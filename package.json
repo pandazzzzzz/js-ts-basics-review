@@ -1,0 +1,22 @@
+{
+  "name": "js-ts-basics-review",
+  "version": "1.0.0",
+  "description": "JavaScript and TypeScript basics review practice project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0",
+    "demo": "node demo/01-variables.js"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "learning",
+    "practice",
+    "basics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
