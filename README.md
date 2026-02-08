@@ -1,54 +1,40 @@
 # JS/TS Basics Review Practice
 
-A comprehensive practice project for reviewing JavaScript and TypeScript fundamentals.
+JavaScript and TypeScript fundamentals practice project with detailed examples and comparisons.
 
 ## Project Structure
 
 ```
-├── demo/                  # Practice examples and demos
+├── demo/                  # Practice examples
 │   ├── 01-variables.js   # Variables and data types
-│   ├── 02-functions.js   # Function declarations and expressions
-│   ├── 03-arrays.js      # Array methods and operations
-│   ├── 04-objects.js     # Object literals and manipulation
-│   ├── 05-typescript-basics.ts  # TypeScript fundamentals
-│   └── 06-modern-features.js    # ES6+ modern JavaScript
-├── docs/                  # Documentation files
-│   └── TODOLIST.md       # Learning roadmap (11 topics)
-├── src/                   # Source code for exercises
-├── tests/                 # Test files
-├── LICENSE               # MIT License
-└── README.md             # This file
+│   ├── 01-variables-ts-comparison.ts  # JS vs TS comparison
+│   ├── 02-functions.js   # Functions
+│   ├── 03-arrays.js      # Arrays
+│   ├── 04-objects.js     # Objects
+│   ├── 05-typescript-basics.ts  # TypeScript basics
+│   └── 06-modern-features.js    # ES6+ features
+├── docs/
+│   ├── TODOLIST.md       # Learning roadmap (11 topics)
+│   └── JS-TS-KEY-DIFFERENCES.md  # Quick reference guide
+└── LICENSE               # MIT License
 ```
 
-## Getting Started
+## Quick Start
 
-1. Clone this repository
-2. Install dependencies: `npm install`
-3. Review the [TODOLIST.md](docs/TODOLIST.md) for the learning roadmap
-4. Start with basics in the `demo/` folder
-5. Run examples: `node demo/01-variables.js`
-6. Run tests: `npm test`
+```bash
+# Run JavaScript examples
+node demo/01-variables.js
 
-## Documentation Sources
+# Run TypeScript examples
+npx ts-node demo/01-variables-ts-comparison.ts
+```
 
-This project's learning materials are based on:
-- **JavaScript**: [JavaScript.info](https://javascript.info) - Modern JavaScript Tutorial
-- **TypeScript**: [TypeScript Official Docs](https://www.typescriptlang.org/docs) - TypeScript 5.x
+## Documentation
 
-All references verified via Context7 MCP service (February 2026).
-
-## Learning Path
-
-Follow the structured learning path in `docs/TODOLIST.md`:
-- **11 fundamental topics** covering JavaScript and TypeScript basics
-- Practice files linked to each topic
-- Official documentation references
-- Progress tracking with checkboxes
-
-## Resources
-
-- [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- **Learning Path**: [TODOLIST.md](docs/TODOLIST.md) - 11 topics with progress tracking
+- **JS vs TS Guide**: [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) - Key differences and pitfalls
+- **JavaScript**: [JavaScript.info](https://javascript.info)
+- **TypeScript**: [TypeScript Docs](https://www.typescriptlang.org/docs)
 
 ## License
 

@@ -13,6 +13,7 @@
 - [ ] Type coercion and conversion
 - [ ] TypeScript type annotations
 - **Practice**: `demo/01-variables.js`
+- **TS Comparison**: `demo/01-variables-ts-comparison.ts` ⭐
 - **Reference**: [JavaScript.info Variables](https://javascript.info/variables)
 
 ### 2. Operators & Expressions
