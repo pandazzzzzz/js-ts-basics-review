@@ -7,8 +7,9 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 ```
 ├── demo/                  # Practice examples
 │   ├── 01-variables.js   # Variables and data types
-│   ├── 01-variables-ts-comparison.ts  # JS vs TS comparison
-│   ├── 02-functions.js   # Functions
+│   ├── 01-variables-ts-comparison.ts  # JS vs TS comparison (variables)
+│   ├── 02-functions.js   # Functions (comprehensive guide)
+│   ├── 02-functions-ts-comparison.ts  # JS vs TS comparison (functions)
 │   ├── 03-arrays.js      # Arrays
 │   ├── 04-objects.js     # Objects
 │   ├── 05-typescript-basics.ts  # TypeScript basics
@@ -24,9 +25,11 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 ```bash
 # Run JavaScript examples
 node demo/01-variables.js
+node demo/02-functions.js
 
 # Run TypeScript examples
 npx ts-node demo/01-variables-ts-comparison.ts
+npx ts-node demo/02-functions-ts-comparison.ts
 ```
 
 ## Documentation
