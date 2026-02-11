@@ -1,3 +1,20 @@
+# Ignore everything by default
+*
+
+# Keep core demo files
+!demo/
+!demo/**/*.js
+!demo/**/*.ts
+
+# Keep essential documentation
+!README.md
+!LICENSE
+
+# Keep git files
+!.gitignore
+!.git/
+
+# Standard ignores (if these exist)
 node_modules/
 dist/
 *.log
