@@ -10,7 +10,9 @@ function add(a: number, b: number): number {
   return a + b;
 }
 
-// Interface
+// Interfaces for object shapes
+// Interfaces define the structure (shape) of objects
+// They specify what properties an object must have and their types
 interface User {
   id: number;
   name: string;
@@ -22,6 +24,21 @@ const user: User = {
   id: 1,
   name: "Bob",
   createdAt: new Date()
+};
+
+// Interfaces can describe any object shape
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  inStock: boolean;
+}
+
+const product: Product = {
+  id: 101,
+  title: "Laptop",
+  price: 999.99,
+  inStock: true
 };
 
 // Type alias
