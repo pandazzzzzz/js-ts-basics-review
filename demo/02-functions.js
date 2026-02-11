@@ -7,9 +7,7 @@
 // 1. FUNCTION DECLARATION (Function Statement)
 // ============================================================================
 /**
- * Function Declaration - Traditional function definition
- * 
- * ES Specification: ES3 (1999)
+ * Function Declaration - Traditional function definition (ES3)
  * 
  * Characteristics:
  * - Hoisted to the top of scope (can be called before declaration)
@@ -75,9 +73,7 @@ console.log(person1); // Person { name: 'Alice', age: 30 }
 // 2. FUNCTION EXPRESSION
 // ============================================================================
 /**
- * Function Expression - Assigning function to a variable
- * 
- * ES Specification: ES3 (1999)
+ * Function Expression - Assigning function to a variable (ES3)
  * 
  * Characteristics:
  * - Not hoisted, can only be called after definition
@@ -130,9 +126,7 @@ logger("Conditional function created");
 // 3. ARROW FUNCTION
 // ============================================================================
 /**
- * Arrow Function - ES6 concise function syntax
- * 
- * ES Specification: ES6/ES2015
+ * Arrow Function - ES6 concise function syntax (ES6)
  * 
  * Characteristics:
  * - More concise syntax
@@ -219,9 +213,7 @@ console.log(sumAllArrow(1, 2, 3, 4, 5)); // 15
 // 4. DEFAULT PARAMETERS
 // ============================================================================
 /**
- * Default Parameters - Provide default values for function parameters
- * 
- * ES Specification: ES6/ES2015
+ * Default Parameters - Provide default values for function parameters (ES6)
  * 
  * Characteristics:
  * - Used when parameter is not passed or is undefined
@@ -267,9 +259,7 @@ console.log(calculateArea(5, 10)); // 50 (rectangle)
 // 5. REST PARAMETERS
 // ============================================================================
 /**
- * Rest Parameters - Collect multiple arguments into an array
- * 
- * ES Specification: ES6/ES2015
+ * Rest Parameters - Collect multiple arguments into an array (ES6)
  * 
  * Characteristics:
  * - Uses ... syntax
@@ -314,9 +304,7 @@ processData({
 // 6. HIGHER-ORDER FUNCTIONS
 // ============================================================================
 /**
- * Higher-Order Functions - Functions that accept or return functions
- * 
- * ES Specification: ES3 (concept), ES5/ES6 enhanced
+ * Higher-Order Functions - Functions that accept or return functions (ES3)
  * 
  * Characteristics:
  * - Functions are first-class citizens
@@ -365,9 +353,7 @@ console.log(addOneThenDouble(5)); // 12
 // 7. CLOSURES
 // ============================================================================
 /**
- * Closures - Functions can access variables from outer scope
- * 
- * ES Specification: ES3 (1999)
+ * Closures - Functions can access variables from outer scope (ES3)
  * 
  * Characteristics:
  * - Inner function can access outer function's variables
@@ -439,9 +425,7 @@ for (var k = 0; k < 3; k++) {
 // 8. ASYNC FUNCTIONS
 // ============================================================================
 /**
- * Async Functions - Handle asynchronous operations with async/await
- * 
- * ES Specification: ES8/ES2017
+ * Async Functions - Handle asynchronous operations with async/await (ES2017)
  * 
  * Characteristics:
  * - async function always returns a Promise
@@ -501,9 +485,7 @@ fetchMultiple();
 // 9. GENERATOR FUNCTIONS
 // ============================================================================
 /**
- * Generator Functions - Functions that can pause and resume execution
- * 
- * ES Specification: ES6/ES2015
+ * Generator Functions - Functions that can pause and resume execution (ES6)
  * 
  * Characteristics:
  * - Uses function* syntax
@@ -570,9 +552,7 @@ console.log("Fibonacci:", fib.next().value); // 5
 // 10. METHOD DEFINITIONS
 // ============================================================================
 /**
- * Method Definitions - ES6 shorthand syntax for object methods
- * 
- * ES Specification: ES6/ES2015
+ * Method Definitions - ES6 shorthand syntax for object methods (ES6)
  * 
  * Characteristics:
  * - More concise syntax
@@ -621,9 +601,7 @@ console.log("After reset:", calculator.result); // 0
 // 11. FUNCTION BINDING
 // ============================================================================
 /**
- * Function Binding - Control function's 'this' value
- * 
- * ES Specification: ES5 (bind), ES3 (call/apply)
+ * Function Binding - Control function's 'this' value (ES5)
  * 
  * Methods:
  * - call: Invoke immediately with argument list
