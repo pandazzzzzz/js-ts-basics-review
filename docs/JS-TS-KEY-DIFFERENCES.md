@@ -234,15 +234,57 @@ if (typeof value === "string") {
 | `Type 'any' is not assignable to type 'X'` | Implicit any | Add explicit type annotation |
 | `Property 'X' does not exist on type 'Y'` | Wrong type or typo | Check type definition or property name |
 
+### 13. Advanced Function Concepts
+
+#### IIFE (Immediately Invoked Function Expression)
+```javascript
+// Module pattern with IIFE
+const myModule = (function() {
+  let privateVar = 0;
+  return {
+    increment: () => ++privateVar,
+    getValue: () => privateVar
+  };
+})();
+```
+
+#### Pure Functions
+```javascript
+// ✅ Pure function - same input always gives same output, no side effects
+const add = (a, b) => a + b;
+
+// ❌ Impure function - depends on external state
+let total = 0;
+const addToTotal = (n) => total += n;
+```
+
+#### Function Composition
+```typescript
+// Compose functions right-to-left
+const compose = <T>(...fns: Function[]) => 
+  (x: T) => fns.reduceRight((acc, fn) => fn(acc), x);
+
+// Pipe functions left-to-right
+const pipe = <T>(...fns: Function[]) => 
+  (x: T) => fns.reduce((acc, fn) => fn(acc), x);
+```
+
+**See**: `demo/02-functions.js` sections 13-16 for comprehensive examples
+
 ---
 
 ## 📚 Resources
 
-- **JavaScript**: [JavaScript.info](https://javascript.info)
-- **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- **JavaScript**: [JavaScript.info](https://javascript.info) - Modern JavaScript Tutorial
+- **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) - Official Documentation
 - **Practice Files**: 
-  - `demo/01-variables.js` - JavaScript examples
+  - `demo/01-variables.js` - JavaScript variables (7 sections)
   - `demo/01-variables-ts-comparison.ts` - TypeScript comparison
+  - `demo/02-functions.js` - JavaScript functions (16 sections: declarations, expressions, arrows, closures, async, generators, IIFE, TCO, pure functions)
+  - `demo/02-functions-ts-comparison.ts` - TypeScript comparison
+  - `demo/03-arrays.js` - JavaScript arrays (8 sections)
+  - `demo/03-arrays-ts-comparison.ts` - TypeScript comparison
+  - `demo/04-objects.js` - JavaScript objects (10 sections)
   - `demo/05-typescript-basics.ts` - TypeScript fundamentals
 
 ---

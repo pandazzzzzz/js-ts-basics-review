@@ -5,14 +5,15 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 ## Project Structure
 
 ```
-├── demo/                  # Practice examples
-│   ├── 01-variables.js   # Variables and data types
-│   ├── 01-variables-ts-comparison.ts  # JS vs TS comparison (variables)
-│   ├── 02-functions.js   # Functions (comprehensive guide)
-│   ├── 02-functions-ts-comparison.ts  # JS vs TS comparison (functions)
-│   ├── 03-arrays.js      # Arrays and array methods
-│   ├── 04-objects.js     # Objects and object methods
-│   ├── 05-typescript-basics.ts  # TypeScript basics
+├── demo/                  # Practice examples (executable code)
+│   ├── 01-variables.js   # Variables and data types (7 sections)
+│   ├── 01-variables-ts-comparison.ts  # TypeScript comparison
+│   ├── 02-functions.js   # Functions comprehensive guide (16 sections, 1100+ lines)
+│   ├── 02-functions-ts-comparison.ts  # TypeScript comparison
+│   ├── 03-arrays.js      # Arrays and methods (8 sections)
+│   ├── 03-arrays-ts-comparison.ts     # TypeScript comparison
+│   ├── 04-objects.js     # Objects and methods (10 sections)
+│   ├── 05-typescript-basics.ts  # TypeScript fundamentals
 │   ├── 06-modern-features.js    # ES6+ features and classes
 │   ├── 07-operators.js   # Operators and expressions
 │   ├── 08-control-flow.js # Control structures
@@ -24,7 +25,7 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 │   ├── 14-event-loop-callbacks.js # Event Loop and Callbacks
 │   ├── 15-modules.js     # ES Modules
 │   └── 16-prototypes-inheritance.js # Prototypes and Inheritance
-├── audit/                # Audit tooling (TypeScript)
+├── js-fundamentals-review/  # Audit tooling (TypeScript)
 │   └── src/              # Property-based tests and validators
 ├── docs/
 │   ├── TODOLIST.md       # Learning roadmap (14 topics)
@@ -37,8 +38,9 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 ```bash
 # Run JavaScript examples
 node demo/01-variables.js
-node demo/02-functions.js
-node demo/03-arrays.js
+node demo/02-functions.js      # 16 sections: declarations, expressions, arrows, closures, async, generators, IIFE, TCO, pure functions
+node demo/03-arrays.js         # 8 sections: creation, iteration, search, manipulation, destructuring
+node demo/04-objects.js        # 10 sections: creation, access, methods, destructuring, prototypes
 node demo/07-operators.js
 node demo/12-promises.js
 node demo/13-async-await.js
@@ -46,14 +48,14 @@ node demo/13-async-await.js
 # Run TypeScript examples
 npx ts-node demo/01-variables-ts-comparison.ts
 npx ts-node demo/02-functions-ts-comparison.ts
+npx ts-node demo/03-arrays-ts-comparison.ts
 npx ts-node demo/05-typescript-basics.ts
 
 # Run audit tests
-cd audit
+cd js-fundamentals-review
 npm install
+npm test
 npm run test:coverage
-npm run test:style
-npm run test:executable
 ```
 
 ## Documentation
@@ -65,12 +67,13 @@ npm run test:executable
 
 ## Features
 
-- ✅ 16 comprehensive demo files covering JavaScript fundamentals
+- ✅ 19 comprehensive demo files covering JavaScript fundamentals
+- ✅ 3 TypeScript comparison files (variables, functions, arrays)
 - ✅ Property-based testing for code quality validation
-- ✅ ES version annotations for all features
-- ✅ TypeScript comparison notes
-- ✅ 300+ lines per comprehensive demo file
+- ✅ ES version annotations for all features (ES1-ES2023)
+- ✅ 300-1100+ lines per comprehensive demo file
 - ✅ Executable code examples with detailed comments
+- ✅ Advanced topics: IIFE patterns, TCO, pure functions, functional programming
 
 ## License
 
