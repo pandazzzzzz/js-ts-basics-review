@@ -40,17 +40,35 @@
 - [x] Arrow functions
 - [x] Parameters and arguments
 - [x] Return values
+- [x] Default parameters
+- [x] Rest parameters
+- [x] Higher-order functions
+- [x] Closures
+- [x] Async functions
+- [x] Generator functions
+- [x] Method definitions
+- [x] Function binding (call, apply, bind)
+- [x] Currying
+- [x] Function properties and methods
+- [x] IIFE patterns
+- [x] Tail call optimization
+- [x] Pure functions and functional programming
 - [x] TypeScript function types
-- **Practice**: `demo/02-functions.js` ✅
+- **Practice**: `demo/02-functions.js` ✅ (16 sections, 1100+ lines)
+- **TS Comparison**: `demo/02-functions-ts-comparison.ts` ⭐
 - **Reference**: [JavaScript.info Functions](https://javascript.info/function-basics)
 
 ### 5. Arrays
 - [x] Array creation and access
 - [x] Array methods (push, pop, shift, unshift)
 - [x] Array iteration (forEach, map, filter, reduce)
+- [x] Array search methods (find, findIndex, indexOf, includes)
+- [x] Array manipulation (sort, reverse, splice, slice)
 - [x] Array destructuring
+- [x] Spread operator with arrays
 - [x] TypeScript array types
-- **Practice**: `demo/03-arrays.js` ✅
+- **Practice**: `demo/03-arrays.js` ✅ (8 sections)
+- **TS Comparison**: `demo/03-arrays-ts-comparison.ts` ⭐
 - **Reference**: [JavaScript.info Arrays](https://javascript.info/array)
 
 ### 6. Objects
@@ -58,8 +76,15 @@
 - [x] Property access (dot vs bracket notation)
 - [x] Object methods
 - [x] Object destructuring
+- [x] Property shorthand and computed properties
+- [x] Getters and setters
+- [x] Object inspection methods (keys, values, entries)
+- [x] Object copying and merging (assign, spread)
+- [x] Object freezing and sealing
+- [x] Prototype basics
+- [x] this binding
 - [x] TypeScript interfaces and types
-- **Practice**: `demo/04-objects.js` ✅
+- **Practice**: `demo/04-objects.js` ✅ (10 sections)
 - **Reference**: [JavaScript.info Objects](https://javascript.info/object)
 
 ### 7. Strings & Template Literals

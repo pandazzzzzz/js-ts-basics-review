@@ -9,6 +9,8 @@
 # Keep essential documentation
 !README.md
 !LICENSE
+!docs/
+!docs/**/*.md
 
 # Keep git files
 !.gitignore
