@@ -455,43 +455,277 @@ console.log("Immutable approach:", { immutableExample, sorted });
 // - Use some/every for validation
 
 // ============================================
-// TypeScript Comparison Notes
+// TypeScript Comparison & Common Pitfalls
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
+🔍 TYPESCRIPT VS JAVASCRIPT - KEY DIFFERENCES
 
-1. TYPE ANNOTATIONS
-   JS:  const numbers = [1, 2, 3];
-   TS:  const numbers: number[] = [1, 2, 3];
-   TS:  const numbers: Array<number> = [1, 2, 3];
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. TYPE ANNOTATIONS & INFERENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-2. READONLY ARRAYS
-   JS:  No built-in readonly arrays
-   TS:  const numbers: readonly number[] = [1, 2, 3];
-   TS:  const numbers: ReadonlyArray<number> = [1, 2, 3];
-   // Prevents push, pop, splice, etc.
+JavaScript:
+  const numbers = [1, 2, 3];           // No type checking
+  numbers.push("four");                // ✅ Allowed (runtime error risk)
 
-3. TUPLE TYPES
-   JS:  const pair = [1, "hello"]; // Just an array
-   TS:  const pair: [number, string] = [1, "hello"];
-   // Fixed length and types
+TypeScript:
+  const numbers: number[] = [1, 2, 3]; // Explicit type
+  numbers.push("four");                // ❌ Error: Argument of type 'string' is not assignable
 
-4. TYPE INFERENCE
-   TS automatically infers array types:
-   const numbers = [1, 2, 3]; // number[]
-   const mixed = [1, "two", 3]; // (number | string)[]
+  // Alternative syntax (equivalent):
+  const numbers: Array<number> = [1, 2, 3];
 
-5. ARRAY METHOD TYPE SAFETY
-   TS ensures type safety in callbacks:
-   const numbers: number[] = [1, 2, 3];
-   numbers.map(n => n.toFixed(2)); // ✅ OK
-   numbers.map(n => n.toUpperCase()); // ❌ Error
+  // Type inference (recommended):
+  const numbers = [1, 2, 3];           // Inferred as number[]
+  numbers.push(4);                     // ✅ OK
+  numbers.push("four");                // ❌ Error
 
-⚠️ COMMON CONFUSION POINTS:
-- Array<T> vs T[] are equivalent
-- readonly prevents mutation but not reassignment of elements
-- Tuple types have fixed length, arrays don't
-- Type narrowing works with array methods
+⚠️ PITFALL: Mixed type arrays
+  JS:  const mixed = [1, "two", true];     // ✅ Allowed
+  TS:  const mixed = [1, "two", true];     // Inferred as (number | string | boolean)[]
+  TS:  mixed.push(null);                   // ❌ Error: null not in union type
 
-📘 TypeScript provides compile-time type safety for arrays!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. READONLY ARRAYS - IMMUTABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+JavaScript:
+  const numbers = [1, 2, 3];
+  numbers.push(4);                     // ✅ Allowed (const only prevents reassignment)
+  numbers[0] = 99;                     // ✅ Allowed
+
+TypeScript:
+  const numbers: readonly number[] = [1, 2, 3];
+  numbers.push(4);                     // ❌ Error: Property 'push' does not exist
+  numbers[0] = 99;                     // ❌ Error: Index signature is readonly
+
+  // Alternative syntax:
+  const numbers: ReadonlyArray<number> = [1, 2, 3];
+
+⚠️ PITFALL: readonly is shallow
+  const nested: readonly number[][] = [[1, 2], [3, 4]];
+  nested.push([5, 6]);                 // ❌ Error: Cannot push
+  nested[0].push(99);                  // ✅ Allowed! Inner array is mutable
+
+  // Solution: Deep readonly
+  const nested: readonly (readonly number[])[] = [[1, 2], [3, 4]];
+  nested[0].push(99);                  // ❌ Error: Now inner arrays are readonly too
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. TUPLE TYPES - FIXED LENGTH & TYPES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+JavaScript:
+  const pair = [1, "hello"];           // Just an array
+  pair.push(true);                     // ✅ Allowed
+  const [num, str] = pair;             // No type checking
+
+TypeScript:
+  const pair: [number, string] = [1, "hello"];
+  pair.push(true);                     // ⚠️ Allowed! (TypeScript limitation)
+  const [num, str] = pair;             // num: number, str: string
+
+  // Readonly tuple (prevents push):
+  const pair: readonly [number, string] = [1, "hello"];
+  pair.push(true);                     // ❌ Error: Property 'push' does not exist
+
+⚠️ PITFALL: Tuple length not enforced with push/pop
+  const tuple: [number, string] = [1, "hello"];
+  tuple.push(999);                     // ✅ Allowed (TypeScript bug/limitation)
+  console.log(tuple);                  // [1, "hello", 999] - breaks tuple contract!
+
+  // Solution: Use readonly tuples or avoid mutation
+  const tuple: readonly [number, string] = [1, "hello"];
+
+⚠️ PITFALL: Optional tuple elements
+  type Point = [number, number, number?]; // z is optional
+  const point2D: Point = [1, 2];       // ✅ OK
+  const point3D: Point = [1, 2, 3];    // ✅ OK
+  const [x, y, z] = point2D;           // z: number | undefined
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. ARRAY METHOD TYPE SAFETY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+map() - Type transformation:
+  JS:  const numbers = [1, 2, 3];
+       const strings = numbers.map(n => n.toString());
+
+  TS:  const numbers: number[] = [1, 2, 3];
+       const strings = numbers.map(n => n.toString()); // Inferred as string[]
+       const wrong = numbers.map(n => n.toUpperCase()); // ❌ Error
+
+filter() - Type narrowing:
+  JS:  const mixed = [1, "two", 3, "four"];
+       const numbers = mixed.filter(x => typeof x === "number");
+
+  TS:  const mixed: (number | string)[] = [1, "two", 3, "four"];
+       const numbers = mixed.filter(x => typeof x === "number"); // Still (number | string)[]
+       
+       // Type guard needed:
+       const numbers = mixed.filter((x): x is number => typeof x === "number"); // number[]
+
+⚠️ PITFALL: filter() doesn't narrow types automatically
+  const mixed: (number | string)[] = [1, "two", 3];
+  const numbers = mixed.filter(x => typeof x === "number");
+  numbers[0].toFixed(2);               // ❌ Error: toFixed may not exist
+  
+  // Solution: Use type predicate
+  const isNumber = (x: any): x is number => typeof x === "number";
+  const numbers = mixed.filter(isNumber); // Now number[]
+  numbers[0].toFixed(2);               // ✅ OK
+
+reduce() - Accumulator type inference:
+  TS:  const numbers = [1, 2, 3];
+       const sum = numbers.reduce((acc, n) => acc + n, 0); // number
+       const obj = numbers.reduce((acc, n) => {
+         acc[n] = n * 2;
+         return acc;
+       }, {} as Record<number, number>); // Need type assertion for empty object
+
+find() - Returns T | undefined:
+  TS:  const numbers: number[] = [1, 2, 3];
+       const found = numbers.find(n => n > 2); // number | undefined
+       found.toFixed(2);                // ❌ Error: Object is possibly undefined
+       found?.toFixed(2);               // ✅ OK: Optional chaining
+       
+       if (found !== undefined) {
+         found.toFixed(2);              // ✅ OK: Type narrowed to number
+       }
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. COMMON CONFUSION POINTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ Array<T> vs T[] - They're equivalent!
+  type Numbers1 = Array<number>;       // Same as...
+  type Numbers2 = number[];            // ...this
+  
+  // Preference: Use T[] for simple types, Array<T> for complex types
+  const simple: number[] = [1, 2, 3];
+  const complex: Array<Promise<string>> = [Promise.resolve("hello")];
+
+⚠️ Empty array initialization
+  JS:  const arr = [];                 // No type info
+       arr.push(1);                    // ✅ OK
+       arr.push("two");                // ✅ OK
+
+  TS:  const arr = [];                 // Inferred as any[]
+       arr.push(1);                    // ✅ OK
+       arr.push("two");                // ✅ OK (any allows anything)
+
+       // Better: Specify type
+       const arr: number[] = [];
+       arr.push(1);                    // ✅ OK
+       arr.push("two");                // ❌ Error
+
+⚠️ Array destructuring with rest
+  TS:  const [first, ...rest]: [number, ...number[]] = [1, 2, 3, 4];
+       // first: number, rest: number[]
+
+       const [a, b, ...c]: [string, string, ...boolean[]] = ["x", "y", true, false];
+       // a: string, b: string, c: boolean[]
+
+⚠️ Const assertions for literal types
+  JS:  const arr = [1, 2, 3];          // Mutable array
+
+  TS:  const arr = [1, 2, 3];          // number[]
+       const arr = [1, 2, 3] as const; // readonly [1, 2, 3] (literal types!)
+       
+       arr[0] = 99;                    // ❌ Error: Cannot assign to readonly
+       type First = typeof arr[0];     // 1 (literal type, not number)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. ADVANCED TYPESCRIPT PATTERNS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Non-empty arrays:
+  type NonEmptyArray<T> = [T, ...T[]];
+  
+  const valid: NonEmptyArray<number> = [1, 2, 3]; // ✅ OK
+  const invalid: NonEmptyArray<number> = [];      // ❌ Error: Source has 0 elements
+
+Array length constraints:
+  type Pair<T> = [T, T];
+  type Triple<T> = [T, T, T];
+  
+  const pair: Pair<number> = [1, 2];   // ✅ OK
+  const triple: Triple<string> = ["a", "b", "c"]; // ✅ OK
+
+Variadic tuple types:
+  type Concat<T extends any[], U extends any[]> = [...T, ...U];
+  
+  type Result = Concat<[1, 2], [3, 4]>; // [1, 2, 3, 4]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. MIGRATION TIPS: JS → TS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Add basic type annotations
+  // Before (JS)
+  const numbers = [1, 2, 3];
+  
+  // After (TS)
+  const numbers: number[] = [1, 2, 3];
+
+Step 2: Use type inference where possible
+  // Verbose
+  const doubled: number[] = numbers.map((n: number): number => n * 2);
+  
+  // Better (inference works)
+  const doubled = numbers.map(n => n * 2); // Inferred as number[]
+
+Step 3: Add readonly for immutable data
+  // Before
+  const config = [1, 2, 3];
+  
+  // After
+  const config: readonly number[] = [1, 2, 3];
+
+Step 4: Use tuples for fixed structures
+  // Before
+  const point = [10, 20];
+  
+  // After
+  const point: [number, number] = [10, 20];
+
+Step 5: Add type guards for filtering
+  // Before
+  const numbers = mixed.filter(x => typeof x === "number");
+  
+  // After
+  const numbers = mixed.filter((x): x is number => typeof x === "number");
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. PERFORMANCE CONSIDERATIONS (SAME IN JS & TS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TypeScript types are erased at runtime - no performance impact!
+
+However, type safety can prevent runtime errors:
+  // JS: Runtime error
+  const numbers = [1, 2, 3];
+  numbers.push("four");
+  const sum = numbers.reduce((a, b) => a + b, 0); // NaN (1 + 2 + 3 + "four")
+
+  // TS: Compile-time error (prevents runtime issue)
+  const numbers: number[] = [1, 2, 3];
+  numbers.push("four");                // ❌ Error caught at compile time!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📘 SUMMARY: TYPESCRIPT BENEFITS FOR ARRAYS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Compile-time type safety
+✅ Better IDE autocomplete and refactoring
+✅ Prevents common runtime errors
+✅ Self-documenting code
+✅ Easier to maintain large codebases
+✅ No runtime performance cost
+
+⚠️ Learning curve for advanced types
+⚠️ Requires build step
+⚠️ Some edge cases (tuple push, etc.)
+
+🎯 RECOMMENDATION: Use TypeScript for production code, especially in teams!
 */
