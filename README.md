@@ -25,8 +25,6 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 │   ├── 14-event-loop-callbacks.js # Event Loop and Callbacks
 │   ├── 15-modules.js     # ES Modules
 │   └── 16-prototypes-inheritance.js # Prototypes and Inheritance
-├── js-fundamentals-review/  # Audit tooling (TypeScript)
-│   └── src/              # Property-based tests and validators
 ├── docs/
 │   ├── TODOLIST.md       # Learning roadmap (14 topics)
 │   └── JS-TS-KEY-DIFFERENCES.md  # Quick reference guide
@@ -50,12 +48,6 @@ npx ts-node demo/01-variables-ts-comparison.ts
 npx ts-node demo/02-functions-ts-comparison.ts
 npx ts-node demo/03-arrays-ts-comparison.ts
 npx ts-node demo/05-typescript-basics.ts
-
-# Run audit tests
-cd js-fundamentals-review
-npm install
-npm test
-npm run test:coverage
 ```
 
 ## Documentation
@@ -69,7 +61,6 @@ npm run test:coverage
 
 - ✅ 19 comprehensive demo files covering JavaScript fundamentals
 - ✅ 3 TypeScript comparison files (variables, functions, arrays)
-- ✅ Property-based testing for code quality validation
 - ✅ ES version annotations for all features (ES1-ES2023)
 - ✅ 300-1100+ lines per comprehensive demo file
 - ✅ Executable code examples with detailed comments
