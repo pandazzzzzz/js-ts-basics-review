@@ -35,15 +35,16 @@ __pycache__/
 .pytest_cache/
 .hypothesis/
 
-# Ignore audit/analysis tools and their outputs
+# Ignore audit/analysis tools and their outputs (local only)
 array-audit/
 audit/
 js-fundamentals-review/
 reports/
-*-report.md
-*-analysis.md
-*-summary.md
-*-findings.md
+
+# Ignore analysis and review documents (local only)
+REVIEW_FINDINGS.md
+REVIEW_SUMMARY.md
+CORE_TOPICS_ANALYSIS.md
 
 # Keep .kiro specs but ignore other .kiro files
 .kiro/*
