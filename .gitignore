@@ -45,6 +45,9 @@ reports/
 REVIEW_FINDINGS.md
 REVIEW_SUMMARY.md
 CORE_TOPICS_ANALYSIS.md
+CHANGELOG.md
+FILE_RENAMING_MAP.md
+array-audit-report.md
 
 # Keep .kiro specs but ignore other .kiro files
 .kiro/*
