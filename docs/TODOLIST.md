@@ -1,169 +1,151 @@
-# Learning Roadmap - Basics Stage
+# Learning Roadmap
 
 > **Documentation Sources**: 
-> - JavaScript: [JavaScript.info](https://javascript.info) (Modern JavaScript Tutorial)
-> - TypeScript: [TypeScript Official Docs](https://www.typescriptlang.org/docs) (TypeScript 5.x)
-> - Last Updated: February 2026
+> - JavaScript: [JavaScript.info](https://javascript.info)
+> - TypeScript: [TypeScript Official Docs](https://www.typescriptlang.org/docs)
+> - Last Updated: 2026-02-14
 
-## Stage 1: JavaScript & TypeScript Fundamentals
+## Learning Path
+
+Files are organized in recommended learning order (01-15). Follow the sequence for optimal understanding.
+
+## 📁 Stage 1: Basic Syntax (01-04)
 
 ### 1. Variables & Data Types
 - [x] Variable declarations (var, let, const)
 - [x] Primitive types (string, number, boolean, null, undefined, symbol, bigint)
 - [x] Type coercion and conversion
 - [x] TypeScript type annotations
-- **Practice**: `demo/01-variables.js` ✅
-- **TS Comparison**: `demo/01-variables-ts-comparison.ts` ⭐
-- **Reference**: [JavaScript.info Variables](https://javascript.info/variables)
+- **File**: `demo/01-variables.js` ✅
+- **TS**: `demo/01-variables-ts-comparison.ts`
+- **Ref**: [JavaScript.info Variables](https://javascript.info/variables)
 
 ### 2. Operators & Expressions
-- [x] Arithmetic operators
-- [x] Comparison operators
-- [x] Logical operators
+- [x] Arithmetic, comparison, logical operators
 - [x] Assignment operators
 - [x] Ternary operator
-- **Practice**: `demo/07-operators.js` ✅
-- **Reference**: [JavaScript.info Operators](https://javascript.info/operators)
+- **File**: `demo/02-operators.js` ✅
+- **Ref**: [JavaScript.info Operators](https://javascript.info/operators)
 
 ### 3. Control Flow
-- [x] if/else statements
-- [x] switch statements
-- [x] for loops
-- [x] while/do-while loops
+- [x] if/else, switch statements
+- [x] for, while, do-while loops
 - [x] break and continue
-- **Practice**: `demo/08-control-flow.js` ✅
-- **Reference**: [JavaScript.info Conditionals](https://javascript.info/ifelse)
+- **File**: `demo/03-control-flow.js` ✅
+- **Ref**: [JavaScript.info Conditionals](https://javascript.info/ifelse)
 
-### 4. Functions
-- [x] Function declarations
-- [x] Function expressions
-- [x] Arrow functions
-- [x] Parameters and arguments
-- [x] Return values
-- [x] Default parameters
-- [x] Rest parameters
-- [x] Higher-order functions
-- [x] Closures
-- [x] Async functions
-- [x] Generator functions
-- [x] Method definitions
-- [x] Function binding (call, apply, bind)
-- [x] Currying
-- [x] Function properties and methods
-- [x] IIFE patterns
-- [x] Tail call optimization
-- [x] Pure functions and functional programming
-- [x] TypeScript function types
-- **Practice**: `demo/02-functions.js` ✅ (16 sections, 1100+ lines)
-- **TS Comparison**: `demo/02-functions-ts-comparison.ts` ⭐
-- **Reference**: [JavaScript.info Functions](https://javascript.info/function-basics)
+### 4. Strings & Template Literals
+- [x] String methods (slice, substring, indexOf, includes)
+- [x] Template literals and interpolation
+- [x] Tagged templates
+- **File**: `demo/04-strings.js` ✅
+- **Ref**: [JavaScript.info Strings](https://javascript.info/string)
+
+## 📁 Stage 2: Data Structures (05-07)
 
 ### 5. Arrays
 - [x] Array creation and access
 - [x] Array methods (push, pop, shift, unshift)
-- [x] Array iteration (forEach, map, filter, reduce)
-- [x] Array search methods (find, findIndex, indexOf, includes)
-- [x] Array manipulation (sort, reverse, splice, slice)
-- [x] Array destructuring
-- [x] Spread operator with arrays
-- [x] TypeScript array types
-- **Practice**: `demo/03-arrays.js` ✅ (8 sections)
-- **TS Comparison**: `demo/03-arrays-ts-comparison.ts` ⭐
-- **Reference**: [JavaScript.info Arrays](https://javascript.info/array)
+- [x] Iteration (forEach, map, filter, reduce)
+- [x] Search (find, findIndex, indexOf, includes)
+- [x] Manipulation (sort, reverse, splice, slice)
+- [x] Destructuring and spread operator
+- **File**: `demo/05-arrays.js` ✅
+- **TS**: `demo/05-arrays-ts-comparison.ts`
+- **Ref**: [JavaScript.info Arrays](https://javascript.info/array)
 
-### 6. Objects
-- [x] Object literals
-- [x] Property access (dot vs bracket notation)
+### 6. Functions
+- [x] Declarations, expressions, arrow functions
+- [x] Parameters (default, rest)
+- [x] Higher-order functions
+- [x] Closures
+- [x] Async functions, generators
+- [x] IIFE, TCO, pure functions
+- [x] Currying, function binding
+- **File**: `demo/06-functions.js` ✅ (16 sections, 1100+ lines)
+- **TS**: `demo/06-functions-ts-comparison.ts`
+- **Ref**: [JavaScript.info Functions](https://javascript.info/function-basics)
+
+### 7. Objects
+- [x] Object literals, property access
 - [x] Object methods
-- [x] Object destructuring
-- [x] Property shorthand and computed properties
+- [x] Destructuring, spread operator
 - [x] Getters and setters
-- [x] Object inspection methods (keys, values, entries)
-- [x] Object copying and merging (assign, spread)
-- [x] Object freezing and sealing
-- [x] Prototype basics
-- [x] this binding
-- [x] TypeScript interfaces and types
-- **Practice**: `demo/04-objects.js` ✅ (10 sections)
-- **Reference**: [JavaScript.info Objects](https://javascript.info/object)
+- [x] Object methods (keys, values, entries, assign)
+- [x] Freezing and sealing
+- **File**: `demo/07-objects.js` ✅
+- **Ref**: [JavaScript.info Objects](https://javascript.info/object)
 
-### 7. Strings & Template Literals
-- [x] String methods (slice, substring, indexOf, includes)
-- [x] Template literals (multi-line strings)
-- [x] String interpolation with `${}`
-- [x] Tagged templates
-- [x] Regular expressions basics
-- **Practice**: `demo/09-strings.js` ✅
-- **Reference**: [JavaScript.info Strings](https://javascript.info/string)
+## 📁 Stage 3: Core Concepts (08-11)
 
-### 8. Error Handling
+### 8. Scope & Closures
+- [x] Global vs local scope
+- [x] Block scope
+- [x] Lexical scope
+- [x] Closures
+- **File**: `demo/08-scope-closures.js` ✅
+- **Ref**: [JavaScript.info Closures](https://javascript.info/closure)
+
+### 9. Error Handling
 - [x] try/catch/finally
 - [x] throw statements
 - [x] Error types
 - [x] Custom errors
-- **Practice**: `demo/10-error-handling.js` ✅
-- **Reference**: [JavaScript.info Error Handling](https://javascript.info/try-catch)
+- **File**: `demo/09-error-handling.js` ✅
+- **Ref**: [JavaScript.info Error Handling](https://javascript.info/try-catch)
 
-### 9. Scope & Closures
-- [x] Global vs local scope
-- [x] Block scope
-- [x] Lexical scope
-- [x] Closures basics
-- **Practice**: `demo/11-scope-closures.js` ✅
-- **Reference**: [JavaScript.info Closures](https://javascript.info/closure)
-
-### 10. TypeScript Basics (TypeScript 5.x)
-- [x] Type annotations and type inference
-- [x] Interfaces for object shapes
-- [x] Type aliases
-- [x] Union types (`string | number`)
-- [x] Optional properties (`?`)
-- [x] Readonly properties
-- [x] Function type annotations
-- **Practice**: `demo/05-typescript-basics.ts` ✅
-- **Reference**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-
-### 11. Modern JavaScript Features (ES6+)
-- [x] Spread operator (`...`) for arrays and objects
-- [x] Destructuring assignment
-- [x] Default parameters
-- [x] Rest parameters
-- [x] Arrow functions and lexical `this`
-- [x] Classes and inheritance
-- [x] Modules (import/export)
-- **Practice**: `demo/06-modern-features.js` ✅
-- **Reference**: [JavaScript.info Modern Features](https://javascript.info/advanced-functions)
-
-### 12. Asynchronous JavaScript
-- [x] Promises (creation, chaining, error handling)
-- [x] Async/Await syntax
-- [x] Event Loop and Callbacks
-- **Practice**: `demo/12-promises.js`, `demo/13-async-await.js`, `demo/14-event-loop-callbacks.js` ✅
-- **Reference**: [JavaScript.info Async](https://javascript.info/async)
-
-### 13. Modules
-- [x] ES Modules (import/export)
-- [x] Default vs Named exports
-- [x] Dynamic imports
-- **Practice**: `demo/15-modules.js` ✅
-- **Reference**: [JavaScript.info Modules](https://javascript.info/modules-intro)
-
-### 14. Prototypes & Inheritance
+### 10. Prototypes & Inheritance
 - [x] Prototype chain
 - [x] Constructor functions
 - [x] Object.create()
-- [x] Class syntax and prototypes
-- **Practice**: `demo/16-prototypes-inheritance.js` ✅
-- **Reference**: [JavaScript.info Prototypes](https://javascript.info/prototypes)
+- [x] Class syntax
+- **File**: `demo/10-prototypes-inheritance.js` ✅
+- **Ref**: [JavaScript.info Prototypes](https://javascript.info/prototypes)
+
+### 11. Modern Features (ES6+)
+- [x] Spread operator, destructuring
+- [x] Default and rest parameters
+- [x] Arrow functions
+- [x] Classes and inheritance
+- **File**: `demo/11-modern-features.js` ✅
+- **Ref**: [JavaScript.info Modern Features](https://javascript.info/advanced-functions)
+
+## 📁 Stage 4: Asynchronous Programming (12-15)
+
+### 12. Event Loop & Callbacks
+- [x] Event loop mechanism
+- [x] Callback patterns
+- [x] Callback hell
+- **File**: `demo/12-event-loop-callbacks.js` ✅
+- **Ref**: [JavaScript.info Event Loop](https://javascript.info/event-loop)
+
+### 13. Promises
+- [x] Promise creation and chaining
+- [x] Error handling
+- [x] Promise.all/race/allSettled/any
+- **File**: `demo/13-promises.js` ✅
+- **Ref**: [JavaScript.info Promises](https://javascript.info/promise-basics)
+
+### 14. Async/Await
+- [x] async function syntax
+- [x] await keyword
+- [x] Error handling with try/catch
+- [x] Parallel vs sequential execution
+- **File**: `demo/14-async-await.js` ✅
+- **Ref**: [JavaScript.info Async/Await](https://javascript.info/async-await)
+
+### 15. Modules
+- [x] ES Modules (import/export)
+- [x] Default vs named exports
+- [x] Dynamic imports
+- **File**: `demo/15-modules.js` ✅
+- **Ref**: [JavaScript.info Modules](https://javascript.info/modules-intro)
 
 ---
 
-**Progress**: 14/14 topics completed ✅
+**Progress**: 15/15 topics ✅
 
-**Documentation Verified**: ✅ Based on latest official sources
-- JavaScript.info (Modern JavaScript Tutorial - continuously updated)
-- TypeScript Official Documentation (TypeScript 5.x series)
-
-**Next Stages**: 
+**Next Steps**: 
+- Advanced topics: JSON, Iterators/Generators, Regular Expressions
 - Intermediate: DOM manipulation, Advanced TypeScript, Web APIs
 - Advanced: Design patterns, Performance optimization, Testing
