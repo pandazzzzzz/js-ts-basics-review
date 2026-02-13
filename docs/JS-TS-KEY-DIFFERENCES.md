@@ -269,7 +269,7 @@ const pipe = <T>(...fns: Function[]) =>
   (x: T) => fns.reduce((acc, fn) => fn(acc), x);
 ```
 
-**See**: `demo/06-functions.js` sections 13-16 for comprehensive examples
+**See**: `demo/data-structures/06-functions.js` sections 13-16 for comprehensive examples
 
 ---
 
@@ -278,10 +278,10 @@ const pipe = <T>(...fns: Function[]) =>
 - **JavaScript**: [JavaScript.info](https://javascript.info)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - **Practice Files**: 
-  - `demo/01-variables.js` + `demo/01-variables-ts-comparison.ts`
-  - `demo/05-arrays.js` + `demo/05-arrays-ts-comparison.ts`
-  - `demo/06-functions.js` + `demo/06-functions-ts-comparison.ts` (16 sections, 1100+ lines)
-  - `demo/07-objects.js`
+  - `demo/basics/01-variables.js` + `demo/basics/01-variables-ts-comparison.ts`
+  - `demo/data-structures/05-arrays.js` + `demo/data-structures/05-arrays-ts-comparison.ts`
+  - `demo/data-structures/06-functions.js` + `demo/data-structures/06-functions-ts-comparison.ts` (16 sections, 1100+ lines)
+  - `demo/data-structures/07-objects.js`
 
 ---
 

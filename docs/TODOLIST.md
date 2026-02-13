@@ -16,29 +16,29 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Primitive types (string, number, boolean, null, undefined, symbol, bigint)
 - [x] Type coercion and conversion
 - [x] TypeScript type annotations
-- **File**: `demo/01-variables.js` ✅
-- **TS**: `demo/01-variables-ts-comparison.ts`
+- **File**: `demo/basics/01-variables.js` ✅
+- **TS**: `demo/basics/01-variables-ts-comparison.ts`
 - **Ref**: [JavaScript.info Variables](https://javascript.info/variables)
 
 ### 2. Operators & Expressions
 - [x] Arithmetic, comparison, logical operators
 - [x] Assignment operators
 - [x] Ternary operator
-- **File**: `demo/02-operators.js` ✅
+- **File**: `demo/basics/02-operators.js` ✅
 - **Ref**: [JavaScript.info Operators](https://javascript.info/operators)
 
 ### 3. Control Flow
 - [x] if/else, switch statements
 - [x] for, while, do-while loops
 - [x] break and continue
-- **File**: `demo/03-control-flow.js` ✅
+- **File**: `demo/basics/03-control-flow.js` ✅
 - **Ref**: [JavaScript.info Conditionals](https://javascript.info/ifelse)
 
 ### 4. Strings & Template Literals
 - [x] String methods (slice, substring, indexOf, includes)
 - [x] Template literals and interpolation
 - [x] Tagged templates
-- **File**: `demo/04-strings.js` ✅
+- **File**: `demo/basics/04-strings.js` ✅
 - **Ref**: [JavaScript.info Strings](https://javascript.info/string)
 
 ## 📁 Stage 2: Data Structures (05-07)
@@ -50,8 +50,8 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Search (find, findIndex, indexOf, includes)
 - [x] Manipulation (sort, reverse, splice, slice)
 - [x] Destructuring and spread operator
-- **File**: `demo/05-arrays.js` ✅
-- **TS**: `demo/05-arrays-ts-comparison.ts`
+- **File**: `demo/data-structures/05-arrays.js` ✅
+- **TS**: `demo/data-structures/05-arrays-ts-comparison.ts`
 - **Ref**: [JavaScript.info Arrays](https://javascript.info/array)
 
 ### 6. Functions
@@ -62,8 +62,8 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Async functions, generators
 - [x] IIFE, TCO, pure functions
 - [x] Currying, function binding
-- **File**: `demo/06-functions.js` ✅ (16 sections, 1100+ lines)
-- **TS**: `demo/06-functions-ts-comparison.ts`
+- **File**: `demo/data-structures/06-functions.js` ✅ (16 sections, 1100+ lines)
+- **TS**: `demo/data-structures/06-functions-ts-comparison.ts`
 - **Ref**: [JavaScript.info Functions](https://javascript.info/function-basics)
 
 ### 7. Objects
@@ -73,7 +73,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Getters and setters
 - [x] Object methods (keys, values, entries, assign)
 - [x] Freezing and sealing
-- **File**: `demo/07-objects.js` ✅
+- **File**: `demo/data-structures/07-objects.js` ✅
 - **Ref**: [JavaScript.info Objects](https://javascript.info/object)
 
 ## 📁 Stage 3: Core Concepts (08-11)
@@ -83,7 +83,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Block scope
 - [x] Lexical scope
 - [x] Closures
-- **File**: `demo/08-scope-closures.js` ✅
+- **File**: `demo/core-concepts/08-scope-closures.js` ✅
 - **Ref**: [JavaScript.info Closures](https://javascript.info/closure)
 
 ### 9. Error Handling
@@ -91,7 +91,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] throw statements
 - [x] Error types
 - [x] Custom errors
-- **File**: `demo/09-error-handling.js` ✅
+- **File**: `demo/core-concepts/09-error-handling.js` ✅
 - **Ref**: [JavaScript.info Error Handling](https://javascript.info/try-catch)
 
 ### 10. Prototypes & Inheritance
@@ -99,7 +99,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Constructor functions
 - [x] Object.create()
 - [x] Class syntax
-- **File**: `demo/10-prototypes-inheritance.js` ✅
+- **File**: `demo/core-concepts/10-prototypes-inheritance.js` ✅
 - **Ref**: [JavaScript.info Prototypes](https://javascript.info/prototypes)
 
 ### 11. Modern Features (ES6+)
@@ -107,7 +107,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Default and rest parameters
 - [x] Arrow functions
 - [x] Classes and inheritance
-- **File**: `demo/11-modern-features.js` ✅
+- **File**: `demo/core-concepts/11-modern-features.js` ✅
 - **Ref**: [JavaScript.info Modern Features](https://javascript.info/advanced-functions)
 
 ## 📁 Stage 4: Asynchronous Programming (12-15)
@@ -116,14 +116,14 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] Event loop mechanism
 - [x] Callback patterns
 - [x] Callback hell
-- **File**: `demo/12-event-loop-callbacks.js` ✅
+- **File**: `demo/asynchronous/12-event-loop-callbacks.js` ✅
 - **Ref**: [JavaScript.info Event Loop](https://javascript.info/event-loop)
 
 ### 13. Promises
 - [x] Promise creation and chaining
 - [x] Error handling
 - [x] Promise.all/race/allSettled/any
-- **File**: `demo/13-promises.js` ✅
+- **File**: `demo/asynchronous/13-promises.js` ✅
 - **Ref**: [JavaScript.info Promises](https://javascript.info/promise-basics)
 
 ### 14. Async/Await
@@ -131,14 +131,14 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - [x] await keyword
 - [x] Error handling with try/catch
 - [x] Parallel vs sequential execution
-- **File**: `demo/14-async-await.js` ✅
+- **File**: `demo/asynchronous/14-async-await.js` ✅
 - **Ref**: [JavaScript.info Async/Await](https://javascript.info/async-await)
 
 ### 15. Modules
 - [x] ES Modules (import/export)
 - [x] Default vs named exports
 - [x] Dynamic imports
-- **File**: `demo/15-modules.js` ✅
+- **File**: `demo/asynchronous/15-modules.js` ✅
 - **Ref**: [JavaScript.info Modules](https://javascript.info/modules-intro)
 
 ---
