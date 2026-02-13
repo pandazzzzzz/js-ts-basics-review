@@ -1,25 +1,50 @@
-# Ignore everything by default
-*
-
-# Keep core demo files
-!demo/
-!demo/**/*.js
-!demo/**/*.ts
-
-# Keep essential documentation
-!README.md
-!LICENSE
-!docs/
-!docs/**/*.md
-
-# Keep git files
-!.gitignore
-!.git/
-
-# Standard ignores (if these exist)
+# Node modules and dependencies
 node_modules/
 dist/
 *.log
-.DS_Store
+
+# Environment files
 .env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Test coverage
 coverage/
+.nyc_output/
+
+# Build outputs
+build/
+out/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Python (for audit tools)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.hypothesis/
+
+# Ignore audit/analysis tools and their outputs
+array-audit/
+audit/
+js-fundamentals-review/
+reports/
+*-report.md
+*-analysis.md
+*-summary.md
+*-findings.md
+
+# Keep .kiro specs but ignore other .kiro files
+.kiro/*
+!.kiro/specs/
