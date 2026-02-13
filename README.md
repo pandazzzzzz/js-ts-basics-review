@@ -6,27 +6,27 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 
 ```
 ├── demo/                  # Practice examples (executable code)
-│   ├── 📁 Basic Syntax
+│   ├── basics/            # Basic Syntax (01-04)
 │   │   ├── 01-variables.js              # Variables and data types (7 sections)
 │   │   ├── 01-variables-ts-comparison.ts
 │   │   ├── 02-operators.js              # Operators and expressions
 │   │   ├── 03-control-flow.js           # Control structures (if/loop/switch)
 │   │   └── 04-strings.js                # Strings and template literals
 │   │
-│   ├── 📁 Data Structures
+│   ├── data-structures/   # Data Structures (05-07)
 │   │   ├── 05-arrays.js                 # Arrays and methods (8 sections)
 │   │   ├── 05-arrays-ts-comparison.ts
 │   │   ├── 06-functions.js              # Functions (16 sections, 1100+ lines)
 │   │   ├── 06-functions-ts-comparison.ts
 │   │   └── 07-objects.js                # Objects and methods (10 sections)
 │   │
-│   ├── 📁 Core Concepts
+│   ├── core-concepts/     # Core Concepts (08-11)
 │   │   ├── 08-scope-closures.js         # Scope and closures
 │   │   ├── 09-error-handling.js         # Error handling
 │   │   ├── 10-prototypes-inheritance.js # Prototypes and inheritance
 │   │   └── 11-modern-features.js        # ES6+ features and classes
 │   │
-│   └── 📁 Asynchronous Programming
+│   └── asynchronous/      # Asynchronous Programming (12-15)
 │       ├── 12-event-loop-callbacks.js   # Event loop and callbacks
 │       ├── 13-promises.js               # Promises
 │       ├── 14-async-await.js            # Async/Await
@@ -43,33 +43,33 @@ JavaScript and TypeScript fundamentals practice project with detailed examples a
 ```bash
 # Run JavaScript examples (recommended learning order)
 
-# 📁 Basic Syntax
-node demo/01-variables.js      # Start here: Variables and data types
-node demo/02-operators.js      # Operators and expressions
-node demo/03-control-flow.js   # Control structures
-node demo/04-strings.js        # Strings and template literals
+# Basic Syntax (01-04)
+node demo/basics/01-variables.js      # Start here: Variables and data types
+node demo/basics/02-operators.js      # Operators and expressions
+node demo/basics/03-control-flow.js   # Control structures
+node demo/basics/04-strings.js        # Strings and template literals
 
-# 📁 Data Structures
-node demo/05-arrays.js         # Arrays: creation, iteration, search, manipulation
-node demo/06-functions.js      # Functions: 16 sections, 1100+ lines
-node demo/07-objects.js        # Objects: creation, access, methods, prototypes
+# Data Structures (05-07)
+node demo/data-structures/05-arrays.js         # Arrays: creation, iteration, search, manipulation
+node demo/data-structures/06-functions.js      # Functions: 16 sections, 1100+ lines
+node demo/data-structures/07-objects.js        # Objects: creation, access, methods, prototypes
 
-# 📁 Core Concepts
-node demo/08-scope-closures.js # Scope and closures
-node demo/09-error-handling.js # Error handling
-node demo/10-prototypes-inheritance.js # Prototypes
-node demo/11-modern-features.js # ES6+ features
+# Core Concepts (08-11)
+node demo/core-concepts/08-scope-closures.js # Scope and closures
+node demo/core-concepts/09-error-handling.js # Error handling
+node demo/core-concepts/10-prototypes-inheritance.js # Prototypes
+node demo/core-concepts/11-modern-features.js # ES6+ features
 
-# 📁 Asynchronous Programming
-node demo/12-event-loop-callbacks.js # Event loop basics
-node demo/13-promises.js       # Promises
-node demo/14-async-await.js    # Async/Await
-node demo/15-modules.js        # ES Modules
+# Asynchronous Programming (12-15)
+node demo/asynchronous/12-event-loop-callbacks.js # Event loop basics
+node demo/asynchronous/13-promises.js       # Promises
+node demo/asynchronous/14-async-await.js    # Async/Await
+node demo/asynchronous/15-modules.js        # ES Modules
 
 # Run TypeScript examples
-npx ts-node demo/01-variables-ts-comparison.ts
-npx ts-node demo/05-arrays-ts-comparison.ts
-npx ts-node demo/06-functions-ts-comparison.ts
+npx ts-node demo/basics/01-variables-ts-comparison.ts
+npx ts-node demo/data-structures/05-arrays-ts-comparison.ts
+npx ts-node demo/data-structures/06-functions-ts-comparison.ts
 ```
 
 ## Documentation
