@@ -7,7 +7,7 @@
 
 ## Learning Path
 
-Files are organized in recommended learning order (01-15). Follow the sequence for optimal understanding.
+Files are organized in recommended learning order (01-20). Follow the sequence for optimal understanding.
 
 ## 📁 Stage 1: Basic Syntax (01-04)
 
@@ -41,7 +41,7 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - **File**: `demo/basics/04-strings.js` ✅
 - **Ref**: [JavaScript.info Strings](https://javascript.info/string)
 
-## 📁 Stage 2: Data Structures (05-07)
+## 📁 Stage 2: Data Structures (05-09)
 
 ### 5. Arrays
 - [x] Array creation and access
@@ -76,76 +76,116 @@ Files are organized in recommended learning order (01-15). Follow the sequence f
 - **File**: `demo/data-structures/07-objects.js` ✅
 - **Ref**: [JavaScript.info Objects](https://javascript.info/object)
 
-## 📁 Stage 3: Core Concepts (08-11)
+### 8. Map & Set
+- [ ] Map creation and methods
+- [ ] Set creation and methods
+- [ ] WeakMap and WeakSet
+- [ ] Use cases and performance
+- **File**: `demo/data-structures/08-map-set.js` 🚧
+- **Ref**: [JavaScript.info Map and Set](https://javascript.info/map-set)
 
-### 8. Scope & Closures
+### 9. JSON
+- [ ] JSON.parse() and JSON.stringify()
+- [ ] JSON data types
+- [ ] Serialization and deserialization
+- [ ] Error handling
+- **File**: `demo/data-structures/09-json.js` 🚧
+- **Ref**: [JavaScript.info JSON](https://javascript.info/json)
+
+## 📁 Stage 3: Core Concepts (10-15)
+
+### 10. Scope & Closures
 - [x] Global vs local scope
 - [x] Block scope
 - [x] Lexical scope
 - [x] Closures
-- **File**: `demo/core-concepts/08-scope-closures.js` ✅
+- **File**: `demo/core-concepts/10-scope-closures.js` ✅
 - **Ref**: [JavaScript.info Closures](https://javascript.info/closure)
 
-### 9. Error Handling
+### 11. Error Handling
 - [x] try/catch/finally
 - [x] throw statements
 - [x] Error types
 - [x] Custom errors
-- **File**: `demo/core-concepts/09-error-handling.js` ✅
+- **File**: `demo/core-concepts/11-error-handling.js` ✅
 - **Ref**: [JavaScript.info Error Handling](https://javascript.info/try-catch)
 
-### 10. Prototypes & Inheritance
+### 12. Prototypes & Inheritance
 - [x] Prototype chain
 - [x] Constructor functions
 - [x] Object.create()
 - [x] Class syntax
-- **File**: `demo/core-concepts/10-prototypes-inheritance.js` ✅
+- **File**: `demo/core-concepts/12-prototypes-inheritance.js` ✅
 - **Ref**: [JavaScript.info Prototypes](https://javascript.info/prototypes)
 
-### 11. Modern Features (ES6+)
+### 13. Modern Features (ES6+)
 - [x] Spread operator, destructuring
 - [x] Default and rest parameters
 - [x] Arrow functions
 - [x] Classes and inheritance
-- **File**: `demo/core-concepts/11-modern-features.js` ✅
+- **File**: `demo/core-concepts/13-modern-features.js` ✅
 - **Ref**: [JavaScript.info Modern Features](https://javascript.info/advanced-functions)
 
-## 📁 Stage 4: Asynchronous Programming (12-15)
+### 14. Regular Expressions
+- [ ] Regex patterns and syntax
+- [ ] String methods with regex
+- [ ] Flags and modifiers
+- [ ] Common patterns
+- **File**: `demo/core-concepts/14-regex.js` 🚧
+- **Ref**: [JavaScript.info Regular Expressions](https://javascript.info/regular-expressions)
 
-### 12. Event Loop & Callbacks
+### 15. Iterators & Generators
+- [ ] Iterator protocol
+- [ ] Generator functions
+- [ ] yield keyword
+- [ ] Async iterators
+- **File**: `demo/core-concepts/15-iterators-generators.js` 🚧
+- **Ref**: [JavaScript.info Generators](https://javascript.info/generators)
+
+## 📁 Stage 4: Asynchronous Programming (16-20)
+
+### 16. Event Loop & Callbacks
 - [x] Event loop mechanism
 - [x] Callback patterns
 - [x] Callback hell
-- **File**: `demo/asynchronous/12-event-loop-callbacks.js` ✅
+- **File**: `demo/asynchronous/16-event-loop-callbacks.js` ✅
 - **Ref**: [JavaScript.info Event Loop](https://javascript.info/event-loop)
 
-### 13. Promises
+### 17. Promises
 - [x] Promise creation and chaining
 - [x] Error handling
 - [x] Promise.all/race/allSettled/any
-- **File**: `demo/asynchronous/13-promises.js` ✅
+- **File**: `demo/asynchronous/17-promises.js` ✅
 - **Ref**: [JavaScript.info Promises](https://javascript.info/promise-basics)
 
-### 14. Async/Await
+### 18. Async/Await
 - [x] async function syntax
 - [x] await keyword
 - [x] Error handling with try/catch
 - [x] Parallel vs sequential execution
-- **File**: `demo/asynchronous/14-async-await.js` ✅
+- **File**: `demo/asynchronous/18-async-await.js` ✅
 - **Ref**: [JavaScript.info Async/Await](https://javascript.info/async-await)
 
-### 15. Modules
+### 19. Modules
 - [x] ES Modules (import/export)
 - [x] Default vs named exports
 - [x] Dynamic imports
-- **File**: `demo/asynchronous/15-modules.js` ✅
+- **File**: `demo/asynchronous/19-modules.js` ✅
 - **Ref**: [JavaScript.info Modules](https://javascript.info/modules-intro)
+
+### 20. Fetch API
+- [ ] Fetch basics
+- [ ] Request and Response objects
+- [ ] Headers and options
+- [ ] Error handling
+- **File**: `demo/asynchronous/20-fetch-api.js` 🚧
+- **Ref**: [MDN Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ---
 
-**Progress**: 15/15 topics ✅
+**Progress**: 15/20 topics ✅ (5 new skeleton files 🚧)
 
 **Next Steps**: 
-- Advanced topics: JSON, Iterators/Generators, Regular Expressions
-- Intermediate: DOM manipulation, Advanced TypeScript, Web APIs
+- Complete skeleton files: Map/Set, JSON, Regex, Iterators/Generators, Fetch API
+- Advanced topics: DOM manipulation, Advanced TypeScript, Web APIs
 - Advanced: Design patterns, Performance optimization, Testing
