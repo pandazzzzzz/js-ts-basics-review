@@ -1,130 +1,33 @@
 # ============================================
-# Node.js & Dependencies
+# 忽略所有文件和文件夹（默认）
 # ============================================
-node_modules/
-dist/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+*
 
 # ============================================
-# Environment & Configuration
+# 保留核心文件和文件夹
 # ============================================
-.env
-.env.local
-.env.*.local
+# 核心文件夹
+!demo/
+!demo/**
+!docs/
+!docs/**
+
+# 核心文件
+!.gitignore
+!LICENSE
+!README.md
+!package.json
 
 # ============================================
-# Operating System Files
+# 说明
 # ============================================
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Windows
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-Desktop.ini
-
-# Linux
-*~
-.directory
-
-# ============================================
-# IDE & Editor Files
-# ============================================
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.project
-.classpath
-.settings/
-*.sublime-project
-*.sublime-workspace
-
-# ============================================
-# Test Coverage & Testing
-# ============================================
-coverage/
-.nyc_output/
-*.lcov
-.jest/
-
-# ============================================
-# Build Outputs
-# ============================================
-build/
-out/
-*.tsbuildinfo
-
-# ============================================
-# Temporary Files
-# ============================================
-*.tmp
-*.temp
-.cache/
-*.bak
-*.swp
-
-# ============================================
-# Python (for audit/analysis tools)
-# ============================================
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.hypothesis/
-*.egg-info/
-.venv/
-venv/
-ENV/
-
-# ============================================
-# Audit & Analysis Tools (Local Development)
-# ============================================
-# These folders contain temporary analysis tools
-array-audit/
-audit/
-js-fundamentals-review/
-reports/
-
-# ============================================
-# Analysis & Review Documents (Local Only)
-# ============================================
-# These are temporary analysis documents, not part of the main project
-REVIEW_FINDINGS.md
-REVIEW_SUMMARY.md
-CORE_TOPICS_ANALYSIS.md
-FILE_RENAMING_MAP.md
-array-audit-report.md
-
-# ============================================
-# Kiro AI Assistant Files
-# ============================================
-# Ignore all Kiro files - development tools only
-.kiro/
-
-# ============================================
-# KEEP IN VERSION CONTROL (DO NOT IGNORE)
-# ============================================
-# CORE PROJECT FILES - Only these should be tracked:
-# 
-# Essential Files:
-# - README.md          (main project documentation)
-# - LICENSE            (project license)
-# - package.json       (dependencies and scripts)
-# - .gitignore         (this file)
+# 此配置确保只有以下内容被同步到远程分支：
+# - demo/ 文件夹及其所有内容
+# - docs/ 文件夹及其所有内容
+# - .gitignore 文件
+# - LICENSE 文件
+# - README.md 文件
+# - package.json 文件
 #
-# Essential Folders:
-# - demo/              (all demo files - the main content)
-# - docs/              (learning documentation)
-#
-# Everything else is ignored for a clean, focused repository
+# 其他所有文件和文件夹都会被忽略
 
