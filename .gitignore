@@ -1,54 +1,148 @@
-# Node modules and dependencies
+# ============================================
+# Node.js & Dependencies
+# ============================================
 node_modules/
 dist/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Environment files
+# ============================================
+# Environment & Configuration
+# ============================================
 .env
 .env.local
+.env.*.local
 
-# OS files
+# ============================================
+# Operating System Files
+# ============================================
+# macOS
 .DS_Store
-Thumbs.db
+.AppleDouble
+.LSOverride
 
-# IDE files
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# ============================================
+# IDE & Editor Files
+# ============================================
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
 
-# Test coverage
+# ============================================
+# Test Coverage & Testing
+# ============================================
 coverage/
 .nyc_output/
+*.lcov
+.jest/
 
-# Build outputs
+# ============================================
+# Build Outputs
+# ============================================
 build/
 out/
+*.tsbuildinfo
 
-# Temporary files
+# ============================================
+# Temporary Files
+# ============================================
 *.tmp
 *.temp
 .cache/
+*.bak
+*.swp
 
-# Python (for audit tools)
+# ============================================
+# Python (for audit/analysis tools)
+# ============================================
 __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
 .hypothesis/
+*.egg-info/
+.venv/
+venv/
+ENV/
 
-# Ignore audit/analysis tools and their outputs (local only)
+# ============================================
+# Audit & Analysis Tools (Local Development)
+# ============================================
+# These folders contain temporary analysis tools
 array-audit/
 audit/
 js-fundamentals-review/
 reports/
 
-# Ignore analysis and review documents (local only)
+# ============================================
+# Analysis & Review Documents (Local Only)
+# ============================================
+# These are temporary analysis documents, not part of the main project
 REVIEW_FINDINGS.md
 REVIEW_SUMMARY.md
 CORE_TOPICS_ANALYSIS.md
-CHANGELOG.md
 FILE_RENAMING_MAP.md
 array-audit-report.md
+COVERAGE_REVIEW_PLAN.md
+FOLDER_STRUCTURE_ANALYSIS.md
+JAVASCRIPT_COVERAGE_REVIEW_REPORT.md
+DOCUMENTATION_SYNC_SUMMARY.md
+GITIGNORE_UPDATE_SUMMARY.md
 
-# Keep .kiro specs but ignore other .kiro files
+# ============================================
+# Project Documentation (Development Only)
+# ============================================
+# These documentation files are for development reference only
+# Core project only needs: README.md, LICENSE, package.json, demo/, docs/
+CHANGELOG.md                    # Change history - development reference only
+DEMO_FILE_STRUCTURE.md          # File structure reference - development reference only
+QUICK_REFERENCE.md              # Quick reference guide - development reference only
+VERSION_CONTROL_GUIDE.md        # Version control guide - development reference only
+CORE_FILES_ONLY.md              # Core files strategy - development reference only
+FINAL_GITIGNORE_UPDATE.md       # Final update summary - development reference only
+
+# ============================================
+# Kiro AI Assistant Files
+# ============================================
+# Keep specs for documentation, ignore other Kiro files
 .kiro/*
 !.kiro/specs/
+
+# ============================================
+# KEEP IN VERSION CONTROL (DO NOT IGNORE)
+# ============================================
+# CORE PROJECT FILES - Only these should be tracked:
+# 
+# Essential Files:
+# - README.md          (main project documentation)
+# - LICENSE            (project license)
+# - package.json       (dependencies and scripts)
+# - .gitignore         (this file)
+#
+# Essential Folders:
+# - demo/              (all demo files - the main content)
+# - docs/              (learning documentation)
+#
+# Everything else is ignored for a clean, focused repository
+

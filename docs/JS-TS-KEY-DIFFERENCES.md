@@ -282,8 +282,16 @@ const pipe = <T>(...fns: Function[]) =>
   - `demo/data-structures/05-arrays.js` + `demo/data-structures/05-arrays-ts-comparison.ts`
   - `demo/data-structures/06-functions.js` + `demo/data-structures/06-functions-ts-comparison.ts` (16 sections, 1100+ lines)
   - `demo/data-structures/07-objects.js`
+  - `demo/core-concepts/11-scope-closures.js`
+  - `demo/core-concepts/12-error-handling.js`
+  - `demo/core-concepts/13-prototypes-inheritance.js`
+  - `demo/core-concepts/14-modern-features.js`
+  - `demo/asynchronous/18-event-loop-callbacks.js`
+  - `demo/asynchronous/19-promises.js`
+  - `demo/asynchronous/20-async-await.js`
+  - `demo/asynchronous/21-modules.js`
 
 ---
 
-**Last Updated**: 2026-02-14  
+**Last Updated**: 2026-02-16  
 **Based on**: ES2020+ and TypeScript 5.x
