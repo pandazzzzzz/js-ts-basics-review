@@ -121,6 +121,7 @@ QUICK_REFERENCE.md              # Quick reference guide - development reference 
 VERSION_CONTROL_GUIDE.md        # Version control guide - development reference only
 CORE_FILES_ONLY.md              # Core files strategy - development reference only
 FINAL_GITIGNORE_UPDATE.md       # Final update summary - development reference only
+GIT_COMMIT_SUMMARY.md           # Git commit summary - development reference only
 
 # ============================================
 # Kiro AI Assistant Files
