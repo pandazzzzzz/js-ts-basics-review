@@ -1,118 +1,139 @@
 # JS/TS Basics Review Practice
 
-JavaScript and TypeScript fundamentals practice project with detailed examples and comparisons.
+JavaScript / TypeScript fundamentals review project with detailed examples and comparisons.
 
 ## Project Structure
 
 ```
-├── demo/                  # Practice examples (executable code)
-│   ├── basics/            # Basic Syntax (01-04)
-│   │   ├── 01-variables.js              # Variables and data types (7 sections)
-│   │   ├── 01-variables-ts-comparison.ts
-│   │   ├── 02-operators.js              # Operators and expressions
-│   │   ├── 03-control-flow.js           # Control structures (if/loop/switch)
-│   │   └── 04-strings.js                # Strings and template literals
-│   │
-│   ├── data-structures/   # Data Structures (05-10)
-│   │   ├── 05-arrays.js                 # Arrays and methods (8 sections)
-│   │   ├── 05-arrays-ts-comparison.ts
-│   │   ├── 06-functions.js              # Functions (16 sections, 1100+ lines)
-│   │   ├── 06-functions-ts-comparison.ts
-│   │   ├── 07-objects.js                # Objects and methods (10 sections)
-│   │   ├── 08-map-set.js                # Map and Set data structures
-│   │   ├── 09-json.js                   # JSON operations
-│   │   └── 10-date-time.js              # Date and time handling
-│   │
-│   ├── core-concepts/     # Core Concepts (11-17)
-│   │   ├── 11-scope-closures.js         # Scope and closures
-│   │   ├── 12-error-handling.js         # Error handling
-│   │   ├── 13-prototypes-inheritance.js # Prototypes and inheritance
-│   │   ├── 14-modern-features.js        # ES6+ features and classes
-│   │   ├── 15-regex.js                  # Regular expressions
-│   │   ├── 16-iterators-generators.js   # Iterators and generators
-│   │   └── 17-proxy-reflect.js          # Proxy and Reflect API
-│   │
-│   └── asynchronous/      # Asynchronous Programming (18-22)
-│       ├── 18-event-loop-callbacks.js   # Event loop and callbacks
-│       ├── 19-promises.js               # Promises
-│       ├── 20-async-await.js            # Async/Await
-│       ├── 21-modules.js                # ES Modules
-│       └── 22-fetch-api.js              # Fetch API
+demo/
+├── 01-basics/              # Basic Syntax (01-05)
+│   ├── 01-variables.js                  # Variables & Data Types
+│   ├── 01-variables-ts-comparison.ts    # TS Comparison
+│   ├── 02-operators.js                  # Operators & Expressions
+│   ├── 03-control-flow.js               # Control Structures
+│   ├── 04-strings.js                    # Strings & Template Literals
+│   └── 05-numbers-math.js              # Numbers & Math
 │
-├── docs/
-│   ├── TODOLIST.md       # Learning roadmap (14 topics)
-│   └── JS-TS-KEY-DIFFERENCES.md  # Quick reference guide
-└── LICENSE               # MIT License
+├── 02-data-structures/     # Data Structures (06-12)
+│   ├── 06-arrays.js                     # Array Methods
+│   ├── 06-arrays-ts-comparison.ts       # TS Comparison
+│   ├── 07-functions.js                  # Functions (16 sections, 1100+ lines)
+│   ├── 07-functions-ts-comparison.ts    # TS Comparison
+│   ├── 08-objects.js                    # Objects & Methods
+│   ├── 09-destructuring.js             # Destructuring Assignment
+│   ├── 10-map-set.js                    # Map & Set
+│   ├── 11-json.js                       # JSON Operations
+│   └── 12-date-time.js                 # Date & Time
+│
+├── 03-core-concepts/       # Core Concepts (13-23)
+│   ├── 13-scope-closures.js             # Scope & Closures
+│   ├── 14-this-keyword.js               # this Keyword
+│   ├── 15-prototypes-inheritance.js     # Prototypes & Inheritance
+│   ├── 16-classes.js                    # Classes
+│   ├── 17-property-descriptors.js       # Property Descriptors
+│   ├── 18-modern-features.js            # ES6+ Features
+│   ├── 19-symbol-deep.js               # Symbol Deep Dive
+│   ├── 20-error-handling.js             # Error Handling
+│   ├── 21-regex.js                      # Regular Expressions
+│   ├── 22-iterators-generators.js       # Iterators & Generators
+│   └── 23-proxy-reflect.js             # Proxy & Reflect
+│
+├── 04-asynchronous/        # Asynchronous Programming (24-28)
+│   ├── 24-event-loop-callbacks.js       # Event Loop & Callbacks
+│   ├── 25-promises.js                   # Promises
+│   ├── 26-async-await.js               # Async/Await
+│   ├── 27-modules.js                    # ES Modules
+│   └── 28-fetch-api.js                 # Fetch API
+│
+├── 05-browser-dom/         # Browser & DOM (29-32)
+│   ├── 29-dom-basics.js                 # DOM Basics
+│   ├── 30-dom-manipulation.js           # DOM Manipulation
+│   ├── 31-events.js                     # Event Handling
+│   └── 32-forms-validation.js          # Forms & Validation
+│
+└── 06-advanced/            # Advanced Topics (33-39)
+    ├── 33-es2022-plus-features.js       # ES2022+ Features
+    ├── 34-debugging-testing.js          # Debugging & Testing
+    ├── 35-memory-gc.js                  # Memory & Garbage Collection
+    ├── 36-typed-arrays.js               # Typed Arrays
+    ├── 37-intl-api.js                   # Internationalization API
+    ├── 38-weakref-finalization.js       # WeakRef & FinalizationRegistry
+    └── 39-storage-network.js            # Storage & Network
 ```
 
 ## Quick Start
 
 ```bash
-# Run JavaScript examples (recommended learning order)
+# Stage 1: Basic Syntax
+node demo/01-basics/01-variables.js
+node demo/01-basics/02-operators.js
+node demo/01-basics/03-control-flow.js
+node demo/01-basics/04-strings.js
+node demo/01-basics/05-numbers-math.js
 
-# Basic Syntax (01-04)
-node demo/basics/01-variables.js      # Start here: Variables and data types
-node demo/basics/02-operators.js      # Operators and expressions
-node demo/basics/03-control-flow.js   # Control structures
-node demo/basics/04-strings.js        # Strings and template literals
+# Stage 2: Data Structures
+node demo/02-data-structures/06-arrays.js
+node demo/02-data-structures/07-functions.js
+node demo/02-data-structures/08-objects.js
+node demo/02-data-structures/09-destructuring.js
+node demo/02-data-structures/10-map-set.js
+node demo/02-data-structures/11-json.js
+node demo/02-data-structures/12-date-time.js
 
-# Data Structures (05-10)
-node demo/data-structures/05-arrays.js         # Arrays: creation, iteration, search, manipulation
-node demo/data-structures/06-functions.js      # Functions: 16 sections, 1100+ lines
-node demo/data-structures/07-objects.js        # Objects: creation, access, methods, prototypes
-node demo/data-structures/08-map-set.js        # Map and Set data structures
-node demo/data-structures/09-json.js           # JSON operations
-node demo/data-structures/10-date-time.js      # Date and time handling
+# Stage 3: Core Concepts
+node demo/03-core-concepts/13-scope-closures.js
+node demo/03-core-concepts/14-this-keyword.js
+node demo/03-core-concepts/15-prototypes-inheritance.js
+node demo/03-core-concepts/16-classes.js
+node demo/03-core-concepts/17-property-descriptors.js
+node demo/03-core-concepts/18-modern-features.js
+node demo/03-core-concepts/19-symbol-deep.js
+node demo/03-core-concepts/20-error-handling.js
+node demo/03-core-concepts/21-regex.js
+node demo/03-core-concepts/22-iterators-generators.js
+node demo/03-core-concepts/23-proxy-reflect.js
 
-# Core Concepts (11-17)
-node demo/core-concepts/11-scope-closures.js # Scope and closures
-node demo/core-concepts/12-error-handling.js # Error handling
-node demo/core-concepts/13-prototypes-inheritance.js # Prototypes
-node demo/core-concepts/14-modern-features.js # ES6+ features
-node demo/core-concepts/15-regex.js          # Regular expressions
-node demo/core-concepts/16-iterators-generators.js # Iterators and generators
-node demo/core-concepts/17-proxy-reflect.js  # Proxy and Reflect API
+# Stage 4: Asynchronous Programming
+node demo/04-asynchronous/24-event-loop-callbacks.js
+node demo/04-asynchronous/25-promises.js
+node demo/04-asynchronous/26-async-await.js
+node demo/04-asynchronous/27-modules.js
+node demo/04-asynchronous/28-fetch-api.js
 
-# Asynchronous Programming (18-22)
-node demo/asynchronous/18-event-loop-callbacks.js # Event loop basics
-node demo/asynchronous/19-promises.js       # Promises
-node demo/asynchronous/20-async-await.js    # Async/Await
-node demo/asynchronous/21-modules.js        # ES Modules
-node demo/asynchronous/22-fetch-api.js      # Fetch API
-
-# Run TypeScript examples
-npx ts-node demo/basics/01-variables-ts-comparison.ts
-npx ts-node demo/data-structures/05-arrays-ts-comparison.ts
-npx ts-node demo/data-structures/06-functions-ts-comparison.ts
+# TypeScript Comparisons
+npx ts-node demo/01-basics/01-variables-ts-comparison.ts
+npx ts-node demo/02-data-structures/06-arrays-ts-comparison.ts
+npx ts-node demo/02-data-structures/07-functions-ts-comparison.ts
 ```
-
-## Documentation
-
-- **Learning Path**: [TODOLIST.md](docs/TODOLIST.md) - 14 topics with progress tracking
-- **JS vs TS Guide**: [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) - Key differences and pitfalls
-- **JavaScript**: [JavaScript.info](https://javascript.info)
-- **TypeScript**: [TypeScript Docs](https://www.typescriptlang.org/docs)
-
-## Features
-
-- ✅ 22 comprehensive demo files covering JavaScript fundamentals
-- ✅ 3 TypeScript comparison files (variables, functions, arrays)
-- ✅ Organized by learning progression: Basics → Data Structures → Core Concepts → Async
-- ✅ ES version annotations for all features (ES1-ES2023)
-- ✅ 300-1100+ lines per comprehensive demo file
-- ✅ Executable code examples with detailed comments
-- ✅ Advanced topics: IIFE patterns, TCO, pure functions, functional programming
-- ✅ New topics: Date/Time handling, Proxy/Reflect API
 
 ## Learning Path
 
-The files are numbered in recommended learning order (01-22):
+Files are numbered 01-39 in recommended learning order:
 
-1. **Basic Syntax (01-04)** - Start here if you're new to JavaScript
-2. **Data Structures (05-10)** - Learn arrays, functions, objects, Map/Set, JSON, and Date/Time
-3. **Core Concepts (11-17)** - Master scope, errors, prototypes, ES6+, regex, iterators, and Proxy/Reflect
-4. **Asynchronous (18-22)** - Understand async programming patterns and Fetch API
+1. **Basic Syntax (01-05)** — Variables, operators, control flow, strings, numbers
+2. **Data Structures (06-12)** — Arrays, functions, objects, destructuring, Map/Set, JSON, dates
+3. **Core Concepts (13-23)** — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy
+4. **Asynchronous (24-28)** — Event loop, Promises, Async/Await, modules, Fetch
+5. **Browser & DOM (29-32)** — DOM manipulation, events, forms & validation
+6. **Advanced (33-39)** — ES2022+, debugging, memory management, internationalization, etc.
+
+## Progress
+
+- ✅ Completed: 15/39 (01-04, 06-08, 13, 15, 18, 20, 24-27)
+- 🚧 Skeleton: 24/39
+
+## Documentation
+
+- [TODOLIST.md](docs/TODOLIST.md) — Learning roadmap & progress tracking
+- [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS differences guide
+
+## References
+
+- [JavaScript.info](https://javascript.info)
+- [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [TypeScript Docs](https://www.typescriptlang.org/docs)
+- [roadmap.sh/javascript](https://roadmap.sh/javascript)
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT
