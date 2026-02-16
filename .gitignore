@@ -125,9 +125,8 @@ FINAL_GITIGNORE_UPDATE.md       # Final update summary - development reference o
 # ============================================
 # Kiro AI Assistant Files
 # ============================================
-# Keep specs for documentation, ignore other Kiro files
-.kiro/*
-!.kiro/specs/
+# Ignore all Kiro files - development tools only
+.kiro/
 
 # ============================================
 # KEEP IN VERSION CONTROL (DO NOT IGNORE)
