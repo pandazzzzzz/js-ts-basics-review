@@ -1,5 +1,5 @@
 // Operators and Expressions Demo
-// 📘 For TypeScript comparison, see: 07-operators-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
 
 // ============================================
 // Arithmetic Operators
@@ -378,15 +378,219 @@ console.log("'hello' instanceof String:", "hello" instanceof String); // false (
 console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
 
 // ============================================
+// Spread and Rest Operators
+// ============================================
+
+// Spread Operator (...) - Expands iterable into individual elements (ES2015)
+// - Works with arrays, objects, strings, and any iterable
+// - Use case: array/object copying, merging, function arguments
+// - Common pitfall: creates shallow copy (nested objects are still referenced)
+console.log("\nSpread Operator (...):");
+
+// Array spreading
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+console.log("Combined arrays:", combined);
+
+// Array copying (shallow)
+const original = [1, 2, 3];
+const copy = [...original];
+console.log("Array copy:", copy); // [1, 2, 3]
+console.log("Are they same?:", original === copy); // false (different references)
+
+// Object spreading
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const mergedObj = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
+console.log("Merged objects:", mergedObj);
+
+// Object spreading with override
+const defaults = { theme: "light", lang: "en" };
+const userPrefs = { theme: "dark" };
+const finalPrefs = { ...defaults, ...userPrefs }; // theme: "dark" wins
+console.log("Final preferences:", finalPrefs);
+
+// Spread in function calls
+const numbers = [5, 10, 15];
+console.log("Math.max with spread:", Math.max(...numbers)); // 15
+
+// String spreading
+const str = "hello";
+const chars = [...str]; // ['h', 'e', 'l', 'l', 'o']
+console.log("String to array:", chars);
+
+// Edge case: Shallow copy warning
+const nested = { a: { b: 1 } };
+const shallowCopy = { ...nested };
+shallowCopy.a.b = 2;
+console.log("Original nested.a.b:", nested.a.b); // 2 (modified!)
+console.log("Shallow copy warning: nested objects are still referenced");
+
+// Rest Parameters (...rest) - Collects remaining elements into array (ES2015)
+// - Must be last parameter
+// - Creates real array (unlike arguments object)
+// - Use case: variable number of function arguments
+console.log("\nRest Parameters (...):");
+
+function sum(...numbers) {
+  return numbers.reduce((total, n) => total + n, 0);
+}
+console.log("sum(1, 2, 3, 4):", sum(1, 2, 3, 4)); // 10
+
+function greet(greeting, ...names) {
+  return `${greeting} ${names.join(", ")}!`;
+}
+console.log("greet('Hello', 'Alice', 'Bob'):", greet("Hello", "Alice", "Bob")); // "Hello Alice, Bob!"
+
+// Rest in destructuring
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+console.log("Destructuring with rest:", { first, second, rest }); // { first: 1, second: 2, rest: [3, 4, 5] }
+
+const { x, y, ...remaining } = { x: 1, y: 2, z: 3, w: 4 };
+console.log("Object destructuring with rest:", { x, y, remaining }); // { x: 1, y: 2, remaining: { z: 3, w: 4 } }
+
+// ============================================
+// Property Access Operators
+// ============================================
+
+// Optional Chaining (?.) - Safely access nested properties (ES2020)
+// - Returns undefined if any part is null/undefined
+// - Short-circuits: stops evaluation at first null/undefined
+// - Use case: accessing deeply nested properties, optional method calls
+// - Prevents "Cannot read property of undefined" errors
+console.log("\nOptional Chaining (?.):");
+
+const user = {
+  name: "Alice",
+  address: {
+    city: "NYC",
+    zip: "10001"
+  },
+  getEmail: function() {
+    return "alice@example.com";
+  }
+};
+
+// Safe property access
+console.log("user?.address?.city:", user?.address?.city); // "NYC"
+console.log("user?.contact?.email:", user?.contact?.email); // undefined (no error!)
+
+// Optional method call
+console.log("user.getEmail?.():", user.getEmail?.()); // "alice@example.com"
+console.log("user.sendEmail?.():", user.sendEmail?.()); // undefined (method doesn't exist)
+
+// Optional array indexing
+const arr = [1, 2, 3];
+console.log("arr?.[0]:", arr?.[0]); // 1
+console.log("arr?.[10]:", arr?.[10]); // undefined
+
+const nullArr = null;
+console.log("nullArr?.[0]:", nullArr?.[0]); // undefined (no error!)
+
+// Edge case: Optional chaining with function calls
+const obj3 = {
+  method: null
+};
+console.log("obj3.method?.():", obj3.method?.()); // undefined (method is null)
+// console.log("obj3.method():", obj3.method()); // ❌ Error: obj3.method is not a function
+
+// ============================================
+// this Keyword
+// ============================================
+
+// this - References current execution context (ES1)
+// - In methods: refers to the object
+// - In functions: depends on how function is called
+// - Arrow functions: inherit this from enclosing scope
+// - Use case: accessing object properties, method context
+// - Common pitfall: this changes based on call context
+console.log("\nthis Keyword:");
+
+const person = {
+  name: "Bob",
+  greet: function() {
+    console.log(`Hello, I'm ${this.name}`);
+  },
+  greetArrow: () => {
+    console.log(`Arrow function this:`, this); // inherits from outer scope
+  }
+};
+
+person.greet(); // "Hello, I'm Bob" (this = person)
+
+// this in different contexts
+function regularFunction() {
+  console.log("Regular function this:", this); // depends on call context
+}
+
+const arrowFunction = () => {
+  console.log("Arrow function inherits this from enclosing scope");
+};
+
+// Binding this
+const boundGreet = person.greet.bind(person);
+boundGreet(); // "Hello, I'm Bob" (this is bound to person)
+
+// ============================================
+// super Keyword
+// ============================================
+
+// super - Calls parent class methods (ES2015)
+// - Used in class inheritance
+// - super() calls parent constructor (must be called before using this)
+// - super.method() calls parent method
+// - Use case: extending classes, calling parent functionality
+console.log("\nsuper Keyword:");
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  speak() {
+    return `${this.name} makes a sound`;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name); // Must call super() before using this
+    this.breed = breed;
+  }
+  
+  speak() {
+    const parentSpeak = super.speak(); // Call parent method
+    return `${parentSpeak} and barks!`;
+  }
+}
+
+const dog = new Dog("Rex", "Labrador");
+console.log("dog.speak():", dog.speak()); // "Rex makes a sound and barks!"
+console.log("dog.name:", dog.name); // "Rex"
+console.log("dog.breed:", dog.breed); // "Labrador"
+
+// ============================================
 // Other Operators
 // ============================================
 
 // Comma Operator (,) - Evaluates each operand, returns last (ES1)
 // - Use case: multiple expressions in one statement (rare)
 // - Common in for loops
+// - Common pitfall: lowest precedence, can cause confusion
 console.log("\nComma Operator:");
 let h = (1, 2, 3); // evaluates 1, 2, 3, returns 3
 console.log("h = (1, 2, 3):", h); // 3
+
+// Comma in for loops
+for (let i = 0, j = 10; i < 5; i++, j--) {
+  console.log(`i: ${i}, j: ${j}`);
+}
+
+// Edge case: Comma operator precedence
+let commaTest = (5, 10); // 10
+console.log("Comma with parentheses:", commaTest); // 10
+// let commaTest2 = 5, 10; // ❌ Syntax error without parentheses
 
 // Grouping Operator () - Controls evaluation order (ES1)
 // - Highest precedence
@@ -401,150 +605,207 @@ console.log("void 0:", void 0); // undefined
 console.log("void (2 + 2):", void (2 + 2)); // undefined (expression evaluated but returns undefined)
 
 // Delete Operator - Removes property from object (ES1)
-// - Returns true if successful
+// - Returns true if successful (even if property doesn't exist!)
 // - Cannot delete variables or functions
 // - Use case: removing object properties
+// - Common pitfall: returns true even if property doesn't exist
 const obj = { a: 1, b: 2 };
 console.log("\ndelete Operator:");
 console.log("Before delete:", obj); // { a: 1, b: 2 }
 console.log("delete obj.a:", delete obj.a); // true
 console.log("After delete:", obj); // { b: 2 }
+console.log("delete obj.nonexistent:", delete obj.nonexistent); // true (even though it doesn't exist!)
 
 // ============================================
 // Common Pitfalls & Best Practices
 // ============================================
 
-console.log("\n=== Common Pitfalls ===");
+console.log("\n=== Common Pitfalls & Edge Cases ===");
 
-// Pitfall 1: == vs === (type coercion)
-console.log("\nPitfall 1: == vs ===");
-console.log("0 == false:", 0 == false); // true (type coercion)
-console.log("0 === false:", 0 === false); // false (different types)
-console.log("'' == 0:", "" == 0); // true (both convert to 0)
-console.log("'' === 0:", "" === 0); // false
-// Best Practice: Always use === and !== unless you specifically need type coercion
-
-// Pitfall 2: Operator precedence confusion
-console.log("\nPitfall 2: Operator Precedence");
-console.log("5 + 10 * 2:", 5 + 10 * 2); // 25 (not 30)
-console.log("true || false && false:", true || false && false); // true (not false)
-// Best Practice: Use parentheses for clarity, even if not strictly needed
-
-// Pitfall 3: NaN comparisons
-console.log("\nPitfall 3: NaN Comparisons");
+// Pitfall 1: NaN comparison behavior
+console.log("\nPitfall 1: NaN Comparison Behavior");
 console.log("NaN == NaN:", NaN == NaN); // false
 console.log("NaN === NaN:", NaN === NaN); // false
+console.log("NaN !== NaN:", NaN !== NaN); // true (only value not equal to itself!)
 console.log("Number.isNaN(NaN):", Number.isNaN(NaN)); // true
-// Best Practice: Use Number.isNaN() to check for NaN
+console.log("Number.isNaN('hello'):", Number.isNaN("hello")); // false (not NaN, just not a number)
+console.log("isNaN('hello'):", isNaN("hello")); // true (legacy, converts to number first)
+// Best Practice: Use Number.isNaN() to check for NaN, not === or ==
 
-// Pitfall 4: Floating point precision
-console.log("\nPitfall 4: Floating Point Precision");
+// Pitfall 2: Floating point precision
+console.log("\nPitfall 2: Floating Point Precision");
 console.log("0.1 + 0.2:", 0.1 + 0.2); // 0.30000000000000004
 console.log("0.1 + 0.2 === 0.3:", 0.1 + 0.2 === 0.3); // false
 console.log("Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON:", Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON); // true
-// Best Practice: Use epsilon comparison for floating point equality
+console.log("0.3 - 0.2:", 0.3 - 0.2); // 0.09999999999999998
+console.log("0.3 - 0.1:", 0.3 - 0.1); // 0.19999999999999998
+// Best Practice: Use epsilon comparison for floating point equality, or work with integers
 
-// Pitfall 5: String + Number concatenation
-console.log("\nPitfall 5: String + Number");
-console.log("'5' + 3:", "5" + 3); // "53" (concatenation)
-console.log("'5' - 3:", "5" - 3); // 2 (subtraction converts to number)
-console.log("'5' * 3:", "5" * 3); // 15 (multiplication converts to number)
+// Pitfall 3: Type coercion with addition
+console.log("\nPitfall 3: Type Coercion with Addition");
+console.log("1 + 2:", 1 + 2); // 3 (number + number)
+console.log("'1' + 2:", "1" + 2); // "12" (string + number = string concatenation)
+console.log("1 + '2':", 1 + "2"); // "12" (number + string = string concatenation)
+console.log("'1' + '2':", "1" + "2"); // "12" (string + string)
+console.log("1 + 2 + '3':", 1 + 2 + "3"); // "33" (left-to-right: (1+2)+'3' = 3+'3')
+console.log("'1' + 2 + 3:", "1" + 2 + 3); // "123" (left-to-right: ('1'+2)+3 = '12'+3)
 // Best Practice: Explicitly convert types with Number() or String()
 
-// Pitfall 6: Truthy/Falsy confusion
-console.log("\nPitfall 6: Truthy/Falsy Values");
-console.log("Boolean(0):", Boolean(0)); // false
-console.log("Boolean(''):", Boolean("")); // false
-console.log("Boolean('0'):", Boolean("0")); // true (non-empty string)
-console.log("Boolean([]):", Boolean([])); // true (empty array is truthy!)
-console.log("Boolean({}):", Boolean({})); // true (empty object is truthy!)
-// Best Practice: Be explicit with comparisons, don't rely on implicit coercion
+// Pitfall 4: Division by zero
+console.log("\nPitfall 4: Division by Zero");
+console.log("1 / 0:", 1 / 0); // Infinity
+console.log("-1 / 0:", -1 / 0); // -Infinity
+console.log("0 / 0:", 0 / 0); // NaN
+console.log("Infinity + 1:", Infinity + 1); // Infinity
+console.log("Infinity - Infinity:", Infinity - Infinity); // NaN
+console.log("Infinity * 0:", Infinity * 0); // NaN
+// Best Practice: Check for zero before division, or handle Infinity/NaN appropriately
 
-// Pitfall 7: || vs ?? for default values
-console.log("\nPitfall 7: || vs ?? for Defaults");
-const value1 = 0;
-const value2 = null;
-console.log("0 || 'default':", value1 || "default"); // "default" (0 is falsy)
-console.log("0 ?? 'default':", value1 ?? "default"); // 0 (0 is not null/undefined)
-console.log("null || 'default':", value2 || "default"); // "default"
-console.log("null ?? 'default':", value2 ?? "default"); // "default"
-// Best Practice: Use ?? when 0, false, or "" are valid values
+// Pitfall 5: Bitwise operations on negative numbers
+console.log("\nPitfall 5: Bitwise on Negative Numbers");
+console.log("~5:", ~5); // -6 (bitwise NOT)
+console.log("~-1:", ~-1); // 0
+console.log("-5 >> 1:", -5 >> 1); // -3 (sign-propagating right shift)
+console.log("-5 >>> 1:", -5 >>> 1); // 2147483645 (zero-fill right shift, treats as unsigned)
+console.log("-1 >>> 0:", -1 >>> 0); // 4294967295 (converts to unsigned 32-bit)
+// Best Practice: Be careful with bitwise operators on negative numbers, understand two's complement
 
-// Pitfall 8: Postfix vs Prefix increment
-console.log("\nPitfall 8: Postfix vs Prefix");
-let i = 5;
-console.log("i++:", i++); // 5 (returns then increments)
-console.log("i:", i); // 6
-console.log("++i:", ++i); // 7 (increments then returns)
-console.log("i:", i); // 7
+// Pitfall 6: Operator precedence gotchas
+console.log("\nPitfall 6: Operator Precedence");
+console.log("2 + 3 * 4:", 2 + 3 * 4); // 14 (not 20, * before +)
+console.log("(2 + 3) * 4:", (2 + 3) * 4); // 20 (parentheses first)
+console.log("true || false && false:", true || false && false); // true (&& before ||)
+console.log("(true || false) && false:", (true || false) && false); // false
+console.log("2 ** 3 ** 2:", 2 ** 3 ** 2); // 512 (right-to-left: 2 ** (3 ** 2))
+console.log("(2 ** 3) ** 2:", (2 ** 3) ** 2); // 64
+// Best Practice: Use parentheses for clarity, even if not strictly needed
+
+// Pitfall 7: Prefix vs postfix increment
+console.log("\nPitfall 7: Prefix vs Postfix Increment");
+let prefixTest = 5;
+console.log("prefixTest:", prefixTest); // 5
+console.log("prefixTest++:", prefixTest++); // 5 (returns then increments)
+console.log("prefixTest:", prefixTest); // 6
+console.log("++prefixTest:", ++prefixTest); // 7 (increments then returns)
+console.log("prefixTest:", prefixTest); // 7
 // Best Practice: Use on separate line to avoid confusion
 
-// Pitfall 9: Bitwise operators on negative numbers
-console.log("\nPitfall 9: Bitwise on Negatives");
-console.log("~-1:", ~-1); // 0
-console.log("-5 >> 1:", -5 >> 1); // -3 (sign-propagating)
-console.log("-5 >>> 1:", -5 >>> 1); // 2147483645 (zero-fill)
-// Best Practice: Be careful with bitwise operators on negative numbers
+// Pitfall 8: Loose equality coercion
+console.log("\nPitfall 8: Loose Equality Coercion");
+console.log("0 == false:", 0 == false); // true
+console.log("'' == false:", "" == false); // true
+console.log("null == undefined:", null == undefined); // true
+console.log("[] == false:", [] == false); // true (array converts to empty string)
+console.log("[] == ![]:", [] == ![]); // true (bizarre but true!)
+console.log("'0' == false:", "0" == false); // true
+// Best Practice: Always use === and !== unless you specifically need type coercion
 
-// Pitfall 10: typeof null
-console.log("\nPitfall 10: typeof null");
-console.log("typeof null:", typeof null); // "object" (historical bug)
-console.log("null === null:", null === null); // true (use this instead)
-// Best Practice: Use === null to check for null specifically
+// Pitfall 9: Nullish coalescing vs logical OR
+console.log("\nPitfall 9: Nullish Coalescing vs Logical OR");
+console.log("0 ?? 10:", 0 ?? 10); // 0 (0 is not null/undefined)
+console.log("0 || 10:", 0 || 10); // 10 (0 is falsy)
+console.log("'' ?? 'default':", "" ?? "default"); // '' (empty string is not null/undefined)
+console.log("'' || 'default':", "" || "default"); // 'default' (empty string is falsy)
+console.log("false ?? true:", false ?? true); // false (false is not null/undefined)
+console.log("false || true:", false || true); // true (false is falsy)
+// Best Practice: Use ?? when 0, false, or "" are valid values
 
-// ============================================
-// TypeScript Comparison Notes
-// ============================================
-/*
-🔍 Key Differences in TypeScript:
+// Pitfall 10: Optional chaining with function calls
+console.log("\nPitfall 10: Optional Chaining with Function Calls");
+const optionalObj = {
+  method: null,
+  validMethod: () => "success"
+};
+console.log("optionalObj.method?.():", optionalObj.method?.()); // undefined (method is null)
+console.log("optionalObj.validMethod?.():", optionalObj.validMethod?.()); // "success"
+console.log("optionalObj.nonexistent?.():", optionalObj.nonexistent?.()); // undefined
+// Without optional chaining: optionalObj.method() would throw error
+// Best Practice: Use ?. when accessing properties or methods that might not exist
 
-1. STRICT EQUALITY ENFORCEMENT
-   JS:  Can use == or === (both compile)
-   TS:  ESLint rules often enforce === only
-   TS:  @typescript-eslint/no-implicit-coercion warns about ==
+// Pitfall 11: String comparison is lexicographic
+console.log("\nPitfall 11: String Comparison");
+console.log("'10' < '9':", "10" < "9"); // true ('1' < '9' in Unicode)
+console.log("'apple' < 'banana':", "apple" < "banana"); // true
+console.log("'Apple' < 'apple':", "Apple" < "apple"); // true (uppercase comes before lowercase)
+console.log("10 < 9:", 10 < 9); // false (numeric comparison)
+// Best Practice: Convert to numbers for numeric comparison, use localeCompare for proper string sorting
 
-2. TYPE-SAFE OPERATORS
-   JS:  let x = 5 + "3"; // "53" (allowed)
-   TS:  let x: number = 5 + "3"; // ❌ Error: Type 'string' is not assignable to type 'number'
-   TS:  Catches type mismatches at compile time
+// Pitfall 12: Delete operator return value
+console.log("\nPitfall 12: Delete Operator Return Value");
+const deleteTest = { x: 1 };
+console.log("delete deleteTest.x:", delete deleteTest.x); // true
+console.log("delete deleteTest.nonexistent:", delete deleteTest.nonexistent); // true (even though it doesn't exist!)
+console.log("deleteTest:", deleteTest); // {}
+// Best Practice: Don't rely on delete return value to check if property existed
 
-3. NULLISH COALESCING WITH STRICT NULL CHECKS
-   JS:  value ?? default (ES2020+)
-   TS:  Same syntax, but with strictNullChecks, provides better type narrowing
-   TS:  let x: string | null = null; let y = x ?? "default"; // y is string
+console.log("\n=== Best Practices Summary ===");
 
-4. OPTIONAL CHAINING
-   JS:  obj?.prop (ES2020+)
-   TS:  Same syntax, but provides type safety
-   TS:  Type narrows to exclude null/undefined after check
+// Best Practice 1: Use strict equality
+console.log("\nBest Practice: Use Strict Equality (=== and !==)");
+console.log("Always use === instead of ==");
+console.log("Always use !== instead of !=");
+console.log("Reason: Avoids unexpected type coercion and makes code more predictable");
+// Good: if (x === 5) { }
+// Bad:  if (x == 5) { }
 
-5. BITWISE OPERATORS
-   JS:  Works on any number
-   TS:  Can enforce integer types with custom types
-   TS:  type Int32 = number & { __int32: never }; (branded types)
+// Best Practice 2: Use optional chaining for nested access
+console.log("\nBest Practice: Use Optional Chaining for Nested Access");
+console.log("Use ?. to safely access nested properties");
+console.log("Prevents 'Cannot read property of undefined' errors");
+// Good: const city = user?.address?.city;
+// Bad:  const city = user && user.address && user.address.city;
 
-6. TYPEOF TYPE GUARDS
-   JS:  typeof x === "string" (runtime check)
-   TS:  Same syntax, but TypeScript narrows type in if block
-   TS:  if (typeof x === "string") { x.toUpperCase(); // x is string here }
+// Best Practice 3: Use nullish coalescing for default values
+console.log("\nBest Practice: Use Nullish Coalescing for Default Values");
+console.log("Prefer ?? over || when 0, false, or '' are valid values");
+console.log("Reason: ?? only treats null/undefined as nullish");
+// Good: const count = userInput ?? 10;
+// Bad:  const count = userInput || 10; // treats 0 as invalid
 
-7. INSTANCEOF TYPE GUARDS
-   JS:  obj instanceof Class (runtime check)
-   TS:  Same syntax, but TypeScript narrows type
-   TS:  if (obj instanceof Error) { console.log(obj.message); // obj is Error }
+// Best Practice 4: Avoid implicit type coercion
+console.log("\nBest Practice: Avoid Implicit Type Coercion");
+console.log("Be explicit about type conversions");
+console.log("Reason: Makes code more readable and prevents bugs");
+// Good: const num = Number("42");
+// Bad:  const num = +"42";
 
-8. OPERATOR OVERLOADING
-   JS:  No operator overloading
-   TS:  No operator overloading (same as JS)
-   TS:  Must use methods for custom types
+// Best Practice 5: Use parentheses for clarity
+console.log("\nBest Practice: Use Parentheses for Clarity");
+console.log("Add parentheses to make operator precedence explicit");
+console.log("Reason: Improves readability and prevents precedence-related bugs");
+// Good: const result = (a + b) * c;
+// Bad:  const result = a + b * c; // unclear intent
 
-⚠️ COMMON CONFUSION POINTS:
-- TypeScript doesn't change runtime behavior of operators
-- === is enforced by linters, not the compiler
-- Type coercion still happens at runtime
-- Bitwise operators still convert to 32-bit integers
-- typeof and instanceof work the same, but provide type narrowing
-- Operator precedence is identical to JavaScript
+// Best Practice 6: Use logical assignment operators
+console.log("\nBest Practice: Use Logical Assignment Operators");
+console.log("Use &&=, ||=, ??= for conditional assignment");
+console.log("Reason: More concise and expressive than traditional patterns");
+// Good: obj.prop ??= defaultValue;
+// Bad:  if (!obj.prop) obj.prop = defaultValue;
 
-📘 See 07-operators-ts-comparison.ts for detailed examples!
-*/
+// Best Practice 7: Use typeof carefully
+console.log("\nBest Practice: Use typeof Carefully");
+console.log("Remember typeof null === 'object'");
+console.log("Use appropriate checks for different types");
+// Good: if (x !== null && typeof x === "object") { }
+// Bad:  if (typeof x === "object") { } // includes null
+
+// Best Practice 8: Prefer exponentiation operator
+console.log("\nBest Practice: Prefer Exponentiation Operator");
+console.log("Use ** instead of Math.pow()");
+console.log("Reason: More concise and readable");
+// Good: const square = x ** 2;
+// Bad:  const square = Math.pow(x, 2);
+
+// Best Practice 9: Be careful with delete
+console.log("\nBest Practice: Be Careful with delete");
+console.log("Understand delete behavior and consider alternatives");
+console.log("Reason: delete can cause performance issues");
+// Consider: obj.prop = undefined; // or use Map for dynamic keys
+
+// Best Practice 10: Avoid comma operator
+console.log("\nBest Practice: Avoid Comma Operator");
+console.log("Avoid using comma operator except in for loops");
+console.log("Reason: Comma operator is confusing and rarely necessary");
+// Good: a++; b++; let x = c;
+// Bad:  let x = (a++, b++, c);
