@@ -1,5 +1,5 @@
 // Control Flow and Control Structures Demo
-// 📘 For TypeScript comparison, see: 08-control-flow-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 03-control-flow-ts-comparison.ts
 
 // ============================================
 // If/Else Statements
@@ -783,70 +783,4 @@ console.log(processValue(null));
 console.log(processValue(undefined));
 console.log(processValue(-5));
 console.log(processValue(42));
-
-// ============================================
-// TypeScript Comparison Notes
-// ============================================
-/*
-🔍 Key Differences in TypeScript:
-
-1. TYPE NARROWING IN CONDITIONALS
-   JS:  if (typeof x === "string") { x.toUpperCase(); }
-   TS:  Same syntax, but TypeScript narrows x to string type in if block
-   TS:  Provides autocomplete and type safety within the block
-
-2. SWITCH EXHAUSTIVENESS CHECKING
-   JS:  No compile-time check for missing cases
-   TS:  With union types, can enforce all cases handled
-   TS:  type Status = "active" | "inactive";
-   TS:  switch (status) { case "active": ...; case "inactive": ...; }
-   TS:  TypeScript ensures all Status values are covered
-
-3. LOOP TYPE INFERENCE
-   JS:  for (const item of items) { ... }
-   TS:  Same syntax, but item type is inferred from items array type
-   TS:  const items: string[] = ["a", "b"];
-   TS:  for (const item of items) { item.toUpperCase(); // item is string }
-
-4. FOR...IN WITH INDEX SIGNATURE
-   JS:  for (const key in obj) { console.log(obj[key]); }
-   TS:  Requires index signature or type assertion
-   TS:  const obj: { [key: string]: number } = { a: 1, b: 2 };
-   TS:  for (const key in obj) { console.log(obj[key]); // OK }
-
-5. NEVER TYPE FOR UNREACHABLE CODE
-   JS:  No concept of unreachable code types
-   TS:  function fail(): never { throw new Error(); }
-   TS:  Used for exhaustiveness checking in switch statements
-
-6. CONTROL FLOW ANALYSIS
-   JS:  No compile-time flow analysis
-   TS:  Tracks variable assignments through control flow
-   TS:  let x: string | number = "hello";
-   TS:  if (typeof x === "string") { x.toUpperCase(); // x is string }
-   TS:  else { x.toFixed(2); // x is number }
-
-7. DISCRIMINATED UNIONS WITH SWITCH
-   JS:  No special handling
-   TS:  type Shape = { kind: "circle"; radius: number } | { kind: "square"; size: number };
-   TS:  switch (shape.kind) {
-   TS:    case "circle": return shape.radius; // shape is circle type
-   TS:    case "square": return shape.size; // shape is square type
-   TS:  }
-
-8. LABELED STATEMENTS
-   JS:  Labels work with any statement
-   TS:  Same as JavaScript, no additional type checking
-   TS:  Labels are rarely used in modern code
-
-⚠️ COMMON CONFUSION POINTS:
-- TypeScript doesn't change runtime behavior of control flow
-- Type narrowing only works within the conditional block
-- for...in still returns string keys in TypeScript
-- Switch fall-through behavior is identical to JavaScript
-- Labels work the same but are discouraged in both languages
-- Exhaustiveness checking requires union types and proper switch structure
-
-📘 See 08-control-flow-ts-comparison.ts for detailed examples!
-*/
 
