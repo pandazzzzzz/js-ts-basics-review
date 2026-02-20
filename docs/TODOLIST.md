@@ -1,9 +1,9 @@
 # 学习路线图
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **更新**: 2026-02-16
+> **更新**: 2026-02-20
 
-**进度**: 15/39 ✅ · 24 骨架 🚧
+**进度**: 16/39 ✅ · 23 骨架 🚧
 
 ---
 
@@ -15,9 +15,9 @@
 | 02 | `demo/01-basics/02-operators.js` | 运算符与表达式 | ✅ |
 | 03 | `demo/01-basics/03-control-flow.js` | 控制结构 | ✅ |
 | 04 | `demo/01-basics/04-strings.js` | 字符串与模板字面量 | ✅ |
-| 05 | `demo/01-basics/05-numbers-math.js` | 数字与 Math 对象 | 🚧 |
+| 05 | `demo/01-basics/05-numbers-math.js` | 数字与 Math 对象 | ✅ |
 
-TS 对比: `01-variables-ts-comparison.ts`
+TS 对比: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts` · `03-control-flow-ts-comparison.ts` · `04-strings-ts-comparison.ts`
 
 ### 知识点清单
 

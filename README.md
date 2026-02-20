@@ -10,8 +10,11 @@ demo/
 │   ├── 01-variables.js                  # Variables & Data Types
 │   ├── 01-variables-ts-comparison.ts    # TS Comparison
 │   ├── 02-operators.js                  # Operators & Expressions
+│   ├── 02-operators-ts-comparison.ts    # TS Comparison
 │   ├── 03-control-flow.js               # Control Structures
+│   ├── 03-control-flow-ts-comparison.ts # TS Comparison
 │   ├── 04-strings.js                    # Strings & Template Literals
+│   ├── 04-strings-ts-comparison.ts      # TS Comparison
 │   └── 05-numbers-math.js              # Numbers & Math
 │
 ├── 02-data-structures/     # Data Structures (06-12)
@@ -102,6 +105,9 @@ node demo/04-asynchronous/28-fetch-api.js
 
 # TypeScript Comparisons
 npx ts-node demo/01-basics/01-variables-ts-comparison.ts
+npx ts-node demo/01-basics/02-operators-ts-comparison.ts
+npx ts-node demo/01-basics/03-control-flow-ts-comparison.ts
+npx ts-node demo/01-basics/04-strings-ts-comparison.ts
 npx ts-node demo/02-data-structures/06-arrays-ts-comparison.ts
 npx ts-node demo/02-data-structures/07-functions-ts-comparison.ts
 ```
@@ -119,8 +125,8 @@ Files are numbered 01-39 in recommended learning order:
 
 ## Progress
 
-- ✅ Completed: 15/39 (01-04, 06-08, 13, 15, 18, 20, 24-27)
-- 🚧 Skeleton: 24/39
+- ✅ Completed: 16/39 (01-05, 06-08, 13, 15, 18, 20, 24-27)
+- 🚧 Skeleton: 23/39
 
 ## Documentation
 
