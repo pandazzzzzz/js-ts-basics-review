@@ -17,7 +17,7 @@
 | 04 | `demo/01-basics/04-strings.js` | 字符串与模板字面量 | ✅ |
 | 05 | `demo/01-basics/05-numbers-math.js` | 数字与 Math 对象 | ✅ |
 
-TS 对比: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts` · `03-control-flow-ts-comparison.ts` · `04-strings-ts-comparison.ts`
+TS 对比: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts` · `03-control-flow-ts-comparison.ts` · `04-strings-ts-comparison.ts` · `05-numbers-math-ts-comparison.ts`
 
 ### 知识点清单
 

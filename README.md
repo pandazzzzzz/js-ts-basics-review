@@ -15,7 +15,8 @@ demo/
 │   ├── 03-control-flow-ts-comparison.ts # TS Comparison
 │   ├── 04-strings.js                    # Strings & Template Literals
 │   ├── 04-strings-ts-comparison.ts      # TS Comparison
-│   └── 05-numbers-math.js              # Numbers & Math
+│   ├── 05-numbers-math.js              # Numbers & Math
+│   └── 05-numbers-math-ts-comparison.ts # TS Comparison
 │
 ├── 02-data-structures/     # Data Structures (06-12)
 │   ├── 06-arrays.js                     # Array Methods
@@ -108,6 +109,7 @@ npx ts-node demo/01-basics/01-variables-ts-comparison.ts
 npx ts-node demo/01-basics/02-operators-ts-comparison.ts
 npx ts-node demo/01-basics/03-control-flow-ts-comparison.ts
 npx ts-node demo/01-basics/04-strings-ts-comparison.ts
+npx ts-node demo/01-basics/05-numbers-math-ts-comparison.ts
 npx ts-node demo/02-data-structures/06-arrays-ts-comparison.ts
 npx ts-node demo/02-data-structures/07-functions-ts-comparison.ts
 ```
