@@ -433,10 +433,10 @@ console.log("Shallow copy warning: nested objects are still referenced");
 // - Use case: variable number of function arguments
 console.log("\nRest Parameters (...):");
 
-function sum(...numbers) {
+function sumNumbers(...numbers) {
   return numbers.reduce((total, n) => total + n, 0);
 }
-console.log("sum(1, 2, 3, 4):", sum(1, 2, 3, 4)); // 10
+console.log("sumNumbers(1, 2, 3, 4):", sumNumbers(1, 2, 3, 4)); // 10
 
 function greet(greeting, ...names) {
   return `${greeting} ${names.join(", ")}!`;
