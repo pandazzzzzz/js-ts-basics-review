@@ -24,6 +24,7 @@ demo/
 │   ├── 07-functions.js                  # Functions (16 sections, 1100+ lines)
 │   ├── 07-functions-ts-comparison.ts    # TS Comparison
 │   ├── 08-objects.js                    # Objects & Methods
+│   ├── 08-objects-ts-comparison.ts      # TS Comparison
 │   ├── 09-destructuring.js             # Destructuring Assignment
 │   ├── 10-map-set.js                    # Map & Set
 │   ├── 11-json.js                       # JSON Operations
@@ -112,6 +113,7 @@ npx ts-node demo/01-basics/04-strings-ts-comparison.ts
 npx ts-node demo/01-basics/05-numbers-math-ts-comparison.ts
 npx ts-node demo/02-data-structures/06-arrays-ts-comparison.ts
 npx ts-node demo/02-data-structures/07-functions-ts-comparison.ts
+npx ts-node demo/02-data-structures/08-objects-ts-comparison.ts
 ```
 
 ## Learning Path
