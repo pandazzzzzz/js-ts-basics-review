@@ -277,19 +277,19 @@ const pipe = <T>(...fns: Function[]) =>
 
 - **JavaScript**: [JavaScript.info](https://javascript.info)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**: 
-  - `demo/basics/01-variables.js` + `demo/basics/01-variables-ts-comparison.ts`
-  - `demo/data-structures/05-arrays.js` + `demo/data-structures/05-arrays-ts-comparison.ts`
-  - `demo/data-structures/06-functions.js` + `demo/data-structures/06-functions-ts-comparison.ts` (16 sections, 1100+ lines)
-  - `demo/data-structures/07-objects.js`
-  - `demo/core-concepts/11-scope-closures.js`
-  - `demo/core-concepts/12-error-handling.js`
-  - `demo/core-concepts/13-prototypes-inheritance.js`
-  - `demo/core-concepts/14-modern-features.js`
-  - `demo/asynchronous/18-event-loop-callbacks.js`
-  - `demo/asynchronous/19-promises.js`
-  - `demo/asynchronous/20-async-await.js`
-  - `demo/asynchronous/21-modules.js`
+- **Practice Files**:
+  - `demo/01-basics/01-variables.js` + `demo/01-basics/01-variables-ts-comparison.ts`
+  - `demo/02-data-structures/06-arrays.js` + `demo/02-data-structures/06-arrays-ts-comparison.ts`
+  - `demo/02-data-structures/07-functions.js` + `demo/02-data-structures/07-functions-ts-comparison.ts` (16 sections, 1100+ lines)
+  - `demo/02-data-structures/08-objects.js` + `demo/02-data-structures/08-objects-ts-comparison.ts`
+  - `demo/03-core-concepts/13-scope-closures.js`
+  - `demo/03-core-concepts/20-error-handling.js`
+  - `demo/03-core-concepts/15-prototypes-inheritance.js`
+  - `demo/03-core-concepts/18-modern-features.js`
+  - `demo/04-asynchronous/24-event-loop-callbacks.js`
+  - `demo/04-asynchronous/25-promises.js`
+  - `demo/04-asynchronous/26-async-await.js`
+  - `demo/04-asynchronous/27-modules.js`
 
 ---
 
