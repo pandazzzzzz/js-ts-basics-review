@@ -1,48 +1,279 @@
-// 解构赋值 — 完整专题 Demo
+// Destructuring Assignment - Complete Demo
 // 📘 javascript.info: "Destructuring assignment"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 // 📌 ES6 (ES2015)
 
 // ============================================
-// TODO List for Destructuring Assignment
+// Section 1: Array Destructuring
 // ============================================
 
-// Section 1: 数组解构
-// TODO: 基本语法: const [a, b] = [1, 2]
-// TODO: 跳过元素: const [, , third] = arr
-// TODO: 剩余元素: const [first, ...rest] = arr
-// TODO: 默认值: const [a = 1, b = 2] = arr
-// TODO: 交换变量: [a, b] = [b, a]
-// TODO: 嵌套解构: const [[a, b], [c, d]] = nested
-// TODO: 与任何可迭代对象配合 (String, Set, Map)
+// Basic syntax (ES6)
+// - Extract values from arrays and assign to variables
+// - Based on position, not names
+const arr = [1, 2, 3];
+const [a, b, c] = arr;
+console.log("Array Destructuring - Basic Syntax:");
+console.log("  a:", a, "b:", b, "c:", c); // 1, 2, 3
 
-// Section 2: 对象解构
-// TODO: 基本语法: const { name, age } = obj
-// TODO: 重命名: const { name: userName } = obj
-// TODO: 默认值: const { name = "Guest" } = obj
-// TODO: 重命名 + 默认值: const { name: userName = "Guest" } = obj
-// TODO: 剩余属性: const { a, ...rest } = obj (ES2018)
-// TODO: 嵌套解构: const { address: { city } } = obj
-// TODO: 计算属性名解构: const { [key]: value } = obj
+// Skipping elements
+// - Use commas to skip unwanted elements
+const [, , third] = ["first", "second", "third"];
+console.log("\nSkipping Elements:");
+console.log("  third:", third); // "third"
 
-// Section 3: 函数参数解构
-// TODO: 对象参数解构: function({ name, age }) {}
-// TODO: 带默认值的参数解构: function({ name = "Guest" } = {}) {}
-// TODO: 数组参数解构: function([first, second]) {}
-// TODO: 复杂参数解构: 嵌套 + 默认值 + 重命名
+const [, second, , fourth] = [1, 2, 3, 4];
+console.log("  second:", second, "fourth:", fourth); // 2, 4
 
-// Section 4: 高级用法
-// TODO: 解构赋值给已声明的变量 (需要括号): ({ a, b } = obj)
-// TODO: for...of 循环中的解构
-// TODO: Map.entries() 解构: for (const [key, value] of map)
-// TODO: import 解构: import { useState, useEffect } from 'react'
-// TODO: 解构与 JSON 数据处理
+// Rest elements - Rest pattern (ES6)
+// - Use ... to collect remaining elements into a new array
+// - rest must be the last element
+const [first, ...rest] = ["Julius", "Caesar", "Consul", "Roman"];
+console.log("\nRest Elements:");
+console.log("  first:", first); // "Julius"
+console.log("  rest:", rest); // ["Caesar", "Consul", "Roman"]
 
-// Section 5: 常见陷阱与最佳实践
-// TODO: 解构 null/undefined 会报错
-// TODO: 深层嵌套解构的可读性问题
-// TODO: 解构与默认参数的交互
-// TODO: 何时使用解构 vs 直接访问
+// Default values (ES6)
+// - Used when array element is undefined
+const [name = "Guest", surname = "Anonymous"] = ["Julius"];
+console.log("\nDefault Values:");
+console.log("  name:", name); // "Julius" (from array)
+console.log("  surname:", surname); // "Anonymous" (default)
+
+// Default values can be expressions (evaluated only when needed)
+let promptCalled = false;
+const [x = (promptCalled = true, "default")] = ["provided"];
+console.log("  Default value not evaluated:", !promptCalled); // true
+
+// Swapping variables (ES6)
+// - Swap without temporary variable
+let x1 = 1, y1 = 2;
+[x1, y1] = [y1, x1];
+console.log("\nSwapping Variables:");
+console.log("  x1:", x1, "y1:", y1); // 2, 1
+
+// Nested destructuring (ES6)
+// - Destructure nested arrays
+const nested = [[1, 2], [3, 4]];
+const [[a1, b1], [c1, d1]] = nested;
+console.log("\nNested Destructuring:");
+console.log("  a1:", a1, "b1:", b1, "c1:", c1, "d1:", d1); // 1, 2, 3, 4
+
+// Working with any iterable (ES6)
+// - Not limited to arrays, works with any iterable object
+console.log("\nWorking with Iterables:");
+
+// String
+const [char1, char2, ...remainingChars] = "Hello";
+console.log("  String:", char1, char2, remainingChars); // "H", "e", ["l", "l", "o"]
+
+// Set
+const [setFirst, setSecond] = new Set([1, 2, 3]);
+console.log("  Set:", setFirst, setSecond); // 1, 2
+
+// Map (destructure entries)
+const map = new Map([["a", 1], ["b", 2]]);
+const [entry1, entry2] = map;
+console.log("  Map entries:", entry1, entry2); // ["a", 1], ["b", 2]
+
+// ============================================
+// Section 2: Object Destructuring
+// ============================================
+
+// Basic syntax (ES6)
+// - Extract properties from objects and assign to variables
+// - Based on property names, not position
+const user2 = { name: "Alice", age: 30, city: "New York" };
+const { name: name2, age: age2, city: city2 } = user2;
+console.log("\nObject Destructuring - Basic Syntax:");
+console.log("  name:", name2, "age:", age2, "city:", city2);
+
+// Renaming variables (ES6)
+// - Syntax: { propertyName: newVariableName }
+const { name: userName, age: userAge } = user2;
+console.log("\nRenaming Variables:");
+console.log("  userName:", userName, "userAge:", userAge);
+
+// Default values (ES6)
+// - Used when property value is undefined
+const { name: n = "Guest", country = "Unknown" } = { name: "Bob" };
+console.log("\nDefault Values:");
+console.log("  n:", n, "country:", country); // "Bob", "Unknown"
+
+// Renaming + default values (ES6)
+const { name: fullName = "Anonymous" } = {};
+console.log("  fullName:", fullName); // "Anonymous"
+
+// Rest properties - Rest pattern (ES2018)
+// - Collect remaining properties into a new object
+const options = { title: "Menu", height: 200, width: 100 };
+const { title, ...remainingProps } = options;
+console.log("\nRest Properties (ES2018):");
+console.log("  title:", title); // "Menu"
+console.log("  remainingProps:", remainingProps); // { height: 200, width: 100 }
+
+// Nested destructuring (ES6)
+// - Destructure nested objects
+const complexObj = {
+  size: { width: 100, height: 200 },
+  items: ["Cake", "Donut"],
+  extra: true
+};
+const {
+  size: { width, height },
+  items: [item1, item2],
+  extra
+} = complexObj;
+console.log("\nNested Destructuring:");
+console.log("  width:", width, "height:", height); // 100, 200
+console.log("  item1:", item1, "item2:", item2); // "Cake", "Donut"
+
+// Deep nested + default values
+const deepNested = { user: { profile: { email: "test@example.com" } } };
+const { user: { profile: { email, phone = "N/A" } } } = deepNested;
+console.log("  email:", email, "phone:", phone); // "test@example.com", "N/A"
+
+// Computed property name destructuring (ES6)
+// - Use [] syntax to destructure dynamic property names
+const key = "dynamicKey";
+const dynamicObj = { dynamicKey: "value123" };
+const { [key]: dynamicValue } = dynamicObj;
+console.log("\nComputed Property Name Destructuring:");
+console.log("  dynamicValue:", dynamicValue); // "value123"
+
+// ============================================
+// Section 3: Function Parameter Destructuring
+// ============================================
+
+// Object parameter destructuring (ES6)
+// - Extract object properties directly from parameters
+function greetUser({ name, age }) {
+  return `Hello, ${name}! You are ${age} years old.`;
+}
+console.log("\nFunction Parameter Destructuring - Object:");
+console.log(" ", greetUser({ name: "Charlie", age: 25 }));
+
+// Parameter destructuring with default values (ES6)
+// - Provide defaults for both entire parameter and internal properties
+function configure({ width = 100, height = 200, title = "Untitled" } = {}) {
+  return { width, height, title };
+}
+console.log("\nParameter Destructuring with Default Values:");
+console.log("  No args:", configure()); // { width: 100, height: 200, title: "Untitled" }
+console.log("  Partial args:", configure({ width: 50 })); // { width: 50, height: 200, title: "Untitled" }
+console.log("  Full override:", configure({ width: 50, height: 100, title: "Custom" }));
+
+// Array parameter destructuring (ES6)
+function sumPair([a, b]) {
+  return a + b;
+}
+console.log("\nArray Parameter Destructuring:");
+console.log("  sumPair([3, 4]):", sumPair([3, 4])); // 7
+
+// Complex parameter destructuring - nested + defaults + renaming
+function createUser({
+  profile: { firstName: fn, lastName: ln } = {},
+  settings: { theme = "light", notifications = true } = {}
+} = {}) {
+  return { fullName: `${fn || "Unknown"} ${ln || ""}`.trim(), theme, notifications };
+}
+console.log("\nComplex Parameter Destructuring:");
+console.log(" ", createUser({
+  profile: { firstName: "John", lastName: "Doe" },
+  settings: { theme: "dark" }
+}));
+// { fullName: "John Doe", theme: "dark", notifications: true }
+
+// ============================================
+// Section 4: Advanced Usage
+// ============================================
+
+// Destructuring to already declared variables (ES6)
+// - Need parentheses, otherwise JS parses { as a block
+let existingA, existingB;
+({ a: existingA, b: existingB } = { a: 10, b: 20 });
+console.log("\nDestructuring to Declared Variables:");
+console.log("  existingA:", existingA, "existingB:", existingB); // 10, 20
+
+// Destructuring in for...of loops (ES6)
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" }
+];
+console.log("\nfor...of Loop Destructuring:");
+for (const { id, name } of users) {
+  console.log(`  User ${id}: ${name}`);
+}
+
+// Map.entries() destructuring (ES6)
+const userMap = new Map([["id", 1], ["name", "Alice"]]);
+console.log("\nMap.entries() Destructuring:");
+for (const [mapKey, mapValue] of userMap) {
+  console.log(`  ${mapKey}: ${mapValue}`);
+}
+
+// Array index destructuring (ES6)
+const indexedArr = ["a", "b", "c"];
+const { 0: firstElem, [indexedArr.length - 1]: lastElem } = indexedArr;
+console.log("\nArray Index Destructuring:");
+console.log("  firstElem:", firstElem, "lastElem:", lastElem); // "a", "c"
+
+// Destructuring with JSON data (ES6)
+const jsonData = JSON.stringify({ users: [{ name: "Alice", posts: [{ title: "Hello" }] }] });
+const { users: [{ name: userName2, posts: [{ title: firstPost }] }] } = JSON.parse(jsonData);
+console.log("\nJSON Data Destructuring:");
+console.log(`  User: ${userName2}, First post: ${firstPost}`);
+
+// ============================================
+// Section 5: Common Pitfalls & Best Practices
+// ============================================
+
+// Pitfall: Destructuring null/undefined throws error (ES6)
+// - Must check first or use default values
+console.log("\nCommon Pitfalls:");
+try {
+  const { prop } = null;
+} catch (e) {
+  console.log("  Destructuring null throws:", e.name); // TypeError
+}
+
+// Solution: Use default values
+const safeObj = null;
+const { prop: safeProp = "default" } = safeObj || {};
+console.log("  Safe destructuring:", safeProp); // "default"
+
+// Pitfall: Readability issues with deep nesting
+// - More than 2-3 levels reduces readability
+// Bad:
+// const { a: { b: { c: { d } } } } = obj;
+// Better: Destructure in steps or use helper functions
+
+// Pitfall: Default values only apply for undefined
+const { zero = 1 } = { zero: 0 };
+const { empty = "default" } = { empty: "" };
+const { nullish = "default" } = { nullish: null };
+console.log("\nDefault Value Behavior:");
+console.log("  0 does not trigger default:", zero); // 0
+console.log("  Empty string does not trigger default:", empty); // ""
+console.log("  null does not trigger default:", nullish); // null
+
+// Best Practice: When to use destructuring
+// 1. Function parameters - improves readability, clarifies required params
+// 2. Swapping variables - concise and elegant
+// 3. Extracting data from API responses
+// 4. React hooks: const [state, setState] = useState()
+
+// Best Practice: Configuration object pattern
+function initApp({
+  port = 3000,
+  host = "localhost",
+  debug = false,
+  database = { url: "localhost", port: 5432 }
+} = {}) {
+  console.log("\nConfiguration Object Pattern Example:");
+  console.log(`  Server: ${host}:${port}, Debug: ${debug}`);
+  console.log(`  Database: ${database.url}:${database.port}`);
+}
+initApp({ port: 8080, debug: true });
 
 // ============================================
 // TypeScript Comparison Notes
@@ -52,14 +283,20 @@
 
 1. TYPE ANNOTATIONS WITH DESTRUCTURING
    TS:  const { name, age }: { name: string; age: number } = obj
-   TS:  注意: 冒号在解构中是重命名，不是类型标注
+   TS:  Note: colon is for renaming in destructuring, not type annotation
 
 2. FUNCTION PARAMETER DESTRUCTURING TYPING
    TS:  function greet({ name, age }: { name: string; age: number }) {}
-   TS:  通常用 interface/type 简化
+   TS:  Usually simplified with interface/type:
+        interface User { name: string; age: number }
+        function greet({ name, age }: User) {}
 
 3. REST ELEMENTS TYPING
    TS:  const [first, ...rest]: [string, ...number[]] = tuple
+   TS:  const { a, ...rest }: { a: string } & Record<string, number> = obj
 
-📘 See related: 05-arrays.js (数组解构), 07-objects.js (对象解构), 14-modern-features.js (ES6 特性)
+4. DEFAULT VALUES WITH TYPES
+   TS:  const { count = 0 }: { count?: number } = obj
+
+📘 See related: 06-arrays.js (array destructuring), 08-objects.js (object destructuring), 18-modern-features.js (ES6 features)
 */
