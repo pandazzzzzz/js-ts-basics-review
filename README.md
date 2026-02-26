@@ -129,8 +129,8 @@ Files are numbered 01-39 in recommended learning order:
 
 ## Progress
 
-- ✅ Completed: 16/39 (01-05, 06-08, 13, 15, 18, 20, 24-27)
-- 🚧 Skeleton: 23/39
+- ✅ Completed: 20/39 (01-08, 09-12, 13, 15, 18, 20, 24-27)
+- 🚧 Skeleton: 19/39
 
 ## Documentation
 

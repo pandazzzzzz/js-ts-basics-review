@@ -3,7 +3,7 @@
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-02-20
 
-**进度**: 16/39 ✅ · 23 骨架 🚧
+**进度**: 20/39 ✅ · 19 骨架 🚧
 
 ---
 
@@ -36,10 +36,10 @@ TS 对比: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts` ·
 | 06 | `demo/02-data-structures/06-arrays.js` | 数组方法 | ✅ |
 | 07 | `demo/02-data-structures/07-functions.js` | 函数 (16 节) | ✅ |
 | 08 | `demo/02-data-structures/08-objects.js` | 对象与方法 | ✅ |
-| 09 | `demo/02-data-structures/09-destructuring.js` | 解构赋值 | 🚧 |
-| 10 | `demo/02-data-structures/10-map-set.js` | Map 与 Set | 🚧 |
-| 11 | `demo/02-data-structures/11-json.js` | JSON 操作 | 🚧 |
-| 12 | `demo/02-data-structures/12-date-time.js` | 日期与时间 | 🚧 |
+| 09 | `demo/02-data-structures/09-destructuring.js` | 解构赋值 | ✅ |
+| 10 | `demo/02-data-structures/10-map-set.js` | Map 与 Set | ✅ |
+| 11 | `demo/02-data-structures/11-json.js` | JSON 操作 | ✅ |
+| 12 | `demo/02-data-structures/12-date-time.js` | 日期与时间 | ✅ |
 
 TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts`
 
