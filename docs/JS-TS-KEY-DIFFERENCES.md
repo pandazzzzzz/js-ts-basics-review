@@ -282,6 +282,10 @@ const pipe = <T>(...fns: Function[]) =>
   - `demo/02-data-structures/06-arrays.js` + `demo/02-data-structures/06-arrays-ts-comparison.ts`
   - `demo/02-data-structures/07-functions.js` + `demo/02-data-structures/07-functions-ts-comparison.ts` (16 sections, 1100+ lines)
   - `demo/02-data-structures/08-objects.js` + `demo/02-data-structures/08-objects-ts-comparison.ts`
+  - `demo/02-data-structures/09-destructuring.js` + `demo/02-data-structures/09-destructuring-ts-comparison.ts`
+  - `demo/02-data-structures/10-map-set.js` + `demo/02-data-structures/10-map-set-ts-comparison.ts`
+  - `demo/02-data-structures/11-json.js` + `demo/02-data-structures/11-json-ts-comparison.ts`
+  - `demo/02-data-structures/12-date-time.js` + `demo/02-data-structures/12-date-time-ts-comparison.ts`
   - `demo/03-core-concepts/13-scope-closures.js`
   - `demo/03-core-concepts/20-error-handling.js`
   - `demo/03-core-concepts/15-prototypes-inheritance.js`

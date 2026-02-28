@@ -22,13 +22,17 @@ demo/
 │   ├── 06-arrays.js                     # Array Methods
 │   ├── 06-arrays-ts-comparison.ts       # TS Comparison
 │   ├── 07-functions.js                  # Functions (16 sections, 1100+ lines)
-│   ├── 07-functions-ts-comparison.ts    # TS Comparison
-│   ├── 08-objects.js                    # Objects & Methods
+│   ├── 07-functions-ts-comparison.ts   # TS Comparison
+│   ├── 08-objects.js                     # Objects & Methods
 │   ├── 08-objects-ts-comparison.ts      # TS Comparison
-│   ├── 09-destructuring.js             # Destructuring Assignment
-│   ├── 10-map-set.js                    # Map & Set
+│   ├── 09-destructuring.js              # Destructuring Assignment
+│   ├── 09-destructuring-ts-comparison.ts # TS Comparison
+│   ├── 10-map-set.js                     # Map & Set
+│   ├── 10-map-set-ts-comparison.ts       # TS Comparison
 │   ├── 11-json.js                       # JSON Operations
-│   └── 12-date-time.js                 # Date & Time
+│   ├── 11-json-ts-comparison.ts         # TS Comparison
+│   ├── 12-date-time.js                  # Date & Time
+│   └── 12-date-time-ts-comparison.ts    # TS Comparison
 │
 ├── 03-core-concepts/       # Core Concepts (13-23)
 │   ├── 13-scope-closures.js             # Scope & Closures

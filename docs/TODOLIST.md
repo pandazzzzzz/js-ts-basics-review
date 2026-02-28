@@ -3,7 +3,7 @@
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-02-20
 
-**进度**: 20/39 ✅ · 19 骨架 🚧
+**进度**: 20/39 ✅ · 19 骨架 🚧 · 7 TypeScript 对比文件
 
 ---
 
@@ -41,7 +41,7 @@ TS 对比: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts` ·
 | 11 | `demo/02-data-structures/11-json.js` | JSON 操作 | ✅ |
 | 12 | `demo/02-data-structures/12-date-time.js` | 日期与时间 | ✅ |
 
-TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts`
+TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `08-objects-ts-comparison.ts` · `09-destructuring-ts-comparison.ts` · `10-map-set-ts-comparison.ts` · `11-json-ts-comparison.ts` · `12-date-time-ts-comparison.ts`
 
 ### 知识点清单
 
