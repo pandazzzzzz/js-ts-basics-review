@@ -1,88 +1,470 @@
-// ES2022+ 新特性汇总 Demo
-// 📘 javascript.info 散布章节 + MDN "New in JavaScript"
+// ES2022+ Features Demo
+// 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 覆盖 ES2022 ~ ES2025 的重要新特性
+// 📌 Covers ES2022 ~ ES2025 important features
 
 // ============================================
-// TODO List for ES2022+ Features
+// ES2022 Features
 // ============================================
 
-// === ES2022 ===
-
-// Section 1: 类的增强 (已在 23-classes.js 详细覆盖)
-// TODO: 简要回顾: #私有字段、static 属性、static 初始化块
+// Section 1: Class Enhancements (Brief Review)
+// - Private fields (#field), static properties, static initialization blocks
+// - See 23-classes.js for detailed coverage
 
 // Section 2: Error.cause
-// TODO: new Error('msg', { cause: originalError })
-// TODO: 错误链追踪的实际用例
-// TODO: 与 12-error-handling.js 的关联
+// - Allows chaining errors with original cause
+// - Useful for preserving error context through multiple layers
+console.log("\n=== Error.cause (ES2022) ===");
+
+function connectDatabase() {
+  throw new Error("Connection timeout");
+}
+
+function initializeApp() {
+  try {
+    connectDatabase();
+  } catch (originalError) {
+    // Chain errors with cause property
+    throw new Error("Failed to initialize app", { cause: originalError });
+  }
+}
+
+try {
+  initializeApp();
+} catch (error) {
+  console.log("Error message:", error.message);
+  console.log("Original cause:", error.cause?.message);
+  // Output:
+  // Error message: Failed to initialize app
+  // Original cause: Connection timeout
+}
 
 // Section 3: Top-level await
-// TODO: 模块顶层直接使用 await
-// TODO: 使用场景: 动态导入、配置加载
-// TODO: 注意: 仅在 ES Modules 中可用
+// - Use await at the top level of ES modules
+// - No need to wrap in async function
+// - Module evaluation waits for the promise to resolve
+console.log("\n=== Top-level await (ES2022) ===");
 
-// Section 4: .at() 方法
-// TODO: Array.prototype.at() — 支持负索引
-// TODO: String.prototype.at()
-// TODO: TypedArray.prototype.at()
-// TODO: 与 [] 访问的对比
+// Example (only works in ES modules):
+// const data = await fetch('/api/config').then(r => r.json());
+// const module = await import('./dynamic-module.js');
+
+// Use cases:
+// - Dynamic imports based on runtime conditions
+// - Loading configuration before module execution
+// - Dependency initialization
+
+console.log("Note: Top-level await only works in ES modules");
+
+// Section 4: .at() Method
+// - Access array/string elements with negative indices
+// - Returns undefined for out-of-bounds indices
+console.log("\n=== .at() Method (ES2022) ===");
+
+const arr = [10, 20, 30, 40, 50];
+console.log("arr.at(0):", arr.at(0));    // 10 (first element)
+console.log("arr.at(-1):", arr.at(-1));  // 50 (last element)
+console.log("arr.at(-2):", arr.at(-2));  // 40 (second to last)
+console.log("arr.at(10):", arr.at(10));  // undefined (out of bounds)
+
+// Comparison with bracket notation:
+console.log("arr[-1]:", arr[-1]);        // undefined (doesn't work)
+console.log("arr[arr.length - 1]:", arr[arr.length - 1]); // 50 (verbose)
+
+// Works with strings too:
+const str = "Hello";
+console.log("str.at(-1):", str.at(-1));  // "o"
 
 // Section 5: Object.hasOwn()
-// TODO: Object.hasOwn(obj, prop) 替代 obj.hasOwnProperty(prop)
-// TODO: 更安全: 不受原型链覆盖影响
+// - Safer alternative to Object.prototype.hasOwnProperty()
+// - Not affected by prototype chain overrides
+console.log("\n=== Object.hasOwn() (ES2022) ===");
 
-// Section 6: RegExp /d 标志 (indices)
-// TODO: 匹配结果包含 indices 属性
-// TODO: 获取捕获组的起止位置
+const obj = { name: "Alice", age: 30 };
 
-// === ES2023 ===
+// Old way (can be overridden):
+console.log("obj.hasOwnProperty('name'):", obj.hasOwnProperty("name")); // true
 
-// Section 7: 不可变数组方法 (已在 05-arrays.js 覆盖)
-// TODO: 简要回顾: toSorted(), toReversed(), toSpliced(), with()
-// TODO: findLast(), findLastIndex()
+// New way (safer):
+console.log("Object.hasOwn(obj, 'name'):", Object.hasOwn(obj, "name")); // true
+console.log("Object.hasOwn(obj, 'toString'):", Object.hasOwn(obj, "toString")); // false
 
-// Section 8: Hashbang (#!) 语法
-// TODO: #!/usr/bin/env node — 脚本文件首行
-// TODO: 使 JS 文件可直接在命令行执行
+// Why safer? Consider this case:
+const objWithoutProto = Object.create(null);
+objWithoutProto.name = "Bob";
+// objWithoutProto.hasOwnProperty('name'); // ❌ TypeError!
+console.log("Object.hasOwn(objWithoutProto, 'name'):", Object.hasOwn(objWithoutProto, "name")); // ✅ true
 
-// === ES2024 ===
+// Section 6: RegExp /d Flag (indices)
+// - Provides start and end indices for matches and capture groups
+console.log("\n=== RegExp /d Flag (ES2022) ===");
+
+const text = "2023-12-25";
+const dateRegex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/d;
+const match = dateRegex.exec(text);
+
+console.log("Match:", match[0]);                    // "2023-12-25"
+console.log("Year group:", match.groups.year);      // "2023"
+console.log("Indices:", match.indices);             // [[0, 10], [0, 4], [5, 7], [8, 10]]
+console.log("Year indices:", match.indices.groups.year); // [0, 4]
+
+// Use case: Syntax highlighting, precise text replacement
+
+// ============================================
+// ES2023 Features
+// ============================================
+
+// Section 7: Immutable Array Methods (Brief Review)
+// - toSorted(), toReversed(), toSpliced(), with()
+// - findLast(), findLastIndex()
+// - See 05-arrays.js for detailed coverage
+console.log("\n=== Immutable Array Methods (ES2023) ===");
+
+const numbers = [3, 1, 4, 1, 5];
+console.log("Original:", numbers);
+console.log("toSorted():", numbers.toSorted());     // [1, 1, 3, 4, 5]
+console.log("toReversed():", numbers.toReversed()); // [5, 1, 4, 1, 3]
+console.log("with(2, 99):", numbers.with(2, 99));   // [3, 1, 99, 1, 5]
+console.log("Original unchanged:", numbers);        // [3, 1, 4, 1, 5]
+
+const items = [1, 2, 3, 4, 5];
+console.log("findLast(x => x > 3):", items.findLast(x => x > 3)); // 5
+console.log("findLastIndex(x => x > 3):", items.findLastIndex(x => x > 3)); // 4
+
+// Section 8: Hashbang (#!) Syntax
+// - Allows JavaScript files to be executed directly as scripts
+console.log("\n=== Hashbang Syntax (ES2023) ===");
+
+// Example file content:
+// #!/usr/bin/env node
+// console.log("This file can be executed directly!");
+
+// Usage:
+// 1. Add hashbang as first line
+// 2. Make file executable: chmod +x script.js
+// 3. Run directly: ./script.js
+
+console.log("Hashbang allows JS files to be executable scripts");
+
+// ============================================
+// ES2024 Features
+// ============================================
 
 // Section 9: Object.groupBy / Map.groupBy
-// TODO: Object.groupBy(items, callback) — 按条件分组
-// TODO: Map.groupBy(items, callback) — 返回 Map
-// TODO: 替代手动 reduce 分组的简洁方案
+// - Group array elements by a key function
+// - Object.groupBy returns plain object, Map.groupBy returns Map
+console.log("\n=== Object.groupBy / Map.groupBy (ES2024) ===");
+
+const people = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 25 },
+  { name: "David", age: 30 }
+];
+
+// Group by age using Object.groupBy
+const groupedByAge = Object.groupBy(people, person => person.age);
+console.log("Grouped by age:", groupedByAge);
+// { 25: [{name: "Alice", age: 25}, {name: "Charlie", age: 25}],
+//   30: [{name: "Bob", age: 30}, {name: "David", age: 30}] }
+
+// Group by age using Map.groupBy
+const mapGrouped = Map.groupBy(people, person => person.age);
+console.log("Map grouped:", mapGrouped);
+console.log("Get age 25 group:", mapGrouped.get(25));
+
+// Old way (manual reduce):
+const manualGroup = people.reduce((acc, person) => {
+  const key = person.age;
+  if (!acc[key]) acc[key] = [];
+  acc[key].push(person);
+  return acc;
+}, {});
+console.log("Manual grouping:", manualGroup);
 
 // Section 10: Promise.withResolvers()
-// TODO: const { promise, resolve, reject } = Promise.withResolvers()
-// TODO: 替代 new Promise((resolve, reject) => ...) 的场景
-// TODO: 在外部控制 Promise 的 resolve/reject
+// - Exposes resolve and reject functions outside Promise constructor
+// - Useful for external control of Promise state
+console.log("\n=== Promise.withResolvers() (ES2024) ===");
 
-// Section 11: 正则表达式 /v 标志 (unicodeSets)
-// TODO: 替代 /u 标志的增强版
-// TODO: 集合操作: 交集 (&&)、差集 (--)
-// TODO: 字符串属性: \p{...}
+// Old way:
+let resolveOld, rejectOld;
+const promiseOld = new Promise((resolve, reject) => {
+  resolveOld = resolve;
+  rejectOld = reject;
+});
 
-// === ES2025 (Stage 4 / 即将发布) ===
+// New way:
+const { promise, resolve, reject } = Promise.withResolvers();
 
-// Section 12: Set 方法
-// TODO: set.union(other) — 并集
-// TODO: set.intersection(other) — 交集
-// TODO: set.difference(other) — 差集
-// TODO: set.symmetricDifference(other) — 对称差集
-// TODO: set.isSubsetOf(other) / set.isSupersetOf(other)
-// TODO: set.isDisjointFrom(other)
+// Use case: Event-driven promise resolution
+class AsyncQueue {
+  constructor() {
+    this.queue = [];
+  }
+
+  enqueue(item) {
+    const { promise, resolve } = Promise.withResolvers();
+    this.queue.push({ item, resolve });
+    return promise;
+  }
+
+  dequeue() {
+    if (this.queue.length === 0) return null;
+    const { item, resolve } = this.queue.shift();
+    resolve(item);
+    return item;
+  }
+}
+
+const queue = new AsyncQueue();
+queue.enqueue("task1").then(result => console.log("Resolved:", result));
+setTimeout(() => queue.dequeue(), 100);
+
+// Section 11: RegExp /v Flag (unicodeSets)
+// - Enhanced Unicode support with set operations
+// - Replaces /u flag with more features
+console.log("\n=== RegExp /v Flag (ES2024) ===");
+
+// Set operations in character classes:
+// - Intersection: [A&&B]
+// - Subtraction: [A--B]
+// - Union: [A[B]] (implicit)
+
+console.log("RegExp /v flag features:");
+console.log("- Set operations in character classes");
+console.log("- Intersection: [A&&B]");
+console.log("- Subtraction: [A--B]");
+console.log("- Union: [A[B]]");
+
+// ⚠️ BROWSER/RUNTIME SUPPORT:
+// - Chrome: 112+ (April 2023)
+// - Firefox: 116+ (August 2023)
+// - Safari: 17+ (September 2023)
+// - Node.js: 20.0+ (April 2023)
+// - Edge: 112+ (April 2023)
+
+// Note: /v flag requires ES2024 support
+// Uncomment when available in your environment
+
+// Example: Match emoji but not keycap emoji
+// const emojiRegex = /[\p{Emoji}--\p{Emoji_Keycap}]/v;
+// console.log("😀 matches:", emojiRegex.test("😀")); // true
+// console.log("1️⃣ matches:", emojiRegex.test("1️⃣")); // false (keycap)
+
+// Example: Match letters that are both uppercase and Latin
+// const upperLatinRegex = /[\p{Uppercase}&&\p{Script=Latin}]/v;
+// console.log("A matches:", upperLatinRegex.test("A")); // true
+// console.log("Α matches:", upperLatinRegex.test("Α")); // false (Greek)
+
+console.log("\nUse cases:");
+console.log("- Complex Unicode character matching");
+console.log("- Emoji filtering and validation");
+console.log("- Script-specific text processing");
+
+// ============================================
+// ES2025 Features (Stage 4 / Upcoming)
+// ============================================
+
+// Section 12: Set Methods
+// - Mathematical set operations
+// - Returns new Set (immutable)
+console.log("\n=== Set Methods (ES2025) ===");
+
+// ⚠️ BROWSER/RUNTIME SUPPORT:
+// - Chrome: 122+ (February 2024)
+// - Firefox: 127+ (June 2024)
+// - Safari: 17+ (March 2024)
+// - Node.js: 22.0+ (April 2024)
+// - Edge: 122+ (February 2024)
+
+const setA = new Set([1, 2, 3, 4]);
+const setB = new Set([3, 4, 5, 6]);
+
+// Union: All elements from both sets
+console.log("union:", setA.union(setB)); // Set {1, 2, 3, 4, 5, 6}
+
+// Intersection: Elements in both sets
+console.log("intersection:", setA.intersection(setB)); // Set {3, 4}
+
+// Difference: Elements in A but not in B
+console.log("difference:", setA.difference(setB)); // Set {1, 2}
+
+// Symmetric Difference: Elements in either set but not both
+console.log("symmetricDifference:", setA.symmetricDifference(setB)); // Set {1, 2, 5, 6}
+
+// Subset/Superset checks
+console.log("isSubsetOf:", new Set([1, 2]).isSubsetOf(setA)); // true
+console.log("isSupersetOf:", setA.isSupersetOf(new Set([1, 2]))); // true
+
+// Disjoint check: No common elements
+console.log("isDisjointFrom:", setA.isDisjointFrom(new Set([7, 8]))); // true
 
 // Section 13: Iterator Helpers
-// TODO: iterator.map(), .filter(), .take(), .drop(), .forEach()
-// TODO: iterator.reduce(), .toArray(), .flatMap()
-// TODO: 惰性求值的优势
+// - Lazy evaluation methods for iterators
+// - More memory efficient than array methods
+console.log("\n=== Iterator Helpers (ES2025) ===");
 
-// Section 14: 资源管理 (using / await using)
-// TODO: using 声明 — 自动调用 Symbol.dispose
-// TODO: await using — 异步资源清理 (Symbol.asyncDispose)
-// TODO: DisposableStack / AsyncDisposableStack
-// TODO: 实际用例: 文件句柄、数据库连接、锁
+// ⚠️ BROWSER/RUNTIME SUPPORT:
+// - Chrome: 122+ (February 2024)
+// - Firefox: 131+ (October 2024)
+// - Safari: 17.4+ (March 2024)
+// - Node.js: 22.0+ (April 2024)
+// - Edge: 122+ (February 2024)
+// - Polyfill: es-iterator-helpers (npm)
+
+// Note: Iterator helpers are ES2025 features
+// They require runtime support or polyfills
+// Uncomment when available in your environment
+
+// Example generator function
+// function* numbersIterator() {
+//   yield 1;
+//   yield 2;
+//   yield 3;
+//   yield 4;
+//   yield 5;
+// }
+// 
+// const iter = numbersIterator();
+// 
+// // Chain operations (lazy evaluation)
+// const result = iter
+//   .map(x => x * 2)        // [2, 4, 6, 8, 10]
+//   .filter(x => x > 5)     // [6, 8, 10]
+//   .take(2)                // [6, 8]
+//   .toArray();             // Convert to array
+// 
+// console.log("Iterator result:", result); // [6, 8]
+
+console.log("Iterator helper methods:");
+console.log("- map(fn): Transform each value");
+console.log("- filter(fn): Filter values");
+console.log("- take(n): Take first n elements");
+console.log("- drop(n): Skip first n elements");
+console.log("- forEach(fn): Execute function for each element");
+console.log("- reduce(fn, initial): Reduce to single value");
+console.log("- flatMap(fn): Map and flatten");
+console.log("- some(fn), every(fn), find(fn)");
+console.log("- toArray(): Convert to array");
+
+// Advantage: Lazy evaluation - operations only execute when needed
+console.log("\nLazy evaluation example:");
+console.log("Infinite iterator with filter and take:");
+console.log("- Creates infinite sequence");
+console.log("- Filters even numbers");
+console.log("- Takes first 10");
+console.log("- Only computes what's needed");
+
+// const infiniteIter = (function* () {
+//   let i = 0;
+//   while (true) yield i++;
+// })();
+// 
+// const first10Even = infiniteIter
+//   .filter(x => x % 2 === 0)
+//   .take(10)
+//   .toArray();
+// 
+// console.log("First 10 even numbers:", first10Even);
+
+// Section 14: Resource Management (using / await using)
+// - Automatic resource cleanup using Symbol.dispose
+// - Similar to try-with-resources in Java or using in C#
+console.log("\n=== Resource Management (ES2025) ===");
+
+// ⚠️ BROWSER/RUNTIME SUPPORT:
+// - Chrome: 125+ (May 2024)
+// - Firefox: Not yet supported (as of 2025)
+// - Safari: 18+ (September 2024)
+// - Node.js: 20.4+ (June 2023) with --harmony-explicit-resource-management flag
+// - Node.js: 22.0+ (April 2024) enabled by default
+// - Edge: 125+ (May 2024)
+// - TypeScript: 5.2+ (August 2023)
+
+// Define a disposable resource
+class FileHandle {
+  constructor(filename) {
+    this.filename = filename;
+    console.log(`Opening file: ${filename}`);
+  }
+
+  write(data) {
+    console.log(`Writing to ${this.filename}: ${data}`);
+  }
+
+  [Symbol.dispose]() {
+    console.log(`Closing file: ${this.filename}`);
+  }
+}
+
+// Note: using declarations are ES2025 features
+// They require runtime support (Node.js 20.4+, modern browsers)
+// Uncomment when available in your environment
+
+// Using declaration - automatically calls Symbol.dispose
+// {
+//   using file = new FileHandle("data.txt");
+//   file.write("Hello, World!");
+//   // file is automatically disposed at end of block
+// }
+// console.log("File closed automatically");
+
+console.log("Using declaration syntax:");
+console.log("- using resource = new Resource()");
+console.log("- Automatically calls Symbol.dispose at end of block");
+console.log("- Similar to try-with-resources in Java");
+
+// Async disposal with Symbol.asyncDispose
+class DatabaseConnection {
+  constructor(url) {
+    this.url = url;
+    console.log(`Connecting to: ${url}`);
+  }
+
+  async query(sql) {
+    console.log(`Executing: ${sql}`);
+    return [];
+  }
+
+  async [Symbol.asyncDispose]() {
+    console.log(`Disconnecting from: ${this.url}`);
+    // Async cleanup logic
+  }
+}
+
+// Await using for async resources
+// async function queryDatabase() {
+//   await using db = new DatabaseConnection("localhost:5432");
+//   await db.query("SELECT * FROM users");
+//   // db is automatically disposed (async) at end of block
+// }
+
+console.log("\nAsync using declaration:");
+console.log("- await using resource = new AsyncResource()");
+console.log("- Automatically calls Symbol.asyncDispose");
+console.log("- Waits for async cleanup to complete");
+
+// DisposableStack for managing multiple resources
+console.log("\nDisposableStack:");
+console.log("- Manage multiple disposable resources");
+console.log("- stack.use(resource) - Add resource");
+console.log("- stack.defer(fn) - Add cleanup function");
+console.log("- stack.dispose() - Dispose all in reverse order");
+
+// const stack = new DisposableStack();
+// stack.use(new FileHandle("file1.txt"));
+// stack.use(new FileHandle("file2.txt"));
+// stack.defer(() => console.log("Custom cleanup"));
+// stack.dispose(); // Disposes all resources in reverse order
+
+// Use cases:
+console.log("\nUse cases:");
+console.log("- File handles");
+console.log("- Database connections");
+console.log("- Locks and semaphores");
+console.log("- Network sockets");
+console.log("- Temporary resources");
 
 // ============================================
 // TypeScript Comparison Notes
@@ -91,15 +473,36 @@
 🔍 Key Differences in TypeScript:
 
 1. USING DECLARATIONS
-   TS 5.2+: 已支持 using / await using
-   TS:  需要 Disposable / AsyncDisposable 接口
+   TS 5.2+: Full support for using / await using
+   TS:  Requires Disposable / AsyncDisposable interfaces
+   TS:  interface Disposable { [Symbol.dispose](): void }
+   TS:  interface AsyncDisposable { [Symbol.asyncDispose](): Promise<void> }
 
 2. SATISFIES OPERATOR (TS 4.9)
-   TS:  const config = { ... } satisfies Config
-   TS:  保留字面量类型的同时进行类型检查
+   TS:  const config = { port: 8080 } satisfies Config;
+   TS:  Type-checks without widening literal types
+   TS:  Preserves autocomplete for object properties
 
 3. CONST TYPE PARAMETERS (TS 5.0)
-   TS:  function foo<const T>(arg: T) {}
+   TS:  function identity<const T>(value: T): T { return value; }
+   TS:  Preserves literal types in generic functions
 
-📘 See related: 05-arrays.js (ES2023 数组方法), 23-classes.js (ES2022 类特性)
+4. GROUPBY TYPING
+   TS:  Object.groupBy<T, K>(items: T[], fn: (item: T) => K): Record<K, T[]>
+   TS:  Map.groupBy<T, K>(items: T[], fn: (item: T) => K): Map<K, T[]>
+
+5. ITERATOR HELPERS TYPING
+   TS:  Iterator<T> has full type support for helper methods
+   TS:  Type inference works through chained operations
+
+⚠️ BROWSER/RUNTIME SUPPORT:
+- ES2024/2025 features may require polyfills or transpilation
+- Check compatibility: https://caniuse.com
+- Node.js: Check version support for each feature
+- TypeScript: May need lib updates in tsconfig.json
+
+📘 See related:
+- 05-arrays.js (ES2023 array methods)
+- 23-classes.js (ES2022 class features)
+- 38-weakref-finalization.js (Resource management patterns)
 */
