@@ -159,29 +159,25 @@ class TypedDataView {
 
 console.log("\n=== BufferSource Type ===\n");
 
-// BufferSource is used in Web APIs
-type BufferSource = ArrayBufferView | ArrayBuffer;
+// BufferSource is used in Web APIs (TypeScript built-in type)
+// type BufferSource = ArrayBufferView | ArrayBuffer;
 
 // ArrayBufferView includes all TypedArrays and DataView
-type ArrayBufferView = 
-  | Int8Array
-  | Uint8Array
-  | Uint8ClampedArray
-  | Int16Array
-  | Uint16Array
-  | Int32Array
-  | Uint32Array
-  | Float32Array
-  | Float64Array
-  | BigInt64Array
-  | BigUint64Array
-  | DataView;
+console.log(`
+ArrayBufferView includes:
+- Int8Array, Uint8Array, Uint8ClampedArray
+- Int16Array, Uint16Array
+- Int32Array, Uint32Array
+- Float32Array, Float64Array
+- BigInt64Array, BigUint64Array
+- DataView
+`);
 
 // Type-safe function accepting any buffer source
-function processBufferSource(data: BufferSource): void {
+function processBufferSource(data: ArrayBuffer | ArrayBufferView): void {
   if (data instanceof ArrayBuffer) {
     console.log("ArrayBuffer:", data.byteLength);
-  } else {
+  } else if (ArrayBuffer.isView(data)) {
     console.log("ArrayBufferView:", data.byteLength, data.byteOffset);
   }
 }

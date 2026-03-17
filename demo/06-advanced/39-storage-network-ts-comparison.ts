@@ -528,8 +528,9 @@ class TypedFormData<T extends Record<string, any>> {
   private formData = new FormData();
 
   append<K extends keyof T>(name: K, value: T[K]): this {
-    if (value instanceof Blob) {
-      this.formData.append(name as string, value);
+    if (typeof value === 'object' && value !== null && 'size' in value) {
+      // Likely a Blob or File
+      this.formData.append(name as string, value as any);
     } else {
       this.formData.append(name as string, String(value));
     }

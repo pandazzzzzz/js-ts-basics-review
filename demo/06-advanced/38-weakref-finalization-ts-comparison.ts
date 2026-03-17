@@ -313,28 +313,26 @@ detector.report();
 
 console.log("\n=== Disposable Pattern Integration ===\n");
 
-// Combine WeakRef with Disposable pattern
+// Combine WeakRef with Disposable pattern (requires ESNext lib)
+// Note: Symbol.dispose requires lib: ["ESNext"] in tsconfig.json
+console.log(`
+ManagedResource example (requires ESNext lib):
+
 interface Disposable {
   [Symbol.dispose](): void;
 }
 
 class ManagedResource implements Disposable {
-  private static tracker = new ResourceTracker<ManagedResource, string>(
-    (name) => console.warn(`Resource ${name} was not disposed properly`)
-  );
-
   constructor(private name: string) {
-    console.log(`Creating resource: ${name}`);
-    ManagedResource.tracker.track(this, name);
+    console.log(\`Creating resource: \${name}\`);
   }
 
   use(): void {
-    console.log(`Using resource: ${this.name}`);
+    console.log(\`Using resource: \${this.name}\`);
   }
 
   [Symbol.dispose](): void {
-    console.log(`Disposing resource: ${this.name}`);
-    ManagedResource.tracker.untrack(this);
+    console.log(\`Disposing resource: \${this.name}\`);
   }
 }
 
@@ -344,6 +342,7 @@ class ManagedResource implements Disposable {
 //   resource.use();
 //   // Automatically disposed at end of block
 // }
+`);
 
 // ============================================
 // Section 7: Type Guards and Utilities

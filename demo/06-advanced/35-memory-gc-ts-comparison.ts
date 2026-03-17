@@ -29,37 +29,34 @@ However, TypeScript can help prevent memory leaks through:
 
 console.log("\n=== Disposable Pattern (TS 5.2+) ===\n");
 
-// Disposable interface for automatic resource cleanup
-interface Disposable {
-  [Symbol.dispose](): void;
-}
+// Disposable interface for automatic resource cleanup (requires ESNext lib)
+// Note: Symbol.dispose requires lib: ["ESNext"] in tsconfig.json
+// interface Disposable {
+//   [Symbol.dispose](): void;
+// }
 
-interface AsyncDisposable {
-  [Symbol.asyncDispose](): Promise<void>;
-}
+// interface AsyncDisposable {
+//   [Symbol.asyncDispose](): Promise<void>;
+// }
 
-// Type-safe resource with automatic cleanup
+// Type-safe resource with automatic cleanup (example - requires ESNext)
+console.log(`
+FileHandle example (requires ESNext lib):
+
 class FileHandle implements Disposable {
-  private closed = false;
-
   constructor(private filename: string) {
-    console.log(`Opening file: ${filename}`);
+    console.log(\`Opening file: \${filename}\`);
   }
 
   write(data: string): void {
-    if (this.closed) {
-      throw new Error("Cannot write to closed file");
-    }
-    console.log(`Writing to ${this.filename}: ${data}`);
+    console.log(\`Writing to \${this.filename}: \${data}\`);
   }
 
   [Symbol.dispose](): void {
-    if (!this.closed) {
-      console.log(`Closing file: ${this.filename}`);
-      this.closed = true;
-    }
+    console.log(\`Closing file: \${this.filename}\`);
   }
 }
+`);
 
 // using declaration (ES2025/TS 5.2+)
 // {
@@ -83,29 +80,21 @@ Benefits:
 - Type-safe resource management
 `);
 
-// Async disposal
+// Async disposal example (requires ESNext lib)
+console.log(`
+DatabaseConnection example (requires ESNext lib):
+
 class DatabaseConnection implements AsyncDisposable {
-  private connected = true;
-
-  constructor(private url: string) {
-    console.log(`Connecting to: ${url}`);
-  }
-
   async query(sql: string): Promise<unknown[]> {
-    if (!this.connected) {
-      throw new Error("Connection closed");
-    }
-    console.log(`Executing: ${sql}`);
+    console.log(\`Executing: \${sql}\`);
     return [];
   }
 
   async [Symbol.asyncDispose](): Promise<void> {
-    if (this.connected) {
-      console.log(`Disconnecting from: ${this.url}`);
-      this.connected = false;
-    }
+    console.log('Disconnecting from database');
   }
 }
+`);
 
 // await using for async resources
 // async function queryDatabase() {
@@ -197,11 +186,14 @@ console.log("\n=== Memory Leak Prevention with Types ===\n");
 //   leakedVariable = "I'm global!"; // Error: Cannot find name 'leakedVariable'
 // }
 
-// Pattern 2: Type-safe timer cleanup
-class TimerManager {
-  private timers = new Set<NodeJS.Timeout>();
+// Pattern 2: Type-safe timer cleanup (requires @types/node for NodeJS namespace)
+console.log(`
+TimerManager example (Node.js environment):
 
-  setTimeout(callback: () => void, delay: number): NodeJS.Timeout {
+class TimerManager {
+  private timers = new Set<ReturnType<typeof setTimeout>>();
+
+  setTimeout(callback: () => void, delay: number) {
     const timer = setTimeout(() => {
       callback();
       this.timers.delete(timer);
@@ -210,27 +202,12 @@ class TimerManager {
     return timer;
   }
 
-  setInterval(callback: () => void, delay: number): NodeJS.Timeout {
-    const timer = setInterval(callback, delay);
-    this.timers.add(timer);
-    return timer;
-  }
-
   clearAll(): void {
     this.timers.forEach(timer => clearTimeout(timer));
     this.timers.clear();
   }
-
-  [Symbol.dispose](): void {
-    this.clearAll();
-  }
 }
-
-// Usage
-const timerManager = new TimerManager();
-timerManager.setTimeout(() => console.log("Hello"), 1000);
-// Cleanup all timers when done
-timerManager.clearAll();
+`);
 
 // Pattern 3: Type-safe closure management
 interface CacheEntry<T> {
@@ -250,7 +227,9 @@ class SmartCache<K extends string, V> {
     // Prevent unbounded growth
     if (this.cache.size >= this.maxSize) {
       const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
+      if (firstKey !== undefined) {
+        this.cache.delete(firstKey);
+      }
     }
 
     this.cache.set(key, {
@@ -353,28 +332,20 @@ class ResourceTracker<T extends object> {
   }
 }
 
-// Usage
+// Resource tracking example (requires ESNext lib)
+console.log(`
+ManagedFileHandle example (requires ESNext lib):
+
 class ManagedFileHandle implements Disposable {
-  private static tracker = new ResourceTracker<ManagedFileHandle>();
-  private closed = false;
-
-  constructor(private filename: string) {
-    console.log(`Opening file: ${filename}`);
-    ManagedFileHandle.tracker.track(this, filename);
-  }
-
   close(): void {
-    if (!this.closed) {
-      console.log(`Closing file: ${this.filename}`);
-      this.closed = true;
-      ManagedFileHandle.tracker.untrack(this);
-    }
+    console.log('Closing file');
   }
 
   [Symbol.dispose](): void {
     this.close();
   }
 }
+`);
 
 // ============================================
 // Section 7: Memory Profiling Types
@@ -382,7 +353,11 @@ class ManagedFileHandle implements Disposable {
 
 console.log("\n=== Memory Profiling Types ===\n");
 
-// Type-safe memory usage tracking
+// Type-safe memory usage tracking (Node.js environment)
+// Note: Requires @types/node for process.memoryUsage()
+console.log(`
+Memory profiling example (Node.js):
+
 interface MemoryUsage {
   rss: number;        // Resident Set Size
   heapTotal: number;  // Total heap size
@@ -398,17 +373,9 @@ function getMemoryUsage(): MemoryUsage | null {
 }
 
 function formatBytes(bytes: number): string {
-  return `${Math.round(bytes / 1024 / 1024)} MB`;
+  return \`\${Math.round(bytes / 1024 / 1024)} MB\`;
 }
-
-const memUsage = getMemoryUsage();
-if (memUsage) {
-  console.log("Memory usage:");
-  console.log("RSS:", formatBytes(memUsage.rss));
-  console.log("Heap Total:", formatBytes(memUsage.heapTotal));
-  console.log("Heap Used:", formatBytes(memUsage.heapUsed));
-  console.log("External:", formatBytes(memUsage.external));
-}
+`);
 
 // ============================================
 // Section 8: Best Practices
