@@ -1,9 +1,9 @@
 # 学习路线图
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **更新**: 2026-02-20
+> **更新**: 2026-03-18
 
-**进度**: 20/39 ✅ · 19 骨架 🚧 · 7 TypeScript 对比文件
+**进度**: 39/39 ✅ · 39 TypeScript 对比文件 ✅
 
 ---
 
@@ -60,16 +60,18 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
 | 13 | `demo/03-core-concepts/13-scope-closures.js` | 作用域与闭包 | ✅ |
-| 14 | `demo/03-core-concepts/14-this-keyword.js` | this 关键字 | 🚧 |
+| 14 | `demo/03-core-concepts/14-this-keyword.js` | this 关键字 | ✅ |
 | 15 | `demo/03-core-concepts/15-prototypes-inheritance.js` | 原型与继承 | ✅ |
-| 16 | `demo/03-core-concepts/16-classes.js` | 类 | 🚧 |
-| 17 | `demo/03-core-concepts/17-property-descriptors.js` | 属性描述符 | 🚧 |
+| 16 | `demo/03-core-concepts/16-classes.js` | 类 | ✅ |
+| 17 | `demo/03-core-concepts/17-property-descriptors.js` | 属性描述符 | ✅ |
 | 18 | `demo/03-core-concepts/18-modern-features.js` | ES6+ 特性 | ✅ |
-| 19 | `demo/03-core-concepts/19-symbol-deep.js` | Symbol 深入 | 🚧 |
+| 19 | `demo/03-core-concepts/19-symbol-deep.js` | Symbol 深入 | ✅ |
 | 20 | `demo/03-core-concepts/20-error-handling.js` | 错误处理 | ✅ |
-| 21 | `demo/03-core-concepts/21-regex.js` | 正则表达式 | 🚧 |
-| 22 | `demo/03-core-concepts/22-iterators-generators.js` | 迭代器与生成器 | 🚧 |
-| 23 | `demo/03-core-concepts/23-proxy-reflect.js` | Proxy 与 Reflect | 🚧 |
+| 21 | `demo/03-core-concepts/21-regex.js` | 正则表达式 | ✅ |
+| 22 | `demo/03-core-concepts/22-iterators-generators.js` | 迭代器与生成器 | ✅ |
+| 23 | `demo/03-core-concepts/23-proxy-reflect.js` | Proxy 与 Reflect | ✅ |
+
+TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-modern-features-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -95,7 +97,9 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 | 25 | `demo/04-asynchronous/25-promises.js` | Promise | ✅ |
 | 26 | `demo/04-asynchronous/26-async-await.js` | Async/Await | ✅ |
 | 27 | `demo/04-asynchronous/27-modules.js` | ES Modules | ✅ |
-| 28 | `demo/04-asynchronous/28-fetch-api.js` | Fetch API | 🚧 |
+| 28 | `demo/04-asynchronous/28-fetch-api.js` | Fetch API | ✅ |
+
+TS 对比: `24-event-loop-callbacks-ts-comparison.ts` · `25-promises-ts-comparison.ts` · `26-async-await-ts-comparison.ts` · `27-modules-ts-comparison.ts` · `28-fetch-api-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -111,10 +115,12 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
-| 29 | `demo/05-browser-dom/29-dom-basics.js` | DOM 基础 | 🚧 |
-| 30 | `demo/05-browser-dom/30-dom-manipulation.js` | DOM 操作 | 🚧 |
-| 31 | `demo/05-browser-dom/31-events.js` | 事件处理 | 🚧 |
-| 32 | `demo/05-browser-dom/32-forms-validation.js` | 表单与验证 | 🚧 |
+| 29 | `demo/05-browser-dom/29-dom-basics.js` | DOM 基础 | ✅ |
+| 30 | `demo/05-browser-dom/30-dom-manipulation.js` | DOM 操作 | ✅ |
+| 31 | `demo/05-browser-dom/31-events.js` | 事件处理 | ✅ |
+| 32 | `demo/05-browser-dom/32-forms-validation.js` | 表单与验证 | ✅ |
+
+TS 对比: `29-dom-basics-ts-comparison.ts` · `30-dom-manipulation-ts-comparison.ts` · `31-events-ts-comparison.ts` · `32-forms-validation-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -129,13 +135,15 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
-| 33 | `demo/06-advanced/33-es2022-plus-features.js` | ES2022+ 新特性 | 🚧 |
-| 34 | `demo/06-advanced/34-debugging-testing.js` | 调试与测试 | 🚧 |
-| 35 | `demo/06-advanced/35-memory-gc.js` | 内存与垃圾回收 | 🚧 |
-| 36 | `demo/06-advanced/36-typed-arrays.js` | 类型化数组 | 🚧 |
-| 37 | `demo/06-advanced/37-intl-api.js` | 国际化 API | 🚧 |
-| 38 | `demo/06-advanced/38-weakref-finalization.js` | WeakRef 与 FinalizationRegistry | 🚧 |
-| 39 | `demo/06-advanced/39-storage-network.js` | 存储与网络 | 🚧 |
+| 33 | `demo/06-advanced/33-es2022-plus-features.js` | ES2022+ 新特性 | ✅ |
+| 34 | `demo/06-advanced/34-debugging-testing.js` | 调试与测试 | ✅ |
+| 35 | `demo/06-advanced/35-memory-gc.js` | 内存与垃圾回收 | ✅ |
+| 36 | `demo/06-advanced/36-typed-arrays.js` | 类型化数组 | ✅ |
+| 37 | `demo/06-advanced/37-intl-api.js` | 国际化 API | ✅ |
+| 38 | `demo/06-advanced/38-weakref-finalization.js` | WeakRef 与 FinalizationRegistry | ✅ |
+| 39 | `demo/06-advanced/39-storage-network.js` | 存储与网络 | ✅ |
+
+TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-ts-comparison.ts` · `35-memory-gc-ts-comparison.ts` · `36-typed-arrays-ts-comparison.ts` · `37-intl-api-ts-comparison.ts` · `38-weakref-finalization-ts-comparison.ts` · `39-storage-network-ts-comparison.ts`
 
 ### 知识点清单
 

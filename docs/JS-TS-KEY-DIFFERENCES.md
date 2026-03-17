@@ -278,24 +278,53 @@ const pipe = <T>(...fns: Function[]) =>
 - **JavaScript**: [JavaScript.info](https://javascript.info)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - **Practice Files**:
-  - `demo/01-basics/01-variables.js` + `demo/01-basics/01-variables-ts-comparison.ts`
-  - `demo/02-data-structures/06-arrays.js` + `demo/02-data-structures/06-arrays-ts-comparison.ts`
-  - `demo/02-data-structures/07-functions.js` + `demo/02-data-structures/07-functions-ts-comparison.ts` (16 sections, 1100+ lines)
-  - `demo/02-data-structures/08-objects.js` + `demo/02-data-structures/08-objects-ts-comparison.ts`
-  - `demo/02-data-structures/09-destructuring.js` + `demo/02-data-structures/09-destructuring-ts-comparison.ts`
-  - `demo/02-data-structures/10-map-set.js` + `demo/02-data-structures/10-map-set-ts-comparison.ts`
-  - `demo/02-data-structures/11-json.js` + `demo/02-data-structures/11-json-ts-comparison.ts`
-  - `demo/02-data-structures/12-date-time.js` + `demo/02-data-structures/12-date-time-ts-comparison.ts`
-  - `demo/03-core-concepts/13-scope-closures.js`
-  - `demo/03-core-concepts/20-error-handling.js`
-  - `demo/03-core-concepts/15-prototypes-inheritance.js`
-  - `demo/03-core-concepts/18-modern-features.js`
-  - `demo/04-asynchronous/24-event-loop-callbacks.js`
-  - `demo/04-asynchronous/25-promises.js`
-  - `demo/04-asynchronous/26-async-await.js`
-  - `demo/04-asynchronous/27-modules.js`
+  - Stage 1 (Basic Syntax):
+    - `demo/01-basics/01-variables.js` + `01-variables-ts-comparison.ts`
+    - `demo/01-basics/02-operators.js` + `02-operators-ts-comparison.ts`
+    - `demo/01-basics/03-control-flow.js` + `03-control-flow-ts-comparison.ts`
+    - `demo/01-basics/04-strings.js` + `04-strings-ts-comparison.ts`
+    - `demo/01-basics/05-numbers-math.js` + `05-numbers-math-ts-comparison.ts`
+  - Stage 2 (Data Structures):
+    - `demo/02-data-structures/06-arrays.js` + `06-arrays-ts-comparison.ts`
+    - `demo/02-data-structures/07-functions.js` + `07-functions-ts-comparison.ts` (16 sections, 1100+ lines)
+    - `demo/02-data-structures/08-objects.js` + `08-objects-ts-comparison.ts`
+    - `demo/02-data-structures/09-destructuring.js` + `09-destructuring-ts-comparison.ts`
+    - `demo/02-data-structures/10-map-set.js` + `10-map-set-ts-comparison.ts`
+    - `demo/02-data-structures/11-json.js` + `11-json-ts-comparison.ts`
+    - `demo/02-data-structures/12-date-time.js` + `12-date-time-ts-comparison.ts`
+  - Stage 3 (Core Concepts):
+    - `demo/03-core-concepts/13-scope-closures.js` + `13-scope-closures-ts-comparison.ts`
+    - `demo/03-core-concepts/14-this-keyword.js` + `14-this-keyword-ts-comparison.ts`
+    - `demo/03-core-concepts/15-prototypes-inheritance.js` + `15-prototypes-inheritance-ts-comparison.ts`
+    - `demo/03-core-concepts/16-classes.js` + `16-classes-ts-comparison.ts`
+    - `demo/03-core-concepts/17-property-descriptors.js` + `17-property-descriptors-ts-comparison.ts`
+    - `demo/03-core-concepts/18-modern-features.js` + `18-modern-features-ts-comparison.ts`
+    - `demo/03-core-concepts/19-symbol-deep.js` + `19-symbol-deep-ts-comparison.ts`
+    - `demo/03-core-concepts/20-error-handling.js` + `20-error-handling-ts-comparison.ts`
+    - `demo/03-core-concepts/21-regex.js` + `21-regex-ts-comparison.ts`
+    - `demo/03-core-concepts/22-iterators-generators.js` + `22-iterators-generators-ts-comparison.ts`
+    - `demo/03-core-concepts/23-proxy-reflect.js` + `23-proxy-reflect-ts-comparison.ts`
+  - Stage 4 (Asynchronous):
+    - `demo/04-asynchronous/24-event-loop-callbacks.js` + `24-event-loop-callbacks-ts-comparison.ts`
+    - `demo/04-asynchronous/25-promises.js` + `25-promises-ts-comparison.ts`
+    - `demo/04-asynchronous/26-async-await.js` + `26-async-await-ts-comparison.ts`
+    - `demo/04-asynchronous/27-modules.js` + `27-modules-ts-comparison.ts`
+    - `demo/04-asynchronous/28-fetch-api.js` + `28-fetch-api-ts-comparison.ts`
+  - Stage 5 (Browser & DOM):
+    - `demo/05-browser-dom/29-dom-basics.js` + `29-dom-basics-ts-comparison.ts`
+    - `demo/05-browser-dom/30-dom-manipulation.js` + `30-dom-manipulation-ts-comparison.ts`
+    - `demo/05-browser-dom/31-events.js` + `31-events-ts-comparison.ts`
+    - `demo/05-browser-dom/32-forms-validation.js` + `32-forms-validation-ts-comparison.ts`
+  - Stage 6 (Advanced):
+    - `demo/06-advanced/33-es2022-plus-features.js` + `33-es2022-plus-features-ts-comparison.ts`
+    - `demo/06-advanced/34-debugging-testing.js` + `34-debugging-testing-ts-comparison.ts`
+    - `demo/06-advanced/35-memory-gc.js` + `35-memory-gc-ts-comparison.ts`
+    - `demo/06-advanced/36-typed-arrays.js` + `36-typed-arrays-ts-comparison.ts`
+    - `demo/06-advanced/37-intl-api.js` + `37-intl-api-ts-comparison.ts`
+    - `demo/06-advanced/38-weakref-finalization.js` + `38-weakref-finalization-ts-comparison.ts`
+    - `demo/06-advanced/39-storage-network.js` + `39-storage-network-ts-comparison.ts`
 
 ---
 
-**Last Updated**: 2026-02-16  
+**Last Updated**: 2026-03-18  
 **Based on**: ES2020+ and TypeScript 5.x
