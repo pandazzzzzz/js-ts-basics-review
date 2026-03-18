@@ -3,7 +3,7 @@
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-03-18
 
-**进度**: 39/39 ✅ · 39 TypeScript 对比文件 ✅
+**进度**: 46/46 ✅ · 46 TypeScript 对比文件 ✅
 
 ---
 
@@ -131,7 +131,7 @@ TS 对比: `29-dom-basics-ts-comparison.ts` · `30-dom-manipulation-ts-compariso
 
 ---
 
-## 📁 Stage 6: 高级主题 (33-39)
+## 📁 Stage 6: 高级主题 (33-46)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
@@ -142,8 +142,15 @@ TS 对比: `29-dom-basics-ts-comparison.ts` · `30-dom-manipulation-ts-compariso
 | 37 | `demo/06-advanced/37-intl-api.js` | 国际化 API | ✅ |
 | 38 | `demo/06-advanced/38-weakref-finalization.js` | WeakRef 与 FinalizationRegistry | ✅ |
 | 39 | `demo/06-advanced/39-storage-network.js` | 存储与网络 | ✅ |
+| 40 | `demo/06-advanced/40-design-patterns.js` | 设计模式 | ✅ |
+| 41 | `demo/06-advanced/41-web-apis.js` | Web APIs | ✅ |
+| 42 | `demo/06-advanced/42-performance.js` | 性能优化 | ✅ |
+| 43 | `demo/06-advanced/43-typescript-advanced-ts-comparison.ts` | TypeScript 高级特性 | ✅ |
+| 44 | `demo/06-advanced/44-security.js` | 安全最佳实践 | ✅ |
+| 45 | `demo/06-advanced/45-build-tools.js` | 构建工具集成 | ✅ |
+| 46 | `demo/06-advanced/46-reserved.js` | 预留扩展 | 📝 |
 
-TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-ts-comparison.ts` · `35-memory-gc-ts-comparison.ts` · `36-typed-arrays-ts-comparison.ts` · `37-intl-api-ts-comparison.ts` · `38-weakref-finalization-ts-comparison.ts` · `39-storage-network-ts-comparison.ts`
+TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-ts-comparison.ts` · `35-memory-gc-ts-comparison.ts` · `36-typed-arrays-ts-comparison.ts` · `37-intl-api-ts-comparison.ts` · `38-weakref-finalization-ts-comparison.ts` · `39-storage-network-ts-comparison.ts` · `40-design-patterns-ts-comparison.ts` · `41-web-apis-ts-comparison.ts` · `42-performance-ts-comparison.ts` · `43-typescript-advanced-ts-comparison.ts` · `44-security-ts-comparison.ts` · `45-build-tools-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -154,3 +161,9 @@ TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-t
 **37 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
 **38 WeakRef** — WeakRef 创建与使用、FinalizationRegistry、缓存模式
 **39 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
+**40 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
+**41 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
+**42 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
+**43 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
+**44 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
+**45 构建工具** — webpack 配置、vite 配置、代码分割、生产优化

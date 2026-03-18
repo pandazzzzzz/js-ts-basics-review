@@ -419,3 +419,348 @@ console.log("- TypeScript-like type checking (with @ts-check)");
 - 12-error-handling.js (Error handling patterns)
 - 28-events.js (Event debugging)
 */
+
+
+// ============================================
+// Section 6: Jest/Vitest Practical Examples
+// ============================================
+
+console.log("\n=== Jest/Vitest Practical Examples ===");
+
+// Jest/Vitest Configuration
+// jest.config.js or vitest.config.ts
+/*
+export default {
+  testEnvironment: 'node', // or 'jsdom' for browser
+  coverageDirectory: 'coverage',
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  },
+  collectCoverageFrom: [
+    'src/**\/*.{js,ts}',
+    '!src/**\/*.test.{js,ts}'
+  ]
+};
+*/
+
+// Test Suite Structure with describe() and test()
+/*
+describe('Calculator', () => {
+  beforeEach(() => {
+    // Setup before each test
+    console.log('Setting up test');
+  });
+
+  afterEach(() => {
+    // Cleanup after each test
+    console.log('Cleaning up test');
+  });
+
+  test('should add two numbers', () => {
+    expect(add(2, 3)).toBe(5);
+  });
+
+  test('should multiply two numbers', () => {
+    expect(multiply(2, 3)).toBe(6);
+  });
+});
+*/
+
+// Mock Functions - jest.fn() / vi.fn()
+console.log("\nMock Functions:");
+console.log("- Track function calls");
+console.log("- Control return values");
+console.log("- Verify call arguments");
+
+/*
+// Create mock function
+const mockFn = jest.fn(); // or vi.fn() in Vitest
+
+// Mock implementation
+mockFn.mockImplementation((x) => x * 2);
+mockFn.mockReturnValue(42);
+mockFn.mockReturnValueOnce(1).mockReturnValueOnce(2);
+
+// Call mock
+mockFn(5); // returns 10 (from implementation)
+
+// Verify calls
+expect(mockFn).toHaveBeenCalled();
+expect(mockFn).toHaveBeenCalledTimes(1);
+expect(mockFn).toHaveBeenCalledWith(5);
+expect(mockFn).toHaveBeenLastCalledWith(5);
+
+// Access call data
+console.log(mockFn.mock.calls); // [[5]]
+console.log(mockFn.mock.results); // [{ type: 'return', value: 10 }]
+*/
+
+// Mock Modules - jest.mock() / vi.mock()
+console.log("\nMock Modules:");
+console.log("- Replace entire modules");
+console.log("- Mock specific exports");
+console.log("- Isolate unit tests");
+
+/*
+// Mock entire module
+jest.mock('./api', () => ({
+  fetchUser: jest.fn().mockResolvedValue({ id: 1, name: 'Alice' }),
+  createUser: jest.fn().mockResolvedValue({ id: 2, name: 'Bob' })
+}));
+
+// Vitest equivalent
+vi.mock('./api', () => ({
+  fetchUser: vi.fn().mockResolvedValue({ id: 1, name: 'Alice' }),
+  createUser: vi.fn().mockResolvedValue({ id: 2, name: 'Bob' })
+}));
+
+// Partial mock (keep some real implementations)
+jest.mock('./utils', () => ({
+  ...jest.requireActual('./utils'),
+  formatDate: jest.fn().mockReturnValue('2024-01-01')
+}));
+*/
+
+// Mock Timers - jest.useFakeTimers()
+console.log("\nMock Timers:");
+console.log("- Control setTimeout/setInterval");
+console.log("- Fast-forward time");
+console.log("- Test time-dependent code");
+
+/*
+jest.useFakeTimers(); // or vi.useFakeTimers()
+
+function delayedGreeting(callback) {
+  setTimeout(() => callback('Hello'), 1000);
+}
+
+test('should call callback after 1 second', () => {
+  const callback = jest.fn();
+  delayedGreeting(callback);
+  
+  // Fast-forward time
+  jest.advanceTimersByTime(1000);
+  
+  expect(callback).toHaveBeenCalledWith('Hello');
+});
+
+jest.useRealTimers(); // Restore real timers
+*/
+
+// Async Testing - Promises
+console.log("\nAsync Testing with Promises:");
+console.log("- Use async/await in tests");
+console.log("- Use resolves/rejects matchers");
+console.log("- Return promises from tests");
+
+/*
+// Method 1: async/await
+test('should fetch user data', async () => {
+  const user = await fetchUser(1);
+  expect(user.name).toBe('Alice');
+});
+
+// Method 2: resolves matcher
+test('should fetch user data', () => {
+  return expect(fetchUser(1)).resolves.toEqual({ id: 1, name: 'Alice' });
+});
+
+// Method 3: rejects matcher for errors
+test('should reject with error', () => {
+  return expect(fetchUser(-1)).rejects.toThrow('User not found');
+});
+
+// Method 4: async/await with try/catch
+test('should handle errors', async () => {
+  try {
+    await fetchUser(-1);
+    fail('Should have thrown error');
+  } catch (error) {
+    expect(error.message).toBe('User not found');
+  }
+});
+*/
+
+// Callback Testing with done()
+console.log("\nCallback Testing:");
+console.log("- Use done() parameter");
+console.log("- Call done() when async operation completes");
+console.log("- Test will timeout if done() not called");
+
+/*
+test('should call callback', (done) => {
+  function fetchData(callback) {
+    setTimeout(() => {
+      callback('data');
+    }, 100);
+  }
+  
+  fetchData((data) => {
+    expect(data).toBe('data');
+    done(); // Signal test completion
+  });
+});
+*/
+
+// Snapshot Testing
+console.log("\nSnapshot Testing:");
+console.log("- Capture component/data snapshots");
+console.log("- Detect unexpected changes");
+console.log("- Update with -u flag");
+
+/*
+// toMatchSnapshot() - External snapshot file
+test('should match snapshot', () => {
+  const data = {
+    id: 1,
+    name: 'Alice',
+    email: 'alice@example.com'
+  };
+  expect(data).toMatchSnapshot();
+});
+
+// toMatchInlineSnapshot() - Inline snapshot
+test('should match inline snapshot', () => {
+  const data = { id: 1, name: 'Alice' };
+  expect(data).toMatchInlineSnapshot(`
+    {
+      "id": 1,
+      "name": "Alice",
+    }
+  `);
+});
+
+// Update snapshots: npm test -- -u
+*/
+
+// Coverage Configuration
+console.log("\nCoverage Configuration:");
+console.log("- Run with --coverage flag");
+console.log("- Set coverage thresholds");
+console.log("- Exclude files from coverage");
+
+/*
+// Run coverage
+npm test -- --coverage
+
+// Coverage thresholds in config
+coverageThreshold: {
+  global: {
+    branches: 80,
+    functions: 80,
+    lines: 80,
+    statements: 80
+  },
+  './src/utils/': {
+    branches: 90,
+    functions: 90,
+    lines: 90,
+    statements: 90
+  }
+}
+
+// Exclude from coverage
+coveragePathIgnorePatterns: [
+  '/node_modules/',
+  '/tests/',
+  '/*.test.js$'
+]
+
+// Coverage reporters
+coverageReporters: ['text', 'lcov', 'html']
+*/
+
+// Mock API Requests (MSW - Mock Service Worker)
+console.log("\nMock API Requests:");
+console.log("- Intercept network requests");
+console.log("- Return mock responses");
+console.log("- Test without real API");
+
+/*
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+// Setup mock server
+const server = setupServer(
+  rest.get('/api/users/:id', (req, res, ctx) => {
+    const { id } = req.params;
+    return res(
+      ctx.json({ id: Number(id), name: 'Alice' })
+    );
+  }),
+  
+  rest.post('/api/users', async (req, res, ctx) => {
+    const body = await req.json();
+    return res(
+      ctx.status(201),
+      ctx.json({ id: 1, ...body })
+    );
+  })
+);
+
+// Start server before tests
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+// Test with mocked API
+test('should fetch user', async () => {
+  const response = await fetch('/api/users/1');
+  const user = await response.json();
+  expect(user.name).toBe('Alice');
+});
+*/
+
+// Test Organization Best Practices
+console.log("\nTest Organization:");
+console.log("- One test file per source file");
+console.log("- Name: filename.test.js or filename.spec.js");
+console.log("- Group related tests with describe()");
+console.log("- Use beforeEach/afterEach for setup/cleanup");
+console.log("- Keep tests independent");
+console.log("- Test one thing per test");
+
+// Common Testing Patterns
+console.log("\nCommon Testing Patterns:");
+console.log("- AAA: Arrange, Act, Assert");
+console.log("- Given-When-Then");
+console.log("- Test edge cases and error conditions");
+console.log("- Use descriptive test names");
+console.log("- Avoid testing implementation details");
+
+/*
+// AAA Pattern
+test('should calculate total price', () => {
+  // Arrange
+  const items = [
+    { price: 10, quantity: 2 },
+    { price: 20, quantity: 1 }
+  ];
+  
+  // Act
+  const total = calculateTotal(items);
+  
+  // Assert
+  expect(total).toBe(40);
+});
+
+// Given-When-Then Pattern
+test('given items in cart, when calculating total, then returns sum', () => {
+  // Given
+  const items = [{ price: 10 }, { price: 20 }];
+  
+  // When
+  const total = calculateTotal(items);
+  
+  // Then
+  expect(total).toBe(30);
+});
+*/
+
+console.log("\n✅ Jest/Vitest practical examples complete");
+console.log("Run tests: npm test or npm run test:coverage");
