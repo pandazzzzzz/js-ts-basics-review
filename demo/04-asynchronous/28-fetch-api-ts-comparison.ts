@@ -870,3 +870,214 @@ console.log(`
 
 📘 See 28-fetch-api.js for JavaScript fundamentals!
 `);
+
+
+// ============================================================================
+// ABORTCONTROLLER AND ABORTSIGNAL TYPES
+// ============================================================================
+
+console.log("\n=== AbortController and AbortSignal Types ===");
+
+// TypeScript: Built-in AbortController and AbortSignal types
+// AbortController: class with signal property and abort() method
+// AbortSignal: interface with aborted property and abort event
+
+// Basic AbortController with types
+async function typedAbortController(): Promise<void> {
+  const controller: AbortController = new AbortController();
+  const signal: AbortSignal = controller.signal;
+  
+  // AbortSignal properties
+  const isAborted: boolean = signal.aborted;
+  const reason: unknown = signal.reason; // TypeScript 4.7+
+  
+  // Event listener with typed event
+  signal.addEventListener('abort', (event: Event) => {
+    console.log('Aborted:', signal.reason);
+  });
+  
+  try {
+    const response: Response = await fetch('https://api.example.com/data', {
+      signal
+    });
+    const data: unknown = await response.json();
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      console.log('Request was aborted');
+    }
+  }
+}
+
+// Typed timeout function
+function fetchWithTimeout<T = unknown>(
+  url: string,
+  options: RequestInit = {},
+  timeoutMs: number = 5000
+): Promise<Response> {
+  const controller = new AbortController();
+  const { signal: originalSignal, ...restOptions } = options;
+  
+  // Combine signals if provided
+  if (originalSignal) {
+    originalSignal.addEventListener('abort', () => {
+      controller.abort(originalSignal.reason);
+    });
+  }
+  
+  const timeoutId = setTimeout(() => {
+    controller.abort(new Error(\`Timeout after \${timeoutMs}ms\`));
+  }, timeoutMs);
+  
+  return fetch(url, {
+    ...restOptions,
+    signal: controller.signal
+  }).finally(() => {
+    clearTimeout(timeoutId);
+  });
+}
+
+// Usage with type inference
+async function useTypedTimeout(): Promise<void> {
+  try {
+    const response = await fetchWithTimeout(
+      'https://api.example.com/data',
+      { method: 'GET' },
+      3000
+    );
+    const data: unknown = await response.json();
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      console.log('Request timed out');
+    }
+  }
+}
+
+// Typed search controller
+class TypedSearchController<T> {
+  private currentController: AbortController | null = null;
+  
+  async search(query: string, endpoint: string): Promise<T[] | null> {
+    // Cancel previous search
+    if (this.currentController) {
+      this.currentController.abort('New search started');
+    }
+    
+    this.currentController = new AbortController();
+    const { signal } = this.currentController;
+    
+    try {
+      const response = await fetch(\`\${endpoint}?q=\${query}\`, { signal });
+      if (!response.ok) {
+        throw new Error(\`HTTP \${response.status}\`);
+      }
+      const results: T[] = await response.json();
+      return results;
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        return null; // Search was cancelled
+      }
+      throw error;
+    }
+  }
+  
+  cancel(): void {
+    if (this.currentController) {
+      this.currentController.abort('User cancelled');
+      this.currentController = null;
+    }
+  }
+}
+
+// Usage with typed results
+interface SearchResult {
+  id: number;
+  title: string;
+  description: string;
+}
+
+async function useTypedSearchController(): Promise<void> {
+  const searchController = new TypedSearchController<SearchResult>();
+  
+  const results = await searchController.search('typescript', '/api/search');
+  if (results) {
+    results.forEach(result => {
+      console.log(result.title); // Type-safe access
+    });
+  }
+}
+
+// AbortSignal.timeout() - Modern API (TypeScript 4.7+)
+async function typedSignalTimeout(): Promise<void> {
+  try {
+    // Type-safe timeout signal
+    const signal: AbortSignal = AbortSignal.timeout(5000);
+    
+    const response = await fetch('https://api.example.com/data', { signal });
+    const data: unknown = await response.json();
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'TimeoutError') {
+      console.log('Request timed out');
+    }
+  }
+}
+
+// Combining signals with types
+function combineSignals(...signals: AbortSignal[]): AbortSignal {
+  const controller = new AbortController();
+  
+  for (const signal of signals) {
+    if (signal.aborted) {
+      controller.abort(signal.reason);
+      break;
+    }
+    
+    signal.addEventListener('abort', () => {
+      controller.abort(signal.reason);
+    }, { once: true });
+  }
+  
+  return controller.signal;
+}
+
+// React hook pattern with types
+interface UseFetchOptions extends RequestInit {
+  skip?: boolean;
+}
+
+interface UseFetchResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: Error | null;
+  refetch: () => void;
+}
+
+// Example hook signature (implementation would use React)
+function useFetch<T = unknown>(
+  url: string,
+  options?: UseFetchOptions
+): UseFetchResult<T> {
+  // Implementation would use useState, useEffect, etc.
+  // This is just the type signature
+  return {
+    data: null,
+    loading: false,
+    error: null,
+    refetch: () => {}
+  };
+}
+
+console.log("\nAbortController TypeScript Features:");
+console.log("  - Built-in types for AbortController and AbortSignal");
+console.log("  - Type-safe abort reasons (TypeScript 4.7+)");
+console.log("  - Generic search controllers");
+console.log("  - Type-safe timeout functions");
+console.log("  - AbortSignal.timeout() support");
+
+console.log("\nBest Practices:");
+console.log("  ✅ Use generic types for reusable abort logic");
+console.log("  ✅ Type abort reasons for better error handling");
+console.log("  ✅ Create typed wrapper functions");
+console.log("  ✅ Use AbortSignal.timeout() when available");
+console.log("  ✅ Combine signals with type safety");
+
+console.log("\n📘 See 28-fetch-api.js for detailed AbortController examples!");

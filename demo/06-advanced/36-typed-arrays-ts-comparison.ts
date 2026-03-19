@@ -437,3 +437,180 @@ console.log(`
 │   TypeScript: Interface-based type safety                          │
 └─────────────────────────────────────────────────────────────────────┘
 `);
+
+
+// ============================================
+// TEXTENCODER AND TEXTDECODER TYPES
+// ============================================
+
+console.log("\n=== TextEncoder and TextDecoder Types ===\n");
+
+// TypeScript: Built-in types for Encoding API
+// TextEncoder: Always UTF-8 encoding
+// TextDecoder: Supports multiple encodings
+
+// TextEncoder with types
+const encoder: TextEncoder = new TextEncoder();
+const encoding: string = encoder.encoding; // Always "utf-8"
+
+// encode() returns Uint8Array
+const text: string = "Hello, World!";
+const encoded: Uint8Array = encoder.encode(text);
+
+console.log("Encoded type:", encoded.constructor.name);
+console.log("Encoded length:", encoded.length);
+
+// encodeInto() with typed result
+interface EncodeIntoResult {
+  read: number;
+  written: number;
+}
+
+const targetBuffer: Uint8Array = new Uint8Array(50);
+const result: TextEncoderEncodeIntoResult = encoder.encodeInto(text, targetBuffer);
+
+// result.read and result.written are typed as numbers
+const charsRead: number = result.read;
+const bytesWritten: number = result.written;
+
+console.log(\`encodeInto: read \${charsRead} chars, wrote \${bytesWritten} bytes\`);
+
+// TextDecoder with types
+const decoder: TextDecoder = new TextDecoder('utf-8');
+const decoderEncoding: string = decoder.encoding;
+const fatal: boolean = decoder.fatal;
+const ignoreBOM: boolean = decoder.ignoreBOM;
+
+// decode() returns string
+const bytes: Uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
+const decoded: string = decoder.decode(bytes);
+
+console.log("Decoded:", decoded);
+
+// Typed decoder with options
+interface TextDecoderOptions {
+  fatal?: boolean;
+  ignoreBOM?: boolean;
+}
+
+interface TextDecodeOptions {
+  stream?: boolean;
+}
+
+const strictDecoder: TextDecoder = new TextDecoder('utf-8', { fatal: true });
+const streamDecoder: TextDecoder = new TextDecoder('utf-8', { fatal: false });
+
+// Streaming decode with types
+const chunk1: Uint8Array = new Uint8Array([72, 101, 108]);
+const chunk2: Uint8Array = new Uint8Array([108, 111]);
+
+const part1: string = streamDecoder.decode(chunk1, { stream: true });
+const part2: string = streamDecoder.decode(chunk2, { stream: false });
+
+console.log("Streamed:", part1 + part2);
+
+// Generic encoding function with types
+function encodeText(text: string): Uint8Array {
+  const encoder = new TextEncoder();
+  return encoder.encode(text);
+}
+
+function decodeBytes(bytes: Uint8Array, encoding: string = 'utf-8'): string {
+  const decoder = new TextDecoder(encoding);
+  return decoder.decode(bytes);
+}
+
+// Type-safe encoding conversion
+function convertEncoding(
+  bytes: Uint8Array,
+  fromEncoding: string,
+  toEncoding: string = 'utf-8'
+): Uint8Array {
+  const decoder = new TextDecoder(fromEncoding);
+  const text = decoder.decode(bytes);
+  
+  const encoder = new TextEncoder(); // Always UTF-8
+  return encoder.encode(text);
+}
+
+// Usage with type safety
+const latin1Bytes: Uint8Array = new Uint8Array([72, 233, 108, 108, 111]);
+const utf8Bytes: Uint8Array = convertEncoding(latin1Bytes, 'iso-8859-1', 'utf-8');
+
+console.log("Converted encoding:", decodeBytes(utf8Bytes));
+
+// Async file reading with types
+async function readTextFile(file: File): Promise<string> {
+  const arrayBuffer: ArrayBuffer = await file.arrayBuffer();
+  const bytes: Uint8Array = new Uint8Array(arrayBuffer);
+  const decoder: TextDecoder = new TextDecoder('utf-8');
+  return decoder.decode(bytes);
+}
+
+// WebSocket binary message handling with types
+interface WebSocketMessage {
+  type: 'text' | 'binary';
+  data: string | Uint8Array;
+}
+
+function handleWebSocketMessage(event: MessageEvent): WebSocketMessage {
+  if (typeof event.data === 'string') {
+    return { type: 'text', data: event.data };
+  } else if (event.data instanceof ArrayBuffer) {
+    const decoder = new TextDecoder();
+    const bytes = new Uint8Array(event.data);
+    const text = decoder.decode(bytes);
+    return { type: 'binary', data: bytes };
+  }
+  throw new Error('Unknown message type');
+}
+
+// Base64 encoding with types
+function base64EncodeTyped(text: string): string {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(text);
+  const binString = String.fromCodePoint(...bytes);
+  return btoa(binString);
+}
+
+function base64DecodeTyped(base64: string): string {
+  const binString = atob(base64);
+  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0)!);
+  const decoder = new TextDecoder();
+  return decoder.decode(bytes);
+}
+
+// Type-safe CSV parsing
+async function parseCSVFromBinary(arrayBuffer: ArrayBuffer): Promise<string[][]> {
+  const decoder = new TextDecoder('utf-8');
+  const text = decoder.decode(arrayBuffer);
+  const lines = text.split('\\n');
+  return lines.map(line => line.split(','));
+}
+
+// Crypto operations with typed encoding
+async function hashTextTyped(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = new Uint8Array(hashBuffer);
+  return Array.from(hashArray)
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+console.log("\nTextEncoder/TextDecoder TypeScript Features:");
+console.log("  - Full type definitions for encoding/decoding");
+console.log("  - Type-safe encode() and decode() methods");
+console.log("  - Typed encodeInto() result");
+console.log("  - Type-safe encoding options");
+console.log("  - Generic encoding functions");
+
+console.log("\nBest Practices:");
+console.log("  ✅ Use TextEncoder/TextDecoder types explicitly");
+console.log("  ✅ Type encoding options and results");
+console.log("  ✅ Create generic encoding utilities");
+console.log("  ✅ Handle encoding errors with try/catch");
+console.log("  ✅ Use type guards for binary data");
+
+console.log("\n📘 See 36-typed-arrays.js for detailed Encoding API examples!");

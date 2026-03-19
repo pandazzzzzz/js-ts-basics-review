@@ -387,3 +387,407 @@ console.log(`
 │   TypeScript: Type guards with branded types                       │
 └─────────────────────────────────────────────────────────────────────┘
 `);
+
+
+// ============================================
+// WEB CRYPTO API TYPES (DEEP DIVE)
+// ============================================
+
+console.log("\n=== Web Crypto API Types - Deep Dive ===\n");
+
+// TypeScript: Full type definitions for Web Crypto API
+// crypto.subtle is typed as SubtleCrypto
+
+// Hash functions with types
+async function hashSHA256Typed(message: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data: Uint8Array = encoder.encode(message);
+  const hashBuffer: ArrayBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray: Uint8Array = new Uint8Array(hashBuffer);
+  const hashHex: string = Array.from(hashArray)
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+  return hashHex;
+}
+
+// Typed hash algorithm parameter
+type HashAlgorithm = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
+
+async function hashWithAlgorithm(
+  message: string,
+  algorithm: HashAlgorithm
+): Promise<ArrayBuffer> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  return await crypto.subtle.digest(algorithm, data);
+}
+
+// AES encryption with full types
+interface EncryptedData {
+  encrypted: Uint8Array;
+  iv: Uint8Array;
+  salt: Uint8Array;
+}
+
+async function encryptAESGCMTyped(
+  plaintext: string,
+  password: string
+): Promise<EncryptedData> {
+  const encoder = new TextEncoder();
+  
+  // Import password key
+  const passwordKey: CryptoKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  // Generate salt
+  const salt: Uint8Array = crypto.getRandomValues(new Uint8Array(16));
+  
+  // Derive encryption key
+  const key: CryptoKey = await crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    } as Pbkdf2Params,
+    passwordKey,
+    { name: 'AES-GCM', length: 256 } as AesKeyGenParams,
+    false,
+    ['encrypt', 'decrypt']
+  );
+  
+  // Encrypt
+  const iv: Uint8Array = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted: ArrayBuffer = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv: iv } as AesGcmParams,
+    key,
+    encoder.encode(plaintext)
+  );
+  
+  return {
+    encrypted: new Uint8Array(encrypted),
+    iv: iv,
+    salt: salt
+  };
+}
+
+async function decryptAESGCMTyped(
+  encryptedData: EncryptedData,
+  password: string
+): Promise<string> {
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+  
+  // Import password key
+  const passwordKey: CryptoKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  // Derive same key
+  const key: CryptoKey = await crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: encryptedData.salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    } as Pbkdf2Params,
+    passwordKey,
+    { name: 'AES-GCM', length: 256 } as AesKeyGenParams,
+    false,
+    ['encrypt', 'decrypt']
+  );
+  
+  // Decrypt
+  const decrypted: ArrayBuffer = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: encryptedData.iv } as AesGcmParams,
+    key,
+    encryptedData.encrypted
+  );
+  
+  return decoder.decode(decrypted);
+}
+
+// RSA key pair generation with types
+interface RSAKeyPair {
+  publicKey: CryptoKey;
+  privateKey: CryptoKey;
+}
+
+async function generateRSAKeyPairTyped(): Promise<CryptoKeyPair> {
+  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(
+    {
+      name: 'RSA-OAEP',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256'
+    } as RsaHashedKeyGenParams,
+    true,
+    ['encrypt', 'decrypt']
+  );
+  
+  return keyPair;
+}
+
+// RSA encryption with types
+async function encryptRSATyped(
+  plaintext: string,
+  publicKey: CryptoKey
+): Promise<Uint8Array> {
+  const encoder = new TextEncoder();
+  const encrypted: ArrayBuffer = await crypto.subtle.encrypt(
+    { name: 'RSA-OAEP' } as RsaOaepParams,
+    publicKey,
+    encoder.encode(plaintext)
+  );
+  
+  return new Uint8Array(encrypted);
+}
+
+async function decryptRSATyped(
+  encrypted: Uint8Array,
+  privateKey: CryptoKey
+): Promise<string> {
+  const decoder = new TextDecoder();
+  const decrypted: ArrayBuffer = await crypto.subtle.decrypt(
+    { name: 'RSA-OAEP' } as RsaOaepParams,
+    privateKey,
+    encrypted
+  );
+  
+  return decoder.decode(decrypted);
+}
+
+// Digital signatures with types
+async function generateSigningKeyPairTyped(): Promise<CryptoKeyPair> {
+  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256'
+    } as RsaHashedKeyGenParams,
+    true,
+    ['sign', 'verify']
+  );
+  
+  return keyPair;
+}
+
+async function signMessageTyped(
+  message: string,
+  privateKey: CryptoKey
+): Promise<Uint8Array> {
+  const encoder = new TextEncoder();
+  const signature: ArrayBuffer = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    privateKey,
+    encoder.encode(message)
+  );
+  
+  return new Uint8Array(signature);
+}
+
+async function verifySignatureTyped(
+  message: string,
+  signature: Uint8Array,
+  publicKey: CryptoKey
+): Promise<boolean> {
+  const encoder = new TextEncoder();
+  const isValid: boolean = await crypto.subtle.verify(
+    'RSASSA-PKCS1-v1_5',
+    publicKey,
+    signature,
+    encoder.encode(message)
+  );
+  
+  return isValid;
+}
+
+// Key export/import with types
+type KeyFormat = 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+async function exportKeyTyped(
+  key: CryptoKey,
+  format: KeyFormat = 'jwk'
+): Promise<JsonWebKey | ArrayBuffer> {
+  if (format === 'jwk') {
+    return await crypto.subtle.exportKey('jwk', key);
+  } else {
+    return await crypto.subtle.exportKey(format, key);
+  }
+}
+
+async function importAESKeyTyped(
+  jwk: JsonWebKey
+): Promise<CryptoKey> {
+  const key: CryptoKey = await crypto.subtle.importKey(
+    'jwk',
+    jwk,
+    { name: 'AES-GCM', length: 256 } as AesKeyGenParams,
+    true,
+    ['encrypt', 'decrypt']
+  );
+  
+  return key;
+}
+
+// Generic crypto utility class
+class CryptoUtils {
+  static async hash(
+    data: string,
+    algorithm: HashAlgorithm = 'SHA-256'
+  ): Promise<string> {
+    const encoder = new TextEncoder();
+    const buffer = await crypto.subtle.digest(algorithm, encoder.encode(data));
+    const array = new Uint8Array(buffer);
+    return Array.from(array).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  
+  static async generateAESKey(): Promise<CryptoKey> {
+    return await crypto.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 } as AesKeyGenParams,
+      true,
+      ['encrypt', 'decrypt']
+    );
+  }
+  
+  static async encrypt(
+    data: string,
+    key: CryptoKey
+  ): Promise<{ encrypted: Uint8Array; iv: Uint8Array }> {
+    const encoder = new TextEncoder();
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const encrypted = await crypto.subtle.encrypt(
+      { name: 'AES-GCM', iv } as AesGcmParams,
+      key,
+      encoder.encode(data)
+    );
+    
+    return {
+      encrypted: new Uint8Array(encrypted),
+      iv
+    };
+  }
+  
+  static async decrypt(
+    encrypted: Uint8Array,
+    iv: Uint8Array,
+    key: CryptoKey
+  ): Promise<string> {
+    const decoder = new TextDecoder();
+    const decrypted = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv } as AesGcmParams,
+      key,
+      encrypted
+    );
+    
+    return decoder.decode(decrypted);
+  }
+}
+
+// Usage with full type safety
+async function demonstrateCryptoUtils(): Promise<void> {
+  // Hash
+  const hash: string = await CryptoUtils.hash('Hello, World!');
+  console.log('Hash:', hash);
+  
+  // Encrypt/Decrypt
+  const key: CryptoKey = await CryptoUtils.generateAESKey();
+  const { encrypted, iv } = await CryptoUtils.encrypt('Secret message', key);
+  const decrypted: string = await CryptoUtils.decrypt(encrypted, iv, key);
+  console.log('Decrypted:', decrypted);
+}
+
+// Type-safe password hashing
+interface PasswordHash {
+  hash: Uint8Array;
+  salt: Uint8Array;
+  iterations: number;
+}
+
+async function hashPasswordTyped(password: string): Promise<PasswordHash> {
+  const encoder = new TextEncoder();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iterations = 100000;
+  
+  const passwordKey: CryptoKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits']
+  );
+  
+  const hash: ArrayBuffer = await crypto.subtle.deriveBits(
+    {
+      name: 'PBKDF2',
+      salt,
+      iterations,
+      hash: 'SHA-256'
+    } as Pbkdf2Params,
+    passwordKey,
+    256
+  );
+  
+  return {
+    hash: new Uint8Array(hash),
+    salt,
+    iterations
+  };
+}
+
+async function verifyPasswordTyped(
+  password: string,
+  storedHash: PasswordHash
+): Promise<boolean> {
+  const encoder = new TextEncoder();
+  
+  const passwordKey: CryptoKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits']
+  );
+  
+  const hash: ArrayBuffer = await crypto.subtle.deriveBits(
+    {
+      name: 'PBKDF2',
+      salt: storedHash.salt,
+      iterations: storedHash.iterations,
+      hash: 'SHA-256'
+    } as Pbkdf2Params,
+    passwordKey,
+    256
+  );
+  
+  const newHash = new Uint8Array(hash);
+  return newHash.every((byte, i) => byte === storedHash.hash[i]);
+}
+
+console.log("\nWeb Crypto API TypeScript Features:");
+console.log("  - Full type definitions for all crypto operations");
+console.log("  - Type-safe algorithm parameters");
+console.log("  - Typed key generation and management");
+console.log("  - Type-safe encryption/decryption");
+console.log("  - Typed digital signatures");
+console.log("  - Generic crypto utility classes");
+
+console.log("\nBest Practices:");
+console.log("  ✅ Use explicit types for crypto operations");
+console.log("  ✅ Define interfaces for encrypted data");
+console.log("  ✅ Type algorithm parameters");
+console.log("  ✅ Create type-safe utility classes");
+console.log("  ✅ Use branded types for sensitive data");
+console.log("  ✅ Type key formats and usages");
+
+console.log("\n📘 See 44-security.js for detailed Web Crypto API examples!");

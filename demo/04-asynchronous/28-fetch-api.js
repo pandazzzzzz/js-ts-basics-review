@@ -627,33 +627,324 @@ async function demonstrateRetry() {
 
 demonstrateRetry();
 
-// Pattern 3: AbortController for cancellation
-async function demonstrateAbort() {
-  console.log("\n19. AbortController for cancellation:");
+// Pattern 3: AbortController for cancellation (DETAILED)
+console.log("\n19. AbortController Deep Dive:");
 
+/**
+ * AbortController & AbortSignal - Cancel async operations
+ * 
+ * ES Specification: DOM Standard (living standard)
+ * 
+ * Characteristics:
+ * - Cancel fetch requests
+ * - Cancel multiple operations with one signal
+ * - Timeout implementation
+ * - Event-based cancellation
+ * - Works with any API that accepts AbortSignal
+ * 
+ * Use Cases:
+ * - Search-as-you-type (cancel previous requests)
+ * - Component unmount cleanup
+ * - Timeout implementation
+ * - User-initiated cancellation
+ * - Race conditions prevention
+ */
+
+// Basic AbortController usage
+async function basicAbortExample() {
+  console.log("\n19.1 Basic AbortController:");
+  
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => {
-    controller.abort(); // Cancel after 100ms
-  }, 100);
-
+  const signal = controller.signal;
+  
+  // Listen for abort event
+  signal.addEventListener('abort', () => {
+    console.log("   Signal aborted, reason:", signal.reason);
+  });
+  
   try {
-    // Using a delay simulation - abort will trigger
-    const response = await fetch(`${API_BASE}/posts/1`, {
-      signal: controller.signal
-    });
-    clearTimeout(timeoutId);
+    const fetchPromise = fetch(`${API_BASE}/posts/1`, { signal });
+    
+    // Abort after 100ms
+    setTimeout(() => {
+      controller.abort('Timeout after 100ms');
+    }, 100);
+    
+    const response = await fetchPromise;
     const data = await response.json();
     console.log("   Completed before abort:", data.id);
   } catch (error) {
     if (error.name === "AbortError") {
-      console.log("   Request was aborted (cancelled)");
+      console.log("   ✓ Request was aborted");
+      console.log("   Abort reason:", signal.reason);
     } else {
       console.error("   Fetch error:", error.message);
     }
   }
 }
 
-demonstrateAbort();
+basicAbortExample();
+
+// Timeout implementation with AbortController
+function fetchWithTimeout(url, options = {}, timeoutMs = 5000) {
+  const controller = new AbortController();
+  const { signal: originalSignal, ...restOptions } = options;
+  
+  // Combine with existing signal if provided
+  if (originalSignal) {
+    originalSignal.addEventListener('abort', () => {
+      controller.abort(originalSignal.reason);
+    });
+  }
+  
+  const timeoutId = setTimeout(() => {
+    controller.abort(new Error(`Request timeout after ${timeoutMs}ms`));
+  }, timeoutMs);
+  
+  return fetch(url, {
+    ...restOptions,
+    signal: controller.signal
+  }).finally(() => {
+    clearTimeout(timeoutId);
+  });
+}
+
+async function demonstrateTimeout() {
+  console.log("\n19.2 Timeout with AbortController:");
+  
+  try {
+    const response = await fetchWithTimeout(`${API_BASE}/posts/1`, {}, 10000);
+    const data = await response.json();
+    console.log("   ✓ Fetched within timeout:", data.id);
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("   ✗ Request timed out");
+    } else {
+      console.error("   Error:", error.message);
+    }
+  }
+}
+
+demonstrateTimeout();
+
+// Cancel multiple operations with one signal
+async function cancelMultipleOperations() {
+  console.log("\n19.3 Cancel multiple operations:");
+  
+  const controller = new AbortController();
+  const { signal } = controller;
+  
+  try {
+    // Start multiple requests with same signal
+    const requests = [
+      fetch(`${API_BASE}/posts/1`, { signal }),
+      fetch(`${API_BASE}/posts/2`, { signal }),
+      fetch(`${API_BASE}/posts/3`, { signal })
+    ];
+    
+    // Cancel all after 50ms
+    setTimeout(() => {
+      console.log("   Aborting all requests...");
+      controller.abort('User cancelled');
+    }, 50);
+    
+    const responses = await Promise.all(requests);
+    const data = await Promise.all(responses.map(r => r.json()));
+    console.log("   ✓ All completed:", data.map(d => d.id));
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("   ✓ All requests cancelled");
+    }
+  }
+}
+
+cancelMultipleOperations();
+
+// Search-as-you-type pattern
+class SearchController {
+  constructor() {
+    this.currentController = null;
+  }
+  
+  async search(query) {
+    // Cancel previous search
+    if (this.currentController) {
+      this.currentController.abort('New search started');
+    }
+    
+    // Create new controller for this search
+    this.currentController = new AbortController();
+    const { signal } = this.currentController;
+    
+    try {
+      const response = await fetch(`${API_BASE}/posts?q=${query}`, { signal });
+      const results = await response.json();
+      return results;
+    } catch (error) {
+      if (error.name === "AbortError") {
+        console.log(`   Search for "${query}" was cancelled`);
+        return null;
+      }
+      throw error;
+    }
+  }
+}
+
+async function demonstrateSearchAsYouType() {
+  console.log("\n19.4 Search-as-you-type pattern:");
+  
+  const searchController = new SearchController();
+  
+  // Simulate rapid typing
+  searchController.search('java');      // Will be cancelled
+  searchController.search('javasc');    // Will be cancelled
+  const results = await searchController.search('javascript'); // Final search
+  
+  if (results) {
+    console.log("   ✓ Search completed for: javascript");
+  }
+}
+
+demonstrateSearchAsYouType();
+
+// React component cleanup pattern
+console.log("\n19.5 React component cleanup pattern:");
+console.log(`
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    
+    async function fetchUser() {
+      try {
+        const response = await fetch(\`/api/users/\${userId}\`, { signal });
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('Failed to fetch user:', error);
+        }
+      }
+    }
+    
+    fetchUser();
+    
+    // Cleanup: abort on unmount or userId change
+    return () => {
+      controller.abort('Component unmounted');
+    };
+  }, [userId]);
+  
+  return <div>{user?.name}</div>;
+}
+`);
+
+// Combining multiple AbortSignals
+function combineSignals(...signals) {
+  const controller = new AbortController();
+  
+  for (const signal of signals) {
+    if (signal.aborted) {
+      controller.abort(signal.reason);
+      break;
+    }
+    
+    signal.addEventListener('abort', () => {
+      controller.abort(signal.reason);
+    }, { once: true });
+  }
+  
+  return controller.signal;
+}
+
+async function demonstrateCombinedSignals() {
+  console.log("\n19.6 Combining multiple signals:");
+  
+  const userController = new AbortController();
+  const timeoutController = new AbortController();
+  
+  // Timeout after 5 seconds
+  setTimeout(() => {
+    timeoutController.abort('Timeout');
+  }, 5000);
+  
+  const combinedSignal = combineSignals(
+    userController.signal,
+    timeoutController.signal
+  );
+  
+  try {
+    // User cancels immediately
+    setTimeout(() => {
+      userController.abort('User cancelled');
+    }, 10);
+    
+    const response = await fetch(`${API_BASE}/posts/1`, {
+      signal: combinedSignal
+    });
+    const data = await response.json();
+    console.log("   ✓ Completed:", data.id);
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("   ✓ Cancelled by:", combinedSignal.reason);
+    }
+  }
+}
+
+demonstrateCombinedSignals();
+
+// AbortSignal.timeout() - Modern API (ES2023)
+async function demonstrateSignalTimeout() {
+  console.log("\n19.7 AbortSignal.timeout() (Modern):");
+  
+  try {
+    // Modern browsers support AbortSignal.timeout()
+    if (typeof AbortSignal.timeout === 'function') {
+      const response = await fetch(`${API_BASE}/posts/1`, {
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      });
+      const data = await response.json();
+      console.log("   ✓ Fetched with timeout:", data.id);
+    } else {
+      console.log("   AbortSignal.timeout() not supported");
+      console.log("   Use fetchWithTimeout() helper instead");
+    }
+  } catch (error) {
+    if (error.name === "TimeoutError" || error.name === "AbortError") {
+      console.log("   ✗ Request timed out");
+    }
+  }
+}
+
+demonstrateSignalTimeout();
+
+// AbortSignal.any() - Combine signals (ES2024 proposal)
+console.log("\n19.8 AbortSignal.any() (Future API):");
+console.log(`
+// Proposed API (not yet widely supported)
+const userSignal = userController.signal;
+const timeoutSignal = AbortSignal.timeout(5000);
+
+const combinedSignal = AbortSignal.any([userSignal, timeoutSignal]);
+
+fetch(url, { signal: combinedSignal });
+// Aborts when ANY signal aborts
+`);
+
+// Best practices
+console.log("\n19.9 AbortController Best Practices:");
+console.log("  ✅ Always handle AbortError separately");
+console.log("  ✅ Cancel previous requests in search/autocomplete");
+console.log("  ✅ Clean up on component unmount (React/Vue)");
+console.log("  ✅ Implement timeouts for all network requests");
+console.log("  ✅ Provide meaningful abort reasons");
+console.log("  ✅ Use AbortSignal.timeout() when available");
+console.log("  ✅ Combine signals for complex cancellation logic");
+console.log("  ⚠️ Don't reuse AbortController (create new for each operation)");
+console.log("  ⚠️ Remember to clear timeouts in finally blocks");
+console.log("  ⚠️ Check signal.aborted before starting operations\n");
 
 // Pattern 4: Sequential dependent API calls
 async function sequentialDependentCalls() {

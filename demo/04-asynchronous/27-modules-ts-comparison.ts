@@ -406,7 +406,122 @@ node1.next = node2;
 console.log("Linked list node:", node1.value, "->", node1.next?.value);
 
 // ============================================================================
-// 14. BARREL EXPORTS (index.ts pattern)
+// 14. COMMONJS VS ES MODULES IN TYPESCRIPT
+// ============================================================================
+
+console.log("\n=== CommonJS vs ES Modules in TypeScript ===");
+
+// TypeScript supports both module systems
+// Configure in tsconfig.json:
+/*
+{
+  "compilerOptions": {
+    "module": "commonjs",  // or "es2015", "es2020", "esnext"
+    "moduleResolution": "node",
+    "esModuleInterop": true,  // Better CommonJS interop
+    "allowSyntheticDefaultImports": true
+  }
+}
+*/
+
+// CommonJS in TypeScript (when module: "commonjs")
+// export = { value: 42 };
+// import mod = require("./module");
+
+// ES Modules in TypeScript (when module: "es2015"+)
+// export const value = 42;
+// import { value } from "./module";
+
+console.log("TypeScript module system configuration:");
+console.log("  - Set 'module' in tsconfig.json");
+console.log("  - Use esModuleInterop for better CommonJS compatibility");
+console.log("  - Prefer ES modules for new projects");
+
+// Interoperability
+interface CommonJSModule {
+  default?: unknown;
+  [key: string]: unknown;
+}
+
+// Import CommonJS module in TypeScript
+// const cjsModule: CommonJSModule = require("./cjs-module");
+
+// Import ES module in TypeScript
+// import { named } from "./es-module";
+
+console.log("\nTypeScript handles both module systems:");
+console.log("  - Compile-time type checking");
+console.log("  - Runtime compatibility");
+console.log("  - esModuleInterop for seamless interop");
+
+// ============================================================================
+// 15. IMPORT MAPS IN TYPESCRIPT
+// ============================================================================
+
+console.log("\n=== Import Maps in TypeScript ===");
+
+// TypeScript doesn't directly support import maps
+// But you can configure path mapping in tsconfig.json:
+/*
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "lodash": ["../node_modules/lodash-es/lodash.js"]
+    }
+  }
+}
+*/
+
+// Usage with path mapping:
+// import { Button } from "@components/Button";
+// import { formatDate } from "@utils/date";
+// import _ from "lodash";
+
+console.log("TypeScript path mapping (tsconfig.json):");
+console.log("  - baseUrl: Base directory for resolution");
+console.log("  - paths: Map module names to locations");
+console.log("  - Similar to import maps but compile-time");
+
+// For browser import maps, TypeScript compiles normally
+// Import maps are resolved at runtime by the browser
+
+console.log("\nBrowser import maps with TypeScript:");
+console.log("  1. Write TypeScript with bare specifiers");
+console.log("  2. Compile to JavaScript");
+console.log("  3. Use import maps in HTML for runtime resolution");
+
+// Example workflow:
+/*
+// TypeScript source
+import React from 'react';
+import { debounce } from 'lodash';
+
+// Compiles to JavaScript
+import React from 'react';
+import { debounce } from 'lodash';
+
+// Browser resolves with import map
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://cdn.skypack.dev/react",
+    "lodash": "/node_modules/lodash-es/lodash.js"
+  }
+}
+</script>
+*/
+
+console.log("\nTypeScript + Import Maps workflow:");
+console.log("  - TypeScript: Type checking and compilation");
+console.log("  - Import Maps: Runtime module resolution");
+console.log("  - Best of both worlds: types + flexible loading");
+
+// ============================================================================
+// 16. BARREL EXPORTS (index.ts pattern)
 // ============================================================================
 
 // TypeScript: Barrel files for clean public API

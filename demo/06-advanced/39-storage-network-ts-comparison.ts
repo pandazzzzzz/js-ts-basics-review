@@ -614,3 +614,276 @@ console.log(`
 │   TypeScript: Type-safe event handlers                             │
 └─────────────────────────────────────────────────────────────────────┘
 `);
+
+
+// ============================================
+// HISTORY API TYPES
+// ============================================
+
+console.log("\n=== History API Types ===\n");
+
+// TypeScript: Built-in types for History API
+// History interface with typed methods
+
+// history.state is typed as any by default
+const currentState: unknown = history.state;
+
+// Type-safe state management
+interface RouteState {
+  page: string;
+  userId?: number;
+  scrollPosition?: number;
+  timestamp: number;
+}
+
+// pushState with typed state
+function navigateToProfile(userId: number): void {
+  const state: RouteState = {
+    page: 'profile',
+    userId,
+    scrollPosition: window.scrollY,
+    timestamp: Date.now()
+  };
+  
+  history.pushState(state, '', \`/profile/\${userId}\`);
+}
+
+// replaceState with typed state
+function updateProfileTab(userId: number, tab: string): void {
+  const state: RouteState = {
+    page: 'profile',
+    userId,
+    timestamp: Date.now()
+  };
+  
+  history.replaceState(state, '', \`/profile/\${userId}?tab=\${tab}\`);
+}
+
+// Type-safe popstate handler
+window.addEventListener('popstate', (event: PopStateEvent) => {
+  const state = event.state as RouteState | null;
+  
+  if (state) {
+    console.log('Navigated to:', state.page);
+    if (state.userId) {
+      console.log('User ID:', state.userId);
+    }
+    if (state.scrollPosition !== undefined) {
+      window.scrollTo(0, state.scrollPosition);
+    }
+  }
+});
+
+// Type-safe router class
+interface Route<T = unknown> {
+  path: string;
+  handler: (state: T) => void;
+}
+
+class TypedRouter<TState = unknown> {
+  private routes: Map<string, Route<TState>['handler']> = new Map();
+  
+  constructor() {
+    window.addEventListener('popstate', (event: PopStateEvent) => {
+      this.handleRoute(location.pathname, event.state as TState);
+    });
+  }
+  
+  route(path: string, handler: (state: TState) => void): void {
+    this.routes.set(path, handler);
+  }
+  
+  navigate(path: string, state: TState): void {
+    history.pushState(state, '', path);
+    this.handleRoute(path, state);
+  }
+  
+  private handleRoute(path: string, state: TState): void {
+    const handler = this.routes.get(path);
+    if (handler) {
+      handler(state);
+    }
+  }
+}
+
+// Usage with typed state
+interface AppState {
+  view: 'home' | 'profile' | 'settings';
+  data?: unknown;
+}
+
+const router = new TypedRouter<AppState>();
+
+router.route('/', (state) => {
+  console.log('Home view:', state.view);
+});
+
+router.route('/profile', (state) => {
+  console.log('Profile view:', state.view, state.data);
+});
+
+// Navigate with type safety
+router.navigate('/profile', { view: 'profile', data: { userId: 123 } });
+
+console.log("History API TypeScript Features:");
+console.log("  - Type-safe state objects");
+console.log("  - Typed popstate event handlers");
+console.log("  - Generic router classes");
+console.log("  - Type-safe navigation methods");
+
+// ============================================
+// SERVER-SENT EVENTS (SSE) TYPES
+// ============================================
+
+console.log("\n=== Server-Sent Events Types ===\n");
+
+// TypeScript: Built-in EventSource types
+const eventSource: EventSource = new EventSource('/events');
+
+// EventSource properties are typed
+const url: string = eventSource.url;
+const readyState: number = eventSource.readyState;
+const withCredentials: boolean = eventSource.withCredentials;
+
+// Type-safe event handlers
+eventSource.addEventListener('open', (event: Event) => {
+  console.log('Connection opened');
+});
+
+eventSource.addEventListener('message', (event: MessageEvent) => {
+  const data: string = event.data;
+  const lastEventId: string = event.lastEventId;
+  const origin: string = event.origin;
+  
+  console.log('Message:', data);
+});
+
+eventSource.addEventListener('error', (event: Event) => {
+  if (eventSource.readyState === EventSource.CLOSED) {
+    console.log('Connection closed');
+  }
+});
+
+// Type-safe custom events
+interface NotificationData {
+  title: string;
+  message: string;
+  timestamp: number;
+}
+
+eventSource.addEventListener('notification', (event: MessageEvent) => {
+  const data: NotificationData = JSON.parse(event.data);
+  console.log('Notification:', data.title);
+});
+
+// Generic SSE client class
+class TypedEventSource<TEvents extends Record<string, unknown>> {
+  private eventSource: EventSource;
+  
+  constructor(url: string) {
+    this.eventSource = new EventSource(url);
+  }
+  
+  on<K extends keyof TEvents>(
+    eventType: K,
+    handler: (data: TEvents[K]) => void
+  ): void {
+    this.eventSource.addEventListener(eventType as string, (event: MessageEvent) => {
+      const data: TEvents[K] = JSON.parse(event.data);
+      handler(data);
+    });
+  }
+  
+  onOpen(handler: () => void): void {
+    this.eventSource.addEventListener('open', handler);
+  }
+  
+  onError(handler: (error: Event) => void): void {
+    this.eventSource.addEventListener('error', handler);
+  }
+  
+  close(): void {
+    this.eventSource.close();
+  }
+  
+  get readyState(): number {
+    return this.eventSource.readyState;
+  }
+}
+
+// Usage with typed events
+interface AppEvents {
+  notification: NotificationData;
+  userJoined: { userId: number; name: string };
+  message: { text: string; from: string };
+}
+
+const typedEventSource = new TypedEventSource<AppEvents>('/events');
+
+typedEventSource.on('notification', (data) => {
+  // data is typed as NotificationData
+  console.log(data.title, data.message);
+});
+
+typedEventSource.on('userJoined', (data) => {
+  // data is typed as { userId: number; name: string }
+  console.log(\`User \${data.name} joined\`);
+});
+
+typedEventSource.onOpen(() => {
+  console.log('Connected');
+});
+
+typedEventSource.onError((error) => {
+  console.error('SSE error:', error);
+});
+
+// Type-safe SSE with React hook pattern
+interface UseSSEOptions {
+  reconnect?: boolean;
+  maxRetries?: number;
+}
+
+interface UseSSEResult<T> {
+  data: T | null;
+  connected: boolean;
+  error: Error | null;
+}
+
+function useSSE<T>(
+  url: string,
+  eventType: string = 'message',
+  options?: UseSSEOptions
+): UseSSEResult<T> {
+  // Implementation would use useState, useEffect
+  return {
+    data: null,
+    connected: false,
+    error: null
+  };
+}
+
+// Usage
+interface StockPrice {
+  symbol: string;
+  price: number;
+  change: number;
+}
+
+// const { data, connected, error } = useSSE<StockPrice>('/api/stocks', 'price');
+
+console.log("\nServer-Sent Events TypeScript Features:");
+console.log("  - Built-in EventSource types");
+console.log("  - Type-safe event handlers");
+console.log("  - Generic SSE client classes");
+console.log("  - Typed custom events");
+console.log("  - Type-safe React hooks");
+
+console.log("\nBest Practices:");
+console.log("  ✅ Define interfaces for event data");
+console.log("  ✅ Use generic classes for type-safe SSE");
+console.log("  ✅ Type custom event handlers");
+console.log("  ✅ Handle connection states with types");
+console.log("  ✅ Create reusable typed hooks");
+
+console.log("\n📘 See 39-storage-network.js for detailed History API and SSE examples!");

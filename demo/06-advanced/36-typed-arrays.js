@@ -217,7 +217,342 @@ console.log("Blob/File APIs are browser-specific");
 console.log("Use for: file uploads, downloads, image processing");
 
 // ============================================
-// Section 6: Practical Applications
+// Section 7: Encoding API (TextEncoder/TextDecoder)
+// ============================================
+
+console.log("\n=== Encoding API ===");
+
+/**
+ * Encoding API - Convert between text and binary data
+ * 
+ * TextEncoder: String → Uint8Array (UTF-8 encoding)
+ * TextDecoder: Uint8Array → String (various encodings)
+ * 
+ * Use Cases:
+ * - File I/O with text content
+ * - Network protocols with text data
+ * - WebSocket binary messages
+ * - Crypto operations with text
+ * - Data compression/decompression
+ */
+
+// ============================================
+// 7.1 TextEncoder - String to Binary
+// ============================================
+
+console.log("\n7.1 TextEncoder - String to Binary:");
+
+// Create TextEncoder (always UTF-8)
+const encoder = new TextEncoder();
+
+// Encode string to Uint8Array
+const text = "Hello, World!";
+const encoded = encoder.encode(text);
+
+console.log("Original text:", text);
+console.log("Encoded bytes:", encoded);
+console.log("Byte length:", encoded.length);
+console.log("Encoding:", encoder.encoding); // Always "utf-8"
+
+// Encoding special characters
+const specialText = "Hello 世界 🌍";
+const specialEncoded = encoder.encode(specialText);
+console.log("\nSpecial characters:", specialText);
+console.log("Encoded bytes:", specialEncoded);
+console.log("Byte length:", specialEncoded.length); // More than character count
+
+// Character vs Byte length
+console.log("\nCharacter vs Byte length:");
+console.log("  'Hello' - 5 chars, 5 bytes");
+console.log("  '世界' - 2 chars, 6 bytes (3 bytes each in UTF-8)");
+console.log("  '🌍' - 1 char, 4 bytes (emoji)");
+
+// encodeInto() - More efficient for pre-allocated buffers
+const buffer = new Uint8Array(50);
+const result = encoder.encodeInto("Hello", buffer);
+console.log("\nencodeInto() result:");
+console.log("  read:", result.read);       // Characters read from source
+console.log("  written:", result.written); // Bytes written to buffer
+console.log("  buffer:", buffer.slice(0, result.written));
+
+// ============================================
+// 7.2 TextDecoder - Binary to String
+// ============================================
+
+console.log("\n7.2 TextDecoder - Binary to String:");
+
+// Create TextDecoder (default UTF-8)
+const decoder = new TextDecoder();
+
+// Decode Uint8Array to string
+const bytes = new Uint8Array([72, 101, 108, 108, 111]); // "Hello"
+const decoded = decoder.decode(bytes);
+console.log("Decoded text:", decoded);
+
+// Decode with different encodings
+const utf8Decoder = new TextDecoder('utf-8');
+const utf16Decoder = new TextDecoder('utf-16');
+const latin1Decoder = new TextDecoder('iso-8859-1');
+
+console.log("\nSupported encodings:");
+console.log("  - utf-8 (default)");
+console.log("  - utf-16le, utf-16be");
+console.log("  - iso-8859-1 (latin1)");
+console.log("  - windows-1252");
+console.log("  - and many more...");
+
+// Decode special characters
+const specialBytes = new Uint8Array([
+  72, 101, 108, 108, 111, 32,           // "Hello "
+  228, 184, 150, 231, 149, 140, 32,     // "世界 "
+  240, 159, 140, 141                     // "🌍"
+]);
+const specialDecoded = decoder.decode(specialBytes);
+console.log("\nDecoded special chars:", specialDecoded);
+
+// Streaming decode (for large data)
+const streamDecoder = new TextDecoder('utf-8', { stream: true });
+
+const chunk1 = new Uint8Array([72, 101, 108]); // "Hel"
+const chunk2 = new Uint8Array([108, 111]);     // "lo"
+
+const part1 = streamDecoder.decode(chunk1, { stream: true });
+const part2 = streamDecoder.decode(chunk2, { stream: false });
+
+console.log("\nStreaming decode:");
+console.log("  Chunk 1:", part1);
+console.log("  Chunk 2:", part2);
+console.log("  Combined:", part1 + part2);
+
+// Error handling options
+const strictDecoder = new TextDecoder('utf-8', { fatal: true });
+const lenientDecoder = new TextDecoder('utf-8', { fatal: false });
+
+const invalidBytes = new Uint8Array([0xFF, 0xFE]); // Invalid UTF-8
+
+try {
+  strictDecoder.decode(invalidBytes);
+} catch (error) {
+  console.log("\nStrict decoder throws:", error.name);
+}
+
+const lenientResult = lenientDecoder.decode(invalidBytes);
+console.log("Lenient decoder replaces with:", lenientResult); // Replacement character �
+
+// ============================================
+// 7.3 Practical Applications
+// ============================================
+
+console.log("\n7.3 Practical Applications:");
+
+// Application 1: File reading with encoding
+console.log("\n1. File Reading:");
+console.log(`
+async function readTextFile(file) {
+  const arrayBuffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(arrayBuffer);
+  const decoder = new TextDecoder('utf-8');
+  const text = decoder.decode(bytes);
+  return text;
+}
+
+// Usage
+const file = document.querySelector('input[type="file"]').files[0];
+const content = await readTextFile(file);
+`);
+
+// Application 2: WebSocket binary messages
+console.log("\n2. WebSocket Binary Messages:");
+console.log(`
+const ws = new WebSocket('ws://example.com');
+ws.binaryType = 'arraybuffer';
+
+// Send text as binary
+ws.addEventListener('open', () => {
+  const encoder = new TextEncoder();
+  const message = encoder.encode('Hello Server');
+  ws.send(message.buffer);
+});
+
+// Receive binary as text
+ws.addEventListener('message', (event) => {
+  if (event.data instanceof ArrayBuffer) {
+    const decoder = new TextDecoder();
+    const bytes = new Uint8Array(event.data);
+    const text = decoder.decode(bytes);
+    console.log('Received:', text);
+  }
+});
+`);
+
+// Application 3: Crypto operations with text
+console.log("\n3. Crypto Operations:");
+console.log(`
+async function hashText(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = new Uint8Array(hashBuffer);
+  return Array.from(hashArray)
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+const hash = await hashText('Hello, World!');
+console.log('SHA-256:', hash);
+`);
+
+// Application 4: Base64 encoding/decoding
+function base64Encode(text) {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(text);
+  const binString = String.fromCodePoint(...bytes);
+  return btoa(binString);
+}
+
+function base64Decode(base64) {
+  const binString = atob(base64);
+  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+  const decoder = new TextDecoder();
+  return decoder.decode(bytes);
+}
+
+console.log("\n4. Base64 Encoding:");
+const original = "Hello, 世界!";
+const base64 = base64Encode(original);
+const restored = base64Decode(base64);
+console.log("  Original:", original);
+console.log("  Base64:", base64);
+console.log("  Restored:", restored);
+
+// Application 5: CSV parsing from binary
+console.log("\n5. CSV Parsing from Binary:");
+console.log(`
+async function parseCSV(arrayBuffer) {
+  const decoder = new TextDecoder('utf-8');
+  const text = decoder.decode(arrayBuffer);
+  const lines = text.split('\\n');
+  const data = lines.map(line => line.split(','));
+  return data;
+}
+
+// Usage with fetch
+const response = await fetch('/data.csv');
+const buffer = await response.arrayBuffer();
+const csvData = await parseCSV(buffer);
+`);
+
+// Application 6: Protocol buffer parsing
+console.log("\n6. Protocol Buffer Parsing:");
+console.log(`
+function parseMessage(bytes) {
+  const decoder = new TextDecoder('utf-8');
+  
+  // Read header (first 4 bytes)
+  const headerBytes = bytes.slice(0, 4);
+  const header = new DataView(headerBytes.buffer).getUint32(0);
+  
+  // Read body (remaining bytes)
+  const bodyBytes = bytes.slice(4);
+  const body = decoder.decode(bodyBytes);
+  
+  return { header, body };
+}
+`);
+
+// ============================================
+// 7.4 Character Encoding Conversion
+// ============================================
+
+console.log("\n7.4 Character Encoding Conversion:");
+
+// Convert between encodings
+function convertEncoding(bytes, fromEncoding, toEncoding) {
+  // Decode from source encoding
+  const decoder = new TextDecoder(fromEncoding);
+  const text = decoder.decode(bytes);
+  
+  // Encode to target encoding
+  const encoder = new TextEncoder(); // Always UTF-8
+  const converted = encoder.encode(text);
+  
+  return converted;
+}
+
+// Example: Latin1 to UTF-8
+const latin1Bytes = new Uint8Array([72, 233, 108, 108, 111]); // "Héllo" in Latin1
+const utf8Bytes = convertEncoding(latin1Bytes, 'iso-8859-1', 'utf-8');
+console.log("Latin1 bytes:", latin1Bytes);
+console.log("UTF-8 bytes:", utf8Bytes);
+console.log("Decoded:", new TextDecoder().decode(utf8Bytes));
+
+// Detect encoding (heuristic)
+function detectEncoding(bytes) {
+  // Check for BOM (Byte Order Mark)
+  if (bytes[0] === 0xEF && bytes[1] === 0xBB && bytes[2] === 0xBF) {
+    return 'utf-8';
+  }
+  if (bytes[0] === 0xFE && bytes[1] === 0xFF) {
+    return 'utf-16be';
+  }
+  if (bytes[0] === 0xFF && bytes[1] === 0xFE) {
+    return 'utf-16le';
+  }
+  
+  // Default to UTF-8
+  return 'utf-8';
+}
+
+console.log("\nEncoding detection:");
+const utf8BOM = new Uint8Array([0xEF, 0xBB, 0xBF, 72, 101, 108, 108, 111]);
+console.log("  Detected:", detectEncoding(utf8BOM));
+
+// ============================================
+// 7.5 Performance Considerations
+// ============================================
+
+console.log("\n7.5 Performance Considerations:");
+
+console.log("\nTextEncoder.encode() vs encodeInto():");
+console.log("  encode():");
+console.log("    - Allocates new Uint8Array");
+console.log("    - Simpler API");
+console.log("    - Use for small strings");
+console.log("  encodeInto():");
+console.log("    - Uses pre-allocated buffer");
+console.log("    - More efficient for large data");
+console.log("    - Requires buffer management");
+
+console.log("\nStreaming decode:");
+console.log("  - Use { stream: true } for chunked data");
+console.log("  - Handles multi-byte characters across chunks");
+console.log("  - Essential for large files");
+
+console.log("\nBest practices:");
+console.log("  ✅ Reuse TextEncoder/TextDecoder instances");
+console.log("  ✅ Use encodeInto() for large strings");
+console.log("  ✅ Use streaming decode for large files");
+console.log("  ✅ Handle encoding errors gracefully");
+console.log("  ✅ Validate encoding before decoding");
+console.log("  ⚠️ Be aware of UTF-8 byte length vs character length");
+console.log("  ⚠️ Handle BOM (Byte Order Mark) if present");
+
+// ============================================
+// 7.6 Common Use Cases Summary
+// ============================================
+
+console.log("\n7.6 Common Use Cases:");
+console.log("  1. File I/O - Read/write text files as binary");
+console.log("  2. WebSocket - Send/receive text as binary");
+console.log("  3. Crypto - Hash/encrypt text data");
+console.log("  4. Network protocols - Parse binary messages");
+console.log("  5. Data compression - Compress/decompress text");
+console.log("  6. CSV/JSON parsing - Parse from binary");
+console.log("  7. Base64 encoding - Convert text to/from base64");
+console.log("  8. Character encoding conversion - Convert between encodings\n");
+
+// ============================================
+// Section 8: Practical Applications (Updated)
 // ============================================
 
 console.log("\n=== Practical Applications ===");

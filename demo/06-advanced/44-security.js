@@ -388,7 +388,640 @@ if (validIP) {
 // ⚠️ Not validating file types
 
 // ============================================
-// TypeScript Comparison Notes
+// Section 6: Web Crypto API (Deep Dive)
+// ============================================
+
+console.log("\n=== Web Crypto API - Deep Dive ===");
+
+/**
+ * Web Crypto API - Cryptographic operations in the browser
+ * 
+ * crypto.subtle methods:
+ * - encrypt/decrypt: Symmetric encryption
+ * - sign/verify: Digital signatures
+ * - digest: Hash functions
+ * - generateKey: Key generation
+ * - deriveKey/deriveBits: Key derivation
+ * - importKey/exportKey: Key import/export
+ * - wrapKey/unwrapKey: Key wrapping
+ * 
+ * Supported algorithms:
+ * - AES-GCM, AES-CBC, AES-CTR: Symmetric encryption
+ * - RSA-OAEP: Asymmetric encryption
+ * - RSA-PSS, RSASSA-PKCS1-v1_5, ECDSA: Digital signatures
+ * - SHA-256, SHA-384, SHA-512: Hash functions
+ * - PBKDF2, HKDF: Key derivation
+ * - HMAC: Message authentication
+ */
+
+// ============================================
+// 6.1 Hash Functions (SHA-256, SHA-384, SHA-512)
+// ============================================
+
+console.log("\n6.1 Hash Functions:");
+
+// SHA-256 hash
+async function hashSHA256(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+console.log(`
+// SHA-256 Example
+const message = "Hello, World!";
+const hash = await hashSHA256(message);
+console.log('SHA-256:', hash);
+// Output: dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f
+`);
+
+// Different hash algorithms
+async function demonstrateHashAlgorithms() {
+  const message = "Hello, World!";
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  
+  // SHA-256 (32 bytes)
+  const sha256 = await crypto.subtle.digest('SHA-256', data);
+  console.log('SHA-256 length:', sha256.byteLength, 'bytes');
+  
+  // SHA-384 (48 bytes)
+  const sha384 = await crypto.subtle.digest('SHA-384', data);
+  console.log('SHA-384 length:', sha384.byteLength, 'bytes');
+  
+  // SHA-512 (64 bytes)
+  const sha512 = await crypto.subtle.digest('SHA-512', data);
+  console.log('SHA-512 length:', sha512.byteLength, 'bytes');
+}
+
+console.log("\nHash algorithm comparison:");
+console.log("  SHA-256: 256 bits (32 bytes) - Most common");
+console.log("  SHA-384: 384 bits (48 bytes) - More secure");
+console.log("  SHA-512: 512 bits (64 bytes) - Most secure");
+
+// Use cases for hashing
+console.log("\nHash function use cases:");
+console.log("  - Password hashing (with salt)");
+console.log("  - File integrity verification");
+console.log("  - Digital signatures");
+console.log("  - Blockchain");
+console.log("  - Content addressing");
+
+// ============================================
+// 6.2 Symmetric Encryption (AES)
+// ============================================
+
+console.log("\n6.2 Symmetric Encryption (AES):");
+
+// AES-GCM encryption (recommended)
+async function encryptAESGCM(plaintext, password) {
+  const encoder = new TextEncoder();
+  
+  // Derive key from password
+  const passwordKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    passwordKey,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+  
+  // Encrypt
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv: iv },
+    key,
+    encoder.encode(plaintext)
+  );
+  
+  return {
+    encrypted: new Uint8Array(encrypted),
+    iv: iv,
+    salt: salt
+  };
+}
+
+async function decryptAESGCM(encryptedData, password) {
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+  
+  // Derive same key from password
+  const passwordKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: encryptedData.salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    passwordKey,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+  
+  // Decrypt
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: encryptedData.iv },
+    key,
+    encryptedData.encrypted
+  );
+  
+  return decoder.decode(decrypted);
+}
+
+console.log(`
+// AES-GCM Encryption Example
+const plaintext = "Secret message";
+const password = "my-secure-password";
+
+const encrypted = await encryptAESGCM(plaintext, password);
+console.log('Encrypted:', encrypted.encrypted);
+console.log('IV:', encrypted.iv);
+console.log('Salt:', encrypted.salt);
+
+const decrypted = await decryptAESGCM(encrypted, password);
+console.log('Decrypted:', decrypted); // "Secret message"
+`);
+
+// AES modes comparison
+console.log("\nAES Encryption Modes:");
+console.log("  AES-GCM (Galois/Counter Mode):");
+console.log("    ✓ Authenticated encryption");
+console.log("    ✓ Detects tampering");
+console.log("    ✓ Recommended for most use cases");
+console.log("    - Requires unique IV for each encryption");
+console.log("\n  AES-CBC (Cipher Block Chaining):");
+console.log("    ✓ Well-established");
+console.log("    - No authentication (use with HMAC)");
+console.log("    - Padding oracle attacks possible");
+console.log("\n  AES-CTR (Counter Mode):");
+console.log("    ✓ Parallelizable");
+console.log("    - No authentication (use with HMAC)");
+console.log("    - Requires unique IV");
+
+// Key sizes
+console.log("\nAES Key Sizes:");
+console.log("  - 128 bits: Fast, secure for most uses");
+console.log("  - 192 bits: More secure");
+console.log("  - 256 bits: Maximum security");
+
+// ============================================
+// 6.3 Asymmetric Encryption (RSA)
+// ============================================
+
+console.log("\n6.3 Asymmetric Encryption (RSA):");
+
+// Generate RSA key pair
+async function generateRSAKeyPair() {
+  const keyPair = await crypto.subtle.generateKey(
+    {
+      name: 'RSA-OAEP',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256'
+    },
+    true,
+    ['encrypt', 'decrypt']
+  );
+  
+  return keyPair;
+}
+
+// RSA encryption
+async function encryptRSA(plaintext, publicKey) {
+  const encoder = new TextEncoder();
+  const encrypted = await crypto.subtle.encrypt(
+    { name: 'RSA-OAEP' },
+    publicKey,
+    encoder.encode(plaintext)
+  );
+  
+  return new Uint8Array(encrypted);
+}
+
+// RSA decryption
+async function decryptRSA(encrypted, privateKey) {
+  const decoder = new TextDecoder();
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'RSA-OAEP' },
+    privateKey,
+    encrypted
+  );
+  
+  return decoder.decode(decrypted);
+}
+
+console.log(`
+// RSA Encryption Example
+const keyPair = await generateRSAKeyPair();
+
+const plaintext = "Secret message";
+const encrypted = await encryptRSA(plaintext, keyPair.publicKey);
+console.log('Encrypted:', encrypted);
+
+const decrypted = await decryptRSA(encrypted, keyPair.privateKey);
+console.log('Decrypted:', decrypted); // "Secret message"
+`);
+
+console.log("\nRSA vs AES:");
+console.log("  RSA (Asymmetric):");
+console.log("    ✓ Public/private key pair");
+console.log("    ✓ No shared secret needed");
+console.log("    ✓ Digital signatures");
+console.log("    - Slower than AES");
+console.log("    - Limited message size");
+console.log("\n  AES (Symmetric):");
+console.log("    ✓ Fast encryption");
+console.log("    ✓ Unlimited message size");
+console.log("    - Requires shared secret");
+console.log("    - Key distribution problem");
+
+console.log("\nHybrid encryption (RSA + AES):");
+console.log("  1. Generate random AES key");
+console.log("  2. Encrypt data with AES key");
+console.log("  3. Encrypt AES key with RSA public key");
+console.log("  4. Send encrypted data + encrypted key");
+
+// ============================================
+// 6.4 Digital Signatures
+// ============================================
+
+console.log("\n6.4 Digital Signatures:");
+
+// Generate signing key pair
+async function generateSigningKeyPair() {
+  const keyPair = await crypto.subtle.generateKey(
+    {
+      name: 'RSASSA-PKCS1-v1_5',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256'
+    },
+    true,
+    ['sign', 'verify']
+  );
+  
+  return keyPair;
+}
+
+// Sign message
+async function signMessage(message, privateKey) {
+  const encoder = new TextEncoder();
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    privateKey,
+    encoder.encode(message)
+  );
+  
+  return new Uint8Array(signature);
+}
+
+// Verify signature
+async function verifySignature(message, signature, publicKey) {
+  const encoder = new TextEncoder();
+  const isValid = await crypto.subtle.verify(
+    'RSASSA-PKCS1-v1_5',
+    publicKey,
+    signature,
+    encoder.encode(message)
+  );
+  
+  return isValid;
+}
+
+console.log(`
+// Digital Signature Example
+const keyPair = await generateSigningKeyPair();
+
+const message = "Important document";
+const signature = await signMessage(message, keyPair.privateKey);
+console.log('Signature:', signature);
+
+const isValid = await verifySignature(message, signature, keyPair.publicKey);
+console.log('Valid:', isValid); // true
+
+// Tampered message
+const tamperedMessage = "Important document (modified)";
+const isValidTampered = await verifySignature(
+  tamperedMessage, 
+  signature, 
+  keyPair.publicKey
+);
+console.log('Valid (tampered):', isValidTampered); // false
+`);
+
+console.log("\nDigital Signature Algorithms:");
+console.log("  RSASSA-PKCS1-v1_5:");
+console.log("    ✓ Widely supported");
+console.log("    ✓ Compatible with many systems");
+console.log("\n  RSA-PSS:");
+console.log("    ✓ More secure than PKCS1");
+console.log("    ✓ Probabilistic padding");
+console.log("\n  ECDSA:");
+console.log("    ✓ Smaller keys than RSA");
+console.log("    ✓ Faster than RSA");
+console.log("    ✓ Modern standard");
+
+// Use cases
+console.log("\nDigital Signature Use Cases:");
+console.log("  - Document signing");
+console.log("  - Software distribution");
+console.log("  - API authentication (JWT)");
+console.log("  - Blockchain transactions");
+console.log("  - Email signing (S/MIME)");
+
+// ============================================
+// 6.5 Key Generation and Management
+// ============================================
+
+console.log("\n6.5 Key Generation and Management:");
+
+// Generate symmetric key
+async function generateAESKey() {
+  const key = await crypto.subtle.generateKey(
+    { name: 'AES-GCM', length: 256 },
+    true,
+    ['encrypt', 'decrypt']
+  );
+  
+  return key;
+}
+
+// Export key
+async function exportKey(key) {
+  const exported = await crypto.subtle.exportKey('jwk', key);
+  return exported;
+}
+
+// Import key
+async function importKey(jwk, algorithm, usages) {
+  const key = await crypto.subtle.importKey(
+    'jwk',
+    jwk,
+    algorithm,
+    true,
+    usages
+  );
+  
+  return key;
+}
+
+console.log(`
+// Key Generation Example
+const key = await generateAESKey();
+console.log('Generated key:', key);
+
+// Export key (for storage)
+const exported = await exportKey(key);
+console.log('Exported key (JWK):', exported);
+
+// Import key (from storage)
+const imported = await importKey(
+  exported,
+  { name: 'AES-GCM', length: 256 },
+  ['encrypt', 'decrypt']
+);
+console.log('Imported key:', imported);
+`);
+
+// Key formats
+console.log("\nKey Formats:");
+console.log("  raw: Raw bytes (symmetric keys)");
+console.log("  pkcs8: Private key format");
+console.log("  spki: Public key format");
+console.log("  jwk: JSON Web Key (most flexible)");
+
+// Key derivation (PBKDF2)
+console.log("\nKey Derivation (PBKDF2):");
+console.log(`
+async function deriveKey(password, salt) {
+  const encoder = new TextEncoder();
+  
+  const passwordKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits', 'deriveKey']
+  );
+  
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    passwordKey,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+  
+  return key;
+}
+`);
+
+console.log("\nKey Derivation Use Cases:");
+console.log("  - Password-based encryption");
+console.log("  - Key stretching");
+console.log("  - Derive multiple keys from one password");
+
+// Key storage best practices
+console.log("\nKey Storage Best Practices:");
+console.log("  ✅ Never store keys in localStorage");
+console.log("  ✅ Use IndexedDB for client-side key storage");
+console.log("  ✅ Encrypt keys before storage");
+console.log("  ✅ Use key wrapping for key storage");
+console.log("  ✅ Store keys server-side when possible");
+console.log("  ✅ Use hardware security modules (HSM) for production");
+console.log("  ⚠️ Never log or expose keys");
+console.log("  ⚠️ Rotate keys regularly");
+console.log("  ⚠️ Use strong key derivation (high iterations)");
+
+// ============================================
+// 6.6 Practical Applications
+// ============================================
+
+console.log("\n6.6 Practical Applications:");
+
+console.log("\n1. Secure Password Storage:");
+console.log(`
+async function hashPassword(password) {
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const encoder = new TextEncoder();
+  
+  const passwordKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits']
+  );
+  
+  const hash = await crypto.subtle.deriveBits(
+    {
+      name: 'PBKDF2',
+      salt: salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    passwordKey,
+    256
+  );
+  
+  return {
+    hash: new Uint8Array(hash),
+    salt: salt
+  };
+}
+
+async function verifyPassword(password, storedHash, storedSalt) {
+  const { hash } = await hashPassword(password);
+  // Compare hash with storedHash
+  return hash.every((byte, i) => byte === storedHash[i]);
+}
+`);
+
+console.log("\n2. End-to-End Encryption (E2EE):");
+console.log(`
+// User A generates key pair
+const keyPairA = await generateRSAKeyPair();
+
+// User B generates key pair
+const keyPairB = await generateRSAKeyPair();
+
+// User A encrypts message for User B
+const message = "Secret message";
+const encrypted = await encryptRSA(message, keyPairB.publicKey);
+
+// User B decrypts message
+const decrypted = await decryptRSA(encrypted, keyPairB.privateKey);
+`);
+
+console.log("\n3. File Encryption:");
+console.log(`
+async function encryptFile(file, password) {
+  const arrayBuffer = await file.arrayBuffer();
+  const data = new Uint8Array(arrayBuffer);
+  
+  // Derive key from password
+  const key = await deriveKeyFromPassword(password);
+  
+  // Encrypt file
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv: iv },
+    key,
+    data
+  );
+  
+  return { encrypted, iv };
+}
+`);
+
+console.log("\n4. JWT Token Signing:");
+console.log(`
+async function signJWT(payload, privateKey) {
+  const header = { alg: 'RS256', typ: 'JWT' };
+  const encoder = new TextEncoder();
+  
+  const headerB64 = btoa(JSON.stringify(header));
+  const payloadB64 = btoa(JSON.stringify(payload));
+  const message = \`\${headerB64}.\${payloadB64}\`;
+  
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    privateKey,
+    encoder.encode(message)
+  );
+  
+  const signatureB64 = btoa(String.fromCharCode(...new Uint8Array(signature)));
+  return \`\${message}.\${signatureB64}\`;
+}
+`);
+
+console.log("\n5. Secure Random Token Generation:");
+console.log(`
+function generateSecureToken(length = 32) {
+  const array = new Uint8Array(length);
+  crypto.getRandomValues(array);
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+const token = generateSecureToken();
+console.log('Secure token:', token);
+`);
+
+// ============================================
+// 6.7 Security Best Practices
+// ============================================
+
+console.log("\n6.7 Web Crypto API Best Practices:");
+
+console.log("\nEncryption:");
+console.log("  ✅ Use AES-GCM for authenticated encryption");
+console.log("  ✅ Generate unique IV for each encryption");
+console.log("  ✅ Use 256-bit keys for maximum security");
+console.log("  ✅ Never reuse IVs with the same key");
+console.log("  ⚠️ Don't use ECB mode (insecure)");
+console.log("  ⚠️ Don't use CBC without authentication");
+
+console.log("\nKey Management:");
+console.log("  ✅ Use PBKDF2 with high iterations (100,000+)");
+console.log("  ✅ Generate random salts for each key derivation");
+console.log("  ✅ Store keys securely (IndexedDB, not localStorage)");
+console.log("  ✅ Use key wrapping for key storage");
+console.log("  ⚠️ Never hardcode keys in source code");
+console.log("  ⚠️ Rotate keys regularly");
+
+console.log("\nHashing:");
+console.log("  ✅ Use SHA-256 or stronger");
+console.log("  ✅ Use salt for password hashing");
+console.log("  ✅ Use PBKDF2/bcrypt/scrypt for passwords");
+console.log("  ⚠️ Don't use MD5 or SHA-1 (broken)");
+
+console.log("\nDigital Signatures:");
+console.log("  ✅ Use RSA-PSS or ECDSA");
+console.log("  ✅ Verify signatures before trusting data");
+console.log("  ✅ Use 2048-bit RSA or 256-bit ECDSA minimum");
+console.log("  ⚠️ Protect private keys carefully");
+
+console.log("\nGeneral:");
+console.log("  ✅ Use crypto.getRandomValues() for random data");
+console.log("  ✅ Handle errors gracefully");
+console.log("  ✅ Use HTTPS for all crypto operations");
+console.log("  ✅ Keep crypto libraries updated");
+console.log("  ⚠️ Don't implement your own crypto algorithms");
+console.log("  ⚠️ Don't trust client-side crypto alone\n");
+
+// ============================================
+// TypeScript Comparison Notes (Updated)
 // ============================================
 /*
 🔍 Key Differences in TypeScript:

@@ -251,7 +251,279 @@ console.log("  ✗ Only key-value pairs");
 console.log("  ✗ No indexes");
 
 // ============================================
-// Section 4: Fetch Advanced (Complements 22-fetch-api.js)
+// Section 4: History API (Browser Navigation)
+// ============================================
+
+console.log("\n=== History API ===");
+
+/**
+ * History API - Manipulate browser history
+ * 
+ * Methods:
+ * - pushState(): Add new history entry
+ * - replaceState(): Modify current history entry
+ * - back(), forward(), go(): Navigate history
+ * 
+ * Events:
+ * - popstate: Fired when active history entry changes
+ * 
+ * Use Cases:
+ * - Single Page Applications (SPA)
+ * - Client-side routing
+ * - Preserving application state
+ * - Deep linking
+ */
+
+console.log("History API methods:");
+console.log("- history.pushState(state, title, url)");
+console.log("- history.replaceState(state, title, url)");
+console.log("- history.back()");
+console.log("- history.forward()");
+console.log("- history.go(delta)");
+console.log("- history.state (current state object)");
+console.log("- history.length (number of entries)");
+
+// pushState() - Add new history entry
+console.log("\npushState() - Add new history entry:");
+console.log(`
+// Navigate to new URL without page reload
+history.pushState(
+  { page: 'profile', userId: 123 },  // State object
+  '',                                 // Title (usually ignored)
+  '/profile/123'                      // URL
+);
+
+// Browser URL changes to /profile/123
+// Page doesn't reload
+// Back button now works
+`);
+
+// replaceState() - Modify current entry
+console.log("\nreplaceState() - Modify current entry:");
+console.log(`
+// Update current history entry
+history.replaceState(
+  { page: 'profile', userId: 123, tab: 'settings' },
+  '',
+  '/profile/123?tab=settings'
+);
+
+// URL changes but no new history entry
+// Back button goes to previous page (not previous state)
+`);
+
+// popstate event - Handle back/forward
+console.log("\npopstate event - Handle navigation:");
+console.log(`
+window.addEventListener('popstate', (event) => {
+  console.log('State:', event.state);
+  console.log('URL:', location.pathname);
+  
+  // Render appropriate content based on state
+  if (event.state?.page === 'profile') {
+    renderProfile(event.state.userId);
+  } else if (event.state?.page === 'home') {
+    renderHome();
+  }
+});
+`);
+
+// ============================================
+// Section 4.1: Single Page Application Routing
+// ============================================
+
+console.log("\n=== SPA Routing Implementation ===");
+
+console.log("\nSimple Router Class:");
+console.log(`
+class Router {
+  constructor() {
+    this.routes = new Map();
+    this.currentRoute = null;
+    
+    // Handle popstate (back/forward buttons)
+    window.addEventListener('popstate', (event) => {
+      this.handleRoute(location.pathname, event.state);
+    });
+    
+    // Handle link clicks
+    document.addEventListener('click', (event) => {
+      if (event.target.matches('[data-link]')) {
+        event.preventDefault();
+        this.navigate(event.target.href);
+      }
+    });
+  }
+  
+  // Register route
+  route(path, handler) {
+    this.routes.set(path, handler);
+  }
+  
+  // Navigate to route
+  navigate(path, state = {}) {
+    history.pushState(state, '', path);
+    this.handleRoute(path, state);
+  }
+  
+  // Handle route change
+  handleRoute(path, state) {
+    const handler = this.routes.get(path);
+    if (handler) {
+      this.currentRoute = path;
+      handler(state);
+    } else {
+      this.handle404();
+    }
+  }
+  
+  // 404 handler
+  handle404() {
+    console.log('404 - Page not found');
+  }
+  
+  // Initial route
+  init() {
+    this.handleRoute(location.pathname, history.state);
+  }
+}
+
+// Usage
+const router = new Router();
+
+router.route('/', () => {
+  document.getElementById('app').innerHTML = '<h1>Home</h1>';
+});
+
+router.route('/about', () => {
+  document.getElementById('app').innerHTML = '<h1>About</h1>';
+});
+
+router.route('/profile/:id', (state) => {
+  const id = state.userId || location.pathname.split('/')[2];
+  document.getElementById('app').innerHTML = 
+    \`<h1>Profile \${id}</h1>\`;
+});
+
+router.init();
+
+// Navigate programmatically
+router.navigate('/about');
+`);
+
+// Advanced routing patterns
+console.log("\nAdvanced Routing Patterns:");
+console.log(`
+// 1. Route parameters
+router.route('/users/:id', (params) => {
+  const userId = params.id;
+  fetchUser(userId).then(renderUser);
+});
+
+// 2. Query parameters
+router.route('/search', () => {
+  const params = new URLSearchParams(location.search);
+  const query = params.get('q');
+  performSearch(query);
+});
+
+// 3. Hash routing (alternative)
+window.addEventListener('hashchange', () => {
+  const hash = location.hash.slice(1); // Remove #
+  handleRoute(hash);
+});
+
+// 4. Nested routes
+router.route('/dashboard', () => {
+  renderDashboard();
+  
+  // Sub-router for dashboard sections
+  const subRouter = new Router();
+  subRouter.route('/dashboard/overview', renderOverview);
+  subRouter.route('/dashboard/settings', renderSettings);
+});
+
+// 5. Route guards (authentication)
+router.beforeEach((to, from, next) => {
+  if (to.requiresAuth && !isAuthenticated()) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+`);
+
+// Browser history management
+console.log("\nBrowser History Management:");
+console.log(`
+// Navigate back
+history.back();
+// Equivalent to:
+history.go(-1);
+
+// Navigate forward
+history.forward();
+// Equivalent to:
+history.go(1);
+
+// Navigate to specific position
+history.go(-2); // Go back 2 pages
+history.go(3);  // Go forward 3 pages
+
+// Check history length
+console.log('History entries:', history.length);
+
+// Get current state
+console.log('Current state:', history.state);
+
+// Scroll restoration
+history.scrollRestoration = 'manual'; // or 'auto'
+`);
+
+// State management with History API
+console.log("\nState Management:");
+console.log(`
+// Store complex state
+const state = {
+  page: 'product',
+  productId: 123,
+  filters: { category: 'electronics', price: 'low' },
+  scrollPosition: window.scrollY,
+  timestamp: Date.now()
+};
+
+history.pushState(state, '', '/products/123');
+
+// Restore state on popstate
+window.addEventListener('popstate', (event) => {
+  if (event.state) {
+    // Restore filters
+    applyFilters(event.state.filters);
+    
+    // Restore scroll position
+    window.scrollTo(0, event.state.scrollPosition);
+    
+    // Render product
+    renderProduct(event.state.productId);
+  }
+});
+`);
+
+// Best practices
+console.log("\nHistory API Best Practices:");
+console.log("  ✅ Always provide meaningful state objects");
+console.log("  ✅ Handle popstate event for back/forward");
+console.log("  ✅ Use replaceState for URL updates without history");
+console.log("  ✅ Preserve scroll position in state");
+console.log("  ✅ Implement 404 handling");
+console.log("  ✅ Use data-link attribute for SPA links");
+console.log("  ✅ Test with browser back/forward buttons");
+console.log("  ⚠️ Don't use title parameter (browsers ignore it)");
+console.log("  ⚠️ Be careful with state size (browsers have limits)");
+console.log("  ⚠️ Handle initial page load separately\n");
+
+// ============================================
+// Section 5: Fetch Advanced (Complements 28-fetch-api.js)
 // ============================================
 
 console.log("\n=== Fetch Advanced ===");
@@ -430,85 +702,499 @@ console.log("  ✗ Unidirectional (server to client)");
 console.log("  ✗ HTTP/1.1 connection limit");
 
 // ============================================
-// Section 6: Server-Sent Events (SSE)
+// Section 6: Server-Sent Events (SSE) - DETAILED
 // ============================================
 
-console.log("\n=== Server-Sent Events (SSE) ===");
+console.log("\n=== Server-Sent Events (SSE) - Detailed ===");
 
-// SSE - Server pushes data to client
-// - Unidirectional (server to client only)
-// - Automatic reconnection
-// - Text-based protocol
-// - Uses HTTP
+/**
+ * Server-Sent Events (SSE) - Unidirectional server push
+ * 
+ * Characteristics:
+ * - Unidirectional (server to client only)
+ * - Automatic reconnection
+ * - Text-based protocol
+ * - Uses HTTP (no special protocol)
+ * - Event-based API
+ * - Built-in event ID for resume
+ * 
+ * Use Cases:
+ * - Real-time notifications
+ * - Live feeds (news, social media)
+ * - Stock tickers
+ * - Server monitoring dashboards
+ * - Progress updates
+ * - Chat (server to client messages)
+ */
 
-// Creating EventSource (browser):
-// const eventSource = new EventSource('/events');
-// 
-// eventSource.addEventListener('open', () => {
-//   console.log('Connection opened');
-// });
-// 
-// eventSource.addEventListener('message', (event) => {
-//   console.log('Message:', event.data);
-// });
-// 
-// eventSource.addEventListener('error', (error) => {
-//   console.error('Error:', error);
-// });
-// 
-// // Close connection
-// eventSource.close();
-
-// Custom event types
-// eventSource.addEventListener('userJoined', (event) => {
-//   const user = JSON.parse(event.data);
-//   console.log('User joined:', user);
-// });
-
-// Server-side format (Node.js example):
-// res.writeHead(200, {
-//   'Content-Type': 'text/event-stream',
-//   'Cache-Control': 'no-cache',
-//   'Connection': 'keep-alive'
-// });
-// 
-// // Send message
-// res.write('data: Hello\n\n');
-// 
-// // Send custom event
-// res.write('event: userJoined\n');
-// res.write('data: {"name":"Alice"}\n\n');
-// 
-// // Send with ID (for reconnection)
-// res.write('id: 123\n');
-// res.write('data: Message\n\n');
-
-console.log("\nSSE features:");
-console.log("- Automatic reconnection");
-console.log("- Last-Event-ID for resume");
-console.log("- Custom event types");
-console.log("- Simple text protocol");
-
-console.log("\nSSE vs WebSocket:");
-console.log("SSE:");
-console.log("  ✓ Simpler than WebSocket");
+console.log("SSE vs WebSocket vs HTTP Polling:");
+console.log("\nServer-Sent Events:");
+console.log("  ✓ Unidirectional (server → client)");
 console.log("  ✓ Automatic reconnection");
-console.log("  ✓ Works over HTTP");
-console.log("  ✗ Unidirectional only");
+console.log("  ✓ Event-based");
+console.log("  ✓ Simple HTTP protocol");
+console.log("  ✓ Built-in event IDs");
 console.log("  ✗ Text only (no binary)");
 console.log("  ✗ HTTP/1.1 connection limit (6 per domain)");
+console.log("  ✗ No client → server messages");
 
 console.log("\nWebSocket:");
 console.log("  ✓ Bidirectional");
 console.log("  ✓ Binary support");
 console.log("  ✓ No connection limit");
+console.log("  ✓ Lower latency");
 console.log("  ✗ Manual reconnection");
 console.log("  ✗ More complex");
+console.log("  ✗ Requires WebSocket server");
 
-// Use cases
-console.log("\nUse cases:");
-console.log("SSE: News feeds, stock tickers, notifications");
-console.log("WebSocket: Chat, gaming, collaborative editing");
+console.log("\nHTTP Polling:");
+console.log("  ✓ Simple");
+console.log("  ✓ Works everywhere");
+console.log("  ✗ High latency");
+console.log("  ✗ Inefficient (many requests)");
+console.log("  ✗ Server load");
+
+// ============================================
+// Section 6.1: EventSource API
+// ============================================
+
+console.log("\n--- EventSource API ---\n");
+
+// Creating EventSource connection
+console.log("Creating EventSource:");
+console.log(`
+const eventSource = new EventSource('/events');
+
+// Connection states
+console.log(eventSource.readyState);
+// 0 = CONNECTING
+// 1 = OPEN
+// 2 = CLOSED
+
+// Connection URL
+console.log(eventSource.url); // '/events'
+
+// Reconnection behavior
+console.log(eventSource.withCredentials); // false (default)
+`);
+
+// Event listeners
+console.log("\nEventSource Event Listeners:");
+console.log(`
+// 1. open event - Connection established
+eventSource.addEventListener('open', (event) => {
+  console.log('Connection opened');
+});
+
+// 2. message event - Default event type
+eventSource.addEventListener('message', (event) => {
+  console.log('Message:', event.data);
+  console.log('Last Event ID:', event.lastEventId);
+  console.log('Origin:', event.origin);
+});
+
+// 3. error event - Connection error or closed
+eventSource.addEventListener('error', (event) => {
+  if (eventSource.readyState === EventSource.CLOSED) {
+    console.log('Connection closed');
+  } else {
+    console.log('Connection error, will retry');
+  }
+});
+
+// 4. Custom event types
+eventSource.addEventListener('userJoined', (event) => {
+  const user = JSON.parse(event.data);
+  console.log('User joined:', user.name);
+});
+
+eventSource.addEventListener('notification', (event) => {
+  const notification = JSON.parse(event.data);
+  showNotification(notification);
+});
+`);
+
+// Closing connection
+console.log("\nClosing EventSource:");
+console.log(`
+// Close connection (no automatic reconnection)
+eventSource.close();
+
+// Check if closed
+if (eventSource.readyState === EventSource.CLOSED) {
+  console.log('Connection is closed');
+}
+`);
+
+// ============================================
+// Section 6.2: Server-Side Implementation
+// ============================================
+
+console.log("\n--- Server-Side Implementation ---\n");
+
+console.log("SSE Response Format:");
+console.log(`
+// HTTP Headers
+Content-Type: text/event-stream
+Cache-Control: no-cache
+Connection: keep-alive
+Access-Control-Allow-Origin: * (for CORS)
+
+// Event format
+data: This is a message\\n\\n
+
+// Multi-line message
+data: First line\\n
+data: Second line\\n\\n
+
+// Custom event type
+event: userJoined\\n
+data: {"name":"Alice","id":123}\\n\\n
+
+// With event ID (for reconnection)
+id: 1234\\n
+data: Message with ID\\n\\n
+
+// Retry interval (milliseconds)
+retry: 5000\\n\\n
+
+// Comment (ignored by client)
+: This is a comment\\n\\n
+`);
+
+console.log("Node.js Server Example:");
+console.log(`
+// Express.js
+app.get('/events', (req, res) => {
+  // Set SSE headers
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  // Send initial message
+  res.write('data: Connected\\n\\n');
+  
+  // Send message every 5 seconds
+  const intervalId = setInterval(() => {
+    const data = {
+      time: new Date().toISOString(),
+      message: 'Hello from server'
+    };
+    res.write(\`data: \${JSON.stringify(data)}\\n\\n\`);
+  }, 5000);
+  
+  // Cleanup on client disconnect
+  req.on('close', () => {
+    clearInterval(intervalId);
+    res.end();
+  });
+});
+
+// Send custom event
+function sendCustomEvent(res, eventType, data) {
+  res.write(\`event: \${eventType}\\n\`);
+  res.write(\`data: \${JSON.stringify(data)}\\n\\n\`);
+}
+
+// Send with event ID
+function sendWithId(res, id, data) {
+  res.write(\`id: \${id}\\n\`);
+  res.write(\`data: \${JSON.stringify(data)}\\n\\n\`);
+}
+
+// Set retry interval
+function setRetryInterval(res, ms) {
+  res.write(\`retry: \${ms}\\n\\n\`);
+}
+`);
+
+// ============================================
+// Section 6.3: Practical Examples
+// ============================================
+
+console.log("\n--- Practical Examples ---\n");
+
+console.log("1. Real-time Notifications:");
+console.log(`
+// Client
+const notifications = new EventSource('/api/notifications');
+
+notifications.addEventListener('notification', (event) => {
+  const data = JSON.parse(event.data);
+  showNotification(data.title, data.message);
+});
+
+// Server
+app.get('/api/notifications', (req, res) => {
+  setupSSE(res);
+  
+  // Subscribe to notification events
+  notificationEmitter.on('new', (notification) => {
+    res.write(\`event: notification\\n\`);
+    res.write(\`data: \${JSON.stringify(notification)}\\n\\n\`);
+  });
+});
+`);
+
+console.log("\n2. Live Feed (News/Social):");
+console.log(`
+// Client
+const feed = new EventSource('/api/feed');
+
+feed.addEventListener('post', (event) => {
+  const post = JSON.parse(event.data);
+  prependPost(post);
+});
+
+feed.addEventListener('update', (event) => {
+  const update = JSON.parse(event.data);
+  updatePost(update.id, update.data);
+});
+
+// Server
+app.get('/api/feed', (req, res) => {
+  setupSSE(res);
+  
+  // New post
+  postEmitter.on('created', (post) => {
+    res.write(\`event: post\\n\`);
+    res.write(\`id: \${post.id}\\n\`);
+    res.write(\`data: \${JSON.stringify(post)}\\n\\n\`);
+  });
+  
+  // Post updated
+  postEmitter.on('updated', (post) => {
+    res.write(\`event: update\\n\`);
+    res.write(\`data: \${JSON.stringify(post)}\\n\\n\`);
+  });
+});
+`);
+
+console.log("\n3. Stock Ticker:");
+console.log(`
+// Client
+const ticker = new EventSource('/api/stocks');
+
+ticker.addEventListener('price', (event) => {
+  const data = JSON.parse(event.data);
+  updateStockPrice(data.symbol, data.price, data.change);
+});
+
+// Server
+app.get('/api/stocks', (req, res) => {
+  setupSSE(res);
+  
+  // Send price updates every second
+  const intervalId = setInterval(() => {
+    const prices = getLatestPrices();
+    prices.forEach(stock => {
+      res.write(\`event: price\\n\`);
+      res.write(\`data: \${JSON.stringify(stock)}\\n\\n\`);
+    });
+  }, 1000);
+  
+  req.on('close', () => clearInterval(intervalId));
+});
+`);
+
+console.log("\n4. Progress Updates:");
+console.log(`
+// Client
+const progress = new EventSource(\`/api/jobs/\${jobId}/progress\`);
+
+progress.addEventListener('progress', (event) => {
+  const data = JSON.parse(event.data);
+  updateProgressBar(data.percent);
+});
+
+progress.addEventListener('complete', (event) => {
+  const result = JSON.parse(event.data);
+  showResult(result);
+  progress.close();
+});
+
+// Server
+app.get('/api/jobs/:id/progress', (req, res) => {
+  setupSSE(res);
+  const jobId = req.params.id;
+  
+  // Listen for job progress
+  jobEmitter.on(\`progress:\${jobId}\`, (percent) => {
+    res.write(\`event: progress\\n\`);
+    res.write(\`data: \${JSON.stringify({ percent })}\\n\\n\`);
+  });
+  
+  jobEmitter.on(\`complete:\${jobId}\`, (result) => {
+    res.write(\`event: complete\\n\`);
+    res.write(\`data: \${JSON.stringify(result)}\\n\\n\`);
+  });
+});
+`);
+
+console.log("\n5. Server Monitoring Dashboard:");
+console.log(`
+// Client
+const monitor = new EventSource('/api/monitor');
+
+monitor.addEventListener('metrics', (event) => {
+  const metrics = JSON.parse(event.data);
+  updateDashboard(metrics);
+});
+
+monitor.addEventListener('alert', (event) => {
+  const alert = JSON.parse(event.data);
+  showAlert(alert.level, alert.message);
+});
+
+// Server
+app.get('/api/monitor', (req, res) => {
+  setupSSE(res);
+  
+  // Send metrics every 5 seconds
+  const intervalId = setInterval(() => {
+    const metrics = collectMetrics();
+    res.write(\`event: metrics\\n\`);
+    res.write(\`data: \${JSON.stringify(metrics)}\\n\\n\`);
+  }, 5000);
+  
+  // Send alerts
+  alertEmitter.on('alert', (alert) => {
+    res.write(\`event: alert\\n\`);
+    res.write(\`data: \${JSON.stringify(alert)}\\n\\n\`);
+  });
+  
+  req.on('close', () => clearInterval(intervalId));
+});
+`);
+
+// ============================================
+// Section 6.4: Reconnection and Error Handling
+// ============================================
+
+console.log("\n--- Reconnection and Error Handling ---\n");
+
+console.log("Automatic Reconnection:");
+console.log(`
+// EventSource automatically reconnects
+const eventSource = new EventSource('/events');
+
+eventSource.addEventListener('error', (event) => {
+  if (eventSource.readyState === EventSource.CONNECTING) {
+    console.log('Reconnecting...');
+  } else if (eventSource.readyState === EventSource.CLOSED) {
+    console.log('Connection closed permanently');
+  }
+});
+
+// Server can set retry interval
+// retry: 5000 (5 seconds)
+
+// Client resumes from last event ID
+// Server receives Last-Event-ID header
+`);
+
+console.log("\nResume from Last Event:");
+console.log(`
+// Server
+app.get('/events', (req, res) => {
+  setupSSE(res);
+  
+  // Get last event ID from client
+  const lastEventId = req.headers['last-event-id'];
+  
+  if (lastEventId) {
+    // Send missed events since lastEventId
+    const missedEvents = getEventsSince(lastEventId);
+    missedEvents.forEach(event => {
+      res.write(\`id: \${event.id}\\n\`);
+      res.write(\`data: \${JSON.stringify(event.data)}\\n\\n\`);
+    });
+  }
+  
+  // Continue with live events
+  // ...
+});
+`);
+
+console.log("\nManual Reconnection:");
+console.log(`
+let eventSource;
+let reconnectAttempts = 0;
+const maxReconnectAttempts = 5;
+
+function connect() {
+  eventSource = new EventSource('/events');
+  
+  eventSource.addEventListener('open', () => {
+    console.log('Connected');
+    reconnectAttempts = 0;
+  });
+  
+  eventSource.addEventListener('error', () => {
+    eventSource.close();
+    
+    if (reconnectAttempts < maxReconnectAttempts) {
+      const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);
+      console.log(\`Reconnecting in \${delay}ms...\`);
+      setTimeout(connect, delay);
+      reconnectAttempts++;
+    } else {
+      console.log('Max reconnection attempts reached');
+    }
+  });
+}
+
+connect();
+`);
+
+// ============================================
+// Section 6.5: Best Practices
+// ============================================
+
+console.log("\n--- SSE Best Practices ---\n");
+
+console.log("Client-side:");
+console.log("  ✅ Always handle error events");
+console.log("  ✅ Close connection when no longer needed");
+console.log("  ✅ Use custom event types for different messages");
+console.log("  ✅ Parse JSON data safely (try/catch)");
+console.log("  ✅ Implement reconnection limits");
+console.log("  ✅ Show connection status to user");
+console.log("  ⚠️ Be aware of HTTP/1.1 connection limit (6 per domain)");
+console.log("  ⚠️ Consider using HTTP/2 for multiple SSE connections");
+
+console.log("\nServer-side:");
+console.log("  ✅ Set correct headers (Content-Type, Cache-Control)");
+console.log("  ✅ Handle client disconnection (cleanup)");
+console.log("  ✅ Use event IDs for resumable connections");
+console.log("  ✅ Set appropriate retry interval");
+console.log("  ✅ Implement authentication/authorization");
+console.log("  ✅ Use compression (gzip) for text data");
+console.log("  ✅ Monitor active connections");
+console.log("  ⚠️ Be careful with memory leaks (event listeners)");
+console.log("  ⚠️ Implement rate limiting");
+console.log("  ⚠️ Handle server restarts gracefully");
+
+console.log("\nWhen to use SSE:");
+console.log("  ✓ Real-time notifications");
+console.log("  ✓ Live feeds and updates");
+console.log("  ✓ Server monitoring");
+console.log("  ✓ Progress tracking");
+console.log("  ✓ One-way data flow (server → client)");
+
+console.log("\nWhen to use WebSocket instead:");
+console.log("  ✓ Bidirectional communication");
+console.log("  ✓ Binary data");
+console.log("  ✓ Low latency requirements");
+console.log("  ✓ Gaming, chat, collaboration");
+console.log("  ✓ Many concurrent connections\n");
+
+// ============================================
+// Section 7: WebSocket (Updated)
+// ============================================
+
+console.log("\n=== WebSocket (Comparison with SSE) ===\n");
 
 // ============================================
 // TypeScript Comparison Notes

@@ -453,7 +453,7 @@ console.log("  - Load features on demand");
 console.log("  - Better performance for large apps\n");
 
 // ============================================
-// 9. ES MODULES VS COMMONJS
+// 9. ES MODULES VS COMMONJS (DETAILED COMPARISON)
 // ============================================
 
 /**
@@ -474,36 +474,474 @@ console.log("  - Better performance for large apps\n");
  * - Primarily Node.js
  */
 
-console.log("=== ES Modules vs CommonJS ===\n");
+console.log("=== ES Modules vs CommonJS (Detailed) ===\n");
 
-console.log("ES Modules (ESM):");
-console.log("  Syntax: import/export");
-console.log("  Loading: Asynchronous");
-console.log("  Analysis: Static (compile-time)");
-console.log("  Tree-shaking: Yes");
-console.log("  Top-level await: Yes (ES2022)");
-console.log("  File extension: .mjs or .js with type: module");
-console.log("  Example:");
-console.log("    import { fn } from './module.js';");
+// ============================================
+// 9.1 CommonJS Syntax and Patterns
+// ============================================
+
+console.log("--- CommonJS (CJS) Syntax ---\n");
+
+// CommonJS Export Patterns
+console.log("CommonJS Export Patterns:");
+console.log(`
+// Pattern 1: module.exports (single export)
+module.exports = function add(a, b) {
+  return a + b;
+};
+
+// Pattern 2: module.exports object
+module.exports = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  PI: 3.14159
+};
+
+// Pattern 3: exports shorthand (adds properties)
+exports.add = (a, b) => a + b;
+exports.subtract = (a, b) => a - b;
+exports.PI = 3.14159;
+
+// ⚠️ PITFALL: Don't reassign exports
+exports = { add }; // ❌ Doesn't work! Use module.exports
+module.exports = { add }; // ✅ Correct
+
+// Pattern 4: Exporting class
+class Calculator {
+  add(a, b) { return a + b; }
+}
+module.exports = Calculator;
+
+// Pattern 5: Mixed exports
+module.exports = Calculator;
+module.exports.version = '1.0.0';
+module.exports.utils = { format: (n) => n.toFixed(2) };
+`);
+
+// CommonJS Import Patterns
+console.log("CommonJS Import Patterns:");
+console.log(`
+// Pattern 1: Import entire module
+const math = require('./math');
+math.add(1, 2);
+
+// Pattern 2: Destructuring import
+const { add, subtract } = require('./math');
+add(1, 2);
+
+// Pattern 3: Import default export
+const Calculator = require('./calculator');
+const calc = new Calculator();
+
+// Pattern 4: Conditional require (dynamic)
+if (condition) {
+  const feature = require('./feature');
+  feature.init();
+}
+
+// Pattern 5: Lazy loading
+function loadHeavyModule() {
+  const heavy = require('./heavy-module');
+  return heavy;
+}
+
+// Pattern 6: Caching behavior
+const module1 = require('./module'); // Loads and caches
+const module2 = require('./module'); // Returns cached version
+console.log(module1 === module2); // true
+`);
+
+// ============================================
+// 9.2 ES Modules Syntax (Detailed)
+// ============================================
+
+console.log("\n--- ES Modules (ESM) Syntax ---\n");
+
+console.log("ES Modules Export Patterns:");
+console.log(`
+// Pattern 1: Named exports (inline)
+export const PI = 3.14159;
+export function add(a, b) { return a + b; }
+export class Calculator { }
+
+// Pattern 2: Named exports (list)
+const PI = 3.14159;
+function add(a, b) { return a + b; }
+export { PI, add };
+
+// Pattern 3: Default export
+export default class Calculator { }
+// Or:
+class Calculator { }
+export default Calculator;
+
+// Pattern 4: Mixed exports
+export default Calculator;
+export const version = '1.0.0';
+export const utils = { format: (n) => n.toFixed(2) };
+
+// Pattern 5: Re-exports
+export { add, subtract } from './math.js';
+export * from './utils.js';
+export { default as Calculator } from './calculator.js';
+`);
+
+console.log("ES Modules Import Patterns:");
+console.log(`
+// Pattern 1: Named imports
+import { add, subtract } from './math.js';
+
+// Pattern 2: Default import
+import Calculator from './calculator.js';
+
+// Pattern 3: Mixed imports
+import Calculator, { version, utils } from './calculator.js';
+
+// Pattern 4: Namespace import
+import * as Math from './math.js';
+Math.add(1, 2);
+
+// Pattern 5: Side effects only
+import './polyfills.js';
+
+// Pattern 6: Dynamic import (ES2020)
+const module = await import('./module.js');
+`);
+
+// ============================================
+// 9.3 Key Differences and Comparison
+// ============================================
+
+console.log("\n--- Detailed Comparison ---\n");
+
+console.log("1. SYNTAX:");
+console.log("  CommonJS:");
+console.log("    const module = require('./module');");
+console.log("    module.exports = { value: 42 };");
+console.log("  ES Modules:");
+console.log("    import module from './module.js';");
 console.log("    export const value = 42;");
 
-console.log("\nCommonJS (CJS):");
-console.log("  Syntax: require/module.exports");
-console.log("  Loading: Synchronous");
-console.log("  Analysis: Dynamic (runtime)");
-console.log("  Tree-shaking: No");
-console.log("  Top-level await: No");
-console.log("  File extension: .cjs or .js (default in Node.js)");
-console.log("  Example:");
-console.log("    const { fn } = require('./module.js');");
-console.log("    module.exports = { value: 42 };");
+console.log("\n2. LOADING:");
+console.log("  CommonJS:");
+console.log("    - Synchronous (blocking)");
+console.log("    - Loaded at runtime");
+console.log("    - Can be called anywhere in code");
+console.log("  ES Modules:");
+console.log("    - Asynchronous (non-blocking)");
+console.log("    - Loaded at parse time");
+console.log("    - Hoisted to top of file");
 
-console.log("\nKey Differences:");
-console.log("  1. ESM imports are hoisted, CJS requires are not");
-console.log("  2. ESM imports are read-only, CJS exports can be modified");
-console.log("  3. ESM supports top-level await, CJS doesn't");
-console.log("  4. ESM enables tree-shaking, CJS doesn't");
-console.log("  5. ESM is the future standard, CJS is legacy\n");
+console.log("\n3. STATIC vs DYNAMIC:");
+console.log("  CommonJS:");
+console.log("    - Dynamic: require() can use variables");
+console.log("    - const mod = require(dynamicPath);");
+console.log("    - Conditional requires allowed");
+console.log("  ES Modules:");
+console.log("    - Static: import path must be string literal");
+console.log("    - Enables tree-shaking and optimization");
+console.log("    - Use dynamic import() for runtime loading");
+
+console.log("\n4. MUTABILITY:");
+console.log("  CommonJS:");
+console.log("    - Exports are copies (mutable)");
+console.log("    - Can modify imported values");
+console.log("  ES Modules:");
+console.log("    - Imports are live bindings (read-only)");
+console.log("    - Cannot reassign imported values");
+
+console.log("\n5. THIS BINDING:");
+console.log("  CommonJS:");
+console.log("    - 'this' refers to module.exports");
+console.log("    - console.log(this === module.exports); // true");
+console.log("  ES Modules:");
+console.log("    - 'this' is undefined at top level");
+console.log("    - console.log(this); // undefined");
+
+console.log("\n6. FILE EXTENSIONS:");
+console.log("  CommonJS:");
+console.log("    - .js (default in Node.js)");
+console.log("    - .cjs (explicit CommonJS)");
+console.log("  ES Modules:");
+console.log("    - .mjs (explicit ES Module)");
+console.log("    - .js with \"type\": \"module\" in package.json");
+
+console.log("\n7. TOP-LEVEL AWAIT:");
+console.log("  CommonJS:");
+console.log("    - Not supported");
+console.log("    - Must use async IIFE or promises");
+console.log("  ES Modules:");
+console.log("    - Supported (ES2022)");
+console.log("    - const data = await fetch(url);");
+
+console.log("\n8. TREE-SHAKING:");
+console.log("  CommonJS:");
+console.log("    - Not possible (dynamic nature)");
+console.log("    - Entire module included in bundle");
+console.log("  ES Modules:");
+console.log("    - Fully supported");
+console.log("    - Unused exports removed by bundlers");
+
+console.log("\n9. CIRCULAR DEPENDENCIES:");
+console.log("  CommonJS:");
+console.log("    - Returns partial exports");
+console.log("    - Can cause undefined values");
+console.log("  ES Modules:");
+console.log("    - Better handling with live bindings");
+console.log("    - Still should be avoided");
+
+console.log("\n10. BROWSER SUPPORT:");
+console.log("  CommonJS:");
+console.log("    - Not natively supported");
+console.log("    - Requires bundler (Webpack, Browserify)");
+console.log("  ES Modules:");
+console.log("    - Native browser support");
+console.log("    - <script type=\"module\" src=\"app.js\"></script>");
+
+// ============================================
+// 9.4 Interoperability
+// ============================================
+
+console.log("\n--- Interoperability ---\n");
+
+console.log("Using CommonJS in ES Modules:");
+console.log(`
+// Import CommonJS module in ESM
+import cjsModule from './commonjs-module.cjs';
+// Default import gets module.exports
+
+// Named imports from CommonJS (Node.js only)
+import { named } from './commonjs-module.cjs';
+// Works if module.exports = { named }
+`);
+
+console.log("\nUsing ES Modules in CommonJS:");
+console.log(`
+// Dynamic import in CommonJS
+async function loadESM() {
+  const esmModule = await import('./esm-module.mjs');
+  console.log(esmModule.default);
+  console.log(esmModule.named);
+}
+
+// ❌ Cannot use static import in CommonJS
+// import { named } from './esm-module.mjs'; // SyntaxError
+`);
+
+console.log("\nNode.js Package.json Configuration:");
+console.log(`
+// Use ES Modules by default
+{
+  "type": "module",
+  "main": "index.js"
+}
+
+// Use CommonJS by default (default behavior)
+{
+  "type": "commonjs",
+  "main": "index.js"
+}
+
+// Dual package (both ESM and CJS)
+{
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  }
+}
+`);
+
+// ============================================
+// 9.5 Module Resolution
+// ============================================
+
+console.log("\n--- Module Resolution ---\n");
+
+console.log("Node.js Module Resolution Algorithm:");
+console.log(`
+1. Core modules (fs, path, http)
+   - Highest priority
+   - Built into Node.js
+
+2. File modules (./file, ../file, /absolute/path)
+   - Relative or absolute paths
+   - Tries: .js, .json, .node extensions
+
+3. Folder modules (./folder)
+   - Looks for package.json "main" field
+   - Falls back to index.js
+
+4. node_modules
+   - Searches up directory tree
+   - node_modules/package-name
+   - Continues to parent directories
+`);
+
+console.log("ES Module Resolution:");
+console.log(`
+1. Must include file extension
+   - import './module.js' ✅
+   - import './module' ❌ (works in bundlers, not native)
+
+2. Supports package.json "exports" field
+   {
+     "exports": {
+       ".": "./index.js",
+       "./feature": "./src/feature.js"
+     }
+   }
+
+3. Import maps (browser)
+   <script type="importmap">
+   {
+     "imports": {
+       "lodash": "/node_modules/lodash-es/lodash.js",
+       "react": "https://cdn.skypack.dev/react"
+     }
+   }
+   </script>
+`);
+
+// ============================================
+// 9.6 Import Maps (Browser)
+// ============================================
+
+console.log("\n--- Import Maps ---\n");
+
+console.log("Import Maps enable bare module specifiers in browsers:");
+console.log(`
+<!-- Define import map -->
+<script type="importmap">
+{
+  "imports": {
+    "lodash": "/node_modules/lodash-es/lodash.js",
+    "lodash/": "/node_modules/lodash-es/",
+    "react": "https://cdn.skypack.dev/react@18",
+    "react-dom": "https://cdn.skypack.dev/react-dom@18",
+    "@/": "/src/"
+  }
+}
+</script>
+
+<!-- Use bare specifiers -->
+<script type="module">
+  import _ from 'lodash';
+  import { debounce } from 'lodash/debounce.js';
+  import React from 'react';
+  import { createRoot } from 'react-dom';
+  import { utils } from '@/utils.js';
+  
+  console.log(_.VERSION);
+</script>
+`);
+
+console.log("Import Maps Features:");
+console.log("  - Map bare specifiers to URLs");
+console.log("  - Support for scoped packages");
+console.log("  - Trailing slash for directory mapping");
+console.log("  - CDN integration");
+console.log("  - Local path aliases");
+
+console.log("\nImport Maps Browser Support:");
+console.log("  - Chrome/Edge: 89+");
+console.log("  - Safari: 16.4+");
+console.log("  - Firefox: 108+");
+console.log("  - Polyfill available: es-module-shims");
+
+console.log("\nImport Maps Use Cases:");
+console.log("  - Development without bundler");
+console.log("  - CDN-based dependencies");
+console.log("  - Path aliases (@/, ~/");
+console.log("  - Version management");
+console.log("  - Micro-frontend architecture");
+
+// ============================================
+// 9.7 Migration Guide
+// ============================================
+
+console.log("\n--- Migration: CommonJS to ES Modules ---\n");
+
+console.log("Step-by-step migration:");
+console.log(`
+1. Update package.json
+   {
+     "type": "module"
+   }
+
+2. Rename files (optional)
+   - .js → .mjs (if not using "type": "module")
+   - Keep .cjs for CommonJS files
+
+3. Convert require to import
+   // Before (CommonJS)
+   const fs = require('fs');
+   const { readFile } = require('fs');
+   const express = require('express');
+   
+   // After (ES Modules)
+   import fs from 'fs';
+   import { readFile } from 'fs';
+   import express from 'express';
+
+4. Convert module.exports to export
+   // Before (CommonJS)
+   module.exports = function add(a, b) {
+     return a + b;
+   };
+   
+   // After (ES Modules)
+   export default function add(a, b) {
+     return a + b;
+   }
+   
+   // Before (CommonJS)
+   module.exports = { add, subtract };
+   
+   // After (ES Modules)
+   export { add, subtract };
+
+5. Update __dirname and __filename
+   // Before (CommonJS)
+   console.log(__dirname);
+   console.log(__filename);
+   
+   // After (ES Modules)
+   import { fileURLToPath } from 'url';
+   import { dirname } from 'path';
+   const __filename = fileURLToPath(import.meta.url);
+   const __dirname = dirname(__filename);
+
+6. Add file extensions to imports
+   // Before (CommonJS)
+   const utils = require('./utils');
+   
+   // After (ES Modules)
+   import utils from './utils.js';
+
+7. Convert dynamic requires
+   // Before (CommonJS)
+   const module = require(dynamicPath);
+   
+   // After (ES Modules)
+   const module = await import(dynamicPath);
+`);
+
+console.log("\nCommon Migration Pitfalls:");
+console.log("  ⚠️ Forgetting file extensions");
+console.log("  ⚠️ Using require() in ESM");
+console.log("  ⚠️ Missing __dirname/__filename replacements");
+console.log("  ⚠️ Circular dependencies breaking");
+console.log("  ⚠️ JSON imports (use import assertions)");
+
+console.log("\nBest Practices:");
+console.log("  ✅ Use ES Modules for new projects");
+console.log("  ✅ Migrate gradually (dual packages)");
+console.log("  ✅ Test thoroughly after migration");
+console.log("  ✅ Update tooling (ESLint, Jest, etc.)");
+console.log("  ✅ Document breaking changes\n");
 
 // ============================================
 // 10. MODULE LOADING AND CACHING
