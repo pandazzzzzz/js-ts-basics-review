@@ -339,6 +339,78 @@ console.log("\n=== search() Method ===");
 console.log("search(/[0-9]/):", "I have 5 apples".search(/[0-9]/)); // 7
 console.log("search(/cat/):", "dog".search(/cat/)); // -1
 
+// localeCompare() - Locale-aware string comparison (ES3)
+// - Returns -1, 0, or 1
+// - Respects locale-specific sorting rules
+// - Use case: sorting names, internationalization
+console.log("\n=== localeCompare() Method ===");
+console.log("'a'.localeCompare('b'):", 'a'.localeCompare('b')); // -1 (a comes before b)
+console.log("'b'.localeCompare('a'):", 'b'.localeCompare('a')); // 1 (b comes after a)
+console.log("'a'.localeCompare('a'):", 'a'.localeCompare('a')); // 0 (equal)
+
+// Locale-specific sorting
+const names = ['Ärger', 'Apfel', 'Zorn'];
+console.log("German sort:", names.sort((a, b) => a.localeCompare(b, 'de'))); 
+// ['Apfel', 'Ärger', 'Zorn'] (German collation)
+
+// Case-insensitive comparison
+console.log("'A'.localeCompare('a', 'en', { sensitivity: 'base' }):", 
+  'A'.localeCompare('a', 'en', { sensitivity: 'base' })); // 0 (case-insensitive)
+
+// normalize() - Unicode normalization (ES6/ES2015)
+// - NFC, NFD, NFKC, NFKD forms
+// - Use case: comparing strings with accents
+console.log("\n=== normalize() Method ===");
+const str1 = '\u00F1'; // ñ (single character)
+const str2 = '\u006E\u0303'; // ñ (n + combining tilde)
+console.log("str1 === str2:", str1 === str2); // false (different representations)
+console.log("str1.normalize() === str2.normalize():", 
+  str1.normalize() === str2.normalize()); // true (normalized to same form)
+
+// Different normalization forms
+const accentStr = 'café';
+console.log("NFC:", accentStr.normalize('NFC')); // Canonical composition
+console.log("NFD:", accentStr.normalize('NFD')); // Canonical decomposition
+console.log("NFKC:", accentStr.normalize('NFKC')); // Compatibility composition
+console.log("NFKD:", accentStr.normalize('NFKD')); // Compatibility decomposition
+
+// matchAll() - Global regex matches (ES2020)
+// - Returns iterator of all matches
+// - Includes capture groups
+// - Use case: extracting all matches with details
+console.log("\n=== matchAll() Method ===");
+const textMatchAll = "test1 test2 test3";
+const regex = /test(\d)/g;
+const matches = [...textMatchAll.matchAll(regex)];
+matches.forEach(match => {
+  console.log(`Match: ${match[0]}, Group: ${match[1]}, Index: ${match.index}`);
+});
+// Match: test1, Group: 1, Index: 0
+// Match: test2, Group: 2, Index: 6
+// Match: test3, Group: 3, Index: 12
+
+// Comparing with match()
+console.log("\nmatch() vs matchAll():");
+console.log("match(/test(\\d)/g):", textMatchAll.match(/test(\d)/g)); // ["test1", "test2", "test3"] (no groups)
+console.log("matchAll() with groups:", [...textMatchAll.matchAll(/test(\d)/g)].map(m => m[1])); // ["1", "2", "3"]
+
+// at() - Access character with negative indexing (ES2022)
+// - Supports negative indices
+// - Returns undefined for out of bounds
+// - Use case: accessing from end of string
+console.log("\n=== at() Method (ES2022) ===");
+const strAt = "Hello World";
+console.log("strAt.at(0):", strAt.at(0)); // "H" (first character)
+console.log("strAt.at(-1):", strAt.at(-1)); // "d" (last character)
+console.log("strAt.at(-2):", strAt.at(-2)); // "l" (second from end)
+console.log("strAt.at(100):", strAt.at(100)); // undefined (out of bounds)
+
+// Comparing with bracket notation
+console.log("\nBracket notation vs at():");
+console.log("strAt[0]:", strAt[0]); // "H"
+console.log("str[-1]:", str[-1]); // undefined (bracket notation doesn't support negative)
+console.log("str.at(-1):", str.at(-1)); // "d" (at() supports negative)
+
 // ============================================
 // Template Literals (ES6/ES2015)
 // ============================================
@@ -499,6 +571,31 @@ const query = sql`SELECT * FROM users WHERE id = ${userId} AND name = ${userName
 console.log("\nSQL Query:", query);
 // { text: "SELECT * FROM users WHERE id = $1 AND name = $2", values: [42, "Alice"] }
 
+// String.raw() - Raw template strings (ES6/ES2015)
+// - Ignores escape sequences
+// - Useful for regex, file paths, LaTeX
+// - Static method on String constructor
+console.log("\n=== String.raw() ===");
+console.log(String.raw`C:\Users\Name\file.txt`); 
+// "C:\Users\Name\file.txt" (backslashes not escaped)
+console.log(`C:\Users\Name\file.txt`); 
+// "C:UsersNamefile.txt" (backslashes escaped)
+
+const path = String.raw`C:\Program Files\App`;
+console.log("Path:", path); // "C:\Program Files\App"
+
+// Useful for regex patterns
+const regexPattern = String.raw`\d+\.\d+`;
+console.log("Regex pattern:", regexPattern); // "\d+\.\d+" (literal backslashes)
+const regex2 = new RegExp(regexPattern);
+console.log("Test regex:", regex2.test("3.14")); // true
+
+// Comparing with regular template literal
+console.log("\nRegular template:", `\n\t`); // Newline and tab (2 characters rendered as whitespace)
+console.log("String.raw:", String.raw`\n\t`); // "\n\t" (4 characters: backslash-n, backslash-t)
+console.log("Length regular:", `\n\t`.length); // 2
+console.log("Length raw:", String.raw`\n\t`.length); // 4
+
 // ============================================
 // Common Pitfalls & Best Practices
 // ============================================
@@ -642,8 +739,8 @@ console.log("4. Cleaned input:", cleaned);
 
 // 5. Use slice() instead of substring() or substr()
 // slice() is more consistent and flexible
-const str2 = "Hello World";
-console.log("5. Use slice():", str2.slice(0, 5));
+const strSlice = "Hello World";
+console.log("5. Use slice():", strSlice.slice(0, 5));
 
 // 6. Use replaceAll() for replacing all occurrences (ES2021+)
 const text3 = "foo foo foo";

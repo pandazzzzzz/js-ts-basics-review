@@ -285,6 +285,53 @@ console.log("num.toPrecision(5):", num.toPrecision(5)); // "123.46"
 console.log("num.toPrecision(8):", num.toPrecision(8)); // "123.45679"
 console.log("(0.000123).toPrecision(2):", (0.000123).toPrecision(2)); // "0.00012"
 
+// toExponential(n) - Exponential notation (ES3)
+// - Returns string in exponential notation
+// - n is number of digits after decimal
+// - Use case: scientific notation, very large/small numbers
+console.log("\n=== toExponential() ===");
+const num2 = 123456;
+console.log("num2.toExponential():", num2.toExponential()); // "1.23456e+5"
+console.log("num2.toExponential(2):", num2.toExponential(2)); // "1.23e+5"
+console.log("(0.000123).toExponential(2):", (0.000123).toExponential(2)); // "1.23e-4"
+console.log("(12345).toExponential(1):", (12345).toExponential(1)); // "1.2e+4"
+
+// toLocaleString() - Locale-aware number formatting (ES3)
+// - Formats number according to locale
+// - Supports options for currency, units, etc.
+// - Use case: displaying numbers to users
+console.log("\n=== toLocaleString() ===");
+const bigNum = 1234567.89;
+console.log("US format:", bigNum.toLocaleString('en-US')); // "1,234,567.89"
+console.log("DE format:", bigNum.toLocaleString('de-DE')); // "1.234.567,89"
+console.log("FR format:", bigNum.toLocaleString('fr-FR')); // "1 234 567,89"
+console.log("IN format:", bigNum.toLocaleString('en-IN')); // "12,34,567.89" (Indian numbering)
+
+// Currency formatting
+const price = 1234.56;
+console.log("\nCurrency formatting:");
+console.log("USD:", price.toLocaleString('en-US', { 
+  style: 'currency', 
+  currency: 'USD' 
+})); // "$1,234.56"
+console.log("EUR:", price.toLocaleString('de-DE', { 
+  style: 'currency', 
+  currency: 'EUR' 
+})); // "1.234,56 €"
+console.log("JPY:", price.toLocaleString('ja-JP', { 
+  style: 'currency', 
+  currency: 'JPY' 
+})); // "¥1,235" (no decimals for yen)
+
+// Percent formatting
+const percent = 0.1234;
+console.log("\nPercent formatting:");
+console.log("Percent:", percent.toLocaleString('en-US', { 
+  style: 'percent',
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1
+})); // "12.3%"
+
 // toString(base) - Convert to string with base
 // - Default base is 10
 // - Can specify base 2-36
@@ -305,6 +352,21 @@ console.log("123..toString():", 123..toString()); // "123"
 console.log("(123).toString():", (123).toString()); // "123"
 console.log("123 .toString():", 123 .toString()); // "123" (space works too)
 // console.log("123.toString():", 123.toString()); // ❌ Syntax error (dot seen as decimal)
+
+// Number.parseFloat() and Number.parseInt() (ES6)
+// - Same as global parseFloat() and parseInt()
+// - Preferred in modern code (namespaced)
+// - Avoids global namespace pollution
+console.log("\n=== Number.parseFloat() / Number.parseInt() ===");
+console.log('Number.parseFloat("123.45"):', Number.parseFloat("123.45")); // 123.45
+console.log('Number.parseFloat("  456.78  "):', Number.parseFloat("  456.78  ")); // 456.78
+console.log('Number.parseInt("123", 10):', Number.parseInt("123", 10)); // 123
+console.log('Number.parseInt("FF", 16):', Number.parseInt("FF", 16)); // 255
+
+// Comparing with global functions
+console.log("\nGlobal vs Number methods:");
+console.log('parseFloat("123.45"):', parseFloat("123.45")); // 123.45 (same result)
+console.log('Number.parseFloat("123.45"):', Number.parseFloat("123.45")); // 123.45 (preferred)
 
 // ============================================
 // 6. Math Object
@@ -480,6 +542,117 @@ console.log("Math.fround(1.337):", Math.fround(1.337)); // 1.3370000123977661
 console.log("Math.imul(2, 4):", Math.imul(2, 4)); // 8
 console.log("Math.imul(0xffffffff, 5):", Math.imul(0xffffffff, 5)); // -5
 
+// High-precision Math methods (ES6)
+console.log("\n=== High-Precision Math Methods ===");
+
+// Math.expm1() - e^x - 1 (more accurate for small x)
+// - Avoids precision loss for values close to 0
+// - Use case: financial calculations, scientific computing
+console.log("Math.expm1(1):", Math.expm1(1)); // e - 1 = 1.718...
+console.log("Math.expm1(0.001):", Math.expm1(0.001)); // More accurate than Math.exp(0.001) - 1
+console.log("Math.expm1(0):", Math.expm1(0)); // 0
+
+// Math.log1p() - ln(1 + x) (more accurate for small x)
+// - Avoids precision loss for values close to 0
+// - Use case: probability calculations, statistics
+console.log("\nMath.log1p():");
+console.log("Math.log1p(1):", Math.log1p(1)); // ln(2) = 0.693...
+console.log("Math.log1p(0.001):", Math.log1p(0.001)); // More accurate than Math.log(1.001)
+console.log("Math.log1p(0):", Math.log1p(0)); // 0
+
+// Hyperbolic functions (ES6)
+console.log("\n=== Hyperbolic Functions ===");
+
+// Math.sinh() - Hyperbolic sine
+console.log("Math.sinh(0):", Math.sinh(0)); // 0
+console.log("Math.sinh(1):", Math.sinh(1)); // 1.175...
+
+// Math.cosh() - Hyperbolic cosine
+console.log("Math.cosh(0):", Math.cosh(0)); // 1
+console.log("Math.cosh(1):", Math.cosh(1)); // 1.543...
+
+// Math.tanh() - Hyperbolic tangent
+console.log("Math.tanh(0):", Math.tanh(0)); // 0
+console.log("Math.tanh(1):", Math.tanh(1)); // 0.761...
+
+// Inverse hyperbolic functions
+console.log("\n=== Inverse Hyperbolic Functions ===");
+console.log("Math.asinh(0):", Math.asinh(0)); // 0
+console.log("Math.asinh(1):", Math.asinh(1)); // 0.881...
+console.log("Math.acosh(1):", Math.acosh(1)); // 0
+console.log("Math.acosh(2):", Math.acosh(2)); // 1.316...
+console.log("Math.atanh(0):", Math.atanh(0)); // 0
+console.log("Math.atanh(0.5):", Math.atanh(0.5)); // 0.549...
+
+// Intl.NumberFormat for advanced formatting (Intl API)
+console.log("\n=== Intl.NumberFormat ===");
+
+// Currency formatting with options
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+console.log("Formatted currency:", formatter.format(1234.5)); // "$1,234.50"
+
+// Different currencies
+const eurFormatter = new Intl.NumberFormat('de-DE', {
+  style: 'currency',
+  currency: 'EUR'
+});
+console.log("EUR format:", eurFormatter.format(1234.56)); // "1.234,56 €"
+
+const jpyFormatter = new Intl.NumberFormat('ja-JP', {
+  style: 'currency',
+  currency: 'JPY'
+});
+console.log("JPY format:", jpyFormatter.format(1234.56)); // "¥1,235" (no decimals)
+
+// Unit formatting
+const unitFormatter = new Intl.NumberFormat('en-US', {
+  style: 'unit',
+  unit: 'kilometer-per-hour'
+});
+console.log("Speed:", unitFormatter.format(120)); // "120 km/h"
+
+const tempFormatter = new Intl.NumberFormat('en-US', {
+  style: 'unit',
+  unit: 'celsius'
+});
+console.log("Temperature:", tempFormatter.format(25)); // "25°C"
+
+// Percent formatting
+const percentFormatter = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1
+});
+console.log("Percent:", percentFormatter.format(0.1234)); // "12.3%"
+
+// Compact notation (ES2020)
+const compactFormatter = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  compactDisplay: 'short'
+});
+console.log("Compact 1M:", compactFormatter.format(1000000)); // "1M"
+console.log("Compact 1.5M:", compactFormatter.format(1500000)); // "1.5M"
+console.log("Compact 1B:", compactFormatter.format(1000000000)); // "1B"
+
+// Scientific notation
+const scientificFormatter = new Intl.NumberFormat('en-US', {
+  notation: 'scientific'
+});
+console.log("Scientific:", scientificFormatter.format(123456)); // "1.235E5"
+
+// Significant digits
+const sigDigitsFormatter = new Intl.NumberFormat('en-US', {
+  minimumSignificantDigits: 3,
+  maximumSignificantDigits: 5
+});
+console.log("Sig digits 123:", sigDigitsFormatter.format(123)); // "123"
+console.log("Sig digits 0.00123:", sigDigitsFormatter.format(0.00123)); // "0.00123"
+
 // ============================================
 // 7. BigInt (ES2020)
 // ============================================
@@ -625,9 +798,9 @@ console.log('parseInt("10", 2):', parseInt("10", 2)); // 2
 
 // 4. Use toFixed() for display, not calculations
 console.log("\n4. Use toFixed() for display:");
-const price = 19.99;
-console.log("Display:", price.toFixed(2)); // "19.99"
-console.log("Calculate:", price * 1.1); // 21.989
+const priceFixed = 19.99;
+console.log("Display:", priceFixed.toFixed(2)); // "19.99"
+console.log("Calculate:", priceFixed * 1.1); // 21.989
 
 // 5. Use BigInt for large integers
 console.log("\n5. Use BigInt for large integers:");
@@ -651,8 +824,8 @@ console.log('+"123":', +"123"); // 123 (shorter)
 
 // 9. Check for safe integers
 console.log("\n9. Check for safe integers:");
-const bigNum = 9007199254740992;
-console.log("Number.isSafeInteger(bigNum):", Number.isSafeInteger(bigNum)); // false
+const bigNumSafe = 9007199254740992;
+console.log("Number.isSafeInteger(bigNumSafe):", Number.isSafeInteger(bigNumSafe)); // false
 console.log("Use BigInt if not safe");
 
 // 10. Use numeric separators for readability

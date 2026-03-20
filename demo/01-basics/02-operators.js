@@ -377,6 +377,33 @@ console.log("[] instanceof Object:", [] instanceof Object); // true (Array exten
 console.log("'hello' instanceof String:", "hello" instanceof String); // false (primitive)
 console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
 
+// in operator - Check if property exists in object (ES1)
+// - Returns true if property exists in object or prototype chain
+// - Works with arrays (checks indices)
+// - Use case: property existence checks, avoiding hasOwnProperty
+// - Common pitfall: checks prototype chain, not just own properties
+console.log("\nin Operator:");
+const car = { make: "Toyota", model: "Camry" };
+console.log("'make' in car:", 'make' in car); // true
+console.log("'year' in car:", 'year' in car); // false
+console.log("'toString' in car:", 'toString' in car); // true (inherited from Object.prototype)
+
+const arrIn = ['a', 'b', 'c'];
+console.log("0 in arrIn:", 0 in arrIn); // true (index exists)
+console.log("3 in arrIn:", 3 in arrIn); // false (index doesn't exist)
+console.log("'length' in arrIn:", 'length' in arrIn); // true (array property)
+
+// Use case: Safe property access
+function printProperty(obj, prop) {
+  if (prop in obj) {
+    console.log(`${prop}: ${obj[prop]}`);
+  } else {
+    console.log(`${prop} does not exist`);
+  }
+}
+printProperty(car, 'make'); // "make: Toyota"
+printProperty(car, 'year'); // "year does not exist"
+
 // ============================================
 // Spread and Rest Operators
 // ============================================
@@ -447,8 +474,8 @@ console.log("greet('Hello', 'Alice', 'Bob'):", greet("Hello", "Alice", "Bob")); 
 const [first, second, ...rest] = [1, 2, 3, 4, 5];
 console.log("Destructuring with rest:", { first, second, rest }); // { first: 1, second: 2, rest: [3, 4, 5] }
 
-const { x, y, ...remaining } = { x: 1, y: 2, z: 3, w: 4 };
-console.log("Object destructuring with rest:", { x, y, remaining }); // { x: 1, y: 2, remaining: { z: 3, w: 4 } }
+const { x: xVal, y: yVal, ...remaining } = { x: 1, y: 2, z: 3, w: 4 };
+console.log("Object destructuring with rest:", { xVal, yVal, remaining }); // { xVal: 1, yVal: 2, remaining: { z: 3, w: 4 } }
 
 // ============================================
 // Property Access Operators
