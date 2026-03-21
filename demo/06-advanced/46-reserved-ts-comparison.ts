@@ -278,7 +278,7 @@ console.log("\n=== Type-Level Programming ===\n");
 
 // Type-level string manipulation
 type TrimLeft<S extends string> = S extends ` ${infer T}` ? TrimLeft<T> : S;
-type TrimRight<S extends string> = S extends `${T} ` ? TrimRight<T> : S;
+type TrimRight<S extends string> = S extends `${infer T} ` ? TrimRight<T> : S;
 type Trim<S extends string> = TrimLeft<TrimRight<S>>;
 
 type Trimmed = Trim<'  hello world  '>; // "hello world"
