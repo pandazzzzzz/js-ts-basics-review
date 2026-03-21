@@ -323,8 +323,15 @@ const pipe = <T>(...fns: Function[]) =>
     - `demo/06-advanced/37-intl-api.js` + `37-intl-api-ts-comparison.ts`
     - `demo/06-advanced/38-weakref-finalization.js` + `38-weakref-finalization-ts-comparison.ts`
     - `demo/06-advanced/39-storage-network.js` + `39-storage-network-ts-comparison.ts`
+    - `demo/06-advanced/40-design-patterns.js` + `40-design-patterns-ts-comparison.ts`
+    - `demo/06-advanced/41-web-apis.js` + `41-web-apis-ts-comparison.ts`
+    - `demo/06-advanced/42-performance.js` + `42-performance-ts-comparison.ts`
+    - `demo/06-advanced/43-typescript-advanced-ts-comparison.ts` (TS-only)
+    - `demo/06-advanced/44-security.js` + `44-security-ts-comparison.ts`
+    - `demo/06-advanced/45-build-tools.js` + `45-build-tools-ts-comparison.ts`
+    - `demo/06-advanced/46-reserved.js` + `46-reserved-ts-comparison.ts`
 
 ---
 
-**Last Updated**: 2026-03-18  
+**Last Updated**: 2026-03-21
 **Based on**: ES2020+ and TypeScript 5.x

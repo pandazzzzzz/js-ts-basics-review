@@ -148,9 +148,9 @@ TS 对比: `29-dom-basics-ts-comparison.ts` · `30-dom-manipulation-ts-compariso
 | 43 | `demo/06-advanced/43-typescript-advanced-ts-comparison.ts` | TypeScript 高级特性 | ✅ |
 | 44 | `demo/06-advanced/44-security.js` | 安全最佳实践 | ✅ |
 | 45 | `demo/06-advanced/45-build-tools.js` | 构建工具集成 | ✅ |
-| 46 | `demo/06-advanced/46-reserved.js` | 预留扩展 | 📝 |
+| 46 | `demo/06-advanced/46-reserved.js` | 预留扩展 | ✅ |
 
-TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-ts-comparison.ts` · `35-memory-gc-ts-comparison.ts` · `36-typed-arrays-ts-comparison.ts` · `37-intl-api-ts-comparison.ts` · `38-weakref-finalization-ts-comparison.ts` · `39-storage-network-ts-comparison.ts` · `40-design-patterns-ts-comparison.ts` · `41-web-apis-ts-comparison.ts` · `42-performance-ts-comparison.ts` · `43-typescript-advanced-ts-comparison.ts` · `44-security-ts-comparison.ts` · `45-build-tools-ts-comparison.ts`
+TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-ts-comparison.ts` · `35-memory-gc-ts-comparison.ts` · `36-typed-arrays-ts-comparison.ts` · `37-intl-api-ts-comparison.ts` · `38-weakref-finalization-ts-comparison.ts` · `39-storage-network-ts-comparison.ts` · `40-design-patterns-ts-comparison.ts` · `41-web-apis-ts-comparison.ts` · `42-performance-ts-comparison.ts` · `43-typescript-advanced-ts-comparison.ts` · `44-security-ts-comparison.ts` · `45-build-tools-ts-comparison.ts` · `46-reserved-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -167,3 +167,4 @@ TS 对比: `33-es2022-plus-features-ts-comparison.ts` · `34-debugging-testing-t
 **43 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
 **44 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
 **45 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
+**46 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
