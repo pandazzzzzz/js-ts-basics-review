@@ -1,5 +1,6 @@
 // TypeScript String Comparison
-// 📘 Companion to: 04-strings.js
+// This file demonstrates TypeScript-specific string features
+// 📘 For JavaScript runtime behavior, see: 04-strings.js
 
 // ============================================
 // 1. String Type Annotations
@@ -647,11 +648,5 @@ console.log("\n=== String Comparison ===");
 console.log("Compare 'a' and 'b':", compareStrings("a", "b", "en-US"));
 console.log("Compare '苹果' and '香蕉':", compareStrings("苹果", "香蕉", "zh-CN"));
 
-// Type-safe case conversion with locale
-function toLocaleUpperCase(str: string, locale: Locale): string {
-  return str.toLocaleUpperCase(locale);
-}
-
-console.log("Turkish İ:", toLocaleUpperCase("istanbul", "en-US"));
-
 console.log("\n=== TypeScript String Features Complete ===");
+console.log("=== See 04-strings.js for runtime behavior ===");

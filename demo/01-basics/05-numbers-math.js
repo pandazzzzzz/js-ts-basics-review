@@ -836,3 +836,20 @@ console.log("Million:", million2);
 console.log("Billion:", billion3);
 
 console.log("\n=== Numbers and Math Demo Complete ===");
+
+// ============================================
+// See TypeScript Comparison
+// ============================================
+
+/*
+🔍 See 05-numbers-math-ts-comparison.ts for:
+   - Number type annotations and literal types
+   - Branded number types (Percentage, Celsius, etc.)
+   - Type-safe math operations
+   - Nullable numbers with proper handling
+   - Tuple types for numeric coordinates
+   - Discriminated unions with numeric values
+
+📘 Key differences: TypeScript provides compile-time type safety
+   for numeric operations while JavaScript handles runtime behavior.
+*/

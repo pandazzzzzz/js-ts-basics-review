@@ -1,5 +1,6 @@
 // TypeScript Numbers and Math Comparison
-// 📘 Companion to: 05-numbers-math.js
+// This file demonstrates TypeScript-specific number features
+// 📘 For JavaScript runtime behavior, see: 05-numbers-math.js
 
 // Wrap in block scope to avoid conflicts with other files
 {
@@ -574,6 +575,7 @@ const userScores: UserScores = {
 
 console.log("User scores:", userScores);
 
-console.log("\n=== TypeScript Numbers and Math Complete ===");
+console.log("\n=== TypeScript Numbers Complete ===");
+console.log("=== See 05-numbers-math.js for runtime behavior ===");
 
 } // End of block scope

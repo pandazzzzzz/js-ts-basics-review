@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: Operators Comparison
-// This file demonstrates key differences, pitfalls, and best practices
-// 📘 For JavaScript basics, see: 02-operators.js
+// This file demonstrates TypeScript-specific operator features
+// 📘 For JavaScript runtime behavior, see: 02-operators.js
 
 // Make this file a module to avoid global scope conflicts
 export {};
@@ -449,28 +449,16 @@ const dynamicObj: { [key: string]: any } = { a: 1, b: 2 };
 delete dynamicObj.a; // ✅ OK with index signature
 
 // ============================================
-// 13. Common Pitfalls: JS vs TS Operators
+// 13. Common Pitfalls: TS-Specific
 // ============================================
 
-console.log("\n=== Common Pitfalls ===\n");
+console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
-// PITFALL 1: Type coercion still happens at runtime
+// PITFALL 1: Type coercion still happens at runtime with 'any'
 const runtimeSum = 5 + ("3" as any); // "53" at runtime (TypeScript can't prevent this with 'any')
-console.log("Runtime coercion:", runtimeSum);
+console.log("Runtime coercion with 'any':", runtimeSum);
 
-// PITFALL 2: NaN is type number
-const notANumber: number = NaN; // ✅ OK in TypeScript
-console.log("typeof NaN:", typeof notANumber); // "number"
-// @ts-expect-error - Demonstrating that NaN is never equal to itself
-console.log("NaN === NaN:", NaN === NaN); // false
-
-// PITFALL 3: Comparison operators don't prevent logic errors
-const comparison1 = 10 > 5; // true
-const comparison2 = "10" > "5"; // false (string comparison)
-// TypeScript allows both, but results differ!
-console.log("Comparisons:", comparison1, comparison2);
-
-// PITFALL 4: Optional chaining returns undefined
+// PITFALL 2: Optional chaining returns undefined
 interface Data {
   value?: {
     nested?: {
@@ -485,11 +473,12 @@ const deepValue = data.value?.nested?.deep; // Type: number | undefined
 
 // ✅ FIX: Handle undefined explicitly
 const safeCalculation = (deepValue ?? 0) + 10; // ✅ OK
-console.log("Safe calculation:", safeCalculation);
+console.log("Safe calculation with nullish coalescing:", safeCalculation);
 
-// ============================================
-// 14. Best Practices Summary
-// ============================================
+// PITFALL 3: Comparison operators don't prevent logic errors
+const comparison1 = 10 > 5; // true
+const comparison2 = "10" > "5"; // false (string comparison)
+console.log("Comparisons:", comparison1, comparison2);
 
 /*
 ✅ DO:
@@ -517,16 +506,17 @@ console.log("Safe calculation:", safeCalculation);
 10. Assume TypeScript prevents all runtime errors
 
 ⚠️ WATCH OUT FOR:
-1. typeof null === "object" (both JS and TS)
-2. NaN === NaN is false (use Number.isNaN)
-3. Optional chaining returns undefined (handle it!)
-4. ?? vs || behavior with falsy values
-5. Bitwise operators convert to 32-bit integers
-6. String comparison is lexicographic ("10" < "9" is true)
-7. Type assertions don't perform runtime checks
-8. Spread creates shallow copies
-9. Delete operator return value (always true, even if property doesn't exist)
-10. Operator precedence (use parentheses for clarity)
+1. Optional chaining returns undefined (handle it!)
+2. ?? vs || behavior with falsy values
+3. Type assertions don't perform runtime checks
+4. 'any' defeats TypeScript's purpose
+5. Delete operator with required properties
+
+📘 See 02-operators.js for:
+   - NaN behavior (NaN === NaN is false)
+   - Floating point precision issues
+   - typeof null === "object"
+   - Loose equality (==) coercion rules
 */
 
 // ============================================
@@ -606,5 +596,5 @@ if (user !== null) {
 }
 
 console.log("\n=== TypeScript provides compile-time type safety ===");
-console.log("=== Runtime behavior still follows JavaScript rules ===");
-console.log("=== Use TypeScript features to catch errors early! ===");
+console.log("=== Runtime behavior follows JavaScript rules ===");
+console.log("=== See 02-operators.js for runtime behavior ===");

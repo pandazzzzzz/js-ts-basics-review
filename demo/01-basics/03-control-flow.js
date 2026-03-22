@@ -904,7 +904,7 @@ function processValue(val) {
   if (val === null) return "Null value";
   if (val === undefined) return "Undefined value";
   if (val < 0) return "Negative value";
-  
+
   // Main logic without nesting
   return `Processing: ${val}`;
 }
@@ -914,4 +914,20 @@ console.log(processValue(null));
 console.log(processValue(undefined));
 console.log(processValue(-5));
 console.log(processValue(42));
+
+// ============================================
+// See TypeScript Comparison
+// ============================================
+
+/*
+🔍 See 03-control-flow-ts-comparison.ts for:
+   - Type narrowing in if/else blocks
+   - Switch exhaustiveness checking with never type
+   - Discriminated unions with switch
+   - Type predicates for custom type guards
+   - Control flow analysis
+
+📘 Key differences: TypeScript tracks types through control flow
+   and provides compile-time type safety.
+*/
 

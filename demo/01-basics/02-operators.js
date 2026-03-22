@@ -2,6 +2,22 @@
 // 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
 
 // ============================================
+// See TypeScript Comparison
+// ============================================
+
+/*
+🔍 See 02-operators-ts-comparison.ts for:
+   - Type-safe arithmetic operations
+   - Type narrowing with comparison operators
+   - Branded types for operators
+   - Delete operator type safety
+   - Type guards with typeof/instanceof
+
+📘 Key differences: TypeScript catches type mismatches at compile time
+   while JavaScript allows implicit conversions at runtime.
+*/
+
+// ============================================
 // Arithmetic Operators
 // ============================================
 

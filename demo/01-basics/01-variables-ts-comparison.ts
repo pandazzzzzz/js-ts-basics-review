@@ -1,5 +1,6 @@
 // TypeScript vs JavaScript: Variables and Types Comparison
-// This file demonstrates key differences, pitfalls, and best practices
+// This file demonstrates TypeScript-specific features for variables
+// 📘 For JavaScript runtime behavior, see: 01-variables.js
 
 // Make this file a module to avoid global scope conflicts
 export {};
@@ -158,30 +159,22 @@ function processValue(value: string | number) {
 }
 
 // ============================================
-// 7. Common Pitfalls: JS vs TS
+// 7. Common Pitfalls: TS-Specific
 // ============================================
 
-console.log("\n=== Common Pitfalls ===\n");
+console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
-// PITFALL 1: typeof null in both JS and TS
-const nullValue: null = null;
-console.log("typeof null:", typeof nullValue); // "object" (historical bug)
-// ✅ FIX: Use strict equality
-console.log("nullValue === null:", nullValue === null); // true
+// PITFALL 1: Type assertions don't perform runtime checks
+let wrongAssertion = (42 as any) as string;
+// wrongAssertion.toUpperCase(); // Runtime error! TypeScript won't catch this
+console.log("Type assertions bypass compile-time checks");
 
-// PITFALL 2: NaN type in TypeScript
-const notANumber: number = NaN; // ✅ OK, NaN is type 'number'
-console.log("typeof NaN:", typeof notANumber); // "number"
-// Note: NaN === NaN is always false (use Number.isNaN instead)
-console.log("Number.isNaN(NaN):", Number.isNaN(NaN)); // true
-
-// PITFALL 3: Array type confusion
-let jsArrayExample = [1, 2, 3]; // JS: any array
-let tsArrayExample: number[] = [1, 2, 3]; // TS: typed array
+// PITFALL 2: Array type confusion
+let tsArrayExample: number[] = [1, 2, 3];
 // tsArrayExample.push("string"); // ❌ Error in TS
-// jsArrayExample.push("string"); // ✅ OK in JS (dangerous!)
+console.log("Typed arrays prevent mixed types");
 
-// PITFALL 4: Object property access
+// PITFALL 3: Object property access
 interface Person {
   name: string;
   age: number;
@@ -191,7 +184,27 @@ const person: Person = { name: "Alice", age: 30 };
 console.log(person.name); // ✅ OK
 // console.log(person.email); // ❌ Error: Property 'email' does not exist
 
-// In JavaScript, this would return undefined (no error)
+// PITFALL 4: Non-null assertion can cause runtime errors
+interface UserProfile {
+  name: string;
+  age: number;
+}
+
+function getUserProfile(): UserProfile | null {
+  return { name: "Bob", age: 25 };
+}
+
+const maybeUserProfile = getUserProfile();
+
+// Safe way:
+const userName1 = maybeUserProfile?.name; // ✅ Safe: string | undefined
+console.log("Safe access:", userName1);
+
+// Dangerous way (non-null assertion):
+const userName2 = maybeUserProfile!.name; // ⚠️ Tells TS "trust me, it's not null"
+console.log("Non-null assertion:", userName2);
+
+// ✅ BEST PRACTICE: Use optional chaining or explicit null checks
 
 // ============================================
 // 8. Best Practices Summary
@@ -217,13 +230,16 @@ console.log(person.name); // ✅ OK
 7. Use 'var' (use 'const' or 'let')
 
 ⚠️ WATCH OUT FOR:
-1. typeof null === "object" (both JS and TS)
-2. NaN === NaN is false (use Number.isNaN)
-3. Type assertions don't perform runtime checks
-4. Implicit 'any' when types can't be inferred
+1. Type assertions don't perform runtime checks
+2. Non-null assertion (!) can cause runtime errors
+3. Type widening with const vs let
+4. any defeats TypeScript's purpose
 5. Optional chaining (?.) vs null checks
 6. Difference between null and undefined
-7. Type widening with const vs let
+
+📘 See related:
+- 01-variables.js (JavaScript runtime behavior)
+- 02-operators-ts-comparison.ts (Operator type safety)
 */
 
 // ============================================
@@ -286,5 +302,6 @@ const userName2 = maybeUserProfile!.name; // ⚠️ Tells TS "trust me, it's not
 // ⚠️ PITFALL: Non-null assertion can cause runtime errors
 // ✅ BEST PRACTICE: Prefer optional chaining or explicit null checks
 
-console.log("\n=== TypeScript provides type safety at compile time ===");
-console.log("=== But runtime behavior follows JavaScript rules ===");
+console.log("\n=== TypeScript provides compile-time type safety ===");
+console.log("=== Runtime behavior follows JavaScript rules ===");
+console.log("=== See 01-variables.js for runtime behavior ===");

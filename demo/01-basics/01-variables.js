@@ -128,40 +128,18 @@ console.log("value === null:", value === null); // true (strict check)
 console.log("value === undefined:", value === undefined); // false
 
 // ============================================
-// TypeScript Comparison Notes
+// See TypeScript Comparison
 // ============================================
+
 /*
-🔍 Key Differences in TypeScript:
+🔍 See 01-variables-ts-comparison.ts for:
+   - Type annotations and type inference
+   - strictNullChecks behavior
+   - Special types: any, unknown, never
+   - Type assertions and type guards
+   - Literal types and type widening
 
-1. TYPE ANNOTATIONS
-   JS:  let x = 42;
-   TS:  let x: number = 42;
-
-2. NULL/UNDEFINED HANDLING (strictNullChecks)
-   JS:  let x = null; // Always OK
-   TS:  let x: number = null; // ❌ Error with strictNullChecks
-   TS:  let x: number | null = null; // ✅ OK with union type
-
-3. TYPE SAFETY
-   JS:  No compile-time type checking
-   TS:  Catches type errors before runtime
-
-4. SPECIAL TYPES
-   - any: Disables type checking (avoid!)
-   - unknown: Type-safe alternative to any
-   - never: For functions that never return
-
-5. OPTIONAL CHAINING & NULLISH COALESCING
-   Both JS (ES2020+) and TS support:
-   - obj?.prop (optional chaining)
-   - value ?? defaultValue (nullish coalescing)
-
-⚠️ COMMON CONFUSION POINTS:
-- typeof null === "object" (same in both JS and TS)
-- strictNullChecks changes null/undefined behavior
-- Type assertions don't perform runtime checks
-- 'any' defeats TypeScript's purpose
-
-📘 See 01-variables-ts-comparison.ts for detailed examples!
+📘 Key differences: TypeScript adds compile-time type checking while
+   maintaining the same runtime behavior as JavaScript.
 */
 

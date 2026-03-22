@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: Control Flow Comparison
-// This file demonstrates key differences, pitfalls, and best practices
-// 📘 For JavaScript basics, see: 03-control-flow.js
+// This file demonstrates TypeScript-specific control flow features
+// 📘 For JavaScript syntax and runtime behavior, see: 03-control-flow.js
 
 // Make this file a module to avoid global scope conflicts
 export {};
@@ -607,6 +607,12 @@ console.log("\n=== Best Practices ===\n");
 8. Exhaustiveness checking requires proper return types
 9. Optional chaining returns undefined
 10. Nullish coalescing only checks null/undefined
+
+📘 See 03-control-flow.js for:
+   - Control flow syntax (if/else, switch, loops)
+   - Break/continue behavior
+   - Try-catch-finally
+   - Common JavaScript pitfalls
 */
 
 // Example: Comprehensive type-safe control flow
@@ -646,4 +652,4 @@ handleResult({ status: "error", message: "Something went wrong" });
 
 console.log("\n=== TypeScript provides compile-time type safety ===");
 console.log("=== Runtime behavior follows JavaScript rules ===");
-console.log("=== Use TypeScript features for better control flow! ===");
+console.log("=== See 03-control-flow.js for runtime behavior ===");
