@@ -575,6 +575,43 @@ const userScores: UserScores = {
 
 console.log("User scores:", userScores);
 
+// ============================================
+// 19. Best Practices Summary
+// ============================================
+
+console.log("\n=== Best Practices ===\n");
+
+/*
+✅ DO:
+1. Use type annotations for number parameters and returns
+2. Use branded types for domain-specific numbers (Percentage, Money)
+3. Enable strictNullChecks and use nullable number types
+4. Use BigInt for calculations beyond MAX_SAFE_INTEGER
+5. Use type predicates for custom validation
+6. Leverage const assertions for literal numeric types
+7. Use numeric literal types for fixed values (status codes, ports)
+8. Apply mapped types for transforming numeric structures
+
+❌ DON'T:
+1. Mix number and BigInt without explicit conversion
+2. Use any to bypass type checking for numbers
+3. Ignore TypeScript errors about null/undefined numbers
+4. Assume type assertions perform runtime validation
+5. Use non-null assertion (!) without null checks
+
+⚠️ WATCH OUT FOR:
+1. Type assertions don't validate at runtime
+2. Floating point precision issues (same as JS)
+3. Branded types need factory functions
+4. Literal types may widen without as const
+5. NaN is still type number
+
+📘 See related:
+- 05-numbers-math.js (JavaScript runtime behavior)
+- 01-variables-ts-comparison.ts (Basic type annotations)
+- 02-operators-ts-comparison.ts (Numeric operations)
+*/
+
 console.log("\n=== TypeScript Numbers Complete ===");
 console.log("=== See 05-numbers-math.js for runtime behavior ===");
 

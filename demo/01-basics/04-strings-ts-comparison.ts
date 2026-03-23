@@ -123,37 +123,33 @@ const envKey: EnvVarUpper = "API_KEY";
 console.log("Environment variable:", envKey);
 
 // ============================================
-// 5. Type-Safe String Methods
+// 5. Type-Safe String Methods (TS-Specific)
 // ============================================
 
-// String methods with proper return types
+// TypeScript narrows types with string methods
 function processString(input: string): string {
+  // Type inference knows return type is string
   const trimmed: string = input.trim();
   const upper: string = trimmed.toUpperCase();
-  const replaced: string = upper.replace("HELLO", "HI");
-  return replaced;
+  return upper;
 }
 
-console.log("\n=== Type-Safe String Methods ===");
-console.log("Processed:", processString("  hello world  "));
-
-// Methods that can return null
+// Methods that can return null - type narrowing
 function findPattern(text: string, pattern: RegExp): RegExpMatchArray | null {
   return text.match(pattern);
 }
 
+// TypeScript ensures null handling
 const matchResult = findPattern("Hello 123", /\d+/);
 if (matchResult) {
-  console.log("Found:", matchResult[0]); // Type narrowing ensures result is not null
+  // TypeScript knows matchResult is not null here
+  console.log("Found:", matchResult[0]);
 }
 
-// split returns string array
-function splitText(text: string, separator: string): string[] {
-  return text.split(separator);
-}
+// split returns typed array
+const parts: string[] = "a,b,c".split(",");
 
-const parts: string[] = splitText("a,b,c", ",");
-console.log("Parts:", parts);
+// ✅ See 04-strings.js for runtime behavior of string methods
 
 // ============================================
 // 6. Nullable Strings
@@ -238,10 +234,10 @@ const config: Config = {
 console.log("Config:", config);
 
 // ============================================
-// 8. Tagged Template Type Safety
+// 8. Tagged Template Type Safety (TS Concept)
 // ============================================
 
-// Type-safe tagged template function
+// TypeScript ensures tagged template functions receive correct types
 function htmlTag(strings: TemplateStringsArray, ...values: (string | number)[]): string {
   return strings.reduce((result, str, i) => {
     const value = values[i] !== undefined ? String(values[i]) : '';
@@ -249,13 +245,7 @@ function htmlTag(strings: TemplateStringsArray, ...values: (string | number)[]):
   }, '');
 }
 
-console.log("\n=== Tagged Template Type Safety ===");
-const userAge: number = 30;
-const userName2: string = "Alice";
-const htmlOutput = htmlTag`<div>Name: ${userName2}, Age: ${userAge}</div>`;
-console.log("HTML:", htmlOutput);
-
-// SQL query builder with types
+// SQL query builder with typed return
 interface SqlQuery {
   text: string;
   values: (string | number)[];
@@ -268,9 +258,10 @@ function sqlQuery(strings: TemplateStringsArray, ...values: (string | number)[])
   return { text, values };
 }
 
-const userId2: number = 42;
-const sqlResult = sqlQuery`SELECT * FROM users WHERE id = ${userId2}`;
+const sqlResult = sqlQuery`SELECT * FROM users WHERE id = ${42}`;
 console.log("SQL Query:", sqlResult);
+
+// ✅ See 04-strings.js for runtime behavior of tagged templates
 
 // ============================================
 // 9. String Enums
@@ -543,17 +534,17 @@ const envConfig: EnvConfig = {
 console.log("Env config:", envConfig);
 
 // ============================================
-// 17. Const Assertions and Literal Types
+// 17. Const Assertions and Literal Types (TS)
 // ============================================
 
-// Without const assertion
+// Without const assertion - type is widened
 const config1 = {
   apiUrl: "https://api.example.com",
   timeout: 5000
 };
 // Type: { apiUrl: string; timeout: number; }
 
-// With const assertion
+// With const assertion - type is literal
 const config2 = {
   apiUrl: "https://api.example.com",
   timeout: 5000
@@ -565,14 +556,12 @@ console.log("Config1 apiUrl type: string");
 console.log("Config2 apiUrl type: literal 'https://api.example.com'");
 
 // Tuple with const assertion
-const tuple1 = ["hello", 42];
-// Type: (string | number)[]
-
 const tuple2 = ["hello", 42] as const;
 // Type: readonly ["hello", 42]
 
-console.log("Tuple1:", tuple1);
 console.log("Tuple2:", tuple2);
+
+// ✅ See 04-strings.js for template literal runtime behavior
 
 // ============================================
 // 18. String Branding for Type Safety
