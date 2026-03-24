@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "JavaScript and TypeScript basics review practice project",
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0",
+    "test": "node tests/bug-condition-exploration.test.js",
+    "test:bug-exploration": "node tests/bug-condition-exploration.test.js",
     "demo": "node demo/01-basics/01-variables.js"
   },
   "keywords": [

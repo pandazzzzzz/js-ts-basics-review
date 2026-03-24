@@ -273,7 +273,7 @@ console.log("num:", num);
 console.log("num.toFixed(0):", num.toFixed(0)); // "123"
 console.log("num.toFixed(2):", num.toFixed(2)); // "123.46" (rounded)
 console.log("num.toFixed(4):", num.toFixed(4)); // "123.4568"
-console.log("(1.005).toFixed(2):", (1.005).toFixed(2)); // "1.01" (rounding quirk)
+console.log("(1.005).toFixed(2):", (1.005).toFixed(2)); // "1.00" (rounding quirk - 1.005 can't be represented exactly)
 
 // toPrecision(n) - Fixed significant figures
 // - Rounds to n significant digits
