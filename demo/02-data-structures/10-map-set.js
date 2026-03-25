@@ -471,6 +471,93 @@ console.log("  Intersection A∩B:", [...intersection]); // [4, 5]
 const difference = new Set([...setA].filter((x) => !setB.has(x)));
 console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
 
+// ES2024 Set Operations (Stage 3, supported in modern engines)
+console.log("\nES2024 Set Operations:");
+
+// First, polyfill if not available
+if (typeof Set.prototype.union !== "function") {
+  Set.prototype.union = function(other) {
+    const result = new Set(this);
+    for (const item of other) result.add(item);
+    return result;
+  };
+  Set.prototype.intersection = function(other) {
+    const result = new Set();
+    for (const item of other) if (this.has(item)) result.add(item);
+    return result;
+  };
+  Set.prototype.difference = function(other) {
+    const result = new Set(this);
+    for (const item of other) result.delete(item);
+    return result;
+  };
+  Set.prototype.symmetricDifference = function(other) {
+    const result = new Set(this);
+    for (const item of other) {
+      if (this.has(item)) result.delete(item);
+      else result.add(item);
+    }
+    return result;
+  };
+  Set.prototype.isSubsetOf = function(other) {
+    for (const item of this) if (!other.has(item)) return false;
+    return true;
+  };
+  Set.prototype.isSupersetOf = function(other) {
+    for (const item of other) if (!this.has(item)) return false;
+    return true;
+  };
+  Set.prototype.isDisjointFrom = function(other) {
+    for (const item of this) if (other.has(item)) return false;
+    return true;
+  };
+}
+
+const set1 = new Set([1, 2, 3, 4, 5]);
+const set2 = new Set([4, 5, 6, 7, 8]);
+const set3 = new Set([1, 2]);
+
+// union() - Returns new Set with elements from both
+console.log("\n  union():", [...set1.union(set2)]); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// intersection() - Returns new Set with elements present in both
+console.log("  intersection():", [...set1.intersection(set2)]); // [4, 5]
+
+// difference() - Returns new Set with elements from this but not other
+console.log("  difference():", [...set1.difference(set2)]); // [1, 2, 3]
+
+// symmetricDifference() - Returns new Set with elements from either but not both
+console.log("  symmetricDifference():", [...set1.symmetricDifference(set2)]); // [1, 2, 3, 6, 7, 8]
+
+// isSubsetOf() - Returns true if all elements are in other
+console.log("  isSubsetOf():", set3.isSubsetOf(set1)); // true
+console.log("  isSubsetOf():", set1.isSubsetOf(set2)); // false
+
+// isSupersetOf() - Returns true if this contains all elements of other
+console.log("  isSupersetOf():", set1.isSupersetOf(set3)); // true
+console.log("  isSupersetOf():", set2.isSupersetOf(set1)); // false
+
+// isDisjointFrom() - Returns true if no elements in common
+const set4 = new Set([9, 10]);
+console.log("  isDisjointFrom():", set1.isDisjointFrom(set4)); // true
+console.log("  isDisjointFrom():", set1.isDisjointFrom(set2)); // false
+
+// Map.groupBy() - ES2024 array grouping (similar to Object.groupBy)
+console.log("\nMap.groupBy() - ES2024:");
+const scores = [90, 85, 95, 70, 80, 65];
+try {
+  if (typeof Map.groupBy === "function") {
+    const scoresGrouped = Map.groupBy(scores, score =>
+      score >= 85 ? 'A' : score >= 70 ? 'B' : 'C'
+    );
+    console.log("  Scores grouped by grade:", scoresGrouped);
+  } else {
+    console.log("  Map.groupBy() not available (ES2024)");
+  }
+} catch (e) {
+  console.log("  Map.groupBy() not available in current environment");
+}
+
 // ============================================
 // Section 10: Common Pitfalls
 // ============================================
@@ -511,14 +598,21 @@ console.log("\n  Pitfall 4 - JSON serialization:");
 console.log("    JSON.stringify(Map):", JSON.stringify(mapToJson)); // {}
 console.log("    Correct: JSON.stringify(Object.fromEntries(map)):", JSON.stringify(Object.fromEntries(mapToJson)));
 
-// Pitfall 5: Map key equality (same as Object.is)
+// Pitfall 5: Map key equality (SameValueZero algorithm)
+// - Map uses SameValueZero for key comparison
+// - Same as === except: NaN === NaN (true in Map) and 0 === -0 (true in Map)
+// - Unlike Object.is: 0 and -0 are considered the same in Map
 const eqMap = new Map();
 eqMap.set(0, "zero");
-eqMap.set(-0, "minus zero");
+eqMap.set(-0, "minus zero"); // Overwrites 0!
 eqMap.set(NaN, "not a number");
-console.log("\n  Pitfall 5 - Key equality:");
+console.log("\n  Pitfall 5 - Key equality (SameValueZero):");
 console.log("    0 and -0 same in Map:", eqMap.get(0)); // "minus zero"
 console.log("    NaN accessible in Map:", eqMap.get(NaN)); // "not a number"
+console.log("    SameValueZero rules:");
+console.log("      - Object.is(NaN, NaN) → true (Map uses)");
+console.log("      - Object.is(0, -0) → false (Map treats as same!)");
+console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
 
 // ============================================
 // TypeScript Comparison Notes

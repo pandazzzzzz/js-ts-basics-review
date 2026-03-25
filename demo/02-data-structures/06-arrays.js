@@ -33,6 +33,20 @@ console.log("Constructor:", arrayConstructor);
 console.log("Array.of(5):", arrayOf);
 console.log("Array.from('hello'):", arrayFrom);
 
+// Array.from() with mapping function
+const arrayFromMap = Array.from({ length: 5 }, (_, i) => i * 2);
+console.log("Array.from with map:", arrayFromMap); // [0, 2, 4, 6, 8]
+
+// Array.isArray() - Check if value is an array (ES5)
+// - Returns true only for arrays
+// - typeof check is not enough (typeof [] === "object")
+console.log("\nArray.isArray() - Type checking:");
+console.log("Array.isArray([1, 2, 3]):", Array.isArray([1, 2, 3])); // true
+console.log("Array.isArray({ length: 3 }):", Array.isArray({ length: 3 })); // false
+console.log("Array.isArray('hello'):", Array.isArray("hello")); // false
+console.log("Array.isArray(null):", Array.isArray(null)); // false
+console.log("typeof []:", typeof []); // "object" (not reliable!)
+
 // ============================================
 // Array Iteration Methods (Non-Mutating)
 // ============================================
@@ -158,6 +172,27 @@ const hasThree = numbers.includes(3);
 console.log("\nincludes - Contains:");
 console.log("Has 3:", hasThree);
 console.log("Has 10:", numbers.includes(10));
+
+// includes with fromIndex parameter
+const withDuplicates = [1, 2, 3, 1, 2, 3];
+console.log("\nincludes with fromIndex:");
+console.log("includes(1):", withDuplicates.includes(1)); // true
+console.log("includes(1, 2):", withDuplicates.includes(1, 2)); // true (search from index 2)
+console.log("includes(1, 3):", withDuplicates.includes(1, 3)); // false
+
+// at() - Access elements with negative index (ES2022)
+// - Returns element at given index
+// - Supports negative indices (access from end)
+// - Returns undefined for out of bounds
+const atArray = [10, 20, 30, 40, 50];
+console.log("\nat() - Safe indexing:");
+console.log("at(0):", atArray.at(0)); // 10
+console.log("at(2):", atArray.at(2)); // 30
+console.log("at(-1):", atArray.at(-1)); // 50 (last element)
+console.log("at(-2):", atArray.at(-2)); // 40 (second to last)
+console.log("at(99):", atArray.at(99)); // undefined
+console.log("at(-99):", atArray.at(-99)); // undefined
+console.log("Comparison: arr[arr.length-1] vs arr.at(-1):", [atArray[atArray.length - 1], atArray.at(-1)]);
 
 // indexOf - Find first index of value (ES5)
 // - Returns index or -1
@@ -362,6 +397,61 @@ const toSplicedExample = [1, 2, 3, 4, 5];
 console.log("\ntoSpliced - Immutable splice:");
 console.log("Original:", toSplicedExample);
 console.log("Spliced:", toSplicedExample.toSpliced(2, 2, 99, 100));
+
+// ============================================
+// Typed Arrays - Numeric Arrays with Fixed Type
+// ============================================
+
+// Typed Arrays - For high-performance numeric operations (ES6/ES2015)
+// - Fixed element type (e.g., Int8, Float64)
+// - Used for WebGL, binary data processing, audio/video
+// - More memory efficient and faster than regular arrays
+console.log("\nTyped Arrays:");
+
+// Int8Array - 8-bit signed integers (-128 to 127)
+const int8Array = new Int8Array([10, 20, 30]);
+console.log("Int8Array:", int8Array);
+console.log("Bytes per element:", int8Array.BYTES_PER_ELEMENT);
+
+// Uint8Array - 8-bit unsigned integers (0 to 255)
+const uint8Array = new Uint8Array(5); // Creates array of 5 zeros
+console.log("\nUint8Array (empty, size 5):", uint8Array);
+uint8Array[0] = 255; // Max value
+uint8Array[1] = 300; // Wraps to 44 (overflow)
+console.log("After setting 255 and 300:", uint8Array);
+
+// Float64Array - 64-bit floating point numbers (standard JS number)
+const float64Array = new Float64Array([1.1, 2.2, 3.3]);
+console.log("\nFloat64Array:", float64Array);
+
+// Creating from ArrayBuffer (shared memory)
+const buffer = new ArrayBuffer(16); // 16 bytes
+const view1 = new Int32Array(buffer, 0, 2); // First 8 bytes as 2 ints
+const view2 = new Int8Array(buffer, 8, 8); // Next 8 bytes as 8 bytes
+view1[0] = 1000;
+view1[1] = 2000;
+console.log("\nShared ArrayBuffer:");
+console.log("Int32 view:", view1);
+console.log("Int8 view:", view2);
+
+// Common TypedArray types
+console.log("\nCommon TypedArray Types:");
+console.log("  Int8Array:", Int8Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Uint8Array:", Uint8Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Int16Array:", Int16Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Uint16Array:", Uint16Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Int32Array:", Int32Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Uint32Array:", Uint32Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Float32Array:", Float32Array.BYTES_PER_ELEMENT, "bytes");
+console.log("  Float64Array:", Float64Array.BYTES_PER_ELEMENT, "bytes");
+
+// TypedArray methods (similar to regular arrays)
+console.log("\nTypedArray methods:");
+const typedArr = new Int16Array([5, 3, 8, 1, 9, 4]);
+console.log("  Original:", typedArr);
+console.log("  sort:", typedArr.sort()); // Sorts in place
+console.log("  map:", typedArr.map(x => x * 2)); // Returns regular array
+console.log("  filter:", typedArr.filter(x => x > 5)); // Returns regular array
 
 // ============================================
 // Array Destructuring (ES6/ES2015)

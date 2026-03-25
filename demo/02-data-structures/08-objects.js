@@ -217,6 +217,69 @@ console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toStrin
 // - Works with objects without prototype
 console.log("Object.hasOwn(person, 'name'):", Object.hasOwn(person, "name"));
 
+// Object.is() - Strict equality with special cases (ES6/ES2015)
+// - Similar to === but handles NaN and +/-0 differently
+// - NaN === NaN is false, Object.is(NaN, NaN) is true
+// - 0 === -0 is true, Object.is(0, -0) is false
+console.log("\nObject.is() - Value comparison:");
+console.log("Object.is(NaN, NaN):", Object.is(NaN, NaN)); // true
+console.log("NaN === NaN:", NaN === NaN); // false
+console.log("Object.is(0, -0):", Object.is(0, -0)); // false
+console.log("0 === -0:", 0 === -0); // true
+console.log("Object.is({}, {}):", Object.is({}, {})); // false (different references)
+console.log("Object.is('foo', 'foo'):", Object.is("foo", "foo")); // true
+
+// ============================================
+// Object Methods - Property Definition
+// ============================================
+
+// Object.defineProperty() - Define single property with descriptor (ES5)
+// - Allows fine-grained control over property behavior
+// - Property descriptors: value, writable, enumerable, configurable
+// - Getters/setters: get, set
+console.log("\nObject.defineProperty():");
+const strictObj = {};
+Object.defineProperty(strictObj, "readonly", {
+  value: "cannot change",
+  writable: false,      // Cannot assign new value
+  enumerable: true,     // Visible in Object.keys()
+  configurable: false    // Cannot delete or redefine
+});
+console.log("Created with defineProperty:", strictObj);
+strictObj.readonly = "trying to change"; // Silently fails in non-strict mode
+console.log("After attempt to change:", strictObj.readonly);
+
+// Object.defineProperties() - Define multiple properties (ES5)
+const multiProps = {};
+Object.defineProperties(multiProps, {
+  _id: {
+    value: 1,
+    writable: true,
+    enumerable: false // Hidden (starts with _ convention)
+  },
+  id: {
+    get() { return this._id; },
+    set(value) { this._id = value; },
+    enumerable: true
+  },
+  name: {
+    value: "Default",
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
+});
+console.log("\nObject.defineProperties():", multiProps);
+console.log("Own enumerable props:", Object.keys(multiProps)); // ['id', 'name']
+
+// Property descriptor reading
+const descriptor = Object.getOwnPropertyDescriptor(strictObj, "readonly");
+console.log("\nProperty descriptor:", descriptor);
+
+// Object.getOwnPropertyDescriptors() - Get all property descriptors (ES2017)
+const allDescriptors = Object.getOwnPropertyDescriptors(multiProps);
+console.log("\nAll descriptors:", Object.keys(allDescriptors));
+
 // ============================================
 // Object Methods - Copying and Merging
 // ============================================
@@ -502,6 +565,38 @@ const CONFIG = Object.freeze({
 // Best Practice 6: Avoid modifying prototypes
 // - Use composition over inheritance
 // - Use classes or factory functions
+
+// ============================================
+// Object Methods - Grouping (ES2024)
+// ============================================
+
+// Object.groupBy() - Group array elements into object (ES2024)
+// - Groups array items by key returned from callback
+// - Returns object with grouped arrays
+// - Similar to SQL GROUP BY or Map.groupBy()
+console.log("\nObject.groupBy() - Array grouping:");
+
+// Group numbers by parity
+const numbersToGroup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const groupedByParity = Object.groupBy(numbersToGroup, num => num % 2 === 0 ? 'even' : 'odd');
+console.log("Grouped by parity:", groupedByParity);
+
+// Group people by age category
+const peopleToGroup = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 35 },
+  { name: "Charlie", age: 28 },
+  { name: "Diana", age: 42 }
+];
+const groupedByAge = Object.groupBy(peopleToGroup, person =>
+  person.age < 30 ? 'young' : person.age < 40 ? 'middle' : 'senior'
+);
+console.log("Grouped by age category:", groupedByAge);
+
+// Group strings by length
+const words = ["hello", "world", "hi", "there", "a", "an"];
+const groupedByLength = Object.groupBy(words, word => `length-${word.length}`);
+console.log("Grouped by length:", groupedByLength);
 
 // ============================================
 // TypeScript Comparison Notes
