@@ -547,6 +547,91 @@ console.log("Fibonacci:", fib.next().value); // 2
 console.log("Fibonacci:", fib.next().value); // 3
 console.log("Fibonacci:", fib.next().value); // 5
 
+// yield* - Delegating to another generator (ES6)
+// - Delegates iteration to another generator or iterable
+// - Can be used to compose generators
+function* innerGenerator() {
+  yield 1;
+  yield 2;
+}
+
+function* outerGenerator() {
+  yield 0;
+  yield* innerGenerator(); // Delegate to inner generator
+  yield 3;
+}
+
+console.log("\nyield* - Generator Delegation:");
+console.log("Result:", [...outerGenerator()]); // [0, 1, 2, 3]
+
+// yield* with string (strings are iterable)
+function* stringGenerator() {
+  yield* "hello";
+}
+console.log("yield* string:", [...stringGenerator()]); // ['h', 'e', 'l', 'l', 'o']
+
+// yield* for tree traversal
+function* treeWalk(node) {
+  if (Array.isArray(node)) {
+    for (const item of node) {
+      yield* treeWalk(item);
+    }
+  } else {
+    yield node;
+  }
+}
+const nestedTree = [1, [2, [3, 4], 5], 6];
+console.log("yield* tree walk:", [...treeWalk(nestedTree)]); // [1, 2, 3, 4, 5, 6]
+
+// Async Generator Functions (ES2018)
+// - Combines async/await with generators
+// - Uses async function* syntax
+// - Returns AsyncIterator
+// - Can use for await...of to consume
+console.log("\nAsync Generator Functions (ES2018):");
+
+async function* asyncNumberGenerator() {
+  for (let i = 1; i <= 3; i++) {
+    await new Promise(resolve => setTimeout(resolve, 100)); // Simulate async
+    yield i;
+  }
+}
+
+// Consuming async generator
+(async () => {
+  console.log("Async generator results:");
+  for await (const num of asyncNumberGenerator()) {
+    console.log(`  Received: ${num}`);
+  }
+})();
+
+// Async generator with real-world example (simulated API calls)
+async function* fetchInBatches(ids) {
+  for (const id of ids) {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 50));
+    yield { id, data: `Data for ${id}` };
+  }
+}
+
+// Consuming async generator with for await...of
+(async () => {
+  console.log("\nAsync generator - simulated API:");
+  for await (const item of fetchInBatches([1, 2, 3])) {
+    console.log(`  ${item.id}: ${item.data}`);
+  }
+})();
+
+// Async iterator result can also be obtained directly
+(async () => {
+  const asyncGen = asyncNumberGenerator();
+  console.log("\nDirect async iteration:");
+  console.log(await asyncGen.next()); // { value: 1, done: false }
+  console.log(await asyncGen.next()); // { value: 2, done: false }
+  console.log(await asyncGen.next()); // { value: 3, done: false }
+  console.log(await asyncGen.next()); // { value: undefined, done: true }
+})();
+
 
 // ============================================================================
 // 10. METHOD DEFINITIONS

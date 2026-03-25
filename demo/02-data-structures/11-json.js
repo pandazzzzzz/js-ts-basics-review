@@ -523,6 +523,76 @@ console.log(`    parse: ${parseTime.toFixed(2)}ms`);
 console.log(`    JSON size: ${(largeJson.length / 1024).toFixed(2)}KB`);
 
 // ============================================
+// Section 12: ES2019 JSON Improvements
+// ============================================
+
+console.log("\nES2019 JSON Improvements:");
+
+// 1. Well-formed JSON.stringify (ES2019)
+// - Ensures output is valid UTF-8
+// - Escapes lone surrogates (U+D800 to U+DFFF)
+// - Previously, lone surrogates could break JSON.parse
+const withLoneSurrogate = {
+  loneSurrogate: "\uD800" // Lone high surrogate
+};
+
+console.log("  Well-formed JSON.stringify (ES2019):");
+const jsonStringWithSurrogate = JSON.stringify(withLoneSurrogate);
+console.log("    Lone surrogate escaped:", jsonStringWithSurrogate);
+// Output: {"loneSurrogate":"\\ud800"} (escaped properly)
+
+// Before ES2019, this could cause issues
+// Now it's always safe to parse back
+const parsedBack = JSON.parse(jsonStringWithSurrogate);
+console.log("    Parsed back successfully:", parsedBack);
+
+// 2. JSON Superset (ES2019)
+// - JSON strings can now contain unescaped U+2028 (LINE SEPARATOR)
+// - JSON strings can now contain unescaped U+2029 (PARAGRAPH SEPARATOR)
+// - These were previously syntax errors in JS but valid in JSON
+console.log("\n  JSON Superset (ES2019):");
+
+// Before ES2019, these characters required escaping
+// Now they're valid in JSON strings
+const withLineSeparators = {
+  message: "Hello\u2028World", // LINE SEPARATOR
+  text: "Paragraph\u2029End"   // PARAGRAPH SEPARATOR
+};
+
+const jsonWithSeparators = JSON.stringify(withLineSeparators);
+console.log("    JSON with line/paragraph separators:", jsonWithSeparators);
+
+// This is now valid JavaScript
+const parsedWithSeparators = JSON.parse(jsonWithSeparators);
+console.log("    Parsed successfully:", parsedWithSeparators);
+
+// 3. JSON.stringify() with Symbol keys (ES2019 behavior)
+// - Symbol keys are silently ignored in JSON.stringify
+const objWithSymbols = {
+  [Symbol("id")]: 123,
+  name: "Test"
+};
+console.log("\n  Symbol keys in JSON.stringify:");
+console.log("    Object:", objWithSymbols);
+console.log("    JSON:", JSON.stringify(objWithSymbols)); // Symbol keys ignored
+
+// 4. JSON source text access (ES2019)
+// - JSON.parse() now exposes raw source text in reviver
+console.log("\n  JSON.parse reviver - source access:");
+function reviverWithSource(key, value) {
+  if (key === "created") {
+    console.log(`    Reviver called for '${key}'`);
+    // Value is already parsed, but we know the original text
+    return new Date(value);
+  }
+  return value;
+}
+
+const jsonWithDate = '{"created":"2024-06-15T10:00:00Z"}';
+const parsedDate = JSON.parse(jsonWithDate, reviverWithSource);
+console.log("    Result:", parsedDate.created instanceof Date);
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*
