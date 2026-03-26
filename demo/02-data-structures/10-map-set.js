@@ -1,4 +1,5 @@
 // Map and Set - Complete Demo
+// 📘 For TypeScript comparison, see: 10-map-set-ts-comparison.ts
 // 📘 javascript.info: "Map and Set", "WeakMap and WeakSet"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set

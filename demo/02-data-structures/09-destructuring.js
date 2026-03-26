@@ -1,4 +1,5 @@
 // Destructuring Assignment - Complete Demo
+// 📘 For TypeScript comparison, see: 09-destructuring-ts-comparison.ts
 // 📘 javascript.info: "Destructuring assignment"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 // 📌 ES6 (ES2015)

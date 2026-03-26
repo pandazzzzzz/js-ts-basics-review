@@ -1,4 +1,5 @@
 // JSON - Complete Demo
+// 📘 For TypeScript comparison, see: 11-json-ts-comparison.ts
 // 📘 javascript.info: "JSON methods, toJSON"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
 // 📘 RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format
