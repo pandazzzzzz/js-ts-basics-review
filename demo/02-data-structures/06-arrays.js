@@ -1,5 +1,5 @@
-// Arrays Demo
-// 📘 For TypeScript comparison, see TypeScript notes at the end
+// Arrays - Complete Demo
+// 📘 For TypeScript comparison, see: 06-arrays-ts-comparison.ts
 
 // ============================================
 // Array Creation and Basics

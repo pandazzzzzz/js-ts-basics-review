@@ -1,5 +1,5 @@
-// Objects Demo
-// 📘 For TypeScript comparison, see TypeScript notes at the end
+// Objects - Complete Demo
+// 📘 For TypeScript comparison, see: 08-objects-ts-comparison.ts
 
 // ============================================
 // Object Creation
