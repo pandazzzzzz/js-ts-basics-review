@@ -798,6 +798,312 @@ console.log("Counter:", Counter.getCount()); // 2
 
 
 // ============================================================================
+// 12. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
+// ============================================================================
+/**
+ * IIFE - Functions that run immediately after definition (ES5)
+ *
+ * Characteristics:
+ * - Executes immediately upon definition
+ * - Creates isolated scope
+ * - Prevents global namespace pollution
+ * - Returns values can be assigned to variables
+ *
+ * Use Cases:
+ * - Module pattern (pre-ES6)
+ * - Initialization code
+ * - Avoiding global pollution
+ * - Creating private scope
+ *
+ * Common Pitfalls:
+ * - Unnecessary in modern code (use ES6 modules)
+ * - Can make debugging harder
+ * - Confusing to beginners
+ */
+
+console.log("\n=== 12. IIFE Demo ===");
+
+// 12.1 Basic IIFE syntax
+(function() {
+  var privateVar = "I'm private to this IIFE";
+  console.log("IIFE executed immediately");
+  console.log("privateVar inside IIFE:", privateVar);
+})();
+
+// 12.2 IIFE with arrow function (ES6+)
+(() => {
+  const message = "Arrow function IIFE";
+  console.log(message);
+})();
+
+// 12.3 IIFE returning value
+const result = (function() {
+  var privateData = "computed value";
+  return privateData.toUpperCase();
+})();
+
+console.log("IIFE returned value:", result);
+
+// 12.4 IIFE with parameters
+(function(a, b) {
+  console.log("IIFE with parameters:", a + b);
+})(10, 20);
+
+// 12.5 IIFE for initialization
+const APP_CONFIG = (function() {
+  // Private initialization logic
+  var defaultTimeout = 5000;
+  var apiBase = "https://api.example.com";
+
+  return {
+    timeout: defaultTimeout,
+    apiUrl: apiBase,
+    isProduction: false
+  };
+})();
+
+console.log("\nIIFE module pattern:");
+console.log("APP_CONFIG:", APP_CONFIG);
+
+// 12.6 IIFE revealing module pattern
+const UserModule = (function() {
+  var users = [];
+
+  function add(user) {
+    users.push(user);
+    console.log("User added:", user.name);
+  }
+
+  function getAll() {
+    return users.slice(); // Return copy
+  }
+
+  function getCount() {
+    return users.length;
+  }
+
+  // Reveal public API
+  return {
+    addUser: add,
+    getUsers: getAll,
+    userCount: getCount
+  };
+})();
+
+console.log("\nRevealing module pattern:");
+UserModule.addUser({ name: "Alice", id: 1 });
+UserModule.addUser({ name: "Bob", id: 2 });
+console.log("Total users:", UserModule.userCount());
+
+// 12.7 IIFE in loops (solving var closure problem)
+console.log("\nIIFE solving closure in loop:");
+for (var i = 0; i < 3; i++) {
+  (function(index) {
+    setTimeout(function() {
+      console.log("IIFE preserved i:", index);
+    }, 50);
+  })(i);
+}
+
+// Note: Modern alternative is to use let
+for (let j = 0; j < 3; j++) {
+  setTimeout(function() {
+    console.log("let preserved j:", j);
+  }, 50);
+}
+
+
+// ============================================================================
+// 13. eval() - DYNAMIC CODE EXECUTION
+// ============================================================================
+/**
+ * eval() - Execute JavaScript code from a string (ES1)
+ *
+ * Characteristics:
+ * - Executes arbitrary code string
+ * - Has access to local scope (in non-strict mode)
+ * - Security risk
+ * - Performance impact (prevents optimization)
+ *
+ * Use Cases:
+ * - Avoid in production code
+ * - Educational purposes only
+ * - Code playgrounds/editors
+ *
+ * Common Pitfalls:
+ * - MAJOR SECURITY RISK
+ * - Prevents JIT optimization
+ * - Scope pollution in non-strict mode
+ * - Code injection vulnerabilities
+ */
+
+console.log("\n=== 13. eval() Demo ===");
+
+// 13.1 Basic eval usage (AVOID IN PRODUCTION!)
+console.log("\nBasic eval (avoid in production):");
+
+// Simple expression evaluation
+var code = "2 + 2";
+var evalResult = eval(code);
+console.log("eval('2 + 2'):", evalResult); // 4
+
+// 13.2 eval with variables (scope access)
+var evalX = 10;
+var evalY = 20;
+var dynamicExpression = "evalX * evalY + 5";
+console.log("eval dynamic expression:", eval(dynamicExpression)); // 205
+
+// 13.3 eval creating variables (BAD PRACTICE)
+console.log("\neval creating variables (bad practice):");
+eval("var evalCreatedVar = 'I was created by eval'");
+console.log("evalCreatedVar:", typeof evalCreatedVar !== 'undefined' ? evalCreatedVar : 'undefined');
+
+// 13.4 eval in strict mode
+console.log("\neval in strict mode:");
+(function() {
+  "use strict";
+  try {
+    eval("var strictVar = 'created in strict mode'");
+    console.log("strictVar in local scope:", typeof strictVar); // undefined (eval creates own scope)
+  } catch (error) {
+    console.log("Strict mode eval error:", error.message);
+  }
+})();
+
+// 13.5 Security risks
+console.log("\nSecurity risks (why eval is dangerous):");
+var userInput = "alert('XSS attack!')"; // Simulated malicious input
+console.log("Never eval user input like: eval('" + userInput + "')");
+
+// 13.6 Safer alternatives
+console.log("\nSafer alternatives to eval:");
+
+// Use Function constructor (still be careful!)
+var add = new Function('a', 'b', 'return a + b');
+console.log("Function constructor:", add(2, 3)); // 5
+
+// Use JSON.parse for JSON data
+var jsonString = '{"name": "Alice", "age": 30}';
+var parsedData = JSON.parse(jsonString);
+console.log("JSON.parse instead of eval:", parsedData);
+
+// Use computed property access instead of eval
+var obj = { foo: 1, bar: 2 };
+var propName = "foo";
+console.log("Computed property:", obj[propName]); // 1
+
+// 13.7 Performance impact
+console.log("\nPerformance impact:");
+console.log("eval() prevents JavaScript engine optimization");
+console.log("Code containing eval() runs slower even if eval() not executed");
+
+
+// ============================================================================
+// 14. with STATEMENT - DYNAMIC SCOPE (DEPRECATED)
+// ============================================================================
+/**
+ * with Statement - Extend scope chain temporarily (DEPRECATED ES5)
+ *
+ * Characteristics:
+ * - Adds object to front of scope chain
+ * - Allows accessing object properties without prefix
+ * - DEPRECATED and prohibited in strict mode
+ * - Can cause ambiguity and bugs
+ *
+ * Use Cases:
+ * - AVOID - deprecated feature
+ * - Historical understanding only
+ * - Not available in strict mode
+ *
+ * Common Pitfalls:
+ * - Ambiguous variable references
+ * - Performance impact
+ * - Prohibited in strict mode
+ * - Makes code harder to understand
+ */
+
+console.log("\n=== 14. with Statement Demo (Deprecated) ===");
+
+// 14.1 with statement basics (AVOID IN MODERN CODE!)
+console.log("\nwith statement (deprecated, avoid in modern code):");
+
+var user = {
+  name: "Alice",
+  age: 30,
+  city: "New York"
+};
+
+// Using with (not allowed in strict mode)
+(function() {
+  // Temporarily add user properties to scope
+  with (user) {
+    console.log("Name:", name);   // Alice (from user.name)
+    console.log("Age:", age);     // 30 (from user.age)
+    console.log("City:", city);   // New York (from user.city)
+  }
+})();
+
+// 14.2 Problems with with statement
+console.log("\nProblems with 'with':");
+
+var obj1 = { a: 1, b: 2 };
+var obj2 = { a: 10 };
+
+(function() {
+  var a = 100; // Local variable
+
+  with (obj1) {
+    console.log("Inside with obj1:");
+    console.log("  a:", a); // 1 (from obj1.a, shadows local variable!)
+    console.log("  b:", b); // 2 (from obj1.b)
+
+    // Assignment creates property on obj1, not local variable
+    b = 20;
+    console.log("  obj1.b after assignment:", obj1.b); // 20
+  }
+
+  console.log("Local 'a' still exists:", a); // 100
+  console.log("obj1.b was modified:", obj1.b); // 20
+})();
+
+// 14.3 Why with is deprecated
+console.log("\nWhy 'with' is deprecated:");
+console.log("1. Ambiguous: Hard to tell which variable is referenced");
+console.log("2. Performance: Prevents scope optimization");
+console.log("3. Deprecated: Not allowed in strict mode");
+console.log("4. Bugs: Easy to accidentally modify wrong object");
+
+// 14.4 Modern alternatives
+console.log("\nModern alternatives to 'with':");
+
+// Destructuring (ES6)
+const { name: userName, age: userAge, city: userCity } = user;
+console.log("Destructuring:", userName, userAge, userCity);
+
+// Object shorthand methods
+function displayUser(u) {
+  const { name: n, age: a } = u;
+  console.log(`User: ${n}, Age: ${a}`);
+}
+displayUser(user);
+
+// 14.5 with in strict mode
+console.log("\nwith in strict mode:");
+try {
+  eval(`
+    "use strict";
+    var obj = { x: 1 };
+    with (obj) {
+      console.log(x);
+    }
+  `);
+} catch (error) {
+  console.log("Strict mode error:", error.message);
+  // SyntaxError: Strict mode code may not include a with statement
+}
+
+
+// ============================================================================
 // COMMON PITFALLS & BEST PRACTICES
 // ============================================================================
 

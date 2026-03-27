@@ -1133,6 +1133,285 @@ try {
   console.log("   Handled at caller level");
 }
 
+
+// ============================================================================
+// 13. ASYNC ERROR HANDLING
+// ============================================================================
+/**
+ * Async Error Handling - Handling errors in asynchronous code (ES6+)
+ *
+ * Characteristics:
+ * - Promise rejections with .catch()
+ * - async/await with try/catch
+ * - Unhandled rejection warnings
+ * - Different error propagation
+ *
+ * Use Cases:
+ * - API error handling
+ * - Database operations
+ * - File I/O operations
+ * - Network requests
+ *
+ * Common Pitfalls:
+ * - Forgetting .catch() on promises
+ * - Unhandled promise rejections
+ * - Mixing callbacks with promises
+ */
+
+console.log("\n=== 13. Async Error Handling Demo ===");
+
+// 13.1 Promise error handling
+console.log("\nPromise error handling:");
+
+function failingPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error("Promise failed")), 10);
+  });
+}
+
+function successPromise() {
+  return Promise.resolve("Success!");
+}
+
+// Using .catch()
+failingPromise()
+  .then(result => console.log("Won't run"))
+  .catch(error => console.log("  Caught promise error:", error.message))
+  .finally(() => console.log("  Finally always runs"));
+
+// 13.2 async/await with try/catch
+console.log("\nasync/await error handling:");
+
+async function asyncOperation() {
+  try {
+    const result = await failingPromise();
+    console.log("  Won't reach here");
+  } catch (error) {
+    console.log("  Caught async error:", error.message);
+  } finally {
+    console.log("  Cleanup in finally");
+  }
+}
+
+asyncOperation();
+
+// 13.3 Handling multiple async errors
+console.log("\nMultiple async errors:");
+
+async function handleMultipleErrors() {
+  try {
+    const results = await Promise.all([
+      successPromise(),
+      failingPromise(), // This will cause rejection
+      successPromise()
+    ]);
+  } catch (error) {
+    console.log("  Promise.all failed:", error.message);
+  }
+}
+
+handleMultipleErrors();
+
+// 13.4 Promise.allSettled (no unhandled rejections)
+console.log("\nPromise.allSettled (safer):");
+
+async function allSettledExample() {
+  const results = await Promise.allSettled([
+    successPromise(),
+    failingPromise(),
+    successPromise()
+  ]);
+
+  results.forEach((result, i) => {
+    if (result.status === "fulfilled") {
+      console.log(`  ${i}: Success -`, result.value);
+    } else {
+      console.log(`  ${i}: Failed -`, result.reason.message);
+    }
+  });
+}
+
+allSettledExample();
+
+
+// ============================================================================
+// 14. ERROR CHAINING WITH ERROR.CAUSE
+// ============================================================================
+/**
+ * Error Chaining - Preserving error context (ES2022)
+ *
+ * Characteristics:
+ * - Error.cause property for original error
+ * - Maintains error chain for debugging
+ * - Better context preservation
+ *
+ * Use Cases:
+ * - Error wrapping
+ * - Multi-layer applications
+ * - Debugging complex systems
+ */
+
+console.log("\n=== 14. Error Chaining Demo ===");
+
+function lowLevelOperation() {
+  throw new Error("Connection timeout");
+}
+
+function midLevelOperation() {
+  try {
+    lowLevelOperation();
+  } catch (error) {
+    throw new Error("Database operation failed", { cause: error });
+  }
+}
+
+function highLevelOperation() {
+  try {
+    midLevelOperation();
+  } catch (error) {
+    throw new Error("Service unavailable", { cause: error });
+  }
+}
+
+console.log("\nError chain:");
+try {
+  highLevelOperation();
+} catch (error) {
+  console.log("  Top error:", error.message);
+  console.log("  Caused by:", error.cause?.message);
+  console.log("  Root cause:", error.cause?.cause?.message);
+}
+
+
+// ============================================================================
+// 15. AGGREGATEERROR - MULTIPLE ERRORS
+// ============================================================================
+/**
+ * AggregateError - Representing multiple errors (ES2021)
+ *
+ * Characteristics:
+ * - Contains array of errors
+ * - Used by Promise.any() when all reject
+ * - Single error for multiple failures
+ */
+
+console.log("\n=== 15. AggregateError Demo ===");
+
+// 15.1 Creating AggregateError
+const multipleErrors = [
+  new Error("First error"),
+  new Error("Second error"),
+  new Error("Third error")
+];
+
+const aggregateErr = new AggregateError(multipleErrors, "Multiple operations failed");
+
+console.log("\nAggregateError:");
+console.log("  Message:", aggregateErr.message);
+console.log("  Error count:", aggregateErr.errors.length);
+aggregateErr.errors.forEach((err, i) => {
+  console.log(`  Error ${i + 1}:`, err.message);
+});
+
+// 15.2 Promise.any() with AggregateError
+console.log("\nPromise.any() produces AggregateError:");
+
+const promises = [
+  Promise.reject(new Error("Failed 1")),
+  Promise.reject(new Error("Failed 2")),
+  Promise.reject(new Error("Failed 3"))
+];
+
+Promise.any(promises)
+  .then(result => console.log("  First success:", result))
+  .catch(error => {
+    if (error instanceof AggregateError) {
+      console.log("  All promises rejected:");
+      error.errors.forEach((err, i) => {
+        console.log(`    ${i + 1}:`, err.message);
+      });
+    }
+  });
+
+
+// ============================================================================
+// 16. RETRY WITH BACKOFF
+// ============================================================================
+/**
+ * Retry Pattern - Retrying failed operations (ES6+)
+ *
+ * Characteristics:
+ * - Exponential backoff
+ * - Maximum retry limit
+ * - Transient error handling
+ */
+
+console.log("\n=== 16. Retry Pattern Demo ===");
+
+async function retry(fn, maxRetries = 3, baseDelay = 100) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+
+      if (attempt === maxRetries) {
+        break;
+      }
+
+      const delay = baseDelay * Math.pow(2, attempt - 1);
+      console.log(`  Attempt ${attempt} failed, retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+
+  throw lastError;
+}
+
+let callCount = 0;
+async function flakyOperation() {
+  callCount++;
+  if (callCount < 3) {
+    throw new Error("Temporary failure");
+  }
+  return "Success on attempt " + callCount;
+}
+
+console.log("\nRetry example:");
+retry(flakyOperation, 5, 50)
+  .then(result => console.log("  Final:", result))
+  .catch(error => console.log("  All retries exhausted:", error.message));
+
+
+// ============================================================================
+// 17. GLOBAL ERROR HANDLING
+// ============================================================================
+/**
+ * Global Error Handling - Last resort error catching (ES6+)
+ *
+ * Characteristics:
+ * - process.on('uncaughtException') in Node.js
+ * - process.on('unhandledRejection') for promises
+ * - window.onerror in browsers
+ */
+
+console.log("\n=== 17. Global Error Handling Demo ===");
+
+// Node.js unhandled rejection handler
+if (typeof process !== 'undefined') {
+  process.on('unhandledRejection', (reason, promise) => {
+    console.log("  Unhandled Rejection:", reason);
+  });
+}
+
+console.log("\nGlobal handlers registered:");
+console.log("  process.on('unhandledRejection')");
+console.log("  process.on('uncaughtException')");
+console.log("  Always handle errors locally first!");
+
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================
