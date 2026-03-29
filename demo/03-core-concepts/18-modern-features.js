@@ -608,3 +608,14 @@ console.log("Private fields provide true encapsulation");
 
 📘 See 06-modern-features-ts-comparison.ts for detailed examples!
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Modern ES6+ Features:
+- 24-function-patterns-advanced.js (destructuring, spread in advanced usage)
+- 27-optimization-performance.js (performance of modern features)
+`);

@@ -1211,3 +1211,15 @@ console.log("\n=== Async Error Handling Advanced Demo Complete ===");
 - 24-function-patterns-advanced.js (retry patterns)
 - 27-optimization-performance.js (timeout optimization)
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Async Error Handling:
+- 20-error-handling.js (synchronous error handling)
+- 24-function-patterns-advanced.js (retry and debounce)
+- 27-optimization-performance.js (promise performance)
+`);

@@ -1107,3 +1107,13 @@ console.log("\n=== Proxy and Reflect Demo Complete ===");
 📘 See related: 17-property-descriptors.js for property manipulation
 📘 See related: 16-classes.js for class patterns
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Proxy & Reflect:
+- 17-property-descriptors.js (property descriptors)
+- 19-symbol-deep.js (well-known symbols)
+`);

@@ -684,3 +684,14 @@ console.log("\n=== Symbol Deep Dive Demo Complete ===");
 📘 See related: 01-variables.js (Symbol basics)
 📘 See related: 22-iterators-generators.js (Symbol.iterator)
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Symbols & Weak Collections:
+- 28-memory-management.js (WeakMap, WeakSet, WeakRef, FinalizationRegistry)
+- 23-proxy-reflect.js (well-known symbols)
+- 17-property-descriptors.js (property descriptors with symbols)
+`);

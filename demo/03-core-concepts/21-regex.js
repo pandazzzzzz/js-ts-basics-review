@@ -747,3 +747,12 @@ console.log("\n=== Regular Expressions Demo Complete ===");
 📘 See related: 01-basics.js for string methods
 📘 See related: 04-strings.js for string manipulation
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Regular Expressions:
+- 22-iterators-generators.js (generators for regex matches)
+`);

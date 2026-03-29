@@ -1293,3 +1293,18 @@ processor.processPayment(200);
 📘 See 23-classes-ts-comparison.ts for detailed TypeScript examples!
 📘 See related: 13-prototypes-inheritance.js for prototype relationship
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Classes & Inheritance:
+- 14-this-keyword.js (this in classes)
+- 15-prototypes-inheritance.js (prototype chain underlying classes)
+- 25-inheritance-patterns.js (composition and design patterns)
+
+Advanced Patterns:
+- 24-function-patterns-advanced.js (higher-order functions for classes)
+- 28-memory-management.js (object pooling)
+`);

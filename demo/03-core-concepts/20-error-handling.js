@@ -1549,3 +1549,14 @@ console.log("  Always handle errors locally first!");
 
 📘 See 10-error-handling-ts-comparison.ts for detailed examples!
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Error Handling:
+- 26-async-error-handling.js (Promise and async/await error handling)
+- 24-function-patterns-advanced.js (retry patterns)
+`);

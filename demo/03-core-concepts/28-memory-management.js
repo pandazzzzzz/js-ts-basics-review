@@ -1113,3 +1113,15 @@ console.log("\n=== Memory Management Demo Complete ===");
 - 27-optimization-performance.js (performance optimization)
 - 22-iterators-generators.js (generators for streaming)
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Memory Management:
+- 19-symbol-deep.js (WeakMap, WeakSet basics)
+- 27-optimization-performance.js (memory-efficient patterns)
+- 24-function-patterns-advanced.js (memoization cache management)
+`);

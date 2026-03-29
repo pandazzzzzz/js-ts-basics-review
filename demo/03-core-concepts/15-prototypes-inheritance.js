@@ -955,3 +955,19 @@ console.log("  rect instanceof Object:", rect instanceof Object);
 
 📘 See 16-prototypes-inheritance-ts-comparison.ts for detailed examples!
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Prototypes & Inheritance:
+- 14-this-keyword.js (this binding with prototypes)
+- 16-classes.js (ES6 classes as prototype syntax)
+- 25-inheritance-patterns.js (advanced inheritance patterns)
+
+Composition & Patterns:
+- 24-function-patterns-advanced.js (functional inheritance patterns)
+- 16-classes.js (composition over inheritance)
+`);

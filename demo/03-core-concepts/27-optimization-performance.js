@@ -1149,3 +1149,15 @@ console.log("\n=== Performance Optimization Demo Complete ===");
 - 24-function-patterns-advanced.js (memoization)
 - 28-memory-management.js (memory optimization)
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Performance & Optimization:
+- 24-function-patterns-advanced.js (memoization, lazy evaluation)
+- 28-memory-management.js (garbage collection, object pooling)
+- 22-iterators-generators.js (generator-based streaming)
+`);

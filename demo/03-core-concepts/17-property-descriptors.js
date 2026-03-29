@@ -812,3 +812,13 @@ console.log("\n=== Property Descriptors Demo Complete ===");
 📘 See related: 07-objects.js for basic getter/setter examples
 📘 See related: 23-proxy-reflect.js for Proxy interception of descriptors
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Property Descriptors:
+- 23-proxy-reflect.js (Proxy and Reflect API for property access)
+- 19-symbol-deep.js (Symbols as property keys)
+`);

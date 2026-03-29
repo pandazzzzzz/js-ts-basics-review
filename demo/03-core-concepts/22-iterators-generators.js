@@ -1021,3 +1021,13 @@ console.log("\n=== Iterators and Generators Demo Complete ===");
 📘 See related: 19-symbol-deep.js (Symbol.iterator)
 📘 See related: 04-asynchronous/ for async patterns
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Iterators & Generators:
+- 27-optimization-performance.js (lazy evaluation with generators)
+- 28-memory-management.js (large data handling with generators)
+`);

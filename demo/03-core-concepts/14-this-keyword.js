@@ -935,3 +935,21 @@ console.log("\n=== this Keyword Demo Complete ===");
 📘 See related: 06-functions.js (call/apply/bind)
 📘 See related: 23-classes.js (this in classes)
 */
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+this Binding & Context:
+- 13-scope-closures.js (lexical scope and closures)
+- 16-classes.js (this in classes and constructors)
+
+Prototypes & Inheritance:
+- 15-prototypes-inheritance.js (prototype-based this)
+- 25-inheritance-patterns.js (advanced patterns involving this)
+
+Advanced Patterns:
+- 24-function-patterns-advanced.js (bind, call, apply patterns)
+- 23-proxy-reflect.js (Proxy and this interaction)
+`);

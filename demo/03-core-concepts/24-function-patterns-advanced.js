@@ -1016,3 +1016,19 @@ console.log("\n=== Function Patterns Advanced Demo Complete ===");
 - 27-optimization-performance.js (performance)
 - 28-memory-management.js (memoization caches)
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Function Patterns:
+- 13-scope-closures.js (closures and lexical scope)
+- 27-optimization-performance.js (memoization optimization)
+- 28-memory-management.js (object pooling)
+
+Design Patterns:
+- 25-inheritance-patterns.js (mixins, strategy, observer)
+- 26-async-error-handling.js (circuit breakers, retry patterns)
+`);

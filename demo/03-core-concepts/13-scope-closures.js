@@ -1239,3 +1239,26 @@ CLOSURE USE CASES:
 • Memoization: Cache expensive computations
 • Module Pattern: Organize and encapsulate code
 `);
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Scope & Closures:
+- 14-this-keyword.js (this binding in different contexts)
+- 24-function-patterns-advanced.js (advanced function patterns with closures)
+
+Inheritance & Prototypes:
+- 15-prototypes-inheritance.js (prototype chain and inheritance)
+- 16-classes.js (ES6 classes and their scope behavior)
+
+Error Handling:
+- 20-error-handling.js (synchronous error handling)
+- 26-async-error-handling.js (async error handling with promises/await)
+
+Advanced Patterns:
+- 25-inheritance-patterns.js (advanced inheritance patterns)
+- 27-optimization-performance.js (performance considerations for closures)
+`);

@@ -1338,3 +1338,15 @@ console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 - 16-classes.js (ES6 classes)
 - 24-function-patterns-advanced.js (functional patterns)
 */
+
+// ============================================================================
+// CROSS-REFERENCES
+// ============================================================================
+console.log(`
+📘 See related files for additional patterns:
+
+Inheritance Patterns:
+- 15-prototypes-inheritance.js (prototypal inheritance)
+- 16-classes.js (ES6 class syntax)
+- 24-function-patterns-advanced.js (functional composition)
+`);
