@@ -242,7 +242,53 @@ demonstrateTDZ();
 
 
 // ============================================================================
-// 9. MODULE SCOPE AND CLOSURES
+// 9. SCOPE CHAIN TYPE INFERENCE
+// ============================================================================
+
+// TypeScript: Type inference through scope chain
+interface GlobalContext {
+  globalValue: string;
+}
+
+// Global scope type
+declare const globalThis: GlobalContext & typeof globalThis;
+
+// Nested scope with type shadowing
+function demonstrateScopeChain(): void {
+  const outerValue: number = 10;
+
+  function innerFunction(): void {
+    const innerValue: number = 20;
+
+    // TypeScript resolves types through scope chain
+    const combined = outerValue + innerValue; // number + number
+    console.log("Scope chain sum:", combined);
+  }
+
+  innerFunction();
+  // console.log(innerValue); // Error: innerValue is not accessible here
+}
+
+console.log("\n=== Scope Chain Type Inference ===");
+demonstrateScopeChain();
+
+// Variable shadowing with types
+function demonstrateShadowing(): void {
+  const value: string | number = "hello";
+
+  if (true) {
+    const value: number = 42; // Shadows outer 'value', different type allowed
+    console.log("Inner shadowed value:", value); // Type is number
+  }
+
+  console.log("Outer value:", value); // Type is string | number
+}
+
+demonstrateShadowing();
+
+
+// ============================================================================
+// 10. MODULE SCOPE AND CLOSURES
 // ============================================================================
 
 // Module-level private state (simulated with closure)
@@ -269,7 +315,7 @@ console.log(modulePrivateState.get("counter")); // 0
 
 
 // ============================================================================
-// 10. COMPARISON TABLE
+// 11. COMPARISON TABLE
 // ============================================================================
 
 console.log("\n=== JavaScript vs TypeScript: Scope & Closures ===");
@@ -285,6 +331,8 @@ console.log(`
 │ Type guards                │       ✗         │       ✓         │
 │ Function type aliases      │       ✗         │       ✓         │
 │ Block-scoped types         │       ✗         │       ✓         │
+│ Scope chain type inference │       ✗         │       ✓         │
+│ Variable shadowing safety  │  Runtime only   │  Compile-time  │
 │ Runtime behavior           │    Same         │    Same         │
 │ Closure mechanics          │    Same         │    Same         │
 │ TDZ behavior               │    Same         │    Same         │
@@ -296,6 +344,8 @@ KEY TAKEAWAYS:
 3. Generic closures preserve type information
 4. const assertions create deeply immutable types
 5. satisfies operator preserves literal types
+6. Scope chain type inference through nested functions
+7. Type-safe variable shadowing with different types
 `);
 
 console.log("=== TypeScript provides type safety without changing runtime behavior ===");

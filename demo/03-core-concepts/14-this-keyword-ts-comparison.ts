@@ -95,6 +95,49 @@ loggerImplementation.log.call(loggerContext, "Application started");
 
 
 // ============================================================================
+// 3.5 THISTYPE IN COMPLEX SCENARIOS
+// ============================================================================
+
+// TypeScript: ThisType for mixin patterns
+interface EventEmitter {
+  on(event: string, handler: Function): void;
+  emit(event: string, data: any): void;
+}
+
+interface EventContext {
+  eventName: string;
+  timestamp: number;
+}
+
+type EventHandler = (this: EventContext & EventEmitter, data: any) => void;
+
+const eventMixin = {
+  handlers: new Map<string, EventHandler[]>(),
+
+  on(event: string, handler: EventHandler): void {
+    if (!this.handlers.has(event)) {
+      this.handlers.set(event, []);
+    }
+    this.handlers.get(event)!.push(handler);
+  },
+
+  emit(event: string, data: any): void {
+    const handlers = this.handlers.get(event) || [];
+    const context: EventContext = {
+      eventName: event,
+      timestamp: Date.now()
+    };
+
+    handlers.forEach(handler => {
+      handler.call({ ...context, ...this }, data);
+    });
+  }
+};
+
+console.log("\n=== ThisType in Complex Scenarios ===");
+
+
+// ============================================================================
 // 4. ARROW FUNCTION THIS TYPING
 // ============================================================================
 

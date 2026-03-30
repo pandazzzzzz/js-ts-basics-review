@@ -331,6 +331,93 @@ console.log("Users named Alice:", userRepository.findByName("Alice"));
 
 
 // ============================================================================
+// 8. OBSERVER PATTERN WITH TYPES
+// ============================================================================
+
+console.log("\n=== Observer Pattern with Types ===");
+
+// TypeScript: Typed observer pattern
+interface Observer<T> {
+  update(data: T): void;
+}
+
+interface Subject<T> {
+  subscribe(observer: Observer<T>): () => void;
+  unsubscribe(observer: Observer<T>): void;
+  notify(data: T): void;
+}
+
+class TypedSubject<T> implements Subject<T> {
+  private observers: Observer<T>[] = [];
+
+  subscribe(observer: Observer<T>): () => void {
+    this.observers.push(observer);
+    return () => this.unsubscribe(observer);
+  }
+
+  unsubscribe(observer: Observer<T>): void {
+    this.observers = this.observers.filter(obs => obs !== observer);
+  }
+
+  notify(data: T): void {
+    this.observers.forEach(observer => observer.update(data));
+  }
+}
+
+class DataObserver implements Observer<string> {
+  constructor(private name: string) {}
+
+  update(data: string): void {
+    console.log(`[${this.name}] Received: ${data}`);
+  }
+}
+
+const typedSubject = new TypedSubject<string>();
+const observer1 = new DataObserver("Observer1");
+const observer2 = new DataObserver("Observer2");
+
+const unsubscribe1 = typedSubject.subscribe(observer1);
+typedSubject.subscribe(observer2);
+
+typedSubject.notify("Hello observers!");
+unsubscribe1();
+typedSubject.notify("After unsubscribe");
+
+
+// ============================================================================
+// 9. COMPARISON TABLE
+// ============================================================================
+
+console.log("\n=== JavaScript vs TypeScript: Inheritance Patterns ===");
+console.log(`
+┌────────────────────────────┬─────────────────┬─────────────────┐
+│ Feature                    │   JavaScript    │   TypeScript    │
+├────────────────────────────┼─────────────────┼─────────────────┤
+│ Interface-based composition│       ✗         │       ✓         │
+│ Abstract classes           │  Manual pattern │  Native support │
+│ Strategy pattern types     │  Runtime only   │  Interface typed│
+│ Mixin type inference       │       ✗         │       ✓         │
+│ Discriminated unions       │       ✗         │       ✓         │
+│ Visitor pattern types      │  Runtime only   │  Generic types  │
+│ Observer pattern types     │  Runtime only   │  Generic types  │
+│ Generic constraints        │       ✗         │       ✓         │
+│ Type-safe composition      │       ✗         │       ✓         │
+│ Runtime behavior           │    Same         │    Same         │
+└────────────────────────────┴─────────────────┴─────────────────┘
+
+KEY TAKEAWAYS:
+1. TypeScript adds compile-time type safety to inheritance patterns
+2. Interfaces enable better composition contracts
+3. Abstract classes provide native template method support
+4. Generic mixins preserve type information through composition
+5. Type-safe observer pattern with generic Subject/Observer
+6. Runtime pattern behavior follows JavaScript rules
+`);
+
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 
@@ -342,9 +429,11 @@ console.log("4. Typed mixins");
 console.log("5. Discriminated unions");
 console.log("6. Visitor pattern with interfaces");
 console.log("7. Generic constraints");
+console.log("8. Observer pattern with types");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe composition");
 console.log("- Exhaustive switch checks");
 console.log("- Better pattern matching");
 console.log("- Mixin type inference");
+console.log("- Generic observer/subject pattern");
