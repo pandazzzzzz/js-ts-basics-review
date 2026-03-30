@@ -1290,7 +1290,7 @@ processor.processPayment(200);
      readonly apiKey: string = "secret";
    }
 
-📘 See 23-classes-ts-comparison.ts for detailed TypeScript examples!
+📘 See 16-classes-ts-comparison.ts for detailed TypeScript examples!
 📘 See related: 13-prototypes-inheritance.js for prototype relationship
 */
 // ============================================================================

@@ -90,9 +90,9 @@ function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-const log = debounce((message: string) => console.log(message), 100);
-log("Hello");
-log("World"); // Only this will log after 100ms
+const debouncedLog = debounce((message: string) => console.log(message), 100);
+debouncedLog("Hello");
+debouncedLog("World"); // Only this will log after 100ms
 
 // Generic throttle with types
 function throttle<T extends (...args: any[]) => any>(
@@ -254,6 +254,67 @@ getUser(userId); // OK
 
 
 // ============================================================================
+// 9. TRAMPOLINE PATTERN FOR RECURSION
+// ============================================================================
+
+// JavaScript: Trampoline without type safety
+// function trampoline(fn) {
+//   let result = fn();
+//   while (typeof result === 'function') {
+//     result = result();
+//   }
+//   return result;
+// }
+
+// TypeScript: Typed trampoline pattern
+type Thunk<T> = () => T | Thunk<T>;
+
+function trampoline<T>(fn: Thunk<T>): T {
+  let result: T | Thunk<T> = fn();
+
+  while (typeof result === 'function') {
+    result = (result as Thunk<T>)();
+  }
+
+  return result;
+}
+
+// Typed thunk creator
+function thunk<T extends (...args: any[]) => any, R extends ReturnType<T>>(
+  fn: T,
+  ...args: Parameters<T>
+): () => R {
+  return () => fn(...args) as R;
+}
+
+console.log("\n=== Trampoline Pattern ===");
+
+// Tail-recursive factorial with trampoline
+function factorial(n: number, acc: number = 1): number | (() => number) {
+  if (n <= 1) {
+    return acc;
+  }
+  return thunk(factorial, n - 1, n * acc);
+}
+
+console.log("Trampoline factorial(10):", trampoline(() => factorial(10))); // 3628800
+
+// Mutual recursion with trampoline
+function isEven(n: number): boolean | (() => boolean | (() => boolean)) {
+  if (n === 0) return true;
+  return thunk(isOdd, n - 1);
+}
+
+function isOdd(n: number): boolean | (() => boolean | (() => boolean)) {
+  if (n === 0) return false;
+  return thunk(isEven, n - 1);
+}
+
+console.log("isEven(10):", trampoline(() => isEven(10))); // true
+console.log("isEven(9):", trampoline(() => isEven(9))); // false
+
+
+// ============================================================================
 // 8. DECORATORS (EXPERIMENTAL)
 // ============================================================================
 
@@ -294,6 +355,7 @@ console.log("5. Type guards and assertion functions");
 console.log("6. Typed Promises and async/await");
 console.log("7. Branded types for nominal typing");
 console.log("8. Method decorators");
+console.log("9. Trampoline pattern for safe recursion");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Compile-time type checking");

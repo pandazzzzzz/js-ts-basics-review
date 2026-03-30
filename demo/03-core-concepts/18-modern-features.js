@@ -1,5 +1,5 @@
 // Modern JavaScript Features (ES6+)
-// 📘 For TypeScript comparison, see: 06-modern-features-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 18-modern-features-ts-comparison.ts
 
 // ============================================
 // 1. Spread Operator (ES6/ES2015)
@@ -606,7 +606,7 @@ console.log("Private fields provide true encapsulation");
 - TypeScript interfaces have no runtime representation
 - Class field initialization order matters in both languages
 
-📘 See 06-modern-features-ts-comparison.ts for detailed examples!
+📘 See 18-modern-features-ts-comparison.ts for detailed examples!
 */
 
 // ============================================================================

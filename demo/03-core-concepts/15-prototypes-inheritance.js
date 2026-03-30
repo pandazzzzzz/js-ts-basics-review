@@ -1,5 +1,5 @@
 // Prototypes and Inheritance Demo
-// 📘 For TypeScript comparison, see: 16-prototypes-inheritance-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 15-prototypes-inheritance-ts-comparison.ts
 
 // ============================================
 // 1. PROTOTYPE BASICS
@@ -953,7 +953,7 @@ console.log("  rect instanceof Object:", rect instanceof Object);
    - Instance: Belong to each instance
    - Static members not inherited by instances
 
-📘 See 16-prototypes-inheritance-ts-comparison.ts for detailed examples!
+📘 See 15-prototypes-inheritance-ts-comparison.ts for detailed examples!
 */
 
 // ============================================================================

@@ -1,5 +1,5 @@
 // Error Handling Demo
-// 📘 For TypeScript comparison, see: 10-error-handling-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 20-error-handling-ts-comparison.ts
 
 // ============================================
 // Basic Error Handling - try/catch/finally
@@ -1547,7 +1547,7 @@ console.log("  Always handle errors locally first!");
    - Promise rejections need .catch()
    - Unhandled rejections are runtime errors
 
-📘 See 10-error-handling-ts-comparison.ts for detailed examples!
+📘 See 20-error-handling-ts-comparison.ts for detailed examples!
 */
 
 // ============================================================================
