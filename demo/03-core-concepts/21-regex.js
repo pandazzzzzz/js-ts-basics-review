@@ -519,6 +519,59 @@ let csvRe = /([^,]+)/g;
 console.log("\nCSV parsing:");
 console.log("Fields:", csv.match(csvRe));
 
+// ============================================================================
+// 7.7 UNICODE PROPERTY ESCAPES (u flag)
+// ============================================================================
+/**
+ * Unicode Property Escapes (u flag)
+ *
+ * Syntax: \p{Property=Value} or \p{Property}
+ * Negation: \P{Property=Value} (uppercase P)
+ *
+ * Common Properties:
+ * - \p{L}  : Letter (any language)
+ * - \p{N}  : Number (any script)
+ * - \p{P}  : Punctuation
+ * - \p{S}  : Symbol
+ * - \p{Z}  : Separator (spaces)
+ * - \p{Emoji} : Emoji characters
+ * - \p{ASCII} : ASCII range
+ * - \p{Letter} : Letter characters
+ * - \p{White_Space} : Whitespace characters
+ *
+ * Requires 'u' flag for Unicode mode
+ */
+
+console.log("\n=== 7.7 Unicode Property Escapes Demo ===");
+
+// Match any letter (including non-ASCII like 中文, α, ñ)
+let anyLetter = /\p{L}+/gu;
+console.log("Any letter:", "Hello中文αñ".match(anyLetter));
+
+// Match any number (including Arabic numerals)
+let anyNumber = /\p{N}+/gu;
+console.log("Any number:", "123٤٥٦中文".match(anyNumber));
+
+// Match emojis
+let emojiRe = /\p{Emoji}+/gu;
+console.log("Emojis:", "Hello 🌍🎉 World 👍".match(emojiRe));
+
+// Match punctuation
+let punctRe = /\p{P}+/gu;
+console.log("Punctuation:", "Hello, world! (test)".match(punctRe));
+
+// Combining properties - Letters and numbers
+let alphaNum = /[\p{L}\p{N}]+/gu;
+console.log("Alpha-num:", "Hello123中文456".match(alphaNum));
+
+// Script matching - Cyrillic letters
+let cyrillic = /\p{Script=Cyrillic}+/gu;
+console.log("Cyrillic:", "Hello Привет World".match(cyrillic));
+
+// Name validation with Unicode support
+let unicodeNameRe = /[\p{L}\p{M}\p{Z}]+/gu;
+console.log("Names:", "José María 中文".match(unicodeNameRe));
+
 
 // ============================================================================
 // 8. COMMON PITFALLS

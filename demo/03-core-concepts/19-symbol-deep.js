@@ -286,6 +286,57 @@ console.log("myArray instanceof MyArray:", myArray instanceof MyArray); // true
 console.log("filtered instanceof MyArray:", filtered instanceof MyArray); // false
 console.log("filtered instanceof Array:", filtered instanceof Array); // true
 
+// 3.7 Symbol.match/replace/search/split - Custom regex behavior
+class CaseInsensitiveMatcher {
+  constructor(pattern) {
+    this.pattern = pattern.toLowerCase();
+  }
+
+  [Symbol.match](string) {
+    const lower = string.toLowerCase();
+    const matches = [];
+    let pos = 0;
+    while (pos < lower.length) {
+      const idx = lower.indexOf(this.pattern, pos);
+      if (idx === -1) break;
+      matches.push(string.slice(idx, idx + this.pattern.length));
+      pos = idx + 1;
+    }
+    return matches.length ? matches : null;
+  }
+
+  [Symbol.replace](string, replacement) {
+    return string.toLowerCase().replaceAll(this.pattern, replacement);
+  }
+
+  [Symbol.search](string) {
+    return string.toLowerCase().indexOf(this.pattern);
+  }
+
+  [Symbol.split](string) {
+    return string.toLowerCase().split(this.pattern);
+  }
+}
+
+console.log("\nSymbol.match/replace/search/split:");
+const matcher = new CaseInsensitiveMatcher("HELLO");
+console.log("'hello world hello'.match:", "hello world hello".match(matcher));
+console.log("'HELLO WORLD'.replace:", matcher[Symbol.replace]("HELLO WORLD", "hi"));
+console.log("'Say HELLO'.search:", "Say HELLO".search(matcher));
+console.log("'aHELLOb'.split:", "aHELLOb".split(matcher));
+
+// 3.8 Symbol.unscopables - Exclude properties from with statement
+// Note: with statement is deprecated, but this symbol exists for Array methods
+console.log("\nSymbol.unscopables:");
+console.log("Array[Symbol.unscopables]:", Array.prototype[Symbol.unscopables]);
+// { copyWithin: true, entries: true, fill: true, find: true, findIndex: true, ... }
+// These methods are excluded from 'with' scope binding
+
+// Built-in objects with Symbol.unscopables
+const unscopables = ['copyWithin', 'entries', 'fill', 'find', 'findIndex',
+                     'flat', 'flatMap', 'includes', 'keys', 'values'];
+console.log("Methods excluded from 'with':", unscopables.slice(0, 5));
+
 
 // ============================================================================
 // 4. SYMBOL PRACTICAL APPLICATIONS

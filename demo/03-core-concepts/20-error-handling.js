@@ -1135,103 +1135,51 @@ try {
 
 
 // ============================================================================
-// 13. ASYNC ERROR HANDLING
+// 13. ASYNC ERROR HANDLING (BASIC)
 // ============================================================================
 /**
- * Async Error Handling - Handling errors in asynchronous code (ES6+)
+ * Async Error Handling - Basic patterns (see 26-async-error-handling.js for details)
  *
- * Characteristics:
- * - Promise rejections with .catch()
- * - async/await with try/catch
- * - Unhandled rejection warnings
- * - Different error propagation
+ * Note: Comprehensive async error handling is covered in:
+ * - 26-async-error-handling.js (Promise.any, circuit breaker, retry patterns)
  *
- * Use Cases:
- * - API error handling
- * - Database operations
- * - File I/O operations
- * - Network requests
- *
- * Common Pitfalls:
- * - Forgetting .catch() on promises
- * - Unhandled promise rejections
- * - Mixing callbacks with promises
+ * Basic Patterns:
+ * - Promise .catch() for rejection handling
+ * - try/catch with async/await
+ * - Promise.allSettled() for safer handling
  */
 
-console.log("\n=== 13. Async Error Handling Demo ===");
+console.log("\n=== 13. Async Error Handling (Basic) ===");
 
-// 13.1 Promise error handling
+// 13.1 Basic Promise error handling
 console.log("\nPromise error handling:");
-
-function failingPromise() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => reject(new Error("Promise failed")), 10);
-  });
-}
-
-function successPromise() {
-  return Promise.resolve("Success!");
-}
-
-// Using .catch()
-failingPromise()
-  .then(result => console.log("Won't run"))
-  .catch(error => console.log("  Caught promise error:", error.message))
-  .finally(() => console.log("  Finally always runs"));
+Promise.reject(new Error("Promise failed"))
+  .catch(error => console.log("  Caught:", error.message));
 
 // 13.2 async/await with try/catch
-console.log("\nasync/await error handling:");
-
-async function asyncOperation() {
+async function basicAsyncError() {
   try {
-    const result = await failingPromise();
-    console.log("  Won't reach here");
+    await Promise.reject(new Error("Async failed"));
   } catch (error) {
     console.log("  Caught async error:", error.message);
-  } finally {
-    console.log("  Cleanup in finally");
   }
 }
+basicAsyncError();
 
-asyncOperation();
-
-// 13.3 Handling multiple async errors
-console.log("\nMultiple async errors:");
-
-async function handleMultipleErrors() {
-  try {
-    const results = await Promise.all([
-      successPromise(),
-      failingPromise(), // This will cause rejection
-      successPromise()
-    ]);
-  } catch (error) {
-    console.log("  Promise.all failed:", error.message);
-  }
-}
-
-handleMultipleErrors();
-
-// 13.4 Promise.allSettled (no unhandled rejections)
-console.log("\nPromise.allSettled (safer):");
-
-async function allSettledExample() {
+// 13.3 Promise.allSettled for safer handling
+async function saferAsyncHandling() {
   const results = await Promise.allSettled([
-    successPromise(),
-    failingPromise(),
-    successPromise()
+    Promise.resolve("Success"),
+    Promise.reject(new Error("Failed"))
   ]);
 
   results.forEach((result, i) => {
-    if (result.status === "fulfilled") {
-      console.log(`  ${i}: Success -`, result.value);
-    } else {
-      console.log(`  ${i}: Failed -`, result.reason.message);
-    }
+    console.log(`  ${i}:`, result.status, result.value || result.reason?.message);
   });
 }
+saferAsyncHandling();
 
-allSettledExample();
+// For advanced async error patterns, see 26-async-error-handling.js
 
 
 // ============================================================================

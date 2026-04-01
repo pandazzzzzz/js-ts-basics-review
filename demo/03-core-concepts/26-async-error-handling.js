@@ -407,6 +407,103 @@ try {
 
 
 // ============================================================================
+// 4.4 Promise.any() - First success or all failure (ES2021)
+// ============================================================================
+/**
+ * Promise.any() - Returns the FIRST fulfilled promise, or AggregateError if ALL reject (ES2021)
+ *
+ * Comparison with other Promise methods:
+ * - Promise.all(): All must succeed (or any rejects)
+ * - Promise.race(): First settled (whether success or failure)
+ * - Promise.any(): First success (or all fail)
+ * - Promise.allSettled(): Wait for all, get results/reasons
+ *
+ * Use Cases:
+ * - Multiple redundant APIs (try fastest responding)
+ * - Fallback data sources
+ * - Competitive race for first success
+ *
+ * Common Pitfalls:
+ * - Different from Promise.race() which takes ANY first settled
+ * - AggregateError contains ALL rejection reasons
+ */
+
+console.log("\n=== 4.4 Promise.any() Demo ===");
+
+// 4.4.1 Basic Promise.any() - first success
+async function fetchFromMultipleSources() {
+  const sources = [
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Source 1 down')), 100)),
+    new Promise(resolve => setTimeout(() => resolve('Data from Source 2'), 200)),
+    new Promise(resolve => setTimeout(() => resolve('Data from Source 3'), 300))
+  ];
+
+  try {
+    const result = await Promise.any(sources);
+    console.log('Promise.any() - First success:', result);
+    return result;
+  } catch (error) {
+    if (error instanceof AggregateError) {
+      console.log('All sources failed:', error.errors.map(e => e.message));
+    }
+    throw error;
+  }
+}
+
+// 4.4.2 All promises reject - AggregateError
+async function allFail() {
+  const promises = [
+    Promise.reject(new Error('Failed 1')),
+    Promise.reject(new Error('Failed 2')),
+    Promise.reject(new Error('Failed 3'))
+  ];
+
+  try {
+    await Promise.any(promises);
+  } catch (error) {
+    console.log('Promise.any() - All rejected:');
+    console.log('  Error count:', error.errors.length);
+    error.errors.forEach((err, i) => {
+      console.log(`  ${i + 1}:`, err.message);
+    });
+  }
+}
+
+// 4.4.3 Comparison: Promise.any() vs Promise.race()
+async function compareRaceVsAny() {
+  console.log("\nComparing Promise.any() vs Promise.race():");
+
+  const promises = [
+    Promise.reject(new Error('Fast failure')),
+    new Promise(resolve => setTimeout(() => resolve('Slow success'), 50))
+  ];
+
+  // Promise.race() takes first settled, even if rejected
+  try {
+    const raceResult = await Promise.race([...promises]);
+    console.log('Promise.race() result:', raceResult);
+  } catch (error) {
+    console.log('Promise.race() got first (rejected):', error.message);
+  }
+
+  // Promise.any() waits for first success
+  try {
+    const anyResult = await Promise.any([...promises]);
+    console.log('Promise.any() got first success:', anyResult);
+  } catch (error) {
+    console.log('Promise.any() all rejected:', error.message);
+  }
+}
+
+// Run demos
+Promise.all([
+  fetchFromMultipleSources(),
+  allFail(),
+  compareRaceVsAny()
+]).catch(() => {});
+
+
+// ============================================================================
 // 5. CIRCUIT BREAKER PATTERN
 // ============================================================================
 /**

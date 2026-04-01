@@ -38,13 +38,74 @@ console.log("\nDestructuring:");
 console.log({ name, age, first, second, rest });
 
 // ============================================
-// 3. Default Parameters (ES6/ES2015)
+// 3. Optional Chaining (?.) (ES2020)
+// ============================================
+
+// Optional Chaining - Safe property access without nested if checks (ES2020)
+// - Returns undefined instead of throwing TypeError for null/undefined
+// - Works with properties, methods, and array access
+// - Can be chained deeply with obj?.a?.b?.c
+const user = {
+  name: "Alice",
+  address: {
+    city: "NYC",
+    zip: "10001"
+  }
+};
+
+console.log("\nOptional Chaining:");
+console.log("User city:", user?.address?.city); // "NYC"
+console.log("Missing nested:", user?.profile?.email); // undefined
+console.log("Optional method call:", user?.getName?.()); // undefined (method doesn't exist)
+
+// Real-world example
+function getUserName(obj) {
+  return obj?.user?.name ?? "Anonymous";
+}
+
+console.log("With user:", getUserName({ user: { name: "Bob" } })); // "Bob"
+console.log("Without user:", getUserName({})); // "Anonymous"
+
+// ============================================
+// 4. Nullish Coalescing (??) (ES2020)
+// ============================================
+
+// Nullish Coalescing - Fallback for null or undefined only (ES2020)
+// - Only triggers on null or undefined (not falsy values like 0, "", false)
+// - Safer alternative to || operator
+// - Preserves "truthy but falsy" values like 0 and empty strings
+
+const config = { timeout: 0, debug: "" };
+const defaults = { timeout: 5000, debug: "verbose" };
+
+console.log("\nNullish Coalescing:");
+// ?? only activates on null/undefined
+console.log("Timeout (??):", config.timeout ?? defaults.timeout); // 0 (preserved!)
+console.log("Debug (??):", config.debug ?? defaults.debug); // "" (preserved!)
+
+// || activates on any falsy value (wrong for 0, "", false)
+console.log("Timeout (||):", config.timeout || defaults.timeout); // 5000 (wrong!)
+console.log("Debug (||):", config.debug || defaults.debug); // "verbose" (wrong!)
+
+// Practical use case
+function getPort(port) {
+  return port ?? 3000; // Only use default if port is null/undefined
+}
+
+console.log("Port 8080:", getPort(8080)); // 8080
+console.log("Port 0 (valid):", getPort(0)); // 0 (correctly preserved!)
+console.log("Port null:", getPort(null)); // 3000
+console.log("Port undefined:", getPort(undefined)); // 3000
+
+// ============================================
+// 5. Default Parameters (ES6/ES2015)
 // ============================================
 
 // Default Parameters - Provide default values for function parameters (ES6/ES2015)
 // - Evaluated at call time
 // - Can reference earlier parameters
 // - Replaces need for || operator checks
+// NOTE: For nullish coalescing fallback (??), see section 4 above
 function greet(name = "Guest", greeting = "Hello") {
   return `${greeting}, ${name}!`;
 }
@@ -54,7 +115,7 @@ console.log(greet()); // "Hello, Guest!"
 console.log(greet("Bob")); // "Hello, Bob!"
 
 // ============================================
-// 4. Rest Parameters (ES6/ES2015)
+// 6. Rest Parameters (ES6/ES2015)
 // ============================================
 
 // Rest Parameters - Collect remaining arguments into an array (ES6/ES2015)
@@ -69,7 +130,7 @@ console.log("\nRest Parameters:");
 console.log(sum(1, 2, 3, 4, 5)); // 15
 
 // ============================================
-// 5. Arrow Functions (ES6/ES2015)
+// 7. Arrow Functions (ES6/ES2015)
 // ============================================
 
 // Arrow Functions - Shorter syntax with lexical this binding (ES6/ES2015)
@@ -91,7 +152,7 @@ const counter = {
 counter.increment();
 
 // ============================================
-// 6. Classes - Basic Syntax (ES6/ES2015)
+// 8. Classes - Basic Syntax (ES6/ES2015)
 // ============================================
 
 // Classes - Syntactic sugar over prototype-based inheritance (ES6/ES2015)
@@ -125,7 +186,7 @@ console.log("\nBasic Classes:");
 console.log(dog.speak()); // "Max barks!"
 
 // ============================================
-// 7. Static Methods and Properties (ES6/ES2015 for methods, ES2022 for properties)
+// 9. Static Methods and Properties (ES6/ES2015 for methods, ES2022 for properties)
 // ============================================
 
 // Static Methods - Methods called on the class itself, not instances (ES6/ES2015)
@@ -165,7 +226,7 @@ console.log("Instance method:", mathInstance.instanceMethod());
 // console.log(mathInstance.square(5)); // TypeError: mathInstance.square is not a function
 
 // ============================================
-// 8. Private Fields (ES2022)
+// 10. Private Fields (ES2022)
 // ============================================
 
 // Private Fields - Fields that are only accessible within the class (ES2022)
@@ -219,7 +280,7 @@ console.log("After withdrawal:", account.getBalance());
 // console.log(account.#balance); // SyntaxError: Private field '#balance' must be declared in an enclosing class
 
 // ============================================
-// 9. Getters and Setters (ES6/ES2015)
+// 11. Getters and Setters (ES6/ES2015)
 // ============================================
 
 // Getters and Setters - Computed properties with validation (ES6/ES2015)
@@ -277,7 +338,7 @@ console.log("After setting Fahrenheit to 86:");
 console.log("Celsius:", temp.celsius);
 
 // ============================================
-// 10. Class Inheritance and Method Overriding (ES6/ES2015)
+// 12. Class Inheritance and Method Overriding (ES6/ES2015)
 // ============================================
 
 // Class Inheritance - Extend classes to create specialized versions (ES6/ES2015)
@@ -353,7 +414,7 @@ console.log(tesla.brake());
 console.log(tesla.charge());
 
 // ============================================
-// 11. Abstract Class Patterns (ES6/ES2015)
+// 13. Abstract Class Patterns (ES6/ES2015)
 // ============================================
 
 // Abstract Class Pattern - Base classes that should not be instantiated directly
@@ -524,7 +585,7 @@ class StringUtils {
 console.log("Static utility:", StringUtils.capitalize("hello"));
 
 // Best Practice 2: Use getters for computed properties
-class User {
+class UserProfile {
   constructor(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -535,8 +596,8 @@ class User {
   }
 }
 
-const user = new User("John", "Doe");
-console.log("Computed property:", user.fullName);
+const userProfile = new UserProfile("John", "Doe");
+console.log("Computed property:", userProfile.fullName);
 
 // Best Practice 3: Use private fields for true encapsulation
 class SecureData {
@@ -558,7 +619,7 @@ console.log("Private fields provide true encapsulation");
 // NOTE: MODULES (import/export)
 // ============================================
 /*
- * Modules (import/export) are covered in detail in demo/15-modules.js
+ * Modules (import/export) are covered in detail in demo/04-asynchronous/32-modules.js
  * 
  * ES6 introduced native module system with import/export syntax:
  * - export: Make values available to other modules
@@ -566,7 +627,7 @@ console.log("Private fields provide true encapsulation");
  * - default export: Single main export per module
  * - named exports: Multiple exports per module
  * 
- * See demo/15-modules.js for comprehensive coverage of:
+ * See demo/04-asynchronous/32-modules.js for comprehensive coverage of:
  * - import and export syntax
  * - default vs named exports
  * - dynamic imports
