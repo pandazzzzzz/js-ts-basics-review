@@ -642,7 +642,7 @@ console.log("Private fields provide true encapsulation");
 // Array.from() - Create array from array-like or iterable
 console.log("\nArray.from():");
 console.log("Array.from('hello'):", Array.from("hello")); // ['h', 'e', 'l', 'l', 'o']
-console.log("Array.from({length: 3}, x => x*2):", Array.from({length: 3}, x => x*2)); // [0, 2, 4]
+console.log("Array.from([1, 2, 3], x => x*2):", Array.from([1, 2, 3], x => x*2)); // [2, 4, 6]
 
 // Array.of() - Create array from arguments
 console.log("\nArray.of():");
