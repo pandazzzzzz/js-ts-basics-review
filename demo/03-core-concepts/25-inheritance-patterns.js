@@ -26,35 +26,12 @@
  * - Memory overhead with many small components
  */
 
-console.log("=== 1. Composition Over Inheritance Demo ===");
+console.log("\n=== 1. Composition Over Inheritance Demo ===");
 
 // 1.1 Bad: Deep inheritance hierarchy
-class Animal {
-  constructor(name) {
-    this.name = name;
-  }
-  eat() { console.log(`${this.name} is eating`); }
-}
-
-class Mammal extends Animal {
-  hasFur() { return true; }
-}
-
-class Swimmer {
-  constructor(obj) {
-    this.obj = obj;
-  }
-  swim() { console.log(`${this.obj.name} is swimming`); }
-}
-
-class Flyer {
-  constructor(obj) {
-    this.obj = obj;
-  }
-  fly() { console.log(`${this.obj.name} is flying`); }
-}
-
-console.log("Bad: Deep inheritance (hard to maintain)");
+console.log("\nBad: Deep inheritance (hard to maintain):");
+console.log("  Animal → Mammal → Primate → Human → Developer");
+console.log("  Can lead to 'class explosion' and fragile base class problem");
 
 // 1.2 Good: Composition with mixins
 function canEat(obj) {

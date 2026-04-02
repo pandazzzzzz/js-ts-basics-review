@@ -447,10 +447,37 @@ console.log("'$100' matches:", "price: $100".match(negLookbehind)); // null
 // 6.6 Lookahead with replacement
 let fruits = ["ripe orange A", "green orange B", "ripe orange C"];
 console.log("\nLookahead replacement:");
-let replacedFruits = fruits.map(f =>
-  f.replace(/(?<=ripe )orange/, "apple")
+let replacedFruits = fruits.map(fruit =>
+  fruit.replace(/(?<=ripe )orange/, "apple")
 );
 console.log(replacedFruits);
+
+// 6.7 Possessive Quantifiers - Greedy without backtracking (JS: similar effect with lookahead)
+console.log("\nPossessive Quantifiers:");
+
+// JavaScript doesn't support possessive quantifiers (a++), but can simulate with lookahead
+let possessiveRe = /(a+(?![^a]))ab/; // a+ followed by 'a' or end, then 'ab'
+console.log("Greedy match:", "aaab".match(possessiveRe)); // null (different from a+ab)
+
+// Standard greedy quantifier allows backtracking
+let standardRe = /a+ab/;
+console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
+
+// 6.8 Optimization tips
+console.log("\nOptimization Tips:");
+
+// 1. Use character classes instead of alternation
+let charClass = /[abc]/; // Better than /a|b|c/
+
+// 2. Avoid capturing groups if not needed
+let nonCapture = /(?:\d+)/; // Better than /(\d+)/ if you don't need groups
+
+// 3. Be specific with anchors
+let anchored = /^\d{3}-\d{4}$/; // Better than /\d{3}-\d{4}/ for exact match
+
+console.log("Character class test:", charClass.test("a"));
+console.log("Non-capturing group:", "123".match(nonCapture));
+console.log("Anchored pattern:", anchored.test("123-456"));
 
 
 // ============================================================================
