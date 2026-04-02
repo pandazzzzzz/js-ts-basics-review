@@ -636,6 +636,120 @@ console.log("Private fields provide true encapsulation");
  */
 
 // ============================================
+// 16. NEW ARRAY METHODS (ES2022/ES2023)
+// ============================================
+
+// Array.from() - Create array from array-like or iterable
+console.log("\nArray.from():");
+console.log("Array.from('hello'):", Array.from("hello")); // ['h', 'e', 'l', 'l', 'o']
+console.log("Array.from({length: 3}, x => x*2):", Array.from({length: 3}, x => x*2)); // [0, 2, 4]
+
+// Array.of() - Create array from arguments
+console.log("\nArray.of():");
+console.log("Array.of(5):", Array.of(5)); // [5]
+console.log("Array.of(1, 2, 3):", Array.of(1, 2, 3)); // [1, 2, 3]
+console.log("Array(5):", Array(5)); // [, , , , ] (empty slots - different!)
+
+// Object.fromEntries() - Convert.entries to object
+console.log("\nObject.fromEntries():");
+const entries = [['name', 'Alice'], ['age', 30]];
+console.log("From entries:", Object.fromEntries(entries)); // { name: 'Alice', age: 30 }
+
+// Array.prototype.at() - Access with negative indices (ES2022)
+console.log("\nArray.at():");
+const arr = [10, 20, 30, 40, 50];
+console.log("arr[0]:", arr[0]); // 10
+console.log("arr.at(0):", arr.at(0)); // 10
+console.log("arr.at(-1):", arr.at(-1)); // 50 (last element)
+console.log("arr.at(-2):", arr.at(-2)); // 40 (second to last)
+
+// Array.prototype.findLast() (ES2023)
+console.log("\nArray.findLast():");
+const nums = [1, 2, 3, 4, 5];
+console.log("findLast even:", nums.findLast(n => n % 2 === 0)); // 4
+console.log("findLast > 3:", nums.findLast(n => n > 3)); // 5
+
+
+// ============================================
+// 17. STRING METHODS (ES2021/ES2022)
+// ============================================
+
+// String.prototype.replaceAll() (ES2021)
+console.log("\nString.replaceAll():");
+const text = "hello world hello";
+console.log("replaceAll('hello', 'hi'):", text.replaceAll("hello", "hi")); // "hi world hi"
+console.log("replace() first only:", text.replace("hello", "hi")); // "hi world hello"
+
+// String.prototype.trimStart/trimEnd() aliases (ES2022)
+console.log("\nString trimming:");
+const padded = "   hello   ";
+console.log("trimStart:", '"' + padded.trimStart() + '"'); // "hello   "
+console.log("trimEnd:", '"' + padded.trimEnd() + '"'); // "   hello"
+console.log("trim:", '"' + padded.trim() + '"'); // "hello"
+
+
+// ============================================
+// 18. LOGICAL ASSIGNMENT OPERATORS (ES2021)
+// ============================================
+
+// &&= (and-assignment), ||= (or-assignment), ??= (nullish-assignment)
+console.log("\nLogical assignment operators:");
+let a = 5;
+a &&= 10; // a = a && 10 → 10 (both truthy)
+console.log("a &&= 10:", a);
+
+let b = 0;
+b &&= 10; // b = b && 10 → 0 (falsy, no change)
+console.log("b &&= 10:", b);
+
+let c = null;
+c ??= "default"; // c = c ?? "default" → "default"
+console.log("c ??= 'default':", c);
+
+let d = "value";
+d ??= "default"; // d = d ?? "default" → "value" (already set)
+console.log("d ??= 'default':", d);
+
+
+// ============================================
+// 19. PROMISE METHODS (ES2021)
+// ============================================
+
+// Promise.prototype.finally() - Clean up after promise
+console.log("\nPromise.finally():");
+
+function fetchData() {
+  return new Promise(resolve => {
+    setTimeout(() => resolve("Data fetched"), 100);
+  });
+}
+
+fetchData()
+  .then(result => console.log("  Result:", result))
+  .catch(error => console.log("  Error:", error))
+  .finally(() => console.log("  Cleanup - always runs"));
+
+
+// ============================================
+// 20. MODERN FEATURES SUMMARY
+// ============================================
+console.log("\n=== Modern JavaScript Features Summary ===");
+console.log(`
+Key modern features (ES2020-ES2023):
+- Optional chaining (?.) - Safe property access
+- Nullish coalescing (??) - Fallback for null/undefined
+- Array.from() / of() - New array creation
+- Object.fromEntries() - Convert entries to object
+- String.replaceAll() - Replace all occurrences
+- Array.at() - Negative index access
+- Logical assignment (&&=, ||=, ??=) - Short-circuit assignment
+- Promise.finally() - Clean up after promise
+- Promise.any() - First fulfilled promise
+-定型数组操作 (TypedArray methods) - copyWithin(), at(), etc.
+`);
+
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*
