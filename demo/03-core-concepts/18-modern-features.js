@@ -643,6 +643,8 @@ console.log("Private fields provide true encapsulation");
 console.log("\nArray.from():");
 console.log("Array.from('hello'):", Array.from("hello")); // ['h', 'e', 'l', 'l', 'o']
 console.log("Array.from([1, 2, 3], x => x*2):", Array.from([1, 2, 3], x => x*2)); // [2, 4, 6]
+// Note: mapFn receives (element, index) - with {length}, use index for sequence
+console.log("Array.from({length: 3}, (_, i) => i*2):", Array.from({length: 3}, (_, i) => i*2)); // [0, 2, 4]
 
 // Array.of() - Create array from arguments
 console.log("\nArray.of():");
@@ -712,10 +714,11 @@ console.log("d ??= 'default':", d);
 
 
 // ============================================
-// 19. PROMISE METHODS (ES2021)
+// 19. PROMISE METHODS
 // ============================================
 
-// Promise.prototype.finally() - Clean up after promise
+// Promise.prototype.finally() - Clean up after promise (ES2018/ES9)
+// Note: Already covered in earlier sections, here as quick reference
 console.log("\nPromise.finally():");
 
 function fetchData() {
@@ -728,6 +731,22 @@ fetchData()
   .then(result => console.log("  Result:", result))
   .catch(error => console.log("  Error:", error))
   .finally(() => console.log("  Cleanup - always runs"));
+
+// Promise.any() - First fulfilled promise (ES2021)
+console.log("\nPromise.any() - First success:");
+async function demoPromiseAny() {
+  try {
+    const result = await Promise.any([
+      Promise.reject(new Error('Source 1 failed')),
+      Promise.resolve('Data from Source 2'),
+      Promise.resolve('Data from Source 3')
+    ]);
+    console.log("  First success:", result);
+  } catch (error) {
+    console.log("  All failed");
+  }
+}
+demoPromiseAny().catch(() => {});
 
 
 // ============================================
