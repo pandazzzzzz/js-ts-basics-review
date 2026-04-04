@@ -5,84 +5,112 @@
 export {};
 
 // ============================================================================
-// 1. TEMPLATE LITERAL TYPES
+// 1. TYPED SPREAD OPERATOR
 // ============================================================================
 
-// JavaScript: Template literals at runtime only
-// const greeting = `Hello, ${name}!`;
+// JavaScript: const arr2 = [...arr1, 4, 5];
+// TypeScript: Same runtime behavior, but with type inference
 
-// TypeScript: Template literal types at type level
-type GreetingTemplate<T extends string> = `Hello, ${T}!`;
+const arr1: number[] = [1, 2, 3];
+const arr2: number[] = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
 
-type Message = GreetingTemplate<"Alice">; // "Hello, Alice!"
+const obj1: { a: number; b: number } = { a: 1, b: 2 };
+const obj2: { a: number; b: number; c: number } = { ...obj1, c: 3 };
 
-// Union types with template literals
-type EventType = "click" | "scroll" | "keydown";
-type EventName = `${EventType}Event`; // "clickEvent" | "scrollEvent" | "keydownEvent"
+console.log("=== Typed Spread Operator ===");
+console.log({ arr2, obj2 });
 
-console.log("=== Template Literal Types ===");
-const event: EventName = "clickEvent";
-console.log(event);
+// TypeScript: Spread with generic constraints
+function mergeObjects<T extends object, U extends object>(obj1: T, obj2: U): T & U {
+  return { ...obj1, ...obj2 };
+}
 
-// Complex template literal types
-type HttpStatusCode = 200 | 301 | 404 | 500;
-type StatusResponse<T extends HttpStatusCode> = {
-  status: T;
-  message: T extends 200 ? "OK" :
-           T extends 301 ? "Moved" :
-           T extends 404 ? "Not Found" : "Error";
+const merged = mergeObjects({ a: 1 }, { b: 2 });
+console.log("Merged:", merged);
+
+
+// ============================================================================
+// 2. TYPED DESTRUCTURING
+// ============================================================================
+
+// JavaScript: const { name, age } = person;
+// TypeScript: Destructuring with type annotations
+
+interface Person {
+  name: string;
+  age: number;
+  city: string;
+}
+
+const person: Person = { name: "Alice", age: 30, city: "NYC" };
+const { name, age }: { name: string; age: number } = person;
+
+// TypeScript: Destructuring with type annotations
+const numbers: [number, number, number, number] = [10, 20, 30, 40];
+const [first, second, ...rest]: [number, ...number[]] = numbers;
+
+console.log("\n=== Typed Destructuring ===");
+console.log({ name, age, first, second, rest });
+
+// TypeScript: Renaming with types
+interface User {
+  username: string;
+  email: string;
+}
+
+const user: User = { username: "alice", email: "alice@example.com" };
+const { username: name, email: emailAddress } = user;
+console.log("Renamed destructuring:", name, emailAddress);
+
+
+// ============================================================================
+// 3. OPTIONAL CHAINING WITH TYPES
+// ============================================================================
+
+// JavaScript: obj?.a?.b?.c
+// TypeScript: Optional chaining with proper null handling
+
+interface NestedAddress {
+  city: string;
+  zip: string;
+}
+
+interface UserProfile {
+  name: string;
+  address?: NestedAddress;
+}
+
+const typedUser: UserProfile = {
+  name: "Alice",
+  address: { city: "NYC", zip: "10001" }
 };
 
-const okResponse: StatusResponse<200> = { status: 200, message: "OK" };
-const notFound: StatusResponse<404> = { status: 404, message: "Not Found" };
-
-
-// ============================================================================
-// 2. OPTIONAL CHAINING TYPES
-// ============================================================================
-
-// JavaScript: Optional chaining at runtime
-// const value = obj?.property?.nested;
-
-// TypeScript: Optional chaining with proper null handling
-interface NestedObject {
-  a?: {
-    b?: {
-      c: string;
-    };
-  };
-}
-
-function safeAccess(obj: NestedObject): string | undefined {
-  return obj?.a?.b?.c;
-}
-
 console.log("\n=== Optional Chaining Types ===");
-console.log(safeAccess({ a: { b: { c: "value" } } })); // "value"
-console.log(safeAccess({})); // undefined
+console.log("User city:", typedUser?.address?.city); // "NYC"
+console.log("Missing nested:", typedUser?.profile?.email); // undefined
 
-// Optional chaining with method calls
-interface ApiClient {
-  getData?(): Promise<{ value: string }>;
-}
-
-async function fetchData(client: ApiClient): Promise<string | undefined> {
-  return (await client.getData?.())?.value;
+// TypeScript: Type narrowing with optional chaining
+function getUserEmail(obj: UserProfile): string | undefined {
+  return obj?.address?.city;
 }
 
 
 // ============================================================================
-// 3. NULLISH COALESCING WITH TYPES
+// 4. NULLISH COALESCING WITH TYPES
 // ============================================================================
 
-// JavaScript: Nullish coalescing operator
-// const value = input ?? defaultValue;
-
+// JavaScript: const value = input ?? defaultValue;
 // TypeScript: Proper type inference with nullish coalescing
+
+interface Config {
+  port?: number;
+  timeout?: number;
+}
+
 function getConfig(
-  userConfig: Partial<{ port: number; timeout: number }> = {},
-  defaults: { port: number; timeout: number }
-): { port: number; timeout: number } {
+  userConfig: Partial<Config> = {},
+  defaults: Config
+): Config {
   return {
     port: userConfig.port ?? defaults.port,
     timeout: userConfig.timeout ?? defaults.timeout
@@ -90,13 +118,13 @@ function getConfig(
 }
 
 console.log("\n=== Nullish Coalescing Types ===");
-const config = getConfig(
+const typedConfig = getConfig(
   { port: 8080 },
   { port: 3000, timeout: 5000 }
 );
-console.log(config); // { port: 8080, timeout: 5000 }
+console.log(typedConfig);
 
-// Type narrowing with nullish coalescing
+// TypeScript: Nullish coalescing with type narrowing
 type MaybeString = string | null | undefined;
 
 function getString(value: MaybeString, fallback: string): string {
@@ -105,270 +133,301 @@ function getString(value: MaybeString, fallback: string): string {
 
 
 // ============================================================================
-// 4. CONST ASSERTIONS
+// 5. TYPED DEFAULT PARAMETERS
 // ============================================================================
 
-// JavaScript: Object literals are mutable
-// const config = { apiUrl: "https://api.example.com" };
+// JavaScript: function greet(name = "Guest", greeting = "Hello")
+// TypeScript: Default parameters with type annotations
 
-// TypeScript: const assertions create literal types
-const mutableConfig = {
-  apiUrl: "https://api.example.com",
-  methods: ["GET", "POST"]
-};
+function greet(name: string = "Guest", greeting: string = "Hello"): string {
+  return `${greeting}, ${name}!`;
+}
 
-const immutableConfig = {
-  apiUrl: "https://api.example.com",
-  methods: ["GET", "POST"]
-} as const;
+console.log("\n=== Typed Default Parameters ===");
+console.log(greet()); // "Hello, Guest!"
+console.log(greet("Bob")); // "Hello, Bob!"
 
-console.log("\n=== Const Assertions ===");
-// mutableConfig.apiUrl = "changed"; // ✅ OK if type allows
-// immutableConfig.apiUrl = "changed"; // ❌ Error: readonly property
+// TypeScript: Default parameters can reference earlier parameters
+function createGreeting(
+  name: string,
+  greeting: string = "Hello",
+  punctuation: string = "!"
+): string {
+  return `${greeting}, ${name}${punctuation}`;
+}
 
-// Type inference difference
-type MutableType = typeof mutableConfig;
-// { apiUrl: string; methods: string[] }
-
-type ImmutableType = typeof immutableConfig;
-// { readonly apiUrl: "https://api.example.com"; readonly methods: readonly ["GET", "POST"] }
+console.log(createGreeting("Alice")); // "Hello, Alice!"
 
 
 // ============================================================================
-// 5. SATISFIES OPERATOR (TS 4.9+)
+// 6. TYPED REST PARAMETERS
 // ============================================================================
 
-// TypeScript: satisfies operator for type validation without widening
-type RouteConfig = {
-  path: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
-  handler: (req: unknown) => Promise<void>;
-};
+// JavaScript: function sum(...numbers)
+// TypeScript: Rest parameters with tuple types
 
-// Without satisfies - type is widened
-const routesWithoutSatisfies: Record<string, RouteConfig> = {
-  "/users": {
-    path: "/users",
-    method: "GET",
-    handler: async () => {}
+function sum(...numbers: number[]): number {
+  return numbers.reduce((acc, n) => acc + n, 0);
+}
+
+console.log("\n=== Typed Rest Parameters ===");
+console.log(sum(1, 2, 3, 4, 5)); // 15
+
+// TypeScript: Rest parameter with specific tuple type
+function processTuple(first: number, second: number, ...rest: number[]): string {
+  return `${first}, ${second}, [${rest.join(', ')}]`;
+}
+
+console.log(processTuple(1, 2, 3, 4, 5)); // "1, 2, [3, 4, 5]"
+
+
+// ============================================================================
+// 7. TYPED ARROW FUNCTIONS
+// ============================================================================
+
+// JavaScript: const add = (a, b) => a + b;
+// TypeScript: Arrow functions with explicit return types
+
+const add = (a: number, b: number): number => a + b;
+
+// TypeScript: Implicit return type inference
+const multiply = (a: number, b: number) => a * b; // Return type inferred as number
+
+console.log("\n=== Typed Arrow Functions ===");
+console.log("add(5, 3):", add(5, 3));
+console.log("multiply(4, 6):", multiply(4, 6));
+
+// TypeScript: Lexical this typing
+class Counter {
+  count = 0;
+
+  increment(): void {
+    setTimeout(() => {
+      this.count++; // TypeScript knows 'this' is Counter
+      console.log("Counter:", this.count);
+    }, 100);
   }
-};
-// routesWithoutSatisfies["/users"].method is just "GET" | "POST" | "PUT" | "DELETE"
+}
 
-// With satisfies - preserves literal types
-const routes = {
-  "/users": {
-    path: "/users",
-    method: "GET",
-    handler: async () => {}
-  },
-  "/posts": {
-    path: "/posts",
-    method: "POST",
-    handler: async () => {}
-  }
-} satisfies Record<string, RouteConfig>;
-
-console.log("\n=== Satisfies Operator ===");
-// routes["/users"].method has literal type "GET"
-// routes["/posts"].method has literal type "POST"
+const counter = new Counter();
+counter.increment();
 
 
 // ============================================================================
-// 6. INFER TYPE KEYWORD
+// 8. TYPED CLASSES - BASIC SYNTAX
 // ============================================================================
 
-// TypeScript: infer keyword for conditional types
-type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
-
-type PromiseValue<T> = T extends Promise<infer V> ? V : never;
-
-type ArrayElement<T> = T extends (infer E)[] ? E : never;
-
-// Complex inference
-type FirstArgument<T> = T extends (arg: infer A, ...args: any[]) => any ? A : never;
-
-console.log("\n=== Infer Keyword ===");
-type MyFunction = (x: number, y: string) => boolean;
-type MyReturn = ReturnType<MyFunction>; // boolean
-type MyFirstArg = FirstArgument<MyFunction>; // number
-
-
-// ============================================================================
-// 7. CONDITIONAL TYPES
-// ============================================================================
-
-// TypeScript: Conditional types for type-level logic
-type IsString<T> = T extends string ? true : false;
-
-type StringCheck1 = IsString<"hello">; // true
-type StringCheck2 = IsString<42>; // false
-
-// Distributive conditional types
-type ToArray<T> = T extends any ? T[] : never;
-
-type ArrayOfString = ToArray<string>; // string[]
-type ArrayOfUnion = ToArray<string | number>; // string[] | number[]
-
-// Exclude utility type (built-in conditional)
-type LiteralUnion = "a" | "b" | "c" | 1 | 2;
-type OnlyStrings = Exclude<LiteralUnion, number>; // "a" | "b" | "c"
-
-console.log("\n=== Conditional Types ===");
-
-
-// ============================================================================
-// 8. NON-NULL ASSERTION OPERATOR
-// ============================================================================
-
-// TypeScript: Non-null assertion (!) operator
-interface User {
+// TypeScript: Class with typed fields, constructor, and methods
+class Animal {
   name: string;
-  email?: string | null;
-}
 
-function getUserEmail(user: User): string {
-  // Tell TypeScript we know this isn't null/undefined
-  return user.email!;
-}
+  constructor(name: string) {
+    this.name = name;
+  }
 
-// Use with caution - can cause runtime errors if wrong
-function safeGetUserEmail(user: User): string | undefined {
-  return user.email ?? undefined;
-}
-
-console.log("\n=== Non-null Assertion ===");
-console.log("Use ! operator when you know a value isn't null/undefined");
-console.log("But prefer proper null checks in most cases");
-
-
-// ============================================================================
-// 9. TYPE PREDICATES AND ASSERTION FUNCTIONS
-// ============================================================================
-
-// Type predicate for custom type guards
-interface Fish { swim(): void; }
-interface Bird { fly(): void; }
-
-function isFish(pet: Fish | Bird): pet is Fish {
-  return (pet as Fish).swim !== undefined;
-}
-
-function move(pet: Fish | Bird): void {
-  if (isFish(pet)) {
-    pet.swim(); // TypeScript knows pet is Fish
-  } else {
-    pet.fly(); // TypeScript knows pet is Bird
+  speak(): string {
+    return `${this.name} makes a sound`;
   }
 }
 
-// Assertion functions (TS 3.7+)
-function assertIsDefined<T>(value: T | null | undefined): asserts value is T {
-  if (value === null || value === undefined) {
-    throw new Error("Value is null or undefined");
+// TypeScript: Inheritance with typed super
+class Dog extends Animal {
+  breed: string;
+
+  constructor(name: string, breed: string) {
+    super(name);
+    this.breed = breed;
+  }
+
+  speak(): string {
+    return `${this.name} barks!`;
   }
 }
 
-console.log("\n=== Type Predicates and Assertions ===");
+const dog = new Dog("Max", "Golden Retriever");
+console.log("\n=== Typed Classes ===");
+console.log(dog.speak()); // "Max barks!"
 
 
 // ============================================================================
-// 10. AS CONST VS AS TYPE
+// 9. TYPED STATIC MEMBERS
 // ============================================================================
 
-// Different ways to type expressions
-const arr1 = [1, 2, 3];           // number[]
-const arr2 = [1, 2, 3] as const;  // readonly [1, 2, 3]
-const arr3 = [1, 2, 3] as number[]; // number[] (explicit)
+// TypeScript: Static members with types
+class MathUtils {
+  static readonly PI: number = 3.14159;
+  static version: string = "1.0.0";
 
-const obj1 = { a: 1 };            // { a: number }
-const obj2 = { a: 1 } as const;   // { readonly a: 1 }
-const obj3 = { a: 1 } as { a: number }; // { a: number } (explicit)
+  static square(x: number): number {
+    return x * x;
+  }
 
-console.log("\n=== as const vs as Type ===");
-console.log("as const - Creates deeply readonly literal types");
-console.log("as Type - Asserts specific type (use sparingly)");
-
-
-// ============================================================================
-// 11. BRAND/TAGGED TYPES
-// ============================================================================
-
-// TypeScript: Branding types for nominal typing
-type UserId = string & { readonly brand: unique symbol };
-type OrderId = string & { readonly brand: unique symbol };
-
-function createUserId(id: string): UserId {
-  return id as UserId;
+  static circleArea(radius: number): number {
+    return this.PI * this.square(radius);
+  }
 }
 
-function getOrder(id: OrderId): void {
-  console.log(`Getting order ${id}`);
-}
-
-console.log("\n=== Brand/Tagged Types ===");
-const userId = createUserId("user-123");
-// getOrder(userId); // ❌ Error: UserId is not assignable to OrderId
+console.log("\n=== Typed Static Members ===");
+console.log("MathUtils.PI:", MathUtils.PI);
+console.log("MathUtils.square(5):", MathUtils.square(5));
+console.log("MathUtils.circleArea(3):", MathUtils.circleArea(3).toFixed(2));
 
 
 // ============================================================================
-// 12. OPAQUE TYPES PATTERN
+// 10. PRIVATE FIELDS: JS # vs TS private
 // ============================================================================
 
-// TypeScript: Opaque types using unique symbols
-declare const opaque: unique symbol;
+// JavaScript: #balance (ES2022 private, runtime enforced)
+// TypeScript: private balance (compile-time checked) or #balance (runtime)
 
-type Opaque<T, Tag> = T & { [opaque]: Tag };
+class JSBankAccount {
+  #balance = 0; // ES2022 private, runtime enforced
 
-type Celsius = Opaque<number, "Celsius">;
-type Fahrenheit = Opaque<number, "Fahrenheit">;
+  deposit(amount: number): boolean {
+"    if (amount > 0) {
+      this.#balance += amount;
+      return true;
+    }
+    return false;
+  }
 
-function createCelsius(value: number): Celsius {
-  return value as Celsius;
+  getBalance(): number {
+    return this.#balance;
+  }
 }
 
-function createFahrenheit(value: number): Fahrenheit {
-  return value as Fahrenheit;
+// TypeScript: private keyword (compile-time only, removed at runtime)
+class TSBankAccount {
+  private balance = 0; // TypeScript private, compile-time checked
+
+  deposit(amount: number): boolean {
+    if (amount > 0) {
+      this.balance += amount;
+      return true;
+    }
+    return false;
+  }
+
+  getBalance(): number {
+    return this.balance;
+  }
 }
 
-function celsiusToFahrenheit(c: Celsius): Fahrenheit {
-  return ((c as number) * 9/5 + 32) as Fahrenheit;
+// TypeScript: protected for subclasses
+class Parent {
+  protected shared = "protected value";
+  private hidden = "private value";
 }
 
-console.log("\n=== Opaque Types Pattern ===");
-const temp = createCelsius(25);
-console.log(celsiusToFahrenheit(temp));
+class Child extends Parent {
+  useShared(): string {
+    return this.shared; // ✅ Can access protected
+    // return this.hidden; // ❌ Cannot access private
+  }
+}
+
+console.log("\n=== Private Fields Comparison ===");
+console.log("JS #: Runtime enforced, cannot be accessed outside");
+console.log("TS private: Compile-time checked, accessible at runtime via workarounds");
 
 
 // ============================================================================
-// 13. COMPARISON TABLE
+// 11. TYPED GETTERS AND SETTERS
 // ============================================================================
 
-console.log("\n=== JavaScript vs TypeScript: Modern Features ===");
-console.log(`
-┌────────────────────────────┬─────────────────┬─────────────────┐
-│ Feature                    │   JavaScript    │   TypeScript    │
-├────────────────────────────┼─────────────────┼─────────────────┤
-│ Template literal types     │       ✗         │       ✓         │
-│ Optional chaining types    │  Runtime only   │  Type narrowing│
-│ Nullish coalescing types   │  Runtime only   │  Type inference│
-│ Const assertions           │       ✗         │       ✓         │
-│ Satisfies operator         │       ✗         │       ✓         │
-│ Infer keyword              │       ✗         │       ✓         │
-│ Conditional types          │       ✗         │       ✓         │
-│ Type predicates            │       ✗         │       ✓         │
-│ Brand/opaque types         │       ✗         │       ✓         │
-│ Runtime behavior           │    Same         │    Same         │
-│ Optional chaining          │    Same         │    Same         │
-│ Nullish coalescing         │    Same         │    Same         │
-└────────────────────────────┴─────────────────┴─────────────────┘
+// TypeScript: Getters and setters with types
+class Temperature {
+  #celsius = 0;
 
-KEY TAKEAWAYS:
-1. TypeScript adds type-level template literals
-2. Optional chaining integrates with null checking
-3. Const assertions preserve literal types
-4. Satisfies operator validates without widening
-5. Runtime behavior follows JavaScript rules
-`);
+  constructor(celsius = 0) {
+ fanc    this.#celsius = celsius;
+  }
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+  get celsius(): number {
+    return this.#celsius;
+  }
+
+  set celsius(value: number) {
+    this.#celsius = value;
+  }
+
+  get fahrenheit(): number {
+    return this.#celsius * 9/5 + 32;
+  }
+
+  set fahrenheit(value: number) {
+    this.#celsius = (value - 32) * 5/9;
+  }
+}
+
+const temp = new Temperature(25);
+console.log("\n=== Typed Getters/Setters ===");
+console.log("Celsius:", temp.celsius); // 25
+console.log("Fahrenheit:", temp.fahrenheit.toFixed(1)); // 77.0
+
+temp.fahrenheit = 86;
+console.log("After setting to 86°F:", temp.celsius); // 30
+
+
+// ============================================================================
+// 12. ABSTRACT CLASSES
+// ============================================================================
+
+// TypeScript: Abstract classes with typed methods
+abstract class Shape {
+  abstract getArea(): number;
+
+  describe(): string {
+    return `Shape with area: ${this.getArea()}`;
+  }
+}
+
+class Circle extends Shape {
+  constructor(private radius: number) {}
+
+  getArea(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(private width: number, private height: number) {}
+
+  getArea(): number {
+    return this.width * this.height;
+  }
+}
+
+// const shape = new Shape(); // ❌ Cannot instantiate abstract class
+const circle = new Circle(5);
+const rectangle = new Rectangle(4, 6);
+
+console.log("\n=== Typed Abstract Classes ===");
+console.log("Circle area:", circle.getArea().toFixed(2));
+console.log("Rectangle area:", rectangle.getArea());
+
+
+// ============================================================================
+// SUMMARY
+// ============================================================================
+
+console.log("\n=== TypeScript Modern Features Summary ===");
+console.log("1. Typed spread operator");
+console.log("2. Typed destructuring");
+console.log("3. Optional chaining with type narrowing");
+console.log("4. Nullish coalescing with type inference");
+console.log("5. Typed default parameters");
+console.log("6. Typed rest parameters");
+console.log("7. Typed arrow functions");
+console.log("8. Typed classes with inheritance");
+console.log("9. Typed static members");
+console.log("10. Private fields: JS # vs TS private");
+console.log("11. Typed getters/setters");
+console.log("12. Abstract classes");
+
+console.log("\n📘 Key TypeScript Benefits:");
+console.log("- Type inference with spread/destructuring");
+console.log("- Compile-time parameter validation");
+console.log("- Return type safety for functions");
+console.log("- Class field typing and inheritance");
+console.log("- Abstract classes for interface enforcement");

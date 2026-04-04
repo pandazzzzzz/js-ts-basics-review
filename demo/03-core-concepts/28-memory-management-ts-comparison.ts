@@ -347,6 +347,266 @@ console.log("Total estimated memory:", manager.getTotalSize());
 
 
 // ============================================================================
+// 8. TYPED MEMORY LEAK PATTERNS
+// ============================================================================
+
+console.log("\n=== Typed Memory Leak Patterns ===");
+
+// TypeScript: Type-safe event listener management
+interface EventListener {
+  callback: (data: unknown) => void;
+  once: boolean;
+}
+
+class TypedEventEmitter {
+  private readonly listeners: Map<string, EventListener[]> = new Map();
+
+  on(event: string, callback: (data: unknown) => void): () => void {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event)!.push({ callback, once: false });
+
+    // Return cleanup function
+    return () => this.off(event, callback);
+  }
+
+  once(event: string, callback: (data: unknown) => void): () => void {
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, []);
+    }
+    this.listeners.get(event)!.push({ callback, once: true });
+
+    return () => this.off(event, callback);
+  }
+
+  off(event: string, callback?: (data: unknown) => void): void {
+    if (!this.listeners.has(event)) return;
+
+    const listeners = this.listeners.get(event)!;
+    if (callback) {
+      this.listeners.set(event, listeners.filter(l => l.callback !== callback));
+    } else {
+      this.listeners.set(event, []);
+    }
+  }
+
+  emit(event: string, data: unknown): void {
+    const listeners = this.listeners.get(event);
+    if (!listeners) return;
+
+    listeners.forEach(l => {
+      l.callback(data);
+      if (l.once) this.off(event, l.callback);
+    });
+  }
+}
+
+const typedEmitter = new TypedEventEmitter();
+const cleanup = typedEmitter.on('data', (data) => console.log('Received:', data));
+typedEmitter.emit('data', 'test');
+cleanup(); // Properly remove listener
+
+// TypeScript: Type-safe timer management
+class TimerManager {
+  private readonly timers: Map<number, NodeJS.Timeout> = new Map();
+  private readonly intervals: Map<number, NodeJS.Timeout> = new Map();
+  private nextId = 0;
+
+  setTimeout(callback: () => void, delay: number): number {
+    const id = this.nextId++;
+    const timer = setTimeout(() => {
+      callback();
+      this.timers.delete(id);
+    }, delay);
+    this.timers.set(id, timer);
+    return id;
+  }
+
+  setInterval(callback: () => void, interval: number): number {
+    const id = this.nextId++;
+    const timer = setInterval(callback, interval);
+    this.intervals.set(id, timer);
+    return id;
+  }
+
+  clearTimer(id: number): void {
+    const timer = this.timers.get(id);
+    if (timer) {
+      clearTimeout(timer);
+      this.timers.delete(id);
+    }
+  }
+
+  clearInterval(id: number): void {
+    const timer = this.intervals.get(id);
+    if (timer) {
+      clearInterval(timer);
+      this.intervals.delete(id);
+    }
+  }
+
+  clearAll(): void {
+    this.timers.forEach(timer => clearTimeout(timer));
+    this.intervals.forEach(timer => clearInterval(timer));
+    this.timers.clear();
+    this.intervals.clear();
+  }
+
+  get stats(): { timeouts: number; intervals: number } {
+    return {
+      timeouts: this.timers.size,
+      intervals: this.intervals.size
+    };
+  }
+}
+
+const timerManager = new TimerManager();
+const timerId = timerManager.setTimeout(() => console.log('Timer fired'), 1000);
+console.log('Active timers:', timerManager.stats);
+
+
+// ============================================================================
+// 9. TYPED GARBAGE COLLECTION CONCEPTS
+// ============================================================================
+
+console.log("\n=== Typed Garbage Collection Concepts ===");
+
+// TypeScript: GC-friendly pattern with types
+interface GCFriendlyCache<K extends object, V> {
+  get(key: K): V | undefined;
+  set(key: K, value: V): void;
+  has(key: K): boolean;
+  clear(): void;
+}
+
+// WeakMap-based cache (GC-friendly)
+class WeakCache<K extends object, V> implements GCFriendlyCache<K, V> {
+  private readonly cache = new WeakMap<K, V>();
+
+  get(key: K): V | undefined {
+    return this.cache.get(key);
+  }
+
+  set(key: K, value: V): void {
+    this.cache.set(key, value);
+  }
+
+  has(key: K): boolean {
+    return this.cache.has(key);
+  }
+
+  clear(): void {
+    // WeakMap cannot be cleared, but entries will be GC'd
+  }
+}
+
+// TypeScript: Memory monitoring with types
+interface MemoryThresholds {
+  warnMB: number;
+  errorMB: number;
+}
+
+interface MemoryStats {
+  heapUsedMB: number;
+  heapTotalMB: number;
+  externalMB: number;
+  arrayBuffersMB: number;
+}
+
+class TypedMemoryMonitor {
+  private readonly thresholds: MemoryThresholds;
+
+  constructor(thresholds: MemoryThresholds = { warnMB: 100, errorMB: 500 }) {
+    this.thresholds = thresholds;
+  }
+
+  getStats(): MemoryStats {
+    const usage = process.memoryUsage();
+    return {
+      heapUsedMB: usage.heapUsed / 1024 / 1024,
+      heapTotalMB: usage.heapTotal / 1024 / 1024,
+      externalMB: usage.external / 1024 / 1024,
+      arrayBuffersMB: usage.arrayBuffers / 1024 / 1024
+    };
+  }
+
+  checkThresholds(): 'ok' | 'warn' | 'error' {
+    const stats = this.getStats();
+    if (stats.heapUsedMB > this.thresholds.errorMB) return 'error';
+    if (stats.heapUsedMB > this.thresholds.warnMB) return 'warn';
+    return 'ok';
+  }
+}
+
+const monitor = new TypedMemoryMonitor({ warnMB: 50, errorMB: 200 });
+const memStats = monitor.getStats();
+console.log('Memory stats:', memStats);
+console.log('Threshold status:', monitor.checkThresholds());
+
+
+// ============================================================================
+// 10. TYPED LARGE DATA HANDLING
+// ============================================================================
+
+console.log("\n=== Typed Large Data Handling ===");
+
+// TypeScript: Generic chunk processor
+interface ChunkProcessor<T, R> {
+  process(chunk: T[]): R[];
+}
+
+class DataStreamProcessor<T, R> {
+  constructor(
+    private readonly chunkSize: number,
+    private readonly processor: ChunkProcessor<T, R>
+  ) {}
+
+  async processData(data: T[]): Promise<R[]> {
+    const results: R[] = [];
+    const totalChunks = Math.ceil(data.length / this.chunkSize);
+
+    for (let i = 0; i < data.length; i += this.chunkSize) {
+      const chunk = data.slice(i, i + this.chunkSize);
+      const processed = this.processor.process(chunk);
+      results.push(...processed);
+
+      // Yield to event loop
+      await new Promise(resolve => setImmediate(resolve));
+    }
+
+    return results;
+  }
+}
+
+// TypeScript: Generator-based stream with types
+function* typedStreamGenerator<T>(
+  generator: (index: number) => T,
+  total: number
+): Generator<T> {
+  for (let i = 0; i < total; i++) {
+    yield generator(i);
+  }
+}
+
+interface StreamItem {
+  id: number;
+  timestamp: number;
+  value: string;
+}
+
+const dataStream = typedStreamGenerator<StreamItem>(
+  (i) => ({ id: i, timestamp: Date.now(), value: `item-${i}` }),
+  10
+);
+
+console.log('Streaming typed data:');
+for (const item of dataStream) {
+  console.log(`  Item ${item.id}: ${item.value}`);
+}
+
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 
@@ -358,6 +618,9 @@ console.log("4. Typed arrays with strong typing");
 console.log("5. Branded types for object tracking");
 console.log("6. Typed memory usage monitoring");
 console.log("7. Discriminated unions for object types");
+console.log("8. Typed memory leak patterns");
+console.log("9. Typed garbage collection concepts");
+console.log("10. Typed large data handling");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe weak collections");

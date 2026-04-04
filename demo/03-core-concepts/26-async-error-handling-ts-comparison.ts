@@ -324,6 +324,312 @@ async function retry<T>(
 
 
 // ============================================================================
+// 8. TYPED TIMEOUT AND CANCELLATION
+// ============================================================================
+
+console.log("\n=== Typed Timeout and Cancellation ===");
+
+// TypeScript: Typed timeout wrapper
+function withTimeout<T>(
+  promise: Promise<T>,
+  ms: number,
+  errorMessage = "Operation timed out"
+): Promise<T> {
+  const timeout = new Promise<never>((_, reject) => {
+    setTimeout(() => reject(new Error(errorMessage)), ms);
+  });
+
+  return Promise.race([promise, timeout]);
+}
+
+async function slowOperation(): Promise<string> {
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  return "Completed";
+}
+
+console.log("Timeout wrapper:");
+withTimeout(slowOperation(), 100)
+  .then(result => console.log("Result:", result))
+  .catch(error => console.log("Error:", error.message));
+
+// TypeScript: AbortController with types
+async function cancellableOperation(
+  signal: AbortSignal
+): Promise<string> {
+  for (let i = 0; i < 10; i++) {
+    if (signal.aborted) {
+      throw new Error("Operation cancelled");
+    }
+    console.log(`Progress: ${i * 10}%`);
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+  return "Complete";
+}
+
+console.log("\nCancellable operation:");
+const controller = new AbortController();
+
+cancellableOperation(controller.signal)
+  .then(result => console.log("Result:", result))
+  .catch(error => console.log("Cancelled:", error.message));
+
+// Cancel after 300ms
+setTimeout(() => {
+  controller.abort();
+  console.log("Operation aborted by user");
+}, 300);
+
+
+// ============================================================================
+// 9. TYPED ERROR CONTEXT PRESERVATION
+// ============================================================================
+
+console.log("\n=== Typed Error Context Preservation ===");
+
+// TypeScript: Enhanced error class with typed context
+interface ErrorContext {
+  [key: string]: unknown;
+}
+
+class TypedAppError extends Error {
+  public readonly timestamp: Date;
+  public readonly context: Readonly<ErrorContext>;
+
+  constructor(
+    message: string,
+    context: ErrorContext = {}
+  ) {
+    super(message);
+    this.name = "TypedAppError";
+    this.timestamp = new Date();
+    this.context = context;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+
+  toJSON(): {
+    name: string;
+    message: string;
+    timestamp: number;
+    context: ErrorContext;
+    stack?: string;
+  } {
+    return {
+      name: this.name,
+      message: this.message,
+      timestamp: this.timestamp.getTime(),
+      context: this.context,
+      stack: this.stack
+    };
+  }
+}
+
+// TypeScript: Domain-specific errors with typed fields
+class DatabaseConnectionError extends TypedAppError {
+  constructor(
+    public readonly host: string,
+    public readonly port: number,
+    originalError?: Error
+  ) {
+    super(`Failed to connect to database at ${host}:${port}`, {
+      host,
+      port,
+      errorCode: originalError?.message,
+      retryable: true
+    });
+    this.name = "DatabaseConnectionError";
+  }
+}
+
+class UserValidationError extends TypedAppError {
+  constructor(
+    public readonly field: string,
+    public readonly value: unknown,
+    public readonly reason: string
+  ) {
+    super(`Validation failed for field "${field}"`, {
+      field,
+      value,
+      reason,
+      type: "VALIDATION_ERROR"
+    });
+    this.name = "UserValidationError";
+  }
+}
+
+// Usage examples
+console.log("Enhanced typed errors:");
+
+try {
+  throw new DatabaseConnectionError("localhost", 5432, new Error("ECONNREFUSED"));
+} catch (error) {
+  if (error instanceof TypedAppError) {
+    console.log("\nDatabase error:", error.toJSON());
+  }
+}
+
+try {
+  throw new UserValidationError("email", "invalid", "Must be valid email format");
+} catch (error) {
+  if (error instanceof UserValidationError) {
+    console.log("\nValidation error:", error.toJSON());
+  }
+}
+
+
+// ============================================================================
+// 10. TYPED ERROR MIDDLEWARE PATTERNS
+// ============================================================================
+
+console.log("\n=== Typed Error Middleware Patterns ===");
+
+// TypeScript: Generic error middleware pipeline
+type Middleware<T> = (data: T) => Promise<T>;
+type ErrorMiddleware = (error: unknown) => Promise<unknown>;
+
+class TypedPipeline<T, R> {
+  private readonly handlers: Array<Middleware<T | R>> = [];
+  private readonly errorHandlers: ErrorMiddleware[] = [];
+
+  use(handler: Middleware<T | R>): this {
+    this.handlers.push(handler);
+    return this;
+  }
+
+  useError(handler: ErrorMiddleware): this {
+    this.errorHandlers.push(handler);
+    return this;
+  }
+
+  async execute(input: T): Promise<R> {
+    try {
+      let result: T | R = input;
+      for (const handler of this.handlers) {
+        result = await handler(result);
+      }
+      return result as R;
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  private async handleError(error: unknown): Promise<never> {
+    let handledError = error;
+
+    for (const handler of this.errorHandlers) {
+      handledError = await handler(handledError);
+    }
+
+    throw handledError;
+  }
+}
+
+// TypeScript: Typed middleware
+interface ProcessingData {
+  name?: string;
+  [key: string]: unknown;
+}
+
+interface ProcessedData extends ProcessingData {
+  transformed: boolean;
+}
+
+const typedLoggingMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
+  console.log("Processing:", data);
+  return data;
+};
+
+const typedValidationMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
+  if (!data || typeof data !== "object" || !data.name) {
+    throw new Error("Invalid data format: name required");
+  }
+  return data;
+};
+
+const typedTransformationMiddleware = async (data: ProcessingData): Promise<ProcessedData> => {
+  return { ...data, transformed: true };
+};
+
+// TypeScript: Typed error handlers
+interface ClientErrorResponse {
+  success: false;
+  error: {
+    message: string;
+    type: string;
+  };
+}
+
+const typedFormatErrorHandler = async (error: unknown): Promise<ClientErrorResponse> => {
+  return {
+    success: false,
+    error: {
+      message: error instanceof Error ? error.message : "Unknown error",
+      type: error instanceof Error ? error.constructor.name : "UnknownError"
+    }
+  };
+};
+
+const typedLoggingErrorHandler = async (error: unknown): Promise<unknown> => {
+  if (error instanceof Error) {
+    console.log("Error logged:", error.message);
+  }
+  return error;
+};
+
+// Build and run typed pipeline
+const typedPipeline = new TypedPipeline<ProcessingData, ProcessedData | ClientErrorResponse>();
+typedPipeline
+  .use(typedLoggingMiddleware)
+  .use(typedValidationMiddleware)
+  .use(typedTransformationMiddleware)
+  .useError(typedLoggingErrorHandler)
+  .useError(typedFormatErrorHandler);
+
+console.log("\nTyped pipeline execution:");
+typedPipeline.execute({ name: "test" })
+  .then(result => console.log("Success:", result))
+  .catch(error => console.log("Final error:", error));
+
+
+// ============================================================================
+// 11. TYPED GLOBAL ERROR HANDLING
+// ============================================================================
+
+console.log("\n=== Typed Global Error Handling ===");
+
+// TypeScript: Safe function wrapper with types
+function safeExecute<T extends (...args: unknown[]) => Promise<R>, R>(
+  fn: T,
+  fallback: ((error: unknown) => R) | R = null as R
+): (...args: Parameters<T>) => Promise<R> {
+  return async (...args: Parameters<T>): Promise<R> => {
+    try {
+      return await fn(...args);
+    } catch (error) {
+      console.log("Safe execute caught:", error instanceof Error ? error.message : String(error));
+      return typeof fallback === "function"
+        ? (fallback as (error: unknown) => R)(error)
+        : fallback;
+    }
+  };
+}
+
+const typedSafeDivide = safeExecute(
+  async (a: number, b: number): Promise<number> => {
+    if (b === 0) throw new Error("Division by zero");
+    return a / b;
+  },
+  (error: unknown) => ({
+    error: error instanceof Error ? error.message : "Unknown error",
+    result: 0
+  })
+);
+
+console.log("\nTyped safe execute:");
+typedSafeDivide(10, 2).then(result => console.log("10 / 2 =", result));
+typedSafeDivide(10, 0).then(result => console.log("10 / 0 =", result));
+
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 
@@ -335,6 +641,10 @@ console.log("4. Typed circuit breaker");
 console.log("5. AggregateError with type guards");
 console.log("6. Error cause typing");
 console.log("7. Generic retry function");
+console.log("8. Typed timeout and cancellation (AbortSignal)");
+console.log("9. Typed error context preservation");
+console.log("10. Typed error middleware patterns");
+console.log("11. Typed global error handling");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Exhaustive error type checking");
