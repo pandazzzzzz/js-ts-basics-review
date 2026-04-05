@@ -331,7 +331,185 @@ console.log("Users named Alice:", userRepository.findByName("Alice"));
 
 
 // ============================================================================
-// 8. OBSERVER PATTERN WITH TYPES
+// 8. PARASITIC COMPOSITION WITH TYPES
+// ============================================================================
+
+console.log("\n=== Parasitic Composition with Types ===");
+
+// TypeScript: Typed parasitic composition
+function createPerson(name: string) {
+  return { name };
+}
+
+function createEmployee(name: string, title: string) {
+  const person = createPerson(name);
+  return {
+    ...person,
+    title,
+    getTitle: (): string => title
+  };
+}
+
+const emp = createEmployee('Alice', 'Engineer');
+console.log("Parasitic composition:");
+console.log('Employee:', emp.name, emp.getTitle());
+
+// TypeScript: Typed parasitic inheritance
+interface Animal {
+  name: string;
+  eat(): void;
+}
+
+function Animal2(name: string): Animal {
+  return {
+    name,
+    eat: () => console.log(`${name} is eating`)
+  };
+}
+
+interface Dog extends Animal {
+  breed: string;
+  bark(): void;
+}
+
+function createDog(name: string, breed: string): Dog {
+  const animal = Animal2(name);
+  return {
+    ...animal,
+    breed,
+    bark: () => console.log(`${name} says woof!`)
+  };
+}
+
+const typedDog = createDog('Buddy', 'Golden Retriever');
+console.log("\nParasitic inheritance:");
+typedDog.eat();
+typedDog.bark();
+
+// TypeScript: Factory with typed composition
+interface Loggable {
+  log(msg: string): void;
+}
+
+interface Cacheable<K, V> {
+  getCache(key: K): V | undefined;
+  setCache(key: K, value: V): void;
+}
+
+function withLogging<T extends { name?: string }>(obj: T): T & Loggable {
+  return {
+    ...obj,
+    log: (msg: string) => console.log(`[${obj.name || 'unknown'}] ${msg}`)
+  };
+}
+
+function withCaching<T, K, V>(obj: T, _cacheKey: string): T & Cacheable<K, V> {
+  const cache = new Map<K, V>();
+  return {
+    ...obj,
+    getCache: (key: K) => cache.get(key),
+    setCache: (key: K, value: V) => void { cache.set(key, value); }
+  };
+}
+
+const baseService = { name: 'UserService', fetch: () => ({ id: 1 }) };
+const enhancedService = withCaching(withLogging(baseService), 'users');
+
+console.log("\nFactory composition:");
+enhancedService.log('Fetching user');
+enhancedService.setCache('user:1', { id: 1, name: 'Bob' });
+console.log('Cached value:', enhancedService.getCache('user:1'));
+
+
+// ============================================================================
+// 9. TYPED TRAITS PATTERN
+// ============================================================================
+
+console.log("\n=== Typed Traits Pattern ===");
+
+// TypeScript: Basic traits
+interface TEquality {
+  equals(other: unknown): boolean;
+}
+
+const TEquality = {
+  equals(this: object, other: unknown): boolean {
+    return this === other;
+  }
+};
+
+interface TSerializable {
+  serialize(): string;
+  deserialize(json: string): object;
+}
+
+const TSerializable = {
+  serialize(this: object): string {
+    return JSON.stringify(this);
+  },
+  deserialize(this: any, json: string): object {
+    return Object.assign(new this.constructor(), JSON.parse(json));
+  }
+};
+
+interface TLoggable {
+  log(message: string): void;
+}
+
+const TLoggable = {
+  log(this: { constructor: { name: string } }, message: string): void {
+    console.log(`[${this.constructor.name}] ${message}`);
+  }
+};
+
+// TypeScript: Trait composer with conflict resolution
+function composeTraits(...traits: object[]): object {
+  const composed: Record<string, unknown> = {};
+  const conflicts: Map<string, number> = new Map();
+
+  traits.forEach(trait => {
+    Object.keys(trait).forEach(key => {
+      if (composed[key] !== undefined && composed[key] !== (trait as any)[key]) {
+        conflicts.set(key, (conflicts.get(key) || 0) + 1);
+      }
+      composed[key] = (trait as any)[key];
+    });
+  });
+
+  if (conflicts.size > 0) {
+    console.warn('Trait conflicts:', Array.from(conflicts.keys()));
+  }
+
+  return composed;
+}
+
+function applyTraits<T extends new (...args: any[]) => any>(
+  cls: T,
+  ...traits: object[]
+): T {
+  const composed = composeTraits(...traits);
+  Object.assign(cls.prototype, composed);
+  return cls;
+}
+
+class Entity {
+  id: number;
+  constructor(id: number) {
+    this.id = id;
+  }
+}
+
+applyTraits(Entity, TEquality, TLoggable, TSerializable);
+
+const entity = new Entity(123);
+console.log("Traits applied:");
+entity.log('Entity created');
+console.log('Serialized:', (entity as any).serialize());
+console.log('Equals self:', (entity as any).equals(entity));
+
+
+// ============================================================================
+// 10. OBSERVER PATTERN WITH TYPES
 // ============================================================================
 
 console.log("\n=== Observer Pattern with Types ===");
@@ -429,7 +607,9 @@ console.log("4. Typed mixins");
 console.log("5. Discriminated unions");
 console.log("6. Visitor pattern with interfaces");
 console.log("7. Generic constraints");
-console.log("8. Observer pattern with types");
+console.log("8. Parasitic composition with types");
+console.log("9. Typed traits pattern");
+console.log("10. Observer pattern with types");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe composition");

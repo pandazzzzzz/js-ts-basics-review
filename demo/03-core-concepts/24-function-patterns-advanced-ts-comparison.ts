@@ -254,6 +254,34 @@ getUser(userId); // OK
 
 
 // ============================================================================
+// 8. DECORATORS (EXPERIMENTAL)
+// ============================================================================
+
+console.log("\n=== Decorators ===");
+
+// TypeScript: Method decorator
+function log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  descriptor.value = function(...args: any[]) {
+    console.log(`Calling ${propertyKey} with args:`, args);
+    const result = originalMethod.apply(this, args);
+    console.log(`Result:`, result);
+    return result;
+  };
+}
+
+class Calculator {
+  @log
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+const calc = new Calculator();
+calc.add(2, 3); // Logs call and result
+
+
+// ============================================================================
 // 9. TRAMPOLINE PATTERN FOR RECURSION
 // ============================================================================
 
@@ -315,31 +343,173 @@ console.log("isEven(9):", trampoline(() => isEven(9))); // false
 
 
 // ============================================================================
-// 8. DECORATORS (EXPERIMENTAL)
+// 10. POINT-FREE STYLE WITH TYPES
 // ============================================================================
 
-console.log("\n=== Decorators ===");
+console.log("\n=== Point-Free Style with Types ===");
 
-// TypeScript: Method decorator
-function log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  descriptor.value = function(...args: any[]) {
-    console.log(`Calling ${propertyKey} with args:`, args);
-    const result = originalMethod.apply(this, args);
-    console.log(`Result:`, result);
+// TypeScript: Typed compose/pipe utilities for point-free style
+type Compose = <A, B, C>(f: (b: B) => C, g: (a: A) => B) => (a: A) => C;
+type Pipe = <A, B, C>(g: (a: A) => B, f: (b: B) => C) => (a: A) => C;
+
+const compose: Compose = (f, g) => (a) => f(g(a));
+const pipe: Pipe = (g, f) => (a) => f(g(a));
+
+// Multi-parameter pipe with generics
+function pipe3<A, B, C, D>(
+  f1: (a: A) => B,
+  f2: (b: B) => C,
+  f3: (c: C) => D
+): (a: A) => D {
+  return (a) => f3(f2(f1(a)));
+}
+
+// Point-free style functions with types
+const add1 = (x: number): number => x + 1;
+const multiply2 = (x: number): number => x * 2;
+
+// Regular style - explicit argument x
+const regularTransform = (x: number): number => multiply2(add1(x));
+console.log("Regular style:", regularTransform(5)); // 12
+
+// Point-free style - no explicit argument
+const pointFreeTransform = pipe(add1, multiply2);
+console.log("Point-free style:", pointFreeTransform(5)); // 12
+
+// TypeScript: Practical array processing with point-free style
+const isEven = (x: number): boolean => x % 2 === 0;
+const doubleValue = (x: number): number => x * 2;
+const trim = (str: string): string => str.trim();
+const toUpper = (str: string): string => str.toUpperCase();
+const addPrefix = (prefix: string) => (str: string): string => `${prefix} ${str}`;
+
+const numbers = [1, 2, 3, 4, 5];
+const result = numbers
+  .filter(isEven)
+  .map(doubleValue);
+console.log("\nArray processing:", result); // [4, 8]
+
+// Point-free data transformation pipeline
+const formatName = pipe3(trim, toUpper, addPrefix('Dr.'));
+console.log("Name formatting:", formatName('  alice  ')); // "Dr. ALICE"
+
+
+// ============================================================================
+// 11. PERFORMANCE CONSIDERATIONS WITH TYPES
+// ============================================================================
+
+console.log("\n=== Performance Considerations with Types ===");
+
+// TypeScript: Iteration vs function composition
+function sumLoop(n: number): number {
+  let total = 0;
+  for (let i = 0; i < n; i++) {
+    total += i;
+  }
+  return total;
+}
+
+function sumReduce(n: number): number {
+  return Array.from({ length: n }, (_, i) => i)
+    .reduce((acc, val) => acc + val, 0);
+}
+
+console.log("Performance comparison (conceptual):");
+console.log("- sumLoop: Direct iteration, minimal overhead");
+console.log("- sumReduce: Array creation + reduce, more overhead");
+
+// TypeScript: Memoization with max cache size (LRU-like)
+function memoizeWithMaxSize<T extends (...args: any[]) => R, R>(
+  fn: T,
+  maxSize: number = 100,
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify
+): (...args: Parameters<T>) => R {
+  const cache = new Map<string, R>();
+
+  return ((...args: Parameters<T>) => {
+    const key = keyFn(...args);
+
+    if (cache.has(key)) {
+      return cache.get(key)!;
+    }
+
+    const result = fn(...args);
+
+    if (cache.size >= maxSize) {
+      const firstKey = cache.keys().next().value;
+      cache.delete(firstKey);
+    }
+
+    cache.set(key, result);
+    return result;
+  }) as T;
+}
+
+const expensiveCalc = memoizeWithMaxSize((n: number): number => {
+  console.log(`Calculating for ${n}...`);
+  return n * n;
+}, 3);
+
+console.log("\nMemoization with max cache size:");
+expensiveCalc(1); // Calculates
+expensiveCalc(2); // Calculates
+expensiveCalc(3); // Calculates
+expensiveCalc(4); // Calculates, evicts 1
+expensiveCalc(1); // Calculates again (evicted)
+
+// TypeScript: Lazy evaluation with types
+function lazy<T>(fn: () => T): () => T {
+  let evaluated = false;
+  let result: T | undefined;
+
+  return (): T => {
+    if (!evaluated) {
+      result = fn();
+      evaluated = true;
+    }
+    return result!;
+  };
+}
+
+const expensiveComputation = lazy(() => {
+  console.log("Computing (lazy)...");
+  return 42 * 42;
+});
+
+console.log("\nLazy evaluation:");
+console.log("First call:", expensiveComputation()); // Logs "Computing..."
+console.log("Second call:", expensiveComputation()); // No log
+
+// TypeScript: WeakMap-based cache for GC-friendly memoization
+function weakMemoize<T extends object, R>(
+  fn: (obj: T) => R
+): (obj: T) => R {
+  const cache = new WeakMap<T, R>();
+
+  return (obj: T): R => {
+    if (cache.has(obj)) {
+      return cache.get(obj)!;
+    }
+    const result = fn(obj);
+    cache.set(obj, result);
     return result;
   };
 }
 
-class Calculator {
-  @log
-  add(a: number, b: number): number {
-    return a + b;
-  }
+interface DataObject {
+  id: number;
+  value: number;
 }
 
-const calc = new Calculator();
-calc.add(2, 3); // Logs call and result
+const processData = weakMemoize((obj: DataObject): number => {
+  console.log("Processing data...");
+  return obj.value * 2;
+});
+
+const data: DataObject = { id: 1, value: 100 };
+console.log("\nWeakMap memoization:");
+console.log(processData(data)); // Processes
+console.log(processData(data)); // Uses cache
 
 
 // ============================================================================
@@ -356,9 +526,13 @@ console.log("6. Typed Promises and async/await");
 console.log("7. Branded types for nominal typing");
 console.log("8. Method decorators");
 console.log("9. Trampoline pattern for safe recursion");
+console.log("10. Point-free style with typed compose/pipe");
+console.log("11. Performance considerations (memoization, lazy evaluation)");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Compile-time type checking");
 console.log("- Better IDE autocompletion");
 console.log("- Refactoring safety");
 console.log("- Self-documenting code");
+console.log("- Type-safe function composition");
+console.log("- GC-friendly memoization with WeakMap");
