@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Modules Comparison
-// 📘 For JavaScript examples, see: 27-modules.js
+// 📘 For JavaScript examples, see: 32-modules.js
 // This file demonstrates TypeScript-specific typing for modules
 
 // ============================================================================

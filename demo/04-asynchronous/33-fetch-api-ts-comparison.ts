@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Fetch API Comparison
-// 📘 For JavaScript examples, see: 28-fetch-api.js
+// 📘 For JavaScript examples, see: 33-fetch-api.js
 // This file demonstrates TypeScript-specific typing for Fetch API
 
 export {};

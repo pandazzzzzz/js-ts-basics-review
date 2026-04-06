@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Async/Await Comparison
-// 📘 For JavaScript examples, see: 26-async-await.js
+// 📘 For JavaScript examples, see: 31-async-await.js
 // This file demonstrates TypeScript-specific typing for async/await
 
 export {};

@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Promises Comparison
-// 📘 For JavaScript examples, see: 25-promises.js
+// 📘 For JavaScript examples, see: 30-promises.js
 // This file demonstrates TypeScript-specific typing for Promises
 
 export {};

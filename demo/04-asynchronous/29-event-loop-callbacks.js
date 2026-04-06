@@ -1,5 +1,5 @@
 // Event Loop and Callbacks Demo
-// 📘 For TypeScript comparison, see: 14-event-loop-callbacks-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 29-event-loop-callbacks-ts-comparison.ts
 
 // ============================================
 // 1. CALL STACK BASICS
@@ -757,136 +757,6 @@ setTimeout(() => {
   `);
 }, 3500);
 
-// ============================================
-// TypeScript Comparison Notes
-// ============================================
-/*
-🔍 Key Differences in TypeScript:
-
-1. CALLBACK FUNCTION TYPES
-   JS:  function process(callback) { callback(result); }
-   TS:  function process(callback: (result: string) => void): void {
-          callback(result);
-        }
-   
-   Benefits:
-   - Type-safe callback parameters
-   - Better IDE autocomplete
-   - Compile-time error checking
-
-2. ERROR-FIRST CALLBACK TYPES
-   JS:  function fetch(callback) { callback(error, data); }
-   TS:  function fetch(callback: (error: Error | null, data?: Data) => void): void {
-          callback(error, data);
-        }
-   
-   Benefits:
-   - Explicit error handling
-   - Type-safe data parameter
-   - Better error messages
-
-3. SETTIMEOUT RETURN TYPE
-   JS:  const id = setTimeout(() => {}, 100);
-   TS:  const id: NodeJS.Timeout = setTimeout(() => {}, 100);
-        // or: const id: number = setTimeout(() => {}, 100); (browser)
-   
-   Benefits:
-   - Type-safe timer IDs
-   - Platform-specific types
-   - Better type checking
-
-4. GENERIC CALLBACK TYPES
-   JS:  function map(array, callback) { return array.map(callback); }
-   TS:  function map<T, U>(
-          array: T[],
-          callback: (item: T, index: number) => U
-        ): U[] {
-          return array.map(callback);
-        }
-   
-   Benefits:
-   - Type-safe transformations
-   - Generic type preservation
-   - Better type inference
-
-5. EVENT HANDLER TYPES
-   JS:  element.addEventListener('click', (event) => {});
-   TS:  element.addEventListener('click', (event: MouseEvent) => {});
-   
-   Benefits:
-   - Type-safe event objects
-   - Better IDE support
-   - Prevents runtime errors
-
-6. PROMISE CALLBACK TYPES
-   JS:  promise.then(result => {}, error => {});
-   TS:  promise.then(
-          (result: Data) => {},
-          (error: Error) => {}
-        );
-   
-   Benefits:
-   - Type-safe Promise callbacks
-   - Better error handling
-   - Type inference
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. CALLBACK PARAMETER ORDER
-   - Error-first callbacks: (error, data)
-   - Array methods: (item, index, array)
-   - Event handlers: (event)
-   
-   Be consistent with parameter order!
-
-2. VOID VS UNDEFINED RETURN
-   - void: Callback doesn't return meaningful value
-   - undefined: Callback explicitly returns undefined
-   
-   type Callback = () => void; // ✅ Flexible
-   type Callback = () => undefined; // ❌ Too strict
-
-3. OPTIONAL CALLBACK PARAMETERS
-   - Use ? for optional parameters
-   - Provide default values when appropriate
-   
-   function process(callback?: (data: string) => void): void {
-     if (callback) callback("data");
-   }
-
-4. THIS BINDING IN CALLBACKS
-   - Arrow functions inherit 'this'
-   - Regular functions have dynamic 'this'
-   
-   class Component {
-     name = "Component";
-     
-     // ✅ Arrow function preserves 'this'
-     onClick = () => {
-       console.log(this.name);
-     };
-     
-     // ❌ Regular function loses 'this'
-     onClickBad() {
-       setTimeout(function() {
-         console.log(this.name); // Error!
-       }, 100);
-     }
-   }
-
-5. TIMER ID TYPES
-   - Browser: number
-   - Node.js: NodeJS.Timeout
-   
-   Use ReturnType<typeof setTimeout> for cross-platform code
-
-6. CALLBACK HELL TYPE SAFETY
-   - TypeScript doesn't prevent callback hell
-   - Still need to use Promises/async-await
-   - Type safety doesn't equal code quality
-
-📘 See 14-event-loop-callbacks-ts-comparison.ts for detailed examples!
-*/
 
 // ============================================
 // 12. RENDERING AND EVENT LOOP (BROWSER)
@@ -1077,3 +947,134 @@ setTimeout(() => {
   }, 7000);
 
 }, 4000);
+
+// ============================================
+// TypeScript Comparison Notes
+// ============================================
+/*
+🔍 Key Differences in TypeScript:
+
+1. CALLBACK FUNCTION TYPES
+   JS:  function process(callback) { callback(result); }
+   TS:  function process(callback: (result: string) => void): void {
+          callback(result);
+        }
+
+   Benefits:
+   - Type-safe callback parameters
+   - Better IDE autocomplete
+   - Compile-time error checking
+
+2. ERROR-FIRST CALLBACK TYPES
+   JS:  function fetch(callback) { callback(error, data); }
+   TS:  function fetch(callback: (error: Error | null, data?: Data) => void): void {
+          callback(error, data);
+        }
+
+   Benefits:
+   - Explicit error handling
+   - Type-safe data parameter
+   - Better error messages
+
+3. SETTIMEOUT RETURN TYPE
+   JS:  const id = setTimeout(() => {}, 100);
+   TS:  const id: NodeJS.Timeout = setTimeout(() => {}, 100);
+        // or: const id: number = setTimeout(() => {}, 100); (browser)
+
+   Benefits:
+   - Type-safe timer IDs
+   - Platform-specific types
+   - Better type checking
+
+4. GENERIC CALLBACK TYPES
+   JS:  function map(array, callback) { return array.map(callback); }
+   TS:  function map<T, U>(
+          array: T[],
+          callback: (item: T, index: number) => U
+        ): U[] {
+          return array.map(callback);
+        }
+
+   Benefits:
+   - Type-safe transformations
+   - Generic type preservation
+   - Better type inference
+
+5. EVENT HANDLER TYPES
+   JS:  element.addEventListener('click', (event) => {});
+   TS:  element.addEventListener('click', (event: MouseEvent) => {});
+
+   Benefits:
+   - Type-safe event objects
+   - Better IDE support
+   - Prevents runtime errors
+
+6. PROMISE CALLBACK TYPES
+   JS:  promise.then(result => {}, error => {});
+   TS:  promise.then(
+          (result: Data) => {},
+          (error: Error) => {}
+        );
+
+   Benefits:
+   - Type-safe Promise callbacks
+   - Better error handling
+   - Type inference
+
+⚠️ COMMON CONFUSION POINTS:
+
+1. CALLBACK PARAMETER ORDER
+   - Error-first callbacks: (error, data)
+   - Array methods: (item, index, array)
+   - Event handlers: (event)
+
+   Be consistent with parameter order!
+
+2. VOID VS UNDEFINED RETURN
+   - void: Callback doesn't return meaningful value
+   - undefined: Callback explicitly returns undefined
+
+   type Callback = () => void; // ✅ Flexible
+   type Callback = () => undefined; // ❌ Too strict
+
+3. OPTIONAL CALLBACK PARAMETERS
+   - Use ? for optional parameters
+   - Provide default values when appropriate
+
+   function process(callback?: (data: string) => void): void {
+     if (callback) callback("data");
+   }
+
+4. THIS BINDING IN CALLBACKS
+   - Arrow functions inherit 'this'
+   - Regular functions have dynamic 'this'
+
+   class Component {
+     name = "Component";
+
+     // ✅ Arrow function preserves 'this'
+     onClick = () => {
+       console.log(this.name);
+     };
+
+     // ❌ Regular function loses 'this'
+     onClickBad() {
+       setTimeout(function() {
+         console.log(this.name); // Error!
+       }, 100);
+     }
+   }
+
+5. TIMER ID TYPES
+   - Browser: number
+   - Node.js: NodeJS.Timeout
+
+   Use ReturnType<typeof setTimeout> for cross-platform code
+
+6. CALLBACK HELL TYPE SAFETY
+   - TypeScript doesn't prevent callback hell
+   - Still need to use Promises/async-await
+   - Type safety doesn't equal code quality
+
+📘 See 29-event-loop-callbacks-ts-comparison.ts for detailed examples!
+*/

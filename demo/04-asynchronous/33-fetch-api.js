@@ -1,5 +1,5 @@
 // Fetch API Demo
-// 📘 For TypeScript comparison, see TypeScript notes at the end
+// 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
 
 // ============================================
 // 1. FETCH API BASICS
@@ -1388,71 +1388,104 @@ See also:
 `);
 
 // ============================================
-// TYPESCRIPT COMPARISON NOTES
 // ============================================
+// TypeScript Comparison Notes
+// ============================================
+/*
+🔍 Key Differences in TypeScript:
 
-/**
- * TypeScript Comparison: Fetch API
- *
- * TypeScript adds type safety to fetch operations:
- *
- * 1. Typed Response Data:
- *    interface Post { id: number; title: string; body: string; userId: number; }
- *    const post = await fetch(url).then(r => r.json()) as Post;
- *
- * 2. Generic Fetch Wrapper:
- *    async function fetchApi<T>(url: string): Promise<T> {
- *      const response = await fetch(url);
- *      if (!response.ok) throw new Error(`HTTP ${response.status}`);
- *      return await response.json() as T;
- *    }
- *    const post = await fetchApi<Post>('/posts/1');
- *
- * 3. RequestInit Types:
- *    const options: RequestInit = {
- *      method: 'POST',
- *      headers: { 'Content-Type': 'application/json' },
- *      body: JSON.stringify(data)
- *    };
- *
- * 4. Response Type Guards:
- *    function isSuccess(response: Response): response is Response & { ok: true } {
- *      return response.ok;
- *    }
- *
- * 5. Error Type Unions:
- *    type FetchError = NetworkError | HttpError | ParseError;
- *
- * 6. Typed API Client Class:
- *    class ApiClient {
- *      constructor(private baseURL: string, private defaultHeaders: HeadersInit = {}) {}
- *
- *      async get<T>(endpoint: string): Promise<T> { ... }
- *      async post<T>(endpoint: string, data: unknown): Promise<T> { ... }
- *    }
- *
- * TypeScript catches common mistakes:
- * - Missing required headers in RequestInit
- * - Wrong body type for JSON.stringify
- * - Untyped response data leading to property access errors
- * - Missing error handling in Promise chains
- */
+1. TYPED RESPONSE DATA
+   JS:  const post = await fetch(url).then(r => r.json());
+   TS:  interface Post { id: number; title: string; }
+        const post = await fetch(url).then(r => r.json()) as Post;
 
-// TypeScript would look like this:
-// interface Post {
-//   id: number;
-//   title: string;
-//   body: string;
-//   userId: number;
-// }
-//
-// async function fetchPost(id: number): Promise<Post> {
-//   const response = await fetch(`${API_BASE}/posts/${id}`);
-//   if (!response.ok) {
-//     throw new Error(`HTTP ${response.status}`);
-//   }
-//   return await response.json() as Post;
-// }
-//
-// const post = await fetchPost(1);
-// console.log(post.title); // Type-safe!
+   Benefits:
+   - Type-safe response data
+   - Better IDE autocomplete
+   - Compile-time error checking
+
+2. GENERIC FETCH WRAPPER
+   JS:  async function fetchApi(url) {
+          const response = await fetch(url);
+          return await response.json();
+        }
+   TS:  async function fetchApi<T>(url: string): Promise<T> {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json() as T;
+        }
+
+   Benefits:
+   - Type-safe generic functions
+   - Reusable typed API client
+   - Better type inference
+
+3. REQUEST OPTIONS TYPES
+   JS:  const options = { method: 'POST', body: data };
+   TS:  const options: RequestInit = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        };
+
+   Benefits:
+   - Type-safe request options
+   - Catches header typos
+   - Validated body types
+
+4. RESPONSE TYPE GUARDS
+   JS:  if (response.ok) { /* ... */ }
+   TS:  function isSuccess(response: Response): response is Response & { ok: true } {
+          return response.ok;
+        }
+
+   Benefits:
+   - Narrow response types
+   - Better type safety
+   - Explicit error handling
+
+5. ERROR TYPE UNIONS
+   JS:  try { await fetch(url); } catch (error) { /* ... */ }
+   TS:  type FetchError = NetworkError | HttpError | ParseError;
+        catch (error: unknown) {
+          if (error instanceof Error) { /* ... */ }
+        }
+
+   Benefits:
+   - Type-safe error handling
+   - Better error categorization
+   - Explicit error types
+
+6. TYPED API CLIENT CLASS
+   JS:  class ApiClient {
+          async get(endpoint) { /* ... */ }
+          async post(endpoint, data) { /* ... */ }
+        }
+   TS:  class ApiClient {
+          async get<T>(endpoint: string): Promise<T> { /* ... */ }
+          async post<T>(endpoint: string, data: unknown): Promise<T> { /* ... */ }
+        }
+
+   Benefits:
+   - Type-safe API methods
+   - Generic response types
+   - Better IDE support
+
+⚠️ COMMON CONFUSION POINTS:
+
+1. RESPONSE BODY CAN ONLY BE READ ONCE
+   - Use response.clone() if you need to read multiple times
+   - Or store the parsed result
+
+2. AS CAST VS TYPE ASSERTION
+   - Both work but have different syntax
+   - const data = await response.json() as Post;
+   - const data = <Post>await response.json();
+
+3. MIXING JS AND TS FETCH CODE
+   - Type assertions don't change runtime behavior
+   - Still need proper error handling
+   - TypeScript only catches compile-time errors
+
+📘 See 33-fetch-api-ts-comparison.ts for detailed examples!
+*/

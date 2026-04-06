@@ -1,5 +1,5 @@
 // Promises Demo
-// 📘 For TypeScript comparison, see: 12-promises-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 30-promises-ts-comparison.ts
 
 // ============================================
 // 1. PROMISE BASICS
@@ -670,5 +670,5 @@ console.log(`
    ]);
    // user: User, posts: Post[], comments: Comment[]
 
-📘 See 12-promises-ts-comparison.ts for detailed examples!
+📘 See 30-promises-ts-comparison.ts for detailed examples!
 */

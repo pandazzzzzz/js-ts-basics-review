@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Event Loop and Callbacks Comparison
-// 📘 For JavaScript examples, see: 24-event-loop-callbacks.js
+// 📘 For JavaScript examples, see: 29-event-loop-callbacks.js
 // This file demonstrates TypeScript-specific typing for callbacks and timers
 
 export {};
