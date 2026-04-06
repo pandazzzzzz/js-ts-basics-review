@@ -459,7 +459,154 @@ promiseChain();
 asyncAwaitVersion();
 
 // ============================================
-// 8. PRACTICAL EXAMPLES
+// 9. ASYNC ITERATORS (ES2018)
+// ============================================
+
+/**
+ * Async Iterators - for await...of
+ *
+ * ES Specification: ES2018
+ *
+ * Characteristics:
+ * - async function* creates async generator
+ * - for await...of iterates over async iterator
+ * - Automatically awaits each yielded value
+ * - Can handle streams of async values
+ * - Useful for paginated APIs, data streams
+ *
+ * Use Cases:
+ * - Processing streams of data
+ * - Paginated API results
+ * - Queue processing
+ * - Sequential async operations
+ */
+
+console.log("\n=== Async Iterators Demo ===\n");
+
+// Async generator function
+async function* asyncGenerator() {
+  console.log("Async generator started");
+
+  yield await delay(100, 1);
+  console.log("Yielded 1");
+
+  yield await delay(100, 2);
+  console.log("Yielded 2");
+
+  yield await delay(100, 3);
+  console.log("Yielded 3");
+}
+
+// Using for await...of
+(async () => {
+  console.log("Using for await...of:");
+
+  for await (const value of asyncGenerator()) {
+    console.log("  Received value:", value);
+  }
+
+  console.log("Async generator completed");
+})();
+
+// Practical example: Paginated API
+async function* fetchPaginatedData(pageSize = 10) {
+  let page = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    console.log(`Fetching page ${page}...`);
+
+    // Simulate API call
+    const data = await delay(50, {
+      items: Array(pageSize).fill(0).map((_, i) => ({
+        id: (page - 1) * pageSize + i + 1,
+        name: `Item ${(page - 1) * pageSize + i + 1}`
+      })),
+      nextPage: page < 3 ? page + 1 : null
+    });
+
+    yield* data.items; // Yield all items
+    hasMore = data.nextPage !== null;
+    page = data.nextPage || page;
+  }
+}
+
+setTimeout(async () => {
+  console.log("\nPaginated API example:");
+
+  let count = 0;
+  for await (const item of fetchPaginatedData(5)) {
+    count++;
+    console.log(`  Item ${count}: ${item.name}`);
+  }
+
+  console.log("  All pages fetched, total items:", count);
+}, 2000);
+
+// Practical example: Async queue processing
+class AsyncQueue {
+  constructor() {
+    this.queue = [];
+    this.processing = false;
+  }
+
+  async* process() {
+    while (this.queue.length > 0 || this.processing) {
+      if (this.queue.length === 0) {
+        // Wait for new items
+        await new Promise(resolve => {
+          setTimeout(resolve, 100);
+        });
+        continue;
+      }
+
+      const item = this.queue.shift();
+      this.processing = true;
+
+      // Process item
+      console.log(`  Processing: ${item}`);
+      await delay(100, item);
+      console.log(`  Completed: ${item}`);
+
+      this.processing = false;
+      yield item;
+    }
+  }
+
+  add(item) {
+    this.queue.push(item);
+    console.log(`  Added to queue: ${item}`);
+  }
+}
+
+setTimeout(async () => {
+  console.log("\nAsync queue processing:");
+
+  const queue = new AsyncQueue();
+
+  // Start processing
+  const processor = queue.process();
+
+  // Add items
+  queue.add("Task 1");
+  queue.add("Task 2");
+  queue.add("Task 3");
+
+  setTimeout(() => {
+    queue.add("Task 4");
+    queue.add("Task 5");
+  }, 300);
+
+  // Consume results
+  for await (const result of processor) {
+    console.log(`  Queue result: ${result}`);
+  }
+
+  console.log("  Queue processing complete");
+}, 3000);
+
+// ============================================
+// 10. PRACTICAL EXAMPLES
 // ============================================
 
 console.log("\n=== Practical Examples ===\n");
@@ -700,6 +847,8 @@ console.log(`
 10. Use async/await instead of Promise chains for better readability
 11. Be careful with await in loops - consider if parallel is better
 12. Always return values from async functions explicitly
+13. Use async iterators (async function*) for async streams and pagination
+14. Use for await...of for clean async iteration
 `);
 
 // ============================================

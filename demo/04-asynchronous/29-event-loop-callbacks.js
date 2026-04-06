@@ -887,3 +887,193 @@ setTimeout(() => {
 
 📘 See 14-event-loop-callbacks-ts-comparison.ts for detailed examples!
 */
+
+// ============================================
+// 12. RENDERING AND EVENT LOOP (BROWSER)
+// ============================================
+
+/**
+ * Rendering - When browser paints to screen
+ *
+ * ES Specification: Web API (browser)
+ *
+ * Characteristics:
+ * - Rendering happens after microtasks and before next macrotask
+ * - Only if DOM has changes (layout thrashing prevention)
+ * - Target: 60fps (16.67ms per frame)
+ * - requestAnimationFrame syncs with display refresh rate
+ * - Rendering is part of event loop in browsers
+ *
+ * Event Loop with Rendering:
+ * 1. Execute synchronous code
+ * 2. Execute all microtasks
+ * 3. Perform rendering if needed
+ * 4. Execute one macrotask
+ * 5. Repeat
+ *
+ * Use Cases:
+ * - Animations
+ * - Game loops
+ * - Smooth UI updates
+ * - Performance optimization
+ */
+
+setTimeout(() => {
+  console.log("\n=== Rendering and Event Loop Demo ===\n");
+
+  // 12.1 requestAnimationFrame
+  console.log("12.1 requestAnimationFrame - Animation frame:");
+
+  let frameCount = 0;
+  const startTime = Date.now();
+
+  function animate() {
+    frameCount++;
+    const elapsed = Date.now() - startTime;
+
+    console.log(`   Frame ${frameCount}, elapsed: ${elapsed}ms`);
+
+    if (frameCount < 5) {
+      // Schedule next frame
+      requestAnimationFrame(animate);
+    } else {
+      const avgFrameTime = elapsed / frameCount;
+      console.log(`   Average frame time: ${avgFrameTime.toFixed(2)}ms`);
+      console.log(`   Target for 60fps: 16.67ms per frame`);
+    }
+  }
+
+  requestAnimationFrame(animate);
+
+  // 12.2 Microtasks vs Rendering
+  setTimeout(() => {
+    console.log("\n12.2 Microtasks vs Rendering order:");
+
+    function updateDOM() {
+      console.log("   1. DOM update");
+    }
+
+    function processMicrotasks() {
+      console.log("   2. Microtask processing");
+      return Promise.resolve().then(() => {
+        console.log("   3. Promise microtask");
+      });
+    }
+
+    function scheduleMacrotask() {
+      console.log("   4. Macrotask scheduled");
+      setTimeout(() => {
+        console.log("   6. Macrotack execution");
+      }, 0);
+    }
+
+    // Execution order:
+    updateDOM();           // 1. DOM update
+    processMicrotasks();     // 2-3. Microtasks run before rendering
+    scheduleMacrotask();     // 4-6. Rendering, then macrotask
+
+    console.log("   5. Synchronous code done");
+    // Rendering happens here (after microtasks, before macrotask)
+  }, 3000);
+
+  // 12.3 Animation loop best practices
+  setTimeout(() => {
+    console.log("\n12.3 Animation loop best practices:");
+
+    class AnimationLoop {
+      constructor(updateCallback) {
+        this.updateCallback = updateCallback;
+        this.isRunning = false;
+        this.lastTime = 0;
+      }
+
+      start() {
+        if (!this.isRunning) {
+          this.isRunning = true;
+          this.lastTime = performance.now();
+          console.log("   ✓ Animation loop started");
+          this.loop();
+        }
+      }
+
+      stop() {
+        this.isRunning = false;
+        console.log("   ✓ Animation loop stopped");
+      }
+
+      loop() {
+        if (!this.isRunning) return;
+
+        const currentTime = performance.now();
+        const deltaTime = currentTime - this.lastTime;
+        this.lastTime = currentTime;
+
+        this.updateCallback(deltaTime);
+
+        requestAnimationFrame(() => this.loop());
+      }
+    }
+
+    // Example usage
+    const animationLoop = new AnimationLoop((deltaTime) => {
+      // Update animation based on delta time
+      // deltaTime is in milliseconds
+    });
+
+    animationLoop.start();
+
+    // Stop after 1 second
+    setTimeout(() => animationLoop.stop(), 1000);
+  }, 5000);
+
+  // 12.4 Rendering timing
+  setTimeout(() => {
+    console.log("\n12.4 Rendering timing visualization:");
+
+    console.log(`
+    Event Loop Cycle with Rendering:
+    -------------------------------
+
+    ┌─────────────────────────────────┐
+    │ 1. Synchronous Code          │
+    │    - Execute all sync code     │
+    └──────────────┬───────────────┘
+                   │
+                   ↓
+    ┌─────────────────────────────────┐
+    │ 2. Microtasks Queue          │
+    │    - Promise callbacks        │
+    │    - queueMicrotask()        │
+    │    - Process ALL until empty   │
+    └──────────────┬───────────────┘
+                   │
+                   ↓
+    ┌─────────────────────────────────┐
+    │ 3. Rendering (if DOM changed)│
+    │    - Style calculation       │
+    │    - Layout calculation      │
+    │    - Paint to screen         │
+    │    - Composite layers        │
+    └──────────────┬───────────────┘
+                   │
+                   ↓
+    ┌─────────────────────────────────┐
+    │ 4. Macrotask Queue          │
+    │    - setTimeout              │
+    │    - setInterval            │
+    │    - I/O callbacks         │
+    │    - Process ONE at a time   │
+    └──────────────┬───────────────┘
+                   │
+                   └──→ Back to step 1
+    `);
+
+    console.log("Key points:");
+    console.log("  - Rendering happens AFTER all microtasks");
+    console.log("  - Rendering happens BEFORE next macrotask");
+    console.log("  - requestAnimationFrame syncs with display refresh");
+    console.log("  - Excessive microtasks can delay rendering");
+    console.log("  - Layout thrashing triggers unnecessary repaints");
+  }, 7000);
+
+}, 4000);

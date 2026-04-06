@@ -972,7 +972,274 @@ async function sequentialDependentCalls() {
 sequentialDependentCalls();
 
 // ============================================
-// 7. COMMON PITFALLS
+// 8. STREAM API (ADVANCED)
+// ============================================
+
+/**
+ * Stream API - Read response body incrementally
+ *
+ * ES Specification: Streams API (living standard)
+ *
+ * Characteristics:
+ * - response.body provides ReadableStream
+ * - Read data in chunks instead of all at once
+ * - Efficient for large files or data
+ * - Low memory usage
+ * - Can pause and resume reading
+ *
+ * Use Cases:
+ * - Large file downloads
+ * - Real-time data processing
+ * - Progress tracking
+ * - Data transformation
+ */
+
+console.log("\n=== Stream API Demo ===\n");
+
+// Basic stream reading
+async function readStream() {
+  console.log("21. Basic stream reading:");
+
+  try {
+    const response = await fetch(`${API_BASE}/posts/1`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let result = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        console.log("  ✓ Stream reading complete");
+        break;
+      }
+
+      // Decode chunk
+      const chunk = decoder.decode(value, { stream: true });
+      result += chunk;
+
+      console.log(`  Received chunk: ${value.length} bytes`);
+    }
+
+    console.log(`  Total size: ${result.length} bytes`);
+  } catch (error) {
+    console.error("  Stream error:", error.message);
+  }
+}
+
+readStream();
+
+// Stream with progress tracking
+async function downloadWithProgress(url, onProgress) {
+  console.log("\n22. Download with progress tracking:");
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const contentLength = response.headers.get('content-length');
+    const total = parseInt(contentLength, 10);
+    let loaded = 0;
+
+    const reader = response.body.getReader();
+    const chunks = [];
+
+    while (true) {
+      const { done, value } = await reader.read();
+
+      if (done) break;
+
+      chunks.push(value);
+      loaded += value.length;
+
+      if (onProgress) {
+        const percent = total ? Math.round((loaded / total) * 100) : 'unknown';
+        console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
+      }
+    }
+
+    // Combine chunks
+    const result = new Uint8Array(loaded);
+    let offset = 0;
+    for (const chunk of chunks) {
+      result.set(chunk, offset);
+      offset += chunk.length;
+    }
+
+    console.log("  ✓ Download complete");
+    return result;
+  } catch (error) {
+    console.error("  Download error:", error.message);
+    throw error;
+  }
+}
+
+setTimeout(() => {
+  downloadWithProgress(`${API_BASE}/posts/1`, (loaded, total, percent) => {
+    // Progress callback
+  });
+}, 2000);
+
+// Stream transformation
+async function transformStream() {
+  console.log("\n23. Stream transformation:");
+
+  try {
+    const response = await fetch(`${API_BASE}/posts/1`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let lineCount = 0;
+    let charCount = 0;
+
+    while (true) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        console.log("  ✓ Stream processing complete");
+        console.log(`  Lines: ${lineCount}, Characters: ${charCount}`);
+        break;
+      }
+
+      const chunk = decoder.decode(value, { stream: true });
+      charCount += chunk.length;
+
+      // Count newlines (simplified)
+      const newlines = chunk.split('\n').length - 1;
+      lineCount += newlines;
+
+      console.log(`  Processed ${chunk.length} characters`);
+    }
+  } catch (error) {
+    console.error("  Transform error:", error.message);
+  }
+}
+
+setTimeout(() => {
+  transformStream();
+}, 3000);
+
+// Cancelable stream reading
+async function cancelableStream() {
+  console.log("\n24. Cancelable stream reading:");
+
+  const controller = new AbortController();
+
+  try {
+    const response = await fetch(`${API_BASE}/posts/1`, {
+      signal: controller.signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    let byteCount = 0;
+
+    console.log("  Starting to read stream...");
+
+    // Cancel after 50ms
+    setTimeout(() => {
+      console.log("  Cancelling stream...");
+      controller.abort('User cancelled');
+    }, 50);
+
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          console.log("  Stream completed naturally");
+          break;
+        }
+
+        byteCount += value.length;
+        console.log(`  Read ${value.length} bytes`);
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log(`  ✓ Stream cancelled after ${byteCount} bytes`);
+      } else {
+        throw error;
+      }
+    }
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      console.error("  Error:", error.message);
+    }
+  }
+}
+
+setTimeout(() => {
+  cancelableStream();
+}, 4000);
+
+// Stream vs non-stream comparison
+async function compareReadingMethods() {
+  console.log("\n25. Stream vs non-stream comparison:");
+
+  // Method 1: Read entire response at once
+  console.log("  Method 1: Read all at once");
+  const start1 = Date.now();
+  const response1 = await fetch(`${API_BASE}/posts/1`);
+  const data1 = await response1.json();
+  const time1 = Date.now() - start1;
+  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
+
+  // Method 2: Read as stream
+  console.log("\n  Method 2: Read as stream");
+  const start2 = Date.now();
+  const response2 = await fetch(`${API_BASE}/posts/1`);
+  const reader2 = response2.body.getReader();
+  let byteCount = 0;
+
+  while (true) {
+    const { done, value } = await reader2.read();
+    if (done) break;
+    byteCount += value.length;
+  }
+
+  const time2 = Date.now() - start2;
+  console.log(`    Time: ${time2}ms, Size: ${byteCount} bytes`);
+
+  console.log("\n  Comparison:");
+  console.log(`    Non-stream: ${time1}ms`);
+  console.log(`    Stream: ${time2}ms`);
+  console.log("    Streams are better for large files, real-time processing");
+}
+
+setTimeout(() => {
+  compareReadingMethods();
+}, 5000);
+
+// Stream best practices
+console.log("\n26. Stream API Best Practices:");
+console.log("  ✅ Use streams for large files (>1MB)");
+console.log("  ✅ Implement progress tracking for user feedback");
+console.log("  ✅ Use TextDecoder for text streams");
+console.log("  ✅ Handle AbortError for cancellation");
+console.log("  ✅ Combine chunks properly at the end");
+console.log("  ✅ Use { stream: true } in TextDecoder");
+console.log("  ✅ Clean up resources in finally blocks");
+console.log("  ⚠️ Don't forget to call reader.releaseLock() when done");
+console.log("  ⚠️ Remember response.body can only be read once");
+console.log("  ⚠️ Streams are not supported in very old browsers");
+
+// ============================================
+// 9. COMMON PITFALLS
 // ============================================
 
 /**
