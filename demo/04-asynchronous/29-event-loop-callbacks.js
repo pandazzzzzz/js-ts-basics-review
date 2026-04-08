@@ -736,29 +736,6 @@ console.log("  Blocking operation completed");
 // The setTimeout above will only execute after this
 
 // ============================================
-// BEST PRACTICES SUMMARY
-// ============================================
-
-setTimeout(() => {
-  console.log("\n=== Best Practices Summary ===\n");
-  console.log(`
-1. UNDERSTAND the event loop and execution order
-2. USE arrow functions to preserve 'this' in callbacks
-3. ALWAYS clear intervals and timeouts when done
-4. AVOID callback hell - use Promises or async/await
-5. USE error-first callbacks (error, data) for consistency
-6. DON'T block the event loop with long synchronous operations
-7. REMEMBER microtasks execute before macrotasks
-8. USE debouncing/throttling for frequent events
-9. BE AWARE setTimeout delay is minimum, not exact
-10. PREFER Promises/async-await over callbacks for async code
-11. USE named functions instead of anonymous callbacks for better debugging
-12. UNDERSTAND the difference between microtasks and macrotasks
-  `);
-}, 3500);
-
-
-// ============================================
 // 12. RENDERING AND EVENT LOOP (BROWSER)
 // ============================================
 
@@ -947,6 +924,29 @@ setTimeout(() => {
   }, 7000);
 
 }, 4000);
+
+// ============================================
+// BEST PRACTICES SUMMARY
+// ============================================
+
+setTimeout(() => {
+  console.log("\n=== Best Practices Summary ===\n");
+  console.log(`
+1. UNDERSTAND the event loop and execution order
+2. USE arrow functions to preserve 'this' in callbacks
+3. ALWAYS clear intervals and timeouts when done
+4. AVOID callback hell - use Promises or async/await
+5. USE error-first callbacks (error, data) for consistency
+6. DON'T block the event loop with long synchronous operations
+7. REMEMBER microtasks execute before macrotasks
+8. USE debouncing/throttling for frequent events
+9. BE AWARE setTimeout delay is minimum, not exact
+10. PREFER Promises/async-await over callbacks for async code
+11. USE named functions instead of anonymous callbacks for better debugging
+12. UNDERSTAND the difference between microtasks and macrotasks
+  `);
+}, 3500);
+
 
 // ============================================
 // TypeScript Comparison Notes

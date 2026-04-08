@@ -1434,7 +1434,7 @@ See also:
    - Validated body types
 
 4. RESPONSE TYPE GUARDS
-   JS:  if (response.ok) { /* ... */ }
+   JS:  if (response.ok) { // handle success }
    TS:  function isSuccess(response: Response): response is Response & { ok: true } {
           return response.ok;
         }
@@ -1445,10 +1445,10 @@ See also:
    - Explicit error handling
 
 5. ERROR TYPE UNIONS
-   JS:  try { await fetch(url); } catch (error) { /* ... */ }
+   JS:  try { await fetch(url); } catch (error) { // handle error }
    TS:  type FetchError = NetworkError | HttpError | ParseError;
         catch (error: unknown) {
-          if (error instanceof Error) { /* ... */ }
+          if (error instanceof Error) { // handle }
         }
 
    Benefits:
@@ -1458,12 +1458,12 @@ See also:
 
 6. TYPED API CLIENT CLASS
    JS:  class ApiClient {
-          async get(endpoint) { /* ... */ }
-          async post(endpoint, data) { /* ... */ }
+          async get(endpoint) { // fetch and return }
+          async post(endpoint, data) { // fetch and return }
         }
    TS:  class ApiClient {
-          async get<T>(endpoint: string): Promise<T> { /* ... */ }
-          async post<T>(endpoint: string, data: unknown): Promise<T> { /* ... */ }
+          async get<T>(endpoint: string): Promise<T> { // fetch and return }
+          async post<T>(endpoint: string, data: unknown): Promise<T> { // fetch and return }
         }
 
    Benefits:
