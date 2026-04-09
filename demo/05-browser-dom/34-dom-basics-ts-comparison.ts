@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: DOM Basics Comparison
-// 📘 For JavaScript examples, see: 29-dom-basics.js
+// 📘 For JavaScript examples, see: 34-dom-basics.js
 // This file demonstrates TypeScript-specific type features for DOM manipulation
 
 export {}; // Make this file a module to avoid global scope conflicts

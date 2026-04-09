@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Event System Comparison
-// 📘 For JavaScript examples, see: 31-events.js
+// 📘 For JavaScript examples, see: 36-events.js
 // This file demonstrates TypeScript-specific type features for event handling
 
 export {}; // Make this file a module to avoid global scope conflicts

@@ -327,7 +327,7 @@ input:required {
 //   - Cross-field dependency validation
 //   - Async server validation
 // Use Cases: Password strength, duplicate password, uniqueness check
-// Common Pitfalls: Validation timing issues, debounce handling不当
+// Common Pitfalls: Validation timing issues, improper debounce handling
 
 console.log("\n=== Section 4: Custom Validation Logic ===\n");
 
