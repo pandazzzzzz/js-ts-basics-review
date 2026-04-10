@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Web APIs Comparison
-// 📘 For JavaScript examples, see: 41-web-apis.js
+// 📘 For JavaScript examples, see: 46-web-apis.js
 // This file demonstrates TypeScript-specific type features for Web APIs
 
 export {}; // Make this file a module

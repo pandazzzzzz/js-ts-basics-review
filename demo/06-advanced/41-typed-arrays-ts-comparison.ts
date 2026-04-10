@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: TypedArray and Binary Data Comparison
-// 📘 For JavaScript examples, see: 36-typed-arrays.js
+// 📘 For JavaScript examples, see: 41-typed-arrays.js
 // This file demonstrates TypeScript-specific type features for binary data
 
 export {}; // Make this file a module to avoid global scope conflicts

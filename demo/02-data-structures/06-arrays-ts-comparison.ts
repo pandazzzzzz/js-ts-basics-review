@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Arrays Comparison
-// 📘 For JavaScript examples, see: 03-arrays.js
+// 📘 For JavaScript examples, see: 06-arrays.js
 // This file demonstrates key differences, pitfalls, and best practices
 
 // Make this file a module to avoid global scope conflicts

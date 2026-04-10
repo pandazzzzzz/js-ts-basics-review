@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: WeakRef and FinalizationRegistry Comparison
-// 📘 For JavaScript examples, see: 38-weakref-finalization.js
+// 📘 For JavaScript examples, see: 43-weakref-finalization.js
 // This file demonstrates TypeScript-specific type features for weak references
 
 export {}; // Make this file a module to avoid global scope conflicts

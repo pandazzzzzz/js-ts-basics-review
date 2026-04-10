@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Performance Optimization Comparison
-// 📘 For JavaScript examples, see: 42-performance.js
+// 📘 For JavaScript examples, see: 47-performance.js
 // This file demonstrates TypeScript-specific type features for performance optimization
 
 export {}; // Make this file a module

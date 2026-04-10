@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Memory and GC Comparison
-// 📘 For JavaScript examples, see: 35-memory-gc.js
+// 📘 For JavaScript examples, see: 40-memory-gc.js
 // This file demonstrates TypeScript-specific memory management patterns
 
 export {}; // Make this file a module to avoid global scope conflicts

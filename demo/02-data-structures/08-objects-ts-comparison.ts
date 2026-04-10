@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: Objects Comparison
+// 📘 For JavaScript examples, see: 08-objects.js
 // This file demonstrates key differences, pitfalls, and best practices
-// 📘 For JavaScript basics, see: 08-objects.js
 
 // Make this file a module to avoid global scope conflicts
 export {};

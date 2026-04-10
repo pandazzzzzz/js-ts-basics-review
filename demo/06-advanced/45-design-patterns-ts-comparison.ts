@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Design Patterns Comparison
-// 📘 For JavaScript examples, see: 40-design-patterns.js
+// 📘 For JavaScript examples, see: 45-design-patterns.js
 // This file demonstrates TypeScript-specific type features for design patterns
 
 export {}; // Make this file a module

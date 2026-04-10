@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Intl API Comparison
-// 📘 For JavaScript examples, see: 37-intl-api.js
+// 📘 For JavaScript examples, see: 42-intl-api.js
 // This file demonstrates TypeScript-specific type features for Intl API
 
 export {}; // Make this file a module to avoid global scope conflicts

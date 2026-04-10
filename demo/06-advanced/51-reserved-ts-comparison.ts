@@ -1,5 +1,5 @@
 // Reserved for Future Extensions - TypeScript Comparison
-// 📘 For JavaScript examples, see: 46-reserved.js
+// 📘 For JavaScript examples, see: 51-reserved.js
 // This file demonstrates TypeScript-specific features for upcoming JavaScript
 
 export {}; // Make this file a module to avoid global scope conflicts

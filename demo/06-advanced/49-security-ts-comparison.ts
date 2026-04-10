@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Web Security Comparison
-// 📘 For JavaScript examples, see: 44-security.js
+// 📘 For JavaScript examples, see: 49-security.js
 // This file demonstrates TypeScript-specific type features for web security
 
 export {}; // Make this file a module

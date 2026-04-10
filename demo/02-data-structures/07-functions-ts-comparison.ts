@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Functions Comparison
-// 📘 For JavaScript examples, see: 02-functions.js
+// 📘 For JavaScript examples, see: 07-functions.js
 // This file demonstrates key differences, pitfalls, and best practices
 
 // Make this file a module to avoid global scope conflicts
