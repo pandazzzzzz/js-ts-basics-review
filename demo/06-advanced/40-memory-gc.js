@@ -1,4 +1,5 @@
 // Garbage Collection and Memory Management Demo
+// 📘 For TypeScript comparison, see: 40-memory-gc-ts-comparison.ts
 // 📘 javascript.info: "Garbage collection"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management
 

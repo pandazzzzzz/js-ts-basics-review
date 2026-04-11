@@ -1,4 +1,5 @@
 // WeakRef and FinalizationRegistry Demo
+// 📘 For TypeScript comparison, see: 43-weakref-finalization-ts-comparison.ts
 // 📘 javascript.info: "WeakRef and FinalizationRegistry"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakRef
 // 📌 ES2021 (ES12)
@@ -357,6 +358,88 @@ try {
 } finally {
   resource2.close(); // Always called
 }
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Non-deterministic cleanup
+console.log("\nPitfall 1: Non-deterministic cleanup timing");
+console.log("  Finalizer callbacks run at GC discretion");
+console.log("  Can be delayed or never called in some cases");
+console.log("  Fix: Use for cleanup hints, not critical logic");
+
+// Pitfall 2: WeakRef deref() returning undefined
+console.log("\nPitfall 2: WeakRef.deref() returns undefined");
+console.log("  Object may be collected between check and use");
+console.log("  deref() can fail even if checked immediately before");
+console.log("  Fix: Always handle undefined case");
+
+// Pitfall 3: Memory leaks in cache with WeakRef
+console.log("\nPitfall 3: Key leaks in WeakRef cache");
+console.log("  WeakRef allows value GC, but key may remain");
+console.log("  Map keys are strong references");
+console.log("  Fix: Use FinalizationRegistry to clean up keys");
+
+// Pitfall 4: Finalizer callback errors
+console.log("\nPitfall 4: Finalizer callback errors");
+console.log("  Errors in finalizer are silently ignored");
+console.log("  No way to catch or handle finalizer errors");
+console.log("  Fix: Make finalizers robust");
+
+// Pitfall 5: Re-registering same object
+console.log("\nPitfall 5: Re-registering with FinalizationRegistry");
+console.log("  Can register same object multiple times");
+console.log("  Multiple callbacks for same object");
+console.log("  Fix: Track registration or use unique handles");
+
+// Pitfall 6: Using WeakRef for critical data
+console.log("\nPitfall 6: WeakRef for critical data");
+console.log("  Data may be collected unexpectedly");
+console.log("  Not suitable for essential information");
+console.log("  Fix: Use only for cache/optimization");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Use WeakRef for optional caches only");
+console.log("2. Use FinalizationRegistry for cleanup hints");
+console.log("3. Always check if deref() returns undefined");
+console.log("4. Implement proper cache key cleanup");
+console.log("5. Make finalizer callbacks robust");
+console.log("6. Consider using/await using instead (ES2025)");
+console.log("7. Test finalizer behavior (can be flaky)");
+console.log("8. Use try/finally as fallback");
+console.log("9. Document WeakRef usage clearly");
+console.log("10. Profile memory before and after");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't rely on immediate finalization");
+console.log("2. Don't use for critical resource cleanup");
+console.log("3. Don't assume deref() succeeds");
+console.log("4. Don't register same object multiple times");
+console.log("5. Don't throw in finalizer callbacks");
+console.log("6. Don't use without fallback");
+console.log("7. Don't expect predictable cleanup order");
+console.log("8. Don't use for required application data");
+console.log("9. Don't forget to unregister if possible");
+console.log("10. Don't overuse - has performance overhead");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Non-deterministic finalization");
+console.log("2. Browser support (ES2021)");
+console.log("3. Key leaks in caches");
+console.log("4. Finalizer callback reliability");
+console.log("5. Multiple registrations");
+console.log("6. Performance impact");
+console.log("7. Memory pressure effects");
+console.log("8. Testing difficulties");
 
 // ============================================
 // TypeScript Comparison Notes

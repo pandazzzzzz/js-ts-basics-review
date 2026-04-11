@@ -1,4 +1,5 @@
 // Storage and Advanced Network Requests Demo
+// 📘 For TypeScript comparison, see: 44-storage-network-ts-comparison.ts
 // 📘 javascript.info Part 3 > "Storing data", "Network requests"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
 // ⚠️ Most content is browser-specific
@@ -1195,6 +1196,109 @@ console.log("  ✓ Many concurrent connections\n");
 // ============================================
 
 console.log("\n=== WebSocket (Comparison with SSE) ===\n");
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: localStorage synchronous blocking
+console.log("\nPitfall 1: localStorage is synchronous");
+console.log("  Blocks main thread during read/write");
+console.log("  Can cause UI jank with large data");
+console.log("  Fix: Use IndexedDB for large data");
+
+// Pitfall 2: Storage quota limits
+console.log("\nPitfall 2: Storage quota limits");
+console.log("  localStorage: ~5-10MB per origin");
+console.log("  IndexedDB: Larger but still limited");
+console.log("  QuotaExceededError when full");
+console.log("  Fix: Monitor usage, implement cleanup");
+
+// Pitfall 3: JSON.stringify limitations
+console.log("\nPitfall 3: JSON.stringify limitations");
+console.log("  Cannot serialize Date, Map, Set, undefined, functions");
+console.log("  Date becomes ISO string (needs parsing)");
+console.log("  Fix: Use custom serialization");
+
+// Pitfall 4: CORS preflight caching
+console.log("\nPitfall 4: CORS preflight requests");
+console.log("  Complex requests trigger OPTIONS preflight");
+console.log("  Preflight can be cached but timing varies");
+console.log("  Fix: Use simple requests when possible");
+
+// Pitfall 5: WebSocket connection handling
+console.log("\nPitfall 5: WebSocket connection lifecycle");
+console.log("  Connection can drop unexpectedly");
+console.log("  Need manual reconnection logic");
+console.log("  Fix: Implement exponential backoff");
+
+// Pitfall 6: SSE reconnection timing
+console.log("\nPitfall 6: SSE automatic reconnection");
+console.log("  Reconnects after 'retry' milliseconds");
+console.log("  Default is 1000ms if not specified");
+console.log("  Fix: Set appropriate retry interval");
+
+// Pitfall 7: Cookie size limits
+console.log("\nPitfall 7: Cookie size limits");
+console.log("  Maximum 4KB per cookie");
+console.log("  Sent with every HTTP request");
+console.log("  Fix: Store minimal data in cookies");
+
+// Pitfall 8: Memory leaks with event listeners
+console.log("\nPitfall 8: Event listener memory leaks");
+console.log("  WebSocket/SSE need explicit cleanup");
+console.log("  Forgot to close = memory leak");
+console.log("  Fix: Always clean up in unload/destroy");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Use localStorage for small, synchronous data");
+console.log("2. Use IndexedDB for large or complex data");
+console.log("3. Use sessionStorage for tab-specific data");
+console.log("4. Implement storage quota monitoring");
+console.log("5. Use JSON.parse/stringify carefully");
+console.log("6. Handle CORS properly on server side");
+console.log("7. Implement WebSocket reconnection logic");
+console.log("8. Set appropriate SSE retry intervals");
+console.log("9. Use httpOnly cookies for sensitive data");
+console.log("10. Clean up all event listeners and connections");
+console.log("11. Use AbortController for fetch cancellation");
+console.log("12. Validate all user input before storage");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't store sensitive data in localStorage");
+console.log("2. Don't store large objects in localStorage");
+console.log("3. Don't block main thread with storage operations");
+console.log("4. Don't forget CORS credentials option");
+console.log("5. Don't assume WebSocket stays connected");
+console.log("6. Don't forget to close connections on cleanup");
+console.log("7. Don't store too much in cookies (4KB limit)");
+console.log("8. Don't use cookies for non-essential data");
+console.log("9. Don't forget error handling");
+console.log("10. Don't ignore network status changes");
+console.log("11. Don't forget HTTPS for security-sensitive APIs");
+console.log("12. Don't trust client-side storage for critical data");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Storage quota exceeded errors");
+console.log("2. localStorage synchronous blocking");
+console.log("3. JSON serialization edge cases");
+console.log("4. CORS preflight complexity");
+console.log("5. WebSocket disconnections");
+console.log("6. SSE reconnection loops");
+console.log("7. Cookie size and count limits");
+console.log("8. Memory leaks from unclosed connections");
+console.log("9. Cross-tab synchronization issues");
+console.log("10. Private browsing storage restrictions");
+console.log("11. Browser-specific implementation differences");
+console.log("12. Security implications of each storage type");
 
 // ============================================
 // TypeScript Comparison Notes

@@ -1,4 +1,5 @@
 // Performance Optimization Demo
+// 📘 For TypeScript comparison, see: 47-performance-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Performance
 // 📘 Web Performance: https://web.dev/performance/
 // 📌 Covers performance measurement and optimization techniques
@@ -385,6 +386,61 @@ function processObject(obj) {
 // - Cache management
 // - Event listener cleanup
 // - Timer cleanup
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Premature optimization
+console.log("\nPitfall 1: Premature optimization");
+console.log("  Optimizing code paths that are not bottlenecks wastes time and adds complexity.");
+console.log("  Fix: Profile first with Performance API or DevTools, then optimize the hottest paths.");
+
+// Pitfall 2: Measuring without baseline
+console.log("\nPitfall 2: Measuring without baseline");
+console.log("  Without a baseline you cannot tell if a change improved or degraded performance.");
+console.log("  Fix: Record baseline metrics with performance.mark/measure before any optimization.");
+
+// Pitfall 3: Debounce/throttle confusion
+console.log("\nPitfall 3: Debounce/throttle confusion");
+console.log("  Using debounce when you need throttle (or vice versa) causes missed events or laggy UX.");
+console.log("  Fix: Debounce for inputs that should fire once after typing stops; throttle for continuous events like scroll/mousemove.");
+
+// Pitfall 4: Memory leaks from closures
+console.log("\nPitfall 4: Memory leaks from closures");
+console.log("  Closures can inadvertently hold references to large objects long after they are needed.");
+console.log("  Fix: Nullify references you no longer need and avoid capturing heavy objects in long-lived callbacks.");
+
+// Pitfall 5: Not cleaning up observers
+console.log("\nPitfall 5: Not cleaning up observers");
+console.log("  PerformanceObserver and IntersectionObserver instances keep firing until disconnected.");
+console.log("  Fix: Always call observer.disconnect() in unmount/cleanup hooks.");
+
+// Pitfall 6: Dynamic import waterfall
+console.log("\nPitfall 6: Dynamic import waterfall");
+console.log("  Sequentially awaiting dynamic imports (await A; await B) wastes time when modules are independent.");
+console.log("  Fix: Use Promise.all() to load independent modules in parallel: await Promise.all([import('./A'), import('./B')]);");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("\n✅ DO:");
+console.log("1. Measure first - always profile with real data before deciding what to optimize.");
+console.log("2. Use appropriate optimization - debounce inputs, throttle scroll/resize, virtualize long lists, lazy-load below-the-fold content.");
+console.log("3. Profile in production - use PerformanceObserver and Real User Monitoring (RUM) to catch regressions early.");
+
+console.log("\n❌ DON'T:");
+console.log("1. Premature optimization - do not optimize code paths that have not been identified as bottlenecks.");
+console.log("2. Optimize without measuring - every change should be validated against a baseline.");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Measurement accuracy - warm up caches, run multiple iterations, and account for JIT compilation variance.");
+console.log("2. Real-world conditions - test on low-end devices and slow networks, not just your dev machine.");
 
 // ============================================
 // TypeScript Comparison Notes

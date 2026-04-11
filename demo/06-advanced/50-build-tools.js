@@ -1,4 +1,5 @@
 // Build Tools Integration Demo
+// 📘 For TypeScript comparison, see: 50-build-tools-ts-comparison.ts
 // 📘 Webpack: https://webpack.js.org/
 // 📘 Vite: https://vitejs.dev/
 // 📌 Covers webpack, vite, code splitting, and production optimization
@@ -529,6 +530,84 @@ npm run build -- --analyze
 // - Optimize assets
 // - Enable caching
 // - Monitor bundle size
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Over-configuration
+console.log("\nPitfall 1: Over-configuration");
+console.log("  Too many webpack options become confusing");
+console.log("  Fix: Start simple, add complexity as needed");
+
+// Pitfall 2: Tree shaking not working
+console.log("\nPitfall 2: Tree shaking not working");
+console.log("  Side effects prevent dead code elimination");
+console.log("  Fix: Use 'sideEffects': false in package.json");
+console.log("  Fix: Use ES module imports/exports");
+
+// Pitfall 3: Large bundle sizes
+console.log("\nPitfall 3: Large bundle sizes");
+console.log("  Bundling entire library instead of needed parts");
+console.log("  Fix: Use dynamic imports, analyze bundle size");
+
+// Pitfall 4: Cache invalidation issues
+console.log("\nPitfall 4: Cache invalidation");
+console.log("  Users get stale cached assets");
+console.log("  Fix: Use content hashing in filenames");
+
+// Pitfall 5: Development vs production mismatch
+console.log("\nPitfall 5: Development vs production mismatch");
+console.log("  Code works in dev but fails in production");
+console.log("  Fix: Test production build before deploying");
+console.log("  Fix: Minification can change behavior");
+
+// Pitfall 6: Source map exposure
+console.log("\nPitfall 6: Source map exposure");
+console.log("  Source maps expose original code in production");
+console.log("  Fix: Don't upload source maps to public servers");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Analyze bundle size regularly (webpack-bundle-analyzer)");
+console.log("2. Use code splitting and dynamic imports");
+console.log("3. Enable tree shaking with ES modules");
+console.log("4. Use content hashing for cache busting");
+console.log("5. Test production build before deploying");
+console.log("6. Configure source maps appropriately");
+console.log("7. Use environment variables for configuration");
+console.log("8. Keep dependencies updated");
+console.log("9. Use Vite for faster development experience");
+console.log("10. Monitor build times and optimize");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't over-configure webpack");
+console.log("2. Don't upload source maps to public servers");
+console.log("3. Don't ignore bundle size warnings");
+console.log("4. Don't skip production build testing");
+console.log("5. Don't use CommonJS if tree shaking is needed");
+console.log("6. Don't bundle unnecessary dependencies");
+console.log("7. Don't ignore cache invalidation");
+console.log("8. Don't forget to optimize images and assets");
+console.log("9. Don't disable minification in production");
+console.log("10. Don't use outdated build tools");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Bundle size creep");
+console.log("2. Tree shaking compatibility");
+console.log("3. Cache invalidation timing");
+console.log("4. Development vs production differences");
+console.log("5. Source map security");
+console.log("6. Build tool deprecation");
+console.log("7. Dependency compatibility");
+console.log("8. Environment variable exposure");
 
 // ============================================
 // TypeScript Comparison Notes

@@ -1,4 +1,5 @@
 // Web APIs Demo
+// 📘 For TypeScript comparison, see: 46-web-apis-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API
 // 📘 Web APIs: https://developer.mozilla.org/en-US/docs/Web/API
 // 📌 Covers important modern Web APIs
@@ -493,6 +494,64 @@ if ('getBattery' in navigator) {
   });
 }
 `);
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Service Worker registration errors
+console.log("\nPitfall 1: Service Worker registration errors");
+console.log("  Description: Service Worker registration can fail silently if the sw.js file returns a 404, or if the scope is incorrect. Errors may also occur when registering from a subdirectory without proper scope configuration.");
+console.log("  Fix: Always wrap registration in try/catch, verify the sw.js path is correct, and explicitly set the scope option if needed. Check the browser console for registration errors.");
+
+// Pitfall 2: Intersection Observer threshold confusion
+console.log("\nPitfall 2: Intersection Observer threshold confusion");
+console.log("  Description: The threshold value is often misunderstood. threshold: 0 means the callback fires when even 1 pixel is visible, while threshold: 1 means the entire element must be visible. Using threshold: 0.5 means 50% must be visible.");
+console.log("  Fix: Use an array of thresholds like [0, 0.25, 0.5, 0.75, 1] to track multiple visibility levels, or start with threshold: 0 for lazy loading patterns.");
+
+// Pitfall 3: Geolocation permission denied
+console.log("\nPitfall 3: Geolocation permission denied");
+console.log("  Description: Users can deny geolocation permission, and once denied, the browser will not prompt again. The API also fails silently on non-HTTPS origins (except localhost).");
+console.log("  Fix: Always provide a fallback UI when permission is denied. Handle all three error codes: PERMISSION_DENIED (1), POSITION_UNAVAILABLE (2), and TIMEOUT (3). Serve the app gracefully without location data.");
+
+// Pitfall 4: Web Worker not terminating
+console.log("\nPitfall 4: Web Worker not terminating");
+console.log("  Description: Workers continue running in the background even after the main thread no longer needs them. Each worker consumes memory and CPU resources. Forgetting to terminate workers leads to memory leaks.");
+console.log("  Fix: Always call worker.terminate() or self.close() inside the worker when the task is complete. Use cleanup patterns in component unmount or page navigation events.");
+
+// Pitfall 5: Notification permission handling
+console.log("\nPitfall 5: Notification permission handling");
+console.log("  Description: Notification.requestPermission() must be called in response to a user gesture in some browsers. If the user blocks notifications, you cannot re-prompt them without them manually changing browser settings.");
+console.log("  Fix: Request permission only after explaining why notifications are useful. Check Notification.permission before requesting. Handle 'default', 'granted', and 'denied' states appropriately.");
+
+// Pitfall 6: Clipboard API security restrictions
+console.log("\nPitfall 6: Clipboard API security restrictions");
+console.log("  Description: navigator.clipboard.readText() requires both user permission and a secure context (HTTPS). In many browsers, clipboard read requires the document to have focus. It will throw if called outside a user gesture.");
+console.log("  Fix: Use the Clipboard API only inside event handlers triggered by user actions. Wrap calls in try/catch. Use document.execCommand('copy') as a fallback for older browsers.");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("\n✅ DO:");
+console.log("1. Check API availability before use (e.g., 'serviceWorker' in navigator, 'geolocation' in navigator)");
+console.log("2. Handle permissions gracefully - request at the right time and provide fallbacks when denied");
+console.log("3. Clean up resources: terminate workers, unobserve IntersectionObservers, clear geolocation watches, close WebSockets");
+console.log("4. Use HTTPS for all security-sensitive APIs (Service Workers, Geolocation, Clipboard, Notifications)");
+
+console.log("\n❌ DON'T:");
+console.log("1. Assume an API exists without feature detection - browser support varies");
+console.log("2. Forget cleanup - leaving workers running, observers active, or connections open causes memory leaks");
+console.log("3. Block the main thread - offload heavy computations to Web Workers to keep the UI responsive");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Browser support differences - check caniuse.com and provide polyfills or fallbacks where needed");
+console.log("2. Permissions can be denied or blocked - always handle the denied state and don't assume access");
+console.log("3. Memory leaks from unclosed connections, unremoved observers, or unterminated workers accumulate over time");
 
 // ============================================
 // TypeScript Comparison Notes

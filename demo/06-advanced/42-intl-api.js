@@ -1,4 +1,5 @@
 // Intl Internationalization API Demo
+// 📘 For TypeScript comparison, see: 42-intl-api-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
 // 📘 javascript.info: "Intl" (brief mention)
 // 📌 ECMAScript Internationalization API
@@ -450,6 +451,88 @@ function formatStats(count, locale) {
 console.log("\n4. Multi-language UI:");
 console.log("Views:", formatStats(1234567, 'en-US')); // "1.2M"
 console.log("Likes:", formatStats(9876, 'en-US'));    // "9.9K"
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Locale string format
+console.log("\nPitfall 1: Locale string format");
+console.log("  'en-US' vs 'en-us' (case sensitivity)");
+console.log("  Some locales are case-sensitive");
+console.log("  Fix: Use standard locale format");
+
+// Pitfall 2: Time zone handling
+console.log("\nPitfall 2: Time zone handling");
+console.log("  timeZone: 'UTC' vs timeZone: undefined");
+console.log("  undefined uses local timezone");
+console.log("  Fix: Always specify timezone for consistency");
+
+// Pitfall 3: Number formatting precision
+console.log("\nPitfall 3: Number formatting precision");
+console.log("  maximumFractionDigits affects rounding");
+console.log("  Rounding may not match expectations");
+console.log("  Fix: Test edge cases");
+
+// Pitfall 4: Collator numeric sorting
+console.log("\nPitfall 4: Collator numeric sorting");
+console.log("  Without numeric: true, '10' comes before '2'");
+console.log("  Files sorted: file1, file10, file2");
+console.log("  Fix: Use numeric: true for numbers in strings");
+
+// Pitfall 5: Currency code validity
+console.log("\nPitfall 5: Invalid currency codes");
+console.log("  Invalid codes throw RangeError");
+console.log("  'XYZ' is not valid currency");
+console.log("  Fix: Validate currency codes");
+
+// Pitfall 6: Intl.Segmenter support
+console.log("\nPitfall 6: Intl.Segmenter availability");
+console.log("  Newer API (ES2022)");
+console.log("  Not available in older browsers");
+console.log("  Fix: Check support before use");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Cache Intl formatters for reuse (expensive to create)");
+console.log("2. Use appropriate granularity for Segmenter");
+console.log("3. Provide fallback locales for missing translations");
+console.log("4. Test with actual locale data (not just 'en-US')");
+console.log("5. Use numeric: true for sorting strings with numbers");
+console.log("6. Always specify timezone for date formatting");
+console.log("7. Validate currency codes before use");
+console.log("8. Use Intl.RelativeTimeFormat for user-friendly times");
+console.log("9. Consider locale-specific plural rules");
+console.log("10. Handle missing locale gracefully");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't create new formatter for each call");
+console.log("2. Don't use 'en-US' as only test locale");
+console.log("3. Don't forget timezone in date formatting");
+console.log("4. Don't sort without numeric: true for file names");
+console.log("5. Don't assume all currencies are valid");
+console.log("6. Don't use Intl.Segmenter without fallback");
+console.log("7. Don't ignore locale fallback chain");
+console.log("8. Don't forget to validate locale strings");
+console.log("9. Don't use default locale for user-specific content");
+console.log("10. Don't forget about RTL locale considerations");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Formatter creation overhead (cache them)");
+console.log("2. Timezone inconsistencies");
+console.log("3. Currency code validation");
+console.log("4. Numeric sorting vs alphabetical");
+console.log("5. Intl.Segmenter browser support");
+console.log("6. Plural rules variations across locales");
+console.log("7. RTL text direction considerations");
+console.log("8. Missing locale fallback handling");
 
 // ============================================
 // TypeScript Comparison Notes

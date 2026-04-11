@@ -1,362 +1,195 @@
-// TypeScript Advanced Features
-// 📘 TypeScript Handbook: https://www.typescriptlang.org/docs/handbook/
-// 📘 Advanced Types: https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
-// 📌 Covers advanced TypeScript type system features (TypeScript only)
+// TypeScript vs JavaScript: TypeScript Advanced Comparison
+// 📘 For JavaScript foundations, see: 48-typescript-advanced.js
+// This file demonstrates TypeScript-specific advanced features
 
-export {}; // Make this file a module
+export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================
-// Section 1: Generic Constraints
+// JSDoc vs TypeScript Type System
 // ============================================
 
-console.log("=== Generic Constraints ===\n");
+console.log("=== JSDoc vs TypeScript ===\n");
 
-// Basic generic constraint
-function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+// JavaScript with JSDoc:
+/**
+ * @param {number} a
+ * @param {number} b
+ * @returns {number}
+ */
+function addJs(a, b) {
+  return a + b;
+}
+
+// TypeScript:
+function addTs(a: number, b: number): number {
+  return a + b;
+}
+
+console.log("JSDoc: Type hints in comments");
+console.log("TypeScript: Native type annotations");
+console.log("Key difference: TypeScript provides compile-time checking");
+
+// JSDoc types:
+/**
+ * @typedef {Object} UserJs
+ * @property {number} id
+ * @property {string} name
+ */
+
+// TypeScript:
+interface UserTs {
+  id: number;
+  name: string;
+}
+
+console.log("\nJSDoc vs TypeScript Interfaces:");
+console.log("JSDoc: @typedef in comments");
+console.log("TypeScript: 'interface' keyword");
+
+// ============================================
+// Generic Constraints - TypeScript
+// ============================================
+
+console.log("\n=== Generic Constraints ===\n");
+
+// JavaScript:
+// No generic type-safe property access
+function getPropertyJs(obj, key) {
   return obj[key];
 }
+const userJs = { name: "Alice", age: 30 };
+const nameJs = getPropertyJs(userJs, "name"); // any type
 
-const user = { name: "Alice", age: 30 };
-const name = getProperty(user, "name"); // Type: string
-const age = getProperty(user, "age");   // Type: number
-console.log("Name:", name, "Age:", age);
-
-// Multiple constraints
-interface Lengthwise {
-  length: number;
+// TypeScript:
+function getPropertyTs<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
 }
+const userTs = { name: "Alice", age: 30 };
+const nameTs = getPropertyTs(userTs, "name"); // type: string
+const ageTs = getPropertyTs(userTs, "age");   // type: number
 
-function logLength<T extends Lengthwise>(arg: T): T {
-  console.log("Length:", arg.length);
-  return arg;
-}
-
-logLength("hello");        // OK: string has length
-logLength([1, 2, 3]);      // OK: array has length
-// logLength(123);         // Error: number doesn't have length
-
-// Generic defaults
-interface Container<T = string> {
-  value: T;
-}
-
-const stringContainer: Container = { value: "hello" };
-const numberContainer: Container<number> = { value: 42 };
-
-console.log("Containers:", stringContainer, numberContainer);
+console.log("JavaScript: Returns 'any' type, no type safety");
+console.log("TypeScript: Returns correct type, type-safe");
+console.log("Name:", nameTs, "Age:", ageTs);
 
 // ============================================
-// Section 2: Conditional Types
+// Conditional Types - TypeScript Only
 // ============================================
 
 console.log("\n=== Conditional Types ===\n");
 
-// Basic conditional type
+// TypeScript-only feature
 type IsString<T> = T extends string ? true : false;
-
 type A = IsString<string>;  // true
 type B = IsString<number>;  // false
 
-// Distributive conditional types
-type ToArray<T> = T extends any ? T[] : never;
-type StrOrNumArray = ToArray<string | number>; // string[] | number[]
-
-
 // Infer keyword
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
-type FunctionReturn = ReturnType<() => string>; // string
+type Fn = () => string;
+type FunctionReturn = ReturnType<Fn>; // string
 
-type ArrayElement<T> = T extends (infer E)[] ? E : never;
-type Element = ArrayElement<number[]>; // number
-
-// Practical example: Unwrap Promise
-type Awaited<T> = T extends Promise<infer U> ? U : T;
-type Result = Awaited<Promise<string>>; // string
-
-console.log("Conditional types enable type transformations");
+console.log("Conditional types: Type-level ternary operator");
+console.log("IsString<string>: true");
+console.log("IsString<number>: false");
 
 // ============================================
-// Section 3: Mapped Types
+// Mapped Types - TypeScript Only
 // ============================================
 
 console.log("\n=== Mapped Types ===\n");
 
-// Built-in mapped types
+// JavaScript: Manual type transformation
+// TypeScript: Built-in mapped types
 interface User {
   name: string;
   age: number;
-  email: string;
 }
 
+// TypeScript built-in utility types
 type PartialUser = Partial<User>;     // All properties optional
 type RequiredUser = Required<User>;   // All properties required
 type ReadonlyUser = Readonly<User>;   // All properties readonly
-type PickedUser = Pick<User, 'name' | 'age'>; // Pick specific properties
-type OmittedUser = Omit<User, 'email'>; // Omit specific properties
 
-// Custom mapped type
+console.log("JavaScript: No built-in type transformation");
+console.log("TypeScript: Built-in utility types");
+console.log("Partial, Required, Readonly, Pick, Omit");
+
+// Custom mapped type in TypeScript
 type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
-
 type NullableUser = Nullable<User>;
-// { name: string | null; age: number | null; email: string | null; }
+// { name: string | null; age: number | null; }
 
-// Mapped type with key remapping
-type Getters<T> = {
-  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
-};
-
-type UserGetters = Getters<User>;
-// { getName: () => string; getAge: () => number; getEmail: () => string; }
-
-console.log("Mapped types transform object types");
+console.log("Custom mapped types: Transform object types");
 
 // ============================================
-// Section 4: Template Literal Types
+// Template Literal Types - TypeScript Only
 // ============================================
 
 console.log("\n=== Template Literal Types ===\n");
 
-// Basic template literal type
-type World = "world";
-type Greeting = `hello ${World}`; // "hello world"
-
-// Event names
+// TypeScript-only: String manipulation at type level
 type EventName = "click" | "focus" | "blur";
 type EventHandler = `on${Capitalize<EventName>}`;
 // "onClick" | "onFocus" | "onBlur"
 
-// CSS properties
-type CSSProperty = "color" | "background" | "border";
-type CSSValue = string | number;
-type CSSProperties = {
-  [K in CSSProperty]: CSSValue;
-};
-
-// Route parameters
-type Route = "/users/:id" | "/posts/:postId/comments/:commentId";
-type ExtractParams<T extends string> = 
-  T extends `${infer _Start}:${infer Param}/${infer Rest}`
-    ? Param | ExtractParams<`/${Rest}`>
-    : T extends `${infer _Start}:${infer Param}`
-    ? Param
-    : never;
-
-type RouteParams = ExtractParams<Route>; // "id" | "postId" | "commentId"
-
-console.log("Template literal types enable string manipulation at type level");
+console.log("Template literal types: String manipulation at type level");
+console.log("Event handlers: onClick, onFocus, onBlur");
 
 // ============================================
-// Section 5: Decorators
+// Decorators - TypeScript Experimental
 // ============================================
 
 console.log("\n=== Decorators ===\n");
 
-// Class decorator
-function Sealed(constructor: Function) {
-  Object.seal(constructor);
-  Object.seal(constructor.prototype);
-}
+console.log("JavaScript: Stage 3 proposal, requires transpilation");
+console.log("TypeScript: --experimentalDecorators flag");
 
-@Sealed
-class SealedClass {
-  name: string = "Sealed";
-}
-
-// Method decorator
-function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+// TypeScript decorator example (requires tsconfig flag)
+function LogTs(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
-  
   descriptor.value = function(...args: any[]) {
     console.log(`Calling ${propertyKey} with:`, args);
     const result = originalMethod.apply(this, args);
     console.log(`Result:`, result);
     return result;
   };
-  
   return descriptor;
 }
 
-// Property decorator
-function ReadOnly(target: any, propertyKey: string) {
-  Object.defineProperty(target, propertyKey, {
-    writable: false
-  });
-}
-
-// Parameter decorator
-function Required(target: any, propertyKey: string, parameterIndex: number) {
-  console.log(`Parameter ${parameterIndex} of ${propertyKey} is required`);
-}
-
-class DecoratedClass {
-  @ReadOnly
-  readonly apiUrl: string = "https://api.example.com";
-
-  @Log
-  greet(@Required name: string): string {
-    return `Hello, ${name}!`;
-  }
-}
-
-const instance = new DecoratedClass();
-console.log(instance.greet("Alice"));
-
-// Decorator factory
-function MinLength(min: number) {
-  return function(target: any, propertyKey: string) {
-    let value: string;
-    
-    Object.defineProperty(target, propertyKey, {
-      get() { return value; },
-      set(newValue: string) {
-        if (newValue.length < min) {
-          throw new Error(`${propertyKey} must be at least ${min} characters`);
-        }
-        value = newValue;
-      }
-    });
-  };
-}
+console.log("Decorators: Add metadata, modify behavior");
 
 // ============================================
-// Section 6: Advanced Generics
+// Type Guards - TypeScript
 // ============================================
 
-console.log("\n=== Advanced Generics ===\n");
+console.log("\n=== Type Guards ===\n");
 
-// Generic inference
-function identity<T>(arg: T): T {
-  return arg;
+// JavaScript:
+function isStringJs(value) {
+  return typeof value === "string";
 }
 
-const result = identity("hello"); // T inferred as string
-
-// Multiple generic parameters
-function merge<T, U>(obj1: T, obj2: U): T & U {
-  return { ...obj1, ...obj2 };
+// TypeScript: Type predicate
+function isStringTs(value: unknown): value is string {
+  return typeof value === "string";
 }
 
-const merged = merge({ name: "Alice" }, { age: 30 });
-console.log("Merged:", merged);
-
-// Generic constraints with keyof
-function pluck<T, K extends keyof T>(objects: T[], key: K): T[K][] {
-  return objects.map(obj => obj[key]);
+const value: unknown = "hello";
+if (isStringTs(value)) {
+  console.log(value.toUpperCase()); // TypeScript knows value is string here
 }
 
-const users = [
-  { name: "Alice", age: 30 },
-  { name: "Bob", age: 25 }
-];
-
-const names = pluck(users, "name"); // string[]
-const ages = pluck(users, "age");   // number[]
-console.log("Names:", names, "Ages:", ages);
-
-// Recursive types
-type JSONValue = 
-  | string
-  | number
-  | boolean
-  | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
-
-const jsonData: JSONValue = {
-  name: "Alice",
-  age: 30,
-  hobbies: ["reading", "coding"],
-  address: {
-    city: "New York",
-    zip: 10001
-  }
-};
-
-console.log("JSON data:", jsonData);
+console.log("Type guards: Type predicates with 'is' operator");
 
 // ============================================
-// Section 7: Utility Types
+// Declaration Merging - TypeScript Only
 // ============================================
 
-console.log("\n=== Utility Types ===\n");
+console.log("\n=== Declaration Merging ===\n");
 
-interface Todo {
-  title: string;
-  description: string;
-  completed: boolean;
-}
-
-// Partial - all properties optional
-type PartialTodo = Partial<Todo>;
-
-// Required - all properties required
-type RequiredTodo = Required<PartialTodo>;
-
-// Readonly - all properties readonly
-type ReadonlyTodo = Readonly<Todo>;
-
-// Record - construct object type
-type TodoRecord = Record<string, Todo>;
-
-// Pick - select properties
-type TodoPreview = Pick<Todo, 'title' | 'completed'>;
-
-// Omit - exclude properties
-type TodoInfo = Omit<Todo, 'completed'>;
-
-// Exclude - exclude from union
-type T0 = Exclude<"a" | "b" | "c", "a">; // "b" | "c"
-
-// Extract - extract from union
-type T1 = Extract<"a" | "b" | "c", "a" | "f">; // "a"
-
-// NonNullable - exclude null and undefined
-type T2 = NonNullable<string | number | undefined>; // string | number
-
-// Parameters - extract function parameters
-type T3 = Parameters<(a: string, b: number) => void>; // [string, number]
-
-// ReturnType - extract function return type
-type T4 = ReturnType<() => string>; // string
-
-console.log("Utility types provide common type transformations");
-
-// ============================================
-// Section 8: Module System
-// ============================================
-
-console.log("\n=== Module System ===\n");
-
-// Namespace
-namespace Validation {
-  export interface StringValidator {
-    isValid(s: string): boolean;
-  }
-
-  export class EmailValidator implements StringValidator {
-    isValid(s: string): boolean {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-    }
-  }
-
-  export class URLValidator implements StringValidator {
-    isValid(s: string): boolean {
-      try {
-        new URL(s);
-        return true;
-      } catch {
-        return false;
-      }
-    }
-  }
-}
-
-const emailValidator = new Validation.EmailValidator();
-console.log("Valid email:", emailValidator.isValid("test@example.com"));
-
-// Declaration merging
+// TypeScript-only: Interface merging
 interface Box {
   height: number;
   width: number;
@@ -367,13 +200,30 @@ interface Box {
 }
 
 const box: Box = { height: 10, width: 20, depth: 30 };
+console.log("Declaration merging: Multiple interfaces merge");
 console.log("Box:", box);
 
-// Ambient declarations
-declare const API_KEY: string;
-declare function fetchData(url: string): Promise<any>;
+// ============================================
+// Namespaces - TypeScript
+// ============================================
 
-console.log("Module system enables code organization");
+console.log("\n=== Namespaces ===\n");
+
+// TypeScript namespace
+namespace ValidationTs {
+  export interface StringValidator {
+    isValid(s: string): boolean;
+  }
+  export class EmailValidator implements StringValidator {
+    isValid(s: string): boolean {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+    }
+  }
+}
+
+const validator = new ValidationTs.EmailValidator();
+console.log("Namespaces: TypeScript-specific organization");
+console.log("Valid email:", validator.isValid("test@example.com"));
 
 // ============================================
 // Best Practices
@@ -382,53 +232,30 @@ console.log("Module system enables code organization");
 console.log("\n=== Best Practices ===\n");
 
 console.log("✅ DO:");
-console.log("1. Use generic constraints to ensure type safety");
-console.log("2. Leverage conditional types for type transformations");
-console.log("3. Use mapped types to transform object types");
-console.log("4. Apply template literal types for string manipulation");
-console.log("5. Use decorators for cross-cutting concerns");
-console.log("6. Prefer utility types over manual type definitions");
+console.log("1. Use TypeScript native types over JSDoc");
+console.log("2. Leverage generic constraints");
+console.log("3. Use utility types");
+console.log("4. Prefer unknown over any");
+console.log("5. Use type guards for narrowing");
 
 console.log("\n❌ DON'T:");
-console.log("1. Don't overuse complex conditional types");
-console.log("2. Don't create deeply nested generic types");
-console.log("3. Don't abuse decorators for business logic");
-console.log("4. Don't ignore type inference");
-console.log("5. Don't use any when advanced types can help");
+console.log("1. Don't use any unless necessary");
+console.log("2. Don't overcomplicate types");
+console.log("3. Don't ignore type inference");
 
-console.log("\n📊 TypeScript Advanced Features:");
+console.log("\n📊 JavaScript vs TypeScript Summary:");
 console.log(`
-┌─────────────────────────────────────────────────────────────────────┐
-│ TYPESCRIPT ADVANCED FEATURES                                        │
-├─────────────────────────────────────────────────────────────────────┤
-│ Generic Constraints:                                                │
-│   - extends keyof for property access                               │
-│   - Multiple constraints with &                                     │
-│   - Generic defaults                                                │
-│                                                                      │
-│ Conditional Types:                                                  │
-│   - T extends U ? X : Y                                             │
-│   - infer keyword for type inference                                │
-│   - Distributive conditional types                                  │
-│                                                                      │
-│ Mapped Types:                                                       │
-│   - Transform object types                                          │
-│   - Key remapping with as                                           │
-│   - Built-in: Partial, Required, Readonly, Pick, Omit              │
-│                                                                      │
-│ Template Literal Types:                                             │
-│   - String manipulation at type level                               │
-│   - Capitalize, Uppercase, Lowercase, Uncapitalize                  │
-│   - Extract patterns from strings                                   │
-│                                                                      │
-│ Decorators:                                                         │
-│   - Class, method, property, parameter decorators                   │
-│   - Decorator factories                                             │
-│   - Metadata with reflect-metadata                                  │
-│                                                                      │
-│ Module System:                                                      │
-│   - Namespaces for organization                                     │
-│   - Declaration merging                                             │
-│   - Ambient declarations                                            │
-└─────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────┬─────────────────┬─────────────────┐
+│ Feature                              │   JavaScript    │   TypeScript    │
+├──────────────────────────────────────────┼─────────────────┼─────────────────┤
+│ Type system                          │   JSDoc (opt   │   Native types  │
+│ Generic constraints                  │   No            │   Yes           │
+│ Conditional types                  │   No            │   Yes           │
+│ Mapped types                     │   No            │   Yes           │
+│ Template literal types              │   No            │   Yes           │
+│ Decorators                     │   Proposal      │   Experimental  │
+│ Declaration merging            │   No            │   Yes           │
+│ Type guards                      │   Runtime       │   Type predicates│
+│ Namespaces                   │   No            │   Yes           │
+└──────────────────────────────────────────┴─────────────────┴─────────────────┘
 `);

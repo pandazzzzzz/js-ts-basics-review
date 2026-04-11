@@ -1,4 +1,5 @@
 // Reserved for Future Extensions Demo
+// 📘 For TypeScript comparison, see: 51-reserved-ts-comparison.ts
 // 📘 TC39 Proposals: https://github.com/tc39/proposals
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
@@ -396,6 +397,81 @@ console.log("- V8 Features: https://v8.dev/features");
 console.log("- Kangax Compat: https://kangax.github.io/compat-table/");
 console.log("- Can I Use: https://caniuse.com/");
 console.log("- MDN: https://developer.mozilla.org/");
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Using Stage 1/2 proposals in production
+console.log("\nPitfall 1: Using early-stage proposals in production");
+console.log("  Stage 1/2 proposals may change significantly");
+console.log("  Breaking changes possible before Stage 4");
+console.log("  Fix: Only use Stage 3+ with fallbacks");
+
+// Pitfall 2: Relying on deprecated APIs
+console.log("\nPitfall 2: Relying on deprecated APIs");
+console.log("  Deprecated APIs will eventually be removed");
+console.log("  Fix: Check deprecation warnings, migrate early");
+
+// Pitfall 3: Ignoring browser compatibility
+console.log("\nPitfall 3: Ignoring browser compatibility");
+console.log("  New features may not work in all target browsers");
+console.log("  Fix: Check caniuse.com before using new features");
+
+// Pitfall 4: Assuming Node.js features in browsers
+console.log("\nPitfall 4: Assuming Node.js features in browsers");
+console.log("  Node.js has features not available in browsers");
+console.log("  Fix: Check runtime environment compatibility");
+
+// Pitfall 5: Not following TC39 proposal changes
+console.log("\nPitfall 5: Not following TC39 proposal changes");
+console.log("  Proposals evolve, syntax may change");
+console.log("  Fix: Monitor proposal status regularly");
+
+// Pitfall 6: Temporal API confusion with Date
+console.log("\nPitfall 6: Temporal API vs Date confusion");
+console.log("  Temporal is completely new API, not Date replacement");
+console.log("  Fix: Learn Temporal API separately");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Follow TC39 proposal stages before using features");
+console.log("2. Monitor browser compatibility (caniuse.com)");
+console.log("3. Use transpilation for older browser support");
+console.log("4. Keep dependencies and build tools updated");
+console.log("5. Test in target environments");
+console.log("6. Use polyfills for critical missing features");
+console.log("7. Follow TypeScript releases and new features");
+console.log("8. Consider WinterCG for cross-runtime compatibility");
+console.log("9. Evaluate new runtimes (Deno, Bun) for your use case");
+console.log("10. Stay informed about JavaScript evolution");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't use Stage 1/2 proposals in production");
+console.log("2. Don't ignore deprecation warnings");
+console.log("3. Don't assume features work everywhere");
+console.log("4. Don't rely on a single runtime");
+console.log("5. Don't ignore browser compatibility");
+console.log("6. Don't use experimental features in production");
+console.log("7. Don't skip testing in target environments");
+console.log("8. Don't assume Node.js is the only runtime");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. TC39 proposal stage changes");
+console.log("2. Browser support variations");
+console.log("3. Runtime compatibility differences");
+console.log("4. Deprecated API removal timelines");
+console.log("5. Polyfill quality and maintenance");
+console.log("6. Breaking changes in major versions");
+console.log("7. Experimental feature stability");
+console.log("8. TypeScript version compatibility");
 
 // ============================================
 // TypeScript Comparison Notes

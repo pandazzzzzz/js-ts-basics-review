@@ -1,4 +1,5 @@
 // TypedArray and Binary Data Demo
+// 📘 For TypeScript comparison, see: 41-typed-arrays-ts-comparison.ts
 // 📘 javascript.info Part 3 > "Binary data, files" > "ArrayBuffer, binary arrays"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays
 
@@ -664,6 +665,89 @@ headerView.setUint16(2, 1024, false); // length
 headerView.setUint32(4, Date.now(), false); // timestamp
 
 console.log("Parsed header:", parseHeader(headerBuffer));
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: TypedArrays have fixed size
+console.log("\nPitfall 1: TypedArrays have fixed size");
+console.log("  No push(), pop(), splice() methods");
+console.log("  Cannot dynamically grow/shrink");
+console.log("  Fix: Create new TypedArray with desired size");
+
+// Pitfall 2: subarray() shares buffer
+console.log("\nPitfall 2: subarray() vs slice()");
+console.log("  subarray() shares underlying buffer");
+console.log("  Changes to subarray affect original");
+console.log("  slice() creates new buffer copy");
+
+// Pitfall 3: Endianness confusion
+console.log("\nPitfall 3: Endianness in DataView");
+console.log("  Default is little-endian (true)");
+console.log("  Network protocols use big-endian");
+console.log("  Fix: Always specify explicitly");
+
+// Pitfall 4: Uint8ClampedArray behavior
+console.log("\nPitfall 4: Uint8ClampedArray special behavior");
+console.log("  Values clamped to 0-255 (not wrapped)");
+console.log("  Different from Uint8Array (wraps around)");
+console.log("  Use for canvas image data only");
+
+// Pitfall 5: TypedArray type confusion
+console.log("\nPitfall 5: Wrong TypedArray type");
+console.log("  Int8Array: -128 to 127");
+console.log("  Uint8Array: 0 to 255");
+console.log("  Overflow truncates silently");
+console.log("  Fix: Choose appropriate type for data range");
+
+// Pitfall 6: Blob URL memory leaks
+console.log("\nPitfall 6: Blob URL memory leaks");
+console.log("  URL.createObjectURL() creates reference");
+console.log("  Must call URL.revokeObjectURL() to free");
+console.log("  Fix: Revoke after use");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Choose correct TypedArray type for data range");
+console.log("2. Use DataView for mixed-type binary data");
+console.log("3. Use subarray() for views (no copy overhead)");
+console.log("4. Use slice() when you need independent copy");
+console.log("5. Specify endianness explicitly in DataView");
+console.log("6. Revoke Blob URLs after use");
+console.log("7. Reuse buffers instead of creating new ones");
+console.log("8. Use set() for bulk copying into TypedArray");
+console.log("9. Check browser support for BigInt TypedArrays");
+console.log("10. Use appropriate byte offset for parsing");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't try push/pop/splice on TypedArrays");
+console.log("2. Don't forget subarray shares buffer");
+console.log("3. Don't ignore endianness in binary protocols");
+console.log("4. Don't use Uint8ClampedArray for general data");
+console.log("5. Don't forget to revoke Blob URLs");
+console.log("6. Don't mix signed/unsigned TypedArrays incorrectly");
+console.log("7. Don't create new buffers unnecessarily");
+console.log("8. Don't use DataView when TypedArray is sufficient");
+console.log("9. Don't ignore byte alignment issues");
+console.log("10. Don't forget BigInt TypedArrays require ES2020");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Buffer sharing in subarray()");
+console.log("2. Endianness (little vs big endian)");
+console.log("3. Uint8ClampedArray clamping behavior");
+console.log("4. Memory leaks from Blob URLs");
+console.log("5. Type overflow/truncation");
+console.log("6. DataView vs TypedArray performance");
+console.log("7. BigInt TypedArray browser support");
+console.log("8. Buffer alignment and offsets");
 
 // ============================================
 // TypeScript Comparison Notes

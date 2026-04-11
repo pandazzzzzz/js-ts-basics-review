@@ -1,4 +1,5 @@
 // Web Security Best Practices Demo
+// 📘 For TypeScript comparison, see: 49-security-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/Security
 // 📘 OWASP: https://owasp.org/www-project-top-ten/
 // 📌 Covers XSS, CSRF, CSP, secure storage, and input validation
@@ -1019,6 +1020,92 @@ console.log("  ✅ Use HTTPS for all crypto operations");
 console.log("  ✅ Keep crypto libraries updated");
 console.log("  ⚠️ Don't implement your own crypto algorithms");
 console.log("  ⚠️ Don't trust client-side crypto alone\n");
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: XSS through innerHTML
+console.log("\nPitfall 1: XSS through innerHTML");
+console.log("  Setting innerHTML with unsanitized user input allows script injection");
+console.log("  Fix: Always sanitize with DOMPurify or use textContent");
+
+// Pitfall 2: CSRF token not verified server-side
+console.log("\nPitfall 2: CSRF token not verified server-side");
+console.log("  Client-side token generation alone provides zero protection");
+console.log("  Fix: Server must generate, store, and verify tokens");
+
+// Pitfall 3: Storing tokens in localStorage
+console.log("\nPitfall 3: Storing tokens in localStorage");
+console.log("  localStorage is accessible via JavaScript (XSS extraction)");
+console.log("  Fix: Use HttpOnly, Secure, SameSite cookies");
+
+// Pitfall 4: Weak CSP (allowing unsafe-inline)
+console.log("\nPitfall 4: Weak CSP (allowing unsafe-inline)");
+console.log("  'unsafe-inline' allows inline scripts, defeating CSP purpose");
+console.log("  Fix: Use nonce-based or hash-based CSP");
+
+// Pitfall 5: Trusting client-side validation
+console.log("\nPitfall 5: Trusting client-side validation");
+console.log("  Client validation can be bypassed via browser dev tools");
+console.log("  Fix: Always enforce validation server-side");
+
+// Pitfall 6: Not sanitizing user input
+console.log("\nPitfall 6: Not sanitizing user input");
+console.log("  Raw user input in DOM/URLs/SQL enables injection attacks");
+console.log("  Fix: Sanitize and validate at every entry point");
+
+// Pitfall 7: Using eval() on user data
+console.log("\nPitfall 7: Using eval() on user data");
+console.log("  eval() executes arbitrary code from user input");
+console.log("  Fix: Use JSON.parse() and safe alternatives");
+
+// Pitfall 8: Predictable CSRF tokens
+console.log("\nPitfall 8: Predictable CSRF tokens");
+console.log("  Math.random() or timestamps are guessable");
+console.log("  Fix: Use crypto.getRandomValues() for secure randomness");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Sanitize all input before rendering or processing");
+console.log("2. Use Content-Security-Policy headers to restrict script sources");
+console.log("3. Use HttpOnly, Secure, SameSite cookies for sensitive tokens");
+console.log("4. Validate all input server-side, never rely solely on client validation");
+console.log("5. Use CSP headers for defense in depth");
+console.log("6. Implement rate limiting for sensitive endpoints");
+console.log("7. Use secure, random CSRF tokens");
+console.log("8. Keep all security libraries updated");
+console.log("9. Use HTTPS for all communication");
+console.log("10. Implement proper error handling (no stack traces in production)");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't trust any user input without sanitization");
+console.log("2. Don't store secrets, tokens, or credentials in client-side code");
+console.log("3. Don't use eval() or Function() with user-supplied data");
+console.log("4. Don't use 'unsafe-inline' in CSP");
+console.log("5. Don't implement your own crypto algorithms");
+console.log("6. Don't skip server-side validation");
+console.log("7. Don't store sensitive data in localStorage");
+console.log("8. Don't expose stack traces in production errors");
+console.log("9. Don't trust client-side validation alone");
+console.log("10. Don't hardcode secrets in source code");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. XSS vectors: innerHTML, DOM manipulation, URL parameters, event handlers");
+console.log("2. CSRF bypasses: missing token validation, SameSite cookie gaps, CORS misconfigurations");
+console.log("3. Token exposure: localStorage, URL parameters, error messages, logging");
+console.log("4. Injection attacks: SQL, NoSQL, OS commands, LDAP");
+console.log("5. Security headers missing or misconfigured");
+console.log("6. Third-party library vulnerabilities");
+console.log("7. Client-side crypto limitations");
+console.log("8. Mixed content (HTTP + HTTPS)");
 
 // ============================================
 // TypeScript Comparison Notes (Updated)
