@@ -535,6 +535,205 @@ console.log("7. RTL text direction considerations");
 console.log("8. Missing locale fallback handling");
 
 // ============================================
+// Section 9: Intl.DisplayNames (ES2022)
+// ============================================
+
+console.log("\n=== Intl.DisplayNames ===");
+
+// Intl.DisplayNames - Get localized names for languages, regions, scripts, currencies
+// Useful for building locale selection UIs
+
+const languageNames = new Intl.DisplayNames(['en'], { type: 'language' });
+console.log("Language names (English):");
+console.log("- 'fr':", languageNames.of('fr')); // "French"
+console.log("- 'zh':", languageNames.of('zh')); // "Chinese"
+console.log("- 'ja':", languageNames.of('ja')); // "Japanese"
+
+const regionNames = new Intl.DisplayNames(['zh'], { type: 'region' });
+console.log("\nRegion names (Chinese):");
+console.log("- 'US':", regionNames.of('US')); // "美国"
+console.log("- 'JP':", regionNames.of('JP')); // "日本"
+console.log("- 'FR':", regionNames.of('FR')); // "法国"
+
+const currencyNames = new Intl.DisplayNames(['en'], { type: 'currency' });
+console.log("\nCurrency names (English):");
+console.log("- 'USD':", currencyNames.of('USD')); // "US Dollar"
+console.log("- 'EUR':", currencyNames.of('EUR')); // "Euro"
+console.log("- 'CNY':", currencyNames.of('CNY')); // "Chinese Yuan"
+
+const scriptNames = new Intl.DisplayNames(['en'], { type: 'script' });
+console.log("\nScript names (English):");
+console.log("- 'Latn':", scriptNames.of('Latn')); // "Latin"
+console.log("- 'Hant':", scriptNames.of('Hant')); // "Traditional Han"
+console.log("- 'Arab':", scriptNames.of('Arab')); // "Arabic"
+
+// Use cases:
+console.log("\nUse cases:");
+console.log("- Locale/language selection dropdowns");
+console.log("- Country/region pickers");
+console.log("- Currency selection UIs");
+console.log("- Displaying user-friendly names from codes");
+
+// ============================================
+// Section 10: Intl.Locale (ES2021)
+// ============================================
+
+console.log("\n=== Intl.Locale ===");
+
+// Intl.Locale - Locale object with structured locale data
+// Provides locale information in structured form
+
+const locale = new Intl.Locale('zh-CN');
+console.log("Locale 'zh-CN':");
+console.log("- language:", locale.language); // "zh"
+console.log("- region:", locale.region); // "CN"
+console.log("- baseName:", locale.baseName); // "zh-CN"
+console.log("- toString():", locale.toString()); // "zh-CN"
+
+// Locale with script and variant
+const extendedLocale = new Intl.Locale('zh-Hant-TW');
+console.log("\nExtended locale 'zh-Hant-TW':");
+console.log("- language:", extendedLocale.language); // "zh"
+console.log("- script:", extendedLocale.script); // "Hant"
+console.log("- region:", extendedLocale.region); // "TW"
+console.log("- baseName:", extendedLocale.baseName); // "zh-Hant-TW"
+
+// Locale with options
+const localeWithOptions = new Intl.Locale('en', {
+  region: 'US',
+  calendar: 'gregory',
+  numberingSystem: 'latn'
+});
+console.log("\nLocale with options:");
+console.log("- toString():", localeWithOptions.toString()); // "en-US-u-ca-gregory-nu-latn"
+console.log("- calendar:", localeWithOptions.calendar); // "gregory"
+console.log("- numberingSystem:", localeWithOptions.numberingSystem); "latn"
+
+// Get all locale info
+console.log("\nLocale properties:");
+console.log("- locale.language: Primary language subtag");
+console.log("- locale.script: Script subtag (optional)");
+console.log("- locale.region: Region subtag (optional)");
+console.log("- locale.baseName: Core locale identifier");
+console.log("- locale.calendar: Calendar type");
+console.log("- locale.collation: Collation type");
+console.log("- locale.hourCycle: Hour cycle (h12, h23, etc)");
+console.log("- locale.numberingSystem: Numbering system");
+console.log("- locale.numeric: Numeric ordering flag");
+console.log("- locale.caseFirst: Case-first ordering");
+
+// Use cases:
+console.log("\nUse cases:");
+console.log("- Parsing and validating locale strings");
+console.log("- Extracting locale components");
+console.log("- Building locale-aware UIs");
+console.log("- Locale normalization");
+
+// ============================================
+// Section 11: Intl.DurationFormat (ES2024)
+// ============================================
+
+console.log("\n=== Intl.DurationFormat ===");
+
+// Intl.DurationFormat - Format durations (ES2024)
+// ⚠️ BROWSER/RUNTIME SUPPORT:
+// - Chrome: Not yet supported (as of 2025)
+// - Firefox: Not yet supported
+// - Safari: Not yet supported
+// - Node.js: Not yet supported
+// - Polyfill available: intl-durationformat (npm)
+
+console.log("⚠️ NOTE: Intl.DurationFormat is ES2024, limited runtime support.");
+console.log("Expected syntax:");
+console.log(`
+const duration = {
+  hours: 2,
+  minutes: 30,
+  seconds: 45
+};
+
+const df = new Intl.DurationFormat('en-US', {
+  style: 'long'
+});
+console.log(df.format(duration));
+// Expected: "2 hours, 30 minutes, 45 seconds"
+
+const dfShort = new Intl.DurationFormat('en-US', {
+  style: 'short'
+});
+console.log(dfShort.format(duration));
+// Expected: "2 hr, 30 min, 45 sec"
+
+const dfNarrow = new Intl.DurationFormat('en-US', {
+  style: 'narrow'
+});
+console.log(dfNarrow.format(duration));
+// Expected: "2h 30m 45s"
+`);
+
+console.log("\nDuration object properties:");
+console.log("- years, months, weeks, days");
+console.log("- hours, minutes, seconds, milliseconds");
+console.log("- microseconds, nanoseconds");
+
+console.log("\nStyle options:");
+console.log("- 'long': Full names (hours, minutes)");
+console.log("- 'short': Abbreviated (hr, min)");
+console.log("- 'narrow': Minimal (h, m)");
+
+console.log("\nUse cases:");
+console.log("- Video/audio duration display");
+console.log("- Timer/countdown formatting");
+console.log("- Travel time display");
+console.log("- Task duration tracking");
+
+// ============================================
+// Section 12: formatToParts() Method
+// ============================================
+
+console.log("\n=== formatToParts() Method ===");
+
+// formatToParts() - Get formatted parts as array
+// Useful for styling individual parts
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+
+const parts = formatter.formatToParts(1234.56);
+console.log("formatToParts(1234.56):", parts);
+// [
+//   { type: 'currency', value: '$' },
+//   { type: 'integer', value: '1' },
+//   { type: 'group', value: ',' },
+//   { type: 'integer', value: '234' },
+//   { type: 'decimal', value: '.' },
+//   { type: 'fraction', value: '56' }
+// ]
+
+// Use case: Custom styling
+console.log("\nUse case: Custom styling of parts");
+console.log(`
+// Style each part differently
+parts.map(part => {
+  if (part.type === 'currency') {
+    return \`<span class="currency">\${part.value}</span>\`;
+  } else if (part.type === 'integer') {
+    return \`<span class="number">\${part.value}</span>\`;
+  }
+  return part.value;
+});
+`);
+
+// Available for:
+console.log("\nformatToParts() available for:");
+console.log("- Intl.NumberFormat.formatToParts()");
+console.log("- Intl.DateTimeFormat.formatToParts()");
+console.log("- Intl.RelativeTimeFormat.formatToParts()");
+console.log("- Intl.ListFormat.formatToParts()");
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*

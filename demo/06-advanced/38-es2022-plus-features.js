@@ -2,7 +2,52 @@
 // 📘 For TypeScript comparison, see: 38-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 Covers ES2022 ~ ES2025 important features
+// 📌 Covers ES2021 ~ ES2025 important features
+
+// ============================================
+// ES2021 Features (Brief Review)
+// ============================================
+
+// Promise.any() - First fulfilled promise wins
+console.log("\n=== Promise.any() (ES2021) ===");
+
+const promise1 = Promise.reject("Error 1");
+const promise2 = Promise.reject("Error 2");
+const promise3 = Promise.resolve("Success 3");
+
+// Returns first promise that fulfills (ignores rejections)
+Promise.any([promise1, promise2, promise3])
+  .then(result => console.log("Promise.any result:", result)) // "Success 3"
+  .catch(error => console.log("All promises rejected:", error.errors));
+
+// Comparison with other Promise combinators:
+console.log("\nPromise combinators comparison:");
+console.log("Promise.all():       All must fulfill (fast-fail on reject)");
+console.log("Promise.allSettled(): Wait for all to settle (no fail-fast)");
+console.log("Promise.race():      First to settle (fulfill or reject)");
+console.log("Promise.any():       First to fulfill (ignore rejects)");
+
+// Example: Fetch from multiple sources, use first success
+const urls = [
+  "https://api1.example.com/data",
+  "https://api2.example.com/data",
+  "https://api3.example.com/data"
+];
+
+// Uncomment to test:
+// const fetchPromises = urls.map(url =>
+//   fetch(url).then(r => r.json()).catch(() => null)
+// );
+// Promise.any(fetchPromises.filter(p => p !== null))
+//   .then(data => console.log("Got data:", data));
+
+// AggregateError - New error type for Promise.any()
+Promise.any([Promise.reject("A"), Promise.reject("B")])
+  .catch(err => {
+    console.log("Error type:", err.name);        // "AggregateError"
+    console.log("Error message:", err.message);  // "All promises were rejected"
+    console.log("Individual errors:", err.errors); // ["A", "B"]
+  });
 
 // ============================================
 // ES2022 Features
@@ -554,6 +599,75 @@ console.log("5. Transpilation output size");
 console.log("6. Iterator helper memory efficiency vs array methods");
 console.log("7. Set method return types (new Set, not original)");
 console.log("8. using declaration disposal timing");
+
+// ============================================
+// Stage 3 Proposals (Upcoming)
+// ============================================
+
+// Section 15: Temporal API (Stage 3)
+// - Modern date/time API to replace Date object
+// - Immutable, timezone-aware, easier to use
+console.log("\n=== Temporal API (Stage 3 Proposal) ===");
+
+console.log("⚠️ NOTE: Temporal is a Stage 3 proposal, not yet in ES standard.");
+console.log("Browser/runtime support is limited. Use polyfills for now.");
+console.log("Polyfill: @js-temporal/polyfill (npm)");
+console.log("Status: https://github.com/tc39/proposal-temporal");
+
+console.log("\nTemporal object types:");
+console.log("- Temporal.Now: Current time methods");
+console.log("- Temporal.PlainDate: Date without time (e.g., 2024-01-15)");
+console.log("- Temporal.PlainTime: Time without date (e.g., 14:30:00)");
+console.log("- Temporal.PlainDateTime: Date and time without timezone");
+console.log("- Temporal.ZonedDateTime: Date, time, and timezone");
+console.log("- Temporal.Duration: Duration of time (e.g., 2 hours, 30 minutes)");
+console.log("- Temporal.Instant: Exact point in time (UTC)");
+
+console.log("\nExample syntax (with polyfill):");
+console.log(`
+// Get current date
+const today = Temporal.Now.plainDateISO();
+console.log("Today:", today.toString()); // "2024-01-15"
+
+// Create specific date
+const birthday = Temporal.PlainDate.from("1990-06-20");
+console.log("Birthday:", birthday.year, birthday.month, birthday.day);
+
+// Date arithmetic
+const nextWeek = today.add({ days: 7 });
+console.log("Next week:", nextWeek.toString());
+
+// Duration calculation
+const age = today.since(birthday);
+console.log("Age:", age.years, "years");
+
+// Timezone-aware datetime
+const meeting = Temporal.ZonedDateTime.from({
+  year: 2024,
+  month: 3,
+  day: 15,
+  hour: 14,
+  timeZone: "America/New_York"
+});
+console.log("Meeting:", meeting.toString());
+`);
+
+console.log("\nAdvantages over Date object:");
+console.log("1. Immutable (no mutation methods)");
+console.log("2. No month index confusion (January = 1, not 0)");
+console.log("3. Proper timezone handling");
+console.log("4. Clear separation of date/time/datetime/instant");
+console.log("5. Simple arithmetic (add, subtract, since, until)");
+console.log("6. Precision control (nanoseconds support)");
+console.log("7. Internationalization built-in");
+console.log("8. No 1970 epoch dependency");
+
+console.log("\nUse cases:");
+console.log("- Calendar applications");
+console.log("- Scheduling systems");
+console.log("- Financial date calculations");
+console.log("- Timezone-aware event coordination");
+console.log("- Age/duration calculations");
 
 // ============================================
 // TypeScript Comparison Notes

@@ -218,6 +218,97 @@ console.log("Blob/File APIs are browser-specific");
 console.log("Use for: file uploads, downloads, image processing");
 
 // ============================================
+// Section 6: SharedArrayBuffer and Atomics
+// ============================================
+
+console.log("\n=== SharedArrayBuffer and Atomics ===");
+
+// SharedArrayBuffer - ArrayBuffer that can be shared between threads
+// - Allows multiple Web Workers to access same memory
+// - Requires careful synchronization with Atomics
+// - Browser support: Requires CORS headers for security
+
+console.log("\nSharedArrayBuffer:");
+console.log("- Fixed-length raw binary data buffer");
+console.log("- Can be shared between workers/threads");
+console.log("- Same memory, no copying needed");
+console.log("- Requires proper synchronization");
+
+// Example: Creating SharedArrayBuffer
+const sharedBuffer = new SharedArrayBuffer(1024); // 1024 bytes shared memory
+console.log("Shared buffer byte length:", sharedBuffer.byteLength);
+
+// Create TypedArray view on shared buffer
+const sharedArray = new Int32Array(sharedBuffer);
+console.log("Shared Int32Array length:", sharedArray.length);
+
+// ⚠️ SECURITY REQUIREMENTS:
+console.log("\nSecurity requirements (browser):");
+console.log("- Cross-Origin-Opener-Policy: same-origin");
+console.log("- Cross-Origin-Embedder-Policy: require-corp");
+console.log("Or use: Cross-Origin-Resource-Policy: same-origin");
+console.log("Reason: Prevent Spectre-style attacks");
+
+// Atomics - Thread-safe operations on SharedArrayBuffer
+console.log("\nAtomics object:");
+console.log("- Provides atomic (thread-safe) operations");
+console.log("- Ensures no race conditions");
+console.log("- Operations are indivisible (complete before other operations)");
+
+console.log("\nAtomic operations:");
+console.log("- Atomics.load(typedArray, index): Read value");
+console.log("- Atomics.store(typedArray, index, value): Write value");
+console.log("- Atomics.add(typedArray, index, value): Add and return old");
+console.log("- Atomics.sub(typedArray, index, value): Subtract and return old");
+console.log("- Atomics.and(typedArray, index, value): Bitwise AND");
+console.log("- Atomics.or(typedArray, index, value): Bitwise OR");
+console.log("- Atomics.xor(typedArray, index, value): Bitwise XOR");
+console.log("- Atomics.exchange(typedArray, index, value): Swap and return old");
+console.log("- Atomics.compareExchange(typedArray, index, expected, replacement): Conditional swap");
+
+// Example: Atomic operations
+sharedArray[0] = 10;
+console.log("\nInitial value:", sharedArray[0]);
+
+// Atomic read
+const loaded = Atomics.load(sharedArray, 0);
+console.log("Atomics.load(0):", loaded);
+
+// Atomic write
+Atomics.store(sharedArray, 0, 20);
+console.log("After Atomics.store(0, 20):", sharedArray[0]);
+
+// Atomic add
+const oldValue = Atomics.add(sharedArray, 0, 5);
+console.log("Atomics.add(0, 5) returned old value:", oldValue);
+console.log("New value:", sharedArray[0]);
+
+// Atomic compareExchange (conditional swap)
+const expected = 25;
+const replacement = 100;
+const result = Atomics.compareExchange(sharedArray, 0, expected, replacement);
+console.log("Atomics.compareExchange(0, 25, 100):", result);
+console.log("Current value:", sharedArray[0]); // 100 if was 25, else unchanged
+
+// Wait/wake operations for synchronization
+console.log("\nSynchronization operations:");
+console.log("- Atomics.wait(typedArray, index, expected, timeout): Block until value changes");
+console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents");
+console.log("- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)");
+
+console.log("\nUse cases:");
+console.log("- Multi-threaded computation (Web Workers)");
+console.log("- Shared state between workers");
+console.log("- Lock-free algorithms");
+console.log("- Parallel data processing");
+console.log("- Real-time collaborative editing");
+
+console.log("\n⚠️ NOTE:");
+console.log("- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)");
+console.log("- Not for Float32Array or Float64Array");
+console.log("- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer");
+
+// ============================================
 // Section 7: Encoding API (TextEncoder/TextDecoder)
 // ============================================
 

@@ -124,6 +124,82 @@ console.log("- Validation");
 console.log("- Dependency injection");
 console.log("- Caching and memoization");
 
+// Stage 3 Decorator Syntax Example
+console.log("\n=== Stage 3 Decorator Syntax (ES2023+) ===");
+
+console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
+console.log("Enable with: { decoratorMetadata: true } in TypeScript");
+
+console.log("\nActual Stage 3 decorator syntax:");
+console.log(`
+// Method decorator with @ syntax
+function logged(target, context) {
+  return function(...args) {
+    console.log("Calling:", context.name);
+    return target.apply(this, args);
+  };
+}
+
+class Example {
+  @logged
+  greet(name) {
+    return \`Hello, \${name}!\`;
+  }
+}
+
+// Usage
+const ex = new Example();
+ex.greet("Alice");
+// Output: Calling: greet, Hello, Alice!
+`);
+
+console.log("\nClass decorator example:");
+console.log(`
+function sealed(constructor, context) {
+  Object.seal(constructor);
+  Object.seal(constructor.prototype);
+}
+
+@sealed
+class BankAccount {
+  balance = 0;
+  deposit(amount) { this.balance += amount; }
+}
+`);
+
+console.log("\nField decorator (auto-accessor) example:");
+console.log(`
+function range(min, max) {
+  return (target, context) => {
+    return {
+      get() { return target.get.call(this); },
+      set(value) {
+        if (value < min || value > max) throw new Error(\`Out of range\`);
+        target.set.call(this, value);
+      }
+    };
+  };
+}
+
+class Temperature {
+  @range(0, 100)
+  accessor value = 50;
+}
+`);
+
+console.log("\n⚠️ TypeScript decorators vs Stage 3 decorators:");
+console.log("- TypeScript legacy decorators: Different signature (target, propertyKey, descriptor)");
+console.log("- Stage 3 decorators: New signature (target, context) with context object");
+console.log("- TypeScript 5.0+: Supports Stage 3 with 'experimentalDecorators: false'");
+console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-05'");
+
+console.log("\nDecorator context object properties:");
+console.log("- context.kind: 'class' | 'method' | 'getter' | 'setter' | 'field' | 'accessor'");
+console.log("- context.name: String (property name)");
+console.log("- context.access: { get, set } (for fields/accessors)");
+console.log("- context.static: Boolean (static or instance)");
+console.log("- context.addInitializer(fn): Add initialization hook");
+
 // ============================================
 // Section 3: Reflect API (ES6)
 // ============================================
