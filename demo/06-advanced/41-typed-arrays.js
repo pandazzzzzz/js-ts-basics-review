@@ -360,12 +360,12 @@ console.log("  '世界' - 2 chars, 6 bytes (3 bytes each in UTF-8)");
 console.log("  '🌍' - 1 char, 4 bytes (emoji)");
 
 // encodeInto() - More efficient for pre-allocated buffers
-const buffer = new Uint8Array(50);
-const result = encoder.encodeInto("Hello", buffer);
+const encodeBuffer = new Uint8Array(50);
+const encodeResult = encoder.encodeInto("Hello", encodeBuffer);
 console.log("\nencodeInto() result:");
-console.log("  read:", result.read);       // Characters read from source
-console.log("  written:", result.written); // Bytes written to buffer
-console.log("  buffer:", buffer.slice(0, result.written));
+console.log("  read:", encodeResult.read);       // Characters read from source
+console.log("  written:", encodeResult.written); // Bytes written to buffer
+console.log("  buffer:", encodeBuffer.slice(0, encodeResult.written));
 
 // ============================================
 // 7.2 TextDecoder - Binary to String
