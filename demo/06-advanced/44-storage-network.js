@@ -596,7 +596,7 @@ console.log("- Access-Control-Allow-Origin");
 console.log("- Preflight requests for complex requests");
 
 // ============================================
-// Section 5: WebSocket
+// Section 6: WebSocket
 // ============================================
 
 console.log("\n=== WebSocket ===");
@@ -703,7 +703,7 @@ console.log("  ✗ Unidirectional (server to client)");
 console.log("  ✗ HTTP/1.1 connection limit");
 
 // ============================================
-// Section 6: Server-Sent Events (SSE) - DETAILED
+// Section 7: Server-Sent Events (SSE) - DETAILED
 // ============================================
 
 console.log("\n=== Server-Sent Events (SSE) - Detailed ===");
@@ -756,7 +756,7 @@ console.log("  ✗ Inefficient (many requests)");
 console.log("  ✗ Server load");
 
 // ============================================
-// Section 6.1: EventSource API
+// Section 7.1: EventSource API
 // ============================================
 
 console.log("\n--- EventSource API ---\n");
@@ -828,7 +828,7 @@ if (eventSource.readyState === EventSource.CLOSED) {
 `);
 
 // ============================================
-// Section 6.2: Server-Side Implementation
+// Section 7.2: Server-Side Implementation
 // ============================================
 
 console.log("\n--- Server-Side Implementation ---\n");
@@ -911,7 +911,7 @@ function setRetryInterval(res, ms) {
 `);
 
 // ============================================
-// Section 6.3: Practical Examples
+// Section 7.3: Practical Examples
 // ============================================
 
 console.log("\n--- Practical Examples ---\n");
@@ -1070,7 +1070,7 @@ app.get('/api/monitor', (req, res) => {
 `);
 
 // ============================================
-// Section 6.4: Reconnection and Error Handling
+// Section 7.4: Reconnection and Error Handling
 // ============================================
 
 console.log("\n--- Reconnection and Error Handling ---\n");
@@ -1150,7 +1150,7 @@ connect();
 `);
 
 // ============================================
-// Section 6.5: Best Practices
+// Section 7.5: Best Practices
 // ============================================
 
 console.log("\n--- SSE Best Practices ---\n");
@@ -1190,12 +1190,6 @@ console.log("  ✓ Binary data");
 console.log("  ✓ Low latency requirements");
 console.log("  ✓ Gaming, chat, collaboration");
 console.log("  ✓ Many concurrent connections\n");
-
-// ============================================
-// Section 7: WebSocket (Updated)
-// ============================================
-
-console.log("\n=== WebSocket (Comparison with SSE) ===\n");
 
 // ============================================
 // Common Pitfalls

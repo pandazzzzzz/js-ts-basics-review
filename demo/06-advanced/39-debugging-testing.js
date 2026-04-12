@@ -710,6 +710,54 @@ console.log("\n✅ Jest/Vitest practical examples complete");
 console.log("Run tests: npm test or npm run test:coverage");
 
 // ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Using console.log for everything
+console.log("\nPitfall 1: Using console.log for everything");
+console.log("  console.log is great but has limitations.");
+console.log("  Doesn't show line numbers consistently, no object expansion by default.");
+console.log("  Fix: Use console.table for arrays, console.dir for objects.");
+
+// Pitfall 2: Not handling errors in tests
+console.log("\nPitfall 2: Not handling errors in tests");
+console.log("  Tests that don't catch expected errors fail unexpectedly.");
+console.log("  async/await errors without expect().rejects fail tests.");
+console.log("  Fix: Use expect().rejects.toThrow() or try/catch with assert.rejects.");
+
+// Pitfall 3: Test dependencies affecting each other
+console.log("\nPitfall 3: Test dependencies affecting each other");
+console.log("  Tests that modify shared state cause flaky tests.");
+console.log("  Test order shouldn't matter but does with shared mutations.");
+console.log("  Fix: Use beforeEach/afterEach for isolation, reset state.");
+
+// Pitfall 4: Not cleaning up in tests
+console.log("\nPitfall 4: Not cleaning up in tests");
+console.log("  Timers, event listeners, and mock data accumulate.");
+console.log("  Can cause memory leaks and interfere with other tests.");
+console.log("  Fix: Use afterEach to clear timeouts, remove listeners.");
+
+// Pitfall 5: Using debugger instead of proper breakpoints
+console.log("\nPitfall 5: Using debugger statements in code");
+console.log("  debugger; statements stop execution but are inflexible.");
+console.log("  You have to modify code to change breakpoints.");
+console.log("  Fix: Use DevTools source maps and breakpoints UI.");
+
+// Pitfall 6: Not using source maps
+console.log("\nPitfall 6: Not using source maps");
+console.log("  Debugging transpiled code is confusing and ineffective.");
+console.log("  Error stack traces point to bundled files, not source.");
+console.log("  Fix: Generate source maps in build tools (webpack, Vite).");
+
+// Pitfall 7: Overusing try/catch for flow control
+console.log("\nPitfall 7: Overusing try/catch for flow control");
+console.log("  try/catch is for exceptional cases, not normal flow.");
+console.log("  Using it for expected conditions hides real errors.");
+console.log("  Fix: Use conditional checks, early returns for normal flows.");
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*

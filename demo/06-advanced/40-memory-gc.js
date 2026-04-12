@@ -372,6 +372,80 @@ console.log("- Use AbortController for automatic cleanup");
 console.log("- Avoid anonymous functions if you need to remove");
 
 // ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Assuming immediate garbage collection
+console.log("\nPitfall 1: Assuming immediate garbage collection");
+console.log("  Setting objects to null doesn't guarantee immediate GC.");
+console.log("  JS engines decide when to run GC based on heuristics.");
+console.log("  Fix: Don't rely on immediate cleanup. Use explicit cleanup for resources.");
+
+// Pitfall 2: Memory leaks in closures
+console.log("\nPitfall 2: Memory leaks in closures");
+console.log("  Closures capture and retain references from their lexical scope.");
+console.log("  If a closure is long-lived, it keeps all captured objects alive.");
+console.log("  Fix: Only capture what you need; nullify large references when done.");
+
+// Pitfall 3: Not clearing timers/intervals
+console.log("\nPitfall 3: Not clearing timers/intervals");
+console.log("  setInterval and setTimeout callbacks keep their scope alive.");
+console.log("  Forgotten timers prevent garbage collection of enclosed objects.");
+console.log("  Fix: Always store timer IDs and call clearTimeout/clearInterval.");
+
+// Pitfall 4: Event listeners not removed
+console.log("\nPitfall 4: Event listeners not removed");
+console.log("  Event listeners with closures hold references to DOM elements.");
+console.log("  If elements are removed but listeners stay, memory leaks occur.");
+console.log("  Fix: Always remove event listeners when elements are removed.");
+
+// Pitfall 5: Using Map/Set for object caches
+console.log("\nPitfall 5: Using Map/Set for object caches");
+console.log("  Regular Map/Set keep strong references to keys.");
+console.log("  Cached objects cannot be garbage collected while in Map.");
+console.log("  Fix: Use WeakMap/WeakSet for object caches and metadata.");
+
+// Pitfall 6: Detached DOM nodes
+console.log("\nPitfall 6: Detached DOM nodes");
+console.log("  DOM nodes removed from document but referenced in arrays.");
+console.log("  These detached nodes and their subtrees are kept in memory.");
+console.log("  Fix: Clear arrays/objects holding DOM references.");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("\n✅ DO:");
+console.log("1. Use WeakMap/WeakSet for caches and metadata attached to objects.");
+console.log("2. Always clear timers and intervals when no longer needed.");
+console.log("3. Remove event listeners before removing DOM elements.");
+console.log("4. Nullify large object references when you're done with them.");
+console.log("5. Use strict mode to catch accidental global variables.");
+console.log("6. Profile memory with DevTools to identify leaks early.");
+console.log("7. Use object pooling for frequently created/destroyed objects.");
+console.log("8. Be mindful of closures capturing large objects.");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't assume GC runs immediately after setting references to null.");
+console.log("2. Don't create unnecessary temporary objects in hot loops.");
+console.log("3. Don't forget to clean up event listeners and timers.");
+console.log("4. Don't use regular Map for caching objects that should be GC'd.");
+console.log("5. Don't ignore memory warnings from DevTools.");
+console.log("6. Don't create global variables unintentionally (use strict mode).");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Closures can unexpectedly keep objects alive longer than intended.");
+console.log("2. Event listeners with anonymous functions are hard to remove.");
+console.log("3. Circular references (handled by modern GC but worth knowing).");
+console.log("4. Memory leaks in long-running applications accumulate over time.");
+console.log("5. Large objects don't GC when you expect without explicit cleanup.");
+console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*
