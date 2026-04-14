@@ -50,12 +50,109 @@ Promise.any([Promise.reject("A"), Promise.reject("B")])
   });
 
 // ============================================
+// Promise Combinators: Practical Examples
+// ============================================
+
+console.log("\n=== Promise.all() - Wait for all to fulfill ===");
+
+// Promise.all() resolves when ALL promises fulfill
+// Rejects immediately if ANY promise rejects
+const p1 = Promise.resolve(10);
+const p2 = Promise.resolve(20);
+const p3 = Promise.resolve(30);
+
+Promise.all([p1, p2, p3])
+  .then(results => console.log("Promise.all results:", results)) // [10, 20, 30]
+  .catch(error => console.log("Promise.all failed:", error));
+
+// Example: Fetch multiple resources in parallel
+console.log("\nPromise.all() use case: Parallel data fetching");
+const fetchUsers = Promise.resolve([{ id: 1, name: "Alice" }]);
+const fetchPosts = Promise.resolve([{ id: 1, title: "Hello" }]);
+const fetchComments = Promise.resolve([{ id: 1, text: "Hi!" }]);
+
+Promise.all([fetchUsers, fetchPosts, fetchComments])
+  .then(([users, posts, comments]) => {
+    console.log("Users:", users);
+    console.log("Posts:", posts);
+    console.log("Comments:", comments);
+  });
+
+console.log("\n=== Promise.allSettled() - Wait for all to settle ===");
+
+// Promise.allSettled() waits for ALL promises to settle (fulfill OR reject)
+// Always resolves with an array of outcome objects
+const ps1 = Promise.resolve("Success 1");
+const ps2 = Promise.reject("Error 2");
+const ps3 = Promise.resolve("Success 3");
+
+Promise.allSettled([ps1, ps2, ps3])
+  .then(results => {
+    console.log("Promise.allSettled results:");
+    results.forEach((result, i) => {
+      if (result.status === "fulfilled") {
+        console.log(`  Promise ${i + 1}: Fulfilled with`, result.value);
+      } else {
+        console.log(`  Promise ${i + 1}: Rejected with`, result.reason);
+      }
+    });
+  });
+
+// Use case: Batch operations where you want to know all outcomes
+console.log("\nPromise.allSettled() use case: Batch processing");
+const uploadFiles = [
+  Promise.resolve("file1.jpg"),
+  Promise.reject("file2.png"),
+  Promise.resolve("file3.pdf")
+];
+
+Promise.allSettled(uploadFiles)
+  .then(results => {
+    const successful = results
+      .filter(r => r.status === "fulfilled")
+      .map(r => r.value);
+    const failed = results
+      .filter(r => r.status === "rejected")
+      .map(r => r.reason);
+    console.log("  Successful uploads:", successful);
+    console.log("  Failed uploads:", failed);
+  });
+
+console.log("\n=== Promise.race() - First to settle wins ===");
+
+// Promise.race() resolves/rejects as soon as ANY promise settles
+const pr1 = new Promise(resolve => setTimeout(() => resolve("Slow"), 200));
+const pr2 = new Promise(resolve => setTimeout(() => resolve("Fast"), 100));
+const pr3 = new Promise((_, reject) => setTimeout(() => reject("Error"), 150));
+
+Promise.race([pr1, pr2, pr3])
+  .then(winner => console.log("Promise.race winner:", winner)) // "Fast"
+  .catch(error => console.log("Promise.race failed:", error));
+
+// Use case: Timeouts for slow operations
+console.log("\nPromise.race() use case: Request timeout");
+function fetchWithTimeout(url, timeoutMs) {
+  const fetchPromise = new Promise(resolve =>
+    setTimeout(() => resolve(`Data from ${url}`), 3000)
+  );
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error("Request timed out")), timeoutMs)
+  );
+  return Promise.race([fetchPromise, timeoutPromise]);
+}
+
+// This will timeout after 1 second
+fetchWithTimeout("/api/data", 1000)
+  .then(data => console.log("  Got data:", data))
+  .catch(error => console.log("  Error:", error.message));
+
+// ============================================
 // ES2022 Features
 // ============================================
 
 // Section 1: Class Enhancements (Brief Review)
 // - Private fields (#field), static properties, static initialization blocks
-// - See 23-classes.js for detailed coverage
+// - See 16-classes.js for detailed coverage
 
 // Section 2: Error.cause
 // - Allows chaining errors with original cause
@@ -102,6 +199,140 @@ console.log("\n=== Top-level await (ES2022) ===");
 
 console.log("Note: Top-level await only works in ES modules");
 
+// ============================================
+// ES2021: String Methods
+// ============================================
+
+console.log("\n=== String.replaceAll() (ES2021) ===");
+
+// Replace all occurrences of substring
+const text = "hello world, hello universe";
+const replaced = text.replaceAll("hello", "hi");
+console.log("Replaced:", replaced); // "hi world, hi universe"
+
+// Replace with global regex
+const text2 = "cat cat cat";
+const replaced2 = text2.replaceAll(/cat/g, "dog");
+console.log("Replaced with regex:", replaced2); // "dog dog dog"
+
+// ⚠️ Pitfall: Non-global regex throws TypeError
+try {
+  text2.replaceAll(/arez/, "dog"); // Missing 'g' flag
+} catch (err) {
+  console.log("Non-global regex error:", err.message);
+}
+
+// Comparison with replace() - replaces only first occurrence
+console.log("replace() vs replaceAll():");
+console.log("  replace():", "cat cat cat".replace("cat", "dog")); // "dog cat cat"
+console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog cat dog"
+
+// ============================================
+// ES2021: Logical Assignment Operators
+// ============================================
+
+console.log("\n=== Logical Assignment Operators (ES2021) ===");
+
+// Logical OR assignment (||=) - assigns if falsy
+let x = 0;
+x ||= 10;
+console.log("x ||= 10:", x); // 10 (0 is falsy)
+
+let y = 5;
+y ||= 10;
+console.log("y ||= 10:", y); // 5 (5 is truthy, no assignment)
+
+// Logical AND assignment (&&=) - assigns if truthy
+let a = 5;
+a &&= 10;
+console.log("a &&= 10:", a); // 10 (5 is truthy)
+
+let b = 0;
+b &&= 10;
+console.log("b &&= 10:", b); // 0 (0 is falsy, no assignment)
+
+// Nullish coalescing assignment (??=) - assigns if null/undefined
+let c = null;
+c ??= 20;
+console.log("c ??= 20:", c); // 20 (null is nullish)
+
+let d = 0;
+d ??= 20;
+console.log("d ??= 20:", d); // 0 (0 is not nullish)
+
+// Practical use case: Set defaults
+let config = {};
+config.port ??= 8080;      // Only sets if 8080 if undefined/null
+config.timeout ??= 5000;
+console.log("Config defaults:", config);
+
+// ============================================
+// ES2021: Numeric Separators
+// ============================================
+
+console.log("\n=== Numeric Separators (ES2021) ===");
+
+const billion = 1_000_000_000;
+const pi = 3.141_592_653;
+const bytes = 0xFF_FF_FF_FF;
+const binary = 0b1010_0001_1000_0101;
+
+console.log("Billion:", billion); // 1000000000
+console.log("PI:", pi); // 3.141592653
+console.log("Bytes:", bytes); // 4294967295
+console.log("Binary:", binary); // 41373
+
+// Comparison (harder to read):
+const oldStyle = 1000000000;
+const newStyle = 1_000_000_000;
+console.log("Same value:", oldStyle === newStyle); // true
+
+// ============================================
+// ES2021: WeakRef
+// ============================================
+
+console.log("\n=== WeakRef (ES2021) ===");
+
+let weakTarget = { data: "important" };
+const weakRef = new WeakRef(weakTarget);
+
+console.log("WeakRef deref:", weakRef.deref()); // { data: "important" }
+
+weakTarget = null; // Remove strong reference
+// weakRef.deref() may now return undefined after GC
+console.log("After removing target:", weakRef.deref()); // { data: "important" } or undefined
+
+// ============================================
+// ES2021: FinalizationRegistry
+// ============================================
+
+console.log("\n=== FinalizationRegistry (ES2021) ===");
+
+const registry = new FinalizationRegistry((heldValue) => {
+  console.log("Object was GC'd, held value:", heldValue);
+});
+
+let finalObj = { id: 1 };
+registry.register(finalObj, "Object #1");
+
+finalObj = null; // Remove strong reference
+// GC may trigger callback with "Object #1"
+
+// ============================================
+// ES2021: Intl.PluralRules
+// ============================================
+
+console.log("\n=== Intl.PluralRules (ES2021) ===");
+
+const en = new Intl.PluralRules('en-US');
+console.log("1:", en.select(1));    // "one"
+console.log("2:", en.select(2));    // "other"
+console.log("0:", en.select(0));    // "other"
+
+const ru = new Intl.PluralRules('ru', { type: 'ordinal' });
+console.log("Russian ordinal 1:", ru.select(1)); // "one"
+console.log("Russian ordinal 2:", ru.select(2)); // "few"
+
 // Section 4: .at() Method
 // - Access array/string elements with negative indices
 // - Returns undefined for out-of-bounds indices
@@ -145,9 +376,9 @@ console.log("Object.hasOwn(objWithoutProto, 'name'):", Object.hasOwn(objWithoutP
 // - Provides start and end indices for matches and capture groups
 console.log("\n=== RegExp /d Flag (ES2022) ===");
 
-const text = "2023-12-25";
+const dateText = "2023-12-25";
 const dateRegex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/d;
-const match = dateRegex.exec(text);
+const match = dateRegex.exec(dateText);
 
 console.log("Match:", match[0]);                    // "2023-12-25"
 console.log("Year group:", match.groups.year);      // "2023"
@@ -163,7 +394,7 @@ console.log("Year indices:", match.indices.groups.year); // [0, 4]
 // Section 7: Immutable Array Methods (Brief Review)
 // - toSorted(), toReversed(), toSpliced(), with()
 // - findLast(), findLastIndex()
-// - See 05-arrays.js for detailed coverage
+// - See 02-data-structures/06-arrays.js for detailed coverage
 console.log("\n=== Immutable Array Methods (ES2023) ===");
 
 const numbers = [3, 1, 4, 1, 5];
@@ -173,9 +404,38 @@ console.log("toReversed():", numbers.toReversed()); // [5, 1, 4, 1, 3]
 console.log("with(2, 99):", numbers.with(2, 99));   // [3, 1, 99, 1, 5]
 console.log("Original unchanged:", numbers);        // [3, 1, 4, 1, 5]
 
+// toSpliced() - Immutable version of splice()
+// splice(start, deleteCount, ...items) - modifies original
+// toSpliced(start, deleteCount, ...items) - returns new array
 const items = [1, 2, 3, 4, 5];
-console.log("findLast(x => x > 3):", items.findLast(x => x > 3)); // 5
-console.log("findLastIndex(x => x > 3):", items.findLastIndex(x => x > 3)); // 4
+console.log("\n=== toSpliced() - Immutable splice ===");
+console.log("Original items:", items);
+
+// Remove 2 elements starting at index 1
+const spliced1 = items.toSpliced(1, 2);
+console.log("toSpliced(1, 2):", spliced1); // [1, 4, 5]
+
+// Replace 1 element at index 2 with 'a' and 'b'
+const spliced2 = items.toSpliced(2, 1, 'a', 'b');
+console.log("toSpliced(2, 1, 'a', 'b'):", spliced2); // [1, 2, 'a', 'b', 4, 5]
+
+// Insert elements at index 3 without deleting
+const spliced3 = items.toSpliced(3, 0, 'x', 'y');
+console.log("toSpliced(3, 0, 'x', 'y'):", spliced3); // [1, 2, 3, 'x', 'y', 4, 5]
+
+// Original array remains unchanged
+console.log("Original items still:", items); // [1, 2, 3, 4, 5]
+
+// Comparison with mutable splice()
+const mutableItems = [...items];
+const removed = mutableItems.splice(1, 2);
+console.log("\nMutable splice() comparison:");
+console.log("  mutableItems after splice:", mutableItems); // [1, 4, 5] (modified)
+console.log("  removed elements:", removed); // [2, 3]
+
+const findItems = [1, 2, 3, 4, 5];
+console.log("findLast(x => x > 3):", findItems.findLast(x => x > 3)); // 5
+console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); // 4
 
 // Section 8: Hashbang (#!) Syntax
 // - Allows JavaScript files to be executed directly as scripts
@@ -283,15 +543,8 @@ console.log("- Intersection: [A&&B]");
 console.log("- Subtraction: [A--B]");
 console.log("- Union: [A[B]]");
 
-// ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: 112+ (April 2023)
-// - Firefox: 116+ (August 2023)
-// - Safari: 17+ (September 2023)
-// - Node.js: 20.0+ (April 2023)
-// - Edge: 112+ (April 2023)
-
-// Note: /v flag requires ES2024 support
-// Uncomment when available in your environment
+// ⚠️  Note:
+// - SharedArrayBuffer only works with integer TypedArrays (Int32Array, BigInt64Array)
 
 // Example: Match emoji but not keycap emoji
 // const emojiRegex = /[\p{Emoji}--\p{Emoji_Keycap}]/v;
