@@ -164,7 +164,7 @@ TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-t
 
 ### 知识点清单
 
-**38 ES2022+** — at()、Object.hasOwn、错误 cause、top-level await、Array.findLast 等
+**38 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、using/await using) · Stage 3 (Temporal API)
 **39 调试与测试** — console 方法、debugger、断点、单元测试基础
 **40 内存与 GC** — 内存生命周期、垃圾回收算法、内存泄漏检测与预防
 **41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理

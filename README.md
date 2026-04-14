@@ -1,36 +1,27 @@
-# JS/TS Basics Review Practice
+# JS/TS Fundamentals Review
 
-JavaScript / TypeScript fundamentals review project with detailed examples and comparisons.
+JavaScript/TypeScript fundamentals with 51 numbered demo files and TypeScript comparison files.
 
-## Learning Path
+## Structure
 
-Files are numbered 01-46 in recommended learning order:
-
-1. **Basic Syntax (01-05)** — Variables, operators, control flow, strings, numbers
-2. **Data Structures (06-12)** — Arrays, functions, objects, destructuring, Map/Set, JSON, dates
-3. **Core Concepts (13-23)** — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy
-4. **Asynchronous (24-28)** — Event loop, Promises, Async/Await, modules, Fetch
-5. **Browser & DOM (29-32)** — DOM manipulation, events, forms & validation
-6. **Advanced (33-46)** — ES2022+ (33), debugging/testing (34), memory/GC (35), typed arrays (36), Intl API (37), WeakRef (38), storage/network (39), design patterns (40), Web APIs (41), performance optimization (42), TypeScript advanced (43), security (44), build tools (45)
+**Stage 1 (01-05)**: Basics — Variables, operators, control flow, strings, numbers  
+**Stage 2 (06-12)**: Data Structures — Arrays, functions, objects, destructuring, Map/Set, JSON, dates  
+**Stage 3 (13-28)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy  
+**Stage 4 (29-33)**: Async — Event loop, Promises, async/await, modules, Fetch  
+**Stage 5 (34-37)**: Browser & DOM — DOM basics, manipulation, events, forms  
+**Stage 6 (38-51)**: Advanced — ES2022+, debugging, memory, typed arrays, Intl, WeakRef, patterns
 
 ## Progress
 
-- ✅ Completed: 46/46 (Files 01-46 all completed)
-- 🎉 Knowledge coverage: 95%+ achieved
-- 📚 Topics covered: 40-design-patterns, 41-web-apis, 42-performance, 43-typescript-advanced, 44-security, 45-build-tools
+✅ 51/51 files completed · 51 TypeScript comparisons  
+✅ ES2021-ES2025 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers)  
+✅ Common Pitfalls & Best Practices sections in all advanced files
 
 ## Documentation
 
-- [TODOLIST.md](docs/TODOLIST.md) — Learning roadmap & progress tracking
-- [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS differences guide
+- [TODOLIST.md](docs/TODOLIST.md) — Detailed roadmap
+- [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS reference
 
 ## References
 
-- [JavaScript.info](https://javascript.info)
-- [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [TypeScript Docs](https://www.typescriptlang.org/docs)
-- [roadmap.sh/javascript](https://roadmap.sh/javascript)
-
-## License
-
-MIT
+[javascript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook)
