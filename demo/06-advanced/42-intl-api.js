@@ -607,7 +607,7 @@ const localeWithOptions = new Intl.Locale('en', {
 console.log("\nLocale with options:");
 console.log("- toString():", localeWithOptions.toString()); // "en-US-u-ca-gregory-nu-latn"
 console.log("- calendar:", localeWithOptions.calendar); // "gregory"
-console.log("- numberingSystem:", localeWithOptions.numberingSystem); "latn"
+console.log("- numberingSystem:", localeWithOptions.numberingSystem); // "latn"
 
 // Get all locale info
 console.log("\nLocale properties:");

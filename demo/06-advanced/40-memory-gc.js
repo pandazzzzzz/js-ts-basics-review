@@ -277,7 +277,7 @@ console.log("- Ideal for caches and metadata");
 console.log("- No memory leaks from forgotten entries");
 
 // Technique 3: Use WeakRef for optional caching
-// See 38-weakref-finalization.js for details
+// See 43-weakref-finalization.js for details
 console.log("\nWeakRef for caching:");
 console.log("- Hold reference without preventing GC");
 console.log("- Cache can be cleared by GC when memory is low");
@@ -511,8 +511,8 @@ console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
 - Profile in production-like environment
 
 📘 See related:
-- 08-map-set.js (WeakMap/WeakSet)
-- 11-scope-closures.js (Closures and memory)
-- 38-weakref-finalization.js (WeakRef/FinalizationRegistry)
-- 28-events.js (Event listener cleanup)
+- 02-data-structures/10-map-set.js (WeakMap/WeakSet)
+- 03-core-concepts/13-scope-closures.js (Closures and memory)
+- 43-weakref-finalization.js (WeakRef/FinalizationRegistry)
+- 05-browser-dom/36-events.js (Event listener cleanup)
 */
