@@ -923,6 +923,105 @@ console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
 // ============================================
+// Stage 3 Proposals: More Upcoming Features
+// ============================================
+
+// Section 16: DisposableStack (Stage 3)
+// - Manage multiple disposable resources together
+// - Automatic cleanup in reverse order
+console.log("\n=== DisposableStack (Stage 3 Proposal) ===");
+
+console.log("⚠️ NOTE: DisposableStack is a Stage 3 proposal.");
+console.log("Requires Node.js 22.0+ or modern browsers.");
+console.log("Polyfill: @ungap/disposable-stack (npm)");
+
+// DisposableStack example (simplified - commented out for compatibility)
+console.log("\nDisposableStack syntax:");
+console.log(`
+// Manage multiple resources together
+const stack = new DisposableStack();
+
+// Add disposable resources
+const file1 = stack.use(new FileHandle("file1.txt"));
+const file2 = stack.use(new FileHandle("file2.txt"));
+
+// Add custom cleanup functions
+stack.defer(() => console.log("Custom cleanup logic"));
+
+// Use the resources
+file1.write("Hello 1");
+file2.write("Hello 2");
+
+// Dispose all at once (reverse order)
+stack.dispose();
+// Output:
+// Closing file: file2.txt
+// Closing file: file1.txt
+// Custom cleanup logic
+`);
+
+// Section 17: Array.fromAsync (Stage 3)
+// - Create arrays from async iterables
+// - Similar to Array.from but for async
+console.log("\n=== Array.fromAsync (Stage 3 Proposal) ===");
+
+console.log("⚠️ NOTE: Array.fromAsync is a Stage 3 proposal.");
+console.log("Requires transpilation or polyfill.");
+
+console.log("\nArray.fromAsync syntax:");
+console.log(`
+// Convert async iterator to array
+async function* asyncNumbers() {
+  yield 1;
+  yield 2;
+  yield 3;
+  yield 4;
+  yield 5;
+}
+
+const arr = await Array.fromAsync(asyncNumbers());
+console.log("From async iterator:", arr); // [1, 2, 3, 4, 5]
+
+// Also works with sync iterables, promises, etc.
+const withPromises = await Array.fromAsync([
+  Promise.resolve(1),
+  Promise.resolve(2),
+  Promise.resolve(3)
+]);
+console.log("With promises:", withPromises); // [1, 2, 3]
+`);
+
+// Section 18: Promise.try (Stage 3)
+// - Normalize sync/async exceptions
+// - Similar to try/catch but for functions
+console.log("\n=== Promise.try (Stage 3 Proposal) ===");
+
+console.log("⚠️ NOTE: Promise.try is a Stage 3 proposal.");
+console.log("Also known as Promise.start in some implementations.");
+
+console.log("\nPromise.try syntax:");
+console.log(`
+// Normalize sync/async errors
+function mayThrow() {
+  if (Math.random() < 0.5) {
+    throw new Error("Sync error");
+  }
+  return Promise.reject(new Error("Async error"));
+}
+
+// Both sync and async errors are caught
+Promise.try(() => mayThrow())
+  .then(result => console.log("Success:", result))
+  .catch(error => console.log("Caught:", error.message));
+  // Catches both sync and async errors!
+`);
+
+console.log("\nWhy Promise.try?");
+console.log("- Catches both sync and async exceptions");
+console.log("- No need for separate try/catch and .catch()");
+console.log("- Better error handling in promise chains");
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*
@@ -958,7 +1057,7 @@ console.log("- Age/duration calculations");
 - TypeScript: May need lib updates in tsconfig.json
 
 📘 See related:
-- 05-arrays.js (ES2023 array methods)
-- 23-classes.js (ES2022 class features)
-- 38-weakref-finalization.js (Resource management patterns)
+- 02-data-structures/06-arrays.js (ES2023 array methods)
+- 03-core-concepts/16-classes.js (ES2022 class features)
+- 43-weakref-finalization.js (Resource management patterns)
 */
