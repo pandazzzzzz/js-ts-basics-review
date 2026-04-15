@@ -122,10 +122,29 @@ const port = config?.server?.port; // undefined if any part is null/undefined
 // Nullish Coalescing (??) - ES2020+
 const defaultPort = port ?? 3000; // Use 3000 only if port is null/undefined
 
-// ⚠️ CONFUSION: ?? vs ||
-const a = 0 || 100;  // 100 (0 is falsy)
-const b = 0 ?? 100;  // 0 (0 is not null/undefined)
+// ⚠️ CRITICAL PITFALL: ?? vs || with numeric 0
+const port = 0;
+const wrong = port || 3000;  // 3000 (0 is falsy - WRONG!)
+const right = port ?? 3000;  // 0 (0 is not nullish - CORRECT!)
 ```
+
+### 8. Logical Assignment Operators (ES2021)
+
+| Operator | Behavior | Use Case |
+|----------|---------|----------|
+| `||=` | Assign if falsy | Set defaults for falsy values |
+| `&&=` | Assign if truthy | Update only when truthy |
+| `??=` | Assign if nullish | Set defaults preserving 0, "", false |
+
+```javascript
+let config = { port: 0 };
+config.port ??= 3000; // Stays 0 (not nullish)
+config.host ??= "localhost"; // Becomes "localhost" (undefined)
+```
+
+⚠️ **Critical**: `??=` preserves `0`, `""`, `false` unlike `||=`
+
+**See**: `demo/06-advanced/38-es2022-plus-features.js`
 
 ### 8. Variable Declarations (Same in Both)
 
@@ -149,6 +168,9 @@ const b = 0 ?? 100;  // 0 (0 is not null/undefined)
 - [ ] Use literal types for fixed value sets
 - [ ] Use optional chaining (`?.`) for safe property access
 - [ ] Use nullish coalescing (`??`) for default values
+- [ ] Use logical assignment (`??=`) for defaults preserving `0`, `""`, `false`
+- [ ] Use `Object.hasOwn()` instead of `hasOwnProperty` (ES2022)
+- [ ] Use immutable array methods (`toSorted`, etc.) for safety (ES2023)
 
 #### ❌ DON'T:
 - [ ] Use `var` (use `const` or `let`)
@@ -224,7 +246,19 @@ if (typeof value === "string") {
 }
 ```
 
-### 12. Common Error Messages & Solutions
+### 12. TypeScript Utility Types
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `Partial<T>` | All properties optional | `Partial<User>` |
+| `Required<T>` | All properties required | `Required<User>` |
+| `Readonly<T>` | All properties readonly | `Readonly<User>` |
+| `Pick<T, K>` | Select properties | `Pick<User, 'id' \| 'name'>` |
+| `Omit<T, K>` | Remove properties | `Omit<User, 'email'>` |
+
+**See**: `demo/06-advanced/48-typescript-advanced-ts-comparison.ts`
+
+### 13. Common Error Messages & Solutions
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -234,7 +268,7 @@ if (typeof value === "string") {
 | `Type 'any' is not assignable to type 'X'` | Implicit any | Add explicit type annotation |
 | `Property 'X' does not exist on type 'Y'` | Wrong type or typo | Check type definition or property name |
 
-### 13. Advanced Function Concepts
+### 14. Advanced Function Concepts
 
 #### IIFE (Immediately Invoked Function Expression)
 ```javascript
@@ -271,72 +305,37 @@ const pipe = <T>(...fns: Function[]) =>
 
 **See**: `demo/02-data-structures/07-functions.js` sections 13-16 for comprehensive examples
 
+### 15. Modern ES Features (ES2021-ES2025)
+
+#### Immutable Array Methods (ES2023)
+| Method | Description | Mutates? |
+|--------|-------------|----------|
+| `toSorted()` | Returns sorted copy | No |
+| `toReversed()` | Returns reversed copy | No |
+| `toSpliced()` | Returns spliced copy | No |
+| `with(i, v)` | Returns copy with value | No |
+
+#### Resource Management (ES2025 / TS 5.2+)
+```typescript
+// using declaration - automatic cleanup
+using file = new FileHandle("data.txt");
+// file[Symbol.dispose]() called at block end
+
+await using db = new DatabaseConnection();
+// db[Symbol.asyncDispose]() called at block end
+```
+
+**See**: `demo/06-advanced/38-es2022-plus-features.js`
+
 ---
 
 ## 📚 Resources
 
-- **JavaScript**: [JavaScript.info](https://javascript.info)
+- **JavaScript**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**:
-  - Stage 1 (Basic Syntax):
-    - `demo/01-basics/01-variables.js` + `01-variables-ts-comparison.ts`
-    - `demo/01-basics/02-operators.js` + `02-operators-ts-comparison.ts`
-    - `demo/01-basics/03-control-flow.js` + `03-control-flow-ts-comparison.ts`
-    - `demo/01-basics/04-strings.js` + `04-strings-ts-comparison.ts`
-    - `demo/01-basics/05-numbers-math.js` + `05-numbers-math-ts-comparison.ts`
-  - Stage 2 (Data Structures):
-    - `demo/02-data-structures/06-arrays.js` + `06-arrays-ts-comparison.ts`
-    - `demo/02-data-structures/07-functions.js` + `07-functions-ts-comparison.ts`
-    - `demo/02-data-structures/08-objects.js` + `08-objects-ts-comparison.ts`
-    - `demo/02-data-structures/09-destructuring.js` + `09-destructuring-ts-comparison.ts`
-    - `demo/02-data-structures/10-map-set.js` + `10-map-set-ts-comparison.ts`
-    - `demo/02-data-structures/11-json.js` + `11-json-ts-comparison.ts`
-    - `demo/02-data-structures/12-date-time.js` + `12-date-time-ts-comparison.ts`
-  - Stage 3 (Core Concepts):
-    - `demo/03-core-concepts/13-scope-closures.js` + `13-scope-closures-ts-comparison.ts`
-    - `demo/03-core-concepts/14-this-keyword.js` + `14-this-keyword-ts-comparison.ts`
-    - `demo/03-core-concepts/15-prototypes-inheritance.js` + `15-prototypes-inheritance-ts-comparison.ts`
-    - `demo/03-core-concepts/16-classes.js` + `16-classes-ts-comparison.ts`
-    - `demo/03-core-concepts/17-property-descriptors.js` + `17-property-descriptors-ts-comparison.ts`
-    - `demo/03-core-concepts/18-modern-features.js` + `18-modern-features-ts-comparison.ts`
-    - `demo/03-core-concepts/19-symbol-deep.js` + `19-symbol-deep-ts-comparison.ts`
-    - `demo/03-core-concepts/20-error-handling.js` + `20-error-handling-ts-comparison.ts`
-    - `demo/03-core-concepts/21-regex.js` + `21-regex-ts-comparison.ts`
-    - `demo/03-core-concepts/22-iterators-generators.js` + `22-iterators-generators-ts-comparison.ts`
-    - `demo/03-core-concepts/23-proxy-reflect.js` + `23-proxy-reflect-ts-comparison.ts`
-    - `demo/03-core-concepts/24-function-patterns-advanced.js` + `24-function-patterns-advanced-ts-comparison.ts`
-    - `demo/03-core-concepts/25-inheritance-patterns.js` + `25-inheritance-patterns-ts-comparison.ts`
-    - `demo/03-core-concepts/26-async-error-handling.js` + `26-async-error-handling-ts-comparison.ts`
-    - `demo/03-core-concepts/27-optimization-performance.js` + `27-optimization-performance-ts-comparison.ts`
-    - `demo/03-core-concepts/28-memory-management.js` + `28-memory-management-ts-comparison.ts`
-  - Stage 4 (Asynchronous):
-    - `demo/04-asynchronous/29-event-loop-callbacks.js` + `29-event-loop-callbacks-ts-comparison.ts`
-    - `demo/04-asynchronous/30-promises.js` + `30-promises-ts-comparison.ts`
-    - `demo/04-asynchronous/31-async-await.js` + `31-async-await-ts-comparison.ts`
-    - `demo/04-asynchronous/32-modules.js` + `32-modules-ts-comparison.ts`
-    - `demo/04-asynchronous/33-fetch-api.js` + `33-fetch-api-ts-comparison.ts`
-  - Stage 5 (Browser & DOM):
-    - `demo/05-browser-dom/34-dom-basics.js` + `34-dom-basics-ts-comparison.ts`
-    - `demo/05-browser-dom/35-dom-manipulation.js` + `35-dom-manipulation-ts-comparison.ts`
-    - `demo/05-browser-dom/36-events.js` + `36-events-ts-comparison.ts`
-    - `demo/05-browser-dom/37-forms-validation.js` + `37-forms-validation-ts-comparison.ts`
-  - Stage 6 (Advanced):
-    - `demo/06-advanced/38-es2022-plus-features.js` + `38-es2022-plus-features-ts-comparison.ts`
-    - `demo/06-advanced/39-debugging-testing.js` + `39-debugging-testing-ts-comparison.ts`
-    - `demo/06-advanced/40-memory-gc.js` + `40-memory-gc-ts-comparison.ts`
-    - `demo/06-advanced/41-typed-arrays.js` + `41-typed-arrays-ts-comparison.ts`
-    - `demo/06-advanced/42-intl-api.js` + `42-intl-api-ts-comparison.ts`
-    - `demo/06-advanced/43-weakref-finalization.js` + `43-weakref-finalization-ts-comparison.ts`
-    - `demo/06-advanced/44-storage-network.js` + `44-storage-network-ts-comparison.ts`
-    - `demo/06-advanced/45-design-patterns.js` + `45-design-patterns-ts-comparison.ts`
-    - `demo/06-advanced/46-web-apis.js` + `46-web-apis-ts-comparison.ts`
-    - `demo/06-advanced/47-performance.js` + `47-performance-ts-comparison.ts`
-    - `demo/06-advanced/48-typescript-advanced-ts-comparison.ts` (TS-only)
-    - `demo/06-advanced/49-security.js` + `49-security-ts-comparison.ts`
-    - `demo/06-advanced/50-build-tools.js` + `50-build-tools-ts-comparison.ts`
-    - `demo/06-advanced/51-reserved.js` + `51-reserved-ts-comparison.ts`
+- **Practice Files**: 51 numbered demo files (01-51) in `demo/` folder, each with TypeScript comparison
 
 ---
 
-**Last Updated**: 2026-03-21
-**Based on**: ES2020+ and TypeScript 5.x
+**Last Updated**: 2026-04-16
+**Based on**: ES2025 and TypeScript 5.x
