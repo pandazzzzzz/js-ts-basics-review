@@ -1,5 +1,5 @@
 // JavaScript Metaprogramming - JSDoc, Decorators, Reflect, Proxy
-// 📘 For TypeScript comparison, see: 48-typescript-advanced-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 47-typescript-advanced-ts-comparison.ts
 // 📘 ECMAScript Decorator Proposal: https://github.com/tc39/proposal-decorators
 // 📘 JSDoc Type Hints: https://www.typescriptlang.org/docs/handbook/jsdoc-reference.html
 // 📘 Reflect API: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect

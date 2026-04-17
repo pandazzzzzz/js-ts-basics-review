@@ -891,6 +891,6 @@ console.log("8. Buffer alignment and offsets");
 
 📘 See related:
 - 02-data-structures/06-arrays.js (Array methods)
-- 44-storage-network.js (WebSocket binary data)
-- 40-memory-gc.js (Memory management)
+- 43-storage-network.js (WebSocket binary data)
+- 40-memory-management.js (Memory management)
 */

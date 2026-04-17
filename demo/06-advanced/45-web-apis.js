@@ -1,5 +1,5 @@
 // Web APIs Demo
-// 📘 For TypeScript comparison, see: 46-web-apis-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 45-web-apis-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API
 // 📘 Web APIs: https://developer.mozilla.org/en-US/docs/Web/API
 // 📌 Covers important modern Web APIs

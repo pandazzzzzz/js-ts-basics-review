@@ -1,5 +1,5 @@
 // Reserved for Future Extensions Demo
-// 📘 For TypeScript comparison, see: 51-reserved-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 50-reserved-ts-comparison.ts
 // 📘 TC39 Proposals: https://github.com/tc39/proposals
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution

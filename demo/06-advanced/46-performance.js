@@ -1,5 +1,5 @@
 // Performance Optimization Demo
-// 📘 For TypeScript comparison, see: 47-performance-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 46-performance-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Performance
 // 📘 Web Performance: https://web.dev/performance/
 // 📌 Covers performance measurement and optimization techniques

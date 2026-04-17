@@ -3,7 +3,7 @@
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-03-29
 
-**进度**: 51/51 ✅ · 51 TypeScript 对比文件 ✅
+**进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅
 
 ---
 
@@ -141,40 +141,38 @@ TS 对比: `34-dom-basics-ts-comparison.ts` · `35-dom-manipulation-ts-compariso
 
 ---
 
-## 📁 Stage 6: 高级主题 (38-51)
+## 📁 Stage 6: 高级主题 (38-50)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
 | 38 | `demo/06-advanced/38-es2022-plus-features.js` | ES2022+ 新特性 | ✅ |
 | 39 | `demo/06-advanced/39-debugging-testing.js` | 调试与测试 | ✅ |
-| 40 | `demo/06-advanced/40-memory-gc.js` | 内存与垃圾回收 | ✅ |
+| 40 | `demo/06-advanced/40-memory-management.js` | 内存管理 | ✅ |
 | 41 | `demo/06-advanced/41-typed-arrays.js` | 类型化数组 | ✅ |
 | 42 | `demo/06-advanced/42-intl-api.js` | 国际化 API | ✅ |
-| 43 | `demo/06-advanced/43-weakref-finalization.js` | WeakRef 与 FinalizationRegistry | ✅ |
-| 44 | `demo/06-advanced/44-storage-network.js` | 存储与网络 | ✅ |
-| 45 | `demo/06-advanced/45-design-patterns.js` | 设计模式 | ✅ |
-| 46 | `demo/06-advanced/46-web-apis.js` | Web APIs | ✅ |
-| 47 | `demo/06-advanced/47-performance.js` | 性能优化 | ✅ |
-| 48 | `demo/06-advanced/48-typescript-advanced-ts-comparison.ts` | TypeScript 高级特性 | ✅ |
-| 49 | `demo/06-advanced/49-security.js` | 安全最佳实践 | ✅ |
-| 50 | `demo/06-advanced/50-build-tools.js` | 构建工具集成 | ✅ |
-| 51 | `demo/06-advanced/51-reserved.js` | 预留扩展 | ✅ |
+| 43 | `demo/06-advanced/43-storage-network.js` | 存储与网络 | ✅ |
+| 44 | `demo/06-advanced/44-design-patterns.js` | 设计模式 | ✅ |
+| 45 | `demo/06-advanced/45-web-apis.js` | Web APIs | ✅ |
+| 46 | `demo/06-advanced/46-performance.js` | 性能优化 | ✅ |
+| 47 | `demo/06-advanced/47-typescript-advanced.js` | TypeScript 高级特性 | ✅ |
+| 48 | `demo/06-advanced/48-security.js` | 安全最佳实践 | ✅ |
+| 49 | `demo/06-advanced/49-build-tools.js` | 构建工具集成 | ✅ |
+| 50 | `demo/06-advanced/50-reserved.js` | 预留扩展 | ✅ |
 
-TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-ts-comparison.ts` · `40-memory-gc-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-weakref-finalization-ts-comparison.ts` · `44-storage-network-ts-comparison.ts` · `45-design-patterns-ts-comparison.ts` · `46-web-apis-ts-comparison.ts` · `47-performance-ts-comparison.ts` · `48-typescript-advanced-ts-comparison.ts` · `49-security-ts-comparison.ts` · `50-build-tools-ts-comparison.ts` · `51-reserved-ts-comparison.ts`
+TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-ts-comparison.ts` · `40-memory-management-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
 
 ### 知识点清单
 
 **38 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、using/await using) · Stage 3 (Temporal API)
 **39 调试与测试** — console 方法、debugger、断点、单元测试基础
-**40 内存与 GC** — 内存生命周期、垃圾回收算法、内存泄漏检测与预防
+**40 内存管理** — 内存生命周期、垃圾回收算法、内存泄漏检测与预防、WeakMap/WeakSet、WeakRef、FinalizationRegistry
 **41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
 **42 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
-**43 WeakRef** — WeakRef 创建与使用、FinalizationRegistry、缓存模式
-**44 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
-**45 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
-**46 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
-**47 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
-**48 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
-**49 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
-**50 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
-**51 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
+**43 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
+**44 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
+**45 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
+**46 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
+**47 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
+**48 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
+**49 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
+**50 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性

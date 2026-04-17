@@ -1,6 +1,6 @@
-// Garbage Collection and Memory Management Demo
-// 📘 For TypeScript comparison, see: 40-memory-gc-ts-comparison.ts
-// 📘 javascript.info: "Garbage collection"
+// Memory Management - Comprehensive Guide
+// 📘 For TypeScript comparison, see: 40-memory-management-ts-comparison.ts
+// 📘 javascript.info: "Garbage collection", "WeakRef and FinalizationRegistry"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management
 
 // ============================================
@@ -135,7 +135,7 @@ clearInterval(intervalId);
 // Pattern 3: Closures holding large objects
 function createClosure() {
   let largeArray = new Array(1000000).fill("data");
-  
+
   return function() {
     // This closure keeps largeArray in memory
     // even if we only need one value
@@ -151,7 +151,7 @@ function createBetterClosure() {
   let largeArray = new Array(1000000).fill("data");
   let firstItem = largeArray[0];  // Extract only what's needed
   largeArray = null;              // Allow GC of large array
-  
+
   return function() {
     return firstItem;
   };
@@ -164,7 +164,7 @@ function createBetterClosure() {
 //   document.body.appendChild(div);
 //   elements.push(div);  // Keeps reference even if removed from DOM
 // }
-// 
+//
 // // Later: remove from DOM but still in array
 // document.body.removeChild(elements[0]);
 // // elements[0] still prevents GC!
@@ -177,7 +177,7 @@ function createBetterClosure() {
 //   console.log('Clicked!');
 // }
 // button.addEventListener('click', handleClick);
-// 
+//
 // // If button is removed from DOM but listener not removed:
 // // Both button and handleClick are kept in memory
 
@@ -187,14 +187,14 @@ function createBetterClosure() {
 // Pattern 6: Large objects not nullified
 function processLargeData() {
   let largeData = new Array(10000000).fill({ data: "value" });
-  
+
   // Process data...
   let result = largeData.length;
-  
+
   // largeData is kept in memory until function returns
   // Fix: Set to null when done
   largeData = null;
-  
+
   return result;
 }
 
@@ -207,7 +207,299 @@ console.log("5. Event listeners not removed");
 console.log("6. Large objects not nullified");
 
 // ============================================
-// Section 4: Memory Leak Detection
+// Section 4: WeakMap and WeakSet
+// ============================================
+
+console.log("\n=== WeakMap and WeakSet ===");
+
+// WeakMap - Map with weak references to keys
+// - Keys can be garbage collected
+// - No iteration methods (can't enumerate weak references)
+// - Ideal for metadata and caches
+
+const weakMap = new WeakMap();
+let wmKey = { id: 1 };
+weakMap.set(wmKey, "metadata");
+console.log("WeakMap entry:", weakMap.get(wmKey)); // "metadata"
+
+// If key becomes unreachable:
+wmKey = null;
+// WeakMap entry is automatically removed when key is GC'd ✓
+
+// WeakSet - Set with weak references
+// - Objects can be garbage collected
+// - No iteration methods
+// - Ideal for tracking object relationships
+
+const weakSet = new WeakSet();
+let wsObj = { data: "test" };
+weakSet.add(wsObj);
+console.log("WeakSet has:", weakSet.has(wsObj)); // true
+
+// If object becomes unreachable:
+wsObj = null;
+// Object removed from WeakSet when GC'd ✓
+
+console.log("\nWeakMap/WeakSet benefits:");
+console.log("- Keys/values can be garbage collected");
+console.log("- Ideal for caches and metadata");
+console.log("- No memory leaks from forgotten entries");
+console.log("- No iteration methods (security/privacy)");
+
+// Use case: Attaching metadata to objects
+const metadataCache = new WeakMap();
+
+function attachMetadata(obj, metadata) {
+  metadataCache.set(obj, metadata);
+}
+
+function getMetadata(obj) {
+  return metadataCache.get(obj);
+}
+
+let user1 = { name: "Alice" };
+attachMetadata(user1, { role: "admin", created: new Date() });
+console.log("User metadata:", getMetadata(user1));
+
+// When user1 is GC'd, metadata is also GC'd automatically
+
+// ============================================
+// Section 5: WeakRef
+// ============================================
+
+console.log("\n=== WeakRef ===");
+
+// WeakRef - Weak reference to an object
+// - Doesn't prevent garbage collection
+// - Can be used to implement caches
+// - deref() returns the object or undefined if GC'd
+
+// Creating a WeakRef
+let target = { name: "Alice", data: new Array(1000) };
+const weakRef = new WeakRef(target);
+
+// Accessing target
+console.log("Dereferencing:", weakRef.deref());
+// { name: "Alice", data: [...] }
+
+// Target is still reachable via 'target' variable
+console.log("Target still exists:", weakRef.deref() !== undefined); // true
+
+// If we remove the strong reference:
+target = null;
+// Now, object can be garbage collected
+// weakRef.deref() may return undefined after GC
+
+console.log("\nWeakRef behavior:");
+console.log("- new WeakRef(target) creates weak reference");
+console.log("- weakRef.deref() returns target or undefined");
+console.log("- Target can be GC'd if no strong references exist");
+console.log("- deref() timing is non-deterministic");
+
+// Use case: Cache with automatic cleanup
+class Cache {
+  constructor() {
+    this.cache = new Map();
+  }
+
+  set(key, value) {
+    this.cache.set(key, new WeakRef(value));
+  }
+
+  get(key) {
+    const ref = this.cache.get(key);
+    if (!ref) return undefined;
+
+    const value = ref.deref();
+    if (value === undefined) {
+      // Object was garbage collected
+      this.cache.delete(key);
+    }
+    return value;
+  }
+
+  has(key) {
+    return this.get(key) !== undefined;
+  }
+}
+
+const cache = new Cache();
+let largeObject = { data: new Array(10000) };
+cache.set("key1", largeObject);
+
+console.log("\nCache example:");
+console.log("Has key1:", cache.has("key1")); // true
+
+// If largeObject becomes unreachable:
+largeObject = null;
+// After GC, cache.get("key1") will return undefined
+
+// ============================================
+// Section 6: FinalizationRegistry
+// ============================================
+
+console.log("\n=== FinalizationRegistry ===");
+
+// FinalizationRegistry - Notification when objects are GC'd
+// - Register objects to be notified when they're collected
+// - Callback receives "held value" (not the object itself)
+// - Timing is non-deterministic
+
+// Creating a FinalizationRegistry
+const registry = new FinalizationRegistry((heldValue) => {
+  console.log(`Object with held value "${heldValue}" was garbage collected`);
+});
+
+// Registering objects
+let obj1 = { name: "Object 1" };
+let obj2 = { name: "Object 2" };
+
+registry.register(obj1, "obj1-metadata");
+registry.register(obj2, "obj2-metadata");
+
+console.log("Objects registered for finalization");
+
+// When obj1 becomes unreachable and is GC'd:
+// obj1 = null;
+// Eventually: "Object with held value "obj1-metadata" was garbage collected"
+
+// Unregistering objects
+const unregisterToken = { id: "token" };
+let obj3 = { name: "Object 3" };
+registry.register(obj3, "obj3-metadata", unregisterToken);
+
+// Later, if we don't want notification:
+registry.unregister(unregisterToken);
+// Now obj3 won't trigger callback when GC'd
+
+console.log("\nFinalizationRegistry behavior:");
+console.log("- Callback is called after object is GC'd");
+console.log("- Timing is non-deterministic");
+console.log("- Callback receives held value, not object");
+console.log("- Can unregister with token");
+
+// Use case: Image cache with cleanup
+class ImageCache {
+  constructor() {
+    this.cache = new Map();
+    this.registry = new FinalizationRegistry((url) => {
+      console.log(`Image ${url} was garbage collected`);
+      this.cache.delete(url);
+    });
+  }
+
+  load(url) {
+    // Check if cached
+    const cached = this.cache.get(url);
+    if (cached) {
+      const image = cached.deref();
+      if (image) {
+        console.log(`Cache hit: ${url}`);
+        return image;
+      }
+    }
+
+    // Load new image
+    console.log(`Loading: ${url}`);
+    const image = { url, data: new Array(1000) }; // Simulated image
+
+    this.cache.set(url, new WeakRef(image));
+    this.registry.register(image, url);
+
+    return image;
+  }
+}
+
+const imageCache = new ImageCache();
+let img1 = imageCache.load("photo1.jpg");
+let img2 = imageCache.load("photo1.jpg"); // Cache hit
+console.log("Same image:", img1 === img2); // true
+
+// ============================================
+// Section 7: Memory Optimization Techniques
+// ============================================
+
+console.log("\n=== Memory Optimization Techniques ===");
+
+// Technique 1: Nullify references when done
+let cacheData = { data: new Array(1000000) };
+// ... use cacheData ...
+cacheData = null;  // Allow GC
+
+// Technique 2: Use WeakMap/WeakSet for caches
+// Regular Map keeps keeps keys alive:
+const regularMap = new Map();
+let rmKey = { id: 1 };
+regularMap.set(rmKey, "value");
+rmKey = null;  // Object still in Map, not GC'd!
+
+// WeakMap allows GC:
+const wm = new WeakMap();
+let wmKey2 = { id: 1 };
+wm.set(wmKey2, "value");
+wmKey2 = null;  // Object can be GC'd now ✓
+
+console.log("WeakMap/WeakSet benefits:");
+console.log("- Keys can be garbage collected");
+console.log("- Ideal for caches and metadata");
+console.log("- No memory leaks from forgotten entries");
+
+// Technique 3: Object pooling
+// Reuse objects instead of creating new ones
+class ObjectPool {
+  constructor(createFn, resetFn) {
+    this.createFn = createFn;
+    this.resetFn = resetFn;
+    this.pool = [];
+  }
+
+  acquire() {
+    return this.pool.pop() || this.createFn();
+  }
+
+  release(obj) {
+    this.resetFn(obj);
+    this.pool.push(obj);
+  }
+}
+
+// Example: Pool of point objects
+const pointPool = new ObjectPool(
+  () => ({ x: 0, y: 0 }),
+  (point) => { point.x = 0; point.y = 0; }
+);
+
+const point = pointPool.acquire();
+point.x = 10;
+point.y = 20;
+// ... use point ...
+pointPool.release(point);  // Reuse instead of GC
+
+console.log("Object pooling benefits:");
+console.log("- Reduces GC pressure");
+console.log("- Faster than allocation");
+console.log("- Good for frequently created/destroyed objects");
+
+// Technique 4: Avoid temporary objects in hot paths
+// Bad: Creates temporary array every call
+function sumBad(a, b, c) {
+  return [a, b, c].reduce((sum, n) => sum + n, 0);
+}
+
+// Good: No temporary objects
+function sumGood(a, b, c) {
+  return a + b + c;
+}
+
+// Technique 5: String interning concept
+// JavaScript engines automatically intern string literals
+const str1 = "hello";
+const str2 = "hello";
+console.log("\nString interning:");
+console.log("str1 === str2:", str1 === str2);  // true (same reference)
+
+// ============================================
+// Section 8: Memory Leak Detection
 // ============================================
 
 console.log("\n=== Memory Leak Detection ===");
@@ -246,130 +538,6 @@ console.log("1. Run: node --inspect app.js");
 console.log("2. Open chrome://inspect in Chrome");
 console.log("3. Click 'inspect' on your Node process");
 console.log("4. Use Memory panel like browser debugging");
-
-// ============================================
-// Section 5: Memory Optimization Techniques
-// ============================================
-
-console.log("\n=== Memory Optimization Techniques ===");
-
-// Technique 1: Nullify references when done
-let cache = { data: new Array(1000000) };
-// ... use cache ...
-cache = null;  // Allow GC
-
-// Technique 2: Use WeakMap/WeakSet for caches
-// Regular Map keeps keys alive:
-const regularMap = new Map();
-let key = { id: 1 };
-regularMap.set(key, "value");
-key = null;  // Object still in Map, not GC'd!
-
-// WeakMap allows GC:
-const weakMap = new WeakMap();
-let weakKey = { id: 1 };
-weakMap.set(weakKey, "value");
-weakKey = null;  // Object can be GC'd now ✓
-
-console.log("WeakMap/WeakSet benefits:");
-console.log("- Keys can be garbage collected");
-console.log("- Ideal for caches and metadata");
-console.log("- No memory leaks from forgotten entries");
-
-// Technique 3: Use WeakRef for optional caching
-// See 43-weakref-finalization.js for details
-console.log("\nWeakRef for caching:");
-console.log("- Hold reference without preventing GC");
-console.log("- Cache can be cleared by GC when memory is low");
-
-// Technique 4: Object pooling
-// Reuse objects instead of creating new ones
-class ObjectPool {
-  constructor(createFn, resetFn) {
-    this.createFn = createFn;
-    this.resetFn = resetFn;
-    this.pool = [];
-  }
-  
-  acquire() {
-    return this.pool.pop() || this.createFn();
-  }
-  
-  release(obj) {
-    this.resetFn(obj);
-    this.pool.push(obj);
-  }
-}
-
-// Example: Pool of point objects
-const pointPool = new ObjectPool(
-  () => ({ x: 0, y: 0 }),
-  (point) => { point.x = 0; point.y = 0; }
-);
-
-const point = pointPool.acquire();
-point.x = 10;
-point.y = 20;
-// ... use point ...
-pointPool.release(point);  // Reuse instead of GC
-
-console.log("Object pooling benefits:");
-console.log("- Reduces GC pressure");
-console.log("- Faster than allocation");
-console.log("- Good for frequently created/destroyed objects");
-
-// Technique 5: Avoid temporary objects in hot paths
-// Bad: Creates temporary array every call
-function sumBad(a, b, c) {
-  return [a, b, c].reduce((sum, n) => sum + n, 0);
-}
-
-// Good: No temporary objects
-function sumGood(a, b, c) {
-  return a + b + c;
-}
-
-// Technique 6: String interning concept
-// JavaScript engines automatically intern string literals
-const str1 = "hello";
-const str2 = "hello";
-console.log("\nString interning:");
-console.log("str1 === str2:", str1 === str2);  // true (same reference)
-
-// But dynamically created strings are not interned:
-const str3 = "hel" + "lo";
-console.log("str1 === str3:", str1 === str3);  // true (value)
-// Note: Modern engines may optimize this too
-
-// ============================================
-// Section 6: Relationships with Other Concepts
-// ============================================
-
-console.log("\n=== Related Concepts ===");
-
-// Closures and memory (see 11-scope-closures.js)
-console.log("Closures:");
-console.log("- Capture variables from outer scope");
-console.log("- Keep captured variables in memory");
-console.log("- Can cause leaks if not careful");
-
-// WeakMap/WeakSet GC behavior (see 08-map-set.js)
-console.log("\nWeakMap/WeakSet:");
-console.log("- Keys are weakly held");
-console.log("- Don't prevent garbage collection");
-console.log("- Ideal for metadata and caches");
-
-// WeakRef/FinalizationRegistry (see 38-weakref-finalization.js)
-console.log("\nWeakRef/FinalizationRegistry:");
-console.log("- Advanced weak reference control");
-console.log("- Notification when objects are GC'd");
-console.log("- Use sparingly, non-deterministic");
-
-// Event listener cleanup (see 28-events.js)
-console.log("\nEvent listeners:");
-console.log("- Always remove when done");
-console.log("- Use AbortController for automatic cleanup");
-console.log("- Avoid anonymous functions if you need to remove");
 
 // ============================================
 // Common Pitfalls
@@ -413,6 +581,18 @@ console.log("  DOM nodes removed from document but referenced in arrays.");
 console.log("  These detached nodes and their subtrees are kept in memory.");
 console.log("  Fix: Clear arrays/objects holding DOM references.");
 
+// Pitfall 7: Non-deterministic finalization
+console.log("\nPitfall 7: Non-deterministic cleanup timing");
+console.log("  Finalizer callbacks run at GC discretion.");
+console.log("  Can be delayed or never called in some cases.");
+console.log("  Fix: Use for cleanup hints, not critical logic.");
+
+// Pitfall 8: WeakRef deref() returning undefined
+console.log("\nPitfall 8: WeakRef.deref() returns undefined");
+console.log("  Object may be collected between check and use.");
+console.log("  deref() can fail even if checked immediately before.");
+console.log("  Fix: Always handle undefined case.");
+
 // ============================================
 // Best Practices
 // ============================================
@@ -428,6 +608,8 @@ console.log("5. Use strict mode to catch accidental global variables.");
 console.log("6. Profile memory with DevTools to identify leaks early.");
 console.log("7. Use object pooling for frequently created/destroyed objects.");
 console.log("8. Be mindful of closures capturing large objects.");
+console.log("9. Use WeakRef for optional caches only, not critical data.");
+console.log("10. Always check if deref() returns undefined when using WeakRef.");
 
 console.log("\n❌ DON'T:");
 console.log("1. Don't assume GC runs immediately after setting references to null.");
@@ -436,6 +618,10 @@ console.log("3. Don't forget to clean up event listeners and timers.");
 console.log("4. Don't use regular Map for caching objects that should be GC'd.");
 console.log("5. Don't ignore memory warnings from DevTools.");
 console.log("6. Don't create global variables unintentionally (use strict mode).");
+console.log("7. Don't rely on WeakRef/FinalizationRegistry for critical cleanup.");
+console.log("8. Don't assume deref() succeeds with WeakRef.");
+console.log("9. Don't use WeakRef for essential application data.");
+console.log("10. Don't throw errors in FinalizationRegistry callbacks.");
 
 console.log("\n⚠️ WATCH OUT FOR:");
 console.log("1. Closures can unexpectedly keep objects alive longer than intended.");
@@ -444,6 +630,8 @@ console.log("3. Circular references (handled by modern GC but worth knowing).");
 console.log("4. Memory leaks in long-running applications accumulate over time.");
 console.log("5. Large objects don't GC when you expect without explicit cleanup.");
 console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
+console.log("7. Non-deterministic finalization makes WeakRef/FinalizationRegistry tricky.");
+console.log("8. Browser support varies - check before using WeakRef/FinalizationRegistry.");
 
 // ============================================
 // TypeScript Comparison Notes
@@ -457,7 +645,33 @@ console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
    TS:  No impact on garbage collection behavior
    TS:  Same memory lifecycle as JavaScript
 
-2. DISPOSABLE PATTERN (TS 5.2+)
+2. WEAKREF TYPING
+   JS:  Runtime type checking only
+   TS:  WeakRef<T> generic type
+   TS:  deref() returns T | undefined
+   TS:  Type-safe weak references
+
+   Example:
+   const ref: WeakRef<MyClass> = new WeakRef(obj);
+   const value: MyClass | undefined = ref.deref();
+
+3. FINALIZATIONREGISTRY TYPING
+   TS:  FinalizationRegistry<T> generic
+   TS:  T is the type of held value
+   TS:  Callback parameter is typed as T
+
+   Example:
+   const registry = new FinalizationRegistry<string>((heldValue) => {
+     // heldValue is typed as string
+     console.log(heldValue);
+   });
+
+4. WEAKMAP/WEAKSET TYPING
+   TS:  WeakMap<K extends object, V>
+   TS:  WeakSet<T extends object>
+   TS:  Type system enforces object keys only
+
+5. DISPOSABLE PATTERN (TS 5.2+)
    TS:  using / await using declarations
    TS:  Disposable / AsyncDisposable interfaces
    TS:  Automatic resource cleanup
@@ -467,27 +681,22 @@ console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
    interface Disposable {
      [Symbol.dispose](): void;
    }
-   
+
    class Resource implements Disposable {
      [Symbol.dispose]() {
        // Cleanup logic
      }
    }
-   
+
    {
      using resource = new Resource();
      // Automatically disposed at end of block
    }
 
-3. TYPE SAFETY HELPS PREVENT LEAKS
+6. TYPE SAFETY HELPS PREVENT LEAKS
    TS:  Strict null checks catch potential issues
    TS:  Type system enforces cleanup patterns
    TS:  Better IDE support for finding unused variables
-
-4. WEAKMAP/WEAKSET TYPING
-   TS:  WeakMap<K extends object, V>
-   TS:  WeakSet<T extends object>
-   TS:  Type system enforces object keys only
 
 ⚠️ MEMORY BEST PRACTICES:
 - Use const by default (prevents accidental reassignment)
@@ -510,9 +719,37 @@ console.log("6. Detached DOM nodes are a common source of leaks in browsers.");
 - Test with realistic data volumes
 - Profile in production-like environment
 
+⚠️ IMPORTANT WARNINGS:
+
+1. DON'T USE WeakRef/FinalizationRegistry FOR RESOURCE CLEANUP
+   - File handles: Use explicit close()
+   - Database connections: Use explicit disconnect()
+   - Network sockets: Use explicit close()
+   - Locks: Use explicit release()
+
+   Why? Finalization is non-deterministic and may not run!
+
+2. DON'T RELY ON FINALIZATION TIMING
+   - GC runs when it wants
+   - May not run before program exit
+   - Different in different engines
+   - Different in different environments
+
+3. PERFORMANCE IMPACT
+   - WeakRef.deref() is not free
+   - FinalizationRegistry has overhead
+   - Use sparingly
+   - Profile before using in hot paths
+
+4. DEBUGGING CHALLENGES
+   - Hard to test GC behavior
+   - Non-reproducible timing
+   - Different in dev vs production
+   - Use for diagnostics, not logic
+
 📘 See related:
-- 02-data-structures/10-map-set.js (WeakMap/WeakSet)
-- 03-core-concepts/13-scope-closures.js (Closures and memory)
-- 43-weakref-finalization.js (WeakRef/FinalizationRegistry)
-- 05-browser-dom/36-events.js (Event listener cleanup)
+- demo/02-data-structures/10-map-set.js (WeakMap/WeakSet)
+- demo/03-core-concepts/13-scope-closures.js (Closures and memory)
+- demo/05-browser-dom/36-events.js (Event listener cleanup)
+- demo/06-advanced/38-es2022-plus-features.js (using/await using)
 */

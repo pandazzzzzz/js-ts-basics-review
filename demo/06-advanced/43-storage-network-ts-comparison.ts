@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Storage and Network Comparison
-// 📘 For JavaScript examples, see: 44-storage-network.js
+// 📘 For JavaScript examples, see: 43-storage-network.js
 // This file demonstrates TypeScript-specific type features for storage and network APIs
 
 export {}; // Make this file a module to avoid global scope conflicts

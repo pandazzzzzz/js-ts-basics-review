@@ -1,5 +1,5 @@
 // Web Security Best Practices Demo
-// 📘 For TypeScript comparison, see: 49-security-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 48-security-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/Security
 // 📘 OWASP: https://owasp.org/www-project-top-ten/
 // 📌 Covers XSS, CSRF, CSP, secure storage, and input validation

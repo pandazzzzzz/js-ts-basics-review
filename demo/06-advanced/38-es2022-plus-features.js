@@ -1059,5 +1059,5 @@ console.log("- Better error handling in promise chains");
 📘 See related:
 - 02-data-structures/06-arrays.js (ES2023 array methods)
 - 03-core-concepts/16-classes.js (ES2022 class features)
-- 43-weakref-finalization.js (Resource management patterns)
+- 40-memory-management.js (Resource management patterns)
 */
