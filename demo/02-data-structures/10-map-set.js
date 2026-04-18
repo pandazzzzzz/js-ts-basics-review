@@ -640,5 +640,5 @@ console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
    TS:  type MapEntry<K, V> = [K, V]
    TS:  type SetValue<T> = T
 
-📘 See related: 06-arrays.js (arrays), 08-objects.js (objects), 18-modern-features.js (ES6)
+📘 See related: 06-arrays.js (arrays), 08-objects.js (objects), 18-es6-plus-syntax.js (ES6+)
 */

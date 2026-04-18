@@ -672,3 +672,61 @@ console.log(`
 
 📘 See 30-promises-ts-comparison.ts for detailed examples!
 */
+
+// ============================================
+// 11. PROMISE COMBINATORS COMPARISON
+// ============================================
+
+/**
+ * Quick Reference - Promise Combinators:
+ *
+ * | Combinator         | Resolves When...          | Rejects When...           | Use Case                        |
+ * |--------------------|---------------------------|---------------------------|---------------------------------|
+ * | Promise.all()      | All promises fulfill      | Any promise rejects       | Parallel operations, all needed |
+ * | Promise.allSettled()| All promises settle      | Never                     | Batch operations, need all results |
+ * | Promise.race()     | Any promise settles       | Any promise rejects       | Timeout patterns, fastest wins  |
+ * | Promise.any()      | Any promise fulfills      | All promises reject       | First successful response       |
+ */
+
+console.log("\n=== Promise Combinators Quick Reference ===\n");
+
+// Visual comparison with timing
+function createTimedPromise(value, delay, shouldReject = false) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldReject) {
+        reject(new Error(`Error: ${value}`));
+      } else {
+        resolve(value);
+      }
+    }, delay);
+  });
+}
+
+const fast = createTimedPromise("fast", 50);
+const medium = createTimedPromise("medium", 100);
+const slow = createTimedPromise("slow", 150);
+
+// Promise.all - waits for all, fails fast
+console.log("Promise.all([fast, medium, slow]):");
+console.log("  → Resolves when ALL complete (~150ms)");
+console.log("  → Result: ['fast', 'medium', 'slow']");
+console.log("  → If any rejects, immediately rejects\n");
+
+// Promise.allSettled - waits for all, never rejects
+console.log("Promise.allSettled([fast, medium, slow]):");
+console.log("  → Resolves when ALL complete (~150ms)");
+console.log("  → Result: [{status, value/reason}, ...]");
+console.log("  → Never rejects, always gives all outcomes\n");
+
+// Promise.race - first to settle wins
+console.log("Promise.race([fast, medium, slow]):");
+console.log("  → Settles when FIRST completes (~50ms)");
+console.log("  → Result: 'fast'");
+console.log("  → Can resolve OR reject\n");
+
+// Promise.any - first success wins, ignores rejects
+console.log("Promise.any([fast, medium, slow]):");
+console.log("  → Resolves when FIRST succeeds (~50ms)");
+console.log("  → Result: 'fast'");
+console.log("  → Only rejects if ALL reject (AggregateError)\n");

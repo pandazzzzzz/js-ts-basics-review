@@ -8,153 +8,46 @@
 // ES2021 Features (Brief Review)
 // ============================================
 
-// Promise.any() - First fulfilled promise wins
-console.log("\n=== Promise.any() (ES2021) ===");
+// Note: Promise combinators (Promise.all, Promise.race, Promise.allSettled, Promise.any)
+// are covered in detail in 30-promises.js
+// This file focuses on OTHER ES2021+ features
 
-const promise1 = Promise.reject("Error 1");
-const promise2 = Promise.reject("Error 2");
-const promise3 = Promise.resolve("Success 3");
-
-// Returns first promise that fulfills (ignores rejections)
-Promise.any([promise1, promise2, promise3])
-  .then(result => console.log("Promise.any result:", result)) // "Success 3"
-  .catch(error => console.log("All promises rejected:", error.errors));
-
-// Comparison with other Promise combinators:
-console.log("\nPromise combinators comparison:");
-console.log("Promise.all():       All must fulfill (fast-fail on reject)");
-console.log("Promise.allSettled(): Wait for all to settle (no fail-fast)");
-console.log("Promise.race():      First to settle (fulfill or reject)");
-console.log("Promise.any():       First to fulfill (ignore rejects)");
-
-// Example: Fetch from multiple sources, use first success
-const urls = [
-  "https://api1.example.com/data",
-  "https://api2.example.com/data",
-  "https://api3.example.com/data"
-];
-
-// Uncomment to test:
-// const fetchPromises = urls.map(url =>
-//   fetch(url).then(r => r.json()).catch(() => null)
-// );
-// Promise.any(fetchPromises.filter(p => p !== null))
-//   .then(data => console.log("Got data:", data));
-
-// AggregateError - New error type for Promise.any()
-Promise.any([Promise.reject("A"), Promise.reject("B")])
-  .catch(err => {
-    console.log("Error type:", err.name);        // "AggregateError"
-    console.log("Error message:", err.message);  // "All promises were rejected"
-    console.log("Individual errors:", err.errors); // ["A", "B"]
-  });
-
-// ============================================
-// Promise Combinators: Practical Examples
-// ============================================
-
-console.log("\n=== Promise.all() - Wait for all to fulfill ===");
-
-// Promise.all() resolves when ALL promises fulfill
-// Rejects immediately if ANY promise rejects
-const p1 = Promise.resolve(10);
-const p2 = Promise.resolve(20);
-const p3 = Promise.resolve(30);
-
-Promise.all([p1, p2, p3])
-  .then(results => console.log("Promise.all results:", results)) // [10, 20, 30]
-  .catch(error => console.log("Promise.all failed:", error));
-
-// Example: Fetch multiple resources in parallel
-console.log("\nPromise.all() use case: Parallel data fetching");
-const fetchUsers = Promise.resolve([{ id: 1, name: "Alice" }]);
-const fetchPosts = Promise.resolve([{ id: 1, title: "Hello" }]);
-const fetchComments = Promise.resolve([{ id: 1, text: "Hi!" }]);
-
-Promise.all([fetchUsers, fetchPosts, fetchComments])
-  .then(([users, posts, comments]) => {
-    console.log("Users:", users);
-    console.log("Posts:", posts);
-    console.log("Comments:", comments);
-  });
-
-console.log("\n=== Promise.allSettled() - Wait for all to settle ===");
-
-// Promise.allSettled() waits for ALL promises to settle (fulfill OR reject)
-// Always resolves with an array of outcome objects
-const ps1 = Promise.resolve("Success 1");
-const ps2 = Promise.reject("Error 2");
-const ps3 = Promise.resolve("Success 3");
-
-Promise.allSettled([ps1, ps2, ps3])
-  .then(results => {
-    console.log("Promise.allSettled results:");
-    results.forEach((result, i) => {
-      if (result.status === "fulfilled") {
-        console.log(`  Promise ${i + 1}: Fulfilled with`, result.value);
-      } else {
-        console.log(`  Promise ${i + 1}: Rejected with`, result.reason);
-      }
-    });
-  });
-
-// Use case: Batch operations where you want to know all outcomes
-console.log("\nPromise.allSettled() use case: Batch processing");
-const uploadFiles = [
-  Promise.resolve("file1.jpg"),
-  Promise.reject("file2.png"),
-  Promise.resolve("file3.pdf")
-];
-
-Promise.allSettled(uploadFiles)
-  .then(results => {
-    const successful = results
-      .filter(r => r.status === "fulfilled")
-      .map(r => r.value);
-    const failed = results
-      .filter(r => r.status === "rejected")
-      .map(r => r.reason);
-    console.log("  Successful uploads:", successful);
-    console.log("  Failed uploads:", failed);
-  });
-
-console.log("\n=== Promise.race() - First to settle wins ===");
-
-// Promise.race() resolves/rejects as soon as ANY promise settles
-const pr1 = new Promise(resolve => setTimeout(() => resolve("Slow"), 200));
-const pr2 = new Promise(resolve => setTimeout(() => resolve("Fast"), 100));
-const pr3 = new Promise((_, reject) => setTimeout(() => reject("Error"), 150));
-
-Promise.race([pr1, pr2, pr3])
-  .then(winner => console.log("Promise.race winner:", winner)) // "Fast"
-  .catch(error => console.log("Promise.race failed:", error));
-
-// Use case: Timeouts for slow operations
-console.log("\nPromise.race() use case: Request timeout");
-function fetchWithTimeout(url, timeoutMs) {
-  const fetchPromise = new Promise(resolve =>
-    setTimeout(() => resolve(`Data from ${url}`), 3000)
-  );
-  const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error("Request timed out")), timeoutMs)
-  );
-  return Promise.race([fetchPromise, timeoutPromise]);
-}
-
-// This will timeout after 1 second
-fetchWithTimeout("/api/data", 1000)
-  .then(data => console.log("  Got data:", data))
-  .catch(error => console.log("  Error:", error.message));
+console.log("\n=== ES2021+ Features Overview ===\n");
+console.log("ES2021:");
+console.log("  - Promise.any(), AggregateError (see 30-promises.js)");
+console.log("  - String.replaceAll()");
+console.log("  - Logical assignment operators (||=, &&=, ??=)");
+console.log("  - Numeric separators");
+console.log("  - WeakRef, FinalizationRegistry");
+console.log("  - Intl.PluralRules");
+console.log("\nES2022:");
+console.log("  - Class private fields (#field)");
+console.log("  - .at() method for arrays/strings");
+console.log("  - Object.hasOwn()");
+console.log("  - Error.cause");
+console.log("  - Top-level await");
+console.log("  - RegExp /d flag (match indices)");
+console.log("\nES2023:");
+console.log("  - Immutable array methods (toSorted, toReversed, with)");
+console.log("  - findLast(), findLastIndex()");
+console.log("  - Hashbang syntax");
+console.log("\nES2024:");
+console.log("  - Object.groupBy(), Map.groupBy()");
+console.log("  - Promise.withResolvers()");
+console.log("  - RegExp /v flag (unicodeSets)");
+console.log("\nES2025:");
+console.log("  - Set methods (union, intersection, difference)");
+console.log("  - Iterator helpers");
+console.log("  - using / await using declarations");
 
 // ============================================
 // ES2022 Features
 // ============================================
 
-// Section 1: Class Enhancements (Brief Review)
-// - Private fields (#field), static properties, static initialization blocks
-// - See 16-classes.js for detailed coverage
+// Note: Class enhancements covered in 16-classes.js
 
-// Section 2: Error.cause
+// ============================================
+// Error.cause (ES2022)
 // - Allows chaining errors with original cause
 // - Useful for preserving error context through multiple layers
 console.log("\n=== Error.cause (ES2022) ===");
@@ -182,7 +75,8 @@ try {
   // Original cause: Connection timeout
 }
 
-// Section 3: Top-level await
+// ============================================
+// Top-level await (ES2022)
 // - Use await at the top level of ES modules
 // - No need to wrap in async function
 // - Module evaluation waits for the promise to resolve
@@ -333,7 +227,8 @@ const ru = new Intl.PluralRules('ru', { type: 'ordinal' });
 console.log("Russian ordinal 1:", ru.select(1)); // "one"
 console.log("Russian ordinal 2:", ru.select(2)); // "few"
 
-// Section 4: .at() Method
+// ============================================
+// .at() Method (ES2022)
 // - Access array/string elements with negative indices
 // - Returns undefined for out-of-bounds indices
 console.log("\n=== .at() Method (ES2022) ===");
@@ -352,7 +247,8 @@ console.log("arr[arr.length - 1]:", arr[arr.length - 1]); // 50 (verbose)
 const str = "Hello";
 console.log("str.at(-1):", str.at(-1));  // "o"
 
-// Section 5: Object.hasOwn()
+// ============================================
+// Object.hasOwn() (ES2022)
 // - Safer alternative to Object.prototype.hasOwnProperty()
 // - Not affected by prototype chain overrides
 console.log("\n=== Object.hasOwn() (ES2022) ===");
@@ -372,7 +268,8 @@ objWithoutProto.name = "Bob";
 // objWithoutProto.hasOwnProperty('name'); // ❌ TypeError!
 console.log("Object.hasOwn(objWithoutProto, 'name'):", Object.hasOwn(objWithoutProto, "name")); // ✅ true
 
-// Section 6: RegExp /d Flag (indices)
+// ============================================
+// RegExp /d Flag (ES2022)
 // - Provides start and end indices for matches and capture groups
 console.log("\n=== RegExp /d Flag (ES2022) ===");
 
@@ -391,10 +288,9 @@ console.log("Year indices:", match.indices.groups.year); // [0, 4]
 // ES2023 Features
 // ============================================
 
-// Section 7: Immutable Array Methods (Brief Review)
-// - toSorted(), toReversed(), toSpliced(), with()
-// - findLast(), findLastIndex()
-// - See 02-data-structures/06-arrays.js for detailed coverage
+// ============================================
+// Immutable Array Methods (ES2023)
+// Note: See 02-data-structures/06-arrays.js for detailed coverage
 console.log("\n=== Immutable Array Methods (ES2023) ===");
 
 const numbers = [3, 1, 4, 1, 5];
@@ -437,7 +333,8 @@ const findItems = [1, 2, 3, 4, 5];
 console.log("findLast(x => x > 3):", findItems.findLast(x => x > 3)); // 5
 console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); // 4
 
-// Section 8: Hashbang (#!) Syntax
+// ============================================
+// Hashbang Syntax (ES2023)
 // - Allows JavaScript files to be executed directly as scripts
 console.log("\n=== Hashbang Syntax (ES2023) ===");
 
@@ -456,7 +353,8 @@ console.log("Hashbang allows JS files to be executable scripts");
 // ES2024 Features
 // ============================================
 
-// Section 9: Object.groupBy / Map.groupBy
+// ============================================
+// Object.groupBy / Map.groupBy (ES2024)
 // - Group array elements by a key function
 // - Object.groupBy returns plain object, Map.groupBy returns Map
 console.log("\n=== Object.groupBy / Map.groupBy (ES2024) ===");
@@ -488,7 +386,8 @@ const manualGroup = people.reduce((acc, person) => {
 }, {});
 console.log("Manual grouping:", manualGroup);
 
-// Section 10: Promise.withResolvers()
+// ============================================
+// Promise.withResolvers() (ES2024)
 // - Exposes resolve and reject functions outside Promise constructor
 // - Useful for external control of Promise state
 console.log("\n=== Promise.withResolvers() (ES2024) ===");
@@ -527,7 +426,8 @@ const queue = new AsyncQueue();
 queue.enqueue("task1").then(result => console.log("Resolved:", result));
 setTimeout(() => queue.dequeue(), 100);
 
-// Section 11: RegExp /v Flag (unicodeSets)
+// ============================================
+// RegExp /v Flag (ES2024)
 // - Enhanced Unicode support with set operations
 // - Replaces /u flag with more features
 console.log("\n=== RegExp /v Flag (ES2024) ===");
@@ -565,7 +465,8 @@ console.log("- Script-specific text processing");
 // ES2025 Features (Stage 4 / Upcoming)
 // ============================================
 
-// Section 12: Set Methods
+// ============================================
+// Set Methods (ES2025)
 // - Mathematical set operations
 // - Returns new Set (immutable)
 console.log("\n=== Set Methods (ES2025) ===");
@@ -599,7 +500,8 @@ console.log("isSupersetOf:", setA.isSupersetOf(new Set([1, 2]))); // true
 // Disjoint check: No common elements
 console.log("isDisjointFrom:", setA.isDisjointFrom(new Set([7, 8]))); // true
 
-// Section 13: Iterator Helpers
+// ============================================
+// Iterator Helpers (ES2025)
 // - Lazy evaluation methods for iterators
 // - More memory efficient than array methods
 console.log("\n=== Iterator Helpers (ES2025) ===");
@@ -667,7 +569,8 @@ console.log("- Only computes what's needed");
 // 
 // console.log("First 10 even numbers:", first10Even);
 
-// Section 14: Resource Management (using / await using)
+// ============================================
+// Resource Management (ES2025)
 // - Automatic resource cleanup using Symbol.dispose
 // - Similar to try-with-resources in Java or using in C#
 console.log("\n=== Resource Management (ES2025) ===");
@@ -857,7 +760,8 @@ console.log("8. using declaration disposal timing");
 // Stage 3 Proposals (Upcoming)
 // ============================================
 
-// Section 15: Temporal API (Stage 3)
+// ============================================
+// Temporal API (Stage 3 Proposal)
 // - Modern date/time API to replace Date object
 // - Immutable, timezone-aware, easier to use
 console.log("\n=== Temporal API (Stage 3 Proposal) ===");
@@ -926,7 +830,8 @@ console.log("- Age/duration calculations");
 // Stage 3 Proposals: More Upcoming Features
 // ============================================
 
-// Section 16: DisposableStack (Stage 3)
+// ============================================
+// DisposableStack (Stage 3 Proposal)
 // - Manage multiple disposable resources together
 // - Automatic cleanup in reverse order
 console.log("\n=== DisposableStack (Stage 3 Proposal) ===");
@@ -960,7 +865,8 @@ stack.dispose();
 // Custom cleanup logic
 `);
 
-// Section 17: Array.fromAsync (Stage 3)
+// ============================================
+// Array.fromAsync (Stage 3 Proposal)
 // - Create arrays from async iterables
 // - Similar to Array.from but for async
 console.log("\n=== Array.fromAsync (Stage 3 Proposal) ===");
@@ -991,7 +897,8 @@ const withPromises = await Array.fromAsync([
 console.log("With promises:", withPromises); // [1, 2, 3]
 `);
 
-// Section 18: Promise.try (Stage 3)
+// ============================================
+// Promise.try (Stage 3 Proposal)
 // - Normalize sync/async exceptions
 // - Similar to try/catch but for functions
 console.log("\n=== Promise.try (Stage 3 Proposal) ===");

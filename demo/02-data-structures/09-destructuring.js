@@ -299,5 +299,5 @@ initApp({ port: 8080, debug: true });
 4. DEFAULT VALUES WITH TYPES
    TS:  const { count = 0 }: { count?: number } = obj
 
-📘 See related: 06-arrays.js (array destructuring), 08-objects.js (object destructuring), 18-modern-features.js (ES6 features)
+📘 See related: 06-arrays.js (array destructuring), 08-objects.js (object destructuring), 18-es6-plus-syntax.js (ES6+ features)
 */

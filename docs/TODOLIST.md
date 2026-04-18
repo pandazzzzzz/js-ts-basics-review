@@ -64,7 +64,7 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 | 15 | `demo/03-core-concepts/15-prototypes-inheritance.js` | 原型与继承 | ✅ |
 | 16 | `demo/03-core-concepts/16-classes.js` | 类 | ✅ |
 | 17 | `demo/03-core-concepts/17-property-descriptors.js` | 属性描述符 | ✅ |
-| 18 | `demo/03-core-concepts/18-modern-features.js` | ES6+ 特性 | ✅ |
+| 18 | `demo/03-core-concepts/18-es6-plus-syntax.js` | ES6+ 语法 | ✅ |
 | 19 | `demo/03-core-concepts/19-symbol-deep.js` | Symbol 深入 | ✅ |
 | 20 | `demo/03-core-concepts/20-error-handling.js` | 错误处理 | ✅ |
 | 21 | `demo/03-core-concepts/21-regex.js` | 正则表达式 | ✅ |
@@ -76,7 +76,7 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 | 27 | `demo/03-core-concepts/27-optimization-performance.js` | 性能优化 | ✅ |
 | 28 | `demo/03-core-concepts/28-memory-management.js` | 内存管理 | ✅ |
 
-TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-modern-features-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-async-error-handling-ts-comparison.ts` · `27-optimization-performance-ts-comparison.ts` · `28-memory-management-ts-comparison.ts`
+TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-es6-plus-syntax-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-async-error-handling-ts-comparison.ts` · `27-optimization-performance-ts-comparison.ts` · `28-memory-management-ts-comparison.ts`
 
 ### 知识点清单
 

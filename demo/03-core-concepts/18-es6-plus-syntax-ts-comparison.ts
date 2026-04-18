@@ -1,6 +1,6 @@
-// TypeScript vs JavaScript: Modern Features Comparison
-// 📘 For JavaScript examples, see: 18-modern-features.js
-// This file demonstrates TypeScript-specific typing for modern ES features
+// TypeScript vs JavaScript: ES6+ Syntax Features Comparison
+// 📘 For JavaScript examples, see: 18-es6-plus-syntaxES6+ Syntax Comparison
+// This file demonstrates TypeScript-specific typing for modern ES6+ features
 
 export {};
 

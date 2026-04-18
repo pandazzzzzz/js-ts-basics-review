@@ -1,5 +1,5 @@
-// Modern JavaScript Features (ES6+)
-// 📘 For TypeScript comparison, see: 18-modern-features-ts-comparison.ts
+// ES6+ Syntax Features (Spread, Destructuring, Optional Chaining, Nullish Coalescing)
+// 📘 For TypeScript comparison, see: 18-es6-plus-syntax-ts-comparison.ts
 
 // ============================================
 // 1. Spread Operator (ES6/ES2015)
@@ -800,7 +800,7 @@ Key modern features (ES2020-ES2023):
 - TypeScript interfaces have no runtime representation
 - Class field initialization order matters in both languages
 
-📘 See 18-modern-features-ts-comparison.ts for detailed examples!
+📘 See 18-es6-plus-syntax-ts-comparison.ts for detailed examples!
 */
 
 // ============================================================================
