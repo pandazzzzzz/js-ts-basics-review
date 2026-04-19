@@ -1,9 +1,9 @@
 # 学习路线图
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **更新**: 2026-03-29
+> **更新**: 2026-04-19
 
-**进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅
+**进度**: 49/49 ✅ · 49 TypeScript 对比文件 ✅
 
 ---
 
@@ -55,7 +55,7 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 
 ---
 
-## 📁 Stage 3: 核心概念 (13-28)
+## 📁 Stage 3: 核心概念 (13-27)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
@@ -72,11 +72,10 @@ TS 对比: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` · `0
 | 23 | `demo/03-core-concepts/23-proxy-reflect.js` | Proxy 与 Reflect | ✅ |
 | 24 | `demo/03-core-concepts/24-function-patterns-advanced.js` | 高级函数模式 | ✅ |
 | 25 | `demo/03-core-concepts/25-inheritance-patterns.js` | 继承模式 | ✅ |
-| 26 | `demo/03-core-concepts/26-async-error-handling.js` | 异步错误处理 | ✅ |
-| 27 | `demo/03-core-concepts/27-optimization-performance.js` | 性能优化 | ✅ |
-| 28 | `demo/03-core-concepts/28-memory-management.js` | 内存管理 | ✅ |
+| 26 | `demo/03-core-concepts/26-optimization-performance.js` | 性能优化 | ✅ |
+| 27 | `demo/03-core-concepts/27-memory-management.js` | 内存管理 | ✅ |
 
-TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-es6-plus-syntax-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-async-error-handling-ts-comparison.ts` · `27-optimization-performance-ts-comparison.ts` · `28-memory-management-ts-comparison.ts`
+TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-es6-plus-syntax-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-optimization-performance-ts-comparison.ts` · `27-memory-management-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -93,13 +92,12 @@ TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-compariso
 **23 Proxy 与 Reflect** — Proxy 陷阱、Reflect 方法、元编程模式
 **24 高级函数模式** — 柯里化、组合、偏应用、防抖节流、蹦床、记忆化
 **25 继承模式** — 组合优于继承、混入、策略模式、观察者模式、模板方法、访问者模式
-**26 异步错误处理** — Promise 错误、async/await 错误、熔断器、重试模式
-**27 性能优化** — 尾调用优化、记忆化、惰性求值、事件循环优化、批处理
-**28 内存管理** — WeakRef、FinalizationRegistry、内存泄漏、对象池、GC 基础
+**26 性能优化** — 尾调用优化、记忆化、惰性求值、事件循环优化、批处理
+**27 内存管理** — WeakRef、FinalizationRegistry、内存泄漏、对象池、GC 基础
 
 ---
 
-## 📁 Stage 4: 异步编程 (29-33)
+## 📁 Stage 4: 异步编程 (29-34)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
@@ -108,8 +106,9 @@ TS 对比: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-compariso
 | 31 | `demo/04-asynchronous/31-async-await.js` | Async/Await | ✅ |
 | 32 | `demo/04-asynchronous/32-modules.js` | ES Modules | ✅ |
 | 33 | `demo/04-asynchronous/33-fetch-api.js` | Fetch API | ✅ |
+| 34 | `demo/04-asynchronous/34-async-error-handling.js` | 异步错误处理 | ✅ |
 
-TS 对比: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-comparison.ts` · `31-async-await-ts-comparison.ts` · `32-modules-ts-comparison.ts` · `33-fetch-api-ts-comparison.ts`
+TS 对比: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-comparison.ts` · `31-async-await-ts-comparison.ts` · `32-modules-ts-comparison.ts` · `33-fetch-api-ts-comparison.ts` · `34-async-error-handling-ts-comparison.ts`
 
 ### 知识点清单
 
@@ -117,62 +116,60 @@ TS 对比: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-compari
 **30 Promise** — 创建与链式调用、错误处理、Promise.all/race/allSettled/any
 **31 Async/Await** — async 函数、await、try/catch 错误处理、并行 vs 串行
 **32 模块** — import/export、默认导出 vs 命名导出、动态导入
-**33 Fetch API** — fetch 基础、Request/Response、Headers、错误处理
+**33 Fetch API** — fetch 础、Request/Response、Headers、错误处理
+**34 异步错误处理** — Promise 错误、async/await 错误、熔断器、重试模式
 
 ---
 
-## 📁 Stage 5: 浏览器与 DOM (34-37)
+## 📁 Stage 5: 浏览器与 DOM (35-38)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
-| 34 | `demo/05-browser-dom/34-dom-basics.js` | DOM 基础 | ✅ |
-| 35 | `demo/05-browser-dom/35-dom-manipulation.js` | DOM 操作 | ✅ |
-| 36 | `demo/05-browser-dom/36-events.js` | 事件处理 | ✅ |
-| 37 | `demo/05-browser-dom/37-forms-validation.js` | 表单与验证 | ✅ |
+| 35 | `demo/05-browser-dom/35-dom-basics.js` | DOM 基础 | ✅ |
+| 36 | `demo/05-browser-dom/36-dom-manipulation.js` | DOM 操作 | ✅ |
+| 37 | `demo/05-browser-dom/37-events.js` | 事件处理 | ✅ |
+| 38 | `demo/05-browser-dom/38-forms-validation.js` | 表单与验证 | ✅ |
 
-TS 对比: `34-dom-basics-ts-comparison.ts` · `35-dom-manipulation-ts-comparison.ts` · `36-events-ts-comparison.ts` · `37-forms-validation-ts-comparison.ts`
+TS 对比: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-comparison.ts` · `37-events-ts-comparison.ts` · `38-forms-validation-ts-comparison.ts`
 
 ### 知识点清单
 
-**34 DOM 基础** — DOM 树、节点类型、选择器(getElementById/querySelector)、遍历
-**35 DOM 操作** — 创建/插入/删除节点、修改属性与样式、DocumentFragment、性能优化
-**36 事件处理** — addEventListener、事件冒泡/捕获、事件委托、自定义事件
-**37 表单与验证** — 表单元素、Constraint Validation API、自定义验证、表单提交
+**35 DOM 基础** — DOM 树、节点类型、选择器(getElementById/querySelector)、遍历
+**36 DOM 操作** — 创建/插入/删除节点、修改属性与样式、DocumentFragment、性能优化
+**37 事件处理** — addEventListener、事件冒泡/捕获、事件委托、自定义事件
+**38 表单与验证** — 表单元素、Constraint Validation API、自定义验证、表单提交
 
 ---
 
-## 📁 Stage 6: 高级主题 (38-50)
+## 📁 Stage 6: 高级主题 (39-49)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
-| 38 | `demo/06-advanced/38-es2022-plus-features.js` | ES2022+ 新特性 | ✅ |
 | 39 | `demo/06-advanced/39-debugging-testing.js` | 调试与测试 | ✅ |
-| 40 | `demo/06-advanced/40-memory-management.js` | 内存管理 | ✅ |
-| 41 | `demo/06-advanced/41-typed-arrays.js` | 类型化数组 | ✅ |
-| 42 | `demo/06-advanced/42-intl-api.js` | 国际化 API | ✅ |
-| 43 | `demo/06-advanced/43-storage-network.js` | 存储与网络 | ✅ |
-| 44 | `demo/06-advanced/44-design-patterns.js` | 设计模式 | ✅ |
-| 45 | `demo/06-advanced/45-web-apis.js` | Web APIs | ✅ |
-| 46 | `demo/06-advanced/46-performance.js` | 性能优化 | ✅ |
-| 47 | `demo/06-advanced/47-typescript-advanced.js` | TypeScript 高级特性 | ✅ |
-| 48 | `demo/06-advanced/48-security.js` | 安全最佳实践 | ✅ |
-| 49 | `demo/06-advanced/49-build-tools.js` | 构建工具集成 | ✅ |
-| 50 | `demo/06-advanced/50-reserved.js` | 预留扩展 | ✅ |
+| 40 | `demo/06-advanced/40-typed-arrays.js` | 类型化数组 | ✅ |
+| 41 | `demo/06-advanced/41-intl-api.js` | 国际化 API | ✅ |
+| 42 | `demo/06-advanced/42-storage-network.js` | 存储与网络 | ✅ |
+| 43 | `demo/06-advanced/43-design-patterns.js` | 设计模式 | ✅ |
+| 44 | `demo/06-advanced/44-web-apis.js` | Web APIs | ✅ |
+| 45 | `demo/06-advanced/45-performance.js` | 性能优化 | ✅ |
+| 46 | `demo/06-advanced/46-typescript-advanced.js` | TypeScript 高级特性 | ✅ |
+| 47 | `demo/06-advanced/47-security.js` | 安全最佳实践 | ✅ |
+| 48 | `demo/06-advanced/48-build-tools.js` | 构建工具集成 | ✅ |
+| 49 | `demo/06-advanced/49-reserved.js` | 预留扩展 | ✅ |
 
-TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-ts-comparison.ts` · `40-memory-management-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
+TS 对比: `39-debugging-testing-ts-comparison.ts` · `40-typed-arrays-ts-comparison.ts` · `41-intl-api-ts-comparison.ts` · `42-storage-network-ts-comparison.ts` · `43-design-patterns-ts-comparison.ts` · `44-web-apis-ts-comparison.ts` · `45-performance-ts-comparison.ts` · `46-typescript-advanced-ts-comparison.ts` · `47-security-ts-comparison.ts` · `48-build-tools-ts-comparison.ts` · `49-reserved-ts-comparison.ts`
 
 ### 知识点清单
 
 **38 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、using/await using) · Stage 3 (Temporal API)
 **39 调试与测试** — console 方法、debugger、断点、单元测试基础
-**40 内存管理** — 内存生命周期、垃圾回收算法、内存泄漏检测与预防、WeakMap/WeakSet、WeakRef、FinalizationRegistry
-**41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
-**42 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
-**43 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
-**44 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
-**45 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
-**46 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
-**47 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
-**48 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
-**49 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
-**50 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
+**40 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
+**41 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
+**42 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
+**43 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
+**44 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
+**45 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
+**46 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
+**47 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
+**48 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
+**49 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
