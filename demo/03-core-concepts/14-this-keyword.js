@@ -932,8 +932,8 @@ console.log("\n=== this Keyword Demo Complete ===");
      };
    }
 
-📘 See related: 06-functions.js (call/apply/bind)
-📘 See related: 23-classes.js (this in classes)
+📘 See related: 07-functions.js (call/apply/bind)
+📘 See related: 16-classes.js (this in classes)
 */
 // ============================================================================
 // CROSS-REFERENCES

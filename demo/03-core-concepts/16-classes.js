@@ -1088,7 +1088,7 @@ console.log("\n=== Classes Demo Complete ===");
    }
 
 📘 See 16-classes-ts-comparison.ts for detailed TypeScript examples!
-📘 See related: 13-prototypes-inheritance.js for prototype relationship
+📘 See related: 15-prototypes-inheritance.js for prototype relationship
 */
 // ============================================================================
 // CROSS-REFERENCES
