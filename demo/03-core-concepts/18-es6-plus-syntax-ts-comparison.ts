@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: ES6+ Syntax Features Comparison
-// 📘 For JavaScript examples, see: 18-es6-plus-syntaxES6+ Syntax Comparison
+// 📘 For JavaScript examples, see: 18-es6-plus-syntax.js
 // This file demonstrates TypeScript-specific typing for modern ES6+ features
 
 export {};

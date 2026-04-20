@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Async Error Handling Comparison
-// 📘 For JavaScript examples, see: 26-async-error-handling.js
+// 📘 For JavaScript examples, see: 34-async-error-handling.js
 // This file demonstrates TypeScript-specific async error handling features
 
 export {};

@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Forms and Validation Comparison
-// 📘 For JavaScript examples, see: 37-forms-validation.js
+// 📘 For JavaScript examples, see: 38-forms-validation.js
 // This file demonstrates TypeScript-specific type features for forms and validation
 
 export {}; // Make this file a module to avoid global scope conflicts

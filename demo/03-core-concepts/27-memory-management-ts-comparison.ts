@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Memory Management Comparison
-// 📘 For JavaScript examples, see: 28-memory-management.js
+// 📘 For JavaScript examples, see: 27-memory-management.js
 // This file demonstrates TypeScript-specific memory management features
 
 export {};
