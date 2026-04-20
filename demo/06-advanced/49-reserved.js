@@ -519,8 +519,8 @@ console.log("8. TypeScript version compatibility");
 - Follow WinterCG for portable APIs
 
 📘 See related:
-- 33-es2022-plus-features.js (Recent ES features)
-- 27-modules.js (Module systems)
-- 42-performance.js (Performance optimization)
-- 43-typescript-advanced-ts-comparison.ts (TS advanced features)
+- 38-es2022-plus-features.js (Recent ES features)
+- 32-modules.js (Module systems)
+- 45-performance.js (Performance optimization)
+- 46-typescript-advanced-ts-comparison.ts (TS advanced features)
 */

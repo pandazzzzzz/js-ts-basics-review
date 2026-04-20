@@ -824,7 +824,7 @@ console.log("\n=== Regular Expressions Demo Complete ===");
      return match ? parseInt(match[1]) : null;
    }
 
-📘 See related: 01-basics.js for string methods
+📘 See related: 01-variables.js for string methods
 📘 See related: 04-strings.js for string manipulation
 */
 // ============================================================================

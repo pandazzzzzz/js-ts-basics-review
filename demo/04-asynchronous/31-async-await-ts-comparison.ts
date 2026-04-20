@@ -700,5 +700,5 @@ console.log(`
 5. Sequential await when parallel is better
    - Use Promise.all for independent operations
 
-📘 See 26-async-await.js for JavaScript fundamentals!
+📘 See 31-async-await.js for JavaScript fundamentals!
 `);

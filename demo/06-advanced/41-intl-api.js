@@ -778,6 +778,6 @@ console.log("- Intl.ListFormat.formatToParts()");
 
 📘 See related:
 - 04-strings.js (localeCompare)
-- 10-date-time.js (Date formatting)
-- 05-arrays.js (Sorting)
+- 12-date-time.js (Date formatting)
+- 06-arrays.js (Sorting)
 */

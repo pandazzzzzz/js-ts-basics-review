@@ -809,6 +809,6 @@ console.log("  Fix: Use conditional checks, early returns for normal flows.");
 - Set up error monitoring (Sentry, Rollbar, etc.)
 
 📘 See related:
-- 12-error-handling.js (Error handling patterns)
-- 28-events.js (Event debugging)
+- 20-error-handling.js (Error handling patterns)
+- 37-events.js (Event debugging)
 */

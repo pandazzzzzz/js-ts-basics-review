@@ -223,7 +223,7 @@ async function loadModule(): Promise<void> {
   console.log("\n=== Dynamic Imports ===");
 
   // Dynamic import with type assertion
-  const module = await import("./27-modules.js") as {
+  const module = await import("./32-modules.js") as {
     default?: unknown;
     [key: string]: unknown;
   };
@@ -604,5 +604,5 @@ console.log(`
 5. Mixing CommonJS and ES modules
    - Stick to one module system
 
-📘 See 27-modules.js for JavaScript fundamentals!
+📘 See 32-modules.js for JavaScript fundamentals!
 `);

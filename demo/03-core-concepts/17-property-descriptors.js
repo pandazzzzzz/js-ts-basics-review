@@ -809,7 +809,7 @@ console.log("\n=== Property Descriptors Demo Complete ===");
      }
    }
 
-📘 See related: 07-objects.js for basic getter/setter examples
+📘 See related: 08-objects.js for basic getter/setter examples
 📘 See related: 23-proxy-reflect.js for Proxy interception of descriptors
 */
 // ============================================================================

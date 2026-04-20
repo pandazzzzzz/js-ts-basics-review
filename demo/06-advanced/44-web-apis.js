@@ -599,7 +599,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 📘 See related:
-- 28-fetch-api.js (Network requests)
-- 31-events.js (Event handling)
-- 39-storage-network.js (Storage APIs)
+- 33-fetch-api.js (Network requests)
+- 37-events.js (Event handling)
+- 42-storage-network.js (Storage APIs)
 */

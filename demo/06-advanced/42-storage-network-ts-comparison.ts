@@ -886,4 +886,4 @@ console.log("  ✅ Type custom event handlers");
 console.log("  ✅ Handle connection states with types");
 console.log("  ✅ Create reusable typed hooks");
 
-console.log("\n📘 See 39-storage-network.js for detailed History API and SSE examples!");
+console.log("\n📘 See 42-storage-network.js for detailed History API and SSE examples!");

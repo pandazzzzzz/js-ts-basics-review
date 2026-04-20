@@ -42,7 +42,7 @@ console.log("1. Basic GET Request:");
 
 const API_BASE = "https://jsonplaceholder.typicode.com";
 
-// Method 1: Using Promise chains (matches file 25-promises.js style)
+// Method 1: Using Promise chains (matches file 30-promises.js style)
 fetch(`${API_BASE}/posts/1`)
   .then(response => {
     console.log("   Response received, status:", response.status);
@@ -1361,9 +1361,9 @@ pitfall_memoryLeak();
  * 10. Create API wrapper for consistent error handling
  *
  * Related Files:
- * - 25-promises.js: Promise fundamentals
- * - 26-async-await.js: Async/await patterns
- * - 27-modules.js: Module organization for API clients
+ * - 30-promises.js: Promise fundamentals
+ * - 31-async-await.js: Async/await patterns
+ * - 32-modules.js: Module organization for API clients
  */
 
 console.log("\n=== Best Practices Summary ===");
@@ -1382,9 +1382,9 @@ Fetch API Best Practices:
 10. Create API wrapper classes for consistent error handling
 
 See also:
-- 25-promises.js: Promise fundamentals and Promise.all/race/allSettled
-- 26-async-await.js: Async/await syntax and error handling
-- 27-modules.js: Organizing API clients as modules
+- 30-promises.js: Promise fundamentals and Promise.all/race/allSettled
+- 31-async-await.js: Async/await syntax and error handling
+- 32-modules.js: Organizing API clients as modules
 `);
 
 // ============================================

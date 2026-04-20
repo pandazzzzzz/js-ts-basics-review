@@ -663,7 +663,7 @@ console.log("8. Environment variable exposure");
 - Enable source maps for debugging
 
 📘 See related:
-- 27-modules.js (ES Modules)
-- 42-performance.js (Performance optimization)
-- 33-es2022-plus-features.js (Dynamic imports)
+- 32-modules.js (ES Modules)
+- 45-performance.js (Performance optimization)
+- 38-es2022-plus-features.js (Dynamic imports)
 */

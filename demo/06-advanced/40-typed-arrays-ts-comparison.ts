@@ -613,4 +613,4 @@ console.log("  ✅ Create generic encoding utilities");
 console.log("  ✅ Handle encoding errors with try/catch");
 console.log("  ✅ Use type guards for binary data");
 
-console.log("\n📘 See 36-typed-arrays.js for detailed Encoding API examples!");
+console.log("\n📘 See 40-typed-arrays.js for detailed Encoding API examples!");

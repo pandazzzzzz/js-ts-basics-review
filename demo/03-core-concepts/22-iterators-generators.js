@@ -1028,6 +1028,6 @@ console.log(`
 📘 See related files for additional patterns:
 
 Iterators & Generators:
-- 27-optimization-performance.js (lazy evaluation with generators)
-- 28-memory-management.js (large data handling with generators)
+- 26-optimization-performance.js (lazy evaluation with generators)
+- 27-memory-management.js (large data handling with generators)
 `);

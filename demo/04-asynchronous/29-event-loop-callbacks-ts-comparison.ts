@@ -575,5 +575,5 @@ console.log(`
 5. Not using type guards for unions
    - TypeScript can't narrow automatically
 
-📘 See 24-event-loop-callbacks.js for JavaScript fundamentals!
+📘 See 29-event-loop-callbacks.js for JavaScript fundamentals!
 `);

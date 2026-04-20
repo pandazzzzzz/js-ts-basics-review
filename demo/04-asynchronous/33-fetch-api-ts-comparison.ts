@@ -868,7 +868,7 @@ console.log(`
    - Response: the HTTP response
    - response.json(): Promise<unknown> with body data
 
-📘 See 28-fetch-api.js for JavaScript fundamentals!
+📘 See 33-fetch-api.js for JavaScript fundamentals!
 `);
 
 
@@ -1080,4 +1080,4 @@ console.log("  ✅ Create typed wrapper functions");
 console.log("  ✅ Use AbortSignal.timeout() when available");
 console.log("  ✅ Combine signals with type safety");
 
-console.log("\n📘 See 28-fetch-api.js for detailed AbortController examples!");
+console.log("\n📘 See 33-fetch-api.js for detailed AbortController examples!");

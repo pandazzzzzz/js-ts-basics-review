@@ -320,7 +320,7 @@ console.log("- Caching and memoization");
 console.log("- Virtual objects and lazy loading");
 console.log("- Data binding and observables");
 
-// See 27-proxy.js for more detailed coverage
+// See 23-proxy-reflect.js for more detailed coverage
 
 // ============================================
 // Section 5: Symbol Metadata
@@ -581,7 +581,7 @@ console.log("8. Reflect vs Object method differences");
 📘 See related:
 - 01-variables.js (Type checking fundamentals)
 - 06-arrays.js (Array type checking)
-- 26-iterators.js (Symbol.iterator)
-- 27-proxy.js (Proxy in depth)
-- 28-decorators.js (Decorators in TypeScript)
+- 22-iterators-generators.js (Symbol.iterator)
+- 23-proxy-reflect.js (Proxy in depth)
+- 18-es6-plus-syntax.js (Decorators in TypeScript)
 */

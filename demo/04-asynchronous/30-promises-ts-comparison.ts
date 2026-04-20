@@ -568,5 +568,5 @@ console.log(`
    - any defeats type safety
    - unknown requires proper type checking
 
-📘 See 25-promises.js for JavaScript fundamentals!
+📘 See 30-promises.js for JavaScript fundamentals!
 `);
