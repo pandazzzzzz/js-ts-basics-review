@@ -141,10 +141,11 @@ TS 对比: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compariso
 
 ---
 
-## 📁 Stage 6: 高级主题 (39-49)
+## 📁 Stage 6: 高级主题 (38-49)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
+| 38 | `demo/06-advanced/38-es2022-plus-features.js` | ES2022+ 特性 | ✅ |
 | 39 | `demo/06-advanced/39-debugging-testing.js` | 调试与测试 | ✅ |
 | 40 | `demo/06-advanced/40-typed-arrays.js` | 类型化数组 | ✅ |
 | 41 | `demo/06-advanced/41-intl-api.js` | 国际化 API | ✅ |
@@ -157,7 +158,7 @@ TS 对比: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compariso
 | 48 | `demo/06-advanced/48-build-tools.js` | 构建工具集成 | ✅ |
 | 49 | `demo/06-advanced/49-reserved.js` | 预留扩展 | ✅ |
 
-TS 对比: `39-debugging-testing-ts-comparison.ts` · `40-typed-arrays-ts-comparison.ts` · `41-intl-api-ts-comparison.ts` · `42-storage-network-ts-comparison.ts` · `43-design-patterns-ts-comparison.ts` · `44-web-apis-ts-comparison.ts` · `45-performance-ts-comparison.ts` · `46-typescript-advanced-ts-comparison.ts` · `47-security-ts-comparison.ts` · `48-build-tools-ts-comparison.ts` · `49-reserved-ts-comparison.ts`
+TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-ts-comparison.ts` · `40-typed-arrays-ts-comparison.ts` · `41-intl-api-ts-comparison.ts` · `42-storage-network-ts-comparison.ts` · `43-design-patterns-ts-comparison.ts` · `44-web-apis-ts-comparison.ts` · `45-performance-ts-comparison.ts` · `46-typescript-advanced-ts-comparison.ts` · `47-security-ts-comparison.ts` · `48-build-tools-ts-comparison.ts` · `49-reserved-ts-comparison.ts`
 
 ### 知识点清单
 
