@@ -256,7 +256,7 @@ if (typeof value === "string") {
 | `Pick<T, K>` | Select properties | `Pick<User, 'id' \| 'name'>` |
 | `Omit<T, K>` | Remove properties | `Omit<User, 'email'>` |
 
-**See**: `demo/06-advanced/48-typescript-advanced-ts-comparison.ts`
+**See**: `demo/06-advanced/46-typescript-advanced-ts-comparison.ts`
 
 ### 13. Common Error Messages & Solutions
 
@@ -333,7 +333,7 @@ await using db = new DatabaseConnection();
 
 - **JavaScript**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**: 51 numbered demo files (01-51) in `demo/` folder, each with TypeScript comparison
+- **Practice Files**: 49 numbered demo files (01-49) in `demo/` folder, each with TypeScript comparison
 
 ---
 
