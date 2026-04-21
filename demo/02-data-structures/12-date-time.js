@@ -704,5 +704,5 @@ console.log("      - Plugin architecture");
    TS:  import { format, addDays } from 'date-fns'
    TS:  Most date libraries have full TypeScript support
 
-📘 See related: 08-objects.js (object methods), 27-fetch-api.js (timestamps)
+📘 See related: 08-objects.js (object methods), 33-fetch-api.js (timestamps)
 */

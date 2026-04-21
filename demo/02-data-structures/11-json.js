@@ -622,5 +622,5 @@ console.log("    Result:", parsedDate.created instanceof Date);
 5. UTILITY TYPES
    TS:  type Jsonify<T> = { /* Serializable version of T *\/ }
 
-📘 See related: 08-objects.js (objects), 27-fetch-api.js (network requests)
+📘 See related: 08-objects.js (objects), 33-fetch-api.js (network requests)
 */
