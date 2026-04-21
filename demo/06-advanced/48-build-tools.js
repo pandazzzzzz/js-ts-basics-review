@@ -1,5 +1,5 @@
 // Build Tools Integration Demo
-// 📘 For TypeScript comparison, see: 49-build-tools-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 48-build-tools-ts-comparison.ts
 // 📘 Webpack: https://webpack.js.org/
 // 📘 Vite: https://vitejs.dev/
 // 📌 Covers webpack, vite, code splitting, and production optimization
