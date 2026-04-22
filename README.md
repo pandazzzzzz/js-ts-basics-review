@@ -9,7 +9,7 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files and TypeScript co
 **Stage 3 (13-27)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy  
 **Stage 4 (29-34)**: Async — Event loop, Promises, async/await, modules, Fetch, async error handling  
 **Stage 5 (35-38)**: Browser & DOM — DOM basics, manipulation, events, forms  
-**Stage 6 (38-49)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
+**Stage 6 (39-49)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
 
 ## Progress
 

@@ -1014,7 +1014,7 @@ console.log("\n=== Function Patterns Advanced Demo Complete ===");
 📘 See related files:
 - 13-scope-closures.js (closures and scope)
 - 27-optimization-performance.js (performance)
-- 28-memory-management.js (memoization caches)
+- 27-memory-management.js (memoization caches)
 */
 
 // ============================================================================
@@ -1026,7 +1026,7 @@ console.log(`
 Function Patterns:
 - 13-scope-closures.js (closures and lexical scope)
 - 27-optimization-performance.js (memoization optimization)
-- 28-memory-management.js (object pooling)
+- 27-memory-management.js (object pooling)
 
 Design Patterns:
 - 25-inheritance-patterns.js (mixins, strategy, observer)

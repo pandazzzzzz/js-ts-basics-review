@@ -1147,7 +1147,7 @@ console.log("\n=== Performance Optimization Demo Complete ===");
 📘 See related files:
 - 22-iterators-generators.js (generators)
 - 24-function-patterns-advanced.js (memoization)
-- 28-memory-management.js (memory optimization)
+- 27-memory-management.js (memory optimization)
 */
 
 // ============================================================================
@@ -1158,6 +1158,6 @@ console.log(`
 
 Performance & Optimization:
 - 24-function-patterns-advanced.js (memoization, lazy evaluation)
-- 28-memory-management.js (garbage collection, object pooling)
+- 27-memory-management.js (garbage collection, object pooling)
 - 22-iterators-generators.js (generator-based streaming)
 `);

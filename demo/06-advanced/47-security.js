@@ -1161,6 +1161,6 @@ console.log("8. Mixed content (HTTP + HTTPS)");
 
 📘 See related:
 - 39-storage-network.js (Storage APIs)
-- 28-fetch-api.js (Network requests)
+- 33-fetch-api.js (Network requests)
 - 32-forms-validation.js (Form validation)
 */

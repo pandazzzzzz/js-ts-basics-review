@@ -1103,5 +1103,5 @@ Classes & Inheritance:
 
 Advanced Patterns:
 - 24-function-patterns-advanced.js (higher-order functions for classes)
-- 28-memory-management.js (object pooling)
+- 27-memory-management.js (object pooling)
 `);

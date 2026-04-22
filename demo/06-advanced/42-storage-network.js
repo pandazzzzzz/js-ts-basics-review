@@ -524,7 +524,7 @@ console.log("  ⚠️ Be careful with state size (browsers have limits)");
 console.log("  ⚠️ Handle initial page load separately\n");
 
 // ============================================
-// Section 5: Fetch Advanced (Complements 28-fetch-api.js)
+// Section 5: Fetch Advanced (Complements 33-fetch-api.js)
 // ============================================
 
 console.log("\n=== Fetch Advanced ===");

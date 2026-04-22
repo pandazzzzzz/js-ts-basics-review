@@ -141,7 +141,7 @@ TS 对比: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compariso
 
 ---
 
-## 📁 Stage 6: 高级主题 (38-49)
+## 📁 Stage 6: 高级主题 (39-49)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
