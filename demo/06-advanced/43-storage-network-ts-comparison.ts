@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Storage and Network Comparison
-// 📘 For JavaScript examples, see: 42-storage-network.js
+// 📘 For JavaScript examples, see: 43-storage-network.js
 // This file demonstrates TypeScript-specific type features for storage and network APIs
 
 export {}; // Make this file a module to avoid global scope conflicts
@@ -886,4 +886,4 @@ console.log("  ✅ Type custom event handlers");
 console.log("  ✅ Handle connection states with types");
 console.log("  ✅ Create reusable typed hooks");
 
-console.log("\n📘 See 42-storage-network.js for detailed History API and SSE examples!");
+console.log("\n📘 See 43-storage-network.js for detailed History API and SSE examples!");

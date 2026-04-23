@@ -48,7 +48,7 @@ const birthday = Temporal.PlainDate.from('1990-01-15');
 const age = today.since(birthday).years;
 `);
 
-// 2. Set Methods (already covered in 33-es2022-plus-features.js, ES2025)
+// 2. Set Methods (already covered in 39-es2022-plus-features.js, ES2025)
 
 // 3. Decorators (Stage 3)
 console.log("\nDecorators (Stage 3):");

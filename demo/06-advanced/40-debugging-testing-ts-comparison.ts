@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Debugging and Testing Comparison
-// 📘 For JavaScript examples, see: 39-debugging-testing.js
+// 📘 For JavaScript examples, see: 40-debugging-testing.js
 // This file demonstrates TypeScript-specific debugging and testing features
 
 export {}; // Make this file a module to avoid global scope conflicts

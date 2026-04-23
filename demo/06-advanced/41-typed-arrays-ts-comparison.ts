@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: TypedArray and Binary Data Comparison
-// 📘 For JavaScript examples, see: 40-typed-arrays.js
+// 📘 For JavaScript examples, see: 41-typed-arrays.js
 // This file demonstrates TypeScript-specific type features for binary data
 
 export {}; // Make this file a module to avoid global scope conflicts
@@ -613,4 +613,4 @@ console.log("  ✅ Create generic encoding utilities");
 console.log("  ✅ Handle encoding errors with try/catch");
 console.log("  ✅ Use type guards for binary data");
 
-console.log("\n📘 See 40-typed-arrays.js for detailed Encoding API examples!");
+console.log("\n📘 See 41-typed-arrays.js for detailed Encoding API examples!");

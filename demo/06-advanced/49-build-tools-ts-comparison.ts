@@ -1,5 +1,5 @@
 // TypeScript vs JavaScript: Build Tools Comparison
-// 📘 For JavaScript examples, see: 48-build-tools.js
+// 📘 For JavaScript examples, see: 49-build-tools.js
 // This file demonstrates TypeScript-specific type features for build tools
 
 export {}; // Make this file a module

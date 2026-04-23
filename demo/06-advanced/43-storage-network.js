@@ -1396,7 +1396,7 @@ Fetch:
 - Cache responses when appropriate
 
 📘 See related:
-- 22-fetch-api.js (Basic fetch)
-- 36-typed-arrays.js (Binary data)
-- 12-error-handling.js (Error handling)
+- 33-fetch-api.js (Basic fetch)
+- 41-typed-arrays.js (Binary data)
+- 20-error-handling.js (Error handling)
 */
