@@ -144,7 +144,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 
 ⚠️ **Critical**: `??=` preserves `0`, `""`, `false` unlike `||=`
 
-**See**: `demo/06-advanced/38-es2022-plus-features.js`
+**See**: `demo/06-advanced/39-es2022-plus-features.js`
 
 ### 8. Variable Declarations (Same in Both)
 
@@ -325,7 +325,7 @@ await using db = new DatabaseConnection();
 // db[Symbol.asyncDispose]() called at block end
 ```
 
-**See**: `demo/06-advanced/38-es2022-plus-features.js`
+**See**: `demo/06-advanced/39-es2022-plus-features.js`
 
 ---
 

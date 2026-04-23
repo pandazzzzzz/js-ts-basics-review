@@ -1160,7 +1160,7 @@ console.log("8. Mixed content (HTTP + HTTPS)");
 - Follow principle of least privilege
 
 📘 See related:
-- 39-storage-network.js (Storage APIs)
+- 43-storage-network.js (Storage APIs)
 - 33-fetch-api.js (Network requests)
 - 32-forms-validation.js (Form validation)
 */

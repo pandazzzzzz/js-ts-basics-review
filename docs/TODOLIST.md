@@ -141,36 +141,36 @@ TS 对比: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compariso
 
 ---
 
-## 📁 Stage 6: 高级主题 (39-49)
+## 📁 Stage 6: 高级主题 (39-50)
 
 | # | 文件 | 主题 | 状态 |
 |---|------|------|------|
-| 38 | `demo/06-advanced/38-es2022-plus-features.js` | ES2022+ 特性 | ✅ |
-| 39 | `demo/06-advanced/39-debugging-testing.js` | 调试与测试 | ✅ |
-| 40 | `demo/06-advanced/40-typed-arrays.js` | 类型化数组 | ✅ |
-| 41 | `demo/06-advanced/41-intl-api.js` | 国际化 API | ✅ |
-| 42 | `demo/06-advanced/42-storage-network.js` | 存储与网络 | ✅ |
-| 43 | `demo/06-advanced/43-design-patterns.js` | 设计模式 | ✅ |
-| 44 | `demo/06-advanced/44-web-apis.js` | Web APIs | ✅ |
-| 45 | `demo/06-advanced/45-performance.js` | 性能优化 | ✅ |
-| 46 | `demo/06-advanced/46-typescript-advanced.js` | TypeScript 高级特性 | ✅ |
-| 47 | `demo/06-advanced/47-security.js` | 安全最佳实践 | ✅ |
-| 48 | `demo/06-advanced/48-build-tools.js` | 构建工具集成 | ✅ |
-| 49 | `demo/06-advanced/49-reserved.js` | 预留扩展 | ✅ |
+| 39 | `demo/06-advanced/39-es2022-plus-features.js` | ES2022+ 特性 | ✅ |
+| 40 | `demo/06-advanced/40-debugging-testing.js` | 调试与测试 | ✅ |
+| 41 | `demo/06-advanced/41-typed-arrays.js` | 类型化数组 | ✅ |
+| 42 | `demo/06-advanced/42-intl-api.js` | 国际化 API | ✅ |
+| 43 | `demo/06-advanced/43-storage-network.js` | 存储与网络 | ✅ |
+| 44 | `demo/06-advanced/44-design-patterns.js` | 设计模式 | ✅ |
+| 45 | `demo/06-advanced/45-web-apis.js` | Web APIs | ✅ |
+| 46 | `demo/06-advanced/46-performance.js` | 性能优化 | ✅ |
+| 47 | `demo/06-advanced/47-typescript-advanced.js` | TypeScript 高级特性 | ✅ |
+| 48 | `demo/06-advanced/48-security.js` | 安全最佳实践 | ✅ |
+| 49 | `demo/06-advanced/49-build-tools.js` | 构建工具集成 | ✅ |
+| 50 | `demo/06-advanced/50-reserved.js` | 预留扩展 | ✅ |
 
-TS 对比: `38-es2022-plus-features-ts-comparison.ts` · `39-debugging-testing-ts-comparison.ts` · `40-typed-arrays-ts-comparison.ts` · `41-intl-api-ts-comparison.ts` · `42-storage-network-ts-comparison.ts` · `43-design-patterns-ts-comparison.ts` · `44-web-apis-ts-comparison.ts` · `45-performance-ts-comparison.ts` · `46-typescript-advanced-ts-comparison.ts` · `47-security-ts-comparison.ts` · `48-build-tools-ts-comparison.ts` · `49-reserved-ts-comparison.ts`
+TS 对比: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
 
 ### 知识点清单
 
-**38 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、using/await using) · Stage 3 (Temporal API)
-**39 调试与测试** — console 方法、debugger、断点、单元测试基础
-**40 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
-**41 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
-**42 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
-**43 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
-**44 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
-**45 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
-**46 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
-**47 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
-**48 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
-**49 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
+**39 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、using/await using) · Stage 3 (Temporal API)
+**40 调试与测试** — console 方法、debugger、断点、单元测试基础
+**41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
+**42 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
+**43 存储与网络** — localStorage/sessionStorage、IndexedDB、XMLHttpRequest、WebSocket
+**44 设计模式** — 工厂模式、单例模式、观察者模式、策略模式、装饰器模式
+**45 Web APIs** — Service Workers、Web Workers、Intersection Observer、Geolocation、WebSocket
+**46 性能优化** — Performance API、防抖节流、懒加载、虚拟滚动、代码分割
+**47 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
+**48 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
+**49 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
+**50 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性

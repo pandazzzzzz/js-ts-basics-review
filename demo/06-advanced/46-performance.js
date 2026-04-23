@@ -489,7 +489,7 @@ console.log("2. Real-world conditions - test on low-end devices and slow network
 - Split code by routes and features
 
 📘 See related:
-- 35-memory-gc.js (Memory management)
-- 41-web-apis.js (Intersection Observer)
-- 33-es2022-plus-features.js (Dynamic imports)
+- 27-memory-management.js (Memory management)
+- 45-web-apis.js (Intersection Observer)
+- 39-es2022-plus-features.js (Dynamic imports)
 */

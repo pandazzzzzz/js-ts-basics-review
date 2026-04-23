@@ -1,5 +1,5 @@
 // Reserved for Future Extensions Demo
-// 📘 For TypeScript comparison, see: 49-reserved-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 50-reserved-ts-comparison.ts
 // 📘 TC39 Proposals: https://github.com/tc39/proposals
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
@@ -519,8 +519,8 @@ console.log("8. TypeScript version compatibility");
 - Follow WinterCG for portable APIs
 
 📘 See related:
-- 38-es2022-plus-features.js (Recent ES features)
+- 39-es2022-plus-features.js (Recent ES features)
 - 32-modules.js (Module systems)
-- 45-performance.js (Performance optimization)
-- 46-typescript-advanced-ts-comparison.ts (TS advanced features)
+- 46-performance.js (Performance optimization)
+- 47-typescript-advanced-ts-comparison.ts (TS advanced features)
 */

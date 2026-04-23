@@ -1,5 +1,5 @@
 // ES2022+ Features Demo
-// 📘 For TypeScript comparison, see: 38-es2022-plus-features-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
 // 📌 Covers ES2021 ~ ES2025 important features

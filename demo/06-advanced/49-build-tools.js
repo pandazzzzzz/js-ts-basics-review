@@ -1,5 +1,5 @@
 // Build Tools Integration Demo
-// 📘 For TypeScript comparison, see: 48-build-tools-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 49-build-tools-ts-comparison.ts
 // 📘 Webpack: https://webpack.js.org/
 // 📘 Vite: https://vitejs.dev/
 // 📌 Covers webpack, vite, code splitting, and production optimization
@@ -664,6 +664,6 @@ console.log("8. Environment variable exposure");
 
 📘 See related:
 - 32-modules.js (ES Modules)
-- 45-performance.js (Performance optimization)
-- 38-es2022-plus-features.js (Dynamic imports)
+- 46-performance.js (Performance optimization)
+- 39-es2022-plus-features.js (Dynamic imports)
 */

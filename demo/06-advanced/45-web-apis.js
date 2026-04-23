@@ -601,5 +601,5 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 📘 See related:
 - 33-fetch-api.js (Network requests)
 - 37-events.js (Event handling)
-- 42-storage-network.js (Storage APIs)
+- 43-storage-network.js (Storage APIs)
 */

@@ -1,6 +1,6 @@
 # JS/TS Fundamentals Review
 
-JavaScript/TypeScript fundamentals with 49 numbered demo files and TypeScript comparison files.
+JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript comparison files.
 
 ## Structure
 
@@ -9,11 +9,11 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files and TypeScript co
 **Stage 3 (13-27)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy  
 **Stage 4 (29-34)**: Async — Event loop, Promises, async/await, modules, Fetch, async error handling  
 **Stage 5 (35-38)**: Browser & DOM — DOM basics, manipulation, events, forms  
-**Stage 6 (39-49)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
+**Stage 6 (39-50)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
 
 ## Progress
 
-✅ 49/49 files completed · 49 TypeScript comparisons  
+✅ 50/50 files completed · 50 TypeScript comparisons  
 ✅ ES2021-ES2025 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers)  
 ✅ Common Pitfalls & Best Practices sections in all advanced files
 
