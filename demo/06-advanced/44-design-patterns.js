@@ -1,4 +1,5 @@
 // Design Patterns Demo
+// 📘 For TypeScript comparison, see: 44-design-patterns-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
 // 📘 Patterns: https://www.patterns.dev/posts/classic-design-patterns
 // 📌 Covers common design patterns in JavaScript
