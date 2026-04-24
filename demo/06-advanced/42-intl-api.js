@@ -637,13 +637,13 @@ console.log("\n=== Intl.DurationFormat ===");
 
 // Intl.DurationFormat - Format durations (ES2024)
 // ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: Not yet supported (as of 2025)
-// - Firefox: Not yet supported
-// - Safari: Not yet supported
-// - Node.js: Not yet supported
+// - Chrome: 135+ (December 2024)
+// - Firefox: 136+ (February 2025)
+// - Safari: 18.1+ (January 2025)
+// - Node.js: 24+ (October 2024)
 // - Polyfill available: intl-durationformat (npm)
 
-console.log("⚠️ NOTE: Intl.DurationFormat is ES2024, limited runtime support.");
+console.log("Intl.DurationFormat is ES2024, modern runtime support available.");
 console.log("Expected syntax:");
 console.log(`
 const duration = {

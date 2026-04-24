@@ -424,6 +424,37 @@ console.log("  Sequentially awaiting dynamic imports (await A; await B) wastes t
 console.log("  Fix: Use Promise.all() to load independent modules in parallel: await Promise.all([import('./A'), import('./B')]);");
 
 // ============================================
+// Core Web Vitals (2025 Update)
+// ============================================
+
+console.log("\n=== Core Web Vitals (2025 Update) ===");
+
+// Core Web Vitals - Google's user-centric performance metrics
+// Updated in 2024: INP (Interaction to Next Paint) replaces FID
+console.log("\n📊 Core Web Vitals (2025):");
+console.log("1. LCP (Largest Contentful Paint) - Loading performance");
+console.log("   - Good: ≤2.5s, Needs improvement: ≤4.0s");
+console.log("2. INP (Interaction to Next Paint) - Interactivity (replacing FID)");
+console.log("   - Good: ≤200ms, Needs improvement: ≤500ms");
+console.log("   - FID was deprecated in March 2024, INP is the new official metric");
+console.log("3. CLS (Cumulative Layout Shift) - Visual stability");
+console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
+
+// INP (Interaction to Next Paint) observer example
+const inpObserver = new PerformanceObserver((list) => {
+  for (const entry of list.getEntries()) {
+    console.log(`🔄 INP: ${entry.duration.toFixed(2)}ms`);
+  }
+});
+
+inpObserver.observe({ entryTypes: ['event'] });
+
+console.log("\n💡 INP vs FID:");
+console.log("- FID only measured first input delay");
+console.log("- INP measures ALL interactions' latencies (best representation of responsiveness)");
+console.log("- INP considers 98th percentile of interactions");
+
+// ============================================
 // Best Practices
 // ============================================
 
