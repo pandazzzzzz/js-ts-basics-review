@@ -578,6 +578,28 @@ console.log("8. Reflect vs Object method differences");
 - dts-gen to generate .d.ts from .js
 - TypeScript ESLint for linting
 
+9. TYPESCRIPT VERSION UPDATES (2025)
+   TS 5.5 (June 2024):
+   - Explicit type annotations on catch variables (catch (e: unknown))
+   - Speed improvements in type checking
+   - Better error messages
+
+   TS 5.6 (September 2024):
+   - Iterator helper methods type support (ES2025)
+   - Better strict mode checks
+   - Improved type inference
+
+   TS 5.7 (Beta, 2025):
+   - Enhanced ECMAScript module support
+   - Better Node.js ESM interop
+   - Performance optimizations
+
+   Key features to use:
+   - satisfies operator (TS 4.9+): Preserves literal types
+   - const type parameters (TS 5.0+): Prevent type widening
+   - using declarations support (TS 5.2+): ES2025 feature
+   - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
+
 📘 See related:
 - 01-variables.js (Type checking fundamentals)
 - 06-arrays.js (Array type checking)
