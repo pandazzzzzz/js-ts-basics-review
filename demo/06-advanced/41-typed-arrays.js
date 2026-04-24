@@ -1,5 +1,5 @@
 // TypedArray and Binary Data Demo
-// 📘 For TypeScript comparison, see: 40-typed-arrays-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 41-typed-arrays-ts-comparison.ts
 // 📘 javascript.info Part 3 > "Binary data, files" > "ArrayBuffer, binary arrays"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays
 

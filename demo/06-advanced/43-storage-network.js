@@ -1,5 +1,5 @@
 // Storage and Advanced Network Requests Demo
-// 📘 For TypeScript comparison, see: 42-storage-network-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 43-storage-network-ts-comparison.ts
 // 📘 javascript.info Part 3 > "Storing data", "Network requests"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
 // ⚠️ Most content is browser-specific

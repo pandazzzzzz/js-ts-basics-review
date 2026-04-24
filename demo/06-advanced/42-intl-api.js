@@ -1,5 +1,5 @@
 // Intl Internationalization API Demo
-// 📘 For TypeScript comparison, see: 41-intl-api-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 42-intl-api-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl
 // 📘 javascript.info: "Intl" (brief mention)
 // 📌 ECMAScript Internationalization API
