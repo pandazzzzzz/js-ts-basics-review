@@ -599,31 +599,36 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-   View Transitions API (Chrome 111+, Safari 18+):
+   View Transitions API (Chrome 111+, Safari 18.0+):
    - Smooth animated transitions between page states
    - document.startViewTransition(() => updateDOM())
    - Great for single-page app navigation
    - CSS: @keyframes for transition customization
+   - ⚠️ Firefox support behind flag in nightly builds
 
-   Popover API (Chrome 114+, Safari 17+):
+   Popover API (Chrome 114+, Safari 16.4+):
    - Built-in popover without custom positioning
    - <button popovertarget="menu">
    - <div id="menu" popover>
    - No need for tooltip/menu libraries
    - Automatic focus management and accessibility
+   - Implicit ARIA attributes for better screen reader support
 
-   CSS Container Queries (Chrome 105+, Safari 16+):
+   CSS Container Queries (Chrome 105+, Safari 16.4+):
    - Responsive design based on parent container
    - @container (max-width: 400px) { ... }
    - Better for component-based design
    - More flexible than media queries
+   - Requires container-type: inline-size on parent
 
    Web Components improvements:
-   - Declarative shadow DOM (Chrome 90+)
-   - Element internals API
-   - Better form integration
+   - Declarative shadow DOM (Chrome 90+, Safari 16.4+)
+   - Element internals API (Chrome 90+, Safari 16.4+)
+   - Better form integration (Chrome 90+, Safari 16.4+)
 
    Note: Check caniuse.com for current browser support
+   - Some features may require vendor prefixes or polyfills
+   - Firefox support varies, check feature flags
 
 📘 See related:
 - 33-fetch-api.js (Network requests)

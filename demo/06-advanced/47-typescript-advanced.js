@@ -578,27 +578,34 @@ console.log("8. Reflect vs Object method differences");
 - dts-gen to generate .d.ts from .js
 - TypeScript ESLint for linting
 
-9. TYPESCRIPT VERSION UPDATES (2025)
-   TS 5.5 (June 2024):
+9. TYPESCRIPT VERSION UPDATES (2024-2025)
+   TS 5.5 (August 2024):
    - Explicit type annotations on catch variables (catch (e: unknown))
-   - Speed improvements in type checking
+   - Inferred type predicates for JSDoc
+   - Performance improvements
    - Better error messages
 
-   TS 5.6 (September 2024):
+   TS 5.6 (November 2024):
    - Iterator helper methods type support (ES2025)
    - Better strict mode checks
    - Improved type inference
+   - Regular expression flags for improved consistency
 
-   TS 5.7 (Beta, 2025):
-   - Enhanced ECMAScript module support
-   - Better Node.js ESM interop
-   - Performance optimizations
+   TS 6.0 (Upcoming):
+   - Last JavaScript-based TypeScript compiler
+   - Future versions will use Go-based rewrite (typescript-go)
+   - Major performance improvements expected
+
+   ⚠️ MIGRATION NOTE: TypeScript 6.0+ will be Go-based
+   - Check microsoft/typescript-go for development progress
+   - Plan migration path for large codebases
 
    Key features to use:
    - satisfies operator (TS 4.9+): Preserves literal types
    - const type parameters (TS 5.0+): Prevent type widening
    - using declarations support (TS 5.2+): ES2025 feature
    - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
+   - Decorator metadata (TS 5.0+): Requires 'emitDecoratorMetadata: true'
 
 📘 See related:
 - 01-variables.js (Type checking fundamentals)

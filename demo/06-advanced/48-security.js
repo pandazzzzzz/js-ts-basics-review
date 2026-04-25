@@ -1002,6 +1002,26 @@ console.log("  ✅ Use key wrapping for key storage");
 console.log("  ⚠️ Never hardcode keys in source code");
 console.log("  ⚠️ Rotate keys regularly");
 
+console.log("\nPassword Hashing Recommendations (2025):");
+console.log("  ✅ PREFER: Argon2id for new implementations");
+console.log("     - Winner of 2015 Password Hashing Competition");
+console.log("     - Configurable: time_cost=2, memory_cost=19456, parallelism=1");
+console.log("     - Resistant to GPU and side-channel attacks");
+
+console.log("  ✅ ACCEPTABLE: PBKDF2 with high iterations");
+console.log("     - PBKDF2-HMAC-SHA256: 600,000+ iterations");
+console.log("     - PBKDF2-HMAC-SHA512: 220,000+ iterations");
+console.log("     - Well-tested, widely available");
+
+console.log("  ⚠️ LEGACY: bcrypt (consider migration)");
+console.log("     - Fixed work factor limits security");
+console.log("     - Still acceptable but Argon2id preferred");
+
+console.log("  Implementation:");
+console.log("  - Node.js 21.2+: Argon2id available natively");
+console.log("  - Earlier versions: Use argon2 npm package");
+console.log("  - Browsers: Use argon2 package via polyfill");
+
 console.log("\nHashing:");
 console.log("  ✅ Use SHA-256 or stronger");
 console.log("  ✅ Use salt for password hashing");

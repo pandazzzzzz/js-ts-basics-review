@@ -180,14 +180,15 @@ console.log(webpackEnvConfig);
 
 console.log("\n=== Vite Configuration ===");
 
-// Vite 5.x Features (2024)
-console.log("\nVite 5.x New Features:");
-console.log("1. Faster dev server startup (up to 10x faster than Vite 4)");
-console.log("2. Improved CSS handling with Lightning CSS");
-console.log("3. Better TypeScript support with faster type checking");
-console.log("4. Enhanced ESM support for Node.js");
-console.log("5. Improved build performance with Rollup 4");
-console.log("6. Better error messages and debugging");
+// Vite 5.x Features (2023-2024)
+console.log("\nVite 5.x Key Features:");
+console.log("1. Powered by Rollup 4 for improved build performance");
+console.log("2. Faster HMR with optimized dependency pre-bundling");
+console.log("3. Enhanced CSS handling with Lightning CSS (opt-in transformer)");
+console.log("4. Better TypeScript support with faster type checking");
+console.log("5. Improved ESM support for Node.js compatibility");
+console.log("6. Better error messages and debugging experience");
+console.log("7. Cleaned up deprecated APIs and streamlined configuration");
 
 // Basic vite.config.js
 const viteBasicConfig = `
@@ -216,6 +217,27 @@ export default defineConfig({
 
 console.log("Basic vite config:");
 console.log(viteBasicConfig);
+
+// Lightning CSS is opt-in
+const viteLightningConfig = `
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  css: {
+    // Optional: Use Lightning CSS for processing
+    transformer: 'lightningcss',
+    lightningcss: {
+      targets: {
+        chrome: 111,
+        safari: 16
+      }
+    }
+  }
+});
+`;
+
+console.log("\nVite with Lightning CSS (opt-in):");
+console.log(viteLightningConfig);
 
 // Vite with React
 const viteReactConfig = `

@@ -440,19 +440,39 @@ console.log("   - FID was deprecated in March 2024, INP is the new official metr
 console.log("3. CLS (Cumulative Layout Shift) - Visual stability");
 console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
-// INP (Interaction to Next Paint) observer example
-const inpObserver = new PerformanceObserver((list) => {
-  for (const entry of list.getEntries()) {
-    console.log(`🔄 INP: ${entry.duration.toFixed(2)}ms`);
-  }
-});
-
-inpObserver.observe({ entryTypes: ['event'] });
+// INP (Interaction to Next Paint) measurement
+// ⚠️ NOTE: The PerformanceObserver with 'event' entry type is experimental
+// For production measurement, use the web-vitals library
 
 console.log("\n💡 INP vs FID:");
 console.log("- FID only measured first input delay");
 console.log("- INP measures ALL interactions' latencies (best representation of responsiveness)");
 console.log("- INP considers 98th percentile of interactions");
+console.log("- Measures clicks, taps, and keyboard interactions");
+console.log("- Excludes scroll and drag interactions");
+
+console.log("\n✅ INP Measurement Best Practices:");
+console.log("- Use web-vitals library: npm install web-vitals");
+console.log("- INP is 98th percentile of all interaction latencies");
+console.log("- Measures clicks, taps, and keyboard interactions");
+console.log("- Excludes scroll and drag interactions");
+
+const inpCodeExample = `
+// Production-ready INP measurement using web-vitals:
+// import { onINP } from 'web-vitals';
+
+// onINP((metric) => {
+//   console.log(\`INP: \${metric.value}ms\`);
+//   // Send to analytics
+// }, {
+//   reportAllChanges: true
+// });
+
+// Fallback for browsers without INP support:
+// Use FID (First Input Delay) as fallback
+`;
+
+console.log(inpCodeExample);
 
 // ============================================
 // Best Practices
