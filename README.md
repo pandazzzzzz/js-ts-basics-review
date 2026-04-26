@@ -2,25 +2,60 @@
 
 JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript comparison files.
 
+## Requirements
+
+- Node.js 18+ (for ES2022+ features)
+- TypeScript 5+ (for comparison files)
+
+## Quick Start
+
+```bash
+# Run a JavaScript demo file
+node demo/01-basics/01-variables.js
+node demo/02-data-structures/06-arrays.js
+node demo/06-advanced/39-es2022-plus-features.js
+
+# Run TypeScript comparison files (requires ts-node)
+npx ts-node demo/01-basics/01-variables-ts-comparison.ts
+```
+
 ## Structure
 
-**Stage 1 (01-05)**: Basics — Variables, operators, control flow, strings, numbers  
-**Stage 2 (06-12)**: Data Structures — Arrays, functions, objects, destructuring, Map/Set, JSON, dates  
-**Stage 3 (13-27)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy  
-**Stage 4 (29-34)**: Async — Event loop, Promises, async/await, modules, Fetch, async error handling  
-**Stage 5 (35-38)**: Browser & DOM — DOM basics, manipulation, events, forms  
+**Stage 1 (01-05)**: Basics — Variables, operators, control flow, strings, numbers
+**Stage 2 (06-12)**: Data Structures — Arrays, functions, objects, destructuring, Map/Set, JSON, dates
+**Stage 3 (13-27)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy
+**Stage 4 (29-34)**: Async — Event loop, Promises, async/await, modules, Fetch, async error handling
+**Stage 5 (35-38)**: Browser & DOM — DOM basics, manipulation, events, forms
 **Stage 6 (39-50)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
 
 ## Progress
 
-✅ 50/50 files completed · 50 TypeScript comparisons  
-✅ ES2021-ES2025 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers)  
+✅ 50/50 files completed · 50 TypeScript comparisons
+✅ ES2021-ES2025 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers)
 ✅ Common Pitfalls & Best Practices sections in all advanced files
 
 ## Documentation
 
 - [TODOLIST.md](docs/TODOLIST.md) — Detailed roadmap
 - [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS reference
+
+## Audit Tools
+
+| Tool | Purpose | Location |
+|------|---------|----------|
+| js-fundamentals-review | JS/TS file pair validation | [js-fundamentals-review/](js-fundamentals-review/) |
+| basics-review | 01-basics folder analysis | [basics-review/](basics-review/) |
+| operators-review | Operator coverage audit | [operators-review/](operators-review/) |
+| audit | Property-based testing | [audit/](audit/) |
+| array-audit | Array method examples (Python) | [array-audit/](array-audit/) |
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| `ts-node` not found | Run `npm install -g ts-node` or use `npx ts-node` |
+| ES2022+ syntax error | Ensure Node.js 18+ (`node --version`) |
+| Module not found | Check file path relative to project root |
 
 ## References
 

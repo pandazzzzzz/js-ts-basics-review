@@ -146,7 +146,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 
 **See**: `demo/06-advanced/39-es2022-plus-features.js`
 
-### 8. Variable Declarations (Same in Both)
+### 9. Variable Declarations (Same in Both)
 
 | Keyword | Scope | Hoisting | Reassignable | Redeclarable |
 |---------|-------|----------|--------------|--------------|
@@ -156,7 +156,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 
 *TDZ = Temporal Dead Zone (ReferenceError before declaration)
 
-### 9. Best Practices Checklist
+### 10. Best Practices Checklist
 
 #### ✅ DO:
 - [ ] Enable `strictNullChecks` in TypeScript
@@ -181,7 +181,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 - [ ] Mix `null` and `undefined` carelessly
 - [ ] Rely on implicit type widening
 
-### 10. Migration Tips: JS → TS
+### 11. Migration Tips: JS → TS
 
 1. **Start with `any`**, gradually add types
 2. **Enable strict mode** incrementally:
@@ -200,7 +200,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 6. **Add interfaces** for object shapes
 7. **Use type guards** for runtime checks
 
-### 11. Quick Syntax Reference
+### 12. Quick Syntax Reference
 
 ```typescript
 // Type Annotations
@@ -246,7 +246,7 @@ if (typeof value === "string") {
 }
 ```
 
-### 12. TypeScript Utility Types
+### 13. TypeScript Utility Types
 
 | Type | Purpose | Example |
 |------|---------|---------|
@@ -258,7 +258,7 @@ if (typeof value === "string") {
 
 **See**: `demo/06-advanced/46-typescript-advanced-ts-comparison.ts`
 
-### 13. Common Error Messages & Solutions
+### 14. Common Error Messages & Solutions
 
 | Error | Cause | Solution |
 |-------|-------|----------|
@@ -268,7 +268,7 @@ if (typeof value === "string") {
 | `Type 'any' is not assignable to type 'X'` | Implicit any | Add explicit type annotation |
 | `Property 'X' does not exist on type 'Y'` | Wrong type or typo | Check type definition or property name |
 
-### 14. Advanced Function Concepts
+### 15. Advanced Function Concepts
 
 #### IIFE (Immediately Invoked Function Expression)
 ```javascript
@@ -305,7 +305,7 @@ const pipe = <T>(...fns: Function[]) =>
 
 **See**: `demo/02-data-structures/07-functions.js` sections 13-16 for comprehensive examples
 
-### 15. Modern ES Features (ES2021-ES2025)
+### 16. Modern ES Features (ES2021-ES2025)
 
 #### Immutable Array Methods (ES2023)
 | Method | Description | Mutates? |
@@ -333,9 +333,10 @@ await using db = new DatabaseConnection();
 
 - **JavaScript**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**: 49 numbered demo files (01-49) in `demo/` folder, each with TypeScript comparison
+- **Practice Files**: 50 numbered demo files (01-50) in `demo/` folder, each with TypeScript comparison
 
 ---
 
 **Last Updated**: 2026-04-16
 **Based on**: ES2025 and TypeScript 5.x
+**Updated**: 2026-04-26

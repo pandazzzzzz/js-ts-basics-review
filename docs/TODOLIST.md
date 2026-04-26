@@ -1,9 +1,9 @@
 # 学习路线图
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **更新**: 2026-04-19
+> **更新**: 2026-04-26
 
-**进度**: 49/49 ✅ · 49 TypeScript 对比文件 ✅
+**进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅
 
 ---
 
