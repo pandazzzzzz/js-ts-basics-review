@@ -591,14 +591,17 @@ console.log("8. Reflect vs Object method differences");
    - Improved type inference
    - Regular expression flags for improved consistency
 
-   TS 6.0 (Upcoming):
-   - Last JavaScript-based TypeScript compiler
-   - Future versions will use Go-based rewrite (typescript-go)
-   - Major performance improvements expected
+	   TS 6.0 (Released, December 2024):
+	   - Last JavaScript-based TypeScript compiler
+	   - TypeScript 7.0 will use typescript-go (Go-based rewrite)
+	   - New ignoreDeprecations option for TS 6.0 features removed in 7.0
+	   - Major performance improvements expected in 7.0
 
-   ⚠️ MIGRATION NOTE: TypeScript 6.0+ will be Go-based
-   - Check microsoft/typescript-go for development progress
-   - Plan migration path for large codebases
+	   ⚠️ MIGRATION NOTE: TypeScript 7.0+ will be Go-based
+	   - Check microsoft/typescript-go for development progress
+	   - Plan migration path for large codebases
+	   - Use ignoreDeprecations: "6.0" in tsconfig.json if needed
+
 
    Key features to use:
    - satisfies operator (TS 4.9+): Preserves literal types

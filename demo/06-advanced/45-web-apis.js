@@ -599,12 +599,15 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-   View Transitions API (Chrome 111+, Safari 18.0+):
-   - Smooth animated transitions between page states
-   - document.startViewTransition(() => updateDOM())
-   - Great for single-page app navigation
-   - CSS: @keyframes for transition customization
-   - ⚠️ Firefox support behind flag in nightly builds
+	   View Transitions API (Chrome 111+, Safari 18.0+):
+	   - Smooth animated transitions between page states
+	   - document.startViewTransition(() => updateDOM())
+	   - Supports both SPA (same-document) and MPA (cross-document) transitions
+	   - CSS: ::view-transition pseudo-elements for custom animations
+	   - Great for single-page app navigation
+	   - ⚠️ Firefox: Support behind flag in nightly builds
+	   - ⚠️ Check support: if ('startViewTransition' in document)
+
 
    Popover API (Chrome 114+, Safari 16.4+):
    - Built-in popover without custom positioning
