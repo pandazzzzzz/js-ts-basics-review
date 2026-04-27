@@ -644,32 +644,39 @@ console.log("\n=== Intl.DurationFormat ===");
 // - Polyfill available: intl-durationformat (npm)
 
 console.log("Intl.DurationFormat is ES2024, modern runtime support available.");
-console.log("Expected syntax:");
-console.log(`
-const duration = {
-  hours: 2,
-  minutes: 30,
-  seconds: 45
-};
+console.log("Runtime check:");
+if ('DurationFormat' in Intl) {
+  console.log("✅ Intl.DurationFormat supported, running examples:");
+  const duration = {
+    hours: 2,
+    minutes: 30,
+    seconds: 45
+  };
 
-const df = new Intl.DurationFormat('en-US', {
-  style: 'long'
-});
-console.log(df.format(duration));
-// Expected: "2 hours, 30 minutes, 45 seconds"
+  const df = new Intl.DurationFormat('en-US', { style: 'long' });
+  console.log(df.format(duration));
 
-const dfShort = new Intl.DurationFormat('en-US', {
-  style: 'short'
-});
-console.log(dfShort.format(duration));
-// Expected: "2 hr, 30 min, 45 sec"
+  const dfShort = new Intl.DurationFormat('en-US', { style: 'short' });
+  console.log(dfShort.format(duration));
 
-const dfNarrow = new Intl.DurationFormat('en-US', {
-  style: 'narrow'
-});
-console.log(dfNarrow.format(duration));
-// Expected: "2h 30m 45s"
+  const dfNarrow = new Intl.DurationFormat('en-US', { style: 'narrow' });
+  console.log(dfNarrow.format(duration));
+
+  const zhDf = new Intl.DurationFormat('zh-CN', { style: 'long' });
+  console.log(zhDf.format(duration));
+} else {
+  console.log("⚠️ Intl.DurationFormat not supported in this runtime.");
+  console.log("Expected syntax:");
+  console.log(`
+const duration = { hours: 2, minutes: 30, seconds: 45 };
+const df = new Intl.DurationFormat('en-US', { style: 'long' });
+// "2 hours, 30 minutes, 45 seconds"
+const dfShort = new Intl.DurationFormat('en-US', { style: 'short' });
+// "2 hr, 30 min, 45 sec"
+const dfNarrow = new Intl.DurationFormat('en-US', { style: 'narrow' });
+// "2h 30m 45s"
 `);
+}
 
 console.log("\nDuration object properties:");
 console.log("- years, months, weeks, days");

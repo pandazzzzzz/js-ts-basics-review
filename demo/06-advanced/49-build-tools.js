@@ -184,7 +184,8 @@ console.log("\n=== Vite Configuration ===");
 console.log("\nVite 5.x Key Features:");
 console.log("1. Powered by Rollup 4 for improved build performance");
 console.log("2. Faster HMR with optimized dependency pre-bundling");
-console.log("3. Enhanced CSS handling with Lightning CSS (opt-in transformer)");
+console.log("3. Enhanced CSS handling: Lightning CSS default for minification in production");
+console.log("   - Optional transformer: 'lightningcss' to replace PostCSS completely");
 console.log("4. Better TypeScript support with faster type checking");
 console.log("5. Improved ESM support for Node.js compatibility");
 console.log("6. Better error messages and debugging experience");
@@ -236,7 +237,8 @@ export default defineConfig({
 });
 `;
 
-console.log("\nVite with Lightning CSS (opt-in):");
+console.log("\nVite with Lightning CSS (opt-in transformer):");
+console.log("// Note: Lightning CSS is used by default for CSS minification in production");
 console.log(viteLightningConfig);
 
 // Vite with React
