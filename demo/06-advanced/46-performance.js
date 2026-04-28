@@ -441,7 +441,7 @@ console.log("3. CLS (Cumulative Layout Shift) - Visual stability");
 console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
 // INP (Interaction to Next Paint) measurement
-// ⚠️ NOTE: The PerformanceObserver with 'event' entry type is experimental
+// INP is a stable Core Web Vital metric
 // For production measurement, use the web-vitals library
 
 console.log("\n💡 INP vs FID:");
