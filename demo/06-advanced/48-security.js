@@ -1011,16 +1011,16 @@ console.log("     - Resistant to GPU and side-channel attacks");
 console.log("  ✅ ACCEPTABLE: PBKDF2 with high iterations");
 console.log("     - PBKDF2-HMAC-SHA256: 600,000+ iterations");
 console.log("     - PBKDF2-HMAC-SHA512: 220,000+ iterations");
-console.log("     - Well-tested, widely available");
+console.log("     - Well-tested, widely available via Web Crypto API");
 
 console.log("  ⚠️ LEGACY: bcrypt (consider migration)");
 console.log("     - Fixed work factor limits security");
 console.log("     - Still acceptable but Argon2id preferred");
 
 console.log("  Implementation:");
-console.log("  - Node.js 21.2+: Argon2id available natively");
-console.log("  - Earlier versions: Use argon2 npm package");
+console.log("  - Node.js: Use argon2 npm package");
 console.log("  - Browsers: Use argon2 package via polyfill");
+console.log("  - PBKDF2: Available natively via Web Crypto API in both Node.js and browsers");
 
 console.log("\nHashing:");
 console.log("  ✅ Use SHA-256 or stronger");

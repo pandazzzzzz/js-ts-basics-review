@@ -599,13 +599,12 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-	   View Transitions API (Chrome 111+, Safari 18.0+):
+	   View Transitions API (Chrome 106+, Safari 16.0+, Firefox 110+):
 	   - Smooth animated transitions between page states
 	   - document.startViewTransition(() => updateDOM())
 	   - Supports both SPA (same-document) and MPA (cross-document) transitions
 	   - CSS: ::view-transition pseudo-elements for custom animations
 	   - Great for single-page app navigation
-	   - ⚠️ Firefox: Support behind flag in nightly builds
 	   - ⚠️ Check support: if ('startViewTransition' in document)
 
 
@@ -617,7 +616,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
    - Automatic focus management and accessibility
    - Implicit ARIA attributes for better screen reader support
 
-   CSS Container Queries (Chrome 105+, Safari 16.4+):
+   CSS Container Queries (Chrome 106+, Safari 16.0+):
    - Responsive design based on parent container
    - @container (max-width: 400px) { ... }
    - Better for component-based design
@@ -625,9 +624,9 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
    - Requires container-type: inline-size on parent
 
    Web Components improvements:
-   - Declarative shadow DOM (Chrome 90+, Safari 16.4+)
-   - Element internals API (Chrome 90+, Safari 16.4+)
-   - Better form integration (Chrome 90+, Safari 16.4+)
+   - Declarative shadow DOM (Chrome 111+, Safari 16.4+, Firefox 123+)
+   - Element internals API (Chrome 90+, Firefox 114+, Safari 16.4+)
+   - Better form integration (Chrome 90+, Firefox 114+, Safari 16.4+)
 
    Note: Check caniuse.com for current browser support
    - Some features may require vendor prefixes or polyfills

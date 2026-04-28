@@ -578,20 +578,20 @@ console.log("8. Reflect vs Object method differences");
 - dts-gen to generate .d.ts from .js
 - TypeScript ESLint for linting
 
-9. TYPESCRIPT VERSION UPDATES (2024-2025)
-   TS 5.5 (August 2024):
+9. TYPESCRIPT VERSION UPDATES (2024-2026)
+   TS 5.5 (June 2024):
    - Explicit type annotations on catch variables (catch (e: unknown))
    - Inferred type predicates for JSDoc
    - Performance improvements
    - Better error messages
 
-   TS 5.6 (November 2024):
+   TS 5.6 (September 2024):
    - Iterator helper methods type support (ES2025)
    - Better strict mode checks
    - Improved type inference
    - Regular expression flags for improved consistency
 
-	   TS 6.0 (Released, December 2024):
+	   TS 6.0 (March 2026):
 	   - Last JavaScript-based TypeScript compiler
 	   - TypeScript 7.0 will use typescript-go (Go-based rewrite)
 	   - New ignoreDeprecations option for TS 6.0 features removed in 7.0
