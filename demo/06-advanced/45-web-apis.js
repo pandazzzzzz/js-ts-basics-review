@@ -608,7 +608,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 	   - ⚠️ Check support: if ('startViewTransition' in document)
 
 
-   Popover API (Chrome 114+, Safari 16.4+):
+   Popover API (Chrome 114+, Safari 17+, Firefox 125+):
    - Built-in popover without custom positioning
    - <button popovertarget="menu">
    - <div id="menu" popover>
