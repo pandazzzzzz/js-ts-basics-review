@@ -599,7 +599,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-	   View Transitions API (Chrome 106+, Safari 16.0+, Firefox 110+):
+	   View Transitions API (Chrome 111+, Safari 16.0+, Firefox 110+):
 	   - Smooth animated transitions between page states
 	   - document.startViewTransition(() => updateDOM())
 	   - Supports both SPA (same-document) and MPA (cross-document) transitions
@@ -616,7 +616,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
    - Automatic focus management and accessibility
    - Implicit ARIA attributes for better screen reader support
 
-   CSS Container Queries (Chrome 106+, Safari 16.0+):
+   CSS Container Queries (Chrome 106+, Safari 16.0+, Firefox 110+):
    - Responsive design based on parent container
    - @container (max-width: 400px) { ... }
    - Better for component-based design

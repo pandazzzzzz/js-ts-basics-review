@@ -591,7 +591,7 @@ console.log("8. Reflect vs Object method differences");
    - Improved type inference
    - Regular expression flags for improved consistency
 
-	   TS 6.0 (March 2026):
+	   TS 6.0 (December 2024):
 	   - Last JavaScript-based TypeScript compiler
 	   - TypeScript 7.0 will use typescript-go (Go-based rewrite)
 	   - New ignoreDeprecations option for TS 6.0 features removed in 7.0
