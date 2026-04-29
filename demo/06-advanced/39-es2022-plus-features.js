@@ -462,7 +462,7 @@ console.log("- Emoji filtering and validation");
 console.log("- Script-specific text processing");
 
 // ============================================
-// ES2025 Features (Stage 4 / Upcoming)
+// ES2025 Features (Stage 4 / Current Standard)
 // ============================================
 
 // ============================================

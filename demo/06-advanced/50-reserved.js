@@ -177,7 +177,7 @@ console.log("\nDeno:");
 console.log("- Created by Ryan Dahl (Node.js creator)");
 console.log("- Secure by default (requires permissions)");
 console.log("- TypeScript support out of the box");
-console.log("- Deno 2.0: npm compatibility");
+console.log("- Deno 2.0 (Released Nov 2024): npm compatibility");
 
 console.log(`
 // Deno example
@@ -313,12 +313,14 @@ console.log("- TS 5.1: typeof self in functions, getter/setter same name");
 console.log("- TS 5.2: using declarations, private #d fields in types");
 console.log("- TS 5.3: Import attributes, resolution-mode comments");
 console.log("- TS 5.4: NoInfer utility type, closure improvements");
+console.log("- TS 5.5: Inferred type predicates, explicit catch variable types");
+console.log("- TS 5.6: Iterator helper methods type support, stricter checks");
+console.log("- TS 6.0: ignoreDeprecations option, last JS-based compiler");
 
 console.log("\nTypeScript Roadmap:");
-console.log("- Better type inference");
-console.log("- Performance improvements");
+console.log("- TS 7.0: Go-based rewrite (typescript-go)");
+console.log("- Major performance improvements expected");
 console.log("- More precise type checking");
-console.log("- Improved IDE experience");
 
 // Advanced Type Features (TypeScript-only)
 console.log("\nAdvanced Type Features (TypeScript):");

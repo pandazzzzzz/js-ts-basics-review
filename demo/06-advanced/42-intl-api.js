@@ -637,8 +637,8 @@ console.log("\n=== Intl.DurationFormat ===");
 
 // Intl.DurationFormat - Format durations (ES2024)
 // ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: 135+ (December 2024)
-// - Firefox: 136+ (February 2025)
+// - Chrome: 135+ (January 2025)
+// - Firefox: 136+ (March 2025)
 // - Safari: 18.1+ (January 2025)
 // - Node.js: 24+ (October 2024)
 // - Polyfill available: intl-durationformat (npm)
