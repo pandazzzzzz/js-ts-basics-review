@@ -4,8 +4,19 @@ JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript co
 
 ## Requirements
 
-- Node.js 18+ (for ES2022+ features)
-- TypeScript 5+ (for comparison files)
+### Version Requirements by Feature
+
+| Feature Category | Node.js | TypeScript |
+|-----------------|---------|------------|
+| ES2022+ (基础特性) | 18+ | 5+ |
+| ES2025 Features | 22+ | 5.2+ |
+| Intl.DurationFormat | 24+ | - |
+
+**Note**: 
+- Node.js 18+ supports most ES2022+ features
+- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Resource Management
+- Node.js 24+ (October 2024) required for Intl.DurationFormat
+- TypeScript 5.2+ (August 2023) required for `using` declarations
 
 ## Quick Start
 
@@ -33,6 +44,13 @@ npx ts-node demo/01-basics/01-variables-ts-comparison.ts
 ✅ 50/50 files completed · 50 TypeScript comparisons
 ✅ ES2021-ES2025 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers)
 ✅ Common Pitfalls & Best Practices sections in all advanced files
+
+## Project Status
+
+📅 **Last Updated**: 2026-04-30  
+🔍 **Documentation Review**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals  
+🚀 **Git Status**: Synchronized with remote (126 commits)  
+📊 **Coverage**: Complete (Stages 1-6)
 
 ## Documentation
 

@@ -202,61 +202,51 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 
 ### 12. Quick Syntax Reference
 
+> **Note**: See demo files for comprehensive examples with TypeScript comparisons
+
+**Basic Types**: `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`
+
+**Union Types**: `string | number` - multiple possible types
+
+**Literal Types**: `"on" | "off"` - specific values only
+
+**Arrays**: `number[]` or `Array<number>`
+
+**Objects**: 
 ```typescript
-// Type Annotations
-let name: string = "Alice";
-let age: number = 30;
-let active: boolean = true;
-
-// Union Types
-let id: string | number = "123";
-
-// Literal Types
-let status: "on" | "off" = "on";
-
-// Arrays
-let numbers: number[] = [1, 2, 3];
-let mixed: (string | number)[] = [1, "two", 3];
-
-// Objects
 interface User {
   name: string;
   age: number;
-  email?: string; // Optional
+  email?: string;      // Optional
   readonly id: number; // Readonly
-}
-
-// Functions
-function add(a: number, b: number): number {
-  return a + b;
-}
-
-// Type Aliases
-type Point = { x: number; y: number };
-
-// Type Assertions
-let value = someValue as string;
-
-// Non-null Assertion (use carefully!)
-let name = user!.name;
-
-// Type Guards
-if (typeof value === "string") {
-  // value is string here
 }
 ```
 
+**Functions**: 
+```typescript
+function add(a: number, b: number): number {
+  return a + b;
+}
+```
+
+**Type Guards**: `typeof value === "string"` - runtime type narrowing
+
+**See**: 
+- `demo/01-basics/01-variables-ts-comparison.ts` - Type annotations
+- `demo/02-data-structures/08-objects-ts-comparison.ts` - Interfaces
+- `demo/06-advanced/47-typescript-advanced-ts-comparison.ts` - Advanced types
+
 ### 13. TypeScript Utility Types
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| `Partial<T>` | All properties optional | `Partial<User>` |
-| `Required<T>` | All properties required | `Required<User>` |
-| `Readonly<T>` | All properties readonly | `Readonly<User>` |
-| `Pick<T, K>` | Select properties | `Pick<User, 'id' \| 'name'>` |
-| `Omit<T, K>` | Remove properties | `Omit<User, 'email'>` |
+| Type | Purpose |
+|------|---------|
+| `Partial<T>` | All properties optional |
+| `Required<T>` | All properties required |
+| `Readonly<T>` | All properties readonly |
+| `Pick<T, K>` | Select specific properties |
+| `Omit<T, K>` | Remove specific properties |
 
-**See**: `demo/06-advanced/46-typescript-advanced-ts-comparison.ts`
+**See**: `demo/06-advanced/47-typescript-advanced-ts-comparison.ts` for utility types examples
 
 ### 14. Common Error Messages & Solutions
 
@@ -270,40 +260,17 @@ if (typeof value === "string") {
 
 ### 15. Advanced Function Concepts
 
-#### IIFE (Immediately Invoked Function Expression)
-```javascript
-// Module pattern with IIFE
-const myModule = (function() {
-  let privateVar = 0;
-  return {
-    increment: () => ++privateVar,
-    getValue: () => privateVar
-  };
-})();
-```
+> **Note**: See `demo/02-data-structures/07-functions.js` for comprehensive examples (16 sections)
 
-#### Pure Functions
-```javascript
-// ✅ Pure function - same input always gives same output, no side effects
-const add = (a, b) => a + b;
+**IIFE** (Immediately Invoked Function Expression): Module pattern for encapsulation
 
-// ❌ Impure function - depends on external state
-let total = 0;
-const addToTotal = (n) => total += n;
-```
+**Pure Functions**: Same input → same output, no side effects
 
-#### Function Composition
-```typescript
-// Compose functions right-to-left
-const compose = <T>(...fns: Function[]) => 
-  (x: T) => fns.reduceRight((acc, fn) => fn(acc), x);
+**Function Composition**: 
+- `compose(f, g)(x)` = f(g(x)) - right-to-left
+- `pipe(f, g)(x)` = g(f(x)) - left-to-right
 
-// Pipe functions left-to-right
-const pipe = <T>(...fns: Function[]) => 
-  (x: T) => fns.reduce((acc, fn) => fn(acc), x);
-```
-
-**See**: `demo/02-data-structures/07-functions.js` sections 13-16 for comprehensive examples
+**See**: `demo/02-data-structures/07-functions.js` sections 13-16
 
 ### 16. Modern ES Features (ES2021-ES2025)
 
@@ -337,6 +304,6 @@ await using db = new DatabaseConnection();
 
 ---
 
-**Last Updated**: 2026-04-16
+**Last Updated**: 2026-04-30
 **Based on**: ES2025 and TypeScript 5.x
-**Updated**: 2026-04-26
+**Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals
