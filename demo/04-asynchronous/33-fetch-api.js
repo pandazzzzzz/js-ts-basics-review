@@ -16,7 +16,7 @@
  * - Does NOT reject on HTTP error status (404, 500)
  * - Only rejects on network failure or CORS issues
  * - Requires manual check of response.ok or response.status
- * - Browser built-in (not available in Node.js < 18 without polyfill)
+ * - Browser built-in (globally available in Node.js 18+)
  *
  * Use Cases:
  * - REST API consumption
@@ -34,7 +34,7 @@
 console.log("=== Fetch API Basics Demo ===\n");
 
 // Basic fetch GET request (returns Promise<Response>)
-// Note: In Node.js 18+, fetch is global. In older versions, use node-fetch package.
+// Note: fetch is globally available in Node.js 18+ and all modern browsers.
 // For browser, fetch is always available.
 
 // Simple GET request
@@ -895,7 +895,7 @@ async function demonstrateCombinedSignals() {
 
 demonstrateCombinedSignals();
 
-// AbortSignal.timeout() - Modern API (ES2023)
+// AbortSignal.timeout() - Modern API (DOM Standard, not ES specification)
 async function demonstrateSignalTimeout() {
   console.log("\n19.7 AbortSignal.timeout() (Modern):");
   
@@ -920,14 +920,14 @@ async function demonstrateSignalTimeout() {
 
 demonstrateSignalTimeout();
 
-// AbortSignal.any() - Combine signals (ES2024 proposal)
-console.log("\n19.8 AbortSignal.any() (Future API):");
+// AbortSignal.any() - DEPRECATED/withdrawn
+// NOTE: AbortSignal.any() was removed from the spec due to web compatibility issues.
+// Do not use. Use the combineSignals helper above instead.
+console.log("\n19.8 AbortSignal.any() (Deprecated - Do Not Use):");
 console.log(`
-// Proposed API (not yet widely supported)
-const userSignal = userController.signal;
-const timeoutSignal = AbortSignal.timeout(5000);
-
-const combinedSignal = AbortSignal.any([userSignal, timeoutSignal]);
+// WARNING: AbortSignal.any() was withdrawn from the spec.
+// Use the combineSignals helper function (above) instead:
+const combinedSignal = combineSignals(userController.signal, AbortSignal.timeout(5000));
 
 fetch(url, { signal: combinedSignal });
 // Aborts when ANY signal aborts

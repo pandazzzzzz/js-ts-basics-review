@@ -55,8 +55,8 @@ failingOperation()
 // 1.2 Error propagation in chains
 Promise.resolve(10)
   .then(x => x * 2)
-  .then(x => x / 0) // This will cause an error
-  .then(x => console.log('This won\'t run'))
+  .then(x => x / 0) // Produces Infinity (does NOT throw)
+  .then(x => console.log('Result:', x)) // Will run and print "Infinity"
   .catch(error => console.log('\nCaught error in chain:', error.message));
 
 // 1.3 Multiple catch handlers (first matching wins)

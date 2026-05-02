@@ -299,7 +299,7 @@ console.log("\n=== Code Quality Tools ===");
 // - Enforces coding standards
 // - Configurable rules
 // - Plugin ecosystem
-// Configuration: .eslintrc.js or .eslintrc.json
+// Configuration: eslint.config.js (ESLint 9.x+ flat config)
 
 console.log("ESLint example rules:");
 console.log("- no-unused-vars: Disallow unused variables");
@@ -626,24 +626,18 @@ console.log("- Return mock responses");
 console.log("- Test without real API");
 
 /*
-import { rest } from 'msw';
+import { http } from 'msw';
 import { setupServer } from 'msw/node';
 
-// Setup mock server
+// MSW v2 uses http/graphql instead of rest (v2 API)
 const server = setupServer(
-  rest.get('/api/users/:id', (req, res, ctx) => {
-    const { id } = req.params;
-    return res(
-      ctx.json({ id: Number(id), name: 'Alice' })
-    );
+  http.get('/api/users/:id', ({ params }) => {
+    const { id } = params;
+    return Response.json({ id: Number(id), name: 'Alice' });
   }),
-  
-  rest.post('/api/users', async (req, res, ctx) => {
-    const body = await req.json();
-    return res(
-      ctx.status(201),
-      ctx.json({ id: 1, ...body })
-    );
+
+  http.post('/api/users', async ({ request }) => {
+    return Response.json({ id: 1, ...body }, { status: 201 });
   })
 );
 
@@ -652,7 +646,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-// Test with mocked API
+// Test with mocked API (MSW v2)
 test('should fetch user', async () => {
   const response = await fetch('/api/users/1');
   const user = await response.json();

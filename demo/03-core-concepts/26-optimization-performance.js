@@ -6,24 +6,29 @@
 // 1. TAIL CALL OPTIMIZATION (TCO)
 // ============================================================================
 /**
- * Tail Call Optimization - Optimizing recursive calls (ES6)
+ * Tail Call Optimization - Optimizing recursive calls
  *
  * Characteristics:
  * - Tail position: last operation in function
- * - Reuses current stack frame
- * - Prevents stack overflow
- * - Limited browser support (Safari only)
+ * - Reuses current stack frame (theoretical)
+ * - Prevents stack overflow (theoretical)
  *
- * Use Cases:
+ * IMPORTANT: TCO is part of ES6 spec but has NOT been implemented in any
+ * major JavaScript engine. Safari briefly implemented it in 2016 but removed
+ * it in 2017 due to debugging complexity. As of 2026, no engine supports TCO.
+ *
+ * For deep recursion, use iterative approaches or trampoline patterns instead.
+ *
+ * Use Cases (theoretical):
  * - Deep recursion algorithms
  * - Mathematical sequences
  * - Tree/graph traversals
  * - State machines
  *
  * Common Pitfalls:
- * - Not all JS engines implement TCO
- * - Must be in strict mode
- * - Easy to break tail position
+ * - TCO is NOT reliable - do not depend on it
+ * - Use iterative or trampoline patterns for deep recursion
+ * - ES6 TCO spec was designed but never shipped in any engine
  */
 
 console.log("=== 1. Tail Call Optimization Demo ===");

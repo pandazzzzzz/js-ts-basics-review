@@ -246,7 +246,7 @@ console.log("Shared Int32Array length:", sharedArray.length);
 console.log("\nSecurity requirements (browser):");
 console.log("- Cross-Origin-Opener-Policy: same-origin");
 console.log("- Cross-Origin-Embedder-Policy: require-corp");
-console.log("Or use: Cross-Origin-Resource-Policy: same-origin");
+console.log("Note: Cross-Origin-Resource-Policy (CORP) is a different security feature");
 console.log("Reason: Prevent Spectre-style attacks");
 
 // Atomics - Thread-safe operations on SharedArrayBuffer

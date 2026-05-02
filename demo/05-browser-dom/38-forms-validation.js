@@ -516,6 +516,7 @@ input.addEventListener('paste', (e) => {
   const cleaned = text.replace(/<script.*?>.*?<\\/script>/gi, '');
 
   // Insert into input box
+  // ⚠️ document.execCommand('insertText') is deprecated - use input.setRangeText() instead
   document.execCommand('insertText', false, cleaned);
 });
 `);
@@ -545,7 +546,8 @@ async function readFromClipboard() {
   }
 }
 
-// Fallback solution (compatible with old browsers）
+// Fallback solution (note: document.execCommand is deprecated across all browsers)
+// Consider using a polyfill or modern alternative
 function fallbackCopy(text) {
   const textarea = document.createElement('textarea');
   textarea.value = text;

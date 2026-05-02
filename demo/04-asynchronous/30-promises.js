@@ -349,6 +349,57 @@ Promise.any([
   });
 
 // ============================================
+// 7.5. PROMISE.WITHRESOLVERS() - EXTERNAL RESOLVE/REJECT
+// ============================================
+
+/**
+ * Promise.withResolvers() - Create promise with external resolve/reject
+ *
+ * ES Specification: ES2024
+ *
+ * Characteristics:
+ * - Returns { promise, resolve, reject } object
+ * - Avoids manual Promise constructor pattern
+ * - Useful for event-driven promise resolution
+ *
+ * Use Cases:
+ * - Event-driven promise resolution
+ * - Decoupling promise creation from resolution
+ * - External control of promise state
+ */
+
+console.log("\n=== Promise.withResolvers() Demo ===\n");
+
+// Traditional way (requires manual constructor)
+console.log("Traditional way (promise constructor):");
+let traditionalResolve;
+const traditionalPromise = new Promise((resolve, reject) => {
+  traditionalResolve = resolve;
+});
+traditionalPromise.then(v => console.log("Traditional resolved:", v));
+traditionalResolve("hello");
+
+// Modern way (ES2024)
+console.log("\nModern way (Promise.withResolvers):");
+const { promise, resolve, reject } = Promise.withResolvers();
+promise.then(v => console.log("withResolvers resolved:", v));
+resolve("world");
+
+// Practical: event-driven resolution
+console.log("\nPractical: event-driven resolution:");
+class EventEmitter {
+  once(eventName) {
+    const { promise, resolve } = Promise.withResolvers();
+    // Simplified: in real code, use proper event system
+    setTimeout(() => resolve(`${eventName} fired!`), 100);
+    return promise;
+  }
+}
+
+const emitter = new EventEmitter();
+emitter.once('ready').then(msg => console.log("Event:", msg));
+
+// ============================================
 // 8. ERROR HANDLING PATTERNS
 // ============================================
 
@@ -686,6 +737,7 @@ console.log(`
  * | Promise.allSettled()| All promises settle      | Never                     | Batch operations, need all results |
  * | Promise.race()     | Any promise settles       | Any promise rejects       | Timeout patterns, fastest wins  |
  * | Promise.any()      | Any promise fulfills      | All promises reject       | First successful response       |
+ * | Promise.withResolvers() | External control  | External control          | Event-driven, decoupled resolve |
  */
 
 console.log("\n=== Promise Combinators Quick Reference ===\n");

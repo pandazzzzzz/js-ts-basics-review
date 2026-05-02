@@ -577,9 +577,8 @@ console.log("\n  Symbol keys in JSON.stringify:");
 console.log("    Object:", objWithSymbols);
 console.log("    JSON:", JSON.stringify(objWithSymbols)); // Symbol keys ignored
 
-// 4. JSON source text access (ES2019)
-// - JSON.parse() now exposes raw source text in reviver
-console.log("\n  JSON.parse reviver - source access:");
+// 4. JSON.parse reviver - transforming values during parsing
+console.log("\n  JSON.parse reviver - transforming values:");
 function reviverWithSource(key, value) {
   if (key === "created") {
     console.log(`    Reviver called for '${key}'`);
