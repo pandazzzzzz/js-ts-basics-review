@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 Covers ES2021 ~ ES2025 important features
+// 📌 Covers ES2021 ~ ES2026 important features
 
 // ============================================
 // ES2021 Features (Brief Review)
@@ -39,6 +39,12 @@ console.log("\nES2025:");
 console.log("  - Set methods (union, intersection, difference)");
 console.log("  - Iterator helpers");
 console.log("  - using / await using declarations");
+
+console.log("\nES2026:");
+console.log("  - Temporal API (modern date/time API)");
+console.log("  - Math.sumPrecise (high-precision floating-point summation)");
+console.log("  - RegExp.escape (escape regex special characters)");
+console.log("  - Explicit Resource Management (using/await using finalized)");
 
 // ============================================
 // ES2022 Features
@@ -462,7 +468,7 @@ console.log("- Emoji filtering and validation");
 console.log("- Script-specific text processing");
 
 // ============================================
-// ES2025 Features (Stage 4 / Current Standard)
+// ES2025 Features (Stage 4 / Finalized)
 // ============================================
 
 // ============================================
@@ -570,14 +576,15 @@ console.log("- Only computes what's needed");
 // console.log("First 10 even numbers:", first10Even);
 
 // ============================================
-// Resource Management (ES2025)
+// Resource Management (ES2026)
 // - Automatic resource cleanup using Symbol.dispose
 // - Similar to try-with-resources in Java or using in C#
-console.log("\n=== Resource Management (ES2025) ===");
+// ES2026 Finalized: Explicit Resource Management is part of the ECMAScript specification.
+console.log("\n=== Resource Management (ES2026) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 125+ (May 2024)
-// - Firefox: Not yet supported (as of 2025)
+// - Firefox: 133+ (April 2025)
 // - Safari: 18+ (September 2024)
 // - Node.js: 20.4+ (June 2023) with --harmony-explicit-resource-management flag
 // - Node.js: 22.0+ (April 2024) enabled by default
@@ -600,7 +607,7 @@ class FileHandle {
   }
 }
 
-// Note: using declarations are ES2025 features
+// Note: using declarations are ES2026 features
 // They require runtime support (Node.js 20.4+, modern browsers)
 // Uncomment when available in your environment
 
@@ -676,7 +683,7 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Using features without checking browser support
 console.log("\nPitfall 1: Browser/runtime compatibility");
-console.log("  ES2024/ES2025 features may not be available");
+console.log("  ES2024/ES2025/ES2026 features may not be available");
 console.log("  Check: https://caniuse.com or Node.js version");
 console.log("  Fix: Use transpilation (Babel, TypeScript) or polyfills");
 
@@ -757,19 +764,19 @@ console.log("7. Set method return types (new Set, not original)");
 console.log("8. using declaration disposal timing");
 
 // ============================================
-// Stage 3 Proposals (Upcoming)
+// ES2026 Features
 // ============================================
 
 // ============================================
-// Temporal API (Stage 3 Proposal)
+// Temporal API (ES2026)
 // - Modern date/time API to replace Date object
 // - Immutable, timezone-aware, easier to use
-console.log("\n=== Temporal API (Stage 3 Proposal) ===");
+console.log("\n=== Temporal API (ES2026) ===");
 
-console.log("⚠️ NOTE: Temporal is a Stage 3 proposal, not yet in ES standard.");
-console.log("Browser/runtime support is limited. Use polyfills for now.");
-console.log("Polyfill: @js-temporal/polyfill (npm)");
-console.log("Status: https://github.com/tc39/proposal-temporal");
+console.log("✅ NOTE: Temporal reached Stage 4 in March 2026 and is part of ES2026.");
+console.log("Browser/runtime support varies by engine. Check caniuse.com for current status.");
+console.log("Polyfill (for older environments): @js-temporal/polyfill (npm)");
+console.log("Spec: https://github.com/tc39/proposal-temporal");
 
 console.log("\nTemporal object types:");
 console.log("- Temporal.Now: Current time methods");
@@ -780,7 +787,7 @@ console.log("- Temporal.ZonedDateTime: Date, time, and timezone");
 console.log("- Temporal.Duration: Duration of time (e.g., 2 hours, 30 minutes)");
 console.log("- Temporal.Instant: Exact point in time (UTC)");
 
-console.log("\nExample syntax (with polyfill):");
+console.log("\nExample syntax:");
 console.log(`
 // Get current date
 const today = Temporal.Now.plainDateISO();
@@ -827,16 +834,80 @@ console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
 // ============================================
-// Stage 3 Proposals: More Upcoming Features
+// Math.sumPrecise (ES2026)
+// - High-precision summation avoiding floating-point errors
+// - Uses Kahan-Babuška algorithm internally
+// ES2026 Finalized
+console.log("\n=== Math.sumPrecise (ES2026) ===");
+
+console.log("✅ NOTE: Math.sumPrecise is an ES2026 feature.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+console.log("\nMath.sumPrecise solves floating-point precision issues:");
+console.log(`
+// Standard addition accumulates floating-point errors
+const numbers = [0.1, 0.2, 0.3, 0.4, 0.5];
+const sum = numbers.reduce((a, b) => a + b, 0);
+console.log(sum); // 1.5 (correct in this case, but not always)
+
+const large = [1e16, 1, 1, 1];
+const badSum = large.reduce((a, b) => a + b, 0);
+console.log(badSum); // 10000000000000003 (precision loss!)
+
+// Math.sumPrecise handles this correctly
+const goodSum = Math.sumPrecise(large);
+console.log(goodSum); // 10000000000000003 (correct)
+`);
+
+console.log("\nUse cases:");
+console.log("- Financial calculations");
+console.log("- Scientific data processing");
+console.log("- Statistical aggregations");
+console.log("- Any scenario sensitive to floating-point error accumulation");
+
+// ============================================
+// RegExp.escape (ES2026)
+// - Escape special regex characters in a string
+// - Useful for building dynamic regex patterns safely
+// ES2026 Finalized
+console.log("\n=== RegExp.escape (ES2026) ===");
+
+console.log("✅ NOTE: RegExp.escape is an ES2026 feature.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+console.log("\nRegExp.escape syntax:");
+console.log(`
+// Escape special characters for use in regex
+const userInput = "Hello (world)? [test]";
+const escaped = RegExp.escape(userInput);
+console.log(escaped); // "Hello \\\\(world\\\\)\\\\? \\\\[test\\\\]"
+
+const regex = new RegExp(\`^\${escaped}$\`);
+console.log(regex.test(userInput)); // true
+
+// Without escaping, special characters would be interpreted as regex syntax
+const unescapedRegex = new RegExp(\`^\${userInput}$\`);
+// Throws SyntaxError or matches incorrectly
+`);
+
+console.log("\nUse cases:");
+console.log("- Safe search/replace with user input");
+console.log("- Building dynamic regex patterns");
+console.log("- Input validation with user-provided patterns");
+console.log("- Preventing ReDoS attacks from user-controlled regex");
+
+// ============================================
+// Stage 3 Proposals (Upcoming)
 // ============================================
 
 // ============================================
-// DisposableStack (Stage 3 Proposal)
+// DisposableStack (ES2026)
 // - Manage multiple disposable resources together
 // - Automatic cleanup in reverse order
-console.log("\n=== DisposableStack (Stage 3 Proposal) ===");
+// Part of Explicit Resource Management (ES2026)
+console.log("\n=== DisposableStack (ES2026) ===");
 
-console.log("⚠️ NOTE: DisposableStack is a Stage 3 proposal.");
+console.log("✅ NOTE: DisposableStack is part of ES2026 (Explicit Resource Management).");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 console.log("Polyfill: @ungap/disposable-stack (npm)");
 
@@ -958,7 +1029,7 @@ console.log("- Better error handling in promise chains");
    TS:  Type inference works through chained operations
 
 ⚠️ BROWSER/RUNTIME SUPPORT:
-- ES2024/2025 features may require polyfills or transpilation
+- ES2024/ES2025/ES2026 features may require polyfills or transpilation
 - Check compatibility: https://caniuse.com
 - Node.js: Check version support for each feature
 - TypeScript: May need lib updates in tsconfig.json

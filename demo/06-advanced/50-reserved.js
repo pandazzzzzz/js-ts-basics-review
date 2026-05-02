@@ -25,23 +25,24 @@ console.log("Stage 3: Candidate - Implementation feedback needed");
 console.log("Stage 4: Finished - Approved for ES standard");
 
 // ============================================
-// Section 2: Stage 3 Proposals (Likely ES2026+)
+// Section 2: Recent Proposals (ES2025/ES2026)
 // ============================================
 
-console.log("\n=== Stage 3 Proposals ===");
+console.log("\n=== Recent Standardized Features ===");
 
-// 1. Temporal API (Modern Date/Time)
-console.log("\nTemporal API (Stage 3):");
+// 1. Temporal API (Modern Date/Time) - ES2026
+console.log("\nTemporal API (ES2026):");
 console.log("- Replacement for Date object");
 console.log("- Immutable, timezone-aware, easier to use");
 console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
+console.log("- Stage 4, finalized in ES2026 (March 2026)");
 
-// Example of Temporal API syntax (commented as not yet available)
+// Example of Temporal API syntax
 // const today = Temporal.Now.plainDateISO();
 // const birthday = Temporal.PlainDate.from('1990-01-15');
 // const duration = today.until(birthday);
 
-console.log("\nTemporal Example (future syntax):");
+console.log("\nTemporal Example syntax:");
 console.log(`
 const today = Temporal.Now.plainDateISO();
 const birthday = Temporal.PlainDate.from('1990-01-15');
@@ -50,14 +51,15 @@ const age = today.since(birthday).years;
 
 // 2. Set Methods (already covered in 39-es2022-plus-features.js, ES2025)
 
-// 3. Decorators (Stage 3)
-console.log("\nDecorators (Stage 3):");
+// 3. Decorators (ES2025)
+console.log("\nDecorators (ES2025):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");
 console.log("- Metadata-based programming");
+console.log("- Finalized in ES2025");
 
 // Example decorator syntax (TypeScript already supports this)
-console.log("\nDecorator Example (future JS syntax):");
+console.log("\nDecorator Example (JS syntax):");
 console.log(`
 function logged(target, context) {
   return function(...args) {
@@ -219,10 +221,11 @@ console.log("- Portable code between Node, Deno, Bun, Cloudflare Workers");
 
 console.log("\n=== Module System Future ===");
 
-// Import Attributes (Stage 3)
-console.log("\nImport Attributes (Stage 3):");
+// Import Attributes (ES2025)
+console.log("\nImport Attributes (ES2025):");
 console.log("- Specify how modules should be loaded");
 console.log("- JSON modules, CSS modules, etc.");
+console.log("- Finalized in ES2025");
 
 console.log(`
 // Import JSON as module

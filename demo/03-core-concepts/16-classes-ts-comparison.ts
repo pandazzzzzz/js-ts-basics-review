@@ -482,7 +482,7 @@ console.log(`
 │ readonly modifier          │  Object.freeze  │ Type system     │
 │ Abstract classes           │  Manual pattern │ abstract keyword│
 │ implements interface       │       ✗         │       ✓         │
-│ Decorators                 │  Stage 3 proposal│ TS experimental│
+│ Decorators                 │  ES2025         │ TS stable       │
 │ Method overloads           │       ✗         │       ✓         │
 │ Generic classes            │       ✗         │       ✓         │
 │ Static member types        │       ✗         │       ✓         │

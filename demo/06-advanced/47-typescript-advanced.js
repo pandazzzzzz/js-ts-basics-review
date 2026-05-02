@@ -76,12 +76,12 @@ console.log("3. self-documenting code");
 console.log("4. Can gradually adopt TypeScript");
 
 // ============================================
-// Section 2: Decorator Proposal (JavaScript Stage 3)
+// Section 2: Decorators (JavaScript ES2025)
 // ============================================
 
-console.log("\n=== Decorator Proposal (Stage 3) ===\n");
+console.log("\n=== Decorators (ES2025) ===\n");
 
-// Decorators are a Stage 3 proposal for JavaScript
+// Decorators reached Stage 4 in 2024 and are part of ES2025
 // They allow adding metadata and modifying classes/functions
 // TypeScript has had experimental decorators for years
 
@@ -124,13 +124,13 @@ console.log("- Validation");
 console.log("- Dependency injection");
 console.log("- Caching and memoization");
 
-// Stage 3 Decorator Syntax Example
-console.log("\n=== Stage 3 Decorator Syntax (ES2023+) ===");
+// ES2025 Decorator Syntax Example
+console.log("\n=== ES2025 Decorator Syntax ===");
 
 console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
 console.log("Enable with: { decoratorMetadata: true } in TypeScript");
 
-console.log("\nActual Stage 3 decorator syntax:");
+console.log("\nActual ES2025 decorator syntax:");
 console.log(`
 // Method decorator with @ syntax
 function logged(target, context) {
@@ -187,11 +187,11 @@ class Temperature {
 }
 `);
 
-console.log("\n⚠️ TypeScript decorators vs Stage 3 decorators:");
+console.log("\n⚠️ TypeScript decorators vs ES2025 decorators:");
 console.log("- TypeScript legacy decorators: Different signature (target, propertyKey, descriptor)");
-console.log("- Stage 3 decorators: New signature (target, context) with context object");
-console.log("- TypeScript 5.0+: Supports Stage 3 with 'experimentalDecorators: false'");
-console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-05'");
+console.log("- ES2025 decorators: New signature (target, context) with context object");
+console.log("- TypeScript 5.0+: Supports ES2025 with 'experimentalDecorators: false'");
+console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-11'");
 
 console.log("\nDecorator context object properties:");
 console.log("- context.kind: 'class' | 'method' | 'getter' | 'setter' | 'field' | 'accessor'");
@@ -502,7 +502,7 @@ console.log("3. Proxy traps affecting performance");
 console.log("4. Memory leaks with long-lived proxies");
 console.log("5. Type coercion edge cases");
 console.log("6. Different JSDoc implementations");
-console.log("7. Stage 3 proposal changes");
+console.log("7. Proposal syntax changes");
 console.log("8. Reflect vs Object method differences");
 
 // ============================================
@@ -518,10 +518,10 @@ console.log("8. Reflect vs Object method differences");
    TS:  Type inference reduces need for explicit annotations
 
 2. DECORATORS
-   JS:  Stage 3 proposal, requires transpilation
+   JS:  ES2025 standard, part of the ECMAScript specification
    TS:  Experimental decorators (legacy) since TS 1.5
    TS:  --experimentalDecorators flag required
-   TS:  New decorator proposal support in TS 5.0+
+   TS:  ES2025 decorator support in TS 5.0+ (experimentalDecorators: false)
    TS:  Decorator metadata with reflect-metadata
 
 3. TYPE-LEVEL PROGRAMMING
@@ -591,10 +591,20 @@ console.log("8. Reflect vs Object method differences");
    - Improved type inference
    - Regular expression flags for improved consistency
 
-   TS 6.0 (December 2024):
-   - Last JavaScript-based TypeScript compiler
+   TS 5.8 (March 2025):
+   - Granular return type checking in conditional expressions
+   - Improved error messages for complex type mismatches
+   - Better inference for chained method calls
+
+   TS 5.9 (December 2025):
+   - Conditional return type inference improvements
+   - Stricter checks on inferred return types
+
+   TS 6.0 (March 2026):
+   - Bridge release: last JavaScript-based TypeScript compiler
    - TypeScript 7.0 will use typescript-go (Go-based rewrite)
-   - New ignoreDeprecations option for TS 6.0 features removed in 7.0
+   - ignoreDeprecations option for features removed in 7.0
+   - Improved 'this'-less inference (reduces need for explicit this parameters)
    - Major performance improvements expected in 7.0
 
    ⚠️ MIGRATION NOTE: TypeScript 7.0+ will be Go-based

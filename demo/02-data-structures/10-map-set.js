@@ -472,8 +472,8 @@ console.log("  Intersection A∩B:", [...intersection]); // [4, 5]
 const difference = new Set([...setA].filter((x) => !setB.has(x)));
 console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
 
-// ES2024 Set Operations (Stage 3, supported in modern engines)
-console.log("\nES2024 Set Operations:");
+// ES2025 Set Methods (Supported in modern engines)
+console.log("\nES2025 Set Methods:");
 
 // First, polyfill if not available
 if (typeof Set.prototype.union !== "function") {

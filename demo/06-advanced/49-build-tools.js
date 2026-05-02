@@ -191,6 +191,87 @@ console.log("5. Improved ESM support for Node.js compatibility");
 console.log("6. Better error messages and debugging experience");
 console.log("7. Cleaned up deprecated APIs and streamlined configuration");
 
+// Vite 7.x Features (June 2025)
+console.log("\nVite 7.x Key Features:");
+console.log("1. Node.js requirement: Node 20.19+ or Node 22.12+ minimum");
+console.log("2. baseline-widely-available build target replaces default targets");
+console.log("   - Broader browser compatibility out of the box");
+console.log("   - Replaces es2020/Chrome 87+ defaults");
+console.log("3. Removed Sass legacy API (Ruby Sass)");
+console.log("   - Only supports Dart Sass (sass) going forward");
+console.log("   - Update: use 'sass' instead of 'node-sass'");
+console.log("4. Environment API (experimental)");
+console.log("   - Per-environment plugin configuration");
+console.log("   - Separate build configs for client/server (SSR)");
+console.log("5. Removed splitVendorChunkPlugin");
+console.log("6. Improved CSS handling and Lightning CSS integration");
+
+// Basic Vite 7 config with Environment API (SSR)
+const vite7EnvConfig = `
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    // Use baseline-widely-available for broader compatibility
+    target: 'baseline-widely-available',
+  },
+
+  // Environment API for SSR
+  environments: {
+    client: {
+      build: {
+        outDir: 'dist/client',
+      },
+    },
+    ssr: {
+      build: {
+        outDir: 'dist/ssr',
+        rollupOptions: {
+          input: './src/entry-server.js',
+        },
+      },
+    },
+  },
+});
+`;
+
+console.log("\nVite 7 with Environment API (SSR):");
+console.log(vite7EnvConfig);
+
+// Vite 8.x Features (March 2026)
+console.log("\nVite 8.x Key Features:");
+console.log("1. Powered by Rolldown (Rust-based bundler, replaces Rollup)");
+console.log("   - 10-30x faster production builds");
+console.log("   - ~75% less memory usage");
+console.log("   - Drop-in replacement for Rollup-based builds");
+console.log("2. Improved HMR with Rolldown's incremental compilation");
+console.log("3. Native TypeScript ESM output (no .js extension rewriting)");
+console.log("4. Better compatibility with Node.js ESM resolution");
+console.log("5. Updated plugin API with Rolldown hook compatibility");
+console.log("6. Node 20.19+ / 22.12+ minimum (same as Vite 7)");
+
+console.log("\n⚠️ Migration from Vite 7 to Vite 8:");
+console.log("- Most Rollup plugins work via compatibility layer");
+console.log("- Check custom Rollup plugins for Rolldown compatibility");
+console.log("- Review rollupOptions in vite.config.ts for deprecated options");
+console.log("- Run 'npx vite build' and check for warnings");
+
+// Vite 8 config with Rolldown
+const vite8Config = `
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    // Rolldown is the default bundler in Vite 8
+    // No configuration needed - it just works
+    target: 'baseline-widely-available',
+  },
+});
+`;
+
+console.log("\nVite 8 with Rolldown (default):");
+console.log(vite8Config);
+
 // Basic vite.config.js
 const viteBasicConfig = `
 import { defineConfig } from 'vite';
@@ -674,16 +755,17 @@ console.log("8. Environment variable exposure");
    TS:  Typed plugin hooks
 
 ⚠️ BUILD TOOL COMPARISON:
-┌──────────────┬─────────────┬─────────────┐
-│ Feature      │ Webpack     │ Vite        │
-├──────────────┼─────────────┼─────────────┤
-│ Dev Server   │ Slower      │ Fast (ESM)  │
-│ HMR          │ Good        │ Instant     │
-│ Build Speed  │ Slower      │ Fast        │
-│ Config       │ Complex     │ Simple      │
-│ Ecosystem    │ Mature      │ Growing     │
-│ Bundle Size  │ Larger      │ Smaller     │
-└──────────────┴─────────────┴─────────────┘
+┌──────────────┬─────────────┬─────────────┬──────────────┐
+│ Feature      │ Webpack     │ Vite 5/7    │ Vite 8       │
+├──────────────┼─────────────┼─────────────┼──────────────┤
+│ Dev Server   │ Slower      │ Fast (ESM)  │ Fast (ESM)   │
+│ HMR          │ Good        │ Instant     │ Instant      │
+│ Build Speed  │ Slower      │ Fast        │ 10-30x faster│
+│ Config       │ Complex     │ Simple      │ Simple       │
+│ Ecosystem    │ Mature      │ Growing     │ Growing      │
+│ Bundle Size  │ Larger      │ Smaller     │ Smaller      │
+│ Bundler      │ Webpack     │ Rollup      │ Rolldown(Rust)│
+└──────────────┴─────────────┴─────────────┴──────────────┘
 
 🔧 BEST PRACTICES:
 - Use code splitting for large apps

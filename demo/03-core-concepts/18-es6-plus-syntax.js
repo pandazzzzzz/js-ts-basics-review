@@ -764,7 +764,7 @@ Key modern features (ES2020-ES2023):
 - Logical assignment (&&=, ||=, ??=) - Short-circuit assignment
 - Promise.finally() - Clean up after promise
 - Promise.any() - First fulfilled promise
--定型数组操作 (TypedArray methods) - copyWithin(), at(), etc.
+- TypedArray methods - copyWithin(), at(), etc.
 `);
 
 
@@ -791,8 +791,8 @@ Key modern features (ES2020-ES2023):
    TS:  Full type annotations for parameters and return types
 
 5. DECORATORS
-   JS:  Proposal (Stage 3)
-   TS:  Experimental decorators available with flag
+   JS:  ES2025 standard
+   TS:  ES2025 decorators supported (experimentalDecorators: false)
 
 ⚠️ COMMON CONFUSION POINTS:
 - TypeScript's private is compile-time only; JS # is runtime

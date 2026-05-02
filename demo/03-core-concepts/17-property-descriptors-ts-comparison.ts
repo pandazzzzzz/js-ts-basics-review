@@ -362,7 +362,7 @@ console.log(`
 │ ThisType for accessors     │       ✗         │       ✓         │
 │ Type-safe defineProperty   │       ✗         │       ✓         │
 │ Typed getters/setters      │       ✗         │       ✓         │
-│ Accessor decorators        │  Stage 3        │ TS experimental │
+│ Accessor decorators        │  ES2025         │ TS stable       │
 │ Const assertions           │       ✗         │       ✓         │
 │ Mapped types               │       ✗         │       ✓         │
 │ Runtime behavior           │    Same         │    Same         │
