@@ -30,12 +30,12 @@ console.log("Stage 4: Finished - Approved for ES standard");
 
 console.log("\n=== Recent Standardized Features ===");
 
-// 1. Temporal API (Modern Date/Time) - ES2026
-console.log("\nTemporal API (ES2026):");
-console.log("- Replacement for Date object");
-console.log("- Immutable, timezone-aware, easier to use");
+// 1. Temporal API (ES2024) - Modern Date/Time
+console.log("\nTemporal API (ES2024):");
+console.log("- Modern replacement for Date object");
+console.log("- Immutable, timezone-aware, easy-to-use API");
 console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
-console.log("- Stage 4, finalized in ES2026 (March 2026)");
+console.log("- Stage 4, included in ES2024");
 
 // Example of Temporal API syntax
 // const today = Temporal.Now.plainDateISO();

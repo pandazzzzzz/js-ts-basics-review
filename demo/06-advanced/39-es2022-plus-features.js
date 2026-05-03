@@ -35,16 +35,15 @@ console.log("\nES2024:");
 console.log("  - Object.groupBy(), Map.groupBy()");
 console.log("  - Promise.withResolvers()");
 console.log("  - RegExp /v flag (unicodeSets)");
+console.log("  - using / await using declarations");
 console.log("\nES2025:");
 console.log("  - Set methods (union, intersection, difference)");
 console.log("  - Iterator helpers");
-console.log("  - using / await using declarations");
-
+console.log("  - Decorators (Stage 4 - class/method decorators)");
 console.log("\nES2026:");
 console.log("  - Temporal API (modern date/time API)");
 console.log("  - Math.sumPrecise (high-precision floating-point summation)");
 console.log("  - RegExp.escape (escape regex special characters)");
-console.log("  - Explicit Resource Management (using/await using finalized)");
 
 // ============================================
 // ES2022 Features
