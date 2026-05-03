@@ -35,13 +35,13 @@ console.log("\nES2024:");
 console.log("  - Object.groupBy(), Map.groupBy()");
 console.log("  - Promise.withResolvers()");
 console.log("  - RegExp /v flag (unicodeSets)");
-console.log("  - using / await using declarations");
 console.log("\nES2025:");
 console.log("  - Set methods (union, intersection, difference)");
 console.log("  - Iterator helpers");
 console.log("  - Decorators (Stage 4 - class/method decorators)");
-console.log("\nES2026:");
 console.log("  - Temporal API (modern date/time API)");
+console.log("  - Explicit Resource Management (using/await using)");
+console.log("\nES2026:");
 console.log("  - Math.sumPrecise (high-precision floating-point summation)");
 console.log("  - RegExp.escape (escape regex special characters)");
 
@@ -575,20 +575,20 @@ console.log("- Only computes what's needed");
 // console.log("First 10 even numbers:", first10Even);
 
 // ============================================
-// Resource Management (ES2026)
+// Resource Management (ES2025)
 // - Automatic resource cleanup using Symbol.dispose
 // - Similar to try-with-resources in Java or using in C#
-// ES2026 Finalized: Explicit Resource Management is part of the ECMAScript specification.
-console.log("\n=== Resource Management (ES2026) ===");
+// ES2025 Finalized: Explicit Resource Management is part of the ECMAScript specification.
+console.log("\n=== Resource Management (ES2025) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: 125+ (May 2024)
-// - Firefox: 133+ (April 2025)
-// - Safari: 18+ (September 2024)
+// - Chrome: 122+ (July 2023), 130+ (Sept 2024) shipping by default
+// - Firefox: 120+ (Dec 2023), 134+ (June 2025) shipping by default
+// - Safari: 17.4+ (May 2023), 18.2+ (Oct 2024) shipping by default
 // - Node.js: 20.4+ (June 2023) with --harmony-explicit-resource-management flag
 // - Node.js: 22.0+ (April 2024) enabled by default
-// - Edge: 125+ (May 2024)
-// - TypeScript: 5.2+ (August 2023)
+// - Edge: 122+ (July 2023), 130+ (Sept 2024) shipping by default
+// - TypeScript: 5.2+ (August 2023) support for using declarations
 
 // Define a disposable resource
 class FileHandle {
@@ -763,16 +763,16 @@ console.log("7. Set method return types (new Set, not original)");
 console.log("8. using declaration disposal timing");
 
 // ============================================
-// ES2026 Features
+// ES2025 Features (Temporal & Set Methods)
 // ============================================
 
 // ============================================
-// Temporal API (ES2026)
+// Temporal API (ES2025)
 // - Modern date/time API to replace Date object
 // - Immutable, timezone-aware, easier to use
-console.log("\n=== Temporal API (ES2026) ===");
+console.log("\n=== Temporal API (ES2025) ===");
 
-console.log("✅ NOTE: Temporal reached Stage 4 in March 2026 and is part of ES2026.");
+console.log("✅ NOTE: Temporal reached Stage 4 in Nov 2023 and is part of ES2025.");
 console.log("Browser/runtime support varies by engine. Check caniuse.com for current status.");
 console.log("Polyfill (for older environments): @js-temporal/polyfill (npm)");
 console.log("Spec: https://github.com/tc39/proposal-temporal");
@@ -833,13 +833,13 @@ console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
 // ============================================
-// Math.sumPrecise (ES2026)
+// Math.sumPrecise (ES2026) - Stage 3 Proposal
 // - High-precision summation avoiding floating-point errors
 // - Uses Kahan-Babuška algorithm internally
-// ES2026 Finalized
-console.log("\n=== Math.sumPrecise (ES2026) ===");
+// ⚠️ NOTE: Math.sumPrecise is Stage 3, not ES2026
+console.log("\n=== Math.sumPrecise (Stage 3 Proposal) ===");
 
-console.log("✅ NOTE: Math.sumPrecise is an ES2026 feature.");
+console.log("⚠️ NOTE: Math.sumPrecise is a Stage 3 proposal, not yet ES2026.");
 console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
 console.log("\nMath.sumPrecise solves floating-point precision issues:");
@@ -865,14 +865,14 @@ console.log("- Statistical aggregations");
 console.log("- Any scenario sensitive to floating-point error accumulation");
 
 // ============================================
-// RegExp.escape (ES2026)
+// RegExp.escape (Stage 3 Proposal)
 // - Escape special regex characters in a string
 // - Useful for building dynamic regex patterns safely
-// ES2026 Finalized
-console.log("\n=== RegExp.escape (ES2026) ===");
+// ⚠️ NOTE: RegExp.escape is Stage 3, not ES2026
+console.log("\n=== RegExp.escape (Stage 3 Proposal) ===");
 
-console.log("✅ NOTE: RegExp.escape is an ES2026 feature.");
-console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+console.log("⚠️ NOTE: RegExp.escape is a Stage 3 proposal.");
+console.log("It has not yet reached Stage 4, not part of ES2026.");
 
 console.log("\nRegExp.escape syntax:");
 console.log(`
@@ -900,13 +900,13 @@ console.log("- Preventing ReDoS attacks from user-controlled regex");
 // ============================================
 
 // ============================================
-// DisposableStack (ES2026)
+// DisposableStack (ES2025)
 // - Manage multiple disposable resources together
 // - Automatic cleanup in reverse order
-// Part of Explicit Resource Management (ES2026)
-console.log("\n=== DisposableStack (ES2026) ===");
+// Part of Explicit Resource Management (ES2025)
+console.log("\n=== DisposableStack (ES2025) ===");
 
-console.log("✅ NOTE: DisposableStack is part of ES2026 (Explicit Resource Management).");
+console.log("✅ NOTE: DisposableStack is part of ES2025 (Explicit Resource Management).");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 console.log("Polyfill: @ungap/disposable-stack (npm)");
 

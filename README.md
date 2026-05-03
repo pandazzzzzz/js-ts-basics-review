@@ -10,12 +10,12 @@ JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript co
 |-----------------|---------|------------|
 | ES2022+ (基础特性) | 18+ | 5+ |
 | ES2025 Features | 22+ | 5.2+ |
-| Intl.DurationFormat | 24+ | - |
+| Temporal API | 22+ | 5.0+ |
 
 **Note**: 
 - Node.js 18+ supports most ES2022+ features
-- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Resource Management
-- Node.js 24+ (October 2024) required for Intl.DurationFormat
+- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Temporal API, Resource Management
+- TypeScript 5.0+ required for Temporal API
 - TypeScript 5.2+ (August 2023) required for `using` declarations
 
 ## Quick Start
