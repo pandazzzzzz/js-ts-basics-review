@@ -598,11 +598,11 @@ console.log("\n  Tip: Reuse date objects in loops");
 
 console.log("\nModern Alternatives:");
 
-// Temporal API (ES2026)
+// Temporal API (ES2025)
 // - Modern replacement for Date object
 // - Immutable, time-zone aware, easier to work with
-// - Finalized in ES2026, browser support varies by engine
-console.log("  Temporal API (ES2026):");
+// - Finalized in ES2025, browser support varies by engine
+console.log("  Temporal API (ES2025):");
 console.log("    - Temporal.Now.instant() - Current instant");
 console.log("    - Temporal.PlainDate - Date without timezone");
 console.log("    - Temporal.PlainTime - Time without date/timezone");
@@ -611,12 +611,12 @@ console.log("    - Temporal.ZonedDateTime - Date and time with timezone");
 console.log("    - Temporal.Duration - Time duration");
 console.log("    - Better timezone and DST handling");
 
-// Date.prototype.toTemporalInstant() (ES2026)
+// Date.prototype.toTemporalInstant() (ES2025)
 // - Bridge method to convert Date to Temporal
 // - Allows migration from Date to Temporal
-console.log("\n  Date.prototype.toTemporalInstant() (ES2026):");
+console.log("\n  Date.prototype.toTemporalInstant() (ES2025):");
 
-// Check if Temporal is available (ES2026, browser support varies)
+// Check if Temporal is available (ES2025, browser support varies)
 if (typeof Temporal !== 'undefined') {
   const legacyDate = new Date("2024-06-15T10:30:00Z");
   const temporalInstant = legacyDate.toTemporalInstant();
@@ -627,7 +627,7 @@ if (typeof Temporal !== 'undefined') {
   const plainDateTime = temporalInstant.toZonedDateTimeISO("America/New_York").toPlainDateTime();
   console.log("    In New York timezone:", plainDateTime.toString());
 } else {
-  console.log("    Temporal API (ES2026) not yet available in this environment");
+  console.log("    Temporal API (ES2025) not yet available in this environment");
   console.log("    Polyfill for older environments: npm install @js-temporal/polyfill");
   console.log("    Usage:");
   console.log("      const legacyDate = new Date('2024-06-15T10:30:00Z');");
@@ -648,7 +648,7 @@ console.log("      - Immutable (all operations return new objects)");
 console.log("      - Timezone-aware by design");
 console.log("      - Clear separation of concepts (Instant, PlainDate, etc.)");
 console.log("      - Consistent API across all types");
-console.log("      - ES2026 standardized API (Stage 4, March 2026)");
+console.log("      - ES2025 standardized API (Stage 4, November 2023)");
 console.log("      - Better for internationalization");
 
 // Third-party library comparison
