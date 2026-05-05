@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 Covers ES2021 ~ ES2026 important features
+// 📌 Covers ES2021 ~ ES2025 features + Stage 3 proposals
 
 // ============================================
 // ES2021 Features (Brief Review)
@@ -41,9 +41,9 @@ console.log("  - Iterator helpers");
 console.log("  - Decorators (Stage 4 - class/method decorators)");
 console.log("  - Temporal API (modern date/time API)");
 console.log("  - Explicit Resource Management (using/await using)");
-console.log("\nES2026:");
-console.log("  - Math.sumPrecise (high-precision floating-point summation)");
-console.log("  - RegExp.escape (escape regex special characters)");
+console.log("\nStage 3 Proposals:");
+console.log("  - Math.sumPrecise (Stage 3 - high-precision summation)");
+console.log("  - RegExp.escape (Stage 3 - escape regex special characters)");
 
 // ============================================
 // ES2022 Features
@@ -606,8 +606,8 @@ class FileHandle {
   }
 }
 
-// Note: using declarations are ES2026 features
-// They require runtime support (Node.js 20.4+, modern browsers)
+// Note: using declarations are ES2025 features (finalized March 2024)
+// They require runtime support (Node.js 22.0+, modern browsers)
 // Uncomment when available in your environment
 
 // Using declaration - automatically calls Symbol.dispose
