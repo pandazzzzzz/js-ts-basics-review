@@ -4,6 +4,18 @@
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
 
+// 📘 ES Version Verification:
+// - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// - Last Verified: 2026-05-07
+// - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
+// - Stage Process: Stage 0 (Strawperson) → Stage 1 (Proposal) → Stage 2 (Draft) → Stage 3 (Candidate) → Stage 4 (Finished)
+//
+// Current Proposals Status:
+// - Stage 4 (Finalized): Temporal, using, Set methods, Iterator helpers, Decorators → ES2025
+// - Stage 3 (Candidate): Math.sumPrecise, RegExp.escape, Array.fromAsync, Promise.try
+// - Stage 2 (Draft): Records & Tuples, Pattern Matching
+// - Stage 1 (Proposal): Pipeline Operator, Partial Application
+
 // ============================================
 // Section 1: TC39 Proposal Stages
 // ============================================

@@ -4,6 +4,17 @@
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
 // 📌 Covers ES2021 ~ ES2025 features + Stage 3 proposals
 
+// 📘 ES Version Verification:
+// - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// - Last Verified: 2026-05-07
+// - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
+// - Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
+//
+// ES Version Attribution in this file:
+// - ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v)
+// - ES2025: Features finalized in 2024 (Temporal, using, Set methods, Iterator helpers, Decorators)
+// - Stage 3: Active proposals, not yet finalized (Math.sumPrecise, RegExp.escape, Array.fromAsync, Promise.try)
+
 // ============================================
 // ES2021 Features (Brief Review)
 // ============================================
