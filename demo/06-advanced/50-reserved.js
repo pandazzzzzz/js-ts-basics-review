@@ -25,7 +25,7 @@ console.log("Stage 3: Candidate - Implementation feedback needed");
 console.log("Stage 4: Finished - Approved for ES standard");
 
 // ============================================
-// Section 2: Recent Proposals (ES2025/ES2026)
+// Section 2: Recent Standardized Features (ES2025) + Future Proposals
 // ============================================
 
 console.log("\n=== Recent Standardized Features ===");

@@ -682,7 +682,7 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Using features without checking browser support
 console.log("\nPitfall 1: Browser/runtime compatibility");
-console.log("  ES2024/ES2025/ES2026 features may not be available");
+console.log("  ES2024/ES2025 + Stage 3 proposals may not be available");
 console.log("  Check: https://caniuse.com or Node.js version");
 console.log("  Fix: Use transpilation (Babel, TypeScript) or polyfills");
 
@@ -833,7 +833,7 @@ console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
 // ============================================
-// Math.sumPrecise (ES2026) - Stage 3 Proposal
+// Math.sumPrecise - Stage 3 Proposal
 // - High-precision summation avoiding floating-point errors
 // - Uses Kahan-Babuška algorithm internally
 // ⚠️ NOTE: Math.sumPrecise is Stage 3, not ES2026
@@ -1028,7 +1028,7 @@ console.log("- Better error handling in promise chains");
    TS:  Type inference works through chained operations
 
 ⚠️ BROWSER/RUNTIME SUPPORT:
-- ES2024/ES2025/ES2026 features may require polyfills or transpilation
+- ES2024/ES2025 + Stage 3 proposals may require polyfills or transpilation
 - Check compatibility: https://caniuse.com
 - Node.js: Check version support for each feature
 - TypeScript: May need lib updates in tsconfig.json
