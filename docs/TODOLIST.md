@@ -2,15 +2,17 @@
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-04-26
-> **ES 版本验证**: 2026-05-07 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **ES 版本验证**: 2026-05-09 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 <!-- 
 ES Version Verification Notes:
 - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
 - Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
-- ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v)
-- ES2025: Features finalized in 2024 (Temporal, using, Set methods, Iterator helpers, Decorators)
-- Stage 3: Active proposals, not yet finalized (Math.sumPrecise, RegExp.escape)
+- ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer)
+- ES2025: Features finalized in 2024 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array)
+- ES2027: Temporal API (Stage 4 Nov 2023, delayed publication)
+- Stage 3: Active proposals, not yet finalized (Decorators, Explicit Resource Management/using, Math.sumPrecise)
+- Withdrawn: Records & Tuples (subsumed by Composites)
 - Always verify against TC39 finished proposals before updating ES version attributions
 -->
 
@@ -173,7 +175,7 @@ TS 对比: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-t
 
 ### 知识点清单
 
-**39 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v) · ES2025 (Set 方法、Iterator helpers、Temporal API、using/await using) · Stage 3 (Math.sumPrecise、RegExp.escape)
+**39 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v、ArrayBuffer.transfer) · ES2025 (Set 方法、Iterator helpers、RegExp.escape、Promise.try、Float16Array) · ES2027 (Temporal API) · Stage 3 (Decorators、using/await using、Math.sumPrecise)
 **40 调试与测试** — console 方法、debugger、断点、单元测试基础
 **41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
 **42 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat
@@ -184,4 +186,4 @@ TS 对比: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-t
 **47 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
 **48 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
 **49 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
-**50 预留扩展** — TC39 提案、Temporal API、装饰器、运行时演进、未来特性
+**50 预留扩展** — TC39 提案、Temporal API (ES2027)、Decorators (Stage 3)、运行时演进、未来特性

@@ -6,14 +6,15 @@
 
 // 📘 ES Version Verification:
 // - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// - Last Verified: 2026-05-07
+// - Last Verified: 2026-05-09
 // - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
 // - Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
 //
 // ES Version Attribution in this file:
-// - ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v)
-// - ES2025: Features finalized in 2024 (Temporal, using, Set methods, Iterator helpers, Decorators)
-// - Stage 3: Active proposals, not yet finalized (Math.sumPrecise, RegExp.escape, Array.fromAsync, Promise.try)
+// - ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer)
+// - ES2025: Features finalized in 2024 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, JSON Modules)
+// - ES2027: Temporal API (Stage 4 Nov 2023, delayed publication)
+// - Stage 3: Active proposals, not yet finalized (Decorators, Explicit Resource Management/using, Math.sumPrecise)
 
 // ============================================
 // ES2021 Features (Brief Review)
@@ -46,15 +47,23 @@ console.log("\nES2024:");
 console.log("  - Object.groupBy(), Map.groupBy()");
 console.log("  - Promise.withResolvers()");
 console.log("  - RegExp /v flag (unicodeSets)");
+console.log("  - ArrayBuffer.transfer (transfer/resize)");
+console.log("  - Well-Formed Unicode Strings (isWellFormed/toWellFormed)");
 console.log("\nES2025:");
 console.log("  - Set methods (union, intersection, difference)");
 console.log("  - Iterator helpers");
-console.log("  - Decorators (Stage 4 - class/method decorators)");
+console.log("  - RegExp.escape() (escape regex special characters)");
+console.log("  - Promise.try() (normalize sync/async errors)");
+console.log("  - Float16Array / Math.f16round() (half-precision floats)");
+console.log("  - JSON Modules (import JSON directly)");
+console.log("  - Import Attributes (with { type: 'json' })");
+console.log("  - RegExp Modifiers (inline flag changes)");
+console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
-console.log("  - Explicit Resource Management (using/await using)");
 console.log("\nStage 3 Proposals:");
+console.log("  - Decorators (Stage 3 - class/method decorators)");
+console.log("  - Explicit Resource Management (using/await using, Stage 3)");
 console.log("  - Math.sumPrecise (Stage 3 - high-precision summation)");
-console.log("  - RegExp.escape (Stage 3 - escape regex special characters)");
 
 // ============================================
 // ES2022 Features
@@ -478,6 +487,62 @@ console.log("- Emoji filtering and validation");
 console.log("- Script-specific text processing");
 
 // ============================================
+// ArrayBuffer.transfer() (ES2024)
+// - Transfer ownership of ArrayBuffer to another context
+// - Useful for worker communication
+console.log("\n=== ArrayBuffer.transfer() (ES2024) ===");
+
+console.log("ArrayBuffer.prototype.transfer():");
+console.log("- Transfer ownership without copying");
+console.log("- Detaches original buffer");
+console.log("- Worker.postMessage optimization");
+
+console.log("\nExample:");
+console.log(`
+const buffer = new ArrayBuffer(1024);
+const transferred = buffer.transfer(); // buffer becomes detached
+// transferred is now the new owner of the memory
+`);
+
+// ============================================
+// Resizable ArrayBuffers (ES2024)
+// - Dynamically resize buffers without reallocation
+console.log("\n=== Resizable ArrayBuffers (ES2024) ===");
+
+console.log("Resizable/growable ArrayBuffer features:");
+console.log("- new ArrayBuffer(size, { maxByteLength })");
+console.log("- buffer.resize(newSize)");
+console.log("- buffer.resizable / buffer.maxByteLength");
+
+console.log("\nExample:");
+console.log(`
+const buffer = new ArrayBuffer(1024, { maxByteLength: 4096 });
+console.log(buffer.resizable); // true
+buffer.resize(2048); // Resize to 2KB
+console.log(buffer.byteLength); // 2048
+`);
+
+// ============================================
+// Well-Formed Unicode Strings (ES2024)
+// - isWellFormed() / toWellFormed() for lone surrogate handling
+console.log("\n=== Well-Formed Unicode Strings (ES2024) ===");
+
+console.log("String.prototype.isWellFormed():");
+console.log("- Returns true if string contains no lone surrogates");
+console.log("- Useful for proper Unicode handling");
+
+console.log("\nString.prototype.toWellFormed():");
+console.log("- Replaces lone surrogates with U+FFFD");
+console.log("- Safe for text processing");
+
+console.log("\nExample:");
+console.log(`
+const str = "\\uD800"; // Lone surrogate (invalid)
+console.log(str.isWellFormed()); // false
+console.log(str.toWellFormed()); // "\\uFFFD" (replacement char)
+`);
+
+// ============================================
 // ES2025 Features (Stage 4 / Finalized)
 // ============================================
 
@@ -586,11 +651,94 @@ console.log("- Only computes what's needed");
 // console.log("First 10 even numbers:", first10Even);
 
 // ============================================
-// Resource Management (ES2025)
+// Float16Array / Math.f16round (ES2025)
+// - Half-precision floating point numbers (16-bit)
+// - More memory efficient than Float32Array
+console.log("\n=== Float16Array / Math.f16round (ES2025) ===");
+
+console.log("Float16Array:");
+console.log("- 16-bit half-precision floats");
+console.log("- Memory efficient for ML/audio graphics");
+console.log("- new Float16Array(length or typed array)");
+
+console.log("\nMath.f16round():");
+console.log("- Round to nearest Float16 value");
+console.log("- Similar to Math.fround() for Float32");
+
+console.log("\nExample:");
+console.log(`
+const arr = new Float16Array([1.0, 2.5, 3.14159]);
+console.log(arr[2]); // 3.14 (rounded to Float16 precision)
+
+const rounded = Math.f16round(3.14159265359);
+console.log(rounded); // 3.140625 (Float16 precision)
+`);
+
+// ============================================
+// JSON Modules (ES2025)
+// - Import JSON files directly as modules
+console.log("\n=== JSON Modules (ES2025) ===");
+
+console.log("Import JSON as module:");
+console.log("- import data from './config.json' with { type: 'json' }");
+console.log("- Type-safe JSON imports");
+console.log("- No need for fetch() or require()");
+
+console.log("\nExample:");
+console.log(`
+// config.json: { "apiUrl": "https://api.example.com" }
+import config from './config.json' with { type: 'json' };
+console.log(config.apiUrl); // "https://api.example.com"
+`);
+
+// ============================================
+// RegExp Modifiers (ES2025)
+// - Inline flag changes within regex patterns
+console.log("\n=== RegExp Modifiers (ES2025) ===");
+
+console.log("Inline modifiers:");
+console.log("- (?i) case insensitive");
+console.log("- (?m) multiline");
+console.log("- (?s) dotAll");
+console.log("- (?U) unicode");
+console.log("- (?-flag) to turn off a flag");
+
+console.log("\nExample:");
+console.log(`
+// Case-insensitive for part of pattern only
+const regex = /(?i:hello) WORLD/;
+regex.test("HELLO world"); // true for 'hello' part, false overall
+
+// Turn off case-insensitivity
+const mixed = /(?i:hello) (?-i:WORLD)/;
+mixed.test("hello World"); // false - WORLD must be uppercase
+`);
+
+// ============================================
+// Duplicate Named Capture Groups (ES2025)
+// - Allow same name for different capture groups
+console.log("\n=== Duplicate Named Capture Groups (ES2025) ===");
+
+console.log("Duplicate named captures:");
+console.log("- Same name in different alternatives");
+console.log("- Useful for matching multiple formats");
+
+console.log("\nExample:");
+console.log(`
+// Match date in YYYY-MM-DD or DD/MM/YYYY format
+const dateRegex = /(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})|(?<day>\\d{2})\\/(?<month>\\d{2})\\/(?<year>\\d{4})/;
+const match1 = dateRegex.exec("2024-06-15");
+const match2 = dateRegex.exec("15/06/2024");
+console.log(match1.groups); // { year: "2024", month: "06", day: "15" }
+console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
+`);
+
+// ============================================
+// Resource Management (Stage 3)
 // - Automatic resource cleanup using Symbol.dispose
 // - Similar to try-with-resources in Java or using in C#
-// ES2025 Finalized: Explicit Resource Management is part of the ECMAScript specification.
-console.log("\n=== Resource Management (ES2025) ===");
+// Stage 3: Explicit Resource Management is an active TC39 proposal, not yet finalized.
+console.log("\n=== Resource Management (Stage 3) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 122+ (July 2023), 130+ (Sept 2024) shipping by default
@@ -617,9 +765,9 @@ class FileHandle {
   }
 }
 
-// Note: using declarations are ES2025 features (finalized March 2024)
-// They require runtime support (Node.js 22.0+, modern browsers)
-// Uncomment when available in your environment
+// Note: using declarations are Stage 3 (Explicit Resource Management proposal)
+// They require runtime support (Node.js 22.0+ with flag, modern browsers may have partial support)
+// Check TC39 proposal status before production use
 
 // Using declaration - automatically calls Symbol.dispose
 // {
@@ -774,16 +922,16 @@ console.log("7. Set method return types (new Set, not original)");
 console.log("8. using declaration disposal timing");
 
 // ============================================
-// ES2025 Features (Temporal & Set Methods)
+// ES2025 Features (continued) & ES2027
 // ============================================
 
 // ============================================
-// Temporal API (ES2025)
+// Temporal API (ES2027)
 // - Modern date/time API to replace Date object
 // - Immutable, timezone-aware, easier to use
-console.log("\n=== Temporal API (ES2025) ===");
+console.log("\n=== Temporal API (ES2027) ===");
 
-console.log("✅ NOTE: Temporal reached Stage 4 in Nov 2023 and is part of ES2025.");
+console.log("NOTE: Temporal reached Stage 4 in Nov 2023 and is targeted for ES2027.");
 console.log("Browser/runtime support varies by engine. Check caniuse.com for current status.");
 console.log("Polyfill (for older environments): @js-temporal/polyfill (npm)");
 console.log("Spec: https://github.com/tc39/proposal-temporal");
@@ -876,14 +1024,14 @@ console.log("- Statistical aggregations");
 console.log("- Any scenario sensitive to floating-point error accumulation");
 
 // ============================================
-// RegExp.escape (Stage 3 Proposal)
+// RegExp.escape (ES2025)
 // - Escape special regex characters in a string
 // - Useful for building dynamic regex patterns safely
-// ⚠️ NOTE: RegExp.escape is Stage 3, not ES2026
-console.log("\n=== RegExp.escape (Stage 3 Proposal) ===");
+// ES2025: RegExp.escape is part of the ECMAScript 2025 specification.
+console.log("\n=== RegExp.escape (ES2025) ===");
 
-console.log("⚠️ NOTE: RegExp.escape is a Stage 3 proposal.");
-console.log("It has not yet reached Stage 4, not part of ES2026.");
+console.log("NOTE: RegExp.escape is standardized in ES2025.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
 console.log("\nRegExp.escape syntax:");
 console.log(`
@@ -911,13 +1059,13 @@ console.log("- Preventing ReDoS attacks from user-controlled regex");
 // ============================================
 
 // ============================================
-// DisposableStack (ES2025)
+// DisposableStack (Stage 3)
 // - Manage multiple disposable resources together
 // - Automatic cleanup in reverse order
-// Part of Explicit Resource Management (ES2025)
-console.log("\n=== DisposableStack (ES2025) ===");
+// Part of Explicit Resource Management (Stage 3)
+console.log("\n=== DisposableStack (Stage 3) ===");
 
-console.log("✅ NOTE: DisposableStack is part of ES2025 (Explicit Resource Management).");
+console.log("NOTE: DisposableStack is part of Stage 3 (Explicit Resource Management proposal).");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 console.log("Polyfill: @ungap/disposable-stack (npm)");
 
@@ -947,13 +1095,14 @@ stack.dispose();
 `);
 
 // ============================================
-// Array.fromAsync (Stage 3 Proposal)
+// Array.fromAsync (Proposal Status Uncertain)
 // - Create arrays from async iterables
 // - Similar to Array.from but for async
-console.log("\n=== Array.fromAsync (Stage 3 Proposal) ===");
+console.log("\n=== Array.fromAsync (Status Uncertain) ===");
 
-console.log("⚠️ NOTE: Array.fromAsync is a Stage 3 proposal.");
-console.log("Requires transpilation or polyfill.");
+console.log("NOTE: Array.fromAsync proposal status needs verification.");
+console.log("Check TC39 proposals repository for current status.");
+console.log("May have been withdrawn, merged, or moved between stages.");
 
 console.log("\nArray.fromAsync syntax:");
 console.log(`
@@ -979,13 +1128,13 @@ console.log("With promises:", withPromises); // [1, 2, 3]
 `);
 
 // ============================================
-// Promise.try (Stage 3 Proposal)
+// Promise.try (ES2025)
 // - Normalize sync/async exceptions
 // - Similar to try/catch but for functions
-console.log("\n=== Promise.try (Stage 3 Proposal) ===");
+console.log("\n=== Promise.try (ES2025) ===");
 
-console.log("⚠️ NOTE: Promise.try is a Stage 3 proposal.");
-console.log("Also known as Promise.start in some implementations.");
+console.log("NOTE: Promise.try is standardized in ES2025.");
+console.log("Check caniuse.com for browser/runtime support status.");
 
 console.log("\nPromise.try syntax:");
 console.log(`

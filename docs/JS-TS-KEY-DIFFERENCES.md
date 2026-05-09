@@ -1,13 +1,15 @@
 # JavaScript vs TypeScript: Key Differences Quick Reference
 
 <!-- 
-ES Version Verification Notes (Added 2026-05-07):
+ES Version Verification Notes (Added 2026-05-09):
 - Reference: TC39 Finished Proposals - https://github.com/tc39/proposals/blob/main/finished-proposals.md
 - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
 - Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
-- ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v)
-- ES2025: Features finalized in 2024 (Temporal, using, Set methods, Iterator helpers, Decorators)
-- Stage 3: Active proposals, not yet finalized (Math.sumPrecise, RegExp.escape)
+- ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer)
+- ES2025: Features finalized in 2024 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array)
+- ES2027: Temporal API (Stage 4 Nov 2023, delayed publication)
+- Stage 3: Active proposals (Decorators, Explicit Resource Management/using, Math.sumPrecise)
+- Withdrawn: Records & Tuples (subsumed by Composites)
 - Always verify ES version attributions against TC39 official records
 -->
 
@@ -293,15 +295,17 @@ function add(a: number, b: number): number {
 | `toSpliced()` | Returns spliced copy | No |
 | `with(i, v)` | Returns copy with value | No |
 
-#### Resource Management (ES2025 / TS 5.2+)
+#### Resource Management (Stage 3 / TS 5.2+)
 ```typescript
-// using declaration - automatic cleanup
+// using declaration - automatic cleanup (Stage 3 proposal)
 using file = new FileHandle("data.txt");
 // file[Symbol.dispose]() called at block end
 
 await using db = new DatabaseConnection();
 // db[Symbol.asyncDispose]() called at block end
 ```
+
+Note: `using` is a Stage 3 TC39 proposal, not yet part of ECMAScript standard. TypeScript 5.2+ supports the syntax.
 
 **See**: `demo/06-advanced/39-es2022-plus-features.js`
 
@@ -315,6 +319,6 @@ await using db = new DatabaseConnection();
 
 ---
 
-**Last Updated**: 2026-04-30
+**Last Updated**: 2026-05-09
 **Based on**: ES2025 and TypeScript 5.x
 **Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals

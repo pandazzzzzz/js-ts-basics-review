@@ -10,13 +10,14 @@ JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript co
 |-----------------|---------|------------|
 | ES2022+ (基础特性) | 18+ | 5+ |
 | ES2025 Features | 22+ | 5.2+ |
-| Temporal API | 22+ | 5.0+ |
+| Temporal API (ES2027) | Future | 5.0+ |
 
 **Note**: 
 - Node.js 18+ supports most ES2022+ features
-- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Temporal API, Resource Management
-- TypeScript 5.0+ required for Temporal API
-- TypeScript 5.2+ (August 2023) required for `using` declarations
+- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, RegExp.escape, Promise.try
+- Temporal API is ES2027 (Stage 4 Nov 2023, delayed publication) - check future Node.js versions
+- TypeScript 5.0+ required for Temporal API type definitions
+- TypeScript 5.2+ (August 2023) supports `using` declarations syntax (Stage 3 JS proposal)
 
 ## Quick Start
 
@@ -47,7 +48,7 @@ npx ts-node demo/01-basics/01-variables-ts-comparison.ts
 
 ## Project Status
 
-📅 **Last Updated**: 2026-04-30  
+📅 **Last Updated**: 2026-05-09
 🔍 **Documentation Review**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals  
 🚀 **Git Status**: Synchronized with remote (126 commits)  
 📊 **Coverage**: Complete (Stages 1-6)

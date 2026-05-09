@@ -6,15 +6,16 @@
 
 // 📘 ES Version Verification:
 // - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// - Last Verified: 2026-05-07
+// - Last Verified: 2026-05-09
 // - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
 // - Stage Process: Stage 0 (Strawperson) → Stage 1 (Proposal) → Stage 2 (Draft) → Stage 3 (Candidate) → Stage 4 (Finished)
 //
-// Current Proposals Status:
-// - Stage 4 (Finalized): Temporal, using, Set methods, Iterator helpers, Decorators → ES2025
-// - Stage 3 (Candidate): Math.sumPrecise, RegExp.escape, Array.fromAsync, Promise.try
-// - Stage 2 (Draft): Records & Tuples, Pattern Matching
-// - Stage 1 (Proposal): Pipeline Operator, Partial Application
+// Current Proposals Status (per TC39 finished proposals and active proposals):
+// - ES2025 (Finalized): Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, JSON Modules
+// - ES2027 (Finalized): Temporal API
+// - Stage 3 (Candidate): Decorators, Explicit Resource Management (using), Math.sumPrecise
+// - Stage 2 (Draft): Pipeline Operator, Pattern Matching
+// - Withdrawn: Records & Tuples (subsumed by Composites proposal)
 
 // ============================================
 // Section 1: TC39 Proposal Stages
@@ -37,17 +38,17 @@ console.log("Stage 3: Candidate - Implementation feedback needed");
 console.log("Stage 4: Finished - Approved for ES standard");
 
 // ============================================
-// Section 2: Recent Standardized Features (ES2025) + Future Proposals
+// Section 2: Recent Standardized Features (ES2025/ES2027) + Future Proposals
 // ============================================
 
 console.log("\n=== Recent Standardized Features ===");
 
-// 1. Temporal API (ES2025) - Modern Date/Time
-console.log("\nTemporal API (ES2025):");
+// 1. Temporal API (ES2027) - Modern Date/Time
+console.log("\nTemporal API (ES2027):");
 console.log("- Modern replacement for Date object");
 console.log("- Immutable, timezone-aware, easy-to-use API");
 console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
-console.log("- Stage 4, included in ES2025");
+console.log("- Stage 4 (Nov 2023), included in ES2027");
 
 // Example of Temporal API syntax
 // const today = Temporal.Now.plainDateISO();
@@ -63,12 +64,12 @@ const age = today.since(birthday).years;
 
 // 2. Set Methods (already covered in 39-es2022-plus-features.js, ES2025)
 
-// 3. Decorators (ES2025)
-console.log("\nDecorators (ES2025):");
+// 3. Decorators (Stage 3)
+console.log("\nDecorators (Stage 3):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");
 console.log("- Metadata-based programming");
-console.log("- Finalized in ES2025");
+console.log("- Stage 3 proposal, not yet finalized");
 
 // Example decorator syntax (TypeScript already supports this)
 console.log("\nDecorator Example (JS syntax):");
@@ -89,16 +90,18 @@ class Example {
 `);
 
 // ============================================
-// Section 3: Stage 2 Proposals (Potential Future)
+// Section 3: Stage 2 Proposals + Withdrawn Proposals
 // ============================================
 
 console.log("\n=== Stage 2 Proposals ===");
 
-// 1. Records & Tuples
-console.log("\nRecords & Tuples (Stage 2):");
-console.log("- Immutable data structures");
+// 1. Records & Tuples (WITHDRAWN)
+console.log("\nRecords & Tuples (WITHDRAWN):");
+console.log("- Originally proposed immutable data structures");
 console.log("- Deep equality by value");
-console.log("#{} syntax for records, #[] for tuples");
+console.log("- Proposal withdrawn, subsumed by Composites proposal");
+console.log("- Check tc39/proposal-composites for latest status");
+console.log("#{} syntax for records, #[] for tuples (historical)");
 
 console.log("\nRecord & Tuple Example (future syntax):");
 console.log(`
@@ -134,16 +137,17 @@ const result = match (value) {
 `);
 
 // ============================================
-// Section 4: Stage 1 Proposals (Exploratory)
+// Section 4: Stage 1/2 Proposals (Exploratory)
 // ============================================
 
-console.log("\n=== Stage 1 Proposals ===");
+console.log("\n=== Active Proposals ===");
 
-// 1. Pipeline Operator
-console.log("\nPipeline Operator (Stage 1):");
+// 1. Pipeline Operator (Stage 2)
+console.log("\nPipeline Operator (Stage 2):");
 console.log("- |> operator for function chaining");
 console.log("- More readable than nested calls");
 console.log("- Similar to F#/Elixir pipe operator");
+console.log("- Moved from Stage 1 to Stage 2");
 
 console.log("\nPipeline Example (future syntax):");
 console.log(`

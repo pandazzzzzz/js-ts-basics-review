@@ -76,14 +76,14 @@ console.log("3. self-documenting code");
 console.log("4. Can gradually adopt TypeScript");
 
 // ============================================
-// Section 2: Decorators (JavaScript ES2025)
+// Section 2: Decorators (Stage 3 Proposal)
 // ============================================
 
-console.log("\n=== Decorators (ES2025) ===\n");
+console.log("\n=== Decorators (Stage 3) ===\n");
 
-// Decorators reached Stage 4 in 2024 and are part of ES2025
+// Decorators are a Stage 3 TC39 proposal (not yet finalized as of May 2026)
 // They allow adding metadata and modifying classes/functions
-// TypeScript has had experimental decorators for years
+// TypeScript has had experimental decorators for years with legacy syntax
 
 console.log("Decorator proposal stages:");
 console.log("- Stage 0: Strawman (idea)");
@@ -124,13 +124,14 @@ console.log("- Validation");
 console.log("- Dependency injection");
 console.log("- Caching and memoization");
 
-// ES2025 Decorator Syntax Example
-console.log("\n=== ES2025 Decorator Syntax ===");
+// Stage 3 Decorator Syntax Example
+console.log("\n=== Stage 3 Decorator Syntax ===");
 
 console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
 console.log("Enable with: { decoratorMetadata: true } in TypeScript");
+console.log("Note: Decorators are Stage 3, not yet part of ECMAScript standard");
 
-console.log("\nActual ES2025 decorator syntax:");
+console.log("\nProposed decorator syntax (Stage 3):");
 console.log(`
 // Method decorator with @ syntax
 function logged(target, context) {
@@ -518,10 +519,10 @@ console.log("8. Reflect vs Object method differences");
    TS:  Type inference reduces need for explicit annotations
 
 2. DECORATORS
-   JS:  ES2025 standard, part of the ECMAScript specification
+   JS:  Stage 3 proposal (not yet standardized, check TC39 status)
    TS:  Experimental decorators (legacy) since TS 1.5
-   TS:  --experimentalDecorators flag required
-   TS:  ES2025 decorator support in TS 5.0+ (experimentalDecorators: false)
+   TS:  --experimentalDecorators flag required for legacy syntax
+   TS:  Stage 3 decorator support in TS 5.0+ (useLegacyDecorators: false)
    TS:  Decorator metadata with reflect-metadata
 
 3. TYPE-LEVEL PROGRAMMING
@@ -616,7 +617,7 @@ console.log("8. Reflect vs Object method differences");
    Key features to use:
    - satisfies operator (TS 4.9+): Preserves literal types
    - const type parameters (TS 5.0+): Prevent type widening
-   - using declarations support (TS 5.2+): ES2025 feature
+   - using declarations support (TS 5.2+): Stage 3 JS proposal
    - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
    - Decorator metadata (TS 5.0+): Requires 'emitDecoratorMetadata: true'
 
