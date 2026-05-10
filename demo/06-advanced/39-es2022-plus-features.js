@@ -14,7 +14,8 @@
 // - ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer)
 // - ES2025: Features finalized in 2024 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, JSON Modules)
 // - ES2027: Temporal API (Stage 4 Nov 2023, delayed publication)
-// - Stage 3: Active proposals, not yet finalized (Decorators, Explicit Resource Management/using, Math.sumPrecise)
+// - ES2026: Features finalized in 2025 (Math.sumPrecise, Array.fromAsync, Error.isError, Uint8Array Base64)
+// - Stage 3: Active proposals, not yet finalized (Decorators, Explicit Resource Management/using)
 
 // ============================================
 // ES2021 Features (Brief Review)
@@ -58,12 +59,16 @@ console.log("  - Float16Array / Math.f16round() (half-precision floats)");
 console.log("  - JSON Modules (import JSON directly)");
 console.log("  - Import Attributes (with { type: 'json' })");
 console.log("  - RegExp Modifiers (inline flag changes)");
+console.log("\nES2026:");
+console.log("  - Math.sumPrecise (high-precision floating-point summation)");
+console.log("  - Array.fromAsync (create arrays from async iterables)");
+console.log("  - Error.isError (type checking for Error objects)");
+console.log("  - Uint8Array to/from Base64 (base64 encoding/decoding)");
 console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
 console.log("\nStage 3 Proposals:");
 console.log("  - Decorators (Stage 3 - class/method decorators)");
 console.log("  - Explicit Resource Management (using/await using, Stage 3)");
-console.log("  - Math.sumPrecise (Stage 3 - high-precision summation)");
 
 // ============================================
 // ES2022 Features
@@ -992,13 +997,13 @@ console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
 // ============================================
-// Math.sumPrecise - Stage 3 Proposal
+// Math.sumPrecise (ES2026)
 // - High-precision summation avoiding floating-point errors
 // - Uses Kahan-Babuška algorithm internally
-// ⚠️ NOTE: Math.sumPrecise is Stage 3, not ES2026
-console.log("\n=== Math.sumPrecise (Stage 3 Proposal) ===");
+// - Reached Stage 4 in 2025-07, part of ES2026
+console.log("\n=== Math.sumPrecise (ES2026) ===");
 
-console.log("⚠️ NOTE: Math.sumPrecise is a Stage 3 proposal, not yet ES2026.");
+console.log("NOTE: Math.sumPrecise reached Stage 4 in July 2025 and is part of ES2026.");
 console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
 console.log("\nMath.sumPrecise solves floating-point precision issues:");
@@ -1095,14 +1100,14 @@ stack.dispose();
 `);
 
 // ============================================
-// Array.fromAsync (Proposal Status Uncertain)
+// Array.fromAsync (ES2026)
 // - Create arrays from async iterables
 // - Similar to Array.from but for async
-console.log("\n=== Array.fromAsync (Status Uncertain) ===");
+// - Reached Stage 4 in 2025-05, part of ES2026
+console.log("\n=== Array.fromAsync (ES2026) ===");
 
-console.log("NOTE: Array.fromAsync proposal status needs verification.");
-console.log("Check TC39 proposals repository for current status.");
-console.log("May have been withdrawn, merged, or moved between stages.");
+console.log("NOTE: Array.fromAsync reached Stage 4 in May 2025 and is part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
 console.log("\nArray.fromAsync syntax:");
 console.log(`

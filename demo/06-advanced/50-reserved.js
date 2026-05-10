@@ -12,8 +12,9 @@
 //
 // Current Proposals Status (per TC39 finished proposals and active proposals):
 // - ES2025 (Finalized): Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, JSON Modules
+// - ES2026 (Finalized): Math.sumPrecise, Array.fromAsync, Error.isError, Uint8Array Base64
 // - ES2027 (Finalized): Temporal API
-// - Stage 3 (Candidate): Decorators, Explicit Resource Management (using), Math.sumPrecise
+// - Stage 3 (Candidate): Decorators, Explicit Resource Management (using)
 // - Stage 2 (Draft): Pipeline Operator, Pattern Matching
 // - Withdrawn: Records & Tuples (subsumed by Composites proposal)
 
