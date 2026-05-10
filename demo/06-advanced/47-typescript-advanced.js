@@ -188,10 +188,10 @@ class Temperature {
 }
 `);
 
-console.log("\n⚠️ TypeScript decorators vs ES2025 decorators:");
+console.log("\n⚠️ TypeScript decorators vs Stage 3 decorators:");
 console.log("- TypeScript legacy decorators: Different signature (target, propertyKey, descriptor)");
-console.log("- ES2025 decorators: New signature (target, context) with context object");
-console.log("- TypeScript 5.0+: Supports ES2025 with 'experimentalDecorators: false'");
+console.log("- Stage 3 decorators: New signature (target, context) with context object");
+console.log("- TypeScript 5.0+: Supports Stage 3 with 'experimentalDecorators: false'");
 console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-11'");
 
 console.log("\nDecorator context object properties:");
