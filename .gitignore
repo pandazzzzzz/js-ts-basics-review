@@ -11,6 +11,10 @@
 !demo/**
 !docs/
 !docs/**
+!reference/
+!reference/**
+!scripts/
+!scripts/**
 
 # 核心文件
 !.gitignore
@@ -24,10 +28,13 @@
 # 此配置确保只有以下内容被同步到远程分支：
 # - demo/ 文件夹及其所有内容
 # - docs/ 文件夹及其所有内容
+# - reference/ 文件夹及其所有内容（ES 版本参考数据）
+# - scripts/ 文件夹及其所有内容（验证脚本）
 # - .gitignore 文件
 # - LICENSE 文件
 # - README.md 文件
 # - package.json 文件
 #
+# CLAUDE.md 仅保留在本地，不提交到远程
 # 其他所有文件和文件夹都会被忽略
 

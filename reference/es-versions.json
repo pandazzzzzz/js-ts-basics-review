@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "lastVerified": "2026-05-11",
+    "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
+    "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
+    "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
+    "example": "Stage 4 finalized in 2024 → ES2025 (June 2025 release)"
+  },
+  "features": {
+    "Temporal": {
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2023-11",
+      "note": "Stage 4 reached Nov 2023, delayed publication to ES2027",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js", "demo/02-data-structures/12-date-time.js"]
+    },
+    "Decorators": {
+      "status": "Stage 3",
+      "stage": 3,
+      "note": "Candidate stage, not yet finalized. Active TC39 proposal.",
+      "files": ["demo/06-advanced/47-typescript-advanced.js", "demo/06-advanced/50-reserved.js", "demo/03-core-concepts/16-classes.js"]
+    },
+    "Array.fromAsync": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025-05",
+      "note": "Stage 4 reached May 2025, part of ES2026",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js"]
+    },
+    "Math.sumPrecise": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025-07",
+      "note": "Stage 4 reached July 2025, part of ES2026",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js"]
+    },
+    "Error.isError": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025",
+      "note": "Part of ES2026",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js"]
+    },
+    "Uint8Array Base64": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025",
+      "note": "Uint8Array.toBase64/fromBase64, part of ES2026",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js"]
+    },
+    "Set methods": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024-02",
+      "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc.",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/10-map-set.js"]
+    },
+    "Iterator helpers": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024-02",
+      "note": "map, filter, take, drop, forEach, reduce, toArray, etc.",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "RegExp.escape": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Promise.try": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Float16Array": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "note": "Includes Math.f16round()",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "JSON Modules": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "note": "import data from './file.json' with { type: 'json' }",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js"]
+    },
+    "Import Attributes": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "note": "Formerly Import Assertions, renamed to Import Attributes",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "RegExp Modifiers": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "note": "Inline flag changes (?i, ?m, ?s)",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Duplicate Named Capture Groups": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2024",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "using (Explicit Resource Management)": {
+      "status": "Stage 3",
+      "stage": 3,
+      "note": "Candidate stage. using/await using declarations, Symbol.dispose/Symbol.asyncDispose",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/50-reserved.js", "demo/06-advanced/47-typescript-advanced.js"]
+    },
+    "DisposableStack": {
+      "status": "Stage 3",
+      "stage": 3,
+      "note": "Part of Explicit Resource Management proposal",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Pipeline Operator": {
+      "status": "Stage 2",
+      "stage": 2,
+      "note": "Draft stage, syntax under discussion",
+      "files": ["demo/06-advanced/50-reserved.js"]
+    },
+    "Pattern Matching": {
+      "status": "Stage 2",
+      "stage": 2,
+      "note": "Draft stage",
+      "files": ["demo/06-advanced/50-reserved.js"]
+    },
+    "Records & Tuples": {
+      "status": "Withdrawn",
+      "stage": -1,
+      "note": "Withdrawn, subsumed by Composites proposal",
+      "files": ["demo/06-advanced/50-reserved.js"]
+    },
+    "Object.groupBy": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/08-objects.js"]
+    },
+    "Map.groupBy": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Promise.withResolvers": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "RegExp v flag": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "note": "Unicode set operations in character classes",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "ArrayBuffer.transfer": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Resizable ArrayBuffer": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Well-Formed Unicode Strings": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023",
+      "note": "isWellFormed(), toWellFormed()",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "toSorted": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "note": "Immutable array sort",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "toReversed": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "with": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "note": "Array.with(index, value) - immutable replacement",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "toSpliced": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "findLast": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "findLastIndex": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/02-data-structures/06-arrays.js"]
+    },
+    "Hashbang Syntax": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2022",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "at": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021",
+      "note": "Array/string .at() method with negative indices",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/03-core-concepts/18-es6-plus-syntax.js"]
+    },
+    "Object.hasOwn": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "Error.cause": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/03-core-concepts/20-error-handling.js"]
+    },
+    "Top-level await": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/04-asynchronous/32-modules.js"]
+    },
+    "Private class fields": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021",
+      "note": "#field syntax",
+      "files": ["demo/03-core-concepts/16-classes.js"]
+    },
+    "replaceAll": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/01-basics/04-strings.js"]
+    },
+    "Logical Assignment": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "note": "||=, &&=, ??=",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/01-basics/02-operators.js"]
+    },
+    "Numeric Separators": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js"]
+    },
+    "WeakRef": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/03-core-concepts/27-memory-management.js"]
+    },
+    "FinalizationRegistry": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/06-advanced/39-es2022-plus-features.js", "demo/03-core-concepts/27-memory-management.js"]
+    },
+    "Promise.any": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/04-asynchronous/30-promises.js"]
+    },
+    "AggregateError": {
+      "status": "ES2021",
+      "stage": 4,
+      "stage4Date": "2020",
+      "files": ["demo/04-asynchronous/30-promises.js"]
+    }
+  }
+}
