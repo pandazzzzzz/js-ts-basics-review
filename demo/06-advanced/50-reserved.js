@@ -4,19 +4,9 @@
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
 
-// 📘 ES Version Verification:
-// - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// - Last Verified: 2026-05-09
-// - Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
-// - Stage Process: Stage 0 (Strawperson) → Stage 1 (Proposal) → Stage 2 (Draft) → Stage 3 (Candidate) → Stage 4 (Finished)
-//
-// Current Proposals Status (per TC39 finished proposals and active proposals):
-// - ES2025 (Finalized): Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, JSON Modules
-// - ES2026 (Finalized): Math.sumPrecise, Array.fromAsync, Error.isError, Uint8Array Base64
-// - ES2027 (Finalized): Temporal API
-// - Stage 3 (Candidate): Decorators, Explicit Resource Management (using)
-// - Stage 2 (Draft): Pipeline Operator, Pattern Matching
-// - Withdrawn: Records & Tuples (subsumed by Composites proposal)
+// 📘 ES Version Reference: reference/es-versions.json
+// 📘 TC39 Source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// 📘 Last Verified: 2026-05-09 (check reference file for details)
 
 // ============================================
 // Section 1: TC39 Proposal Stages

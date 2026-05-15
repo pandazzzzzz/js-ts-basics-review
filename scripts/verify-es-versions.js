@@ -75,29 +75,54 @@ function getAllJsFiles(dir) {
 }
 
 // Extract ES version annotations from file content
-function extractAnnotations(content, filePath) {
+function extractAnnotations(content, filePath, reference) {
   const annotations = [];
 
-  // Specific feature patterns - must match uppercase ES or Stage keywords
-  const featurePatterns = [
+  // Short feature names that need precise matching (avoid false positives)
+  // at:  avoid matching codePointAt, charCodeAt, startsAt, endsAt, etc.
+  // with: avoid matching startsWith, endsWith, etc.
+  const shortFeatures = ['at', 'with'];
+
+  // Dynamically generate feature patterns from reference.json
+  // This ensures coverage of all 30+ features defined in reference
+  const featurePatterns = Object.keys(reference.features).map(featureName => {
+    // Escape special regex characters and allow for spacing variations
+    const escapedName = featureName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
+
+    // For short feature names, require method context with word boundary
+    // to avoid matching unrelated methods like startsWith, codePointAt
+    if (shortFeatures.includes(featureName)) {
+      return {
+        name: featureName,
+        regex: new RegExp(`\\b\\.${escapedName}\\([^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b|Array\\.${escapedName}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
+      };
+    }
+
+    return {
+      name: featureName,
+      regex: new RegExp(`${escapedName}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
+    };
+  });
+
+  // Add alias patterns for common variations
+  featurePatterns.push(
     { name: 'Temporal', regex: /Temporal(?:\s+API)?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Decorators', regex: /Decorators?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Array.fromAsync', regex: /Array\.fromAsync[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Math.sumPrecise', regex: /Math\.sumPrecise[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'using', regex: /(?:using|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Set methods', regex: /Set\s+Methods[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Iterator helpers', regex: /Iterator\s+helpers?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Float16Array', regex: /Float16Array[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'Promise.try', regex: /Promise\.try[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'RegExp.escape', regex: /RegExp\.escape[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'JSON Modules', regex: /JSON\s+Modules?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'DisposableStack', regex: /DisposableStack[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-  ];
+    { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
+  );
 
   for (const pattern of featurePatterns) {
     const matches = content.matchAll(pattern.regex);
     for (const match of matches) {
-      const version = match[1].replace(/Stage\s*/, 'Stage ');
+      // Find the first non-empty capture group (for patterns with multiple groups)
+      let version = null;
+      for (let i = 1; i < match.length; i++) {
+        if (match[i]) {
+          version = match[i].replace(/Stage\s*/, 'Stage ');
+          break;
+        }
+      }
+      if (!version) continue;
+
       // Filter out false positives from filenames (lowercase es2022, etc.)
       if (!version.match(/^es\d{4}$/i) || version.toUpperCase() !== version) {
         continue;
@@ -116,11 +141,11 @@ function extractAnnotations(content, filePath) {
 
 // Check verification blocks
 function checkVerificationBlocks(content, filePath) {
-  const hasVerificationBlock = content.includes('ES Version Verification:') ||
-                               content.includes('📘 ES Version Verification:');
+  const hasVerificationBlock = content.includes('ES Version Reference:') ||
+                               content.includes('ES Version Verification:');
 
   if (hasVerificationBlock) {
-    // Extract lastVerified date from block
+    // Extract lastVerified date from block or reference file
     const lastVerifiedMatch = content.match(/Last Verified:\s*(\d{4}-\d{2}-\d{2})/);
     if (lastVerifiedMatch) {
       return { hasBlock: true, lastVerified: lastVerifiedMatch[1] };
@@ -194,7 +219,7 @@ function main() {
     const relPath = path.relative(path.dirname(REFERENCE_FILE), file);
 
     // Extract annotations
-    const annotations = extractAnnotations(content, file);
+    const annotations = extractAnnotations(content, file, reference);
     allAnnotations.push(...annotations);
 
     // Check verification blocks
