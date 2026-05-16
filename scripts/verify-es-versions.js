@@ -78,37 +78,34 @@ function getAllJsFiles(dir) {
 function extractAnnotations(content, filePath, reference) {
   const annotations = [];
 
-  // Short feature names that need precise matching (avoid false positives)
-  // at:  avoid matching codePointAt, charCodeAt, startsAt, endsAt, etc.
+  // Hard-coded patterns for short feature names that need precise matching
+  // at: avoid matching codePointAt, charCodeAt, DurationFormat, etc.
   // with: avoid matching startsWith, endsWith, etc.
-  const shortFeatures = ['at', 'with'];
+  const shortFeaturePatterns = [
+    { name: 'at', regex: /\.at\([^)]*\)(?:[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b|Array\.at[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b)/gi },
+    { name: 'with', regex: /\.with\([^)]*\)(?:[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b|Array\.with[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b)/gi }
+  ];
 
-  // Dynamically generate feature patterns from reference.json
-  // This ensures coverage of all 30+ features defined in reference
-  const featurePatterns = Object.keys(reference.features).map(featureName => {
-    // Escape special regex characters and allow for spacing variations
-    const escapedName = featureName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
-
-    // For short feature names, require method context with word boundary
-    // to avoid matching unrelated methods like startsWith, codePointAt
-    if (shortFeatures.includes(featureName)) {
+  // Dynamically generate patterns for remaining features from reference.json
+  // (skipping 'at' and 'with' which are handled by shortFeaturePatterns above)
+  const skipFeatures = ['at', 'with'];
+  const dynamicPatterns = Object.keys(reference.features)
+    .filter(featureName => !skipFeatures.includes(featureName))
+    .map(featureName => {
+      const escapedName = featureName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
       return {
         name: featureName,
-        regex: new RegExp(`\\b\\.${escapedName}\\([^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b|Array\\.${escapedName}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
+        regex: new RegExp(`${escapedName}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
       };
-    }
-
-    return {
-      name: featureName,
-      regex: new RegExp(`${escapedName}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
-    };
-  });
+    });
 
   // Add alias patterns for common variations
-  featurePatterns.push(
+  dynamicPatterns.push(
     { name: 'Temporal', regex: /Temporal(?:\s+API)?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
     { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
   );
+
+  const featurePatterns = [...shortFeaturePatterns, ...dynamicPatterns];
 
   for (const pattern of featurePatterns) {
     const matches = content.matchAll(pattern.regex);

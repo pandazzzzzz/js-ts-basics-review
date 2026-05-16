@@ -355,8 +355,8 @@ console.log("Symbol.asyncIterator - Async iterator");
 console.log("Symbol.hasInstance - instanceof behavior");
 console.log("Symbol.toStringTag - Object.prototype.toString()");
 console.log("Symbol.toPrimitive - Convert to primitive");
-console.log("Symbol.dispose - Explicit resource management (ES2025)");
-console.log("Symbol.asyncDispose - Async resource management (ES2025)");
+console.log("Symbol.dispose - Explicit resource management (Stage 3)");
+console.log("Symbol.asyncDispose - Async resource management (Stage 3)");
 
 // Example: Symbol.toStringTag
 class MyClass {
