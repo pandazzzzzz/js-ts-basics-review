@@ -121,7 +121,9 @@ function extractAnnotations(content, filePath, reference) {
       if (!version) continue;
 
       // Filter out false positives from filenames (lowercase es2022, etc.)
-      if (!version.match(/^es\d{4}$/i) || version.toUpperCase() !== version) {
+      // Only allow uppercase ES202x or Stage N formats
+      const isValidVersion = version.match(/^ES20\d{2}$/) || version.match(/^Stage \d$/);
+      if (!isValidVersion) {
         continue;
       }
       annotations.push({

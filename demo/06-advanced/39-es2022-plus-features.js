@@ -6,7 +6,7 @@
 
 // 📘 ES Version Reference: reference/es-versions.json
 // 📘 TC39 Source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📘 Last Verified: 2026-05-09 (check reference file for details)
+// 📘 Last Verified: 2026-05-11 (check reference file for details)
 
 // ============================================
 // ES2021 Features (Brief Review)

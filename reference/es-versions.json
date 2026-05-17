@@ -18,7 +18,7 @@
       "status": "Stage 3",
       "stage": 3,
       "note": "Candidate stage, not yet finalized. Active TC39 proposal.",
-      "files": ["demo/06-advanced/47-typescript-advanced.js", "demo/06-advanced/50-reserved.js", "demo/03-core-concepts/16-classes.js"]
+      "files": ["demo/03-core-concepts/16-classes.js", "demo/06-advanced/39-es2022-plus-features.js", "demo/06-advanced/47-typescript-advanced.js", "demo/06-advanced/50-reserved.js"]
     },
     "Array.fromAsync": {
       "status": "ES2026",
