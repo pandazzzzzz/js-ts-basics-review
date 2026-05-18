@@ -369,7 +369,7 @@ console.log("FlatMapped:", flatMapped);
 // - Returns new array
 // - Immutable alternative to bracket assignment
 const original = [1, 2, 3, 4, 5];
-const withReplaced = original.with(2, 99);
+const withReplaced = original.with(2, 99); // (ES2023)
 console.log("\nwith - Immutable replace:");
 console.log("Original:", original);
 console.log("With replaced:", withReplaced);

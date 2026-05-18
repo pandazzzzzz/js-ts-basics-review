@@ -390,7 +390,7 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
  * - Different from string "#field"
  */
 
-console.log("\n=== 4. Private and Protected Properties Demo ===");
+console.log("\n=== 4. Private and Protected Properties Demo ==="); // Private class fields (ES2022)
 
 // 4.1 Private field with #
 class BankAccount {

@@ -102,7 +102,8 @@ function extractAnnotations(content, filePath, reference) {
   // Add alias patterns for common variations
   dynamicPatterns.push(
     { name: 'Temporal', regex: /Temporal(?:\s+API)?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
+    { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
+    { name: 'RegExp v flag', regex: /RegExp\s+\/v[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
   );
 
   const featurePatterns = [...shortFeaturePatterns, ...dynamicPatterns];

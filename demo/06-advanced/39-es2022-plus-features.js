@@ -1019,6 +1019,69 @@ console.log("- Scientific data processing");
 console.log("- Statistical aggregations");
 console.log("- Any scenario sensitive to floating-point error accumulation");
 
+  // ============================================
+  // Error.isError (ES2026)
+  // - Reliable Error type checking across realms
+  // - Replaces instanceof Error which fails across iframes/realms
+  // ES2026: Error.isError is part of the ECMAScript 2026 specification.
+  console.log("\n=== Error.isError (ES2026) ===");
+
+  console.log("NOTE: Error.isError reached Stage 4 and is part of ES2026.");
+  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+  console.log("\nError.isError solves cross-realm type checking:");
+  console.log(`
+  // Traditional instanceof fails across realms (iframes, workers)
+  // try { ... } catch (e) { if (e instanceof Error) { ... } }
+  // This can fail when the Error constructor differs between realms!
+
+  // Error.isError provides reliable checking
+  // if (Error.isError(e)) { console.log("Definitely an Error"); }
+
+  // Works with all Error subtypes
+  // Error.isError(new Error("test"));     // true
+  // Error.isError(new TypeError("test")); // true
+  // Error.isError(new RangeError("test"));// true
+  // Error.isError("not an error");        // false
+  // Error.isError({ message: "fake" });   // false
+  `);
+
+  console.log("\nUse cases:");
+  console.log("- Error handling in libraries used across realms");
+  console.log("- Validating error objects in iframe/postMessage scenarios");
+  console.log("- Type narrowing in try/catch blocks");
+
+  // ============================================
+  // Uint8Array Base64 (ES2026)
+  // - Native base64 encoding/decoding for binary data
+  // - Uint8Array.toBase64() and Uint8Array.fromBase64()
+  // ES2026: Uint8Array Base64 methods are part of the ECMAScript 2026 specification.
+  console.log("\n=== Uint8Array Base64 (ES2026) ===");
+
+  console.log("NOTE: Uint8Array Base64 methods reached Stage 4 and are part of ES2026.");
+  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+  console.log("\nUint8Array Base64 methods:");
+  console.log(`
+  // Encode binary data to Base64
+  // const data = new Uint8Array([72, 101, 108, 108, 111]);
+  // const encoded = data.toBase64();
+  // console.log(encoded); // "SGVsbG8="
+
+  // Decode Base64 to binary data
+  // const decoded = Uint8Array.fromBase64("SGVsbG8=");
+  // console.log(decoded); // Uint8Array [72, 101, 108, 108, 111]
+
+  // Standard and URL-safe variants
+  // data.toBase64({ alphabet: "base64url" });
+  `);
+
+  console.log("\nUse cases:");
+  console.log("- Encoding binary data for JSON/API transport");
+  console.log("- Data URIs and inline resources");
+  console.log("- Cryptographic key exchange formats");
+  console.log("- WebSocket binary-to-text protocol adapters");
+
 // ============================================
 // RegExp.escape (ES2025)
 // - Escape special regex characters in a string
