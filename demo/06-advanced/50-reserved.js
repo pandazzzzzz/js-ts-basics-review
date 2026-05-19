@@ -4,10 +4,6 @@
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 // 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
 
-// 📘 ES Version Reference: reference/es-versions.json
-// 📘 TC39 Source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📘 Last Verified: 2026-05-11 (check reference file for details)
-
 // ============================================
 // Section 1: TC39 Proposal Stages
 // ============================================

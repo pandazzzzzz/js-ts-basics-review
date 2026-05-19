@@ -4,17 +4,6 @@
 > **更新**: 2026-04-26
 > **ES 版本验证**: 2026-05-09 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
-<!-- 
-ES Version Verification Notes:
-- Verification Rule: Stage 4 in calendar year N → ES version N+1 (released June N+1)
-- Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
-- ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer)
-- ES2025: Features finalized in 2024 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array)
-- ES2027: Temporal API (Stage 4 Nov 2023, delayed publication)
-- Stage 3: Active proposals, not yet finalized (Decorators, Explicit Resource Management/using, Math.sumPrecise)
-- Withdrawn: Records & Tuples (subsumed by Composites)
-- Always verify against TC39 finished proposals before updating ES version attributions
--->
 
 **进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅
 
