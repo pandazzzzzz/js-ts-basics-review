@@ -50,6 +50,20 @@ function checkLastVerified(reference) {
   return true;
 }
 
+function validateStage4Dates(reference) {
+  const issues = [];
+  for (const [name, feature] of Object.entries(reference.features)) {
+    if (feature.stage === 4) {
+      if (!feature.stage4Date) {
+        issues.push({ name, issue: `Missing stage4Date` });
+      } else if (!/^\d{4}-\d{2}$/.test(feature.stage4Date)) {
+        issues.push({ name, stage4Date: feature.stage4Date, issue: `Invalid format, expected YYYY-MM` });
+      }
+    }
+  }
+  return issues;
+}
+
 function getAllJsFiles(dir) {
   const files = [];
 
@@ -169,6 +183,14 @@ function main() {
   log('cyan', `Reference source: ${reference.meta.source}`);
 
   const verifiedOk = checkLastVerified(reference);
+
+  const dateIssues = validateStage4Dates(reference);
+  if (dateIssues.length > 0) {
+    log('yellow', '\n⚠️  stage4Date Format Issues:');
+    for (const issue of dateIssues) {
+      log('yellow', `   ${issue.name}: ${issue.issue} (current: "${issue.stage4Date}")`);
+    }
+  }
 
   const demoFiles = getAllJsFiles(DEMO_DIR);
   log('cyan', `\nScanning ${demoFiles.length} demo files...`);

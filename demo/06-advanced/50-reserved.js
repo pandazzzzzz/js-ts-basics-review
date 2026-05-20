@@ -25,7 +25,7 @@ console.log("Stage 3: Candidate - Implementation feedback needed");
 console.log("Stage 4: Finished - Approved for ES standard");
 
 // ============================================
-// Section 2: Recent Standardized Features (ES2025/ES2027) + Future Proposals
+// Section 2: Recent Standardized Features (ES2025/ES2026/ES2027) + Future Proposals
 // ============================================
 
 console.log("\n=== Recent Standardized Features ===");
@@ -51,7 +51,44 @@ const age = today.since(birthday).years;
 
 // 2. Set Methods (already covered in 39-es2022-plus-features.js, ES2025)
 
-// 3. Decorators (Stage 3)
+// 3. ES2026 Features
+console.log("\nES2026 Features:");
+console.log("- Array.fromAsync (Stage 4 May 2025): Create arrays from async iterables");
+console.log("- Math.sumPrecise (Stage 4 July 2025): High-precision floating-point summation");
+console.log("- Error.isError (Stage 4 June 2025): Reliable Error type checking across realms");
+console.log("- Uint8Array Base64 (Stage 4 September 2025): Native base64 encoding/decoding");
+
+// Example of ES2026 features
+console.log("\nES2026 Example syntax:");
+console.log(`
+// Array.fromAsync - Convert async iterator to array
+async function* asyncNumbers() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+const arr = await Array.fromAsync(asyncNumbers());
+// arr = [1, 2, 3]
+
+// Math.sumPrecise - Accurate summation
+const large = [1e16, 1, 1, 1];
+const sum = Math.sumPrecise(large);
+// sum = 10000000000000003 (correct)
+
+// Error.isError - Cross-realm error checking
+if (Error.isError(someValue)) {
+  console.log("Definitely an Error object");
+}
+
+// Uint8Array Base64 - Encode/decode binary data
+const data = new Uint8Array([72, 101, 108, 108, 111]);
+const encoded = data.toBase64();
+// encoded = "SGVsbG8="
+const decoded = Uint8Array.fromBase64("SGVsbG8=");
+// decoded = Uint8Array [72, 101, 108, 108, 111]
+`);
+
+// 4. Decorators (Stage 3)
 console.log("\nDecorators (Stage 3):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");

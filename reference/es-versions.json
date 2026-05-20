@@ -11,249 +11,295 @@
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2023-11",
-      "note": "Stage 4 reached Nov 2023, delayed publication to ES2027"
+      "note": "Stage 4 reached Nov 2023, delayed publication to ES2027",
+      "url": "https://github.com/tc39/proposal-temporal"
     },
     "Decorators": {
       "status": "Stage 3",
       "stage": 3,
-      "note": "Candidate stage, not yet finalized. Active TC39 proposal."
+      "note": "Candidate stage, not yet finalized. Active TC39 proposal.",
+      "url": "https://github.com/tc39/proposal-decorators"
     },
     "Array.fromAsync": {
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-05",
-      "note": "Stage 4 reached May 2025, part of ES2026"
+      "note": "Stage 4 reached May 2025, part of ES2026",
+      "url": "https://github.com/tc39/proposal-array-from-async"
     },
     "Math.sumPrecise": {
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-07",
-      "note": "Stage 4 reached July 2025, part of ES2026"
+      "note": "Stage 4 reached July 2025, part of ES2026",
+      "url": "https://github.com/tc39/proposal-math-sum"
     },
     "Error.isError": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025",
-      "note": "Part of ES2026"
+      "stage4Date": "2025-06",
+      "note": "Stage 4 reached June 2025, part of ES2026",
+      "url": "https://github.com/tc39/proposal-error-iserror"
     },
     "Uint8Array Base64": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025",
-      "note": "Uint8Array.toBase64/fromBase64, part of ES2026"
+      "stage4Date": "2025-09",
+      "note": "Stage 4 reached September 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
+      "url": "https://github.com/tc39/proposal-arraybuffer-base64"
     },
     "Set methods": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-02",
-      "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc."
+      "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc.",
+      "url": "https://github.com/tc39/proposal-set-methods"
     },
     "Iterator helpers": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-02",
-      "note": "map, filter, take, drop, forEach, reduce, toArray, etc."
+      "note": "map, filter, take, drop, forEach, reduce, toArray, etc.",
+      "url": "https://github.com/tc39/proposal-iterator-helpers"
     },
     "RegExp.escape": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024"
+      "stage4Date": "2024-03",
+      "url": "https://github.com/tc39/proposal-regex-escaping"
     },
     "Promise.try": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024"
+      "stage4Date": "2024-03",
+      "url": "https://github.com/tc39/proposal-promise-try"
     },
     "Float16Array": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024",
-      "note": "Includes Math.f16round()"
+      "stage4Date": "2024-03",
+      "note": "Includes Math.f16round()",
+      "url": "https://github.com/tc39/proposal-float16array"
     },
     "JSON Modules": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024",
-      "note": "import data from './file.json' with { type: 'json' }"
+      "stage4Date": "2024-03",
+      "note": "import data from './file.json' with { type: 'json' }",
+      "url": "https://github.com/tc39/proposal-json-modules"
     },
     "Import Attributes": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024",
-      "note": "Formerly Import Assertions, renamed to Import Attributes"
+      "stage4Date": "2024-03",
+      "note": "Formerly Import Assertions, renamed to Import Attributes",
+      "url": "https://github.com/tc39/proposal-import-attributes"
     },
     "RegExp Modifiers": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024",
-      "note": "Inline flag changes (?i, ?m, ?s)"
+      "stage4Date": "2024-03",
+      "note": "Inline flag changes (?i, ?m, ?s)",
+      "url": "https://github.com/tc39/proposal-regexp-modifiers"
     },
     "Duplicate Named Capture Groups": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024"
+      "stage4Date": "2024-03",
+      "url": "https://github.com/tc39/proposal-duplicate-named-capturing-groups"
     },
     "using (Explicit Resource Management)": {
       "status": "Stage 3",
       "stage": 3,
-      "note": "Candidate stage. using/await using declarations, Symbol.dispose/Symbol.asyncDispose"
+      "note": "Candidate stage. using/await using declarations, Symbol.dispose/Symbol.asyncDispose",
+      "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "DisposableStack": {
       "status": "Stage 3",
       "stage": 3,
-      "note": "Part of Explicit Resource Management proposal"
+      "note": "Part of Explicit Resource Management proposal",
+      "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "Pipeline Operator": {
       "status": "Stage 2",
       "stage": 2,
-      "note": "Draft stage, syntax under discussion"
+      "note": "Draft stage, syntax under discussion",
+      "url": "https://github.com/tc39/proposal-pipeline-operator"
     },
     "Pattern Matching": {
       "status": "Stage 2",
       "stage": 2,
-      "note": "Draft stage"
+      "note": "Draft stage",
+      "url": "https://github.com/tc39/proposal-pattern-matching"
     },
     "Records & Tuples": {
       "status": "Withdrawn",
       "stage": -1,
-      "note": "Withdrawn, subsumed by Composites proposal"
+      "note": "Withdrawn, subsumed by Composites proposal",
+      "url": "https://github.com/tc39/proposal-record-tuple"
     },
     "Object.groupBy": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023"
+      "stage4Date": "2023-03",
+      "url": "https://github.com/tc39/proposal-array-grouping"
     },
     "Map.groupBy": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023"
+      "stage4Date": "2023-03",
+      "url": "https://github.com/tc39/proposal-array-grouping"
     },
     "Promise.withResolvers": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023"
+      "stage4Date": "2023-03",
+      "url": "https://github.com/tc39/proposal-promise-with-resolvers"
     },
     "RegExp v flag": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023",
-      "note": "Unicode set operations in character classes"
+      "stage4Date": "2023-03",
+      "note": "Unicode set operations in character classes",
+      "url": "https://github.com/tc39/proposal-regexp-v-flag"
     },
     "ArrayBuffer.transfer": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023"
+      "stage4Date": "2023-03",
+      "url": "https://github.com/tc39/proposal-arraybuffer-transfer"
     },
     "Resizable ArrayBuffer": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023"
+      "stage4Date": "2023-03",
+      "url": "https://github.com/tc39/proposal-resizablearraybuffer"
     },
     "Well-Formed Unicode Strings": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023",
-      "note": "isWellFormed(), toWellFormed()"
+      "stage4Date": "2023-03",
+      "note": "isWellFormed(), toWellFormed()",
+      "url": "https://github.com/tc39/proposal-is-usv-string"
     },
     "toSorted": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022",
-      "note": "Immutable array sort"
+      "stage4Date": "2022-06",
+      "note": "Immutable array sort",
+      "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "toReversed": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022"
+      "stage4Date": "2022-06",
+      "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "with": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022",
-      "note": "Array.with(index, value) - immutable replacement"
+      "stage4Date": "2022-06",
+      "note": "Array.with(index, value) - immutable replacement",
+      "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "toSpliced": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022"
+      "stage4Date": "2022-06",
+      "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "findLast": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022"
+      "stage4Date": "2022-06",
+      "url": "https://github.com/tc39/proposal-array-find-from-last"
     },
     "findLastIndex": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022"
+      "stage4Date": "2022-06",
+      "url": "https://github.com/tc39/proposal-array-find-from-last"
     },
     "Hashbang Syntax": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022"
+      "stage4Date": "2022-06",
+      "url": "https://github.com/tc39/proposal-hashbang"
     },
     "at": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021",
-      "note": "Array/string .at() method with negative indices"
+      "stage4Date": "2021-03",
+      "note": "Array/string .at() method with negative indices",
+      "url": "https://github.com/tc39/proposal-relative-indexing-method"
     },
     "Object.hasOwn": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021"
+      "stage4Date": "2021-03",
+      "url": "https://github.com/tc39/proposal-accessible-object-hasownproperty"
     },
     "Error.cause": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021"
+      "stage4Date": "2021-03",
+      "url": "https://github.com/tc39/proposal-error-cause"
     },
     "Top-level await": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021"
+      "stage4Date": "2021-03",
+      "url": "https://github.com/tc39/proposal-top-level-await"
     },
     "Private class fields": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021",
-      "note": "#field syntax"
+      "stage4Date": "2021-03",
+      "note": "#field syntax",
+      "url": "https://github.com/tc39/proposal-class-fields"
     },
     "replaceAll": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-string-replaceall"
     },
     "Logical Assignment": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020",
-      "note": "||=, &&=, ??="
+      "stage4Date": "2020-03",
+      "note": "||=, &&=, ??=",
+      "url": "https://github.com/tc39/proposal-logical-assignment"
     },
     "Numeric Separators": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-numeric-separator"
     },
     "WeakRef": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-weakrefs"
     },
     "FinalizationRegistry": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-weakrefs"
     },
     "Promise.any": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-promise-any"
     },
     "AggregateError": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020"
+      "stage4Date": "2020-03",
+      "url": "https://github.com/tc39/proposal-promise-any"
     }
   }
 }
