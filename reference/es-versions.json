@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-05-19",
+    "lastVerified": "2026-05-22",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
@@ -13,6 +13,20 @@
       "stage4Date": "2023-11",
       "note": "Stage 4 reached Nov 2023, delayed publication to ES2027",
       "url": "https://github.com/tc39/proposal-temporal"
+    },
+    "Atomics.pause": {
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2025-07",
+      "note": "Atomics.pause() for pausing threads in shared memory contexts",
+      "url": "https://github.com/tc39/proposal-atomics-pause"
+    },
+    "Joint Iteration": {
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2025-05",
+      "note": "for await (const [[key1, val1], [key2, val2]] of zip(iter1, iter2))",
+      "url": "https://github.com/tc39/proposal-joint-iteration"
     },
     "Decorators": {
       "status": "Stage 3",
@@ -47,6 +61,27 @@
       "stage4Date": "2025-09",
       "note": "Stage 4 reached September 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
       "url": "https://github.com/tc39/proposal-arraybuffer-base64"
+    },
+    "Upsert": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025-01",
+      "note": "Map.prototype.upsert(key, onInsert, onUpdate)",
+      "url": "https://github.com/tc39/proposal-upsert"
+    },
+    "JSON.parse source text access": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025-06",
+      "note": "Access to 'source' property of JSON.parse results",
+      "url": "https://github.com/tc39/proposal-json-parse-source"
+    },
+    "Iterator Sequencing": {
+      "status": "ES2026",
+      "stage": 4,
+      "stage4Date": "2025-07",
+      "note": "Iterator concatenation with + operator (iter1 + iter2)",
+      "url": "https://github.com/tc39/proposal-iterator-sequencing"
     },
     "Set methods": {
       "status": "ES2025",
@@ -108,16 +143,25 @@
       "stage4Date": "2024-03",
       "url": "https://github.com/tc39/proposal-duplicate-named-capturing-groups"
     },
+    "Redeclarable global eval vars": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2025-02",
+      "note": "Allows redeclaration of eval-introduced global variables",
+      "url": "https://github.com/tc39/proposal-redeclarable-global-eval-vars"
+    },
     "using (Explicit Resource Management)": {
-      "status": "Stage 3",
-      "stage": 3,
-      "note": "Candidate stage. using/await using declarations, Symbol.dispose/Symbol.asyncDispose",
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2025-05",
+      "note": "Stage 4 reached May 2025, using/await using declarations, Symbol.dispose/Symbol.asyncDispose",
       "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "DisposableStack": {
-      "status": "Stage 3",
-      "stage": 3,
-      "note": "Part of Explicit Resource Management proposal",
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2025-05",
+      "note": "Part of Explicit Resource Management proposal (Stage 4 May 2025, ES2027)",
       "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "Pipeline Operator": {

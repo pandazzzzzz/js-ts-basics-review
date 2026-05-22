@@ -53,9 +53,12 @@ console.log("  - Error.isError (type checking for Error objects)");
 console.log("  - Uint8Array to/from Base64 (base64 encoding/decoding)");
 console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
+console.log("  - Explicit Resource Management (using/await using, ES2027)");
+console.log("  - DisposableStack");
+console.log("  - Atomics.pause");
+console.log("  - Joint Iteration");
 console.log("\nStage 3 Proposals:");
 console.log("  - Decorators (Stage 3 - class/method decorators)");
-console.log("  - Explicit Resource Management (using/await using, Stage 3)");
 
 // ============================================
 // ES2022 Features
@@ -726,11 +729,11 @@ console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
 `);
 
 // ============================================
-// Resource Management (Stage 3)
+// Resource Management (ES2027)
 // - Automatic resource cleanup using Symbol.dispose
 // - Similar to try-with-resources in Java or using in C#
-// Stage 3: Explicit Resource Management is an active TC39 proposal, not yet finalized.
-console.log("\n=== Resource Management (Stage 3) ===");
+// ES2027: Explicit Resource Management reached Stage 4 in May 2025.
+console.log("\n=== Resource Management (ES2027) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 122+ (July 2023), 130+ (Sept 2024) shipping by default
@@ -757,9 +760,9 @@ class FileHandle {
   }
 }
 
-// Note: using declarations are Stage 3 (Explicit Resource Management proposal)
-// They require runtime support (Node.js 22.0+ with flag, modern browsers may have partial support)
-// Check TC39 proposal status before production use
+// Note: using declarations reached Stage 4 (ES2027, May 2025)
+// They require runtime support (Node.js 22.0+, modern browsers)
+// Check browser support (caniuse.com) before production use
 
 // Using declaration - automatically calls Symbol.dispose
 // {
@@ -1110,17 +1113,17 @@ console.log("- Input validation with user-provided patterns");
 console.log("- Preventing ReDoS attacks from user-controlled regex");
 
 // ============================================
-// Stage 3 Proposals (Upcoming)
+// ES2027 Proposals (Explicit Resource Management)
 // ============================================
 
 // ============================================
-// DisposableStack (Stage 3)
+// DisposableStack (ES2027)
 // - Manage multiple disposable resources together
 // - Automatic cleanup in reverse order
-// Part of Explicit Resource Management (Stage 3)
-console.log("\n=== DisposableStack (Stage 3) ===");
+// Part of Explicit Resource Management (Stage 4 May 2025, ES2027)
+console.log("\n=== DisposableStack (ES2027) ===");
 
-console.log("NOTE: DisposableStack is part of Stage 3 (Explicit Resource Management proposal).");
+console.log("NOTE: DisposableStack reached Stage 4 (ES2027, May 2025).");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 console.log("Polyfill: @ungap/disposable-stack (npm)");
 

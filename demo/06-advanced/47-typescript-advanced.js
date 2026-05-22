@@ -355,8 +355,8 @@ console.log("Symbol.asyncIterator - Async iterator");
 console.log("Symbol.hasInstance - instanceof behavior");
 console.log("Symbol.toStringTag - Object.prototype.toString()");
 console.log("Symbol.toPrimitive - Convert to primitive");
-console.log("Symbol.dispose - Explicit resource management (Stage 3)");
-console.log("Symbol.asyncDispose - Async resource management (Stage 3)");
+console.log("Symbol.dispose - Explicit resource management (ES2027, Stage 4 May 2025)");
+console.log("Symbol.asyncDispose - Async resource management (ES2027, Stage 4 May 2025)");
 
 // Example: Symbol.toStringTag
 class MyClass {
@@ -617,7 +617,7 @@ console.log("8. Reflect vs Object method differences");
    Key features to use:
    - satisfies operator (TS 4.9+): Preserves literal types
    - const type parameters (TS 5.0+): Prevent type widening
-   - using declarations support (TS 5.2+): Stage 3 JS proposal
+   - using declarations support (TS 5.2+): ES2027, Stage4 May 2025
    - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
    - Decorator metadata (TS 5.0+): Requires 'emitDecoratorMetadata: true'
 
