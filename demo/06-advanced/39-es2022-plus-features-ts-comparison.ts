@@ -395,3 +395,158 @@ console.log("1. Don't use any with new ES features");
 console.log("2. Don't ignore undefined in .at() return type");
 console.log("3. Don't forget to enable ES2022+ in tsconfig.json");
 console.log("4. Don't use type assertions when type inference works");
+
+// ============================================
+// ES2026 Features - TypeScript Enhancements
+// ============================================
+
+console.log("\n=== ES2026 Features - TypeScript Enhancements ===\n");
+
+console.log("Math.sumPrecise - Number Type:");
+console.log(`
+// TypeScript infers return type as number
+const sum: number = Math.sumPrecise([0.1, 0.2, 0.3]);
+`);
+
+console.log("Array.fromAsync - Generic Type Inference:");
+console.log(`
+// Async iterator with type inference
+async function* asyncNumbers(): AsyncGenerator<number> {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+// TypeScript infers array type from iterator
+const arr: number[] = await Array.fromAsync(asyncNumbers());
+`);
+
+console.log("Error.isError - Type Guard:");
+console.log(`
+// TypeScript treats Error.isError as type guard
+function handleError(error: unknown): void {
+  if (Error.isError(error)) {
+    // TypeScript narrows error to Error here
+    console.log("Error message:", error.message);
+  }
+}
+`);
+
+console.log("Uint8Array Base64 Methods:");
+console.log(`
+// Type-safe base64 encoding/decoding
+const data: Uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
+
+// TypeScript knows toBase64 returns string
+const encoded: string = data.toBase64();
+
+// TypeScript knows fromBase64 returns Uint8Array
+const decoded: Uint8Array = Uint8Array.fromBase64(encoded);
+`);
+
+console.log("Map.prototype.upsert - Generic Types:");
+console.log(`
+// upsert with type inference
+const counter = new Map<string, number>();
+
+// TypeScript tracks callback return types
+counter.upsert("requests", () => 1, (existing: number) => existing + 1);
+
+// Type-safe updates
+const count: number | undefined = counter.get("requests");
+`);
+
+console.log("JSON.parse source text access:");
+console.log(`
+// Access source text property on parsed objects
+const json: string = '{"name":"Alice"}';
+const data = JSON.parse(json);
+// const source: string = data.source; // Original JSON string
+`);
+
+console.log("Iterator Sequencing with +:");
+console.log(`
+// Type-safe iterator concatenation
+const iter1 = [1, 2, 3][Symbol.iterator]();
+const iter2 = [4, 5][Symbol.iterator]();
+
+// TypeScript infers combined iterator type
+const combined = iter1 + iter2;
+// const values: number[] = [...combined]; // [1, 2, 3, 4, 5]
+`);
+
+// ============================================
+// ES2027 Features - TypeScript Enhancements
+// ============================================
+
+console.log("\n=== ES2027 Features - TypeScript Enhancements ===\n");
+
+console.log("Atomics.pause - Shared Memory Contexts:");
+console.log(`
+// Used with SharedArrayBuffer and Int32Array
+const lock = new Int32Array(new SharedArrayBuffer(4));
+
+function acquireLock(): void {
+  // Spin-wait with pause
+  while (Atomics.compareExchange(lock, 0, 0, 1) !== 0) {
+    Atomics.pause(); // Hint to CPU that we're waiting
+  }
+}
+
+function releaseLock(): void {
+  Atomics.store(lock, 0, 0);
+}
+`);
+
+console.log("Joint Iteration (zip):");
+console.log(`
+// Iterate over multiple typed arrays simultaneously
+const names: string[] = ["Alice", "Bob"];
+const ages: number[] = [25, 30];
+
+// Type-safe joint iteration
+for (const [[, name], [, age]] of zip(names, ages)) {
+  // TypeScript knows name is string, age is number
+  console.log(\`\${name} is \${age}\`);
+}
+`);
+
+// ============================================
+// Decorators (Stage 3) - TypeScript Implementation
+// ============================================
+
+console.log("\n=== Decorators - Stage 3 Proposal ===\n");
+
+console.log("NOTE: Decorators are currently Stage 3 (not yet ES standard).");
+console.log("TypeScript 5.0+ supports Stage 3 decorator syntax.");
+console.log("Enable with: { experimentalDecorators: false, emitDecoratorMetadata: true }");
+
+console.log("\nStage 3 Decorator Syntax:");
+console.log(`
+// TypeScript 5.0+ Stage 3 decorator signature
+type ClassDecorator<T extends Function> = (target: T, context: ClassDecoratorContext) => T | void;
+type MethodDecorator = (target: Function, context: ClassMethodDecoratorContext) => Function | void;
+
+// Example class decorator
+const logged = <T extends Function>(target: T, context: ClassDecoratorContext): T => {
+  console.log(\`Decorating \${context.name}\`);
+  return target;
+};
+
+@logged
+class MyClass {
+  @deprecated("Use newMethod instead")
+  oldMethod(): void {
+    // ...
+  }
+}
+
+// Method decorator
+const deprecated = (message: string) =>
+  (target: Function, context: ClassMethodDecoratorContext): Function => {
+    return function(this: any, ...args: any[]) {
+      console.warn(\`\${context.kind} \${context.name} is deprecated: \${message}\`);
+      return target.apply(this, args);
+    };
+  };
+`);

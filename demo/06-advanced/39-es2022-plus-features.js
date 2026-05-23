@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 Covers ES2021 ~ ES2025 features + Stage 3 proposals
+// 📌 Covers ES2021 ~ ES2027 features + Stage 3 proposals
 
 // ============================================
 // ES2021 Features (Brief Review)
@@ -46,11 +46,15 @@ console.log("  - Float16Array / Math.f16round() (half-precision floats)");
 console.log("  - JSON Modules (import JSON directly)");
 console.log("  - Import Attributes (with { type: 'json' })");
 console.log("  - RegExp Modifiers (inline flag changes)");
+console.log("  - Redeclarable global eval vars");
 console.log("\nES2026:");
 console.log("  - Math.sumPrecise (high-precision floating-point summation)");
 console.log("  - Array.fromAsync (create arrays from async iterables)");
 console.log("  - Error.isError (type checking for Error objects)");
 console.log("  - Uint8Array to/from Base64 (base64 encoding/decoding)");
+console.log("  - Map.prototype.upsert (conditional insert/update)");
+console.log("  - JSON.parse source text access");
+console.log("  - Iterator Sequencing (iter1 + iter2)");
 console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
 console.log("  - Explicit Resource Management (using/await using, ES2027)");
@@ -1081,6 +1085,92 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   console.log("- Cryptographic key exchange formats");
   console.log("- WebSocket binary-to-text protocol adapters");
 
+  // ============================================
+  // Map.prototype.upsert (ES2026)
+  // - Conditionally insert or update a Map entry
+  // - Reached Stage 4 in 2025-01, part of ES2026
+  console.log("\n=== Map.prototype.upsert (ES2026) ===");
+
+  console.log("NOTE: Map.prototype.upsert reached Stage 4 in January 2025 and is part of ES2026.");
+  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+  console.log("\nMap.prototype.upsert syntax:");
+  console.log(`
+  // map.upsert(key, onInsert, onUpdate)
+  // - onInsert: Called when key doesn't exist (returns value to insert)
+  // - onUpdate: Called when key exists (receives existing value, returns new value)
+
+  const counter = new Map();
+
+  counter.upsert("requests", () => 1, (existing) => existing + 1);
+  // First call: onInsert -> 1
+  console.log(counter.get("requests")); // 1
+
+  counter.upsert("requests", () => 1, (existing) => existing + 1);
+  // Second call: onUpdate(1) -> 2
+  console.log(counter.get("requests")); // 2
+  `);
+
+  console.log("\nUse cases:");
+  console.log("- Counters and accumulators");
+  console.log("- Conditional updates based on existing value");
+  console.log("  - Cache hit/miss logic");
+  console.log("  - Conditional inserts");
+  console.log("- Idempotent operations");
+
+  // ============================================
+  // JSON.parse source text access (ES2026)
+  // - Access original JSON source text via 'source' property
+  // - Reached Stage 4 in 2025-06, part of ES2026
+  console.log("\n=== JSON.parse source text access (ES2026) ===");
+
+  console.log("NOTE: JSON.parse source text access reached Stage 4 in June 2025 and is part of ES2026.");
+  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+  console.log("\nSource text access:");
+  console.log(`
+  // Access original JSON string from parsed objects
+  const jsonString = '{"name":"Alice","age":30}';
+
+  // Parse with source tracking
+  const data = JSON.parse(jsonString);
+  // const source = data.source; // '{"name":"Alice","age":30"}'
+
+  // Useful for error reporting, validation, debugging
+  `);
+
+  console.log("\nUse cases:");
+  console.log("- Error messages with source context");
+  console.log("- Custom validation with original text");
+  console.log("- Debugging and logging");
+  console.log("- JSON to source round-tripping");
+
+  // ============================================
+  // Iterator Sequencing (ES2026)
+  // - Concatenate iterators using + operator
+  // - Reached Stage 4 in 2025-07, part of ES2026
+  console.log("\n=== Iterator Sequencing (ES2026) ===");
+
+  console.log("NOTE: Iterator Sequencing reached Stage 4 in July 2025 and is part of ES2026.");
+  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+  console.log("\nIterator concatenation with +:");
+  console.log(`
+  // Concatenate multiple iterators
+  const iter1 = [1, 2, 3][Symbol.iterator]();
+  const iter2 = [4, 5][Symbol.iterator]();
+  const iter3 = [6][Symbol.iterator]();
+
+  // Using + operator to concatenate
+  const combined = iter1 + iter2 + iter3;
+  console.log([...combined]); // [1, 2, 3, 4, 5, 6]
+  `);
+
+  console.log("\nUse cases:");
+  console.log("- Combining data sources");
+  console.log("- Iterator composition");
+  console.log("- Lazy concatenation of collections");
+
 // ============================================
 // RegExp.escape (ES2025)
 // - Escape special regex characters in a string
@@ -1113,7 +1203,7 @@ console.log("- Input validation with user-provided patterns");
 console.log("- Preventing ReDoS attacks from user-controlled regex");
 
 // ============================================
-// ES2027 Proposals (Explicit Resource Management)
+// ES2027 Proposals (Explicit Resource Management & Concurrency)
 // ============================================
 
 // ============================================
@@ -1151,6 +1241,77 @@ stack.dispose();
 // Closing file: file1.txt
 // Custom cleanup logic
 `);
+
+// ============================================
+// Atomics.pause (ES2027)
+// - Pause execution for spin-wait loops
+// - Improves performance of busy-waiting synchronization
+// - Reached Stage 4 in July 2025, part of ES2027
+console.log("\n=== Atomics.pause (ES2027) ===");
+
+console.log("NOTE: Atomics.pause reached Stage 4 in July 2025 and is part of ES2027.");
+console.log("Requires Node.js 22.0+ or modern browsers.");
+
+console.log("\nAtomics.pause purpose:");
+console.log(`
+// Atomics.pause() is used in spin-wait loops
+// It hints to the CPU that the thread is waiting
+// Reduces CPU usage compared to tight loops
+
+// Example: Busy-wait spinlock
+// const lock = new Int32Array(new SharedArrayBuffer(4));
+//
+// function acquireLock() {
+//   while (Atomics.compareExchange(lock, 0, 0, 1) !== 0) {
+//     Atomics.pause(); // Hint: we're waiting
+//   }
+// }
+//
+// function releaseLock() {
+//   Atomics.store(lock, 0, 0);
+// }
+`);
+
+console.log("\nUse cases:");
+console.log("- Custom mutex implementations");
+console.log("- Busy-wait synchronization");
+console.log("- Lock-free data structures");
+console.log("- Worker coordination");
+
+// ============================================
+// Joint Iteration (ES2027)
+// - Iterate over multiple iterables simultaneously
+// - Reached Stage 4 in May 2025, part of ES2027
+console.log("\n=== Joint Iteration (ES2027) ===");
+
+console.log("NOTE: Joint Iteration reached Stage 4 in May 2025 and is part of ES2027.");
+console.log("Requires Node.js 22.0+ or modern browsers.");
+
+console.log("\nJoint iteration syntax:");
+console.log(`
+// Iterate over multiple iterables at once
+const names = ["Alice", "Bob", "Charlie"];
+const ages = [25, 30, 35];
+const cities = ["NYC", "LA", "SF"];
+
+// for...of with destructuring
+for (const [[, name], [, age], [, city]] of zip(names, ages, cities)) {
+  console.log(\`\${name}, \${age}, \${city}\`);
+}
+// Output:
+// Alice, 25, NYC
+// Bob, 30, LA
+// Charlie, 35, SF
+
+// zip() creates a joint iterator
+// Each iteration yields arrays of [index, value] tuples
+`);
+
+console.log("\nUse cases:");
+console.log("- Parallel array processing");
+console.log("- Combining related data structures");
+console.log("- Matrix operations");
+console.log("- Paired iteration");
 
 // ============================================
 // Array.fromAsync (ES2026)
