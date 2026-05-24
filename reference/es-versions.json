@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-05-22",
+    "lastVerified": "2026-05-24",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
@@ -17,14 +17,14 @@
     "Atomics.pause": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2025-07",
+      "stage4Date": "2024-10",
       "note": "Atomics.pause() for pausing threads in shared memory contexts",
       "url": "https://github.com/tc39/proposal-atomics-pause"
     },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2025-05",
+      "stage4Date": "2025-11",
       "note": "for await (const [[key1, val1], [key2, val2]] of zip(iter1, iter2))",
       "url": "https://github.com/tc39/proposal-joint-iteration"
     },
@@ -51,7 +51,7 @@
     "Error.isError": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025-06",
+      "stage4Date": "2025-05",
       "note": "Stage 4 reached June 2025, part of ES2026",
       "url": "https://github.com/tc39/proposal-error-iserror"
     },
@@ -65,21 +65,21 @@
     "Upsert": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025-01",
+      "stage4Date": "2026-01",
       "note": "Map.prototype.upsert(key, onInsert, onUpdate)",
       "url": "https://github.com/tc39/proposal-upsert"
     },
     "JSON.parse source text access": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025-06",
+      "stage4Date": "2025-11",
       "note": "Access to 'source' property of JSON.parse results",
       "url": "https://github.com/tc39/proposal-json-parse-source"
     },
     "Iterator Sequencing": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025-07",
+      "stage4Date": "2025-11",
       "note": "Iterator concatenation with + operator (iter1 + iter2)",
       "url": "https://github.com/tc39/proposal-iterator-sequencing"
     },

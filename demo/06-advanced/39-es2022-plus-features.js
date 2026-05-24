@@ -1088,10 +1088,10 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   // ============================================
   // Map.prototype.upsert (ES2026)
   // - Conditionally insert or update a Map entry
-  // - Reached Stage 4 in 2025-01, part of ES2026
+  // - Reached Stage 4 in 2026-01, part of ES2026
   console.log("\n=== Map.prototype.upsert (ES2026) ===");
 
-  console.log("NOTE: Map.prototype.upsert reached Stage 4 in January 2025 and is part of ES2026.");
+  console.log("NOTE: Map.prototype.upsert reached Stage 4 in January 2026 and is part of ES2026.");
   console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
   console.log("\nMap.prototype.upsert syntax:");
@@ -1121,10 +1121,10 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   // ============================================
   // JSON.parse source text access (ES2026)
   // - Access original JSON source text via 'source' property
-  // - Reached Stage 4 in 2025-06, part of ES2026
+  // - Reached Stage 4 in 2025-11, part of ES2026
   console.log("\n=== JSON.parse source text access (ES2026) ===");
 
-  console.log("NOTE: JSON.parse source text access reached Stage 4 in June 2025 and is part of ES2026.");
+  console.log("NOTE: JSON.parse source text access reached Stage 4 in November 2025 and is part of ES2026.");
   console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
   console.log("\nSource text access:");
@@ -1148,10 +1148,10 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   // ============================================
   // Iterator Sequencing (ES2026)
   // - Concatenate iterators using + operator
-  // - Reached Stage 4 in 2025-07, part of ES2026
+  // - Reached Stage 4 in 2025-11, part of ES2026
   console.log("\n=== Iterator Sequencing (ES2026) ===");
 
-  console.log("NOTE: Iterator Sequencing reached Stage 4 in July 2025 and is part of ES2026.");
+  console.log("NOTE: Iterator Sequencing reached Stage 4 in November 2025 and is part of ES2026.");
   console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
   console.log("\nIterator concatenation with +:");
@@ -1246,10 +1246,10 @@ stack.dispose();
 // Atomics.pause (ES2027)
 // - Pause execution for spin-wait loops
 // - Improves performance of busy-waiting synchronization
-// - Reached Stage 4 in July 2025, part of ES2027
+// - Reached Stage 4 in October 2024, part of ES2027
 console.log("\n=== Atomics.pause (ES2027) ===");
 
-console.log("NOTE: Atomics.pause reached Stage 4 in July 2025 and is part of ES2027.");
+console.log("NOTE: Atomics.pause reached Stage 4 in October 2024 and is part of ES2027.");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 
 console.log("\nAtomics.pause purpose:");
@@ -1281,10 +1281,10 @@ console.log("- Worker coordination");
 // ============================================
 // Joint Iteration (ES2027)
 // - Iterate over multiple iterables simultaneously
-// - Reached Stage 4 in May 2025, part of ES2027
+// - Reached Stage 4 in November 2025, part of ES2027
 console.log("\n=== Joint Iteration (ES2027) ===");
 
-console.log("NOTE: Joint Iteration reached Stage 4 in May 2025 and is part of ES2027.");
+console.log("NOTE: Joint Iteration reached Stage 4 in November 2025 and is part of ES2027.");
 console.log("Requires Node.js 22.0+ or modern browsers.");
 
 console.log("\nJoint iteration syntax:");
