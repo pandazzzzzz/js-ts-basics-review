@@ -55,8 +55,11 @@ const age = today.since(birthday).years;
 console.log("\nES2026 Features:");
 console.log("- Array.fromAsync (Stage 4 May 2025): Create arrays from async iterables");
 console.log("- Math.sumPrecise (Stage 4 July 2025): High-precision floating-point summation");
-console.log("- Error.isError (Stage 4 June 2025): Reliable Error type checking across realms");
-console.log("- Uint8Array Base64 (Stage 4 September 2025): Native base64 encoding/decoding");
+console.log("- Error.isError (Stage 4 May 2025): Reliable Error type checking across realms");
+console.log("- Uint8Array Base64 (Stage 4 July 2025): Native base64 encoding/decoding");
+console.log("- Upsert (Stage 4 January 2026): Map.prototype.upsert conditional insert/update");
+console.log("- JSON.parse source text access (Stage 4 November 2025): Access original JSON string");
+console.log("- Iterator Sequencing (Stage 4 November 2025): Iterator concatenation with + operator");
 
 // Example of ES2026 features
 console.log("\nES2026 Example syntax:");
@@ -88,7 +91,35 @@ const decoded = Uint8Array.fromBase64("SGVsbG8=");
 // decoded = Uint8Array [72, 101, 108, 108, 111]
 `);
 
-// 4. Decorators (Stage 3)
+// 4. ES2027 Features
+console.log("\nES2027 Features:");
+console.log("- Temporal (Stage 4 November 2023): Modern date/time API");
+console.log("- Explicit Resource Management (Stage 4 May 2025): using/await using declarations");
+console.log("- Atomics.pause (Stage 4 October 2024): Spin-wait loop optimization");
+console.log("- Joint Iteration (Stage 4 November 2025): Iterate over multiple iterables");
+
+// Example of ES2027 features
+console.log("\nES2027 Example syntax:");
+console.log(`
+// using declaration
+{
+  using file = openFile("data.txt");
+  file.write("hello");
+  // file closed automatically at end of block
+}
+
+// Atomics.pause in spin-lock
+while (Atomics.compareExchange(lock, 0, 0, 1) !== 0) {
+  Atomics.pause(); // Hint to CPU that we're waiting
+}
+
+// Joint Iteration
+for (const [name, age, city] of zip(names, ages, cities)) {
+  console.log(\`\${name}, \${age}, \${city}\`);
+}
+`);
+
+// 5. Decorators (Stage 3)
 console.log("\nDecorators (Stage 3):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");

@@ -1029,7 +1029,7 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   // ES2026: Error.isError is part of the ECMAScript 2026 specification.
   console.log("\n=== Error.isError (ES2026) ===");
 
-  console.log("NOTE: Error.isError reached Stage 4 and is part of ES2026.");
+  console.log("NOTE: Error.isError reached Stage 4 in May 2025 and is part of ES2026.");
   console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
   console.log("\nError.isError solves cross-realm type checking:");
@@ -1061,7 +1061,7 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
   // ES2026: Uint8Array Base64 methods are part of the ECMAScript 2026 specification.
   console.log("\n=== Uint8Array Base64 (ES2026) ===");
 
-  console.log("NOTE: Uint8Array Base64 methods reached Stage 4 and are part of ES2026.");
+  console.log("NOTE: Uint8Array Base64 methods reached Stage 4 in July 2025 and are part of ES2026.");
   console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
   console.log("\nUint8Array Base64 methods:");

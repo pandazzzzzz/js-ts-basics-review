@@ -58,8 +58,8 @@
     "Uint8Array Base64": {
       "status": "ES2026",
       "stage": 4,
-      "stage4Date": "2025-09",
-      "note": "Stage 4 reached September 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
+      "stage4Date": "2025-07",
+      "note": "Stage 4 reached July 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
       "url": "https://github.com/tc39/proposal-arraybuffer-base64"
     },
     "Upsert": {
