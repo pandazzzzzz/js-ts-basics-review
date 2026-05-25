@@ -52,7 +52,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-05",
-      "note": "Stage 4 reached June 2025, part of ES2026",
+      "note": "Stage 4 reached May 2025, part of ES2026",
       "url": "https://github.com/tc39/proposal-error-iserror"
     },
     "Uint8Array Base64": {
