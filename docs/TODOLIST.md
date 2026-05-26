@@ -2,7 +2,7 @@
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-04-26
-> **ES 版本验证**: 2026-05-09 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **ES 版本验证**: 2026-05-24 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 
 **进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅
@@ -164,7 +164,7 @@ TS 对比: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-t
 
 ### 知识点清单
 
-**39 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v、ArrayBuffer.transfer) · ES2025 (Set 方法、Iterator helpers、RegExp.escape、Promise.try、Float16Array) · ES2027 (Temporal API) · Stage 3 (Decorators、using/await using、Math.sumPrecise)
+**39 ES2022+** — ES2021 (replaceAll、||=、&&=、??=、数字分隔符、WeakRef、FinalizationRegistry、Intl.PluralRules、Promise.any、AggregateError) · ES2022 (at()、Object.hasOwn、Error.cause、top-level await、class 私有字段) · ES2023 (toSpliced、findLast、Hashbang) · ES2024 (Object.groupBy、Promise.withResolvers、RegExp /v、ArrayBuffer.transfer) · ES2025 (Set methods、Iterator helpers、RegExp.escape、Promise.try、Float16Array、Import Attributes、Redeclarable global eval vars) · ES2026 (Array.fromAsync、Math.sumPrecise、Error.isError、Uint8Array Base64、Upsert、JSON.parse source text access、Iterator Sequencing) · ES2027 (Temporal API、Explicit Resource Management、DisposableStack、Atomics.pause、Joint Iteration) · Stage 3 (Decorators)
 **40 调试与测试** — console 方法、debugger、断点、单元测试基础
 **41 类型化数组** — ArrayBuffer、TypedArray 视图、DataView、二进制数据处理
 **42 国际化 API** — Intl.NumberFormat、DateTimeFormat、Collator、RelativeTimeFormat

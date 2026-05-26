@@ -990,6 +990,15 @@ console.log("- Financial date calculations");
 console.log("- Timezone-aware event coordination");
 console.log("- Age/duration calculations");
 
+/*
+ * verification:
+ *   feature: Math.sumPrecise
+ *   status: ES2026
+ *   stage4Date: 2025-07
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // ============================================
 // Math.sumPrecise (ES2026)
 // - High-precision summation avoiding floating-point errors
@@ -1022,154 +1031,199 @@ console.log("- Scientific data processing");
 console.log("- Statistical aggregations");
 console.log("- Any scenario sensitive to floating-point error accumulation");
 
-  // ============================================
-  // Error.isError (ES2026)
-  // - Reliable Error type checking across realms
-  // - Replaces instanceof Error which fails across iframes/realms
-  // ES2026: Error.isError is part of the ECMAScript 2026 specification.
-  console.log("\n=== Error.isError (ES2026) ===");
+/*
+ * verification:
+ *   feature: Error.isError
+ *   status: ES2026
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
-  console.log("NOTE: Error.isError reached Stage 4 in May 2025 and is part of ES2026.");
-  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+// ============================================
+// Error.isError (ES2026)
+// - Reliable Error type checking across realms
+// - Replaces instanceof Error which fails across iframes/realms
+// ES2026: Error.isError is part of the ECMAScript 2026 specification.
+console.log("\n=== Error.isError (ES2026) ===");
 
-  console.log("\nError.isError solves cross-realm type checking:");
-  console.log(`
-  // Traditional instanceof fails across realms (iframes, workers)
-  // try { ... } catch (e) { if (e instanceof Error) { ... } }
-  // This can fail when the Error constructor differs between realms!
+console.log("NOTE: Error.isError reached Stage 4 in May 2025 and is part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-  // Error.isError provides reliable checking
-  // if (Error.isError(e)) { console.log("Definitely an Error"); }
+console.log("\nError.isError solves cross-realm type checking:");
+console.log(`
+// Traditional instanceof fails across realms (iframes, workers)
+// try { ... } catch (e) { if (e instanceof Error) { ... } }
+// This can fail when the Error constructor differs between realms!
 
-  // Works with all Error subtypes
-  // Error.isError(new Error("test"));     // true
-  // Error.isError(new TypeError("test")); // true
-  // Error.isError(new RangeError("test"));// true
-  // Error.isError("not an error");        // false
-  // Error.isError({ message: "fake" });   // false
-  `);
+// Error.isError provides reliable checking
+// if (Error.isError(e)) { console.log("Definitely an Error"); }
 
-  console.log("\nUse cases:");
-  console.log("- Error handling in libraries used across realms");
-  console.log("- Validating error objects in iframe/postMessage scenarios");
-  console.log("- Type narrowing in try/catch blocks");
+// Works with all Error subtypes
+// Error.isError(new Error("test"));     // true
+// Error.isError(new TypeError("test")); // true
+// Error.isError(new RangeError("test"));// true
+// Error.isError("not an error");        // false
+// Error.isError({ message: "fake" });   // false
+`);
 
-  // ============================================
-  // Uint8Array Base64 (ES2026)
-  // - Native base64 encoding/decoding for binary data
-  // - Uint8Array.toBase64() and Uint8Array.fromBase64()
-  // ES2026: Uint8Array Base64 methods are part of the ECMAScript 2026 specification.
-  console.log("\n=== Uint8Array Base64 (ES2026) ===");
+console.log("\nUse cases:");
+console.log("- Error handling in libraries used across realms");
+console.log("- Validating error objects in iframe/postMessage scenarios");
+console.log("- Type narrowing in try/catch blocks");
 
-  console.log("NOTE: Uint8Array Base64 methods reached Stage 4 in July 2025 and are part of ES2026.");
-  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+/*
+ * verification:
+ *   feature: Uint8Array Base64
+ *   status: ES2026
+ *   stage4Date: 2025-07
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
-  console.log("\nUint8Array Base64 methods:");
-  console.log(`
-  // Encode binary data to Base64
-  // const data = new Uint8Array([72, 101, 108, 108, 111]);
-  // const encoded = data.toBase64();
-  // console.log(encoded); // "SGVsbG8="
+// ============================================
+// Uint8Array Base64 (ES2026)
+// - Native base64 encoding/decoding for binary data
+// - Uint8Array.toBase64() and Uint8Array.fromBase64()
+// ES2026: Uint8Array Base64 methods are part of the ECMAScript 2026 specification.
+console.log("\n=== Uint8Array Base64 (ES2026) ===");
 
-  // Decode Base64 to binary data
-  // const decoded = Uint8Array.fromBase64("SGVsbG8=");
-  // console.log(decoded); // Uint8Array [72, 101, 108, 108, 111]
+console.log("NOTE: Uint8Array Base64 methods reached Stage 4 in July 2025 and are part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-  // Standard and URL-safe variants
-  // data.toBase64({ alphabet: "base64url" });
-  `);
+console.log("\nUint8Array Base64 methods:");
+console.log(`
+// Encode binary data to Base64
+// const data = new Uint8Array([72, 101, 108, 108, 111]);
+// const encoded = data.toBase64();
+// console.log(encoded); // "SGVsbG8="
 
-  console.log("\nUse cases:");
-  console.log("- Encoding binary data for JSON/API transport");
-  console.log("- Data URIs and inline resources");
-  console.log("- Cryptographic key exchange formats");
-  console.log("- WebSocket binary-to-text protocol adapters");
+// Decode Base64 to binary data
+// const decoded = Uint8Array.fromBase64("SGVsbG8=");
+// console.log(decoded); // Uint8Array [72, 101, 108, 108, 111]
 
-  // ============================================
-  // Map.prototype.upsert (ES2026)
-  // - Conditionally insert or update a Map entry
-  // - Reached Stage 4 in 2026-01, part of ES2026
-  console.log("\n=== Map.prototype.upsert (ES2026) ===");
+// Standard and URL-safe variants
+// data.toBase64({ alphabet: "base64url" });
+`);
 
-  console.log("NOTE: Map.prototype.upsert reached Stage 4 in January 2026 and is part of ES2026.");
-  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+console.log("\nUse cases:");
+console.log("- Encoding binary data for JSON/API transport");
+console.log("- Data URIs and inline resources");
+console.log("- Cryptographic key exchange formats");
+console.log("- WebSocket binary-to-text protocol adapters");
 
-  console.log("\nMap.prototype.upsert syntax:");
-  console.log(`
-  // map.upsert(key, onInsert, onUpdate)
-  // - onInsert: Called when key doesn't exist (returns value to insert)
-  // - onUpdate: Called when key exists (receives existing value, returns new value)
+/*
+ * verification:
+ *   feature: Upsert
+ *   status: ES2026
+ *   stage4Date: 2026-01
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
-  const counter = new Map();
+// ============================================
+// Map.prototype.upsert (ES2026)
+// - Conditionally insert or update a Map entry
+// - Reached Stage 4 in 2026-01, part of ES2026
+console.log("\n=== Map.prototype.upsert (ES2026) ===");
 
-  counter.upsert("requests", () => 1, (existing) => existing + 1);
-  // First call: onInsert -> 1
-  console.log(counter.get("requests")); // 1
+console.log("NOTE: Map.prototype.upsert reached Stage 4 in January 2026 and is part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-  counter.upsert("requests", () => 1, (existing) => existing + 1);
-  // Second call: onUpdate(1) -> 2
-  console.log(counter.get("requests")); // 2
-  `);
+console.log("\nMap.prototype.upsert syntax:");
+console.log(`
+// map.upsert(key, onInsert, onUpdate)
+// - onInsert: Called when key doesn't exist (returns value to insert)
+// - onUpdate: Called when key exists (receives existing value, returns new value)
 
-  console.log("\nUse cases:");
-  console.log("- Counters and accumulators");
-  console.log("- Conditional updates based on existing value");
-  console.log("  - Cache hit/miss logic");
-  console.log("  - Conditional inserts");
-  console.log("- Idempotent operations");
+const counter = new Map();
 
-  // ============================================
-  // JSON.parse source text access (ES2026)
-  // - Access original JSON source text via 'source' property
-  // - Reached Stage 4 in 2025-11, part of ES2026
-  console.log("\n=== JSON.parse source text access (ES2026) ===");
+counter.upsert("requests", () => 1, (existing) => existing + 1);
+// First call: onInsert -> 1
+console.log(counter.get("requests")); // 1
 
-  console.log("NOTE: JSON.parse source text access reached Stage 4 in November 2025 and is part of ES2026.");
-  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+counter.upsert("requests", () => 1, (existing) => existing + 1);
+// Second call: onUpdate(1) -> 2
+console.log(counter.get("requests")); // 2
+`);
 
-  console.log("\nSource text access:");
-  console.log(`
-  // Access original JSON string from parsed objects
-  const jsonString = '{"name":"Alice","age":30}';
+console.log("\nUse cases:");
+console.log("- Counters and accumulators");
+console.log("- Conditional updates based on existing value");
+console.log("  - Cache hit/miss logic");
+console.log("  - Conditional inserts");
+console.log("- Idempotent operations");
 
-  // Parse with source tracking
-  const data = JSON.parse(jsonString);
-  // const source = data.source; // '{"name":"Alice","age":30"}'
+/*
+ * verification:
+ *   feature: JSON.parse source text access
+ *   status: ES2026
+ *   stage4Date: 2025-11
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
-  // Useful for error reporting, validation, debugging
-  `);
+// ============================================
+// JSON.parse source text access (ES2026)
+// - Access original JSON source text via 'source' property
+// - Reached Stage 4 in 2025-11, part of ES2026
+console.log("\n=== JSON.parse source text access (ES2026) ===");
 
-  console.log("\nUse cases:");
-  console.log("- Error messages with source context");
-  console.log("- Custom validation with original text");
-  console.log("- Debugging and logging");
-  console.log("- JSON to source round-tripping");
+console.log("NOTE: JSON.parse source text access reached Stage 4 in November 2025 and is part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-  // ============================================
-  // Iterator Sequencing (ES2026)
-  // - Concatenate iterators using + operator
-  // - Reached Stage 4 in 2025-11, part of ES2026
-  console.log("\n=== Iterator Sequencing (ES2026) ===");
+console.log("\nSource text access:");
+console.log(`
+// Access original JSON string from parsed objects
+const jsonString = '{"name":"Alice","age":30}';
 
-  console.log("NOTE: Iterator Sequencing reached Stage 4 in November 2025 and is part of ES2026.");
-  console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+// Parse with source tracking
+const data = JSON.parse(jsonString);
+// const source = data.source; // '{"name":"Alice","age":30"}'
 
-  console.log("\nIterator concatenation with +:");
-  console.log(`
-  // Concatenate multiple iterators
-  const iter1 = [1, 2, 3][Symbol.iterator]();
-  const iter2 = [4, 5][Symbol.iterator]();
-  const iter3 = [6][Symbol.iterator]();
+// Useful for error reporting, validation, debugging
+`);
 
-  // Using + operator to concatenate
-  const combined = iter1 + iter2 + iter3;
-  console.log([...combined]); // [1, 2, 3, 4, 5, 6]
-  `);
+console.log("\nUse cases:");
+console.log("- Error messages with source context");
+console.log("- Custom validation with original text");
+console.log("- Debugging and logging");
+console.log("- JSON to source round-tripping");
 
-  console.log("\nUse cases:");
-  console.log("- Combining data sources");
-  console.log("- Iterator composition");
-  console.log("- Lazy concatenation of collections");
+/*
+ * verification:
+ *   feature: Iterator Sequencing
+ *   status: ES2026
+ *   stage4Date: 2025-11
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
+// ============================================
+// Iterator Sequencing (ES2026)
+// - Concatenate iterators using + operator
+// - Reached Stage 4 in 2025-11, part of ES2026
+console.log("\n=== Iterator Sequencing (ES2026) ===");
+
+console.log("NOTE: Iterator Sequencing reached Stage 4 in November 2025 and is part of ES2026.");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
+
+console.log("\nIterator concatenation with +:");
+console.log(`
+// Concatenate multiple iterators
+const iter1 = [1, 2, 3][Symbol.iterator]();
+const iter2 = [4, 5][Symbol.iterator]();
+const iter3 = [6][Symbol.iterator]();
+
+// Using + operator to concatenate
+const combined = iter1 + iter2 + iter3;
+console.log([...combined]); // [1, 2, 3, 4, 5, 6]
+`);
+
+console.log("\nUse cases:");
+console.log("- Combining data sources");
+console.log("- Iterator composition");
+console.log("- Lazy concatenation of collections");
 
 // ============================================
 // RegExp.escape (ES2025)
@@ -1312,6 +1366,15 @@ console.log("- Parallel array processing");
 console.log("- Combining related data structures");
 console.log("- Matrix operations");
 console.log("- Paired iteration");
+
+/*
+ * verification:
+ *   feature: Array.fromAsync
+ *   status: ES2026
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-05-26
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // Array.fromAsync (ES2026)
