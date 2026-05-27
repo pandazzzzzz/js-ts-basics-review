@@ -673,6 +673,15 @@ const rounded = Math.f16round(3.14159265359);
 console.log(rounded); // 3.140625 (Float16 precision)
 `);
 
+/*
+ * verification:
+ *   feature: JSON Modules
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // ============================================
 // JSON Modules (ES2025)
 // - Import JSON files directly as modules
@@ -713,6 +722,15 @@ const mixed = /(?i:hello) (?-i:WORLD)/;
 mixed.test("hello World"); // false - WORLD must be uppercase
 `);
 
+/*
+ * verification:
+ *   feature: RegExp Modifiers
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // ============================================
 // Duplicate Named Capture Groups (ES2025)
 // - Allow same name for different capture groups
@@ -731,6 +749,24 @@ const match2 = dateRegex.exec("15/06/2024");
 console.log(match1.groups); // { year: "2024", month: "06", day: "15" }
 console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
 `);
+
+/*
+ * verification:
+ *   feature: Duplicate Named Capture Groups
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
+/*
+ * verification:
+ *   feature: using (Explicit Resource Management)
+ *   status: ES2027
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // Resource Management (ES2027)
@@ -923,6 +959,15 @@ console.log("8. using declaration disposal timing");
 // ============================================
 // ES2025 Features (continued) & ES2027
 // ============================================
+
+/*
+ * verification:
+ *   feature: Temporal
+ *   status: ES2027
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // Temporal API (ES2027)
@@ -1225,6 +1270,15 @@ console.log("- Combining data sources");
 console.log("- Iterator composition");
 console.log("- Lazy concatenation of collections");
 
+/*
+ * verification:
+ *   feature: RegExp.escape
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // ============================================
 // RegExp.escape (ES2025)
 // - Escape special regex characters in a string
@@ -1259,6 +1313,15 @@ console.log("- Preventing ReDoS attacks from user-controlled regex");
 // ============================================
 // ES2027 Proposals (Explicit Resource Management & Concurrency)
 // ============================================
+
+/*
+ * verification:
+ *   feature: DisposableStack
+ *   status: ES2027
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // DisposableStack (ES2027)
@@ -1296,6 +1359,15 @@ stack.dispose();
 // Custom cleanup logic
 `);
 
+/*
+ * verification:
+ *   feature: Atomics.pause
+ *   status: ES2027
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // ============================================
 // Atomics.pause (ES2027)
 // - Pause execution for spin-wait loops
@@ -1331,6 +1403,15 @@ console.log("- Custom mutex implementations");
 console.log("- Busy-wait synchronization");
 console.log("- Lock-free data structures");
 console.log("- Worker coordination");
+
+/*
+ * verification:
+ *   feature: Joint Iteration
+ *   status: ES2027
+ *   stage4Date: 2025-11
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // Joint Iteration (ES2027)
@@ -1408,6 +1489,15 @@ const withPromises = await Array.fromAsync([
 ]);
 console.log("With promises:", withPromises); // [1, 2, 3]
 `);
+
+/*
+ * verification:
+ *   feature: Promise.try
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-05-27
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // Promise.try (ES2025)

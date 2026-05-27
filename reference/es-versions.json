@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-05-24",
+    "lastVerified": "2026-05-26",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
