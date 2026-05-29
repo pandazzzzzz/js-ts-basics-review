@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-05-28",
+    "lastVerified": "2026-05-29",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
@@ -10,8 +10,8 @@
     "Temporal": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2023-11",
-      "note": "Stage 4 reached Nov 2023, delayed publication to ES2027",
+      "stage4Date": "2025-09",
+      "note": "Stage 4 reached Sep 2025, delayed publication to ES2027",
       "url": "https://github.com/tc39/proposal-temporal"
     },
     "Atomics.pause": {
@@ -100,13 +100,13 @@
     "RegExp.escape": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2025-02",
       "url": "https://github.com/tc39/proposal-regex-escaping"
     },
     "Promise.try": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2024-10",
       "url": "https://github.com/tc39/proposal-promise-try"
     },
     "Float16Array": {
