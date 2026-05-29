@@ -1514,7 +1514,7 @@ console.log("With promises:", withPromises); // [1, 2, 3]
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-05-29
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposposals.md
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
 // ============================================
