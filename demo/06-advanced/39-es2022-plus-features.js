@@ -74,6 +74,16 @@ console.log("  - Decorators (Stage 3 - class/method decorators)");
 // Error.cause (ES2022)
 // - Allows chaining errors with original cause
 // - Useful for preserving error context through multiple layers
+
+/*
+ * verification:
+ *   feature: Error.cause
+ *   status: ES2022
+ *   stage4Date: 2021-10
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Error.cause (ES2022) ===");
 
 function connectDatabase() {
@@ -104,6 +114,16 @@ try {
 // - Use await at the top level of ES modules
 // - No need to wrap in async function
 // - Module evaluation waits for the promise to resolve
+
+/*
+ * verification:
+ *   feature: Top-level await
+ *   status: ES2022
+ *   stage4Date: 2021-05
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Top-level await (ES2022) ===");
 
 // Example (only works in ES modules):
@@ -120,6 +140,15 @@ console.log("Note: Top-level await only works in ES modules");
 // ============================================
 // ES2021: String Methods
 // ============================================
+
+/*
+ * verification:
+ *   feature: String.replaceAll
+ *   status: ES2021
+ *   stage4Date: 2020-06
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 console.log("\n=== String.replaceAll() (ES2021) ===");
 
@@ -148,6 +177,15 @@ console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog 
 // ============================================
 // ES2021: Logical Assignment Operators
 // ============================================
+
+/*
+ * verification:
+ *   feature: Logical Assignment
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 console.log("\n=== Logical Assignment Operators (ES2021) ===");
 
@@ -187,6 +225,15 @@ console.log("Config defaults:", config);
 // ============================================
 // ES2021: Numeric Separators
 // ============================================
+
+/*
+ * verification:
+ *   feature: Numeric Separators
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 console.log("\n=== Numeric Separators (ES2021) ===");
 
@@ -255,6 +302,16 @@ console.log("Russian ordinal 2:", ru.select(2)); // "few"
 // .at() Method (ES2022)
 // - Access array/string elements with negative indices
 // - Returns undefined for out-of-bounds indices
+
+/*
+ * verification:
+ *   feature: .at()
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== .at() Method (ES2022) ===");
 
 const arr = [10, 20, 30, 40, 50];
@@ -275,6 +332,16 @@ console.log("str.at(-1):", str.at(-1));  // "o"
 // Object.hasOwn() (ES2022)
 // - Safer alternative to Object.prototype.hasOwnProperty()
 // - Not affected by prototype chain overrides
+
+/*
+ * verification:
+ *   feature: Object.hasOwn
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Object.hasOwn() (ES2022) ===");
 
 const obj = { name: "Alice", age: 30 };
@@ -315,6 +382,16 @@ console.log("Year indices:", match.indices.groups.year); // [0, 4]
 // ============================================
 // Immutable Array Methods (ES2023)
 // Note: See 02-data-structures/06-arrays.js for detailed coverage
+
+/*
+ * verification:
+ *   feature: toSorted
+ *   status: ES2023
+ *   stage4Date: 2022-03
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Immutable Array Methods (ES2023) ===");
 
 const numbers = [3, 1, 4, 1, 5];
@@ -353,6 +430,15 @@ console.log("\nMutable splice() comparison:");
 console.log("  mutableItems after splice:", mutableItems); // [1, 4, 5] (modified)
 console.log("  removed elements:", removed); // [2, 3]
 
+/*
+ * verification:
+ *   feature: findLast
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 const findItems = [1, 2, 3, 4, 5];
 console.log("findLast(x => x > 3):", findItems.findLast(x => x > 3)); // 5
 console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); // 4
@@ -360,6 +446,16 @@ console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); 
 // ============================================
 // Hashbang Syntax (ES2023)
 // - Allows JavaScript files to be executed directly as scripts
+
+/*
+ * verification:
+ *   feature: Hashbang Syntax
+ *   status: ES2023
+ *   stage4Date: 2022-07
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Hashbang Syntax (ES2023) ===");
 
 // Example file content:
@@ -381,6 +477,16 @@ console.log("Hashbang allows JS files to be executable scripts");
 // Object.groupBy / Map.groupBy (ES2024)
 // - Group array elements by a key function
 // - Object.groupBy returns plain object, Map.groupBy returns Map
+
+/*
+ * verification:
+ *   feature: Object.groupBy
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Object.groupBy / Map.groupBy (ES2024) ===");
 
 const people = [
@@ -414,6 +520,16 @@ console.log("Manual grouping:", manualGroup);
 // Promise.withResolvers() (ES2024)
 // - Exposes resolve and reject functions outside Promise constructor
 // - Useful for external control of Promise state
+
+/*
+ * verification:
+ *   feature: Promise.withResolvers
+ *   status: ES2024
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Promise.withResolvers() (ES2024) ===");
 
 // Old way:
@@ -454,6 +570,16 @@ setTimeout(() => queue.dequeue(), 100);
 // RegExp /v Flag (ES2024)
 // - Enhanced Unicode support with set operations
 // - Replaces /u flag with more features
+
+/*
+ * verification:
+ *   feature: RegExp v flag
+ *   status: ES2024
+ *   stage4Date: 2023-05
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== RegExp /v Flag (ES2024) ===");
 
 // Set operations in character classes:
@@ -489,6 +615,16 @@ console.log("- Script-specific text processing");
 // ArrayBuffer.transfer() (ES2024)
 // - Transfer ownership of ArrayBuffer to another context
 // - Useful for worker communication
+
+/*
+ * verification:
+ *   feature: ArrayBuffer.transfer
+ *   status: ES2024
+ *   stage4Date: 2024-02
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== ArrayBuffer.transfer() (ES2024) ===");
 
 console.log("ArrayBuffer.prototype.transfer():");
@@ -506,6 +642,16 @@ const transferred = buffer.transfer(); // buffer becomes detached
 // ============================================
 // Resizable ArrayBuffers (ES2024)
 // - Dynamically resize buffers without reallocation
+
+/*
+ * verification:
+ *   feature: Resizable ArrayBuffer
+ *   status: ES2024
+ *   stage4Date: 2023-09
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Resizable ArrayBuffers (ES2024) ===");
 
 console.log("Resizable/growable ArrayBuffer features:");
@@ -524,6 +670,16 @@ console.log(buffer.byteLength); // 2048
 // ============================================
 // Well-Formed Unicode Strings (ES2024)
 // - isWellFormed() / toWellFormed() for lone surrogate handling
+
+/*
+ * verification:
+ *   feature: Well-Formed Unicode Strings
+ *   status: ES2024
+ *   stage4Date: 2023-05
+ *   lastVerified: 2026-05-30
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 console.log("\n=== Well-Formed Unicode Strings (ES2024) ===");
 
 console.log("String.prototype.isWellFormed():");
