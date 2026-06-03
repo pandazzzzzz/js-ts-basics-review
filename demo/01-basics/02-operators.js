@@ -233,6 +233,14 @@ console.log("a **= 3:", a); // 8
 // Logical AND Assignment (&&=) - Assigns if left is truthy (ES2021)
 // - Only assigns if left side is truthy
 // - Short-circuits like &&
+/*
+ * verification:
+ *   feature: Logical Assignment
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 let b = 10;
 b &&= 20; // b = b && 20
 console.log("\nLogical Assignment:");

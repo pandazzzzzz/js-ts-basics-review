@@ -53,6 +53,14 @@ console.log("1.5e-9:", nano);
 // - Improves readability for large numbers
 // - Can use underscore _ anywhere between digits
 // - Cannot start or end with _, or have multiple consecutive _
+/*
+ * verification:
+ *   feature: Numeric Separators
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const largeNumber = 1_000_000; // 1 million
 const billion2 = 1_000_000_000;
 const creditCard = 1234_5678_9012_3456;

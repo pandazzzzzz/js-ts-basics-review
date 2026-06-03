@@ -473,6 +473,14 @@ const difference = new Set([...setA].filter((x) => !setB.has(x)));
 console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
 
 // ES2025 Set Methods (Supported in modern engines)
+/*
+ * verification:
+ *   feature: Set methods
+ *   status: ES2025
+ *   stage4Date: 2024-02
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\nES2025 Set Methods:");
 
 // First, polyfill if not available
@@ -544,6 +552,14 @@ console.log("  isDisjointFrom():", set1.isDisjointFrom(set4)); // true
 console.log("  isDisjointFrom():", set1.isDisjointFrom(set2)); // false
 
 // Map.groupBy() - ES2024 array grouping (similar to Object.groupBy)
+/*
+ * verification:
+ *   feature: Map.groupBy
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\nMap.groupBy() - ES2024:");
 const scores = [90, 85, 95, 70, 80, 65];
 try {

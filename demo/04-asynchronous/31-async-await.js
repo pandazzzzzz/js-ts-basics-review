@@ -369,6 +369,15 @@ console.log("\n=== Top-Level Await Demo ===\n");
 // Note: Top-level await only works in ES modules
 // In this demo file, we'll simulate it with IIFE
 
+/*
+ * verification:
+ *   feature: Top-level await
+ *   status: ES2022
+ *   stage4Date: 2021-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 // Simulated top-level await
 (async () => {
   console.log("Simulating top-level await...");

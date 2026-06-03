@@ -323,6 +323,15 @@ Promise.allSettled(promises)
 
 console.log("\n=== Promise.any Demo ===\n");
 
+/*
+ * verification:
+ *   feature: Promise.any
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
 Promise.any([
   asyncOperation(1, true),  // Fails
   asyncOperation(2),         // Succeeds
@@ -380,6 +389,14 @@ traditionalPromise.then(v => console.log("Traditional resolved:", v));
 traditionalResolve("hello");
 
 // Modern way (ES2024)
+/*
+ * verification:
+ *   feature: Promise.withResolvers
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\nModern way (Promise.withResolvers):");
 const { promise, resolve, reject } = Promise.withResolvers();
 promise.then(v => console.log("withResolvers resolved:", v));

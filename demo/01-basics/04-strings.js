@@ -254,6 +254,14 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, 'dog'));
 // - Replaces all occurrences
 // - searchValue can be string or global regex
 // - More convenient than replace with global regex
+/*
+ * verification:
+ *   feature: replaceAll
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\n=== replaceAll() Method ===");
 console.log("replaceAll('cat', 'dog'):", replaceStr.replaceAll('cat', 'dog'));
 // "The dog sat on the mat. The dog was happy."

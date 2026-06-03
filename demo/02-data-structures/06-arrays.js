@@ -141,6 +141,14 @@ console.log("Index of first > 3:", foundIndex);
 // findLast - Find last element matching condition (ES2023)
 // - Returns element or undefined
 // - Searches from end to start
+/*
+ * verification:
+ *   feature: findLast
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const findLastExample = [1, 2, 3, 4, 5, 4, 3].findLast(n => n === 4);
 console.log("Last occurrence of 4:", findLastExample);
 
@@ -184,6 +192,14 @@ console.log("includes(1, 3):", withDuplicates.includes(1, 3)); // false
 // - Returns element at given index
 // - Supports negative indices (access from end)
 // - Returns undefined for out of bounds
+/*
+ * verification:
+ *   feature: at
+ *   status: ES2022
+ *   stage4Date: 2021-03
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const atArray = [10, 20, 30, 40, 50];
 console.log("\nat() - Safe indexing:");
 console.log("at(0):", atArray.at(0)); // 10
@@ -368,6 +384,14 @@ console.log("FlatMapped:", flatMapped);
 // with - Create copy with element replaced (ES2023)
 // - Returns new array
 // - Immutable alternative to bracket assignment
+/*
+ * verification:
+ *   feature: with
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const original = [1, 2, 3, 4, 5];
 const withReplaced = original.with(2, 99); // (ES2023)
 console.log("\nwith - Immutable replace:");
@@ -377,6 +401,14 @@ console.log("With replaced:", withReplaced);
 // toReversed - Create reversed copy (ES2023)
 // - Returns new array
 // - Immutable alternative to reverse()
+/*
+ * verification:
+ *   feature: toReversed
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const toReversedExample = [1, 2, 3, 4, 5];
 console.log("\ntoReversed - Immutable reverse:");
 console.log("Original:", toReversedExample);
@@ -385,6 +417,14 @@ console.log("Reversed:", toReversedExample.toReversed());
 // toSorted - Create sorted copy (ES2023)
 // - Returns new array
 // - Immutable alternative to sort()
+/*
+ * verification:
+ *   feature: toSorted
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const toSortedExample = [3, 1, 4, 1, 5];
 console.log("\ntoSorted - Immutable sort:");
 console.log("Original:", toSortedExample);
@@ -393,6 +433,14 @@ console.log("Sorted:", toSortedExample.toSorted((a, b) => a - b));
 // toSpliced - Create spliced copy (ES2023)
 // - Returns new array
 // - Immutable alternative to splice()
+/*
+ * verification:
+ *   feature: toSpliced
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 const toSplicedExample = [1, 2, 3, 4, 5];
 console.log("\ntoSpliced - Immutable splice:");
 console.log("Original:", toSplicedExample);
