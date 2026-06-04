@@ -80,7 +80,7 @@ console.log("  - Decorators (Stage 3 - class/method decorators)");
  *   feature: Error.cause
  *   status: ES2022
  *   stage4Date: 2021-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -115,15 +115,6 @@ try {
 // - No need to wrap in async function
 // - Module evaluation waits for the promise to resolve
 
-/*
- * verification:
- *   feature: Top-level await
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-
 console.log("\n=== Top-level await (ES2022) ===");
 
 // Example (only works in ES modules):
@@ -140,15 +131,6 @@ console.log("Note: Top-level await only works in ES modules");
 // ============================================
 // ES2021: String Methods
 // ============================================
-
-/*
- * verification:
- *   feature: String.replaceAll
- *   status: ES2021
- *   stage4Date: 2020-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 console.log("\n=== String.replaceAll() (ES2021) ===");
 
@@ -177,15 +159,6 @@ console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog 
 // ============================================
 // ES2021: Logical Assignment Operators
 // ============================================
-
-/*
- * verification:
- *   feature: Logical Assignment
- *   status: ES2021
- *   stage4Date: 2020-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 console.log("\n=== Logical Assignment Operators (ES2021) ===");
 
@@ -226,15 +199,6 @@ console.log("Config defaults:", config);
 // ES2021: Numeric Separators
 // ============================================
 
-/*
- * verification:
- *   feature: Numeric Separators
- *   status: ES2021
- *   stage4Date: 2020-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-
 console.log("\n=== Numeric Separators (ES2021) ===");
 
 const billion = 1_000_000_000;
@@ -261,7 +225,7 @@ console.log("Same value:", oldStyle === newStyle); // true
  *   feature: WeakRef
  *   status: ES2021
  *   stage4Date: 2020-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -285,7 +249,7 @@ console.log("After removing target:", weakRef.deref()); // { data: "important" }
  *   feature: FinalizationRegistry
  *   status: ES2021
  *   stage4Date: 2020-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -321,15 +285,6 @@ console.log("Russian ordinal 2:", ru.select(2)); // "few"
 // - Access array/string elements with negative indices
 // - Returns undefined for out-of-bounds indices
 
-/*
- * verification:
- *   feature: .at()
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-
 console.log("\n=== .at() Method (ES2022) ===");
 
 const arr = [10, 20, 30, 40, 50];
@@ -350,15 +305,6 @@ console.log("str.at(-1):", str.at(-1));  // "o"
 // Object.hasOwn() (ES2022)
 // - Safer alternative to Object.prototype.hasOwnProperty()
 // - Not affected by prototype chain overrides
-
-/*
- * verification:
- *   feature: Object.hasOwn
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 console.log("\n=== Object.hasOwn() (ES2022) ===");
 
@@ -401,15 +347,6 @@ console.log("Year indices:", match.indices.groups.year); // [0, 4]
 // Immutable Array Methods (ES2023)
 // Note: See 02-data-structures/06-arrays.js for detailed coverage
 
-/*
- * verification:
- *   feature: toSorted
- *   status: ES2023
- *   stage4Date: 2022-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-
 console.log("\n=== Immutable Array Methods (ES2023) ===");
 
 const numbers = [3, 1, 4, 1, 5];
@@ -448,15 +385,6 @@ console.log("\nMutable splice() comparison:");
 console.log("  mutableItems after splice:", mutableItems); // [1, 4, 5] (modified)
 console.log("  removed elements:", removed); // [2, 3]
 
-/*
- * verification:
- *   feature: findLast
- *   status: ES2023
- *   stage4Date: 2022-06
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-
 const findItems = [1, 2, 3, 4, 5];
 console.log("findLast(x => x > 3):", findItems.findLast(x => x > 3)); // 5
 console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); // 4
@@ -469,8 +397,8 @@ console.log("findLastIndex(x => x > 3):", findItems.findLastIndex(x => x > 3)); 
  * verification:
  *   feature: Hashbang Syntax
  *   status: ES2023
- *   stage4Date: 2022-07
- *   lastVerified: 2026-05-30
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -495,15 +423,6 @@ console.log("Hashbang allows JS files to be executable scripts");
 // Object.groupBy / Map.groupBy (ES2024)
 // - Group array elements by a key function
 // - Object.groupBy returns plain object, Map.groupBy returns Map
-
-/*
- * verification:
- *   feature: Object.groupBy
- *   status: ES2024
- *   stage4Date: 2023-03
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 console.log("\n=== Object.groupBy / Map.groupBy (ES2024) ===");
 
@@ -538,15 +457,6 @@ console.log("Manual grouping:", manualGroup);
 // Promise.withResolvers() (ES2024)
 // - Exposes resolve and reject functions outside Promise constructor
 // - Useful for external control of Promise state
-
-/*
- * verification:
- *   feature: Promise.withResolvers
- *   status: ES2024
- *   stage4Date: 2023-11
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 console.log("\n=== Promise.withResolvers() (ES2024) ===");
 
@@ -593,8 +503,8 @@ setTimeout(() => queue.dequeue(), 100);
  * verification:
  *   feature: RegExp v flag
  *   status: ES2024
- *   stage4Date: 2023-05
- *   lastVerified: 2026-05-30
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -639,7 +549,7 @@ console.log("- Script-specific text processing");
  *   feature: ArrayBuffer.transfer
  *   status: ES2024
  *   stage4Date: 2023-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -666,7 +576,7 @@ const transferred = buffer.transfer(); // buffer becomes detached
  *   feature: Resizable ArrayBuffer
  *   status: ES2024
  *   stage4Date: 2023-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -694,7 +604,7 @@ console.log(buffer.byteLength); // 2048
  *   feature: Well-Formed Unicode Strings
  *   status: ES2024
  *   stage4Date: 2023-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -718,15 +628,6 @@ console.log(str.toWellFormed()); // "\\uFFFD" (replacement char)
 // ============================================
 // ES2025 Features (Stage 4 / Finalized)
 // ============================================
-
-/*
- * verification:
- *   feature: Set methods
- *   status: ES2025
- *   stage4Date: 2024-02
- *   lastVerified: 2026-05-30
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 
 // ============================================
 // Set Methods (ES2025)
@@ -768,7 +669,7 @@ console.log("isDisjointFrom:", setA.isDisjointFrom(new Set([7, 8]))); // true
  *   feature: Iterator helpers
  *   status: ES2025
  *   stage4Date: 2024-02
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -846,7 +747,7 @@ console.log("- Only computes what's needed");
  *   feature: Float16Array
  *   status: ES2025
  *   stage4Date: 2024-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -919,7 +820,7 @@ mixed.test("hello World"); // false - WORLD must be uppercase
  *   feature: RegExp Modifiers
  *   status: ES2025
  *   stage4Date: 2024-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -947,7 +848,7 @@ console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
  *   feature: Duplicate Named Capture Groups
  *   status: ES2025
  *   stage4Date: 2024-03
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -956,7 +857,7 @@ console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
  *   feature: using (Explicit Resource Management)
  *   status: ES2027
  *   stage4Date: 2025-05
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1157,7 +1058,7 @@ console.log("8. using declaration disposal timing");
  *   feature: Temporal
  *   status: ES2027
  *   stage4Date: 2025-09
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1232,7 +1133,7 @@ console.log("- Age/duration calculations");
  *   feature: Math.sumPrecise
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1273,7 +1174,7 @@ console.log("- Any scenario sensitive to floating-point error accumulation");
  *   feature: Error.isError
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1314,7 +1215,7 @@ console.log("- Type narrowing in try/catch blocks");
  *   feature: Uint8Array Base64
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1354,7 +1255,7 @@ console.log("- WebSocket binary-to-text protocol adapters");
  *   feature: Upsert
  *   status: ES2026
  *   stage4Date: 2026-01
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1396,7 +1297,7 @@ console.log("- Idempotent operations");
  *   feature: JSON.parse source text access
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1432,7 +1333,7 @@ console.log("- JSON to source round-tripping");
  *   feature: Iterator Sequencing
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1467,7 +1368,7 @@ console.log("- Lazy concatenation of collections");
  *   feature: RegExp.escape
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1511,7 +1412,7 @@ console.log("- Preventing ReDoS attacks from user-controlled regex");
  *   feature: DisposableStack
  *   status: ES2027
  *   stage4Date: 2025-05
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1556,7 +1457,7 @@ stack.dispose();
  *   feature: Atomics.pause
  *   status: ES2027
  *   stage4Date: 2024-10
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1601,7 +1502,7 @@ console.log("- Worker coordination");
  *   feature: Joint Iteration
  *   status: ES2027
  *   stage4Date: 2025-11
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1645,7 +1546,7 @@ console.log("- Paired iteration");
  *   feature: Array.fromAsync
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1687,7 +1588,7 @@ console.log("With promises:", withPromises); // [1, 2, 3]
  *   feature: Promise.try
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-05-30
+ *   lastVerified: 2026-06-04
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

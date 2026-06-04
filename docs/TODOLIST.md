@@ -2,7 +2,7 @@
 
 > **参考**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **更新**: 2026-04-26
-> **ES 版本验证**: 2026-05-24 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **ES 版本验证**: 2026-06-04 · 参考 [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 
 **进度**: 50/50 ✅ · 50 TypeScript 对比文件 ✅

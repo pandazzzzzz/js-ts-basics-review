@@ -352,14 +352,6 @@ console.log(Animal2.describe()); // Kingdom: Animalia
 console.log(Dog2.describe()); // Kingdom: Canis lupus familiaris
 
 // 3.6 Static block (ES2022)
-/*
- * verification:
- *   feature: Private class fields
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-04
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 class ClassWithStaticBlock {
   static x = 10;
   static y;
@@ -409,14 +401,6 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
 console.log("\n=== 4. Private and Protected Properties Demo ==="); // Private class fields (ES2022)
 
 // 4.1 Private field with #
-/*
- * verification:
- *   feature: Private class fields
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-04
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 class BankAccount {
   #balance = 0; // Private field
 
