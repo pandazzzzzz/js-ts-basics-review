@@ -58,7 +58,7 @@ console.log("1.5e-9:", nano);
  *   feature: Numeric Separators
  *   status: ES2021
  *   stage4Date: 2020-03
- *   lastVerified: 2026-06-04
+ *   lastVerified: 2026-06-05
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const largeNumber = 1_000_000; // 1 million

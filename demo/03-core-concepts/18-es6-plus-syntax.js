@@ -790,6 +790,13 @@ Key modern features (ES2020-ES2023):
    JS:  No type annotations
    TS:  Full type annotations for parameters and return types
 
+/*
+ * verification:
+ *   feature: Decorators
+ *   status: Stage 3
+ *   lastVerified: 2026-06-05
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 5. DECORATORS
    JS:  Stage 3 proposal (not yet finalized)
    TS:  Stage 3 decorators supported (experimentalDecorators: false)

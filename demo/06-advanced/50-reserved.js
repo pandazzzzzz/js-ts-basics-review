@@ -175,6 +175,13 @@ console.log(a === b); // true (deep equality!)
 `);
 
 // 2. Pattern Matching
+/*
+ * verification:
+ *   feature: Pattern Matching
+ *   status: Stage 2
+ *   lastVerified: 2026-06-05
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("\nPattern Matching (Stage 2):");
 console.log("- Powerful pattern matching like Haskell/Elixir");
 console.log("- match keyword for destructuring");
@@ -198,6 +205,13 @@ const result = match (value) {
 console.log("\n=== Active Proposals ===");
 
 // 1. Pipeline Operator (Stage 2)
+/*
+ * verification:
+ *   feature: Pipeline Operator
+ *   status: Stage 2
+ *   lastVerified: 2026-06-05
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("\nPipeline Operator (Stage 2):");
 console.log("- |> operator for function chaining");
 console.log("- More readable than nested calls");
@@ -293,6 +307,14 @@ console.log("- Portable code between Node, Deno, Bun, Cloudflare Workers");
 console.log("\n=== Module System Future ===");
 
 // Import Attributes (ES2025)
+/*
+ * verification:
+ *   feature: Import Attributes
+ *   status: ES2025
+ *   stage4Date: 2024-03
+ *   lastVerified: 2026-06-05
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\nImport Attributes (ES2025):");
 console.log("- Specify how modules should be loaded");
 console.log("- JSON modules, CSS modules, etc.");
