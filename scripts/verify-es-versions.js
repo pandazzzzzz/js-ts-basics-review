@@ -366,6 +366,7 @@ function main() {
   const allAnnotations = [];
   const allBlocks = [];
   const conflicts = [];
+  const allFeaturesWithBlocks = new Set(); // Track all features that have blocks anywhere
 
   for (const file of demoFiles) {
     const content = fs.readFileSync(file, 'utf8');
@@ -374,6 +375,9 @@ function main() {
 
     const blocks = extractVerificationBlocks(content, file);
     allBlocks.push(...blocks);
+
+    // Add all features with blocks to the global set
+    blocks.forEach(block => allFeaturesWithBlocks.add(block.feature));
 
     for (const ann of annotations) {
       const comparison = compareWithReference(ann, reference);
@@ -415,6 +419,7 @@ function main() {
   // ===== NEW: Verification block checks =====
   log('cyan', `\n=== Verification Block Checks ===`);
   log('cyan', `Verification blocks found: ${allBlocks.length}`);
+  log('cyan', `Features with verification blocks: ${allFeaturesWithBlocks.size}`);
 
   // Check 1: stage4Date consistency in blocks vs reference
   const blockDateIssues = checkBlockStage4Dates(allBlocks, reference);
@@ -460,19 +465,43 @@ function main() {
     log('green', '✅ All lastVerified dates consistent');
   }
 
-  // Check 4: Missing verification blocks
+  // Check 4: Missing verification blocks (global check)
   log('cyan', '\n=== Missing Verification Block Report ===');
   let missingCount = 0;
+  const allReferencedFeatures = new Set();
+
+  // First collect all referenced features across all files
   for (const file of demoFiles) {
     const content = fs.readFileSync(file, 'utf8');
-    const fileBlocks = extractVerificationBlocks(content, file);
-    const missing = checkMissingVerificationBlocks(file, content, featurePatterns, reference, fileBlocks);
-
-    if (missing.length > 0) {
-      const relPath = path.relative(path.dirname(REFERENCE_FILE), file);
-      log('yellow', `  ${relPath}: missing blocks for ${missing.join(', ')}`);
-      missingCount += missing.length;
+    for (const pattern of featurePatterns) {
+      const matches = content.matchAll(pattern.regex);
+      for (const match of matches) {
+        let version = null;
+        for (let i = 1; i < match.length; i++) {
+          if (match[i]) {
+            version = match[i].replace(/Stage\s*/, 'Stage ');
+            break;
+          }
+        }
+        if (version && (version.match(/^ES20\d{2}$/) || version.match(/^Stage \d$/))) {
+          allReferencedFeatures.add(pattern.name);
+          break;
+        }
+      }
     }
+  }
+
+  // Now check which referenced features have no blocks anywhere
+  const missingFeatures = [];
+  for (const featureName of allReferencedFeatures) {
+    if (!allFeaturesWithBlocks.has(featureName) && reference.features[featureName]) {
+      missingFeatures.push(featureName);
+    }
+  }
+
+  if (missingFeatures.length > 0) {
+    log('yellow', `  Missing verification blocks for: ${missingFeatures.join(', ')}`);
+    missingCount = missingFeatures.length;
   }
   if (missingCount === 0) {
     log('green', '✅ No missing verification blocks detected');

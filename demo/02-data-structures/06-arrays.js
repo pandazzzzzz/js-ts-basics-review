@@ -152,6 +152,14 @@ console.log("Index of first > 3:", foundIndex);
 const findLastExample = [1, 2, 3, 4, 5, 4, 3].findLast(n => n === 4);
 console.log("Last occurrence of 4:", findLastExample);
 
+/*
+ * verification:
+ *   feature: findLastIndex
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-06-04
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 // findLastIndex - Find index of last match (ES2023)
 const findLastIndexExample = [1, 2, 3, 4, 5, 4, 3].findLastIndex(n => n === 4);
 console.log("Last index of 4:", findLastIndexExample);
