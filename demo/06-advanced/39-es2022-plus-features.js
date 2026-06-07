@@ -860,6 +860,37 @@ console.log(match2.groups); // { year: "2024", month: "06", day: "15" }
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
+// ============================================
+// Redeclarable global eval vars (ES2025)
+// - Allow variables introduced by eval to be redeclared
+/*
+ * verification:
+ *   feature: Redeclarable global eval vars
+ *   status: ES2025
+ *   stage4Date: 2025-02
+ *   lastVerified: 2026-06-05
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\n=== Redeclarable global eval vars (ES2025) ===");
+
+console.log("Redeclarable global eval vars allow:");
+console.log("- Variables introduced by eval() can be redeclared with let/const");
+console.log("- Fixes historical behavior where eval-introduced vars could not be redeclared");
+console.log("- Aligns behavior with non-eval introduced variables");
+
+console.log("\nExample:");
+console.log(`
+// Before ES2025 this would throw a SyntaxError:
+eval("var x = 1");
+let x = 2; // Allowed in ES2025+!
+console.log(x); // 2
+
+// Works with const too:
+eval("var y = 10");
+const y = 20;
+console.log(y); // 20
+`);
+
 /*
  * verification:
  *   feature: using (Explicit Resource Management)
