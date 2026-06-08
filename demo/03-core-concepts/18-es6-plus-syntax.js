@@ -795,7 +795,7 @@ Key modern features (ES2020-ES2023):
  *   feature: Decorators
  *   status: Stage 3
  *   lastVerified: 2026-06-05
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 5. DECORATORS
    JS:  Stage 3 proposal (not yet finalized)
