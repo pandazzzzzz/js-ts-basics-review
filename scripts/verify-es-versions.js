@@ -29,6 +29,7 @@ const MAX_VERIFIED_DAYS = 90;
 const args = process.argv.slice(2);
 const OPTIONS = {
   fix: args.includes('--fix'),
+  dryRun: args.includes('--dry-run') || args.includes('-n'),
   template: (() => {
     const idx = args.indexOf('--template');
     if (idx !== -1 && args[idx + 1]) {
@@ -36,8 +37,12 @@ const OPTIONS = {
     }
     return null;
   })(),
-  checkTS: args.includes('--check-ts')
+  checkTS: args.includes('--check-ts'),
+  help: args.includes('--help') || args.includes('-h'),
+  version: args.includes('--version') || args.includes('-v')
 };
+
+const VERSION = '2.0.0';
 
 const colors = {
   red: '\x1b[31m',
@@ -49,6 +54,43 @@ const colors = {
 
 function log(color, message) {
   console.log(`${colors[color]}${message}${colors.reset}`);
+}
+
+// 显示帮助信息
+function showHelp() {
+  console.log(`
+ES版本标注验证脚本 v${VERSION}
+用法: node scripts/verify-es-versions.js [options]
+
+选项:
+  -h, --help                显示此帮助信息
+  -v, --version             显示版本号
+  -n, --dry-run             预览修改内容但不实际写入文件（与--fix配合使用）
+  --fix                     自动修复常见问题（source URL错误、lastVerified统一等）
+  --template <feature-name> 生成指定特性的验证块模板
+  --check-ts                同时检查TypeScript比较文件(*.ts-comparison.ts)
+
+检查项:
+  1. reference/es-versions.json 的 lastVerified 是否过期（超过90天）
+  2. demo文件中的ES版本标注是否与参考文件一致
+  3. 同一feature在不同文件中标注是否一致
+  4. verification block 中的 stage4Date 是否与 reference 一致
+  5. lastVerified 日期在文件和 reference 之间是否一致
+  6. 跨文件重复的 verification block 检测
+  7. 引用 ES20xx 但缺少 verification block 的文件报告
+
+示例:
+  基础验证:                  node scripts/verify-es-versions.js
+  同时验证JS和TS文件:        node scripts/verify-es-versions.js --check-ts
+  自动修复并预览修改:        node scripts/verify-es-versions.js --fix --dry-run
+  应用自动修复:              node scripts/verify-es-versions.js --fix
+  生成Decorators验证块模板:  node scripts/verify-es-versions.js --template "Decorators"
+`);
+}
+
+// 显示版本信息
+function showVersion() {
+  console.log(`v${VERSION}`);
 }
 
 // 获取所有JS和（可选）TS文件
@@ -230,57 +272,102 @@ function syncLastVerified(block, referenceDate) {
 }
 
 // 应用修复到文件
-function applyFixes(filePath, fixes) {
-  if (fixes.length === 0) return false;
+function applyFixes(filePath, fixes, originalContent = null) {
+  if (fixes.length === 0) return { modified: false, content: originalContent };
 
-  let content = fs.readFileSync(filePath, 'utf8');
+  let content = originalContent !== null ? originalContent : fs.readFileSync(filePath, 'utf8');
   let modified = false;
+  const changes = [];
 
   for (const fix of fixes) {
     if (fix.type === 'source') {
       // 替换source行
       const pattern = new RegExp(`(\\*\\s*source:\\s*)${fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
-      if (pattern.test(content)) {
-        content = content.replace(pattern, `$1${fix.new}`);
+      const newContent = content.replace(pattern, (match, p1) => {
         modified = true;
-        log('cyan', `  Fixed source URL for "${fix.feature}"`);
-        log('cyan', `    Old: ${fix.old}`);
-        log('cyan', `    New: ${fix.new}`);
+        changes.push({
+          type: 'source',
+          feature: fix.feature,
+          line: null, // 这里可以改进为计算行号
+          old: fix.old,
+          new: fix.new
+        });
+        return `${p1}${fix.new}`;
+      });
+      if (newContent !== content) {
+        content = newContent;
+        if (!OPTIONS.dryRun) {
+          log('cyan', `  Fixed source URL for "${fix.feature}"`);
+          log('cyan', `    Old: ${fix.old}`);
+          log('cyan', `    New: ${fix.new}`);
+        } else {
+          log('cyan', `  Would fix source URL for "${fix.feature}"`);
+          log('cyan', `    Old: ${fix.old}`);
+          log('cyan', `    New: ${fix.new}`);
+        }
       }
     } else if (fix.type === 'lastVerified') {
       // 替换lastVerified行
       let fixed = false;
+      let change = null;
       // 方法1: 精确匹配旧日期（如果有的话）
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const oldPattern = new RegExp(`\\*\\s*lastVerified:\\s*${escapedOld}`, 'g');
-        if (oldPattern.test(content)) {
-          content = content.replace(oldPattern, ` *   lastVerified: ${fix.new}`);
+        const newContent = content.replace(oldPattern, (match) => {
           fixed = true;
+          change = {
+            type: 'lastVerified',
+            feature: fix.feature,
+            old: fix.old,
+            new: fix.new
+          };
+          return ` *   lastVerified: ${fix.new}`;
+        });
+        if (newContent !== content) {
+          content = newContent;
         }
       }
       // 方法2: 如果没有找到，或者fix.old为空，用更通用的模式替换
       if (!fixed) {
         const genericPattern = /(\*\s*lastVerified:\s*)[^\n*]*/g;
-        if (genericPattern.test(content)) {
-          content = content.replace(genericPattern, `$1${fix.new}`);
+        const newContent = content.replace(genericPattern, (match, p1) => {
           fixed = true;
+          change = {
+            type: 'lastVerified',
+            feature: fix.feature,
+            old: fix.old || '(not set)',
+            new: fix.new
+          };
+          return `${p1}${fix.new}`;
+        });
+        if (newContent !== content) {
+          content = newContent;
         }
       }
       if (fixed) {
         modified = true;
-        log('cyan', `  Fixed lastVerified for "${fix.feature}"`);
-        log('cyan', `    Old: ${fix.old || '(not set)'}`);
-        log('cyan', `    New: ${fix.new}`);
+        changes.push(change);
+        if (!OPTIONS.dryRun) {
+          log('cyan', `  Fixed lastVerified for "${fix.feature}"`);
+          log('cyan', `    Old: ${fix.old || '(not set)'}`);
+          log('cyan', `    New: ${fix.new}`);
+        } else {
+          log('cyan', `  Would fix lastVerified for "${fix.feature}"`);
+          log('cyan', `    Old: ${fix.old || '(not set)'}`);
+          log('cyan', `    New: ${fix.new}`);
+        }
       }
     }
   }
 
-  if (modified) {
+  if (modified && !OPTIONS.dryRun && originalContent === null) {
+    // 只有当originalContent为空时才写入，说明不是从主循环传入的
+    // 主循环会统一处理写入
     fs.writeFileSync(filePath, content, 'utf8');
-    return true;
   }
-  return false;
+
+  return { modified, content, changes };
 }
 
 // 生成验证块模板
@@ -484,6 +571,17 @@ function compareWithReference(annotation, reference) {
 }
 
 function main() {
+  // 处理帮助和版本
+  if (OPTIONS.help) {
+    showHelp();
+    process.exit(0);
+  }
+
+  if (OPTIONS.version) {
+    showVersion();
+    process.exit(0);
+  }
+
   // 处理--template选项
   if (OPTIONS.template) {
     const reference = loadReference();
@@ -515,11 +613,14 @@ function main() {
   const conflicts = [];
   const allFeaturesWithBlocks = new Set();
 
-  // 收集所有修复
+  // 收集所有修复和文件内容
   const fixesByFile = {};
+  const fileContents = {}; // 缓存文件内容避免重复读取
 
   for (const file of demoFiles) {
     const content = fs.readFileSync(file, 'utf8');
+    fileContents[file] = content; // 缓存内容
+
     const annotations = extractAnnotations(content, file, featurePatterns);
     allAnnotations.push(...annotations);
 
@@ -541,8 +642,8 @@ function main() {
       }
     }
 
-    // 自动修复逻辑
-    if (OPTIONS.fix) {
+    // 收集修复项但不立即应用
+    if (OPTIONS.fix || OPTIONS.dryRun) {
       const fileFixes = [];
       for (const block of blocks) {
         // 修复source URL
@@ -636,20 +737,38 @@ function main() {
   }
 
   // 自动修复报告
-  if (OPTIONS.fix && Object.keys(fixesByFile).length > 0) {
+  if ((OPTIONS.fix || OPTIONS.dryRun) && Object.keys(fixesByFile).length > 0) {
     log('cyan', '\n=== Auto-Fix Mode ===');
+    if (OPTIONS.dryRun) {
+      log('yellow', `DRY RUN MODE - Showing changes that would be applied`);
+    }
     log('yellow', `Found issues in ${Object.keys(fixesByFile).length} files`);
     let fixedCount = 0;
+    let changesCount = 0;
+
     for (const [file, fixes] of Object.entries(fixesByFile)) {
-      if (applyFixes(file, fixes)) {
+      log('cyan', `\nProcessing ${path.relative(path.dirname(REFERENCE_FILE), file)}:`);
+      const { modified, content, changes } = applyFixes(file, fixes, fileContents[file]);
+      if (modified) {
         fixedCount++;
+        changesCount += changes.length;
+        // 只有非dry-run模式才写入文件
+        if (!OPTIONS.dryRun) {
+          fs.writeFileSync(file, content, 'utf8');
+        }
       }
     }
-    log('green', `✅ Fixed ${fixedCount} files`);
-    // 修复后重新运行一遍验证（可选）
-    // log('yellow', '\n💡 Please run verification again to confirm fixes:');
-    // log('yellow', '   node scripts/verify-es-versions.js');
-  } else if (OPTIONS.fix) {
+
+    if (fixedCount > 0) {
+      if (OPTIONS.dryRun) {
+        log('green', `✅ Would modify ${fixedCount} files with ${changesCount} changes`);
+      } else {
+        log('green', `✅ Fixed ${fixedCount} files with ${changesCount} changes`);
+      }
+    } else {
+      log('green', '\n✅ No auto-fixable issues found');
+    }
+  } else if (OPTIONS.fix || OPTIONS.dryRun) {
     log('green', '\n✅ No auto-fixable issues found');
   }
 
