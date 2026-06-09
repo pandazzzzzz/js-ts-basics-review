@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
- * ES版本标注验证脚本
- * 用法: node scripts/verify-es-versions.js
+ * ES版本标注验证脚本（增强版）
+ * 用法: node scripts/verify-es-versions.js [options]
+ *
+ * 选项:
+ *   --fix        自动修复常见问题（source URL错误、lastVerified统一等）
+ *   --template <name>  生成指定特性的验证块模板
+ *   --check-ts    同时检查TypeScript比较文件.ts-comparison.ts
  *
  * 检查:
  * 1. reference/es-versions.json 的 lastVerified 是否过期（超过90天）
@@ -20,6 +25,20 @@ const REFERENCE_FILE = path.join(__dirname, '../reference/es-versions.json');
 const DEMO_DIR = path.join(__dirname, '../demo');
 const MAX_VERIFIED_DAYS = 90;
 
+// 命令行参数
+const args = process.argv.slice(2);
+const OPTIONS = {
+  fix: args.includes('--fix'),
+  template: (() => {
+    const idx = args.indexOf('--template');
+    if (idx !== -1 && args[idx + 1]) {
+      return { name: args[idx + 1] };
+    }
+    return null;
+  })(),
+  checkTS: args.includes('--check-ts')
+};
+
 const colors = {
   red: '\x1b[31m',
   green: '\x1b[32m',
@@ -30,6 +49,25 @@ const colors = {
 
 function log(color, message) {
   console.log(`${colors[color]}${message}${colors.reset}`);
+}
+
+// 获取所有JS和（可选）TS文件
+function getAllCodeFiles(dir, includeTS = false) {
+  const files = [];
+
+  if (!fs.existsSync(dir)) return files;
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getAllCodeFiles(fullPath, includeTS));
+    } else if (entry.name.endsWith('.js') || (includeTS && entry.name.endsWith('.ts'))) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
 }
 
 function loadReference() {
@@ -66,24 +104,6 @@ function validateStage4Dates(reference) {
     }
   }
   return issues;
-}
-
-function getAllJsFiles(dir) {
-  const files = [];
-
-  if (!fs.existsSync(dir)) return files;
-
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      files.push(...getAllJsFiles(fullPath));
-    } else if (entry.name.endsWith('.js')) {
-      files.push(fullPath);
-    }
-  }
-
-  return files;
 }
 
 function buildFeaturePatterns(reference) {
@@ -149,8 +169,6 @@ function extractAnnotations(content, filePath, featurePatterns) {
   return annotations;
 }
 
-// Extract verification blocks from file content
-// Format: /* verification: ... feature: <name> ... stage4Date: <date> ... lastVerified: <date> */
 function extractVerificationBlocks(content, filePath) {
   const blocks = [];
   const regex = /\/\*\s*\n\s*\*\s*verification:\s*\n((?:\s*\*[^\n]*\n)*)\s*\*\//g;
@@ -163,6 +181,7 @@ function extractVerificationBlocks(content, filePath) {
     const stage4DateMatch = blockText.match(/stage4Date:\s*(.+)/);
     const lastVerifiedMatch = blockText.match(/lastVerified:\s*(.+)/);
     const statusMatch = blockText.match(/status:\s*(.+)/);
+    const sourceMatch = blockText.match(/source:\s*(.+)/);
 
     if (featureMatch) {
       blocks.push({
@@ -170,6 +189,7 @@ function extractVerificationBlocks(content, filePath) {
         status: statusMatch ? statusMatch[1].trim() : null,
         stage4Date: stage4DateMatch ? stage4DateMatch[1].trim() : null,
         lastVerified: lastVerifiedMatch ? lastVerifiedMatch[1].trim() : null,
+        source: sourceMatch ? sourceMatch[1].trim() : null,
         line: content.substring(0, match.index).split('\n').length,
         file: relPath
       });
@@ -178,7 +198,130 @@ function extractVerificationBlocks(content, filePath) {
   return blocks;
 }
 
-// Check 1: Verify stage4Date in verification blocks against reference
+// 自动修复：修复source URL错误
+function fixSourceURL(block, reference) {
+  const featureRef = reference.features[block.feature];
+  if (!featureRef) return null;
+
+  const currentSource = block.source;
+  let expectedSource = null;
+
+  // Stage 4 features应该指向finished-proposals.md
+  if (featureRef.stage === 4) {
+    expectedSource = 'https://github.com/tc39/proposals/blob/main/finished-proposals.md';
+  }
+  // Stage 1-3 features应该指向README.md
+  else if (featureRef.stage < 4) {
+    expectedSource = 'https://github.com/tc39/proposals/blob/main/README.md';
+  }
+
+  if (currentSource !== expectedSource) {
+    return { old: currentSource, new: expectedSource };
+  }
+  return null;
+}
+
+// 自动修复：统一lastVerified日期
+function syncLastVerified(block, referenceDate) {
+  if (!block.lastVerified || block.lastVerified !== referenceDate) {
+    return { old: block.lastVerified, new: referenceDate };
+  }
+  return null;
+}
+
+// 应用修复到文件
+function applyFixes(filePath, fixes) {
+  if (fixes.length === 0) return false;
+
+  let content = fs.readFileSync(filePath, 'utf8');
+  let modified = false;
+
+  for (const fix of fixes) {
+    if (fix.type === 'source') {
+      // 替换source行
+      const pattern = new RegExp(`(\\*\\s*source:\\s*)${fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+      if (pattern.test(content)) {
+        content = content.replace(pattern, `$1${fix.new}`);
+        modified = true;
+        log('cyan', `  Fixed source URL for "${fix.feature}"`);
+        log('cyan', `    Old: ${fix.old}`);
+        log('cyan', `    New: ${fix.new}`);
+      }
+    } else if (fix.type === 'lastVerified') {
+      // 替换lastVerified行
+      let fixed = false;
+      // 方法1: 精确匹配旧日期（如果有的话）
+      if (fix.old) {
+        const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const oldPattern = new RegExp(`\\*\\s*lastVerified:\\s*${escapedOld}`, 'g');
+        if (oldPattern.test(content)) {
+          content = content.replace(oldPattern, ` *   lastVerified: ${fix.new}`);
+          fixed = true;
+        }
+      }
+      // 方法2: 如果没有找到，或者fix.old为空，用更通用的模式替换
+      if (!fixed) {
+        const genericPattern = /(\*\s*lastVerified:\s*)[^\n*]*/g;
+        if (genericPattern.test(content)) {
+          content = content.replace(genericPattern, `$1${fix.new}`);
+          fixed = true;
+        }
+      }
+      if (fixed) {
+        modified = true;
+        log('cyan', `  Fixed lastVerified for "${fix.feature}"`);
+        log('cyan', `    Old: ${fix.old || '(not set)'}`);
+        log('cyan', `    New: ${fix.new}`);
+      }
+    }
+  }
+
+  if (modified) {
+    fs.writeFileSync(filePath, content, 'utf8');
+    return true;
+  }
+  return false;
+}
+
+// 生成验证块模板
+function generateTemplate(featureName, reference) {
+  const featureRef = reference.features[featureName];
+
+  if (!featureRef) {
+    log('red', `❌ Feature "${featureName}" not found in reference`);
+    return;
+  }
+
+  let template = `/*
+ * verification:
+ *   feature: ${featureName}
+ *   status: ${featureRef.status}`;
+
+  if (featureRef.stage4Date) {
+    template += `\n *   stage4Date: ${featureRef.stage4Date}`;
+  }
+
+  const currentDate = new Date().toISOString().split('T')[0];
+  template += `\n *   lastVerified: ${currentDate}`;
+
+  // 根据stage设置正确的source
+  if (featureRef.stage === 4) {
+    template += `\n *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md`;
+  } else {
+    template += `\n *   source: https://github.com/tc39/proposals/blob/main/README.md`;
+  }
+
+  template += `\n */`;
+
+  log('cyan', `\n=== Verification Block Template ===`);
+  log('cyan', `Feature: ${featureName}`);
+  log('cyan', `Status: ${featureRef.status}`);
+  if (featureRef.stage4Date) {
+    log('cyan', `Stage 4 Date: ${featureRef.stage4Date}`);
+  }
+  console.log('\n' + template + '\n');
+}
+
 function checkBlockStage4Dates(blocks, reference) {
   const issues = [];
   for (const block of blocks) {
@@ -199,7 +342,6 @@ function checkBlockStage4Dates(blocks, reference) {
   return issues;
 }
 
-// Check 2: Cross-file duplicate verification blocks
 function detectDuplicateBlocks(blocks) {
   const duplicates = [];
   const seen = {};
@@ -224,7 +366,6 @@ function detectDuplicateBlocks(blocks) {
   return duplicates;
 }
 
-// Check 3: lastVerified consistency
 function checkLastVerifiedConsistency(blocks, reference) {
   const issues = [];
   const refDate = reference.meta.lastVerified;
@@ -279,7 +420,6 @@ function checkLastVerifiedConsistency(blocks, reference) {
   return issues;
 }
 
-// Check 4: Files referencing ES20xx but missing verification blocks
 function checkMissingVerificationBlocks(filePath, content, featurePatterns, reference, blocks) {
   const featuresInFile = new Set(blocks.map(b => b.feature));
   const featuresInAnnotations = new Set();
@@ -344,6 +484,13 @@ function compareWithReference(annotation, reference) {
 }
 
 function main() {
+  // 处理--template选项
+  if (OPTIONS.template) {
+    const reference = loadReference();
+    generateTemplate(OPTIONS.template.name, reference);
+    return;
+  }
+
   log('cyan', '\n=== ES Version Annotation Verification ===\n');
 
   const reference = loadReference();
@@ -359,14 +506,17 @@ function main() {
     }
   }
 
-  const demoFiles = getAllJsFiles(DEMO_DIR);
-  log('cyan', `\nScanning ${demoFiles.length} demo files...`);
+  const demoFiles = getAllCodeFiles(DEMO_DIR, OPTIONS.checkTS);
+  log('cyan', `\nScanning ${demoFiles.length} ${OPTIONS.checkTS ? 'code (JS+TS) ' : 'JS'} files...`);
 
   const featurePatterns = buildFeaturePatterns(reference);
   const allAnnotations = [];
   const allBlocks = [];
   const conflicts = [];
-  const allFeaturesWithBlocks = new Set(); // Track all features that have blocks anywhere
+  const allFeaturesWithBlocks = new Set();
+
+  // 收集所有修复
+  const fixesByFile = {};
 
   for (const file of demoFiles) {
     const content = fs.readFileSync(file, 'utf8');
@@ -388,6 +538,26 @@ function main() {
           feature: ann.feature,
           message: comparison.message
         });
+      }
+    }
+
+    // 自动修复逻辑
+    if (OPTIONS.fix) {
+      const fileFixes = [];
+      for (const block of blocks) {
+        // 修复source URL
+        const sourceFix = fixSourceURL(block, reference);
+        if (sourceFix) {
+          fileFixes.push({ type: 'source', feature: block.feature, ...sourceFix });
+        }
+        // 修复lastVerified
+        const lastVerifiedFix = syncLastVerified(block, reference.meta.lastVerified);
+        if (lastVerifiedFix) {
+          fileFixes.push({ type: 'lastVerified', feature: block.feature, ...lastVerifiedFix });
+        }
+      }
+      if (fileFixes.length > 0) {
+        fixesByFile[file] = fileFixes;
       }
     }
   }
@@ -463,6 +633,24 @@ function main() {
     }
   } else {
     log('green', '✅ All lastVerified dates consistent');
+  }
+
+  // 自动修复报告
+  if (OPTIONS.fix && Object.keys(fixesByFile).length > 0) {
+    log('cyan', '\n=== Auto-Fix Mode ===');
+    log('yellow', `Found issues in ${Object.keys(fixesByFile).length} files`);
+    let fixedCount = 0;
+    for (const [file, fixes] of Object.entries(fixesByFile)) {
+      if (applyFixes(file, fixes)) {
+        fixedCount++;
+      }
+    }
+    log('green', `✅ Fixed ${fixedCount} files`);
+    // 修复后重新运行一遍验证（可选）
+    // log('yellow', '\n💡 Please run verification again to confirm fixes:');
+    // log('yellow', '   node scripts/verify-es-versions.js');
+  } else if (OPTIONS.fix) {
+    log('green', '\n✅ No auto-fixable issues found');
   }
 
   // Check 4: Missing verification blocks (global check)
