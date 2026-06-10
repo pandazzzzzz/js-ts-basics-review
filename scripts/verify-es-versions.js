@@ -39,7 +39,8 @@ const OPTIONS = {
   })(),
   checkTS: args.includes('--check-ts'),
   help: args.includes('--help') || args.includes('-h'),
-  version: args.includes('--version') || args.includes('-v')
+  version: args.includes('--version') || args.includes('-v'),
+  listFeatures: args.includes('--list-features') || args.includes('-l')
 };
 
 const VERSION = '2.0.0';
@@ -65,6 +66,7 @@ ES版本标注验证脚本 v${VERSION}
 选项:
   -h, --help                显示此帮助信息
   -v, --version             显示版本号
+  -l, --list-features       列出所有可用的特性名称
   -n, --dry-run             预览修改内容但不实际写入文件（与--fix配合使用）
   --fix                     自动修复常见问题（source URL错误、lastVerified统一等）
   --template <feature-name> 生成指定特性的验证块模板
@@ -84,6 +86,7 @@ ES版本标注验证脚本 v${VERSION}
   同时验证JS和TS文件:        node scripts/verify-es-versions.js --check-ts
   自动修复并预览修改:        node scripts/verify-es-versions.js --fix --dry-run
   应用自动修复:              node scripts/verify-es-versions.js --fix
+  列出所有可用特性:          node scripts/verify-es-versions.js --list-features
   生成Decorators验证块模板:  node scripts/verify-es-versions.js --template "Decorators"
 `);
 }
@@ -376,6 +379,7 @@ function generateTemplate(featureName, reference) {
 
   if (!featureRef) {
     log('red', `❌ Feature "${featureName}" not found in reference`);
+    log('yellow', 'Run with --list-features to see all available features');
     return;
   }
 
@@ -407,6 +411,46 @@ function generateTemplate(featureName, reference) {
     log('cyan', `Stage 4 Date: ${featureRef.stage4Date}`);
   }
   console.log('\n' + template + '\n');
+}
+
+function listFeatures(reference) {
+  log('cyan', `\n=== Available Features ===\n`);
+
+  // 按状态分组
+  const groups = {
+    'ES2027': [],
+    'ES2026': [],
+    'ES2025': [],
+    'ES2024': [],
+    'ES2023': [],
+    'ES2022': [],
+    'ES2021': [],
+    'Stage 3': [],
+    'Stage 2': [],
+    'Other': []
+  };
+
+  for (const [name, feature] of Object.entries(reference.features)) {
+    const status = feature.status;
+    if (groups[status]) {
+      groups[status].push(name);
+    } else {
+      groups['Other'].push(name);
+    }
+  }
+
+  // 按顺序显示
+  const order = ['ES2027', 'ES2026', 'ES2025', 'ES2024', 'ES2023', 'ES2022', 'ES2021', 'Stage 3', 'Stage 2', 'Other'];
+  for (const status of order) {
+    if (groups[status].length > 0) {
+      log('green', `\n${status}:`);
+      for (const name of groups[status].sort()) {
+        console.log(`  - ${name}`);
+      }
+    }
+  }
+
+  console.log(`\nTotal: ${Object.keys(reference.features).length} features`);
 }
 
 function checkBlockStage4Dates(blocks, reference) {
@@ -580,6 +624,12 @@ function main() {
   if (OPTIONS.version) {
     showVersion();
     process.exit(0);
+  }
+
+  if (OPTIONS.listFeatures) {
+    const reference = loadReference();
+    listFeatures(reference);
+    return;
   }
 
   // 处理--template选项
