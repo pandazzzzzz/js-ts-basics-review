@@ -278,7 +278,7 @@ console.log("Static method:", MathUtils.add(5, 3)); // 8
  *   feature: Private class fields
  *   status: ES2022
  *   stage4Date: 2021-03
- *   lastVerified: 2026-06-05
+ *   lastVerified: 2026-06-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 class Config {

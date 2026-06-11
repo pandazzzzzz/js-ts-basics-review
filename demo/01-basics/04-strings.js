@@ -259,7 +259,7 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, 'dog'));
  *   feature: replaceAll
  *   status: ES2021
  *   stage4Date: 2020-03
- *   lastVerified: 2026-06-05
+ *   lastVerified: 2026-06-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== replaceAll() Method ===");

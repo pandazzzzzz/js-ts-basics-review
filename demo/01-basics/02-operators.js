@@ -238,7 +238,7 @@ console.log("a **= 3:", a); // 8
  *   feature: Logical Assignment
  *   status: ES2021
  *   stage4Date: 2020-03
- *   lastVerified: 2026-06-05
+ *   lastVerified: 2026-06-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 let b = 10;

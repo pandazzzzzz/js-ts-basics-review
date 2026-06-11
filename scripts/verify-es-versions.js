@@ -41,7 +41,12 @@ const OPTIONS = {
       }
       const lineIdx = args.indexOf('--line');
       if (lineIdx !== -1 && args[lineIdx + 1]) {
-        tpl.line = parseInt(args[lineIdx + 1], 10);
+        const parsed = parseInt(args[lineIdx + 1], 10);
+        if (isNaN(parsed)) {
+          console.error(`Error: --line value must be a number, got "${args[lineIdx + 1]}"`);
+          process.exit(1);
+        }
+        tpl.line = parsed;
       }
       return tpl;
     }
@@ -274,6 +279,7 @@ function extractAnnotations(content, filePath, featurePatterns) {
 
 function extractVerificationBlocks(content, filePath) {
   const blocks = [];
+  // Match verification blocks with flexible whitespace (spaces or tabs)
   const regex = /\/\*\s*\n\s*\*\s*verification:\s*\n((?:\s*\*[^\n]*\n)*)\s*\*\//g;
   const relPath = path.relative(path.dirname(REFERENCE_FILE), filePath);
 
@@ -375,11 +381,11 @@ function applyFixes(filePath, fixes, originalContent = null) {
       let change = null;
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const oldPattern = new RegExp(`\\*\\s*lastVerified:\\s*${escapedOld}`, 'g');
-        const newContent = content.replace(oldPattern, (match) => {
+        const oldPattern = new RegExp(`(\\s*\\*\\s*lastVerified:\\s*)${escapedOld}`, 'g');
+        const newContent = content.replace(oldPattern, (match, p1) => {
           fixed = true;
           change = { type: 'lastVerified', feature: fix.feature, old: fix.old, new: fix.new };
-          return ` *   lastVerified: ${fix.new}`;
+          return `${p1}${fix.new}`;
         });
         if (newContent !== content) {
           content = newContent;
@@ -409,13 +415,6 @@ function applyFixes(filePath, fixes, originalContent = null) {
           log('cyan', `    New: ${fix.new}`);
         }
       }
-    }
-  }
-
-  if (modified && !OPTIONS.dryRun && originalContent === null) {
-    const result = safeWriteFile(filePath, content, OPTIONS.backup);
-    if (!result.success) {
-      log('red', `  ❌ Failed to write ${filePath}: ${result.error}`);
     }
   }
 
@@ -465,6 +464,15 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     const resolvedPath = path.isAbsolute(targetFile)
       ? targetFile
       : path.resolve(process.cwd(), targetFile);
+
+    // Validate target path is within project root
+    const projectRoot = path.resolve(__dirname, '..');
+    const normalizedTarget = path.resolve(resolvedPath);
+    if (!normalizedTarget.startsWith(projectRoot + path.sep)) {
+      log('red', `❌ Target file is outside the project directory: ${targetFile}`);
+      log('yellow', `   Project root: ${projectRoot}`);
+      return { success: false, error: 'Target file outside project directory' };
+    }
 
     const result = safeReadFile(resolvedPath);
     if (!result.success) {
@@ -633,38 +641,6 @@ function checkLastVerifiedConsistency(blocks, reference) {
   return issues;
 }
 
-function checkMissingVerificationBlocks(filePath, content, featurePatterns, reference, blocks) {
-  const featuresInFile = new Set(blocks.map(b => b.feature));
-  const featuresInAnnotations = new Set();
-
-  // Check which features are referenced in annotations but lack blocks
-  for (const pattern of featurePatterns) {
-    const matches = content.matchAll(pattern.regex);
-    for (const match of matches) {
-      let version = null;
-      for (let i = 1; i < match.length; i++) {
-        if (match[i]) {
-          version = match[i].replace(/Stage\s*/, 'Stage ');
-          break;
-        }
-      }
-      if (version && (version.match(/^ES20\d{2}$/) || version.match(/^Stage \d$/))) {
-        featuresInAnnotations.add(pattern.name);
-        break;
-      }
-    }
-  }
-
-  const missing = [];
-  for (const featureName of featuresInAnnotations) {
-    if (!featuresInFile.has(featureName) && reference.features[featureName]) {
-      missing.push(featureName);
-    }
-  }
-
-  return missing;
-}
-
 function compareWithReference(annotation, reference) {
   const feature = reference.features[annotation.feature];
   if (!feature) {
@@ -682,7 +658,7 @@ function compareWithReference(annotation, reference) {
   const annNorm = annVersion.replace('Stage ', 'Stage').toUpperCase();
   const refNorm = refVersion.replace('Stage ', 'Stage').toUpperCase();
 
-  if (annNorm === refNorm || annNorm.includes(refNorm)) {
+  if (annNorm === refNorm) {
     return { match: true };
   }
 
@@ -800,6 +776,11 @@ function main() {
         fixesByFile[file] = fileFixes;
       }
     }
+  }
+
+  // Report read errors summary
+  if (readErrors > 0) {
+    log('yellow', `\n⚠️  ${readErrors} file(s) could not be read and were skipped`);
   }
 
   // ===== Annotations summary =====

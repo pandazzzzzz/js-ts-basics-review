@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-06-05",
+    "lastVerified": "2026-06-12",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
@@ -86,14 +86,14 @@
     "Set methods": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-02",
+      "stage4Date": "2024-04",
       "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc.",
       "url": "https://github.com/tc39/proposal-set-methods"
     },
     "Iterator helpers": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-02",
+      "stage4Date": "2024-10",
       "note": "map, filter, take, drop, forEach, reduce, toArray, etc.",
       "url": "https://github.com/tc39/proposal-iterator-helpers"
     },
@@ -112,35 +112,35 @@
     "Float16Array": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2025-02",
       "note": "Includes Math.f16round()",
       "url": "https://github.com/tc39/proposal-float16array"
     },
     "JSON Modules": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2024-10",
       "note": "import data from './file.json' with { type: 'json' }",
       "url": "https://github.com/tc39/proposal-json-modules"
     },
     "Import Attributes": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2024-10",
       "note": "Formerly Import Assertions, renamed to Import Attributes",
       "url": "https://github.com/tc39/proposal-import-attributes"
     },
     "RegExp Modifiers": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2024-10",
       "note": "Inline flag changes (?i, ?m, ?s)",
       "url": "https://github.com/tc39/proposal-regexp-modifiers"
     },
     "Duplicate Named Capture Groups": {
       "status": "ES2025",
       "stage": 4,
-      "stage4Date": "2024-03",
+      "stage4Date": "2024-04",
       "url": "https://github.com/tc39/proposal-duplicate-named-capturing-groups"
     },
     "Redeclarable global eval vars": {

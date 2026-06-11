@@ -1,6 +1,7 @@
 #!/bin/sh
 # Pre-commit hook for JS/TS review project
 # Runs the ES version verification script before commit
+set -euo pipefail
 
 echo "Running ES version verification..."
 

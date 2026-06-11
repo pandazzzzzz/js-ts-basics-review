@@ -1,5 +1,6 @@
 #!/bin/sh
 # Install pre-commit hook for JS/TS review project
+set -euo pipefail
 
 echo "Installing pre-commit hook..."
 

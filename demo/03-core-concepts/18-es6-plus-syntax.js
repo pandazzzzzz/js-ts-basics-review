@@ -794,7 +794,7 @@ Key modern features (ES2020-ES2023):
  * verification:
  *   feature: Decorators
  *   status: Stage 3
- *   lastVerified: 2026-06-05
+ *   lastVerified: 2026-06-12
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 5. DECORATORS
