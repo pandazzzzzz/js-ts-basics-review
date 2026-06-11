@@ -30,10 +30,20 @@ const args = process.argv.slice(2);
 const OPTIONS = {
   fix: args.includes('--fix'),
   dryRun: args.includes('--dry-run') || args.includes('-n'),
+  backup: args.includes('--backup') || args.includes('-b'),
   template: (() => {
     const idx = args.indexOf('--template');
     if (idx !== -1 && args[idx + 1]) {
-      return { name: args[idx + 1] };
+      const tpl = { name: args[idx + 1] };
+      const fileIdx = args.indexOf('--file');
+      if (fileIdx !== -1 && args[fileIdx + 1]) {
+        tpl.file = args[fileIdx + 1];
+      }
+      const lineIdx = args.indexOf('--line');
+      if (lineIdx !== -1 && args[lineIdx + 1]) {
+        tpl.line = parseInt(args[lineIdx + 1], 10);
+      }
+      return tpl;
     }
     return null;
   })(),
@@ -43,18 +53,56 @@ const OPTIONS = {
   listFeatures: args.includes('--list-features') || args.includes('-l')
 };
 
-const VERSION = '2.0.0';
+const VERSION = '2.1.0';
+
+// 颜色输出支持检测
+let useColors = true;
+try {
+  // 检测是否在支持颜色的终端中运行
+  if (process.env.NO_COLOR || process.env.TERM === 'dumb' || !process.stdout.isTTY) {
+    useColors = false;
+  }
+} catch (e) {
+  useColors = false;
+}
 
 const colors = {
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  cyan: '\x1b[36m',
-  reset: '\x1b[0m'
+  red: useColors ? '\x1b[31m' : '',
+  green: useColors ? '\x1b[32m' : '',
+  yellow: useColors ? '\x1b[33m' : '',
+  cyan: useColors ? '\x1b[36m' : '',
+  reset: useColors ? '\x1b[0m' : ''
 };
 
 function log(color, message) {
   console.log(`${colors[color]}${message}${colors.reset}`);
+}
+
+// 安全的文件读取
+function safeReadFile(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) {
+      return { success: false, error: `File not found: ${filePath}`, content: null };
+    }
+    return { success: true, error: null, content: fs.readFileSync(filePath, 'utf8') };
+  } catch (e) {
+    return { success: false, error: e.message, content: null };
+  }
+}
+
+// 安全的文件写入（支持备份）
+function safeWriteFile(filePath, content, createBackup = false) {
+  try {
+    if (createBackup && fs.existsSync(filePath)) {
+      const backupPath = filePath + '.bak';
+      fs.writeFileSync(backupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
+      log('cyan', `  Backup created: ${path.basename(backupPath)}`);
+    }
+    fs.writeFileSync(filePath, content, 'utf8');
+    return { success: true, error: null };
+  } catch (e) {
+    return { success: false, error: e.message };
+  }
 }
 
 // 显示帮助信息
@@ -68,8 +116,11 @@ ES版本标注验证脚本 v${VERSION}
   -v, --version             显示版本号
   -l, --list-features       列出所有可用的特性名称
   -n, --dry-run             预览修改内容但不实际写入文件（与--fix配合使用）
+  -b, --backup              修复前自动创建 .bak 备份文件（与--fix配合使用）
   --fix                     自动修复常见问题（source URL错误、lastVerified统一等）
   --template <feature-name> 生成指定特性的验证块模板
+    --file <path>             将模板直接插入到指定文件
+    --line <num>              插入到指定行号（默认文件末尾）
   --check-ts                同时检查TypeScript比较文件(*.ts-comparison.ts)
 
 检查项:
@@ -85,9 +136,10 @@ ES版本标注验证脚本 v${VERSION}
   基础验证:                  node scripts/verify-es-versions.js
   同时验证JS和TS文件:        node scripts/verify-es-versions.js --check-ts
   自动修复并预览修改:        node scripts/verify-es-versions.js --fix --dry-run
-  应用自动修复:              node scripts/verify-es-versions.js --fix
+  修复并创建备份:            node scripts/verify-es-versions.js --fix --backup
   列出所有可用特性:          node scripts/verify-es-versions.js --list-features
   生成Decorators验证块模板:  node scripts/verify-es-versions.js --template "Decorators"
+  直接插入模板到文件:        node scripts/verify-es-versions.js --template "Decorators" --file demo/03-core-concepts/18-es6-plus-syntax.js --line 790
 `);
 }
 
@@ -116,11 +168,17 @@ function getAllCodeFiles(dir, includeTS = false) {
 }
 
 function loadReference() {
-  if (!fs.existsSync(REFERENCE_FILE)) {
-    log('red', `❌ Reference file not found: ${REFERENCE_FILE}`);
+  const result = safeReadFile(REFERENCE_FILE);
+  if (!result.success) {
+    log('red', `❌ Cannot read reference file: ${result.error}`);
     process.exit(1);
   }
-  return JSON.parse(fs.readFileSync(REFERENCE_FILE, 'utf8'));
+  try {
+    return JSON.parse(result.content);
+  } catch (e) {
+    log('red', `❌ Reference file is not valid JSON: ${e.message}`);
+    process.exit(1);
+  }
 }
 
 function checkLastVerified(reference) {
@@ -278,7 +336,16 @@ function syncLastVerified(block, referenceDate) {
 function applyFixes(filePath, fixes, originalContent = null) {
   if (fixes.length === 0) return { modified: false, content: originalContent };
 
-  let content = originalContent !== null ? originalContent : fs.readFileSync(filePath, 'utf8');
+  let content = originalContent !== null ? originalContent : null;
+  if (content === null) {
+    const result = safeReadFile(filePath);
+    if (!result.success) {
+      log('red', `  ❌ Cannot read ${filePath}: ${result.error}`);
+      return { modified: false, content: null, changes: [] };
+    }
+    content = result.content;
+  }
+
   let modified = false;
   const changes = [];
 
@@ -288,13 +355,7 @@ function applyFixes(filePath, fixes, originalContent = null) {
       const pattern = new RegExp(`(\\*\\s*source:\\s*)${fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
       const newContent = content.replace(pattern, (match, p1) => {
         modified = true;
-        changes.push({
-          type: 'source',
-          feature: fix.feature,
-          line: null, // 这里可以改进为计算行号
-          old: fix.old,
-          new: fix.new
-        });
+        changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
         return `${p1}${fix.new}`;
       });
       if (newContent !== content) {
@@ -310,38 +371,25 @@ function applyFixes(filePath, fixes, originalContent = null) {
         }
       }
     } else if (fix.type === 'lastVerified') {
-      // 替换lastVerified行
       let fixed = false;
       let change = null;
-      // 方法1: 精确匹配旧日期（如果有的话）
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const oldPattern = new RegExp(`\\*\\s*lastVerified:\\s*${escapedOld}`, 'g');
         const newContent = content.replace(oldPattern, (match) => {
           fixed = true;
-          change = {
-            type: 'lastVerified',
-            feature: fix.feature,
-            old: fix.old,
-            new: fix.new
-          };
+          change = { type: 'lastVerified', feature: fix.feature, old: fix.old, new: fix.new };
           return ` *   lastVerified: ${fix.new}`;
         });
         if (newContent !== content) {
           content = newContent;
         }
       }
-      // 方法2: 如果没有找到，或者fix.old为空，用更通用的模式替换
       if (!fixed) {
         const genericPattern = /(\*\s*lastVerified:\s*)[^\n*]*/g;
         const newContent = content.replace(genericPattern, (match, p1) => {
           fixed = true;
-          change = {
-            type: 'lastVerified',
-            feature: fix.feature,
-            old: fix.old || '(not set)',
-            new: fix.new
-          };
+          change = { type: 'lastVerified', feature: fix.feature, old: fix.old || '(not set)', new: fix.new };
           return `${p1}${fix.new}`;
         });
         if (newContent !== content) {
@@ -365,22 +413,23 @@ function applyFixes(filePath, fixes, originalContent = null) {
   }
 
   if (modified && !OPTIONS.dryRun && originalContent === null) {
-    // 只有当originalContent为空时才写入，说明不是从主循环传入的
-    // 主循环会统一处理写入
-    fs.writeFileSync(filePath, content, 'utf8');
+    const result = safeWriteFile(filePath, content, OPTIONS.backup);
+    if (!result.success) {
+      log('red', `  ❌ Failed to write ${filePath}: ${result.error}`);
+    }
   }
 
   return { modified, content, changes };
 }
 
 // 生成验证块模板
-function generateTemplate(featureName, reference) {
+function generateTemplate(featureName, reference, targetFile = null, targetLine = null) {
   const featureRef = reference.features[featureName];
 
   if (!featureRef) {
     log('red', `❌ Feature "${featureName}" not found in reference`);
     log('yellow', 'Run with --list-features to see all available features');
-    return;
+    return { success: false, error: 'Feature not found' };
   }
 
   let template = `/*
@@ -410,7 +459,40 @@ function generateTemplate(featureName, reference) {
   if (featureRef.stage4Date) {
     log('cyan', `Stage 4 Date: ${featureRef.stage4Date}`);
   }
+
+  // 如果指定了目标文件，直接插入
+  if (targetFile) {
+    const resolvedPath = path.isAbsolute(targetFile)
+      ? targetFile
+      : path.resolve(process.cwd(), targetFile);
+
+    const result = safeReadFile(resolvedPath);
+    if (!result.success) {
+      log('red', `❌ Cannot read target file: ${result.error}`);
+      return { success: false, error: result.error };
+    }
+
+    const lines = result.content.split('\n');
+    const insertLine = targetLine !== null ? Math.min(targetLine, lines.length) : lines.length;
+
+    // 在指定行之前插入模板
+    const templateLines = template.split('\n');
+    lines.splice(insertLine, 0, ...templateLines, '');
+    const newContent = lines.join('\n');
+
+    const writeResult = safeWriteFile(resolvedPath, newContent, OPTIONS.backup);
+    if (!writeResult.success) {
+      log('red', `❌ Failed to write file: ${writeResult.error}`);
+      return { success: false, error: writeResult.error };
+    }
+
+    log('green', `✅ Template inserted into ${path.basename(resolvedPath)} at line ${insertLine}`);
+    return { success: true, file: resolvedPath, line: insertLine };
+  }
+
+  // 否则输出到控制台
   console.log('\n' + template + '\n');
+  return { success: true, template };
 }
 
 function listFeatures(reference) {
@@ -635,7 +717,7 @@ function main() {
   // 处理--template选项
   if (OPTIONS.template) {
     const reference = loadReference();
-    generateTemplate(OPTIONS.template.name, reference);
+    generateTemplate(OPTIONS.template.name, reference, OPTIONS.template.file || null, OPTIONS.template.line || null);
     return;
   }
 
@@ -666,9 +748,16 @@ function main() {
   // 收集所有修复和文件内容
   const fixesByFile = {};
   const fileContents = {}; // 缓存文件内容避免重复读取
+  let readErrors = 0;
 
   for (const file of demoFiles) {
-    const content = fs.readFileSync(file, 'utf8');
+    const result = safeReadFile(file);
+    if (!result.success) {
+      log('yellow', `⚠️  Cannot read ${path.relative(path.dirname(REFERENCE_FILE), file)}: ${result.error}`);
+      readErrors++;
+      continue;
+    }
+    const content = result.content;
     fileContents[file] = content; // 缓存内容
 
     const annotations = extractAnnotations(content, file, featurePatterns);
@@ -804,7 +893,10 @@ function main() {
         changesCount += changes.length;
         // 只有非dry-run模式才写入文件
         if (!OPTIONS.dryRun) {
-          fs.writeFileSync(file, content, 'utf8');
+          const writeResult = safeWriteFile(file, content, OPTIONS.backup);
+          if (!writeResult.success) {
+            log('red', `  ❌ Failed to write ${file}: ${writeResult.error}`);
+          }
         }
       }
     }
@@ -829,7 +921,8 @@ function main() {
 
   // First collect all referenced features across all files
   for (const file of demoFiles) {
-    const content = fs.readFileSync(file, 'utf8');
+    if (!fileContents[file]) continue; // 跳过之前读取失败的文件
+    const content = fileContents[file];
     for (const pattern of featurePatterns) {
       const matches = content.matchAll(pattern.regex);
       for (const match of matches) {
