@@ -219,8 +219,8 @@ function buildFeaturePatterns(reference) {
 
   // Short feature names that need precise matching (avoid substring matches)
   const shortNames = {
-    at: /(?:\.at\([^)]*\)|\.at\b|Array\.at|String\.at)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi,
-    with: /(?:\.with\([^)]*\)|\.with\b|Array\.with)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi
+    at: /(?:\.at\([^)]*\)|\.at\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi,
+    with: /(?:\.with\([^)]*\)|\.with\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi
   };
 
   for (const [name, regex] of Object.entries(shortNames)) {
@@ -675,7 +675,7 @@ function main() {
   // 处理帮助和版本
   if (OPTIONS.help) {
     showHelp();
-    process.exit(0);
+    return;
   }
 
   if (OPTIONS.version) {
