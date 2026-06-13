@@ -672,7 +672,7 @@ function compareWithReference(annotation, reference) {
 }
 
 function main() {
-  // 处理帮助和版本
+  // 处理不需要扫描文件的操作
   if (OPTIONS.help) {
     showHelp();
     return;
@@ -683,17 +683,17 @@ function main() {
     return;
   }
 
-  if (OPTIONS.listFeatures) {
+  // 需要加载 reference 但不扫描文件的操作
+  if (OPTIONS.listFeatures || OPTIONS.template) {
     const reference = loadReference();
-    listFeatures(reference);
-    return;
-  }
-
-  // 处理--template选项
-  if (OPTIONS.template) {
-    const reference = loadReference();
-    generateTemplate(OPTIONS.template.name, reference, OPTIONS.template.file || null, OPTIONS.template.line || null);
-    return;
+    if (OPTIONS.listFeatures) {
+      listFeatures(reference);
+      return;
+    }
+    if (OPTIONS.template) {
+      generateTemplate(OPTIONS.template.name, reference, OPTIONS.template.file || null, OPTIONS.template.line || null);
+      return;
+    }
   }
 
   log('cyan', '\n=== ES Version Annotation Verification ===\n');
