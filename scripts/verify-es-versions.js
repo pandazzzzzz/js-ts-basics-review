@@ -126,7 +126,7 @@ ES版本标注验证脚本 v${VERSION}
   --template <feature-name> 生成指定特性的验证块模板
     --file <path>             将模板直接插入到指定文件
     --line <num>              插入到指定行号（默认文件末尾）
-  --check-ts                同时检查TypeScript比较文件(*.ts-comparison.ts)
+  --check-ts                同时检查所有TypeScript文件(*.ts)
 
 检查项:
   1. reference/es-versions.json 的 lastVerified 是否过期（超过90天）
@@ -219,8 +219,8 @@ function buildFeaturePatterns(reference) {
 
   // Short feature names that need precise matching (avoid substring matches)
   const shortNames = {
-    at: /\.at\([^)]*\)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi,
-    with: /\.with\([^)]*\)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi
+    at: /(?:\.at\([^)]*\)|\.at\b|Array\.at|String\.at)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi,
+    with: /(?:\.with\([^)]*\)|\.with\b|Array\.with)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi
   };
 
   for (const [name, regex] of Object.entries(shortNames)) {
@@ -428,7 +428,7 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
   if (!featureRef) {
     log('red', `❌ Feature "${featureName}" not found in reference`);
     log('yellow', 'Run with --list-features to see all available features');
-    return { success: false, error: 'Feature not found' };
+    return;
   }
 
   let template = `/*
@@ -471,13 +471,13 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     if (!normalizedTarget.startsWith(projectRoot + path.sep)) {
       log('red', `❌ Target file is outside the project directory: ${targetFile}`);
       log('yellow', `   Project root: ${projectRoot}`);
-      return { success: false, error: 'Target file outside project directory' };
+      return;
     }
 
     const result = safeReadFile(resolvedPath);
     if (!result.success) {
       log('red', `❌ Cannot read target file: ${result.error}`);
-      return { success: false, error: result.error };
+      return;
     }
 
     const lines = result.content.split('\n');
@@ -491,16 +491,15 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     const writeResult = safeWriteFile(resolvedPath, newContent, OPTIONS.backup);
     if (!writeResult.success) {
       log('red', `❌ Failed to write file: ${writeResult.error}`);
-      return { success: false, error: writeResult.error };
+      return;
     }
 
     log('green', `✅ Template inserted into ${path.basename(resolvedPath)} at line ${insertLine}`);
-    return { success: true, file: resolvedPath, line: insertLine };
+    return;
   }
 
   // 否则输出到控制台
   console.log('\n' + template + '\n');
-  return { success: true, template };
 }
 
 function listFeatures(reference) {
@@ -681,7 +680,7 @@ function main() {
 
   if (OPTIONS.version) {
     showVersion();
-    process.exit(0);
+    return;
   }
 
   if (OPTIONS.listFeatures) {
