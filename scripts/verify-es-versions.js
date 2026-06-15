@@ -88,12 +88,9 @@ function log(color, message) {
 // 安全的文件读取
 function safeReadFile(filePath) {
   try {
-    if (!fs.existsSync(filePath)) {
-      return { success: false, error: `File not found: ${filePath}`, content: null };
-    }
     return { success: true, error: null, content: fs.readFileSync(filePath, 'utf8') };
   } catch (e) {
-    return { success: false, error: e.message, content: null };
+    return { success: false, error: e.code === 'ENOENT' ? `File not found: ${filePath}` : e.message, content: null };
   }
 }
 
@@ -101,7 +98,15 @@ function safeReadFile(filePath) {
 function safeWriteFile(filePath, content, createBackup = false) {
   try {
     if (createBackup && fs.existsSync(filePath)) {
-      const backupPath = filePath + '.bak';
+      // Generate timestamped backup filename to avoid silent overwrites
+      const now = new Date();
+      const ts = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+      const backupPath = filePath.replace(/(\.\w+)$/, `.${ts}.bak$1`);
+      // Warn if an existing .bak would be overwritten
+      const simpleBackupPath = filePath + '.bak';
+      if (fs.existsSync(simpleBackupPath)) {
+        log('yellow', `  ⚠️  Existing backup ${path.basename(simpleBackupPath)} will be preserved (timestamped backup created instead)`);
+      }
       fs.writeFileSync(backupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
       log('cyan', `  Backup created: ${path.basename(backupPath)}`);
     }
@@ -408,11 +413,12 @@ function applyFixes(filePath, fixes, originalContent = null) {
         }
       }
       if (!fixed) {
-        const genericPattern = /(\*\s*lastVerified:\s*)[^\n*]*/g;
+        // Use [ \t] instead of \s to avoid matching newlines (which would consume the next line)
+        const genericPattern = /(\*[ \t]*lastVerified:)[ \t]*[^\n*]*/g;
         const newContent = content.replace(genericPattern, (match, p1) => {
           fixed = true;
           change = { type: 'lastVerified', feature: fix.feature, old: fix.old || '(not set)', new: fix.new };
-          return `${p1}${fix.new}`;
+          return `${p1} ${fix.new}`;
         });
         if (newContent !== content) {
           content = newContent;
@@ -962,4 +968,31 @@ function main() {
   }
 }
 
-main();
+// Only run main() when executed directly, not when required for testing
+if (require.main === module) {
+  main();
+}
+
+// Export for testing
+module.exports = {
+  loadReference,
+  checkLastVerified,
+  validateStage4Dates,
+  buildFeaturePatterns,
+  extractAnnotations,
+  extractVerificationBlocks,
+  fixSourceURL,
+  syncLastVerified,
+  applyFixes,
+  generateTemplate,
+  listFeatures,
+  checkBlockStage4Dates,
+  detectDuplicateBlocks,
+  checkLastVerifiedConsistency,
+  compareWithReference,
+  safeReadFile,
+  safeWriteFile,
+  log,
+  colors,
+  VERSION
+};
