@@ -80,7 +80,9 @@ const colors = {
 };
 
 function log(color, message) {
-  console.log(`${colors[color]}${message}${colors.reset}`);
+  const validColors = new Set(['red', 'green', 'yellow', 'cyan', 'reset']);
+  const useColor = validColors.has(color) ? colors[color] : '';
+  console.log(`${useColor}${message}${useColor ? colors.reset : ''}`);
 }
 
 // 安全的文件读取
@@ -125,7 +127,7 @@ ES版本标注验证脚本 v${VERSION}
   --fix                     自动修复常见问题（source URL错误、lastVerified统一等）
   --template <feature-name> 生成指定特性的验证块模板
     --file <path>             将模板直接插入到指定文件
-    --line <num>              插入到指定行号（默认文件末尾）
+    --line <num>              插入到指定行号（1-based；0 = 首行前；>总行数 = 末尾）
   --check-ts                同时检查所有TypeScript文件(*.ts)
 
 检查项:
@@ -187,8 +189,14 @@ function loadReference() {
 }
 
 function checkLastVerified(reference) {
-  const lastVerified = new Date(reference.meta.lastVerified);
-  const daysSince = Math.floor((Date.now() - lastVerified.getTime()) / (1000 * 60 * 60 * 24));
+  // Parse lastVerified as local date to avoid UTC time zone issues
+  const [year, month, day] = reference.meta.lastVerified.split('-').map(Number);
+  const lastVerified = new Date(year, month - 1, day); // Month is 0-based
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // Calculate days difference in local time
+  const daysSince = Math.floor((today.getTime() - lastVerified.getTime()) / (1000 * 60 * 60 * 24));
 
   if (daysSince > MAX_VERIFIED_DAYS) {
     log('yellow', `⚠️  reference/es-versions.json lastVerified is ${daysSince} days ago (>${MAX_VERIFIED_DAYS} days)`);
@@ -440,7 +448,9 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     template += `\n *   stage4Date: ${featureRef.stage4Date}`;
   }
 
-  const currentDate = new Date().toISOString().split('T')[0];
+  // Generate local date instead of UTC
+  const now = new Date();
+  const currentDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   template += `\n *   lastVerified: ${currentDate}`;
 
   // 根据stage设置正确的source
@@ -468,7 +478,8 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     // Validate target path is within project root
     const projectRoot = path.resolve(__dirname, '..');
     const normalizedTarget = path.resolve(resolvedPath);
-    if (!normalizedTarget.startsWith(projectRoot + path.sep)) {
+    const relativePath = path.relative(projectRoot, normalizedTarget);
+    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
       log('red', `❌ Target file is outside the project directory: ${targetFile}`);
       log('yellow', `   Project root: ${projectRoot}`);
       return;
@@ -654,8 +665,8 @@ function compareWithReference(annotation, reference) {
     return { match: true };
   }
 
-  const annNorm = annVersion.replace('Stage ', 'Stage').toUpperCase();
-  const refNorm = refVersion.replace('Stage ', 'Stage').toUpperCase();
+  const annNorm = annVersion.replace(/Stage\s+/, 'Stage').toUpperCase();
+  const refNorm = refVersion.replace(/Stage\s+/, 'Stage').toUpperCase();
 
   if (annNorm === refNorm) {
     return { match: true };
@@ -897,29 +908,7 @@ function main() {
   // Check 4: Missing verification blocks (global check)
   log('cyan', '\n=== Missing Verification Block Report ===');
   let missingCount = 0;
-  const allReferencedFeatures = new Set();
-
-  // First collect all referenced features across all files
-  for (const file of demoFiles) {
-    if (!fileContents[file]) continue; // 跳过之前读取失败的文件
-    const content = fileContents[file];
-    for (const pattern of featurePatterns) {
-      const matches = content.matchAll(pattern.regex);
-      for (const match of matches) {
-        let version = null;
-        for (let i = 1; i < match.length; i++) {
-          if (match[i]) {
-            version = match[i].replace(/Stage\s*/, 'Stage ');
-            break;
-          }
-        }
-        if (version && (version.match(/^ES20\d{2}$/) || version.match(/^Stage \d$/))) {
-          allReferencedFeatures.add(pattern.name);
-          break;
-        }
-      }
-    }
-  }
+  const allReferencedFeatures = new Set(allAnnotations.map(a => a.feature));
 
   // Now check which referenced features have no blocks anywhere
   const missingFeatures = [];
