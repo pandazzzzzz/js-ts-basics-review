@@ -16,15 +16,9 @@ fi
 # Get the directory where this script is located (git root)
 GIT_ROOT=$(git rev-parse --show-toplevel)
 
-# Run verification script
+# Run verification script (set -e will exit on non-zero)
 node "$GIT_ROOT/scripts/verify-es-versions.js"
 
-# Check exit code
-if [ $? -ne 0 ]; then
-  echo ""
-  echo "❌ ES version verification failed - please fix the issues before committing"
-  exit 1
-fi
-
+echo ""
 echo "✅ ES version verification passed"
 echo ""

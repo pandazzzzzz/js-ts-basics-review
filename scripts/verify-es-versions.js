@@ -365,8 +365,16 @@ function applyFixes(filePath, fixes, originalContent = null) {
 
   for (const fix of fixes) {
     if (fix.type === 'source') {
-      // 替换source行
-      const pattern = new RegExp(`(\\*\\s*source:\\s*)${fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g');
+      // 替换source行 - handle null/missing source
+      let pattern;
+      if (fix.old) {
+        const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        pattern = new RegExp(`(\\*\\s*source:\\s*)${escapedOld}`, 'g');
+      } else {
+        // Source is null/missing - match any source URL or empty source line
+        pattern = /(\*\s*source:\s*)[^\n*]*/g;
+      }
+      const oldSource = fix.old || '(not set)';
       const newContent = content.replace(pattern, (match, p1) => {
         modified = true;
         changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
@@ -376,11 +384,11 @@ function applyFixes(filePath, fixes, originalContent = null) {
         content = newContent;
         if (!OPTIONS.dryRun) {
           log('cyan', `  Fixed source URL for "${fix.feature}"`);
-          log('cyan', `    Old: ${fix.old}`);
+          log('cyan', `    Old: ${oldSource}`);
           log('cyan', `    New: ${fix.new}`);
         } else {
           log('cyan', `  Would fix source URL for "${fix.feature}"`);
-          log('cyan', `    Old: ${fix.old}`);
+          log('cyan', `    Old: ${oldSource}`);
           log('cyan', `    New: ${fix.new}`);
         }
       }
@@ -492,7 +500,7 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
     }
 
     const lines = result.content.split('\n');
-    const insertLine = targetLine !== null ? Math.min(targetLine, lines.length) : lines.length;
+    const insertLine = targetLine !== null ? Math.max(0, Math.min(targetLine, lines.length)) : lines.length;
 
     // 在指定行之前插入模板
     const templateLines = template.split('\n');
