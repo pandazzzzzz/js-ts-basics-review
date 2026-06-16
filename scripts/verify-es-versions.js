@@ -102,13 +102,15 @@ function safeWriteFile(filePath, content, createBackup = false) {
       const now = new Date();
       const ts = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
       const backupPath = filePath.replace(/(\.\w+)$/, `.${ts}.bak$1`);
+      // Handle files with no extension (e.g., Makefile, README)
+      const finalBackupPath = backupPath === filePath ? `${filePath}.${ts}.bak` : backupPath;
       // Warn if an existing .bak would be overwritten
       const simpleBackupPath = filePath + '.bak';
       if (fs.existsSync(simpleBackupPath)) {
         log('yellow', `  ⚠️  Existing backup ${path.basename(simpleBackupPath)} will be preserved (timestamped backup created instead)`);
       }
-      fs.writeFileSync(backupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
-      log('cyan', `  Backup created: ${path.basename(backupPath)}`);
+      fs.writeFileSync(finalBackupPath, fs.readFileSync(filePath, 'utf8'), 'utf8');
+      log('cyan', `  Backup created: ${path.basename(finalBackupPath)}`);
     }
     fs.writeFileSync(filePath, content, 'utf8');
     return { success: true, error: null };
@@ -325,7 +327,7 @@ function fixSourceURL(block, reference) {
   const featureRef = reference.features[block.feature];
   if (!featureRef) return null;
 
-  const currentSource = block.source;
+  const currentSource = block.source || null;
   let expectedSource = null;
 
   // Stage 4 features应该指向finished-proposals.md
@@ -375,26 +377,44 @@ function applyFixes(filePath, fixes, originalContent = null) {
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         pattern = new RegExp(`(\\*\\s*source:\\s*)${escapedOld}`, 'g');
+        const newContent = content.replace(pattern, (match, p1) => {
+          modified = true;
+          changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
+          return `${p1}${fix.new}`;
+        });
+        if (newContent !== content) {
+          content = newContent;
+          if (!OPTIONS.dryRun) {
+            log('cyan', `  Fixed source URL for "${fix.feature}"`);
+            log('cyan', `    Old: ${fix.old}`);
+            log('cyan', `    New: ${fix.new}`);
+          } else {
+            log('cyan', `  Would fix source URL for "${fix.feature}"`);
+            log('cyan', `    Old: ${fix.old}`);
+            log('cyan', `    New: ${fix.new}`);
+          }
+        }
       } else {
         // Source is null/missing - match any source URL or empty source line
-        pattern = /(\*\s*source:\s*)[^\n*]*/g;
-      }
-      const oldSource = fix.old || '(not set)';
-      const newContent = content.replace(pattern, (match, p1) => {
-        modified = true;
-        changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
-        return `${p1}${fix.new}`;
-      });
-      if (newContent !== content) {
-        content = newContent;
-        if (!OPTIONS.dryRun) {
-          log('cyan', `  Fixed source URL for "${fix.feature}"`);
-          log('cyan', `    Old: ${oldSource}`);
-          log('cyan', `    New: ${fix.new}`);
-        } else {
-          log('cyan', `  Would fix source URL for "${fix.feature}"`);
-          log('cyan', `    Old: ${oldSource}`);
-          log('cyan', `    New: ${fix.new}`);
+        // Use [ \t] instead of \s to avoid matching newlines
+        const genericPattern = /(\*[ \t]*source:)[ \t]*[^\n]*/g;
+        const newContent = content.replace(genericPattern, (match, p1) => {
+          modified = true;
+          changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
+          return `${p1} ${fix.new}`;
+        });
+        if (newContent !== content) {
+          content = newContent;
+          const oldSource = fix.old || '(not set)';
+          if (!OPTIONS.dryRun) {
+            log('cyan', `  Fixed source URL for "${fix.feature}"`);
+            log('cyan', `    Old: ${oldSource}`);
+            log('cyan', `    New: ${fix.new}`);
+          } else {
+            log('cyan', `  Would fix source URL for "${fix.feature}"`);
+            log('cyan', `    Old: ${oldSource}`);
+            log('cyan', `    New: ${fix.new}`);
+          }
         }
       }
     } else if (fix.type === 'lastVerified') {

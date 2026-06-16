@@ -171,6 +171,25 @@ describe('safeWriteFile', () => {
     assert.strictEqual(result.success, true);
     assert.strictEqual(fs.existsSync(filePath), true);
   });
+
+  it('should handle backup for files with no extension', () => {
+    const filePath = writeTempFile('Makefile', 'original content');
+    const result = safeWriteFile(filePath, 'new content', true);
+    assert.strictEqual(result.success, true);
+
+    // Original file should have new content
+    assert.strictEqual(fs.readFileSync(filePath, 'utf8'), 'new content');
+
+    // A backup should exist and contain original content
+    const dirFiles = fs.readdirSync(TEMP_DIR);
+    const backupFiles = dirFiles.filter(f => f.includes('.bak') && f !== 'Makefile.bak');
+    assert.ok(backupFiles.length >= 1, 'Should have a backup for no-extension file');
+
+    const hasOriginalBackup = backupFiles.some(f => {
+      return fs.readFileSync(path.join(TEMP_DIR, f), 'utf8') === 'original content';
+    });
+    assert.ok(hasOriginalBackup, 'Should preserve original content in backup');
+  });
 });
 
 // ============================================================
@@ -653,7 +672,34 @@ describe('applyFixes', () => {
     }];
     const result = applyFixes('test.js', fixes, content);
     assert.strictEqual(result.modified, true);
-    assert.ok(result.content.includes('finished-proposals.md'));
+    assert.ok(result.content.includes('source: https://github.com/tc39/proposals/blob/main/finished-proposals.md'));
+    // Verify block structure is preserved (no newline consumed by \s)
+    assert.ok(result.content.includes(' */'));
+    assert.ok(result.content.split('\n').length >= content.split('\n').length - 1, 'Block structure preserved');
+  });
+
+  it('should fix null source with empty line', () => {
+    // Test bug #8: \s should not match newlines in source replacement
+    const content = `/*
+ * verification:
+ *   feature: Test
+ *   status: ES2027
+ *   stage4Date: 2025-09
+ *   lastVerified: 2026-06-12
+ *   source:
+ */`;
+    const fixes = [{
+      type: 'source',
+      feature: 'Test',
+      old: null,
+      new: 'https://github.com/tc39/proposals/blob/main/finished-proposals.md'
+    }];
+    const result = applyFixes('test.js', fixes, content);
+    assert.strictEqual(result.modified, true);
+    // Verify closing */ is preserved on its own line
+    const lines = result.content.split('\n');
+    assert.ok(lines.some(l => l.includes('source:') && l.includes('finished-proposals.md')), 'source URL should be on its own line');
+    assert.ok(lines.some(l => l.trim() === '*/'), 'closing */ should remain on its own line');
   });
 
   it('should fix lastVerified date', () => {
