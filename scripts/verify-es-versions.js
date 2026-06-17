@@ -196,8 +196,40 @@ function loadReference() {
 }
 
 function checkLastVerified(reference) {
+  // Validate lastVerified format before parsing
+  if (!reference.meta.lastVerified || typeof reference.meta.lastVerified !== 'string') {
+    log('yellow', `⚠️  Invalid lastVerified: missing or not a string`);
+    return false;
+  }
+
+  const parts = reference.meta.lastVerified.split('-');
+  if (parts.length !== 3) {
+    log('yellow', `⚠️  Invalid lastVerified format: ${reference.meta.lastVerified} (expected YYYY-MM-DD)`);
+    return false;
+  }
+
+  const [year, month, day] = parts.map(Number);
+  if (isNaN(year) || isNaN(month) || isNaN(day)) {
+    log('yellow', `⚠️  Invalid lastVerified components: ${reference.meta.lastVerified}`);
+    return false;
+  }
+
+  if (month < 1 || month > 12) {
+    log('yellow', `⚠️  Invalid month in lastVerified: ${reference.meta.lastVerified}`);
+    return false;
+  }
+
+  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  // Adjust February for leap years
+  if (month === 2 && (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0))) {
+    daysInMonth[1] = 29;
+  }
+  if (day < 1 || day > daysInMonth[month - 1]) {
+    log('yellow', `⚠️  Invalid day in lastVerified: ${reference.meta.lastVerified}`);
+    return false;
+  }
+
   // Parse lastVerified as local date to avoid UTC time zone issues
-  const [year, month, day] = reference.meta.lastVerified.split('-').map(Number);
   const lastVerified = new Date(year, month - 1, day); // Month is 0-based
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -334,10 +366,14 @@ function fixSourceURL(block, reference) {
   if (featureRef.stage === 4) {
     expectedSource = 'https://github.com/tc39/proposals/blob/main/finished-proposals.md';
   }
-  // Stage 1-3 features应该指向README.md
-  else if (featureRef.stage < 4) {
+  // Stage 0-3 features应该指向README.md
+  // Skip stage < 0 (e.g., Withdrawn) — no valid source URL
+  else if (featureRef.stage >= 0 && featureRef.stage < 4) {
     expectedSource = 'https://github.com/tc39/proposals/blob/main/README.md';
   }
+
+  // Skip features with no valid expected source (e.g., Withdrawn stage -1)
+  if (expectedSource === null) return null;
 
   if (currentSource !== expectedSource) {
     return { old: currentSource, new: expectedSource };
@@ -372,11 +408,11 @@ function applyFixes(filePath, fixes, originalContent = null) {
 
   for (const fix of fixes) {
     if (fix.type === 'source') {
-      // 替换source行 - handle null/missing source
-      let pattern;
+      // Replace source line - use feature-anchored pattern to avoid cross-block matching
+      const escapedFeature = fix.feature.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        pattern = new RegExp(`(\\*\\s*source:\\s*)${escapedOld}`, 'g');
+        const pattern = new RegExp(`(\\*[ \\t]*feature:[ \\t]*${escapedFeature}[ \\t]*\\n(?:\\s*\\*[^\\n]*\\n)*\\s*\\*[ \\t]*source:[ \\t]*)${escapedOld}`, 'g');
         const newContent = content.replace(pattern, (match, p1) => {
           modified = true;
           changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
@@ -395,9 +431,8 @@ function applyFixes(filePath, fixes, originalContent = null) {
           }
         }
       } else {
-        // Source is null/missing - match any source URL or empty source line
-        // Use [ \t] instead of \s to avoid matching newlines
-        const genericPattern = /(\*[ \t]*source:)[ \t]*[^\n]*/g;
+        // Source is null/missing — match any URL or empty line
+        const genericPattern = new RegExp(`(\\*[ \\t]*feature:[ \\t]*${escapedFeature}[ \\t]*\\n(?:\\s*\\*[^\\n]*\\n)*\\s*\\*[ \\t]*source:)[ \\t]*[^\\n]*`, 'g');
         const newContent = content.replace(genericPattern, (match, p1) => {
           modified = true;
           changes.push({ type: 'source', feature: fix.feature, line: null, old: fix.old, new: fix.new });
@@ -418,11 +453,13 @@ function applyFixes(filePath, fixes, originalContent = null) {
         }
       }
     } else if (fix.type === 'lastVerified') {
+      // Feature-anchored pattern to avoid cross-block matching
+      const escapedFeature = fix.feature.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       let fixed = false;
       let change = null;
       if (fix.old) {
         const escapedOld = fix.old.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const oldPattern = new RegExp(`(\\s*\\*\\s*lastVerified:\\s*)${escapedOld}`, 'g');
+        const oldPattern = new RegExp(`(\\*[ \\t]*feature:[ \\t]*${escapedFeature}[ \\t]*\\n(?:\\s*\\*[^\\n]*\\n)*\\s*\\*[ \\t]*lastVerified:[ \\t]*)${escapedOld}`, 'g');
         const newContent = content.replace(oldPattern, (match, p1) => {
           fixed = true;
           change = { type: 'lastVerified', feature: fix.feature, old: fix.old, new: fix.new };
@@ -433,8 +470,7 @@ function applyFixes(filePath, fixes, originalContent = null) {
         }
       }
       if (!fixed) {
-        // Use [ \t] instead of \s to avoid matching newlines (which would consume the next line)
-        const genericPattern = /(\*[ \t]*lastVerified:)[ \t]*[^\n*]*/g;
+        const genericPattern = new RegExp(`(\\*[ \\t]*feature:[ \\t]*${escapedFeature}[ \\t]*\\n(?:\\s*\\*[^\\n]*\\n)*\\s*\\*[ \\t]*lastVerified:)[ \\t]*[^\\n]*`, 'g');
         const newContent = content.replace(genericPattern, (match, p1) => {
           fixed = true;
           change = { type: 'lastVerified', feature: fix.feature, old: fix.old || '(not set)', new: fix.new };
@@ -490,9 +526,10 @@ function generateTemplate(featureName, reference, targetFile = null, targetLine 
   // 根据stage设置正确的source
   if (featureRef.stage === 4) {
     template += `\n *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md`;
-  } else {
+  } else if (featureRef.stage >= 0 && featureRef.stage < 4) {
     template += `\n *   source: https://github.com/tc39/proposals/blob/main/README.md`;
   }
+  // Stage < 0 (e.g., Withdrawn): omit source URL
 
   template += `\n */`;
 

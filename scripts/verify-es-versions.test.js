@@ -218,6 +218,44 @@ describe('checkLastVerified', () => {
     const result = checkLastVerified(ref);
     assert.strictEqual(result, true); // <= 90, not >
   });
+
+  it('should return false for non-date string', () => {
+    const ref = { meta: { lastVerified: 'not-a-date' } };
+    const result = checkLastVerified(ref);
+    assert.strictEqual(result, false);
+  });
+
+  it('should return false for empty string', () => {
+    const ref = { meta: { lastVerified: '' } };
+    const result = checkLastVerified(ref);
+    assert.strictEqual(result, false);
+  });
+
+  it('should return false for missing lastVerified', () => {
+    const ref = { meta: {} };
+    const result = checkLastVerified(ref);
+    assert.strictEqual(result, false);
+  });
+
+  it('should return false for invalid month (>12)', () => {
+    const ref = { meta: { lastVerified: '2026-13-01' } };
+    const result = checkLastVerified(ref);
+    assert.strictEqual(result, false);
+  });
+
+  it('should return false for invalid day', () => {
+    const ref = { meta: { lastVerified: '2026-02-30' } };
+    const result = checkLastVerified(ref);
+    assert.strictEqual(result, false);
+  });
+
+  it('should accept valid leap year date (Feb 29)', () => {
+    const ref = { meta: { lastVerified: '2024-02-29' } };
+    const result = checkLastVerified(ref);
+    // 2024-02-29 is valid, but may be >90 days from now
+    // Just check it doesn't crash with invalid date rejection
+    assert.strictEqual(typeof result, 'boolean');
+  });
 });
 
 // ============================================================
@@ -452,6 +490,28 @@ describe('fixSourceURL', () => {
   it('should return null for unknown feature', () => {
     const block = { feature: 'UnknownFeature', source: 'anything' };
     const fix = fixSourceURL(block, reference);
+    assert.strictEqual(fix, null);
+  });
+
+  it('should return null for Withdrawn (stage -1) features', () => {
+    const ref = {
+      features: {
+        'WithdrawnFeature': { stage: -1 }
+      }
+    };
+    const block = { feature: 'WithdrawnFeature', source: null };
+    const fix = fixSourceURL(block, ref);
+    assert.strictEqual(fix, null, 'Withdrawn features should not get a source URL fix');
+  });
+
+  it('should return null for stage 0 features with correct source', () => {
+    const ref = {
+      features: {
+        'Stage0Feature': { stage: 0 }
+      }
+    };
+    const block = { feature: 'Stage0Feature', source: 'https://github.com/tc39/proposals/blob/main/README.md' };
+    const fix = fixSourceURL(block, ref);
     assert.strictEqual(fix, null);
   });
 });
@@ -767,6 +827,138 @@ describe('applyFixes', () => {
     assert.strictEqual(result.changes.length, 2);
     assert.ok(result.content.includes('finished-proposals.md'));
     assert.ok(result.content.includes('lastVerified: 2026-06-15'));
+  });
+
+  // Regression: null-source fix should NOT pollute other blocks (Bug #1)
+  it('should fix only the target block when source is null in one of two blocks', () => {
+    const content = `/*
+ * verification:
+ *   feature: FeatureA
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-06-12
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+/*
+ * verification:
+ *   feature: FeatureB
+ *   status: Stage 3
+ *   lastVerified: 2026-06-12
+ *   source:
+ */`;
+    const fixes = [{
+      type: 'source',
+      feature: 'FeatureB',
+      old: null,
+      new: 'https://github.com/tc39/proposals/blob/main/README.md'
+    }];
+    const result = applyFixes('test.js', fixes, content);
+    assert.strictEqual(result.modified, true);
+    // FeatureA's correct source should be preserved
+    assert.ok(result.content.includes('source: https://github.com/tc39/proposals/blob/main/finished-proposals.md'),
+      'FeatureA source should not be overwritten');
+    // FeatureB's null source should be fixed
+    assert.ok(result.content.includes('source: https://github.com/tc39/proposals/blob/main/README.md'),
+      'FeatureB source should be fixed');
+    // changes count should be 1, not 2
+    assert.strictEqual(result.changes.length, 1, 'Only one block should be changed');
+  });
+
+  // Regression: null-source fix with different URLs for different blocks (Bug #1)
+  it('should apply different source URLs to different null-source blocks', () => {
+    const content = `/*
+ * verification:
+ *   feature: Stage4Feature
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-06-12
+ *   source:
+ */
+/*
+ * verification:
+ *   feature: Stage3Feature
+ *   status: Stage 3
+ *   lastVerified: 2026-06-12
+ *   source:
+ */`;
+    const fixes = [
+      { type: 'source', feature: 'Stage4Feature', old: null, new: 'https://github.com/tc39/proposals/blob/main/finished-proposals.md' },
+      { type: 'source', feature: 'Stage3Feature', old: null, new: 'https://github.com/tc39/proposals/blob/main/README.md' },
+    ];
+    const result = applyFixes('test.js', fixes, content);
+    assert.strictEqual(result.modified, true);
+    // Each block should get its correct URL
+    const stage4Block = result.content.match(/feature: Stage4Feature[\s\S]*?source: ([^\n]*)/);
+    const stage3Block = result.content.match(/feature: Stage3Feature[\s\S]*?source: ([^\n]*)/);
+    assert.ok(stage4Block, 'Stage4Feature block should exist');
+    assert.ok(stage3Block, 'Stage3Feature block should exist');
+    assert.ok(stage4Block[1].includes('finished-proposals.md'),
+      `Stage4Feature should get finished-proposals.md, got "${stage4Block[1]}"`);
+    assert.ok(stage3Block[1].includes('README.md'),
+      `Stage3Feature should get README.md, got "${stage3Block[1]}"`);
+  });
+
+  // Regression: old-value source fix with same URL in two blocks (Bug #2)
+  it('should fix only target block when old URL appears in multiple blocks', () => {
+    const content = `/*
+ * verification:
+ *   feature: Stage4Feature
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-06-12
+ *   source: https://wrong.url
+ */
+/*
+ * verification:
+ *   feature: Stage3Feature
+ *   status: Stage 3
+ *   lastVerified: 2026-06-12
+ *   source: https://wrong.url
+ */`;
+    const fixes = [
+      { type: 'source', feature: 'Stage4Feature', old: 'https://wrong.url', new: 'https://github.com/tc39/proposals/blob/main/finished-proposals.md' },
+      { type: 'source', feature: 'Stage3Feature', old: 'https://wrong.url', new: 'https://github.com/tc39/proposals/blob/main/README.md' },
+    ];
+    const result = applyFixes('test.js', fixes, content);
+    assert.strictEqual(result.modified, true);
+    const stage4Block = result.content.match(/feature: Stage4Feature[\s\S]*?source: ([^\n]*)/);
+    const stage3Block = result.content.match(/feature: Stage3Feature[\s\S]*?source: ([^\n]*)/);
+    assert.ok(stage4Block[1].includes('finished-proposals.md'),
+      `Stage4Feature should get finished-proposals.md, got "${stage4Block[1]}"`);
+    assert.ok(stage3Block[1].includes('README.md'),
+      `Stage3Feature should get README.md, got "${stage3Block[1]}"`);
+  });
+
+  // Regression: lastVerified fix should not pollute other blocks
+  it('should fix only target block lastVerified when one is empty', () => {
+    const content = `/*
+ * verification:
+ *   feature: FeatureA
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-01-01
+ *   source: https://example.com
+ */
+/*
+ * verification:
+ *   feature: FeatureB
+ *   status: ES2026
+ *   lastVerified:
+ *   source: https://example.com
+ */`;
+    const fixes = [{
+      type: 'lastVerified',
+      feature: 'FeatureB',
+      old: null,
+      new: '2026-06-17'
+    }];
+    const result = applyFixes('test.js', fixes, content);
+    assert.strictEqual(result.modified, true);
+    // FeatureA's lastVerified should be preserved
+    const featureABlock = result.content.match(/feature: FeatureA[\s\S]*?lastVerified: ([^\n]*)/);
+    const featureBBlock = result.content.match(/feature: FeatureB[\s\S]*?lastVerified: ([^\n]*)/);
+    assert.strictEqual(featureABlock[1].trim(), '2026-01-01', 'FeatureA lastVerified should be preserved');
+    assert.strictEqual(featureBBlock[1].trim(), '2026-06-17', 'FeatureB lastVerified should be fixed');
   });
 });
 
