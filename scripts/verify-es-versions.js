@@ -275,7 +275,13 @@ function buildFeaturePatterns(reference) {
   }
 
   // Generate patterns for all other features from reference
-  const skipNames = new Set(['at', 'with']);
+  // Skip names that are handled by shortNames or aliases to avoid double-counting
+  const skipNames = new Set([
+    'at', 'with',
+    'Temporal',
+    'using (Explicit Resource Management)',
+    'RegExp v flag'
+  ]);
   for (const featureName of Object.keys(reference.features)) {
     if (skipNames.has(featureName)) continue;
     const escaped = featureName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
