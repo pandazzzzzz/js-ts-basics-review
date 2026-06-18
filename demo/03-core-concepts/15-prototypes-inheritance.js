@@ -910,7 +910,7 @@ console.log("  rect instanceof Object:", rect instanceof Object);
    - Better API design
 
 10. DECORATORS (TS Experimental)
-    JS:  Stage 3 proposal (not yet finalized)
+    JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
     
     TS:  @sealed
          class Person {

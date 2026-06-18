@@ -1,10 +1,10 @@
 {
   "meta": {
-    "lastVerified": "2026-06-12",
+    "lastVerified": "2026-06-19",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
-    "rule": "Stage 4 in calendar year N → ES version N+1 (released June N+1)",
-    "example": "Stage 4 finalized in 2024 → ES2025 (June 2025 release)"
+    "rule": "Stage 4 meeting date (latest notes) → Expected Publication Year per TC39 finished-proposals.md",
+    "example": "Stage 4 finalized in 2024 → Expected publication year determined by TC39"
   },
   "features": {
     "Temporal": {
@@ -21,6 +21,13 @@
       "note": "Atomics.pause() for pausing threads in shared memory contexts",
       "url": "https://github.com/tc39/proposal-atomics-pause"
     },
+    "Atomics.waitAsync": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023-05",
+      "note": "Non-blocking async version of Atomics.wait()",
+      "url": "https://github.com/tc39/proposal-atomics-wait-async"
+    },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,
@@ -28,10 +35,17 @@
       "note": "for await (const [[key1, val1], [key2, val2]] of zip(iter1, iter2))",
       "url": "https://github.com/tc39/proposal-joint-iteration"
     },
+    "Class Static Block": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021-08",
+      "note": "static { ... } initialization blocks in class definitions",
+      "url": "https://github.com/tc39/proposal-class-static-block"
+    },
     "Decorators": {
-      "status": "Stage 3",
-      "stage": 3,
-      "note": "Candidate stage, not yet finalized. Active TC39 proposal.",
+      "status": "Stage 2.7",
+      "stage": 2.7,
+      "note": "Stage 2.7 — nearing Stage 3. Active TC39 proposal.",
       "url": "https://github.com/tc39/proposal-decorators"
     },
     "Array.fromAsync": {
@@ -130,6 +144,13 @@
       "note": "Formerly Import Assertions, renamed to Import Attributes",
       "url": "https://github.com/tc39/proposal-import-attributes"
     },
+    "RegExp Match Indices": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021-05",
+      "note": "RegExp /d flag providing start/end indices for matches and groups",
+      "url": "https://github.com/tc39/proposal-regexp-match-indices"
+    },
     "RegExp Modifiers": {
       "status": "ES2025",
       "stage": 4,
@@ -226,6 +247,13 @@
       "note": "isWellFormed(), toWellFormed()",
       "url": "https://github.com/tc39/proposal-is-usv-string"
     },
+    "Symbols as WeakMap keys": {
+      "status": "ES2023",
+      "stage": 4,
+      "stage4Date": "2023-01",
+      "note": "Allow Symbol values as keys in WeakMap, WeakSet, WeakRef, FinalizationRegistry",
+      "url": "https://github.com/tc39/proposal-symbols-as-weakmap-keys"
+    },
     "toSorted": {
       "status": "ES2023",
       "stage": 4,
@@ -282,6 +310,13 @@
       "stage": 4,
       "stage4Date": "2021-03",
       "url": "https://github.com/tc39/proposal-accessible-object-hasownproperty"
+    },
+    "Ergonomic brand checks": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021-07",
+      "note": "#field in obj syntax for private field existence checks",
+      "url": "https://github.com/tc39/proposal-private-fields-in-in"
     },
     "Error.cause": {
       "status": "ES2022",

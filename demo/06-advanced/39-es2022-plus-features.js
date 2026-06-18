@@ -61,8 +61,8 @@ console.log("  - Explicit Resource Management (using/await using, ES2027)");
 console.log("  - DisposableStack");
 console.log("  - Atomics.pause");
 console.log("  - Joint Iteration");
-console.log("\nStage 3 Proposals:");
-console.log("  - Decorators (Stage 3 - class/method decorators)");
+console.log("\nStage 2.7 Proposals:");
+console.log("  - Decorators (Stage 2.7 - class/method decorators, nearing Stage 3)");
 
 // ============================================
 // ES2022 Features

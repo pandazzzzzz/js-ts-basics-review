@@ -1075,8 +1075,8 @@ console.log("\n=== Classes Demo Complete ===");
      ) {}
    }
 
-5. DECORATORS (Stage 3 / TS 5.0+)
-   JS:  Stage 3 proposal (not yet finalized)
+5. DECORATORS (Stage 2.7 / TS 5.0+)
+   JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
    TS:  @decorator syntax available
 
    TypeScript example:
