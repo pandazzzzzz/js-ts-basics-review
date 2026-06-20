@@ -76,12 +76,20 @@ console.log("3. self-documenting code");
 console.log("4. Can gradually adopt TypeScript");
 
 // ============================================
-// Section 2: Decorators (Stage 3 Proposal)
+// Section 2: Decorators (Stage 2.7 Proposal)
 // ============================================
 
-console.log("\n=== Decorators (Stage 3) ===\n");
+/*
+ * verification:
+ *   feature: Decorators
+ *   status: Stage 2.7
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 
-// Decorators are a Stage 3 TC39 proposal (not yet finalized as of May 2026)
+console.log("\n=== Decorators (Stage 2.7) ===\n");
+
+// Decorators are a Stage 2.7 TC39 proposal (nearing Stage 3, not yet finalized as of June 2026)
 // They allow adding metadata and modifying classes/functions
 // TypeScript has had experimental decorators for years with legacy syntax
 
@@ -89,7 +97,8 @@ console.log("Decorator proposal stages:");
 console.log("- Stage 0: Strawman (idea)");
 console.log("- Stage 1: Proposal (formalize)");
 console.log("- Stage 2: Draft (complete spec)");
-console.log("- Stage 3: Candidate (testing and feedback)");
+console.log("- Stage 2.7: Near-final (testing and feedback)");
+console.log("- Stage 3: Candidate (ready for implementation)");
 console.log("- Stage 4: Finished (ready for inclusion)");
 
 console.log("\nDecorator types in proposal:");
@@ -124,14 +133,14 @@ console.log("- Validation");
 console.log("- Dependency injection");
 console.log("- Caching and memoization");
 
-// Stage 3 Decorator Syntax Example
-console.log("\n=== Stage 3 Decorator Syntax ===");
+// Stage 2.7 Decorator Syntax Example
+console.log("\n=== Stage 2.7 Decorator Syntax ===");
 
 console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
 console.log("Enable with: { decoratorMetadata: true } in TypeScript");
-console.log("Note: Decorators are Stage 3, not yet part of ECMAScript standard");
+console.log("Note: Decorators are Stage 2.7, not yet part of ECMAScript standard");
 
-console.log("\nProposed decorator syntax (Stage 3):");
+console.log("\nProposed decorator syntax (Stage 2.7):");
 console.log(`
 // Method decorator with @ syntax
 function logged(target, context) {
@@ -188,10 +197,10 @@ class Temperature {
 }
 `);
 
-console.log("\n⚠️ TypeScript decorators vs Stage 3 decorators:");
+console.log("\n⚠️ TypeScript decorators vs Stage 2.7 decorators:");
 console.log("- TypeScript legacy decorators: Different signature (target, propertyKey, descriptor)");
-console.log("- Stage 3 decorators: New signature (target, context) with context object");
-console.log("- TypeScript 5.0+: Supports Stage 3 with 'experimentalDecorators: false'");
+console.log("- Stage 2.7 decorators: New signature (target, context) with context object");
+console.log("- TypeScript 5.0+: Supports Stage 2.7 with 'experimentalDecorators: false'");
 console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-11'");
 
 console.log("\nDecorator context object properties:");
@@ -519,10 +528,10 @@ console.log("8. Reflect vs Object method differences");
    TS:  Type inference reduces need for explicit annotations
 
 2. DECORATORS
-   JS:  Stage 3 proposal (not yet standardized, check TC39 status)
+   JS:  Stage 2.7 proposal (nearing Stage 3, not yet standardized, check TC39 status)
    TS:  Experimental decorators (legacy) since TS 1.5
    TS:  --experimentalDecorators flag required for legacy syntax
-   TS:  Stage 3 decorator support in TS 5.0+ (useLegacyDecorators: false)
+   TS:  Stage 2.7 decorator support in TS 5.0+ (useLegacyDecorators: false)
    TS:  Decorator metadata with reflect-metadata
 
 3. TYPE-LEVEL PROGRAMMING

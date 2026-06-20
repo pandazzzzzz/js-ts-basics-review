@@ -119,12 +119,12 @@ for (const [name, age, city] of zip(names, ages, cities)) {
 }
 `);
 
-// 5. Decorators (Stage 3)
-console.log("\nDecorators (Stage 3):");
+// 5. Decorators (Stage 2.7)
+console.log("\nDecorators (Stage 2.7):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");
 console.log("- Metadata-based programming");
-console.log("- Stage 3 proposal, not yet finalized");
+console.log("- Stage 2.7 proposal, nearing Stage 3, not yet finalized");
 
 // Example decorator syntax (TypeScript already supports this)
 console.log("\nDecorator Example (JS syntax):");
@@ -179,7 +179,7 @@ console.log(a === b); // true (deep equality!)
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 2
- *   lastVerified: 2026-06-12
+ *   lastVerified: 2026-06-19
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("\nPattern Matching (Stage 2):");
@@ -209,7 +209,7 @@ console.log("\n=== Active Proposals ===");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-06-12
+ *   lastVerified: 2026-06-19
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("\nPipeline Operator (Stage 2):");
@@ -312,7 +312,7 @@ console.log("\n=== Module System Future ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-06-12
+ *   lastVerified: 2026-06-19
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nImport Attributes (ES2025):");
