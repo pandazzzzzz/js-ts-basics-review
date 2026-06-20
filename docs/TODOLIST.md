@@ -175,4 +175,4 @@ TS 对比: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-t
 **47 TypeScript 高级** — 泛型约束、条件类型、映射类型、模板字面量类型、装饰器
 **48 安全最佳实践** — XSS 防护、CSRF 防护、CSP 配置、安全存储、输入验证
 **49 构建工具** — webpack 配置、vite 配置、代码分割、生产优化
-**50 预留扩展** — TC39 提案、Temporal API (ES2027)、Decorators (Stage 3)、运行时演进、未来特性
+**50 预留扩展** — TC39 提案、Temporal API (ES2027)、Decorators (Stage 2.7)、运行时演进、未来特性

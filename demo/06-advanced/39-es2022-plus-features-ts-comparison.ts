@@ -512,18 +512,18 @@ for (const [[, name], [, age]] of zip(names, ages)) {
 `);
 
 // ============================================
-// Decorators (Stage 3) - TypeScript Implementation
+// Decorators (Stage 2.7) - TypeScript Implementation
 // ============================================
 
-console.log("\n=== Decorators - Stage 3 Proposal ===\n");
+console.log("\n=== Decorators - Stage 2.7 Proposal ===\n");
 
-console.log("NOTE: Decorators are currently Stage 3 (not yet ES standard).");
-console.log("TypeScript 5.0+ supports Stage 3 decorator syntax.");
+console.log("NOTE: Decorators are currently Stage 2.7 (nearing Stage 3, not yet ES standard).");
+console.log("TypeScript 5.0+ supports Stage 2.7 decorator syntax.");
 console.log("Enable with: { experimentalDecorators: false, emitDecoratorMetadata: true }");
 
-console.log("\nStage 3 Decorator Syntax:");
+console.log("\nStage 2.7 Decorator Syntax:");
 console.log(`
-// TypeScript 5.0+ Stage 3 decorator signature
+// TypeScript 5.0+ Stage 2.7 decorator signature
 type ClassDecorator<T extends Function> = (target: T, context: ClassDecoratorContext) => T | void;
 type MethodDecorator = (target: Function, context: ClassMethodDecoratorContext) => Function | void;
 

@@ -316,7 +316,7 @@ describe('buildFeaturePatterns', () => {
     const ref = {
       features: {
         'TestFeature': { status: 'ES2025', stage: 4 },
-        'Decorators': { status: 'Stage 3', stage: 3 }
+        'Decorators': { status: 'Stage 2.7', stage: 2.7 }
       }
     };
     const patterns = buildFeaturePatterns(ref);
@@ -360,13 +360,23 @@ describe('extractAnnotations', () => {
   });
 
   it('should extract Stage annotations', () => {
-    const content = '// Decorators (Stage 3) - not yet finalized';
+    const content = '// Decorators (Stage 2.7) - not yet finalized';
     const patterns = [
-      { name: 'Decorators', regex: /Decorators[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
+      { name: 'Decorators', regex: /Decorators[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi }
     ];
     const annotations = extractAnnotations(content, 'test/file.js', patterns);
     assert.strictEqual(annotations.length, 1);
-    assert.strictEqual(annotations[0].version, 'Stage 3');
+    assert.strictEqual(annotations[0].version, 'Stage 2.7');
+  });
+
+  it('should extract fractional Stage annotations (e.g. Stage 2.7)', () => {
+    const content = '// Decorators (Stage 2.7) - nearing Stage 3';
+    const patterns = [
+      { name: 'Decorators', regex: /Decorators[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi }
+    ];
+    const annotations = extractAnnotations(content, 'test/file.js', patterns);
+    assert.strictEqual(annotations.length, 1);
+    assert.strictEqual(annotations[0].version, 'Stage 2.7');
   });
 
   it('should not match unrelated text', () => {
@@ -550,7 +560,7 @@ describe('compareWithReference', () => {
   const reference = {
     features: {
       'Temporal': { status: 'ES2027', stage: 4 },
-      'Decorators': { status: 'Stage 3', stage: 3 }
+      'Decorators': { status: 'Stage 2.7', stage: 2.7 }
     }
   };
 
@@ -567,7 +577,7 @@ describe('compareWithReference', () => {
   });
 
   it('should match Stage number annotation', () => {
-    const ann = { feature: 'Decorators', version: 'Stage 3' };
+    const ann = { feature: 'Decorators', version: 'Stage 2.7' };
     const result = compareWithReference(ann, reference);
     assert.strictEqual(result.match, true);
   });
@@ -579,7 +589,7 @@ describe('compareWithReference', () => {
   });
 
   it('should handle multi-space Stage annotations', () => {
-    const ann = { feature: 'Decorators', version: 'Stage    3' };
+    const ann = { feature: 'Decorators', version: 'Stage    2.7' };
     const result = compareWithReference(ann, reference);
     assert.strictEqual(result.match, true);
   });
