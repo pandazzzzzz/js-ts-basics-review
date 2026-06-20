@@ -266,8 +266,8 @@ function buildFeaturePatterns(reference) {
 
   // Short feature names that need precise matching (avoid substring matches)
   const shortNames = {
-    at: /(?:\.at\([^)]*\)|\.at\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi,
-    with: /(?:\.with\([^)]*\)|\.with\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi
+    at: /(?:\.at\([^)]*\)|\.at\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi,
+    with: /(?:\.with\([^)]*\)|\.with\b)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi
   };
 
   for (const [name, regex] of Object.entries(shortNames)) {
@@ -287,15 +287,15 @@ function buildFeaturePatterns(reference) {
     const escaped = featureName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
     patterns.push({
       name: featureName,
-      regex: new RegExp(`${escaped}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4])\\b`, 'gi')
+      regex: new RegExp(`${escaped}[^\n]*?\\b(ES20\\d{2}|Stage\\s*[0-4](?:\\.\\d+)?)\\b`, 'gi')
     });
   }
 
   // Aliases for features with common variations
   patterns.push(
-    { name: 'Temporal', regex: /Temporal(?:\s+API)?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi },
-    { name: 'RegExp v flag', regex: /RegExp\s+\/v[^\n]*?\b(ES20\d{2}|Stage\s*[0-4])\b/gi }
+    { name: 'Temporal', regex: /Temporal(?:\s+API)?[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi },
+    { name: 'using (Explicit Resource Management)', regex: /(?:using declaration|Explicit Resource Management)[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi },
+    { name: 'RegExp v flag', regex: /RegExp\s+\/v[^\n]*?\b(ES20\d{2}|Stage\s*[0-4](?:\.\d+)?)\b/gi }
   );
 
   return patterns;
@@ -303,6 +303,7 @@ function buildFeaturePatterns(reference) {
 
 function extractAnnotations(content, filePath, featurePatterns) {
   const annotations = [];
+  const seen = new Set(); // dedup by feature+line
 
   for (const pattern of featurePatterns) {
     const matches = content.matchAll(pattern.regex);
@@ -316,12 +317,17 @@ function extractAnnotations(content, filePath, featurePatterns) {
       }
       if (!version) continue;
 
-      if (!version.match(/^ES20\d{2}$/) && !version.match(/^Stage \d$/)) continue;
+      if (!version.match(/^ES20\d{2}$/) && !version.match(/^Stage \d+(?:\.\d+)?$/)) continue;
+
+      const line = content.substring(0, match.index).split('\n').length;
+      const key = `${pattern.name}:${line}`;
+      if (seen.has(key)) continue; // skip duplicate matches on same line
+      seen.add(key);
 
       annotations.push({
         feature: pattern.name,
         version,
-        line: content.substring(0, match.index).split('\n').length,
+        line,
         file: path.relative(path.dirname(REFERENCE_FILE), filePath)
       });
     }
