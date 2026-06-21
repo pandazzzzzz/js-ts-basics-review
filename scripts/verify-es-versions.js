@@ -609,6 +609,7 @@ function listFeatures(reference) {
     'ES2022': [],
     'ES2021': [],
     'Stage 3': [],
+    'Stage 2.7': [],
     'Stage 2': [],
     'Other': []
   };
@@ -623,7 +624,7 @@ function listFeatures(reference) {
   }
 
   // 按顺序显示
-  const order = ['ES2027', 'ES2026', 'ES2025', 'ES2024', 'ES2023', 'ES2022', 'ES2021', 'Stage 3', 'Stage 2', 'Other'];
+  const order = ['ES2027', 'ES2026', 'ES2025', 'ES2024', 'ES2023', 'ES2022', 'ES2021', 'Stage 3', 'Stage 2.7', 'Stage 2', 'Other'];
   for (const status of order) {
     if (groups[status].length > 0) {
       log('green', `\n${status}:`);

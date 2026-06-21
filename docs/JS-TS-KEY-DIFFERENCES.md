@@ -283,9 +283,9 @@ function add(a: number, b: number): number {
 | `toSpliced()` | Returns spliced copy | No |
 | `with(i, v)` | Returns copy with value | No |
 
-#### Resource Management (Stage 3 / TS 5.2+)
+#### Resource Management (ES2027 / TS 5.2+)
 ```typescript
-// using declaration - automatic cleanup (Stage 3 proposal)
+// using declaration - automatic cleanup (ES2027, Stage 4 since May 2025)
 using file = new FileHandle("data.txt");
 // file[Symbol.dispose]() called at block end
 
@@ -293,7 +293,7 @@ await using db = new DatabaseConnection();
 // db[Symbol.asyncDispose]() called at block end
 ```
 
-Note: `using` is a Stage 3 TC39 proposal, not yet part of ECMAScript standard. TypeScript 5.2+ supports the syntax.
+Note: `using` reached Stage 4 in May 2025 and is now part of ES2027. TypeScript 5.2+ supports the syntax.
 
 **See**: `demo/06-advanced/39-es2022-plus-features.js`
 
