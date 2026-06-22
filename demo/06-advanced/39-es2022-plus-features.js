@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 javascript.info scattered chapters + MDN "New in JavaScript"
 // 📘 https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// 📌 Covers ES2021 ~ ES2027 features + Stage 3 proposals
+// 📌 Covers ES2021 ~ ES2027 features + Stage 2.7 proposals (Decorators)
 
 // ============================================
 // ES2021 Features (Brief Review)

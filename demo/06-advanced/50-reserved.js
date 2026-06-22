@@ -120,15 +120,6 @@ for (const [name, age, city] of zip(names, ages, cities)) {
 `);
 
 // 5. Decorators (Stage 2.7)
-
-/*
- * verification:
- *   feature: Decorators
- *   status: Stage 2.7
- *   lastVerified: 2026-06-19
- *   source: https://github.com/tc39/proposals/blob/main/README.md
- */
-
 console.log("\nDecorators (Stage 2.7):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");
@@ -515,7 +506,7 @@ console.log("\n=== Common Pitfalls ===");
 console.log("\nPitfall 1: Using early-stage proposals in production");
 console.log("  Stage 1/2 proposals may change significantly");
 console.log("  Breaking changes possible before Stage 4");
-console.log("  Fix: Only use Stage 3+ with fallbacks");
+console.log("  Fix: Only use Stage 2.7+ with fallbacks and polyfills");
 
 // Pitfall 2: Relying on deprecated APIs
 console.log("\nPitfall 2: Relying on deprecated APIs");

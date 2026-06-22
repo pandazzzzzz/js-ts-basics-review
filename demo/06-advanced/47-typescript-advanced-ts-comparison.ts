@@ -143,7 +143,7 @@ console.log("Event handlers: onClick, onFocus, onBlur");
 
 console.log("\n=== Decorators ===\n");
 
-console.log("JavaScript: ES2025 standard, widely supported");
+console.log("JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)");
 console.log("TypeScript: --experimentalDecorators flag");
 
 // TypeScript decorator example (requires tsconfig flag)

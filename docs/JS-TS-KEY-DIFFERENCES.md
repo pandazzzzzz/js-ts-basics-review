@@ -273,7 +273,7 @@ function add(a: number, b: number): number {
 
 **See**: `demo/02-data-structures/07-functions.js` sections 13-16
 
-### 16. Modern ES Features (ES2021-ES2025)
+### 16. Modern ES Features (ES2021-ES2027)
 
 #### Immutable Array Methods (ES2023)
 | Method | Description | Mutates? |
@@ -308,5 +308,5 @@ Note: `using` reached Stage 4 in May 2025 and is now part of ES2027. TypeScript 
 ---
 
 **Last Updated**: 2026-05-09
-**Based on**: ES2025 and TypeScript 5.x
+**Based on**: ES2027 and TypeScript 5.x
 **Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals
