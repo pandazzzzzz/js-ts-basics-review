@@ -120,6 +120,15 @@ for (const [name, age, city] of zip(names, ages, cities)) {
 `);
 
 // 5. Decorators (Stage 2.7)
+
+/*
+ * verification:
+ *   feature: Decorators
+ *   status: Stage 2.7
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
+
 console.log("\nDecorators (Stage 2.7):");
 console.log("- Class and method decorators");
 console.log("- Similar to Python/Java annotations");

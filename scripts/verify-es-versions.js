@@ -378,7 +378,7 @@ function fixSourceURL(block, reference) {
   if (featureRef.stage === 4) {
     expectedSource = 'https://github.com/tc39/proposals/blob/main/finished-proposals.md';
   }
-  // Stage 0-3 features应该指向README.md
+  // Stage < 4 features (including fractional stages like 2.7) should point to README.md
   // Skip stage < 0 (e.g., Withdrawn) — no valid source URL
   else if (featureRef.stage >= 0 && featureRef.stage < 4) {
     expectedSource = 'https://github.com/tc39/proposals/blob/main/README.md';

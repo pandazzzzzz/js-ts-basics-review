@@ -306,6 +306,16 @@ describe('validateStage4Dates', () => {
     const issues = validateStage4Dates(ref);
     assert.strictEqual(issues.length, 0);
   });
+
+  it('should skip fractional stage features (e.g. Stage 2.7)', () => {
+    const ref = {
+      features: {
+        Stage27Feature: { stage: 2.7 } // no stage4Date needed
+      }
+    };
+    const issues = validateStage4Dates(ref);
+    assert.strictEqual(issues.length, 0);
+  });
 });
 
 // ============================================================
@@ -465,6 +475,7 @@ describe('fixSourceURL', () => {
     features: {
       'Stage4Feature': { stage: 4 },
       'Stage3Feature': { stage: 3 },
+      'Stage27Feature': { stage: 2.7 },
       'Stage2Feature': { stage: 2 }
     }
   };
@@ -478,6 +489,13 @@ describe('fixSourceURL', () => {
 
   it('should fix wrong source for Stage 3 feature', () => {
     const block = { feature: 'Stage3Feature', source: 'https://github.com/tc39/proposals/blob/main/finished-proposals.md' };
+    const fix = fixSourceURL(block, reference);
+    assert.notStrictEqual(fix, null);
+    assert.ok(fix.new.includes('README.md'));
+  });
+
+  it('should fix wrong source for Stage 2.7 feature', () => {
+    const block = { feature: 'Stage27Feature', source: 'https://github.com/tc39/proposals/blob/main/finished-proposals.md' };
     const fix = fixSourceURL(block, reference);
     assert.notStrictEqual(fix, null);
     assert.ok(fix.new.includes('README.md'));
