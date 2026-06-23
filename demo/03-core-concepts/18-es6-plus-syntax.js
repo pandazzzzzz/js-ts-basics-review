@@ -818,5 +818,5 @@ console.log(`
 
 Modern ES6+ Features:
 - 24-function-patterns-advanced.js (destructuring, spread in advanced usage)
-- 27-optimization-performance.js (performance of modern features)
+- 26-optimization-performance.js (performance of modern features)
 `);

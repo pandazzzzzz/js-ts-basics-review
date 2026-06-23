@@ -647,7 +647,7 @@ console.log(`
 8. Avoid promise hell - keep chains flat
 9. Don't wrap promises unnecessarily
 10. Handle errors at the appropriate level
-11. Use async/await for better readability (see demo/13-async-await.js)
+11. Use async/await for better readability (see demo/04-asynchronous/31-async-await.js)
 12. Be aware of fail-fast behavior in Promise.all()
 `);
 

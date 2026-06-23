@@ -1306,7 +1306,7 @@ console.log("\n=== Async Error Handling Advanced Demo Complete ===");
 📘 See related files:
 - 20-error-handling.js (synchronous errors)
 - 24-function-patterns-advanced.js (retry patterns)
-- 27-optimization-performance.js (timeout optimization)
+- 26-optimization-performance.js (timeout optimization)
 */
 
 // ============================================================================
@@ -1318,5 +1318,5 @@ console.log(`
 Async Error Handling:
 - 20-error-handling.js (synchronous error handling)
 - 24-function-patterns-advanced.js (retry and debounce)
-- 27-optimization-performance.js (promise performance)
+- 26-optimization-performance.js (promise performance)
 `);

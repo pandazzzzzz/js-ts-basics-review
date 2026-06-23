@@ -1110,7 +1110,7 @@ console.log("\n=== Memory Management Demo Complete ===");
 
 📘 See related files:
 - 19-symbol-deep.js (WeakMap/WeakSet basics)
-- 27-optimization-performance.js (performance optimization)
+- 26-optimization-performance.js (performance optimization)
 - 22-iterators-generators.js (generators for streaming)
 */
 
@@ -1122,6 +1122,6 @@ console.log(`
 
 Memory Management:
 - 19-symbol-deep.js (WeakMap, WeakSet basics)
-- 27-optimization-performance.js (memory-efficient patterns)
+- 26-optimization-performance.js (memory-efficient patterns)
 - 24-function-patterns-advanced.js (memoization cache management)
 `);

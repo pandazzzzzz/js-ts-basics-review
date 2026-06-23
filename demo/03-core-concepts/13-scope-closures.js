@@ -1116,9 +1116,9 @@ Inheritance & Prototypes:
 
 Error Handling:
 - 20-error-handling.js (synchronous error handling)
-- 26-async-error-handling.js (async error handling with promises/await)
+- 34-async-error-handling.js (async error handling with promises/await)
 
 Advanced Patterns:
 - 25-inheritance-patterns.js (advanced inheritance patterns)
-- 27-optimization-performance.js (performance considerations for closures)
+- 26-optimization-performance.js (performance considerations for closures)
 `);

@@ -1447,5 +1447,5 @@ BEST PRACTICES:
     ✅ if (typeof value === "string") { value.toUpperCase(); }
 
 📘 For detailed TypeScript examples and comparisons, see:
-   demo/02-functions-ts-comparison.ts
+   demo/02-data-structures/07-functions-ts-comparison.ts
 */

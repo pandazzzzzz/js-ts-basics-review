@@ -1138,10 +1138,10 @@ try {
 // 13. ASYNC ERROR HANDLING (BASIC)
 // ============================================================================
 /**
- * Async Error Handling - Basic patterns (see 26-async-error-handling.js for details)
+ * Async Error Handling - Basic patterns (see 34-async-error-handling.js for details)
  *
  * Note: Comprehensive async error handling is covered in:
- * - 26-async-error-handling.js (Promise.any, circuit breaker, retry patterns)
+ * - 34-async-error-handling.js (Promise.any, circuit breaker, retry patterns)
  *
  * Basic Patterns:
  * - Promise .catch() for rejection handling
@@ -1179,7 +1179,7 @@ async function saferAsyncHandling() {
 }
 saferAsyncHandling();
 
-// For advanced async error patterns, see 26-async-error-handling.js
+// For advanced async error patterns, see 34-async-error-handling.js
 
 
 // ============================================================================
@@ -1513,6 +1513,6 @@ console.log(`
 📘 See related files for additional patterns:
 
 Error Handling:
-- 26-async-error-handling.js (Promise and async/await error handling)
+- 34-async-error-handling.js (Promise and async/await error handling)
 - 24-function-patterns-advanced.js (retry patterns)
 `);
