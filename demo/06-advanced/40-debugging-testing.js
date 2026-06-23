@@ -1,7 +1,7 @@
 // Debugging and Testing Basics Demo
 // 📘 For TypeScript comparison, see: 40-debugging-testing-ts-comparison.ts
 // 📘 javascript.info Part 1 > "Code quality" (6 chapters)
-// 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools
+// 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools
 
 // ============================================
 // Section 1: Console Methods

@@ -480,14 +480,31 @@ console.log("4. Keep dependencies updated");
 console.log("5. Follow TC39 proposals for upcoming features");
 console.log("6. Use Web Standard APIs when possible");
 console.log("7. Write cross-runtime compatible code");
+console.log("8. Use transpilation for older browser support");
+console.log("9. Test in target environments");
+console.log("10. Use polyfills for critical missing features");
+console.log("11. Consider WinterCG for cross-runtime compatibility");
+console.log("12. Evaluate new runtimes (Deno, Bun) for your use case");
 
 console.log("\n❌ DON'T:");
 console.log("1. Don't use deprecated Node.js-specific APIs");
 console.log("2. Don't rely on bundler-specific features");
 console.log("3. Don't use older CommonJS require() for new projects");
 console.log("4. Don't ignore browser compatibility");
-console.log("5. Don't use experimental features in production");
+console.log("5. Don't use experimental features (Stage 1/2) in production");
 console.log("6. Don't assume Node.js is the only runtime");
+console.log("7. Don't ignore deprecation warnings");
+console.log("8. Don't skip testing in target environments");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. TC39 proposal stage changes");
+console.log("2. Browser support variations (check caniuse.com)");
+console.log("3. Runtime compatibility differences");
+console.log("4. Deprecated API removal timelines");
+console.log("5. Polyfill quality and maintenance");
+console.log("6. Breaking changes in major versions");
+console.log("7. Experimental feature stability");
+console.log("8. TypeScript version compatibility");
 
 console.log("\n🔗 Resources:");
 console.log("- TC39 Proposals: https://github.com/tc39/proposals");
@@ -532,44 +549,6 @@ console.log("  Fix: Monitor proposal status regularly");
 console.log("\nPitfall 6: Temporal API vs Date confusion");
 console.log("  Temporal is completely new API, not Date replacement");
 console.log("  Fix: Learn Temporal API separately");
-
-// ============================================
-// Best Practices
-// ============================================
-
-console.log("\n=== Best Practices ===");
-
-console.log("✅ DO:");
-console.log("1. Follow TC39 proposal stages before using features");
-console.log("2. Monitor browser compatibility (caniuse.com)");
-console.log("3. Use transpilation for older browser support");
-console.log("4. Keep dependencies and build tools updated");
-console.log("5. Test in target environments");
-console.log("6. Use polyfills for critical missing features");
-console.log("7. Follow TypeScript releases and new features");
-console.log("8. Consider WinterCG for cross-runtime compatibility");
-console.log("9. Evaluate new runtimes (Deno, Bun) for your use case");
-console.log("10. Stay informed about JavaScript evolution");
-
-console.log("\n❌ DON'T:");
-console.log("1. Don't use Stage 1/2 proposals in production");
-console.log("2. Don't ignore deprecation warnings");
-console.log("3. Don't assume features work everywhere");
-console.log("4. Don't rely on a single runtime");
-console.log("5. Don't ignore browser compatibility");
-console.log("6. Don't use experimental features in production");
-console.log("7. Don't skip testing in target environments");
-console.log("8. Don't assume Node.js is the only runtime");
-
-console.log("\n⚠️ WATCH OUT FOR:");
-console.log("1. TC39 proposal stage changes");
-console.log("2. Browser support variations");
-console.log("3. Runtime compatibility differences");
-console.log("4. Deprecated API removal timelines");
-console.log("5. Polyfill quality and maintenance");
-console.log("6. Breaking changes in major versions");
-console.log("7. Experimental feature stability");
-console.log("8. TypeScript version compatibility");
 
 // ============================================
 // TypeScript Comparison Notes
