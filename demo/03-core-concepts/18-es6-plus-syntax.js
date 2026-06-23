@@ -682,7 +682,7 @@ const text = "hello world hello";
 console.log("replaceAll('hello', 'hi'):", text.replaceAll("hello", "hi")); // "hi world hi"
 console.log("replace() first only:", text.replace("hello", "hi")); // "hi world hello"
 
-// String.prototype.trimStart/trimEnd() aliases (ES2022)
+// String.prototype.trimStart/trimEnd() aliases (ES2019)
 console.log("\nString trimming:");
 const padded = "   hello   ";
 console.log("trimStart:", '"' + padded.trimStart() + '"'); // "hello   "

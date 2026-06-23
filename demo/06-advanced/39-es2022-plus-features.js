@@ -817,8 +817,7 @@ console.log("Inline modifiers:");
 console.log("- (?i) case insensitive");
 console.log("- (?m) multiline");
 console.log("- (?s) dotAll");
-console.log("- (?U) unicode");
-console.log("- (?-flag) to turn off a flag");
+console.log("- (?-flag) to turn off a flag (e.g., (?-i), (?-m), (?-s))");
 
 console.log("\nExample:");
 console.log(`
@@ -1196,18 +1195,14 @@ console.log("Browser/runtime support is emerging. Check caniuse.com for current 
 
 console.log("\nMath.sumPrecise solves floating-point precision issues:");
 console.log(`
-// Standard addition accumulates floating-point errors
-const numbers = [0.1, 0.2, 0.3, 0.4, 0.5];
-const sum = numbers.reduce((a, b) => a + b, 0);
-console.log(sum); // 1.5 (correct in this case, but not always)
-
-const large = [1e16, 1, 1, 1];
-const badSum = large.reduce((a, b) => a + b, 0);
-console.log(badSum); // 10000000000000003 (precision loss!)
+// Standard addition can lose precision with certain number combinations
+const numbers = [1e16, 1, 1, -1e16, 1, 1, 1];
+const naiveSum = numbers.reduce((a, b) => a + b, 0);
+console.log(naiveSum); // May lose the small values due to floating-point
 
 // Math.sumPrecise handles this correctly
-const goodSum = Math.sumPrecise(large);
-console.log(goodSum); // 10000000000000003 (correct)
+const goodSum = Math.sumPrecise(numbers);
+console.log(goodSum); // 4 (correct — all small values preserved)
 `);
 
 console.log("\nUse cases:");
