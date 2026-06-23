@@ -633,6 +633,14 @@ console.log(str.toWellFormed()); // "\\uFFFD" (replacement char)
 // Set Methods (ES2025)
 // - Mathematical set operations
 // - Returns new Set (immutable)
+/*
+ * verification:
+ *   feature: Set methods
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\n=== Set Methods (ES2025) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
