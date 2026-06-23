@@ -273,14 +273,6 @@ console.log("Static method:", MathUtils.add(5, 3)); // 8
 // console.log(new MathUtils().add(5, 3)); // TypeError
 
 // 3.2 Static property (ES2022)
-/*
- * verification:
- *   feature: Private class fields
- *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-19
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
 class Config {
   static VERSION = "1.0.0";
   static API_URL = "https://api.example.com";
@@ -370,6 +362,14 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
 // ============================================================================
 // 4. PRIVATE AND PROTECTED PROPERTIES
 // ============================================================================
+/*
+ * verification:
+ *   feature: Private class fields
+ *   status: ES2022
+ *   stage4Date: 2021-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 /**
  * Private and Protected Properties (ES2022)
  *
