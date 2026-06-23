@@ -35,7 +35,7 @@ console.log("\nTemporal API (ES2027):");
 console.log("- Modern replacement for Date object");
 console.log("- Immutable, timezone-aware, easy-to-use API");
 console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
-console.log("- Stage 4 (Nov 2023), included in ES2027");
+console.log("- Stage 4 (Sep 2025), included in ES2027");
 
 // Example of Temporal API syntax
 // const today = Temporal.Now.plainDateISO();
@@ -93,7 +93,7 @@ const decoded = Uint8Array.fromBase64("SGVsbG8=");
 
 // 4. ES2027 Features
 console.log("\nES2027 Features:");
-console.log("- Temporal (Stage 4 November 2023): Modern date/time API");
+console.log("- Temporal (Stage 4 September 2025): Modern date/time API");
 console.log("- Explicit Resource Management (Stage 4 May 2025): using/await using declarations");
 console.log("- Atomics.pause (Stage 4 October 2024): Spin-wait loop optimization");
 console.log("- Joint Iteration (Stage 4 November 2025): Iterate over multiple iterables");

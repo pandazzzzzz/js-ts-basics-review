@@ -601,7 +601,7 @@ console.log("\nModern Alternatives:");
 // Temporal API (ES2027)
 // - Modern replacement for Date object
 // - Immutable, time-zone aware, easier to work with
-// - Stage 4 Nov 2023, targeted for ES2027, browser support varies by engine
+// - Stage 4 Sep 2025, targeted for ES2027, browser support varies by engine
 console.log("  Temporal API (ES2027):");
 console.log("    - Temporal.Now.instant() - Current instant");
 console.log("    - Temporal.PlainDate - Date without timezone");
@@ -648,7 +648,7 @@ console.log("      - Immutable (all operations return new objects)");
 console.log("      - Timezone-aware by design");
 console.log("      - Clear separation of concepts (Instant, PlainDate, etc.)");
 console.log("      - Consistent API across all types");
-console.log("      - ES2027 standardized API (Stage 4, November 2023, delayed publication)");
+console.log("      - ES2027 standardized API (Stage 4, September 2025, delayed publication)");
 console.log("      - Better for internationalization");
 
 // Third-party library comparison

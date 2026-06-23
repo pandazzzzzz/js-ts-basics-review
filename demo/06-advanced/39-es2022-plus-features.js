@@ -1107,7 +1107,7 @@ console.log("8. using declaration disposal timing");
 // - Immutable, timezone-aware, easier to use
 console.log("\n=== Temporal API (ES2027) ===");
 
-console.log("NOTE: Temporal reached Stage 4 in Nov 2023 and is targeted for ES2027.");
+console.log("NOTE: Temporal reached Stage 4 in Sep 2025 and is targeted for ES2027.");
 console.log("Browser/runtime support varies by engine. Check caniuse.com for current status.");
 console.log("Polyfill (for older environments): @js-temporal/polyfill (npm)");
 console.log("Spec: https://github.com/tc39/proposal-temporal");
