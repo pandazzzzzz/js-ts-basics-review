@@ -1,6 +1,6 @@
 // Forms and Validation Demo
 // 📘 javascript.info Part 2 > "Forms, controls"
-// 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn/Forms
+// 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms
 // ⚠️ Browser environment only
 
 // ============================================
@@ -628,7 +628,7 @@ console.log("4. Don't forget to clear setCustomValidity errors");
 console.log("5. Don't use synchronous clipboard API (deprecated）\n");
 
 console.log("📚 Reference Documentation:\n");
-console.log("- MDN Forms: https://developer.mozilla.org/en-US/docs/Learn/Forms");
+console.log("- MDN Forms: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms");
 console.log("- Constraint Validation: https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation");
 console.log("- Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API");
 console.log("- FormData: https://developer.mozilla.org/en-US/docs/Web/API/FormData\n");
