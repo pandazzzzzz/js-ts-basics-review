@@ -423,7 +423,7 @@ async function hashWithAlgorithm(
 }
 
 // AES encryption with full types
-interface EncryptedData {
+interface AESEncryptedData {
   encrypted: Uint8Array;
   iv: Uint8Array;
   salt: Uint8Array;
@@ -432,7 +432,7 @@ interface EncryptedData {
 async function encryptAESGCMTyped(
   plaintext: string,
   password: string
-): Promise<EncryptedData> {
+): Promise<AESEncryptedData> {
   const encoder = new TextEncoder();
   
   // Import password key

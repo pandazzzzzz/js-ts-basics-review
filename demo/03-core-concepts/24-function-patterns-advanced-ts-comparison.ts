@@ -348,13 +348,6 @@ console.log("isEven(9):", trampoline(() => isEven(9))); // false
 
 console.log("\n=== Point-Free Style with Types ===");
 
-// TypeScript: Typed compose/pipe utilities for point-free style
-type Compose = <A, B, C>(f: (b: B) => C, g: (a: A) => B) => (a: A) => C;
-type Pipe = <A, B, C>(g: (a: A) => B, f: (b: B) => C) => (a: A) => C;
-
-const compose: Compose = (f, g) => (a) => f(g(a));
-const pipe: Pipe = (g, f) => (a) => f(g(a));
-
 // Multi-parameter pipe with generics
 function pipe3<A, B, C, D>(
   f1: (a: A) => B,
@@ -445,13 +438,13 @@ function memoizeWithMaxSize<T extends (...args: any[]) => R, R>(
   }) as T;
 }
 
-const expensiveCalc = memoizeWithMaxSize((n: number): number => {
+const cachedCalc = memoizeWithMaxSize((n: number): number => {
   console.log(`Calculating for ${n}...`);
   return n * n;
 }, 3);
 
 console.log("\nMemoization with max cache size:");
-expensiveCalc(1); // Calculates
+cachedCalc(1); // Calculates
 expensiveCalc(2); // Calculates
 expensiveCalc(3); // Calculates
 expensiveCalc(4); // Calculates, evicts 1

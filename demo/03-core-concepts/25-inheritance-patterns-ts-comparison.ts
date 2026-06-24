@@ -408,7 +408,7 @@ function withCaching<T, K, V>(obj: T, _cacheKey: string): T & Cacheable<K, V> {
   return {
     ...obj,
     getCache: (key: K) => cache.get(key),
-    setCache: (key: K, value: V) => void { cache.set(key, value); }
+    setCache: (key: K, value: V) => { cache.set(key, value); }
   };
 }
 

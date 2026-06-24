@@ -189,9 +189,13 @@ const buffers = {
 };
 
 // TypeScript: Generic function for typed arrays
-function processTypedArray<T extends TypedArray>(
+// Note: Use a union of typed array types since there is no single TypedArray type
+type TypedArrayLike = Int8Array | Uint8Array | Int16Array | Uint16Array |
+  Int32Array | Uint32Array | Float32Array | Float64Array;
+
+function processTypedArray<T extends TypedArrayLike>(
   array: T,
-  fn: (value: T[0], index: number) => T[0]
+  fn: (value: number, index: number) => number
 ): T {
   for (let i = 0; i < array.length; i++) {
     array[i] = fn(array[i], i);

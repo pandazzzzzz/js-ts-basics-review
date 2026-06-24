@@ -433,8 +433,8 @@ console.log("strAt.at(100):", strAt.at(100)); // undefined (out of bounds)
 // Comparing with bracket notation
 console.log("\nBracket notation vs at():");
 console.log("strAt[0]:", strAt[0]); // "H"
-console.log("str[-1]:", str[-1]); // undefined (bracket notation doesn't support negative)
-console.log("str.at(-1):", str.at(-1)); // "d" (at() supports negative)
+console.log("strAt[-1]:", strAt[-1]); // undefined (bracket notation doesn't support negative)
+console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
 
 // ============================================
 // Template Literals (ES6/ES2015)

@@ -64,9 +64,9 @@ function makeTailRecursive(f) {
   };
 }
 
-const safeFactorial = makeTailRecursive(function fib(n, acc = 1) {
+const safeFactorial = makeTailRecursive(function factorial(n, acc = 1) {
   if (n <= 1) return () => acc;
-  return () => fib(n - 1, n * acc);
+  return () => factorial(n - 1, n * acc);
 });
 
 console.log("\nTrampoline factorial(10):", safeFactorial(10)); // 3628800
@@ -197,7 +197,7 @@ class LRUCache {
 function memoizeLRU(fn, maxSize = 100) {
   const cache = new LRUCache(maxSize);
 
-  return function(...args) {
+  const memoized = function(...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key);
@@ -206,12 +206,15 @@ function memoizeLRU(fn, maxSize = 100) {
     cache.set(key, result);
     return result;
   };
+
+  memoized.cacheSize = () => cache.size;
+  return memoized;
 }
 
 const lruFib = memoizeLRU(fibonacci, 50);
 console.log("\nLRU Fibonacci:");
 console.log("fib(40):", lruFib(40));
-console.log("Cache size:", lruFib.toString());
+console.log("Cache size:", lruFib.cacheSize);
 
 // 2.4 Multi-argument memoization with custom serializer
 function memoizeWithSerializer(fn, serializer = JSON.stringify) {

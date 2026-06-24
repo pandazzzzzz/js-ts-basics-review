@@ -177,20 +177,20 @@ console.log("\nDate range:", new Intl.DateTimeFormat('en-US', {
 
 console.log("\n=== Intl.Collator ===");
 
-// Basic sorting
+// Basic sorting (use slice() to avoid mutating original)
 const names = ['Ä', 'Z', 'A', 'Ö'];
-console.log("Default sort:", names.sort()); // ['A', 'Z', 'Ä', 'Ö'] (wrong!)
+console.log("Default sort:", names.slice().sort()); // ['A', 'Z', 'Ä', 'Ö'] (wrong!)
 
-console.log("Collator sort:", names.sort(
+console.log("Collator sort:", names.slice().sort(
   new Intl.Collator('de-DE').compare
 )); // ['A', 'Ä', 'Ö', 'Z'] (correct!)
 
 // Numeric sorting
 const files = ['file1.txt', 'file10.txt', 'file2.txt', 'file20.txt'];
-console.log("\nDefault sort:", files.sort());
+console.log("\nDefault sort:", files.slice().sort());
 // ['file1.txt', 'file10.txt', 'file2.txt', 'file20.txt'] (wrong!)
 
-console.log("Numeric sort:", files.sort(
+console.log("Numeric sort:", files.slice().sort(
   new Intl.Collator('en-US', { numeric: true }).compare
 )); // ['file1.txt', 'file2.txt', 'file10.txt', 'file20.txt'] (correct!)
 

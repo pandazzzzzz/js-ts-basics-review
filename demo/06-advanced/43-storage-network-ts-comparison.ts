@@ -776,42 +776,7 @@ eventSource.addEventListener('notification', (event: MessageEvent) => {
   console.log('Notification:', data.title);
 });
 
-// Generic SSE client class
-class TypedEventSource<TEvents extends Record<string, unknown>> {
-  private eventSource: EventSource;
-  
-  constructor(url: string) {
-    this.eventSource = new EventSource(url);
-  }
-  
-  on<K extends keyof TEvents>(
-    eventType: K,
-    handler: (data: TEvents[K]) => void
-  ): void {
-    this.eventSource.addEventListener(eventType as string, (event: MessageEvent) => {
-      const data: TEvents[K] = JSON.parse(event.data);
-      handler(data);
-    });
-  }
-  
-  onOpen(handler: () => void): void {
-    this.eventSource.addEventListener('open', handler);
-  }
-  
-  onError(handler: (error: Event) => void): void {
-    this.eventSource.addEventListener('error', handler);
-  }
-  
-  close(): void {
-    this.eventSource.close();
-  }
-  
-  get readyState(): number {
-    return this.eventSource.readyState;
-  }
-}
-
-// Usage with typed events
+// Usage with typed events — see TypedEventSource class definition above
 interface AppEvents {
   notification: NotificationData;
   userJoined: { userId: number; name: string };
