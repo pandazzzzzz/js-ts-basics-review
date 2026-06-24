@@ -796,7 +796,7 @@ Key modern features (ES2020-ES2023):
  *   status: Stage 2.7
  *   lastVerified: 2026-06-19
  *   source: https://github.com/tc39/proposals/blob/main/README.md
- */
+ *
 5. DECORATORS
    JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
    TS:  Stage 2.7 decorators supported in TS 5.0+ (experimentalDecorators: false)
@@ -805,6 +805,7 @@ Key modern features (ES2020-ES2023):
 - TypeScript's private is compile-time only; JS # is runtime
 - TypeScript abstract classes cannot be instantiated; JS needs pattern
 - TypeScript interfaces have no runtime representation
+ */
 - Class field initialization order matters in both languages
 
 📘 See 18-es6-plus-syntax-ts-comparison.ts for detailed examples!

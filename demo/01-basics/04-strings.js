@@ -123,7 +123,7 @@ console.log("\n=== indexOf() Method ===");
 console.log("indexOf('the'):", searchStr.indexOf('the')); // 31 (finds second "the")
 console.log("indexOf('The'):", searchStr.indexOf('The')); // 0 (case-sensitive)
 console.log("indexOf('cat'):", searchStr.indexOf('cat')); // -1 (not found)
-console.log("indexOf('the', 32):", searchStr.indexOf('the', 32)); // 31
+console.log("indexOf('the', 32):", searchStr.indexOf('the', 32)); // -1 (starts searching at position 32, past the 'the' at 31)
 
 // lastIndexOf(searchValue, fromIndex) - Find last occurrence (ES1)
 // - Returns index of last match, or -1 if not found

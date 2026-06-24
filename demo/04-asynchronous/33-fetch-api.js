@@ -421,7 +421,7 @@ errorPropagation();
  * - Easier debugging with breakpoints
  * - Better for complex conditional logic
  *
- * Note: See file 26-async-await.js for detailed async/await patterns
+ * Note: See file 31-async-await.js for detailed async/await patterns
  */
 
 console.log("\n=== Async/Await with Fetch Demo ===\n");

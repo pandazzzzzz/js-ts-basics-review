@@ -290,7 +290,7 @@ console.log("Grade:", grade); // "B"
 // Ternary with side effects
 let count = 0;
 const result = count > 0 ? count++ : count--;
-console.log("Result:", result); // -1 (count was 0, so count-- executed)
+console.log("Result:", result); // 0 (postfix returns original value, then decrements)
 console.log("Count:", count); // -1
 
 // ============================================

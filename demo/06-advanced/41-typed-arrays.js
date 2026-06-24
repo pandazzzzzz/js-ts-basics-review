@@ -786,7 +786,7 @@ console.log("  slice() creates new buffer copy");
 
 // Pitfall 3: Endianness confusion
 console.log("\nPitfall 3: Endianness in DataView");
-console.log("  Default is little-endian (true)");
+console.log("  Default is big-endian (false) — most significant byte first");
 console.log("  Network protocols use big-endian");
 console.log("  Fix: Always specify explicitly");
 

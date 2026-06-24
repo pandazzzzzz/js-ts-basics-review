@@ -810,7 +810,7 @@ setTimeout(() => {
     function scheduleMacrotask() {
       console.log("   4. Macrotask scheduled");
       setTimeout(() => {
-        console.log("   6. Macrotack execution");
+        console.log("   6. Macrotask execution");
       }, 0);
     }
 

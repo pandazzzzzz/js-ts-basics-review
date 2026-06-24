@@ -915,9 +915,9 @@ console.log(y); // 20
 console.log("\n=== Resource Management (ES2027) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: 122+ (July 2023), 130+ (Sept 2024) shipping by default
-// - Firefox: 120+ (Dec 2023), 134+ (June 2025) shipping by default
-// - Safari: 17.4+ (May 2023), 18.2+ (Oct 2024) shipping by default
+// - Chrome: 122+ (Feb 2024), 130+ (Sept 2024) shipping by default
+// - Firefox: 120+ (Nov 2023), 134+ (June 2025) shipping by default
+// - Safari: 17.4+ (Mar 2024), 18.2+ (Oct 2024) shipping by default
 // - Node.js: 20.4+ (June 2023) with --harmony-explicit-resource-management flag
 // - Node.js: 22.0+ (April 2024) enabled by default
 // - Edge: 122+ (July 2023), 130+ (Sept 2024) shipping by default

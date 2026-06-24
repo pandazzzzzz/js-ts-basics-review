@@ -137,7 +137,8 @@ console.log("- Caching and memoization");
 console.log("\n=== Stage 2.7 Decorator Syntax ===");
 
 console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
-console.log("Enable with: { decoratorMetadata: true } in TypeScript");
+console.log("Legacy decorators: { experimentalDecorators: true, emitDecoratorMetadata: true }");
+console.log("Stage 2.7 decorators: { experimentalDecorators: false } (TS 5.0+)");
 console.log("Note: Decorators are Stage 2.7, not yet part of ECMAScript standard");
 
 console.log("\nProposed decorator syntax (Stage 2.7):");
