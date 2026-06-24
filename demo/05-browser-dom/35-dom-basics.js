@@ -175,7 +175,7 @@ console.log("   Example: element.textContent = '<script>not executed</script>'\n
 console.log("3. innerText");
 console.log("   - Similar to textContent, but considers CSS rendering");
 console.log("   - Doesn't return content of hidden elements (display:none)");
-console.log("   - ⚠️ Triggers reflow(reflow), has poor performance");
+console.log("   - ⚠️ Triggers reflow, has poor performance");
 console.log("   - Preserves line formatting (based on CSS rendering result)\n");
 
 console.log("4. outerHTML");

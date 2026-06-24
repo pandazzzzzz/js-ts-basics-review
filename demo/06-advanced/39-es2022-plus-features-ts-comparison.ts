@@ -10,20 +10,18 @@ export {}; // Make this file a module to avoid global scope conflicts
 
 console.log("=== Error.cause - Type Safety ===\n");
 
-// Error.cause with proper typing
-interface ErrorWithCause extends Error {
-  cause?: unknown;
-}
+// Error.cause is built into TS 4.6+ via ErrorOptions interface.
+// No need for a custom interface — Error constructor accepts { cause } natively.
 
-function connectDatabase(): never {
+function connectDatabase(): void {
   throw new Error("Connection timeout");
 }
 
-function initializeApp(): never {
+function initializeApp(): void {
   try {
     connectDatabase();
   } catch (originalError) {
-    // TypeScript knows cause is optional and typed as unknown
+    // TypeScript knows cause is typed as unknown (built-in since TS 4.6)
     throw new Error("Failed to initialize app", { cause: originalError });
   }
 }
@@ -360,8 +358,9 @@ function identity<const T>(value: T): T {
   return value;
 }
 
-const result = identity([1, 2, 3] as const);
-// result type: readonly [1, 2, 3] (literal types preserved)
+// const T infers literal types — no need for 'as const' on the argument
+const result = identity([1, 2, 3]);
+// result type: readonly [1, 2, 3] (literal types preserved by const T)
 
 console.log("const type parameters preserve literal types");
 
@@ -519,7 +518,8 @@ console.log("\n=== Decorators - Stage 2.7 Proposal ===\n");
 
 console.log("NOTE: Decorators are currently Stage 2.7 (nearing Stage 3, not yet ES standard).");
 console.log("TypeScript 5.0+ supports Stage 2.7 decorator syntax.");
-console.log("Enable with: { experimentalDecorators: false, emitDecoratorMetadata: true }");
+console.log("Enable with: { experimentalDecorators: false } in tsconfig.json");
+console.log("Note: emitDecoratorMetadata is NOT compatible with Stage 2.7 decorators.");
 
 console.log("\nStage 2.7 Decorator Syntax:");
 console.log(`

@@ -232,11 +232,12 @@ console.log(sprite.render());
 
 
 // ============================================================================
-// 6. DECORATORS (TS 5.0+)
+// 6. DECORATORS (Legacy / Experimental)
 // ============================================================================
 
-// TypeScript: Experimental decorator support
-// Note: Requires experimentalDecorators: true in tsconfig
+// TypeScript: Legacy decorator support (TS 1.5+)
+// Note: Requires experimentalDecorators: true in tsconfig (legacy mode)
+// For Stage 2.7 decorators (TS 5.0+), use experimentalDecorators: false
 
 // Class decorator
 function sealed<T extends new (...args: any[]) => any>(constructor: T) {

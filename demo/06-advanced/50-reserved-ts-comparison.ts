@@ -105,16 +105,20 @@ type Config = {
   host: string;
 };
 
+// satisfies checks types while preserving literal/narrow types
 const config = {
   port: 8080,
   host: "localhost",
-  extra: "ignored" // This would error without satisfies
 } satisfies Config;
 
-// Port type is preserved as literal 8080, not widened to number
-const port: 8080 = config.port; // OK!
+// Unlike ': Config', satisfies preserves literal types:
+// config.port is type 8080 (not number)
+const port: 8080 = config.port; // OK — literal type preserved!
 
-console.log("satisfies preserves literal types while type-checking");
+// Attempting extra properties WOULD error (same as ': Config'):
+// const bad = { port: 80, host: "x", extra: true } satisfies Config; // Error!
+
+console.log("satisfies preserves literal types while still type-checking");
 
 // ============================================
 // Section 2: TypeScript Decorators (Future JS)

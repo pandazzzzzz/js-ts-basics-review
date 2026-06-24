@@ -7,10 +7,10 @@
 // ============================================================================
 
 // TypeScript: import type for type-only imports (avoids runtime import)
-import type { Calculator } from "./27-modules";
+import type { Calculator } from "./32-modules";
 
 // Regular import (includes runtime value)
-// import { Calculator } from "./27-modules";
+// import { Calculator } from "./32-modules";
 
 // Combined: type-only and value imports
 // import Calculator, { type CalculatorOptions } from "./module";

@@ -138,15 +138,16 @@ console.log("Template literal types: String manipulation at type level");
 console.log("Event handlers: onClick, onFocus, onBlur");
 
 // ============================================
-// Decorators - TypeScript Experimental
+// Decorators - TypeScript Legacy (Experimental)
 // ============================================
 
 console.log("\n=== Decorators ===\n");
 
 console.log("JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)");
-console.log("TypeScript: --experimentalDecorators flag");
+console.log("TypeScript: Legacy syntax requires --experimentalDecorators flag");
+console.log("TS 5.0+: Stage 2.7 syntax available with experimentalDecorators: false");
 
-// TypeScript decorator example (requires tsconfig flag)
+// Legacy TypeScript decorator example (requires experimentalDecorators: true)
 function LogTs(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
   descriptor.value = function(...args: any[]) {

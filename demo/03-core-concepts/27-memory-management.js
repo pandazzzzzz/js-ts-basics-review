@@ -637,7 +637,7 @@ for (let i = 0; i < 1000000; i++) {
 }
 
 console.log('Regular array size estimate:', `${(regularArray.length * 8 / 1024 / 1024).toFixed(2)} MB`);
-console.log('TypedArray size:', `${(typedArray.BYTES / 1024 / 1024).toFixed(2)} MB`);
+console.log('TypedArray size:', `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`);
 console.log('TypedArray is ~7x more memory efficient for numbers');
 
 // 6.2 Chunked processing

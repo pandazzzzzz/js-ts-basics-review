@@ -340,7 +340,7 @@ class Temperature {
   #celsius = 0;
 
   constructor(celsius = 0) {
- fanc    this.#celsius = celsius;
+    this.#celsius = celsius;
   }
 
   get celsius(): number {
