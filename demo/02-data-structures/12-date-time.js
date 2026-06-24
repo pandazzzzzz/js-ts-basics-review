@@ -599,7 +599,7 @@ console.log("\n  Tip: Reuse date objects in loops");
 console.log("\nModern Alternatives:");
 
 // Temporal API (ES2027)
-// - Modern replacement for Date object
+// - Modern date/time API complementing the Date object
 // - Immutable, time-zone aware, easier to work with
 // - Stage 4 Sep 2025, targeted for ES2027, browser support varies by engine
 console.log("  Temporal API (ES2027):");

@@ -32,7 +32,7 @@ console.log("\n=== Recent Standardized Features ===");
 
 // 1. Temporal API (ES2027) - Modern Date/Time
 console.log("\nTemporal API (ES2027):");
-console.log("- Modern replacement for Date object");
+console.log("- Modern complement to Date object");
 console.log("- Immutable, timezone-aware, easy-to-use API");
 console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
 console.log("- Stage 4 (Sep 2025), included in ES2027");

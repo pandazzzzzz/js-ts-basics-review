@@ -1,5 +1,7 @@
 // Variables and Data Types Demo
 // 📘 For TypeScript comparison, see: 01-variables-ts-comparison.ts
+// 📘 javascript.info Part 1 > "JavaScript Fundamentals" (2.1-2.7)
+// 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
 
 // ============================================
 // Variable Declarations
@@ -84,6 +86,142 @@ const bigIntType = 9007199254740991n;
 console.log("Variables Demo:");
 console.log({ stringType, numberType, booleanType });
 console.log({ nullType, undefinedType, symbolType, bigIntType });
+
+
+// ============================================
+// JavaScript in HTML (JS.info 2.1)
+// ============================================
+
+// JavaScript can be included in HTML via <script> tags:
+// <script src="script.js"></script>  -- External file (preferred)
+// <script>console.log("inline");</script>  -- Inline code
+//
+// Modern script loading attributes:
+// - <script defer src="...">  -- Download in parallel, execute after HTML parsed
+// - <script async src="...">  -- Download in parallel, execute as soon as ready
+// - <script type="module">    -- ES module, deferred by default
+//
+// ES6 modules (import/export) are covered in: 32-modules.js
+
+// ============================================
+// Code Structure (JS.info 2.2)
+// ============================================
+
+// Statements end with semicolons (;)
+// Semicolons are technically optional due to ASI (Automatic Semicolon Insertion),
+// but omitting them can cause subtle bugs. Best practice: always use semicolons.
+
+// Single-line comments use //
+// Multi-line comments use /* ... */
+
+// ============================================
+// "use strict" - Modern Mode (JS.info 2.3)
+// ============================================
+
+// "use strict" enables strict mode which catches common mistakes:
+// - Assignment to undeclared variable → ReferenceError (instead of creating global)
+// - Assigning to read-only property → TypeError
+// - Deleting variables/functions → SyntaxError
+// - Duplicate parameter names → SyntaxError
+// - Octal numeric literals (0123) → SyntaxError
+// - `this` in regular functions is `undefined` (not `window`)
+
+// Modern JavaScript: ES6 modules and classes are strict by default.
+// "use strict" can be applied file-wide or per-function:
+//   "use strict";           // File-wide (must be first statement)
+//   function f() { "use strict"; ... }  // Per-function
+
+console.log("\n=== Strict Mode Demo ===");
+
+// Without strict mode, assignment to undeclared variable creates a global
+// In strict mode, this would throw ReferenceError:
+(function sloppyMode() {
+  // accidentallyGlobal = "oops"; // ReferenceError in strict mode!
+})();
+
+// In strict mode, `this` is undefined in regular functions (not window/global)
+(function strictDemo() {
+  "use strict";
+  try {
+    // In strict mode, assigning to undeclared variable throws:
+    // undeclaredVar = 5; // ReferenceError!
+  } catch (e) {
+    console.log("Strict mode prevents accidental globals:", e.message);
+  }
+})();
+
+console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
+
+
+// ============================================
+// Type Conversions (JS.info 2.7)
+// ============================================
+
+console.log("\n=== Type Conversions ===");
+
+// String conversion — String() or .toString()
+console.log("String(42):", String(42));           // "42"
+console.log("String(true):", String(true));       // "true"
+console.log("String(null):", String(null));       // "null"
+console.log("String(undefined):", String(undefined)); // "undefined"
+console.log("(42).toString():", (42).toString()); // "42"
+
+// Numeric conversion — Number() or unary +
+console.log("\nNumeric conversion:");
+console.log("Number('42'):", Number("42"));       // 42
+console.log("Number('42px'):", Number("42px"));   // NaN
+console.log("Number(true):", Number(true));       // 1
+console.log("Number(false):", Number(false));     // 0
+console.log("Number(null):", Number(null));       // 0
+console.log("Number(undefined):", Number(undefined)); // NaN
+console.log("+'42':", +"42");                     // 42 (unary plus shortcut)
+console.log("parseInt('42px'):", parseInt("42px")); // 42 (tolerates non-numeric)
+console.log("parseFloat('3.14px'):", parseFloat("3.14px")); // 3.14
+
+// Boolean conversion — Boolean() or double negation !!
+console.log("\nBoolean conversion:");
+console.log("Boolean(1):", Boolean(1));           // true
+console.log("Boolean(0):", Boolean(0));           // false
+console.log("Boolean('hello'):", Boolean("hello")); // true
+console.log("Boolean(''):", Boolean(""));         // false
+console.log("Boolean(null):", Boolean(null));     // false
+console.log("Boolean(undefined):", Boolean(undefined)); // false
+console.log("Boolean(NaN):", Boolean(NaN));       // false
+console.log("!!42:", !!42);                       // true (double negation shortcut)
+
+// Falsy values summary: false, 0, "", null, undefined, NaN
+// Everything else is truthy (including "0", "false", [], {})
+
+// Loose equality (==) performs type coercion, strict equality (===) does not
+console.log("\nEquality with coercion:");
+console.log("0 == false:", 0 == false);           // true (both coerced to 0)
+console.log("0 === false:", 0 === false);         // false (different types)
+console.log("'' == false:", "" == false);         // true
+console.log("null == undefined:", null == undefined); // true (special case)
+console.log("null === undefined:", null === undefined); // false
+
+
+// ============================================
+// Browser Interaction (JS.info 2.6)
+// ============================================
+
+// alert() — shows a modal dialog with a message
+// alert("Hello World!");
+
+// prompt() — shows a modal dialog with an input field
+// const name = prompt("Enter your name:", "default");
+// Returns the input string, or null if cancelled
+
+// confirm() — shows a modal dialog with OK/Cancel
+// const ok = confirm("Are you sure?");
+// Returns true (OK) or false (Cancel)
+
+// Note: alert/prompt/confirm are browser-only APIs.
+// They do not work in Node.js or server-side environments.
+// For Node.js, use console.log() and readline module instead.
+
+console.log("\nNote: alert/prompt/confirm are browser-only APIs.");
+console.log("In Node.js, use console.log() and process.stdin for I/O.");
 
 
 // ============================================

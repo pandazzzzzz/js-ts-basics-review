@@ -154,7 +154,7 @@ try {
 // Comparison with replace() - replaces only first occurrence
 console.log("replace() vs replaceAll():");
 console.log("  replace():", "cat cat cat".replace("cat", "dog")); // "dog cat cat"
-console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog cat dog"
+console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog dog dog"
 
 // ============================================
 // ES2021: Logical Assignment Operators
@@ -1110,7 +1110,7 @@ console.log("8. using declaration disposal timing");
 
 // ============================================
 // Temporal API (ES2027)
-// - Modern date/time API to replace Date object
+// - Modern date/time API complementing the Date object
 // - Immutable, timezone-aware, easier to use
 console.log("\n=== Temporal API (ES2027) ===");
 
@@ -1429,7 +1429,7 @@ console.log(`
 // Escape special characters for use in regex
 const userInput = "Hello (world)? [test]";
 const escaped = RegExp.escape(userInput);
-console.log(escaped); // "Hello \\\\(world\\\\)\\\\? \\\\[test\\\\]"
+console.log(escaped); // "Hello \\(world\\)\\? \\[test\\]"
 
 const regex = new RegExp(\`^\${escaped}$\`);
 console.log(regex.test(userInput)); // true
