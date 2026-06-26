@@ -473,6 +473,36 @@ console.log("5. Use DocumentFragment when manipulating large amounts of DOM");
 console.log("6. Cache query results to avoid repeated queries");
 console.log("7. Use event delegation to reduce number of listeners\n");
 
+console.log("📐 Element Geometry & Positioning:\n");
+console.log(`
+// getBoundingClientRect() — Get element position and size relative to viewport
+const rect = element.getBoundingClientRect();
+// Returns: { top, right, bottom, left, width, height, x, y }
+
+// scrollIntoView() — Scroll element into visible area
+element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+// Other key geometry properties:
+// offsetTop/Left — relative to offsetParent
+// offsetWidth/Height — including border + padding
+// clientWidth/Height — content + padding (no border/scrollbar)
+// scrollTop/Left — scroll position
+// scrollWidth/Height — total scrollable content size
+// isConnected — true if element is in the DOM tree
+`);
+
+console.log("🎨 Shadow DOM Overview:\n");
+console.log(`
+// Shadow DOM — style and DOM encapsulation
+const host = document.getElementById('host');
+const shadow = host.attachShadow({ mode: 'open' }); // or 'closed'
+
+shadow.innerHTML = '<style>p { color: blue; }</style><p>Scoped content</p><slot></slot>';
+
+// Benefits: CSS scoping, DOM isolation, slot-based composition
+// Used by <video>, <input>, and Web Components internally
+`);
+
 console.log("❌ DON'T:\n");
 console.log("1. Don't insert user input directly into innerHTML (XSS risk)");
 console.log("2. Don't use innerHTML for string concatenation in loops");

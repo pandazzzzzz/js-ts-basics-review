@@ -926,6 +926,94 @@ setTimeout(() => {
 }, 4000);
 
 // ============================================
+// 12.5 QUEUEMICROTASK, SETIMMEDIATE, AND PROCESS.NEXTTICK
+// ============================================
+/**
+ * Platform-specific microtask/timer APIs
+ *
+ * queueMicrotask() (Browser + Node.js, ES2020):
+ * - Queues a microtask, executed before next macrotask
+ * - Similar to Promise.resolve().then(() => ...) but more explicit
+ * - No delay — runs as soon as current task completes and stack is empty
+ *
+ * process.nextTick() (Node.js only):
+ * - Queues a callback before any microtasks
+ * - Runs after current operation, before Promise callbacks and queueMicrotask
+ * - Can cause starvation if used recursively (nextTick queue never empties)
+ * - ⚠️ Use setImmediate or queueMicrotask for most cases
+ *
+ * setImmediate() (Node.js only):
+ * - Queues a macrotask in the "check" phase of the Node.js event loop
+ * - Runs after I/O callbacks but before close callbacks
+ * - Similar to setTimeout(fn, 0) but more efficient (no timer overhead)
+ */
+
+console.log("\n=== 12.5 queueMicrotask, setImmediate, process.nextTick ===");
+
+// queueMicrotask — Standard API (Browser + Node.js)
+console.log("\nqueueMicrotask (Standard ES2020):");
+console.log("  - Adds callback to microtask queue");
+console.log("  - Executes before next macrotask (setTimeout, I/O)");
+console.log("  - But after the current task completes");
+
+Promise.resolve().then(() => console.log("  Promise.then (microtask)"));
+queueMicrotask(() => console.log("  queueMicrotask (also microtask)"));
+// Both run in the same microtask phase
+
+// Execution order demonstration
+setTimeout(() => {
+  console.log("\nExecution order within setTimeout callback:");
+  console.log("  1. Synchronous code");
+
+  queueMicrotask(() => console.log("  3. queueMicrotask (microtask)"));
+  Promise.resolve().then(() => console.log("  2. Promise.then (microtask)"));
+
+  console.log("  → Microtasks run before next macrotask");
+  // Output: 1 → 2 → 3 (sync first, then microtasks by registration order)
+}, 100);
+
+// process.nextTick (Node.js only)
+console.log("\nprocess.nextTick (Node.js only):");
+if (typeof process !== 'undefined' && process.nextTick) {
+  console.log("  - Runs BEFORE microtasks (Promise, queueMicrotask)");
+  console.log("  - Can starve I/O if used recursively");
+  console.log("  - Use queueMicrotask or setImmediate instead for most cases");
+
+  // Demonstration (would show nextTick running before Promise):
+  // process.nextTick(() => console.log('  1. nextTick (even before Promise)'));
+  // Promise.resolve().then(() => console.log('  2. Promise.then'));
+  // queueMicrotask(() => console.log('  3. queueMicrotask'));
+} else {
+  console.log("  ⚠️ Not available in browser environment");
+}
+
+// setImmediate (Node.js only)
+console.log("\nsetImmediate (Node.js only):");
+if (typeof setImmediate !== 'undefined') {
+  console.log("  - Schedules callback in 'check' phase of event loop");
+  console.log("  - Similar to setTimeout(fn, 0) but more efficient");
+  console.log("  - Runs after I/O callbacks, before close callbacks");
+} else {
+  console.log("  ⚠️ Not available in browser environment");
+  console.log("  Use setTimeout(fn, 0) as cross-platform alternative");
+}
+
+// Comparison table
+console.log("\nMicrotask/Timer Comparison:");
+console.log(`
+  ┌─────────────────────┬──────────────┬──────────────────────┐
+  │ API                 │ Queue        │ Platform             │
+  ├─────────────────────┼──────────────┼──────────────────────┤
+  │ process.nextTick()  │ nextTick     │ Node.js only         │
+  │ queueMicrotask()    │ Microtask    │ Browser + Node.js    │
+  │ Promise.then()      │ Microtask    │ Browser + Node.js    │
+  │ setImmediate()      │ Macrotask    │ Node.js only         │
+  │ setTimeout(fn, 0)   │ Macrotask    │ Browser + Node.js    │
+  └─────────────────────┴──────────────┴──────────────────────┘
+`);
+
+
+// ============================================
 // BEST PRACTICES SUMMARY
 // ============================================
 

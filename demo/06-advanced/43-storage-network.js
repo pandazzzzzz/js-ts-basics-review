@@ -1294,6 +1294,86 @@ console.log("10. Private browsing storage restrictions");
 console.log("11. Browser-specific implementation differences");
 console.log("12. Security implications of each storage type");
 
+
+// ============================================
+// Section 8: BroadcastChannel API
+// ============================================
+/**
+ * BroadcastChannel API — Simple cross-tab/window/iframe communication
+ *
+ * Allows same-origin browsing contexts to communicate via messages
+ * without shared storage polling or Service Worker postMessage.
+ *
+ * Key features:
+ * - Simple pub/sub model via channel names
+ * - Works across tabs, windows, iframes (same origin)
+ * - No polling needed (unlike localStorage Storage events)
+ * - Messages are not persisted (unlike localStorage)
+ * - postMessage() is fire-and-forget
+ *
+ * Use cases:
+ * - Sync login/logout state across tabs
+ * - Notify other tabs of data changes
+ * - Coordinate between multiple open windows
+ * - Broadcast theme/preference changes
+ */
+
+console.log("\n=== Section 8: BroadcastChannel API ===");
+
+console.log(`
+// Create or join a channel (same name = same channel)
+const channel = new BroadcastChannel('app_state');
+
+// Send a message to all other contexts on this channel
+channel.postMessage({
+  type: 'LOGOUT',
+  timestamp: Date.now()
+});
+
+// Receive messages from other contexts
+channel.onmessage = (event) => {
+  console.log('Received from another tab:', event.data);
+  // event.origin is always same-origin
+  // event.source is null (not a window reference like postMessage)
+};
+
+// Alternative: addEventListener
+channel.addEventListener('message', (event) => {
+  if (event.data.type === 'LOGOUT') {
+    // Clear session, redirect to login
+    console.log('User logged out in another tab');
+  }
+});
+
+// Close the channel when done
+channel.close();
+
+// Practical example: login state synchronization
+// Tab A: user logs in
+const loginChannel = new BroadcastChannel('auth');
+loginChannel.postMessage({ type: 'LOGIN', user: 'Alice' });
+
+// Tab B: receives login notification
+const sameChannel = new BroadcastChannel('auth');
+sameChannel.onmessage = (e) => {
+  if (e.data.type === 'LOGIN') {
+    console.log(\`User \${e.data.user} logged in from another tab\`);
+    // Update UI, refresh data, etc.
+  }
+};
+
+// Comparison with alternatives:
+// - localStorage Storage event: only fires when OTHER tabs write, not same tab
+// - SharedWorker: more complex setup, shared state
+// - Service Worker postMessage: requires SW registration
+// - window.postMessage: for cross-origin iframes, not same-origin tabs
+// - BroadcastChannel: simplest for same-origin cross-tab communication
+
+// Browser support: Chrome 54+, Firefox 38+, Safari 15.4+, Edge 79+
+console.log("BroadcastChannel provides simple same-origin cross-tab messaging");
+`);
+
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================
