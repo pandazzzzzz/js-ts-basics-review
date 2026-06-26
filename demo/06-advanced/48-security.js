@@ -1043,6 +1043,135 @@ console.log("  ⚠️ Don't implement your own crypto algorithms");
 console.log("  ⚠️ Don't trust client-side crypto alone\n");
 
 // ============================================
+// 7. OWASP TOP 10 ADDITIONAL CONSIDERATIONS
+// ============================================
+/**
+ * OWASP Top 10 (2021) — Additional coverage beyond XSS/CSRF/Injection
+ *
+ * This file covers: XSS (A03: Injection), CSRF (A01: Broken Access Control subset),
+ * Input Validation (A03), CSP (A05: Security Misconfiguration).
+ *
+ * Below are key additional areas from the OWASP Top 10:
+ */
+
+console.log("\n=== 7. OWASP Top 10 Additional Coverage ===");
+
+// A01: Broken Access Control
+console.log("\nA01: Broken Access Control:");
+console.log(`
+// Always verify authorization on the server — never trust client-side checks
+// Client-side hiding (display:none, disabled buttons) is NOT security
+
+// ❌ INSECURE: Client-side only check
+if (user.role === 'admin') {
+  showAdminPanel(); // Panel exists, just hidden for non-admins
+}
+
+// ✅ SECURE: Server validates every request
+async function deleteUser(userId) {
+  const response = await fetch(\`/api/users/\${userId}\`, {
+    method: 'DELETE',
+    headers: { 'Authorization': \`Bearer \${token}\` }
+  });
+  // Server checks: Is the requester authenticated? Do they have permission?
+  if (response.status === 403) throw new Error('Access denied');
+}
+
+// Key practices:
+// - Deny by default — whitelist, not blacklist
+// - Implement proper session management (httpOnly, Secure, SameSite cookies)
+// - Use JWT with short expiration + refresh tokens
+// - Validate permissions on every request, not just at login
+`);
+
+// A02: Cryptographic Failures
+console.log("\nA02: Cryptographic Failures:");
+console.log(`
+// ❌ INSECURE: Weak/outdated algorithms
+// - MD5, SHA-1 for password hashing
+// - ECB mode for encryption
+// - Hardcoded keys in source code
+// - Insufficient key length (< 2048-bit RSA, < 128-bit AES)
+
+// ✅ SECURE: Modern cryptographic practices
+// - Use PBKDF2, bcrypt, or Argon2id for passwords (see Section 6)
+// - Use AES-256-GCM for symmetric encryption
+// - Use RSA 4096+ or ECC (P-256+) for asymmetric
+// - Store keys in environment variables or secrets manager
+// - Use HTTPS (TLS 1.3) for all communications
+
+// Never implement your own crypto — use standard libraries
+// Web Crypto API (Section 6) provides secure implementations
+`);
+
+// A04: Insecure Design
+console.log("\nA04: Insecure Design:");
+console.log(`
+// Security should be part of the design phase, not an afterthought
+
+// Key practices:
+// - Threat modeling during design (STRIDE, attack trees)
+// - Security requirements alongside functional requirements
+// - Rate limiting on all API endpoints
+// - Account lockout after N failed attempts
+// - Secure defaults (opt-in to insecurity, not opt-out)
+
+// Example: Rate limiting pattern
+const attempts = new Map();
+function checkRateLimit(key, maxAttempts = 5, windowMs = 60000) {
+  const now = Date.now();
+  const record = attempts.get(key) || { count: 0, resetAt: now + windowMs };
+  if (now > record.resetAt) { record.count = 0; record.resetAt = now + windowMs; }
+  record.count++;
+  attempts.set(key, record);
+  return record.count <= maxAttempts;
+}
+`);
+
+// A05: Security Misconfiguration
+console.log("\nA05: Security Misconfiguration (beyond CSP):");
+console.log(`
+// Beyond CSP (Section 3), also consider:
+// - HSTS header: Strict-Transport-Security: max-age=31536000; includeSubDomains
+// - X-Content-Type-Options: nosniff
+// - X-Frame-Options: DENY (or SAMEORIGIN) — clickjacking prevention
+// - Referrer-Policy: strict-origin-when-cross-origin
+// - Permissions-Policy: camera=(), microphone=() — disable unused features
+// - Remove server version headers (Server, X-Powered-By)
+// - Disable unnecessary HTTP methods (TRACE, OPTIONS if not needed)
+`);
+
+// A07: Identification and Authentication Failures
+console.log("\nA07: Authentication Failures:");
+console.log(`
+// Key practices:
+// - Multi-factor authentication (MFA/2FA)
+// - No weak password policies (minimum length, complexity)
+// - Secure password reset flows (time-limited tokens, email verification)
+// - Session timeout and proper logout (invalidate server-side session)
+// - Prevent credential stuffing (rate limiting, CAPTCHA, breach detection)
+
+// Example: Secure password reset token
+// const token = crypto.randomBytes(32).toString('hex'); // 64-char hex
+// Store hashed token with expiry (e.g., 15 minutes)
+// const hashedToken = await crypto.subtle.digest('SHA-256',
+//   new TextEncoder().encode(token));
+// Send raw token via email; verify hashed version on use
+`);
+
+// A08: Software and Data Integrity Failures
+console.log("\nA08: Software & Data Integrity:");
+console.log(`
+// - Use Subresource Integrity (SRI) for CDN scripts
+//   <script src="..." integrity="sha384-..."></script>
+// - Verify package integrity (npm audit, lockfile hashes)
+// - CI/CD pipeline security (review dependencies, scan for CVEs)
+// - Signed commits and tags (git verify-commit)
+// - Deserialize data safely (avoid eval(), use JSON.parse with reviver)
+`);
+
+
+// ============================================
 // Common Pitfalls
 // ============================================
 

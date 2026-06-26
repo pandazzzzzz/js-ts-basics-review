@@ -1388,6 +1388,97 @@ See also:
 `);
 
 // ============================================
+// 9. CACHE API INTEGRATION
+// ============================================
+/**
+ * Cache API — Store Request/Response pairs for offline and performance
+ *
+ * Part of the Service Worker API but also available in window context.
+ * Stores Request → Response mappings for programmatic caching.
+ *
+ * Key methods:
+ * - caches.open(name): Open (or create) a named cache
+ * - cache.put(request, response): Store a response
+ * - cache.match(request): Find a matching cached response
+ * - cache.add(url): Fetch + store (shortcut)
+ * - cache.addAll(urls): Fetch + store multiple
+ * - cache.delete(request): Remove from cache
+ * - cache.keys(): List all cached requests
+ * - caches.delete(name): Delete entire cache
+ * - caches.keys(): List all cache names
+ */
+
+console.log("\n=== 9. Cache API Integration ===");
+
+console.log(`
+// Cache API is available in window and Service Worker contexts
+
+// Open a cache (creates if doesn't exist)
+const myCache = await caches.open('api-cache-v1');
+
+// Fetch and cache pattern — network-first with cache fallback
+async function fetchWithCache(url) {
+  try {
+    // Try network first
+    const response = await fetch(url);
+    // Cache the fresh response (clone because body can only be read once)
+    const cache = await caches.open('dynamic-cache');
+    cache.put(url, response.clone());
+    return response;
+  } catch (error) {
+    // Network failed, try cache
+    const cachedResponse = await caches.match(url);
+    if (cachedResponse) {
+      console.log('Serving from cache:', url);
+      return cachedResponse;
+    }
+    throw new Error('Network failed and no cache available');
+  }
+}
+
+// Cache-first pattern — check cache first, fall back to network
+async function cacheFirst(url) {
+  const cached = await caches.match(url);
+  if (cached) return cached;
+
+  const response = await fetch(url);
+  const cache = await caches.open('static-cache');
+  cache.put(url, response.clone());
+  return response;
+}
+
+// Pre-cache resources (typically in Service Worker install event)
+// const cache = await caches.open('app-shell-v1');
+// await cache.addAll([
+//   '/',
+//   '/styles/main.css',
+//   '/scripts/app.js',
+//   '/images/logo.png'
+// ]);
+
+// Clean up old caches (version management)
+const cacheNames = await caches.keys();
+for (const name of cacheNames) {
+  if (name !== 'api-cache-v2') {
+    await caches.delete(name); // Remove outdated caches
+    console.log('Deleted old cache:', name);
+  }
+}
+
+// Check cache size
+const cache = await caches.open('api-cache-v1');
+const keys = await cache.keys();
+console.log('Cached entries:', keys.length);
+
+// Cache API vs other storage:
+// - localStorage: synchronous, string-only, 5-10MB, simple key-value
+// - IndexedDB: async, structured data, large capacity, complex API
+// - Cache API: async, Request/Response pairs, designed for HTTP caching
+// - Best for: API responses, static assets, offline support
+`);
+
+
+// ============================================
 // ============================================
 // TypeScript Comparison Notes
 // ============================================

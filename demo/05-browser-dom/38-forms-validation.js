@@ -673,6 +673,44 @@ console.log("- Constraint Validation: https://developer.mozilla.org/en-US/docs/W
 console.log("- Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API");
 console.log("- FormData: https://developer.mozilla.org/en-US/docs/Web/API/FormData\n");
 
+console.log("♿ Form Accessibility (ARIA):\n");
+console.log(`
+// Accessible form validation patterns
+
+// 1. Associate error messages with inputs using aria-describedby
+input.setAttribute('aria-describedby', 'email-error');
+const errorDiv = document.getElementById('email-error');
+errorDiv.setAttribute('role', 'alert'); // Announced by screen readers
+
+// 2. Mark invalid fields with aria-invalid
+input.setAttribute('aria-invalid', 'true'); // or 'false' when valid
+// Screen readers announce: "invalid entry"
+
+// 3. Required fields with aria-required
+input.setAttribute('aria-required', 'true');
+// Complements the HTML5 'required' attribute
+
+// 4. Accessible error summary at form top
+const errorSummary = document.getElementById('error-summary');
+errorSummary.setAttribute('role', 'alert');
+errorSummary.setAttribute('tabindex', '-1'); // Make focusable
+errorSummary.focus(); // Move focus to errors
+
+// 5. Live region for dynamic validation feedback
+const liveRegion = document.createElement('div');
+liveRegion.setAttribute('aria-live', 'polite'); // Announce changes
+liveRegion.setAttribute('aria-atomic', 'true'); // Announce entire content
+
+// 6. inputmode for mobile keyboard optimization
+input.setAttribute('inputmode', 'numeric'); // Numeric keyboard on mobile
+// Values: text, numeric, decimal, tel, email, url, search, none
+
+// 7. Autocomplete attributes for better UX
+input.setAttribute('autocomplete', 'email'); // Standardized values
+// Common: name, email, tel, address, cc-number, new-password, current-password
+`);
+
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================

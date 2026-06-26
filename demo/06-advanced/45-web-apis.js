@@ -890,3 +890,131 @@ console.log("MutationObserver: Watch for DOM mutations");
 console.log("Pointer Events: Unified mouse/touch/pen input handling");
 console.log("Drag & Drop: Native drag-and-drop with draggable elements");
 console.log("BroadcastChannel: Cross-tab communication without polling");
+
+// ============================================
+// 13. WEB AUDIO API
+// ============================================
+/**
+ * Web Audio API — Audio processing and synthesis
+ *
+ * Key concepts:
+ * - AudioContext: The main audio processing graph
+ * - OscillatorNode: Generate basic waveforms (sine, square, sawtooth, triangle)
+ * - GainNode: Control volume
+ * - BiquadFilterNode: Apply audio filters (lowpass, highpass, etc.)
+ * - AnalyserNode: Extract frequency/time-domain data for visualization
+ * - AudioBuffer: Store and play back audio samples
+ * - MediaStreamAudioSourceNode: Capture from microphone
+ *
+ * Use cases: Games, music apps, audio visualization, spatial audio
+ */
+
+console.log("\n=== Web Audio API ===");
+
+console.log(`
+// Create audio context (must be after user gesture in browsers)
+// const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+// Basic tone generation:
+// const oscillator = ctx.createOscillator();
+// oscillator.type = 'sine'; // sine, square, sawtooth, triangle
+// oscillator.frequency.setValueAtTime(440, ctx.currentTime); // A4 note
+
+// const gainNode = ctx.createGain();
+// gainNode.gain.setValueAtTime(0.5, ctx.currentTime); // 50% volume
+
+// oscillator.connect(gainNode);
+// gainNode.connect(ctx.destination); // speakers/headphones
+// oscillator.start();
+// oscillator.stop(ctx.currentTime + 1); // stop after 1 second
+
+// Audio visualization with AnalyserNode:
+// const analyser = ctx.createAnalyser();
+// analyser.fftSize = 256;
+// const bufferLength = analyser.frequencyBinCount;
+// const dataArray = new Uint8Array(bufferLength);
+// oscillator.connect(analyser);
+// analyser.connect(ctx.destination);
+// analyser.getByteFrequencyData(dataArray); // frequency data
+// analyser.getByteTimeDomainData(dataArray); // waveform data
+
+// Loading and playing audio files:
+// const response = await fetch('sound.mp3');
+// const arrayBuffer = await response.arrayBuffer();
+// const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+// const source = ctx.createBufferSource();
+// source.buffer = audioBuffer;
+// source.connect(ctx.destination);
+// source.start();
+
+// Spatial audio with PannerNode:
+// const panner = ctx.createPanner();
+// panner.panningModel = 'HRTF'; // 3D spatial audio
+// panner.setPosition(x, y, z);
+// source.connect(panner).connect(ctx.destination);
+
+console.log("Web Audio API enables programmatic audio synthesis and processing");
+console.log("Key nodes: Oscillator, Gain, BiquadFilter, Analyser, Panner, Convolver");
+`);
+
+
+// ============================================
+// 14. WEBRTC (Real-Time Communication)
+// ============================================
+/**
+ * WebRTC — Peer-to-peer real-time communication
+ *
+ * Key APIs:
+ * - MediaDevices.getUserMedia(): Capture camera/microphone
+ * - RTCPeerConnection: Establish peer-to-peer connection
+ * - RTCDataChannel: Send arbitrary data between peers
+ * - MediaStream: Represent audio/video streams
+ *
+ * Use cases: Video calls, screen sharing, file transfer, multiplayer games
+ */
+
+console.log("\n=== WebRTC ===");
+
+console.log(`
+// Step 1: Get local media (camera + microphone)
+// const localStream = await navigator.mediaDevices.getUserMedia({
+//   video: true,
+//   audio: true
+// });
+// Display: document.querySelector('video').srcObject = localStream;
+
+// Step 2: Create peer connection
+// const pc = new RTCPeerConnection({
+//   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+// });
+
+// Step 3: Add local tracks to connection
+// localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+// Step 4: Handle remote stream
+// pc.ontrack = (event) => {
+//   document.querySelector('#remoteVideo').srcObject = event.streams[0];
+// };
+
+// Step 5: Create offer/answer (signaling via WebSocket or other channel)
+// const offer = await pc.createOffer();
+// await pc.setLocalDescription(offer);
+// // Send offer to remote peer via signaling server...
+// // Receive answer from remote peer...
+// await pc.setRemoteDescription(answer);
+
+// Data Channel (for non-media data):
+// const dataChannel = pc.createDataChannel('chat');
+// dataChannel.onmessage = (e) => console.log('Received:', e.data);
+// dataChannel.send('Hello peer!');
+
+// Screen sharing:
+// const screenStream = await navigator.mediaDevices.getDisplayMedia({
+//   video: { cursor: 'always' },
+//   audio: false
+// });
+
+console.log("WebRTC enables peer-to-peer audio/video/data communication");
+console.log("Key APIs: getUserMedia, RTCPeerConnection, RTCDataChannel");
+console.log("Requires signaling server for connection establishment (not included in API)");
+`);

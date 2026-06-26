@@ -723,6 +723,108 @@ console.log("6. Build tool deprecation");
 console.log("7. Dependency compatibility");
 console.log("8. Environment variable exposure");
 
+
+// ============================================
+// Section 5: Additional Build Tooling
+// ============================================
+
+console.log("\n=== Section 5: Babel, PostCSS, and ESLint ===");
+
+// Babel — JavaScript transpiler
+console.log("\n📦 Babel — JavaScript Transpiler:");
+console.log(`
+// Babel converts modern JS (ES6+) to backwards-compatible versions
+// Configuration: babel.config.js or .babelrc
+
+// Key presets:
+// @babel/preset-env — Automatically determines needed transforms
+// @babel/preset-react — JSX transformation
+// @babel/preset-typescript — Strip TypeScript types
+
+// Key plugins:
+// @babel/plugin-transform-runtime — Avoid polluting global scope
+// @babel/plugin-proposal-decorators — Decorator support (Stage 2.7)
+
+// Example babel.config.js:
+// module.exports = {
+//   presets: [
+//     ['@babel/preset-env', { targets: '> 0.25%, not dead' }],
+//     '@babel/preset-typescript'
+//   ],
+//   plugins: ['@babel/plugin-transform-runtime']
+// };
+
+// Babel vs TypeScript compiler:
+// - Babel: transpile only (no type checking), faster, more plugins
+// - tsc: transpile + type check, slower but more thorough
+// - Common pattern: Babel for transpilation, tsc --noEmit for type checking
+`);
+
+// PostCSS — CSS transformation
+console.log("\n📦 PostCSS — CSS Transformation Pipeline:");
+console.log(`
+// PostCSS processes CSS with plugins (similar to Babel for JS)
+
+// Key plugins:
+// autoprefixer — Add vendor prefixes automatically
+// cssnano — CSS minification
+// postcss-preset-env — Future CSS features today
+// postcss-import — Inline @import rules
+// tailwindcss — Utility-first CSS framework (built on PostCSS)
+
+// Example postcss.config.js:
+// module.exports = {
+//   plugins: [
+//     require('tailwindcss'),
+//     require('autoprefixer'),
+//     require('cssnano')({ preset: 'default' })
+//   ]
+// };
+
+// Integration with build tools:
+// - Vite: Built-in PostCSS support (postcss.config.js auto-detected)
+// - Webpack: postcss-loader in module.rules
+// - Lightning CSS: Faster Rust-based alternative (used in Vite 7+)
+`);
+
+// ESLint — Static analysis and code quality
+console.log("\n📦 ESLint — JavaScript/TypeScript Linting:");
+console.log(`
+// ESLint catches errors and enforces code style before runtime
+
+// Key configurations:
+// eslint:recommended — Built-in recommended rules
+// @typescript-eslint/recommended — TypeScript-specific rules
+// eslint-config-prettier — Disable rules conflicting with Prettier
+
+// Example .eslintrc.json:
+// {
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:@typescript-eslint/recommended",
+//     "prettier"
+//   ],
+//   "parser": "@typescript-eslint/parser",
+//   "plugins": ["@typescript-eslint"],
+//   "rules": {
+//     "no-console": "warn",
+//     "@typescript-eslint/no-unused-vars": "error"
+//   }
+// }
+
+// Integration:
+// - Vite: vite-plugin-eslint
+// - Webpack: eslint-webpack-plugin
+// - CI/CD: Run eslint in pipeline before build
+// - Pre-commit: lint-staged + husky for staged files only
+
+// Prettier — Code formatter (complement to ESLint):
+// - Formats code consistently (quotes, semicolons, indentation)
+// - .prettierrc: { "singleQuote": true, "semi": true, "tabWidth": 2 }
+// - Use eslint-config-prettier to avoid conflicts
+`);
+
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================

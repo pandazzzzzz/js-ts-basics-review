@@ -522,6 +522,123 @@ decoratedAdd(5, 3);
 // ⚠️ Order of decorators matters
 // ⚠️ Can be hard to debug
 
+
+// ============================================
+// Section 6: Adapter Pattern (ES5/ES6)
+// ============================================
+// - Converts one interface to another expected by the client
+// - Uses ES6 classes and composition
+
+console.log("\n=== Adapter Pattern ===");
+
+// Old/legacy API with incompatible interface
+class OldPaymentSystem {
+  processPayment(amountInCents, currencyCode) {
+    console.log(`Paid ${amountInCents} ${currencyCode} via legacy system`);
+    return { success: true, legacyId: "legacy_" + Date.now() };
+  }
+}
+
+// Modern interface expected by the application
+class ModernPaymentGateway {
+  charge(amount, currency) {
+    console.log(`Charged ${amount} ${currency} via modern gateway`);
+    return { success: true, transactionId: "txn_" + Date.now() };
+  }
+}
+
+// Adapter — makes OldPaymentSystem work with the modern interface
+class PaymentAdapter {
+  constructor(oldSystem) {
+    this.oldSystem = oldSystem;
+  }
+
+  // Adapts the modern charge() call to the old processPayment() call
+  charge(amount, currency) {
+    const amountInCents = Math.round(amount * 100);
+    return this.oldSystem.processPayment(amountInCents, currency);
+  }
+}
+
+// Usage
+const oldSystem = new OldPaymentSystem();
+const adapter = new PaymentAdapter(oldSystem);
+console.log("Through adapter:", JSON.stringify(adapter.charge(9.99, "USD")));
+
+// Functional Adapter — simpler for function-level adaptation
+function createAdapter(oldFn, transform) {
+  return (...args) => {
+    const transformed = transform(args);
+    return oldFn(...transformed);
+  };
+}
+
+function greetOld(name, age) {
+  console.log(`Hello ${name}, you are ${age} years old`);
+}
+
+const greetNew = createAdapter(greetOld, ([obj]) => [obj.name, obj.age]);
+console.log("\nFunctional adapter:");
+greetNew({ name: "Alice", age: 30 });
+
+
+// ============================================
+// Section 7: Facade Pattern (ES5/ES6)
+// ============================================
+// - Provides a simplified interface to a complex subsystem
+// - Uses ES6 classes and composition
+
+console.log("\n=== Facade Pattern ===");
+
+// Complex subsystem with many classes and methods
+class CPU {
+  freeze() { return "CPU frozen"; }
+  jump(position) { return `CPU jumping to ${position}`; }
+  execute() { return "CPU executing"; }
+}
+
+class Memory {
+  load(position, data) { return `Memory loaded "${data}" at ${position}`; }
+}
+
+class HardDrive {
+  read(lba, size) { return `HardDrive reading ${size} bytes from ${lba}`; }
+}
+
+// Facade — provides a simple interface to the complex subsystem
+class ComputerFacade {
+  constructor() {
+    this.cpu = new CPU();
+    this.memory = new Memory();
+    this.hardDrive = new HardDrive();
+  }
+
+  start() {
+    console.log("Starting computer...");
+    console.log("  " + this.cpu.freeze());
+    console.log("  " + this.memory.load("0x00", "boot_loader"));
+    console.log("  " + this.cpu.jump("0x00"));
+    console.log("  " + this.cpu.execute());
+    console.log("  " + this.hardDrive.read("0x1000", 4096));
+    console.log("Computer started successfully!");
+  }
+
+  shutdown() {
+    console.log("Shutting down... saving state, powering off.");
+  }
+}
+
+const computer = new ComputerFacade();
+computer.start();
+computer.shutdown();
+
+// Another Facade: simplified fetch wrapper
+console.log("\nAPI Facade pattern (conceptual):");
+console.log("  const api = new APIFacade('https://api.example.com');");
+console.log("  const users = await api.get('/users');");
+console.log("  // Facade hides fetch, error handling, JSON parsing, base URL");
+
+
 // ============================================
 // Common Pitfalls
 // ============================================
