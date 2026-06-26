@@ -5,7 +5,9 @@
 // 📌 Covers performance measurement and optimization techniques
 
 // ============================================
-// Section 1: Performance API
+// Section 1: Performance API (ES6/ES2015)
+// - performance.now() provides high-resolution timestamps
+// - ES6 introduced the Performance API; PerformanceObserver added later
 // ============================================
 
 console.log("\n=== Performance API ===");
@@ -57,7 +59,7 @@ resources.slice(0, 3).forEach(resource => {
 // ⚠️ Browser differences in precision
 
 // ============================================
-// Section 2: Performance Observer
+// Section 2: Performance Observer (ES2020+)
 // ============================================
 
 console.log("\n=== Performance Observer ===");
@@ -99,7 +101,8 @@ lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
 // - Automated alerts
 
 // ============================================
-// Section 3: Debounce and Throttle
+// Section 3: Debounce and Throttle (ES5+)
+// - Uses closures (ES3) and arrow functions (ES6); requestAnimationFrame (ES6 Browser)
 // ============================================
 
 console.log("\n=== Debounce and Throttle ===");
@@ -154,7 +157,8 @@ const throttledScroll = throttle(handleScroll, 200);
 // ⚠️ Context (this) binding issues
 
 // ============================================
-// Section 4: Lazy Loading
+// Section 4: Lazy Loading (ES2020+)
+// - Native loading="lazy" (Browser), Intersection Observer (ES6 Browser), dynamic import() (ES2020)
 // ============================================
 
 console.log("\n=== Lazy Loading ===");
@@ -218,7 +222,8 @@ const routes = [
 // - Third-party libraries
 
 // ============================================
-// Section 5: Virtual Scrolling
+// Section 5: Virtual Scrolling (ES6+)
+// - Uses ES6 classes, requestAnimationFrame, and Intersection Observer
 // ============================================
 
 console.log("\n=== Virtual Scrolling ===");
@@ -272,7 +277,8 @@ console.log("- Updates on scroll");
 // - Social media feeds
 
 // ============================================
-// Section 6: Code Splitting
+// Section 6: Code Splitting (ES2020+)
+// - Uses dynamic import() (ES2020) and build tool features
 // ============================================
 
 console.log("\n=== Code Splitting ===");
@@ -325,7 +331,8 @@ module.exports = {
 // - Conditional features
 
 // ============================================
-// Section 7: Memory Optimization
+// Section 7: Memory Optimization (ES6+)
+// - Uses WeakMap (ES6), WeakRef (ES2021), and FinalizationRegistry (ES2021)
 // ============================================
 
 console.log("\n=== Memory Optimization ===");

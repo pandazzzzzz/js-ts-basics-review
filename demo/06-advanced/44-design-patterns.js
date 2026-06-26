@@ -5,7 +5,9 @@
 // 📌 Covers common design patterns in JavaScript
 
 // ============================================
-// Section 1: Factory Pattern
+// Section 1: Factory Pattern (ES5/ES6)
+// - Simple Factory, Factory Method, Abstract Factory are pattern-level concepts
+// - Uses ES6 classes, static methods, and inheritance
 // ============================================
 
 console.log("\n=== Factory Pattern ===");
@@ -111,7 +113,8 @@ renderUI(new LightThemeFactory());
 // ⚠️ Not handling unknown types properly
 
 // ============================================
-// Section 2: Singleton Pattern
+// Section 2: Singleton Pattern (ES5/ES6)
+// - Uses ES6 classes, closures (ES3), and ES6 module system
 // ============================================
 
 console.log("\n=== Singleton Pattern ===");
@@ -203,7 +206,8 @@ console.log("config2 apiUrl:", config2.get('apiUrl')); // Same config
 // ⚠️ Violates Single Responsibility Principle
 
 // ============================================
-// Section 3: Observer Pattern (Pub/Sub)
+// Section 3: Observer Pattern (Pub/Sub) (ES5/ES6)
+// - Uses ES6 classes, ES6 Map, and optional chaining (ES2020)
 // ============================================
 
 console.log("\n=== Observer Pattern ===");
@@ -291,7 +295,8 @@ market.updatePrice('MSFT', 120);
 // ⚠️ Performance issues with many observers
 
 // ============================================
-// Section 4: Strategy Pattern
+// Section 4: Strategy Pattern (ES5/ES6)
+// - Uses ES6 classes, closures, and higher-order functions
 // ============================================
 
 console.log("\n=== Strategy Pattern ===");
@@ -403,7 +408,8 @@ console.log("Sorted by age:", users.slice().sort(sortStrategies.byAge));
 // ⚠️ Overhead for simple cases
 
 // ============================================
-// Section 5: Decorator Pattern
+// Section 5: Decorator Pattern (ES5/ES6)
+// - Uses ES6 classes, Proxy (ES6), and higher-order functions
 // ============================================
 
 console.log("\n=== Decorator Pattern ===");
@@ -573,6 +579,248 @@ console.log("\n⚠️ WATCH OUT FOR:");
 console.log("1. Complexity creep - patterns should simplify, not complicate");
 console.log("2. Testing difficulties - some patterns (Singleton, Observer) complicate unit tests");
 console.log("3. Performance overhead - extra abstraction layers can impact performance");
+
+
+// ============================================
+// Section 6: Command Pattern (ES5/ES6)
+// ============================================
+// - Encapsulates a request as an object, allowing parameterization and queuing
+// - Uses ES6 classes and closures
+
+console.log("\n=== Command Pattern ===");
+
+// Command interface: { execute(), undo() }
+// The Command pattern decouples the invoker from the receiver
+
+// Receiver — the object that performs the actual work
+class Calculator {
+  constructor() {
+    this.value = 0;
+  }
+
+  add(n) { this.value += n; }
+  subtract(n) { this.value -= n; }
+  multiply(n) { this.value *= n; }
+  divide(n) { this.value /= n; }
+}
+
+// Concrete Commands — each wraps a specific operation
+class AddCommand {
+  constructor(calculator, amount) {
+    this.calculator = calculator;
+    this.amount = amount;
+  }
+
+  execute() {
+    this.calculator.add(this.amount);
+    return this.calculator.value;
+  }
+
+  undo() {
+    this.calculator.subtract(this.amount);
+    return this.calculator.value;
+  }
+}
+
+class MultiplyCommand {
+  constructor(calculator, amount) {
+    this.calculator = calculator;
+    this.amount = amount;
+  }
+
+  execute() {
+    this.calculator.multiply(this.amount);
+    return this.calculator.value;
+  }
+
+  undo() {
+    this.calculator.divide(this.amount);
+    return this.calculator.value;
+  }
+}
+
+// Invoker — manages command history and execution
+class CommandHistory {
+  constructor() {
+    this.history = [];
+    this.redoStack = [];
+  }
+
+  execute(command) {
+    const result = command.execute();
+    this.history.push(command);
+    this.redoStack = []; // Clear redo stack on new command
+    return result;
+  }
+
+  undo() {
+    const command = this.history.pop();
+    if (command) {
+      this.redoStack.push(command);
+      return command.undo();
+    }
+    return null;
+  }
+
+  redo() {
+    const command = this.redoStack.pop();
+    if (command) {
+      this.history.push(command);
+      return command.execute();
+    }
+    return null;
+  }
+}
+
+// Usage
+const calc = new Calculator();
+const history = new CommandHistory();
+
+console.log("Initial:", calc.value); // 0
+console.log("Add 10:", history.execute(new AddCommand(calc, 10))); // 10
+console.log("Multiply 3:", history.execute(new MultiplyCommand(calc, 3))); // 30
+console.log("Undo:", history.undo()); // 10
+console.log("Undo:", history.undo()); // 0
+console.log("Redo:", history.redo()); // 10
+
+// Functional Command Pattern — simpler for lightweight operations
+function createCommand(execute, undo) {
+  return { execute, undo };
+}
+
+const commands = [];
+let counter = 0;
+
+const incrementCmd = createCommand(
+  () => ++counter,
+  () => --counter
+);
+
+commands.push(incrementCmd);
+console.log("\nFunctional command:", incrementCmd.execute()); // 1
+console.log("Undo:", incrementCmd.undo()); // 0
+
+
+// ============================================
+// Section 7: State Pattern (ES6)
+// ============================================
+// - Allows an object to alter its behavior when its internal state changes
+// - Uses ES6 classes and polymorphism
+
+console.log("\n=== State Pattern ===");
+
+// Context — the object whose behavior changes with state
+class TrafficLight {
+  constructor() {
+    this.state = new RedState(this);
+  }
+
+  setState(state) {
+    this.state = state;
+  }
+
+  // Delegate behavior to current state
+  change() {
+    this.state.change();
+  }
+
+  getColor() {
+    return this.state.getColor();
+  }
+}
+
+// State interface (implicit in JS — duck typing)
+// Each state implements: change(), getColor()
+
+class RedState {
+  constructor(light) {
+    this.light = light;
+  }
+
+  change() {
+    console.log("Red → Green");
+    this.light.setState(new GreenState(this.light));
+  }
+
+  getColor() {
+    return "red";
+  }
+}
+
+class GreenState {
+  constructor(light) {
+    this.light = light;
+  }
+
+  change() {
+    console.log("Green → Yellow");
+    this.light.setState(new YellowState(this.light));
+  }
+
+  getColor() {
+    return "green";
+  }
+}
+
+class YellowState {
+  constructor(light) {
+    this.light = light;
+  }
+
+  change() {
+    console.log("Yellow → Red");
+    this.light.setState(new RedState(this.light));
+  }
+
+  getColor() {
+    return "yellow";
+  }
+}
+
+// Usage
+const light = new TrafficLight();
+console.log("Current:", light.getColor()); // red
+light.change(); // Red → Green
+console.log("Current:", light.getColor()); // green
+light.change(); // Green → Yellow
+console.log("Current:", light.getColor()); // yellow
+light.change(); // Yellow → Red
+console.log("Current:", light.getColor()); // red
+
+// Functional State Pattern — for simpler state machines
+function createStateMachine(initialState, transitions) {
+  let current = initialState;
+
+  return {
+    getState: () => current,
+    transition(action) {
+      const next = transitions[current]?.[action];
+      if (next) {
+        console.log(`${current} --${action}--> ${next}`);
+        current = next;
+      } else {
+        console.log(`Invalid transition: ${current} --${action}--> ?`);
+      }
+      return current;
+    }
+  };
+}
+
+// Example: Simple order state machine
+const orderMachine = createStateMachine("pending", {
+  pending: { pay: "paid", cancel: "cancelled" },
+  paid: { ship: "shipped", refund: "refunded" },
+  shipped: { deliver: "delivered" },
+  delivered: {},
+  cancelled: {},
+  refunded: {}
+});
+
+console.log("\nOrder State Machine:");
+orderMachine.transition("pay"); // pending --pay--> paid
+orderMachine.transition("ship"); // paid --ship--> shipped
+orderMachine.transition("deliver"); // shipped --deliver--> delivered
+orderMachine.transition("pay"); // Invalid (already delivered)
 
 
 // ============================================

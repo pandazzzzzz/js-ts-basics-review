@@ -463,7 +463,32 @@ console.log("Greedy match:", "aaab".match(possessiveRe)); // null (different fro
 let standardRe = /a+ab/;
 console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
 
-// 6.8 Optimization tips
+// 6.8 RegExp `d` flag — Match Indices (ES2022)
+console.log("\nRegExp `d` flag - Match Indices (ES2022):");
+// The `d` flag adds an `.indices` property to match results,
+// providing start/end positions of the overall match and each capture group
+const dRe = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/d;
+const dMatch = dRe.exec("2024-03-15");
+console.log("match[0]:", dMatch[0]); // "2024-03-15"
+console.log("match.indices[0]:", dMatch.indices[0]); // [0, 10] - overall match position
+console.log("match.indices[1]:", dMatch.indices[1]); // [0, 4] - group 1 (year)
+console.log("match.indices[2]:", dMatch.indices[2]); // [5, 7] - group 2 (month)
+console.log("match.indices[3]:", dMatch.indices[3]); // [8, 10] - group 3 (day)
+console.log("match.indices.groups:", dMatch.indices.groups);
+// { year: [0, 4], month: [5, 7], day: [8, 10] }
+// The `d` flag also sets `hasIndices` property on the regex:
+console.log("dRe.hasIndices:", dRe.hasIndices); // true
+
+// Useful for error reporting — know exactly where a match occurred in the source string
+const source = "Error at line 42: Invalid input";
+const errorRe = /line (\d+)/d;
+const errorMatch = errorRe.exec(source);
+if (errorMatch) {
+  console.log(`Found "${errorMatch[0]}" at position ${errorMatch.indices[0][0]}-${errorMatch.indices[0][1]}`);
+  console.log(`Line number "${errorMatch[1]}" at position ${errorMatch.indices[1][0]}-${errorMatch.indices[1][1]}`);
+}
+
+// 6.9 Optimization tips
 console.log("\nOptimization Tips:");
 
 // 1. Use character classes instead of alternation

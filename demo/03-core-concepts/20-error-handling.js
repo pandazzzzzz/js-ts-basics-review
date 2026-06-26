@@ -175,6 +175,36 @@ try {
   console.log(`${error.name}: ${error.message}`);
 }
 
+// Optional Catch Binding (ES2019)
+// When you don't need the error object, you can omit the binding
+console.log("\n=== Optional Catch Binding (ES2019) ===");
+// Before ES2019: catch (error) { ... } — error binding was always required
+// Since ES2019: catch { ... } — can omit the binding entirely
+try {
+  JSON.parse("invalid json");
+} catch {
+  // No (error) binding needed — we don't use the error object
+  console.log("Parsing failed, using default value");
+}
+
+// Also useful with finally-only patterns
+function attemptOperation(fn) {
+  try {
+    return fn();
+  } catch {
+    return null;
+  }
+}
+console.log("attemptOperation with error:", attemptOperation(() => { throw new Error("fail"); })); // null
+console.log("attemptOperation success:", attemptOperation(() => "result")); // "result"
+
+// Error.isError() (ES2026) — Reliable cross-realm Error checking
+console.log("\n=== Error.isError() (ES2026) ===");
+console.log("Error.isError(new Error()):", Error.isError?.(new Error()) ?? "not yet available");
+console.log("Error.isError({}):", Error.isError?.({}) ?? "not yet available");
+console.log("Note: Error.isError() requires Node.js 22+ or browsers supporting ES2026");
+
+
 // ============================================
 // Built-in Error Types
 // ============================================

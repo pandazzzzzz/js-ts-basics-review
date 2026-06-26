@@ -636,4 +636,257 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - 33-fetch-api.js (Network requests)
 - 37-events.js (Event handling)
 - 43-storage-network.js (Storage APIs)
-*/
+
+
+// ============================================
+// 10. CANVAS API (2D Graphics)
+// ============================================
+/**
+ * Canvas API — Programmatic 2D drawing
+ *
+ * The Canvas API provides a bitmap drawing surface for graphics, charts,
+ * image manipulation, and animations.
+ *
+ * Key concepts:
+ * - <canvas> HTML element with 2D rendering context
+ * - Path-based drawing: moveTo, lineTo, arc, bezierCurveTo
+ * - Fill and stroke styles with colors, gradients, patterns
+ * - Text rendering with font, fillText, strokeText
+ * - Image drawing: drawImage (from img/video/canvas/ImageData)
+ * - Transformations: translate, rotate, scale, transform
+ * - Pixel manipulation via ImageData (getImageData/putImageData)
+ * - State management: save()/restore() for isolated drawing contexts
+ */
+
+console.log("\n=== Canvas API ===");
+
+// Canvas API requires a browser environment with <canvas> element
+// The following code demonstrates the API patterns:
+
+// In browser:
+// const canvas = document.getElementById('myCanvas');
+// const ctx = canvas.getContext('2d');
+
+// Basic drawing:
+// ctx.fillStyle = 'blue';
+// ctx.fillRect(10, 10, 100, 50);  // Filled rectangle
+//
+// ctx.strokeStyle = 'red';
+// ctx.lineWidth = 2;
+// ctx.strokeRect(10, 10, 100, 50);  // Outlined rectangle
+
+// Circle:
+// ctx.beginPath();
+// ctx.arc(75, 75, 50, 0, Math.PI * 2);
+// ctx.fillStyle = 'green';
+// ctx.fill();
+
+// Line:
+// ctx.beginPath();
+// ctx.moveTo(0, 0);
+// ctx.lineTo(200, 100);
+// ctx.stroke();
+
+// Text:
+// ctx.font = '24px Arial';
+// ctx.fillStyle = 'black';
+// ctx.fillText('Hello Canvas!', 10, 50);
+
+// Gradients:
+// const gradient = ctx.createLinearGradient(0, 0, 200, 0);
+// gradient.addColorStop(0, 'red');
+// gradient.addColorStop(1, 'blue');
+// ctx.fillStyle = gradient;
+// ctx.fillRect(10, 10, 200, 100);
+
+// Image drawing:
+// const img = new Image();
+// img.onload = () => ctx.drawImage(img, 0, 0);
+// img.src = 'image.png';
+
+// Pixel manipulation:
+// const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+// for (let i = 0; i < imageData.data.length; i += 4) {
+//   // imageData.data[i]     = red (0-255)
+//   // imageData.data[i + 1] = green (0-255)
+//   // imageData.data[i + 2] = blue (0-255)
+//   // imageData.data[i + 3] = alpha (0-255)
+// }
+// ctx.putImageData(imageData, 0, 0);
+
+// Animation loop:
+// function animate() {
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   // Update positions, draw frame...
+//   requestAnimationFrame(animate);
+// }
+// animate();
+
+// State management:
+// ctx.save();      // Push current state (styles, transforms, clipping)
+// ctx.rotate(0.5);
+// ctx.fillRect(50, 50, 100, 50);
+// ctx.restore();   // Pop state back to before rotation
+
+console.log("Canvas API provides 2D drawing via <canvas> element");
+console.log("Common use cases: charts, games, image editing, data visualization");
+console.log("For 3D graphics, see WebGL or WebGPU instead");
+
+
+// ============================================
+// 11. WEB COMPONENTS (Custom Elements + Shadow DOM)
+// ============================================
+/**
+ * Web Components — Reusable, encapsulated custom HTML elements
+ *
+ * Three core technologies:
+ * 1. Custom Elements — Define new HTML tags with custom behavior
+ * 2. Shadow DOM — Encapsulated DOM tree with scoped styles
+ * 3. HTML Templates — Declarative markup fragments for reuse
+ *
+ * Key benefits:
+ * - Framework-agnostic reusable components
+ * - Style encapsulation prevents CSS conflicts
+ * - Standard browser API, no build step required
+ * - Works with any framework (React, Vue, Angular, etc.)
+ */
+
+console.log("\n=== Web Components ===");
+
+// Custom Elements + Shadow DOM example:
+// In browser:
+// class MyCounter extends HTMLElement {
+//   constructor() {
+//     super();
+//     // Attach shadow DOM (open = accessible from outside via .shadowRoot)
+//     this.attachShadow({ mode: 'open' });
+//     this.count = 0;
+//   }
+//
+//   // Called when element is added to DOM
+//   connectedCallback() {
+//     this.render();
+//     this.shadowRoot.querySelector('#increment').addEventListener('click', () => {
+//       this.count++;
+//       this.render();
+//     });
+//   }
+//
+//   // Called when element is removed from DOM
+//   disconnectedCallback() {
+//     // Clean up event listeners, timers, etc.
+//   }
+//
+//   // Attributes to observe for changes
+//   static get observedAttributes() {
+//     return ['initial-value'];
+//   }
+//
+//   // Called when an observed attribute changes
+//   attributeChangedCallback(name, oldValue, newValue) {
+//     if (name === 'initial-value') {
+//       this.count = parseInt(newValue) || 0;
+//       this.render();
+//     }
+//   }
+//
+//   render() {
+//     this.shadowRoot.innerHTML = `
+//       <style>
+//         /* Styles are scoped to this component! */
+//         :host { display: inline-block; font-family: sans-serif; }
+//         button { padding: 8px 16px; font-size: 16px; }
+//         span { margin: 0 12px; font-weight: bold; }
+//       </style>
+//       <button id="decrement">-</button>
+//       <span>${this.count}</span>
+//       <button id="increment">+</button>
+//     `;
+//   }
+// }
+//
+// // Register the custom element
+// customElements.define('my-counter', MyCounter);
+
+// Usage in HTML:
+// <my-counter initial-value="5"></my-counter>
+
+// HTML Templates:
+// <template id="card-template">
+//   <style>
+//     .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; }
+//   </style>
+//   <div class="card">
+//     <h3><slot name="title">Default Title</slot></h3>
+//     <p><slot>Default content</slot></p>
+//   </div>
+// </template>
+
+// Using a template in a custom element:
+// class MyCard extends HTMLElement {
+//   constructor() {
+//     super();
+//     this.attachShadow({ mode: 'open' });
+//     const template = document.getElementById('card-template');
+//     this.shadowRoot.appendChild(template.content.cloneNode(true));
+//   }
+// }
+// customElements.define('my-card', MyCard);
+
+// Declarative Shadow DOM (newer approach):
+// <host-element>
+//   <template shadowrootmode="open">
+//     <style>...</style>
+//     <slot></slot>
+//   </template>
+// </host-element>
+
+console.log("Custom Elements: define new HTML tags with customElements.define()");
+console.log("Shadow DOM: encapsulated DOM with scoped styles via attachShadow()");
+console.log("HTML Templates: reusable markup via <template> and cloneNode()");
+console.log("Lifecycle: connectedCallback, disconnectedCallback, attributeChangedCallback");
+console.log("Key benefit: Framework-agnostic, built-in browser standard");
+
+
+// ============================================
+// 12. ADDITIONAL WEB APIs (Overview)
+// ============================================
+/**
+ * Other important Web APIs to be aware of:
+ *
+ * Streams API:
+ * - ReadableStream, WritableStream, TransformStream
+ * - Used by fetch, File API, and WebSocket for streaming data
+ * - Example: fetch(url).then(r => r.body.pipeThrough(transform).pipeTo(dest))
+ *
+ * ResizeObserver:
+ * - More reliable than resize events for element size changes
+ * - new ResizeObserver(entries => { ... }).observe(element)
+ *
+ * MutationObserver:
+ * - Watch for DOM changes (attribute, childList, characterData)
+ * - new MutationObserver(mutations => { ... }).observe(el, config)
+ *
+ * Pointer Events:
+ * - Unified input model for mouse, touch, and pen
+ * - pointerdown, pointermove, pointerup events
+ * - Replaces separate mouse + touch event handling
+ *
+ * Drag and Drop API:
+ * - Native drag-and-drop with draggable elements and drop zones
+ * - Events: dragstart, dragover, drop, dragend
+ * - DataTransfer object for sharing data between drag source and drop target
+ *
+ * BroadcastChannel API:
+ * - Simple communication between same-origin browsing contexts
+ * - const channel = new BroadcastChannel('app'); channel.postMessage(data);
+ * - Cross-tab/iframe communication without shared storage polling
+ */
+
+console.log("\n=== Additional Web APIs Overview ===");
+console.log("Streams API: ReadableStream/WritableStream for streaming data processing");
+console.log("ResizeObserver: Efficient element size change detection");
+console.log("MutationObserver: Watch for DOM mutations");
+console.log("Pointer Events: Unified mouse/touch/pen input handling");
+console.log("Drag & Drop: Native drag-and-drop with draggable elements");
+console.log("BroadcastChannel: Cross-tab communication without polling");

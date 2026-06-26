@@ -1,5 +1,8 @@
 // ES6+ Syntax Features (Spread, Destructuring, Optional Chaining, Nullish Coalescing)
+// 📘 See: https://javascript.info/ (JavaScript.info - Modern JavaScript)
+// 📘 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript (MDN JavaScript Reference)
 // 📘 For TypeScript comparison, see: 18-es6-plus-syntax-ts-comparison.ts
+// 📌 Covers ES6/ES2015 through ES2023+ modern syntax features
 
 // ============================================
 // 1. Spread Operator (ES6/ES2015)
@@ -671,6 +674,34 @@ const nums = [1, 2, 3, 4, 5];
 console.log("findLast even:", nums.findLast(n => n % 2 === 0)); // 4
 console.log("findLast > 3:", nums.findLast(n => n > 3)); // 5
 
+// Immutable Array Methods (ES2023) - Return new arrays instead of mutating
+console.log("\nImmutable Array Methods (ES2023):");
+const original = [3, 1, 2];
+
+// toSorted() - Returns new sorted array (vs sort() which mutates)
+const sorted = original.toSorted(); // [1, 2, 3]
+console.log("original after toSorted:", original); // [3, 1, 2] (unchanged!)
+console.log("toSorted result:", sorted); // [1, 2, 3]
+// Compare with sort(): original.sort() would mutate original to [1, 2, 3]
+
+// toReversed() - Returns new reversed array (vs reverse() which mutates)
+const reversed = original.toReversed(); // [2, 1, 3]
+console.log("original after toReversed:", original); // [3, 1, 2] (unchanged!)
+console.log("toReversed result:", reversed); // [2, 1, 3]
+
+// toSpliced(start, deleteCount, ...items) - Returns new spliced array (vs splice() which mutates)
+const spliced = original.toSpliced(1, 1, 99); // [3, 99, 2]
+console.log("original after toSpliced:", original); // [3, 1, 2] (unchanged!)
+console.log("toSpliced result:", spliced); // [3, 99, 2]
+
+// with(index, value) - Returns new array with element replaced (vs arr[i] = val which mutates)
+const replaced = original.with(0, 100); // [100, 1, 2]
+console.log("original after with:", original); // [3, 1, 2] (unchanged!)
+console.log("with result:", replaced); // [100, 1, 2]
+
+// These methods enable functional/immutable array programming patterns
+// without needing to copy the array first (e.g., [...arr].sort())
+
 
 // ============================================
 // 17. STRING METHODS (ES2021/ES2022)
@@ -688,6 +719,69 @@ const padded = "   hello   ";
 console.log("trimStart:", '"' + padded.trimStart() + '"'); // "hello   "
 console.log("trimEnd:", '"' + padded.trimEnd() + '"'); // "   hello"
 console.log("trim:", '"' + padded.trim() + '"'); // "hello"
+
+
+// ============================================
+// 17b. NUMERIC SEPARATORS AND BIGINT (ES2020/ES2021)
+// ============================================
+
+// Numeric Separators (ES2021) - Improve readability of large numbers
+console.log("\nNumeric Separators (ES2021):");
+const billion = 1_000_000_000; // Much more readable than 1000000000
+console.log("1_000_000_000:", billion); // 1000000000
+const hex = 0xFF_FF_FF_FF;
+console.log("0xFF_FF_FF_FF:", hex); // 4294967295
+const binary = 0b1010_0101_1100_0011;
+console.log("0b1010_0101_1100_0011:", binary);
+const price = 1_299_99; // Can be used anywhere within digits
+console.log("1_299_99:", price); // 129999
+// Note: underscores cannot be at start/end of number or adjacent to decimal point
+
+// BigInt (ES2020) - Arbitrary precision integers
+console.log("\nBigInt (ES2020):");
+const maxSafe = Number.MAX_SAFE_INTEGER; // 9007199254740991
+console.log("Number.MAX_SAFE_INTEGER:", maxSafe);
+console.log("Beyond safe integer:", maxSafe + 1 === maxSafe + 2); // true (precision loss!)
+
+// BigInt creation: append 'n' suffix or use BigInt() function
+const big1 = 9007199254740991n;
+const big2 = BigInt("9007199254740992");
+const big3 = BigInt(42); // From regular number (safe for small values)
+
+console.log("BigInt literal:", big1);
+console.log("BigInt from string:", big2);
+console.log("BigInt from number:", big3);
+
+// BigInt arithmetic (cannot mix with Number)
+const bigSum = big1 + 1n;
+console.log("big1 + 1n:", bigSum); // 9007199254740992n
+// const bad = big1 + 1; // TypeError: Cannot mix BigInt and other types
+
+// BigInt comparison (can compare with Number using == but not ===)
+console.log("1n == 1:", 1n == 1); // true (loose equality)
+console.log("1n === 1:", 1n === 1); // false (strict equality, different types)
+
+// BigInt limitations
+// - Cannot be used with Math methods (Math.abs(5n) → TypeError)
+// - Cannot be serialized with JSON.stringify (throws TypeError)
+// - No fractional values (5n / 2n = 2n, not 2.5n)
+console.log("5n / 2n:", 5n / 2n); // 2n (truncated toward zero)
+
+// Object.hasOwn() (ES2022) - Safer alternative to Object.prototype.hasOwnProperty
+console.log("\nObject.hasOwn() (ES2022):");
+const obj = { key: "value" };
+console.log("Object.hasOwn(obj, 'key'):", Object.hasOwn(obj, "key")); // true
+console.log("Object.hasOwn(obj, 'toString'):", Object.hasOwn(obj, "toString")); // false
+// Safer than obj.hasOwnProperty() which can be overridden
+// Also works on objects created with Object.create(null)
+
+// Hashbang Grammar (ES2023) - Standardized shebang support
+// #!/usr/bin/env node
+// This line is now officially recognized by the ECMAScript spec
+// It can appear at the very start of a JS file for CLI scripts
+console.log("\nHashbang Grammar (ES2023):");
+console.log("ES2023 standardized the hashbang (#!) grammar for CLI scripts");
+console.log("Example: #!/usr/bin/env node at the top of a .js file");
 
 
 // ============================================
@@ -805,11 +899,10 @@ Key modern features (ES2020-ES2023):
 - TypeScript's private is compile-time only; JS # is runtime
 - TypeScript abstract classes cannot be instantiated; JS needs pattern
 - TypeScript interfaces have no runtime representation
- */
-- Class field initialization order matters in both languages
+   - Class field initialization order matters in both languages
 
 📘 See 18-es6-plus-syntax-ts-comparison.ts for detailed examples!
-*/
+ */
 
 // ============================================================================
 // CROSS-REFERENCES

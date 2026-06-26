@@ -100,6 +100,46 @@ fileInput.files[0];          // First file
   console.log("⚠️ Non-browser environment, form access examples shown in code form");
 }
 
+// FormData API — Programmatic form data handling
+console.log("\n📝 FormData API:\n");
+console.log(`
+// FormData provides a way to construct and manipulate form data
+// Can be created from a <form> element or from scratch
+
+// From a form element:
+// const formData = new FormData(document.querySelector('form'));
+
+// From scratch:
+const formData = new FormData();
+formData.append('username', 'Alice');
+formData.append('email', 'alice@example.com');
+formData.append('avatar', fileInput.files[0]); // File upload
+formData.set('username', 'Bob'); // Overwrite existing key
+console.log('get username:', formData.get('username')); // 'Bob'
+console.log('getAll interests:', formData.getAll('interests')); // []
+console.log('has email:', formData.has('email')); // true
+
+// Iteration:
+for (const [key, value] of formData.entries()) {
+  console.log(key + ':', value);
+}
+// Or: formData.keys(), formData.values()
+
+// Sending with fetch:
+// fetch('/api/upload', { method: 'POST', body: formData });
+
+// Delete a field:
+formData.delete('avatar');
+console.log('has avatar after delete:', formData.has('avatar')); // false
+
+// Key differences from plain objects:
+// - Supports multiple values for the same key (append vs set)
+// - Handles file uploads natively
+// - Automatically sets Content-Type to multipart/form-data with fetch
+// - Works with <form> elements for easy data extraction
+`);
+
+
 // ============================================
 // Section 2: Form Events
 // ============================================

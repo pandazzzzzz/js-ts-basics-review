@@ -1122,3 +1122,49 @@ Advanced Patterns:
 - 25-inheritance-patterns.js (advanced inheritance patterns)
 - 26-optimization-performance.js (performance considerations for closures)
 `);
+
+// ============================================================================
+// TYPESCRIPT COMPARISON NOTES
+// ============================================================================
+/**
+ * 🔍 Key Differences in TypeScript:
+ *
+ * 1. SCOPE
+ *    JS:  var (function-scoped), let/const (block-scoped)
+ *    TS:  Same scoping rules as JS; adds type-level scope (type, interface, namespace)
+ *         - Type aliases and interfaces are block-scoped
+ *         - Namespaces create their own scope
+ *         - Module scope via import/export (same as JS)
+ *
+ * 2. BLOCK-LEVEL TYPES
+ *    TS:  Types declared in blocks are scoped to that block:
+ *         if (true) { type T = string; let x: T = "hello"; }
+ *         // T is not accessible here
+ *
+ * 3. CLOSURES WITH TYPE INFERENCE
+ *    TS:  TypeScript preserves type information through closures:
+ *         function createCounter(initial: number) {
+ *           let count = initial; // TypeScript infers number
+ *           return () => ++count; // Return type: () => number
+ *         }
+ *
+ * 4. MODULE SCOPE
+ *    JS:  Top-level declarations are module-scoped in ES modules
+ *    TS:  Same as JS; additionally, declare global {} extends global scope
+ *
+ * 5. DECLARATION MERGING
+ *    TS:  Interface and namespace declarations merge across same-scope declarations.
+ *         This doesn't exist in JS — it's a TS-only scope behavior.
+ *
+ * 6. CONST ASSERTIONS (as const)
+ *    TS:  as const narrows literal types and makes objects readonly.
+ *         const obj = { x: 10 } as const; // { readonly x: 10 }
+ *         This affects how the value is inferred through closures.
+ *
+ * ⚠️ COMMON CONFUSION POINTS:
+ * - TypeScript's 'private' is compile-time only; JS # is runtime (ES2022)
+ * - TypeScript enums create both type-level and value-level scoped bindings
+ * - 'declare' keyword in TS adds to type scope without runtime code
+ *
+ * 📘 See 13-scope-closures-ts-comparison.ts for detailed TypeScript examples!
+ */

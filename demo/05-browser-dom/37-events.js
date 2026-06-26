@@ -642,6 +642,24 @@ document.addEventListener('visibilitychange', () => {
 });
 `);
 
+console.log("\n📝 Pointer Events (Unified Input):\n");
+console.log(`
+// Pointer Events — Unified API for mouse, touch, and pen input
+// Replaces separate mouse + touch event handling
+// pointerdown, pointermove, pointerup, pointercancel
+// PointerEvent properties: pointerId, pointerType, pressure
+// Set pointer capture: element.setPointerCapture(e.pointerId);
+`);
+
+console.log("\n📝 Drag and Drop API:\n");
+console.log(`
+// Native drag-and-drop. Make element draggable: element.draggable = true
+// Drag source: dragstart, drag, dragend
+// Drop target: dragenter, dragover (must preventDefault), dragleave, drop
+// Use e.dataTransfer.setData/getData for data sharing
+`);
+
+
 // ============================================
 // Section 6: Custom Events
 // ============================================

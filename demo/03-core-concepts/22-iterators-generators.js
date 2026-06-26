@@ -912,6 +912,113 @@ console.log(fg.return()); // Logs "Cleanup!", { value: "cleaned", done: true }
 
 
 // ============================================================================
+// 9b. ITERATOR HELPERS (ES2025)
+// ============================================================================
+/**
+ * Iterator Helpers (ES2025) - Functional-style methods on iterators
+ *
+ * Before ES2025, iterators had no built-in transformation methods.
+ * You had to convert to array (consuming the iterator) to use map/filter/etc.
+ *
+ * ES2025 adds Iterator.prototype methods:
+ * - .map(fn)        — Transform each value
+ * - .filter(fn)     — Keep only matching values
+ * - .take(n)        — Take first n values
+ * - .drop(n)        — Skip first n values
+ * - .flatMap(fn)    — Map and flatten
+ * - .reduce(fn, initial) — Reduce values
+ * - .toArray()      — Convert to array
+ * - .forEach(fn)    — Execute for each value
+ * - .some(fn)       — Check if any value matches
+ * - .every(fn)      — Check if all values match
+ * - .find(fn)       — Find first matching value
+ *
+ * Also adds Iterator.from(iterable) static method to get an Iterator from any iterable.
+ */
+
+console.log("\n=== 9b. Iterator Helpers (ES2025) ===");
+
+// Iterator.from() — Get an Iterator from any iterable
+console.log("\nIterator.from():");
+const fromIter = Iterator.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+console.log("Iterator.from([1..10]).next():", fromIter.next()); // { value: 1, done: false }
+
+// Simulating iterator helpers for environments that don't yet support them
+// (These show the equivalent behavior using generator functions)
+function* mapIterator(iterator, fn) {
+  for (const value of iterator) {
+    yield fn(value);
+  }
+}
+
+function* filterIterator(iterator, fn) {
+  for (const value of iterator) {
+    if (fn(value)) yield value;
+  }
+}
+
+function* takeIterator(iterator, n) {
+  let count = 0;
+  for (const value of iterator) {
+    if (count++ >= n) break;
+    yield value;
+  }
+}
+
+function* dropIterator(iterator, n) {
+  let count = 0;
+  for (const value of iterator) {
+    if (count++ < n) continue;
+    yield value;
+  }
+}
+
+// map — Transform values
+const numbers_iter = [1, 2, 3, 4, 5];
+console.log("\nmap — double each value:");
+const doubled = mapIterator(numbers_iter[Symbol.iterator](), x => x * 2);
+console.log([...doubled]); // [2, 4, 6, 8, 10]
+
+// filter — Keep even numbers
+console.log("\nfilter — keep even numbers:");
+const evens = filterIterator([1, 2, 3, 4, 5, 6][Symbol.iterator](), x => x % 2 === 0);
+console.log([...evens]); // [2, 4, 6]
+
+// take — First 3 values
+console.log("\ntake — first 3 values:");
+const first3 = takeIterator([10, 20, 30, 40, 50][Symbol.iterator](), 3);
+console.log([...first3]); // [10, 20, 30]
+
+// drop — Skip first 3 values
+console.log("\ndrop — skip first 3 values:");
+const after3 = dropIterator([10, 20, 30, 40, 50][Symbol.iterator](), 3);
+console.log([...after3]); // [40, 50]
+
+// Chaining operations — the power of iterator helpers
+console.log("\nChaining: take → filter → map:");
+const source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// Take first 8 → filter even → double
+let chainResult = takeIterator(source[Symbol.iterator](), 8);
+chainResult = filterIterator(chainResult, x => x % 2 === 0);
+chainResult = mapIterator(chainResult, x => x * 2);
+console.log([...chainResult]); // [4, 8, 12, 16]
+
+// With native support (ES2025+), the same would be:
+// Iterator.from([1..10]).take(8).filter(x => x%2===0).map(x => x*2).toArray()
+
+// Iterator.from() with other iterables
+console.log("\nIterator.from() with Set:");
+const set = new Set(["a", "b", "c"]);
+const setIter = Iterator.from(set);
+console.log(setIter.next()); // { value: 'a', done: false }
+
+console.log("\nIterator.from() with Map:");
+const sampleMap = new Map([["x", 1], ["y", 2]]);
+const mapIter2 = Iterator.from(sampleMap);
+console.log(mapIter2.next()); // { value: ['x', 1], done: false }
+
+
+// ============================================================================
 // 10. TYPESCRIPT TYPES
 // ============================================================================
 /**

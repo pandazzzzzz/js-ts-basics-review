@@ -595,6 +595,49 @@ console.log("- javascript.info: https://javascript.info/modifying-document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
 console.log("- High Performance Animations: https://web.dev/animations-guide/\n");
 
+console.log("🔍 MutationObserver — Watch for DOM changes:\n");
+console.log(`
+// MutationObserver watches for changes to the DOM tree
+// More efficient than polling or mutation events (deprecated)
+
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    switch (mutation.type) {
+      case 'childList':
+        console.log('Added nodes:', mutation.addedNodes.length);
+        console.log('Removed nodes:', mutation.removedNodes.length);
+        break;
+      case 'attributes':
+        console.log('Attribute changed:', mutation.attributeName, '→', mutation.target.getAttribute(mutation.attributeName));
+        break;
+      case 'characterData':
+        console.log('Text content changed:', mutation.target.textContent);
+        break;
+    }
+  });
+});
+
+// Configuration options
+observer.observe(targetElement, {
+  childList: true,        // Watch for added/removed child nodes
+  attributes: true,       // Watch for attribute changes
+  characterData: true,    // Watch for text content changes
+  subtree: true,          // Watch descendants too (expensive!)
+  attributeOldValue: true, // Include previous attribute value
+  characterDataOldValue: true // Include previous text value
+});
+
+// Later: stop observing
+observer.disconnect();
+
+// Use cases:
+// - Auto-save on content changes
+// - Lazy-loading elements when they appear
+// - Syntax highlighting dynamic content
+// - Form auto-save
+`);
+
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================
