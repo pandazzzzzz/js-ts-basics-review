@@ -722,7 +722,7 @@ console.log("trim:", '"' + padded.trim() + '"'); // "hello"
 
 
 // ============================================
-// 17b. NUMERIC SEPARATORS AND BIGINT (ES2020/ES2021)
+// 17b. NUMERIC SEPARATORS (ES2021) AND BIGINT (ES2020)
 // ============================================
 
 // Numeric Separators (ES2021) - Improve readability of large numbers
