@@ -163,7 +163,7 @@ function createArrayProxy(arr) {
   return new Proxy(arr, {
     get(target, prop, receiver) {
       // Convert negative index to positive
-      if (typeof prop === "string" && /^\d+$/.test(prop)) {
+      if (typeof prop === "string" && /^-?\d+$/.test(prop)) {
         let index = parseInt(prop);
         if (index < 0) {
           index = target.length + index;
@@ -989,7 +989,7 @@ function createMembrane() {
   let wrapped = new WeakMap();
   let unwrapped = new WeakMap();
 
-  return function wrap(value) {
+  function wrap(value) {
     if (typeof value !== "object" || value === null) {
       return value;
     }
@@ -1011,7 +1011,16 @@ function createMembrane() {
     unwrapped.set(proxy, value);
 
     return proxy;
-  };
+  }
+
+  function unwrap(value) {
+    if (unwrapped.has(value)) {
+      return unwrapped.get(value);
+    }
+    return value;
+  }
+
+  return wrap;
 }
 
 console.log("\nMembrane pattern:");

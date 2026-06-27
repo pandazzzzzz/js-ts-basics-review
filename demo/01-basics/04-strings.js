@@ -159,7 +159,7 @@ console.log("startsWith('quick', 4):", searchStr.startsWith('quick', 4)); // tru
 console.log("\n=== endsWith() Method ===");
 console.log("endsWith('dog'):", searchStr.endsWith('dog')); // true
 console.log("endsWith('lazy'):", searchStr.endsWith('lazy')); // false
-console.log("endsWith('lazy', 40):", searchStr.endsWith('lazy', 40)); // true
+console.log("endsWith('lazy', 39):", searchStr.endsWith('lazy', 39)); // true (endPosition is exclusive)
 
 // ============================================
 // String Methods - Modification
@@ -603,8 +603,8 @@ console.log("\nSQL Query:", query);
 console.log("\n=== String.raw() ===");
 console.log(String.raw`C:\Users\Name\file.txt`); 
 // "C:\Users\Name\file.txt" (backslashes not escaped)
-console.log(`C:\Users\Name\file.txt`); 
-// "C:UsersNamefile.txt" (backslashes escaped)
+console.log(`C:\Users\Name\file.txt`);
+// "C:UsersName\file.txt" (\U \S \N drop backslash; \f is form-feed escape, keeps backslash+file)
 
 const path = String.raw`C:\Program Files\App`;
 console.log("Path:", path); // "C:\Program Files\App"

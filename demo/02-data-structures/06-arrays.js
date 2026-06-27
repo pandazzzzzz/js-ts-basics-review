@@ -506,8 +506,8 @@ console.log("\nTypedArray methods:");
 const typedArr = new Int16Array([5, 3, 8, 1, 9, 4]);
 console.log("  Original:", typedArr);
 console.log("  sort:", typedArr.sort()); // Sorts in place
-console.log("  map:", typedArr.map(x => x * 2)); // Returns regular array
-console.log("  filter:", typedArr.filter(x => x > 5)); // Returns regular array
+console.log("  map:", typedArr.map(x => x * 2)); // Returns same-typed TypedArray
+console.log("  filter:", typedArr.filter(x => x > 5)); // Returns same-typed TypedArray
 
 // ============================================
 // Array Destructuring (ES6/ES2015)

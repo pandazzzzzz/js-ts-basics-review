@@ -348,8 +348,10 @@ const config = {
   host: "localhost"
 } satisfies Config;
 
-// Preserves literal types while type-checking
-// const port: 8080 = config.port; // Literal type preserved with satisfies
+// Note: satisfies validates against Config but does NOT preserve the literal
+// 8080 for config.port (Config.port: number widens it). It only preserves
+// narrower types for properties NOT constrained by the target type.
+// const port: 8080 = config.port;  // ❌ TS2322: 'number' not assignable to 8080
 
 console.log("satisfies operator preserves literal types");
 

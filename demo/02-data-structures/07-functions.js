@@ -1150,7 +1150,7 @@ console.log(`
 │ Own 'this'          │    ✓     │    ✓     │    ✗     │      ✓      │    ✓     │
 │ 'arguments' object  │    ✓     │    ✓     │    ✗     │      ✓      │    ✓     │
 │ Constructor (new)   │    ✓     │    ✓     │    ✗     │      ✗      │    ✗     │
-│ 'prototype'         │    ✓     │    ✓     │    ✗     │      ✓      │    ✓     │
+│ 'prototype'         │    ✓     │    ✓     │    ✗     │      ✗      │    ✓     │
 │ Returns Promise     │    ✗     │    ✗     │    ✗     │      ✓      │    ✗     │
 │ Can use 'yield'     │    ✗     │    ✗     │    ✗     │      ✗      │    ✓     │
 │ Can use 'await'     │    ✗     │    ✗     │    ✗     │      ✓      │    ✗     │

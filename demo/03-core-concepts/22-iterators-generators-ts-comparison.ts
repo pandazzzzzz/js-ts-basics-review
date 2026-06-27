@@ -21,16 +21,18 @@ export {};
 // };
 
 // TypeScript: Iterator<T> interface with proper typing
-const typedIterator: Iterator<number> = {
-  next(): IteratorResult<number> {
-    let current = 0;
-    const last = 5;
-    if (current <= last) {
-      return { value: current++, done: false };
+const typedIterator: Iterator<number> = (() => {
+  let current = 0;
+  const last = 5;
+  return {
+    next(): IteratorResult<number> {
+      if (current <= last) {
+        return { value: current++, done: false };
+      }
+      return { done: true, value: undefined };
     }
-    return { done: true, value: undefined };
-  }
-};
+  };
+})();
 
 console.log("=== Iterator<T> Interface ===");
 console.log(typedIterator.next()); // { value: 0, done: false }
@@ -120,11 +122,12 @@ class CustomCollection implements Iterable<string> {
 
   [Symbol.iterator](): Iterator<string> {
     let index = 0;
+    const items = this.items;
 
     return {
       next(): IteratorResult<string> {
-        if (index < this.items.length) {
-          return { value: this.items[index++], done: false };
+        if (index < items.length) {
+          return { value: items[index++], done: false };
         }
         return { done: true, value: undefined };
       }

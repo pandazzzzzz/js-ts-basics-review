@@ -160,7 +160,7 @@ console.log("Exact '123-4567 extra':", exactRe.test("123-4567 extra")); // false
  *
  * String Methods:
  * - match(re) - Returns match array
- * - matchAll(re) - Returns iterator (with g flag)
+ * - matchAll(re) - Returns iterator (requires g flag, else TypeError)
  * - search(re) - Returns index or -1
  * - replace(re, replacement) - Replace matches
  * - split(re) - Split by pattern
@@ -408,7 +408,7 @@ console.log("Duplicates:", dupStr.match(duplicateRe)); // ['is is', 'test test']
  *
  * Common Pitfalls:
  * - Lookbehind needs ES2018+
- * - Fixed width required for lookbehind
+ * - JS lookbehind supports variable-length patterns (unlike PCRE/Java/.NET)
  * - Can be complex to read
  */
 
@@ -424,7 +424,7 @@ console.log("'100em' matches:", "width: 100em".match(posLookahead)); // null
 let negLookahead = /\d+(?!px)/;
 console.log("\nNegative lookahead:");
 console.log("'100em' matches:", "width: 100em".match(negLookahead)); // ['100']
-console.log("'100px' matches:", "width: 100px".match(negLookahead)); // null
+console.log("'100px' matches:", "width: 100px".match(negLookahead)); // ['10'] (greedy \d+ backtracks)
 
 // 6.3 Password validation with lookahead
 let passwordRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
@@ -442,7 +442,7 @@ console.log("'100' alone matches:", "just 100".match(posLookbehind)); // null
 let negLookbehind = /(?<!\$)\d+/;
 console.log("\nNegative lookbehind:");
 console.log("'100' alone matches:", "just 100".match(negLookbehind)); // ['100']
-console.log("'$100' matches:", "price: $100".match(negLookbehind)); // null
+console.log("'$100' matches:", "price: $100".match(negLookbehind)); // ['00'] (\$ is literal $, lookbehind fails before 100)
 
 // 6.6 Lookahead with replacement
 let fruits = ["ripe orange A", "green orange B", "ripe orange C"];
@@ -452,12 +452,15 @@ let replacedFruits = fruits.map(fruit =>
 );
 console.log(replacedFruits);
 
-// 6.7 Possessive Quantifiers - Greedy without backtracking (JS: similar effect with lookahead)
+// 6.7 Possessive Quantifiers - Greedy without backtracking (JS does NOT support a++)
 console.log("\nPossessive Quantifiers:");
 
-// JavaScript doesn't support possessive quantifiers (a++), but can simulate with lookahead
-let possessiveRe = /(a+(?![^a]))ab/; // a+ followed by 'a' or end, then 'ab'
-console.log("Greedy match:", "aaab".match(possessiveRe)); // null (different from a+ab)
+// JavaScript does NOT support possessive quantifiers (a++). The pattern below is
+// NOT a true possessive simulation — it's an atomic-ish lookahead that still
+// backtracks. A real possessive `a++ab` would never match "aaab" (a++ is greedy
+// and refuses to give back chars), but this lookahead pattern DOES match.
+let possessiveRe = /(a+(?![^a]))ab/; // a+ not followed by non-'a', then 'ab'
+console.log("Lookahead pattern:", "aaab".match(possessiveRe)); // ['aaab', 'aa'] (matches, unlike true possessive)
 
 // Standard greedy quantifier allows backtracking
 let standardRe = /a+ab/;

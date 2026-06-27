@@ -56,8 +56,8 @@ input.addEventListener('focus', (e) => {
 
 // CustomEvent - custom events
 button.addEventListener('custom', (e) => {
-  // e: CustomEvent ✅
-  console.log(e.detail);    // ✅ OK (any)
+  // e: Event (not CustomEvent unless 'custom' is in HTMLElementEventMap)
+  console.log((e as CustomEvent).detail);    // cast needed to access detail
 });
 `);
 
@@ -90,8 +90,8 @@ button.addEventListener('click', (e: MouseEvent) => {
   console.log(e.button);
 });
 
-// Arrow function with explicit this
-const handler = (this: HTMLButtonElement, e: MouseEvent) => {
+// Function with explicit this (arrow functions cannot have a this parameter)
+const handler = function (this: HTMLButtonElement, e: MouseEvent) {
   this.classList.add('active');
 };
 
@@ -124,8 +124,8 @@ elem.addEventListener('click', (e: MouseEvent) => {
   console.log(e.clientX);
 });
 
-// ❌ TypeScript catches invalid event types
-// elem.addEventListener('nonexistent', handler);  // Error: Argument of type 'string' is not assignable
+// Note: arbitrary string event names are accepted (fall back to Event type)
+// elem.addEventListener('nonexistent', (e) => { /* e: Event */ });  // no error
 
 // ❌ Wrong handler type
 // elem.addEventListener('click', (e: KeyboardEvent) => {

@@ -89,10 +89,10 @@ function identity<const T>(value: T): T {
   return value;
 }
 
-const arr = identity([1, 2, 3] as const);
-// Type: readonly [1, 2, 3] - literal types preserved!
+const arr = identity([1, 2, 3]);
+// Type: readonly [1, 2, 3] - literal types preserved (no 'as const' needed!)
 
-const obj = identity({ x: 1, y: 2 } as const);
+const obj = identity({ x: 1, y: 2 });
 // Type: { readonly x: 1; readonly y: 2; }
 
 console.log("const preserves literal types in generics");
@@ -111,9 +111,10 @@ const config = {
   host: "localhost",
 } satisfies Config;
 
-// Unlike ': Config', satisfies preserves literal types:
-// config.port is type 8080 (not number)
-const port: 8080 = config.port; // OK — literal type preserved!
+// Note: satisfies validates against Config, but does NOT preserve literal
+// types for properties constrained by the target type. config.port is `number`
+// (not 8080) because Config.port: number widens it.
+// const port: 8080 = config.port;  // ❌ TS2322: Type 'number' not assignable to 8080
 
 // Attempting extra properties WOULD error (same as ': Config'):
 // const bad = { port: 80, host: "x", extra: true } satisfies Config; // Error!

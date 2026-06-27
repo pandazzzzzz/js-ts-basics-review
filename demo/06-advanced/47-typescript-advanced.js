@@ -532,7 +532,7 @@ console.log("8. Reflect vs Object method differences");
    JS:  Stage 2.7 proposal (nearing Stage 3, not yet standardized, check TC39 status)
    TS:  Experimental decorators (legacy) since TS 1.5
    TS:  --experimentalDecorators flag required for legacy syntax
-   TS:  Stage 2.7 decorator support in TS 5.0+ (useLegacyDecorators: false)
+   TS:  Stage 2.7 decorator support in TS 5.0+ (experimentalDecorators: false, the default)
    TS:  Decorator metadata with reflect-metadata
 
 3. TYPE-LEVEL PROGRAMMING

@@ -321,7 +321,7 @@ showThis.call(undefined); // true in non-strict
 
 (function() {
   "use strict";
-  console.log("Strict mode null:", this === undefined); // true
+  console.log("Strict mode null:", this === null); // true (strict .call(null) preserves null)
 }).call(null);
 
 
