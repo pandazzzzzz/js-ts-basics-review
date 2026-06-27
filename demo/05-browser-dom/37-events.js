@@ -44,7 +44,7 @@ element.onclick = function(event) {
 // - Simple and direct
 `);
 
-console.log("3. addEventListener (modern recommended method) - ES5+");
+console.log("3. addEventListener (modern recommended method) - DOM Level 2+");
 console.log(`
 // Basic syntax
 element.addEventListener(eventType, handler, options);
@@ -53,7 +53,7 @@ element.addEventListener(eventType, handler, options);
 element.addEventListener('click', handleClick);
 element.addEventListener('click', handleClick, { once: true }); // Only execute once
 
-// Options object (ES6+)
+// Options object (DOM API: capture/passive/once/signal)
 element.addEventListener('click', handler, {
   capture: false,    // Whether to trigger in capture phase
   once: false,       // Whether to trigger only once

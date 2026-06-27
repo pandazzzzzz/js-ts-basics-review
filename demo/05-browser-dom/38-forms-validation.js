@@ -217,7 +217,7 @@ form.submit();  // ❌ Direct submit, bypasses validation and submit event
 
 // Trigger custom validated submit
 if (validateCustom(form)) {
-  form.requestSubmit();  // ✅ Triggers submit event (ES2019）
+  form.requestSubmit();  // ✅ Triggers submit event (HTML Living Standard)
 }
 `);
 

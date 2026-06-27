@@ -103,12 +103,12 @@ console.log("6. getElementsByName() - Mainly for forms");
 console.log("   Syntax: document.getElementsByName(name)");
 console.log("   Returns: NodeList\n");
 
-console.log("7. closest() - Search upwards for ancestor (ES6/ES2015)");
+console.log("7. closest() - Search upwards for ancestor (DOM / WHATWG Living Standard)");
 console.log("   Syntax: element.closest(selector)");
 console.log("   Returns: Element | null (includes itself)");
 console.log("   Use case: Finding specific ancestor in event delegation\n");
 
-console.log("8. matches() / matchesSelector() - Match check (ES6/ES2015)");
+console.log("8. matches() / matchesSelector() - Match check (DOM / WHATWG Living Standard)");
 console.log("   Syntax: element.matches(selector)");
 console.log("   Returns: boolean");
 console.log("   Use case: Filtering target element in event delegation\n");
@@ -347,7 +347,7 @@ if (!element.className.includes('active')) {
 }
 `);
 
-console.log("\n2. classList (modern recommended way) - ES5+");
+console.log("\n2. classList (modern recommended way) - DOM API");
 console.log(`
 // Methods:
 element.classList.add('active', 'highlight');      // Add classes
@@ -355,7 +355,7 @@ element.classList.remove('active', 'old');         // Remove classes
 element.classList.toggle('active');                // Toggle class
 element.classList.toggle('active', condition);     // Conditional toggle
 element.classList.contains('active');              // Check class (returns boolean)
-element.classList.replace('old', 'new');           // Replace class (ES2018)
+element.classList.replace('old', 'new');           // Replace class (DOM API)
 
 // Iteration:
 for (let className of element.classList) {

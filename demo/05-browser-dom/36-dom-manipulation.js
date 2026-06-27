@@ -101,7 +101,7 @@ if (typeof document !== 'undefined') {
 
 console.log("\n=== Section 2: Inserting Elements ===\n");
 
-console.log("🔧 Modern Insertion Methods (ES2016+):\n");
+console.log("🔧 Modern Insertion Methods (DOM / WHATWG Living Standard):\n");
 
 console.log("1. parent.append(...nodesOrStrings)");
 console.log("   - Adds at the end of parent element");
@@ -245,7 +245,7 @@ console.log("\n=== Section 3: Removing Elements ===\n");
 
 console.log("🗑️ Removal Methods:\n");
 
-console.log("1. element.remove() - Modern method (ES2016+)");
+console.log("1. element.remove() - Modern method (DOM API)");
 console.log("   - Removes element directly from DOM");
 console.log("   - Simple and direct");
 console.log("   - No parent element reference needed");
@@ -722,7 +722,7 @@ TypeScript:
 
   // Can be used as Node, also has similar methods to ParentNode
   fragment.appendChild(node);
-  fragment.append(node);    // ES2016+
+  fragment.append(node);    // DOM API (ParentNode.append)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 6. TYPE-SAFE UTILITY FUNCTION EXAMPLES
