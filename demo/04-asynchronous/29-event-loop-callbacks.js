@@ -965,8 +965,8 @@ setTimeout(() => {
   console.log("\nExecution order within setTimeout callback:");
   console.log("  1. Synchronous code");
 
-  queueMicrotask(() => console.log("  3. queueMicrotask (microtask)"));
-  Promise.resolve().then(() => console.log("  2. Promise.then (microtask)"));
+  queueMicrotask(() => console.log("  2. queueMicrotask (microtask)"));
+  Promise.resolve().then(() => console.log("  3. Promise.then (microtask)"));
 
   console.log("  → Microtasks run before next macrotask");
   // Output: 1 → 2 → 3 (sync first, then microtasks by registration order)

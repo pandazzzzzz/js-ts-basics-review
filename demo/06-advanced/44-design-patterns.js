@@ -699,7 +699,7 @@ console.log("3. Performance overhead - extra abstraction layers can impact perfo
 
 
 // ============================================
-// Section 6: Command Pattern (ES5/ES6)
+// Section 8: Command Pattern (ES5/ES6)
 // ============================================
 // - Encapsulates a request as an object, allowing parameterization and queuing
 // - Uses ES6 classes and closures
@@ -819,7 +819,7 @@ console.log("Undo:", incrementCmd.undo()); // 0
 
 
 // ============================================
-// Section 7: State Pattern (ES6)
+// Section 9: State Pattern (ES6)
 // ============================================
 // - Allows an object to alter its behavior when its internal state changes
 // - Uses ES6 classes and polymorphism

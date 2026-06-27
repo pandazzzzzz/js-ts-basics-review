@@ -972,7 +972,7 @@ async function sequentialDependentCalls() {
 sequentialDependentCalls();
 
 // ============================================
-// 8. STREAM API (ADVANCED)
+// 7. STREAM API (ADVANCED)
 // ============================================
 
 /**
@@ -1239,7 +1239,7 @@ console.log("  ⚠️ Remember response.body can only be read once");
 console.log("  ⚠️ Streams are not supported in very old browsers");
 
 // ============================================
-// 9. COMMON PITFALLS
+// 8. COMMON PITFALLS
 // ============================================
 
 /**
@@ -1343,7 +1343,7 @@ async function pitfall_memoryLeak() {
 pitfall_memoryLeak();
 
 // ============================================
-// 8. BEST PRACTICES SUMMARY
+// 9. BEST PRACTICES SUMMARY
 // ============================================
 
 /**
@@ -1388,7 +1388,7 @@ See also:
 `);
 
 // ============================================
-// 9. CACHE API INTEGRATION
+// 10. CACHE API INTEGRATION
 // ============================================
 /**
  * Cache API — Store Request/Response pairs for offline and performance

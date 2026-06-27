@@ -477,7 +477,7 @@ async function encryptAESGCMTyped(
 }
 
 async function decryptAESGCMTyped(
-  encryptedData: EncryptedData,
+  encryptedData: AESEncryptedData,
   password: string
 ): Promise<string> {
   const encoder = new TextEncoder();
