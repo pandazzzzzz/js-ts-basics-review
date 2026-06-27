@@ -545,7 +545,7 @@ console.log("\n=== 5. Garbage Collection Basics Demo ===");
 console.log("\nGC Generations:");
 console.log('  Young generation (Eden space): Short-lived objects');
 console.log('  Old generation: Long-lived objects');
-console.log('  Permanent generation: Class metadata');
+console.log('  Code space / Large object space: V8-specific (no "Permanent generation" — that is JVM terminology)');
 
 // 5.2 GC-friendly patterns
 console.log("\nGC-friendly patterns:");
@@ -636,9 +636,12 @@ for (let i = 0; i < 1000000; i++) {
   typedArray[i] = i;
 }
 
-console.log('Regular array size estimate:', `${(regularArray.length * 8 / 1024 / 1024).toFixed(2)} MB`);
+// Note: this regular-array estimate assumes 8 bytes/element (a HeapNumber pointer),
+// but V8 optimizes small-integer arrays with PACKED_SMI_ELEMENTS (~4 bytes/element),
+// so the real ratio vs TypedArray is often closer to 1-2x, not 7x.
+console.log('Regular array size estimate (upper bound, 8 bytes/elem):', `${(regularArray.length * 8 / 1024 / 1024).toFixed(2)} MB`);
 console.log('TypedArray size:', `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`);
-console.log('TypedArray is ~7x more memory efficient for numbers');
+console.log('TypedArray wins most for fixed-encoding types (Int32=4 bytes, Float64=8 bytes)');
 
 // 6.2 Chunked processing
 console.log("\nChunked processing:");
@@ -700,7 +703,7 @@ consumeStream(streamLargeData(1000000), 5);
  * Node.js Memory Considerations - Server-side memory management
  *
  * Characteristics:
- * - V8 heap limits (~1.4GB default, configurable)
+ * - V8 old-space limit auto-tuned to physical memory (configurable via --max-old-space-size)
  * - Buffer allocation outside heap
  * - Worker threads isolation
  * - Cluster mode memory sharing

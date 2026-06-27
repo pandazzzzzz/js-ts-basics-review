@@ -19,7 +19,6 @@ console.log("  - String.replaceAll()");
 console.log("  - Logical assignment operators (||=, &&=, ??=)");
 console.log("  - Numeric separators");
 console.log("  - WeakRef, FinalizationRegistry");
-console.log("  - Intl.PluralRules");
 console.log("\nES2022:");
 console.log("  - Class private fields (#field)");
 console.log("  - .at() method for arrays/strings");
@@ -266,10 +265,10 @@ finalObj = null; // Remove strong reference
 // GC may trigger callback with "Object #1"
 
 // ============================================
-// ES2021: Intl.PluralRules
+// ES2018: Intl.PluralRules
 // ============================================
 
-console.log("\n=== Intl.PluralRules (ES2021) ===");
+console.log("\n=== Intl.PluralRules (ES2018) ===");
 
 const en = new Intl.PluralRules('en-US');
 console.log("1:", en.select(1));    // "one"
@@ -646,7 +645,7 @@ console.log("\n=== Set Methods (ES2025) ===");
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 122+ (February 2024)
 // - Firefox: 127+ (June 2024)
-// - Safari: 17+ (March 2024)
+// - Safari: 17+ (September 2023)
 // - Node.js: 22.0+ (April 2024)
 // - Edge: 122+ (February 2024)
 
@@ -690,7 +689,7 @@ console.log("\n=== Iterator Helpers (ES2025) ===");
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 122+ (February 2024)
 // - Firefox: 131+ (October 2024)
-// - Safari: 17.4+ (March 2024)
+// - Safari: 18.4+ (March 2025)
 // - Node.js: 22.0+ (April 2024)
 // - Edge: 122+ (February 2024)
 // - Polyfill: es-iterator-helpers (npm)
@@ -915,12 +914,12 @@ console.log(y); // 20
 console.log("\n=== Resource Management (ES2027) ===");
 
 // ⚠️ BROWSER/RUNTIME SUPPORT:
-// - Chrome: 122+ (Feb 2024), 130+ (Sept 2024) shipping by default
-// - Firefox: 120+ (Nov 2023), 134+ (June 2025) shipping by default
-// - Safari: 17.4+ (Mar 2024), 18.2+ (Oct 2024) shipping by default
-// - Node.js: 20.4+ (June 2023) with --harmony-explicit-resource-management flag
-// - Node.js: 22.0+ (April 2024) enabled by default
-// - Edge: 122+ (Feb 2024), 130+ (Sept 2024) shipping by default
+// - Chrome: 122+ (Feb 2024) behind flag, 134+ (March 2025) shipping by default
+// - Firefox: 120+ (Nov 2023) behind flag, 141+ (July 2025) shipping by default
+// - Safari: not yet supported as of mid-2026
+// - Node.js: 20.4+ (July 2023) with --harmony-explicit-resource-management flag
+// - Node.js: 24.0+ (May 2025) enabled by default
+// - Edge: 122+ (Feb 2024) behind flag, 134+ (March 2025) shipping by default
 // - TypeScript: 5.2+ (August 2023) support for using declarations
 
 // Define a disposable resource

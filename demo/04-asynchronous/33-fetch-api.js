@@ -920,14 +920,12 @@ async function demonstrateSignalTimeout() {
 
 demonstrateSignalTimeout();
 
-// AbortSignal.any() - DEPRECATED/withdrawn
-// NOTE: AbortSignal.any() was removed from the spec due to web compatibility issues.
-// Do not use. Use the combineSignals helper above instead.
-console.log("\n19.8 AbortSignal.any() (Deprecated - Do Not Use):");
+// AbortSignal.any() - Combines multiple signals (shipped: Chrome 116+, Firefox 124+, Safari 17.4+)
+// Aborts when ANY of the input signals aborts.
+console.log("\n19.8 AbortSignal.any() (Widely Available):");
 console.log(`
-// WARNING: AbortSignal.any() was withdrawn from the spec.
-// Use the combineSignals helper function (above) instead:
-const combinedSignal = combineSignals(userController.signal, AbortSignal.timeout(5000));
+// AbortSignal.any() combines multiple signals — aborts when any input aborts.
+const combinedSignal = AbortSignal.any([userController.signal, AbortSignal.timeout(5000)]);
 
 fetch(url, { signal: combinedSignal });
 // Aborts when ANY signal aborts

@@ -934,7 +934,7 @@ console.log("  ⚠️ Forgetting file extensions");
 console.log("  ⚠️ Using require() in ESM");
 console.log("  ⚠️ Missing __dirname/__filename replacements");
 console.log("  ⚠️ Circular dependencies breaking");
-console.log("  ⚠️ JSON imports (use import assertions)");
+console.log("  ⚠️ JSON imports (use import attributes: with { type: 'json' })");
 
 console.log("\nBest Practices:");
 console.log("  ✅ Use ES Modules for new projects");

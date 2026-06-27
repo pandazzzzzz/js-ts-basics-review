@@ -85,7 +85,7 @@ function onClick(e) {
 element.addEventListener('click', onClick);
 element.removeEventListener('click', onClick);
 
-// ✅ Or use AbortController (ES2019+)
+// ✅ Or use AbortController (WHATWG DOM Living Standard, not ECMAScript)
 const controller = new AbortController();
 element.addEventListener('click', onClick, { signal: controller.signal });
 controller.abort(); // Remove all listeners using this signal at once
@@ -169,14 +169,14 @@ console.log(`
 │                                                             │
 │   1. CAPTURING PHASE (Capture phase)                       │
 │      ↓                                                      │
-│      document → html → body → div#parent → div#target       │
+│      window → document → html → body → div#parent → div#target │
 │                                                             │
 │   2. TARGET PHASE (Target phase)                                 │
 │      ←←←←←←←←←←← div#target (actually clicked element)      │
 │                                                             │
 │   3. BUBBLING PHASE (Bubble phase)                               │
 │      ↑                                                      │
-│      div#target → div#parent → body → html → document       │
+│      div#target → div#parent → body → html → document → window │
 │                                                             │
 └─────────────────────────────────────────────────────────────────────┘
 
@@ -222,8 +222,8 @@ console.log(`
 // - blur
 // - mouseenter
 // - mouseleave
-// - load
 // - unload
+// Note: element 'load' (img/script/link) DOES bubble; only window 'load' doesn't.
 
 // Alternative: Use focusin/focusout instead of focus/blur (they bubble)
 // - Use mouseover/mouseout instead of mouseenter/mouseleave

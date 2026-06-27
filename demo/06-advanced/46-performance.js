@@ -5,9 +5,9 @@
 // 📌 Covers performance measurement and optimization techniques
 
 // ============================================
-// Section 1: Performance API (ES6/ES2015)
-// - performance.now() provides high-resolution timestamps
-// - ES6 introduced the Performance API; PerformanceObserver added later
+// Section 1: Performance API (W3C / WHATWG Web API, not ECMAScript)
+// - performance.now() provides high-resolution timestamps (High Resolution Time)
+// - PerformanceObserver added via Performance Timeline (W3C/WHATWG)
 // ============================================
 
 console.log("\n=== Performance API ===");
@@ -59,7 +59,7 @@ resources.slice(0, 3).forEach(resource => {
 // ⚠️ Browser differences in precision
 
 // ============================================
-// Section 2: Performance Observer (ES2020+)
+// Section 2: Performance Observer (W3C / WHATWG Web API)
 // ============================================
 
 console.log("\n=== Performance Observer ===");

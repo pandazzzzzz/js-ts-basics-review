@@ -13,11 +13,10 @@
  * - Reuses current stack frame (theoretical)
  * - Prevents stack overflow (theoretical)
  *
- * IMPORTANT: TCO is part of ES6 spec but has NOT been implemented in any
- * major JavaScript engine. Safari briefly implemented it in 2016 but removed
- * it in 2017 due to debugging complexity. As of 2026, no engine supports TCO.
- *
- * For deep recursion, use iterative approaches or trampoline patterns instead.
+ * IMPORTANT: Proper Tail Calls (PTC) are part of ES6 spec. Safari/JavaScriptCore
+ * is the only major engine that implements PTC; Chrome/V8 and Firefox do not.
+ * For deep recursion in non-Safari engines, use iterative approaches or
+ * trampoline patterns instead.
  *
  * Use Cases (theoretical):
  * - Deep recursion algorithms
