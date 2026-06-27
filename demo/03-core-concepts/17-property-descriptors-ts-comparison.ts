@@ -239,6 +239,7 @@ function validateNumber(min: number, max: number) {
 class ValidatedConfig {
   private _volume: number = 50;
 
+  // @ts-expect-error — legacy accessor decorator requires experimentalDecorators: true
   @validateNumber(0, 100)
   set volume(value: number) {
     this._volume = value;

@@ -271,6 +271,7 @@ function format(pattern: string) {
 
 @sealed
 class DataService {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @logExecution
   fetchData(id: number): { id: number; data: string } {
     return { id, data: "Sample data" };

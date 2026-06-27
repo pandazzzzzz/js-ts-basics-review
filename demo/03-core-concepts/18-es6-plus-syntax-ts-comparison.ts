@@ -73,6 +73,7 @@ console.log("Renamed destructuring:", name, emailAddress);
 interface NestedAddress {
   city: string;
   zip: string;
+  email?: string;
 }
 
 interface UserProfile {
@@ -87,7 +88,7 @@ const typedUser: UserProfile = {
 
 console.log("\n=== Optional Chaining Types ===");
 console.log("User city:", typedUser?.address?.city); // "NYC"
-console.log("Missing nested:", typedUser?.profile?.email); // undefined
+console.log("Missing nested:", typedUser?.address?.email); // undefined
 
 // TypeScript: Type narrowing with optional chaining
 function getUserEmail(obj: UserProfile): string | undefined {
@@ -284,7 +285,7 @@ class JSBankAccount {
   #balance = 0; // ES2022 private, runtime enforced
 
   deposit(amount: number): boolean {
-"    if (amount > 0) {
+    if (amount > 0) {
       this.#balance += amount;
       return true;
     }

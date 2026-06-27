@@ -289,7 +289,7 @@ function introduce(this: Person, greeting: string): string {
   return `${greeting}, I'm ${this.name}`;
 }
 
-const anotherPerson = { name: "Charlie", age: 35 };
+const anotherPerson = new Person("Charlie", 35);
 
 console.log("\n=== Call/Apply/Bind with This Types ===");
 

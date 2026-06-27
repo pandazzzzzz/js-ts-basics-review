@@ -251,7 +251,7 @@ interface GlobalContext {
 }
 
 // Global scope type
-declare const globalThis: GlobalContext & typeof globalThis;
+declare const globalContext: GlobalContext;
 
 // Nested scope with type shadowing
 function demonstrateScopeChain(): void {

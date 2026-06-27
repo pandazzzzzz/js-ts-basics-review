@@ -161,7 +161,7 @@ class DerivedClass extends BaseClass {
 
 const derived = new DerivedClass();
 const proto = getPrototype(derived);
-console.log("Prototype:", proto.constructor.name); // DerivedClass
+console.log("Prototype:", proto?.constructor.name); // DerivedClass
 
 
 // ============================================================================
