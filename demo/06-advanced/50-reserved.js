@@ -174,7 +174,107 @@ const b = #{ x: 1, y: #{ z: 2 } };
 console.log(a === b); // true (deep equality!)
 `);
 
-// 2. Pattern Matching
+// 2. Composites (Stage 2 proposal)
+// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
+// Composites is the successor to the withdrawn Records & Tuples proposal.
+// It introduces deeply-immutable composite objects/arrays with value
+// semantics (deep equality), replacing the withdrawn #{} / #[] syntax.
+// Proposal: https://github.com/tc39/proposal-composites
+console.log("\nComposites (Stage 2 proposal):");
+console.log("- Successor to the withdrawn Records & Tuples proposal");
+console.log("- Deeply immutable composite objects and arrays");
+console.log("- Value semantics: deep equality by value, usable as Map keys");
+console.log("- Replaces the withdrawn #{} (record) and #[] (tuple) syntax");
+console.log("- Stage 2 proposal (syntax/API still evolving)");
+
+console.log("\nComposite Example (future syntax, illustrative):");
+console.log(`
+// Composite immutable object (deeply frozen, value equality)
+const point = Composite { x: 1, y: 2 };
+// point.x = 3; // TypeError - immutable
+
+// Composite immutable array
+const nums = Composite [1, 2, 3];
+// nums.push(4); // TypeError - immutable
+
+// Deep equality by value
+const a = Composite { x: 1, y: Composite { z: 2 } };
+const b = Composite { x: 1, y: Composite { z: 2 } };
+console.log(a === b); // true (value equality, not reference)
+
+// Usable as Map/Set keys (value-based hashing)
+const map = new Map();
+map.set(Composite { x: 1, y: 2 }, "origin");
+map.get(Composite { x: 1, y: 2 }); // "origin"
+`);
+
+// 3. Decimal (Stage 2 proposal)
+// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
+// Decimal adds a high-precision base-10 number type for financial/monetary
+// calculations where binary floating point (0.1 + 0.2 !== 0.3) is
+// unacceptable. Includes a 'm' numeric literal suffix proposal.
+// Proposal: https://github.com/tc39/proposal-decimal
+console.log("\nDecimal (Stage 2 proposal):");
+console.log("- High-precision base-10 decimal type for money/finance");
+console.log("- Avoids binary floating-point errors (0.1 + 0.2 !== 0.3)");
+console.log("- Proposed 'm' literal suffix for decimal literals");
+console.log("- Stage 2 proposal (literal syntax still under debate)");
+
+console.log("\nDecimal Example (future syntax, illustrative):");
+console.log(`
+// Binary float problems today:
+0.1 + 0.2;          // 0.30000000000000004 (precision loss)
+0.1 + 0.2 === 0.3;  // false
+
+// With Decimal (proposed 'm' suffix):
+const price = 0.10m;
+const tax = 0.02m;
+price + tax;            // 0.12m (exact)
+price + tax === 0.12m;  // true (no rounding error)
+
+// Useful for money:
+const total = 19.99m + 5.00m; // 24.99m, exact cents
+`);
+
+// 4. Do Expressions (Stage 2 proposal)
+// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
+// Do expressions let you evaluate a block as an expression, returning the
+// last value. This makes if/else and other statements usable inline where
+// an expression is expected, reducing IIFE/temporary-variable boilerplate.
+// Proposal: https://github.com/tc39/proposal-do-expressions
+console.log("\nDo Expressions (Stage 2 proposal):");
+console.log("- Evaluate a block as an expression, returning its last value");
+console.log("- Lets if/else and statements be used inline as expressions");
+console.log("- Reduces IIFE and temporary-variable boilerplate");
+console.log("- Stage 2 proposal (semantics of 'return' inside do still being settled)");
+
+console.log("\nDo Expression Example (future syntax, illustrative):");
+console.log(`
+// Today: ternary or IIFE
+const label = condition ? "yes" : "no";
+// or
+const label2 = (() => {
+  if (condition) return "yes";
+  return "no";
+})();
+
+// With do expressions:
+const label = do {
+  if (condition) {
+    "yes";
+  } else {
+    "no";
+  }
+}; // evaluates to "yes" or "no"
+
+// Useful for JSX/computed values:
+const greeting = do {
+  if (user) { \`Hello, \${user.name}!\` }
+  else      { "Please sign in" }
+};
+`);
+
+// 5. Pattern Matching
 /*
  * verification:
  *   feature: Pattern Matching

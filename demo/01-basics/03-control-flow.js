@@ -881,6 +881,32 @@ try {
   console.log("Cleanup code runs regardless");
 }
 
+// Optional catch binding (ES2019) - `catch {` without a binding variable
+// - When the caught error is not used, you can omit the `(error)` parameter
+// - Syntax: `try { ... } catch { ... }` (no parentheses, no binding)
+// - Use case: when you only care that an error happened, not its details
+// - Note: the binding is still allowed when you need error.message etc.
+console.log("\nOptional Catch Binding (ES2019):");
+
+function parseConfig(raw) {
+  try {
+    return JSON.parse(raw);
+  } catch { // No `(error)` binding — error value is unused
+    console.log("caught without binding — returning default config");
+    return { defaults: true };
+  }
+}
+
+console.log("parseConfig('{\"a\":1}'):", parseConfig('{"a":1}')); // { a: 1 }
+console.log("parseConfig('bad'):", parseConfig('bad')); // logs message, returns { defaults: true }
+
+// When you DO need the error, keep the binding (both styles valid)
+try {
+  undefinedVariable; // ReferenceError
+} catch (error) {
+  console.log("With binding — error.name:", error.name); // "ReferenceError"
+}
+
 // ============================================
 // Best Practices Summary
 // ============================================

@@ -193,6 +193,30 @@ console.log("0 ?? 10:", 0 ?? 10); // 0 (0 is not null/undefined)
 console.log("'' ?? 'default':", "" ?? "default"); // '' (empty string is not null/undefined)
 console.log("false ?? true:", false ?? true); // false
 
+// ⚠️ Pitfall: ?? CANNOT be mixed with || or && without parentheses
+// - Mixing `??` with `||`/`&&` in the same expression is a SyntaxError.
+// - This rule prevents ambiguity about precedence (e.g. does `(a ?? b) || c`
+//   or `a ?? (b || c)` happen first?).
+// - You MUST add explicit parentheses to disambiguate.
+// console.log(null || undefined ?? "foo"); // ❌ SyntaxError: Mixed binary operators
+console.log("\n?? cannot mix with || / && (SyntaxError without parentheses):");
+// Demonstrate the SyntaxError by attempting to eval the mixed expression
+try {
+  // Function constructor lets us evaluate the raw source at runtime so the
+  // surrounding file still parses cleanly.
+  new Function('null || undefined ?? "foo"')();
+} catch (e) {
+  console.log("null || undefined ?? \"foo\" →", e.name + ":", e.message); // SyntaxError
+}
+
+// Correct: wrap the || subexpression in parentheses first, then ??
+console.log("(null || undefined) ?? 'foo':", (null || undefined) ?? "foo"); // "foo"
+// Here `null || undefined` evaluates to undefined, then `undefined ?? "foo"` → "foo"
+
+// Contrast: which operator you intend matters
+console.log("null ?? (undefined || 'foo'):", null ?? (undefined || "foo")); // "foo"
+console.log("(null && undefined) ?? 'foo':", (null && undefined) ?? "foo"); // "foo"
+
 // ============================================
 // Assignment Operators
 // ============================================

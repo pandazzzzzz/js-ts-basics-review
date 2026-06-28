@@ -1172,6 +1172,119 @@ console.log(`
 
 
 // ============================================
+// Section 8: Trusted Types & Cross-Origin Isolation (COOP/COEP)
+// ============================================
+
+console.log("\n=== 8. Trusted Types & Cross-Origin Isolation (COOP/COEP) ===");
+
+// NOTE: Trusted Types and COOP/COEP are Web Platform / browser security
+// features delivered via CSP HTTP headers and DOM APIs. They are NOT
+// ECMAScript spec features, so no verification block (HTTP header / browser
+// feature, not an ES feature). Examples are commented out because they
+// require a browser environment and the headers to be set.
+
+// 8.1 Trusted Types - DOM XSS prevention at the browser level
+// Trusted Types locks down dangerous DOM sinks (innerHTML, eval,
+// document.write, insertAdjacentHTML, etc.) so they only accept a
+// "TrustedHTML" object instead of a raw string. This makes DOM-based XSS
+// impossible by construction instead of relying on careful sanitization.
+//
+// Enable via Content-Security-Policy (report-only first, then enforce):
+//   Content-Security-Policy: require-trusted-types-for 'script';
+//   Content-Security-Policy: trusted-types myPolicy default;
+console.log("\n8.1 Trusted Types (DOM XSS hardening):");
+console.log("Header: Content-Security-Policy: require-trusted-types-for 'script'");
+console.log(`
+// Without Trusted Types (raw string -> dangerous sink):
+element.innerHTML = userInput; // ❌ blocked once policy is enforced
+
+// With Trusted Types: only a TrustedHTML value may be assigned.
+// Define a policy that produces TrustedHTML (your single sanitization point):
+const escapePolicy = trustedTypes.createPolicy('myPolicy', {
+  createHTML: (input) => DOMPurify.sanitize(input) // sanitize here, once
+});
+
+// Now assign the TrustedHTML object:
+element.innerHTML = escapePolicy.createHTML(userInput); // ✅ allowed
+
+// Default policy (optional) auto-wraps raw strings so legacy code keeps
+// working while still going through your sanitizer:
+trustedTypes.createPolicy('default', {
+  createHTML: (input) => DOMPurify.sanitize(input)
+});
+`);
+console.log("Benefits:");
+console.log("  - DOM XSS sinks refuse raw strings at runtime");
+console.log("  - Centralizes all sanitization into named policies");
+console.log("  - Report-only mode ('report-uri') eases rollout");
+console.log("Pitfalls:");
+console.log("  - Requires migrating every innerHTML/insertAdjacentHTML call");
+console.log("  - Third-party scripts may break; allowlist via trusted-types");
+
+// 8.2 COOP / COEP - Cross-Origin Isolation
+// Cross-Origin-Opener-Policy (COOP) and Cross-Origin-Embedder-Policy (COEP)
+// together create a "cross-origin isolated" context. This is REQUIRED to
+// enable powerful APIs that share memory across origins safely:
+//   - SharedArrayBuffer (and Atomics) in all browsers (post-Spectre)
+//   - SharedArrayBuffer in Workers
+//   - performance.measureUserAgentSpecificMemory()
+//   - JS Self-Profiling API
+//
+// Related (already covered in 41-typed-arrays.js): SharedArrayBuffer needs
+// this isolation. This section gives the dedicated header treatment.
+console.log("\n8.2 COOP / COEP (Cross-Origin Isolation):");
+console.log("Headers required for cross-origin isolation:");
+console.log(`
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+`);
+console.log("What each header does:");
+console.log("  COOP: same-origin");
+console.log("    - Isolates the browsing context group from other documents");
+console.log("    - Prevents cross-origin windows from sharing the context");
+console.log("    - Blocks cross-origin window.opener access");
+console.log("  COEP: require-corp");
+console.log("    - Requires all cross-origin resources to opt in via CORP");
+console.log("      (Cross-Origin-Resource-Policy) or explicit CORS");
+console.log("    - Prevents loading unauthenticated cross-origin resources");
+console.log("  => Together they grant crossOriginIsolated === true");
+
+// Detecting isolation at runtime (works in browser; Node has no window)
+console.log("\nRuntime detection:");
+console.log(`
+// In a browser window/worker context:
+if (typeof self !== 'undefined' && self.crossOriginIsolated) {
+  // ✅ Safe to use SharedArrayBuffer here
+  const sab = new SharedArrayBuffer(1024);
+} else {
+  // ❌ Not isolated — SharedArrayBuffer unavailable or unshared
+  console.warn("Cross-origin isolation not enabled; SAB unavailable.");
+}
+`);
+
+// 8.3 Common pitfalls for COOP/COEP
+console.log("COOP/COEP pitfalls:");
+console.log("  - All cross-origin resources need CORP or CORS headers");
+console.log("    (images, scripts, iframes, fonts, workers)");
+console.log("  - COEP: credentialless is a friendlier alternative to");
+console.log("    require-corp for sites loading many third-party resources");
+console.log("  - COOP same-origin breaks some window.open()/opener flows");
+console.log("  - Service workers must also serve correct CORP headers");
+console.log("  - Set headers on ALL responses, including subresources");
+
+// 8.4 Related security headers recap
+console.log("\nRelated security headers (recap):");
+console.log("  - Content-Security-Policy: resource allowlist (Section 3)");
+console.log("  - require-trusted-types-for 'script': Trusted Types (8.1)");
+console.log("  - Cross-Origin-Opener-Policy: COOP (8.2)");
+console.log("  - Cross-Origin-Embedder-Policy: COEP (8.2)");
+console.log("  - Cross-Origin-Resource-Policy: per-resource opt-in for COEP");
+console.log("  - Strict-Transport-Security: force HTTPS (Section 7 / A05)");
+console.log("  - X-Content-Type-Options: nosniff (Section 7 / A05)");
+console.log("  - X-Frame-Options / frame-ancestors: clickjacking (Section 3)");
+
+
+// ============================================
 // Common Pitfalls
 // ============================================
 

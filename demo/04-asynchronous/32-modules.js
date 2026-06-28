@@ -1337,6 +1337,63 @@ console.log("  - Use console.log in module scope");
 console.log("  - Verify module execution order\n");
 
 // ============================================
+// 18. IMPORT ATTRIBUTES (ES2025)
+// ============================================
+
+/**
+ * Import Attributes - Provide metadata about how a module should be imported
+ *
+ * ES Specification: ES2025
+ *
+ * Characteristics:
+ * - Syntax: import data from "./file.json" with { type: "json" };
+ * - The `with` keyword passes import attributes to the loader
+ * - JSON Modules require the { type: "json" } attribute
+ * - Renamed from "Import Assertions" (assert) to "Import Attributes" (with):
+ *     assertions were enforce-only and a failed assertion threw; attributes
+ *     are advisory metadata that loaders/bundlers can act on
+ *
+ * Use Cases:
+ * - Importing JSON modules (requires type: "json")
+ * - Importing CSS/WebAssembly/other non-JS module types in bundlers
+ *
+ * Common Pitfalls:
+ * - Using the old `assert` keyword (deprecated/removed in favor of `with`)
+ * - Forgetting the attribute when importing .json (throws in strict loaders)
+ */
+
+console.log("=== Import Attributes (ES2025) ===\n");
+
+/*
+ * verification:
+ *   feature: Import Attributes
+ *   status: ES2025
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
+// Import Attributes use the `with` keyword (ES2025), formerly `assert`.
+// JSON Modules require the { type: "json" } attribute:
+//
+//   import data from "./data.json" with { type: "json" };
+//   console.log(data); // parsed JSON object
+//
+// Old (deprecated) Import Assertions syntax — do NOT use:
+//
+//   import data from "./data.json" assert { type: "json" }; // ❌ removed
+
+console.log("Import Attributes syntax:");
+console.log("  import data from './data.json' with { type: 'json' };");
+console.log("  - `with` provides import metadata to the module loader");
+console.log("  - renamed from Import Assertions (`assert`) to Import Attributes (`with`)");
+console.log("  - JSON modules require the { type: 'json' } attribute\n");
+
+console.log("Dynamic import with attributes (ES2025):");
+console.log("  const mod = await import('./data.json', { with: { type: 'json' } });");
+console.log("  // Second argument carries the import attributes\n");
+
+// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*

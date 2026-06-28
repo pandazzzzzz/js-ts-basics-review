@@ -1002,6 +1002,127 @@ console.log(`Efficient: ${(performance.now() - t2).toFixed(2)}ms`);
 
 
 // ============================================================================
+// 10. V8 ENGINE INTERNALS
+// ============================================================================
+/**
+ * V8 Engine Internals - Hidden classes, inline caches, and shape transitions
+ *
+ * NOTE: These are V8 (and SpiderMonkey/JSC) engine implementation details,
+ * NOT ECMAScript spec features. Behavior is engine-specific and may change
+ * between versions. No verification block (not an ES feature).
+ *
+ * Key concepts:
+ * - Hidden classes (maps): V8 tracks object "shape" for fast property access
+ * - Inline caches (IC): optimize repeated property access / function calls
+ * - Monomorphic vs polymorphic/megamorphic call sites: IC state matters
+ * - `delete` transitions objects to slow "dictionary mode"
+ *
+ * References:
+ * - https://v8.dev/blog/fast-properties
+ * - https://mathiasbynens.be/notes/shapes-ics
+ */
+
+console.log("\n=== 10. V8 Engine Internals Demo ===");
+
+// 10.1 Hidden classes (maps) - object shape tracking
+// V8 assigns each object a hidden class describing its property layout.
+// Two objects with the SAME properties added in the SAME order share a
+// hidden class (fast property access). Different order => different class.
+const o1 = { a: 1, b: 2 };
+const o2 = { b: 2, a: 1 }; // same keys, different insertion order
+
+console.log("\nHidden classes (maps):");
+console.log("o1:", o1);          // { a: 1, b: 2 }
+console.log("o2:", o2);          // { b: 2, a: 1 }
+console.log("Note: o1 and o2 have DIFFERENT hidden classes in V8");
+console.log("  because property insertion order differs (a,b vs b,a).");
+console.log("Tip: Construct objects of the same logical type in a");
+console.log("  consistent field order so they share a hidden class.");
+
+// 10.2 Property addition order triggers hidden class transitions
+// Each new property transitions the object to a new hidden class.
+// Adding fields dynamically in different orders creates divergent class
+// chains, which defeats inline-cache optimizations.
+function makePointA(x, y) {
+  const p = { x };   // hidden class C0 -> C1 (x)
+  p.y = y;           // transitions to C2 (x, y)
+  return p;
+}
+
+function makePointB(x, y) {
+  const p = { y };   // hidden class C0' -> C1' (y)
+  p.x = x;           // transitions to C2' (y, x) — different class!
+  return p;
+}
+
+console.log("\nHidden class transitions:");
+console.log("makePointA(1,2):", makePointA(1, 2)); // { x: 1, y: 2 }
+console.log("makePointB(1,2):", makePointB(1, 2)); // { y: 2, x: 1 }
+console.log("Both look identical logically but use different hidden classes.");
+console.log("Fix: Always assign properties in the same order (ideally via");
+console.log("  constructor or object literal with fixed key order).");
+
+// 10.3 Inline caches (IC) - monomorphic vs polymorphic vs megamorphic
+// When a function reads `obj.x` repeatedly, V8 caches the lookup keyed by
+// the object's hidden class:
+//   - Monomorphic: 1 shape seen => fastest (single cached lookup)
+//   - Polymorphic: 2-4 shapes => slower (small cache of lookups)
+//   - Megamorphic: 5+ shapes => falls back to slow generic lookup
+// Below we model the *concept* (we cannot directly measure IC state here).
+function readX(obj) {
+  return obj.x; // IC state depends on the shapes of objects passed here
+}
+
+const monomorphic = [makePointA(1, 1), makePointA(2, 2), makePointA(3, 3)];
+console.log("\nInline cache states (conceptual):");
+console.log("Monomorphic site (all same shape):",
+  monomorphic.map(readX)); // [1, 2, 3] — IC stays monomorphic (fast)
+
+// Polymorphic / megamorphic: feed the SAME call site objects of many shapes
+const mixed = [
+  { x: 1 },            // shape S1
+  { x: 2, y: 2 },      // shape S2
+  { x: 3, z: 3 },      // shape S3
+  { x: 4, w: 4 },      // shape S4
+  { x: 5, q: 5 }       // shape S5 -> megamorphic (5+ shapes)
+];
+console.log("Polymorphic/megamorphic site (many shapes):",
+  mixed.map(readX));    // [1, 2, 3, 4, 5] — IC degrades to megamorphic (slow)
+console.log("Tip: Keep call sites monomorphic by passing objects that share");
+console.log("  a hidden class (same fields, same order).");
+
+// 10.4 The `delete` trap - dictionary (slow) mode
+// `delete obj.prop` removes a property and can transition the object from
+// fast "in-object" properties to slow "dictionary mode" (hash table backed).
+// Dictionary mode is slower for property access. Prefer setting to
+// undefined (keeps the shape) when you just need to "clear" a value.
+const obj = { a: 1, b: 2, c: 3 };
+console.log("\nThe delete trap:");
+console.log("Before delete:", obj); // { a: 1, b: 2, c: 3 }
+
+// ❌ SLOWER: delete forces a shape transition (often to dictionary mode)
+delete obj.b;
+console.log("After delete obj.b:", obj); // { a: 1, c: 3 }
+
+// ✅ FASTER (when clearing is enough): set to undefined, keep shape stable
+const obj2 = { a: 1, b: 2, c: 3 };
+obj2.b = undefined;
+console.log("After obj2.b = undefined:", obj2); // { a: 1, b: undefined, c: 3 }
+console.log("Tip: Use `obj.prop = undefined` to clear a value while keeping");
+console.log("  the hidden class stable; reserve `delete` for genuinely");
+console.log("  removing keys (and accept the shape-transition cost).");
+
+// 10.5 Practical takeaways
+console.log("\nV8 performance takeaways:");
+console.log("- Always initialize object fields in the same order.");
+console.log("- Avoid mixing many object shapes at one call site.");
+console.log("- Prefer `x = undefined` over `delete x` to preserve shape.");
+console.log("- Allocate \"hot\" objects via constructors/classes for stable shapes.");
+console.log("- These are engine details: profile with V8 flags / DevTools");
+console.log("  before micro-optimizing.");
+
+
+// ============================================================================
 // BEST PRACTICES
 // ============================================================================
 /**

@@ -231,6 +231,26 @@ processObject(circularObj);
 processObject(circularObj.nested);
 processObject(circularObj); // Will be skipped
 
+// 2.5 Symbol as WeakMap key (ES2023)
+console.log("\nSymbol as WeakMap key (ES2023):");
+
+// Before ES2023, WeakMap keys had to be objects. ES2023 (Symbols as WeakMap
+// keys proposal) allows registered Symbols to be used as keys in WeakMap,
+// WeakSet, WeakRef, and FinalizationRegistry — useful for keyed metadata
+// without needing an object identity.
+/*
+ * verification:
+ *   feature: Symbols as WeakMap keys
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+const wm = new WeakMap();
+const s = Symbol("k");
+wm.set(s, "v");
+console.log('  wm.get(s):', wm.get(s)); // 'v'
+
 
 // ============================================================================
 // 3. COMMON MEMORY LEAK PATTERNS

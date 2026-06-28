@@ -789,6 +789,139 @@ console.log("\n=== Regular Expressions Demo Complete ===");
 
 
 // ============================================================================
+// 11. NEWER REGEXP FEATURES (ES2024 & ES2025)
+// ============================================================================
+/**
+ * Newer RegExp Features
+ *
+ * ES2024:
+ * - /v flag (RegExp v flag) — Unicode "set notation" in character classes:
+ *   intersection (&&), subtraction (--), nested classes, and string properties.
+ *
+ * ES2025:
+ * - RegExp.escape(string) — Escape a literal string for safe use in a RegExp.
+ * - Duplicate Named Capture Groups — same group name in alternation branches.
+ * - RegExp Modifiers — inline flag changes scoped to a group: (?i:...), (?-i:...).
+ *
+ * Common Pitfalls:
+ * - /v flag changes semantics of existing [\p{...}] patterns (set mode)
+ * - RegExp.escape handles all syntax chars, not just the historical subset
+ * - Duplicate named groups only work across separate alternation branches
+ */
+
+console.log("\n=== 11. Newer RegExp Features (ES2024 & ES2025) Demo ===");
+
+// 11.1 RegExp v flag — Unicode set operations (ES2024)
+/*
+ * verification:
+ *   feature: RegExp v flag
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nRegExp v flag - set operations (ES2024):");
+
+// Intersection: letters that are also ASCII (excludes é, 中, etc.)
+let asciiLetterRe = new RegExp("[\\p{Letter}&&\\p{ASCII}]", "v");
+console.log("'A' is ASCII letter:", asciiLetterRe.test("A")); // true
+console.log("'é' is ASCII letter:", asciiLetterRe.test("é")); // false (letter but not ASCII)
+console.log("'5' is ASCII letter:", asciiLetterRe.test("5")); // false (ASCII but not letter)
+
+// Subtraction: letters minus ASCII = non-ASCII letters
+let nonAsciiLetterRe = new RegExp("[\\p{Letter}--\\p{ASCII}]", "v");
+console.log("'中' is non-ASCII letter:", nonAsciiLetterRe.test("中")); // true
+
+// String properties (v flag enables multi-code-point string properties)
+let emojiKeycapRe = new RegExp("\\p{RGI_Emoji}", "v");
+console.log("'😀' is RGI emoji:", emojiKeycapRe.test("😀")); // true
+
+// 11.2 RegExp.escape — escape a literal string for use in a regex (ES2025)
+/*
+ * verification:
+ *   feature: RegExp.escape
+ *   status: ES2025
+ *   stage4Date: 2025-02
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nRegExp.escape (ES2025):");
+
+// RegExp.escape turns a literal string into a pattern that matches it verbatim,
+// so special regex chars like . and * are no longer metacharacters.
+if (typeof RegExp.escape === "function") {
+  const escaped = RegExp.escape("a.b*");
+  console.log("RegExp.escape('a.b*'):", JSON.stringify(escaped));
+  // The escaped pattern matches the literal string "a.b*"
+  console.log("matches 'a.b*':", new RegExp(escaped).test("a.b*")); // true
+  console.log("does NOT match 'aXbX':", new RegExp(escaped).test("aXbX")); // false
+
+  // Practical use: safely build a regex from user input
+  const userInput = "price: $5.00 (each)";
+  const safeRe = new RegExp(RegExp.escape(userInput));
+  console.log("user input match:", safeRe.test("The price: $5.00 (each) is firm")); // true
+} else {
+  console.log("RegExp.escape not supported in this runtime (needs Node 26+ / ES2025)");
+}
+
+// 11.3 Duplicate Named Capture Groups (ES2025)
+/*
+ * verification:
+ *   feature: Duplicate Named Capture Groups
+ *   status: ES2025
+ *   stage4Date: 2024-04
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nDuplicate Named Capture Groups (ES2025):");
+
+// Before ES2025, reusing a group name in alternation branches was a SyntaxError.
+// Now the same name can appear in separate alternatives; whichever branch matches
+// populates groups.name (the other is undefined).
+try {
+  const dupNamedRe = /^(?:(?<a>x)|(?<a>y))$/;
+  console.log("'x' match groups:", dupNamedRe.exec("x").groups); // { a: 'x' }
+  console.log("'y' match groups:", dupNamedRe.exec("y").groups); // { a: 'y' }
+
+  // Practical: parse "key:value" OR "key=value" into the same named groups
+  const kvRe = /^(?:(?<key>\w+):(?<value>\w+)|(?<key>\w+)=(?<value>\w+))$/;
+  const colonMatch = kvRe.exec("name:Alice");
+  const eqMatch = kvRe.exec("name=Bob");
+  console.log("colon form:", colonMatch.groups.key, "=", colonMatch.groups.value); // name = Alice
+  console.log("equals form:", eqMatch.groups.key, "=", eqMatch.groups.value); // name = Bob
+} catch (e) {
+  console.log("Duplicate named groups not supported:", e.message);
+}
+
+// 11.4 RegExp Modifiers — inline flag scoping (ES2025)
+/*
+ * verification:
+ *   feature: RegExp Modifiers
+ *   status: ES2025
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nRegExp Modifiers (ES2025):");
+
+// (?flags:...) applies flags only inside that group; (?-flags:...) removes them.
+// Useful when only part of a pattern needs case-insensitivity or dotAll.
+try {
+  // (?i:foo) — match "foo" case-insensitively while the rest stays case-sensitive
+  const caseInsensitivePart = /label: (?i:foo)/;
+  console.log("'label: FOO' matches:", caseInsensitivePart.test("label: FOO")); // true (i scoped to foo)
+  console.log("'LABEL: foo' matches:", caseInsensitivePart.test("LABEL: foo")); // false (label is case-sensitive)
+
+  // (?-i:...) removes a flag inherited from the whole regex
+  const mixedRe = /HELLO (?-i:world)/i; // whole regex is i, but "world" is case-sensitive
+  console.log("'hello WORLD' matches:", mixedRe.test("hello WORLD")); // false (world is case-sensitive)
+  console.log("'hello world' matches:", mixedRe.test("hello world")); // true
+} catch (e) {
+  console.log("RegExp modifiers not supported:", e.message);
+}
+
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 /**

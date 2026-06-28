@@ -1017,6 +1017,56 @@ const sampleMap = new Map([["x", 1], ["y", 2]]);
 const mapIter2 = Iterator.from(sampleMap);
 console.log(mapIter2.next()); // { value: ['x', 1], done: false }
 
+// 9b.1 Native Iterator Helper chaining (ES2025)
+/*
+ * verification:
+ *   feature: Iterator helpers
+ *   status: ES2025
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+// The generator-based helpers above emulate the API. ES2025 ships the real
+// methods on Iterator.prototype. Each method returns a new lazy Iterator, so
+// the chain is NOT evaluated until a terminal step (.toArray(), .forEach(),
+// .reduce(), etc.) pulls values — nothing runs eagerly.
+
+console.log("\n=== 9b.1 Native Iterator Helper Chaining (ES2025) ===");
+
+if (Iterator.prototype && typeof Iterator.prototype.map === "function") {
+  // Same pipeline the generators emulated: double → keep >4 → take 2 → array
+  const nativeChain = Iterator.from([1, 2, 3, 4, 5])
+    .map(x => x * 2)      // [2, 4, 6, 8, 10]
+    .filter(x => x > 4)   // [6, 8, 10]
+    .take(2)              // [6, 8]   (lazy: stops pulling after 2 values)
+    .toArray();           // terminal — materializes [6, 8]
+  console.log("native chain result:", nativeChain); // [6, 8]
+
+  // Laziness proof: a side-effect in map only runs for values actually pulled.
+  // take(1) means map never even sees the 3rd value onward.
+  let mapCalls = 0;
+  const lazy = Iterator.from([10, 20, 30, 40])
+    .map(x => { mapCalls++; return x; })
+    .take(1)
+    .toArray();
+  console.log("lazy take(1) result:", lazy, "| map invoked", mapCalls, "time(s)"); // [10] | 1
+
+  // drop + reduce (a non-array terminal)
+  const sum = Iterator.from([1, 2, 3, 4, 5])
+    .drop(2)              // [3, 4, 5]
+    .reduce((acc, x) => acc + x, 0);
+  console.log("drop(2).reduce sum:", sum); // 12
+
+  // Direct lazy use: an infinite-style iterator without materializing a giant array
+  const firstBigEven = Iterator.from([1, 3, 5, 8, 11, 14])
+    .filter(x => x % 2 === 0)
+    .find(x => x > 10);
+  console.log("first even > 10:", firstBigEven); // 14
+} else {
+  console.log("Native Iterator helpers not supported in this runtime (needs Node 22+ / ES2025)");
+  console.log("Expected: Iterator.from([1,2,3,4,5]).map(x=>x*2).filter(x=>x>4).take(2).toArray() -> [6,8]");
+}
+
 
 // ============================================================================
 // 10. TYPESCRIPT TYPES

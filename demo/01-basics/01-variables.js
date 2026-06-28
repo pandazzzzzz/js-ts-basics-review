@@ -154,6 +154,33 @@ console.log("ES6 modules and classes are strict by default — no 'use strict' n
 
 
 // ============================================
+// globalThis - Cross-Environment Global (ES2020)
+// ============================================
+
+// globalThis - Standard global object reference (ES2020)
+// - Points to the global object in every JavaScript environment:
+//     Browser → window (or self in workers)
+//     Node.js → global
+//     Web Workers → self
+// - Before ES2020, code had to feature-detect: window / global / self
+// - Use case: writing portable code that needs the real global object
+// - typeof globalThis is always "object"
+console.log("\n=== globalThis (ES2020) ===");
+console.log("typeof globalThis:", typeof globalThis); // "object"
+console.log("globalThis === global (Node):", globalThis === global); // true in Node.js
+// In a browser this would be: globalThis === window // true
+// In a Web Worker: globalThis === self // true
+
+// Portable pattern (pre-ES2020 fallback looked like this):
+// const globals = (typeof window !== 'undefined') ? window
+//               : (typeof global !== 'undefined') ? global : this;
+
+// Setting a global variable through globalThis (works everywhere)
+globalThis.__myTempGlobal = "set via globalThis";
+console.log("__myTempGlobal:", __myTempGlobal); // "set via globalThis"
+
+
+// ============================================
 // Type Conversions (JS.info 2.7)
 // ============================================
 

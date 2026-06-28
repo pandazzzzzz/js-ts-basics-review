@@ -436,6 +436,43 @@ console.log("strAt[0]:", strAt[0]); // "H"
 console.log("strAt[-1]:", strAt[-1]); // undefined (bracket notation doesn't support negative)
 console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
 
+// isWellFormed() / toWellFormed() - Well-formed Unicode strings (ES2024)
+// - isWellFormed(): returns true if the string contains no lone surrogates
+// - toWellFormed(): returns a new string with lone surrogates replaced by U+FFFD (�)
+// - A "lone surrogate" is a UTF-16 code unit in the range U+D800–U+DFFF that is
+//   not part of a valid surrogate pair (e.g. a high half without its low half).
+// - Use case: safely passing strings to APIs/systems that require well-formed
+//   UTF-8/UTF-16 (e.g. encodeURIComponent, fetch, file systems).
+/*
+ * verification:
+ *   feature: isWellFormed/toWellFormed
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\n=== isWellFormed() / toWellFormed() Method (ES2024) ===");
+const wellFormedStr = "Hello 😀 World"; // emoji is a valid surrogate pair
+const loneSurrogateStr = "a\uD800b"; // \uD800 is a lone high surrogate
+console.log("'Hello 😀 World'.isWellFormed():", wellFormedStr.isWellFormed()); // true
+console.log("'a\\uD800b'.isWellFormed():", loneSurrogateStr.isWellFormed()); // false (lone surrogate)
+console.log("'a\\uD800b'.toWellFormed():", loneSurrogateStr.toWellFormed()); // "a�b" (U+FFFD)
+console.log("'Hello 😀 World'.toWellFormed():", wellFormedStr.toWellFormed()); // unchanged (already well-formed)
+
+// Comparing toWellFormed() output character codes (U+FFFD = 0xFFFD = 65533)
+const repaired = loneSurrogateStr.toWellFormed();
+console.log("Repaired length:", repaired.length); // 3 ("a", U+FFFD, "b")
+console.log("Repaired[1] codePointAt:", repaired.codePointAt(1)); // 65533 (U+FFFD)
+
+// Practical use: validate input before passing to encodeURIComponent
+function safeEncode(str) {
+  if (!str.isWellFormed()) {
+    str = str.toWellFormed(); // Repair before encoding
+  }
+  return encodeURIComponent(str);
+}
+console.log("safeEncode('a\\uD800b'):", safeEncode(loneSurrogateStr)); // "a%EF%BF%BDb" (U+FFFD UTF-8 encoded)
+
 // ============================================
 // Template Literals (ES6/ES2015)
 // ============================================

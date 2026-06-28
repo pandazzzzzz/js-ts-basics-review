@@ -564,6 +564,97 @@ let legacy = new LegacyPrivate("secret");
 console.log("\nWeakMap private:");
 console.log("Value:", legacy.getValue());
 
+// 4.8 Static initialization block with complex logic (ES2022)
+/*
+ * verification:
+ *   feature: Class Static Block
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+// A static block `static { ... }` runs once when the class is evaluated.
+// Unlike static field initializers (each a single expression), a static block
+// can hold statements: loops, try/catch, conditional init, error handling.
+// It gives privileged access to private static fields for one-time setup.
+
+class AppConfig {
+  static #rawSettings = "debug=true; port=3000; retries=3";
+
+  static debug = false;
+  static port = 8080;
+  static retries = 1;
+
+  static {
+    // Complex initialization logic that would be awkward as field expressions
+    try {
+      const entries = this.#rawSettings.split(";").map(s => s.trim()).filter(Boolean);
+      for (const entry of entries) {
+        const [key, value] = entry.split("=");
+        switch (key) {
+          case "debug":   this.debug = value === "true"; break;
+          case "port":    this.port = Number(value); break;
+          case "retries": this.retries = Number(value); break;
+        }
+      }
+      // Can read/validate after init — recomputation pattern
+      this.port = this.port || 8080; // fallback if parsing failed
+    } catch (e) {
+      console.log("Config init failed:", e.message);
+    }
+  }
+}
+
+console.log("\nStatic initialization block (ES2022):");
+console.log("AppConfig.debug:", AppConfig.debug);   // true
+console.log("AppConfig.port:", AppConfig.port);      // 3000
+console.log("AppConfig.retries:", AppConfig.retries); // 3
+
+// 4.9 Ergonomic brand checks `#field in obj` (ES2022)
+/*
+ * verification:
+ *   feature: Ergonomic brand checks
+ *   status: ES2022
+ *   stage4Date: 2021-07
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+// `#field in obj` returns true/false: does `obj` possess the private field
+// declared in THIS class? This is a true brand/membership check, unlike the
+// string-property check `"#field" in obj` (which is always false because
+// private fields are NOT string properties).
+// IMPORTANT: `#field in obj` only compiles inside the class body that
+// declares #field. Using it elsewhere is a SyntaxError.
+
+class Token {
+  #value;
+
+  constructor(value) {
+    this.#value = value;
+  }
+
+  // Brand check exposed as a method — usable on any object, not just instances
+  static isToken(obj) {
+    return #value in obj; // true only for real Token instances
+  }
+
+  // Instance method variant works the same way
+  isSameBrand(other) {
+    return #value in other;
+  }
+}
+
+console.log("\nErgonomic brand checks (ES2022):");
+const realToken = new Token("abc");
+const plainObject = { value: "abc" };
+const fakeObject = Object.create(Token.prototype); // has prototype but NOT the field
+
+console.log("isToken(realToken):", Token.isToken(realToken)); // true
+console.log("isToken(plainObject):", Token.isToken(plainObject)); // false
+console.log("isToken(fakeObject):", Token.isToken(fakeObject)); // false (no private field)
+console.log("realToken.isSameBrand(realToken):", realToken.isSameBrand(realToken)); // true
+console.log("realToken.isSameBrand(plainObject):", realToken.isSameBrand(plainObject)); // false
+
 
 // ============================================================================
 // 5. INSTANCEOF AND TYPE CHECKING

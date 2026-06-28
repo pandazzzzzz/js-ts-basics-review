@@ -904,6 +904,201 @@ Key modern features (ES2020-ES2023):
 📘 See 18-es6-plus-syntax-ts-comparison.ts for detailed examples!
  */
 
+// ============================================
+// 21. ADDITIONAL ES2020-ES2024 FEATURES
+// ============================================
+
+// This section consolidates additional modern features not covered above.
+// Each feature gets a short 2-4 line demo. Cross-references point to the
+// demo file that covers the topic in depth.
+
+console.log("\n=== Additional ES2020-ES2024 Features ===");
+
+// 21.1 Promise.allSettled (ES2020)
+// - Waits for all promises to settle (never rejects)
+// - Each result is { status, value/reason }
+console.log("\nPromise.allSettled (ES2020):");
+Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))])
+  .then(results => console.log("  Settled results:", results.map(r => r.status)));
+// 📘 See demo/04-asynchronous/30-promises.js for full coverage of Promise combinators
+
+// 21.2 String.prototype.matchAll (ES2020)
+// - Returns an iterator of all matches (including capture groups)
+// - Requires the global (g) flag
+console.log("\nString.matchAll (ES2020):");
+const matchAllRe = /(\w)(\d)/g;
+const matchAllInput = "a1 b2 c3";
+const allMatches = [...matchAllInput.matchAll(matchAllRe)];
+console.log("  Matches:", allMatches.map(m => m[0])); // ['a1', 'b2', 'c3']
+
+// 21.3 globalThis (ES2020)
+// - Universal top-level this that works across browsers, Node.js, workers
+console.log("\nglobalThis (ES2020):");
+console.log("  globalThis === globalThis:", globalThis === globalThis); // true
+// Same object regardless of environment (window in browsers, global in Node)
+
+// 21.4 Error.cause (ES2022)
+// - Pass an underlying cause when wrapping/throwing errors
+// - Useful for error chaining without losing the original stack
+/*
+ * verification:
+ *   feature: Error.cause
+ *   status: ES2022
+ *   stage4Date: 2021-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nError.cause (ES2022):");
+function loadConfig() {
+  try {
+    throw new Error("File not found");
+  } catch (err) {
+    throw new Error("Config load failed", { cause: err });
+  }
+}
+try {
+  loadConfig();
+} catch (e) {
+  console.log("  Top error:", e.message, "| cause:", e.cause.message);
+}
+
+// 21.5 Class static block (ES2022)
+// - static { ... } runs once during class evaluation
+// - Useful for complex static initialization that needs its own scope
+/*
+ * verification:
+ *   feature: Class Static Block
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nClass static block (ES2022):");
+class ConfigLoader {
+  static settings = {};
+  static {
+    // Runs once during class evaluation; private scope for setup logic
+    ConfigLoader.settings.version = "1.0";
+    ConfigLoader.settings.loadedAt = Date.now();
+  }
+}
+console.log("  ConfigLoader.settings:", ConfigLoader.settings);
+// 📘 See demo/03-core-concepts/16-classes.js for in-depth class features
+
+// 21.6 Top-level await (ES2022)
+// - Allows `await` at the top level of an ES Module
+// - This file is NOT an ESM (it uses CommonJS-style top-level code), so the
+//   syntax below is commented out. It works in .mjs files or with "type":"module".
+/*
+ * verification:
+ *   feature: Top-level await
+ *   status: ES2022
+ *   stage4Date: 2021-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nTop-level await (ES2022):");
+console.log("  // In an ES Module (.mjs or type:module) you can write:");
+console.log("  // const data = await fetch('https://api.example.com').then(r => r.json());");
+console.log("  // No async IIFE wrapper needed at module top level");
+
+// 21.7 WeakRef / FinalizationRegistry (ES2021)
+// - WeakRef: hold a weak reference to an object (doesn't prevent GC)
+// - FinalizationRegistry: callback when an object is garbage collected
+/*
+ * verification:
+ *   feature: WeakRef
+ *   status: ES2021
+ *   stage4Date: 2020-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nWeakRef / FinalizationRegistry (ES2021):");
+let weakTarget = { data: "cache-me" };
+const weakRef = new WeakRef(weakTarget);
+console.log("  WeakRef.deref():", weakRef.deref()); // { data: 'cache-me' }
+weakTarget = null; // strong reference dropped; eligible for GC
+// FinalizationRegistry callbacks are non-deterministic — don't rely on timing.
+// 📘 See demo/03-core-concepts/27-memory-management.js for full coverage
+
+// 21.8 Object.groupBy / Map.groupBy (ES2024)
+// - Group iterable elements by a key function
+// - Object.groupBy returns a plain object (null-prototype); Map.groupBy returns a Map
+/*
+ * verification:
+ *   feature: Object.groupBy
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nObject.groupBy / Map.groupBy (ES2024):");
+const inventory = [
+  { name: "apple", type: "fruit" },
+  { name: "carrot", type: "veg" },
+  { name: "banana", type: "fruit" }
+];
+const grouped = Object.groupBy(inventory, item => item.type);
+console.log("  Object.groupBy:", Object.keys(grouped)); // ['fruit', 'veg']
+const groupedMap = Map.groupBy(inventory, item => item.type);
+console.log("  Map.groupBy keys:", [...groupedMap.keys()]); // ['fruit', 'veg']
+
+// 21.9 Promise.withResolvers (ES2024)
+// - Returns { promise, resolve, reject } without a manual constructor
+// - Cleaner than the `let resolve; new Promise(r => resolve = r)` pattern
+/*
+ * verification:
+ *   feature: Promise.withResolvers
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nPromise.withResolvers (ES2024):");
+const { promise: p, resolve: res } = Promise.withResolvers();
+p.then(v => console.log("  withResolvers resolved:", v));
+res("done");
+// 📘 See demo/04-asynchronous/30-promises.js for full coverage
+
+// 21.10 RegExp v flag (ES2024)
+// - Unicode set operations in character classes (union, intersection, subtraction)
+// - Syntax: [\p{Letter}&&\p{ASCII}] (intersection), [\p{ASCII}--\p{Decimal_Number}] (subtraction)
+/*
+ * verification:
+ *   feature: RegExp v flag
+ *   status: ES2024
+ *   stage4Date: 2023-03
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nRegExp v flag (ES2024):");
+try {
+  // ASCII letters excluding decimal numbers (set subtraction)
+  const vRe = /[\p{ASCII}&&\p{Letter}]/v;
+  console.log("  /[\p{ASCII}&&\p{Letter}]/v.test('A'):", vRe.test("A")); // true
+} catch (err) {
+  console.log("  v flag not supported in this runtime:", err.message);
+}
+// 📘 See demo/03-core-concepts/21-regex.js for in-depth regex coverage
+
+// 21.11 Symbol as WeakMap keys (ES2023)
+// - Symbols (not just objects) may now be used as WeakMap/WeakSet/WeakRef keys
+// - Useful for keyed caches/metadata without an object identity
+/*
+ * verification:
+ *   feature: Symbols as WeakMap keys
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nSymbol as WeakMap keys (ES2023):");
+const symWm = new WeakMap();
+const symKey = Symbol("metadata");
+symWm.set(symKey, "symbol-keyed value");
+console.log("  WeakMap.get(symbolKey):", symWm.get(symKey)); // 'symbol-keyed value'
+
+
 // ============================================================================
 // CROSS-REFERENCES
 // ============================================================================

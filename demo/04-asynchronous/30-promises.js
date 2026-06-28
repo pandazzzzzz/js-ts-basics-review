@@ -799,3 +799,56 @@ console.log("Promise.any([fast, medium, slow]):");
 console.log("  → Resolves when FIRST succeeds (~50ms)");
 console.log("  → Result: 'fast'");
 console.log("  → Only rejects if ALL reject (AggregateError)\n");
+
+// ============================================
+// 12. PROMISE.TRY - WRAP SYNC FUNCTION AS PROMISE (ES2025)
+// ============================================
+
+/**
+ * Promise.try(fn) - Execute a (possibly sync, possibly throwing) function and
+ * return its result as a Promise.
+ *
+ * ES Specification: ES2025
+ *
+ * Characteristics:
+ * - Runs the function immediately and wraps the result/throw in a Promise
+ * - Replaces the verbose `new Promise(resolve => resolve(syncFn()))` pattern
+ * - Handles thrown errors the same way: returned promise rejects
+ * - Lets you start a promise chain from a synchronous value/throw uniformly
+ *
+ * Use Cases:
+ * - Wrapping synchronous functions (e.g. JSON.parse) into a promise chain
+ * - Unified entry point whether the producer is sync or async
+ *
+ * Common Pitfalls:
+ * - Old runtimes (< Node 24) lack Promise.try; feature-detect before use
+ */
+
+console.log("=== Promise.try (ES2025) Demo ===\n");
+
+/*
+ * verification:
+ *   feature: Promise.try
+ *   status: ES2025
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+
+const jsonStr = '{"name": "Alice"}';
+
+// Verbose pre-ES2025 way: wrap a sync function with the Promise constructor
+const verbose = new Promise(resolve => resolve(JSON.parse(jsonStr)));
+verbose.then(obj => console.log("Verbose way:", obj.name));
+
+// Modern ES2025 way: Promise.try wraps the sync function directly
+if (typeof Promise.try === "function") {
+  Promise.try(() => JSON.parse(jsonStr))
+    .then(obj => console.log("Promise.try way:", obj.name));
+
+  // Errors thrown synchronously inside the callback become a rejected promise
+  Promise.try(() => JSON.parse("{ invalid json"))
+    .catch(err => console.log("Promise.try error caught:", err.message));
+} else {
+  console.log("Promise.try not supported in this Node version");
+}
