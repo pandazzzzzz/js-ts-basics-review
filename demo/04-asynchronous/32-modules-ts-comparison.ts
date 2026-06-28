@@ -7,6 +7,7 @@
 // ============================================================================
 
 // TypeScript: import type for type-only imports (avoids runtime import)
+// @ts-ignore — demo imports the untyped JS companion file (no @types available)
 import type { Calculator } from "./32-modules";
 
 // Regular import (includes runtime value)
@@ -223,6 +224,7 @@ async function loadModule(): Promise<void> {
   console.log("\n=== Dynamic Imports ===");
 
   // Dynamic import with type assertion
+  // @ts-ignore — demo imports the untyped JS companion file (no @types available)
   const module = await import("./32-modules.js") as {
     default?: unknown;
     [key: string]: unknown;

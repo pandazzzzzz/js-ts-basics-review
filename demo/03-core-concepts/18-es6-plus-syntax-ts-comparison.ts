@@ -59,8 +59,8 @@ interface User {
 }
 
 const user: User = { username: "alice", email: "alice@example.com" };
-const { username: name, email: emailAddress } = user;
-console.log("Renamed destructuring:", name, emailAddress);
+const { username: displayName, email: emailAddress } = user;
+console.log("Renamed destructuring:", displayName, emailAddress);
 
 
 // ============================================================================
@@ -384,7 +384,9 @@ abstract class Shape {
 }
 
 class Circle extends Shape {
-  constructor(private radius: number) {}
+  constructor(private radius: number) {
+    super();
+  }
 
   getArea(): number {
     return Math.PI * this.radius * this.radius;
@@ -392,7 +394,9 @@ class Circle extends Shape {
 }
 
 class Rectangle extends Shape {
-  constructor(private width: number, private height: number) {}
+  constructor(private width: number, private height: number) {
+    super();
+  }
 
   getArea(): number {
     return this.width * this.height;

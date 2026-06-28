@@ -578,9 +578,9 @@ const typedLoggingErrorHandler = async (error: unknown): Promise<unknown> => {
 // Build and run typed pipeline
 const typedPipeline = new TypedPipeline<ProcessingData, ProcessedData | ClientErrorResponse>();
 typedPipeline
-  .use(typedLoggingMiddleware)
-  .use(typedValidationMiddleware)
-  .use(typedTransformationMiddleware)
+  .use(typedLoggingMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
+  .use(typedValidationMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
+  .use(typedTransformationMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
   .useError(typedLoggingErrorHandler)
   .useError(typedFormatErrorHandler);
 
@@ -597,7 +597,7 @@ typedPipeline.execute({ name: "test" })
 console.log("\n=== Typed Global Error Handling ===");
 
 // TypeScript: Safe function wrapper with types
-function safeExecute<T extends (...args: unknown[]) => Promise<R>, R>(
+function safeExecute<T extends (...args: any[]) => Promise<R>, R>(
   fn: T,
   fallback: ((error: unknown) => R) | R = null as R
 ): (...args: Parameters<T>) => Promise<R> {
@@ -613,8 +613,13 @@ function safeExecute<T extends (...args: unknown[]) => Promise<R>, R>(
   };
 }
 
-const typedSafeDivide = safeExecute(
-  async (a: number, b: number): Promise<number> => {
+// The demo intentionally returns a number on success and a structured error
+// object on failure, so the result type is the union of both shapes.
+const typedSafeDivide = safeExecute<
+  (a: number, b: number) => Promise<number | { error: string; result: number }>,
+  number | { error: string; result: number }
+>(
+  async (a: number, b: number) => {
     if (b === 0) throw new Error("Division by zero");
     return a / b;
   },

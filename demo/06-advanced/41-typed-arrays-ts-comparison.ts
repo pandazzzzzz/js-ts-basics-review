@@ -473,7 +473,7 @@ const result: TextEncoderEncodeIntoResult = encoder.encodeInto(text, targetBuffe
 const charsRead: number = result.read;
 const bytesWritten: number = result.written;
 
-console.log(\`encodeInto: read \${charsRead} chars, wrote \${bytesWritten} bytes\`);
+console.log(`encodeInto: read ${charsRead} chars, wrote ${bytesWritten} bytes`);
 
 // TextDecoder with types
 const decoder: TextDecoder = new TextDecoder('utf-8');

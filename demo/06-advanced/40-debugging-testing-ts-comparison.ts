@@ -206,7 +206,8 @@ test('type tests', () => {
 });
 `);
 
-// @ts-expect-error for testing type errors
+// Testing type errors (note: @ts-expect-error only applies within real TS
+// source, not inside a template-literal string demo, so no directive is needed here).
 console.log(`
 Testing type errors:
 

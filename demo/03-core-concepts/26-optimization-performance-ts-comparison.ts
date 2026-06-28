@@ -13,7 +13,7 @@ console.log("=== Typed Memoization ===");
 // TypeScript: Generic memoization with type safety
 function memoize<T extends (...args: any[]) => R, R>(
   fn: T,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
 ): T {
   const cache = new Map<string, R>();
   return ((...args: Parameters<T>) => {

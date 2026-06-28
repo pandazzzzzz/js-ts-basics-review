@@ -319,11 +319,11 @@ class Repository<T extends HasId & HasName> {
   }
 }
 
-interface User extends HasId, HasName {
+interface UserRecord extends HasId, HasName {
   email: string;
 }
 
-const userRepository = new Repository<User>();
+const userRepository = new Repository<UserRecord>();
 userRepository.add({ id: 1, name: "Alice", email: "alice@example.com" });
 userRepository.add({ id: 2, name: "Bob", email: "bob@example.com" });
 console.log("User with id 1:", userRepository.findById(1));
@@ -494,20 +494,20 @@ function applyTraits<T extends new (...args: any[]) => any>(
   return cls;
 }
 
-class Entity {
+class TraitEntity {
   id: number;
   constructor(id: number) {
     this.id = id;
   }
 }
 
-applyTraits(Entity, TEquality, TLoggable, TSerializable);
+applyTraits(TraitEntity, TEquality, TLoggable, TSerializable);
 
-const entity = new Entity(123);
+const traitEntity = new TraitEntity(123);
 console.log("Traits applied:");
-entity.log('Entity created');
-console.log('Serialized:', (entity as any).serialize());
-console.log('Equals self:', (entity as any).equals(entity));
+(traitEntity as any).log('Entity created');
+console.log('Serialized:', (traitEntity as any).serialize());
+console.log('Equals self:', (traitEntity as any).equals(traitEntity));
 
 
 // ============================================================================

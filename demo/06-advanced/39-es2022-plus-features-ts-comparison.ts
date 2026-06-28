@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 39-es2022-plus-features.js
 // This file demonstrates TypeScript-specific type features for modern ECMAScript
 
+/// <reference lib="es2024" />
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================
@@ -12,6 +13,11 @@ console.log("=== Error.cause - Type Safety ===\n");
 
 // Error.cause is built into TS 4.6+ via ErrorOptions interface.
 // No need for a custom interface — Error constructor accepts { cause } natively.
+
+// Helper interface to access Error.cause (typed as unknown by the built-in lib).
+interface ErrorWithCause extends Error {
+  cause?: unknown;
+}
 
 function connectDatabase(): void {
   throw new Error("Connection timeout");

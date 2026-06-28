@@ -240,7 +240,7 @@ class SecureStorage {
     const key = await crypto.subtle.deriveKey(
       {
         name: 'PBKDF2',
-        salt: encrypted.salt,
+        salt: encrypted.salt as BufferSource,
         iterations: 100000,
         hash: 'SHA-256'
       },
@@ -251,7 +251,7 @@ class SecureStorage {
     );
 
     const decrypted = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: encrypted.iv },
+      { name: 'AES-GCM', iv: encrypted.iv as BufferSource },
       key,
       encrypted.ciphertext
     );
@@ -402,7 +402,7 @@ console.log("\n=== Web Crypto API Types - Deep Dive ===\n");
 async function hashSHA256Typed(message: string): Promise<string> {
   const encoder = new TextEncoder();
   const data: Uint8Array = encoder.encode(message);
-  const hashBuffer: ArrayBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashBuffer: ArrayBuffer = await crypto.subtle.digest('SHA-256', data as BufferSource);
   const hashArray: Uint8Array = new Uint8Array(hashBuffer);
   const hashHex: string = Array.from(hashArray)
     .map(b => b.toString(16).padStart(2, '0'))
@@ -510,7 +510,7 @@ async function decryptAESGCMTyped(
   const decrypted: ArrayBuffer = await crypto.subtle.decrypt(
     { name: 'AES-GCM', iv: encryptedData.iv } as AesGcmParams,
     key,
-    encryptedData.encrypted
+    encryptedData.encrypted as BufferSource
   );
   
   return decoder.decode(decrypted);
@@ -560,7 +560,7 @@ async function decryptRSATyped(
   const decrypted: ArrayBuffer = await crypto.subtle.decrypt(
     { name: 'RSA-OAEP' } as RsaOaepParams,
     privateKey,
-    encrypted
+    encrypted as BufferSource
   );
   
   return decoder.decode(decrypted);
@@ -605,7 +605,7 @@ async function verifySignatureTyped(
   const isValid: boolean = await crypto.subtle.verify(
     'RSASSA-PKCS1-v1_5',
     publicKey,
-    signature,
+    signature as BufferSource,
     encoder.encode(message)
   );
   
@@ -687,7 +687,7 @@ class CryptoUtils {
     const decrypted = await crypto.subtle.decrypt(
       { name: 'AES-GCM', iv } as AesGcmParams,
       key,
-      encrypted
+      encrypted as BufferSource
     );
     
     return decoder.decode(decrypted);

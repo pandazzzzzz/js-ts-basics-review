@@ -113,9 +113,11 @@ const throttledScroll = throttle(handleScroll, 200);
 console.log("\n=== Lazy Loading - Type-Safe Imports ===\n");
 
 // Type-safe dynamic imports
+// @ts-ignore — './module' is a demo-only placeholder that does not exist on disk
 type ModuleType = typeof import('./module');
 
 async function loadModule(): Promise<ModuleType> {
+  // @ts-ignore — './module' is a demo-only placeholder that does not exist on disk
   const module = await import('./module');
   return module;
 }
@@ -284,14 +286,14 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function(...args: Parameters<T>): ReturnType<T> {
+  descriptor.value = function(this: any, ...args: Parameters<T>): ReturnType<T> {
     const key = JSON.stringify(args);
-    
+
     if (cache.has(key)) {
       console.log('📦 Cache hit');
       return cache.get(key)!;
     }
-    
+
     const result = originalMethod.apply(this, args);
     cache.set(key, result);
     return result;
@@ -301,12 +303,14 @@ function Memoize<T extends (...args: any[]) => any>(
 }
 
 class Calculator {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @Memoize
   fibonacci(n: number): number {
     if (n <= 1) return n;
     return this.fibonacci(n - 1) + this.fibonacci(n - 2);
   }
 
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @Memoize
   factorial(n: number): number {
     if (n <= 1) return 1;

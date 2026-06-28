@@ -151,6 +151,7 @@ function enumerable(value: boolean) {
 }
 
 class Calculator {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @enumerable(false)
   add(a: number, b: number): number {
     return a + b;
@@ -165,6 +166,7 @@ function format(pattern: string) {
 }
 
 class Formatted {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @format('YYYY-MM-DD')
   date!: string;
 }
@@ -183,6 +185,7 @@ function configurable(value: boolean) {
 class ConfigurableExample {
   private _value: number = 0;
 
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @configurable(false)
   get value(): number {
     return this._value;
@@ -310,11 +313,14 @@ console.log("Type-level programming enables complex type logic");
 console.log("\n=== Module Augmentation ===\n");
 
 // Extend existing module types
-declare module './utils' {
-  interface Utils {
-    newFunction(): void;
-  }
-}
+// Note: `declare module './utils'` would normally augment that module's types.
+// It is commented out here because './utils' does not exist in this demo, and
+// TypeScript rejects augmenting a relative module path it cannot resolve (TS2664).
+// declare module './utils' {
+//   interface Utils {
+//     newFunction(): void;
+//   }
+// }
 
 // Global augmentation
 declare global {
@@ -332,11 +338,11 @@ console.log("Module augmentation extends third-party types");
 console.log("\n=== Advanced Interface Patterns ===\n");
 
 // Interface merging
-interface Config {
+interface AppConfig {
   debug: boolean;
 }
 
-interface Config {
+interface AppConfig {
   production: boolean;
 }
 // Merged: { debug: boolean; production: boolean; }
@@ -355,9 +361,9 @@ namespace Logger {
 }
 
 // Intersection types
-type A = { a: string };
-type B = { b: number };
-type C = A & B; // { a: string; b: number; }
+type A2 = { a: string };
+type B2 = { b: number };
+type C2 = A2 & B2; // { a: string; b: number; }
 
 console.log("Interface patterns enable flexible type composition");
 

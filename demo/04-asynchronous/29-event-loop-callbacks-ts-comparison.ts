@@ -45,8 +45,9 @@ fetchData(1, (error, data) => {
   if (error) {
     console.error("Error:", error.message);
   } else {
-    // data is typed as { id: number; name: string }
-    console.log("Data received:", data.name);
+    // data is typed as { id: number; name: string } | undefined (error-first callback)
+    // In the success branch the callback contract guarantees data is present.
+    console.log("Data received:", data!.name);
   }
 });
 

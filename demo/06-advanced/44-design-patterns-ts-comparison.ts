@@ -312,9 +312,11 @@ function ReadOnly(target: any, propertyKey: string) {
 
 @Singleton
 class DecoratedService {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @ReadOnly
   readonly apiUrl: string = "https://api.example.com";
 
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @Log
   fetchData(id: number): string {
     return `Data for ID: ${id}`;
@@ -336,7 +338,7 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function(...args: Parameters<T>): ReturnType<T> {
+  descriptor.value = function(this: any, ...args: Parameters<T>): ReturnType<T> {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log("📦 Cache hit");
@@ -351,6 +353,7 @@ function Memoize<T extends (...args: any[]) => any>(
 }
 
 class Calculator {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @Memoize
   fibonacci(n: number): number {
     if (n <= 1) return n;

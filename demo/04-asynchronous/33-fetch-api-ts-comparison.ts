@@ -925,7 +925,7 @@ function fetchWithTimeout<T = unknown>(
   }
   
   const timeoutId = setTimeout(() => {
-    controller.abort(new Error(\`Timeout after \${timeoutMs}ms\`));
+    controller.abort(new Error(`Timeout after ${timeoutMs}ms`));
   }, timeoutMs);
   
   return fetch(url, {
@@ -966,9 +966,9 @@ class TypedSearchController<T> {
     const { signal } = this.currentController;
     
     try {
-      const response = await fetch(\`\${endpoint}?q=\${query}\`, { signal });
+      const response = await fetch(`${endpoint}?q=${query}`, { signal });
       if (!response.ok) {
-        throw new Error(\`HTTP \${response.status}\`);
+        throw new Error(`HTTP ${response.status}`);
       }
       const results: T[] = await response.json();
       return results;

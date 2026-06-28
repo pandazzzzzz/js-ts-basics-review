@@ -58,7 +58,7 @@ console.log("\n=== Generic Higher-Order Functions ===");
 // Generic memoization
 function memoize<T extends (...args: any[]) => R, R>(
   fn: T,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
 ): T {
   const cache = new Map<string, R>();
   return ((...args: Parameters<T>) => {
@@ -271,6 +271,7 @@ function log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 }
 
 class Calculator {
+  // @ts-expect-error — legacy decorators require experimentalDecorators: true
   @log
   add(a: number, b: number): number {
     return a + b;
@@ -370,7 +371,7 @@ const pointFreeTransform = pipe(add1, multiply2);
 console.log("Point-free style:", pointFreeTransform(5)); // 12
 
 // TypeScript: Practical array processing with point-free style
-const isEven = (x: number): boolean => x % 2 === 0;
+const isEvenNumber = (x: number): boolean => x % 2 === 0;
 const doubleValue = (x: number): number => x * 2;
 const trim = (str: string): string => str.trim();
 const toUpper = (str: string): string => str.toUpperCase();
@@ -378,7 +379,7 @@ const addPrefix = (prefix: string) => (str: string): string => `${prefix} ${str}
 
 const numbers = [1, 2, 3, 4, 5];
 const result = numbers
-  .filter(isEven)
+  .filter(isEvenNumber)
   .map(doubleValue);
 console.log("\nArray processing:", result); // [4, 8]
 
@@ -415,7 +416,7 @@ console.log("- sumReduce: Array creation + reduce, more overhead");
 function memoizeWithMaxSize<T extends (...args: any[]) => R, R>(
   fn: T,
   maxSize: number = 100,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
 ): (...args: Parameters<T>) => R {
   const cache = new Map<string, R>();
 
@@ -430,7 +431,9 @@ function memoizeWithMaxSize<T extends (...args: any[]) => R, R>(
 
     if (cache.size >= maxSize) {
       const firstKey = cache.keys().next().value;
-      cache.delete(firstKey);
+      if (firstKey !== undefined) {
+        cache.delete(firstKey);
+      }
     }
 
     cache.set(key, result);

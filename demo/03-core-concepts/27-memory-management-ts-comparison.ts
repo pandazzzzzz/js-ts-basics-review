@@ -2,6 +2,18 @@
 // 📘 For JavaScript examples, see: 27-memory-management.js
 // This file demonstrates TypeScript-specific memory management features
 
+// Minimal ambient declarations for the Node.js globals used below.
+// The project has no @types/node, so these keep the Node-API demos type-safe.
+declare const process: {
+  memoryUsage(): {
+    heapUsed: number;
+    heapTotal: number;
+    external: number;
+    arrayBuffers: number;
+  };
+};
+declare function setImmediate(callback: (value?: unknown) => void): void;
+
 export {};
 
 // ============================================================================
@@ -413,8 +425,8 @@ cleanup(); // Properly remove listener
 
 // TypeScript: Type-safe timer management
 class TimerManager {
-  private readonly timers: Map<number, NodeJS.Timeout> = new Map();
-  private readonly intervals: Map<number, NodeJS.Timeout> = new Map();
+  private readonly timers: Map<number, ReturnType<typeof setTimeout>> = new Map();
+  private readonly intervals: Map<number, ReturnType<typeof setInterval>> = new Map();
   private nextId = 0;
 
   setTimeout(callback: () => void, delay: number): number {

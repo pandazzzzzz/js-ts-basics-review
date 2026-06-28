@@ -189,7 +189,8 @@ console.log("Coordinates:", { coordX, coordY });
 
 // ⚠️ PITFALL: Destructuring beyond tuple length
 const pair: [number, string] = [1, "hello"];
-const [a, b, c] = pair; // c: undefined (but TypeScript doesn't warn!)
+// Widen the tuple view so TS allows the 3rd binding; `c` is `undefined` at runtime.
+const [a, b, c] = pair as [number, string, unknown?]; // c: undefined (TS won't flag the access)
 console.log("Destructured:", { a, b, c });
 
 

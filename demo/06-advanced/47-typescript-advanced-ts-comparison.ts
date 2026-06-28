@@ -16,7 +16,7 @@ console.log("=== JSDoc vs TypeScript ===\n");
  * @param {number} b
  * @returns {number}
  */
-function addJs(a, b) {
+function addJs(a: number, b: number) {
   return a + b;
 }
 
@@ -54,7 +54,7 @@ console.log("\n=== Generic Constraints ===\n");
 
 // JavaScript:
 // No generic type-safe property access
-function getPropertyJs(obj, key) {
+function getPropertyJs(obj: Record<string, unknown>, key: string) {
   return obj[key];
 }
 const userJs = { name: "Alice", age: 30 };
@@ -168,7 +168,7 @@ console.log("Decorators: Add metadata, modify behavior");
 console.log("\n=== Type Guards ===\n");
 
 // JavaScript:
-function isStringJs(value) {
+function isStringJs(value: unknown) {
   return typeof value === "string";
 }
 

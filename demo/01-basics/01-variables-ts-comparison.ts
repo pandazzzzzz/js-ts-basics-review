@@ -164,9 +164,10 @@ function processValue(value: string | number) {
 
 console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
-// PITFALL 1: Type assertions don't perform runtime checks
-let wrongAssertion = (42 as any) as string;
-// wrongAssertion.toUpperCase(); // Runtime error! TypeScript won't catch this
+// ⚠️ PITFALL 1: Type assertions don't perform runtime checks
+// (Same idea as the `wrongAssertion` example above, restated in the pitfalls section.)
+let redundantAssertion = (42 as any) as string;
+// redundantAssertion.toUpperCase(); // Runtime error! TypeScript won't catch this
 console.log("Type assertions bypass compile-time checks");
 
 // PITFALL 2: Array type confusion
@@ -185,24 +186,26 @@ console.log(person.name); // ✅ OK
 // console.log(person.email); // ❌ Error: Property 'email' does not exist
 
 // PITFALL 4: Non-null assertion can cause runtime errors
+// (The dedicated section 10 below covers the non-null assertion operator
+//  in depth; here we reuse the same idea under different identifiers.)
 interface UserProfile {
   name: string;
   age: number;
 }
 
-function getUserProfile(): UserProfile | null {
+function fetchProfile(): UserProfile | null {
   return { name: "Bob", age: 25 };
 }
 
-const maybeUserProfile = getUserProfile();
+const maybeProfile = fetchProfile();
 
 // Safe way:
-const userName1 = maybeUserProfile?.name; // ✅ Safe: string | undefined
-console.log("Safe access:", userName1);
+const safeName = maybeProfile?.name; // ✅ Safe: string | undefined
+console.log("Safe access:", safeName);
 
 // Dangerous way (non-null assertion):
-const userName2 = maybeUserProfile!.name; // ⚠️ Tells TS "trust me, it's not null"
-console.log("Non-null assertion:", userName2);
+const forcedName = maybeProfile!.name; // ⚠️ Tells TS "trust me, it's not null"
+console.log("Non-null assertion:", forcedName);
 
 // ✅ BEST PRACTICE: Use optional chaining or explicit null checks
 

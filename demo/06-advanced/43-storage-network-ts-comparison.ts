@@ -447,6 +447,12 @@ console.log("\n=== Server-Sent Events with Types ===\n");
 class TypedEventSource<EventMap extends Record<string, any>> {
   private eventSource: EventSource | null = null;
 
+  // Accept the URL up-front so callers can pass it via the constructor,
+  // mirroring the native EventSource(url) API while staying type-safe.
+  constructor(url: string) {
+    this.connect(url);
+  }
+
   connect(url: string): void {
     this.eventSource = new EventSource(url);
 
@@ -476,6 +482,20 @@ class TypedEventSource<EventMap extends Record<string, any>> {
         console.error("Failed to parse event data:", error);
       }
     });
+  }
+
+  onOpen(handler: () => void): void {
+    if (!this.eventSource) {
+      throw new Error("EventSource not connected");
+    }
+    this.eventSource.addEventListener("open", handler);
+  }
+
+  onError(handler: (error: Event) => void): void {
+    if (!this.eventSource) {
+      throw new Error("EventSource not connected");
+    }
+    this.eventSource.addEventListener("error", handler);
   }
 
   close(): void {
@@ -645,7 +665,7 @@ function navigateToProfile(userId: number): void {
     timestamp: Date.now()
   };
   
-  history.pushState(state, '', \`/profile/\${userId}\`);
+  history.pushState(state, '', `/profile/${userId}`);
 }
 
 // replaceState with typed state
@@ -656,7 +676,7 @@ function updateProfileTab(userId: number, tab: string): void {
     timestamp: Date.now()
   };
   
-  history.replaceState(state, '', \`/profile/\${userId}?tab=\${tab}\`);
+  history.replaceState(state, '', `/profile/${userId}?tab=${tab}`);
 }
 
 // Type-safe popstate handler
@@ -792,7 +812,7 @@ typedEventSource.on('notification', (data) => {
 
 typedEventSource.on('userJoined', (data) => {
   // data is typed as { userId: number; name: string }
-  console.log(\`User \${data.name} joined\`);
+  console.log(`User ${data.name} joined`);
 });
 
 typedEventSource.onOpen(() => {

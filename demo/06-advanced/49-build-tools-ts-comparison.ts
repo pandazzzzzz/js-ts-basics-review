@@ -121,7 +121,10 @@ interface ImportMeta {
 }
 
 // Usage
+// Vite provides import.meta.env via `vite/client` types; declared above as ImportMeta.
+// @ts-ignore — import.meta.env is supplied by the Vite build tool at runtime
 const apiUrl: string = import.meta.env.VITE_API_URL;
+// @ts-ignore — import.meta.env is supplied by the Vite build tool at runtime
 const appTitle: string = import.meta.env.VITE_APP_TITLE;
 
 console.log("Type-safe environment variables");
@@ -133,9 +136,12 @@ console.log("Type-safe environment variables");
 console.log("\n=== Code Splitting - Type-Safe Imports ===\n");
 
 // Type-safe dynamic imports
+// './module' is a placeholder path resolved by the bundler at build time.
+// @ts-ignore — placeholder module resolved by the bundler at build time
 type ModuleType = typeof import('./module');
 
 async function loadModule(): Promise<ModuleType> {
+  // @ts-ignore — placeholder module resolved by the bundler at build time
   const module = await import('./module');
   return module;
 }
