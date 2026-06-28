@@ -379,6 +379,13 @@
       "stage": 4,
       "stage4Date": "2020-03",
       "url": "https://github.com/tc39/proposal-promise-any"
+    },
+    "Intl.PluralRules": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2017-01",
+      "note": "Part of ES2018; reached Stage 4 in Jan 2017",
+      "url": "https://github.com/tc39/proposal-intl-plural-rules"
     }
   }
 }

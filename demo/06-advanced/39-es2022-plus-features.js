@@ -269,6 +269,14 @@ finalObj = null; // Remove strong reference
 // ============================================
 
 console.log("\n=== Intl.PluralRules (ES2018) ===");
+/*
+ * verification:
+ *   feature: Intl.PluralRules
+ *   status: ES2018
+ *   stage4Date: 2017-01
+ *   lastVerified: 2026-06-19
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 const en = new Intl.PluralRules('en-US');
 console.log("1:", en.select(1));    // "one"
