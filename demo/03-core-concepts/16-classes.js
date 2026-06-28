@@ -436,7 +436,11 @@ console.log("After deposit:", account.getBalance()); // 150
 
 // Private field is not accessible outside
 console.log("\nPrivate field access:");
-console.log("'#balance' in account:", "#balance" in account); // false
+// Note: "#balance" in account checks for a STRING-named property (always false —
+// private fields are not string properties). The ES2022 ergonomic brand check
+// `#balance in account` (no quotes) returns true but only works INSIDE the class
+// body that declares #balance.
+console.log("'#balance' in account (string check):", "#balance" in account); // false
 console.log("account.#balance would be SyntaxError");
 
 // 4.2 Private method
@@ -989,7 +993,9 @@ class WithPrivate {
   #secret = "hidden";
 }
 let wp = new WithPrivate();
-console.log("Pitfall 4 - Private not accessible:", "#secret" in wp); // false
+// "#secret" in wp is a string-property check (false); the brand check `#secret in wp`
+// returns true but only inside the WithPrivate class body.
+console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in wp); // false
 
 
 // ============================================================================

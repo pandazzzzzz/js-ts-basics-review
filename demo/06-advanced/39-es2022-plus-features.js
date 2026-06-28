@@ -520,9 +520,6 @@ console.log("- Intersection: [A&&B]");
 console.log("- Subtraction: [A--B]");
 console.log("- Union: [A[B]]");
 
-// ⚠️  Note:
-// - SharedArrayBuffer only works with integer TypedArrays (Int32Array, BigInt64Array)
-
 // Example: Match emoji but not keycap emoji
 // const emojiRegex = /[\p{Emoji}--\p{Emoji_Keycap}]/v;
 // console.log("😀 matches:", emojiRegex.test("😀")); // true

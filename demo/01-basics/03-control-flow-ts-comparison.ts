@@ -209,8 +209,9 @@ const person: Person = {
 
 console.log("\nFor...in with typed object:");
 for (const key in person) {
-  // TypeScript knows key is "name" | "age"
-  // But person[key] requires type assertion or proper handling
+  // TypeScript types `key` as string (NOT "name" | "age"), because for...in
+  // enumerates inherited enumerable props and TS can't guarantee the declared keys.
+  // Hence person[key] needs `as keyof Person`.
   console.log(`${key}: ${person[key as keyof Person]}`);
 }
 

@@ -231,8 +231,8 @@ const result = input
 
 // With placeholder:
 const result = input
-  |> double,
-  |> Math.max(0, $$),
+  |> double
+  |> Math.max(0, $$)
   |> String;
 `);
 
