@@ -269,7 +269,7 @@ const isValid = input.checkValidity();   // Returns boolean, doesn't show prompt
 const isFormValid = form.checkValidity();
 
 // Report validation results (shows browser default prompt）
-input.reportValidity();  // Returns boolean, shows prompt if invalid and focuses
+input.reportValidity();  // Returns boolean, reports problems to the user if invalid
 
 // Force show validation UI (even if unmodified）
 form.classList.add('was-validated');  // Bootstrap style
@@ -555,9 +555,10 @@ input.addEventListener('paste', (e) => {
   // Clean or transform content
   const cleaned = text.replace(/<script.*?>.*?<\\/script>/gi, '');
 
-  // Insert into input box
-  // ⚠️ document.execCommand('insertText') is deprecated - use input.setRangeText() instead
-  document.execCommand('insertText', false, cleaned);
+  // Insert into input box (modern: setRangeText; execCommand('insertText') is deprecated)
+  const start = input.selectionStart ?? 0;
+  const end = input.selectionEnd ?? 0;
+  input.setRangeText(cleaned, start, end, 'end');
 });
 `);
 

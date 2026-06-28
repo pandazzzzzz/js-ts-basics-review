@@ -150,7 +150,7 @@ input.addEventListener('focus', (e: FocusEvent) => {
   target.classList.add('focused');
 });
 
-// ChangeEvent - value change confirmation
+// change event (TS types 'change' as Event, not a ChangeEvent — narrow target via cast)
 select.addEventListener('change', (e: Event) => {
   const target = e.target as HTMLSelectElement;
   console.log(target.value);

@@ -108,7 +108,7 @@ console.log("   Syntax: element.closest(selector)");
 console.log("   Returns: Element | null (includes itself)");
 console.log("   Use case: Finding specific ancestor in event delegation\n");
 
-console.log("8. matches() / matchesSelector() - Match check (DOM / WHATWG Living Standard)");
+console.log("8. matches() / matchesSelector() - Match check (DOM / WHATWG; matchesSelector is the deprecated legacy alias)");
 console.log("   Syntax: element.matches(selector)");
 console.log("   Returns: boolean");
 console.log("   Use case: Filtering target element in event delegation\n");
@@ -122,6 +122,7 @@ console.log("│ querySelector       │ Element/null     │ N/A              �
 console.log("│ querySelectorAll    │ NodeList         │ ❌ Static        │");
 console.log("│ getElementsByTagName│ HTMLCollection   │ ✅ Live          │");
 console.log("│ getElementsByClass  │ HTMLCollection   │ ✅ Live          │");
+console.log("│ getElementsByName   │ NodeList         │ ✅ Live          │");
 console.log("│ children            │ HTMLCollection   │ ✅ Live          │");
 console.log("│ childNodes          │ NodeList         │ ✅ Live          │");
 console.log("└─────────────────────┴──────────────────┴──────────────────┘\n");
@@ -167,7 +168,7 @@ console.log("   Example: element.innerHTML = '<strong>Bold</strong>'\n");
 
 console.log("2. textContent");
 console.log("   - Gets/sets plain text content (doesn't include HTML tags)");
-console.log("   - ✅ Safe: Automatically escapes HTML special characters");
+console.log("   - ✅ Safe: Treats value as plain text, never parsed as HTML (no script execution)");
 console.log("   - ✅ Better performance: Doesn't trigger HTML parsing");
 console.log("   - Returns content of hidden elements");
 console.log("   Example: element.textContent = '<script>not executed</script>'\n");
@@ -200,7 +201,7 @@ console.log(`
 
 console.log("\n6. hidden property");
 console.log("   - HTML5 boolean attribute");
-console.log("   - Equivalent to style.display = 'none'");
+console.log("   - Applies display:none via user-agent stylesheet, but CAN be overridden by author CSS (e.g. display:block)");
 console.log("   - Can be customized with CSS [hidden] { display: none }");
 console.log(`
    element.hidden = true;  // Hide

@@ -81,7 +81,7 @@ console.log(`
 ├─────────────────────┼──────────────────┼─────────────────────────────┤
 │ getElementById      │ Element/null     │ HTMLElement | null          │
 │ querySelector       │ Element/null     │ Element | null              │
-│ querySelectorAll    │ NodeList         │ NodeList<Element>           │
+│ querySelectorAll    │ NodeList         │ NodeListOf<Element>         │
 │ getElementsByTagName│ HTMLCollection   │ HTMLCollectionOf<T>         │
 │ getElementsByClass  │ HTMLCollection   │ HTMLCollectionOf<Element>   │
 │ children            │ HTMLCollection   │ HTMLCollection              │

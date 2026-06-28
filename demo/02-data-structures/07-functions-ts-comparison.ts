@@ -515,7 +515,7 @@ console.log(obj.regularMethod()); // 42
 
 // PITFALL 4: Function overloads order matters
 function overloadOrder(x: string): string;
-function overloadOrder(x: string | number): string; // ⚠️ Less specific, only matches numbers in practice
+function overloadOrder(x: string | number): string; // ⚠️ Less specific — TS picks first matching signature, so this never wins for strings
 function overloadOrder(x: string | number): string {
   return String(x);
 }

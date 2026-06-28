@@ -306,7 +306,9 @@ class CaseInsensitiveMatcher {
   }
 
   [Symbol.replace](string, replacement) {
-    return string.toLowerCase().replaceAll(this.pattern, replacement);
+    // Use a case-insensitive RegExp to preserve non-match casing
+    // (toLowerCase().replaceAll would lowercase the whole string)
+    return string.replace(new RegExp(this.pattern, 'gi'), replacement);
   }
 
   [Symbol.search](string) {

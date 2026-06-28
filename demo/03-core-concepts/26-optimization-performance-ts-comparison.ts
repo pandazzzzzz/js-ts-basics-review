@@ -360,6 +360,6 @@ console.log("7. Template literal types");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe data structures");
-console.log("- Better compiler optimizations");
+console.log("- Better tooling/refactoring (types are erased at runtime; no JIT gain)");
 console.log("- Clear performance contracts");
 console.log("- Immutable value enforcement");

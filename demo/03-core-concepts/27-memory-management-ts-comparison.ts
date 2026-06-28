@@ -501,7 +501,9 @@ class WeakCache<K extends object, V> implements GCFriendlyCache<K, V> {
   }
 
   clear(): void {
-    // WeakMap cannot be cleared, but entries will be GC'd
+    // WeakMap cannot be cleared or iterated; throw rather than silently no-op
+    // (callers must drop all key references and let GC reclaim entries).
+    throw new Error("WeakCache.clear() is unsupported: WeakMap is not iterable");
   }
 }
 

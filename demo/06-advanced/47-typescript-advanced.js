@@ -590,6 +590,15 @@ console.log("8. Reflect vs Object method differences");
 - TypeScript ESLint for linting
 
 9. TYPESCRIPT VERSION UPDATES (2024-2026)
+   TS 5.0 (March 2023):
+   - const type parameters (inferred readonly tuples without `as const`)
+   - Standard (Stage 3) decorators support (experimentalDecorators: false)
+   - `--moduleResolution bundler`
+
+   TS 5.2 (August 2023):
+   - `using` / `await using` declarations (Explicit Resource Management)
+   - Decorator metadata support
+
    TS 5.5 (June 2024):
    - Explicit type annotations on catch variables (catch (e: unknown))
    - Inferred type predicates for JSDoc

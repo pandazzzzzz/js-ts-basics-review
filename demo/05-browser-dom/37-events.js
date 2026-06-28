@@ -431,8 +431,9 @@ document.addEventListener('touchstart', (e) => {
   e.preventDefault();  // ❌ Ignored, console warning
 }, { passive: true });
 
-// Chrome enables passive by default for touch/wheel events (for performance）
-// If you need to prevent, explicitly set passive: false
+// Chrome treats touchstart/touchmove/wheel as passive by default, but ONLY for
+// listeners on document/window/document.body (not other elements).
+// If you need to prevent, explicitly set passive: false.
 document.addEventListener('wheel', (e) => {
   e.preventDefault();  // ✅ Valid
 }, { passive: false });
@@ -626,10 +627,13 @@ window.addEventListener('load', () => {
   hideLoader();
 });
 
+// beforeunload: setting e.returnValue (or returning a string) is the cross-browser
+// requirement; preventDefault() alone is not reliably honored in Chromium.
+// Custom messages are no longer shown in modern browsers (generic dialog only).
 window.addEventListener('beforeunload', (e) => {
   if (hasUnsavedChanges) {
     e.preventDefault();
-    e.returnValue = '';  // Chrome needs this
+    e.returnValue = '';  // Required for cross-browser behavior
   }
 });
 

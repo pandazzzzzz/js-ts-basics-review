@@ -480,21 +480,23 @@ processLargeArray(largeArray, x => Math.sqrt(x), 2500)
     console.log(`  Processed ${results.length} items`);
   });
 
-// 4.3 Using MessageChannel for microtask scheduling
+// 4.3 Using MessageChannel for task (macrotask) scheduling
+// Note: MessageChannel posts a TASK (macrotask), NOT a microtask.
+// Use queueMicrotask() or Promise.resolve().then() for microtasks.
 function scheduleMicroTask(fn) {
   const channel = new MessageChannel();
   channel.port1.onmessage = () => fn();
   channel.port2.postMessage(null);
 }
 
-console.log("\nMicrotask scheduling:");
+console.log("\nTask scheduling via MessageChannel (macrotask, not microtask):");
 scheduleMicroTask(() => {
   console.log('  Executed via MessageChannel');
 });
 
 // 4.4 requestIdleCallback for non-critical work
 function scheduleIdleWork(fn) {
-  if ('requestIdleCallback' in window) {
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
     requestIdleCallback(fn);
   } else {
     setTimeout(fn, 1);
@@ -871,7 +873,7 @@ function benchmark(fn, iterations = 10000) {
     fn();
   }
 
-  // Force garbage collection hint
+  // Force garbage collection hint (only available with --expose-gc; otherwise no-op)
   global.gc?.();
 
   const startTime = performance.now();

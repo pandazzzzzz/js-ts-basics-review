@@ -58,7 +58,8 @@ if (typeof document !== 'undefined') {
 
   console.log(`
 ⚠️ cloneNode Notes:
-- Does not copy event listeners added with addEventListener
+- Does NOT copy event listeners added with addEventListener
+- DOES copy inline handler attributes / IDL properties (e.g. el.onclick = fn)
 - Does not copy JavaScript properties other than standard attributes
 - id attribute is also copied, avoid duplicate IDs!
 `);
@@ -585,7 +586,7 @@ console.log("❌ DON'T:\n");
 console.log("1. Don't frequently manipulate DOM in loops");
 console.log("2. Don't use innerHTML for complex construction (XSS risk)");
 console.log("3. Don't forget to modify id after cloneNode (duplicate IDs)");
-console.log("4. Don't use innerHTML = '' to empty container (event leaks)");
+console.log("4. innerHTML = '' to empty container: modern engines GC removed children and their listeners (only leaks if you retain JS references to them)");
 console.log("5. Don't mix reads and writes of styles in tight loops");
 console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
 

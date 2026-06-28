@@ -365,7 +365,7 @@ console.log("search(/[0-9]/):", "I have 5 apples".search(/[0-9]/)); // 7
 console.log("search(/cat/):", "dog".search(/cat/)); // -1
 
 // localeCompare() - Locale-aware string comparison (ES3)
-// - Returns -1, 0, or 1
+// - Returns a negative number, 0, or a positive number (not strictly -1/0/1)
 // - Respects locale-specific sorting rules
 // - Use case: sorting names, internationalization
 console.log("\n=== localeCompare() Method ===");

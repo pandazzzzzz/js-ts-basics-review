@@ -323,8 +323,8 @@ console.log("Nested object can still be modified:", frozen.nested.value); // 100
 
 // 4.4 Deep freeze implementation
 function deepFreeze(obj) {
-  // Get all properties
-  let propNames = Object.getOwnPropertyNames(obj);
+  // Get all properties (including Symbol-keyed, which getOwnPropertyNames misses)
+  let propNames = Reflect.ownKeys(obj);
 
   // Freeze nested objects first
   for (let name of propNames) {
@@ -518,7 +518,7 @@ console.log("Second access (cached):", expensiveObject.data.length);
  * Related Concepts:
  * 1. Proxy/Reflect - Can intercept descriptor operations
  * 2. Vue 2 Reactivity - Uses defineProperty for reactivity
- * 3. Object.clone() - Needs getOwnPropertyDescriptors
+ * 3. Object cloning - uses getOwnPropertyDescriptors (no built-in Object.clone)
  * 4. Decorators - Often modify property descriptors
  *
  * Framework Usage:

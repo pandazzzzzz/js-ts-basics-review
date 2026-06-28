@@ -662,7 +662,11 @@ async function retry(fn, options = {}) {
     }
   }
 
-  throw Object.assign(lastError, { retriesExhausted: true });
+  // Wrap in a new Error (with cause) instead of mutating lastError in place
+  const wrapped = new Error('Retries exhausted');
+  wrapped.retriesExhausted = true;
+  wrapped.cause = lastError;
+  throw wrapped;
 }
 
 // 6.2 Test retry with simulated flaky service
@@ -840,7 +844,8 @@ class AppError extends Error {
     this.name = this.constructor.name;
     this.timestamp = new Date().toISOString();
     this.context = context;
-    this.stack = new Error().stack; // Preserve original stack
+    // Note: super(message) already captured the throw-site stack; do NOT
+    // overwrite with `new Error().stack` (would lose the original throw frame).
   }
 
   toJSON() {

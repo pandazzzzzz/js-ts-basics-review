@@ -428,6 +428,8 @@ console.log('Cached value:', enhancedService.getCache('user:1'));
 console.log("\n=== Typed Traits Pattern ===");
 
 // TypeScript: Basic traits
+// (interface + const of the same name is legal declaration merging: the
+//  interface is the type, the const is the implementation/mixin.)
 interface TEquality {
   equals(other: unknown): boolean;
 }

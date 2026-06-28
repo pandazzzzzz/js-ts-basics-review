@@ -842,11 +842,11 @@ console.log("  rect instanceof Object:", rect instanceof Object);
    - Better intent communication
 
 6. STATIC MEMBERS WITH TYPES
-   JS:  class Math {
+   JS:  class MathUtils {
           static PI = 3.14159;
         }
-   
-   TS:  class Math {
+
+   TS:  class MathUtils {
           static readonly PI: number = 3.14159;
         }
    

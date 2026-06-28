@@ -52,6 +52,9 @@ if (global.gc) {
 // 1.2 FinalizationRegistry basics
 console.log("\nFinalizationRegistry:");
 
+// Note: FinalizationRegistry callbacks are non-deterministic — they may never
+// fire (e.g. if the process exits before GC), so don't rely on them for
+// critical cleanup. Use try/finally or `using` (ES2027) for deterministic cleanup.
 const registry = new FinalizationRegistry((heldValue) => {
   console.log(`  Cleanup callback: ${heldValue} was garbage collected`);
 });
@@ -934,13 +937,16 @@ lazy.clearExpensiveData(); // Clean up
 // 10.3 Slot-based object structure
 console.log("\nObject shape optimization:");
 
-// Bad: Different shapes prevent hidden class optimization
+// Bad: Different property ADDITION order creates different hidden classes
 const obj1 = { a: 1, b: 2 };
-const obj2 = { b: 2, a: 1 }; // Different property order
+const obj2 = { b: 2, a: 1 }; // Different addition order → different hidden class
 
-// Good: Consistent property order
+// Good: Consistent property addition order
 const obj3 = { a: 1, b: 2 };
-const obj4 = { a: 3, b: 4 }; // Same property order
+const obj4 = { a: 3, b: 4 }; // Same addition order → shared hidden class
+
+// Pitfall: `delete` on an object transitions it to dictionary (slow) mode.
+// Prefer setting to undefined/null over delete for frequently-accessed objects.
 
 console.log('Consistent property order enables hidden class optimization');
 

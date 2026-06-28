@@ -847,6 +847,8 @@ state.count = 1;
 state.count = 2;
 
 // 10.2 Readonly proxy
+// Note: set/deleteProperty traps returning false silently fail in non-strict
+// mode, but THROW a TypeError in strict mode (e.g. ESM modules are strict).
 function createReadonly(obj) {
   return new Proxy(obj, {
     set(target, prop, value) {
@@ -917,11 +919,9 @@ console.log("Proxy call:", userProxy.greet()); // "Hello, I'm Alice" (works!)
 
 // But if method is extracted:
 let extractedGreet = userProxy.greet;
-try {
-  console.log("Extracted:", extractedGreet()); // this is globalThis
-} catch (e) {
-  console.log("Error:", e.message);
-}
+// Note: bare call (no .call/.apply) sets this to globalThis in non-strict mode,
+// so it returns "Hello, I'm undefined" — it does NOT throw.
+console.log("Extracted:", extractedGreet()); // "Hello, I'm undefined"
 
 // 11.3 Private fields and Proxy
 class PrivateClass {
@@ -936,10 +936,12 @@ let privateInstance = new PrivateClass();
 let privateProxy = new Proxy(privateInstance, {});
 
 console.log("\nPrivate fields:");
-// Note: When calling method on proxy, 'this' binding causes issues with private fields
-// This is a known limitation - private fields don't work through proxies
+// Note: Private fields CANNOT be accessed through a Proxy. When getPrivate()
+// is called on the proxy, 'this' is the proxy (not a PrivateClass instance),
+// so accessing #private throws TypeError — there is no "correct this binding"
+// workaround; this always throws.
 try {
-  console.log("Can access method:", privateProxy.getPrivate()); // Works if this binding is correct
+  console.log("Can access method:", privateProxy.getPrivate()); // always throws
 } catch (e) {
   console.log("Private field limitation:", e.message);
 }

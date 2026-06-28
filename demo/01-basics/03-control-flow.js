@@ -776,7 +776,7 @@ try {
   const invalidData = JSON.parse('invalid json');
   console.log("This won't execute");
 } catch (error) {
-  console.log("Caught error:", error.message); // "Unexpected token i in JSON"
+  console.log("Caught error:", error.message); // e.g. "Unexpected token 'i', \"invalid json\" is not valid JSON"
   console.log("Error type:", error.name); // "SyntaxError"
 }
 

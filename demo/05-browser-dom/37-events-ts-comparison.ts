@@ -72,7 +72,8 @@ console.log(`
 │ input              │ InputEvent       │ inputType, data                  │
 │ change, submit     │ Event            │ target                           │
 │ focus, blur        │ FocusEvent       │ relatedTarget                    │
-│ scroll, wheel      │ WheelEvent       │ deltaX, deltaY, deltaZ           │
+│ scroll             │ Event            │ (no delta*; use scrollX/scrollY) │
+│ wheel              │ WheelEvent       │ deltaX, deltaY, deltaZ           │
 │ touch*             │ TouchEvent       │ touches, changedTouches          │
 │ drag*              │ DragEvent        │ dataTransfer                     │
 │ animation*         │ AnimationEvent   │ animationName                    │
@@ -169,10 +170,12 @@ const listener: EventListenerObject = {
 
 elem.addEventListener('click', listener);
 
-// Type-safe object listener with specific event type
+// Type-safe object listener — handleEvent signature is (evt: Event): void,
+// so narrow to MouseEvent inside (can't narrow the parameter itself).
 const mouseListener: EventListenerObject = {
-  handleEvent(e: MouseEvent) {
-    console.log('Mouse position:', e.clientX, e.clientY);
+  handleEvent(e: Event) {
+    const me = e as MouseEvent;
+    console.log('Mouse position:', me.clientX, me.clientY);
   }
 };
 

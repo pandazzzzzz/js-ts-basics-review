@@ -181,7 +181,7 @@ function multiplyTwo(a, b) {
 
 const composedMath = composeN(multiplyTwo, addTwo);
 console.log("\nComposition with multiple args:");
-console.log("composedMath(2, 3):", composedMath(2, 3)); // (2 + 3) * ?? error - needs pairings
+console.log("composedMath(2, 3):", composedMath(2, 3)); // NaN — addTwo(2,3)=5, then multiplyTwo(5)=NaN (missing 2nd arg)
 
 
 // ============================================================================
@@ -588,7 +588,7 @@ function factorial(n, acc = 1) {
 }
 
 console.log("Trampoline factorial:");
-console.log("trampoline(() => factorial(10000)):", trampoline(() => factorial(10))); // 3628800
+console.log("trampoline(() => factorial(10)):", trampoline(() => factorial(10))); // 3628800
 
 // 7.4 Even/odd with mutual recursion
 function even(n) {

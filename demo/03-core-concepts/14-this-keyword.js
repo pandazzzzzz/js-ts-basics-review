@@ -799,8 +799,9 @@ console.log("indirect('this') === globalThis:", indirect("this") === globalThis)
 
 console.log("\n=== this Best Practices Demo ===");
 
-// Good: Strict mode
-"use strict";
+// Good: Strict mode — note: "use strict" must be the FIRST statement in a
+// file or function to take effect; placed here (after other statements) it
+// is a no-op, not a directive.
 
 // Good: Arrow function for callback
 let processor = {
