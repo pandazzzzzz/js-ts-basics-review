@@ -1,6 +1,6 @@
 # JS/TS Fundamentals Review
 
-JavaScript/TypeScript fundamentals with 50 numbered demo files and TypeScript comparison files.
+JavaScript/TypeScript fundamentals with 49 numbered demo files (01-50, 28 reserved) and TypeScript comparison files.
 
 ## Requirements
 
@@ -42,15 +42,15 @@ npx ts-node demo/01-basics/01-variables-ts-comparison.ts
 
 ## Progress
 
-✅ 50/50 files completed · 50 TypeScript comparisons
-✅ ES2021-ES2027 features (replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers, Temporal, Explicit Resource Management)
+✅ 49/49 files completed · 49 TypeScript comparisons
+✅ ES2020-ES2027 features (Optional Chaining, BigInt, replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers, Temporal, Explicit Resource Management)
 ✅ Common Pitfalls & Best Practices sections in all advanced files
 
 ## Project Status
 
-📅 **Last Updated**: 2026-05-09
+📅 **Last Updated**: 2026-06-29
 🔍 **Documentation Review**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals  
-🚀 **Git Status**: Synchronized with remote (189 commits)  
+🚀 **Git Status**: Synchronized with remote (210 commits)  
 📊 **Coverage**: Complete (Stages 1-6)
 
 ## Documentation
