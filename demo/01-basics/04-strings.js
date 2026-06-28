@@ -445,7 +445,7 @@ console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
 //   UTF-8/UTF-16 (e.g. encodeURIComponent, fetch, file systems).
 /*
  * verification:
- *   feature: isWellFormed/toWellFormed
+ *   feature: Well-Formed Unicode Strings
  *   status: ES2024
  *   stage4Date: 2023-03
  *   lastVerified: 2026-06-19
