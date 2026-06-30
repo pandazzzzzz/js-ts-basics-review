@@ -1,57 +1,50 @@
 {
-  "meta": {
-    "lastVerified": "2026-06-19",
-    "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
-    "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
-    "rule": "Stage 4 meeting date (latest notes) → Expected Publication Year per TC39 finished-proposals.md",
-    "example": "Stage 4 finalized in 2024 → Expected publication year determined by TC39"
-  },
   "features": {
     "Temporal": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2025-09",
-      "note": "Stage 4 reached Sep 2025, delayed publication to ES2027",
+      "stage4Date": "2026-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11); delayed publication to ES2027",
       "url": "https://github.com/tc39/proposal-temporal"
     },
     "Atomics.pause": {
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2024-10",
-      "note": "Atomics.pause() for pausing threads in shared memory contexts",
+      "stage4DateType": "milestone",
+      "note": "Listed in finished-proposals (ES2027); 2024-10 is the Stage 3 meeting (notes 2024-10/october-09 'Atomics.pause for stage 3'). Actual Stage 4 meeting notes not yet published; treat as milestone pending confirmation.",
       "url": "https://github.com/tc39/proposal-atomics-pause"
-    },
-    "Atomics.waitAsync": {
-      "status": "ES2024",
-      "stage": 4,
-      "stage4Date": "2023-05",
-      "note": "Non-blocking async version of Atomics.wait()",
-      "url": "https://github.com/tc39/proposal-atomics-wait-async"
     },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2025-11",
-      "note": "for await (const [[key1, val1], [key2, val2]] of zip(iter1, iter2))",
+      "stage4Date": "2026-05",
+      "stage4DateType": "milestone",
+      "note": "2025-11 is the Stage 3 meeting; proposal repo 'Stage 4' commit dated 2026-05-29 implies Stage 4 at the 2026-05 plenary (notes not yet published). for await (const [[k1,v1],[k2,v2]] of zip(i1,i2))",
       "url": "https://github.com/tc39/proposal-joint-iteration"
     },
-    "Class Static Block": {
-      "status": "ES2022",
+    "using (Explicit Resource Management)": {
+      "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2021-08",
-      "note": "static { ... } initialization blocks in class definitions",
-      "url": "https://github.com/tc39/proposal-class-static-block"
+      "stage4Date": "2025-05",
+      "stage4DateType": "milestone",
+      "note": "Conditional Stage 4 at 2025-05 (notes may-28 'Explicit Resource Management for Stage 4'); still conditional as of 2026-03. using/await using, Symbol.dispose/Symbol.asyncDispose",
+      "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
-    "Decorators": {
-      "status": "Stage 2.7",
-      "stage": 2.7,
-      "note": "Stage 2.7 — nearing Stage 3. Active TC39 proposal.",
-      "url": "https://github.com/tc39/proposal-decorators"
+    "DisposableStack": {
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2025-05",
+      "stage4DateType": "milestone",
+      "note": "Part of Explicit Resource Management (conditional Stage 4 May 2025)",
+      "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "Array.fromAsync": {
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-05",
+      "stage4DateType": "exact",
       "note": "Stage 4 reached May 2025, part of ES2026",
       "url": "https://github.com/tc39/proposal-array-from-async"
     },
@@ -59,6 +52,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-07",
+      "stage4DateType": "exact",
       "note": "Stage 4 reached July 2025, part of ES2026",
       "url": "https://github.com/tc39/proposal-math-sum"
     },
@@ -66,6 +60,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-05",
+      "stage4DateType": "exact",
       "note": "Stage 4 reached May 2025, part of ES2026",
       "url": "https://github.com/tc39/proposal-error-iserror"
     },
@@ -73,6 +68,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-07",
+      "stage4DateType": "exact",
       "note": "Stage 4 reached July 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
       "url": "https://github.com/tc39/proposal-arraybuffer-base64"
     },
@@ -80,6 +76,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2026-01",
+      "stage4DateType": "exact",
       "note": "Map.prototype.upsert(key, onInsert, onUpdate)",
       "url": "https://github.com/tc39/proposal-upsert"
     },
@@ -87,6 +84,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-11",
+      "stage4DateType": "exact",
       "note": "Access to 'source' property of JSON.parse results",
       "url": "https://github.com/tc39/proposal-json-parse-source"
     },
@@ -94,6 +92,7 @@
       "status": "ES2026",
       "stage": 4,
       "stage4Date": "2025-11",
+      "stage4DateType": "exact",
       "note": "Iterator concatenation with + operator (iter1 + iter2)",
       "url": "https://github.com/tc39/proposal-iterator-sequencing"
     },
@@ -101,6 +100,7 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-04",
+      "stage4DateType": "exact",
       "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc.",
       "url": "https://github.com/tc39/proposal-set-methods"
     },
@@ -108,6 +108,7 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-10",
+      "stage4DateType": "exact",
       "note": "map, filter, take, drop, forEach, reduce, toArray, etc.",
       "url": "https://github.com/tc39/proposal-iterator-helpers"
     },
@@ -115,18 +116,21 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2025-02",
+      "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-regex-escaping"
     },
     "Promise.try": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-10",
+      "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-promise-try"
     },
     "Float16Array": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2025-02",
+      "stage4DateType": "exact",
       "note": "Includes Math.f16round()",
       "url": "https://github.com/tc39/proposal-float16array"
     },
@@ -134,6 +138,7 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-10",
+      "stage4DateType": "exact",
       "note": "import data from './file.json' with { type: 'json' }",
       "url": "https://github.com/tc39/proposal-json-modules"
     },
@@ -141,20 +146,15 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-10",
+      "stage4DateType": "exact",
       "note": "Formerly Import Assertions, renamed to Import Attributes",
       "url": "https://github.com/tc39/proposal-import-attributes"
-    },
-    "RegExp Match Indices": {
-      "status": "ES2022",
-      "stage": 4,
-      "stage4Date": "2021-05",
-      "note": "RegExp /d flag providing start/end indices for matches and groups",
-      "url": "https://github.com/tc39/proposal-regexp-match-indices"
     },
     "RegExp Modifiers": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-10",
+      "stage4DateType": "exact",
       "note": "Inline flag changes (?i, ?m, ?s)",
       "url": "https://github.com/tc39/proposal-regexp-modifiers"
     },
@@ -162,230 +162,264 @@
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2024-04",
+      "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-duplicate-named-capturing-groups"
     },
     "Redeclarable global eval vars": {
       "status": "ES2025",
       "stage": 4,
       "stage4Date": "2025-02",
+      "stage4DateType": "exact",
       "note": "Allows redeclaration of eval-introduced global variables",
       "url": "https://github.com/tc39/proposal-redeclarable-global-eval-vars"
-    },
-    "using (Explicit Resource Management)": {
-      "status": "ES2027",
-      "stage": 4,
-      "stage4Date": "2025-05",
-      "note": "Stage 4 reached May 2025, using/await using declarations, Symbol.dispose/Symbol.asyncDispose",
-      "url": "https://github.com/tc39/proposal-explicit-resource-management"
-    },
-    "DisposableStack": {
-      "status": "ES2027",
-      "stage": 4,
-      "stage4Date": "2025-05",
-      "note": "Part of Explicit Resource Management proposal (Stage 4 May 2025, ES2027)",
-      "url": "https://github.com/tc39/proposal-explicit-resource-management"
-    },
-    "Pipeline Operator": {
-      "status": "Stage 2",
-      "stage": 2,
-      "note": "Draft stage, syntax under discussion",
-      "url": "https://github.com/tc39/proposal-pipeline-operator"
-    },
-    "Pattern Matching": {
-      "status": "Stage 2",
-      "stage": 2,
-      "note": "Draft stage",
-      "url": "https://github.com/tc39/proposal-pattern-matching"
-    },
-    "Records & Tuples": {
-      "status": "Withdrawn",
-      "stage": -1,
-      "note": "Withdrawn, subsumed by Composites proposal",
-      "url": "https://github.com/tc39/proposal-record-tuple"
     },
     "Object.groupBy": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
+      "stage4Date": "2023-11",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-11 (array-grouping-for-stage-4)",
       "url": "https://github.com/tc39/proposal-array-grouping"
     },
     "Map.groupBy": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
+      "stage4Date": "2023-11",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-11 (array-grouping-for-stage-4)",
       "url": "https://github.com/tc39/proposal-array-grouping"
     },
     "Promise.withResolvers": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
+      "stage4Date": "2023-11",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-11 (promisewithresolvers-for-stage-4)",
       "url": "https://github.com/tc39/proposal-promise-with-resolvers"
     },
     "RegExp v flag": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
-      "note": "Unicode set operations in character classes",
+      "stage4Date": "2023-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-05 (regexp-v-flag-for-stage-4); Unicode set operations in character classes",
       "url": "https://github.com/tc39/proposal-regexp-v-flag"
     },
     "ArrayBuffer.transfer": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
+      "stage4Date": "2024-02",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2024-02 (arraybuffer-transfer-for-stage-4)",
       "url": "https://github.com/tc39/proposal-arraybuffer-transfer"
     },
     "Resizable ArrayBuffer": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
+      "stage4Date": "2023-09",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-09 (resizable-buffers-for-stage-4)",
       "url": "https://github.com/tc39/proposal-resizablearraybuffer"
     },
     "Well-Formed Unicode Strings": {
       "status": "ES2024",
       "stage": 4,
-      "stage4Date": "2023-03",
-      "note": "isWellFormed(), toWellFormed()",
+      "stage4Date": "2023-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-05 (well-formed-unicode-strings-for-stage-4); isWellFormed(), toWellFormed()",
       "url": "https://github.com/tc39/proposal-is-usv-string"
+    },
+    "Atomics.waitAsync": {
+      "status": "ES2024",
+      "stage": 4,
+      "stage4Date": "2023-05",
+      "stage4DateType": "exact",
+      "note": "Non-blocking async version of Atomics.wait()",
+      "url": "https://github.com/tc39/proposal-atomics-wait-async"
     },
     "Symbols as WeakMap keys": {
       "status": "ES2023",
       "stage": 4,
       "stage4Date": "2023-01",
-      "note": "Allow Symbol values as keys in WeakMap, WeakSet, WeakRef, FinalizationRegistry",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-01 (notes jan-30); allow Symbol values as keys in WeakMap, WeakSet, WeakRef, FinalizationRegistry",
       "url": "https://github.com/tc39/proposal-symbols-as-weakmap-keys"
     },
     "toSorted": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022-06",
-      "note": "Immutable array sort",
+      "stage4Date": "2023-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30); immutable array sort",
       "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "toReversed": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022-06",
+      "stage4Date": "2023-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30)",
       "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "with": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022-06",
-      "note": "Array.with(index, value) - immutable replacement",
+      "stage4Date": "2023-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30); Array.with(index, value) - immutable replacement",
       "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "toSpliced": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022-06",
+      "stage4Date": "2023-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30)",
       "url": "https://github.com/tc39/proposal-change-array-by-copy"
     },
     "findLast": {
       "status": "ES2023",
       "stage": 4,
       "stage4Date": "2022-06",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2022-06 (findlastfindlastindex-for-stage-4)",
       "url": "https://github.com/tc39/proposal-array-find-from-last"
     },
     "findLastIndex": {
       "status": "ES2023",
       "stage": 4,
       "stage4Date": "2022-06",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2022-06 (findlastfindlastindex-for-stage-4)",
       "url": "https://github.com/tc39/proposal-array-find-from-last"
     },
     "Hashbang Syntax": {
       "status": "ES2023",
       "stage": 4,
-      "stage4Date": "2022-06",
+      "stage4Date": "2022-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2022-07 (hashbang-grammar-for-stage-4)",
       "url": "https://github.com/tc39/proposal-hashbang"
+    },
+    "Class Static Block": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021-08",
+      "stage4DateType": "exact",
+      "note": "static { ... } initialization blocks in class definitions",
+      "url": "https://github.com/tc39/proposal-class-static-block"
     },
     "at": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021-03",
-      "note": "Array/string .at() method with negative indices",
+      "stage4Date": "2021-08",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-08 (item-method-for-stage-4); Array/string .at() with negative indices",
       "url": "https://github.com/tc39/proposal-relative-indexing-method"
     },
     "Object.hasOwn": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021-03",
+      "stage4Date": "2021-08",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-08 (accessible-object-hasownproperty-for-stage-4)",
       "url": "https://github.com/tc39/proposal-accessible-object-hasownproperty"
     },
     "Ergonomic brand checks": {
       "status": "ES2022",
       "stage": 4,
       "stage4Date": "2021-07",
+      "stage4DateType": "exact",
       "note": "#field in obj syntax for private field existence checks",
       "url": "https://github.com/tc39/proposal-private-fields-in-in"
     },
     "Error.cause": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021-03",
+      "stage4Date": "2021-10",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-10 (error-cause-for-stage-4)",
       "url": "https://github.com/tc39/proposal-error-cause"
     },
     "Top-level await": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021-03",
+      "stage4Date": "2021-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-05 (notes may-25)",
       "url": "https://github.com/tc39/proposal-top-level-await"
     },
     "Private class fields": {
       "status": "ES2022",
       "stage": 4,
-      "stage4Date": "2021-03",
-      "note": "#field syntax",
+      "stage4Date": "2021-04",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-04 (class-fields-...-for-stage-4); #field syntax",
       "url": "https://github.com/tc39/proposal-class-fields"
+    },
+    "RegExp Match Indices": {
+      "status": "ES2022",
+      "stage": 4,
+      "stage4Date": "2021-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2021-05 (notes may-25); RegExp /d flag providing start/end indices",
+      "url": "https://github.com/tc39/proposal-regexp-match-indices"
     },
     "replaceAll": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-06",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-06 (string-prototype-replaceall-for-stage-4)",
       "url": "https://github.com/tc39/proposal-string-replaceall"
     },
     "Logical Assignment": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
-      "note": "||=, &&=, ??=",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (logical-assignment-for-stage-4); ||=, &&=, ??=",
       "url": "https://github.com/tc39/proposal-logical-assignment"
     },
     "Numeric Separators": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (numeric-separators-for-stage-4)",
       "url": "https://github.com/tc39/proposal-numeric-separator"
     },
     "WeakRef": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (weakrefs-for-stage-4)",
       "url": "https://github.com/tc39/proposal-weakrefs"
     },
     "FinalizationRegistry": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (weakrefs-for-stage-4); part of WeakRefs proposal",
       "url": "https://github.com/tc39/proposal-weakrefs"
     },
     "Promise.any": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (promise-any-for-stage-4)",
       "url": "https://github.com/tc39/proposal-promise-any"
     },
     "AggregateError": {
       "status": "ES2021",
       "stage": 4,
-      "stage4Date": "2020-03",
+      "stage4Date": "2020-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-07 (promise-any-for-stage-4); part of Promise.any proposal",
       "url": "https://github.com/tc39/proposal-promise-any"
-    },
-    "Intl.PluralRules": {
-      "status": "ES2018",
-      "stage": 4,
-      "stage4Date": "2017-12",
-      "note": "Part of ES2018; merged into ECMA-402 via PR #198 on 2017-12-22 (predates finished-proposals.md tracking; no TC39 plenary Stage 4 record)",
-      "url": "https://github.com/tc39/proposal-intl-plural-rules"
     }
   }
 }

@@ -373,8 +373,8 @@ console.log("\n=== Top-Level Await Demo ===\n");
  * verification:
  *   feature: Top-level await
  *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2021-05
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

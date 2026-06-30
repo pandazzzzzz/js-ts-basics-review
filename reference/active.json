@@ -1,0 +1,25 @@
+{
+  "features": {
+    "Decorators": {
+      "status": "Stage 2.7",
+      "stage": 2.7,
+      "stage4DateType": null,
+      "note": "Stage 2.7 — nearing Stage 3. Active TC39 proposal (tc39/proposals README ### Stage 2.7 table).",
+      "url": "https://github.com/tc39/proposal-decorators"
+    },
+    "Pipeline Operator": {
+      "status": "Stage 2",
+      "stage": 2,
+      "stage4DateType": null,
+      "note": "Draft stage, syntax under discussion",
+      "url": "https://github.com/tc39/proposal-pipeline-operator"
+    },
+    "Pattern Matching": {
+      "status": "Stage 2",
+      "stage": 2,
+      "stage4DateType": null,
+      "note": "Draft stage",
+      "url": "https://github.com/tc39/proposal-pattern-matching"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "features": {
+    "Records & Tuples": {
+      "status": "Withdrawn",
+      "stage": -1,
+      "stage4DateType": null,
+      "note": "Withdrawn, subsumed by Composites proposal",
+      "url": "https://github.com/tc39/proposal-record-tuple"
+    }
+  }
+}

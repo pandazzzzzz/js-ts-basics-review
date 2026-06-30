@@ -1,0 +1,12 @@
+{
+  "features": {
+    "Intl.PluralRules": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2017-12",
+      "stage4DateType": "milestone",
+      "note": "Part of ES2018; merged into ECMA-402 via PR #198 on 2017-12-22 (predates finished-proposals.md tracking; no TC39 plenary Stage 4 record)",
+      "url": "https://github.com/tc39/proposal-intl-plural-rules"
+    }
+  }
+}

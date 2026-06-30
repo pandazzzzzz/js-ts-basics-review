@@ -279,7 +279,7 @@ const greeting = do {
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 2
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("\nPattern Matching (Stage 2):");
@@ -309,7 +309,7 @@ console.log("\n=== Active Proposals ===");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("\nPipeline Operator (Stage 2):");
@@ -412,7 +412,7 @@ console.log("\n=== Module System Future ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nImport Attributes (ES2025):");

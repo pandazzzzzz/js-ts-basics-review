@@ -21,7 +21,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const REFERENCE_FILE = path.join(__dirname, '../reference/es-versions.json');
+const REFERENCE_DIR = path.join(__dirname, '../reference');
+const REFERENCE_FILE = path.join(REFERENCE_DIR, 'meta.json');
 const DEMO_DIR = path.join(__dirname, '../demo');
 const MAX_VERIFIED_DAYS = 90;
 
@@ -182,17 +183,41 @@ function getAllCodeFiles(dir, includeTS = false) {
 }
 
 function loadReference() {
-  const result = safeReadFile(REFERENCE_FILE);
-  if (!result.success) {
-    log('red', `❌ Cannot read reference file: ${result.error}`);
+  // Read meta.json (contains lastVerified, source, files list)
+  const metaResult = safeReadFile(REFERENCE_FILE);
+  if (!metaResult.success) {
+    log('red', `❌ Cannot read reference/meta.json: ${metaResult.error}`);
     process.exit(1);
   }
+  let metaDoc;
   try {
-    return JSON.parse(result.content);
+    metaDoc = JSON.parse(metaResult.content);
   } catch (e) {
-    log('red', `❌ Reference file is not valid JSON: ${e.message}`);
+    log('red', `❌ reference/meta.json is not valid JSON: ${e.message}`);
     process.exit(1);
   }
+
+  // Merge features from each file listed in meta.files
+  const features = {};
+  const files = metaDoc.meta.files || [];
+  for (const f of files) {
+    const filePath = path.join(REFERENCE_DIR, f);
+    const result = safeReadFile(filePath);
+    if (!result.success) {
+      log('red', `❌ Cannot read reference/${f}: ${result.error}`);
+      process.exit(1);
+    }
+    try {
+      const data = JSON.parse(result.content);
+      if (data.features) {
+        Object.assign(features, data.features);
+      }
+    } catch (e) {
+      log('red', `❌ reference/${f} is not valid JSON: ${e.message}`);
+      process.exit(1);
+    }
+  }
+  return { meta: metaDoc.meta, features };
 }
 
 function checkLastVerified(reference) {

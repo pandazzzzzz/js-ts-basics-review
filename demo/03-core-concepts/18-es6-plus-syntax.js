@@ -888,7 +888,7 @@ Key modern features (ES2020-ES2023):
  * verification:
  *   feature: Decorators
  *   status: Stage 2.7
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  *
 5. DECORATORS
@@ -944,8 +944,8 @@ console.log("  globalThis === globalThis:", globalThis === globalThis); // true
  * verification:
  *   feature: Error.cause
  *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2021-10
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nError.cause (ES2022):");
@@ -970,7 +970,7 @@ try {
  *   feature: Class Static Block
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nClass static block (ES2022):");
@@ -993,8 +993,8 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
  * verification:
  *   feature: Top-level await
  *   status: ES2022
- *   stage4Date: 2021-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2021-05
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nTop-level await (ES2022):");
@@ -1009,8 +1009,8 @@ console.log("  // No async IIFE wrapper needed at module top level");
  * verification:
  *   feature: WeakRef
  *   status: ES2021
- *   stage4Date: 2020-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2020-07
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nWeakRef / FinalizationRegistry (ES2021):");
@@ -1028,8 +1028,8 @@ weakTarget = null; // strong reference dropped; eligible for GC
  * verification:
  *   feature: Object.groupBy
  *   status: ES2024
- *   stage4Date: 2023-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nObject.groupBy / Map.groupBy (ES2024):");
@@ -1050,8 +1050,8 @@ console.log("  Map.groupBy keys:", [...groupedMap.keys()]); // ['fruit', 'veg']
  * verification:
  *   feature: Promise.withResolvers
  *   status: ES2024
- *   stage4Date: 2023-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nPromise.withResolvers (ES2024):");
@@ -1067,8 +1067,8 @@ res("done");
  * verification:
  *   feature: RegExp v flag
  *   status: ES2024
- *   stage4Date: 2023-03
- *   lastVerified: 2026-06-19
+ *   stage4Date: 2023-05
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp v flag (ES2024):");
@@ -1089,7 +1089,7 @@ try {
  *   feature: Symbols as WeakMap keys
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-06-19
+ *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nSymbol as WeakMap keys (ES2023):");
