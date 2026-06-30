@@ -740,108 +740,24 @@ console.log("- Intl.DateTimeFormat.formatToParts()");
 console.log("- Intl.RelativeTimeFormat.formatToParts()");
 console.log("- Intl.ListFormat.formatToParts()");
 
-// ============================================
-// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 3 proposal)
+// ══════════════════════════════════════════
+// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ══════════════════════════════════════════
+// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 3 提案 - 非现行标准)
 // ============================================
 
-console.log("\n=== Intl.MessageFormat (Stage 3 proposal) ===");
+console.log("\n=== Intl.MessageFormat (Stage 3 提案 - 非现行标准) ===");
 
-// MessageFormat 2.0 - Template-based ICU message formatting (Stage 3)
-// NOTE: Stage 3 proposal, NOT yet part of ECMAScript. Node.js may NOT
-// support Intl.MessageFormat yet. This is the future of Intl — a unified
-// declarative message syntax covering plural, gender/select, dates,
-// numbers, and nested messages in a single template string.
+// MessageFormat 2.0 是 Stage 3 提案，尚未进入 ECMAScript 标准。
+// 统一 plural/select/gender/date/number 为单一声明式 ICU 消息语法。
 // No verification block (Stage 3, not finalized).
 // Proposal: https://github.com/tc39/proposal-intl-messageformat
-
-console.log("MessageFormat 2.0 is a Stage 3 proposal (not yet standardized).");
-console.log("It unifies plural/select/gender/date/number formatting into a");
-console.log("single declarative ICU message syntax.");
-
-// 13.1 Plural selection
-// The {count, plural, ...} selector picks a clause based on locale plural
-// rules (one/other, or six forms for Arabic). This is far more robust than
-// hand-rolling `count === 1 ? 'item' : 'items'`.
-const pluralTemplate = `You have {count, plural,
-  =0 {no items}
-  one {one item}
-  other {# items}
-} in your cart.`;
-
-console.log("\nPlural selection template:");
-console.log(pluralTemplate);
-console.log("Renders (count=0):  You have no items in your cart.");
-console.log("Renders (count=1):  You have one item in your cart.");
-console.log("Renders (count=5):  You have 5 items in your cart.");
-
-// 13.2 Select / gender selection
-// {gender, select, ...} chooses a clause by matching a string value.
-// Useful for grammatical gender, role-based, or any enumerated choice.
-const greetTemplate = `{gender, select,
-  male {He added a comment.}
-  female {She added a comment.}
-  other {They added a comment.}
-}`;
-
-console.log("\nSelect / gender template:");
-console.log(greetTemplate);
-console.log("Renders (gender=male):   He added a comment.");
-console.log("Renders (gender=female): She added a comment.");
-console.log("Renders (gender=other):  They added a comment.");
-
-// 13.3 Combined plural + select with nested messages
-const combinedTemplate = `{gender, select,
-  male {{count, plural, one {He added one photo.} other {He added # photos.}}}
-  female {{count, plural, one {She added one photo.} other {She added # photos.}}}
-  other {{count, plural, one {They added one photo.} other {They added # photos.}}}
-}`;
-
-console.log("\nCombined nested template:");
-console.log(combinedTemplate);
-console.log("Renders (gender=female, count=3): She added 3 photos.");
-
-// 13.4 Typed formatters: number and date
-// MessageFormat 2.0 supports typed placeholders: {value, number}, {value, date},
-// reusing Intl.NumberFormat / Intl.DateTimeFormat under the hood.
-const typedTemplate = `Order #{orderId}: {total, number, ::currency/USD} placed on {date, date}.`;
-
-console.log("\nTyped formatters (number/date):");
-console.log(typedTemplate);
-console.log("Renders: Order #1234: $1,234.56 placed on 3/15/2024.");
-
-// 13.5 Attempt actual runtime usage (likely unsupported in current Node)
-console.log("\nRuntime check:");
-if (typeof Intl !== 'undefined' && 'MessageFormat' in Intl) {
-  console.log("✅ Intl.MessageFormat supported in this runtime.");
-  try {
-    const mf = new Intl.MessageFormat(pluralTemplate, 'en-US');
-    console.log("count=5 ->", mf.format({ count: 5 }));
-    console.log("count=0 ->", mf.format({ count: 0 }));
-  } catch (err) {
-    console.log("⚠️ Intl.MessageFormat present but threw:", err.message);
-    console.log("(The Stage 3 API surface may differ across runtimes.)");
-  }
-} else {
-  console.log("⚠️ Intl.MessageFormat NOT supported in this runtime.");
-  console.log("Expected syntax:");
-  console.log(`
-const mf = new Intl.MessageFormat(pluralTemplate, 'en-US');
-mf.format({ count: 5 });  // "You have 5 items in your cart."
-mf.format({ count: 0 });  // "You have no items in your cart."
-
-// Gender/select
-const greet = new Intl.MessageFormat(greetTemplate, 'en-US');
-greet.format({ gender: 'female' }); // "She added a comment."
+console.log("- Stage 3 proposal, not yet standardized; use @messageformat/core polyfill for production");
+console.log(`// Example template (future syntax):
+// const mf = new Intl.MessageFormat(\`You have {count, plural, =0 {no items} one {one item} other {# items}}.\`, 'en-US');
+// mf.format({ count: 5 });  // "You have 5 items."
 `);
-}
-
-// 13.6 When to use
-console.log("\nWhen to use MessageFormat 2.0:");
-console.log("- App localization (i18n) with translators writing templates");
-console.log("- Complex plural/gender rules across many locales");
-console.log("- Avoiding fragile hand-built pluralization logic");
-console.log("- Note: until standardized, use the @messageformat/core npm");
-console.log("  polyfill or ICU MessageFormat libraries for production.");
+// 📘 详见 50-reserved.js（未来扩展专题）
 
 
 // ============================================

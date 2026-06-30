@@ -75,8 +75,10 @@ console.log("2. Better autocompletion");
 console.log("3. self-documenting code");
 console.log("4. Can gradually adopt TypeScript");
 
-// ============================================
-// Section 2: Decorators (Stage 2.7 Proposal)
+// ══════════════════════════════════════════
+// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ══════════════════════════════════════════
+// Section 2: Decorators (Stage 2.7 提案 - 非现行标准)
 // ============================================
 
 /*
@@ -87,129 +89,19 @@ console.log("4. Can gradually adopt TypeScript");
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
-console.log("\n=== Decorators (Stage 2.7) ===\n");
+console.log("\n=== Decorators (Stage 2.7 提案 - 非现行标准) ===\n");
 
-// Decorators are a Stage 2.7 TC39 proposal (nearing Stage 3, not yet finalized as of June 2026)
-// They allow adding metadata and modifying classes/functions
-// TypeScript has had experimental decorators for years with legacy syntax
-
-console.log("Decorator proposal stages:");
-console.log("- Stage 0: Strawman (idea)");
-console.log("- Stage 1: Proposal (formalize)");
-console.log("- Stage 2: Draft (complete spec)");
-console.log("- Stage 2.7: Near-final (testing and feedback)");
-console.log("- Stage 3: Candidate (ready for implementation)");
-console.log("- Stage 4: Finished (ready for inclusion)");
-
-console.log("\nDecorator types in proposal:");
-console.log("1. Class decorators");
-console.log("2. Method decorators");
-console.log("3. Getter/Setter decorators");
-console.log("4. Field decorators");
-console.log("5. Accessor decorators");
-
-console.log("\n⚠️  Note:");
-console.log("- Decorators require transpilation (Babel, TypeScript)");
-console.log("- Syntax may vary between implementations");
-console.log("- Check runtime support before using");
-
-// Example decorator pattern (without actual decorator syntax)
-function logged(target, context) {
-  if (context.kind === "method") {
-    return function(...args) {
-      console.log(`Calling ${context.name} with:`, args);
-      const result = target.apply(this, args);
-      console.log(`Result:`, result);
-      return result;
-    };
-  }
-  return target;
-}
-
-console.log("\nDecorator use cases:");
-console.log("- Logging and debugging");
-console.log("- Performance measurement");
-console.log("- Validation");
-console.log("- Dependency injection");
-console.log("- Caching and memoization");
-
-// Stage 2.7 Decorator Syntax Example
-console.log("\n=== Stage 2.7 Decorator Syntax ===");
-
-console.log("⚠️ Requires transpilation support (Babel 7.21+, TypeScript 5.0+)");
-console.log("Legacy decorators: { experimentalDecorators: true, emitDecoratorMetadata: true }");
-console.log("Stage 2.7 decorators: { experimentalDecorators: false } (TS 5.0+)");
-console.log("Note: Decorators are Stage 2.7, not yet part of ECMAScript standard");
-
-console.log("\nProposed decorator syntax (Stage 2.7):");
-console.log(`
-// Method decorator with @ syntax
-function logged(target, context) {
-  return function(...args) {
-    console.log("Calling:", context.name);
-    return target.apply(this, args);
-  };
-}
-
-class Example {
-  @logged
-  greet(name) {
-    return \`Hello, \${name}!\`;
-  }
-}
-
-// Usage
-const ex = new Example();
-ex.greet("Alice");
-// Output: Calling: greet, Hello, Alice!
+// Decorators 是 TC39 Stage 2.7 提案（截至 2026-06 尚未进入 ECMAScript 标准）。
+// TS 5.0+ 已支持（experimentalDecorators: false），Babel 7.21+ 支持。
+console.log("- Stage 2.7 proposal, not yet part of ECMAScript standard");
+console.log("- TS 5.0+ / Babel 7.21+ support via transpilation");
+console.log(`// Method decorator example (future syntax):
+// function logged(target, context) {
+//   return function(...args) { console.log("Calling:", context.name); return target.apply(this, args); };
+// }
+// class Example { @logged greet(name) { return \`Hello, \${name}!\`; } }
 `);
-
-console.log("\nClass decorator example:");
-console.log(`
-function sealed(constructor, context) {
-  Object.seal(constructor);
-  Object.seal(constructor.prototype);
-}
-
-@sealed
-class BankAccount {
-  balance = 0;
-  deposit(amount) { this.balance += amount; }
-}
-`);
-
-console.log("\nField decorator (auto-accessor) example:");
-console.log(`
-function range(min, max) {
-  return (target, context) => {
-    return {
-      get() { return target.get.call(this); },
-      set(value) {
-        if (value < min || value > max) throw new Error(\`Out of range\`);
-        target.set.call(this, value);
-      }
-    };
-  };
-}
-
-class Temperature {
-  @range(0, 100)
-  accessor value = 50;
-}
-`);
-
-console.log("\n⚠️ TypeScript decorators vs Stage 2.7 decorators:");
-console.log("- TypeScript legacy decorators: Different signature (target, propertyKey, descriptor)");
-console.log("- Stage 2.7 decorators: New signature (target, context) with context object");
-console.log("- TypeScript 5.0+: Supports Stage 2.7 with 'experimentalDecorators: false'");
-console.log("- Babel 7.21+: Use @babel/plugin-proposal-decorators with version: '2023-11'");
-
-console.log("\nDecorator context object properties:");
-console.log("- context.kind: 'class' | 'method' | 'getter' | 'setter' | 'field' | 'accessor'");
-console.log("- context.name: String (property name)");
-console.log("- context.access: { get, set } (for fields/accessors)");
-console.log("- context.static: Boolean (static or instance)");
-console.log("- context.addInitializer(fn): Add initialization hook");
+// 📘 详见 50-reserved.js（未来扩展专题）
 
 // ============================================
 // Section 3: Reflect API (ES6)

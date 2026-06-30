@@ -891,7 +891,7 @@ Key modern features (ES2020-ES2023):
  *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  *
-5. DECORATORS
+5. DECORATORS (Stage 2.7 提案 - 非现行标准, 详见 50-reserved.js)
    JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
    TS:  Stage 2.7 decorators supported in TS 5.0+ (experimentalDecorators: false)
 

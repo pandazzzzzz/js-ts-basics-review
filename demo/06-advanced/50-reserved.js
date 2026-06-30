@@ -2,7 +2,11 @@
 // 📘 For TypeScript comparison, see: 50-reserved-ts-comparison.ts
 // 📘 TC39 Proposals: https://github.com/tc39/proposals
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
-// 📌 Covers upcoming JavaScript/TypeScript features and runtime evolution
+//
+// 📌 文件定位声明：
+// 本文件讲"未来扩展"与 TC39 提案，非现行标准。已标准化部分（Section 2）
+// 只做清单式速览；未定稿提案（Section 3+）语法随时可能变化，勿用于生产。
+// 各提案的 Stage 标注以 reference/ 下的 active.json / withdrawn.json 为准。
 
 // ============================================
 // Section 1: TC39 Proposal Stages
@@ -25,388 +29,14 @@ console.log("Stage 3: Candidate - Implementation feedback needed");
 console.log("Stage 4: Finished - Approved for ES standard");
 
 // ============================================
-// Section 2: Recent Standardized Features (ES2025/ES2026/ES2027) + Future Proposals
+// Section 2: Recent Standardized Features (ES2025/ES2026/ES2027)
 // ============================================
 
 console.log("\n=== Recent Standardized Features ===");
 
-// 1. Temporal API (ES2027) - Modern Date/Time
-console.log("\nTemporal API (ES2027):");
-console.log("- Modern complement to Date object");
-console.log("- Immutable, timezone-aware, easy-to-use API");
-console.log("- Temporal.PlainDate, Temporal.PlainTime, Temporal.ZonedDateTime");
-console.log("- Stage 4 (Sep 2025), included in ES2027");
+// 已标准特性（Stage 4），仅作清单式速览。详细示例见 39-es2022-plus-features.js。
 
-// Example of Temporal API syntax
-// const today = Temporal.Now.plainDateISO();
-// const birthday = Temporal.PlainDate.from('1990-01-15');
-// const duration = today.until(birthday);
-
-console.log("\nTemporal Example syntax:");
-console.log(`
-const today = Temporal.Now.plainDateISO();
-const birthday = Temporal.PlainDate.from('1990-01-15');
-const age = today.since(birthday).years;
-`);
-
-// 2. Set Methods (already covered in 39-es2022-plus-features.js, ES2025)
-
-// 3. ES2026 Features
-console.log("\nES2026 Features:");
-console.log("- Array.fromAsync (Stage 4 May 2025): Create arrays from async iterables");
-console.log("- Math.sumPrecise (Stage 4 July 2025): High-precision floating-point summation");
-console.log("- Error.isError (Stage 4 May 2025): Reliable Error type checking across realms");
-console.log("- Uint8Array Base64 (Stage 4 July 2025): Native base64 encoding/decoding");
-console.log("- Upsert (Stage 4 January 2026): Map.prototype.upsert conditional insert/update");
-console.log("- JSON.parse source text access (Stage 4 November 2025): Access original JSON string");
-console.log("- Iterator Sequencing (Stage 4 November 2025): Iterator concatenation with + operator");
-
-// Example of ES2026 features
-console.log("\nES2026 Example syntax:");
-console.log(`
-// Array.fromAsync - Convert async iterator to array
-async function* asyncNumbers() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-const arr = await Array.fromAsync(asyncNumbers());
-// arr = [1, 2, 3]
-
-// Math.sumPrecise - Accurate summation
-const large = [1e16, 1, 1, 1];
-const sum = Math.sumPrecise(large);
-// sum = 10000000000000003 (correct)
-
-// Error.isError - Cross-realm error checking
-if (Error.isError(someValue)) {
-  console.log("Definitely an Error object");
-}
-
-// Uint8Array Base64 - Encode/decode binary data
-const data = new Uint8Array([72, 101, 108, 108, 111]);
-const encoded = data.toBase64();
-// encoded = "SGVsbG8="
-const decoded = Uint8Array.fromBase64("SGVsbG8=");
-// decoded = Uint8Array [72, 101, 108, 108, 111]
-`);
-
-// 4. ES2027 Features
-console.log("\nES2027 Features:");
-console.log("- Temporal (Stage 4 September 2025): Modern date/time API");
-console.log("- Explicit Resource Management (Stage 4 May 2025): using/await using declarations");
-console.log("- Atomics.pause (Stage 4 October 2024): Spin-wait loop optimization");
-console.log("- Joint Iteration (Stage 4 November 2025): Iterate over multiple iterables");
-
-// Example of ES2027 features
-console.log("\nES2027 Example syntax:");
-console.log(`
-// using declaration
-{
-  using file = openFile("data.txt");
-  file.write("hello");
-  // file closed automatically at end of block
-}
-
-// Atomics.pause in spin-lock
-while (Atomics.compareExchange(lock, 0, 0, 1) !== 0) {
-  Atomics.pause(); // Hint to CPU that we're waiting
-}
-
-// Joint Iteration
-for (const [name, age, city] of zip(names, ages, cities)) {
-  console.log(\`\${name}, \${age}, \${city}\`);
-}
-`);
-
-// 5. Decorators (Stage 2.7)
-console.log("\nDecorators (Stage 2.7):");
-console.log("- Class and method decorators");
-console.log("- Similar to Python/Java annotations");
-console.log("- Metadata-based programming");
-console.log("- Stage 2.7 proposal, nearing Stage 3, not yet finalized");
-
-// Example decorator syntax (TypeScript already supports this)
-console.log("\nDecorator Example (JS syntax):");
-console.log(`
-function logged(target, context) {
-  return function(...args) {
-    console.log(\`Calling \${context.name}\`);
-    return target.apply(this, args);
-  };
-}
-
-class Example {
-  @logged
-  greet(name) {
-    return \`Hello, \${name}!\`;
-  }
-}
-`);
-
-// ============================================
-// Section 3: Stage 2 Proposals + Withdrawn Proposals
-// ============================================
-
-console.log("\n=== Stage 2 Proposals ===");
-
-// 1. Records & Tuples (WITHDRAWN)
-console.log("\nRecords & Tuples (WITHDRAWN):");
-console.log("- Originally proposed immutable data structures");
-console.log("- Deep equality by value");
-console.log("- Proposal withdrawn, subsumed by Composites proposal");
-console.log("- Check tc39/proposal-composites for latest status");
-console.log("#{} syntax for records, #[] for tuples (historical)");
-
-console.log("\nRecord & Tuple Example (future syntax):");
-console.log(`
-// Record - immutable object
-const record = #{ x: 1, y: 2 };
-// record.x = 3; // TypeError - cannot mutate
-
-// Tuple - immutable array
-const tuple = #[1, 2, 3];
-// tuple.push(4); // TypeError - cannot mutate
-
-// Deep equality by value
-const a = #{ x: 1, y: #{ z: 2 } };
-const b = #{ x: 1, y: #{ z: 2 } };
-console.log(a === b); // true (deep equality!)
-`);
-
-// 2. Composites (Stage 2 proposal)
-// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
-// Composites is the successor to the withdrawn Records & Tuples proposal.
-// It introduces deeply-immutable composite objects/arrays with value
-// semantics (deep equality), replacing the withdrawn #{} / #[] syntax.
-// Proposal: https://github.com/tc39/proposal-composites
-console.log("\nComposites (Stage 2 proposal):");
-console.log("- Successor to the withdrawn Records & Tuples proposal");
-console.log("- Deeply immutable composite objects and arrays");
-console.log("- Value semantics: deep equality by value, usable as Map keys");
-console.log("- Replaces the withdrawn #{} (record) and #[] (tuple) syntax");
-console.log("- Stage 2 proposal (syntax/API still evolving)");
-
-console.log("\nComposite Example (future syntax, illustrative):");
-console.log(`
-// Composite immutable object (deeply frozen, value equality)
-const point = Composite { x: 1, y: 2 };
-// point.x = 3; // TypeError - immutable
-
-// Composite immutable array
-const nums = Composite [1, 2, 3];
-// nums.push(4); // TypeError - immutable
-
-// Deep equality by value
-const a = Composite { x: 1, y: Composite { z: 2 } };
-const b = Composite { x: 1, y: Composite { z: 2 } };
-console.log(a === b); // true (value equality, not reference)
-
-// Usable as Map/Set keys (value-based hashing)
-const map = new Map();
-map.set(Composite { x: 1, y: 2 }, "origin");
-map.get(Composite { x: 1, y: 2 }); // "origin"
-`);
-
-// 3. Decimal (Stage 2 proposal)
-// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
-// Decimal adds a high-precision base-10 number type for financial/monetary
-// calculations where binary floating point (0.1 + 0.2 !== 0.3) is
-// unacceptable. Includes a 'm' numeric literal suffix proposal.
-// Proposal: https://github.com/tc39/proposal-decimal
-console.log("\nDecimal (Stage 2 proposal):");
-console.log("- High-precision base-10 decimal type for money/finance");
-console.log("- Avoids binary floating-point errors (0.1 + 0.2 !== 0.3)");
-console.log("- Proposed 'm' literal suffix for decimal literals");
-console.log("- Stage 2 proposal (literal syntax still under debate)");
-
-console.log("\nDecimal Example (future syntax, illustrative):");
-console.log(`
-// Binary float problems today:
-0.1 + 0.2;          // 0.30000000000000004 (precision loss)
-0.1 + 0.2 === 0.3;  // false
-
-// With Decimal (proposed 'm' suffix):
-const price = 0.10m;
-const tax = 0.02m;
-price + tax;            // 0.12m (exact)
-price + tax === 0.12m;  // true (no rounding error)
-
-// Useful for money:
-const total = 19.99m + 5.00m; // 24.99m, exact cents
-`);
-
-// 4. Do Expressions (Stage 2 proposal)
-// NOTE: Stage 2 proposal, NOT finalized. No verification block (Stage 2).
-// Do expressions let you evaluate a block as an expression, returning the
-// last value. This makes if/else and other statements usable inline where
-// an expression is expected, reducing IIFE/temporary-variable boilerplate.
-// Proposal: https://github.com/tc39/proposal-do-expressions
-console.log("\nDo Expressions (Stage 2 proposal):");
-console.log("- Evaluate a block as an expression, returning its last value");
-console.log("- Lets if/else and statements be used inline as expressions");
-console.log("- Reduces IIFE and temporary-variable boilerplate");
-console.log("- Stage 2 proposal (semantics of 'return' inside do still being settled)");
-
-console.log("\nDo Expression Example (future syntax, illustrative):");
-console.log(`
-// Today: ternary or IIFE
-const label = condition ? "yes" : "no";
-// or
-const label2 = (() => {
-  if (condition) return "yes";
-  return "no";
-})();
-
-// With do expressions:
-const label = do {
-  if (condition) {
-    "yes";
-  } else {
-    "no";
-  }
-}; // evaluates to "yes" or "no"
-
-// Useful for JSX/computed values:
-const greeting = do {
-  if (user) { \`Hello, \${user.name}!\` }
-  else      { "Please sign in" }
-};
-`);
-
-// 5. Pattern Matching
-/*
- * verification:
- *   feature: Pattern Matching
- *   status: Stage 2
- *   lastVerified: 2026-06-29
- *   source: https://github.com/tc39/proposals/blob/main/README.md
- */
-console.log("\nPattern Matching (Stage 2):");
-console.log("- Powerful pattern matching like Haskell/Elixir");
-console.log("- match keyword for destructuring");
-console.log("- More expressive than switch");
-
-console.log("\nPattern Matching Example (future syntax):");
-console.log(`
-const result = match (value) {
-  when { type: 'user', name: n } -> \`User: \${n}\`,
-  when { type: 'admin', level: l } if l > 5 -> \`Super Admin\`,
-  when { type: 'admin' } -> \`Admin\`,
-  when [first, ...rest] -> \`Array starting with \${first}\`,
-  when _ -> \`Unknown\`
-};
-`);
-
-// ============================================
-// Section 4: Stage 1/2 Proposals (Exploratory)
-// ============================================
-
-console.log("\n=== Active Proposals ===");
-
-// 1. Pipeline Operator (Stage 2)
-/*
- * verification:
- *   feature: Pipeline Operator
- *   status: Stage 2
- *   lastVerified: 2026-06-29
- *   source: https://github.com/tc39/proposals/blob/main/README.md
- */
-console.log("\nPipeline Operator (Stage 2):");
-console.log("- |> operator for function chaining");
-console.log("- More readable than nested calls");
-console.log("- Similar to F#/Elixir pipe operator");
-console.log("- Moved from Stage 1 to Stage 2");
-
-console.log("\nPipeline Example (future syntax):");
-console.log(`
-// Without pipeline:
-const result = capitalize(trim(lowercase(input)));
-
-// With pipeline:
-const result = input
-  |> lowercase
-  |> trim
-  |> capitalize;
-
-// With placeholder:
-const result = input
-  |> double
-  |> Math.max(0, $$)
-  |> String;
-`);
-
-// 2. Partial Application
-console.log("\nPartial Application (Stage 1):");
-console.log("- ? placeholder for partial application");
-console.log("- Create new functions from existing ones");
-
-console.log("\nPartial Application Example (future syntax):");
-console.log(`
-const add = (a, b, c) => a + b + c;
-const addFive = add(5, ?, ?); // Partially applied
-const addFiveAndThree = addFive(3, ?); // Further partial
-
-console.log(addFiveAndThree(2)); // 10 (5 + 3 + 2)
-`);
-
-// ============================================
-// Section 5: JavaScript Runtime Evolution
-// ============================================
-
-console.log("\n=== JavaScript Runtime Evolution ===");
-
-// Modern JavaScript runtimes beyond Node.js
-console.log("\nModern JavaScript Runtimes:");
-
-// Deno
-console.log("\nDeno:");
-console.log("- Created by Ryan Dahl (Node.js creator)");
-console.log("- Secure by default (requires permissions)");
-console.log("- TypeScript support out of the box");
-console.log("- Deno 2.0 (Released Nov 2024): npm compatibility");
-
-console.log(`
-// Deno example
-// No package.json needed
-// import { serve } from "https://deno.land/std/http/server.ts";
-
-// Permissions required
-// deno run --allow-net server.ts
-`);
-
-// Bun
-console.log("\nBun:");
-console.log("- Extremely fast JavaScript runtime");
-console.log("- Built-in transpiler, test runner, package manager");
-console.log("- Drop-in Node.js replacement");
-console.log("- Native TypeScript/JSX support");
-
-console.log(`
-// Bun example
-// Built-in test runner
-// bun test
-
-// Built-in package manager (faster than npm)
-// bun install
-
-// Run TypeScript directly
-// bun run app.ts
-`);
-
-// WinterCG - Winter Community Group
-console.log("\nWinterCG (Web-interoperable runtimes):");
-console.log("- Standard API across runtimes");
-console.log("- Fetch, URL, Headers everywhere");
-console.log("- Portable code between Node, Deno, Bun, Cloudflare Workers");
-
-// ============================================
-// Section 6: Module System Future
-// ============================================
-
-console.log("\n=== Module System Future ===");
-
-// Import Attributes (ES2025)
+// ES2025
 /*
  * verification:
  *   feature: Import Attributes
@@ -415,196 +45,188 @@ console.log("\n=== Module System Future ===");
  *   lastVerified: 2026-06-29
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
-console.log("\nImport Attributes (ES2025):");
-console.log("- Specify how modules should be loaded");
-console.log("- JSON modules, CSS modules, etc.");
-console.log("- Finalized in ES2025");
+console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
 
-console.log(`
-// Import JSON as module
-import config from './config.json' with { type: 'json' };
+// ES2026
+console.log("- Array.fromAsync (ES2026): const arr = await Array.fromAsync(asyncIter);");
+console.log("- Math.sumPrecise (ES2026): Math.sumPrecise([1e16, 1, 1, 1]) // exact");
+console.log("- Error.isError (ES2026): cross-realm reliable Error check");
+console.log("- Uint8Array Base64 (ES2026): bytes.toBase64() / Uint8Array.fromBase64(s)");
+console.log("- Upsert (ES2026): map.upsert(key, insertFn, updateFn)");
+console.log("- JSON.parse source text access (ES2026): access original JSON string");
+console.log("- Iterator Sequencing (ES2026): iter1 + iter2 concatenation");
 
-// Import CSS (theoretical)
-import styles from './styles.css' with { type: 'css' };
-`);
+// ES2027
+console.log("- Temporal (ES2027): Temporal.Now.plainDateISO() / Temporal.PlainDate.from('1990-01-15')");
+console.log("- using / await using (ES2027, Explicit Resource Management): auto-dispose");
+console.log("- Atomics.pause (ES2027): spin-wait loop CPU hint");
+console.log("- Joint Iteration (ES2027): zip multiple iterables");
 
-// Module Fragments (Stage 1)
-console.log("\nModule Fragments (Stage 1 - Exploratory):");
-console.log("- Inline modules within files");
-console.log("- Better code organization");
-
-console.log(`
-// Hypothetical syntax
-module fragment Utils {
-  export function helper() { /* ... */ }
-}
-
-module fragment Tests {
-  import { helper } from Utils;
-  // Test code
-}
-`);
+// Commented example (ES2026/ES2027 syntax, illustrative)
+console.log("// ES2026/ES2027 example (commented, illustrative):");
+console.log("//   const arr = await Array.fromAsync(asyncIter);      // ES2026");
+console.log("//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027, auto-close");
+console.log("//   for (const [n, a] of zip(names, ages)) console.log(n, a); // ES2027");
 
 // ============================================
-// Section 7: Web Platform Future APIs
+// Section 3+: 未定稿提案 / Withdrawn 提案
+// ⚠️ 以下为非现行标准，语法可能变化，勿用于生产
 // ============================================
+
+// ══════════════════════════════════════════
+// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ══════════════════════════════════════════
+
+console.log("\n=== 未定稿提案 / Withdrawn 提案（非现行标准）===");
+
+// --- Records & Tuples (Withdrawn - 非现行标准) ---
+// 原计划的不可变值语义数据结构（#{} / #[]），深度相等。
+// 提案已撤回，由 Composites 提案接替。见 tc39/proposal-record-tuple。
+console.log("// Records & Tuples (Withdrawn) — 历史语法:");
+console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
+console.log("//   const t = #[1, 2, 3];        // tuple, immutable");
+console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
+
+// --- Composites (Stage 2 提案 - 非现行标准) ---
+// Records & Tuples 的继任者：深度不可变组合对象/数组，值语义（深度相等，
+// 可作 Map key）。语法/API 仍在演进。见 tc39/proposal-composites。
+console.log("// Composites (Stage 2) — future syntax, illustrative:");
+console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
+console.log("//   const a = Composite { x: 1 } , b = Composite { x: 1 };");
+console.log("//   a === b;            // true (value, not reference)");
+console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 }); // 'o'");
+
+// --- Decimal (Stage 2 提案 - 非现行标准) ---
+// 高精度十进制类型，避免二进制浮点误差（0.1 + 0.2 !== 0.3）。拟用 'm' 字面量后缀。
+// 字面量语法仍在讨论。见 tc39/proposal-decimal。
+console.log("// Decimal (Stage 2) — future syntax, illustrative:");
+console.log("//   0.1 + 0.2 === 0.3;       // false today (binary float)");
+console.log("//   const price = 0.10m;");
+console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
+
+// --- Do Expressions (Stage 2 提案 - 非现行标准) ---
+// 把块作为表达式求值，返回最后一个值；让 if/else 可内联为表达式，
+// 减少 IIFE / 临时变量。do 内 return 语义仍在敲定。见 tc39/proposal-do-expressions。
+console.log("// Do Expressions (Stage 2) — future syntax, illustrative:");
+console.log("//   const label = do {");
+console.log("//     if (cond) 'yes'; else 'no';");
+console.log("//   }; // evaluates to 'yes' or 'no'");
+
+// --- Pattern Matching (Stage 2 提案 - 非现行标准) ---
+/*
+ * verification:
+ *   feature: Pattern Matching
+ *   status: Stage 2
+ *   lastVerified: 2026-06-29
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
+console.log("// Pattern Matching (Stage 2) — future syntax, illustrative:");
+console.log("//   const r = match (value) {");
+console.log("//     when { type: 'user', name: n } -> `User: ${n}`,");
+console.log("//     when { type: 'admin' } if lvl > 5 -> 'Super Admin',");
+console.log("//     when _ -> 'Unknown'");
+console.log("//   };");
+
+// --- Pipeline Operator (Stage 2 提案 - 非现行标准) ---
+/*
+ * verification:
+ *   feature: Pipeline Operator
+ *   status: Stage 2
+ *   lastVerified: 2026-06-29
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
+console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
+console.log("//   const r = input");
+console.log("//     |> lowercase");
+console.log("//     |> trim");
+console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(input)))");
+
+// --- Partial Application (Stage 1 提案 - 非现行标准) ---
+// ? 占位符做偏函数应用，从已有函数派生新函数。见 tc39/proposal-partial-application。
+console.log("// Partial Application (Stage 1) — future syntax, illustrative:");
+console.log("//   const add = (a, b, c) => a + b + c;");
+console.log("//   const addFive = add(5, ?, ?);");
+console.log("//   addFive(3, 2); // 10");
+
+// --- Decorators (Stage 2.7 提案 - 非现行标准) ---
+// 类/方法装饰器，元数据式编程，类似 Python/Java 注解。逼近 Stage 3，尚未定稿。
+// 见 tc39/proposal-decorators（TS 5.0 已支持 Stage 2.7 语义）。
+console.log("// Decorators (Stage 2.7) — future syntax, illustrative:");
+console.log("//   function logged(target, context) {");
+console.log("//     return (...args) => { console.log('call', context.name); return target(...args); };");
+console.log("//   }");
+console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
+
+// --- Module Fragments (Stage 1 提案 - 非现行标准) ---
+// 文件内内联模块片段，便于组织代码与测试。见 tc39/proposal-module-fragments。
+console.log("// Module Fragments (Stage 1) — future syntax, illustrative:");
+console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
+console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
+
+// ============================================
+// 后续章节：运行时 / Web 平台 / TypeScript 生态（速览）
+// ============================================
+
+console.log("\n=== JavaScript Runtime Evolution ===");
+console.log("- Deno: secure-by-default, TS-native, npm-compatible (2.0+)");
+console.log("- Bun: fast runtime, built-in transpiler/test runner/pkg manager");
+console.log("- WinterCG: portable web APIs (fetch/URL/Headers) across runtimes");
 
 console.log("\n=== Web Platform Future APIs ===");
-
-// Compute Pressure API
-console.log("\nCompute Pressure API:");
-console.log("- Monitor system load");
-console.log("- Adapt app performance dynamically");
-
-console.log(`
-// Check if system is under heavy load
-const observer = new PressureObserver((records) => {
-  const record = records[0];
-  if (record.state === 'critical') {
-    // Reduce quality, pause non-essential work
-  }
-});
-
-observer.observe('cpu');
-`);
-
-// Speculation Rules API
-console.log("\nSpeculation Rules API:");
-console.log("- Prefetch pages for instant navigation");
-console.log("- Prerender pages user is likely to visit");
-
-console.log(`
-// Prefetch next page
-document.head.insertAdjacentHTML('beforeend', \`
-<script type="speculationrules">
-{
-  "prefetch": [{
-    "urls": ["/next-page.html"]
-  }],
-  "prerender": [{
-    "urls": ["/checkout.html"],
-    "eagerness": "moderate"
-  }]
-}
-</script>
-\`);
-`);
-
-// WebAssembly Evolution
-console.log("\nWebAssembly Evolution:");
-console.log("- Wasm GC: Garbage collection support");
-console.log("- Wasm Components: Portable modules");
-console.log("- Stack switching: Async/await in Wasm");
-console.log("- Multi-memory: Multiple memory spaces");
-
-// ============================================
-// Section 8: TypeScript Evolution
-// ============================================
+console.log("- Compute Pressure API: monitor system load, adapt dynamically");
+console.log("- Speculation Rules API: prefetch/prerender for instant navigation");
+console.log("- WebAssembly: GC, Components, stack switching, multi-memory");
 
 console.log("\n=== TypeScript Evolution ===");
+console.log("- TS 5.x: const type params, using, import attributes, satisfies, inferred predicates");
+console.log("- TS 6.0: ignoreDeprecations, last JS-based compiler");
+console.log("- TS 7.0: Go-based rewrite (typescript-go), major perf gains");
+console.log("- Advanced types: template literal / conditional / mapped / variadic tuple types");
 
-console.log("\nRecent TypeScript Features:");
-console.log("- TS 5.0: const type parameters, better enums");
-console.log("- TS 5.1: typeof self in functions, getter/setter same name");
-console.log("- TS 5.2: using declarations, private #d fields in types");
-console.log("- TS 5.3: Import attributes, resolution-mode comments");
-console.log("- TS 5.4: NoInfer utility type, closure improvements");
-console.log("- TS 5.5: Inferred type predicates, explicit catch variable types");
-console.log("- TS 5.6: Iterator helper methods type support, stricter checks");
-console.log("- TS 6.0: ignoreDeprecations option, last JS-based compiler");
-
-console.log("\nTypeScript Roadmap:");
-console.log("- TS 7.0: Go-based rewrite (typescript-go)");
-console.log("- Major performance improvements expected");
-console.log("- More precise type checking");
-
-// Advanced Type Features (TypeScript-only)
-console.log("\nAdvanced Type Features (TypeScript):");
-console.log("- Template literal types");
-console.log("- Conditional types");
-console.log("- Mapped types with as clauses");
-console.log("- Variadic tuple types");
-console.log("- const type parameters");
-console.log("- satisfies operator");
-
-console.log(`
-// Template literal types
-type Color = 'red' | 'blue';
-type Size = 'small' | 'large';
-type Variant = \`\${Color}-\${Size}\`;
-// 'red-small' | 'red-large' | 'blue-small' | 'blue-large'
-
-// Conditional types
-type NonNullable<T> = T extends null | undefined ? never : T;
-
-// Mapped types with as
-type Getters<T> = {
-  [K in keyof T as \`get\${Capitalize<string & K>}\`]: () => T[K];
-};
-`);
+console.log("\n=== Ecosystem Trends ===");
+console.log("- Build: Vite / Turbopack / Rspack / Bun bundler");
+console.log("- Framework: Server Components / Islands / Edge / Hybrid rendering");
+console.log("- Testing: Vitest / Playwright / Bun test");
 
 // ============================================
-// Section 9: JavaScript Ecosystem Trends
-// ============================================
-
-console.log("\n=== JavaScript Ecosystem Trends ===");
-
-console.log("\nBuild Tool Trends:");
-console.log("- Vite: Fast dev server, ESM-first");
-console.log("- Turbopack: Rust-based, incremental compilation");
-console.log("- Rspack: Rust-based webpack alternative");
-console.log("- Bun bundler: Native, fast bundling");
-
-console.log("\nFramework Trends:");
-console.log("- Server Components (React, Next.js)");
-console.log("- Islands Architecture (Astro, Fresh)");
-console.log("- Edge Computing (Cloudflare, Vercel Edge)");
-console.log("- Hybrid Rendering (SSG + SSR + CSR)");
-
-console.log("\nTesting Trends:");
-console.log("- Vitest: Vite-native testing");
-console.log("- Playwright: Cross-browser E2E");
-console.log("- Bun test: Built-in fast testing");
-
-// ============================================
-// Section 10: Best Practices for Future-Proofing
+// Best Practices for Future-Proofing
 // ============================================
 
 console.log("\n=== Best Practices for Future-Proofing ===");
 
 console.log("\n✅ DO:");
-console.log("1. Use TypeScript for type safety and future features");
-console.log("2. Write ESM modules (import/export)");
-console.log("3. Use native APIs (fetch, URL, FormData)");
-console.log("4. Keep dependencies updated");
-console.log("5. Follow TC39 proposals for upcoming features");
-console.log("6. Use Web Standard APIs when possible");
-console.log("7. Write cross-runtime compatible code");
-console.log("8. Use transpilation for older browser support");
-console.log("9. Test in target environments");
-console.log("10. Use polyfills for critical missing features");
-console.log("11. Consider WinterCG for cross-runtime compatibility");
-console.log("12. Evaluate new runtimes (Deno, Bun) for your use case");
+console.log("1. Use TypeScript for type safety and early access to future features");
+console.log("2. Write ESM modules (import/export); use native APIs (fetch, URL, FormData)");
+console.log("3. Keep deps updated; follow TC39 proposals; prefer Web Standard APIs");
+console.log("4. Write cross-runtime compatible code; consider WinterCG");
+console.log("5. Use transpilation/polyfills for older targets; test in target environments");
 
 console.log("\n❌ DON'T:");
-console.log("1. Don't use deprecated Node.js-specific APIs");
-console.log("2. Don't rely on bundler-specific features");
-console.log("3. Don't use older CommonJS require() for new projects");
-console.log("4. Don't ignore browser compatibility");
-console.log("5. Don't use experimental features (Stage 1/2) in production");
-console.log("6. Don't assume Node.js is the only runtime");
-console.log("7. Don't ignore deprecation warnings");
-console.log("8. Don't skip testing in target environments");
+console.log("1. Use deprecated Node-specific APIs or bundler-specific features");
+console.log("2. Use CommonJS require() for new projects; assume Node is the only runtime");
+console.log("3. Use experimental (Stage 1/2) features in production");
+console.log("4. Ignore deprecation warnings or browser compatibility");
 
 console.log("\n⚠️ WATCH OUT FOR:");
-console.log("1. TC39 proposal stage changes");
+console.log("1. TC39 proposal stage changes (syntax may break before Stage 4)");
 console.log("2. Browser support variations (check caniuse.com)");
-console.log("3. Runtime compatibility differences");
-console.log("4. Deprecated API removal timelines");
-console.log("5. Polyfill quality and maintenance");
-console.log("6. Breaking changes in major versions");
-console.log("7. Experimental feature stability");
-console.log("8. TypeScript version compatibility");
+console.log("3. Runtime compatibility differences; deprecated API removal timelines");
+console.log("4. Polyfill quality/maintenance; breaking changes in major versions");
+
+console.log("\n=== Common Pitfalls ===");
+
+console.log("\nPitfall 1: Using early-stage proposals in production");
+console.log("  Stage 1/2 proposals may change significantly before Stage 4.");
+console.log("  Fix: Only use Stage 2.7+ with fallbacks/polyfills.");
+
+console.log("\nPitfall 2: Relying on deprecated APIs");
+console.log("  Fix: Check deprecation warnings, migrate early.");
+
+console.log("\nPitfall 3: Ignoring browser/runtime compatibility");
+console.log("  Fix: Check caniuse.com / node.green before using new features.");
+
+console.log("\nPitfall 4: Temporal API vs Date confusion");
+console.log("  Temporal is a new API, not a Date replacement. Learn it separately.");
 
 console.log("\n🔗 Resources:");
 console.log("- TC39 Proposals: https://github.com/tc39/proposals");
@@ -614,90 +236,33 @@ console.log("- Can I Use: https://caniuse.com/");
 console.log("- MDN: https://developer.mozilla.org/");
 
 // ============================================
-// Common Pitfalls
-// ============================================
-
-console.log("\n=== Common Pitfalls ===");
-
-// Pitfall 1: Using Stage 1/2 proposals in production
-console.log("\nPitfall 1: Using early-stage proposals in production");
-console.log("  Stage 1/2 proposals may change significantly");
-console.log("  Breaking changes possible before Stage 4");
-console.log("  Fix: Only use Stage 2.7+ with fallbacks and polyfills");
-
-// Pitfall 2: Relying on deprecated APIs
-console.log("\nPitfall 2: Relying on deprecated APIs");
-console.log("  Deprecated APIs will eventually be removed");
-console.log("  Fix: Check deprecation warnings, migrate early");
-
-// Pitfall 3: Ignoring browser compatibility
-console.log("\nPitfall 3: Ignoring browser compatibility");
-console.log("  New features may not work in all target browsers");
-console.log("  Fix: Check caniuse.com before using new features");
-
-// Pitfall 4: Assuming Node.js features in browsers
-console.log("\nPitfall 4: Assuming Node.js features in browsers");
-console.log("  Node.js has features not available in browsers");
-console.log("  Fix: Check runtime environment compatibility");
-
-// Pitfall 5: Not following TC39 proposal changes
-console.log("\nPitfall 5: Not following TC39 proposal changes");
-console.log("  Proposals evolve, syntax may change");
-console.log("  Fix: Monitor proposal status regularly");
-
-// Pitfall 6: Temporal API confusion with Date
-console.log("\nPitfall 6: Temporal API vs Date confusion");
-console.log("  Temporal is completely new API, not Date replacement");
-console.log("  Fix: Learn Temporal API separately");
-
-// ============================================
 // TypeScript Comparison Notes
 // ============================================
 /*
 🔍 Key Differences in TypeScript:
 
 1. TEMPORAL API
-   TS:  Full type definitions for Temporal API
-   TS:  Temporal.PlainDate, Temporal.Duration types
-   TS:  Type-safe timezone handling
+   TS: Full type definitions (Temporal.PlainDate, Temporal.Duration, type-safe TZ)
 
 2. DECORATORS
-   TS:  Full decorator support since TS 5.0
-   TS:  @decorator syntax for classes, methods, properties
-   TS:  Type-safe decorator factories
-   TS:  metadata: emitDecoratorMetadata in tsconfig
+   TS: Full Stage 2.7 decorator support since TS 5.0 (@decorator, factories, metadata)
 
-3. RECORDS & TUPLES (Future)
-   TS:  Will have type definitions when standardized
-   TS:  Readonly<T> as current alternative
-   TS:  as const for immutable literals
+3. RECORDS & TUPLES / COMPOSITES (Future)
+   TS: Will get type definitions when standardized; use Readonly<T> / as const meanwhile
 
 4. PIPELINE OPERATOR (Future)
-   TS:  Will support when standardized
-   TS:  Currently use function composition
-   TS:  pipe(fn1, fn2, fn3)(value)
+   TS: Will support when standardized; currently use function composition pipe(fn1, fn2, fn3)
 
 5. IMPORT ATTRIBUTES
-   TS:  Supported in TS 5.3+
-   TS:  import config from './config.json' with { type: 'json' }
-   TS:  Type-safe JSON imports
+   TS: Supported in TS 5.3+ (import config from './c.json' with { type: 'json' })
 
 ⚠️ RUNTIME SUPPORT:
 - Many features require specific Node.js/browser versions
 - Use TypeScript to transpile to compatible JavaScript
-- Check caniuse.com for browser support
-- Check node.green for Node.js support
-
-🔧 BEST PRACTICES:
-- Use TypeScript for access to future JS features now
-- Keep tsconfig.json target and lib updated
-- Use polyfills for missing runtime features
-- Test in multiple browsers/runtimes
-- Follow WinterCG for portable APIs
+- Check caniuse.com / node.green for support
 
 📘 See related:
-- 39-es2022-plus-features.js (Recent ES features)
-- 32-modules.js (Module systems)
-- 46-performance.js (Performance optimization)
+- 39-es2022-plus-features.js (Recent ES features, full examples)
+- 32-modules.js (Module systems, Import Attributes)
 - 47-typescript-advanced-ts-comparison.ts (TS advanced features)
 */
