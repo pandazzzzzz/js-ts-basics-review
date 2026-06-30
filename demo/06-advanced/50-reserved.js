@@ -163,6 +163,13 @@ console.log("// Module Fragments (Stage 1) — future syntax, illustrative:");
 console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
 console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
 
+// --- Intl.MessageFormat / MessageFormat 2.0 (Stage 3 提案 - 非现行标准) ---
+// 统一 plural/select/gender/date/number 为单一声明式 ICU 消息语法。
+// 见 tc39/proposal-intl-messageformat（详见 42-intl-api.js Section 13）。
+console.log("// Intl.MessageFormat (Stage 3) — future syntax, illustrative:");
+console.log("//   const mf = new Intl.MessageFormat(`You have {count, plural, =0 {no items} one {one item} other {# items}}.`, 'en-US');");
+console.log("//   mf.format({ count: 5 });  // 'You have 5 items.'");
+
 // ============================================
 // 后续章节：运行时 / Web 平台 / TypeScript 生态（速览）
 // ============================================
