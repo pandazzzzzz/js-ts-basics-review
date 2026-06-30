@@ -275,7 +275,7 @@ console.log("\n=== Intl.PluralRules (ES2018) ===");
  *   status: ES2018
  *   stage4Date: 2017-12
  *   lastVerified: 2026-06-29
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ *   source: https://github.com/tc39/proposal-intl-plural-rules
  */
 
 const en = new Intl.PluralRules('en-US');

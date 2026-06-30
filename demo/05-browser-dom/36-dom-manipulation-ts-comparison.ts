@@ -102,7 +102,7 @@ const fragment = document.createDocumentFragment();
 // fragment: DocumentFragment ✅
 
 fragment.appendChild(document.createElement('div'));
-fragment.append(document.createElement('span')); // ES2016+
+fragment.append(document.createElement('span')); // DOM API (ParentNode.append) — WHATWG DOM
 
 // ✅ Type-safe batch insertion
 function createFragment<T extends Node>(

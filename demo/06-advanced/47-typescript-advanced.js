@@ -484,7 +484,7 @@ console.log("8. Reflect vs Object method differences");
 9. TYPESCRIPT VERSION UPDATES (2024-2026)
    TS 5.0 (March 2023):
    - const type parameters (inferred readonly tuples without `as const`)
-   - Standard (Stage 3) decorators support (experimentalDecorators: false)
+   - Standard (Stage 2.7) decorators support (experimentalDecorators: false)
    - `--moduleResolution bundler`
 
    TS 5.2 (August 2023):
@@ -530,7 +530,7 @@ console.log("8. Reflect vs Object method differences");
    - const type parameters (TS 5.0+): Prevent type widening
    - using declarations support (TS 5.2+): ES2027, Stage4 May 2025
    - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
-   - Decorator metadata (TS 5.0+): Requires 'emitDecoratorMetadata: true'
+   - Decorator metadata (Stage 2.7): uses Symbol.metadata (separate proposal), NOT emitDecoratorMetadata (legacy only)
 
 📘 See related:
 - 01-variables.js (Type checking fundamentals)

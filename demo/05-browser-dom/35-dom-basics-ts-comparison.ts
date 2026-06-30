@@ -259,7 +259,7 @@ element.classList.remove('old');                   // ✅ OK
 element.classList.toggle('active');                // Returns boolean
 element.classList.toggle('active', condition);     // Conditional toggle
 element.classList.contains('active');              // Returns boolean
-element.classList.replace('old', 'new');           // ES2018+
+element.classList.replace('old', 'new');           // DOMTokenList.replace() — WHATWG DOM
 
 // Iteration with type inference
 for (const className of element.classList) {
