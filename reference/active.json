@@ -20,6 +20,13 @@
       "stage4DateType": null,
       "note": "Draft stage",
       "url": "https://github.com/tc39/proposal-pattern-matching"
+    },
+    "Atomics.pause": {
+      "status": "Stage 3",
+      "stage": 3,
+      "stage4DateType": null,
+      "note": "Stage 3 as of 2026-06 (proposal README commit 2026-06-02). finished-proposals.md lists it under ES2027 but proposal README still Stage 3; 2024-10 meeting was for-stage-3. Repo: proposal-atomics-microwait (formerly proposal-atomics-pause).",
+      "url": "https://github.com/tc39/proposal-atomics-microwait"
     }
   }
 }

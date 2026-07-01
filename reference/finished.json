@@ -8,14 +8,6 @@
       "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11); delayed publication to ES2027",
       "url": "https://github.com/tc39/proposal-temporal"
     },
-    "Atomics.pause": {
-      "status": "ES2027",
-      "stage": 4,
-      "stage4Date": "2024-10",
-      "stage4DateType": "milestone",
-      "note": "Listed in finished-proposals (ES2027); 2024-10 is the Stage 3 meeting (notes 2024-10/october-09 'Atomics.pause for stage 3'). Actual Stage 4 meeting notes not yet published; treat as milestone pending confirmation.",
-      "url": "https://github.com/tc39/proposal-atomics-pause"
-    },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,

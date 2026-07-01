@@ -59,7 +59,6 @@ console.log("- Iterator Sequencing (ES2026): iter1 + iter2 concatenation");
 // ES2027
 console.log("- Temporal (ES2027): Temporal.Now.plainDateISO() / Temporal.PlainDate.from('1990-01-15')");
 console.log("- using / await using (ES2027, Explicit Resource Management): auto-dispose");
-console.log("- Atomics.pause (ES2027): spin-wait loop CPU hint");
 console.log("- Joint Iteration (ES2027): zip multiple iterables");
 
 // Commented example (ES2026/ES2027 syntax, illustrative)

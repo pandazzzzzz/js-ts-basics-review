@@ -535,7 +535,7 @@ console.log("7. RTL text direction considerations");
 console.log("8. Missing locale fallback handling");
 
 // ============================================
-// Section 9: Intl.DisplayNames (ES2022)
+// Section 9: Intl.DisplayNames (ES2021)
 // ============================================
 
 console.log("\n=== Intl.DisplayNames ===");
@@ -575,7 +575,7 @@ console.log("- Currency selection UIs");
 console.log("- Displaying user-friendly names from codes");
 
 // ============================================
-// Section 10: Intl.Locale (ES2021)
+// Section 10: Intl.Locale (ES2020)
 // ============================================
 
 console.log("\n=== Intl.Locale ===");
@@ -630,12 +630,12 @@ console.log("- Building locale-aware UIs");
 console.log("- Locale normalization");
 
 // ============================================
-// Section 11: Intl.DurationFormat (ES2024)
+// Section 11: Intl.DurationFormat (ES2025)
 // ============================================
 
 console.log("\n=== Intl.DurationFormat ===");
 
-// Intl.DurationFormat - Format durations (ES2024)
+// Intl.DurationFormat - Format durations (ES2025)
 // ⚠️ BROWSER/RUNTIME SUPPORT:
 // - Chrome: 129+ (September 2024)
 // - Firefox: 136+ (March 2025)
@@ -643,7 +643,7 @@ console.log("\n=== Intl.DurationFormat ===");
 // - Node.js: 23.0+ (October 2024)
 // - Polyfill available: intl-durationformat (npm)
 
-console.log("Intl.DurationFormat is ES2024, modern runtime support available.");
+console.log("Intl.DurationFormat is ES2025, modern runtime support available.");
 console.log("Runtime check:");
 if ('DurationFormat' in Intl) {
   console.log("✅ Intl.DurationFormat supported, running examples:");

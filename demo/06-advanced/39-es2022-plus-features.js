@@ -58,7 +58,6 @@ console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
 console.log("  - Explicit Resource Management (using/await using, ES2027)");
 console.log("  - DisposableStack");
-console.log("  - Atomics.pause");
 console.log("  - Joint Iteration");
 console.log("\n⚠️ Stage 2.7 Proposals (非现行标准):");
 console.log("  - Decorators (Stage 2.7 提案 - 非现行标准, 详见 50-reserved.js)");
@@ -944,7 +943,7 @@ class FileHandle {
 }
 
 // Note: using declarations reached Stage 4 (ES2027, May 2025)
-// They require runtime support (Node.js 22.0+, modern browsers)
+// They require runtime support (Node.js 24.0+, modern browsers)
 // Check browser support (caniuse.com) before production use
 
 // Using declaration - automatically calls Symbol.dispose
@@ -1019,7 +1018,7 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Using features without checking browser support
 console.log("\nPitfall 1: Browser/runtime compatibility");
-console.log("  ES2024/ES2025 + Stage 3 proposals may not be available");
+console.log("  ES2024-ES2027 + Stage 2.7/3 proposals may not be available");
 console.log("  Check: https://caniuse.com or Node.js version");
 console.log("  Fix: Use transpilation (Babel, TypeScript) or polyfills");
 
@@ -1118,7 +1117,7 @@ console.log("8. using declaration disposal timing");
 // - Immutable, timezone-aware, easier to use
 console.log("\n=== Temporal API (ES2027) ===");
 
-console.log("NOTE: Temporal reached Stage 4 in Sep 2025 and is targeted for ES2027.");
+console.log("NOTE: Temporal reached Stage 4 in March 2026 and is targeted for ES2027.");
 console.log("Browser/runtime support varies by engine. Check caniuse.com for current status.");
 console.log("Polyfill (for older environments): @js-temporal/polyfill (npm)");
 console.log("Spec: https://github.com/tc39/proposal-temporal");
@@ -1470,7 +1469,7 @@ console.log("- Preventing ReDoS attacks from user-controlled regex");
 console.log("\n=== DisposableStack (ES2027) ===");
 
 console.log("NOTE: DisposableStack reached Stage 4 (ES2027, May 2025).");
-console.log("Requires Node.js 22.0+ or modern browsers.");
+console.log("Requires Node.js 24.0+ or modern browsers.");
 console.log("Polyfill: @ungap/disposable-stack (npm)");
 
 // DisposableStack example (simplified - commented out for compatibility)
@@ -1501,21 +1500,20 @@ stack.dispose();
 /*
  * verification:
  *   feature: Atomics.pause
- *   status: ES2027
- *   stage4Date: 2024-10
+ *   status: Stage 3
  *   lastVerified: 2026-06-29
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
 // ============================================
-// Atomics.pause (ES2027)
+// Atomics.pause (Stage 3 提案 - 非现行标准)
 // - Pause execution for spin-wait loops
 // - Improves performance of busy-waiting synchronization
-// - Reached Stage 4 in October 2024, part of ES2027
-console.log("\n=== Atomics.pause (ES2027) ===");
+// - Stage 3 as of 2026-06（2024-10 为 Stage 3 会议），尚未达 Stage 4
+console.log("\n=== Atomics.pause (Stage 3 提案 - 非现行标准) ===");
 
-console.log("NOTE: Atomics.pause reached Stage 4 in October 2024 and is part of ES2027.");
-console.log("Requires Node.js 22.0+ or modern browsers.");
+console.log("NOTE: Atomics.pause is Stage 3 (not yet standardized); no runtime has shipped it.");
+console.log("See tc39/proposal-atomics-microwait for current status.");
 
 console.log("\nAtomics.pause purpose:");
 console.log(`
@@ -1555,11 +1553,11 @@ console.log("- Worker coordination");
 // ============================================
 // Joint Iteration (ES2027)
 // - Iterate over multiple iterables simultaneously
-// - Reached Stage 4 in November 2025, part of ES2027
+// - Reached Stage 4 in May 2026, part of ES2027
 console.log("\n=== Joint Iteration (ES2027) ===");
 
-console.log("NOTE: Joint Iteration reached Stage 4 in November 2025 and is part of ES2027.");
-console.log("Requires Node.js 22.0+ or modern browsers.");
+console.log("NOTE: Joint Iteration reached Stage 4 in May 2026 and is part of ES2027.");
+console.log("No Chrome/Safari/Node support yet (Firefox 148+ only).");
 
 console.log("\nJoint iteration syntax:");
 console.log(`
