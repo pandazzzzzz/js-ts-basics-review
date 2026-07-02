@@ -18,9 +18,12 @@
 
 # 核心文件
 !.gitignore
+!.gitattributes
+!.editorconfig
 !LICENSE
 !README.md
 !package.json
+!tsconfig.json
 
 # ============================================
 # 说明
@@ -31,9 +34,11 @@
 # - reference/ 文件夹及其所有内容（ES 版本参考数据）
 # - scripts/ 文件夹及其所有内容（验证脚本）
 # - .gitignore 文件
+# - .gitattributes / .editorconfig 文件（行尾/编码规范）
 # - LICENSE 文件
 # - README.md 文件
 # - package.json 文件
+# - tsconfig.json 文件（demo TS 比较文件的编译配置）
 #
 # CLAUDE.md 仅保留在本地，不提交到远程
 # 其他所有文件和文件夹都会被忽略

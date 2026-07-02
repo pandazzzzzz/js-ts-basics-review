@@ -1,0 +1,18 @@
+# Default: treat as text, normalize line endings on commit (checkout uses platform default)
+* text=auto
+
+# Enforce CRLF for source files (matches existing repo convention on Windows)
+*.js   text eol=crlf
+*.ts   text eol=crlf
+*.json text eol=crlf
+*.md   text eol=crlf
+*.css  text eol=crlf
+*.html text eol=crlf
+
+# Binary files — never normalize
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
