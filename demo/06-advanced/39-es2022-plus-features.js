@@ -59,8 +59,8 @@ console.log("  - Temporal API (modern date/time API)");
 console.log("  - Explicit Resource Management (using/await using, ES2027)");
 console.log("  - DisposableStack");
 console.log("  - Joint Iteration");
-console.log("\n⚠️ Stage 2.7 Proposals (非现行标准):");
-console.log("  - Decorators (Stage 2.7 提案 - 非现行标准, 详见 50-reserved.js)");
+console.log("\n⚠️ Stage 2.7 Proposals (not current standard):");
+console.log("  - Decorators (Stage 2.7 proposal - not current standard, see 50-reserved.js)");
 
 // ============================================
 // ES2022 Features
@@ -1498,7 +1498,7 @@ stack.dispose();
 `);
 
 // ══════════════════════════════════════════
-// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
 
 /*
@@ -1510,11 +1510,11 @@ stack.dispose();
  */
 
 // ============================================
-// Atomics.pause (Stage 3 提案 - 非现行标准)
+// Atomics.pause (Stage 3 proposal - not current standard)
 // - Pause execution for spin-wait loops
 // - Improves performance of busy-waiting synchronization
-// - Stage 3 as of 2026-06（2024-10 为 Stage 3 会议），尚未达 Stage 4
-console.log("\n=== Atomics.pause (Stage 3 提案 - 非现行标准) ===");
+// - Stage 3 as of 2026-06 (2024-10 was the for-stage-3 meeting), not yet Stage 4
+console.log("\n=== Atomics.pause (Stage 3 proposal - not current standard) ===");
 
 console.log("NOTE: Atomics.pause is Stage 3 (not yet standardized); no runtime has shipped it.");
 console.log("See tc39/proposal-atomics-microwait for current status.");

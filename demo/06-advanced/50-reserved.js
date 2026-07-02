@@ -3,10 +3,11 @@
 // 📘 TC39 Proposals: https://github.com/tc39/proposals
 // 📘 TypeScript Roadmap: https://github.com/microsoft/TypeScript/wiki/Roadmap
 //
-// 📌 文件定位声明：
-// 本文件讲"未来扩展"与 TC39 提案，非现行标准。已标准化部分（Section 2）
-// 只做清单式速览；未定稿提案（Section 3+）语法随时可能变化，勿用于生产。
-// 各提案的 Stage 标注以 reference/ 下的 active.json / withdrawn.json 为准。
+// 📌 File scope:
+// This file covers "future extensions" and TC39 proposals, not current standards.
+// Standardized features (Section 2) are listed briefly; unfinalized proposals
+// (Section 3+) may change syntax at any time — do not use in production.
+// Stage annotations follow reference/active.json and reference/withdrawn.json.
 
 // ============================================
 // Section 1: TC39 Proposal Stages
@@ -34,7 +35,7 @@ console.log("Stage 4: Finished - Approved for ES standard");
 
 console.log("\n=== Recent Standardized Features ===");
 
-// 已标准特性（Stage 4），仅作清单式速览。详细示例见 39-es2022-plus-features.js。
+// Standardized features (Stage 4); brief list only. See 39-es2022-plus-features.js for full examples.
 
 // ES2025
 /*
@@ -68,50 +69,52 @@ console.log("//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027,
 console.log("//   for (const [n, a] of zip(names, ages)) console.log(n, a); // ES2027");
 
 // ============================================
-// Section 3+: 未定稿提案 / Withdrawn 提案
-// ⚠️ 以下为非现行标准，语法可能变化，勿用于生产
+// Section 3+: Unfinalized proposals / Withdrawn proposals
+// ⚠️ Below are not current standards; syntax may change — do not use in production
 // ============================================
 
 // ══════════════════════════════════════════
-// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
 
-console.log("\n=== 未定稿提案 / Withdrawn 提案（非现行标准）===");
+console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current standard) ===");
 
-// --- Records & Tuples (Withdrawn - 非现行标准) ---
-// 原计划的不可变值语义数据结构（#{} / #[]），深度相等。
-// 提案已撤回，由 Composites 提案接替。见 tc39/proposal-record-tuple。
-console.log("// Records & Tuples (Withdrawn) — 历史语法:");
+// --- Records & Tuples (Withdrawn - not current standard) ---
+// Originally planned immutable value-semantics data structures (#{} / #[]), deep equality.
+// Proposal withdrawn, succeeded by the Composites proposal. See tc39/proposal-record-tuple.
+console.log("// Records & Tuples (Withdrawn) — historical syntax:");
 console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
 console.log("//   const t = #[1, 2, 3];        // tuple, immutable");
 console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
 
-// --- Composites (Stage 2 提案 - 非现行标准) ---
-// Records & Tuples 的继任者：深度不可变组合对象/数组，值语义（深度相等，
-// 可作 Map key）。语法/API 仍在演进。见 tc39/proposal-composites。
+// --- Composites (Stage 2 proposal - not current standard) ---
+// Successor to Records & Tuples: deeply immutable composite objects/arrays with
+// value semantics (deep equality, usable as Map keys). Syntax/API still evolving.
+// See tc39/proposal-composites.
 console.log("// Composites (Stage 2) — future syntax, illustrative:");
 console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
 console.log("//   const a = Composite { x: 1 } , b = Composite { x: 1 };");
 console.log("//   a === b;            // true (value, not reference)");
 console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 }); // 'o'");
 
-// --- Decimal (Stage 2 提案 - 非现行标准) ---
-// 高精度十进制类型，避免二进制浮点误差（0.1 + 0.2 !== 0.3）。拟用 'm' 字面量后缀。
-// 字面量语法仍在讨论。见 tc39/proposal-decimal。
+// --- Decimal (Stage 2 proposal - not current standard) ---
+// High-precision decimal type to avoid binary floating-point error (0.1 + 0.2 !== 0.3).
+// Planned 'm' literal suffix; literal syntax still under discussion. See tc39/proposal-decimal.
 console.log("// Decimal (Stage 2) — future syntax, illustrative:");
 console.log("//   0.1 + 0.2 === 0.3;       // false today (binary float)");
 console.log("//   const price = 0.10m;");
 console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
 
-// --- Do Expressions (Stage 2 提案 - 非现行标准) ---
-// 把块作为表达式求值，返回最后一个值；让 if/else 可内联为表达式，
-// 减少 IIFE / 临时变量。do 内 return 语义仍在敲定。见 tc39/proposal-do-expressions。
+// --- Do Expressions (Stage 2 proposal - not current standard) ---
+// Evaluate a block as an expression, returning the last value; lets if/else inline
+// as an expression, reducing IIFE / temp variables. `return` semantics inside `do`
+// still being finalized. See tc39/proposal-do-expressions.
 console.log("// Do Expressions (Stage 2) — future syntax, illustrative:");
 console.log("//   const label = do {");
 console.log("//     if (cond) 'yes'; else 'no';");
 console.log("//   }; // evaluates to 'yes' or 'no'");
 
-// --- Pattern Matching (Stage 2 提案 - 非现行标准) ---
+// --- Pattern Matching (Stage 2 proposal - not current standard) ---
 /*
  * verification:
  *   feature: Pattern Matching
@@ -126,7 +129,7 @@ console.log("//     when { type: 'admin' } if lvl > 5 -> 'Super Admin',");
 console.log("//     when _ -> 'Unknown'");
 console.log("//   };");
 
-// --- Pipeline Operator (Stage 2 提案 - 非现行标准) ---
+// --- Pipeline Operator (Stage 2 proposal - not current standard) ---
 /*
  * verification:
  *   feature: Pipeline Operator
@@ -140,37 +143,40 @@ console.log("//     |> lowercase");
 console.log("//     |> trim");
 console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(input)))");
 
-// --- Partial Application (Stage 1 提案 - 非现行标准) ---
-// ? 占位符做偏函数应用，从已有函数派生新函数。见 tc39/proposal-partial-application。
+// --- Partial Application (Stage 1 proposal - not current standard) ---
+// `?` placeholder for partial application, deriving new functions from existing ones.
+// See tc39/proposal-partial-application.
 console.log("// Partial Application (Stage 1) — future syntax, illustrative:");
 console.log("//   const add = (a, b, c) => a + b + c;");
 console.log("//   const addFive = add(5, ?, ?);");
 console.log("//   addFive(3, 2); // 10");
 
-// --- Decorators (Stage 2.7 提案 - 非现行标准) ---
-// 类/方法装饰器，元数据式编程，类似 Python/Java 注解。逼近 Stage 3，尚未定稿。
-// 见 tc39/proposal-decorators（TS 5.0 已支持 Stage 2.7 语义）。
+// --- Decorators (Stage 2.7 proposal - not current standard) ---
+// Class/method decorators for metadata-style programming, similar to Python/Java
+// annotations. Nearing Stage 3, not yet finalized.
+// See tc39/proposal-decorators (TS 5.0 already supports Stage 2.7 semantics).
 console.log("// Decorators (Stage 2.7) — future syntax, illustrative:");
 console.log("//   function logged(target, context) {");
 console.log("//     return (...args) => { console.log('call', context.name); return target(...args); };");
 console.log("//   }");
 console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
 
-// --- Module Fragments (Stage 1 提案 - 非现行标准) ---
-// 文件内内联模块片段，便于组织代码与测试。见 tc39/proposal-module-fragments。
+// --- Module Fragments (Stage 1 proposal - not current standard) ---
+// Inline module fragments within a file, for organizing code and tests.
+// See tc39/proposal-module-fragments.
 console.log("// Module Fragments (Stage 1) — future syntax, illustrative:");
 console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
 console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
 
-// --- Intl.MessageFormat / MessageFormat 2.0 (Stage 3 提案 - 非现行标准) ---
-// 统一 plural/select/gender/date/number 为单一声明式 ICU 消息语法。
-// 见 tc39/proposal-intl-messageformat（详见 42-intl-api.js Section 13）。
+// --- Intl.MessageFormat / MessageFormat 2.0 (Stage 3 proposal - not current standard) ---
+// Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
+// See tc39/proposal-intl-messageformat (see 42-intl-api.js Section 13 for detail).
 console.log("// Intl.MessageFormat (Stage 3) — future syntax, illustrative:");
 console.log("//   const mf = new Intl.MessageFormat(`You have {count, plural, =0 {no items} one {one item} other {# items}}.`, 'en-US');");
 console.log("//   mf.format({ count: 5 });  // 'You have 5 items.'");
 
 // ============================================
-// 后续章节：运行时 / Web 平台 / TypeScript 生态（速览）
+// Following sections: Runtime / Web Platform / TypeScript ecosystem (overview)
 // ============================================
 
 console.log("\n=== JavaScript Runtime Evolution ===");

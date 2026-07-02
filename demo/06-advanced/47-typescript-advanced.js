@@ -76,9 +76,9 @@ console.log("3. self-documenting code");
 console.log("4. Can gradually adopt TypeScript");
 
 // ══════════════════════════════════════════
-// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 2: Decorators (Stage 2.7 提案 - 非现行标准)
+// Section 2: Decorators (Stage 2.7 proposal - not current standard)
 // ============================================
 
 /*
@@ -89,10 +89,10 @@ console.log("4. Can gradually adopt TypeScript");
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
-console.log("\n=== Decorators (Stage 2.7 提案 - 非现行标准) ===\n");
+console.log("\n=== Decorators (Stage 2.7 proposal - not current standard) ===\n");
 
-// Decorators 是 TC39 Stage 2.7 提案（截至 2026-06 尚未进入 ECMAScript 标准）。
-// TS 5.0+ 已支持（experimentalDecorators: false），Babel 7.21+ 支持。
+// Decorators are a TC39 Stage 2.7 proposal (as of 2026-06, not yet part of the ECMAScript standard).
+// TS 5.0+ already supports it (experimentalDecorators: false); Babel 7.21+ supports it.
 console.log("- Stage 2.7 proposal, not yet part of ECMAScript standard");
 console.log("- TS 5.0+ / Babel 7.21+ support via transpilation");
 console.log(`// Method decorator example (future syntax):
@@ -101,7 +101,7 @@ console.log(`// Method decorator example (future syntax):
 // }
 // class Example { @logged greet(name) { return \`Hello, \${name}!\`; } }
 `);
-// 📘 详见 50-reserved.js（未来扩展专题）
+// 📘 See 50-reserved.js (future extensions topic)
 
 // ============================================
 // Section 3: Reflect API (ES6)

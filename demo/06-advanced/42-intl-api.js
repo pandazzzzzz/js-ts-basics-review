@@ -741,15 +741,15 @@ console.log("- Intl.RelativeTimeFormat.formatToParts()");
 console.log("- Intl.ListFormat.formatToParts()");
 
 // ══════════════════════════════════════════
-// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 3 提案 - 非现行标准)
+// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 3 proposal - not current standard)
 // ============================================
 
-console.log("\n=== Intl.MessageFormat (Stage 3 提案 - 非现行标准) ===");
+console.log("\n=== Intl.MessageFormat (Stage 3 proposal - not current standard) ===");
 
-// MessageFormat 2.0 是 Stage 3 提案，尚未进入 ECMAScript 标准。
-// 统一 plural/select/gender/date/number 为单一声明式 ICU 消息语法。
+// MessageFormat 2.0 is a Stage 3 proposal, not yet part of the ECMAScript standard.
+// Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
 // No verification block (Stage 3, not finalized).
 // Proposal: https://github.com/tc39/proposal-intl-messageformat
 console.log("- Stage 3 proposal, not yet standardized; use @messageformat/core polyfill for production");
@@ -757,7 +757,7 @@ console.log(`// Example template (future syntax):
 // const mf = new Intl.MessageFormat(\`You have {count, plural, =0 {no items} one {one item} other {# items}}.\`, 'en-US');
 // mf.format({ count: 5 });  // "You have 5 items."
 `);
-// 📘 详见 50-reserved.js（未来扩展专题）
+// 📘 See 50-reserved.js (future extensions topic)
 
 
 // ============================================
