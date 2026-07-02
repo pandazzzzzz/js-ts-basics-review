@@ -129,7 +129,10 @@ class MemoryPool<T extends Resettable> {
   acquire(): T {
     let obj: T;
     if (this.available.length > 0) {
-      obj = this.available.pop()!;
+      // pop() returns T | undefined; guard instead of non-null assertion
+      const pooled = this.available.pop();
+      if (!pooled) throw new Error('pool unexpectedly empty');
+      obj = pooled;
     } else {
       obj = this.factory();
     }

@@ -257,15 +257,17 @@ interface Chainable<T> {
 }
 
 function chainable<T = {}>(): Chainable<T> {
-  const result: any = {};
-
-  result.option = function(this: any, key: string, value: unknown) {
-    this[key] = value;
-    return this;
-  };
-
-  result.get = function(this: any) {
-    return this;
+  // Type the builder as Chainable<T> so `this` is polymorphic and statically
+  // checked — no `any` needed to make method chaining type-check.
+  const result: Chainable<T> = {
+    option<U>(this: Chainable<T>, key: string, value: U): Chainable<T & { [K in keyof U]: U[K] }> {
+      // Real implementations accumulate into an internal record; the cast below
+      // models the widening that the mapped type in the signature promises.
+      return { ...this, [key]: value } as Chainable<T & { [K in keyof U]: U[K] }>;
+    },
+    get(): T {
+      return this as unknown as T;
+    }
   };
 
   return result;

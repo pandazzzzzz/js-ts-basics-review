@@ -401,14 +401,27 @@ interface SerializableError {
   code?: string | number;
 }
 
+// Type guard: narrows an unknown value to one carrying a numeric/string `code`.
+// Avoids triple type assertion (`as unknown as Record<...> as ...`).
+function hasCode(e: unknown): e is { code: string | number } {
+  if (typeof e !== 'object' || e === null || !('code' in e)) return false;
+  return typeof (e as Record<string, unknown>).code === 'string' ||
+    typeof (e as Record<string, unknown>).code === 'number';
+}
+
 function serializeError(error: unknown): SerializableError {
   if (error instanceof Error) {
-    return {
+    const result: SerializableError = {
       name: error.name,
       message: error.message,
-      stack: error.stack,
-      code: (error as unknown as Record<string, unknown>)['code'] as string | number | undefined
+      stack: error.stack
     };
+    // Error may carry extra `code` at runtime (e.g. Node's SystemError);
+    // narrow with a type guard rather than a triple cast.
+    if (hasCode(error)) {
+      result.code = error.code;
+    }
+    return result;
   }
 
   if (typeof error === "object" && error !== null) {
@@ -416,8 +429,8 @@ function serializeError(error: unknown): SerializableError {
       name: "UnknownError",
       message: String(error)
     };
-    if ('code' in error) {
-      result.code = error.code as string | number;
+    if (hasCode(error)) {
+      result.code = error.code;
     }
     return result;
   }

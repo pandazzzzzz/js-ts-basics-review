@@ -449,8 +449,11 @@ const TSerializable = {
   serialize(this: object): string {
     return JSON.stringify(this);
   },
-  deserialize(this: any, json: string): object {
-    return Object.assign(new this.constructor(), JSON.parse(json));
+  // `this` carries a `constructor` so we can reconstruct; typed via a constraint
+  // instead of `any` to keep the call site checked.
+  deserialize(this: object & { constructor: new () => unknown }, json: string): object {
+    const target = new this.constructor() as object;
+    return Object.assign(target, JSON.parse(json));
   }
 };
 
@@ -465,16 +468,19 @@ const TLoggable = {
 };
 
 // TypeScript: Trait composer with conflict resolution
-function composeTraits(...traits: object[]): object {
+// Each trait is a bag of methods: typed as Record<string, unknown> so we can
+// index it without `as any`.
+function composeTraits(...traits: Record<string, unknown>[]): Record<string, unknown> {
   const composed: Record<string, unknown> = {};
   const conflicts: Map<string, number> = new Map();
 
   traits.forEach(trait => {
-    Object.keys(trait).forEach(key => {
-      if (composed[key] !== undefined && composed[key] !== (trait as any)[key]) {
+    (Object.keys(trait) as (keyof typeof trait)[]).forEach(key => {
+      const fn = trait[key];
+      if (composed[key] !== undefined && composed[key] !== fn) {
         conflicts.set(key, (conflicts.get(key) || 0) + 1);
       }
-      composed[key] = (trait as any)[key];
+      composed[key] = fn;
     });
   });
 
@@ -487,27 +493,30 @@ function composeTraits(...traits: object[]): object {
 
 function applyTraits<T extends new (...args: any[]) => any>(
   cls: T,
-  ...traits: object[]
+  ...traits: Record<string, unknown>[]
 ): T {
   const composed = composeTraits(...traits);
   Object.assign(cls.prototype, composed);
   return cls;
 }
 
+// Declaration merging: the interface adds the trait method signatures to
+// TraitEntity's type, so calls below type-check without `as any`.
 class TraitEntity {
   id: number;
   constructor(id: number) {
     this.id = id;
   }
 }
+interface TraitEntity extends TEquality, TLoggable, TSerializable {}
 
 applyTraits(TraitEntity, TEquality, TLoggable, TSerializable);
 
 const traitEntity = new TraitEntity(123);
 console.log("Traits applied:");
-(traitEntity as any).log('Entity created');
-console.log('Serialized:', (traitEntity as any).serialize());
-console.log('Equals self:', (traitEntity as any).equals(traitEntity));
+traitEntity.log('Entity created');
+console.log('Serialized:', traitEntity.serialize());
+console.log('Equals self:', traitEntity.equals(traitEntity));
 
 
 // ============================================================================

@@ -306,12 +306,12 @@ console.log("\n=== Object Methods with Types ===");
 const keys: string[] = Object.keys(serverConfig);
 console.log("Keys:", keys);
 
-// Object.values() returns any[]
-const values: any[] = Object.values(serverConfig);
+// Object.values() returns T[keyof T][] (here: (string | number)[]) — typed, not any[]
+const values = Object.values(serverConfig);
 console.log("Values:", values);
 
-// Object.entries() returns [string, any][]
-const entries: [string, any][] = Object.entries(serverConfig);
+// Object.entries() returns [string, T[keyof T]][] — typed tuples
+const entries = Object.entries(serverConfig);
 console.log("Entries:", entries);
 
 // ✅ BEST PRACTICE: Type-safe iteration
