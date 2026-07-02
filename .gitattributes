@@ -1,13 +1,8 @@
-# Default: treat as text, normalize line endings on commit (checkout uses platform default)
+# Default: auto-detect text vs binary; normalize EOL on commit (stored as LF in index,
+# checked out per platform default — .editorconfig enforces CRLF in editors).
+# This matches the repo's existing core.autocrlf=true history (index is LF,
+# working tree is CRLF on Windows) and avoids a full-repo EOL churn.
 * text=auto
-
-# Enforce CRLF for source files (matches existing repo convention on Windows)
-*.js   text eol=crlf
-*.ts   text eol=crlf
-*.json text eol=crlf
-*.md   text eol=crlf
-*.css  text eol=crlf
-*.html text eol=crlf
 
 # Binary files — never normalize
 *.png  binary
