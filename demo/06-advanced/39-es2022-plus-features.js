@@ -1497,6 +1497,10 @@ stack.dispose();
 // Custom cleanup logic
 `);
 
+// ══════════════════════════════════════════
+// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ══════════════════════════════════════════
+
 /*
  * verification:
  *   feature: Atomics.pause
@@ -1540,6 +1544,7 @@ console.log("- Custom mutex implementations");
 console.log("- Busy-wait synchronization");
 console.log("- Lock-free data structures");
 console.log("- Worker coordination");
+// ══════════════════════════════════════════
 
 /*
  * verification:

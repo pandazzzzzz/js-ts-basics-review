@@ -893,6 +893,10 @@ Key modern features (ES2020-ES2023):
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
+// ══════════════════════════════════════════
+// ⚠️ PROPOSAL SECTION — 非现行标准，语法可能变化
+// ══════════════════════════════════════════
+
 // 5. DECORATORS (Stage 2.7 提案 - 非现行标准, 详见 50-reserved.js)
 //    JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
 //    TS:  Stage 2.7 decorators supported in TS 5.0+ (experimentalDecorators: false)
@@ -904,6 +908,7 @@ Key modern features (ES2020-ES2023):
 // - Class field initialization order matters in both languages
 //
 // 📘 See 18-es6-plus-syntax-ts-comparison.ts for detailed examples!
+// ══════════════════════════════════════════
 
 // ============================================
 // 21. ADDITIONAL ES2020-ES2024 FEATURES
