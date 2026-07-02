@@ -1,4 +1,4 @@
-// ES6+ Syntax Features (Spread, Destructuring, Optional Chaining, Nullish Coalescing)
+// ES6+ Syntax Features Demo
 // 📘 See: https://javascript.info/ (JavaScript.info - Modern JavaScript)
 // 📘 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript (MDN JavaScript Reference)
 // 📘 For TypeScript comparison, see: 18-es6-plus-syntax-ts-comparison.ts
@@ -1105,9 +1105,9 @@ symWm.set(symKey, "symbol-keyed value");
 console.log("  WeakMap.get(symbolKey):", symWm.get(symKey)); // 'symbol-keyed value'
 
 
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

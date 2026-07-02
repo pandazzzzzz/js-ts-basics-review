@@ -1,4 +1,5 @@
 // DOM Manipulation Demo
+// 📘 For TypeScript comparison, see: 36-dom-manipulation-ts-comparison.ts
 // 📘 javascript.info Part 2 > "Modifying the document"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 // ⚠️ Browser environment only

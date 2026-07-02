@@ -956,9 +956,9 @@ console.log("  rect instanceof Object:", rect instanceof Object);
 📘 See 15-prototypes-inheritance-ts-comparison.ts for detailed examples!
 */
 
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

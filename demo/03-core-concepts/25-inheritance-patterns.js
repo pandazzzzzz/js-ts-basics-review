@@ -1,10 +1,10 @@
-// ============================================================================
-// INHERITANCE PATTERNS - ADVANCED COMPREHENSIVE GUIDE
-// ============================================================================
+// Inheritance Patterns - Advanced Demo
+// 📘 For TypeScript comparison, see: 25-inheritance-patterns-ts-comparison.ts
 
-// ============================================================================
+
+// ============================================
 // 1. COMPOSITION OVER INHERITANCE
-// ============================================================================
+// ============================================
 /**
  * Composition Over Inheritance - Building objects by combining components (ES6)
  *
@@ -139,9 +139,9 @@ console.log("\nDependency injection:");
 db.query('SELECT * FROM users');
 
 
-// ============================================================================
+// ============================================
 // 2. FUNCTIONAL MIXINS
-// ============================================================================
+// ============================================
 /**
  * Functional Mixins - Reusable functions that add behavior to objects (ES6)
  *
@@ -260,9 +260,9 @@ if (maybeUser.feature) {
 }
 
 
-// ============================================================================
+// ============================================
 // 3. PARASITIC COMPOSITION
-// ============================================================================
+// ============================================
 /**
  * Parasitic Composition - Building objects by enhancing others (ES6)
  *
@@ -359,9 +359,9 @@ enhancedService.setCache('user:1', { id: 1, name: 'Bob' });
 console.log('Cached value:', enhancedService.getCache('user:1'));
 
 
-// ============================================================================
+// ============================================
 // 4. STRATEGY PATTERN
-// ============================================================================
+// ============================================
 /**
  * Strategy Pattern - Encapsulating interchangeable algorithms (ES6)
  *
@@ -497,9 +497,9 @@ const largeSorter = new Sorter(new QuickSort());
 console.log(largeSorter.sort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]));
 
 
-// ============================================================================
+// ============================================
 // 5. OBSERVER PATTERN
-// ============================================================================
+// ============================================
 /**
  * Observer Pattern - One-to-many dependency (ES6)
  *
@@ -658,9 +658,9 @@ unsubscribe();
 counter.set(3); // No output
 
 
-// ============================================================================
+// ============================================
 // 6. TEMPLATE METHOD PATTERN
-// ============================================================================
+// ============================================
 /**
  * Template Method Pattern - Skeleton algorithm in superclass (ES6)
  *
@@ -826,9 +826,9 @@ const elf = new ElfAI();
 elf.takeTurn();
 
 
-// ============================================================================
+// ============================================
 // 7. VISITOR PATTERN
-// ============================================================================
+// ============================================
 /**
  * Visitor Pattern - Operations on objects without modifying classes (ES6)
  *
@@ -1005,9 +1005,9 @@ console.log('Expression:', printer.visitMultiply(expression));
 console.log('Result:', evaluator.visitMultiply(expression));
 
 
-// ============================================================================
+// ============================================
 // 8. TRAITS PATTERN
-// ============================================================================
+// ============================================
 /**
  * Traits - Composable units of behavior (ES6)
  *
@@ -1096,9 +1096,9 @@ console.log('Serialized:', entity.serialize());
 console.log('Equals self:', entity.equals(entity));
 
 
-// ============================================================================
+// ============================================
 // BEST PRACTICES
-// ============================================================================
+// ============================================
 /**
  * Inheritance Patterns Best Practices
  *
@@ -1183,9 +1183,9 @@ const result = validator.validate({
 console.log('Validation result:', result);
 
 
-// ============================================================================
+// ============================================
 // COMMON PITFALLS
-// ============================================================================
+// ============================================
 console.log("\n=== Inheritance Patterns Common Pitfalls Demo ===");
 
 // Pitfall 1: Deep inheritance hierarchy
@@ -1206,9 +1206,9 @@ console.log("\nPitfall 4 - Over-engineering:");
 console.log("Use patterns when they solve actual problems, not for 'elegance'");
 
 
-// ============================================================================
+// ============================================
 // SUMMARY
-// ============================================================================
+// ============================================
 /**
  * Inheritance Patterns Summary
  *
@@ -1235,9 +1235,9 @@ console.log("Use patterns when they solve actual problems, not for 'elegance'");
 console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 
 
-// ============================================================================
+// ============================================
 // TypeScript Comparison Notes
-// ============================================================================
+// ============================================
 /*
 🔍 Key Differences in TypeScript:
 
@@ -1316,9 +1316,9 @@ console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 - 24-function-patterns-advanced.js (functional patterns)
 */
 
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

@@ -1,10 +1,10 @@
-// ============================================================================
-// FUNCTION PATTERNS - ADVANCED COMPREHENSIVE GUIDE
-// ============================================================================
+// Function Patterns - Advanced Demo
+// 📘 For TypeScript comparison, see: 24-function-patterns-advanced-ts-comparison.ts
 
-// ============================================================================
+
+// ============================================
 // 1. CURRYING - FUNCTION TRANSFORMATION
-// ============================================================================
+// ============================================
 /**
  * Currying - Transforming n-ary function into sequence of unary functions (ES6)
  *
@@ -82,9 +82,9 @@ console.log("add5(2)(3):", add5(2)(3)); // 10
 console.log("add5and3(10):", add5and3(10)); // 18
 
 
-// ============================================================================
+// ============================================
 // 2. FUNCTION COMPOSITION - COMPOSE & PIPE
-// ============================================================================
+// ============================================
 /**
  * Function Composition - Combining functions to create new functions (ES6)
  *
@@ -184,9 +184,9 @@ console.log("\nComposition with multiple args:");
 console.log("composedMath(2, 3):", composedMath(2, 3)); // NaN — addTwo(2,3)=5, then multiplyTwo(5)=NaN (missing 2nd arg)
 
 
-// ============================================================================
+// ============================================
 // 3. ADVANCED PARTIAL APPLICATION
-// ============================================================================
+// ============================================
 /**
  * Partial Application - Fixing some arguments of a function (ES6)
  *
@@ -259,9 +259,9 @@ console.log("\nPartial with placeholders:");
 console.log("subtractFrom10(3):", subtractFrom10(3)); // 10 - 3 = 7
 
 
-// ============================================================================
+// ============================================
 // 4. FUNCTION FACTORIES
-// ============================================================================
+// ============================================
 /**
  * Function Factories - Functions that create and return new functions (ES6)
  *
@@ -350,9 +350,9 @@ console.log("\nAPI client factory:");
 apiClient('/users');
 
 
-// ============================================================================
+// ============================================
 // 5. HIGHER-ORDER FUNCTIONS - FUNCTION TRANSFORMERS
-// ============================================================================
+// ============================================
 /**
  * Higher-Order Functions - Functions that take/return functions (ES6)
  *
@@ -443,9 +443,9 @@ memoizedFibonacci(10);
 memoizedFibonacci(10); // Cache hit
 
 
-// ============================================================================
+// ============================================
 // 6. DEBOUNCING & THROTTLING
-// ============================================================================
+// ============================================
 /**
  * Debounce & Throttle - Rate limiting function execution (ES6)
  *
@@ -537,9 +537,9 @@ throttledLog(); // Throttled
 throttledLog(); // Throttled
 
 
-// ============================================================================
+// ============================================
 // 7. TRAMPOLINES - TAIL RECURSION OPTIMIZATION
-// ============================================================================
+// ============================================
 /**
  * Trampolines - Handling deep recursion without stack overflow (ES6)
  *
@@ -606,9 +606,9 @@ console.log("trampoline(() => even(10)):", trampoline(() => even(10))); // true
 console.log("trampoline(() => even(9)):", trampoline(() => even(9))); // false
 
 
-// ============================================================================
+// ============================================
 // 8. RECURSION PATTERNS
-// ============================================================================
+// ============================================
 /**
  * Recursion Patterns - Functional approaches to iterative problems (ES6)
  *
@@ -703,9 +703,9 @@ console.log("\nRecursive reducer:");
 console.log("Sum of nested values:", sum); // 10
 
 
-// ============================================================================
+// ============================================
 // 9. POINT-FREE STYLE
-// ============================================================================
+// ============================================
 /**
  * Point-Free Style - Omitting explicit arguments (ES6)
  *
@@ -755,9 +755,9 @@ console.log("\nArray processing:");
 console.log("result:", result); // [4, 8]
 
 
-// ============================================================================
+// ============================================
 // 10. PERFORMANCE CONSIDERATIONS
-// ============================================================================
+// ============================================
 /**
  * Function Pattern Performance Considerations (ES6)
  *
@@ -846,9 +846,9 @@ console.log("First call:", expensiveComputation()); // Logs "Computing..."
 console.log("Second call:", expensiveComputation()); // No log
 
 
-// ============================================================================
+// ============================================
 // BEST PRACTICES
-// ============================================================================
+// ============================================
 /**
  * Function Patterns Best Practices
  *
@@ -899,9 +899,9 @@ searchAPI('ab');
 searchAPI('abc');
 
 
-// ============================================================================
+// ============================================
 // COMMON PITFALLS
-// ============================================================================
+// ============================================
 console.log("\n=== Function Patterns Common Pitfalls Demo ===");
 
 // Pitfall 1: Stack overflow with deep recursion
@@ -921,9 +921,9 @@ console.log("\nPitfall 4 - Over-composition:");
 console.log("Too many composed functions are hard to debug");
 
 
-// ============================================================================
+// ============================================
 // SUMMARY
-// ============================================================================
+// ============================================
 /**
  * Function Patterns Summary
  *
@@ -950,9 +950,9 @@ console.log("Too many composed functions are hard to debug");
 console.log("\n=== Function Patterns Advanced Demo Complete ===");
 
 
-// ============================================================================
+// ============================================
 // TypeScript Comparison Notes
-// ============================================================================
+// ============================================
 /*
 🔍 Key Differences in TypeScript:
 
@@ -1017,9 +1017,9 @@ console.log("\n=== Function Patterns Advanced Demo Complete ===");
 - 27-memory-management.js (memoization caches)
 */
 
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

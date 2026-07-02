@@ -1,4 +1,4 @@
-// JavaScript Metaprogramming - JSDoc, Decorators, Reflect, Proxy
+// TypeScript Advanced Features Demo
 // 📘 For TypeScript comparison, see: 47-typescript-advanced-ts-comparison.ts
 // 📘 ECMAScript Decorator Proposal: https://github.com/tc39/proposal-decorators
 // 📘 JSDoc Type Hints: https://www.typescriptlang.org/docs/handbook/jsdoc-reference.html

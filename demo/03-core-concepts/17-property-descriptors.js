@@ -1,10 +1,10 @@
-// ============================================================================
-// PROPERTY DESCRIPTORS & CONFIGURATION - COMPREHENSIVE GUIDE
-// ============================================================================
+// Property Descriptors & Configuration Demo
+// 📘 For TypeScript comparison, see: 17-property-descriptors-ts-comparison.ts
 
-// ============================================================================
+
+// ============================================
 // 1. PROPERTY FLAGS
-// ============================================================================
+// ============================================
 /**
  * Property Flags - Attributes that control property behavior (ES5)
  *
@@ -61,9 +61,9 @@ console.log("defineProperty flags:", Object.getOwnPropertyDescriptor(obj, 'prop2
 // { value: 'value', writable: false, enumerable: false, configurable: false }
 
 
-// ============================================================================
+// ============================================
 // 2. Object.defineProperty()
-// ============================================================================
+// ============================================
 /**
  * Object.defineProperty() - Precise property definition (ES5)
  *
@@ -176,9 +176,9 @@ try {
 }
 
 
-// ============================================================================
+// ============================================
 // 3. Object.defineProperties()
-// ============================================================================
+// ============================================
 /**
  * Object.defineProperties() - Define multiple properties at once (ES5)
  *
@@ -242,9 +242,9 @@ console.log("Clone secret:", clone.secret);
 console.log("Clone fullName:", clone.fullName);
 
 
-// ============================================================================
+// ============================================
 // 4. OBJECT-LEVEL RESTRICTION METHODS
-// ============================================================================
+// ============================================
 /**
  * Object-Level Restriction Methods (ES5)
  *
@@ -350,9 +350,9 @@ deepObj.b.c = 100; // Fails
 console.log("\nDeep frozen - nested cannot be modified:", deepObj.b.c); // 2
 
 
-// ============================================================================
+// ============================================
 // 5. GETTERS AND SETTERS
-// ============================================================================
+// ============================================
 /**
  * Getters and Setters - Accessor Properties (ES5)
  *
@@ -509,9 +509,9 @@ console.log("First access:", expensiveObject.data.length);
 console.log("Second access (cached):", expensiveObject.data.length);
 
 
-// ============================================================================
+// ============================================
 // 6. RELATIONSHIP WITH OTHER CONCEPTS
-// ============================================================================
+// ============================================
 /**
  * Property Descriptors in the Broader JavaScript Ecosystem
  *
@@ -604,9 +604,9 @@ console.log("Assignment descriptor:", Object.getOwnPropertyDescriptor(obj1, 'a')
 console.log("defineProperty descriptor:", Object.getOwnPropertyDescriptor(obj2, 'a'));
 
 
-// ============================================================================
+// ============================================
 // BEST PRACTICES
-// ============================================================================
+// ============================================
 /**
  * Property Descriptor Best Practices
  *
@@ -673,9 +673,9 @@ Object.defineProperty(badExample, 'x', {
 let goodExample = { x: 42 };
 
 
-// ============================================================================
+// ============================================
 // COMMON PITFALLS
-// ============================================================================
+// ============================================
 console.log("\n=== Common Pitfalls Demo ===");
 
 // Pitfall 1: Forgetting default flags
@@ -729,9 +729,9 @@ let extracted = pitfall5.value;
 console.log("Pitfall 5 - This is fine:", extracted);
 
 
-// ============================================================================
+// ============================================
 // SUMMARY
-// ============================================================================
+// ============================================
 /**
  * Property Descriptors Summary
  *
@@ -756,9 +756,9 @@ console.log("Pitfall 5 - This is fine:", extracted);
 console.log("\n=== Property Descriptors Demo Complete ===");
 
 
-// ============================================================================
+// ============================================
 // TypeScript Comparison Notes
-// ============================================================================
+// ============================================
 /*
 🔍 Key Differences in TypeScript:
 
@@ -812,9 +812,9 @@ console.log("\n=== Property Descriptors Demo Complete ===");
 📘 See related: 08-objects.js for basic getter/setter examples
 📘 See related: 23-proxy-reflect.js for Proxy interception of descriptors
 */
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

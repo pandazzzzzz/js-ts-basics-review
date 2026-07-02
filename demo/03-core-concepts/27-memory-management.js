@@ -1,10 +1,10 @@
-// ============================================================================
-// MEMORY MANAGEMENT - COMPREHENSIVE GUIDE
-// ============================================================================
+// Memory Management Demo
+// 📘 For TypeScript comparison, see: 27-memory-management-ts-comparison.ts
 
-// ============================================================================
+
+// ============================================
 // 1. WEAKREF AND FINALIZATIONREGISTRY
-// ============================================================================
+// ============================================
 /**
  * WeakRef and FinalizationRegistry - Weak references and cleanup callbacks (ES2021)
  *
@@ -109,9 +109,9 @@ console.log('\nCache get obj1:', cache.get('obj1'));
 cachedObj1 = null; // Allow GC
 
 
-// ============================================================================
+// ============================================
 // 2. WEAKMAP AND WEAKSET PATTERNS
-// ============================================================================
+// ============================================
 /**
  * WeakMap and WeakSet - Collections with weak references (ES6)
  *
@@ -252,9 +252,9 @@ wm.set(s, "v");
 console.log('  wm.get(s):', wm.get(s)); // 'v'
 
 
-// ============================================================================
+// ============================================
 // 3. COMMON MEMORY LEAK PATTERNS
-// ============================================================================
+// ============================================
 /**
  * Memory Leak Patterns - Common causes and prevention (All ES versions)
  *
@@ -407,9 +407,9 @@ console.log('  Bad: Closure captures entire largeData array');
 console.log('  Good: Closure only captures needed primitive value');
 
 
-// ============================================================================
+// ============================================
 // 4. OBJECT POOLING
-// ============================================================================
+// ============================================
 /**
  * Object Pooling - Reusing objects instead of creating new ones (ES6)
  *
@@ -539,9 +539,9 @@ bufferPool.release(buf1);
 console.log('Buffer released and cleared');
 
 
-// ============================================================================
+// ============================================
 // 5. GARBAGE COLLECTION BASICS
-// ============================================================================
+// ============================================
 /**
  * Garbage Collection - Automatic memory management (Implementation-specific)
  *
@@ -620,9 +620,9 @@ const processor = new DataProcessor(new Array(1000000).fill(0));
 processor.process();
 
 
-// ============================================================================
+// ============================================
 // 6. LARGE DATA HANDLING
-// ============================================================================
+// ============================================
 /**
  * Large Data Handling - Memory-efficient processing (ES6+)
  *
@@ -719,9 +719,9 @@ function consumeStream(generator, limit = 5) {
 consumeStream(streamLargeData(1000000), 5);
 
 
-// ============================================================================
+// ============================================
 // 7. NODE.JS MEMORY CONSIDERATIONS
-// ============================================================================
+// ============================================
 /**
  * Node.js Memory Considerations - Server-side memory management
  *
@@ -765,9 +765,9 @@ console.log('  Bad: fs.readFileSync (loads entire file)');
 console.log('  Good: fs.createReadStream (chunks data)');
 
 
-// ============================================================================
+// ============================================
 // 8. BROWSER MEMORY CONSIDERATIONS
-// ============================================================================
+// ============================================
 /**
  * Browser Memory Considerations - Client-side memory management
  *
@@ -818,9 +818,9 @@ const visibleItems = virtualScrollPattern(10000, [0, 20]);
 console.log(`Rendering ${visibleItems.length} items out of 10000 total`);
 
 
-// ============================================================================
+// ============================================
 // 9. MEMORY PROFILING TOOLS
-// ============================================================================
+// ============================================
 /**
  * Memory Profiling Tools - Identifying memory issues
  *
@@ -893,9 +893,9 @@ console.log("\nAllocation tracker:");
 console.log(tracker.getReport());
 
 
-// ============================================================================
+// ============================================
 // 10. MEMORY OPTIMIZATION TECHNIQUES
-// ============================================================================
+// ============================================
 /**
  * Memory Optimization Techniques - Practical strategies
  *
@@ -976,9 +976,9 @@ console.log('null: Explicit "no value" (use for clearing references)');
 console.log('undefined: Default for uninitialized (don\'t assign manually)');
 
 
-// ============================================================================
+// ============================================
 // BEST PRACTICES
-// ============================================================================
+// ============================================
 /**
  * Memory Management Best Practices
  *
@@ -1049,9 +1049,9 @@ rm.acquire('conn1', {}, () => console.log('  Cleaning connection'));
 rm.release('conn1');
 
 
-// ============================================================================
+// ============================================
 // SUMMARY
-// ============================================================================
+// ============================================
 /**
  * Memory Management Summary
  *
@@ -1080,9 +1080,9 @@ rm.release('conn1');
 console.log("\n=== Memory Management Demo Complete ===");
 
 
-// ============================================================================
+// ============================================
 // TypeScript Comparison Notes
-// ============================================================================
+// ============================================
 /*
 🔍 Key Differences in TypeScript:
 
@@ -1143,9 +1143,9 @@ console.log("\n=== Memory Management Demo Complete ===");
 - 22-iterators-generators.js (generators for streaming)
 */
 
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 

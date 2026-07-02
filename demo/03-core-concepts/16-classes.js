@@ -1,10 +1,10 @@
-// ============================================================================
-// CLASSES (ES6+) - COMPREHENSIVE GUIDE
-// ============================================================================
+// Classes (ES6+) Demo
+// 📘 For TypeScript comparison, see: 16-classes-ts-comparison.ts
 
-// ============================================================================
+
+// ============================================
 // 1. CLASS BASIC SYNTAX
-// ============================================================================
+// ============================================
 /**
  * Class Syntax - ES6 class definition (ES6/ES2015)
  *
@@ -116,9 +116,9 @@ console.log("Object.keys(alice):", Object.keys(alice)); // ['name', 'age']
 console.log("Methods not in keys:", !Object.keys(alice).includes('introduce'));
 
 
-// ============================================================================
+// ============================================
 // 2. CLASS INHERITANCE
-// ============================================================================
+// ============================================
 /**
  * Class Inheritance - extends and super keywords (ES6)
  *
@@ -229,9 +229,9 @@ console.log("Circle.__proto__ === Shape:",
   Circle.__proto__ === Shape); // true (for statics)
 
 
-// ============================================================================
+// ============================================
 // 3. STATIC PROPERTIES AND METHODS
-// ============================================================================
+// ============================================
 /**
  * Static Properties and Methods (ES6 + ES2022)
  *
@@ -359,9 +359,9 @@ console.log("\nStatic block:");
 console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
 
 
-// ============================================================================
+// ============================================
 // 4. PRIVATE AND PROTECTED PROPERTIES
-// ============================================================================
+// ============================================
 /*
  * verification:
  *   feature: Private class fields
@@ -656,9 +656,9 @@ console.log("realToken.isSameBrand(realToken):", realToken.isSameBrand(realToken
 console.log("realToken.isSameBrand(plainObject):", realToken.isSameBrand(plainObject)); // false
 
 
-// ============================================================================
+// ============================================
 // 5. INSTANCEOF AND TYPE CHECKING
-// ============================================================================
+// ============================================
 /**
  * instanceof and Type Checking
  *
@@ -729,9 +729,9 @@ console.log("\nCustom toStringTag:");
 console.log(Object.prototype.toString.call(custom)); // [object CustomType]
 
 
-// ============================================================================
+// ============================================
 // 6. MIXIN PATTERN
-// ============================================================================
+// ============================================
 /**
  * Mixin Pattern - Alternative to Multiple Inheritance
  *
@@ -875,9 +875,9 @@ console.log("\nMixin factory:");
 service.log("Service started");
 
 
-// ============================================================================
+// ============================================
 // 7. RELATIONSHIP WITH PROTOTYPES
-// ============================================================================
+// ============================================
 /**
  * Classes and Prototypes - Syntax Sugar Over Prototypes
  *
@@ -974,9 +974,9 @@ console.log("- Class: New code, cleaner syntax, team familiarity");
 console.log("- Prototype: Library code, maximum compatibility, advanced patterns");
 
 
-// ============================================================================
+// ============================================
 // BEST PRACTICES
-// ============================================================================
+// ============================================
 /**
  * Class Best Practices
  *
@@ -1037,9 +1037,9 @@ class Canary2 extends Bird2 {
 // class Animal -> class Mammal -> class Carnivore -> class Felidae -> class Cat
 
 
-// ============================================================================
+// ============================================
 // COMMON PITFALLS
-// ============================================================================
+// ============================================
 console.log("\n=== Class Common Pitfalls Demo ===");
 
 // Pitfall 1: Forgetting new
@@ -1089,9 +1089,9 @@ let wp = new WithPrivate();
 console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in wp); // false
 
 
-// ============================================================================
+// ============================================
 // SUMMARY
-// ============================================================================
+// ============================================
 /**
  * Class Summary
  *
@@ -1117,9 +1117,9 @@ console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in w
 
 console.log("\n=== Classes Demo Complete ===");
 
-// ============================================================================
+// ============================================
 // TypeScript Comparison Notes
-// ============================================================================
+// ============================================
 /*
 🔍 Key Differences in TypeScript:
 
@@ -1192,12 +1192,11 @@ console.log("\n=== Classes Demo Complete ===");
      readonly apiKey: string = "secret";
    }
 
-📘 See 16-classes-ts-comparison.ts for detailed TypeScript examples!
 📘 See related: 15-prototypes-inheritance.js for prototype relationship
 */
-// ============================================================================
+// ============================================
 // CROSS-REFERENCES
-// ============================================================================
+// ============================================
 console.log(`
 📘 See related files for additional patterns:
 
