@@ -307,6 +307,6 @@ Note: `using` reached Stage 4 in May 2025 and is now part of ES2027. TypeScript 
 
 ---
 
-**Last Updated**: 2026-05-09
+**Last Updated**: 2026-07-03
 **Based on**: ES2027 and TypeScript 5.x
 **Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals

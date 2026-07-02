@@ -8,7 +8,7 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files (01-50, 28 reserv
 
 | Feature Category | Node.js | TypeScript |
 |-----------------|---------|------------|
-| ES2022+ (基础特性) | 18+ | 5+ |
+| ES2022+ (basics) | 18+ | 5+ |
 | ES2027 Features | 22+ | 5.2+ |
 | Temporal API (ES2027) | Future | 5.0+ |
 
