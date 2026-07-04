@@ -27,7 +27,7 @@
  * Common Pitfalls:
  * - TCO is NOT reliable - do not depend on it
  * - Use iterative or trampoline patterns for deep recursion
- * - ES6 TCO spec was designed but never shipped in any engine
+ * - Only Safari/JavaScriptCore ships PTC; V8 and SpiderMonkey do not
  */
 
 console.log("=== 1. Tail Call Optimization Demo ===");

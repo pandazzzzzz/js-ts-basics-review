@@ -540,7 +540,7 @@ const withLoneSurrogate = {
 console.log("  Well-formed JSON.stringify (ES2019):");
 const jsonStringWithSurrogate = JSON.stringify(withLoneSurrogate);
 console.log("    Lone surrogate escaped:", jsonStringWithSurrogate);
-// Output: {"loneSurrogate":"\\ud800"} (escaped properly)
+// Output: {"loneSurrogate":"\ud800"} (escaped as JSON unicode escape)
 
 // Before ES2019, this could cause issues
 // Now it's always safe to parse back

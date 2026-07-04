@@ -48,9 +48,12 @@ function createImplicitGlobal() {
 createImplicitGlobal();
 console.log(implicitGlobal); // Accessible globally (in non-strict mode)
 
-// In strict mode, implicit globals throw ReferenceError
-"use strict";
+// In strict mode, implicit globals throw ReferenceError.
+// Note: "use strict" must be the first statement of a file or function to take
+// effect — placing it mid-file is a no-op string expression. Here we put it as
+// the first line inside the function so strict mode applies only to it.
 function strictMode() {
+  "use strict";
   try {
     strictGlobal = "This will fail";
   } catch (error) {

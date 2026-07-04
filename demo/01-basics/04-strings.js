@@ -641,7 +641,7 @@ console.log("\n=== String.raw() ===");
 console.log(String.raw`C:\Users\Name\file.txt`); 
 // "C:\Users\Name\file.txt" (backslashes not escaped)
 console.log(`C:\Users\Name\file.txt`);
-// "C:UsersName\file.txt" (\U \S \N drop backslash; \f is form-feed escape, keeps backslash+file)
+// "C:UsersName\file.txt" (\U \S \N are unrecognized escapes — backslash dropped; \f is form-feed escape — backslash consumed, replaced by form-feed char)
 
 const path = String.raw`C:\Program Files\App`;
 console.log("Path:", path); // "C:\Program Files\App"

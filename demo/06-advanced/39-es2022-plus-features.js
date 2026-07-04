@@ -788,7 +788,7 @@ console.log("- Similar to Math.fround() for Float32");
 console.log("\nExample:");
 console.log(`
 const arr = new Float16Array([1.0, 2.5, 3.14159]);
-console.log(arr[2]); // 3.14 (rounded to Float16 precision)
+console.log(arr[2]); // 3.140625 (rounded to Float16 precision)
 
 const rounded = Math.f16round(3.14159265359);
 console.log(rounded); // 3.140625 (Float16 precision)
@@ -834,7 +834,8 @@ console.log("\nExample:");
 console.log(`
 // Case-insensitive for part of pattern only
 const regex = /(?i:hello) WORLD/;
-regex.test("HELLO world"); // true for 'hello' part, false overall
+regex.test("HELLO world"); // false — 'hello' matches case-insensitively, but WORLD is case-sensitive
+regex.test("hello WORLD"); // true — both parts match
 
 // Turn off case-insensitivity
 const mixed = /(?i:hello) (?-i:WORLD)/;
@@ -1044,7 +1045,7 @@ console.log("  Fix: Always consume with .toArray() or .forEach()");
 
 // Pitfall 4: Object.groupBy key types
 console.log("\nPitfall 4: Object.groupBy keys are strings");
-console.log("  Object.groupBy returns Record<string, T[]>");
+console.log("  Object.groupBy returns a null-prototype object (no .toString/.constructor)");
 console.log("  Number keys become string keys");
 console.log("  Use Map.groupBy for non-string keys");
 
@@ -1209,11 +1210,11 @@ console.log(`
 // Standard addition can lose precision with certain number combinations
 const numbers = [1e16, 1, 1, -1e16, 1, 1, 1];
 const naiveSum = numbers.reduce((a, b) => a + b, 0);
-console.log(naiveSum); // May lose the small values due to floating-point
+console.log(naiveSum); // 3 — the 1e16/-1e16 cancel but swallow the first two 1s
 
 // Math.sumPrecise handles this correctly
 const goodSum = Math.sumPrecise(numbers);
-console.log(goodSum); // 4 (correct — all small values preserved)
+console.log(goodSum); // 5 (correct — all five 1s preserved; 1e16 and -1e16 cancel)
 `);
 
 console.log("\nUse cases:");

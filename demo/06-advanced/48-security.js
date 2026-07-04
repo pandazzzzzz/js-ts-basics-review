@@ -3,6 +3,7 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/Security
 // 📘 OWASP: https://owasp.org/www-project-top-ten/
 // 📌 Covers XSS, CSRF, CSP, secure storage, and input validation
+// ⚠️ Partial browser environment — DOM/Web Crypto sections require a browser or jsdom; Node crypto sections run in Node
 
 // ============================================
 // Section 1: XSS (Cross-Site Scripting) Protection

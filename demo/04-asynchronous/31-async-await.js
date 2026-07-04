@@ -732,7 +732,7 @@ processItems([1, 2, 3, 4, 5]).then(total => {
 });
 
 // ============================================
-// 9. COMMON PITFALLS & BEST PRACTICES
+// 11. COMMON PITFALLS & BEST PRACTICES
 // ============================================
 
 console.log("\n=== Common Pitfalls ===\n");
