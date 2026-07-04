@@ -467,6 +467,14 @@ let standardRe = /a+ab/;
 console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
 
 // 6.8 RegExp `d` flag — Match Indices (ES2022)
+/*
+ * verification:
+ *   feature: RegExp Match Indices
+ *   status: ES2022
+ *   stage4Date: 2021-05
+ *   lastVerified: 2026-06-29
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 console.log("\nRegExp `d` flag - Match Indices (ES2022):");
 // The `d` flag adds an `.indices` property to match results,
 // providing start/end positions of the overall match and each capture group

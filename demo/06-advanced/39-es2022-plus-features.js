@@ -333,6 +333,14 @@ console.log("Object.hasOwn(objWithoutProto, 'name'):", Object.hasOwn(objWithoutP
 // RegExp /d Flag (ES2022)
 // - Provides start and end indices for matches and capture groups
 console.log("\n=== RegExp /d Flag (ES2022) ===");
+/*
+ * verification:
+ *   feature: RegExp Match Indices
+ *   status: ES2022
+ *   stage4Date: 2021-05
+ *   lastVerified: 2026-06-29
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 const dateText = "2023-12-25";
 const dateRegex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/d;
