@@ -2,7 +2,7 @@
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
 > **Updated**: 2026-07-03
-> **ES version verification**: 2026-06-19 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **ES version verification**: 2026-06-29 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 
 **Progress**: 49/49 ✅ · 49 TypeScript comparison files ✅ (numbered 01-50, 28 reserved)
