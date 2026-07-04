@@ -995,7 +995,7 @@ console.log("  ⚠️ Don't use CBC without authentication");
 
 console.log("\nKey Management:");
 console.log("  ✅ Use PBKDF2 with high iterations (600,000+ as of 2025 OWASP standard)");
-console.log("  ✅ Consider Argon2id for password hashing (via argon2 npm package or WASM lib — not built into Node crypto)");
+console.log("  ✅ Consider Argon2id for password hashing (Node.js 24.7.0+ built-in crypto.argon2; older Node via argon2 npm package)");
 console.log("  ✅ Generate random salts for each key derivation");
 console.log("  ✅ Store keys securely (IndexedDB, not localStorage)");
 console.log("  ✅ Use key wrapping for key storage");
@@ -1018,7 +1018,8 @@ console.log("     - Fixed work factor limits security");
 console.log("     - Still acceptable but Argon2id preferred");
 
 console.log("  Implementation:");
-console.log("  - Node.js: Use argon2 npm package");
+console.log("  - Node.js 24.7.0+: built-in crypto.argon2('argon2id', ...)");
+console.log("  - Older Node.js: use argon2 npm package");
 console.log("  - Browsers: Use argon2 package via WebAssembly");
 console.log("  - PBKDF2: Available natively via Web Crypto API in both Node.js and browsers");
 
