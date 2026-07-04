@@ -202,7 +202,7 @@ console.log("attemptOperation success:", attemptOperation(() => "result")); // "
 console.log("\n=== Error.isError() (ES2026) ===");
 console.log("Error.isError(new Error()):", Error.isError?.(new Error()) ?? "not yet available");
 console.log("Error.isError({}):", Error.isError?.({}) ?? "not yet available");
-console.log("Note: Error.isError() requires Node.js 22+ or browsers supporting ES2026");
+console.log("Note: Error.isError() requires Node.js 24.3+ (partial in 24.0-24.3) or browsers supporting ES2026");
 
 
 // ============================================

@@ -821,7 +821,7 @@ console.log("  → Only rejects if ALL reject (AggregateError)\n");
  * - Unified entry point whether the producer is sync or async
  *
  * Common Pitfalls:
- * - Old runtimes (< Node 24) lack Promise.try; feature-detect before use
+ * - Old runtimes (< Node 23) lack Promise.try; feature-detect before use
  */
 
 console.log("=== Promise.try (ES2025) Demo ===\n");

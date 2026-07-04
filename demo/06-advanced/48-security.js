@@ -995,7 +995,7 @@ console.log("  ⚠️ Don't use CBC without authentication");
 
 console.log("\nKey Management:");
 console.log("  ✅ Use PBKDF2 with high iterations (600,000+ as of 2025 OWASP standard)");
-console.log("  ✅ Consider Argon2id for password hashing (Node.js 21.2+, browsers via WebAssembly libs)");
+console.log("  ✅ Consider Argon2id for password hashing (via argon2 npm package or WASM lib — not built into Node crypto)");
 console.log("  ✅ Generate random salts for each key derivation");
 console.log("  ✅ Store keys securely (IndexedDB, not localStorage)");
 console.log("  ✅ Use key wrapping for key storage");

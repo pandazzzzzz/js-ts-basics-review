@@ -861,7 +861,7 @@ if (typeof RegExp.escape === "function") {
   const safeRe = new RegExp(RegExp.escape(userInput));
   console.log("user input match:", safeRe.test("The price: $5.00 (each) is firm")); // true
 } else {
-  console.log("RegExp.escape not supported in this runtime (needs Node 26+ / ES2025)");
+  console.log("RegExp.escape not supported in this runtime (needs Node 24+ / ES2025)");
 }
 
 // 11.3 Duplicate Named Capture Groups (ES2025)

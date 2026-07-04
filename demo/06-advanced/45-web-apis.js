@@ -599,7 +599,7 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-	   View Transitions API (Chrome 111+, Safari 17.4+):
+	   View Transitions API (Chrome 111+, Safari 18+):
 	   - Smooth animated transitions between page states
 	   - document.startViewTransition(() => updateDOM())
 	   - Supports both SPA (same-document) and MPA (cross-document) transitions
