@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "JavaScript and TypeScript basics review practice project",
   "scripts": {
-    "test": "node tests/bug-condition-exploration.test.js",
+    "test": "node --test scripts/verify-es-versions.test.js",
     "test:bug-exploration": "node tests/bug-condition-exploration.test.js",
+    "verify": "node scripts/verify-es-versions.js",
+    "typecheck": "tsc --noEmit",
     "demo": "node demo/01-basics/01-variables.js"
   },
   "keywords": [
