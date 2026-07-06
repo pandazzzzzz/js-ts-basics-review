@@ -679,7 +679,7 @@ console.log("substring(8, 3):", testStr.substring(8, 3)); // "lo Wo" (swaps argu
 // Pitfall 2: String immutability
 // Strings cannot be modified in place
 const immutable = "Hello";
-immutable[0] = "J"; // Silently fails (always fails, regardless of strict mode)
+immutable[0] = "J"; // Silently fails in sloppy mode (throws TypeError in strict mode)
 console.log("\nString immutability:", immutable); // Still "Hello"
 
 // Correct way: create new string

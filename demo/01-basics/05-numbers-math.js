@@ -329,7 +329,7 @@ console.log("EUR:", price.toLocaleString('de-DE', {
 console.log("JPY:", price.toLocaleString('ja-JP', { 
   style: 'currency', 
   currency: 'JPY' 
-})); // "¥1,235" (no decimals for yen)
+})); // "￥1,235" (no decimals for yen)
 
 // Percent formatting
 const percent = 0.1234;
@@ -615,7 +615,7 @@ const jpyFormatter = new Intl.NumberFormat('ja-JP', {
   style: 'currency',
   currency: 'JPY'
 });
-console.log("JPY format:", jpyFormatter.format(1234.56)); // "¥1,235" (no decimals)
+console.log("JPY format:", jpyFormatter.format(1234.56)); // "￥1,235" (no decimals)
 
 // Unit formatting
 const unitFormatter = new Intl.NumberFormat('en-US', {
