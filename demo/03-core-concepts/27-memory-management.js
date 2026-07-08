@@ -235,9 +235,11 @@ processObject(circularObj); // Will be skipped
 console.log("\nSymbol as WeakMap key (ES2023):");
 
 // Before ES2023, WeakMap keys had to be objects. ES2023 (Symbols as WeakMap
-// keys proposal) allows registered Symbols to be used as keys in WeakMap,
-// WeakSet, WeakRef, and FinalizationRegistry — useful for keyed metadata
-// without needing an object identity.
+// keys proposal) allows non-registered (unique, created with Symbol()) Symbols
+// to be used as keys in WeakMap, WeakSet, WeakRef, and FinalizationRegistry —
+// useful for keyed metadata without needing an object identity.
+// Registered symbols (Symbol.for()) are not allowed, as they are never
+// garbage-collected; well-known symbols like Symbol.iterator are allowed.
 /*
  * verification:
  *   feature: Symbols as WeakMap keys
