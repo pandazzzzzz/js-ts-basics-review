@@ -483,14 +483,14 @@ processLargeArray(largeArray, x => Math.sqrt(x), 2500)
 // 4.3 Using MessageChannel for task (macrotask) scheduling
 // Note: MessageChannel posts a TASK (macrotask), NOT a microtask.
 // Use queueMicrotask() or Promise.resolve().then() for microtasks.
-function scheduleMicroTask(fn) {
+function scheduleTask(fn) {
   const channel = new MessageChannel();
   channel.port1.onmessage = () => fn();
   channel.port2.postMessage(null);
 }
 
 console.log("\nTask scheduling via MessageChannel (macrotask, not microtask):");
-scheduleMicroTask(() => {
+scheduleTask(() => {
   console.log('  Executed via MessageChannel');
 });
 

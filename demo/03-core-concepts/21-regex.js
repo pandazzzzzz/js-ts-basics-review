@@ -408,7 +408,7 @@ console.log("Duplicates:", dupStr.match(duplicateRe)); // ['is is', 'test test']
  *
  * Common Pitfalls:
  * - Lookbehind needs ES2018+
- * - JS lookbehind supports variable-length patterns (unlike PCRE/Java/.NET)
+ * - JS lookbehind supports variable-length patterns (unlike PCRE (fixed-length) and Java (limited variable-length))
  * - Can be complex to read
  */
 

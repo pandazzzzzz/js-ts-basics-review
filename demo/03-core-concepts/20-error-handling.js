@@ -198,6 +198,14 @@ function attemptOperation(fn) {
 console.log("attemptOperation with error:", attemptOperation(() => { throw new Error("fail"); })); // null
 console.log("attemptOperation success:", attemptOperation(() => "result")); // "result"
 
+/*
+ * verification:
+ *   feature: Error.isError
+ *   status: ES2026
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-07-08
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 // Error.isError() (ES2026) — Reliable cross-realm Error checking
 console.log("\n=== Error.isError() (ES2026) ===");
 console.log("Error.isError(new Error()):", Error.isError?.(new Error()) ?? "not yet available");
@@ -1211,6 +1219,14 @@ saferAsyncHandling();
 
 // For advanced async error patterns, see 34-async-error-handling.js
 
+/*
+ * verification:
+ *   feature: Error.cause
+ *   status: ES2022
+ *   stage4Date: 2021-10
+ *   lastVerified: 2026-07-08
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
 
 // ============================================
 // 14. ERROR CHAINING WITH ERROR.CAUSE

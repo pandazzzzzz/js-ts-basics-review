@@ -382,7 +382,7 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
  * Underscore Convention (_):
  * - _fieldName - By convention private
  * - Not enforced by language
- * - Still accessible ( WeakMap alternative)
+ * - Still accessible externally (use WeakMap or # private fields for real privacy)
  *
  * Private Getters/Setters:
  * - get #prop() { }
