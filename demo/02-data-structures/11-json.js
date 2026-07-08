@@ -135,6 +135,10 @@ function typeReplacer(key, value) {
   return value;
 }
 
+/*
+ * Note: Dates will appear as ISO strings here, not { __type: "Date" }
+ * because Date.toJSON() executes before the replacer and converts them to strings first
+ */
 const typed = JSON.stringify(mixedObj, typeReplacer, 2);
 console.log("\n  Type Conversion:");
 console.log("  " + typed.replace(/\n/g, "\n  "));
@@ -548,13 +552,13 @@ const parsedBack = JSON.parse(jsonStringWithSurrogate);
 console.log("    Parsed back successfully:", parsedBack);
 
 // 2. JSON Superset (ES2019)
-// - JSON strings can now contain unescaped U+2028 (LINE SEPARATOR)
-// - JSON strings can now contain unescaped U+2029 (PARAGRAPH SEPARATOR)
+// - JavaScript string literals can now contain unescaped U+2028 (LINE SEPARATOR)
+// - JavaScript string literals can now contain unescaped U+2029 (PARAGRAPH SEPARATOR)
 // - These were previously syntax errors in JS but valid in JSON
 console.log("\n  JSON Superset (ES2019):");
 
-// Before ES2019, these characters required escaping
-// Now they're valid in JSON strings
+// Before ES2019, these characters required escaping in JS
+// Now they're valid in JavaScript string literals
 const withLineSeparators = {
   message: "Hello\u2028World", // LINE SEPARATOR
   text: "Paragraph\u2029End"   // PARAGRAPH SEPARATOR
@@ -567,7 +571,7 @@ console.log("    JSON with line/paragraph separators:", jsonWithSeparators);
 const parsedWithSeparators = JSON.parse(jsonWithSeparators);
 console.log("    Parsed successfully:", parsedWithSeparators);
 
-// 3. JSON.stringify() with Symbol keys (ES2019 behavior)
+// 3. JSON.stringify() with Symbol keys
 // - Symbol keys are silently ignored in JSON.stringify
 const objWithSymbols = {
   [Symbol("id")]: 123,

@@ -664,7 +664,7 @@ console.log("Grouped by length:", groupedByLength);
    - Record<K, T>: Object with specific key/value types
 
 ⚠️ COMMON CONFUSION POINTS:
-- Interface vs Type: Interfaces can be extended, types cannot
+- Interface vs Type: Interfaces use `extends`, types use intersection (`&`), both can be extended
 - Structural typing: Objects match if structure matches
 - Index signatures allow any key
 - Readonly is compile-time only, not runtime

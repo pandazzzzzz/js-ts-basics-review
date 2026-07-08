@@ -22,7 +22,7 @@ const arrayConstructor = new Array(1, 2, 3);
 // - Array.of(5) creates [5], not empty array of length 5
 const arrayOf = Array.of(5);
 
-// Array.from() - Create array from iterable (ES6/ES2015)
+// Array.from() - Create array from iterable or array-like object (ES6/ES2015)
 // - Converts array-like objects to arrays
 // - Can take mapping function as second argument
 const arrayFrom = Array.from("hello"); // ['h', 'e', 'l', 'l', 'o']
@@ -194,7 +194,8 @@ const withDuplicates = [1, 2, 3, 1, 2, 3];
 console.log("\nincludes with fromIndex:");
 console.log("includes(1):", withDuplicates.includes(1)); // true
 console.log("includes(1, 2):", withDuplicates.includes(1, 2)); // true (search from index 2)
-console.log("includes(1, 3):", withDuplicates.includes(1, 3)); // false
+console.log("includes(1, 3):", withDuplicates.includes(1, 3)); // true (search from index 3)
+console.log("includes(1, 4):", withDuplicates.includes(1, 4)); // false
 
 // at() - Access elements with negative index (ES2022)
 // - Returns element at given index

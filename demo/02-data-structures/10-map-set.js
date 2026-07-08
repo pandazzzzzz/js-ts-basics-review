@@ -394,7 +394,7 @@ console.log("\nWeakMap/WeakSet vs Map/Set:");
 console.log("  Iterable: Map✓ Set✓ WeakMap✗ WeakSet✗");
 console.log("  size property: Map✓ Set✓ WeakMap✗ WeakSet✗");
 console.log("  clear(): Map✓ Set✓ WeakMap✗ WeakSet✗");
-console.log("  Key/Value types: any/any Map, any Set, object-only WeakMap, object-only WeakSet");
+console.log("  Key/Value types: any/any Map, any Set, object/symbol WeakMap, object/symbol WeakSet (ES2023+)");
 console.log("  Weak reference: Map✗ Set✗ WeakMap✓ WeakSet✓");
 
 // ============================================
