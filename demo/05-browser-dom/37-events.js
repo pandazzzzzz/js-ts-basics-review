@@ -224,7 +224,7 @@ console.log(`
 // - mouseenter
 // - mouseleave
 // - unload
-// Note: element 'load' (img/script/link) DOES bubble; only window 'load' doesn't.
+// - load (both window.load AND element load events on img/script/link do NOT bubble)
 
 // Alternative: Use focusin/focusout instead of focus/blur (they bubble)
 // - Use mouseover/mouseout instead of mouseenter/mouseleave
