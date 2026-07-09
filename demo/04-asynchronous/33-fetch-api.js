@@ -1060,6 +1060,7 @@ async function downloadWithProgress(url, onProgress) {
 
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 'unknown';
+        onProgress(loaded, total, percent); // 调用进度回调
         console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
       }
     }
@@ -1286,17 +1287,18 @@ console.log("   - In Node.js, CORS is not an issue");
 async function pitfall_credentials() {
   console.log("\n23. Credentials (cookies) note:");
 
-  // Without credentials, cookies/auth headers not sent to same origin
+  // Without explicit credentials: cookies/auth headers sent by default to same origin
+  // (credentials default: 'same-origin')
   const withoutCredentials = await fetch(`${API_BASE}/posts/1`, {
-    // credentials: 'include' // Need this to send cookies
+    // credentials: 'include' // Need this to send cookies for cross-origin requests
   });
-  console.log("   Without credentials option, cookies NOT sent");
+  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
 
-  // With credentials
+  // With credentials for cross-origin
   const withCredentials = await fetch(`${API_BASE}/posts/1`, {
-    credentials: "include" // Send cookies for cross-origin requests
+    credentials: "include" // Required to send cookies for cross-origin requests
   });
-  console.log("   With credentials: 'include', cookies ARE sent");
+  console.log("   With credentials: 'include', cookies ARE sent to any origin");
 }
 
 pitfall_credentials();

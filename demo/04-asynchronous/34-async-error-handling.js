@@ -1051,7 +1051,8 @@ pipeline.execute({ name: 'test' })
 // Test with invalid input
 console.log('\nPipeline with error:');
 pipeline.execute(null)
-  .then(result => console.log('Result:', result));
+  .then(result => console.log('Result:', result))
+  .catch(error => console.log('Error:', error.message));
 
 
 // ============================================
@@ -1118,8 +1119,10 @@ const safeDivide = safeExecute(
 );
 
 console.log('\nSafe execute:');
-console.log('10 / 2 =', safeDivide(10, 2));
-console.log('10 / 0 =', safeDivide(10, 0));
+(async () => {
+  console.log('10 / 2 =', await safeDivide(10, 2));
+  console.log('10 / 0 =', await safeDivide(10, 0));
+})();
 
 
 // ============================================
