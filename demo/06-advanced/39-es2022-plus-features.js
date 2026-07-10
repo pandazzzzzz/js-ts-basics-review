@@ -53,7 +53,7 @@ console.log("  - Error.isError (type checking for Error objects)");
 console.log("  - Uint8Array to/from Base64 (base64 encoding/decoding)");
 console.log("  - Map.prototype.upsert (conditional insert/update)");
 console.log("  - JSON.parse source text access");
-console.log("  - Iterator Sequencing (iter1 + iter2)");
+console.log("  - Iterator Sequencing (Iterator.concat())");
 console.log("\nES2027:");
 console.log("  - Temporal API (modern date/time API)");
 console.log("  - Explicit Resource Management (using/await using, ES2027)");
@@ -283,8 +283,8 @@ console.log("2:", en.select(2));    // "other"
 console.log("0:", en.select(0));    // "other"
 
 const ru = new Intl.PluralRules('ru', { type: 'ordinal' });
-console.log("Russian ordinal 1:", ru.select(1)); // "one"
-console.log("Russian ordinal 2:", ru.select(2)); // "few"
+console.log("Russian ordinal 1:", ru.select(1)); // "other" (Russian ordinals only have "other" category)
+console.log("Russian ordinal 2:", ru.select(2)); // "other"
 
 // ============================================
 // .at() Method (ES2022)
@@ -1393,22 +1393,22 @@ console.log("- JSON to source round-tripping");
 
 // ============================================
 // Iterator Sequencing (ES2026)
-// - Concatenate iterators using + operator
+// - Concatenate iterators using Iterator.concat()
 // - Reached Stage 4 in 2025-11, part of ES2026
 console.log("\n=== Iterator Sequencing (ES2026) ===");
 
 console.log("NOTE: Iterator Sequencing reached Stage 4 in November 2025 and is part of ES2026.");
 console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-console.log("\nIterator concatenation with +:");
+console.log("\nIterator concatenation with Iterator.concat():");
 console.log(`
 // Concatenate multiple iterators
 const iter1 = [1, 2, 3][Symbol.iterator]();
 const iter2 = [4, 5][Symbol.iterator]();
 const iter3 = [6][Symbol.iterator]();
 
-// Using + operator to concatenate
-const combined = iter1 + iter2 + iter3;
+// Using Iterator.concat() to concatenate
+const combined = Iterator.concat(iter1, iter2, iter3);
 console.log([...combined]); // [1, 2, 3, 4, 5, 6]
 `);
 
@@ -1571,7 +1571,7 @@ console.log("- Worker coordination");
 console.log("\n=== Joint Iteration (ES2027) ===");
 
 console.log("NOTE: Joint Iteration reached Stage 4 in May 2026 and is part of ES2027.");
-console.log("No Chrome/Safari/Node support yet (Firefox 148+ only).");
+console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
 console.log("\nJoint iteration syntax:");
 console.log(`
@@ -1581,7 +1581,7 @@ const ages = [25, 30, 35];
 const cities = ["NYC", "LA", "SF"];
 
 // for...of with destructuring
-for (const [[, name], [, age], [, city]] of zip(names, ages, cities)) {
+for (const [[, name], [, age], [, city]] of Iterator.zip(names, ages, cities)) {
   console.log(\`\${name}, \${age}, \${city}\`);
 }
 // Output:
@@ -1589,7 +1589,7 @@ for (const [[, name], [, age], [, city]] of zip(names, ages, cities)) {
 // Bob, 30, LA
 // Charlie, 35, SF
 
-// zip() creates a joint iterator
+// Iterator.zip() creates a joint iterator
 // Each iteration yields arrays of [index, value] tuples
 `);
 
@@ -1703,7 +1703,7 @@ console.log("- Better error handling in promise chains");
    TS:  Preserves literal types in generic functions
 
 4. GROUPBY TYPING
-   TS:  Object.groupBy<T, K>(items: T[], fn: (item: T) => K): Record<K, T[]>
+   TS:  Object.groupBy<T, K extends PropertyKey>(items: T[], fn: (item: T) => K): Record<K, T[]>
    TS:  Map.groupBy<T, K>(items: T[], fn: (item: T) => K): Map<K, T[]>
 
 5. ITERATOR HELPERS TYPING

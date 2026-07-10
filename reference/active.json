@@ -15,11 +15,39 @@
       "url": "https://github.com/tc39/proposal-pipeline-operator"
     },
     "Pattern Matching": {
-      "status": "Stage 2",
-      "stage": 2,
+      "status": "Stage 1",
+      "stage": 1,
       "stage4DateType": null,
-      "note": "Draft stage",
+      "note": "Stage 1 as of 2026-07 (listed in stage-1-proposals.md, no longer in main README Stage 2+ table). Last Stage 2 meeting 2022-03.",
       "url": "https://github.com/tc39/proposal-pattern-matching"
+    },
+    "Decimal": {
+      "status": "Stage 1",
+      "stage": 1,
+      "stage4DateType": null,
+      "note": "Stage 1 as of 2026-07 (listed in stage-1-proposals.md). Stage 2 not yet reached.",
+      "url": "https://github.com/tc39/proposal-decimal"
+    },
+    "Composites": {
+      "status": "Stage 1",
+      "stage": 1,
+      "stage4DateType": null,
+      "note": "Stage 1 as of 2026-07 (composite-keys for-stage-1 at 2025-04 plenary). Successor to Records & Tuples.",
+      "url": "https://github.com/tc39/proposal-composites"
+    },
+    "Do Expressions": {
+      "status": "Stage 1",
+      "stage": 1,
+      "stage4DateType": null,
+      "note": "Stage 1 as of 2026-07 (was Stage 2, no longer in main README Stage 2+ table).",
+      "url": "https://github.com/tc39/proposal-do-expressions"
+    },
+    "Intl.MessageFormat": {
+      "status": "Stage 1",
+      "stage": 1,
+      "stage4DateType": null,
+      "note": "Stage 1 as of 2026-07 (ECMA-402 proposal, for-stage-1 at 2022-03 plenary; subsequent meetings only stage-1 updates).",
+      "url": "https://github.com/tc39/proposal-intl-messageformat"
     },
     "Atomics.pause": {
       "status": "Stage 3",

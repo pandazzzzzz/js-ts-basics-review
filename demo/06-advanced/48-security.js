@@ -52,11 +52,21 @@ console.log("2. createElement + appendChild - for DOM manipulation");
 console.log("3. DOMPurify.sanitize() - for trusted HTML");
 console.log("4. Template literals with escaping");
 
-// HTML escaping function
+// HTML escaping function (browser-only — requires DOM)
 function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+  // In Node.js, use a library like he or implement manually (see Node version below)
+  if (typeof document !== 'undefined') {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+  // Node.js fallback: manual entity escaping
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 console.log("Escaped:", escapeHTML('<script>alert("XSS")</script>'));
@@ -197,10 +207,10 @@ console.log(`
 const nonce = crypto.randomBytes(16).toString('base64');
 
 // Include in CSP header
-Content-Security-Policy: script-src 'nonce-${nonce}'
+Content-Security-Policy: script-src 'nonce-\${nonce}'
 
 // Use in inline script
-<script nonce="${nonce}">
+<script nonce="\${nonce}">
   console.log('This script is allowed');
 </script>
 `);

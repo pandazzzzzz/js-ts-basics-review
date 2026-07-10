@@ -564,7 +564,7 @@ console.log("- 'CNY':", currencyNames.of('CNY')); // "Chinese Yuan"
 const scriptNames = new Intl.DisplayNames(['en'], { type: 'script' });
 console.log("\nScript names (English):");
 console.log("- 'Latn':", scriptNames.of('Latn')); // "Latin"
-console.log("- 'Hant':", scriptNames.of('Hant')); // "Traditional Han"
+console.log("- 'Hant':", scriptNames.of('Hant')); // "Traditional"
 console.log("- 'Arab':", scriptNames.of('Arab')); // "Arabic"
 
 // Use cases:
@@ -743,16 +743,16 @@ console.log("- Intl.ListFormat.formatToParts()");
 // ══════════════════════════════════════════
 // ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 3 proposal - not current standard)
+// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
 // ============================================
 
-console.log("\n=== Intl.MessageFormat (Stage 3 proposal - not current standard) ===");
+console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");
 
-// MessageFormat 2.0 is a Stage 3 proposal, not yet part of the ECMAScript standard.
+// MessageFormat 2.0 is a Stage 1 proposal, not yet part of the ECMAScript standard.
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
-// No verification block (Stage 3, not finalized).
+// No verification block (Stage 1, not finalized).
 // Proposal: https://github.com/tc39/proposal-intl-messageformat
-console.log("- Stage 3 proposal, not yet standardized; use @messageformat/core polyfill for production");
+console.log("- Stage 1 proposal, not yet standardized; use @messageformat/core polyfill for production");
 console.log(`// Example template (future syntax):
 // const mf = new Intl.MessageFormat(\`You have {count, plural, =0 {no items} one {one item} other {# items}}.\`, 'en-US');
 // mf.format({ count: 5 });  // "You have 5 items."

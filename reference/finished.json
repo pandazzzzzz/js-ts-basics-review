@@ -85,7 +85,7 @@
       "stage": 4,
       "stage4Date": "2025-11",
       "stage4DateType": "exact",
-      "note": "Iterator concatenation with + operator (iter1 + iter2)",
+      "note": "Iterator.concat(iter1, iter2, ...) for concatenating iterators",
       "url": "https://github.com/tc39/proposal-iterator-sequencing"
     },
     "Set methods": {
