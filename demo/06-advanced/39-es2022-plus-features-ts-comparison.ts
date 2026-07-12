@@ -512,7 +512,7 @@ const names: string[] = ["Alice", "Bob"];
 const ages: number[] = [25, 30];
 
 // Type-safe joint iteration
-for (const [[, name], [, age]] of zip(names, ages)) {
+for (const [name, age] of Iterator.zip([names, ages])) {
   // TypeScript knows name is string, age is number
   console.log(\`\${name} is \${age}\`);
 }

@@ -975,7 +975,7 @@ orderMachine.transition("pay"); // Invalid (already delivered)
 ⚠️ BROWSER/RUNTIME SUPPORT:
 - All patterns work in modern browsers (ES6+)
 - Decorator syntax requires TypeScript or Babel
-- Class syntax: Chrome 42+, Firefox 45+, Safari 7+, Node.js 6+
+- Class syntax: Chrome 49+, Firefox 45+, Safari 9+, Node.js 6+
 
 🔧 BEST PRACTICES:
 - Use patterns to solve real problems, not for over-engineering

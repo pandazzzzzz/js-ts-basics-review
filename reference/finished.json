@@ -8,12 +8,20 @@
       "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11); delayed publication to ES2027",
       "url": "https://github.com/tc39/proposal-temporal"
     },
+    "Atomics.pause": {
+      "status": "ES2027",
+      "stage": 4,
+      "stage4Date": "2026-06",
+      "stage4DateType": "milestone",
+      "note": "ECMA-262 PR #3847 merged at 2026-06-02T18:01:26Z (proposal repo: atomics-microwait)",
+      "url": "https://github.com/tc39/proposal-atomics-microwait"
+    },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2026-05",
       "stage4DateType": "milestone",
-      "note": "2025-11 is the Stage 3 meeting; proposal repo 'Stage 4' commit dated 2026-05-29 implies Stage 4 at the 2026-05 plenary (notes not yet published). for await (const [[k1,v1],[k2,v2]] of zip(i1,i2))",
+      "note": "2025-11 is the Stage 3 meeting; proposal repo 'Stage 4' commit dated 2026-05-29 implies Stage 4 at 2026-05 plenary (notes not yet published). Iterator.zip([iter1, iter2, ...]) produces [[v1, v2], ...]",
       "url": "https://github.com/tc39/proposal-joint-iteration"
     },
     "using (Explicit Resource Management)": {

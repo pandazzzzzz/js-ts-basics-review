@@ -746,6 +746,13 @@ console.log("- Intl.ListFormat.formatToParts()");
 // Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
 // ============================================
 
+/*
+ * verification:
+ *   feature: Intl.MessageFormat
+ *   status: Stage 1
+ *   lastVerified: 2026-07-12
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");
 
 // MessageFormat 2.0 is a Stage 1 proposal, not yet part of the ECMAScript standard.

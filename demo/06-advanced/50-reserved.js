@@ -43,7 +43,7 @@ console.log("\n=== Recent Standardized Features ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-06-29
+ *   lastVerified: 2026-07-10
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
@@ -66,7 +66,7 @@ console.log("- Joint Iteration (ES2027): Iterator.zip multiple iterables");
 console.log("// ES2026/ES2027 example (commented, illustrative):");
 console.log("//   const arr = await Array.fromAsync(asyncIter);      // ES2026");
 console.log("//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027, auto-close");
-console.log("//   for (const [n, a] of Iterator.zip(names, ages)) console.log(n, a); // ES2027");
+console.log("//   for (const [n, a] of Iterator.zip([names, ages])) console.log(n, a); // ES2027");
 
 // ============================================
 // Section 3+: Unfinalized proposals / Withdrawn proposals
@@ -91,6 +91,13 @@ console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
 // Successor to Records & Tuples: deeply immutable composite objects/arrays with
 // value semantics (deep equality, usable as Map keys). Syntax/API still evolving.
 // See tc39/proposal-composites.
+/*
+ * verification:
+ *   feature: Composites
+ *   status: Stage 1
+ *   lastVerified: 2026-07-12
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("// Composites (Stage 1) — future syntax, illustrative:");
 console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
 console.log("//   const a = Composite { x: 1 } , b = Composite { x: 1 };");
@@ -100,6 +107,13 @@ console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 });
 // --- Decimal (Stage 1 proposal - not current standard) ---
 // High-precision decimal type to avoid binary floating-point error (0.1 + 0.2 !== 0.3).
 // Planned 'm' literal suffix; literal syntax still under discussion. See tc39/proposal-decimal.
+/*
+ * verification:
+ *   feature: Decimal
+ *   status: Stage 1
+ *   lastVerified: 2026-07-12
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("// Decimal (Stage 1) — future syntax, illustrative:");
 console.log("//   0.1 + 0.2 === 0.3;       // false today (binary float)");
 console.log("//   const price = 0.10m;");
@@ -109,6 +123,13 @@ console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
 // Evaluate a block as an expression, returning the last value; lets if/else inline
 // as an expression, reducing IIFE / temp variables. `return` semantics inside `do`
 // still being finalized. See tc39/proposal-do-expressions.
+/*
+ * verification:
+ *   feature: Do Expressions
+ *   status: Stage 1
+ *   lastVerified: 2026-07-12
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 console.log("// Do Expressions (Stage 1) — future syntax, illustrative:");
 console.log("//   const label = do {");
 console.log("//     if (cond) 'yes'; else 'no';");
@@ -134,7 +155,7 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-06-29
+ *   lastVerified: 2026-07-10
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
