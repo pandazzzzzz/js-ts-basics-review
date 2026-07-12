@@ -43,7 +43,7 @@ console.log("\n=== Recent Standardized Features ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-07-10
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
@@ -140,7 +140,7 @@ console.log("//   }; // evaluates to 'yes' or 'no'");
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 1
- *   lastVerified: 2026-07-10
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pattern Matching (Stage 1) — future syntax, illustrative:");
@@ -155,7 +155,7 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-07-10
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");

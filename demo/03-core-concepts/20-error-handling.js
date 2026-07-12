@@ -203,7 +203,7 @@ console.log("attemptOperation success:", attemptOperation(() => "result")); // "
  *   feature: Error.isError
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-07-08
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // Error.isError() (ES2026) — Reliable cross-realm Error checking
@@ -1224,7 +1224,7 @@ saferAsyncHandling();
  *   feature: Error.cause
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-07-08
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -1294,7 +1294,7 @@ try {
  *   feature: AggregateError
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-06-29
+ *   lastVerified: 2026-07-12
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== 15. AggregateError Demo ===");
