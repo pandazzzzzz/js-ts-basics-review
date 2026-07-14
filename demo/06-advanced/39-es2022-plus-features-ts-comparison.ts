@@ -465,10 +465,12 @@ const count: number | undefined = counter.get("requests");
 
 console.log("JSON.parse source text access:");
 console.log(`
-// Access source text property on parsed objects
+// Access source text via reviver's third argument (context)
 const json: string = '{"name":"Alice"}';
-const data = JSON.parse(json);
-// const source: string = data.source; // Original JSON string
+const data = JSON.parse(json, (key, value, context) => {
+  // TypeScript: context is { source: string, index: number, input: string }
+  return value;
+});
 `);
 
 console.log("Iterator Sequencing with Iterator.concat():");

@@ -1,7 +1,7 @@
 # Learning Roadmap
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **Updated**: 2026-07-03
+> **Updated**: 2026-07-13
 > **ES version verification**: 2026-06-29 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 

@@ -1357,22 +1357,25 @@ console.log("- Idempotent operations");
 
 // ============================================
 // JSON.parse source text access (ES2026)
-// - Access original JSON source text via 'source' property
+// - Access original JSON source text via reviver context
 // - Reached Stage 4 in 2025-11, part of ES2026
 console.log("\n=== JSON.parse source text access (ES2026) ===");
 
 console.log("NOTE: JSON.parse source text access reached Stage 4 in November 2025 and is part of ES2026.");
 console.log("Browser/runtime support is emerging. Check caniuse.com for current status.");
 
-console.log("\nSource text access:");
+console.log("\nSource text access via reviver:");
 console.log(`
-// Access original JSON string from parsed objects
+// Access original JSON string via reviver's third argument (context)
 const jsonString = '{"name":"Alice","age":30}';
 
-// Parse with source tracking
-const data = JSON.parse(jsonString);
-// const source = data.source; // '{"name":"Alice","age":30"}'
+// Reviver receives key, value, and context (which has source)
+const data = JSON.parse(jsonString, (key, value, context) => {
+  // context.source contains the original source text of this value
+  return value;
+});
 
+// Source access is limited to primitive values
 // Useful for error reporting, validation, debugging
 `);
 
