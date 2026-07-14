@@ -471,14 +471,14 @@ const data = JSON.parse(json);
 // const source: string = data.source; // Original JSON string
 `);
 
-console.log("Iterator Sequencing with +:");
+console.log("Iterator Sequencing with Iterator.concat():");
 console.log(`
 // Type-safe iterator concatenation
 const iter1 = [1, 2, 3][Symbol.iterator]();
 const iter2 = [4, 5][Symbol.iterator]();
 
-// TypeScript infers combined iterator type
-const combined = iter1 + iter2;
+// TypeScript: Iterator.concat returns IterableIterator<number>
+const combined = Iterator.concat(iter1, iter2);
 // const values: number[] = [...combined]; // [1, 2, 3, 4, 5]
 `);
 

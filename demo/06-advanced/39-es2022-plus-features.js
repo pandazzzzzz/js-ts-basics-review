@@ -1506,10 +1506,6 @@ stack.dispose();
 // Custom cleanup logic
 `);
 
-// ══════════════════════════════════════════
-// ⚠️ PROPOSAL SECTION — not current standard, syntax may change
-// ══════════════════════════════════════════
-
 /*
  * verification:
  *   feature: Atomics.pause
