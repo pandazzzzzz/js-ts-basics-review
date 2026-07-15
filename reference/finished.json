@@ -96,6 +96,14 @@
       "note": "Iterator.concat(iter1, iter2, ...) for concatenating iterators",
       "url": "https://github.com/tc39/proposal-iterator-sequencing"
     },
+    "Intl.DurationFormat": {
+      "status": "ES2025",
+      "stage": 4,
+      "stage4Date": "2025-07",
+      "stage4DateType": "milestone",
+      "note": "ECMA-402 specification; browser support: Chrome 129+, Firefox 136+, Safari 16.4+, Node.js 23.0.0+",
+      "url": "https://tc39.es/proposal-intl-duration-format"
+    },
     "Set methods": {
       "status": "ES2025",
       "stage": 4,

@@ -1369,7 +1369,7 @@ console.log("=== Import Attributes (ES2025) ===\n");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-07-12
+ *   lastVerified: 2026-07-15
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

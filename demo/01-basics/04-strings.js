@@ -259,7 +259,7 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, 'dog'));
  *   feature: replaceAll
  *   status: ES2021
  *   stage4Date: 2020-06
- *   lastVerified: 2026-07-12
+ *   lastVerified: 2026-07-15
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== replaceAll() Method ===");
@@ -448,7 +448,7 @@ console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
  *   feature: Well-Formed Unicode Strings
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-07-12
+ *   lastVerified: 2026-07-15
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== isWellFormed() / toWellFormed() Method (ES2024) ===");

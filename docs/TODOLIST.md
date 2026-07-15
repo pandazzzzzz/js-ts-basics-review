@@ -1,8 +1,8 @@
 # Learning Roadmap
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **Updated**: 2026-07-13
-> **ES version verification**: 2026-06-29 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **Updated**: 2026-07-15
+> **ES version verification**: 2026-07-15 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
 
 
 **Progress**: 49/49 ✅ · 49 TypeScript comparison files ✅ (numbered 01-50, 28 reserved)
@@ -164,7 +164,7 @@ TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testi
 
 ### Knowledge Points
 
-**39 ES2022+** — ES2018 (Intl.PluralRules) · ES2020 (Optional Chaining, Nullish Coalescing, BigInt, Promise.allSettled, matchAll, globalThis) · ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Atomics.pause) · Stage 2.7 (Decorators)
+**39 ES2022+** — ES2018 (Intl.PluralRules) · ES2020 (Optional Chaining, Nullish Coalescing, BigInt, Promise.allSettled, matchAll, globalThis) · ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks, RegExp Match Indices) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Map.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Resizable ArrayBuffer, Atomics.waitAsync, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups, Intl.DurationFormat) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Atomics.pause) · Stage 2.7 (Decorators)
 **40 Debugging and Testing** — console methods, debugger, breakpoints, unit testing basics
 **41 Typed Arrays** — ArrayBuffer, TypedArray views, DataView, binary data processing
 **42 Internationalization API** — Intl.NumberFormat, DateTimeFormat, Collator, RelativeTimeFormat
