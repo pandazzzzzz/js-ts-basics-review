@@ -238,7 +238,7 @@ export default defineConfig({
 console.log("\nVite 7 with Environment API (SSR):");
 console.log(vite7EnvConfig);
 
-// Vite 8.x Features (March 2026)
+// Vite 8.x Features (June 2026)
 console.log("\nVite 8.x Key Features:");
 console.log("1. Powered by Rolldown (Rust-based bundler, replaces Rollup)");
 console.log("   - 10-30x faster production builds");
