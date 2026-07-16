@@ -11,7 +11,7 @@ export {}; // Make this file a module to avoid global scope conflicts
 
 console.log("=== Error.cause - Type Safety ===\n");
 
-// Error.cause is built into TS 4.6+ via ErrorOptions interface.
+// Error.cause is built into TS 4.4+ via ErrorOptions interface.
 // No need for a custom interface — Error constructor accepts { cause } natively.
 
 // Helper interface to access Error.cause (typed as unknown by the built-in lib).
@@ -81,9 +81,10 @@ interface User {
 
 const obj: User = { name: "Alice", age: 30 };
 
-// TypeScript provides type-safe property checking
+// Object.hasOwn is NOT a built-in type guard in TypeScript.
+// Use the `in` operator instead, or wrap it in a custom type guard (shown below).
 if (Object.hasOwn(obj, "name")) {
-  // TypeScript knows the property exists
+  // (Note: TypeScript does NOT narrow the type here without a custom guard)
   console.log("Name:", obj.name);
 }
 
@@ -91,14 +92,14 @@ if (Object.hasOwn(obj, "name")) {
 function hasProperty<T extends object, K extends PropertyKey>(
   obj: T,
   key: K
-): obj is T & Record<K, unknown> {
+): obj is T & { [P in K]-?: unknown } {
   return Object.hasOwn(obj, key);
 }
 
 const maybeUser = { name: "Bob" } as object;
 if (hasProperty(maybeUser, "name")) {
   // TypeScript narrows the type
-  console.log("User name:", (maybeUser as any).name);
+  console.log("User name:", maybeUser["name"]);
 }
 
 console.log("\n=== RegExp /d Flag - Typed Indices ===\n");

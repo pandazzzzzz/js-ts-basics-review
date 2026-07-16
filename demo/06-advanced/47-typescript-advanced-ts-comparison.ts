@@ -83,10 +83,11 @@ type IsString<T> = T extends string ? true : false;
 type A = IsString<string>;  // true
 type B = IsString<number>;  // false
 
-// Infer keyword
-type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+// Infer keyword (example of how ReturnType utility type works under the hood)
+// NOTE: This is a demonstration only — ReturnType is a built-in utility type!
+type ReturnTypeDemo<T> = T extends (...args: any[]) => infer R ? R : never;
 type Fn = () => string;
-type FunctionReturn = ReturnType<Fn>; // string
+type FunctionReturn = ReturnTypeDemo<Fn>; // string
 
 console.log("Conditional types: Type-level ternary operator");
 console.log("IsString<string>: true");

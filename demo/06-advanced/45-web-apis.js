@@ -482,12 +482,14 @@ document.addEventListener('visibilitychange', () => {
 
 // Battery Status API
 console.log("\n5. Battery Status API:");
+console.log("⚠️ DEPRECATED API: Limited browser support (Chrome/Edge only, removed from Firefox)");
+console.log("Privacy concerns led to limited adoption.");
 console.log(`
 if ('getBattery' in navigator) {
   navigator.getBattery().then(battery => {
     console.log('Battery level:', battery.level * 100 + '%');
     console.log('Charging:', battery.charging);
-    
+
     battery.addEventListener('levelchange', () => {
       console.log('Battery level changed:', battery.level);
     });
@@ -599,10 +601,11 @@ console.log("3. Memory leaks from unclosed connections, unremoved observers, or 
 - Request permissions responsibly
 
 9. NEW WEB APIs (2024-2025)
-	   View Transitions API (Chrome 111+, Safari 18+):
+	   View Transitions API (Chrome 111+, Safari 18+, Firefox 144+):
 	   - Smooth animated transitions between page states
 	   - document.startViewTransition(() => updateDOM())
-	   - Supports both SPA (same-document) and MPA (cross-document) transitions
+	   - SPA (same-document) transitions: Chrome 111+, Safari 18+, Firefox 144+
+	   - MPA (cross-document) transitions: Only supported in Chrome 126+ and Firefox 127+
 	   - CSS: ::view-transition pseudo-elements for custom animations
 	   - Great for single-page app navigation
 	   - ⚠️ Check support: if ('startViewTransition' in document)
