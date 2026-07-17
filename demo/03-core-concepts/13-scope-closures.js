@@ -7,19 +7,19 @@
 // ============================================
 /**
  * Global Scope - Variables accessible everywhere in the program (ES1)
- * 
+ *
  * Characteristics:
  * - Variables declared outside any function or block
  * - Accessible from anywhere in the code
- * - In browsers: attached to window object
- * - In Node.js: attached to global object
- * - var, let, const at top level create global variables
- * 
+ * - In browsers: attached to window object (module scope in Node.js)
+ * - In Node.js: attached to global object when not in module
+ * - var, let, const at top level create module-scoped variables
+ *
  * Use Cases:
  * - Configuration constants
  * - Utility functions
  * - Application-wide state (use sparingly)
- * 
+ *
  * Common Pitfalls:
  * - Global namespace pollution
  * - Name collisions
