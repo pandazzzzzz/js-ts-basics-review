@@ -14,7 +14,8 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files (01-50, 28 reserv
 
 **Note**: 
 - Node.js 18+ supports most ES2022+ features
-- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, RegExp.escape, Promise.try
+- Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Promise.try
+- Node.js 24+ (April 2025) required for ES2025 RegExp.escape
 - Temporal API is ES2027 (Stage 4 Mar 2026, delayed publication) - check future Node.js versions
 - TypeScript 5.0+ required for Temporal API type definitions
 - TypeScript 5.2+ (August 2023) supports `using` declarations syntax (now ES2027, Stage 4 since May 2025)
