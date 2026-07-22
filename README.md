@@ -10,15 +10,15 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files (01-50, 28 reserv
 |-----------------|---------|------------|
 | ES2022+ (basics) | 18+ | 5+ |
 | ES2027 Features | 22+ | 5.2+ |
-| Temporal API (ES2027) | Future | 5.0+ |
+| Temporal API (ES2027) | Future | N/A (use community types) |
 
-**Note**: 
+**Note**:
 - Node.js 18+ supports most ES2022+ features
 - Node.js 22+ (April 2024) required for ES2025 Set methods, Iterator helpers, Promise.try
 - Node.js 24+ (April 2025) required for ES2025 RegExp.escape
-- Temporal API is ES2027 (Stage 4 Mar 2026, delayed publication) - check future Node.js versions
-- TypeScript 5.0+ required for Temporal API type definitions
-- TypeScript 5.2+ (August 2023) supports `using` declarations syntax (now ES2027, Stage 4 since May 2025)
+- Temporal API is ES2027 (conditional Stage 4 Mar 2026, delayed publication) - check future Node.js versions
+- TypeScript does not include built-in Temporal types; use community type definitions (e.g., `@js-temporal/polyfill`) for type support
+- TypeScript 5.2+ (August 2023) supports `using` declarations syntax (now ES2027, conditional Stage 4 since May 2025, still conditional as of 2026-03)
 
 ## Quick Start
 
@@ -61,16 +61,6 @@ npx tsc --noEmit
 
 - [TODOLIST.md](docs/TODOLIST.md) — Detailed roadmap
 - [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS reference
-
-## Audit Tools
-
-| Tool | Purpose | Location |
-|------|---------|----------|
-| js-fundamentals-review | JS/TS file pair validation | [js-fundamentals-review/](js-fundamentals-review/) |
-| basics-review | 01-basics folder analysis | [basics-review/](basics-review/) |
-| operators-review | Operator coverage audit | [operators-review/](operators-review/) |
-| audit | Property-based testing | [audit/](audit/) |
-| array-audit | Array method examples (Python) | [array-audit/](array-audit/) |
 
 ## Troubleshooting
 

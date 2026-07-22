@@ -293,7 +293,7 @@ await using db = new DatabaseConnection();
 // db[Symbol.asyncDispose]() called at block end
 ```
 
-Note: `using` reached Stage 4 in May 2025 and is now part of ES2027. TypeScript 5.2+ supports the syntax.
+Note: `using` reached conditional Stage 4 in May 2025 (still conditional as of 2026-03) and is targeted for ES2027. TypeScript 5.2+ supports the syntax.
 
 **See**: `demo/06-advanced/39-es2022-plus-features.js`
 
@@ -303,7 +303,7 @@ Note: `using` reached Stage 4 in May 2025 and is now part of ES2027. TypeScript 
 
 - **JavaScript**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**: 50 numbered demo files (01-50) in `demo/` folder, each with TypeScript comparison
+- **Practice Files**: 49 numbered demo files (01-50, 28 reserved) in `demo/` folder, each with TypeScript comparison
 
 ---
 

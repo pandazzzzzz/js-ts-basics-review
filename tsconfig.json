@@ -11,10 +11,13 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true
+    "resolveJsonModule": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "Node"
+    }
   },
   "include": ["demo/**/*.ts"],
   "exclude": ["node_modules", "**/node_modules/**", "js-fundamentals-review", "basics-review", "operators-review", "audit", "array-audit"]

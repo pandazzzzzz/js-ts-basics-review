@@ -9,7 +9,7 @@
  *   --check-ts    同时检查TypeScript比较文件.ts-comparison.ts
  *
  * 检查:
- * 1. reference/es-versions.json 的 lastVerified 是否过期（超过90天）
+ * 1. reference/meta.json 的 lastVerified 是否过期（超过90天）
  * 2. demo文件中的ES版本标注是否与参考文件一致
  * 3. 同一feature在不同文件中标注是否一致
  * 4. verification block 中的 stage4Date 是否与 reference 一致
@@ -139,7 +139,7 @@ ES版本标注验证脚本 v${VERSION}
   --check-ts                同时检查所有TypeScript文件(*.ts)
 
 检查项:
-  1. reference/es-versions.json 的 lastVerified 是否过期（超过90天）
+  1. reference/meta.json 的 lastVerified 是否过期（超过90天）
   2. demo文件中的ES版本标注是否与参考文件一致
   3. 同一feature在不同文件中标注是否一致
   4. verification block 中的 stage4Date 是否与 reference 一致
@@ -263,7 +263,7 @@ function checkLastVerified(reference) {
   const daysSince = Math.floor((today.getTime() - lastVerified.getTime()) / (1000 * 60 * 60 * 24));
 
   if (daysSince > MAX_VERIFIED_DAYS) {
-    log('yellow', `⚠️  reference/es-versions.json lastVerified is ${daysSince} days ago (>${MAX_VERIFIED_DAYS} days)`);
+    log('yellow', `⚠️  reference/meta.json lastVerified is ${daysSince} days ago (>${MAX_VERIFIED_DAYS} days)`);
     log('yellow', '   Please verify against TC39 official data and update lastVerified');
     return false;
   }
@@ -1050,7 +1050,7 @@ function main() {
   log('green', '\n✅ All ES version annotations consistent with reference');
 
   if (!verifiedOk) {
-    log('yellow', '\n⚠️  Please update reference/es-versions.json:');
+    log('yellow', '\n⚠️  Please update reference/meta.json:');
     log('yellow', '   1. Check TC39 finished-proposals.md');
     log('yellow', '   2. Update lastVerified date');
     log('yellow', '   3. Run this script again');
