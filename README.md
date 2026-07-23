@@ -28,7 +28,7 @@ node demo/01-basics/01-variables.js
 node demo/02-data-structures/06-arrays.js
 node demo/06-advanced/39-es2022-plus-features.js
 
-# Run TypeScript comparison files (requires ts-node)
+# Run TypeScript comparison files (uses npx ts-node, auto-installs on first run)
 npx ts-node demo/01-basics/01-variables-ts-comparison.ts
 
 # Type-check all TypeScript comparison files (uses tracked tsconfig.json)
@@ -62,13 +62,24 @@ npx tsc --noEmit
 - [TODOLIST.md](docs/TODOLIST.md) — Detailed roadmap
 - [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS reference
 
+## Audit Tools
+
+| Tool | Purpose | Location |
+|------|---------|----------|
+| js-fundamentals-review | JS/TS file pair validation | [js-fundamentals-review/](js-fundamentals-review/) |
+| basics-review | 01-basics folder analysis | [basics-review/](basics-review/) |
+| operators-review | Operator coverage audit | [operators-review/](operators-review/) |
+| audit | Property-based testing | [audit/](audit/) |
+| array-audit | Array method examples (Python) | [array-audit/](array-audit/) |
+
 ## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| `ts-node` not found | Run `npm install -g ts-node` or use `npx ts-node` |
-| ES2022+ syntax error | Ensure Node.js 18+ (`node --version`) |
+| `ts-node` not found | `npx ts-node` auto-installs on first run, or install globally with `npm install -g ts-node` |
+| ES2022+ syntax error | Ensure Node.js 18+ (`node --version`); ES2025 features require Node.js 22+ |
 | Module not found | Check file path relative to project root |
+| TypeScript type errors | Run `npx tsc --noEmit` for type checking; ensure tsconfig.json is properly configured |
 
 ## References
 
