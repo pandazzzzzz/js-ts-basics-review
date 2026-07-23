@@ -285,7 +285,7 @@ function add(a: number, b: number): number {
 
 #### Resource Management (ES2027 / TS 5.2+)
 ```typescript
-// using declaration - automatic cleanup (ES2027, Stage 4 since May 2025)
+// using declaration - automatic cleanup (ES2027, conditional Stage 4 since May 2025)
 using file = new FileHandle("data.txt");
 // file[Symbol.dispose]() called at block end
 
