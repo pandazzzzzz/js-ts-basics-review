@@ -331,7 +331,7 @@ console.log(handleState({ status: "error", error: "Failed" }));
 // ============================================
 
 // typeof type guard
-function processValue(value: string | number): string {
+function processStringOrNumber(value: string | number): string {
   if (typeof value === "string") {
     // TypeScript knows value is string here
     return value.toUpperCase();
@@ -342,8 +342,8 @@ function processValue(value: string | number): string {
 }
 
 console.log("\n=== Type Guards ===");
-console.log("Process string:", processValue("hello"));
-console.log("Process number:", processValue(42.567));
+console.log("Process string:", processStringOrNumber("hello"));
+console.log("Process number:", processStringOrNumber(42.567));
 
 // Custom type guard
 function isNonEmptyString(value: string | null | undefined): value is string {

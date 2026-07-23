@@ -92,15 +92,15 @@ function isNumber(value: unknown): value is number {
   return typeof value === "number" && !isNaN(value);
 }
 
-function processValue(value: unknown): number {
+function processUnknownValue(value: unknown): number {
   if (isNumber(value)) {
     return value * 2;
   }
   return 0;
 }
 
-console.log("processValue(10):", processValue(10)); // 20
-console.log("processValue('hello'):", processValue("hello")); // 0
+console.log("processUnknownValue(10):", processUnknownValue(10)); // 20
+console.log("processUnknownValue('hello'):", processUnknownValue("hello")); // 0
 
 // ============================================
 // 4. Nullable Numbers

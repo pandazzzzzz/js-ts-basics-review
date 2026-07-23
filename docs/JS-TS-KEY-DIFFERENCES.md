@@ -124,9 +124,9 @@ const port = config?.server?.port; // undefined if any part is null/undefined
 const defaultPort = port ?? 3000; // Use 3000 only if port is null/undefined
 
 // ⚠️ CRITICAL PITFALL: ?? vs || with numeric 0
-const port = 0;
-const wrong = port || 3000;  // 3000 (0 is falsy - WRONG!)
-const right = port ?? 3000;  // 0 (0 is not nullish - CORRECT!)
+const zeroPort = 0;
+const wrong = zeroPort || 3000;  // 3000 (0 is falsy - WRONG!)
+const right = zeroPort ?? 3000;  // 0 (0 is not nullish - CORRECT!)
 ```
 
 ### 8. Logical Assignment Operators (ES2021)
