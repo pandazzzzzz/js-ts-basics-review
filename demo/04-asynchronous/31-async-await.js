@@ -392,7 +392,7 @@ console.log("\n=== Top-Level Await Demo ===\n");
 })();
 
 // ============================================
-// 7. RELATIONSHIP WITH PROMISES (Promise relationship)
+// 7. RELATIONSHIP WITH PROMISES
 // ============================================
 
 /**
@@ -466,6 +466,50 @@ async function asyncAwaitVersion() {
 
 promiseChain();
 asyncAwaitVersion();
+
+// ============================================
+// 8. PROMISE COMBINATORS WITH ASYNC/AWAIT
+// ============================================
+
+/**
+ * Promise combinators work seamlessly with async/await:
+ *
+ * - await Promise.all([...])     Wait for all to fulfill (tuple result)
+ * - await Promise.race([...])    First to settle
+ * - await Promise.any([...])     First to fulfill
+ * - await Promise.allSettled([...])  All outcomes, never rejects
+ * - Promise.allSettled results have { status, value/reason }
+ *
+ * Tip: Use destructuring with Promise.all for type-safe named results.
+ */
+
+console.log("\n=== Promise Combinators with async/await ===\n");
+
+// Promise.all with destructuring
+async function fetchUserAndPosts(id) {
+  const [user, posts] = await Promise.all([
+    delay(100, { id, name: `User${id}` }),
+    delay(150, [{ id: 1, userId: id }, { id: 2, userId: id }])
+  ]);
+  console.log("User:", user.name, "| Posts:", posts.length);
+  return { user, posts };
+}
+
+fetchUserAndPosts(42);
+
+// Promise.allSettled - never throws, inspect each result
+async function multiFetchWithFallback(urls) {
+  const results = await Promise.allSettled(
+    urls.map(u => delay(Math.random() * 200, u))
+  );
+  const ok = results
+    .filter(r => r.status === "fulfilled")
+    .map(r => r.value);
+  console.log("allSettled:", results.length, "total,", ok.length, "fulfilled");
+  return ok;
+}
+
+multiFetchWithFallback(["/a", "/b", "/c"]);
 
 // ============================================
 // 9. ASYNC ITERATORS (ES2018)

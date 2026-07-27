@@ -303,80 +303,7 @@ const taggedDate = {
 console.log("\n  Type-tagged:", JSON.stringify(taggedDate));
 
 // ============================================
-// Section 8: Common Pitfalls
-// ============================================
-
-console.log("\nCommon Pitfalls:");
-
-// Pitfall 1: Circular references
-const circular = { name: "Circular" };
-circular.self = circular;
-
-console.log("  Pitfall 1 - Circular Reference:");
-try {
-  JSON.stringify(circular);
-} catch (e) {
-  console.log("    Error:", e.name, "-", e.message.slice(0, 50));
-}
-
-// Solution: Use replacer to handle circular references
-function safeStringify(obj, indent = 2) {
-  let cache = new Set();
-  const val = JSON.stringify(obj, (key, value) => {
-    if (typeof value === "object" && value !== null) {
-      if (cache.has(value)) {
-        return "[Circular]";
-      }
-      cache.add(value);
-    }
-    return value;
-  }, indent);
-  cache = null;
-  return val;
-}
-
-console.log("  Safe serialization:", safeStringify(circular));
-
-// Pitfall 2: Method loss
-class Person {
-  constructor(name) {
-    this.name = name;
-  }
-  greet() {
-    return `Hello, I'm ${this.name}`;
-  }
-}
-
-const person = new Person("Alice");
-const personJson = JSON.stringify(person);
-const parsedPerson = JSON.parse(personJson);
-
-console.log("\n  Pitfall 2 - Method Loss:");
-console.log("    Original:", person.greet());
-console.log("    After parse:", typeof parsedPerson.greet); // undefined
-console.log("    Note: Prototype chain methods lost during serialization");
-
-// Pitfall 3: undefined omitted
-const objWithUndefined = {
-  defined: "value",
-  undefined: undefined
-};
-console.log("\n  Pitfall 3 - undefined:");
-console.log("    stringify:", JSON.stringify(objWithUndefined));
-console.log("    has undefined after parse:", "undefined" in JSON.parse(JSON.stringify(objWithUndefined)));
-
-// Pitfall 4: Large number precision loss
-const bigNum = {
-  id: 9007199254740993n, // Exceeds Number.MAX_SAFE_INTEGER
-  safe: 9007199254740991
-};
-
-console.log("\n  Pitfall 4 - Large Number Precision:");
-console.log("    BigInt stringify:", JSON.stringify(bigNum));
-console.log("    Safe integer:", JSON.stringify({ safe: bigNum.safe }));
-
-// ============================================
-// Section 9: Practical Use Cases
+// Section 8: Practical Use Cases
 // ============================================
 
 console.log("\nPractical Use Cases:");
@@ -462,7 +389,7 @@ console.log("    Valid:", isValidJSON('{"a": 1}'));
 console.log("    Invalid:", isValidJSON('{a: 1}')); // JSON requires double quotes
 
 // ============================================
-// Section 10: Error Handling
+// Section 9: Error Handling
 // ============================================
 
 console.log("\nError Handling:");
@@ -503,7 +430,7 @@ try {
 }
 
 // ============================================
-// Section 11: Performance Considerations
+// Section 10: Performance Considerations
 // ============================================
 
 console.log("\nPerformance Considerations:");
@@ -528,7 +455,7 @@ console.log(`    parse: ${parseTime.toFixed(2)}ms`);
 console.log(`    JSON size: ${(largeJson.length / 1024).toFixed(2)}KB`);
 
 // ============================================
-// Section 12: ES2019 JSON Improvements
+// Section 11: ES2019 JSON Improvements
 // ============================================
 
 console.log("\nES2019 JSON Improvements:");
@@ -595,6 +522,79 @@ function reviverWithSource(key, value) {
 const jsonWithDate = '{"created":"2024-06-15T10:00:00Z"}';
 const parsedDate = JSON.parse(jsonWithDate, reviverWithSource);
 console.log("    Result:", parsedDate.created instanceof Date);
+
+// ============================================
+// Section 12: Common Pitfalls
+// ============================================
+
+console.log("\nCommon Pitfalls:");
+
+// Pitfall 1: Circular references
+const circular = { name: "Circular" };
+circular.self = circular;
+
+console.log("  Pitfall 1 - Circular Reference:");
+try {
+  JSON.stringify(circular);
+} catch (e) {
+  console.log("    Error:", e.name, "-", e.message.slice(0, 50));
+}
+
+// Solution: Use replacer to handle circular references
+function safeStringify(obj, indent = 2) {
+  let cache = new Set();
+  const val = JSON.stringify(obj, (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (cache.has(value)) {
+        return "[Circular]";
+      }
+      cache.add(value);
+    }
+    return value;
+  }, indent);
+  cache = null;
+  return val;
+}
+
+console.log("  Safe serialization:", safeStringify(circular));
+
+// Pitfall 2: Method loss
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    return `Hello, I'm ${this.name}`;
+  }
+}
+
+const person = new Person("Alice");
+const personJson = JSON.stringify(person);
+const parsedPerson = JSON.parse(personJson);
+
+console.log("\n  Pitfall 2 - Method Loss:");
+console.log("    Original:", person.greet());
+console.log("    After parse:", typeof parsedPerson.greet); // undefined
+console.log("    Note: Prototype chain methods lost during serialization");
+
+// Pitfall 3: undefined omitted
+const objWithUndefined = {
+  defined: "value",
+  undefined: undefined
+};
+console.log("\n  Pitfall 3 - undefined:");
+console.log("    stringify:", JSON.stringify(objWithUndefined));
+console.log("    has undefined after parse:", "undefined" in JSON.parse(JSON.stringify(objWithUndefined)));
+
+// Pitfall 4: Large number precision loss
+const bigNum = {
+  id: 9007199254740993n, // Exceeds Number.MAX_SAFE_INTEGER
+  safe: 9007199254740991
+};
+
+console.log("\n  Pitfall 4 - Large Number Precision:");
+console.log("    BigInt stringify:", JSON.stringify(bigNum));
+console.log("    Safe integer:", JSON.stringify({ safe: bigNum.safe }));
 
 // ============================================
 // TypeScript Comparison Notes

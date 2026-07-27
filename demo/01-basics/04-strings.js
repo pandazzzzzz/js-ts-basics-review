@@ -2,23 +2,6 @@
 // 📘 For TypeScript comparison, see: 04-strings-ts-comparison.ts
 
 // ============================================
-// See TypeScript Comparison
-// ============================================
-
-/*
-🔍 See 04-strings-ts-comparison.ts for:
-   - String type annotations and literal types
-   - Template literal types (TS 4.1+)
-   - Branded string types for validation
-   - Type-safe string methods
-   - String utility types (Uppercase, Capitalize, etc.)
-   - Discriminated unions with strings
-
-📘 Key differences: TypeScript adds compile-time type checking
-   for string values while maintaining the same runtime behavior.
-*/
-
-// ============================================
 // String Creation Methods
 // ============================================
 
@@ -840,5 +823,22 @@ function sanitize(strings, ...values) {
 
 const untrusted = '<script>alert("xss")</script>';
 console.log("10. Sanitized:", sanitize`User: ${untrusted}`);
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+
+/*
+🔍 See 04-strings-ts-comparison.ts for:
+   - String type annotations and literal types
+   - Template literal types (TS 4.1+)
+   - Branded string types for validation
+   - Type-safe string methods
+   - String utility types (Uppercase, Capitalize, etc.)
+   - Discriminated unions with strings
+
+📘 Key differences: TypeScript adds compile-time type checking
+   for string values while maintaining the same runtime behavior.
+*/
 
 

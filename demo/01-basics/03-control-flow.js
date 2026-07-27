@@ -542,6 +542,163 @@ for (const item of items) {
 }
 
 // ============================================
+// Try-Catch-Finally (Error Handling)
+// ============================================
+
+// try-catch - Handle runtime errors (ES3)
+// - try block contains code that might throw
+// - catch block handles the error
+// - finally block always executes (optional)
+// - Use case: API calls, file operations, parsing
+console.log("\n=== Try-Catch-Finally ===");
+
+try {
+  const data = JSON.parse('{"name": "Alice"}');
+  console.log("Parsed:", data);
+} catch (error) {
+  console.log("Parse error:", error.message);
+} finally {
+  console.log("Cleanup always runs");
+}
+
+// try-catch with invalid JSON
+console.log("\nTry-Catch with Error:");
+try {
+  const invalidData = JSON.parse('invalid json');
+  console.log("This won't execute");
+} catch (error) {
+  console.log("Caught error:", error.message); // e.g. "Unexpected token 'i', \"invalid json\" is not valid JSON"
+  console.log("Error type:", error.name); // "SyntaxError"
+}
+
+// finally block always executes
+console.log("\nFinally Block:");
+let resource = null;
+try {
+  resource = "Resource opened";
+  console.log(resource);
+  // throw new Error("Something went wrong");
+} catch (error) {
+  console.log("Error:", error.message);
+} finally {
+  console.log("Cleanup: Resource closed"); // Always runs
+  resource = null;
+}
+
+// throw statement - Create custom errors (ES3)
+// - Throws any value (usually Error object)
+// - Stops execution and jumps to catch block
+// - Use case: validation, custom error conditions
+console.log("\nThrow Statement:");
+
+function divide(a, b) {
+  if (b === 0) {
+    throw new Error("Division by zero");
+  }
+  return a / b;
+}
+
+try {
+  console.log("10 / 2 =", divide(10, 2)); // 5
+  console.log("10 / 0 =", divide(10, 0)); // Throws error
+  console.log("This won't execute");
+} catch (error) {
+  console.log("Error caught:", error.message); // "Division by zero"
+}
+
+// Custom error types
+console.log("\nCustom Error Types:");
+
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+function validateAge(age) {
+  if (age < 0) {
+    throw new ValidationError("Age cannot be negative");
+  }
+  if (age > 150) {
+    throw new ValidationError("Age is unrealistic");
+  }
+  return age;
+}
+
+try {
+  console.log("Valid age:", validateAge(25)); // 25
+  console.log("Invalid age:", validateAge(-5)); // Throws ValidationError
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.log("Validation error:", error.message);
+  } else {
+    console.log("Unknown error:", error);
+  }
+}
+
+// Nested try-catch
+console.log("\nNested Try-Catch:");
+
+try {
+  console.log("Outer try");
+  try {
+    console.log("Inner try");
+    throw new Error("Inner error");
+  } catch (innerError) {
+    console.log("Inner catch:", innerError.message);
+    throw new Error("Outer error"); // Re-throw or throw new error
+  }
+} catch (outerError) {
+  console.log("Outer catch:", outerError.message);
+}
+
+// try-catch without finally
+console.log("\nTry-Catch Without Finally:");
+try {
+  const result = 10 / 2;
+  console.log("Result:", result);
+} catch (error) {
+  console.log("Error:", error.message);
+}
+// No finally block needed if no cleanup required
+
+// try-finally without catch
+console.log("\nTry-Finally Without Catch:");
+try {
+  console.log("Executing code");
+  // If error occurs here, it will propagate after finally
+} finally {
+  console.log("Cleanup code runs regardless");
+}
+
+// Optional catch binding (ES2019) - `catch {` without a binding variable
+// - When the caught error is not used, you can omit the `(error)` parameter
+// - Syntax: `try { ... } catch { ... }` (no parentheses, no binding)
+// - Use case: when you only care that an error happened, not its details
+// - Note: the binding is still allowed when you need error.message etc.
+console.log("\nOptional Catch Binding (ES2019):");
+
+function parseConfig(raw) {
+  try {
+    return JSON.parse(raw);
+  } catch { // No `(error)` binding — error value is unused
+    console.log("caught without binding — returning default config");
+    return { defaults: true };
+  }
+}
+
+console.log("parseConfig('{\"a\":1}'):", parseConfig('{"a":1}')); // { a: 1 }
+console.log("parseConfig('bad'):", parseConfig('bad')); // logs message, returns { defaults: true }
+
+// When you DO need the error, keep the binding (both styles valid)
+try {
+  undefinedVariable; // ReferenceError
+} catch (error) {
+  console.log("With binding — error.name:", error.name); // "ReferenceError"
+}
+
+// ============================================
 // Common Pitfalls & Best Practices
 // ============================================
 
@@ -749,163 +906,6 @@ switch (status) {
     message = "Unknown status";
 }
 console.log("With default:", message); // "Unknown status"
-
-// ============================================
-// Try-Catch-Finally (Error Handling)
-// ============================================
-
-// try-catch - Handle runtime errors (ES3)
-// - try block contains code that might throw
-// - catch block handles the error
-// - finally block always executes (optional)
-// - Use case: API calls, file operations, parsing
-console.log("\n=== Try-Catch-Finally ===");
-
-try {
-  const data = JSON.parse('{"name": "Alice"}');
-  console.log("Parsed:", data);
-} catch (error) {
-  console.log("Parse error:", error.message);
-} finally {
-  console.log("Cleanup always runs");
-}
-
-// try-catch with invalid JSON
-console.log("\nTry-Catch with Error:");
-try {
-  const invalidData = JSON.parse('invalid json');
-  console.log("This won't execute");
-} catch (error) {
-  console.log("Caught error:", error.message); // e.g. "Unexpected token 'i', \"invalid json\" is not valid JSON"
-  console.log("Error type:", error.name); // "SyntaxError"
-}
-
-// finally block always executes
-console.log("\nFinally Block:");
-let resource = null;
-try {
-  resource = "Resource opened";
-  console.log(resource);
-  // throw new Error("Something went wrong");
-} catch (error) {
-  console.log("Error:", error.message);
-} finally {
-  console.log("Cleanup: Resource closed"); // Always runs
-  resource = null;
-}
-
-// throw statement - Create custom errors (ES3)
-// - Throws any value (usually Error object)
-// - Stops execution and jumps to catch block
-// - Use case: validation, custom error conditions
-console.log("\nThrow Statement:");
-
-function divide(a, b) {
-  if (b === 0) {
-    throw new Error("Division by zero");
-  }
-  return a / b;
-}
-
-try {
-  console.log("10 / 2 =", divide(10, 2)); // 5
-  console.log("10 / 0 =", divide(10, 0)); // Throws error
-  console.log("This won't execute");
-} catch (error) {
-  console.log("Error caught:", error.message); // "Division by zero"
-}
-
-// Custom error types
-console.log("\nCustom Error Types:");
-
-class ValidationError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ValidationError";
-  }
-}
-
-function validateAge(age) {
-  if (age < 0) {
-    throw new ValidationError("Age cannot be negative");
-  }
-  if (age > 150) {
-    throw new ValidationError("Age is unrealistic");
-  }
-  return age;
-}
-
-try {
-  console.log("Valid age:", validateAge(25)); // 25
-  console.log("Invalid age:", validateAge(-5)); // Throws ValidationError
-} catch (error) {
-  if (error instanceof ValidationError) {
-    console.log("Validation error:", error.message);
-  } else {
-    console.log("Unknown error:", error);
-  }
-}
-
-// Nested try-catch
-console.log("\nNested Try-Catch:");
-
-try {
-  console.log("Outer try");
-  try {
-    console.log("Inner try");
-    throw new Error("Inner error");
-  } catch (innerError) {
-    console.log("Inner catch:", innerError.message);
-    throw new Error("Outer error"); // Re-throw or throw new error
-  }
-} catch (outerError) {
-  console.log("Outer catch:", outerError.message);
-}
-
-// try-catch without finally
-console.log("\nTry-Catch Without Finally:");
-try {
-  const result = 10 / 2;
-  console.log("Result:", result);
-} catch (error) {
-  console.log("Error:", error.message);
-}
-// No finally block needed if no cleanup required
-
-// try-finally without catch
-console.log("\nTry-Finally Without Catch:");
-try {
-  console.log("Executing code");
-  // If error occurs here, it will propagate after finally
-} finally {
-  console.log("Cleanup code runs regardless");
-}
-
-// Optional catch binding (ES2019) - `catch {` without a binding variable
-// - When the caught error is not used, you can omit the `(error)` parameter
-// - Syntax: `try { ... } catch { ... }` (no parentheses, no binding)
-// - Use case: when you only care that an error happened, not its details
-// - Note: the binding is still allowed when you need error.message etc.
-console.log("\nOptional Catch Binding (ES2019):");
-
-function parseConfig(raw) {
-  try {
-    return JSON.parse(raw);
-  } catch { // No `(error)` binding — error value is unused
-    console.log("caught without binding — returning default config");
-    return { defaults: true };
-  }
-}
-
-console.log("parseConfig('{\"a\":1}'):", parseConfig('{"a":1}')); // { a: 1 }
-console.log("parseConfig('bad'):", parseConfig('bad')); // logs message, returns { defaults: true }
-
-// When you DO need the error, keep the binding (both styles valid)
-try {
-  undefinedVariable; // ReferenceError
-} catch (error) {
-  console.log("With binding — error.name:", error.name); // "ReferenceError"
-}
 
 // ============================================
 // Best Practices Summary

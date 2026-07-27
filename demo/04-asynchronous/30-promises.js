@@ -358,7 +358,7 @@ Promise.any([
   });
 
 // ============================================
-// 7.5. PROMISE.WITHRESOLVERS() - EXTERNAL RESOLVE/REJECT
+// 8. PROMISE.WITHRESOLVERS() - EXTERNAL RESOLVE/REJECT
 // ============================================
 
 /**
@@ -652,96 +652,6 @@ console.log(`
 `);
 
 // ============================================
-// TypeScript Comparison Notes
-// ============================================
-/*
-🔍 Key Differences in TypeScript:
-
-1. PROMISE TYPE ANNOTATIONS
-   JS:  const promise = new Promise((resolve) => resolve(42));
-   TS:  const promise: Promise<number> = new Promise((resolve) => resolve(42));
-   
-   Benefits:
-   - Type-safe promise values
-   - Better IDE autocomplete
-   - Compile-time error checking
-
-2. GENERIC PROMISE TYPES
-   JS:  function fetchData() { return Promise.resolve({ data: "value" }); }
-   TS:  function fetchData(): Promise<{ data: string }> {
-          return Promise.resolve({ data: "value" });
-        }
-   
-   Benefits:
-   - Explicit return types
-   - Type inference in .then()
-   - Better error messages
-
-3. PROMISE.ALL TYPE INFERENCE
-   JS:  Promise.all([promise1, promise2, promise3])
-   TS:  Promise.all([promise1, promise2, promise3])
-        // Returns Promise<[Type1, Type2, Type3]> - tuple type!
-   
-   Benefits:
-   - Preserves individual types
-   - Type-safe array destructuring
-   - Better type checking
-
-4. ERROR TYPES
-   JS:  promise.catch(error => console.log(error));
-   TS:  promise.catch((error: unknown) => {
-          if (error instanceof Error) {
-            console.log(error.message);
-          }
-        });
-   
-   Benefits:
-   - Type-safe error handling
-   - Forces error type checking
-   - Prevents runtime errors
-
-5. PROMISE UTILITY TYPES
-   TS-Only:
-   - Awaited<T>: Unwraps Promise type
-   - Promise<T>: Promise that resolves to T
-   
-   type Data = Awaited<Promise<string>>; // string
-   type PromiseData = Promise<string>; // Promise<string>
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. PROMISE<void> vs PROMISE<undefined>
-   - Promise<void>: Promise that doesn't return meaningful value
-   - Promise<undefined>: Promise that explicitly returns undefined
-   
-   async function voidFn(): Promise<void> { console.log("hi"); }
-   async function undefinedFn(): Promise<undefined> { return undefined; }
-
-2. ERROR TYPE IN CATCH
-   - Catch parameter is 'unknown' in TypeScript (not 'any')
-   - Must use type guards to access error properties
-   
-   promise.catch((error: unknown) => {
-     if (error instanceof Error) {
-       console.log(error.message); // ✅ Type-safe
-     }
-   });
-
-3. PROMISE.ALL TUPLE TYPES
-   - TypeScript preserves individual types in tuple
-   - Array destructuring is type-safe
-   
-   const [user, posts, comments] = await Promise.all([
-     fetchUser(1),    // Promise<User>
-     fetchPosts(1),   // Promise<Post[]>
-     fetchComments(1) // Promise<Comment[]>
-   ]);
-   // user: User, posts: Post[], comments: Comment[]
-
-📘 See 30-promises-ts-comparison.ts for detailed examples!
-*/
-
-// ============================================
 // 11. PROMISE COMBINATORS COMPARISON
 // ============================================
 
@@ -852,3 +762,93 @@ if (typeof Promise.try === "function") {
 } else {
   console.log("Promise.try not supported in this Node version");
 }
+
+// ============================================
+// TypeScript Comparison Notes
+// ============================================
+/*
+🔍 Key Differences in TypeScript:
+
+1. PROMISE TYPE ANNOTATIONS
+   JS:  const promise = new Promise((resolve) => resolve(42));
+   TS:  const promise: Promise<number> = new Promise((resolve) => resolve(42));
+
+   Benefits:
+   - Type-safe promise values
+   - Better IDE autocomplete
+   - Compile-time error checking
+
+2. GENERIC PROMISE TYPES
+   JS:  function fetchData() { return Promise.resolve({ data: "value" }); }
+   TS:  function fetchData(): Promise<{ data: string }> {
+          return Promise.resolve({ data: "value" });
+        }
+
+   Benefits:
+   - Explicit return types
+   - Type inference in .then()
+   - Better error messages
+
+3. PROMISE.ALL TYPE INFERENCE
+   JS:  Promise.all([promise1, promise2, promise3])
+   TS:  Promise.all([promise1, promise2, promise3])
+        // Returns Promise<[Type1, Type2, Type3]> - tuple type!
+
+   Benefits:
+   - Preserves individual types
+   - Type-safe array destructuring
+   - Better type checking
+
+4. ERROR TYPES
+   JS:  promise.catch(error => console.log(error));
+   TS:  promise.catch((error: unknown) => {
+          if (error instanceof Error) {
+            console.log(error.message);
+          }
+        });
+
+   Benefits:
+   - Type-safe error handling
+   - Forces error type checking
+   - Prevents runtime errors
+
+5. PROMISE UTILITY TYPES
+   TS-Only:
+   - Awaited<T>: Unwraps Promise type
+   - Promise<T>: Promise that resolves to T
+
+   type Data = Awaited<Promise<string>>; // string
+   type PromiseData = Promise<string>; // Promise<string>
+
+⚠️ COMMON CONFUSION POINTS:
+
+1. PROMISE<void> vs PROMISE<undefined>
+   - Promise<void>: Promise that doesn't return meaningful value
+   - Promise<undefined>: Promise that explicitly returns undefined
+
+   async function voidFn(): Promise<void> { console.log("hi"); }
+   async function undefinedFn(): Promise<undefined> { return undefined; }
+
+2. ERROR TYPE IN CATCH
+   - Catch parameter is 'unknown' in TypeScript (not 'any')
+   - Must use type guards to access error properties
+
+   promise.catch((error: unknown) => {
+     if (error instanceof Error) {
+       console.log(error.message); // ✅ Type-safe
+     }
+   });
+
+3. PROMISE.ALL TUPLE TYPES
+   - TypeScript preserves individual types in tuple
+   - Array destructuring is type-safe
+
+   const [user, posts, comments] = await Promise.all([
+     fetchUser(1),    // Promise<User>
+     fetchPosts(1),   // Promise<Post[]>
+     fetchComments(1) // Promise<Comment[]>
+   ]);
+   // user: User, posts: Post[], comments: Comment[]
+
+📘 See 30-promises-ts-comparison.ts for detailed examples!
+*/

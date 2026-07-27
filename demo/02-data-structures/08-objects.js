@@ -497,6 +497,46 @@ thisObj.greet.call(otherObj); // "Hello, I'm Bob"
 thisObj.greet.apply(otherObj); // Same as call
 
 // ============================================
+// Object Methods - Grouping (ES2024)
+// ============================================
+
+// Object.groupBy() - Group array elements into object (ES2024)
+// - Groups array items by key returned from callback
+// - Returns object with grouped arrays
+// - Similar to SQL GROUP BY or Map.groupBy()
+/*
+ * verification:
+ *   feature: Object.groupBy
+ *   status: ES2024
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-07-15
+ *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+ */
+console.log("\nObject.groupBy() - Array grouping:");
+
+// Group numbers by parity
+const numbersToGroup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const groupedByParity = Object.groupBy(numbersToGroup, num => num % 2 === 0 ? 'even' : 'odd');
+console.log("Grouped by parity:", groupedByParity);
+
+// Group people by age category
+const peopleToGroup = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 35 },
+  { name: "Charlie", age: 28 },
+  { name: "Diana", age: 42 }
+];
+const groupedByAge = Object.groupBy(peopleToGroup, person =>
+  person.age < 30 ? 'young' : person.age < 40 ? 'middle' : 'senior'
+);
+console.log("Grouped by age category:", groupedByAge);
+
+// Group strings by length
+const words = ["hello", "world", "hi", "there", "a", "an"];
+const groupedByLength = Object.groupBy(words, word => `length-${word.length}`);
+console.log("Grouped by length:", groupedByLength);
+
+// ============================================
 // Common Pitfalls & Best Practices
 // ============================================
 
@@ -573,46 +613,6 @@ const CONFIG = Object.freeze({
 // Best Practice 6: Avoid modifying prototypes
 // - Use composition over inheritance
 // - Use classes or factory functions
-
-// ============================================
-// Object Methods - Grouping (ES2024)
-// ============================================
-
-// Object.groupBy() - Group array elements into object (ES2024)
-// - Groups array items by key returned from callback
-// - Returns object with grouped arrays
-// - Similar to SQL GROUP BY or Map.groupBy()
-/*
- * verification:
- *   feature: Object.groupBy
- *   status: ES2024
- *   stage4Date: 2023-11
- *   lastVerified: 2026-07-15
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
- */
-console.log("\nObject.groupBy() - Array grouping:");
-
-// Group numbers by parity
-const numbersToGroup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const groupedByParity = Object.groupBy(numbersToGroup, num => num % 2 === 0 ? 'even' : 'odd');
-console.log("Grouped by parity:", groupedByParity);
-
-// Group people by age category
-const peopleToGroup = [
-  { name: "Alice", age: 25 },
-  { name: "Bob", age: 35 },
-  { name: "Charlie", age: 28 },
-  { name: "Diana", age: 42 }
-];
-const groupedByAge = Object.groupBy(peopleToGroup, person =>
-  person.age < 30 ? 'young' : person.age < 40 ? 'middle' : 'senior'
-);
-console.log("Grouped by age category:", groupedByAge);
-
-// Group strings by length
-const words = ["hello", "world", "hi", "there", "a", "an"];
-const groupedByLength = Object.groupBy(words, word => `length-${word.length}`);
-console.log("Grouped by length:", groupedByLength);
 
 // ============================================
 // TypeScript Comparison Notes

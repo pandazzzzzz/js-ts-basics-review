@@ -1343,52 +1343,7 @@ async function pitfall_memoryLeak() {
 pitfall_memoryLeak();
 
 // ============================================
-// 9. BEST PRACTICES SUMMARY
-// ============================================
-
-/**
- * Fetch API Best Practices
- *
- * 1. Always check response.ok or response.status
- * 2. Use async/await for cleaner code
- * 3. Handle errors with try/catch
- * 4. Use AbortController for cancellable requests
- * 5. Set Content-Type header for JSON POST/PUT/PATCH
- * 6. Use credentials: 'include' for cross-origin with auth
- * 7. Always consume response body (prevent memory leaks)
- * 8. Use Promise.all for parallel requests
- * 9. Implement retry logic for flaky networks
- * 10. Create API wrapper for consistent error handling
- *
- * Related Files:
- * - 30-promises.js: Promise fundamentals
- * - 31-async-await.js: Async/await patterns
- * - 32-modules.js: Module organization for API clients
- */
-
-console.log("\n=== Best Practices Summary ===");
-console.log(`
-Fetch API Best Practices:
--------------------------
-1. Always check response.ok - fetch doesn't reject on HTTP errors
-2. Use async/await for cleaner, more readable code
-3. Wrap fetch calls in try/catch for error handling
-4. Use AbortController for cancellable requests (e.g., on unmount)
-5. Set 'Content-Type: application/json' for JSON bodies
-6. Use credentials: 'include' for cross-origin requests with cookies
-7. Always consume response body (json(), text()) to prevent memory leaks
-8. Use Promise.all for parallel requests, not sequential awaits
-9. Implement retry logic with exponential backoff for resilience
-10. Create API wrapper classes for consistent error handling
-
-See also:
-- 30-promises.js: Promise fundamentals and Promise.all/race/allSettled
-- 31-async-await.js: Async/await syntax and error handling
-- 32-modules.js: Organizing API clients as modules
-`);
-
-// ============================================
-// 10. CACHE API INTEGRATION
+// 9. CACHE API INTEGRATION
 // ============================================
 /**
  * Cache API — Store Request/Response pairs for offline and performance
@@ -1479,6 +1434,50 @@ console.log('Cached entries:', keys.length);
 
 
 // ============================================
+// 10. BEST PRACTICES SUMMARY
+// ============================================
+
+/**
+ * Fetch API Best Practices
+ *
+ * 1. Always check response.ok or response.status
+ * 2. Use async/await for cleaner code
+ * 3. Handle errors with try/catch
+ * 4. Use AbortController for cancellable requests
+ * 5. Set Content-Type header for JSON POST/PUT/PATCH
+ * 6. Use credentials: 'include' for cross-origin with auth
+ * 7. Always consume response body (prevent memory leaks)
+ * 8. Use Promise.all for parallel requests
+ * 9. Implement retry logic for flaky networks
+ * 10. Create API wrapper for consistent error handling
+ *
+ * Related Files:
+ * - 30-promises.js: Promise fundamentals
+ * - 31-async-await.js: Async/await patterns
+ * - 32-modules.js: Module organization for API clients
+ */
+
+console.log("\n=== Best Practices Summary ===");
+console.log(`
+Fetch API Best Practices:
+-------------------------
+1. Always check response.ok - fetch doesn't reject on HTTP errors
+2. Use async/await for cleaner, more readable code
+3. Wrap fetch calls in try/catch for error handling
+4. Use AbortController for cancellable requests (e.g., on unmount)
+5. Set 'Content-Type: application/json' for JSON bodies
+6. Use credentials: 'include' for cross-origin requests with cookies
+7. Always consume response body (json(), text()) to prevent memory leaks
+8. Use Promise.all for parallel requests, not sequential awaits
+9. Implement retry logic with exponential backoff for resilience
+10. Create API wrapper classes for consistent error handling
+
+See also:
+- 30-promises.js: Promise fundamentals and Promise.all/race/allSettled
+- 31-async-await.js: Async/await syntax and error handling
+- 32-modules.js: Organizing API clients as modules
+`);
+
 // ============================================
 // TypeScript Comparison Notes
 // ============================================

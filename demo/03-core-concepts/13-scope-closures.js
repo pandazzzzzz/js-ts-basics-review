@@ -547,7 +547,7 @@ console.log("\n=== Function Factories Demo ===");
 // Function factories create customized functions via closure
 // Each factory demonstrates a different use case
 
-// 1. Math operations
+// 9.1 Math operations
 function createMultiplier(multiplier) {
   return function(number) {
     return number * multiplier;
@@ -559,7 +559,7 @@ const triple = createMultiplier(3);
 console.log("double(5):", double(5)); // 10
 console.log("triple(5):", triple(5)); // 15
 
-// 2. String formatting
+// 9.2 String formatting
 function createGreeter(greeting) {
   return function(name) {
     return `${greeting}, ${name}!`;
@@ -569,7 +569,7 @@ function createGreeter(greeting) {
 const sayHello = createGreeter("Hello");
 console.log(sayHello("Alice")); // Hello, Alice!
 
-// 3. Validation
+// 9.3 Validation
 function createValidator(min, max) {
   return function(value) {
     return value >= min && value <= max;
@@ -791,7 +791,7 @@ console.log("Counter:", Counter.getCount()); // 2
 
 
 // ============================================
-// 12. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
+// 13. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
 // ============================================
 /**
  * IIFE - Functions that run immediately after definition (ES5)
@@ -814,22 +814,22 @@ console.log("Counter:", Counter.getCount()); // 2
  * - Confusing to beginners
  */
 
-console.log("\n=== 12. IIFE Demo ===");
+console.log("\n=== 13. IIFE Demo ===");
 
-// 12.1 Basic IIFE syntax
+// 13.1 Basic IIFE syntax
 (function() {
   var privateVar = "I'm private to this IIFE";
   console.log("IIFE executed immediately");
   console.log("privateVar inside IIFE:", privateVar);
 })();
 
-// 12.2 IIFE with arrow function (ES6+)
+// 13.2 IIFE with arrow function (ES6+)
 (() => {
   const message = "Arrow function IIFE";
   console.log(message);
 })();
 
-// 12.3 IIFE returning value
+// 13.3 IIFE returning value
 const result = (function() {
   var privateData = "computed value";
   return privateData.toUpperCase();
@@ -837,12 +837,12 @@ const result = (function() {
 
 console.log("IIFE returned value:", result);
 
-// 12.4 IIFE with parameters
+// 13.4 IIFE with parameters
 (function(a, b) {
   console.log("IIFE with parameters:", a + b);
 })(10, 20);
 
-// 12.5 IIFE for initialization
+// 13.5 IIFE for initialization
 const APP_CONFIG = (function() {
   // Private initialization logic
   var defaultTimeout = 5000;
@@ -858,7 +858,7 @@ const APP_CONFIG = (function() {
 console.log("\nIIFE module pattern:");
 console.log("APP_CONFIG:", APP_CONFIG);
 
-// 12.6 IIFE revealing module pattern
+// 13.6 IIFE revealing module pattern
 const UserModule = (function() {
   var users = [];
 
@@ -888,7 +888,7 @@ UserModule.addUser({ name: "Alice", id: 1 });
 UserModule.addUser({ name: "Bob", id: 2 });
 console.log("Total users:", UserModule.userCount());
 
-// 12.7 IIFE in loops (solving var closure problem)
+// 13.7 IIFE in loops (solving var closure problem)
 console.log("\nIIFE solving closure in loop:");
 for (var i = 0; i < 3; i++) {
   (function(index) {
@@ -907,7 +907,7 @@ for (let j = 0; j < 3; j++) {
 
 
 // ============================================
-// 13. eval() AND with - DYNAMIC SCOPE (AVOID!)
+// 14. eval() AND with - DYNAMIC SCOPE (AVOID!)
 // ============================================
 /**
  * eval() and with Statement - Dynamic scope features (AVOID IN PRODUCTION!)
@@ -928,17 +928,17 @@ for (let j = 0; j < 3; j++) {
  * - Destructuring instead of with
  */
 
-console.log("\n=== 13. eval() and with (Avoid in Production!) ===");
+console.log("\n=== 14. eval() and with (Avoid in Production!) ===");
 
-// 13.1 eval() basics (AVOID!)
+// 14.1 eval() basics (AVOID!)
 var evalX = 10;
 console.log("eval('evalX + 5'):", eval("evalX + 5")); // 15
 
-// 13.2 Security risk demonstration
+// 14.2 Security risk demonstration
 console.log("Security: Never eval user input!");
 // Malicious: eval("alert('XSS')")
 
-// 13.3 Safer alternatives
+// 14.3 Safer alternatives
 var add = new Function('a', 'b', 'return a + b');
 console.log("Function constructor:", add(2, 3)); // 5
 
@@ -948,7 +948,7 @@ console.log("JSON.parse:", JSON.parse(jsonString));
 var obj = { foo: 1 };
 console.log("Computed property:", obj["foo"]); // 1
 
-// 13.4 with statement (DEPRECATED, prohibited in strict mode)
+// 14.4 with statement (DEPRECATED, prohibited in strict mode)
 console.log("\nwith statement (deprecated):");
 var withUser = { name: "Alice", age: 30 };
 
@@ -967,7 +967,7 @@ console.log("with is deprecated: use destructuring instead");
 
 
 // ============================================
-// 14. MODULE PATTERNS AND IIFE
+// 15. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");

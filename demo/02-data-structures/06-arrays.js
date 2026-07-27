@@ -602,7 +602,7 @@ console.log("Immutable approach:", { immutableExample, sorted });
 // - Use some/every for validation
 
 // ============================================
-// TypeScript Comparison & Common Pitfalls
+// TypeScript Comparison
 // ============================================
 /*
 🔍 TYPESCRIPT VS JAVASCRIPT - KEY DIFFERENCES

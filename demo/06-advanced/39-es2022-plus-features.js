@@ -1020,94 +1020,6 @@ console.log("- Network sockets");
 console.log("- Temporary resources");
 
 // ============================================
-// Common Pitfalls
-// ============================================
-
-console.log("\n=== Common Pitfalls ===");
-
-// Pitfall 1: Using features without checking browser support
-console.log("\nPitfall 1: Browser/runtime compatibility");
-console.log("  ES2024-ES2027 + Stage 2.7/3 proposals may not be available");
-console.log("  Check: https://caniuse.com or Node.js version");
-console.log("  Fix: Use transpilation (Babel, TypeScript) or polyfills");
-
-// Pitfall 2: Set methods modify original (no, they don't - but confusion)
-console.log("\nPitfall 2: Set method confusion");
-console.log("  setA.union(setB) returns NEW Set");
-console.log("  setA is NOT modified");
-console.log("  Similar to toSorted(), toReversed()");
-
-// Pitfall 3: Iterator helpers are lazy
-console.log("\nPitfall 3: Iterator helpers are lazy");
-console.log("  Operations only execute when consumed");
-console.log("  .map().filter() without .toArray() does nothing");
-console.log("  Fix: Always consume with .toArray() or .forEach()");
-
-// Pitfall 4: Object.groupBy key types
-console.log("\nPitfall 4: Object.groupBy keys are strings");
-console.log("  Object.groupBy returns a null-prototype object (no .toString/.constructor)");
-console.log("  Number keys become string keys");
-console.log("  Use Map.groupBy for non-string keys");
-
-// Pitfall 5: Promise.withResolvers timing
-console.log("\nPitfall 5: Promise.withResolvers timing");
-console.log("  resolve/reject work immediately");
-console.log("  Promise may be resolved before you expect");
-console.log("  Fix: Control timing with careful placement");
-
-// Pitfall 6: using declaration scope
-console.log("\nPitfall 6: using declaration scope");
-console.log("  Disposed at end of block scope");
-console.log("  Not at end of function if nested in block");
-console.log("  Fix: Be aware of block boundaries");
-
-// Pitfall 7: RegExp /v flag complexity
-console.log("\nPitfall 7: RegExp /v flag syntax");
-console.log("  [A&&B] is intersection, not 'and'");
-console.log("  [A--B] is subtraction, not 'minus'");
-console.log("  Fix: Read spec carefully, test patterns");
-
-// ============================================
-// Best Practices
-// ============================================
-
-console.log("\n=== Best Practices ===");
-
-console.log("✅ DO:");
-console.log("1. Check browser/runtime support before using new features");
-console.log("2. Use transpilation for production code");
-console.log("3. Prefer Set methods over manual implementations");
-console.log("4. Use Object.groupBy for string keys, Map.groupBy for other keys");
-console.log("5. Use Iterator helpers for memory-efficient processing");
-console.log("6. Use using/await using for resource cleanup");
-console.log("7. Add polyfills for critical missing features");
-console.log("8. Use Promise.withResolvers for external control");
-console.log("9. Test RegExp /v patterns thoroughly");
-console.log("10. Keep tsconfig.json lib updated for TypeScript");
-
-console.log("\n❌ DON'T:");
-console.log("1. Don't assume new features are available everywhere");
-console.log("2. Don't use features without fallbacks in production");
-console.log("3. Don't forget to consume iterator chains (toArray/forEach)");
-console.log("4. Don't mix Object.groupBy with number keys expecting numbers");
-console.log("5. Don't forget to implement Symbol.dispose for using");
-console.log("6. Don't use complex RegExp /v patterns without testing");
-console.log("7. Don't rely on lazy iterators without consuming them");
-console.log("8. Don't skip version checks in package.json");
-console.log("9. Don't use experimental features without transpilation");
-console.log("10. Don't forget to update TypeScript for new features");
-
-console.log("\n⚠️ WATCH OUT FOR:");
-console.log("1. Browser compatibility tables (caniuse.com)");
-console.log("2. Node.js version requirements");
-console.log("3. TypeScript lib settings in tsconfig.json");
-console.log("4. Polyfill availability and quality");
-console.log("5. Transpilation output size");
-console.log("6. Iterator helper memory efficiency vs array methods");
-console.log("7. Set method return types (new Set, not original)");
-console.log("8. using declaration disposal timing");
-
-// ============================================
 // ES2025 Features (continued) & ES2027
 // ============================================
 
@@ -1680,6 +1592,94 @@ console.log("\nWhy Promise.try?");
 console.log("- Catches both sync and async exceptions");
 console.log("- No need for separate try/catch and .catch()");
 console.log("- Better error handling in promise chains");
+
+// ============================================
+// Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Using features without checking browser support
+console.log("\nPitfall 1: Browser/runtime compatibility");
+console.log("  ES2024-ES2027 + Stage 2.7/3 proposals may not be available");
+console.log("  Check: https://caniuse.com or Node.js version");
+console.log("  Fix: Use transpilation (Babel, TypeScript) or polyfills");
+
+// Pitfall 2: Set methods modify original (no, they don't - but confusion)
+console.log("\nPitfall 2: Set method confusion");
+console.log("  setA.union(setB) returns NEW Set");
+console.log("  setA is NOT modified");
+console.log("  Similar to toSorted(), toReversed()");
+
+// Pitfall 3: Iterator helpers are lazy
+console.log("\nPitfall 3: Iterator helpers are lazy");
+console.log("  Operations only execute when consumed");
+console.log("  .map().filter() without .toArray() does nothing");
+console.log("  Fix: Always consume with .toArray() or .forEach()");
+
+// Pitfall 4: Object.groupBy key types
+console.log("\nPitfall 4: Object.groupBy keys are strings");
+console.log("  Object.groupBy returns a null-prototype object (no .toString/.constructor)");
+console.log("  Number keys become string keys");
+console.log("  Use Map.groupBy for non-string keys");
+
+// Pitfall 5: Promise.withResolvers timing
+console.log("\nPitfall 5: Promise.withResolvers timing");
+console.log("  resolve/reject work immediately");
+console.log("  Promise may be resolved before you expect");
+console.log("  Fix: Control timing with careful placement");
+
+// Pitfall 6: using declaration scope
+console.log("\nPitfall 6: using declaration scope");
+console.log("  Disposed at end of block scope");
+console.log("  Not at end of function if nested in block");
+console.log("  Fix: Be aware of block boundaries");
+
+// Pitfall 7: RegExp /v flag complexity
+console.log("\nPitfall 7: RegExp /v flag syntax");
+console.log("  [A&&B] is intersection, not 'and'");
+console.log("  [A--B] is subtraction, not 'minus'");
+console.log("  Fix: Read spec carefully, test patterns");
+
+// ============================================
+// Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Check browser/runtime support before using new features");
+console.log("2. Use transpilation for production code");
+console.log("3. Prefer Set methods over manual implementations");
+console.log("4. Use Object.groupBy for string keys, Map.groupBy for other keys");
+console.log("5. Use Iterator helpers for memory-efficient processing");
+console.log("6. Use using/await using for resource cleanup");
+console.log("7. Add polyfills for critical missing features");
+console.log("8. Use Promise.withResolvers for external control");
+console.log("9. Test RegExp /v patterns thoroughly");
+console.log("10. Keep tsconfig.json lib updated for TypeScript");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't assume new features are available everywhere");
+console.log("2. Don't use features without fallbacks in production");
+console.log("3. Don't forget to consume iterator chains (toArray/forEach)");
+console.log("4. Don't mix Object.groupBy with number keys expecting numbers");
+console.log("5. Don't forget to implement Symbol.dispose for using");
+console.log("6. Don't use complex RegExp /v patterns without testing");
+console.log("7. Don't rely on lazy iterators without consuming them");
+console.log("8. Don't skip version checks in package.json");
+console.log("9. Don't use experimental features without transpilation");
+console.log("10. Don't forget to update TypeScript for new features");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Browser compatibility tables (caniuse.com)");
+console.log("2. Node.js version requirements");
+console.log("3. TypeScript lib settings in tsconfig.json");
+console.log("4. Polyfill availability and quality");
+console.log("5. Transpilation output size");
+console.log("6. Iterator helper memory efficiency vs array methods");
+console.log("7. Set method return types (new Set, not original)");
+console.log("8. using declaration disposal timing");
 
 // ============================================
 // TypeScript Comparison Notes

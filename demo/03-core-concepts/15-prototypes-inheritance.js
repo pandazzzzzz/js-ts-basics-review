@@ -588,109 +588,7 @@ console.log(`
 `);
 
 // ============================================
-// 11. COMMON PITFALLS
-// ============================================
-
-console.log("\n=== Common Pitfalls ===\n");
-
-// Pitfall 1: Modifying built-in prototypes
-console.log("Pitfall 1: Modifying built-in prototypes");
-console.log("  ❌ NEVER DO THIS:");
-console.log("  Array.prototype.myMethod = function() { ... }");
-console.log("  Reason: Affects all arrays globally, breaks code");
-
-// Pitfall 2: Forgetting 'new' keyword
-console.log("\nPitfall 2: Forgetting 'new' keyword");
-function BadConstructor(name) {
-  this.name = name; // 'this' is global without 'new'!
-}
-
-// ❌ Without 'new'
-// const bad = BadConstructor("Test"); // 'this' is global!
-
-// ✅ With 'new'
-const good = new BadConstructor("Test");
-console.log("  ✅ With 'new':", good.name);
-
-// Pitfall 3: Prototype pollution
-console.log("\nPitfall 3: Prototype pollution");
-console.log("  Security vulnerability:");
-console.log("  const obj = JSON.parse('{\"__proto__\": {\"isAdmin\": true}}');");
-console.log("  Can pollute Object.prototype!");
-console.log("  ✅ Use Object.create(null) for user data");
-
-// Pitfall 4: Performance - long prototype chains
-console.log("\nPitfall 4: Long prototype chains");
-console.log("  ❌ Deep inheritance hierarchies are slow");
-console.log("  ✅ Prefer composition over deep inheritance");
-
-// Pitfall 5: Confusing __proto__ and prototype
-console.log("\nPitfall 5: Confusing __proto__ and prototype");
-function Example() {}
-const instance = new Example();
-console.log("  instance.__proto__ === Example.prototype:", instance.__proto__ === Example.prototype);
-console.log("  instance.prototype:", instance.prototype); // undefined!
-console.log("  Example.__proto__:", typeof Example.__proto__); // function
-
-// ============================================
-// 12. BEST PRACTICES
-// ============================================
-
-console.log("\n=== Best Practices ===\n");
-console.log(`
-1. USE ES6 CLASSES
-   ✅ class Person { constructor(name) { this.name = name; } }
-   - Cleaner syntax
-   - Better tooling support
-   - Easier to understand
-
-2. AVOID MODIFYING BUILT-IN PROTOTYPES
-   ❌ Array.prototype.myMethod = ...
-   ✅ Create utility functions instead
-
-3. USE Object.getPrototypeOf() INSTEAD OF __proto__
-   ❌ obj.__proto__
-   ✅ Object.getPrototypeOf(obj)
-
-4. PREFER COMPOSITION OVER INHERITANCE
-   ✅ Shallow hierarchies
-   ✅ Mixins and composition
-   ❌ Deep inheritance chains
-
-5. USE Object.create(null) FOR DICTIONARIES
-   ✅ const dict = Object.create(null);
-   - No prototype pollution
-   - No inherited properties
-
-6. ALWAYS USE 'new' WITH CONSTRUCTORS
-   ✅ const obj = new Constructor();
-   - Or use ES6 classes (enforces 'new')
-
-7. PUT METHODS ON PROTOTYPE, NOT INSTANCE
-   ❌ this.method = function() { ... }
-   ✅ Constructor.prototype.method = function() { ... }
-   - Memory efficient
-   - Shared across instances
-
-8. UNDERSTAND PROTOTYPES FOR DEBUGGING
-   - Know how to inspect prototype chain
-   - Understand property lookup
-   - Use console.dir() to see prototypes
-
-9. AVOID Object.setPrototypeOf()
-   ❌ Object.setPrototypeOf(obj, proto)
-   ✅ Object.create(proto)
-   - setPrototypeOf is very slow
-   - Set prototype at creation time
-
-10. USE instanceof CAREFULLY
-    - Only works with constructor functions
-    - Can be fooled by prototype manipulation
-    - Consider duck typing for flexibility
-`);
-
-// ============================================
-// 13. PRACTICAL EXAMPLE - SHAPE HIERARCHY
+// 11. PRACTICAL EXAMPLE - SHAPE HIERARCHY
 // ============================================
 
 console.log("\n=== Practical Example - Shape Hierarchy ===\n");
@@ -755,6 +653,108 @@ console.log("\nPrototype chain:");
 console.log("  rect instanceof Rectangle:", rect instanceof Rectangle);
 console.log("  rect instanceof Shape:", rect instanceof Shape);
 console.log("  rect instanceof Object:", rect instanceof Object);
+
+// ============================================
+// 12. COMMON PITFALLS
+// ============================================
+
+console.log("\n=== Common Pitfalls ===\n");
+
+// Pitfall 1: Modifying built-in prototypes
+console.log("Pitfall 1: Modifying built-in prototypes");
+console.log("  ❌ NEVER DO THIS:");
+console.log("  Array.prototype.myMethod = function() { ... }");
+console.log("  Reason: Affects all arrays globally, breaks code");
+
+// Pitfall 2: Forgetting 'new' keyword
+console.log("\nPitfall 2: Forgetting 'new' keyword");
+function BadConstructor(name) {
+  this.name = name; // 'this' is global without 'new'!
+}
+
+// ❌ Without 'new'
+// const bad = BadConstructor("Test"); // 'this' is global!
+
+// ✅ With 'new'
+const good = new BadConstructor("Test");
+console.log("  ✅ With 'new':", good.name);
+
+// Pitfall 3: Prototype pollution
+console.log("\nPitfall 3: Prototype pollution");
+console.log("  Security vulnerability:");
+console.log("  const obj = JSON.parse('{\"__proto__\": {\"isAdmin\": true}}');");
+console.log("  Can pollute Object.prototype!");
+console.log("  ✅ Use Object.create(null) for user data");
+
+// Pitfall 4: Performance - long prototype chains
+console.log("\nPitfall 4: Long prototype chains");
+console.log("  ❌ Deep inheritance hierarchies are slow");
+console.log("  ✅ Prefer composition over deep inheritance");
+
+// Pitfall 5: Confusing __proto__ and prototype
+console.log("\nPitfall 5: Confusing __proto__ and prototype");
+function Example() {}
+const instance = new Example();
+console.log("  instance.__proto__ === Example.prototype:", instance.__proto__ === Example.prototype);
+console.log("  instance.prototype:", instance.prototype); // undefined!
+console.log("  Example.__proto__:", typeof Example.__proto__); // function
+
+// ============================================
+// 13. BEST PRACTICES
+// ============================================
+
+console.log("\n=== Best Practices ===\n");
+console.log(`
+1. USE ES6 CLASSES
+   ✅ class Person { constructor(name) { this.name = name; } }
+   - Cleaner syntax
+   - Better tooling support
+   - Easier to understand
+
+2. AVOID MODIFYING BUILT-IN PROTOTYPES
+   ❌ Array.prototype.myMethod = ...
+   ✅ Create utility functions instead
+
+3. USE Object.getPrototypeOf() INSTEAD OF __proto__
+   ❌ obj.__proto__
+   ✅ Object.getPrototypeOf(obj)
+
+4. PREFER COMPOSITION OVER INHERITANCE
+   ✅ Shallow hierarchies
+   ✅ Mixins and composition
+   ❌ Deep inheritance chains
+
+5. USE Object.create(null) FOR DICTIONARIES
+   ✅ const dict = Object.create(null);
+   - No prototype pollution
+   - No inherited properties
+
+6. ALWAYS USE 'new' WITH CONSTRUCTORS
+   ✅ const obj = new Constructor();
+   - Or use ES6 classes (enforces 'new')
+
+7. PUT METHODS ON PROTOTYPE, NOT INSTANCE
+   ❌ this.method = function() { ... }
+   ✅ Constructor.prototype.method = function() { ... }
+   - Memory efficient
+   - Shared across instances
+
+8. UNDERSTAND PROTOTYPES FOR DEBUGGING
+   - Know how to inspect prototype chain
+   - Understand property lookup
+   - Use console.dir() to see prototypes
+
+9. AVOID Object.setPrototypeOf()
+   ❌ Object.setPrototypeOf(obj, proto)
+   ✅ Object.create(proto)
+   - setPrototypeOf is very slow
+   - Set prototype at creation time
+
+10. USE instanceof CAREFULLY
+    - Only works with constructor functions
+    - Can be fooled by prototype manipulation
+    - Consider duck typing for flexibility
+`);
 
 // ============================================
 // TypeScript Comparison Notes

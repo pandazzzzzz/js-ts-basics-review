@@ -360,7 +360,7 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
 
 
 // ============================================
-// 4. PRIVATE AND PROTECTED PROPERTIES
+// 4. PRIVATE PROPERTIES AND ENCAPSULATION PATTERNS
 // ============================================
 /*
  * verification:

@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 20-error-handling-ts-comparison.ts
 
 // ============================================
-// Basic Error Handling - try/catch/finally
+// 1. Basic Error Handling - try/catch/finally
 // ============================================
 
 // try/catch - Basic error handling (ES3)
@@ -81,7 +81,7 @@ readFile("data.txt");
 readFile("missing.txt");
 
 // ============================================
-// Throwing Errors
+// 2. Throwing Errors
 // ============================================
 
 // throw statement - Throw custom errors (ES3)
@@ -214,7 +214,7 @@ console.log("Note: Error.isError() requires Node.js 24.3+ (partial in 24.0-24.3)
 
 
 // ============================================
-// Built-in Error Types
+// 3. Built-in Error Types
 // ============================================
 
 console.log("\n=== Built-in Error Types ===");
@@ -375,7 +375,7 @@ const evalError = new EvalError("Eval error example");
 console.log("   EvalError exists:", evalError.name);
 
 // ============================================
-// Custom Error Classes
+// 4. Custom Error Classes
 // ============================================
 
 console.log("\n=== Custom Error Classes ===");
@@ -525,7 +525,7 @@ try {
 }
 
 // ============================================
-// Error Propagation
+// 5. Error Propagation
 // ============================================
 
 console.log("\n=== Error Propagation ===");
@@ -628,7 +628,7 @@ setTimeout(() => {
 
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 6. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -831,7 +831,7 @@ function validateInput(input) {
 // But be aware of unreachable code
 
 // ============================================
-// Best Practices
+// 7. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -1017,7 +1017,7 @@ const result1 = errorBoundary(() => {
 console.log("   App continues:", result1);
 
 // ============================================
-// Real-World Examples
+// 8. Real-World Examples
 // ============================================
 
 console.log("\n=== Real-World Examples ===");
@@ -1173,7 +1173,7 @@ try {
 
 
 // ============================================
-// 13. ASYNC ERROR HANDLING (BASIC)
+// 9. ASYNC ERROR HANDLING (BASIC)
 // ============================================
 /**
  * Async Error Handling - Basic patterns (see 34-async-error-handling.js for details)
@@ -1189,12 +1189,12 @@ try {
 
 console.log("\n=== 13. Async Error Handling (Basic) ===");
 
-// 13.1 Basic Promise error handling
+// 9.1 Basic Promise error handling
 console.log("\nPromise error handling:");
 Promise.reject(new Error("Promise failed"))
   .catch(error => console.log("  Caught:", error.message));
 
-// 13.2 async/await with try/catch
+// 9.2 async/await with try/catch
 async function basicAsyncError() {
   try {
     await Promise.reject(new Error("Async failed"));
@@ -1204,7 +1204,7 @@ async function basicAsyncError() {
 }
 basicAsyncError();
 
-// 13.3 Promise.allSettled for safer handling
+// 9.3 Promise.allSettled for safer handling
 async function saferAsyncHandling() {
   const results = await Promise.allSettled([
     Promise.resolve("Success"),
@@ -1229,7 +1229,7 @@ saferAsyncHandling();
  */
 
 // ============================================
-// 14. ERROR CHAINING WITH ERROR.CAUSE
+// 10. ERROR CHAINING WITH ERROR.CAUSE
 // ============================================
 /**
  * Error Chaining - Preserving error context (ES2022)
@@ -1278,7 +1278,7 @@ try {
 
 
 // ============================================
-// 15. AGGREGATEERROR - MULTIPLE ERRORS
+// 11. AGGREGATEERROR - MULTIPLE ERRORS
 // ============================================
 /**
  * AggregateError - Representing multiple errors (ES2021)
@@ -1299,7 +1299,7 @@ try {
  */
 console.log("\n=== 15. AggregateError Demo ===");
 
-// 15.1 Creating AggregateError
+// 11.1 Creating AggregateError
 const multipleErrors = [
   new Error("First error"),
   new Error("Second error"),
@@ -1315,7 +1315,7 @@ aggregateErr.errors.forEach((err, i) => {
   console.log(`  Error ${i + 1}:`, err.message);
 });
 
-// 15.2 Promise.any() with AggregateError
+// 11.2 Promise.any() with AggregateError
 console.log("\nPromise.any() produces AggregateError:");
 
 const promises = [
@@ -1337,7 +1337,7 @@ Promise.any(promises)
 
 
 // ============================================
-// 16. RETRY WITH BACKOFF
+// 12. RETRY WITH BACKOFF
 // ============================================
 /**
  * Retry Pattern - Retrying failed operations (ES6+)
@@ -1388,7 +1388,7 @@ retry(flakyOperation, 5, 50)
 
 
 // ============================================
-// 17. GLOBAL ERROR HANDLING
+// 13. GLOBAL ERROR HANDLING
 // ============================================
 /**
  * Global Error Handling - Last resort error catching (ES6+)

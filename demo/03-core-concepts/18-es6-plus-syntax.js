@@ -497,7 +497,7 @@ console.log(circle.describe());
 // const shape = new Shape("generic"); // TypeError: Cannot instantiate abstract class Shape directly
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 14. Class Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -639,6 +639,81 @@ console.log("Private fields provide true encapsulation");
  */
 
 // ============================================
+// 15. Object Property Shorthand & Computed Property Names (ES6/ES2015)
+// ============================================
+/**
+ * Object Property Shorthand - Simplify object creation when variable name matches property name (ES6)
+ * Computed Property Names - Dynamically compute property keys at object creation (ES6)
+ *
+ * Use Cases:
+ * - Shorter, cleaner object initialization
+ * - Dynamic property keys from variables/expressions
+ * - Reduces duplication when creating objects from variables
+ */
+
+console.log("\n=== Object Property Shorthand ===");
+
+// Property shorthand and computed property names demo
+// Wrapped in a block to keep demo variables scoped locally
+{
+  // Without shorthand (pre-ES6)
+  const name = "Alice";
+  const age = 30;
+  const email = "alice@example.com";
+
+  const userOld = {
+    name: name,
+    age: age,
+    email: email
+  };
+  console.log("Pre-ES6 object:", userOld);
+
+  // With property shorthand (ES6+)
+  const userNew = {
+    name, // Same as name: name
+    age,  // Same as age: age
+    email // Same as email: email
+  };
+  console.log("ES6 shorthand object:", userNew); // Same as userOld
+}
+
+console.log("\n=== Computed Property Names ===");
+
+{
+  // Dynamic key from variable
+  const key = "user_id";
+  const user = {
+    name: "Bob",
+    [key]: 12345, // Computed property name
+    [`${key}_hash`]: "abc123" // Computed with template literal
+  };
+  console.log("User with computed keys:", user);
+  console.log("user[key]:", user[key]); // 12345
+
+  // Dynamic method names
+  const methodName = "greet";
+  const obj = {
+    [methodName]() {
+      return "Hello!";
+    }
+  };
+  console.log("Dynamic method call:", obj.greet()); // "Hello!"
+
+  // Common use case: mapping arrays to objects
+  const users = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" }
+  ];
+
+  // Create map by id
+  const userMap = Object.fromEntries(
+    users.map(u => [u.id, u])
+  );
+  console.log("User map by id:", userMap);
+  console.log("userMap[2]:", userMap[2]); // { id: 2, name: "Bob" }
+}
+
+// ============================================
 // 16. NEW ARRAY METHODS (ES2022/ES2023)
 // ============================================
 
@@ -722,7 +797,8 @@ console.log("trim:", '"' + padded.trim() + '"'); // "hello"
 
 
 // ============================================
-// 17b. NUMERIC SEPARATORS (ES2021) AND BIGINT (ES2020)
+// ============================================
+// 18. NUMERIC SEPARATORS (ES2021) AND BIGINT (ES2020)
 // ============================================
 
 // Numeric Separators (ES2021) - Improve readability of large numbers
@@ -785,7 +861,7 @@ console.log("Example: #!/usr/bin/env node at the top of a .js file");
 
 
 // ============================================
-// 18. LOGICAL ASSIGNMENT OPERATORS (ES2021)
+// 19. LOGICAL ASSIGNMENT OPERATORS (ES2021)
 // ============================================
 
 // &&= (and-assignment), ||= (or-assignment), ??= (nullish-assignment)
@@ -808,7 +884,7 @@ console.log("d ??= 'default':", d);
 
 
 // ============================================
-// 19. PROMISE METHODS
+// 20. PROMISE METHODS
 // ============================================
 
 // Promise.prototype.finally() - Clean up after promise (ES2018/ES9)
@@ -844,7 +920,7 @@ demoPromiseAny().catch(() => {});
 
 
 // ============================================
-// 20. MODERN FEATURES SUMMARY
+// 21. MODERN FEATURES SUMMARY
 // ============================================
 console.log("\n=== Modern JavaScript Features Summary ===");
 console.log(`
@@ -911,7 +987,7 @@ Key modern features (ES2020-ES2023):
 // ══════════════════════════════════════════
 
 // ============================================
-// 21. ADDITIONAL ES2020-ES2024 FEATURES
+// 22. ADDITIONAL ES2020-ES2024 FEATURES
 // ============================================
 
 // This section consolidates additional modern features not covered above.
@@ -920,7 +996,7 @@ Key modern features (ES2020-ES2023):
 
 console.log("\n=== Additional ES2020-ES2024 Features ===");
 
-// 21.1 Promise.allSettled (ES2020)
+// 22.1 Promise.allSettled (ES2020)
 // - Waits for all promises to settle (never rejects)
 // - Each result is { status, value/reason }
 console.log("\nPromise.allSettled (ES2020):");
@@ -928,7 +1004,7 @@ Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))])
   .then(results => console.log("  Settled results:", results.map(r => r.status)));
 // 📘 See demo/04-asynchronous/30-promises.js for full coverage of Promise combinators
 
-// 21.2 String.prototype.matchAll (ES2020)
+// 22.2 String.prototype.matchAll (ES2020)
 // - Returns an iterator of all matches (including capture groups)
 // - Requires the global (g) flag
 console.log("\nString.matchAll (ES2020):");
@@ -937,13 +1013,13 @@ const matchAllInput = "a1 b2 c3";
 const allMatches = [...matchAllInput.matchAll(matchAllRe)];
 console.log("  Matches:", allMatches.map(m => m[0])); // ['a1', 'b2', 'c3']
 
-// 21.3 globalThis (ES2020)
+// 22.3 globalThis (ES2020)
 // - Universal top-level this that works across browsers, Node.js, workers
 console.log("\nglobalThis (ES2020):");
 console.log("  globalThis === globalThis:", globalThis === globalThis); // true
 // Same object regardless of environment (window in browsers, global in Node)
 
-// 21.4 Error.cause (ES2022)
+// 22.4 Error.cause (ES2022)
 // - Pass an underlying cause when wrapping/throwing errors
 // - Useful for error chaining without losing the original stack
 /*
@@ -968,7 +1044,7 @@ try {
   console.log("  Top error:", e.message, "| cause:", e.cause.message);
 }
 
-// 21.5 Class static block (ES2022)
+// 22.5 Class static block (ES2022)
 // - static { ... } runs once during class evaluation
 // - Useful for complex static initialization that needs its own scope
 /*
@@ -991,7 +1067,7 @@ class ConfigLoader {
 console.log("  ConfigLoader.settings:", ConfigLoader.settings);
 // 📘 See demo/03-core-concepts/16-classes.js for in-depth class features
 
-// 21.6 Top-level await (ES2022)
+// 22.6 Top-level await (ES2022)
 // - Allows `await` at the top level of an ES Module
 // - This file is NOT an ESM (it uses CommonJS-style top-level code), so the
 //   syntax below is commented out. It works in .mjs files or with "type":"module".
@@ -1008,7 +1084,7 @@ console.log("  // In an ES Module (.mjs or type:module) you can write:");
 console.log("  // const data = await fetch('https://api.example.com').then(r => r.json());");
 console.log("  // No async IIFE wrapper needed at module top level");
 
-// 21.7 WeakRef / FinalizationRegistry (ES2021)
+// 22.7 WeakRef / FinalizationRegistry (ES2021)
 // - WeakRef: hold a weak reference to an object (doesn't prevent GC)
 // - FinalizationRegistry: callback when an object is garbage collected
 /*
@@ -1027,7 +1103,7 @@ weakTarget = null; // strong reference dropped; eligible for GC
 // FinalizationRegistry callbacks are non-deterministic — don't rely on timing.
 // 📘 See demo/03-core-concepts/27-memory-management.js for full coverage
 
-// 21.8 Object.groupBy / Map.groupBy (ES2024)
+// 22.8 Object.groupBy / Map.groupBy (ES2024)
 // - Group iterable elements by a key function
 // - Object.groupBy returns a plain object (null-prototype); Map.groupBy returns a Map
 /*
@@ -1049,7 +1125,7 @@ console.log("  Object.groupBy:", Object.keys(grouped)); // ['fruit', 'veg']
 const groupedMap = Map.groupBy(inventory, item => item.type);
 console.log("  Map.groupBy keys:", [...groupedMap.keys()]); // ['fruit', 'veg']
 
-// 21.9 Promise.withResolvers (ES2024)
+// 22.9 Promise.withResolvers (ES2024)
 // - Returns { promise, resolve, reject } without a manual constructor
 // - Cleaner than the `let resolve; new Promise(r => resolve = r)` pattern
 /*
@@ -1066,7 +1142,7 @@ p.then(v => console.log("  withResolvers resolved:", v));
 res("done");
 // 📘 See demo/04-asynchronous/30-promises.js for full coverage
 
-// 21.10 RegExp v flag (ES2024)
+// 22.10 RegExp v flag (ES2024)
 // - Unicode set operations in character classes (union, intersection, subtraction)
 // - Syntax: [\p{Letter}&&\p{ASCII}] (intersection), [\p{ASCII}--\p{Decimal_Number}] (subtraction)
 /*
@@ -1087,7 +1163,7 @@ try {
 }
 // 📘 See demo/03-core-concepts/21-regex.js for in-depth regex coverage
 
-// 21.11 Symbol as WeakMap keys (ES2023)
+// 22.11 Symbol as WeakMap keys (ES2023)
 // - Symbols (not just objects) may now be used as WeakMap/WeakSet/WeakRef keys
 // - Useful for keyed caches/metadata without an object identity
 /*

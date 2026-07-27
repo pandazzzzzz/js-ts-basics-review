@@ -640,65 +640,6 @@ console.log("  // Facade hides fetch, error handling, JSON parsing, base URL");
 
 
 // ============================================
-// Common Pitfalls
-// ============================================
-
-console.log("\n=== Common Pitfalls ===");
-
-// Pitfall 1: Overusing Singletons
-console.log("\nPitfall 1: Overusing Singletons");
-console.log("  Singletons create global state that is difficult to test and debug");
-console.log("  They hide dependencies and make unit testing nearly impossible");
-console.log("  Fix: Use dependency injection instead of relying on global singletons");
-
-// Pitfall 2: Abstract Factory Complexity
-console.log("\nPitfall 2: Abstract Factory Over-Engineering");
-console.log("  Creating factory families for simple object creation adds unnecessary complexity");
-console.log("  Abstract Factory should only be used when you need families of related objects");
-console.log("  Fix: Start with a simple factory; introduce abstract factory only when genuinely needed");
-
-// Pitfall 3: Observer Memory Leaks
-console.log("\nPitfall 3: Observer Memory Leaks");
-console.log("  Failing to unsubscribe from events causes memory leaks and stale callbacks");
-console.log("  Accumulated listeners can also cause the same handler to fire multiple times");
-console.log("  Fix: Always call .off() / .removeEventListener() when components unmount or are destroyed");
-
-// Pitfall 4: Too Many Strategies
-console.log("\nPitfall 4: Too Many Strategy Classes");
-console.log("  Creating a strategy for every minor variation leads to class explosion");
-console.log("  Each strategy class adds overhead and increases cognitive load");
-console.log("  Fix: Use configuration objects or functional approaches for simple variations");
-
-// Pitfall 5: Complex Decorator Chains
-console.log("\nPitfall 5: Complex Decorator Chains");
-console.log("  Long chains of decorators become hard to reason about and debug");
-console.log("  Each decorator adds a layer of indirection that compounds over time");
-console.log("  Fix: Limit decorator depth; consider composition or middleware patterns instead");
-
-// ============================================
-// Best Practices
-// ============================================
-
-console.log("\n=== Best Practices ===");
-
-console.log("✅ DO:");
-console.log("1. Use patterns for real problems, not hypothetical ones");
-console.log("2. Keep patterns simple - start small and add complexity only when needed");
-console.log("3. Prefer composition over inheritance and deep class hierarchies");
-console.log("4. Document pattern usage so the team understands when and why they are applied");
-
-console.log("\n❌ DON'T:");
-console.log("1. Over-engineer simple code with unnecessary patterns");
-console.log("2. Force patterns where a straightforward solution works");
-console.log("3. Use design patterns when a simpler alternative would be clearer");
-
-console.log("\n⚠️ WATCH OUT FOR:");
-console.log("1. Complexity creep - patterns should simplify, not complicate");
-console.log("2. Testing difficulties - some patterns (Singleton, Observer) complicate unit tests");
-console.log("3. Performance overhead - extra abstraction layers can impact performance");
-
-
-// ============================================
 // Section 8: Command Pattern (ES5/ES6)
 // ============================================
 // - Encapsulates a request as an object, allowing parameterization and queuing
@@ -938,6 +879,65 @@ orderMachine.transition("pay"); // pending --pay--> paid
 orderMachine.transition("ship"); // paid --ship--> shipped
 orderMachine.transition("deliver"); // shipped --deliver--> delivered
 orderMachine.transition("pay"); // Invalid (already delivered)
+
+
+// ============================================
+// Section 10: Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+// Pitfall 1: Overusing Singletons
+console.log("\nPitfall 1: Overusing Singletons");
+console.log("  Singletons create global state that is difficult to test and debug");
+console.log("  They hide dependencies and make unit testing nearly impossible");
+console.log("  Fix: Use dependency injection instead of relying on global singletons");
+
+// Pitfall 2: Abstract Factory Complexity
+console.log("\nPitfall 2: Abstract Factory Over-Engineering");
+console.log("  Creating factory families for simple object creation adds unnecessary complexity");
+console.log("  Abstract Factory should only be used when you need families of related objects");
+console.log("  Fix: Start with a simple factory; introduce abstract factory only when genuinely needed");
+
+// Pitfall 3: Observer Memory Leaks
+console.log("\nPitfall 3: Observer Memory Leaks");
+console.log("  Failing to unsubscribe from events causes memory leaks and stale callbacks");
+console.log("  Accumulated listeners can also cause the same handler to fire multiple times");
+console.log("  Fix: Always call .off() / .removeEventListener() when components unmount or are destroyed");
+
+// Pitfall 4: Too Many Strategies
+console.log("\nPitfall 4: Too Many Strategy Classes");
+console.log("  Creating a strategy for every minor variation leads to class explosion");
+console.log("  Each strategy class adds overhead and increases cognitive load");
+console.log("  Fix: Use configuration objects or functional approaches for simple variations");
+
+// Pitfall 5: Complex Decorator Chains
+console.log("\nPitfall 5: Complex Decorator Chains");
+console.log("  Long chains of decorators become hard to reason about and debug");
+console.log("  Each decorator adds a layer of indirection that compounds over time");
+console.log("  Fix: Limit decorator depth; consider composition or middleware patterns instead");
+
+// ============================================
+// Section 11: Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Use patterns for real problems, not hypothetical ones");
+console.log("2. Keep patterns simple - start small and add complexity only when needed");
+console.log("3. Prefer composition over inheritance and deep class hierarchies");
+console.log("4. Document pattern usage so the team understands when and why they are applied");
+
+console.log("\n❌ DON'T:");
+console.log("1. Over-engineer simple code with unnecessary patterns");
+console.log("2. Force patterns where a straightforward solution works");
+console.log("3. Use design patterns when a simpler alternative would be clearer");
+
+console.log("\n⚠️ WATCH OUT FOR:");
+console.log("1. Complexity creep - patterns should simplify, not complicate");
+console.log("2. Testing difficulties - some patterns (Singleton, Observer) complicate unit tests");
+console.log("3. Performance overhead - extra abstraction layers can impact performance");
 
 
 // ============================================
