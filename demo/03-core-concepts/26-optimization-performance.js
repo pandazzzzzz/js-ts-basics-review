@@ -3,6 +3,23 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. TAIL CALL OPTIMIZATION (TCO)
+// 2. ADVANCED MEMOIZATION
+// 3. LAZY EVALUATION
+// 4. EVENT LOOP OPTIMIZATION
+// 5. BATCHING AND COALESCING
+// 6. WEB WORKERS FOR PARALLEL PROCESSING
+// 7. requestAnimationFrame OPTIMIZATION
+// 8. PERFORMANCE BENCHMARKING
+// 9. COMMON PERFORMANCE PITFALLS
+// 10. V8 ENGINE INTERNALS
+
+// ============================================
+
+// ============================================
 // 1. TAIL CALL OPTIMIZATION (TCO)
 // ============================================
 /**

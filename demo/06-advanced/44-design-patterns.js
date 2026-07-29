@@ -5,6 +5,19 @@
 // 📌 Covers common design patterns in JavaScript
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. Section 6: Adapter Pattern (ES5/ES6)
+// 2. Section 7: Facade Pattern (ES5/ES6)
+// 3. Section 8: Command Pattern (ES5/ES6)
+// 4. Section 9: State Pattern (ES6)
+// 5. Section 10: Common Pitfalls
+// 6. Section 11: Best Practices
+
+// ============================================
+
+// ============================================
 // Section 1: Factory Pattern (ES5/ES6)
 // - Simple Factory, Factory Method, Abstract Factory are pattern-level concepts
 // - Uses ES6 classes, static methods, and inheritance
@@ -524,7 +537,7 @@ decoratedAdd(5, 3);
 
 
 // ============================================
-// Section 6: Adapter Pattern (ES5/ES6)
+// 1. Section 6: Adapter Pattern (ES5/ES6)
 // ============================================
 // - Converts one interface to another expected by the client
 // - Uses ES6 classes and composition
@@ -583,7 +596,7 @@ greetNew({ name: "Alice", age: 30 });
 
 
 // ============================================
-// Section 7: Facade Pattern (ES5/ES6)
+// 2. Section 7: Facade Pattern (ES5/ES6)
 // ============================================
 // - Provides a simplified interface to a complex subsystem
 // - Uses ES6 classes and composition
@@ -640,7 +653,7 @@ console.log("  // Facade hides fetch, error handling, JSON parsing, base URL");
 
 
 // ============================================
-// Section 8: Command Pattern (ES5/ES6)
+// 3. Section 8: Command Pattern (ES5/ES6)
 // ============================================
 // - Encapsulates a request as an object, allowing parameterization and queuing
 // - Uses ES6 classes and closures
@@ -760,7 +773,7 @@ console.log("Undo:", incrementCmd.undo()); // 0
 
 
 // ============================================
-// Section 9: State Pattern (ES6)
+// 4. Section 9: State Pattern (ES6)
 // ============================================
 // - Allows an object to alter its behavior when its internal state changes
 // - Uses ES6 classes and polymorphism
@@ -882,7 +895,7 @@ orderMachine.transition("pay"); // Invalid (already delivered)
 
 
 // ============================================
-// Section 10: Common Pitfalls
+// 5. Section 10: Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -918,7 +931,7 @@ console.log("  Each decorator adds a layer of indirection that compounds over ti
 console.log("  Fix: Limit decorator depth; consider composition or middleware patterns instead");
 
 // ============================================
-// Section 11: Best Practices
+// 6. Section 11: Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");

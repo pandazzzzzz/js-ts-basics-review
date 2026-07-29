@@ -5,6 +5,35 @@
 // 📌 Covers ES6/ES2015 through ES2023+ modern syntax features
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. Spread Operator (ES6/ES2015)
+// 2. Destructuring (ES6/ES2015)
+// 3. Optional Chaining (?.) (ES2020)
+// 4. Nullish Coalescing (??) (ES2020)
+// 5. Default Parameters (ES6/ES2015)
+// 6. Rest Parameters (ES6/ES2015)
+// 7. Arrow Functions (ES6/ES2015)
+// 8. Classes - Basic Syntax (ES6/ES2015)
+// 9. Static Methods and Properties (ES6/ES2015 for methods, ES2022 for properties)
+// 10. Private Fields (ES2022)
+// 11. Getters and Setters (ES6/ES2015)
+// 12. Class Inheritance and Method Overriding (ES6/ES2015)
+// 13. Abstract Class Patterns (ES6/ES2015)
+// 14. Class Common Pitfalls & Best Practices
+// 15. Object Property Shorthand & Computed Property Names (ES6/ES2015)
+// 16. NEW ARRAY METHODS (ES2022/ES2023)
+// 17. STRING METHODS (ES2021/ES2022)
+// 18. NUMERIC SEPARATORS (ES2021) AND BIGINT (ES2020)
+// 19. LOGICAL ASSIGNMENT OPERATORS (ES2021)
+// 20. PROMISE METHODS
+// 21. MODERN FEATURES SUMMARY
+// 22. ADDITIONAL ES2020-ES2024 FEATURES
+
+// ============================================
+
+// ============================================
 // 1. Spread Operator (ES6/ES2015)
 // ============================================
 

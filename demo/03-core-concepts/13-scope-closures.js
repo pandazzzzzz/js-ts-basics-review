@@ -3,6 +3,28 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. GLOBAL SCOPE
+// 2. FUNCTION (LOCAL) SCOPE
+// 3. BLOCK SCOPE
+// 4. LEXICAL SCOPE (STATIC SCOPE)
+// 5. SCOPE CHAIN
+// 6. VARIABLE SHADOWING
+// 7. TEMPORAL DEAD ZONE (TDZ)
+// 8. CLOSURES - DATA PRIVACY
+// 9. CLOSURES - FUNCTION FACTORIES
+// 10. CLOSURES - PARTIAL APPLICATION
+// 11. CLOSURES - MEMOIZATION
+// 12. MODULE PATTERN
+// 13. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
+// 14. eval() AND with - DYNAMIC SCOPE (AVOID!)
+// 15. Common Pitfalls & Best Practices
+
+// ============================================
+
+// ============================================
 // 1. GLOBAL SCOPE
 // ============================================
 /**

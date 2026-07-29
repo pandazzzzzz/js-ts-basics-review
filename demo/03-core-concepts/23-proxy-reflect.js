@@ -3,6 +3,25 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. PROXY BASICS
+// 2. GET TRAP
+// 3. SET TRAP
+// 4. HAS TRAP
+// 5. DELETEPROPERTY TRAP
+// 6. APPLY TRAP
+// 7. CONSTRUCT TRAP
+// 8. OTHER TRAPS
+// 9. REFLECT API (Reflect API)
+// 10. PRACTICAL EXAMPLES
+// 11. PERFORMANCE AND PITFALLS
+// 12. ADVANCED PATTERNS
+
+// ============================================
+
+// ============================================
 // 1. PROXY BASICS
 // ============================================
 /**

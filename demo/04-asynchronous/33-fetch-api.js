@@ -2,6 +2,23 @@
 // 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. FETCH API BASICS
+// 2. RESPONSE HANDLING METHODS
+// 3. POST REQUESTS AND CONFIGURATION
+// 4. ERROR HANDLING
+// 5. ASYNC/AWAIT WITH FETCH
+// 6. PRACTICAL PATTERNS
+// 7. STREAM API (ADVANCED)
+// 8. COMMON PITFALLS
+// 9. CACHE API INTEGRATION
+// 10. BEST PRACTICES SUMMARY
+
+// ============================================
+
+// ============================================
 // 1. FETCH API BASICS
 // ============================================
 

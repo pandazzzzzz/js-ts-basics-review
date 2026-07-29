@@ -2,6 +2,31 @@
 // 📘 For TypeScript comparison, see: 32-modules-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. INTRODUCTION TO MODULES
+// 2. MODULE SCOPE
+// 3. NAMED EXPORTS
+// 4. DEFAULT EXPORTS
+// 5. IMPORT SYNTAX
+// 6. IMPORT * AS (NAMESPACE IMPORTS)
+// 7. RE-EXPORTING MODULES
+// 8. DYNAMIC IMPORTS
+// 9. ES MODULES VS COMMONJS (DETAILED COMPARISON)
+// 10. MODULE LOADING AND CACHING
+// 11. CIRCULAR DEPENDENCIES
+// 12. IMPORT HOISTING
+// 13. PRACTICAL MULTI-FILE PROJECT STRUCTURE
+// 14. COMMON PITFALLS & BEST PRACTICES
+// 15. MODULE PATTERNS AND USE CASES
+// 16. PERFORMANCE CONSIDERATIONS
+// 17. DEBUGGING MODULES
+// 18. IMPORT ATTRIBUTES (ES2025)
+
+// ============================================
+
+// ============================================
 // 1. INTRODUCTION TO MODULES
 // ============================================
 

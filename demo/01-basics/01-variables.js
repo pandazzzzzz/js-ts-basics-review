@@ -4,7 +4,72 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
 
 // ============================================
-// Variable Declarations
+// 1. JavaScript in HTML (JS.info 2.1)
+// ============================================
+
+// JavaScript can be included in HTML via <script> tags:
+// <script src="script.js"></script>  -- External file (preferred)
+// <script>console.log("inline");</script>  -- Inline code
+//
+// Modern script loading attributes:
+// - <script defer src="...">  -- Download in parallel, execute after HTML parsed
+// - <script async src="...">  -- Download in parallel, execute as soon as ready
+// - <script type="module">    -- ES module, deferred by default
+//
+// ES6 modules (import/export) are covered in: 32-modules.js
+
+// ============================================
+// 2. Code Structure (JS.info 2.2)
+// ============================================
+
+// Statements end with semicolons (;)
+// Semicolons are technically optional due to ASI (Automatic Semicolon Insertion),
+// but omitting them can cause subtle bugs. Best practice: always use semicolons.
+
+// Single-line comments use //
+// Multi-line comments use /* ... */
+
+// ============================================
+// 3. "use strict" - Modern Mode (JS.info 2.3)
+// ============================================
+
+// "use strict" enables strict mode which catches common mistakes:
+// - Assignment to undeclared variable → ReferenceError (instead of creating global)
+// - Assigning to read-only property → TypeError
+// - Deleting variables/functions → SyntaxError
+// - Duplicate parameter names → SyntaxError
+// - Octal numeric literals (0123) → SyntaxError
+// - `this` in regular functions is `undefined` (not `window`)
+
+// Modern JavaScript: ES6 modules and classes are strict by default.
+// "use strict" can be applied file-wide or per-function:
+//   "use strict";           // File-wide (must be first statement)
+//   function f() { "use strict"; ... }  // Per-function
+
+console.log("\n=== Strict Mode Demo ===");
+
+// Without strict mode, assignment to undeclared variable creates a global
+// In strict mode, this would throw ReferenceError:
+(function sloppyMode() {
+  // accidentallyGlobal = "oops"; // ReferenceError in strict mode!
+})();
+
+// In strict mode, `this` is undefined in regular functions (not window/global)
+(function strictDemo() {
+  "use strict";
+  try {
+    // In strict mode, assigning to undeclared variable throws:
+    // undeclaredVar = 5; // ReferenceError!
+  } catch (e) {
+    console.log("Strict mode prevents accidental globals:", e.message);
+  }
+})();
+
+console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
+
+
+// ============================================
+// 4. Variable Declarations
 // ============================================
 
 // var - Function-scoped or globally-scoped (ES5)
@@ -29,7 +94,7 @@ let modernStyle = "let is block-scoped";
 const constant = "const cannot be reassigned";
 
 // ============================================
-// Primitive Data Types (7 types in ES2020+)
+// 5. Primitive Data Types (7 types in ES2020+)
 // ============================================
 
 // 1. String - Text data (ES1)
@@ -89,72 +154,7 @@ console.log({ nullType, undefinedType, symbolType, bigIntType });
 
 
 // ============================================
-// JavaScript in HTML (JS.info 2.1)
-// ============================================
-
-// JavaScript can be included in HTML via <script> tags:
-// <script src="script.js"></script>  -- External file (preferred)
-// <script>console.log("inline");</script>  -- Inline code
-//
-// Modern script loading attributes:
-// - <script defer src="...">  -- Download in parallel, execute after HTML parsed
-// - <script async src="...">  -- Download in parallel, execute as soon as ready
-// - <script type="module">    -- ES module, deferred by default
-//
-// ES6 modules (import/export) are covered in: 32-modules.js
-
-// ============================================
-// Code Structure (JS.info 2.2)
-// ============================================
-
-// Statements end with semicolons (;)
-// Semicolons are technically optional due to ASI (Automatic Semicolon Insertion),
-// but omitting them can cause subtle bugs. Best practice: always use semicolons.
-
-// Single-line comments use //
-// Multi-line comments use /* ... */
-
-// ============================================
-// "use strict" - Modern Mode (JS.info 2.3)
-// ============================================
-
-// "use strict" enables strict mode which catches common mistakes:
-// - Assignment to undeclared variable → ReferenceError (instead of creating global)
-// - Assigning to read-only property → TypeError
-// - Deleting variables/functions → SyntaxError
-// - Duplicate parameter names → SyntaxError
-// - Octal numeric literals (0123) → SyntaxError
-// - `this` in regular functions is `undefined` (not `window`)
-
-// Modern JavaScript: ES6 modules and classes are strict by default.
-// "use strict" can be applied file-wide or per-function:
-//   "use strict";           // File-wide (must be first statement)
-//   function f() { "use strict"; ... }  // Per-function
-
-console.log("\n=== Strict Mode Demo ===");
-
-// Without strict mode, assignment to undeclared variable creates a global
-// In strict mode, this would throw ReferenceError:
-(function sloppyMode() {
-  // accidentallyGlobal = "oops"; // ReferenceError in strict mode!
-})();
-
-// In strict mode, `this` is undefined in regular functions (not window/global)
-(function strictDemo() {
-  "use strict";
-  try {
-    // In strict mode, assigning to undeclared variable throws:
-    // undeclaredVar = 5; // ReferenceError!
-  } catch (e) {
-    console.log("Strict mode prevents accidental globals:", e.message);
-  }
-})();
-
-console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
-
-
-// ============================================
-// globalThis - Cross-Environment Global (ES2020)
+// 6. globalThis - Cross-Environment Global (ES2020)
 // ============================================
 
 // globalThis - Standard global object reference (ES2020)
@@ -181,7 +181,7 @@ console.log("__myTempGlobal:", __myTempGlobal); // "set via globalThis"
 
 
 // ============================================
-// Type Conversions (JS.info 2.7)
+// 7. Type Conversions (JS.info 2.7)
 // ============================================
 
 console.log("\n=== Type Conversions ===");
@@ -229,7 +229,7 @@ console.log("null === undefined:", null === undefined); // false
 
 
 // ============================================
-// Browser Interaction (JS.info 2.6)
+// 8. Browser Interaction (JS.info 2.6)
 // ============================================
 
 // alert() — shows a modal dialog with a message

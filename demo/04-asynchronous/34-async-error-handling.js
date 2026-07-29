@@ -3,6 +3,23 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. PROMISE ERROR HANDLING BASICS
+// 2. ASYNC/AWAIT ERROR HANDLING
+// 3. ERROR CHAINING WITH ERROR.CAUSE
+// 4. AGGREGATEERROR - HANDLING MULTIPLE ERRORS
+// 5. CIRCUIT BREAKER PATTERN
+// 6. RETRY WITH EXPONENTIAL BACKOFF
+// 7. TIMEOUT AND CANCELLATION
+// 8. ERROR CONTEXT PRESERVATION
+// 9. ERROR MIDDLEWARE PATTERNS
+// 10. GLOBAL ERROR HANDLING
+
+// ============================================
+
+// ============================================
 // 1. PROMISE ERROR HANDLING BASICS
 // ============================================
 /**

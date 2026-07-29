@@ -2,6 +2,24 @@
 // 📘 For TypeScript comparison, see: 31-async-await-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. ASYNC FUNCTION BASICS
+// 2. ASYNC FUNCTION SYNTAX
+// 3. AWAIT KEYWORD USAGE
+// 4. ERROR HANDLING WITH TRY-CATCH
+// 5. SEQUENTIAL VS PARALLEL EXECUTION
+// 6. TOP-LEVEL AWAIT
+// 7. RELATIONSHIP WITH PROMISES
+// 8. PROMISE COMBINATORS WITH ASYNC/AWAIT
+// 9. ASYNC ITERATORS (ES2018)
+// 10. PRACTICAL EXAMPLES
+// 11. COMMON PITFALLS & BEST PRACTICES
+
+// ============================================
+
+// ============================================
 // 1. ASYNC FUNCTION BASICS
 // ============================================
 

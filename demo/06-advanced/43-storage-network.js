@@ -5,6 +5,21 @@
 // ⚠️ Most content is browser-specific
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. localStorage & sessionStorage
+// 2. Cookies
+// 3. IndexedDB
+// 4. History API (Browser Navigation)
+// 5. Fetch Advanced (Complements 33-fetch-api.js)
+// 6. WebSocket
+// 7. Server-Sent Events (SSE) - DETAILED
+// 8. BroadcastChannel API
+
+// ============================================
+
+// ============================================
 // Section 1: localStorage & sessionStorage
 // ============================================
 

@@ -2,6 +2,29 @@
 // 📘 For TypeScript comparison, see: 07-functions-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. Function Declaration (Function Statement)
+// 2. Function Expression
+// 3. Arrow Function
+// 4. Default Parameters
+// 5. Rest Parameters
+// 6. Higher-Order Functions
+// 7. Closures
+// 8. Async Functions
+// 9. Generator Functions
+// 10. Method Definitions
+// 11. Function Binding
+// 12. Currying
+// 13. Function Properties and Methods
+// 14. IIFE Patterns and Use Cases
+// 15. Tail Call Optimization (TCO)
+// 16. Pure Functions and Functional Programming
+
+// ============================================
+
+// ============================================
 // Section 1: Function Declaration (Function Statement)
 // ============================================
 /**

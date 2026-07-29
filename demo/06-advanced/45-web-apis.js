@@ -5,6 +5,26 @@
 // 📌 Covers important modern Web APIs
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. Service Workers
+// 2. Web Workers
+// 3. Intersection Observer
+// 4. Geolocation API
+// 5. WebSocket API
+// 6. Additional Web APIs
+// 7. NEW WEB APIs (2024-2025)
+// 9. WEB COMPONENTS (Custom Elements + Shadow DOM)
+// 10. ADDITIONAL WEB APIs (Overview)
+// 11. WEB AUDIO API
+// 12. WEBRTC (Real-Time Communication)
+// 14. BEST PRACTICES
+// 15. TYPESCRIPT COMPARISON NOTES
+
+// ============================================
+
+// ============================================
 // Section 1: Service Workers
 // ============================================
 

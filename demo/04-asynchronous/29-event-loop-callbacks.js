@@ -2,6 +2,25 @@
 // 📘 For TypeScript comparison, see: 29-event-loop-callbacks-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. CALL STACK BASICS
+// 2. CALLBACK FUNCTIONS
+// 3. SETTIMEOUT AND SETINTERVAL
+// 4. EVENT LOOP MECHANISM
+// 5. CALLBACK QUEUE (TASK QUEUE)
+// 6. MICROTASKS VS MACROTASKS
+// 7. EXECUTION ORDER EXAMPLES
+// 8. CALLBACK HELL PROBLEM
+// 9. EVENT LOOP VISUALIZATION
+// 10. PRACTICAL EXAMPLES
+// 11. COMMON PITFALLS & BEST PRACTICES
+// 12. RENDERING AND EVENT LOOP (BROWSER)
+
+// ============================================
+
+// ============================================
 // 1. CALL STACK BASICS
 // ============================================
 

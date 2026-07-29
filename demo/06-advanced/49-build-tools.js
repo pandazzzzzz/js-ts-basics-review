@@ -5,7 +5,21 @@
 // 📌 Covers webpack, vite, code splitting, and production optimization
 
 // ============================================
-// Section 1: Webpack Configuration
+// Table of Contents
+// ============================================
+
+// 1. Section 1: Webpack Configuration
+// 2. Section 2: Vite Configuration
+// 3. Section 3: Code Splitting
+// 4. Section 4: Production Optimization
+// 5. Common Pitfalls
+// 6. Best Practices
+// 7. Section 5: Additional Build Tooling
+
+// ============================================
+
+// ============================================
+// 1. Section 1: Webpack Configuration
 // ============================================
 
 console.log("\n=== Webpack Configuration ===");
@@ -175,7 +189,7 @@ console.log(webpackEnvConfig);
 // ⚠️ Loader order matters
 
 // ============================================
-// Section 2: Vite Configuration
+// 2. Section 2: Vite Configuration
 // ============================================
 
 console.log("\n=== Vite Configuration ===");
@@ -402,7 +416,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 // - Environment variables
 
 // ============================================
-// Section 3: Code Splitting
+// 3. Section 3: Code Splitting
 // ============================================
 
 console.log("\n=== Code Splitting ===");
@@ -501,7 +515,7 @@ import(/* webpackPreload: true */ './critical-feature.js');
 // - Vendor code separation
 
 // ============================================
-// Section 4: Production Optimization
+// 4. Section 4: Production Optimization
 // ============================================
 
 console.log("\n=== Production Optimization ===");
@@ -646,7 +660,7 @@ npm run build -- --analyze
 // - Monitor bundle size
 
 // ============================================
-// Common Pitfalls
+// 5. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -684,7 +698,7 @@ console.log("  Source maps expose original code in production");
 console.log("  Fix: Don't upload source maps to public servers");
 
 // ============================================
-// Best Practices
+// 6. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -725,7 +739,7 @@ console.log("8. Environment variable exposure");
 
 
 // ============================================
-// Section 5: Additional Build Tooling
+// 7. Section 5: Additional Build Tooling
 // ============================================
 
 console.log("\n=== Section 5: Babel, PostCSS, and ESLint ===");

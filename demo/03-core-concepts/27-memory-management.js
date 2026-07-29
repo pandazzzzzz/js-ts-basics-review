@@ -3,6 +3,23 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. WEAKREF AND FINALIZATIONREGISTRY
+// 2. WEAKMAP AND WEAKSET PATTERNS
+// 3. COMMON MEMORY LEAK PATTERNS
+// 4. OBJECT POOLING
+// 5. GARBAGE COLLECTION BASICS
+// 6. LARGE DATA HANDLING
+// 7. NODE.JS MEMORY CONSIDERATIONS
+// 8. BROWSER MEMORY CONSIDERATIONS
+// 9. MEMORY PROFILING TOOLS
+// 10. MEMORY OPTIMIZATION TECHNIQUES
+
+// ============================================
+
+// ============================================
 // 1. WEAKREF AND FINALIZATIONREGISTRY
 // ============================================
 /**

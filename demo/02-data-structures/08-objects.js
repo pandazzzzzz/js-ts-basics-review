@@ -2,7 +2,26 @@
 // 📘 For TypeScript comparison, see: 08-objects-ts-comparison.ts
 
 // ============================================
-// Object Creation
+// Table of Contents
+// ============================================
+
+// 1. Object Creation
+// 2. Property Access Patterns
+// 3. Property Definition and Manipulation
+// 4. Object Methods - Inspection
+// 5. Object Methods - Property Definition
+// 6. Object Methods - Copying and Merging
+// 7. Object Methods - Freezing and Sealing
+// 8. Object Destructuring (ES6/ES2015)
+// 9. Prototype Basics
+// 10. this Binding
+// 11. Object Methods - Grouping (ES2024)
+// 12. Common Pitfalls & Best Practices
+
+// ============================================
+
+// ============================================
+// 1. Object Creation
 // ============================================
 
 // Object literal - Most common way (ES1)
@@ -43,7 +62,7 @@ console.log("With prototype:", personWithProto);
 console.log("Has species:", personWithProto.species); // From prototype
 
 // ============================================
-// Property Access Patterns
+// 2. Property Access Patterns
 // ============================================
 
 // Dot notation (ES1)
@@ -84,7 +103,7 @@ console.log("Missing:", user?.profile?.phone); // undefined, no error
 console.log("Deep missing:", user?.settings?.theme); // undefined
 
 // ============================================
-// Property Definition and Manipulation
+// 3. Property Definition and Manipulation
 // ============================================
 
 // Property shorthand (ES6/ES2015)
@@ -154,7 +173,7 @@ console.log("After set:", account.balance);
 account.balance = -100; // Rejected
 
 // ============================================
-// Object Methods - Inspection
+// 4. Object Methods - Inspection
 // ============================================
 
 // Object.keys() - Get property names (ES5)
@@ -238,7 +257,7 @@ console.log("Object.is({}, {}):", Object.is({}, {})); // false (different refere
 console.log("Object.is('foo', 'foo'):", Object.is("foo", "foo")); // true
 
 // ============================================
-// Object Methods - Property Definition
+// 5. Object Methods - Property Definition
 // ============================================
 
 // Object.defineProperty() - Define single property with descriptor (ES5)
@@ -289,7 +308,7 @@ const allDescriptors = Object.getOwnPropertyDescriptors(multiProps);
 console.log("\nAll descriptors:", Object.keys(allDescriptors));
 
 // ============================================
-// Object Methods - Copying and Merging
+// 6. Object Methods - Copying and Merging
 // ============================================
 
 // Object.assign() - Shallow copy/merge (ES6/ES2015)
@@ -340,7 +359,7 @@ console.log("Original:", deepOriginal); // Unchanged!
 console.log("Deep copy:", deepCopy);
 
 // ============================================
-// Object Methods - Freezing and Sealing
+// 7. Object Methods - Freezing and Sealing
 // ============================================
 
 // Object.freeze() - Make immutable (ES5)
@@ -390,7 +409,7 @@ console.log("Prevent extensions:", preventExt);
 console.log("Is extensible:", Object.isExtensible(preventExt));
 
 // ============================================
-// Object Destructuring (ES6/ES2015)
+// 8. Object Destructuring (ES6/ES2015)
 // ============================================
 
 // Basic destructuring
@@ -432,7 +451,7 @@ function greetPerson({ name, age }) {
 console.log("Function param:", greetPerson(person));
 
 // ============================================
-// Prototype Basics
+// 9. Prototype Basics
 // ============================================
 
 // Every object has a prototype (ES3)
@@ -463,7 +482,7 @@ console.log("Is animal prototype of dog:", animal.isPrototypeOf(dog));
 console.log("__proto__:", dog.__proto__ === animal);
 
 // ============================================
-// this Binding
+// 10. this Binding
 // ============================================
 
 // this in methods (ES1)
@@ -497,7 +516,7 @@ thisObj.greet.call(otherObj); // "Hello, I'm Bob"
 thisObj.greet.apply(otherObj); // Same as call
 
 // ============================================
-// Object Methods - Grouping (ES2024)
+// 11. Object Methods - Grouping (ES2024)
 // ============================================
 
 // Object.groupBy() - Group array elements into object (ES2024)
@@ -537,7 +556,7 @@ const groupedByLength = Object.groupBy(words, word => `length-${word.length}`);
 console.log("Grouped by length:", groupedByLength);
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 12. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");

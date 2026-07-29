@@ -3,6 +3,23 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. ITERATOR PROTOCOL
+// 2. CUSTOM ITERATORS
+// 3. GENERATOR FUNCTIONS
+// 4. GENERATOR METHODS
+// 5. YIELD* DELEGATION
+// 6. PRACTICAL USE CASES
+// 7. ASYNC ITERATORS
+// 8. COMMON PATTERNS
+// 9. COMMON PITFALLS
+// 10. TYPESCRIPT TYPES
+
+// ============================================
+
+// ============================================
 // 1. ITERATOR PROTOCOL
 // ============================================
 /**

@@ -2,7 +2,27 @@
 // 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
 
 // ============================================
-// Arithmetic Operators
+// Table of Contents
+// ============================================
+
+// 1. Arithmetic Operators
+// 2. Comparison Operators
+// 3. Logical Operators
+// 4. Assignment Operators
+// 5. Ternary (Conditional) Operator
+// 6. Bitwise Operators
+// 7. Operator Precedence Examples
+// 8. typeof and instanceof Operators
+// 9. Spread and Rest Operators
+// 10. Property Access Operators
+// 11. this Keyword
+// 12. super Keyword
+// 13. Other Operators
+
+// ============================================
+
+// ============================================
+// 1. Arithmetic Operators
 // ============================================
 
 // Addition (+) - Adds numbers or concatenates strings (ES1)
@@ -77,7 +97,7 @@ console.log("++x:", ++x); // 7 (increments then returns)
 console.log("x:", x); // 7
 
 // ============================================
-// Comparison Operators
+// 2. Comparison Operators
 // ============================================
 
 // Equality (==) - Loose equality with type coercion (ES1)
@@ -128,7 +148,7 @@ console.log("'apple' < 'banana':", "apple" < "banana"); // true (lexicographic)
 console.log("'10' > '9':", "10" > "9"); // false (string comparison: '1' < '9')
 
 // ============================================
-// Logical Operators
+// 3. Logical Operators
 // ============================================
 
 // Logical AND (&&) - Returns first falsy value or last value (ES1)
@@ -202,7 +222,7 @@ console.log("null ?? (undefined || 'foo'):", null ?? (undefined || "foo")); // "
 console.log("(null && undefined) ?? 'foo':", (null && undefined) ?? "foo"); // "foo"
 
 // ============================================
-// Assignment Operators
+// 4. Assignment Operators
 // ============================================
 
 // Simple Assignment (=) - Assigns value to variable (ES1)
@@ -277,7 +297,7 @@ g ??= 10; // g is not null/undefined, no assignment
 console.log("g ??= 10:", g); // 0
 
 // ============================================
-// Ternary (Conditional) Operator
+// 5. Ternary (Conditional) Operator
 // ============================================
 
 // Ternary Operator (? :) - Inline if-else (ES1)
@@ -302,7 +322,7 @@ console.log("Result:", result); // 0 (postfix returns original value, then decre
 console.log("Count:", count); // -1
 
 // ============================================
-// Bitwise Operators
+// 6. Bitwise Operators
 // ============================================
 
 // Bitwise operators work on 32-bit integers (ES1)
@@ -362,7 +382,7 @@ console.log("-20 >>> 1:", -20 >>> 1); // 2147483638 (treats as unsigned)
 console.log("5 >>> 0:", 5 >>> 0); // 5 (trick to convert to 32-bit unsigned)
 
 // ============================================
-// Operator Precedence Examples
+// 7. Operator Precedence Examples
 // ============================================
 
 // Operator precedence determines evaluation order (ES1)
@@ -379,7 +399,7 @@ console.log("true || false && false:", true || false && false); // true (&& befo
 console.log("(true || false) && false:", (true || false) && false); // false
 
 // ============================================
-// typeof and instanceof Operators
+// 8. typeof and instanceof Operators
 // ============================================
 
 // typeof - Returns string indicating type (ES1)
@@ -437,7 +457,7 @@ printProperty(car, 'make'); // "make: Toyota"
 printProperty(car, 'year'); // "year does not exist"
 
 // ============================================
-// Spread and Rest Operators
+// 9. Spread and Rest Operators
 // ============================================
 
 // Spread Operator (...) - Expands iterable into individual elements (ES2015)
@@ -510,7 +530,7 @@ const { x: xVal, y: yVal, ...remaining } = { x: 1, y: 2, z: 3, w: 4 };
 console.log("Object destructuring with rest:", { xVal, yVal, remaining }); // { xVal: 1, yVal: 2, remaining: { z: 3, w: 4 } }
 
 // ============================================
-// Property Access Operators
+// 10. Property Access Operators
 // ============================================
 
 // Optional Chaining (?.) - Safely access nested properties (ES2020)
@@ -555,7 +575,7 @@ console.log("obj3.method?.():", obj3.method?.()); // undefined (method is null)
 // console.log("obj3.method():", obj3.method()); // ❌ Error: obj3.method is not a function
 
 // ============================================
-// this Keyword
+// 11. this Keyword
 // ============================================
 
 // this - References current execution context (ES1)
@@ -592,7 +612,7 @@ const boundGreet = person.greet.bind(person);
 boundGreet(); // "Hello, I'm Bob" (this is bound to person)
 
 // ============================================
-// super Keyword
+// 12. super Keyword
 // ============================================
 
 // super - Calls parent class methods (ES2015)
@@ -630,7 +650,7 @@ console.log("dog.name:", dog.name); // "Rex"
 console.log("dog.breed:", dog.breed); // "Labrador"
 
 // ============================================
-// Other Operators
+// 13. Other Operators
 // ============================================
 
 // Comma Operator (,) - Evaluates each operand, returns last (ES1)

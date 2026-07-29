@@ -3,6 +3,19 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. PROPERTY FLAGS
+// 2. Object.defineProperty()
+// 3. Object.defineProperties()
+// 4. OBJECT-LEVEL RESTRICTION METHODS
+// 5. GETTERS AND SETTERS
+// 6. RELATIONSHIP WITH OTHER CONCEPTS
+
+// ============================================
+
+// ============================================
 // 1. PROPERTY FLAGS
 // ============================================
 /**

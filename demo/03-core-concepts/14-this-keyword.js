@@ -3,6 +3,20 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. THIS BASIC RULES
+// 2. THIS LOSS PROBLEMS
+// 3. EXPLICIT BINDING - call/apply/bind
+// 4. ARROW FUNCTION this
+// 5. CONSTRUCTOR this
+// 6. CLASS this
+// 7. COMMON PITFALLS AND globalThis
+
+// ============================================
+
+// ============================================
 // 1. THIS BASIC RULES
 // ============================================
 /**

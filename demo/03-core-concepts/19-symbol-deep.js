@@ -3,6 +3,18 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. SYMBOL BASICS
+// 2. GLOBAL SYMBOL REGISTRY
+// 3. WELL-KNOWN SYMBOLS
+// 4. SYMBOL PRACTICAL APPLICATIONS
+// 5. SYMBOL WITH OTHER FEATURES
+
+// ============================================
+
+// ============================================
 // 1. SYMBOL BASICS
 // ============================================
 /**

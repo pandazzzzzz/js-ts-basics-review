@@ -2,6 +2,26 @@
 // 📘 For TypeScript comparison, see: 20-error-handling-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. Basic Error Handling - try/catch/finally
+// 2. Throwing Errors
+// 3. Built-in Error Types
+// 4. Custom Error Classes
+// 5. Error Propagation
+// 6. Common Pitfalls & Best Practices
+// 7. Best Practices
+// 8. Real-World Examples
+// 9. ASYNC ERROR HANDLING (BASIC)
+// 10. ERROR CHAINING WITH ERROR.CAUSE
+// 11. AGGREGATEERROR - MULTIPLE ERRORS
+// 12. RETRY WITH BACKOFF
+// 13. GLOBAL ERROR HANDLING
+
+// ============================================
+
+// ============================================
 // 1. Basic Error Handling - try/catch/finally
 // ============================================
 

@@ -2,7 +2,24 @@
 // 📘 For TypeScript comparison, see: 03-control-flow-ts-comparison.ts
 
 // ============================================
-// If/Else Statements
+// Table of Contents
+// ============================================
+
+// 1. If/Else Statements
+// 2. Switch Statements
+// 3. For Loops
+// 4. While Loops
+// 5. Do-While Loops
+// 6. Break Statement
+// 7. Continue Statement
+// 8. Try-Catch-Finally (Error Handling)
+// 9. Common Pitfalls & Best Practices
+// 10. Best Practices Summary
+
+// ============================================
+
+// ============================================
+// 1. If/Else Statements
 // ============================================
 
 // if statement - Executes code block if condition is true (ES1)
@@ -87,7 +104,7 @@ if ({}) {
 }
 
 // ============================================
-// Switch Statements
+// 2. Switch Statements
 // ============================================
 
 // switch statement - Multi-way branch based on value (ES3)
@@ -212,7 +229,7 @@ switch (action) {
 }
 
 // ============================================
-// For Loops
+// 3. For Loops
 // ============================================
 
 // Traditional for loop - Counter-based iteration (ES1)
@@ -335,7 +352,7 @@ for (const num of uniqueNumbers) {
 }
 
 // ============================================
-// While Loops
+// 4. While Loops
 // ============================================
 
 // while loop - Executes while condition is true (ES1)
@@ -374,7 +391,7 @@ while (true) {
 }
 
 // ============================================
-// Do-While Loops
+// 5. Do-While Loops
 // ============================================
 
 // do-while loop - Executes at least once (ES3)
@@ -414,7 +431,7 @@ do {
 console.log("Valid input received!");
 
 // ============================================
-// Break Statement
+// 6. Break Statement
 // ============================================
 
 // break - Exits loop immediately (ES1)
@@ -467,7 +484,7 @@ outerLoop: for (let i = 0; i < 3; i++) {
 // - Essential to prevent unintended case execution
 
 // ============================================
-// Continue Statement
+// 7. Continue Statement
 // ============================================
 
 // continue - Skips current iteration, continues with next (ES1)
@@ -542,7 +559,7 @@ for (const item of items) {
 }
 
 // ============================================
-// Try-Catch-Finally (Error Handling)
+// 8. Try-Catch-Finally (Error Handling)
 // ============================================
 
 // try-catch - Handle runtime errors (ES3)
@@ -699,7 +716,7 @@ try {
 }
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 9. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -908,7 +925,7 @@ switch (status) {
 console.log("With default:", message); // "Unknown status"
 
 // ============================================
-// Best Practices Summary
+// 10. Best Practices Summary
 // ============================================
 
 console.log("\n=== Best Practices ===");

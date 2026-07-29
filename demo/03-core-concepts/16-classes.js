@@ -3,6 +3,20 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. CLASS BASIC SYNTAX
+// 2. CLASS INHERITANCE
+// 3. STATIC PROPERTIES AND METHODS
+// 4. PRIVATE PROPERTIES AND ENCAPSULATION PATTERNS
+// 5. INSTANCEOF AND TYPE CHECKING
+// 6. MIXIN PATTERN
+// 7. RELATIONSHIP WITH PROTOTYPES
+
+// ============================================
+
+// ============================================
 // 1. CLASS BASIC SYNTAX
 // ============================================
 /**

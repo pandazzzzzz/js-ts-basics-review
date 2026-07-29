@@ -3,6 +3,23 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. CURRYING - FUNCTION TRANSFORMATION
+// 2. FUNCTION COMPOSITION - COMPOSE & PIPE
+// 3. ADVANCED PARTIAL APPLICATION
+// 4. FUNCTION FACTORIES
+// 5. HIGHER-ORDER FUNCTIONS - FUNCTION TRANSFORMERS
+// 6. DEBOUNCING & THROTTLING
+// 7. TRAMPOLINES - TAIL RECURSION OPTIMIZATION
+// 8. RECURSION PATTERNS
+// 9. POINT-FREE STYLE
+// 10. PERFORMANCE CONSIDERATIONS
+
+// ============================================
+
+// ============================================
 // 1. CURRYING - FUNCTION TRANSFORMATION
 // ============================================
 /**

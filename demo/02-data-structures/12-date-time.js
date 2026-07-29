@@ -5,7 +5,28 @@
 // 📌 ES1 (Date object), ES5 (Date.now(), Date.parse(), Date.UTC())
 
 // ============================================
-// Section 1: Date Object Creation
+// Table of Contents
+// ============================================
+
+// 1. Section 1: Date Object Creation
+// 2. Section 2: Getting Date Components
+// 3. Section 3: Getting Time Components
+// 4. Section 4: Setting Date/Time
+// 5. Section 5: UTC Methods
+// 6. Section 6: Date Formatting
+// 7. Section 7: Date Arithmetic
+// 8. Section 8: Date Comparison
+// 9. Section 9: Timezone Handling
+// 10. Section 10: Timestamp Operations
+// 11. Section 11: Common Pitfalls
+// 12. Section 12: Practical Examples
+// 13. Section 13: Performance Considerations
+// 14. Section 14: Modern Alternatives
+
+// ============================================
+
+// ============================================
+// 1. Section 1: Date Object Creation
 // ============================================
 
 console.log("Date Object Creation:");
@@ -47,7 +68,7 @@ console.log("  Date.UTC(2024, 5, 15, 10, 30, 0):", utcTimestamp);
 console.log("  new Date(utcTimestamp):", utcDate);
 
 // ============================================
-// Section 2: Getting Date Components
+// 2. Section 2: Getting Date Components
 // ============================================
 
 console.log("\nGetting Date Components:");
@@ -80,7 +101,7 @@ function formatDate(date) {
 console.log("  Formatted date:", formatDate(date)); // 2024-06-15
 
 // ============================================
-// Section 3: Getting Time Components
+// 3. Section 3: Getting Time Components
 // ============================================
 
 console.log("\nGetting Time Components:");
@@ -116,7 +137,7 @@ function formatDateTime(date) {
 console.log("  Formatted datetime:", formatDateTime(date));
 
 // ============================================
-// Section 4: Setting Date/Time
+// 4. Section 4: Setting Date/Time
 // ============================================
 
 console.log("\nSetting Date/Time:");
@@ -160,7 +181,7 @@ newTime.setTime(1718447400000);
 console.log("  setTime(1718447400000):", formatDateTime(newTime));
 
 // ============================================
-// Section 5: UTC Methods
+// 5. Section 5: UTC Methods
 // ============================================
 
 console.log("\nUTC Methods:");
@@ -195,7 +216,7 @@ console.log("    Local:", localDate.toLocaleString("en-US"));
 console.log("    UTC:", localDate.toUTCString());
 
 // ============================================
-// Section 6: Date Formatting
+// 6. Section 6: Date Formatting
 // ============================================
 
 console.log("\nDate Formatting:");
@@ -256,7 +277,7 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 console.log("  Intl.DateTimeFormat:", formatter.format(fmtDate));
 
 // ============================================
-// Section 7: Date Arithmetic
+// 7. Section 7: Date Arithmetic
 // ============================================
 
 console.log("\nDate Arithmetic:");
@@ -325,7 +346,7 @@ const weekdays = countWeekdays(new Date("2024-06-01"), new Date("2024-06-30"));
 console.log("  Weekdays in June 2024:", weekdays, "days");
 
 // ============================================
-// Section 8: Date Comparison
+// 8. Section 8: Date Comparison
 // ============================================
 
 console.log("\nDate Comparison:");
@@ -363,7 +384,7 @@ const rangeEnd = new Date("2024-12-31");
 console.log("  2024-06-15 in range 2024:", isDateInRange(checkDate, rangeStart, rangeEnd));
 
 // ============================================
-// Section 9: Timezone Handling
+// 9. Section 9: Timezone Handling
 // ============================================
 
 console.log("\nTimezone Handling:");
@@ -397,7 +418,7 @@ console.log("    London:", utcDate3.toLocaleString("en-US", { timeZone: "Europe/
 console.log("    Tokyo:", utcDate3.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
 // ============================================
-// Section 10: Timestamp Operations
+// 10. Section 10: Timestamp Operations
 // ============================================
 
 console.log("\nTimestamp Operations:");
@@ -439,7 +460,7 @@ measureTime((n) => {
 }, 1000000);
 
 // ============================================
-// Section 11: Common Pitfalls
+// 11. Section 11: Common Pitfalls
 // ============================================
 
 console.log("\nCommon Pitfalls:");
@@ -481,7 +502,7 @@ const overflow = new Date(2024, 12, 1); // Month 12 overflows
 console.log("    new Date(2024, 12, 1):", formatDate(overflow)); // 2025-01-01
 
 // ============================================
-// Section 12: Practical Examples
+// 12. Section 12: Practical Examples
 // ============================================
 
 console.log("\nPractical Examples:");
@@ -562,7 +583,7 @@ for (const [tz, time] of Object.entries(converted)) {
 }
 
 // ============================================
-// Section 13: Performance Considerations
+// 13. Section 13: Performance Considerations
 // ============================================
 
 console.log("\nPerformance Considerations:");
@@ -593,7 +614,7 @@ console.log(`    Recommendation: Use Date.now() for timestamps`);
 console.log("\n  Tip: Reuse date objects in loops");
 
 // ============================================
-// Section 14: Modern Alternatives
+// 14. Section 14: Modern Alternatives
 // ============================================
 
 console.log("\nModern Alternatives:");

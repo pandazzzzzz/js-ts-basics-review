@@ -3,6 +3,21 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. COMPOSITION OVER INHERITANCE
+// 2. FUNCTIONAL MIXINS
+// 3. PARASITIC COMPOSITION
+// 4. STRATEGY PATTERN
+// 5. OBSERVER PATTERN
+// 6. TEMPLATE METHOD PATTERN
+// 7. VISITOR PATTERN
+// 8. TRAITS PATTERN
+
+// ============================================
+
+// ============================================
 // 1. COMPOSITION OVER INHERITANCE
 // ============================================
 /**

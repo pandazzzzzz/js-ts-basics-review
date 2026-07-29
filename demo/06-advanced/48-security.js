@@ -6,6 +6,21 @@
 // ⚠️ Partial browser environment — DOM/Web Crypto sections require a browser or jsdom; Node crypto sections run in Node
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. XSS (Cross-Site Scripting) Protection
+// 2. CSRF (Cross-Site Request Forgery) Protection
+// 3. Content Security Policy (CSP)
+// 4. Secure Storage
+// 5. Input Validation
+// 6. Web Crypto API (Deep Dive)
+// 7. OWASP TOP 10 ADDITIONAL CONSIDERATIONS
+// 8. Trusted Types & Cross-Origin Isolation (COOP/COEP)
+
+// ============================================
+
+// ============================================
 // Section 1: XSS (Cross-Site Scripting) Protection
 // ============================================
 

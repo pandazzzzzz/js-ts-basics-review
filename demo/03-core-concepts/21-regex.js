@@ -3,6 +3,24 @@
 
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. CREATING REGULAR EXPRESSIONS
+// 2. BASIC PATTERNS
+// 3. REGULAR EXPRESSION METHODS
+// 4. FLAGS
+// 5. CAPTURING GROUPS
+// 6. LOOKAHEAD AND LOOKBEHIND
+// 7. PRACTICAL USE CASES
+// 8. COMMON PITFALLS
+// 9. BEST PRACTICES
+// 10. TYPESCRIPT CONSIDERATIONS
+// 11. NEWER REGEXP FEATURES (ES2024 & ES2025)
+
+// ============================================
+
+// ============================================
 // 1. CREATING REGULAR EXPRESSIONS
 // ============================================
 /**

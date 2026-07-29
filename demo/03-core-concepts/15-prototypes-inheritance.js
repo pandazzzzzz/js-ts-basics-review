@@ -2,6 +2,26 @@
 // 📘 For TypeScript comparison, see: 15-prototypes-inheritance-ts-comparison.ts
 
 // ============================================
+// Table of Contents
+// ============================================
+
+// 1. PROTOTYPE BASICS
+// 2. __PROTO__ VS PROTOTYPE
+// 3. PROTOTYPE CHAIN MECHANISM
+// 4. OBJECT.CREATE() - PROTOTYPE-BASED INHERITANCE
+// 5. CONSTRUCTOR FUNCTIONS AND 'NEW' KEYWORD
+// 6. INHERITANCE PATTERNS USING PROTOTYPES
+// 7. ES6 CLASSES AND PROTOTYPES
+// 8. OBJECT.GETPROTOTYPEOF AND OBJECT.SETPROTOTYPEOF
+// 9. PROTOTYPE PROPERTY LOOKUP
+// 10. COMPARING APPROACHES
+// 11. PRACTICAL EXAMPLE - SHAPE HIERARCHY
+// 12. COMMON PITFALLS
+// 13. BEST PRACTICES
+
+// ============================================
+
+// ============================================
 // 1. PROTOTYPE BASICS
 // ============================================
 

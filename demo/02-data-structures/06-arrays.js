@@ -2,7 +2,21 @@
 // 📘 For TypeScript comparison, see: 06-arrays-ts-comparison.ts
 
 // ============================================
-// Array Creation and Basics
+// Table of Contents
+// ============================================
+
+// 1. Array Creation and Basics
+// 2. Array Iteration Methods (Non-Mutating)
+// 3. Array Search Methods
+// 4. Array Manipulation Methods (Mutating)
+// 5. Array Manipulation Methods (Non-Mutating)
+// 6. Typed Arrays - Numeric Arrays with Fixed Type
+// 7. Array Destructuring (ES6/ES2015)
+
+// ============================================
+
+// ============================================
+// 1. Array Creation and Basics
 // ============================================
 
 // Array literal - Most common way to create arrays (ES1)
@@ -48,7 +62,7 @@ console.log("Array.isArray(null):", Array.isArray(null)); // false
 console.log("typeof []:", typeof []); // "object" (not reliable!)
 
 // ============================================
-// Array Iteration Methods (Non-Mutating)
+// 2. Array Iteration Methods (Non-Mutating)
 // ============================================
 
 // forEach - Execute function for each element (ES5)
@@ -121,7 +135,7 @@ const rightReduce = [1, 2, 3, 4].reduceRight((acc, n) => acc + n, 0);
 console.log("Right reduce:", rightReduce);
 
 // ============================================
-// Array Search Methods
+// 3. Array Search Methods
 // ============================================
 
 // find - Find first element matching condition (ES6/ES2015)
@@ -234,7 +248,7 @@ const lastIndexExample = [1, 2, 3, 2, 1].lastIndexOf(2);
 console.log("Last index of 2:", lastIndexExample);
 
 // ============================================
-// Array Manipulation Methods (Mutating)
+// 4. Array Manipulation Methods (Mutating)
 // ============================================
 
 // sort - Sort array in place (ES1)
@@ -337,7 +351,7 @@ toCopy.copyWithin(0, 3, 5); // Copy elements 3-5 to position 0
 console.log("copyWithin:", toCopy);
 
 // ============================================
-// Array Manipulation Methods (Non-Mutating)
+// 5. Array Manipulation Methods (Non-Mutating)
 // ============================================
 
 // slice - Extract portion (ES3)
@@ -456,7 +470,7 @@ console.log("Original:", toSplicedExample);
 console.log("Spliced:", toSplicedExample.toSpliced(2, 2, 99, 100));
 
 // ============================================
-// Typed Arrays - Numeric Arrays with Fixed Type
+// 6. Typed Arrays - Numeric Arrays with Fixed Type
 // ============================================
 
 // Typed Arrays - For high-performance numeric operations (ES6/ES2015)
@@ -511,7 +525,7 @@ console.log("  map:", typedArr.map(x => x * 2)); // Returns same-typed TypedArra
 console.log("  filter:", typedArr.filter(x => x > 5)); // Returns same-typed TypedArray
 
 // ============================================
-// Array Destructuring (ES6/ES2015)
+// 7. Array Destructuring (ES6/ES2015)
 // ============================================
 
 // Basic destructuring

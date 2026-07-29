@@ -5,7 +5,27 @@
 // 📌 Covers ES2021 ~ ES2027 features + Stage 2.7 proposals (Decorators)
 
 // ============================================
-// ES2021 Features (Brief Review)
+// Table of Contents
+// ============================================
+
+// 1. ES2021 Features (Brief Review)
+// 2. ES2022 Features
+// 3. ES2021: String Methods
+// 4. ES2021: Logical Assignment Operators
+// 5. ES2021: Numeric Separators
+// 6. ES2021: WeakRef
+// 7. ES2021: FinalizationRegistry
+// 8. ES2018: Intl.PluralRules
+// 9. ES2023 Features
+// 10. ES2024 Features
+// 11. ES2025 Features (Stage 4 / Finalized)
+// 12. ES2025 Features (continued) & ES2027
+// 13. ES2027 Proposals (Explicit Resource Management & Concurrency)
+
+// ============================================
+
+// ============================================
+// 1. ES2021 Features (Brief Review)
 // ============================================
 
 // Note: Promise combinators (Promise.all, Promise.race, Promise.allSettled, Promise.any)
@@ -63,7 +83,7 @@ console.log("\n⚠️ Stage 2.7 Proposals (not current standard):");
 console.log("  - Decorators (Stage 2.7 proposal - not current standard, see 50-reserved.js)");
 
 // ============================================
-// ES2022 Features
+// 2. ES2022 Features
 // ============================================
 
 // Note: Class enhancements covered in 16-classes.js
@@ -127,7 +147,7 @@ console.log("\n=== Top-level await (ES2022) ===");
 console.log("Note: Top-level await only works in ES modules");
 
 // ============================================
-// ES2021: String Methods
+// 3. ES2021: String Methods
 // ============================================
 
 console.log("\n=== String.replaceAll() (ES2021) ===");
@@ -155,7 +175,7 @@ console.log("  replace():", "cat cat cat".replace("cat", "dog")); // "dog cat ca
 console.log("  replaceAll():", "cat cat cat".replaceAll("cat", "dog")); // "dog dog dog"
 
 // ============================================
-// ES2021: Logical Assignment Operators
+// 4. ES2021: Logical Assignment Operators
 // ============================================
 
 console.log("\n=== Logical Assignment Operators (ES2021) ===");
@@ -194,7 +214,7 @@ config.timeout ??= 5000;
 console.log("Config defaults:", config);
 
 // ============================================
-// ES2021: Numeric Separators
+// 5. ES2021: Numeric Separators
 // ============================================
 
 console.log("\n=== Numeric Separators (ES2021) ===");
@@ -215,7 +235,7 @@ const newStyle = 1_000_000_000;
 console.log("Same value:", oldStyle === newStyle); // true
 
 // ============================================
-// ES2021: WeakRef
+// 6. ES2021: WeakRef
 // ============================================
 
 /*
@@ -239,7 +259,7 @@ weakTarget = null; // Remove strong reference
 console.log("After removing target:", weakRef.deref()); // { data: "important" } or undefined
 
 // ============================================
-// ES2021: FinalizationRegistry
+// 7. ES2021: FinalizationRegistry
 // ============================================
 
 /*
@@ -264,7 +284,7 @@ finalObj = null; // Remove strong reference
 // GC may trigger callback with "Object #1"
 
 // ============================================
-// ES2018: Intl.PluralRules
+// 8. ES2018: Intl.PluralRules
 // ============================================
 
 console.log("\n=== Intl.PluralRules (ES2018) ===");
@@ -354,7 +374,7 @@ console.log("Year indices:", match.indices.groups.year); // [0, 4]
 // Use case: Syntax highlighting, precise text replacement
 
 // ============================================
-// ES2023 Features
+// 9. ES2023 Features
 // ============================================
 
 // ============================================
@@ -430,7 +450,7 @@ console.log("\n=== Hashbang Syntax (ES2023) ===");
 console.log("Hashbang allows JS files to be executable scripts");
 
 // ============================================
-// ES2024 Features
+// 10. ES2024 Features
 // ============================================
 
 // ============================================
@@ -637,7 +657,7 @@ console.log(str.toWellFormed()); // "\\uFFFD" (replacement char)
 `);
 
 // ============================================
-// ES2025 Features (Stage 4 / Finalized)
+// 11. ES2025 Features (Stage 4 / Finalized)
 // ============================================
 
 // ============================================
@@ -1020,7 +1040,7 @@ console.log("- Network sockets");
 console.log("- Temporary resources");
 
 // ============================================
-// ES2025 Features (continued) & ES2027
+// 12. ES2025 Features (continued) & ES2027
 // ============================================
 
 /*
@@ -1373,7 +1393,7 @@ console.log("- Input validation with user-provided patterns");
 console.log("- Preventing ReDoS attacks from user-controlled regex");
 
 // ============================================
-// ES2027 Proposals (Explicit Resource Management & Concurrency)
+// 13. ES2027 Proposals (Explicit Resource Management & Concurrency)
 // ============================================
 
 /*
