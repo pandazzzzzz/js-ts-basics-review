@@ -591,53 +591,128 @@ console.log("4. innerHTML = '' to empty container: modern engines GC removed chi
 console.log("5. Don't mix reads and writes of styles in tight loops");
 console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
 
+// ============================================
+// Section 6: MutationObserver
+// ============================================
+// Description: React to DOM changes without polling (DOM Living Standard)
+// ES Spec: WHATWG DOM Living Standard (2012+)
+// Characteristics:
+//   - Observes mutations: child list, attributes, character data
+//   - Delivers batches of mutations asynchronously (microtask queue)
+//   - Replaces deprecated Mutation Events (DOMAttrModified, etc.)
+//   - More efficient than polling with setInterval
+// Use Cases:
+//   - Auto-save on contenteditable changes
+//   - Lazy-load elements as they appear (prefer IntersectionObserver for that)
+//   - Detect third-party DOM modifications
+//   - Highlight elements when attributes change
+// Common Pitfalls:
+//   - subtree: true can be expensive on large DOM trees
+//   - Forgetting to call disconnect() causes memory leaks
+//   - Observing attribute changes triggers for every attribute set, even if value unchanged
+//   - Mutation records are batched — don't expect synchronous callbacks
+
+console.log("\n=== Section 6: MutationObserver Demo ===\n");
+
+if (typeof MutationObserver === 'undefined') {
+  console.log("⚠️ Non-browser environment, MutationObserver examples shown in code form");
+
+  console.log(`
+// Basic usage: watch for changes to an element
+const target = document.querySelector('#watched');
+
+const observer = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    switch (mutation.type) {
+      case 'childList':
+        console.log('Added nodes:', mutation.addedNodes.length);
+        console.log('Removed nodes:', mutation.removedNodes.length);
+        if (mutation.addedNodes.length > 0) {
+          // New nodes appeared — e.g. lazy-init content
+        }
+        break;
+      case 'attributes':
+        console.log('Attribute changed:', mutation.attributeName);
+        console.log('Old value:', mutation.oldValue);
+        console.log('New value:', mutation.target.getAttribute(mutation.attributeName));
+        break;
+      case 'characterData':
+        console.log('Text changed from', mutation.oldValue, 'to', mutation.target.textContent);
+        break;
+    }
+  }
+});
+
+// Configuration options (all booleans, default false unless noted):
+observer.observe(target, {
+  childList: true,            // Watch for added/removed child nodes
+  attributes: true,           // Watch attribute changes
+  characterData: true,        // Watch text content changes
+  subtree: true,              // Watch ALL descendants too (costly!)
+  attributeOldValue: true,    // Record previous attribute value in mutation.oldValue
+  characterDataOldValue: true,// Record previous text in mutation.oldValue
+  attributeFilter: ['class', 'id'],  // Only watch specific attributes (omit = all)
+});
+
+// Stop observing and flush pending records
+observer.disconnect();
+
+// Take records without waiting for callback (e.g. before cleanup)
+const pending = observer.takeRecords();
+`);
+} else {
+  // Browser environment demo (runnable with a real DOM)
+  console.log("✅ Browser environment detected — running MutationObserver demo");
+
+  // Create a target element if document exists
+  const target = document.createElement('div');
+  target.id = 'watched';
+  document.body?.appendChild(target);
+
+  const mutationsLog = [];
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach(m => mutationsLog.push({
+      type: m.type,
+      attributeName: m.attributeName,
+      addedCount: m.addedNodes?.length || 0,
+      removedCount: m.removedNodes?.length || 0
+    }));
+  });
+
+  observer.observe(target, {
+    childList: true,
+    attributes: true,
+    attributeOldValue: true
+  });
+
+  // Trigger mutations
+  const child = document.createElement('span');
+  child.textContent = 'Hello';
+  target.appendChild(child);       // childList mutation
+  target.setAttribute('class', 'active'); // attributes mutation
+  child.textContent = 'World';     // characterData (NOT observed without subtree)
+
+  // Force flush by disconnecting
+  observer.disconnect();
+
+  console.log("Mutations recorded:", mutationsLog.length);
+  mutationsLog.forEach(m => console.log(" -", m));
+
+  target.remove(); // cleanup
+}
+
+console.log("\n💡 MutationObserver vs other APIs:");
+console.log("- Use IntersectionObserver for visibility (scroll/lazy-load)");
+console.log("- Use ResizeObserver for size changes");
+console.log("- Use MutationObserver for structural/attribute changes");
+console.log("- Avoid polling with setInterval for DOM changes\n");
+
+
 console.log("📚 Reference Documentation:\n");
 console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement");
 console.log("- javascript.info: https://javascript.info/modifying-document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
 console.log("- High Performance Animations: https://web.dev/animations-guide/\n");
-
-console.log("🔍 MutationObserver — Watch for DOM changes:\n");
-console.log(`
-// MutationObserver watches for changes to the DOM tree
-// More efficient than polling or mutation events (deprecated)
-
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    switch (mutation.type) {
-      case 'childList':
-        console.log('Added nodes:', mutation.addedNodes.length);
-        console.log('Removed nodes:', mutation.removedNodes.length);
-        break;
-      case 'attributes':
-        console.log('Attribute changed:', mutation.attributeName, '→', mutation.target.getAttribute(mutation.attributeName));
-        break;
-      case 'characterData':
-        console.log('Text content changed:', mutation.target.textContent);
-        break;
-    }
-  });
-});
-
-// Configuration options
-observer.observe(targetElement, {
-  childList: true,        // Watch for added/removed child nodes
-  attributes: true,       // Watch for attribute changes
-  characterData: true,    // Watch for text content changes
-  subtree: true,          // Watch descendants too (expensive!)
-  attributeOldValue: true, // Include previous attribute value
-  characterDataOldValue: true // Include previous text value
-});
-
-// Later: stop observing
-observer.disconnect();
-
-// Use cases:
-// - Auto-save on content changes
-// - Lazy-loading elements when they appear
-// - Syntax highlighting dynamic content
-// - Form auto-save
-`);
 
 
 // ============================================
