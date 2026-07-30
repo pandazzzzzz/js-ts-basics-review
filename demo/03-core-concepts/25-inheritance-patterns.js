@@ -251,11 +251,55 @@ fullUser.log('Composed mixins work!');
 console.log('Created at:', fullUser.createdAt);
 
 // 2.4 Mixin collision detection
-const CollisionDetectingMixin = (superclass) => class extends superclass {
-  constructor(...args) {
-    super(...args);
+// When multiple mixins define methods with the same name,
+// later mixins silently override earlier ones. Collision detection
+// warns about name conflicts to prevent subtle bugs.
+function mixWithCollisionDetection(...mixins) {
+  return (superclass) => {
+    const seen = new Map(); // methodName -> mixinName
+
+    for (const mixin of mixins) {
+      const mixinName = mixin.name || 'anonymous';
+      const proto = mixin(class {}).prototype;
+
+      for (const name of Object.getOwnPropertyNames(proto)) {
+        if (name === 'constructor') continue;
+        if (seen.has(name)) {
+          console.warn(`Mixin collision: "${name}" defined by both ` +
+            `${seen.get(name)} and ${mixinName}. ` +
+            `${mixinName} will take precedence.`);
+        } else {
+          seen.set(name, mixinName);
+        }
+      }
+    }
+
+    return mixins.reduce((cls, m) => m(cls), superclass);
+  };
+}
+
+// Example: two mixins both define a "serialize" method
+const JSONSerializable = (superclass) => class extends superclass {
+  serialize() {
+    return JSON.stringify({ ...this });
   }
 };
+
+const FormSerializable = (superclass) => class extends superclass {
+  serialize() {
+    return new URLSearchParams({ ...this }).toString();
+  }
+};
+
+console.log("\nMixin collision detection:");
+console.log("Creating class with two mixins that both define 'serialize'...");
+const CollidingUser = mixWithCollisionDetection(
+  Loggable, JSONSerializable, FormSerializable
+)(User);
+console.log("(Warning message above shows the collision)");
+
+const collisionUser = new CollidingUser('Test');
+console.log("serialize() result (last mixin wins):", collisionUser.serialize());
 
 // 2.5 Conditional mixins
 function withFeature(featureEnabled) {
