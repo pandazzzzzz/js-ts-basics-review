@@ -915,6 +915,14 @@ searchAPI('a');
 searchAPI('ab');
 searchAPI('abc');
 
+function heavyComputation(value) {
+  // Simulate heavy computation
+  let result = 0;
+  for (let i = 0; i < 1000000; i++) {
+    result += Math.sqrt(i) * value;
+  }
+  return result;
+}
 
 // ============================================
 // COMMON PITFALLS
@@ -923,19 +931,122 @@ console.log("\n=== Function Patterns Common Pitfalls Demo ===");
 
 // Pitfall 1: Stack overflow with deep recursion
 console.log("\nPitfall 1 - Deep recursion:");
-console.log("Use trampolines or iteration for deep recursion");
+console.log("❌ Bad: Unbounded recursion without tail calls");
+function recursiveFactorial(n) {
+  if (n <= 1) return 1;
+  return n * recursiveFactorial(n - 1); // Stack grows with each call
+}
+// recursiveFactorial(10000); // ❌ RangeError: Maximum call stack size exceeded
+
+console.log("✅ Good: Use trampoline for deep recursion");
+function factorialWithTrampoline(n, accumulator = 1) {
+  if (n <= 1) return accumulator;
+  return () => factorialWithTrampoline(n - 1, n * accumulator); // Return thunk, no stack growth
+}
+
+function trampoline(fn) {
+  return function(...args) {
+    let result = fn(...args);
+    while (typeof result === 'function') {
+      result = result();
+    }
+    return result;
+  };
+}
+
+const trampolinedFactorial = trampoline(factorialWithTrampoline);
+console.log("Trampolined factorial(10000) works:", trampolinedFactorial(10000).toString().slice(0, 20) + "...");
 
 // Pitfall 2: Memory leak with unclosed functions
 console.log("\nPitfall 2 - Memory leaks:");
-console.log("Clear caches and avoid retaining unnecessary references");
+console.log("❌ Bad: Caching without eviction policy");
+const badCache = new Map();
+function badCachedFunction(key, value) {
+  if (!badCache.has(key)) {
+    badCache.set(key, heavyComputation(value));
+  }
+  return badCache.get(key);
+}
+// Cache grows forever, never evicts old entries
+
+console.log("✅ Good: Use LRU cache with size limit");
+class LRUCache {
+  constructor(maxSize = 100) {
+    this.cache = new Map();
+    this.maxSize = maxSize;
+  }
+
+  get(key) {
+    if (!this.cache.has(key)) return null;
+    // Move to end to mark as recently used
+    const value = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key, value);
+    return value;
+  }
+
+  set(key, value) {
+    if (this.cache.has(key)) {
+      this.cache.delete(key);
+    } else if (this.cache.size >= this.maxSize) {
+      // Evict least recently used (first entry)
+      const oldestKey = this.cache.keys().next().value;
+      this.cache.delete(oldestKey);
+    }
+    this.cache.set(key, value);
+  }
+}
+
+const goodCache = new LRUCache(100);
+function goodCachedFunction(key, value) {
+  if (!goodCache.get(key)) {
+    goodCache.set(key, heavyComputation(value));
+  }
+  return goodCache.get(key);
+}
+console.log("LRU cache limits size to 100 entries, automatically evicts old ones");
 
 // Pitfall 3: Incorrect debounce/throttle timing
 console.log("\nPitfall 3 - Wrong timing values:");
-console.log("Choose delay values based on use case");
+console.log("❌ Bad: Debounce too short for API calls");
+const badDebouncedSearch = debounce((query) => {
+  console.log(`API call for: ${query}`); // Will fire too often
+}, 50); // 50ms is too short for search inputs
+
+console.log("✅ Good: Choose appropriate delay based on use case");
+const goodDebouncedSearch = debounce((query) => {
+  console.log(`API call for: ${query}`); // Fires after user stops typing
+}, 300); // 300ms is reasonable for search inputs
+
+const goodThrottledResize = throttle(() => {
+  console.log("Resize handler (throttled)");
+}, 100); // 100ms for resize events (10fps is smooth enough)
+
+console.log("Search: 200-500ms, Resize: 50-150ms, Scroll: 100-300ms");
 
 // Pitfall 4: Over-composing functions
 console.log("\nPitfall 4 - Over-composition:");
-console.log("Too many composed functions are hard to debug");
+console.log("❌ Bad: Too many composed functions are hard to debug");
+const badFormat = pipe(
+  trim,
+  toUpper,
+  addPrefix('Dr.'),
+  (str) => str.split(' '),
+  (arr) => arr.reverse(),
+  (arr) => arr.join(', '),
+  (str) => `[${str}]`
+);
+// Hard to trace where errors occur in the chain
+
+console.log("✅ Good: Keep composition chains short and readable");
+const simpleFormat = pipe(trim, toUpper, addPrefix('Dr.'));
+function formatFormalName(name) {
+  const formatted = simpleFormat(name);
+  const [first, last] = formatted.split(' ');
+  return `[${last}, ${first}]`;
+}
+console.log("Bad format('  alice smith  ') → ", badFormat('  alice smith  '));
+console.log("Good format('  alice smith  ') → ", formatFormalName('  alice smith  '));
 
 
 // ============================================

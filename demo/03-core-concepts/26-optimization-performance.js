@@ -975,23 +975,117 @@ console.log("\n=== 9. Common Performance Pitfalls Demo ===");
 
 // 9.1 Pitfall: Unnecessary re-renders
 console.log("\nPitfall 1 - Unnecessary work:");
-console.log("Bad: Recalculating unchanged values");
-console.log("Good: Memoize or cache results");
+console.log("❌ Bad: Recalculating unchanged values on every call");
+function badFilterList(list, filterText) {
+  // Filter runs EVERY time the function is called, even if filterText hasn't changed
+  return list.filter(item => item.includes(filterText));
+}
+
+const largeList = Array.from({ length: 10000 }, (_, i) => `item-${i}`);
+console.log("Bad: Filter runs every time, even for same filter");
+console.time("bad-filter-1");
+badFilterList(largeList, "123");
+console.timeEnd("bad-filter-1");
+console.time("bad-filter-2");
+badFilterList(largeList, "123"); // Same filter, runs again
+console.timeEnd("bad-filter-2");
+
+console.log("\n✅ Good: Memoize or cache results for unchanged inputs");
+function memoize(fn) {
+  const cache = new Map();
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+const goodFilterList = memoize((list, filterText) => {
+  return list.filter(item => item.includes(filterText));
+});
+
+console.log("Good: Filter runs only once for same inputs");
+console.time("good-filter-1");
+goodFilterList(largeList, "123");
+console.timeEnd("good-filter-1");
+console.time("good-filter-2");
+goodFilterList(largeList, "123"); // Cache hit, no recalculation
+console.timeEnd("good-filter-2");
 
 // 9.2 Pitfall: Synchronous XHR/fetch
 console.log("\nPitfall 2 - Blocking operations:");
-console.log("Bad: Synchronous network requests");
-console.log("Good: Use async/await properly");
+console.log("❌ Bad: Synchronous network requests block the main thread");
+/*
+// Bad example (commented out - would block):
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.example.com/data', false); // false = synchronous
+xhr.send(); // Blocks all UI interaction until request completes
+console.log(xhr.responseText);
+*/
+console.log("Synchronous requests freeze the entire page until they complete");
+
+console.log("\n✅ Good: Use async/await properly to avoid blocking");
+async function goodFetchData(url) {
+  const response = await fetch(url); // Async - doesn't block
+  return response.json();
+}
+console.log("Async requests allow UI to remain responsive while loading");
 
 // 9.3 Pitfall: Large array operations
 console.log("\nPitfall 3 - Large array operations:");
-console.log("Bad: Processing entire array at once");
-console.log("Good: Chunk or use generators");
+console.log("❌ Bad: Processing entire array at once blocks the thread");
+const hugeArray = Array.from({ length: 1000000 }, (_, i) => i);
+console.time("bad-array-process");
+const badDoubled = hugeArray.map(n => n * 2); // Processes all 1M items at once
+console.timeEnd("bad-array-process");
+
+console.log("\n✅ Good: Chunk or use generators to process incrementally");
+function* chunkedProcess(array, chunkSize = 1000) {
+  for (let i = 0; i < array.length; i += chunkSize) {
+    const chunk = array.slice(i, i + chunkSize);
+    yield chunk.map(n => n * 2);
+  }
+}
+
+console.time("good-array-process");
+const goodDoubled = [];
+for (const chunk of chunkedProcess(hugeArray, 1000)) {
+  goodDoubled.push(...chunk);
+  // Optionally yield to event loop between chunks:
+  // await new Promise(resolve => setTimeout(resolve, 0));
+}
+console.timeEnd("good-array-process");
+console.log("Chunked processing allows main thread to handle other tasks between chunks");
 
 // 9.4 Pitfall: Excessive DOM manipulation
 console.log("\nPitfall 4 - DOM thrashing:");
-console.log("Bad: Multiple layout-triggering reads/writes");
-console.log("Good: Batch DOM operations");
+console.log("❌ Bad: Multiple layout-triggering reads/writes interleaved");
+/*
+// Bad example (commented out - needs DOM environment):
+const elements = document.querySelectorAll('.item');
+elements.forEach(el => {
+  // Read (triggers layout)
+  const height = el.offsetHeight;
+  // Write (invalidates layout)
+  el.style.height = `${height + 10}px`;
+}); // Causes layout recalculation for EVERY element
+*/
+console.log("Interleaved read/write causes forced synchronous layouts (layout thrashing)");
+
+console.log("\n✅ Good: Batch DOM operations");
+/*
+// Good example (commented out - needs DOM environment):
+const elements = document.querySelectorAll('.item');
+// First: Read ALL layout values
+const heights = Array.from(elements).map(el => el.offsetHeight);
+// Then: Write ALL changes
+elements.forEach((el, i) => {
+  el.style.height = `${heights[i] + 10}px`;
+}); // Only one layout recalculation needed
+*/
+console.log("Batch reads then writes to minimize layout recalculations");
 
 // 9.5 Live demo: Efficient vs inefficient
 function inefficientSum(n) {
