@@ -900,9 +900,9 @@ async function mixingCallbacks() {
 
 mixingCallbacks();
 
-// ============================================
-// BEST PRACTICES SUMMARY
-// ============================================
+
+// Best Practices Summary
+
 
 console.log("\n=== Best Practices Summary ===\n");
 console.log(`

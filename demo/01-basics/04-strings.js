@@ -747,9 +747,6 @@ console.log("emoji.charAt(0):", emoji.charAt(0)); // � (invalid)
 console.log("emoji.codePointAt(0):", emoji.codePointAt(0)); // 128512 (correct)
 console.log("[...emoji].length:", [...emoji].length); // 1 (correct with spread)
 
-// ============================================
-// Best Practices
-// ============================================
 
 console.log("\n=== Best Practices ===");
 

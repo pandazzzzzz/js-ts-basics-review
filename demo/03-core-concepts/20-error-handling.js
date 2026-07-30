@@ -11,13 +11,12 @@
 // 4. Custom Error Classes
 // 5. Error Propagation
 // 6. Common Pitfalls & Best Practices
-// 7. Best Practices
-// 8. Real-World Examples
-// 9. ASYNC ERROR HANDLING (BASIC)
-// 10. ERROR CHAINING WITH ERROR.CAUSE
-// 11. AGGREGATEERROR - MULTIPLE ERRORS
-// 12. RETRY WITH BACKOFF
-// 13. GLOBAL ERROR HANDLING
+// 7. Real-World Examples
+// 8. ASYNC ERROR HANDLING (BASIC)
+// 9. ERROR CHAINING WITH ERROR.CAUSE
+// 10. AGGREGATEERROR - MULTIPLE ERRORS
+// 11. RETRY WITH BACKOFF
+// 12. GLOBAL ERROR HANDLING
 
 // ============================================
 
@@ -850,9 +849,6 @@ function validateInput(input) {
 // Note: throw stops execution, no return needed
 // But be aware of unreachable code
 
-// ============================================
-// 7. Best Practices
-// ============================================
 
 console.log("\n=== Best Practices ===");
 
@@ -1037,7 +1033,7 @@ const result1 = errorBoundary(() => {
 console.log("   App continues:", result1);
 
 // ============================================
-// 8. Real-World Examples
+// 7. Real-World Examples
 // ============================================
 
 console.log("\n=== Real-World Examples ===");
@@ -1193,7 +1189,7 @@ try {
 
 
 // ============================================
-// 9. ASYNC ERROR HANDLING (BASIC)
+// 8. ASYNC ERROR HANDLING (BASIC)
 // ============================================
 /**
  * Async Error Handling - Basic patterns (see 34-async-error-handling.js for details)
@@ -1249,7 +1245,7 @@ saferAsyncHandling();
  */
 
 // ============================================
-// 10. ERROR CHAINING WITH ERROR.CAUSE
+// 9. ERROR CHAINING WITH ERROR.CAUSE
 // ============================================
 /**
  * Error Chaining - Preserving error context (ES2022)
@@ -1298,7 +1294,7 @@ try {
 
 
 // ============================================
-// 11. AGGREGATEERROR - MULTIPLE ERRORS
+// 10. AGGREGATEERROR - MULTIPLE ERRORS
 // ============================================
 /**
  * AggregateError - Representing multiple errors (ES2021)
@@ -1357,7 +1353,7 @@ Promise.any(promises)
 
 
 // ============================================
-// 12. RETRY WITH BACKOFF
+// 11. RETRY WITH BACKOFF
 // ============================================
 /**
  * Retry Pattern - Retrying failed operations (ES6+)
@@ -1408,7 +1404,7 @@ retry(flakyOperation, 5, 50)
 
 
 // ============================================
-// 13. GLOBAL ERROR HANDLING
+// 12. GLOBAL ERROR HANDLING
 // ============================================
 /**
  * Global Error Handling - Last resort error catching (ES6+)

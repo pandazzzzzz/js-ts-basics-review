@@ -631,9 +631,9 @@ function goodFetchUser(id) {
 goodFetchUser(1)
   .then(user => console.log("  ✅ User fetched correctly:", user.name));
 
-// ============================================
-// BEST PRACTICES SUMMARY
-// ============================================
+
+// Best Practices Summary
+
 
 console.log("\n=== Best Practices Summary ===\n");
 console.log(`
