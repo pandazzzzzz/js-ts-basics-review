@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVerified": "2026-07-15",
+    "lastVerified": "2026-07-31",
     "source": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
     "activeProposalsSource": "https://github.com/tc39/proposals/blob/main/README.md",
     "rule": "stage4Date 用 TC39 notes 的 for-stage-4 anchor（stage4DateType=exact）；早期/无 anchor 特性用合并 commit 等里程碑（stage4DateType=milestone）",
