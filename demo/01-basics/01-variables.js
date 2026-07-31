@@ -4,6 +4,12 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the basic building blocks of JavaScript.
+// Read the sections in order to see how variables, values, and simple syntax work together.
+
+// ============================================
 // 1. JavaScript in HTML (JS.info 2.1)
 // ============================================
 

@@ -4,6 +4,12 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces debugging and testing habits that help developers understand code behavior more quickly.
+// The examples focus on practical browser console techniques and the fundamentals of test-minded debugging.
+
+// ============================================
 // Section 1: Console Methods
 // ============================================
 

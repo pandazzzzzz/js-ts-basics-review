@@ -2,6 +2,13 @@
 // 📘 For TypeScript comparison, see: 31-async-await-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file explains async/await as a follow-up to promises.
+// The examples are arranged to show how the syntax changes the way you think about flow control.
+// Read the sections in order to see the progression from basic usage to error handling.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -5,6 +5,12 @@
 // 📌 ES6 (ES2015)
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces destructuring as a concise way to unpack values from arrays and objects.
+// The examples focus on the most common patterns first and then show how the same idea applies to rest syntax.
+
+// ============================================
 // Section 1: Array Destructuring
 // ============================================
 

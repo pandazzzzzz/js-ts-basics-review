@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces proxies and the Reflect API as tools for intercepting and customizing object behavior.
+// The examples focus on the idea of wrapping behavior rather than on advanced production patterns alone.
+
+// ============================================
 // Table of Contents
 // ============================================
 

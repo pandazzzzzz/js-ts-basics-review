@@ -5,6 +5,13 @@
 // ⚠️ Browser environment only
 
 // ============================================
+// Learning goals
+// ============================================
+// This file focuses on how forms work in the browser.
+// The examples are browser-only, so they are most useful when read together with a page or a DOM environment.
+// The sections move from form access, to events, to validation and feedback.
+
+// ============================================
 // Section 1: Form Element Access
 // ============================================
 // Description: Multiple ways to access and manipulate forms and their controls

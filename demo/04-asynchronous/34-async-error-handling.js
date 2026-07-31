@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces error handling for asynchronous code in a way that builds on promises and async/await.
+// The examples show how errors propagate and how to recover from them safely.
+
+// ============================================
 // Table of Contents
 // ============================================
 

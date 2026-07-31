@@ -5,6 +5,12 @@
 // 📌 Covers webpack, vite, code splitting, and production optimization
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces common build-tool concepts that support modern JavaScript workflows.
+// The examples show how bundlers and tooling shape the way code is delivered and optimized.
+
+// ============================================
 // Table of Contents
 // ============================================
 

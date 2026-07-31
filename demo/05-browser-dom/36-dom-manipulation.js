@@ -5,6 +5,12 @@
 // ⚠️ Browser environment only
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces DOM manipulation as the process of creating and updating page content dynamically.
+// The examples progress from creating elements to updating attributes and structure.
+
+// ============================================
 // Section 1: Creating Elements
 // ============================================
 // Description: Dynamically creating DOM elements and text nodes

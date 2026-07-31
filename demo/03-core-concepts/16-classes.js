@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces classes as a clearer syntax for object-oriented patterns in JavaScript.
+// The sections move from basic syntax to inheritance, encapsulation, and the relationship with prototypes.
+
+// ============================================
 // Table of Contents
 // ============================================
 

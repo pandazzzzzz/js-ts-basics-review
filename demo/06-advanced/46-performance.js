@@ -5,6 +5,12 @@
 // 📌 Covers performance measurement and optimization techniques
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces web performance measurement and common optimization techniques.
+// The examples focus on how to observe runtime cost and interpret the results rather than on a single best-practice recipe.
+
+// ============================================
 // Section 1: Performance API (W3C / WHATWG Web API, not ECMAScript)
 // - performance.now() provides high-resolution timestamps (High Resolution Time)
 // - PerformanceObserver added via Performance Timeline (W3C/WHATWG)

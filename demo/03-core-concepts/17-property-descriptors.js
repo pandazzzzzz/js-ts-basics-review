@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces property descriptors and configuration flags that control how object properties behave.
+// The examples show how the language exposes low-level behavior that is often hidden behind everyday syntax.
+
+// ============================================
 // Table of Contents
 // ============================================
 

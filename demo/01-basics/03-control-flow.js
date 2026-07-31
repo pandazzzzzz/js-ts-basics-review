@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 03-control-flow-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces how programs make decisions and repeat work.
+// Read the sections in order to connect conditionals, loops, and error handling as part of the same flow-control story.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file explains how the this keyword is determined at call time rather than at declaration time.
+// The examples progress from basic rules to common loss-of-context patterns and explicit binding techniques.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -10,6 +10,12 @@
 // Stage annotations follow reference/active.json and reference/withdrawn.json.
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the idea of proposal stages and future JavaScript features.
+// It is intended as a reference for how new ideas move toward standardization rather than as a core learning module.
+
+// ============================================
 // Section 1: TC39 Proposal Stages
 // ============================================
 

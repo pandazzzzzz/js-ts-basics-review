@@ -5,6 +5,12 @@
 // ⚠️ Browser environment only
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the browser event system as the main way to respond to user interaction.
+// The examples cover basic event binding, propagation, and common event patterns.
+
+// ============================================
 // Section 1: Event Basics
 // ============================================
 // Description: The DOM event system is the core mechanism for user interaction and programmatic response

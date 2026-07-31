@@ -5,6 +5,12 @@
 // ⚠️ Most content is browser-specific
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces browser storage and advanced network patterns that are common in modern web applications.
+// The sections move from simple storage APIs to more advanced network communication techniques.
+
+// ============================================
 // Table of Contents
 // ============================================
 

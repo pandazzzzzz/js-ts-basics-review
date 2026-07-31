@@ -4,6 +4,12 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces typed arrays as a way to work with binary data in JavaScript.
+// The examples show how ArrayBuffer and typed views are used to represent structured memory.
+
+// ============================================
 // Section 1: ArrayBuffer
 // ============================================
 

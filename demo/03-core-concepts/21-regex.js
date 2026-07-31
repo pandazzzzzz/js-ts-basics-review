@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces regular expressions as a concise way to describe patterns in text.
+// The examples progress from simple matching to groups, flags, and practical use cases.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -7,6 +7,12 @@
 // 📌 Covers JavaScript metaprogramming features used by TypeScript
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces TypeScript-oriented JavaScript patterns that help bridge the gap between plain JavaScript and typed development.
+// The examples focus on practical tooling hints and metaprogramming concepts rather than on deep type theory.
+
+// ============================================
 // Section 1: JSDoc Type Hints (JavaScript)
 // ============================================
 

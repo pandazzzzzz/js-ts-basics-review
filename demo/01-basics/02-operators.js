@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces common operators and how they combine values into expressions.
+// The examples are arranged to help you compare similar operators such as arithmetic, comparison, and logical operators.
+
+// ============================================
 // Table of Contents
 // ============================================
 

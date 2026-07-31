@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 29-event-loop-callbacks-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the event loop and callback-based execution model that underpins asynchronous JavaScript.
+// The examples show how the call stack, queues, and timing interact in practice.
+
+// ============================================
 // Table of Contents
 // ============================================
 

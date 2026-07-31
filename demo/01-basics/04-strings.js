@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 04-strings-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces strings and the common patterns used to create and manipulate text.
+// The examples focus on the most practical string operations before moving to more advanced usage.
+
+// ============================================
 // String Creation Methods
 // ============================================
 

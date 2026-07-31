@@ -6,6 +6,12 @@
 // 📌 ES6 (ES2015)
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces Map and Set as built-in collections with behavior that differs from plain objects.
+// The examples highlight when to choose each collection and how their APIs compare.
+
+// ============================================
 // Section 1: Map Basics
 // ============================================
 

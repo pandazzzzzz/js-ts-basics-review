@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces scope and closures, which are central to understanding how variables and functions behave in JavaScript.
+// The sections build from basic scope rules to more advanced closure patterns and common pitfalls.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -5,6 +5,13 @@
 // 📌 Covers ES6/ES2015 through ES2023+ modern syntax features
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces modern JavaScript syntax in a gradual order.
+// Start from the top and read through the sections one by one.
+// The examples are intentionally small so the syntax patterns are easy to compare.
+
+// ============================================
 // Table of Contents
 // ============================================
 

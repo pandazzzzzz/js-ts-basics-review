@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 15-prototypes-inheritance-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces prototypes and inheritance as the underlying mechanism behind object behavior in JavaScript.
+// The sections compare prototype-based patterns with class-based syntax so the relationship is easier to see.
+
+// ============================================
 // Table of Contents
 // ============================================
 

@@ -5,6 +5,12 @@
 export {}; // Make this file a module
 
 // ============================================
+// Learning goals
+// ============================================
+// This file compares TypeScript-oriented patterns for performance measurement and optimization.
+// The examples focus on how typing can make performance-related code easier to read and maintain.
+
+// ============================================
 // Section 1: Performance API - Type Safety
 // ============================================
 

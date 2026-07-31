@@ -6,6 +6,12 @@
 // ⚠️ Partial browser environment — DOM/Web Crypto sections require a browser or jsdom; Node crypto sections run in Node
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces common web security ideas that matter when JavaScript is used in real applications.
+// The sections highlight core risks and the basic safeguards that help reduce them.
+
+// ============================================
 // Table of Contents
 // ============================================
 

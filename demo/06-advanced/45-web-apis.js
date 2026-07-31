@@ -5,22 +5,30 @@
 // 📌 Covers important modern Web APIs
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces browser-side APIs you will often see in modern web apps.
+// Most examples are browser-only and should be read in that context.
+// Some APIs require HTTPS, user permission, or an explicit user gesture.
+
+// ============================================
 // Table of Contents
 // ============================================
 
-// 1. Service Workers
-// 2. Web Workers
-// 3. Intersection Observer
-// 4. Geolocation API
-// 5. WebSocket API
-// 6. Additional Web APIs
-// 7. NEW WEB APIs (2024-2025)
-// 9. WEB COMPONENTS (Custom Elements + Shadow DOM)
-// 10. ADDITIONAL WEB APIs (Overview)
-// 11. WEB AUDIO API
-// 12. WEBRTC (Real-Time Communication)
-// 14. BEST PRACTICES
-// 15. TYPESCRIPT COMPARISON NOTES
+// 1. Service Workers and Web Workers
+// 2. Intersection Observer
+// 3. Geolocation API
+// 4. WebSocket API
+// 5. Additional browser APIs
+// 6. Newer Web APIs
+// 7. Canvas API
+// 8. Web Components
+// 9. Additional Web APIs Overview
+// 10. Web Audio API
+// 11. WebRTC
+// 12. Common pitfalls
+// 13. Best practices
+// 14. TypeScript comparison notes
 
 // ============================================
 
@@ -434,7 +442,7 @@ createWebSocket();
 // ⚠️ Firewall/proxy issues
 
 // ============================================
-// Section 6: Additional Web APIs
+// Section 5: Additional browser APIs
 // ============================================
 
 console.log("\n=== Additional Web APIs ===");
@@ -519,7 +527,7 @@ if ('getBattery' in navigator) {
 
 // ============================================
 // ============================================
-// 7. NEW WEB APIs (2024-2025)
+// Section 6: Newer Web APIs
 // ============================================
 
 console.log("\n=== New Web APIs (2024-2025) ===\n");
@@ -567,7 +575,7 @@ Note: Check caniuse.com for current browser support
 // ============================================
 `);
 
-// 8. CANVAS API (2D Graphics)
+// Section 7: Canvas API
 // ============================================
 /**
  * Canvas API — Programmatic 2D drawing
@@ -662,7 +670,7 @@ console.log("For 3D graphics, see WebGL or WebGPU instead");
 
 
 // ============================================
-// 9. WEB COMPONENTS (Custom Elements + Shadow DOM)
+// Section 8: Web Components (Custom Elements + Shadow DOM)
 // ============================================
 /**
  * Web Components — Reusable, encapsulated custom HTML elements
@@ -777,7 +785,7 @@ console.log("Key benefit: Framework-agnostic, built-in browser standard");
 
 
 // ============================================
-// 10. ADDITIONAL WEB APIs (Overview)
+// Section 9: Additional Web APIs Overview
 // ============================================
 /**
  * Other important Web APIs to be aware of:
@@ -820,7 +828,7 @@ console.log("Drag & Drop: Native drag-and-drop with draggable elements");
 console.log("BroadcastChannel: Cross-tab communication without polling");
 
 // ============================================
-// 11. WEB AUDIO API
+// Section 10: Web Audio API
 // ============================================
 /**
  * Web Audio API — Audio processing and synthesis
@@ -887,7 +895,7 @@ console.log("Key nodes: Oscillator, Gain, BiquadFilter, Analyser, Panner, Convol
 
 
 // ============================================
-// 12. WEBRTC (Real-Time Communication)
+// Section 11: WebRTC (Real-Time Communication)
 // ============================================
 /**
  * WebRTC — Peer-to-peer real-time communication
@@ -946,7 +954,7 @@ console.log("WebRTC enables peer-to-peer audio/video/data communication");
 console.log("Key APIs: getUserMedia, RTCPeerConnection, RTCDataChannel");
 console.log("Requires signaling server for connection establishment (not included in API)");
 `);
-// 13. COMMON PITFALLS
+// Section 12: Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -982,7 +990,7 @@ console.log("  Description: navigator.clipboard.readText() requires both user pe
 console.log("  Fix: Use the Clipboard API only inside event handlers triggered by user actions. Wrap calls in try/catch. Use document.execCommand('copy') as a fallback for older browsers.");
 
 // ============================================
-// 14. BEST PRACTICES
+// Section 13: Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -1004,7 +1012,7 @@ console.log("2. Permissions can be denied or blocked - always handle the denied 
 console.log("3. Memory leaks from unclosed connections, unremoved observers, or unterminated workers accumulate over time");
 
 // ============================================
-// 15. TYPESCRIPT COMPARISON NOTES
+// Section 14: TypeScript Comparison Notes
 // ============================================
 /*
 🔍 Key Differences in TypeScript:

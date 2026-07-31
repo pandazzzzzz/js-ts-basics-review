@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces symbols as a way to create unique and non-enumerable property keys.
+// The examples focus on why symbols matter and how they differ from normal string-based properties.
+
+// ============================================
 // Table of Contents
 // ============================================
 

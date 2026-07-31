@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 30-promises-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces Promises as the standard way to work with asynchronous results in JavaScript.
+// The examples show how promise states, chaining, and error handling relate to callback-based code.
+
+// ============================================
 // 1. PROMISE BASICS
 // ============================================
 

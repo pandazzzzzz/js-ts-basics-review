@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 20-error-handling-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces error handling as a core part of writing reliable JavaScript.
+// The sections move from basic try/catch patterns to custom errors, propagation, and async-specific concerns.
+
+// ============================================
 // Table of Contents
 // ============================================
 

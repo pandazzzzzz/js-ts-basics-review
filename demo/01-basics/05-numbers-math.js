@@ -4,6 +4,12 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces JavaScript numbers and the Math object.
+// The examples show how numeric literals, conversions, and common math operations behave in practice.
+
+// ============================================
 // 1. Number Representation
 // ============================================
 

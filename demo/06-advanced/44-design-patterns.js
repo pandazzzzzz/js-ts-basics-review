@@ -5,15 +5,24 @@
 // 📌 Covers common design patterns in JavaScript
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces several common JavaScript patterns.
+// The examples are intentionally small so you can focus on the idea
+// behind each pattern rather than on production-grade implementation details.
+
+// ============================================
 // Table of Contents
 // ============================================
 
-// 1. Section 6: Adapter Pattern (ES5/ES6)
-// 2. Section 7: Facade Pattern (ES5/ES6)
-// 3. Section 8: Command Pattern (ES5/ES6)
-// 4. Section 9: State Pattern (ES6)
-// 5. Section 10: Common Pitfalls
-// 6. Section 11: Best Practices
+// 1. Factory and Abstract Factory
+// 2. Singleton
+// 3. Observer
+// 4. Strategy
+// 5. Decorator
+// 6. Adapter and Facade
+// 7. Command and State
+// 8. Common pitfalls and best practices
 
 // ============================================
 

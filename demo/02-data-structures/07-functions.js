@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 07-functions-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces functions as the primary way to organize reusable behavior in JavaScript.
+// The examples progress from basic declarations to more advanced patterns such as closures and higher-order functions.
+
+// ============================================
 // Table of Contents
 // ============================================
 

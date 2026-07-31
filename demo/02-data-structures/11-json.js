@@ -6,6 +6,12 @@
 // 📌 ES5 (ES2009) Standardized
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces JSON as a common way to serialize and exchange data.
+// The examples show how JavaScript values are converted into JSON strings and how the format is read back safely.
+
+// ============================================
 // Section 1: JSON.stringify() Basics
 // ============================================
 

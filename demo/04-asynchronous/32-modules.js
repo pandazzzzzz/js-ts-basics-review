@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 32-modules-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces JavaScript modules as a way to organize code into smaller, reusable units.
+// The examples progress from basic export and import syntax to more advanced loading and dependency patterns.
+
+// ============================================
 // Table of Contents
 // ============================================
 

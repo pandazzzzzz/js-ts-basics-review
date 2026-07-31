@@ -5,6 +5,12 @@
 // 📌 Covers ES2021 ~ ES2027 features + Stage 2.7 proposals (Decorators)
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces newer JavaScript features that build on the language beyond the basics.
+// The examples focus on the most relevant additions and how they fit into everyday usage.
+
+// ============================================
 // Table of Contents
 // ============================================
 

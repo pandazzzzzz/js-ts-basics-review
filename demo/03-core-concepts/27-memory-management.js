@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces memory management concepts that become relevant as applications grow larger.
+// The examples show how weak references, garbage collection, and common leaks relate to everyday JavaScript programming.
+
+// ============================================
 // Table of Contents
 // ============================================
 

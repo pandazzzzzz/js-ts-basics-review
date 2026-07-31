@@ -5,6 +5,12 @@
 // 📌 ES1 (Date object), ES5 (Date.now(), Date.parse(), Date.UTC())
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces Date and time handling in JavaScript.
+// The examples move from creating dates to formatting, comparing, and working with time zones.
+
+// ============================================
 // Table of Contents
 // ============================================
 

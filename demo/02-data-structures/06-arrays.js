@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 06-arrays-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces arrays as one of the most common data structures in JavaScript.
+// The sections move from creation and access to iteration and manipulation so the patterns are easier to compare.
+
+// ============================================
 // Table of Contents
 // ============================================
 

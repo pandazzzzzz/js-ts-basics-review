@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces alternative ways to organize behavior without relying only on inheritance.
+// The examples compare composition and other structural patterns that often appear in real-world JavaScript code.
+
+// ============================================
 // Table of Contents
 // ============================================
 

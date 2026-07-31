@@ -5,6 +5,12 @@
 // ⚠️ Browser environment only — Must be included in HTML file or used with jsdom
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the DOM as the browser representation of HTML and XML documents.
+// The examples start with the tree structure and then show how to navigate and inspect nodes.
+
+// ============================================
 // Section 1: DOM Tree Structure
 // ============================================
 // Description: The Document Object Model (DOM) is a programming interface for HTML/XML documents

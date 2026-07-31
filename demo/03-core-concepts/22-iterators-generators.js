@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces iterators and generators as a way to control how values are produced and consumed.
+// The examples build from the protocol itself to practical use cases such as custom iteration.
+
+// ============================================
 // Table of Contents
 // ============================================
 

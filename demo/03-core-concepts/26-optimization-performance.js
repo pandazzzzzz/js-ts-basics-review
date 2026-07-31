@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces common performance ideas that matter when JavaScript code grows beyond simple examples.
+// The sections highlight trade-offs rather than claiming that any single approach is always best.
+
+// ============================================
 // Table of Contents
 // ============================================
 

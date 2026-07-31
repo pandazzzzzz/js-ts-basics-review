@@ -5,6 +5,12 @@
 // 📌 ECMAScript Internationalization API
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the Intl API as a standard way to format numbers, dates, and other values for different locales.
+// The examples show how language and region settings change the output without changing the underlying data.
+
+// ============================================
 // Section 1: Intl.NumberFormat - Number Formatting
 // ============================================
 

@@ -3,6 +3,12 @@
 
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces several advanced function patterns that are commonly used in functional JavaScript.
+// The sections move from currying and composition to debounce, throttle, and recursion-related patterns.
+
+// ============================================
 // Table of Contents
 // ============================================
 

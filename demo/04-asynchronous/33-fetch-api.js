@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces the Fetch API as a modern way to make network requests in the browser.
+// The examples focus on request setup, response handling, and common patterns for real-world use.
+
+// ============================================
 // Table of Contents
 // ============================================
 

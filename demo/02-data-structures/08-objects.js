@@ -2,6 +2,12 @@
 // 📘 For TypeScript comparison, see: 08-objects-ts-comparison.ts
 
 // ============================================
+// Learning goals
+// ============================================
+// This file introduces objects as the core way to group related data and behavior.
+// The sections move from basic object creation to more advanced patterns such as copying, freezing, and prototype behavior.
+
+// ============================================
 // Table of Contents
 // ============================================
 
