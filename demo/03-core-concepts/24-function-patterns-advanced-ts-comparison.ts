@@ -509,6 +509,115 @@ console.log(processData(data)); // Uses cache
 
 
 // ============================================================================
+// 12. LRU CACHE WITH GENERICS
+// ============================================================================
+
+console.log("\n=== Generic LRU Cache ===");
+
+// TypeScript: Generic LRU Cache with proper typing
+class LRUCache<K, V> {
+  private cache: Map<K, V>;
+  private readonly maxSize: number;
+
+  constructor(maxSize: number = 100) {
+    if (maxSize <= 0) {
+      throw new Error("maxSize must be positive");
+    }
+    this.cache = new Map<K, V>();
+    this.maxSize = maxSize;
+  }
+
+  get(key: K): V | null {
+    if (!this.cache.has(key)) {
+      return null;
+    }
+
+    // Move to end (most recently used)
+    const value = this.cache.get(key)!;
+    this.cache.delete(key);
+    this.cache.set(key, value);
+    return value;
+  }
+
+  set(key: K, value: V): void {
+    if (this.cache.has(key)) {
+      this.cache.delete(key);
+    } else if (this.cache.size >= this.maxSize) {
+      // Evict least recently used (first key in Map)
+      const oldestKey = this.cache.keys().next().value;
+      if (oldestKey !== undefined) {
+        this.cache.delete(oldestKey);
+      }
+    }
+
+    this.cache.set(key, value);
+  }
+
+  has(key: K): boolean {
+    return this.cache.has(key);
+  }
+
+  delete(key: K): boolean {
+    return this.cache.delete(key);
+  }
+
+  clear(): void {
+    this.cache.clear();
+  }
+
+  size(): number {
+    return this.cache.size;
+  }
+
+  // Type-safe iterator
+  [Symbol.iterator](): Iterator<[K, V]> {
+    return this.cache[Symbol.iterator]();
+  }
+
+  // Type-safe keys iterator
+  keys(): IterableIterator<K> {
+    return this.cache.keys();
+  }
+
+  // Type-safe values iterator
+  values(): IterableIterator<V> {
+    return this.cache.values();
+  }
+}
+
+// Example usage
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const userCache = new LRUCache<number, User>(3);
+
+console.log("LRU Cache usage:");
+
+userCache.set(1, { id: 1, name: "Alice", email: "alice@example.com" });
+userCache.set(2, { id: 2, name: "Bob", email: "bob@example.com" });
+userCache.set(3, { id: 3, name: "Charlie", email: "charlie@example.com" });
+
+console.log("Cache size:", userCache.size()); // 3
+
+// Access user 1 (moves to most recently used)
+const alice = userCache.get(1);
+console.log("Got user 1:", alice?.name); // "Alice"
+
+// Add user 4 - evicts user 2 (since user 1 was just accessed)
+userCache.set(4, { id: 4, name: "Diana", email: "diana@example.com" });
+
+console.log("Has user 2?", userCache.has(2)); // false
+console.log("Has user 1?", userCache.has(1)); // true
+
+// Type safety: trying to use wrong types gives compile error
+// userCache.set("string-key", { id: 5, name: "Error", email: "e@e.com" });
+// const wrongType = userCache.get(1)?.nonExistentProperty;
+
+
+// ============================================================================
 // SUMMARY
 // ============================================================================
 
@@ -524,6 +633,7 @@ console.log("8. Method decorators");
 console.log("9. Trampoline pattern for safe recursion");
 console.log("10. Point-free style with typed compose/pipe");
 console.log("11. Performance considerations (memoization, lazy evaluation)");
+console.log("12. Generic LRU Cache with type safety");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Compile-time type checking");
@@ -532,3 +642,5 @@ console.log("- Refactoring safety");
 console.log("- Self-documenting code");
 console.log("- Type-safe function composition");
 console.log("- GC-friendly memoization with WeakMap");
+console.log("- Generic cache implementations with type safety");
+
