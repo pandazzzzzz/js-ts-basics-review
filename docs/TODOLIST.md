@@ -93,8 +93,8 @@ TS comparison: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-compa
 **21 Regular Expressions** — pattern syntax, string methods, flags, common patterns
 **22 Iterators and Generators** — iterator protocol, generator functions, yield, async iterators
 **23 Proxy and Reflect** — Proxy traps, Reflect methods, metaprogramming patterns
-**24 Advanced Function Patterns** — currying, composition, partial application, debounce/throttle, trampolining, memoization
-**25 Inheritance Patterns** — composition over inheritance, mixins, strategy pattern, observer pattern, template method, visitor pattern
+**24 Advanced Function Patterns** — currying, composition, partial application, debounce/throttle, trampolining, memoization, LRU cache patterns
+**25 Inheritance Patterns** — composition over inheritance, functional mixins with collision detection, strategy pattern, observer pattern, template method, visitor pattern, traits pattern
 **26 Performance Optimization** — tail-call optimization, memoization, lazy evaluation, event-loop optimization, batching
 **27 Memory Management** — WeakRef, FinalizationRegistry, memory leaks, object pools, GC basics
 
@@ -138,7 +138,7 @@ TS comparison: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compa
 ### Knowledge Points
 
 **35 DOM Basics** — DOM tree, node types, selectors (getElementById/querySelector), traversal
-**36 DOM Manipulation** — create/insert/delete nodes, modify attributes and styles, DocumentFragment, performance optimization
+**36 DOM Manipulation** — create/insert/delete nodes, modify attributes and styles, DocumentFragment, MutationObserver, performance optimization
 **37 Event Handling** — addEventListener, event bubbling/capturing, event delegation, custom events
 **38 Forms and Validation** — form elements, Constraint Validation API, custom validation, form submission
 
