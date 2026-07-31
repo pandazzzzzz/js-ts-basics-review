@@ -303,10 +303,10 @@ Note: `using` reached conditional Stage 4 in May 2025 (still conditional as of 2
 
 - **JavaScript**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - **TypeScript**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-- **Practice Files**: 49 numbered demo files (01-50, 28 reserved) in `demo/` folder, each with TypeScript comparison
+- **Practice Files**: 49 numbered demo files (01-50, 28 reserved) in `demo/` folder, each with TypeScript comparison and a structured learning-goals intro
 
 ---
 
-**Last Updated**: 2026-07-15
+**Last Updated**: 2026-07-31
 **Based on**: ES2027 and TypeScript 5.x
 **Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals

@@ -1,8 +1,9 @@
 # Learning Roadmap
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **Updated**: 2026-07-15
-> **ES version verification**: 2026-07-15 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **Updated**: 2026-07-31
+> **ES version verification**: 2026-07-31 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)
+> **Content structure**: All demo files now use a consistent learning-goals intro block and clearer section ordering.
 
 
 **Progress**: 49/49 ✅ · 49 TypeScript comparison files ✅ (numbered 01-50, 28 reserved)
