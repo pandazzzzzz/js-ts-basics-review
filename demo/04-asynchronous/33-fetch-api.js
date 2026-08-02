@@ -819,8 +819,8 @@ async function demonstrateSearchAsYouType() {
   const searchController = new SearchController();
   
   // Simulate rapid typing
-  searchController.search('java');      // Will be cancelled
-  searchController.search('javasc');    // Will be cancelled
+  searchController.search('java').catch(() => {});      // Will be cancelled
+  searchController.search('javasc').catch(() => {});    // Will be cancelled
   const results = await searchController.search('javascript'); // Final search
   
   if (results) {

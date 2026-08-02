@@ -644,7 +644,7 @@ console.log("- Locale normalization");
  *   feature: Intl.DurationFormat
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-07-15
+ *   lastVerified: 2026-07-31
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -765,7 +765,7 @@ console.log("- Intl.ListFormat.formatToParts()");
  * verification:
  *   feature: Intl.MessageFormat
  *   status: Stage 1
- *   lastVerified: 2026-07-15
+ *   lastVerified: 2026-07-31
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");

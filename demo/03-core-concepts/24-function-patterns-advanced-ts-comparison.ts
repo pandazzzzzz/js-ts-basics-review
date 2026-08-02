@@ -256,30 +256,33 @@ getUser(userId); // OK
 // ============================================================================
 // 8. DECORATORS (EXPERIMENTAL)
 // ============================================================================
+// NOTE: Decorator example below is commented out because it runs at runtime with
+// ts-node using the new TC39 decorator standard, where the descriptor parameter
+// is different from the legacy decorator protocol. The @ts-expect-error comment only
+// suppresses the TypeScript compilation error, not the runtime error.
 
 console.log("\n=== Decorators ===");
 
-// TypeScript: Method decorator
-function log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  descriptor.value = function(...args: any[]) {
-    console.log(`Calling ${propertyKey} with args:`, args);
-    const result = originalMethod.apply(this, args);
-    console.log(`Result:`, result);
-    return result;
-  };
-}
+// TypeScript: Method decorator (example only - not executed)
+// function log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+//   const originalMethod = descriptor.value;
+//   descriptor.value = function(...args: any[]) {
+//     console.log(`Calling ${propertyKey} with args:`, args);
+//     const result = originalMethod.apply(this, args);
+//     console.log(`Result:`, result);
+//     return result;
+//   };
+// }
 
-class Calculator {
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @log
-  add(a: number, b: number): number {
-    return a + b;
-  }
-}
+// class Calculator {
+//   @log
+//   add(a: number, b: number): number {
+//     return a + b;
+//   }
+// }
 
-const calc = new Calculator();
-calc.add(2, 3); // Logs call and result
+// const calc = new Calculator();
+// calc.add(2, 3); // Logs call and result
 
 
 // ============================================================================

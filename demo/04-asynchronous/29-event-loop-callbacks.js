@@ -807,7 +807,12 @@ setTimeout(() => {
 
     if (frameCount < 5) {
       // Schedule next frame
-      requestAnimationFrame(animate);
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(animate);
+      } else {
+        // Fallback for Node.js: use setTimeout to simulate animation frame (~16.67ms for 60fps)
+        setTimeout(animate, 16.67);
+      }
     } else {
       const avgFrameTime = elapsed / frameCount;
       console.log(`   Average frame time: ${avgFrameTime.toFixed(2)}ms`);
@@ -815,7 +820,13 @@ setTimeout(() => {
     }
   }
 
-  requestAnimationFrame(animate);
+  // Start animation loop (with browser fallback)
+  if (typeof requestAnimationFrame !== 'undefined') {
+    requestAnimationFrame(animate);
+  } else {
+    console.log("   Browser-only: requestAnimationFrame not available, using setTimeout fallback");
+    animate();
+  }
 
   // 12.2 Microtasks vs Rendering
   setTimeout(() => {
@@ -876,13 +887,20 @@ setTimeout(() => {
       loop() {
         if (!this.isRunning) return;
 
-        const currentTime = performance.now();
+        const currentTime = typeof performance !== 'undefined'
+          ? performance.now()
+          : Date.now();
         const deltaTime = currentTime - this.lastTime;
         this.lastTime = currentTime;
 
         this.updateCallback(deltaTime);
 
-        requestAnimationFrame(() => this.loop());
+        if (typeof requestAnimationFrame !== 'undefined') {
+          requestAnimationFrame(() => this.loop());
+        } else {
+          // Node.js fallback
+          setTimeout(() => this.loop(), 16.67);
+        }
       }
     }
 
