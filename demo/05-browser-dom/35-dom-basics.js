@@ -26,11 +26,11 @@ console.log("=== Section 1: DOM Tree Structure ===\n");
 
 // DOM Node Type Constants
 console.log("DOM Node Type Constants:");
-console.log(`Node.ELEMENT_NODE = ${Node?.ELEMENT_NODE ?? 1}`);           // 1 - Element node
-console.log(`Node.TEXT_NODE = ${Node?.TEXT_NODE ?? 3}`);                 // 3 - Text node
-console.log(`Node.COMMENT_NODE = ${Node?.COMMENT_NODE ?? 8}`);           // 8 - Comment node
-console.log(`Node.DOCUMENT_NODE = ${Node?.DOCUMENT_NODE ?? 9}`);         // 9 - Document node
-console.log(`Node.DOCUMENT_TYPE_NODE = ${Node?.DOCUMENT_TYPE_NODE ?? 10}`); // 10 - DOCTYPE
+console.log(`Node.ELEMENT_NODE = ${typeof Node !== 'undefined' ? Node.ELEMENT_NODE : 1}`);           // 1 - Element node
+console.log(`Node.TEXT_NODE = ${typeof Node !== 'undefined' ? Node.TEXT_NODE : 3}`);                 // 3 - Text node
+console.log(`Node.COMMENT_NODE = ${typeof Node !== 'undefined' ? Node.COMMENT_NODE : 8}`);           // 8 - Comment node
+console.log(`Node.DOCUMENT_NODE = ${typeof Node !== 'undefined' ? Node.DOCUMENT_NODE : 9}`);         // 9 - Document node
+console.log(`Node.DOCUMENT_TYPE_NODE = ${typeof Node !== 'undefined' ? Node.DOCUMENT_TYPE_NODE : 10}`); // 10 - DOCTYPE
 
 // DOM navigation examples in browser environment (using conditional check for Node.js compatibility)
 if (typeof document !== 'undefined') {

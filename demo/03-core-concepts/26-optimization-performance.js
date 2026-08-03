@@ -508,7 +508,11 @@ processLargeArray(largeArray, x => Math.sqrt(x), 2500)
 // Use queueMicrotask() or Promise.resolve().then() for microtasks.
 function scheduleTask(fn) {
   const channel = new MessageChannel();
-  channel.port1.onmessage = () => fn();
+  channel.port1.onmessage = () => {
+    fn();
+    channel.port1.close();
+    channel.port2.close();
+  };
   channel.port2.postMessage(null);
 }
 
