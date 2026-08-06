@@ -26,7 +26,9 @@ JavaScript/TypeScript fundamentals with 49 numbered demo files (01-50, 28 reserv
 # Run a JavaScript demo file
 node demo/01-basics/01-variables.js
 node demo/02-data-structures/06-arrays.js
-node demo/06-advanced/39-es2022-plus-features.js
+node demo/06-advanced/39-es2022-plus-features.js    # ES2022+ index file
+node demo/06-advanced/39.5-es2025-features.js      # Specific ES version: ES2025
+node demo/06-advanced/39.7-es2027-future.js        # ES2027+ & future proposals
 
 # Run TypeScript comparison files (uses npx ts-node, auto-installs on first run)
 npx ts-node demo/01-basics/01-variables-ts-comparison.ts
@@ -42,20 +44,21 @@ npx tsc --noEmit
 **Stage 3 (13-27)**: Core Concepts — Scope, this, prototypes, classes, ES6+, regex, iterators, Proxy
 **Stage 4 (29-34)**: Async — Event loop, Promises, async/await, modules, Fetch, async error handling
 **Stage 5 (35-38)**: Browser & DOM — DOM basics, manipulation, events, forms
-**Stage 6 (39-50)**: Advanced — ES2022+, debugging, typed arrays, Intl, patterns
+**Stage 6 (39-50)**: Advanced — ES2022+ (split into 7 per-version files 39.1-39.7), debugging, typed arrays, Intl, patterns
 
 ## Progress
 
-✅ 49/49 files completed · 49 TypeScript comparisons
+✅ 49/49 files completed · 49 TypeScript comparisons (+ 7 ES2022+ split files with their TS counterparts)
 ✅ ES2020-ES2027 features (Optional Chaining, BigInt, replaceAll, logical assignment, numeric separators, WeakRef, Set methods, Iterator helpers, Temporal, Explicit Resource Management)
+✅ 39-es2022-plus-features.js 已按 ES 版本拆分为 7 个独立文件 (39.1-39.7)，每个文件 200-500 行，结构清晰
 ✅ All demo files now use a consistent learning-goals intro structure for clearer study flow
 ✅ Common Pitfalls & Best Practices sections in all advanced files
 
 ## Project Status
 
-📅 **Last Updated**: 2026-07-31
+📅 **Last Updated**: 2026-08-06
 🔍 **Documentation Review**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals, and the current repo structure  
-🚀 **Git Status**: Clean working tree
+🚀 **Git Status**: Files updated (ES2022+ split into per-version files)
 📊 **Coverage**: Complete (Stages 1-6)
 
 ## Documentation

@@ -148,7 +148,14 @@ TS comparison: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compa
 
 | # | File | Topic | Status |
 |---|------|-------|--------|
-| 39 | `demo/06-advanced/39-es2022-plus-features.js` | ES2022+ Features | ✅ |
+| 39 | `demo/06-advanced/39-es2022-plus-features.js` | ES2022+ Features (Index) | ✅ |
+| | `demo/06-advanced/39.1-es2021-features.js` | ES2021 Features | ✅ |
+| | `demo/06-advanced/39.2-es2022-features.js` | ES2022 Features | ✅ |
+| | `demo/06-advanced/39.3-es2023-features.js` | ES2023 Features | ✅ |
+| | `demo/06-advanced/39.4-es2024-features.js` | ES2024 Features | ✅ |
+| | `demo/06-advanced/39.5-es2025-features.js` | ES2025 Features | ✅ |
+| | `demo/06-advanced/39.6-es2026-features.js` | ES2026 Features | ✅ |
+| | `demo/06-advanced/39.7-es2027-future.js` | ES2027+ & Future Proposals | ✅ |
 | 40 | `demo/06-advanced/40-debugging-testing.js` | Debugging and Testing | ✅ |
 | 41 | `demo/06-advanced/41-typed-arrays.js` | Typed Arrays | ✅ |
 | 42 | `demo/06-advanced/42-intl-api.js` | Internationalization API | ✅ |
@@ -161,11 +168,11 @@ TS comparison: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compa
 | 49 | `demo/06-advanced/49-build-tools.js` | Build Tool Integration | ✅ |
 | 50 | `demo/06-advanced/50-reserved.js` | Reserved for Future Extensions | ✅ |
 
-TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
+TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39.1-es2021-features-ts-comparison.ts` · `39.2-es2022-features-ts-comparison.ts` · `39.3-es2023-features-ts-comparison.ts` · `39.4-es2024-features-ts-comparison.ts` · `39.5-es2025-features-ts-comparison.ts` · `39.6-es2026-features-ts-comparison.ts` · `39.7-es2027-future-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
 
 ### Knowledge Points
 
-**39 ES2022+** — ES2018 (Intl.PluralRules) · ES2020 (Optional Chaining, Nullish Coalescing, BigInt, Promise.allSettled, matchAll, globalThis) · ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks, RegExp Match Indices) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Map.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Resizable ArrayBuffer, Atomics.waitAsync, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups, Intl.DurationFormat) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Atomics.pause) · Stage 2.7 (Decorators)
+**39 ES2022+** — 已按ES版本拆分到7个独立文件（39.1-39.7）：ES2018 (Intl.PluralRules) · ES2020 (Optional Chaining, Nullish Coalescing, BigInt, Promise.allSettled, matchAll, globalThis) · ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks, RegExp Match Indices) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Map.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Resizable ArrayBuffer, Atomics.waitAsync, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups, Intl.DurationFormat) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Atomics.pause) · Stage 2.7 (Decorators)
 **40 Debugging and Testing** — console methods, debugger, breakpoints, unit testing basics
 **41 Typed Arrays** — ArrayBuffer, TypedArray views, DataView, binary data processing
 **42 Internationalization API** — Intl.NumberFormat, DateTimeFormat, Collator, RelativeTimeFormat
