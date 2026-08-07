@@ -36,8 +36,16 @@ TS comparison: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts
 
 | # | File | Topic | Status |
 |---|------|-------|--------|
-| 06 | `demo/02-data-structures/06-arrays.js` | Array Methods | ✅ |
-| 07 | `demo/02-data-structures/07-functions.js` | Functions (16 sections) | ✅ |
+| 06 | `demo/02-data-structures/06-arrays.js` | Array Methods (Index) | ✅ |
+| | `demo/02-data-structures/06.1-arrays-basics.js` | Array Basics (Creation, Access, Type, Destructuring) | ✅ |
+| | `demo/02-data-structures/06.2-arrays-iteration.js` | Array Iteration Methods | ✅ |
+| | `demo/02-data-structures/06.3-arrays-search-sort.js` | Array Search & Sort | ✅ |
+| | `demo/02-data-structures/06.4-arrays-manipulation.js` | Array Manipulation & Spread | ✅ |
+| | `demo/02-data-structures/06.5-typed-arrays.js` | Typed Arrays (Basic) | ✅ |
+| 07 | `demo/02-data-structures/07-functions.js` | Functions (Index) | ✅ |
+| | `demo/02-data-structures/07.1-functions-basics.js` | Function Basics | ✅ |
+| | `demo/02-data-structures/07.2-functions-advanced.js` | Advanced Functions | ✅ |
+| | `demo/02-data-structures/07.3-functions-patterns.js` | Function Patterns | ✅ |
 | 08 | `demo/02-data-structures/08-objects.js` | Objects and Methods | ✅ |
 | 09 | `demo/02-data-structures/09-destructuring.js` | Destructuring Assignment | ✅ |
 | 10 | `demo/02-data-structures/10-map-set.js` | Map and Set | ✅ |
@@ -48,8 +56,8 @@ TS comparison: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` �
 
 ### Knowledge Points
 
-**06 Arrays** — creation, iteration (forEach/map/filter/reduce), find, sort, destructuring and spread
-**07 Functions** — declaration/expression/arrow, default/rest parameters, higher-order functions, closures, IIFE, currying, pure functions
+**06 Arrays** — creation (literals/constructor/Array.of/Array.from), access & type checking, destructuring (06.1); iteration (forEach/map/filter/reduce/flat/flatMap) (06.2); search (find/findIndex/includes/some/every) & sort (06.3); manipulation (push/pop/splice/slice/concat/join/spread) (06.4); typed arrays (TypedArray/ArrayBuffer/DataView) (06.5)
+**07 Functions** — declaration/expression/arrow, default/rest parameters (07.1); higher-order functions, closures, generators, currying (07.2); method definitions, binding, IIFE, TCO, pure functions (07.3)
 **08 Objects** — literals, property access, methods, getter/setter, Object.keys/values/entries, freeze/seal
 **09 Destructuring** — array destructuring, object destructuring, nested destructuring, defaults, rest patterns, function parameter destructuring
 **10 Map and Set** — Map creation and methods, Set creation and methods, WeakMap/WeakSet, use cases
@@ -73,7 +81,10 @@ TS comparison: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` �
 | 21 | `demo/03-core-concepts/21-regex.js` | Regular Expressions | ✅ |
 | 22 | `demo/03-core-concepts/22-iterators-generators.js` | Iterators and Generators | ✅ |
 | 23 | `demo/03-core-concepts/23-proxy-reflect.js` | Proxy and Reflect | ✅ |
-| 24 | `demo/03-core-concepts/24-function-patterns-advanced.js` | Advanced Function Patterns | ✅ |
+| 24 | `demo/03-core-concepts/24-function-patterns-advanced.js` | Advanced Function Patterns (Index) | ✅ |
+| | `demo/03-core-concepts/24.1-function-composition.js` | Function Composition | ✅ |
+| | `demo/03-core-concepts/24.2-debounce-throttle.js` | Debounce & Throttle | ✅ |
+| | `demo/03-core-concepts/24.3-memoization-cache.js` | Memoization & Cache | ✅ |
 | 25 | `demo/03-core-concepts/25-inheritance-patterns.js` | Inheritance Patterns | ✅ |
 | 26 | `demo/03-core-concepts/26-optimization-performance.js` | Performance Optimization | ✅ |
 | 27 | `demo/03-core-concepts/27-memory-management.js` | Memory Management | ✅ |
@@ -93,7 +104,7 @@ TS comparison: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-compa
 **21 Regular Expressions** — pattern syntax, string methods, flags, common patterns
 **22 Iterators and Generators** — iterator protocol, generator functions, yield, async iterators
 **23 Proxy and Reflect** — Proxy traps, Reflect methods, metaprogramming patterns
-**24 Advanced Function Patterns** — currying, composition, partial application, debounce/throttle, trampolining, memoization, LRU cache patterns
+**24 Advanced Function Patterns** — currying, composition (compose/pipe), partial application, factories, HOF transformers (24.1); debounce/throttle implementations and use cases (24.2); memoization, LRU cache, trampolining, recursion, point-free style (24.3)
 **25 Inheritance Patterns** — composition over inheritance, functional mixins with collision detection, strategy pattern, observer pattern, template method, visitor pattern, traits pattern
 **26 Performance Optimization** — tail-call optimization, memoization, lazy evaluation, event-loop optimization, batching
 **27 Memory Management** — WeakRef, FinalizationRegistry, memory leaks, object pools, GC basics
