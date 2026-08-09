@@ -70,7 +70,12 @@ TS comparison: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` �
 
 | # | File | Topic | Status |
 |---|------|-------|--------|
-| 13 | `demo/03-core-concepts/13-scope-closures.js` | Scope and Closures | ✅ |
+| 13 | `demo/03-core-concepts/13-scope-closures.js` | Scope and Closures (Index) | ✅ |
+| | `demo/03-core-concepts/13.1-scope-basics.js` | Scope Basics (Global/Function/Block/Scope Chain/Shadowing) | ✅ |
+| | `demo/03-core-concepts/13.2-scope-tdz-strict.js` | TDZ, Strict Mode, eval/with | ✅ |
+| | `demo/03-core-concepts/13.3-closures-basics.js` | Closures Basics (Data Privacy) | ✅ |
+| | `demo/03-core-concepts/13.4-closures-patterns.js` | Closures Patterns (Factory/Partial/Memoization/Module/IIFE) | ✅ |
+| | `demo/03-core-concepts/13.5-scope-pitfalls.js` | Scope & Closures Pitfalls/Best Practices | ✅ |
 | 14 | `demo/03-core-concepts/14-this-keyword.js` | this Keyword | ✅ |
 | 15 | `demo/03-core-concepts/15-prototypes-inheritance.js` | Prototypes and Inheritance | ✅ |
 | 16 | `demo/03-core-concepts/16-classes.js` | Classes | ✅ |
@@ -93,7 +98,7 @@ TS comparison: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-compa
 
 ### Knowledge Points
 
-**13 Scope and Closures** — global/local/block scope, lexical scope, closure principles and applications, IIFE, eval, with
+**13 Scope and Closures** — global/local/block scope, lexical scope, scope chain, variable shadowing (13.1); TDZ, strict mode, eval/with (13.2); closure principles, data privacy, memory behavior (13.3); factory functions, partial application, memoization, module pattern, IIFE (13.4); common pitfalls and best practices (13.5)
 **14 this Keyword** — this binding rules, lost-binding scenarios, call/apply/bind, this in arrow functions, this in classes
 **15 Prototypes and Inheritance** — prototype chain, constructor functions, Object.create(), class syntax
 **16 Classes** — class syntax, inheritance, mixin, instanceof in depth, class vs prototype comparison, composition over inheritance, strategy pattern
