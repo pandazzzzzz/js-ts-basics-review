@@ -94,7 +94,7 @@ TS comparison: `06-arrays-ts-comparison.ts` · `07-functions-ts-comparison.ts` �
 | 26 | `demo/03-core-concepts/26-optimization-performance.js` | Performance Optimization | ✅ |
 | 27 | `demo/03-core-concepts/27-memory-management.js` | Memory Management | ✅ |
 
-TS comparison: `13-scope-closures-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-es6-plus-syntax-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-optimization-performance-ts-comparison.ts` · `27-memory-management-ts-comparison.ts`
+TS comparison: `13-scope-closures-ts-comparison.ts` · `13.1-scope-basics-ts-comparison.ts` · `13.2-scope-tdz-strict-ts-comparison.ts` · `13.3-closures-basics-ts-comparison.ts` · `13.4-closures-patterns-ts-comparison.ts` · `13.5-scope-pitfalls-ts-comparison.ts` · `14-this-keyword-ts-comparison.ts` · `15-prototypes-inheritance-ts-comparison.ts` · `16-classes-ts-comparison.ts` · `17-property-descriptors-ts-comparison.ts` · `18-es6-plus-syntax-ts-comparison.ts` · `19-symbol-deep-ts-comparison.ts` · `20-error-handling-ts-comparison.ts` · `21-regex-ts-comparison.ts` · `22-iterators-generators-ts-comparison.ts` · `23-proxy-reflect-ts-comparison.ts` · `24-function-patterns-advanced-ts-comparison.ts` · `25-inheritance-patterns-ts-comparison.ts` · `26-optimization-performance-ts-comparison.ts` · `27-memory-management-ts-comparison.ts`
 
 ### Knowledge Points
 
