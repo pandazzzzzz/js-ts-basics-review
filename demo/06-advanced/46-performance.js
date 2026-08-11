@@ -3,6 +3,7 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Performance
 // 📘 Web Performance: https://web.dev/performance/
 // 📌 Covers performance measurement and optimization techniques
+export {};
 
 // ============================================
 // Learning goals

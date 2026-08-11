@@ -1,5 +1,6 @@
 // Inheritance Patterns - Advanced Demo
 // 📘 For TypeScript comparison, see: 25-inheritance-patterns-ts-comparison.ts
+export {};
 
 
 // ============================================

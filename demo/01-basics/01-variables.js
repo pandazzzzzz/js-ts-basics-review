@@ -1,6 +1,7 @@
 // Variables and Data Types Demo
 // 📘 For TypeScript comparison, see: 01-variables-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
+export {};
 
 export {}; // ES Module
 

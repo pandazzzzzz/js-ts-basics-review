@@ -3,6 +3,7 @@
 // 📘 javascript.info Part 2 > "Introduction to Events", "UI Events"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/Events
 // ⚠️ Browser environment only
+export {};
 
 // ============================================
 // Learning goals

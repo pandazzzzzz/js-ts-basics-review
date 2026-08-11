@@ -5,6 +5,7 @@
 // 📘 Reflect API: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
 // 📘 Proxy: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
 // 📌 Covers JavaScript metaprogramming features used by TypeScript
+export {};
 
 // ============================================
 // Learning goals

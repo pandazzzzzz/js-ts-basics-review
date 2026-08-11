@@ -1,5 +1,6 @@
 // Optimization & Performance Demo
 // 📘 For TypeScript comparison, see: 26-optimization-performance-ts-comparison.ts
+export {};
 
 
 // ============================================

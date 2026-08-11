@@ -8,6 +8,7 @@
 // Standardized features (Section 2) are listed briefly; unfinalized proposals
 // (Section 3+) may change syntax at any time — do not use in production.
 // Stage annotations follow reference/active.json and reference/withdrawn.json.
+export {};
 
 // ============================================
 // Learning goals

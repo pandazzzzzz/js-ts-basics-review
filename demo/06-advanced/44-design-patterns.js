@@ -3,6 +3,7 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
 // 📘 Patterns: https://www.patterns.dev/
 // 📌 Covers common design patterns in JavaScript
+export {};
 
 // ============================================
 // Learning goals

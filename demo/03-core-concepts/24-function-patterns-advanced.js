@@ -1,5 +1,6 @@
 // Function Patterns - Advanced Demo
 // 📘 For TypeScript comparison, see: 24-function-patterns-advanced-ts-comparison.ts
+export {};
 
 
 // ============================================

@@ -1,5 +1,6 @@
 // Event Loop and Callbacks Demo
 // 📘 For TypeScript comparison, see: 29-event-loop-callbacks-ts-comparison.ts
+export {};
 
 // ============================================
 // Learning goals

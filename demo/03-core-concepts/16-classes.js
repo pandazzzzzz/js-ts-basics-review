@@ -1,5 +1,6 @@
 // Classes (ES6+) Demo
 // 📘 For TypeScript comparison, see: 16-classes-ts-comparison.ts
+export {};
 
 
 // ============================================

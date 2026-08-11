@@ -1,5 +1,6 @@
 // Modules Demo
 // 📘 For TypeScript comparison, see: 32-modules-ts-comparison.ts
+export {};
 
 // ============================================
 // Learning goals

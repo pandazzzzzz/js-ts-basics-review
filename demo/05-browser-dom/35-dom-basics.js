@@ -3,6 +3,7 @@
 // 📘 javascript.info Part 2 > Document
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 // ⚠️ Browser environment only — Must be included in HTML file or used with jsdom
+export {};
 
 // ============================================
 // Learning goals

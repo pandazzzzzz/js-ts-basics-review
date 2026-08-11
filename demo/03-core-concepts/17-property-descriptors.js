@@ -1,5 +1,6 @@
 // Property Descriptors & Configuration Demo
 // 📘 For TypeScript comparison, see: 17-property-descriptors-ts-comparison.ts
+export {};
 
 
 // ============================================

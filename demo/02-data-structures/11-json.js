@@ -4,6 +4,7 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
 // 📘 RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format
 // 📌 ES5 (ES2009) Standardized
+export {};
 
 // ============================================
 // Learning goals

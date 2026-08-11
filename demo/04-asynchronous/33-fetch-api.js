@@ -1,5 +1,6 @@
 // Fetch API Demo
 // 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+export {};
 
 // ============================================
 // Learning goals

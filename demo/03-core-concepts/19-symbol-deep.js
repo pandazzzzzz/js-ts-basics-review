@@ -1,5 +1,6 @@
 // Symbol Deep Dive Demo
 // 📘 For TypeScript comparison, see: 19-symbol-deep-ts-comparison.ts
+export {};
 
 
 // ============================================

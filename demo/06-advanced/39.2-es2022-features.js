@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison, see: 39.2-es2022-features-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
 // 📘 TC39: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+export {};
 
 export {}; // Module
 

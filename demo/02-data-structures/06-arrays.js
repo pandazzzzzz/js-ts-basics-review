@@ -1,5 +1,6 @@
 // Arrays - Complete Demo
 // 📘 For TypeScript comparison, see: 06-arrays-ts-comparison.ts
+export {};
 
 // ============================================
 // Learning goals

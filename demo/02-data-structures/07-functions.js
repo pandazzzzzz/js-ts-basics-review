@@ -1,5 +1,6 @@
 // Functions - Comprehensive Guide
 // 📘 For TypeScript comparison, see: 07-functions-ts-comparison.ts
+export {};
 
 // ============================================
 // Learning goals

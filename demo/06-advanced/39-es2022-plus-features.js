@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison index, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 Detailed version-specific demo files: 39.1 - 39.7
 // This file is the index for the ES2022+ features collection (now split by version)
+export {};
 
 export {}; // Module
 

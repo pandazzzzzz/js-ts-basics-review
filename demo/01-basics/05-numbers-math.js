@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison, see: 05-numbers-math-ts-comparison.ts
 // 📘 javascript.info: "Numbers"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+export {};
 
 // ============================================
 // Learning goals
