@@ -974,3 +974,19 @@ Advanced Patterns:
 - 24-function-patterns-advanced.js (bind, call, apply patterns)
 - 23-proxy-reflect.js (Proxy and this interaction)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 13.1-scope-basics.js - Scope fundamentals");
+console.log("📘 15-prototypes-inheritance.js - Prototypes and inheritance");
+console.log("📘 16-classes.js - Classes and this");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 14-this-keyword-ts-comparison.ts
+*/

@@ -1138,94 +1138,16 @@ console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in w
 console.log("\n=== Classes Demo Complete ===");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 14-this-keyword.js - this keyword");
+console.log("📘 15-prototypes-inheritance.js - Prototypes");
+console.log("📘 25-inheritance-patterns.js - Inheritance patterns");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. ACCESS MODIFIERS
-   JS:  # private fields (runtime enforcement)
-   TS:  public / private / protected (compile-time checks)
-
-   TypeScript example:
-   class User {
-     public name: string;      // Default, accessible everywhere
-     private age: number;      // Only accessible in class
-     protected email: string;  // Accessible in class and subclasses
-   }
-
-2. ABSTRACT CLASSES
-   JS:  no native support, manual throw required
-   TS:  abstract class / abstract method
-
-   TypeScript example:
-   abstract class Animal {
-     abstract makeSound(): void;
-
-     move() {
-       console.log("Moving");
-     }
-   }
-
-3. INTERFACES & IMPLEMENTS
-   JS:  no interface concept
-   TS:  interface + implements contract
-
-   TypeScript example:
-   interface Flyable {
-     fly(): void;
-   }
-
-   class Bird implements Flyable {
-     fly() { console.log("Flying"); }
-   }
-
-4. PARAMETER PROPERTIES
-   JS:  constructor(name) { this.name = name; }
-   TS:  constructor(public name: string) {} // shorthand
-
-   TypeScript example:
-   class Person {
-     constructor(
-       public name: string,
-       private age: number
-     ) {}
-   }
-
-5. DECORATORS (Stage 2.7 / TS 5.0+)
-   JS:  Stage 2.7 proposal (nearing Stage 3, not yet finalized)
-   TS:  @decorator syntax available
-
-   TypeScript example:
-   @sealed
-   class Greeter {
-     @log
-     greet() { }
-   }
-
-6. READONLY PROPERTY
-   JS:  Object.defineProperty or # with convention
-   TS:  readonly keyword
-
-   TypeScript example:
-   class Config {
-     readonly apiKey: string = "secret";
-   }
-
-📘 See related: 15-prototypes-inheritance.js for prototype relationship
+📘 See TypeScript comparison file: 16-classes-ts-comparison.ts
 */
-// ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Classes & Inheritance:
-- 14-this-keyword.js (this in classes)
-- 15-prototypes-inheritance.js (prototype chain underlying classes)
-- 25-inheritance-patterns.js (composition and design patterns)
-
-Advanced Patterns:
-- 24-function-patterns-advanced.js (higher-order functions for classes)
-- 27-memory-management.js (object pooling)
-`);

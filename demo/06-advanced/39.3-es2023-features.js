@@ -259,5 +259,6 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.3-es2023-features-ts-comparison.ts
-// 包含：不可变数组方法类型、findLast 类型推断、Symbol 作为 WeakMap 键类型
+/*
+📘 See TypeScript comparison file: 39.3-es2023-features-ts-comparison.ts
+*/

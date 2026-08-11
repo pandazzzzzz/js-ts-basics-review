@@ -1106,76 +1106,16 @@ console.log("\n=== Memory Management Demo Complete ===");
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 26-optimization-performance.js - Performance optimization");
+console.log("📘 10-map-set.js - WeakMap and WeakSet");
+console.log("📘 19-symbol-deep.js - Symbols and garbage collection");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TYPED WEAKMAP
-   TS:  const privateData = new WeakMap<object, any>();
-
-   TypeScript example:
-   interface PrivateData {
-     secret: string;
-     createdAt: Date;
-   }
-
-   const privateData = new WeakMap<object, PrivateData>();
-
-2. WEAKREF TYPING
-   TS:  const weakRef = new WeakRef<MyClass>(instance);
-
-   TypeScript example:
-   class MyClass {
-     data: string;
-   }
-
-   const weakRef: WeakRef<MyClass> = new WeakRef(new MyClass());
-   const instance = weakRef.deref(); // MyClass | undefined
-
-3. FINALIZATIONREGISTRY TYPE
-   TS:  const registry = new FinalizationRegistry<string>((key) => { ... });
-
-   TypeScript example:
-   interface CacheEntry {
-     data: unknown;
-   }
-
-   const registry = new FinalizationRegistry<string>((key: string) => {
-     console.log(`${key} was garbage collected`);
-   });
-
-4. TYPED ARRAYS
-   TS:  const arr = new Float64Array(1000);
-
-   TypeScript example:
-   const int8 = new Int8Array(100);
-   const uint16 = new Uint16Array(100);
-   const float64 = new Float64Array(100);
-
-5. BUFFER TYPE (NODE.JS)
-   TS:  const buf: Buffer = Buffer.alloc(1024);
-
-   TypeScript example:
-   import { Buffer } from 'buffer';
-
-   const buf: Buffer = Buffer.alloc(1024, 0);
-   const fromString: Buffer = Buffer.from('hello');
-
-📘 See related files:
-- 19-symbol-deep.js (WeakMap/WeakSet basics)
-- 26-optimization-performance.js (performance optimization)
-- 22-iterators-generators.js (generators for streaming)
+📘 See TypeScript comparison file: 27-memory-management-ts-comparison.ts
 */
-
-// ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Memory Management:
-- 19-symbol-deep.js (WeakMap, WeakSet basics)
-- 26-optimization-performance.js (memory-efficient patterns)
-- 24-function-patterns-advanced.js (memoization cache management)
-`);

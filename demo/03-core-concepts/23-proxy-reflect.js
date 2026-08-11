@@ -1153,3 +1153,19 @@ Proxy & Reflect:
 - 17-property-descriptors.js (property descriptors)
 - 19-symbol-deep.js (well-known symbols)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 17-property-descriptors.js - Property descriptors");
+console.log("📘 19-symbol-deep.js - Well-known Symbols");
+console.log("📘 24.1-function-composition.js - Function composition and decorators");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 23-proxy-reflect-ts-comparison.ts
+*/

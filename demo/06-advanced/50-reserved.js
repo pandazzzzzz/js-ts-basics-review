@@ -275,33 +275,15 @@ console.log("- Can I Use: https://caniuse.com/");
 console.log("- MDN: https://developer.mozilla.org/");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 39.7-es2027-future.js - ES2027 and future proposals");
+console.log("📘 42-intl-api.js - Internationalization API");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TEMPORAL API
-   TS: Full type definitions (Temporal.PlainDate, Temporal.Duration, type-safe TZ)
-
-2. DECORATORS
-   TS: Full Stage 2.7 decorator support since TS 5.0 (@decorator, factories, metadata)
-
-3. RECORDS & TUPLES / COMPOSITES (Future)
-   TS: Will get type definitions when standardized; use Readonly<T> / as const meanwhile
-
-4. PIPELINE OPERATOR (Future)
-   TS: Will support when standardized; currently use function composition pipe(fn1, fn2, fn3)
-
-5. IMPORT ATTRIBUTES
-   TS: Supported in TS 5.3+ (import config from './c.json' with { type: 'json' })
-
-⚠️ RUNTIME SUPPORT:
-- Many features require specific Node.js/browser versions
-- Use TypeScript to transpile to compatible JavaScript
-- Check caniuse.com / node.green for support
-
-📘 See related:
-- 39-es2022-plus-features.js (Recent ES features, full examples)
-- 32-modules.js (Module systems, Import Attributes)
-- 47-typescript-advanced-ts-comparison.ts (TS advanced features)
+📘 See TypeScript comparison file: 50-reserved-ts-comparison.ts
 */

@@ -841,3 +841,19 @@ Property Descriptors:
 - 23-proxy-reflect.js (Proxy and Reflect API for property access)
 - 19-symbol-deep.js (Symbols as property keys)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 08-objects.js - Objects and properties");
+console.log("📘 19-symbol-deep.js - Symbol deep dive");
+console.log("📘 23-proxy-reflect.js - Proxy and Reflect");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 17-property-descriptors-ts-comparison.ts
+*/

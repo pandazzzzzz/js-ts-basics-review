@@ -415,133 +415,16 @@ console.log("7. Proposal syntax changes");
 console.log("8. Reflect vs Object method differences");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 24.1-function-composition.ts - Function composition TS");
+console.log("📘 23-proxy-reflect.ts - Proxy TS comparison");
+console.log("📘 48-security.js - Type-safe security");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. NATIVE TYPE SYSTEM
-   JS:  Type hints via JSDoc comments only
-   TS:  First-class type system with type annotations
-   TS:  Compile-time type checking, no runtime overhead
-   TS:  Type inference reduces need for explicit annotations
-
-2. DECORATORS
-   JS:  Stage 2.7 proposal (nearing Stage 3, not yet standardized, check TC39 status)
-   TS:  Experimental decorators (legacy) since TS 1.5
-   TS:  --experimentalDecorators flag required for legacy syntax
-   TS:  Stage 2.7 decorator support in TS 5.0+ (experimentalDecorators: false, the default)
-   TS:  Decorator metadata with reflect-metadata
-
-3. TYPE-LEVEL PROGRAMMING
-   JS:  No type-level operations
-   TS:  Generic types, conditional types, mapped types
-   TS:  Template literal types, recursive types
-   TS:  Type inference through complex operations
-
-4. JSDOC VS TYPESCRIPT
-   JS:  JSDoc provides optional type hints
-   TS:  Can understand JSDoc (--allowJs, --checkJs)
-   TS:  Native syntax is more powerful and concise
-   TS:  Better tooling and refactoring support
-
-5. TYPE GUARDS AND NARROWING
-   JS:  typeof, instanceof, Array.isArray at runtime
-   TS:  User-defined type guards (is operator)
-   TS:  Type narrowing in conditionals
-   TS:  Control flow analysis
-
-6. SYMBOL METADATA
-   JS:  Symbols as unique keys
-   TS:  Unique symbol types
-   TS:  Well-known symbols with type definitions
-   TS:  Symbol metadata for decorators
-
-7. PROXY TYPE SAFETY
-   JS:  Proxies are fully dynamic
-   TS:  Can define proxy types with generics
-   TS:  Type-safe proxy handlers
-   TS:  Better IDE support for proxied objects
-
-8. DECLARATION FILES
-   JS:  No type declarations
-   TS:  .d.ts files for type definitions
-   TS:  Declaration merging
-   TS:  Ambient declarations for libraries
-
-⚠️ MIGRATION BEST PRACTICES:
-- Start with JSDoc in JavaScript files
-- Use --checkJs for gradual type checking
-- Add @ts-check at top of JS files
-- Rename .js to .ts when ready
-- Start with strict: false, gradually enable options
-- Use any sparingly, prefer unknown
-- Add tests to catch runtime issues
-- Use @ts-expect-error for known type issues
-
-🔧 TOOLS FOR ADOPTION:
-- tsc --init to create tsconfig.json
-- --allowJs to include JavaScript files
-- --noEmit to check types without emitting
-- cspell and eslint for additional checks
-- dts-gen to generate .d.ts from .js
-- TypeScript ESLint for linting
-
-9. TYPESCRIPT VERSION UPDATES (2024-2026)
-   TS 5.0 (March 2023):
-   - const type parameters (inferred readonly tuples without `as const`)
-   - Standard (Stage 2.7) decorators support (experimentalDecorators: false)
-   - `--moduleResolution bundler`
-
-   TS 5.2 (August 2023):
-   - `using` / `await using` declarations (Explicit Resource Management)
-   - Decorator metadata support
-
-   TS 5.5 (June 2024):
-   - Explicit type annotations on catch variables (catch (e: unknown))
-   - Inferred type predicates for JSDoc
-   - Performance improvements
-   - Better error messages
-
-   TS 5.6 (September 2024):
-   - Iterator helper methods type support (ES2025)
-   - Better strict mode checks
-   - Improved type inference
-   - Regular expression flags for improved consistency
-
-   TS 5.8 (March 2025):
-   - Granular return type checking in conditional expressions
-   - Improved error messages for complex type mismatches
-   - Better inference for chained method calls
-
-   TS 5.9 (December 2025):
-   - Conditional return type inference improvements
-   - Stricter checks on inferred return types
-
-   TS 6.0 (March 2026):
-   - Bridge release: last JavaScript-based TypeScript compiler
-   - TypeScript 7.0 will use typescript-go (Go-based rewrite)
-   - ignoreDeprecations option for features removed in 7.0
-   - Improved 'this'-less inference (reduces need for explicit this parameters)
-   - Major performance improvements expected in 7.0
-
-   ⚠️ MIGRATION NOTE: TypeScript 7.0+ will be Go-based
-   - Check microsoft/typescript-go for development progress
-   - Plan migration path for large codebases
-   - Use ignoreDeprecations: "6.0" in tsconfig.json if needed
-
-
-   Key features to use:
-   - satisfies operator (TS 4.9+): Preserves literal types
-   - const type parameters (TS 5.0+): Prevent type widening
-   - using declarations support (TS 5.2+): ES2027, Stage4 May 2025
-   - Import attributes syntax (TS 5.3+): import ... with { type: "json" }
-   - Decorator metadata (Stage 2.7): uses Symbol.metadata (separate proposal), NOT emitDecoratorMetadata (legacy only)
-
-📘 See related:
-- 01-variables.js (Type checking fundamentals)
-- 06-arrays.js (Array type checking)
-- 22-iterators-generators.js (Symbol.iterator)
-- 23-proxy-reflect.js (Proxy in depth)
-- 18-es6-plus-syntax.js (Decorators in TypeScript)
+📘 See TypeScript comparison file: 47-typescript-advanced-ts-comparison.ts
 */

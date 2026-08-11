@@ -434,5 +434,6 @@ console.log("🌐 TC39 Proposals: https://github.com/tc39/proposals");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.7-es2027-future-ts-comparison.ts
-// 包含：Temporal 类型、Disposable 接口、Decorator 类型支持
+/*
+📘 See TypeScript comparison file: 39.7-es2027-future-ts-comparison.ts
+*/

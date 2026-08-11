@@ -526,158 +526,16 @@ console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
 console.log("- CSSOM: https://www.w3.org/TR/cssom-1/\n");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 36-dom-manipulation.js - DOM manipulation");
+console.log("📘 37-events.js - Event handling");
+console.log("📘 43-storage-network.js - Storage and network");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 TYPESCRIPT VS JAVASCRIPT - DOM TYPE DIFFERENCES
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. DOM ELEMENT PRECISE TYPES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-JavaScript:
-  const input = document.getElementById('name');
-  input.value;  // ✅ May have no value property at runtime
-
-TypeScript:
-  const input = document.getElementById('name');           // HTMLElement | null
-  input.value;                                             // ❌ Error: Property 'value' does not exist
-
-  // Solution 1: Type assertion
-  const input = document.getElementById('name') as HTMLInputElement;
-
-  // Solution 2: Type guard
-  const input = document.getElementById('name');
-  if (input instanceof HTMLInputElement) {
-    input.value;                                           // ✅ OK
-  }
-
-  // Solution 3: Generic selector (recommended)
-  const input = document.querySelector<HTMLInputElement>('#name');
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-2. NULL SAFETY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-JavaScript:
-  const elem = document.getElementById('missing');
-  elem.textContent = 'Hello';  // ⚠️ Runtime error!
-
-TypeScript:
-  const elem = document.getElementById('missing');
-  elem.textContent = 'Hello';  // ❌ Error: Object is possibly null
-
-  // Solution:
-  if (elem) {
-    elem.textContent = 'Hello';                            // ✅ OK
-  }
-
-  // Or optional chaining
-  elem?.textContent = 'Hello';                             // ✅ OK
-
-  // Or non-null assertion (when you're sure it exists)
-  const elem = document.getElementById('must-exist')!;
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-3. EVENT TARGET TYPING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-JavaScript:
-  form.addEventListener('submit', (e) => {
-    e.target.value;  // ⚠️ May not have value
-  });
-
-TypeScript:
-  form.addEventListener('submit', (e) => {
-    e.target.value;                                        // ❌ Error
-    (e.target as HTMLInputElement).value;                  // ✅ OK
-  });
-
-  // Better approach
-  const handleInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    console.log(target.value);
-  };
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-4. COMMON DOM TYPE REFERENCE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Generic types:
-  Element          - Any element
-  HTMLElement      - HTML element (distinct from SVGElement)
-  Node             - Any node (includes text, comments)
-  NodeList         - querySelectorAll return type
-  HTMLCollection   - getElementsBy* return type
-
-Form elements:
-  HTMLInputElement      - <input>
-  HTMLTextAreaElement   - <textarea>
-  HTMLSelectElement     - <select>
-  HTMLOptionElement     - <option>
-  HTMLFormElement       - <form>
-  HTMLButtonElement     - <button>
-
-Media elements:
-  HTMLImageElement      - <img>
-  HTMLVideoElement      - <video>
-  HTMLAudioElement      - <audio>
-  HTMLCanvasElement     - <canvas>
-
-Other common:
-  HTMLAnchorElement     - <a>
-  HTMLDivElement        - <div>
-  HTMLSpanElement       - <span>
-  HTMLUListElement      - <ul>
-  HTMLLIElement         - <li>
-  HTMLTableElement      - <table>
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-5. CSS TYPE SUPPORT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-TypeScript has complete type support for CSS properties:
-
-  element.style.color = 'red';        // ✅ OK
-  element.style.invalid = 'value';    // ❌ Error: Property 'invalid' does not exist
-
-  // CSS variables support
-  element.style.setProperty('--x', '10px');  // ✅ OK
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-6. TYPE-SAFE UTILITY FUNCTION EXAMPLES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-// Safe element retrieval
-function getElement<T extends HTMLElement>(selector: string): T {
-  const elem = document.querySelector<T>(selector);
-  if (!elem) throw new Error(\`Element not found: \${selector}\`);
-  return elem;
-}
-
-// Usage
-const input = getElement<HTMLInputElement>('#username');
-input.value;  // ✅ Type safe
-
-// Optional element retrieval
-function maybeGetElement<T extends HTMLElement>(selector: string): T | null {
-  return document.querySelector<T>(selector);
-}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📘 SUMMARY: TYPESCRIPT DOM BENEFITS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ Compile-time capture of null reference errors
-✅ Precise DOM element types
-✅ Better IDE autocomplete and refactoring
-✅ Prevents common runtime errors
-✅ Self-documenting code
-
-⚠️ Cases to handle:
-  - Element may not exist (| null)
-  - Need type assertion or guard
-  - Third-party libraries may need type declarations
-
-🎯 RECOMMENDATION: Use TypeScript for production code, especially for DOM manipulation!
+📘 See TypeScript comparison file: 35-dom-basics-ts-comparison.ts
 */

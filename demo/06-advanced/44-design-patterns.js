@@ -1010,3 +1010,19 @@ console.log("3. Performance overhead - extra abstraction layers can impact perfo
 - 23-proxy-reflect.js (Proxy pattern)
 - 07-functions.js (Higher-order functions for functional patterns)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 25-inheritance-patterns.js - Inheritance patterns");
+console.log("📘 24.1-function-composition.js - Function composition");
+console.log("📘 23-proxy-reflect.js - Proxy patterns");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 44-design-patterns-ts-comparison.ts
+*/

@@ -638,29 +638,16 @@ console.log("      - Object.is(0, -0) → false (Map treats as same!)");
 console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 08-objects.js - Objects and methods");
+console.log("📘 11-json.js - JSON operations");
+console.log("📘 27-memory-management.js - Memory management and WeakMap");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. MAP TYPE ANNOTATIONS
-   TS:  const map: Map<string, number> = new Map()
-   TS:  Generic syntax: Map<KeyType, ValueType>
-
-2. SET TYPE ANNOTATIONS
-   TS:  const set: Set<number> = new Set()
-   TS:  Generic syntax: Set<T>
-
-3. WEAKMAP/WEAKSET TYPING
-   TS:  const weakMap: WeakMap<object, string> = new WeakMap()
-   TS:  const weakSet: WeakSet<object> = new WeakSet()
-
-4. ITERATION TYPING
-   TS:  for (const [key, value] of map) { /* key: string, value: number *\/ }
-
-5. UTILITY TYPES
-   TS:  type MapEntry<K, V> = [K, V]
-   TS:  type SetValue<T> = T
-
-📘 See related: 06-arrays.js (arrays), 08-objects.js (objects), 18-es6-plus-syntax.js (ES6+)
+📘 See TypeScript comparison file: 10-map-set-ts-comparison.ts
 */

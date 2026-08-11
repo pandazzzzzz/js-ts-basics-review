@@ -968,15 +968,18 @@ console.log(processValue(42));
 // See TypeScript Comparison
 // ============================================
 
-/*
-🔍 See 03-control-flow-ts-comparison.ts for:
-   - Type narrowing in if/else blocks
-   - Switch exhaustiveness checking with never type
-   - Discriminated unions with switch
-   - Type predicates for custom type guards
-   - Control flow analysis
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross References ===");
+console.log("📘 01-variables.js - Variables and data types");
+console.log("📘 02-operators.js - Operators and expressions");
+console.log("📘 20-error-handling.js - Error handling patterns");
 
-📘 Key differences: TypeScript tracks types through control flow
-   and provides compile-time type safety.
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 03-control-flow-ts-comparison.ts
 */
 

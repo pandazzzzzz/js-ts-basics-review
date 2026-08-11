@@ -1,5 +1,8 @@
 // Operators and Expressions Demo
 // 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
+// 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
+
+export {}; // ES Module
 
 // ============================================
 // Learning goals
@@ -24,8 +27,6 @@
 // 11. this Keyword
 // 12. super Keyword
 // 13. Other Operators
-
-// ============================================
 
 // ============================================
 // 1. Arithmetic Operators
@@ -896,17 +897,16 @@ console.log("Reason: Comma operator is confusing and rarely necessary");
 // Bad:  let x = (a++, b++, c);
 
 // ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross References ===");
+console.log("📘 01-variables.js - Variables and data types");
+console.log("📘 03-control-flow.js - Control flow and conditionals");
+console.log("📘 18-es6-plus-syntax.js - ES6+ syntax features");
+
+// ============================================
 // TypeScript Comparison
 // ============================================
-
 /*
-🔍 See 02-operators-ts-comparison.ts for:
-   - Type-safe arithmetic operations
-   - Type narrowing with comparison operators
-   - Branded types for operators
-   - Delete operator type safety
-   - Type guards with typeof/instanceof
-
-📘 Key differences: TypeScript catches type mismatches at compile time
-   while JavaScript allows implicit conversions at runtime.
+📘 See TypeScript comparison file: 02-operators-ts-comparison.ts
 */

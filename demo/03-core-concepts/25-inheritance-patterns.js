@@ -1392,3 +1392,19 @@ Inheritance Patterns:
 - 16-classes.js (ES6 class syntax)
 - 24-function-patterns-advanced.js (functional composition)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 15-prototypes-inheritance.js - Prototypes");
+console.log("📘 16-classes.js - Classes");
+console.log("📘 44-design-patterns.js - Design patterns");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 25-inheritance-patterns-ts-comparison.ts
+*/

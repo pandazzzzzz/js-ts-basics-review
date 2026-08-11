@@ -393,5 +393,6 @@ console.log("📘 Arrays: 06-arrays.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.4-es2024-features-ts-comparison.ts
-// 包含：groupBy 类型推断、Promise.withResolvers 泛型、Resizable ArrayBuffer 类型
+/*
+📘 See TypeScript comparison file: 39.4-es2024-features-ts-comparison.ts
+*/

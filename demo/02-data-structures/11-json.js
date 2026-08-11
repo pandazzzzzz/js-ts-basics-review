@@ -633,3 +633,19 @@ console.log("    Safe integer:", JSON.stringify({ safe: bigNum.safe }));
 
 📘 See related: 08-objects.js (objects), 33-fetch-api.js (network requests)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 08-objects.js - Objects and methods");
+console.log("📘 10-map-set.js - Map and Set");
+console.log("📘 32-modules.js - ES Modules and import/export");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 11-json-ts-comparison.ts
+*/

@@ -1220,10 +1220,14 @@ console.log("  WeakMap.get(symbolKey):", symWm.get(symKey)); // 'symbol-keyed va
 // ============================================
 // CROSS-REFERENCES
 // ============================================
-console.log(`
-📘 See related files for additional patterns:
+console.log("\n=== Cross-references ===");
+console.log("📘 09-destructuring.js - Destructuring assignment");
+console.log("📘 16-classes.js - Classes");
+console.log("📘 32-modules.js - ES Modules");
 
-Modern ES6+ Features:
-- 24-function-patterns-advanced.js (destructuring, spread in advanced usage)
-- 26-optimization-performance.js (performance of modern features)
-`);
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 18-es6-plus-syntax-ts-comparison.ts
+*/

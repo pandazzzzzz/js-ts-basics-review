@@ -1602,3 +1602,20 @@ See also:
 
 📘 See 33-fetch-api-ts-comparison.ts for detailed examples!
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 33.1-fetch-basics.js - Fetch basics");
+console.log("📘 33.2-fetch-error-handling.js - Error handling");
+console.log("📘 33.3-fetch-practical-patterns.js - Advanced patterns");
+console.log("📘 33.4-fetch-streams-advanced.js - Stream API");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 33-fetch-api-ts-comparison.ts
+*/

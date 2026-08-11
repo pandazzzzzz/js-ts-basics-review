@@ -69,3 +69,19 @@ console.log("📘 TypeScript advanced features: 47-typescript-advanced.js");
 console.log("\n=== Verification ===");
 console.log("All ES version annotations are verified against TC39 official documentation");
 console.log("Last verified: 2026-07-31");
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 39.1-es2021-features.js - ES2021 features");
+console.log("📘 39.2-es2022-features.js - ES2022 features");
+console.log("📘 39.3-es2023-features.js - ES2023 features");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 39-es2022-plus-features-ts-comparison.ts
+*/

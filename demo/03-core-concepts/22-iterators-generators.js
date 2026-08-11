@@ -1165,49 +1165,16 @@ console.log("\n=== Iterators and Generators Demo Complete ===");
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 19-symbol-deep.js - Symbol.iterator");
+console.log("📘 21-regex.js - Regular expressions");
+console.log("📘 31-async-await.js - Async iterators");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. ITERATOR TYPE
-   JS:  let iter = obj[Symbol.iterator]();
-   TS:  let iter: Iterator<number> = obj[Symbol.iterator]();
-
-2. GENERATOR TYPE
-   JS:  function* gen() { yield 1; }
-   TS:  function* gen(): Generator<number, void, unknown> { yield 1; }
-   TS:  Generator<T, TReturn, TNext>
-
-3. ASYNC ITERATOR TYPE
-   JS:  async function* gen() { yield 1; }
-   TS:  async function* gen(): AsyncGenerator<number, void, unknown>
-
-4. ITERABLE TYPE
-   TS:  interface CustomIterable<T> extends Iterable<T>
-   TS:  function process<T>(iter: Iterable<T>): void
-
-5. TYPE INFERENCE
-   TS:  TypeScript can often infer iterator types
-
-   TypeScript example:
-   function* range(start: number, end: number) {
-     for (let i = start; i <= end; i++) {
-       yield i;
-     }
-   }
-   // Inferred: Generator<number, void, unknown>
-
-📘 See related: 19-symbol-deep.js (Symbol.iterator)
-📘 See related: 04-asynchronous/ for async patterns
+📘 See TypeScript comparison file: 22-iterators-generators-ts-comparison.ts
 */
-// ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Iterators & Generators:
-- 26-optimization-performance.js (lazy evaluation with generators)
-- 27-memory-management.js (large data handling with generators)
-`);

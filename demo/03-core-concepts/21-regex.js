@@ -981,51 +981,15 @@ try {
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 04-strings.js - Strings and string methods");
+console.log("📘 22-iterators-generators.js - Iterators and generators");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. REGEXP TYPE
-   JS:  let re = /pattern/;
-   TS:  let re: RegExp = /pattern/;
-
-2. MATCH RESULT TYPING
-   TS:  const match: RegExpMatchArray | null = str.match(regex);
-   TS:  Need to handle null case
-
-3. TEMPLATE LITERAL TYPES
-   TS:  Type-safe pattern strings (TS 4.1+)
-
-   TypeScript example:
-   type Pattern<T extends string> = `/${T}/`;
-   type DigitPattern = Pattern<'\\d+'>; // "/\d+/"
-
-4. STRING LITERAL TYPES FOR VALIDATION
-   TS:  Type-level string validation
-
-   TypeScript example:
-   type Email = `${string}@${string}.${string}`;
-   const email: Email = "test@example.com";
-
-5. REGEXP EXEC RETURN TYPE
-   TS:  RegExpExecArray | null
-
-   TypeScript example:
-   function extractYear(date: string): number | null {
-     const match = /(\d{4})/.exec(date);
-     return match ? parseInt(match[1]) : null;
-   }
-
-📘 See related: 01-variables.js for string methods
-📘 See related: 04-strings.js for string manipulation
+📘 See TypeScript comparison file: 21-regex-ts-comparison.ts
 */
-// ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Regular Expressions:
-- 22-iterators-generators.js (generators for regex matches)
-`);

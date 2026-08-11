@@ -262,10 +262,9 @@ console.log("⚠️  Don't rely on GC timing for application logic");
 console.log("✅ Group numeric separators by thousands, bytes, or logical units");
 
 // ============================================
-// 8. Cross-references
+// Cross-references
 // ============================================
-console.log("\n--- 8. Cross-references ---\n");
-
+console.log("\n=== Cross-references ===");
 console.log("📘 Promise.any() and AggregateError: 30-promises.js");
 console.log("📘 Nullish coalescing operator (??): 02-operators.js");
 console.log("📘 Logical operators: 02-operators.js");
@@ -275,5 +274,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.1-es2021-features-ts-comparison.ts
-// 包含：类型安全的逻辑赋值、WeakRef 类型注解、ES2021 库类型引用
+/*
+📘 See TypeScript comparison file: 39.1-es2021-features-ts-comparison.ts
+*/

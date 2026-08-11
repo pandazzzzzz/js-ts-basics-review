@@ -283,27 +283,16 @@ function initApp({
 initApp({ port: 8080, debug: true });
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 06.1-arrays-basics.js - Array basics");
+console.log("📘 08-objects.js - Objects and methods");
+console.log("📘 07.1-functions-basics.js - Function parameters");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TYPE ANNOTATIONS WITH DESTRUCTURING
-   TS:  const { name, age }: { name: string; age: number } = obj
-   TS:  Note: colon is for renaming in destructuring, not type annotation
-
-2. FUNCTION PARAMETER DESTRUCTURING TYPING
-   TS:  function greet({ name, age }: { name: string; age: number }) {}
-   TS:  Usually simplified with interface/type:
-        interface User { name: string; age: number }
-        function greet({ name, age }: User) {}
-
-3. REST ELEMENTS TYPING
-   TS:  const [first, ...rest]: [string, ...number[]] = tuple
-   TS:  const { a, ...rest }: { a: string } & Record<string, number> = obj
-
-4. DEFAULT VALUES WITH TYPES
-   TS:  const { count = 0 }: { count?: number } = obj
-
-📘 See related: 06-arrays.js (array destructuring), 08-objects.js (object destructuring), 18-es6-plus-syntax.js (ES6+ features)
+📘 See TypeScript comparison file: 09-destructuring-ts-comparison.ts
 */

@@ -1,13 +1,30 @@
 // Variables and Data Types Demo
 // 📘 For TypeScript comparison, see: 01-variables-ts-comparison.ts
-// 📘 javascript.info Part 1 > "JavaScript Fundamentals" (2.1-2.7)
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types
+
+export {}; // ES Module
 
 // ============================================
 // Learning goals
 // ============================================
 // This file introduces the basic building blocks of JavaScript.
 // Read the sections in order to see how variables, values, and simple syntax work together.
+
+// ============================================
+// Table of Contents
+// ============================================
+
+// 1. JavaScript in HTML
+// 2. Code Structure
+// 3. "use strict" - Modern Mode
+// 4. Variable Declarations (var/let/const)
+// 5. Primitive Data Types
+// 6. Type Coercion
+// 7. Variable Naming
+// 8. Global Object
+// 9. Common Pitfalls
+// 10. Best Practices
+// 11. Cross-references
 
 // ============================================
 // 1. JavaScript in HTML (JS.info 2.1)
@@ -299,18 +316,17 @@ console.log("value === null:", value === null); // true (strict check)
 console.log("value === undefined:", value === undefined); // false
 
 // ============================================
-// See TypeScript Comparison
+// Cross-references
 // ============================================
+console.log("\n=== Cross References ===");
+console.log("📘 02-operators.js - Operators and expressions");
+console.log("📘 03-control-flow.js - Control flow and conditionals");
+console.log("📘 13.1-scope-basics.js - Scope fundamentals");
 
+// ============================================
+// TypeScript Comparison
+// ============================================
 /*
-🔍 See 01-variables-ts-comparison.ts for:
-   - Type annotations and type inference
-   - strictNullChecks behavior
-   - Special types: any, unknown, never
-   - Type assertions and type guards
-   - Literal types and type widening
-
-📘 Key differences: TypeScript adds compile-time type checking while
-   maintaining the same runtime behavior as JavaScript.
+📘 See TypeScript comparison file: 01-variables-ts-comparison.ts
 */
 

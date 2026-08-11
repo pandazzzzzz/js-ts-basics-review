@@ -415,5 +415,6 @@ console.log("📘 Strings: 04-strings.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.2-es2022-features-ts-comparison.ts
-// 包含：私有字段类型检查、static block 支持、Error cause 类型、at() 方法类型
+/*
+📘 See TypeScript comparison file: 39.2-es2022-features-ts-comparison.ts
+*/

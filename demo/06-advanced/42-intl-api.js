@@ -783,50 +783,16 @@ console.log(`// Example template (future syntax):
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 12-date-time.js - Date and time formatting");
+console.log("📘 04-strings.js - String comparison");
+console.log("📘 50-reserved.js - Temporal API");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. INTL TYPES
-   JS:  Runtime API only
-   TS:  Full type definitions for all Intl constructors
-   TS:  Intl.NumberFormat, Intl.DateTimeFormat, etc.
-   TS:  Type-safe options objects
-
-2. OPTIONS TYPES
-   TS:  Intl.NumberFormatOptions
-   TS:  Intl.DateTimeFormatOptions
-   TS:  Intl.CollatorOptions
-   TS:  Autocomplete for all options
-
-3. LOCALE STRING TYPE
-   TS:  Intl.LocalesArgument = string | string[] | Intl.Locale
-   TS:  Type-safe locale handling
-
-4. RETURN TYPES
-   TS:  format() returns string
-   TS:  formatToParts() returns typed array
-   TS:  select() returns specific string literals
-
-⚠️ BROWSER/RUNTIME SUPPORT:
-- Most Intl APIs are well-supported in modern browsers
-- Intl.Segmenter is ES2022 (check compatibility)
-- Node.js: Full support in recent versions
-- Polyfills available for older environments
-
-🔧 BEST PRACTICES:
-- Cache formatters for better performance
-- Use appropriate granularity for Segmenter
-- Consider fallback locales
-- Test with actual locale data
-- Use numeric: true for file sorting
-- Remember time zone differences
-- Validate currency codes
-- Handle missing translations gracefully
-
-📘 See related:
-- 04-strings.js (localeCompare)
-- 12-date-time.js (Date formatting)
-- 06-arrays.js (Sorting)
+📘 See TypeScript comparison file: 42-intl-api-ts-comparison.ts
 */

@@ -734,3 +734,19 @@ console.log("      - Plugin architecture");
 
 📘 See related: 08-objects.js (object methods), 33-fetch-api.js (timestamps)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 05-numbers-math.js - Numbers and Math");
+console.log("📘 42-intl-api.js - Internationalization API");
+console.log("📘 50-reserved.js - Temporal API (ES2027)");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 12-date-time-ts-comparison.ts
+*/

@@ -1425,97 +1425,16 @@ console.log("  const mod = await import('./data.json', { with: { type: 'json' } 
 console.log("  // Second argument carries the import attributes\n");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 18-es6-plus-syntax.js - ES6+ syntax");
+console.log("📘 33.3-fetch-practical-patterns.js - Dynamic imports");
+console.log("📘 49-build-tools.js - Build tools and bundling");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TYPE IMPORTS/EXPORTS
-   JS:  import { User } from './user.js';
-   TS:  import { User } from './user';
-        import type { User } from './user'; // Type-only import
-
-   Benefits:
-   - Type-only imports are erased at runtime
-   - Better tree-shaking
-   - Explicit type vs value imports
-
-2. MODULE TYPES
-   JS:  // No type information
-   TS:  export interface User {
-          name: string;
-          email: string;
-        }
-
-   Benefits:
-   - Type safety across modules
-   - Better IDE support
-   - Compile-time error checking
-
-3. NAMESPACE IMPORTS WITH TYPES
-   JS:  import * as Utils from './utils.js';
-   TS:  import * as Utils from './utils';
-        const result: number = Utils.add(1, 2);
-
-   Benefits:
-   - Type-safe namespace access
-   - Better autocomplete
-   - Prevents type errors
-
-4. DEFAULT EXPORT TYPES
-   JS:  export default class User { }
-   TS:  export default class User {
-          constructor(public name: string) {}
-        }
-
-   Benefits:
-   - Type-safe default exports
-   - Better refactoring support
-   - Clear type information
-
-5. RE-EXPORT WITH TYPES
-   JS:  export * from './module.js';
-   TS:  export * from './module';
-        export { type User, type Product } from './models';
-
-   Benefits:
-   - Separate type and value exports
-   - Better tree-shaking
-   - Clearer intent
-
-6. DYNAMIC IMPORT TYPES
-   JS:  const module = await import('./module.js');
-   TS:  const module = await import('./module');
-
-   Benefits:
-   - Type-safe dynamic imports
-   - Better IDE support
-   - Compile-time checking
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. FILE EXTENSIONS
-   - JS: Must include .js extension
-   - TS: Omit extension (TypeScript resolves it)
-
-   import { fn } from './module.js'; // ✅ JS
-   import { fn } from './module';    // ✅ TS
-
-2. TYPE-ONLY IMPORTS
-   - Use 'import type' for types only
-   - Prevents runtime imports of types
-
-   import type { User } from './types'; // ✅ Type only
-   import { User } from './types';      // ❌ Runtime import
-
-3. THIS BINDING IN MODULES
-   - ES Modules: top-level 'this' is undefined
-   - CommonJS: 'this' refers to module.exports
-
-4. CIRCULAR DEPENDENCIES
-   - Can cause undefined values during initialization
-   - Extract shared code or use dynamic imports
-
-📘 See 32-modules-ts-comparison.ts for detailed examples!
+📘 See TypeScript comparison file: 32-modules-ts-comparison.ts
 */
-

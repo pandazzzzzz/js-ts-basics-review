@@ -930,109 +930,16 @@ console.log(`
 `);
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 30-promises.js - Promises");
+console.log("📘 33.2-fetch-error-handling.js - Fetch with async/await");
+console.log("📘 34-async-error-handling.js - Async error handling");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. ASYNC FUNCTION RETURN TYPES
-   JS:  async function getData() { return { data: "value" }; }
-   TS:  async function getData(): Promise<{ data: string }> {
-          return { data: "value" };
-        }
-
-   Benefits:
-   - Explicit Promise return type
-   - Type checking for returned values
-   - Better IDE autocomplete
-
-2. AWAIT TYPE INFERENCE
-   JS:  const result = await fetchData();
-   TS:  const result = await fetchData(); // Type inferred from Promise<T>
-
-   Benefits:
-   - Automatic type inference
-   - No need to annotate awaited values
-   - Type-safe variable usage
-
-3. ERROR HANDLING TYPES
-   JS:  try { await operation(); } catch (error) { console.log(error); }
-   TS:  try {
-          await operation();
-        } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.log(error.message);
-          }
-        }
-
-   Benefits:
-   - Type-safe error handling
-   - Forces error type checking
-   - Prevents runtime errors
-
-4. GENERIC ASYNC FUNCTIONS
-   JS:  async function fetchItem(id) { return await fetch(id); }
-   TS:  async function fetchItem<T>(id: number): Promise<T> {
-          const response = await fetch(`/api/items/${id}`);
-          return response.json();
-        }
-
-   Benefits:
-   - Type-safe generic async functions
-   - Preserves type information
-   - Better type inference
-
-5. PROMISE.ALL TYPE INFERENCE
-   JS:  const [a, b, c] = await Promise.all([p1, p2, p3]);
-   TS:  const [a, b, c] = await Promise.all([p1, p2, p3]);
-        // Types: [Type1, Type2, Type3] - tuple type!
-
-   Benefits:
-   - Preserves individual types
-   - Type-safe destructuring
-   - Better error messages
-
-6. ASYNC ARROW FUNCTION TYPES
-   JS:  const fn = async (x) => x * 2;
-   TS:  const fn: (x: number) => Promise<number> = async (x) => x * 2;
-
-   Benefits:
-   - Explicit function type
-   - Type checking for parameters
-   - Better documentation
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. ASYNC FUNCTION ALWAYS RETURNS PROMISE
-   - Even if you return a non-Promise value
-   - TypeScript enforces Promise<T> return type
-
-   async function getValue(): Promise<number> {
-     return 42; // ✅ Automatically wrapped in Promise
-   }
-
-2. AWAIT UNWRAPS PROMISE TYPE
-   - await converts Promise<T> to T
-   - TypeScript infers the unwrapped type
-
-   const promise: Promise<string> = fetchData();
-   const value: string = await promise;
-
-3. ERROR TYPE IN CATCH IS UNKNOWN
-   - TypeScript 4.4+ uses 'unknown' for catch errors
-   - Must use type guards to access error properties
-
-4. VOID VS PROMISE<VOID>
-   - void: Synchronous function with no return
-   - Promise<void>: Async function with no meaningful return
-
-5. TOP-LEVEL AWAIT TYPE CHECKING
-   - Top-level await works in ES modules
-   - TypeScript checks module type
-
-6. ASYNC GENERATOR RETURN TYPE
-   - Async generators return AsyncIterableIterator<T>
-   - Different from Promise<T>
-
-📘 See 31-async-await-ts-comparison.ts for detailed examples!
+📘 See TypeScript comparison file: 31-async-await-ts-comparison.ts
 */

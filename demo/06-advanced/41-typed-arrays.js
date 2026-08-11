@@ -856,56 +856,16 @@ console.log("7. BigInt TypedArray browser support");
 console.log("8. Buffer alignment and offsets");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 06.5-typed-arrays.js - Typed arrays basics");
+console.log("📘 27-memory-management.js - Memory management");
+console.log("📘 43-storage-network.js - Binary data and storage");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TYPED ARRAY TYPES
-   JS:  Runtime type checking only
-   TS:  Full type definitions for all TypedArray types
-   TS:  Uint8Array, Float32Array, etc. are distinct types
-   TS:  Type inference works with TypedArray methods
-
-2. ARRAYBUFFER TYPES
-   TS:  ArrayBuffer, SharedArrayBuffer types
-   TS:  ArrayBufferLike = ArrayBuffer | SharedArrayBuffer
-   TS:  ArrayBufferView = TypedArray | DataView
-
-3. BUFFER SOURCE TYPES
-   TS:  BufferSource = ArrayBufferView | ArrayBuffer
-   TS:  Used in Web APIs (crypto, fetch, etc.)
-   TS:  Type-safe buffer operations
-
-4. BLOB/FILE TYPES
-   TS:  Blob, File interfaces fully typed
-   TS:  BlobPart = BufferSource | Blob | string
-   TS:  FileReader event types
-
-5. DATAVIEW METHODS
-   TS:  Type-safe get/set methods
-   TS:  Endianness parameter typed as boolean
-   TS:  Return types match the method name
-
-⚠️ COMMON PITFALLS:
-- TypedArrays have fixed size (no push/pop/splice)
-- subarray() shares buffer, slice() copies
-- Uint8ClampedArray clamps values (0-255)
-- DataView is slower but more flexible
-- Remember to revoke object URLs to prevent memory leaks
-- Check browser support for BigInt TypedArrays
-- Be careful with endianness in binary protocols
-
-🔧 PERFORMANCE TIPS:
-- Use TypedArrays for numeric data (faster than regular arrays)
-- Prefer subarray() over slice() when possible (no copy)
-- Use set() for bulk copying
-- DataView is slower, use TypedArray when possible
-- Reuse buffers instead of creating new ones
-- Use appropriate type (Uint8 vs Uint32) for your data
-
-📘 See related:
-- 02-data-structures/06-arrays.js (Array methods)
-- 43-storage-network.js (WebSocket binary data)
-- 27-memory-management.js (Memory management)
+📘 See TypeScript comparison file: 41-typed-arrays-ts-comparison.ts
 */

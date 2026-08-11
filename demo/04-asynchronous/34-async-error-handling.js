@@ -1351,3 +1351,19 @@ Async Error Handling:
 - 24-function-patterns-advanced.js (retry and debounce)
 - 26-optimization-performance.js (promise performance)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 33.2-fetch-error-handling.js - Fetch error handling");
+console.log("📘 33.3-fetch-practical-patterns.js - Retry patterns");
+console.log("📘 30-promises.js - Promise error handling");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 34-async-error-handling-ts-comparison.ts
+*/

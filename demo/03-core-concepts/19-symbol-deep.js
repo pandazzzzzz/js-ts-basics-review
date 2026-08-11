@@ -766,3 +766,19 @@ Symbols & Weak Collections:
 - 23-proxy-reflect.js (well-known symbols)
 - 17-property-descriptors.js (property descriptors with symbols)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 17-property-descriptors.js - Property descriptors");
+console.log("📘 22-iterators-generators.js - Iterators and generators");
+console.log("📘 23-proxy-reflect.js - Proxy and Reflect");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 19-symbol-deep-ts-comparison.ts
+*/

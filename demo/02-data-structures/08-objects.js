@@ -640,59 +640,16 @@ const CONFIG = Object.freeze({
 // - Use classes or factory functions
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 06.1-arrays-basics.js - Array basics");
+console.log("📘 10-map-set.js - Map and Set");
+console.log("📘 15-prototypes-inheritance.js - Prototypes and inheritance");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. INTERFACES
-   JS:  const person = { name: "Alice", age: 30 };
-   TS:  interface Person { name: string; age: number; }
-        const person: Person = { name: "Alice", age: 30 };
-
-2. TYPE ALIASES
-   TS:  type Person = { name: string; age: number; };
-        const person: Person = { name: "Alice", age: 30 };
-
-3. OPTIONAL PROPERTIES
-   TS:  interface Person {
-          name: string;
-          age?: number; // Optional
-        }
-
-4. READONLY PROPERTIES
-   TS:  interface Person {
-          readonly id: number;
-          name: string;
-        }
-
-5. INDEX SIGNATURES
-   TS:  interface StringMap {
-          [key: string]: string;
-        }
-
-6. EXCESS PROPERTY CHECKING
-   TS catches typos and extra properties:
-   interface Person { name: string; }
-   const p: Person = { name: "Alice", age: 30 }; // ❌ Error
-
-7. MAPPED TYPES
-   TS:  type Readonly<T> = { readonly [P in keyof T]: T[P] };
-        type Partial<T> = { [P in keyof T]?: T[P] };
-
-8. UTILITY TYPES
-   - Partial<T>: All properties optional
-   - Required<T>: All properties required
-   - Readonly<T>: All properties readonly
-   - Pick<T, K>: Select specific properties
-   - Omit<T, K>: Exclude specific properties
-   - Record<K, T>: Object with specific key/value types
-
-⚠️ COMMON CONFUSION POINTS:
-- Interface vs Type: Interfaces use `extends`, types use intersection (`&`), both can be extended
-- Structural typing: Objects match if structure matches
-- Index signatures allow any key
-- Readonly is compile-time only, not runtime
-
-📘 TypeScript provides compile-time type safety for objects!
+📘 See TypeScript comparison file: 08-objects-ts-comparison.ts
 */

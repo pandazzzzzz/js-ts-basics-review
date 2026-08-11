@@ -758,57 +758,16 @@ console.log("  Using it for expected conditions hides real errors.");
 console.log("  Fix: Use conditional checks, early returns for normal flows.");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 20-error-handling.js - Error handling");
+console.log("📘 27-memory-management.js - Memory debugging");
+console.log("📘 48-security.js - Security testing");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. TYPE-LEVEL DEBUGGING
-   JS:  Runtime errors only
-   TS:  Compile-time type errors catch issues before runtime
-   TS:  Editor shows type errors immediately
-   TS:  Hover over variables to see inferred types
-
-2. TESTING WITH TYPES
-   JS:  Test runtime behavior only
-   TS:  Can test types with expectTypeOf (Vitest)
-   TS:  @ts-expect-error to test type errors
-   TS:  Example: expectTypeOf(value).toBeNumber()
-
-3. SOURCE MAPS
-   JS:  Optional, mainly for minified code
-   TS:  Essential for debugging TypeScript
-   TS:  Enable in tsconfig.json: "sourceMap": true
-   TS:  Maps compiled JS back to TS source
-
-4. JSDOC VS TYPESCRIPT
-   JS:  JSDoc provides type hints via comments
-   TS:  Native type system, no comments needed
-   TS:  More powerful type features (generics, unions, etc.)
-   TS:  Better tooling and refactoring support
-
-5. LINTING
-   JS:  ESLint with JavaScript rules
-   TS:  @typescript-eslint/eslint-plugin
-   TS:  Additional type-aware rules
-   TS:  Example: @typescript-eslint/no-floating-promises
-
-6. TESTING FRAMEWORKS
-   Both JS and TS use same frameworks (Jest, Vitest, Mocha)
-   TS:  Requires ts-jest or similar for TypeScript support
-   TS:  Type-safe mocks and assertions
-   TS:  Better autocomplete in test files
-
-⚠️ DEBUGGING BEST PRACTICES:
-- Use descriptive variable and function names
-- Add console.log strategically, not everywhere
-- Use debugger statement for complex issues
-- Check Network panel for API problems
-- Read error messages carefully
-- Use source maps in production for better error tracking
-- Set up error monitoring (Sentry, Rollbar, etc.)
-
-📘 See related:
-- 20-error-handling.js (Error handling patterns)
-- 37-events.js (Event debugging)
+📘 See TypeScript comparison file: 40-debugging-testing-ts-comparison.ts
 */

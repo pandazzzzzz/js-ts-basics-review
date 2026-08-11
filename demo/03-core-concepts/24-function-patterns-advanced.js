@@ -1166,3 +1166,19 @@ Design Patterns:
 - 25-inheritance-patterns.js (mixins, strategy, observer)
 - 34-async-error-handling.js (circuit breakers, retry patterns)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 24.1-function-composition.js - Function composition");
+console.log("📘 24.2-debounce-throttle.js - Debounce and throttle");
+console.log("📘 24.3-memoization-cache.js - Memoization and cache");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 24-function-patterns-advanced-ts-comparison.ts
+*/

@@ -476,5 +476,6 @@ console.log("📘 Intl API: 42-intl-api.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.5-es2025-features-ts-comparison.ts
-// 包含：Set 方法类型、Iterator 辅助函数类型、Promise.try 泛型、Float16Array 类型
+/*
+📘 See TypeScript comparison file: 39.5-es2025-features-ts-comparison.ts
+*/

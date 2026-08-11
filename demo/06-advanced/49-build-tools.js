@@ -904,3 +904,18 @@ console.log(`
 - 46-performance.js (Performance optimization)
 - 39-es2022-plus-features.js (Dynamic imports)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 32-modules.js - ES Modules");
+console.log("📘 47-typescript-advanced.js - TypeScript tooling");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 49-build-tools-ts-comparison.ts
+*/

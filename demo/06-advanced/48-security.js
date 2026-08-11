@@ -1460,3 +1460,19 @@ console.log("8. Mixed content (HTTP + HTTPS)");
 - 33-fetch-api.js (Network requests)
 - 38-forms-validation.js (Form validation)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 38-forms-validation.js - Input validation");
+console.log("📘 33.3-fetch-practical-patterns.js - Secure fetch patterns");
+console.log("📘 43-storage-network.js - Secure storage");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 48-security-ts-comparison.ts
+*/

@@ -997,3 +997,19 @@ Composition & Patterns:
 - 24-function-patterns-advanced.js (functional inheritance patterns)
 - 16-classes.js (composition over inheritance)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 14-this-keyword.js - this keyword");
+console.log("📘 16-classes.js - Classes and inheritance");
+console.log("📘 25-inheritance-patterns.js - Inheritance patterns");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 15-prototypes-inheritance-ts-comparison.ts
+*/

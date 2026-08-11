@@ -1412,3 +1412,19 @@ Performance & Optimization:
 - 27-memory-management.js (garbage collection, object pooling)
 - 22-iterators-generators.js (generator-based streaming)
 `);
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 24.2-debounce-throttle.js - Debounce and throttle");
+console.log("📘 27-memory-management.js - Memory management");
+console.log("📘 46-performance.js - Performance optimization");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 26-optimization-performance-ts-comparison.ts
+*/

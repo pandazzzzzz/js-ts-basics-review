@@ -1209,3 +1209,19 @@ setTimeout(() => {
 
 📘 See 29-event-loop-callbacks-ts-comparison.ts for detailed examples!
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 30-promises.js - Promises");
+console.log("📘 31-async-await.js - Async/await");
+console.log("📘 33.1-fetch-basics.js - Fetch API basics");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 29-event-loop-callbacks-ts-comparison.ts
+*/

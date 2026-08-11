@@ -1501,3 +1501,19 @@ Fetch:
 - 41-typed-arrays.js (Binary data)
 - 20-error-handling.js (Error handling)
 */
+
+
+// ============================================
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 35-dom-basics.js - DOM basics");
+console.log("📘 38-forms-validation.js - Forms and validation");
+console.log("📘 45-web-apis.js - Web APIs");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 43-storage-network-ts-comparison.ts
+*/

@@ -722,148 +722,16 @@ console.log("- High Performance Animations: https://web.dev/animations-guide/\n"
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 35-dom-basics.js - DOM basics");
+console.log("📘 37-events.js - Event handling");
+console.log("📘 45-web-apis.js - Advanced Web APIs");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 TYPESCRIPT VS JAVASCRIPT - DOM MANIPULATION TYPE DIFFERENCES
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. createElement OVERLOADS AND PRECISE RETURN TYPES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-JavaScript:
-  const div = document.createElement('div');     // Any Element
-  const input = document.createElement('input'); // Any Element
-
-TypeScript:
-  const div = document.createElement('div');     // HTMLDivElement ✨
-  const input = document.createElement('input'); // HTMLInputElement ✨
-  const video = document.createElement('video'); // HTMLVideoElement ✨
-
-  // Complete tag type mapping:
-  'a'       → HTMLAnchorElement
-  'canvas'  → HTMLCanvasElement
-  'form'    → HTMLFormElement
-  'img'     → HTMLImageElement
-  'input'   → HTMLInputElement
-  'select'  → HTMLSelectElement
-  'table'   → HTMLTableElement
-  'video'   → HTMLVideoElement
-  // ... etc
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-2. querySelector GENERIC USAGE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-JavaScript:
-  const input = document.querySelector('.field');
-  input.value;  // Runtime error possible
-
-TypeScript:
-  const input = document.querySelector('.field');
-  input.value;  // ❌ Error: Property 'value' does not exist on 'Element'
-
-  // Solution: Explicit generic
-  const input = document.querySelector<HTMLInputElement>('.field');
-  // input: HTMLInputElement | null
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-3. cloneNode RETURN TYPE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  const cloned = element.cloneNode(true);
-  // TS returns type: Node, needs type assertion
-
-  const cloned = element.cloneNode(true) as HTMLElement;
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-4. TABLE AND FORM ELEMENT SPECIFIC TYPES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  const table = document.createElement('table');
-  // table: HTMLTableElement
-
-  table.insertRow();        // Returns HTMLTableRowElement
-  table.rows;               // HTMLCollectionOf<HTMLTableRowElement>
-
-  const select = document.createElement('select');
-  // select: HTMLSelectElement
-
-  select.options;           // HTMLOptionsCollection
-  select.add(new Option()); // Specific methods
-
-  const row = table.insertRow();
-  // row: HTMLTableRowElement
-  row.insertCell();         // Returns HTMLTableCellElement
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-5. DocumentFragment TYPE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  const fragment = document.createDocumentFragment();
-  // Type: DocumentFragment
-
-  // Can be used as Node, also has similar methods to ParentNode
-  fragment.appendChild(node);
-  fragment.append(node);    // DOM API (ParentNode.append)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-6. TYPE-SAFE UTILITY FUNCTION EXAMPLES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-// Safe element creation
-function createElement<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  props?: Partial<HTMLElementTagNameMap[K]>
-): HTMLElementTagNameMap[K] {
-  const el = document.createElement(tag);
-  if (props) Object.assign(el, props);
-  return el;
-}
-
-// Usage
-const btn = createElement('button', {
-  textContent: 'Click me',
-  disabled: false,
-  type: 'button'
-}); // Returns type: HTMLButtonElement
-
-// Bulk creation type-safe wrapper
-function createFragment<T extends Node>(
-  items: T[],
-  renderer: (item: T) => HTMLElement
-): DocumentFragment {
-  const fragment = document.createDocumentFragment();
-  items.forEach(item => fragment.appendChild(renderer(item)));
-  return fragment;
-}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-7. COMMON TYPE ASSERTION NEEDS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  const parent = element.parentNode as Element; // parentNode may be Document
-  const next = element.nextSibling as Element; // nextSibling may be Text
-  const first = container.firstChild as Element; // firstChild may be Text
-
-  // Better: Use Element-specific properties
-  const parent = element.parentElement;        // Element | null
-  const next = element.nextElementSibling;     // Element | null
-  const first = container.firstElementChild;   // Element | null
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📘 SUMMARY: TYPESCRIPT DOM MANIPULATION BENEFITS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ createElement automatically infers precise types
-✅ Compile-time catches type mismatch errors
-✅ IDE intelligent suggestions (e.g., input.checked vs textarea.value)
-✅ Refactoring is safer (detects related issues when renaming tags)
-
-⚠️ Note:
-  - querySelector returns Element | null, often needs type assertion
-  - cloneNode returns Node, usually needs type assertion
-  - appendChild returns Node, not specific element type
-
-🎯 RECOMMENDATION: Large projects strongly recommend TypeScript for DOM manipulation!
+📘 See TypeScript comparison file: 36-dom-manipulation-ts-comparison.ts
 */

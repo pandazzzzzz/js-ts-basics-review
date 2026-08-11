@@ -1437,150 +1437,16 @@ console.log("  Always handle errors locally first!");
 
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 03-control-flow.js - Control flow");
+console.log("📘 31-async-await.js - Async/await error handling");
+console.log("📘 34-async-error-handling.js - Advanced async error handling");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. ERROR TYPE ANNOTATIONS
-   JS:  catch (error) { }
-   TS:  catch (error: unknown) { }
-        // TypeScript 4.4+ defaults to unknown
-   
-   Benefits:
-   - Forces type checking before using error
-   - Prevents assuming error is Error object
-   - More type-safe error handling
-
-2. CUSTOM ERROR TYPES
-   JS:  class MyError extends Error { }
-   TS:  class MyError extends Error {
-          constructor(public code: string, message: string) {
-            super(message);
-            this.name = "MyError";
-          }
-        }
-   
-   Benefits:
-   - Type-safe error properties
-   - Better IDE autocomplete
-   - Compile-time property checking
-
-3. ERROR UNION TYPES
-   JS:  function doSomething() { }
-   TS:  function doSomething(): string | Error {
-          if (condition) return "success";
-          return new Error("failed");
-        }
-   
-   Benefits:
-   - Explicit error handling in return types
-   - Alternative to throwing exceptions
-   - Functional error handling pattern
-
-4. TYPE GUARDS FOR ERRORS
-   JS:  if (error instanceof MyError) { }
-   TS:  function isMyError(error: unknown): error is MyError {
-          return error instanceof MyError;
-        }
-   
-   Benefits:
-   - Type narrowing in catch blocks
-   - Reusable type checking
-   - Better type inference
-
-5. NEVER TYPE FOR FUNCTIONS THAT THROW
-   JS:  function fail(message) { throw new Error(message); }
-   TS:  function fail(message: string): never {
-          throw new Error(message);
-        }
-   
-   Benefits:
-   - Indicates function never returns normally
-   - Better control flow analysis
-   - Clearer function intent
-
-6. STRICT NULL CHECKS
-   JS:  const value = obj.property;
-   TS:  const value = obj?.property; // Optional chaining
-        const value = obj.property!; // Non-null assertion
-   
-   Benefits:
-   - Prevents null/undefined errors at compile time
-   - Forces explicit null handling
-   - Reduces runtime errors
-
-7. RESULT TYPE PATTERN
-   JS:  // No built-in support
-   TS:  type Result<T, E = Error> = 
-          | { ok: true; value: T }
-          | { ok: false; error: E };
-        
-        function divide(a: number, b: number): Result<number> {
-          if (b === 0) {
-            return { ok: false, error: new Error("Division by zero") };
-          }
-          return { ok: true, value: a / b };
-        }
-   
-   Benefits:
-   - Explicit error handling
-   - No exceptions thrown
-   - Functional programming style
-
-8. ASSERTION FUNCTIONS
-   TS:  function assert(condition: unknown): asserts condition {
-          if (!condition) throw new Error("Assertion failed");
-        }
-        
-        const value: unknown = "hello";
-        assert(typeof value === "string");
-        // TypeScript now knows value is string
-   
-   Benefits:
-   - Type narrowing with assertions
-   - Runtime + compile-time checking
-   - Better type inference
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. CATCH CLAUSE TYPES
-   - JS: catch (error) - error is any
-   - TS 4.0-4.3: catch (error: any) - default
-   - TS 4.4+: catch (error: unknown) - default
-   
-   Must check type before using:
-   catch (error: unknown) {
-     if (error instanceof Error) {
-       console.log(error.message); // ✅ OK
-     }
-   }
-
-2. THROWING NON-ERROR VALUES
-   - TypeScript allows throwing any value
-   - But catch clause is still unknown/any
-   - Best practice: always throw Error objects
-
-3. ERROR SUBCLASSING
-   - Must call super() in constructor
-   - Must set this.name manually
-   - Stack trace may need adjustment
-
-4. ASYNC ERROR HANDLING
-   - try/catch works with async/await
-   - Promise rejections need .catch()
-   - Unhandled rejections are runtime errors
-
-📘 See 20-error-handling-ts-comparison.ts for detailed examples!
+📘 See TypeScript comparison file: 20-error-handling-ts-comparison.ts
 */
-
-// ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Error Handling:
-- 34-async-error-handling.js (Promise and async/await error handling)
-- 24-function-patterns-advanced.js (retry patterns)
-`);

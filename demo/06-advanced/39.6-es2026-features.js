@@ -447,5 +447,6 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // ============================================
 // TypeScript Comparison
 // ============================================
-// 📘 详见 TypeScript 对比文件：39.6-es2026-features-ts-comparison.ts
-// 包含：sumPrecise 类型、fromAsync 泛型、Base64 方法类型、upsert 类型推断
+/*
+📘 See TypeScript comparison file: 39.6-es2026-features-ts-comparison.ts
+*/

@@ -507,53 +507,16 @@ console.log("1. Measurement accuracy - warm up caches, run multiple iterations, 
 console.log("2. Real-world conditions - test on low-end devices and slow networks, not just your dev machine.");
 
 // ============================================
-// TypeScript Comparison Notes
+// Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 26-optimization-performance.js - Optimization patterns");
+console.log("📘 27-memory-management.js - Memory management");
+console.log("📘 45-web-apis.js - Web APIs");
+
+// ============================================
+// TypeScript Comparison
 // ============================================
 /*
-🔍 Key Differences in TypeScript:
-
-1. PERFORMANCE API
-   TS:  PerformanceEntry, PerformanceMark, PerformanceMeasure types
-   TS:  Type-safe performance.getEntriesByType<T>()
-   TS:  Typed PerformanceObserver callbacks
-
-2. DEBOUNCE/THROTTLE
-   TS:  Generic function types
-   TS:  function debounce<T extends (...args: any[]) => any>(fn: T, delay: number): T
-   TS:  Preserves function signature
-
-3. LAZY LOADING
-   TS:  Type-safe dynamic imports
-   TS:  const module: typeof import('./module') = await import('./module')
-   TS:  React.lazy with component types
-
-4. VIRTUAL SCROLLING
-   TS:  Generic VirtualScroller<T>
-   TS:  Type-safe item rendering
-   TS:  Typed scroll callbacks
-
-5. MEMORY OPTIMIZATION
-   TS:  WeakMap<K extends object, V>
-   TS:  Type-safe cache operations
-   TS:  Typed cleanup methods
-
-⚠️ BROWSER/RUNTIME SUPPORT:
-- Performance API: All modern browsers
-- Performance Observer: Chrome 52+, Firefox 57+, Safari 11+
-- Intersection Observer: Chrome 51+, Firefox 55+, Safari 12.1+
-- Dynamic imports: Chrome 63+, Firefox 67+, Safari 11.1+
-
-🔧 BEST PRACTICES:
-- Measure before optimizing
-- Use Performance Observer for monitoring
-- Debounce user input, throttle scroll/resize
-- Lazy load below-the-fold content
-- Clean up resources in unmount/destroy
-- Use virtual scrolling for large lists
-- Split code by routes and features
-
-📘 See related:
-- 27-memory-management.js (Memory management)
-- 45-web-apis.js (Intersection Observer)
-- 39-es2022-plus-features.js (Dynamic imports)
+📘 See TypeScript comparison file: 46-performance-ts-comparison.ts
 */
