@@ -124,10 +124,14 @@ TS comparison: `13-scope-closures-ts-comparison.ts` · `13.1-scope-basics-ts-com
 | 30 | `demo/04-asynchronous/30-promises.js` | Promises | ✅ |
 | 31 | `demo/04-asynchronous/31-async-await.js` | Async/Await | ✅ |
 | 32 | `demo/04-asynchronous/32-modules.js` | ES Modules | ✅ |
-| 33 | `demo/04-asynchronous/33-fetch-api.js` | Fetch API | ✅ |
+| 33 | `demo/04-asynchronous/33-fetch-api.js` | Fetch API (Index) | ✅ |
+| | `demo/04-asynchronous/33.1-fetch-basics.js` | Fetch Basics (GET, Response Methods, HTTP Methods, FormData) | ✅ |
+| | `demo/04-asynchronous/33.2-fetch-error-handling.js` | Error Handling & Async/Await (Patterns, Timeout, Sequential/Parallel) | ✅ |
+| | `demo/04-asynchronous/33.3-fetch-practical-patterns.js` | Practical Patterns (API Client, Retry, AbortController, Sequential Calls) | ✅ |
+| | `demo/04-asynchronous/33.4-fetch-streams-advanced.js` | Streams & Advanced (Stream API, Progress, Transform, Cancellation) | ✅ |
 | 34 | `demo/04-asynchronous/34-async-error-handling.js` | Async Error Handling | ✅ |
 
-TS comparison: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-comparison.ts` · `31-async-await-ts-comparison.ts` · `32-modules-ts-comparison.ts` · `33-fetch-api-ts-comparison.ts` · `34-async-error-handling-ts-comparison.ts`
+TS comparison: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-comparison.ts` · `31-async-await-ts-comparison.ts` · `32-modules-ts-comparison.ts` · `33-fetch-api-ts-comparison.ts` · `33.1-fetch-basics-ts-comparison.ts` · `33.2-fetch-error-handling-ts-comparison.ts` · `33.3-fetch-practical-patterns-ts-comparison.ts` · `33.4-fetch-streams-advanced-ts-comparison.ts` · `34-async-error-handling-ts-comparison.ts`
 
 ### Knowledge Points
 
@@ -135,7 +139,7 @@ TS comparison: `29-event-loop-callbacks-ts-comparison.ts` · `30-promises-ts-com
 **30 Promises** — creation and chaining, error handling, Promise.all/race/allSettled/any
 **31 Async/Await** — async functions, await, try/catch error handling, parallel vs sequential
 **32 Modules** — import/export, default vs named exports, dynamic import
-**33 Fetch API** — fetch basics, Request/Response, Headers, error handling
+**33 Fetch API** — 已拆分为4个专注文件（33.1-33.4）：GET basics, response methods (json/text/blob/arrayBuffer) (33.1); error handling (response.ok check, network vs HTTP errors), timeout with Promise.race, async/await fetch patterns (33.2); API client wrapper, retry with exponential backoff, AbortController deep dive (basic abort, timeout, cancel multiple, SearchController, combineSignals, AbortSignal.timeout/any), sequential dependent calls (33.3); Stream API basics, download with progress tracking, stream transformation, cancelable stream reading, stream vs non-stream comparison (33.4)
 **34 Async Error Handling** — Promise errors, async/await errors, circuit breaker, retry patterns
 
 ---
