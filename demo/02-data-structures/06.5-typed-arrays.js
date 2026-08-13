@@ -407,8 +407,8 @@ Key rules:
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 06.1-06.4-arrays-*.js - Regular array methods");
-console.log("📘 42-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)");
-console.log("📘 41-storage-network.js - Fetch API with ArrayBuffer");
+console.log("📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)");
+console.log("📘 43-storage-network.js - Fetch API with ArrayBuffer");
 
 // ============================================
 // TypeScript Comparison
