@@ -205,9 +205,9 @@ async function sequentialVsParallel(): Promise<void> {
   const startSeq = Date.now();
 
   try {
-    const post1 = await fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Post);
-    const post2 = await fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Post);
-    const post3 = await fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Post);
+    const post1 = await fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Promise<Post>);
+    const post2 = await fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Promise<Post>);
+    const post3 = await fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Promise<Post>);
 
     const endSeq = Date.now();
     console.log("Sequential time:", endSeq - startSeq, "ms");
@@ -222,9 +222,9 @@ async function sequentialVsParallel(): Promise<void> {
 
   try {
     const [post1, post2, post3] = await Promise.all([
-      fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Post),
-      fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Post),
-      fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Post)
+      fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Promise<Post>),
+      fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Promise<Post>),
+      fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Promise<Post>)
     ]);
 
     const endPar = Date.now();

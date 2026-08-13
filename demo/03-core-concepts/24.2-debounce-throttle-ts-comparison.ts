@@ -199,7 +199,7 @@ function createDebouncedHandler<T extends EventHandler>(
   return debounce(fn, delayMs);
 }
 
-const handleResize = (event: UIEvent) => {
+const handleResize = (event: Event) => {
   console.log('Resize handled:', event);
 };
 
@@ -212,19 +212,21 @@ function debouncePromise<T extends any[], R>(
   fn: (...args: T) => R,
   delayMs: number
 ): (...args: T) => Promise<R> {
-  return new Promise<R>((resolve) => {
-    let timeoutId: NodeJS.Timeout | null = null;
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
+  return (...args: T): Promise<R> => {
+    return new Promise<R>((resolve) => {
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
 
-    timeoutId = setTimeout(() => {
-      const result = fn(...args);
-      resolve(result);
-      timeoutId = null;
-    }, delayMs);
-  });
+      timeoutId = setTimeout(() => {
+        const result = fn(...args);
+        resolve(result);
+        timeoutId = null;
+      }, delayMs);
+    });
+  };
 }
 
 // Example 7: Function type guards for throttle/debounce

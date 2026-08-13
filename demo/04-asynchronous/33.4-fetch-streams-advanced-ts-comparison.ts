@@ -347,12 +347,13 @@ function buildUrl(baseUrl: string, params?: Record<string, QueryValue>): string 
 }
 
 // Usage with typed parameters
-interface UserQueryParams {
+// type alias (not interface) so it's assignable to Record<string, QueryValue>
+type UserQueryParams = {
   _page?: number;
   _limit?: number;
   _sort?: string;
   _order?: "asc" | "desc";
-}
+};
 
 async function fetchUsers(params: UserQueryParams): Promise<User[]> {
   const url = buildUrl(`${API_BASE}/users`, params);
