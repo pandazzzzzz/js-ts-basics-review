@@ -17,6 +17,16 @@ export {};
 // It is intended as a reference for how new ideas move toward standardization rather than as a core learning module.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. TC39 Proposal Stages
+// 2. Recent Standardized Features (ES2025/ES2026/ES2027)
+// 3. Unfinalized proposals / Withdrawn proposals
+// 4. Runtime / Web Platform / TypeScript ecosystem
+// 5. Best Practices for Future-Proofing
+// 6. Common Pitfalls
+
+// ============================================
 // Section 1: TC39 Proposal Stages
 // ============================================
 

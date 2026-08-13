@@ -12,6 +12,15 @@ export {};
 // The examples focus on the most common patterns first and then show how the same idea applies to rest syntax.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Array Destructuring
+// 2. Object Destructuring
+// 3. Function Parameter Destructuring
+// 4. Advanced Usage
+// 5. Common Pitfalls & Best Practices
+
+// ============================================
 // Section 1: Array Destructuring
 // ============================================
 

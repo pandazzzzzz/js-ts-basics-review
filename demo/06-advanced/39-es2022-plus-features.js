@@ -7,6 +7,20 @@ export {};
 export {}; // Module
 
 // ============================================
+// Learning goals
+// ============================================
+// This file is the index for the ES2022+ features collection, now split into per-version focused files.
+// It provides an overview of the ES version timeline and navigation to the detailed demo files.
+
+// ============================================
+// Table of Contents
+// ============================================
+// 1. File Organization
+// 2. Quick Reference
+// 3. Version Timeline
+// 4. Related Files
+
+// ============================================
 // File Organization
 // ============================================
 
