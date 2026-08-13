@@ -630,6 +630,7 @@ console.log("📘 06.1-arrays-basics.js - Array basics");
 console.log("📘 06.2-arrays-iteration.js - Array iteration methods");
 console.log("📘 06.3-arrays-search-sort.js - Array search and sort");
 console.log("📘 06.4-arrays-manipulation.js - Array manipulation methods");
+console.log("📘 06.5-typed-arrays.js - Typed arrays and binary data");
 
 // ============================================
 // TypeScript Comparison
