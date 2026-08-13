@@ -120,11 +120,16 @@ Object.defineProperty(person, 'name', {
 
 console.log("Before assignment:", person.name); // Alice
 
-// In non-strict mode, assignment fails silently
-person.name = "Bob";
-console.log("After assignment (non-strict):", person.name); // Alice (unchanged)
+// This file is an ES module (strict mode), so assignment throws TypeError
+try {
+  person.name = "Bob";
+} catch (error) {
+  console.log("Assignment to writable:false (strict mode):", error.message);
+}
+console.log("After assignment:", person.name); // Alice (unchanged)
 
-// In strict mode, this would throw TypeError
+// In sloppy mode, assignment fails silently instead
+// (demoed below via explicit "use strict" comparison)
 (function() {
   "use strict";
   let strictPerson = { name: "Charlie" };
@@ -168,7 +173,12 @@ Object.defineProperty(config, 'apiKey', {
 });
 
 console.log("\nNon-configurable property:");
-console.log("Cannot delete:", delete config.apiKey); // false (fails silently)
+// delete throws TypeError in strict mode (ES modules); returns false in sloppy mode
+try {
+  delete config.apiKey;
+} catch (error) {
+  console.log("Cannot delete non-configurable:", error.message);
+}
 console.log("Still exists:", config.apiKey); // abc123
 
 try {
@@ -296,7 +306,12 @@ console.log("Is extensible:", Object.isExtensible(extensible)); // true
 
 Object.preventExtensions(extensible);
 
-extensible.b = 2; // Fails silently in non-strict mode
+// Throws TypeError in strict mode (ES modules); fails silently in sloppy mode
+try {
+  extensible.b = 2;
+} catch (error) {
+  console.log("Cannot add to non-extensible:", error.message);
+}
 console.log("After preventExtensions:", extensible); // { a: 1 }
 console.log("Is extensible:", Object.isExtensible(extensible)); // false
 
@@ -314,9 +329,10 @@ console.log("\nBefore seal:", Object.isSealed(sealed)); // false
 
 Object.seal(sealed);
 
-sealed.z = 3; // Cannot add
-delete sealed.x; // Cannot delete
-sealed.x = 100; // Can still modify
+// All mutations throw TypeError in strict mode (ES modules); fail silently in sloppy mode
+try { sealed.z = 3; } catch (e) { console.log("Cannot add to sealed:", e.message); }
+try { delete sealed.x; } catch (e) { console.log("Cannot delete from sealed:", e.message); }
+sealed.x = 100; // Can still modify existing properties
 
 console.log("After seal:", sealed); // { x: 100, y: 2 }
 console.log("Is sealed:", Object.isSealed(sealed)); // true
@@ -330,9 +346,9 @@ console.log("\nBefore freeze:", Object.isFrozen(frozen)); // false
 
 Object.freeze(frozen);
 
-frozen.count = 10; // Cannot modify
-frozen.newProp = "test"; // Cannot add
-delete frozen.count; // Cannot delete
+try { frozen.count = 10; } catch (e) { console.log("Cannot modify frozen:", e.message); }
+try { frozen.newProp = "test"; } catch (e) { console.log("Cannot add to frozen:", e.message); }
+try { delete frozen.count; } catch (e) { console.log("Cannot delete from frozen:", e.message); }
 
 console.log("After freeze:", frozen); // { count: 0, nested: { value: 1 } }
 console.log("Is frozen:", Object.isFrozen(frozen)); // true
@@ -366,8 +382,12 @@ let deepObj = {
 };
 
 deepFreeze(deepObj);
-deepObj.b.c = 100; // Fails
-console.log("\nDeep frozen - nested cannot be modified:", deepObj.b.c); // 2
+try {
+  deepObj.b.c = 100; // Throws TypeError in strict mode (ES modules)
+} catch (e) {
+  console.log("Deep frozen - nested cannot be modified:", e.message);
+}
+console.log("Value unchanged:", deepObj.b.c); // 2
 
 
 // ============================================
@@ -507,7 +527,12 @@ Object.defineProperty(config2, 'version', {
 console.log("\nRead-only property:");
 console.log("Version:", config2.version);
 
-config2.version = "2.0.0"; // Fails silently in non-strict mode
+// Setting a getter-only property throws TypeError in strict mode (ES modules)
+try {
+  config2.version = "2.0.0";
+} catch (e) {
+  console.log("Cannot set getter-only property:", e.message);
+}
 console.log("Still version:", config2.version); // 1.0.0
 
 // 5.5 Lazy initialization with getter
@@ -702,7 +727,11 @@ console.log("\n=== Common Pitfalls Demo ===");
 let pitfall1 = {};
 Object.defineProperty(pitfall1, 'prop', { value: 42 });
 console.log("Pitfall 1 - Not writable:", pitfall1.prop); // 42
-pitfall1.prop = 100; // Fails silently
+try {
+  pitfall1.prop = 100; // Throws in strict mode (default flags: writable=false)
+} catch (e) {
+  console.log("Cannot modify (strict mode):", e.message);
+}
 console.log("Still 42:", pitfall1.prop);
 
 // Pitfall 2: Cannot mix data and accessor descriptors

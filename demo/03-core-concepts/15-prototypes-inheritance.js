@@ -332,6 +332,7 @@ console.log("Manual 'new':", charlie.greet());
 
 console.log("\n=== Inheritance Patterns Demo ===\n");
 
+{ // Block scope to avoid duplicate declaration with earlier Animal() in this file
 // Pattern 1: Constructor inheritance
 function Animal(name) {
   this.name = name;
@@ -360,6 +361,7 @@ console.log("  myDog.eat():", myDog.eat());
 console.log("  myDog.bark():", myDog.bark());
 console.log("  myDog instanceof Dog:", myDog instanceof Dog);
 console.log("  myDog instanceof Animal:", myDog instanceof Animal);
+} // end Pattern 1 block
 
 // Pattern 2: Object.create() inheritance
 const animalMethods = {

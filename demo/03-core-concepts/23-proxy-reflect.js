@@ -444,7 +444,12 @@ console.log("Preventing deletion:");
 console.log("Before delete:", protectedProxy.important);
 delete protectedProxy.removable;
 console.log("After delete removable:", protectedProxy.removable); // undefined
-delete protectedProxy.important;
+// deleteProperty trap returning false throws TypeError in strict mode (ES modules)
+try {
+  delete protectedProxy.important;
+} catch (e) {
+  console.log("Cannot delete important (strict mode):", e.message);
+}
 console.log("After delete important:", protectedProxy.important); // Still "data"
 
 // 5.2 Deletion logging
@@ -892,7 +897,12 @@ function createReadonly(obj) {
 console.log("\nReadonly proxy:");
 let readonly = createReadonly({ x: 10 });
 console.log("x:", readonly.x);
-readonly.x = 20; // Logs error
+// set trap returning false throws TypeError in strict mode (ES modules)
+try {
+  readonly.x = 20;
+} catch (e) {
+  console.log("Cannot set readonly (strict mode):", e.message);
+}
 
 // 10.3 Auto-saving proxy
 function createAutoSave(obj, saveFn) {
@@ -945,9 +955,13 @@ console.log("Proxy call:", userProxy.greet()); // "Hello, I'm Alice" (works!)
 
 // But if method is extracted:
 let extractedGreet = userProxy.greet;
-// Note: bare call (no .call/.apply) sets this to globalThis in non-strict mode,
-// so it returns "Hello, I'm undefined" — it does NOT throw.
-console.log("Extracted:", extractedGreet()); // "Hello, I'm undefined"
+// In strict mode (ES modules) bare call sets this to undefined → throws
+try {
+  console.log("Extracted:", extractedGreet()); // would be "Hello, I'm undefined" in sloppy mode
+} catch (e) {
+  console.log("Extracted (strict mode):", e.message);
+  console.log("Fix: extractedGreet.call(user) →", extractedGreet.call(user)); // "Hello, I'm Alice"
+}
 
 // 11.3 Private fields and Proxy
 class PrivateClass {

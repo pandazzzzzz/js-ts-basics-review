@@ -667,10 +667,14 @@ console.log("slice(8, 3):", testStr.slice(8, 3)); // "" (empty)
 console.log("substring(8, 3):", testStr.substring(8, 3)); // "lo Wo" (swaps arguments)
 
 // Pitfall 2: String immutability
-// Strings cannot be modified in place
+// Strings cannot be modified in place (all demo files are ES modules = strict mode)
 const immutable = "Hello";
-immutable[0] = "J"; // Silently fails in sloppy mode (throws TypeError in strict mode)
-console.log("\nString immutability:", immutable); // Still "Hello"
+try {
+  immutable[0] = "J"; // Throws TypeError in strict mode (silently fails only in sloppy mode)
+} catch (e) {
+  console.log("\nString immutability pitfall:", e.message);
+}
+console.log("String unchanged:", immutable); // Still "Hello"
 
 // Correct way: create new string
 const modified = "J" + immutable.slice(1);

@@ -280,7 +280,11 @@ Object.defineProperty(strictObj, "readonly", {
   configurable: false    // Cannot delete or redefine
 });
 console.log("Created with defineProperty:", strictObj);
-strictObj.readonly = "trying to change"; // Silently fails in non-strict mode
+try {
+  strictObj.readonly = "trying to change"; // Throws TypeError in strict mode (silently fails in sloppy mode)
+} catch (e) {
+  console.log("Cannot assign to readonly property:", e.message);
+}
 console.log("After attempt to change:", strictObj.readonly);
 
 // Object.defineProperties() - Define multiple properties (ES5)
@@ -375,9 +379,16 @@ console.log("Deep copy:", deepCopy);
 // - Returns same object
 const frozen = Object.freeze({ a: 1, b: 2 });
 console.log("\nObject.freeze():");
-frozen.a = 99; // Silently fails (throws in strict mode)
-frozen.c = 3; // Silently fails
-delete frozen.b; // Silently fails
+// All mutations throw TypeError in strict mode (ES modules); fail silently in sloppy mode
+try {
+  frozen.a = 99;
+} catch (e) { console.log("Cannot modify frozen property:", e.message); }
+try {
+  frozen.c = 3;
+} catch (e) { console.log("Cannot add to frozen object:", e.message); }
+try {
+  delete frozen.b;
+} catch (e) { console.log("Cannot delete from frozen object:", e.message); }
 console.log("Frozen (unchanged):", frozen);
 
 // Check if frozen
@@ -395,8 +406,12 @@ console.log("Shallow freeze pitfall:", shallowFrozen);
 const sealed = Object.seal({ a: 1, b: 2 });
 console.log("\nObject.seal():");
 sealed.a = 99; // Works!
-sealed.c = 3; // Silently fails
-delete sealed.b; // Silently fails
+try {
+  sealed.c = 3; // Throws in strict mode (ES modules); fails silently in sloppy mode
+} catch (e) { console.log("Cannot add to sealed:", e.message); }
+try {
+  delete sealed.b; // Throws in strict mode
+} catch (e) { console.log("Cannot delete from sealed:", e.message); }
 console.log("Sealed (a modified):", sealed);
 
 // Check if sealed
@@ -409,7 +424,9 @@ const preventExt = Object.preventExtensions({ a: 1, b: 2 });
 console.log("\nObject.preventExtensions():");
 preventExt.a = 99; // Works!
 delete preventExt.b; // Works!
-preventExt.c = 3; // Silently fails
+try {
+  preventExt.c = 3; // Throws in strict mode (ES modules); fails silently in sloppy mode
+} catch (e) { console.log("Cannot add to non-extensible:", e.message); }
 console.log("Prevent extensions:", preventExt);
 
 // Check if extensible

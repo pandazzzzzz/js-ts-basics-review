@@ -150,7 +150,15 @@ let user = {
 
 let sayNameFunc = user.sayName;
 console.log("\nMethod assigned to variable:");
-sayNameFunc(); // "My name is undefined" - this is globalThis
+// In strict mode (ES modules), `this` is undefined for unbound calls → throws TypeError
+try {
+  sayNameFunc(); // Would be "My name is undefined" in sloppy mode; throws in strict mode
+} catch (e) {
+  console.log("this is lost (strict mode):", e.message);
+  // Fix: bind/call to restore this
+  console.log("Fix with call(user):");
+  sayNameFunc.call(user); // prints "My name is Bob"
+}
 
 // 2.2 setTimeout/setInterval - this is lost
 let counter = {
@@ -232,7 +240,13 @@ let calculator = {
 
 let { add } = calculator;
 console.log("\nDestructured method:");
-console.log("add(5):", add(5)); // NaN - this is globalThis
+// In strict mode (ES modules) this.base throws; in sloppy mode it would be NaN
+try {
+  console.log("add(5):", add(5));
+} catch (e) {
+  console.log("add(5) loses this (strict mode):", e.message);
+  console.log("Fix: add.call(calculator, 5) →", add.call(calculator, 5)); // 15
+}
 
 
 // ============================================
@@ -520,12 +534,17 @@ bob.introduce();
 
 console.log("alice !== bob:", alice !== bob); // true - different instances
 
-// 5.3 Forgetting new - this becomes globalThis
-console.log("\nForgetting new (pollutes global):");
-let charlie = Person("Charlie", 35); // Missing new!
-console.log("charlie is undefined:", charlie === undefined); // true
-console.log("name added to global:", globalThis.name); // "Charlie"
-delete globalThis.name; // Clean up
+// 5.3 Forgetting new - this becomes globalThis in sloppy mode, throws in strict mode
+console.log("\nForgetting new (pollutes global in sloppy mode):");
+// This file is an ES module (strict mode) → calling without new throws TypeError
+try {
+  let charlie = Person("Charlie", 35); // Missing new!
+  console.log("charlie is undefined:", charlie === undefined);
+} catch (e) {
+  console.log("Forgetting new (strict mode):", e.message);
+  console.log("In sloppy mode, this would silently pollute the global object");
+}
+console.log("globalThis.name stays clean:", globalThis.name === undefined);
 
 // 5.4 Return value in constructor
 function WeirdConstructor(name) {
