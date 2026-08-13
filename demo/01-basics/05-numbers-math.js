@@ -11,6 +11,18 @@ export {};
 // The examples show how numeric literals, conversions, and common math operations behave in practice.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Number Representation
+// 2. Precision Issues
+// 3. Number Conversion and Parsing
+// 4. Special Values
+// 5. Number Methods
+// 6. Math Object
+// 7. BigInt (ES2020)
+// 8. Common Pitfalls & Best Practices
+
+// ============================================
 // 1. Number Representation
 // ============================================
 

@@ -13,6 +13,21 @@ export {};
 // The examples highlight when to choose each collection and how their APIs compare.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Map Basics
+// 2. Map Iteration
+// 3. Objects as Map Keys
+// 4. Set Basics
+// 5. Set Iteration and Conversion
+// 6. Map vs Object Comparison
+// 7. Set vs Array Comparison
+// 8. WeakMap and WeakSet
+// 9. Practical Use Cases
+// 10. Common Pitfalls
+// 11. Best Practices
+
+// ============================================
 // Section 1: Map Basics
 // ============================================
 
@@ -637,6 +652,18 @@ console.log("    SameValueZero rules:");
 console.log("      - Object.is(NaN, NaN) → true (Map uses)");
 console.log("      - Object.is(0, -0) → false (Map treats as same!)");
 console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
+
+// ============================================
+// Section 11: Best Practices
+// ============================================
+
+console.log("\nBest Practices:");
+console.log("  1. Use Map when keys are non-strings or order matters");
+console.log("  2. Use Set for uniqueness checks (faster than array.indexOf)");
+console.log("  3. Prefer Object.fromEntries() to convert Map back to plain object");
+console.log("  4. Use WeakMap/WeakSet for memory-safe caches and event listeners");
+console.log("  5. Check Map.size/Set.size instead of .length (undefined)");
+console.log("  6. Use Set for de-duplicating arrays: [...new Set(arr)]");
 
 // ============================================
 // Cross-references

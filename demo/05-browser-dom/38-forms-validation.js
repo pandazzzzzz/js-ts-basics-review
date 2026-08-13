@@ -13,6 +13,16 @@ export {};
 // The sections move from form access, to events, to validation and feedback.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Form Element Access
+// 2. Form Events
+// 3. Constraint Validation API
+// 4. Custom Validation Logic
+// 5. Clipboard and Selection
+// 6. Best Practices & Summary
+
+// ============================================
 // Section 1: Form Element Access
 // ============================================
 // Description: Multiple ways to access and manipulate forms and their controls

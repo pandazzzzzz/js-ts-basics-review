@@ -12,6 +12,16 @@ export {};
 // The examples start with the tree structure and then show how to navigate and inspect nodes.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. DOM Tree Structure
+// 2. Searching and Getting Elements
+// 3. Node Properties and Content
+// 4. Attribute Operations
+// 5. Styles and Classes
+// 6. Best Practices & Summary
+
+// ============================================
 // Section 1: DOM Tree Structure
 // ============================================
 // Description: The Document Object Model (DOM) is a programming interface for HTML/XML documents

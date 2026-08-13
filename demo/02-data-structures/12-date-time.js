@@ -29,6 +29,7 @@ export {};
 // 12. Section 12: Practical Examples
 // 13. Section 13: Performance Considerations
 // 14. Section 14: Modern Alternatives
+// 15. Section 15: Best Practices
 
 // ============================================
 
@@ -705,6 +706,18 @@ console.log("\n    Day.js:");
 console.log("      - Lightweight (2KB)");
 console.log("      - Moment.js compatible API");
 console.log("      - Plugin architecture");
+
+// ============================================
+// Section 15: Best Practices
+// ============================================
+
+console.log("\nBest Practices:");
+console.log("  1. Store timestamps as UTC (Date.now() / toISOString())");
+console.log("  2. Use Date.parse with ISO 8601 strings for reliable parsing");
+console.log("  3. Avoid Date mutators; create new Date instances instead");
+console.log("  4. Use Intl.DateTimeFormat for locale-aware formatting");
+console.log("  5. Consider Temporal (ES2027) for new projects (see 50-reserved.js)");
+console.log("  6. Store dates as strings/numbers in JSON, not raw Date objects");
 
 // ============================================
 // TypeScript Comparison Notes

@@ -13,6 +13,23 @@ export {};
 // The examples show how JavaScript values are converted into JSON strings and how the format is read back safely.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. JSON.stringify() Basics
+// 2. JSON.parse() Basics
+// 3. stringify Options - space Parameter
+// 4. stringify Options - replacer Function
+// 5. parse reviver Function
+// 6. Special Value Handling
+// 7. Date Serialization Patterns
+// 8. Practical Use Cases
+// 9. Error Handling
+// 10. Performance Considerations
+// 11. ES2019 JSON Improvements
+// 12. Common Pitfalls
+// 13. Best Practices
+
+// ============================================
 // Section 1: JSON.stringify() Basics
 // ============================================
 
@@ -602,6 +619,18 @@ const bigNum = {
 console.log("\n  Pitfall 4 - Large Number Precision:");
 console.log("    BigInt stringify:", JSON.stringify(bigNum));
 console.log("    Safe integer:", JSON.stringify({ safe: bigNum.safe }));
+
+// ============================================
+// Section 13: Best Practices
+// ============================================
+
+console.log("\nBest Practices:");
+console.log("  1. Validate parsed JSON with type guards before use");
+console.log("  2. Use the replacer argument to filter sensitive fields");
+console.log("  3. Provide a toJSON() method for custom serialization");
+console.log("  4. Handle BigInt explicitly (JSON.stringify throws otherwise)");
+console.log("  5. Use try/catch around JSON.parse for malformed input");
+console.log("  6. Prefer JSON.stringify(obj, null, 2) for readable debugging output");
 
 // ============================================
 // TypeScript Comparison Notes

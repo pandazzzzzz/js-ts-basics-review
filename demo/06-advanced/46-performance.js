@@ -12,6 +12,20 @@ export {};
 // The examples focus on how to observe runtime cost and interpret the results rather than on a single best-practice recipe.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Performance API
+// 2. Performance Observer
+// 3. Debounce and Throttle
+// 4. Lazy Loading
+// 5. Virtual Scrolling
+// 6. Code Splitting
+// 7. Memory Optimization
+// 8. Common Pitfalls
+// 9. Core Web Vitals (2025 Update)
+// 10. Best Practices
+
+// ============================================
 // Section 1: Performance API (W3C / WHATWG Web API, not ECMAScript)
 // - performance.now() provides high-resolution timestamps (High Resolution Time)
 // - PerformanceObserver added via Performance Timeline (W3C/WHATWG)

@@ -9,6 +9,21 @@ export {};
 // The examples show how promise states, chaining, and error handling relate to callback-based code.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Promise Basics
+// 2. Promise States
+// 3. then/catch/finally Chaining
+// 4. Promise.all - Parallel Execution
+// 5. Promise.race - First Completion
+// 6. Promise.allSettled - All Results
+// 7. Promise.any - First Success
+// 8. Promise.withResolvers() - External Resolve/Reject
+// 9. Error Handling Patterns
+// 10. Practical Examples
+// 11. Common Pitfalls & Best Practices
+
+// ============================================
 // 1. PROMISE BASICS
 // ============================================
 

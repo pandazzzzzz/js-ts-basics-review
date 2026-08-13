@@ -9,6 +9,23 @@ export {};
 // The examples focus on the most practical string operations before moving to more advanced usage.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. String Creation Methods
+// 2. String Properties
+// 3. String Methods - Extraction
+// 4. String Methods - Searching
+// 5. String Methods - Modification
+// 6. String Methods - Splitting and Joining
+// 7. String Methods - Replacement
+// 8. String Methods - Case Conversion
+// 9. String Methods - Other Useful Methods
+// 10. Template Literals (ES6/ES2015)
+// 11. String Interpolation with ${}
+// 12. Tagged Template Literals
+// 13. Common Pitfalls & Best Practices
+
+// ============================================
 // String Creation Methods
 // ============================================
 

@@ -12,6 +12,25 @@ export {};
 // The examples show how language and region settings change the output without changing the underlying data.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Intl.NumberFormat - Number Formatting
+// 2. Intl.DateTimeFormat - Date/Time Formatting
+// 3. Intl.Collator - String Sorting
+// 4. Intl.PluralRules - Plural Rules
+// 5. Intl.RelativeTimeFormat - Relative Time
+// 6. Intl.ListFormat - List Formatting
+// 7. Intl.Segmenter - Text Segmentation
+// 8. Practical Applications
+// 9. Common Pitfalls
+// 10. Best Practices
+// 11. Intl.DisplayNames
+// 12. Intl.Locale
+// 13. Intl.DurationFormat
+// 14. formatToParts() Method
+// 15. Intl.MessageFormat / MessageFormat 2.0 (proposal)
+
+// ============================================
 // Section 1: Intl.NumberFormat - Number Formatting
 // ============================================
 

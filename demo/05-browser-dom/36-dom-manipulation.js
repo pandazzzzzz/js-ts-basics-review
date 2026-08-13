@@ -12,6 +12,17 @@ export {};
 // The examples progress from creating elements to updating attributes and structure.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Creating Elements
+// 2. Inserting Elements
+// 3. Removing Elements
+// 4. Batch Operations and Performance
+// 5. Special APIs for Tables and Lists
+// 6. Best Practices & Summary
+// 7. MutationObserver
+
+// ============================================
 // Section 1: Creating Elements
 // ============================================
 // Description: Dynamically creating DOM elements and text nodes

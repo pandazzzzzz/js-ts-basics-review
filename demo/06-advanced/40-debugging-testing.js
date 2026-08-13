@@ -11,6 +11,17 @@ export {};
 // The examples focus on practical browser console techniques and the fundamentals of test-minded debugging.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Console Methods
+// 2. Debugging Techniques
+// 3. Error Tracking and Handling
+// 4. Testing Basics
+// 5. Code Quality Tools
+// 6. Jest/Vitest Practical Examples
+// 7. Common Pitfalls
+
+// ============================================
 // Section 1: Console Methods
 // ============================================
 

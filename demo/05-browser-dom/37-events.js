@@ -12,6 +12,17 @@ export {};
 // The examples cover basic event binding, propagation, and common event patterns.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Event Basics
+// 2. Event Bubbling and Capturing
+// 3. Event Delegation
+// 4. Browser Default Behavior
+// 5. Common Event Types
+// 6. Custom Events
+// 7. Best Practices & Summary
+
+// ============================================
 // Section 1: Event Basics
 // ============================================
 // Description: The DOM event system is the core mechanism for user interaction and programmatic response

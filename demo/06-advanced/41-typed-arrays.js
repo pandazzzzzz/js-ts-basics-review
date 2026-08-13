@@ -11,6 +11,18 @@ export {};
 // The examples show how ArrayBuffer and typed views are used to represent structured memory.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. ArrayBuffer
+// 2. TypedArray Views
+// 3. DataView
+// 4. TypedArray Methods
+// 5. Blob and File (Browser)
+// 6. SharedArrayBuffer and Atomics
+// 7. Encoding API (TextEncoder/TextDecoder)
+// 8. Practical Applications
+
+// ============================================
 // Section 1: ArrayBuffer
 // ============================================
 

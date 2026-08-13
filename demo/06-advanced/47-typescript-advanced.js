@@ -14,6 +14,18 @@ export {};
 // The examples focus on practical tooling hints and metaprogramming concepts rather than on deep type theory.
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. JSDoc Type Hints (JavaScript)
+// 2. Decorators (Stage 2.7 proposal)
+// 3. Reflect API
+// 4. Proxy Object
+// 5. Symbol Metadata
+// 6. Type Coercion and Type Checking
+// 7. Common Pitfalls
+// 8. Best Practices
+
+// ============================================
 // Section 1: JSDoc Type Hints (JavaScript)
 // ============================================
 
