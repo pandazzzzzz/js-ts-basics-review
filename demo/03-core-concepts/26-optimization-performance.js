@@ -175,93 +175,20 @@ function fibonacci(n) {
 
 const memoizedFib = memoize(fibonacci);
 
-console.log("\nFibonacci memoization:");
-console.time('fib(35)');
+console.log("\nFibonacci memoization (performance comparison):");
+console.time('fib(35) memoized');
 console.log("fib(35):", memoizedFib(35));
-console.timeEnd('fib(35)');
+console.timeEnd('fib(35) memoized');
+// Naive fib(35) without memoization would take seconds; memoized is instant
+// after the first call. This is the core performance benefit of memoization.
 
-// 2.3 LRU Cache (bounded memoization)
-class LRUCache {
-  constructor(maxSize = 100) {
-    this.maxSize = maxSize;
-    this.cache = new Map();
-  }
-
-  get(key) {
-    if (!this.cache.has(key)) return undefined;
-
-    // Move to end (most recently used)
-    const value = this.cache.get(key);
-    this.cache.delete(key);
-    this.cache.set(key, value);
-    return value;
-  }
-
-  set(key, value) {
-    if (this.cache.has(key)) {
-      this.cache.delete(key);
-    } else if (this.cache.size >= this.maxSize) {
-      // Remove oldest (first) item
-      const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
-    }
-    this.cache.set(key, value);
-  }
-
-  has(key) {
-    return this.cache.has(key);
-  }
-
-  get size() {
-    return this.cache.size;
-  }
-}
-
-function memoizeLRU(fn, maxSize = 100) {
-  const cache = new LRUCache(maxSize);
-
-  const memoized = function(...args) {
-    const key = JSON.stringify(args);
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    const result = fn(...args);
-    cache.set(key, result);
-    return result;
-  };
-
-  memoized.cacheSize = () => cache.size;
-  return memoized;
-}
-
-const lruFib = memoizeLRU(fibonacci, 50);
-console.log("\nLRU Fibonacci:");
-console.log("fib(40):", lruFib(40));
-console.log("Cache size:", lruFib.cacheSize);
-
-// 2.4 Multi-argument memoization with custom serializer
-function memoizeWithSerializer(fn, serializer = JSON.stringify) {
-  const cache = new Map();
-
-  return function(...args) {
-    const key = serializer(args);
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-    const result = fn.apply(this, args);
-    cache.set(key, result);
-    return result;
-  };
-}
-
-// Custom serializer for objects (by reference)
-function identitySerializer(args) {
-  return args.map(arg =>
-    typeof arg === 'object' && arg !== null
-      ? `${arg.constructor.name}@${Object.isFrozen(arg) ? 'frozen' : 'mutable'}`
-      : String(arg)
-  ).join('|');
-}
+// 2.3 Bounded memoization (LRU) and custom serializers
+// For production, prefer bounded caches to avoid unbounded memory growth.
+// See 24.3-memoization-cache.js for complete implementations:
+//   - memoizeLRU (LRU eviction policy, bounded cache size)
+//   - memoizeWithKey / memoizeWithSerializer (custom key generation)
+//   - memoizeWeak (WeakMap-based, GC-friendly)
+//   - memoizeMaxSize (simple size limit)
 
 
 // ============================================
@@ -1002,17 +929,8 @@ badFilterList(largeList, "123"); // Same filter, runs again
 console.timeEnd("bad-filter-2");
 
 console.log("\n✅ Good: Memoize or cache results for unchanged inputs");
-function memoize(fn) {
-  const cache = new Map();
-  return (...args) => {
-    const key = JSON.stringify(args);
-    if (cache.has(key)) return cache.get(key);
-    const result = fn(...args);
-    cache.set(key, result);
-    return result;
-  };
-}
-
+// Reusing the memoize() defined earlier in §2 (see 24.3-memoization-cache.js
+// for the full set of memoization variants).
 const goodFilterList = memoize((list, filterText) => {
   return list.filter(item => item.includes(filterText));
 });

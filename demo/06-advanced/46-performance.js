@@ -110,58 +110,51 @@ lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
 // ============================================
 // Section 3: Debounce and Throttle (ES5+)
 // - Uses closures (ES3) and arrow functions (ES6); requestAnimationFrame (ES6 Browser)
+// - See 24.2-debounce-throttle.js for complete implementations and variations
 // ============================================
 
-console.log("\n=== Debounce and Throttle ===");
+console.log("\n=== Debounce and Throttle (Performance Optimization) ===");
 
-// Debounce - Execute after delay, reset on new call
-function debounce(func, delay) {
-  let timeoutId;
-  return function(...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(this, args), delay);
-  };
-}
+// Debounce and throttle are rate-limiting patterns that reduce unnecessary work.
+// Full implementations: 24.2-debounce-throttle.js (7+ variations including cancelable,
+// leading/trailing, Promise-based, maxWait, etc.)
 
-// Example: Search input
-const searchAPI = (query) => console.log(`🔍 Searching for: ${query}`);
-const debouncedSearch = debounce(searchAPI, 300);
+// Performance Impact:
+// - Debounce: Reduces N rapid calls to 1 (after quiet period)
+// - Throttle: Reduces N calls to N/interval (steady rate)
+// - Both prevent layout thrashing and excessive re-renders
 
-// Simulate typing
-console.log("Typing 'hello':");
+// Quick debounce example (one-liner pattern):
+const debouncedSearch = ((delay) => {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => console.log("Search:", a[0]), delay); };
+})(300);
+
+console.log("Debounce - search input optimization (reduces API calls):");
 debouncedSearch('h');
 debouncedSearch('he');
 debouncedSearch('hel');
 debouncedSearch('hell');
-debouncedSearch('hello'); // Only this will execute after 300ms
+debouncedSearch('hello'); // Only this triggers
 
-// Throttle - Execute at most once per interval
-function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
+// Quick throttle example:
+const throttledScroll = ((limit) => {
+  let last = 0;
+  return (pos) => {
+    const now = Date.now();
+    if (now - last >= limit) { console.log("Scroll:", pos); last = now; }
   };
+})(200);
+
+console.log("\nThrottle - scroll event optimization (reduces layout recalculation):");
+for (let i = 0; i < 5; i++) {
+  throttledScroll(i * 100); // Only first in each 200ms window fires
 }
 
-// Example: Scroll event
-const handleScroll = () => console.log('📜 Scroll position:', window.scrollY);
-const throttledScroll = throttle(handleScroll, 200);
-
-// window.addEventListener('scroll', throttledScroll);
-
-// Use cases:
-// - Debounce: Search input, window resize, form validation
-// - Throttle: Scroll events, mouse move, API rate limiting
-
-// Common pitfalls:
-// ⚠️ Debounce delays execution, may feel laggy
-// ⚠️ Throttle may miss the last call
-// ⚠️ Memory leaks if not cleaned up
-// ⚠️ Context (this) binding issues
+// Key Performance Takeaways:
+// ✅ Debounce: Search inputs, resize events, form validation (wait for pause)
+// ✅ Throttle: Scroll, mousemove, API rate limiting (steady stream)
+// ✅ Both: Prevent excessive reflows/repaints in DOM-heavy applications
+// ⚠️ Always clean up (cancel pending timers) when component unmounts to avoid memory leaks
 
 // ============================================
 // Section 4: Lazy Loading (ES2020+)
@@ -513,6 +506,7 @@ console.log("2. Real-world conditions - test on low-end devices and slow network
 console.log("\n=== Cross-references ===");
 console.log("📘 26-optimization-performance.js - Optimization patterns");
 console.log("📘 27-memory-management.js - Memory management");
+console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
 console.log("📘 45-web-apis.js - Web APIs");
 
 // ============================================

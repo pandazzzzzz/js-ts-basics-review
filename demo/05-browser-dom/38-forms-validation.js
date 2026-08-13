@@ -443,19 +443,13 @@ function validateMatch(password, confirm) {
 }
 `);
 
-console.log("\n💡 Debounce Function Implementation:\n");
+console.log("\n💡 Debounce for Real-time Validation:\n");
 console.log(`
-function debounce(fn, delay) {
-  let timeoutId;
-  return function(...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), delay);
-  };
-}
+// See 24.2-debounce-throttle.js for full debounce/throttle implementations.
+// For form validation, debounce prevents validation on every keystroke:
 
-// Usage scenarios: Search suggestions, real-time validation
 searchInput.addEventListener('input', debounce((e) => {
-  fetchSuggestions(e.target.value);
+  validateField(e.target); // Runs 300ms after user stops typing
 }, 300));
 `);
 
@@ -726,6 +720,7 @@ input.setAttribute('autocomplete', 'email'); // Standardized values
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 37-events.js - Event handling");
+console.log("📘 24.2-debounce-throttle.js - Debounce/throttle for real-time validation");
 console.log("📘 43-storage-network.js - Storage and network");
 console.log("📘 48-security.js - Security and input validation");
 

@@ -563,49 +563,37 @@ Execution Flow:
 
 console.log("\n=== Practical Examples ===\n");
 
-// Example 1: Debouncing
-function debounce(func, delay) {
+// Example 1: Debouncing (see 24.2-debounce-throttle.js for full implementation)
+// Debounce delays execution until after a pause — uses the event loop's
+// macrotask queue (setTimeout) to coalesce rapid calls into one.
+const debouncedLog = ((delay) => {
   let timeoutId;
-  
   return function(...args) {
     clearTimeout(timeoutId);
-    
-    timeoutId = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
+    timeoutId = setTimeout(() => console.log("Debounced:", args[0]), delay);
   };
-}
+})(200);
 
-const debouncedLog = debounce((msg) => {
-  console.log("Debounced:", msg);
-}, 200);
-
-console.log("Example 1: Debouncing");
+console.log("Example 1: Debouncing (coalesces rapid calls via macrotask queue)");
 debouncedLog("Call 1");
 debouncedLog("Call 2");
 debouncedLog("Call 3"); // Only this will execute
 
-// Example 2: Throttling
-function throttle(func, limit) {
+// Example 2: Throttling (see 24.2-debounce-throttle.js for full implementation)
+// Throttle limits execution to once per interval — uses the event loop's
+// timer mechanism to enforce a minimum gap between calls.
+const throttledLog = ((limit) => {
   let inThrottle;
-  
   return function(...args) {
     if (!inThrottle) {
-      func.apply(this, args);
+      console.log("Throttled:", args[0]);
       inThrottle = true;
-      
-      setTimeout(() => {
-        inThrottle = false;
-      }, limit);
+      setTimeout(() => { inThrottle = false; }, limit);
     }
   };
-}
+})(200);
 
-const throttledLog = throttle((msg) => {
-  console.log("Throttled:", msg);
-}, 200);
-
-console.log("\nExample 2: Throttling");
+console.log("\nExample 2: Throttling (rate-limits via timer macrotasks)");
 throttledLog("Call 1"); // Executes
 throttledLog("Call 2"); // Ignored
 throttledLog("Call 3"); // Ignored
@@ -1219,6 +1207,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promises");
 console.log("📘 31-async-await.js - Async/await");
 console.log("📘 33.1-fetch-basics.js - Fetch API basics");
+console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
 
 // ============================================
 // TypeScript Comparison
