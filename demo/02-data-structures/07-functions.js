@@ -484,7 +484,7 @@ async function fetchData() {
   return { data: "Sample data" };
 }
 
-async function processData() {
+async function processDataAsync() {
   try {
     const result = await fetchData();
     console.log("Data received:", result);
@@ -494,7 +494,7 @@ async function processData() {
   }
 }
 
-processData();
+processDataAsync();
 
 // Parallel execution of multiple async operations
 async function fetchMultiple() {

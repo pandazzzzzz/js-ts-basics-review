@@ -71,11 +71,17 @@ console.log("=== Global Scope Demo ===");
 accessGlobal();
 
 // Implicit global (without declaration keyword) - BAD PRACTICE
+// In strict mode (ES modules) this throws ReferenceError instead of
+// silently creating a global. Wrap in try/catch to demonstrate both.
 function createImplicitGlobal() {
   implicitGlobal = "I am implicitly global"; // No var/let/const
 }
-createImplicitGlobal();
-console.log(implicitGlobal); // Accessible globally (in non-strict mode)
+try {
+  createImplicitGlobal();
+  console.log(implicitGlobal); // Only reachable in non-strict mode
+} catch (e) {
+  console.log("Implicit global throws in strict mode:", e.message);
+}
 
 // In strict mode, implicit globals throw ReferenceError.
 // Note: "use strict" must be the first statement of a file or function to take
@@ -968,8 +974,8 @@ console.log("Security: Never eval user input!");
 // Malicious: eval("alert('XSS')")
 
 // 14.3 Safer alternatives
-var add = new Function('a', 'b', 'return a + b');
-console.log("Function constructor:", add(2, 3)); // 5
+var funcAdd = new Function('a', 'b', 'return a + b');
+console.log("Function constructor:", funcAdd(2, 3)); // 5
 
 var jsonString = '{"name": "Alice"}';
 console.log("JSON.parse:", JSON.parse(jsonString));
@@ -985,12 +991,15 @@ var withUser = { name: "Alice", age: 30 };
 const { name: withName, age: withAge } = withUser;
 console.log("Destructuring (alternative):", withName, withAge);
 
-// with example (wrapped to avoid strict mode)
-(function() {
-  with (withUser) {
-    console.log("Inside with:", name, age); // Alice, 30
-  }
-})();
+// with example (NOT allowed in strict mode / ES modules)
+// In sloppy mode only, `with` extends scope with an object's properties:
+//   (function() {
+//     with (withUser) {
+//       console.log("Inside with:", name, age); // Alice, 30
+//     }
+//   })();
+// ES modules are always strict mode, so `with` is a compile-time SyntaxError.
+// Use destructuring instead (shown above).
 
 console.log("with is deprecated: use destructuring instead");
 

@@ -951,7 +951,7 @@ function factorialWithTrampoline(n, accumulator = 1) {
   return () => factorialWithTrampoline(n - 1, n * accumulator); // Return thunk, no stack growth
 }
 
-function trampoline(fn) {
+function trampolineWrapper(fn) {
   return function(...args) {
     let result = fn(...args);
     while (typeof result === 'function') {
@@ -961,7 +961,7 @@ function trampoline(fn) {
   };
 }
 
-const trampolinedFactorial = trampoline(factorialWithTrampoline);
+const trampolinedFactorial = trampolineWrapper(factorialWithTrampoline);
 console.log("Trampolined factorial(10000) works:", trampolinedFactorial(10000).toString().slice(0, 20) + "...");
 
 // Pitfall 2: Memory leak with unclosed functions

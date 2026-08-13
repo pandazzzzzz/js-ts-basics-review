@@ -710,7 +710,7 @@ async function basicAbortExample() {
 basicAbortExample();
 
 // Timeout implementation with AbortController
-function fetchWithTimeout(url, options = {}, timeoutMs = 5000) {
+function fetchWithAbortTimeout(url, options = {}, timeoutMs = 5000) {
   const controller = new AbortController();
   const { signal: originalSignal, ...restOptions } = options;
   
@@ -737,7 +737,7 @@ async function demonstrateTimeout() {
   console.log("\n19.2 Timeout with AbortController:");
   
   try {
-    const response = await fetchWithTimeout(`${API_BASE}/posts/1`, {}, 10000);
+    const response = await fetchWithAbortTimeout(`${API_BASE}/posts/1`, {}, 10000);
     const data = await response.json();
     console.log("   ✓ Fetched within timeout:", data.id);
   } catch (error) {
