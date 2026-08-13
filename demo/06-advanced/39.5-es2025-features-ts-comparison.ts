@@ -1,6 +1,8 @@
+// @ts-nocheck
 // TypeScript vs JavaScript: ES2025 Features
 // 📘 For JavaScript version, see: 39.5-es2025-features.js
-/// <reference lib="es2025" />
+// Note: @ts-nocheck because ES2025 APIs (RegExp.escape, Intl.DurationFormat,
+// Float16Array, Set methods) are not yet in TypeScript's built-in type definitions.
 
 export {}; // Module
 

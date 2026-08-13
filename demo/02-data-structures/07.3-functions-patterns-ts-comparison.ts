@@ -56,7 +56,7 @@ interface Calculator {
   add(n: number): Calculator;
   subtract(n: number): Calculator;
   readonly result: number;
-  reset(value: number): void;
+  reset: number;  // setter: assignment triggers reset
 }
 
 const calculator: Calculator = {

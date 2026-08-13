@@ -118,7 +118,7 @@ const data: UserData = { name: "Alice", age: 30 };
 // hasOwn acts as a type guard
 if (Object.hasOwn(data, "age")) {
   // TypeScript narrows data.age to number (not undefined)
-  console.log("Age:", data.age.toFixed(0)); // ✅ No type error
+  console.log("Age:", data.age!.toFixed(0)); // ✅ Object.hasOwn confirms age exists
 }
 
 // Works with objects created from Object.create(null)
@@ -133,9 +133,9 @@ type AB = A | B;
 
 function processAB(ab: AB) {
   if (Object.hasOwn(ab, "a")) {
-    console.log("Type A, a:", ab.a); // ✅ ab is narrowed to A
+    console.log("Type A, a:", (ab as A).a); // ✅ cast to A after hasOwn check
   } else {
-    console.log("Type B, b:", ab.b); // ✅ ab is narrowed to B
+    console.log("Type B, b:", (ab as B).b); // ✅ cast to B
   }
 }
 
@@ -217,11 +217,12 @@ const match = regex.exec(text);
 if (match) {
   console.log("Full match:", match[0]);
   console.log("Group 1:", match[1]);
-  console.log("Indices type:", typeof match.indices); // object
-  console.log("Full match start:", match.indices[0][0]); // 0
-  console.log("Full match end:", match.indices[0][1]); // 16
-  console.log("Group 1 start:", match.indices[1][0]); // 6
-  console.log("Group 1 end:", match.indices[1][1]); // 16
+  const indices = match.indices!;
+  console.log("Indices type:", typeof indices); // object
+  console.log("Full match start:", indices[0][0]); // 0
+  console.log("Full match end:", indices[0][1]); // 16
+  console.log("Group 1 start:", indices[1][0]); // 6
+  console.log("Group 1 end:", indices[1][1]); // 16
 }
 
 // Named capture groups with indices
@@ -230,7 +231,7 @@ const namedMatch = namedRegex.exec(text);
 
 if (namedMatch?.groups?.lang) {
   console.log("\nNamed group 'lang':", namedMatch.groups.lang);
-  console.log("Named group indices:", namedMatch.indices.groups?.lang); // [6, 16]
+  console.log("Named group indices:", namedMatch.indices!.groups?.lang); // [6, 16]
 }
 
 // ============================================
@@ -248,7 +249,7 @@ class User2 {
 
   static isUser(obj: unknown): obj is User2 {
     // Type guard: returns type predicate 'obj is User2'
-    return #id in obj;
+    return #id in (obj as object);
   }
 
   getId(): number {

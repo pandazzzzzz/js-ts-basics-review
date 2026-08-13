@@ -109,7 +109,9 @@ function memoizeMaxSize<T extends any[], R>(
     }
     if (cache.size >= maxSize) {
       const firstKey = cache.keys().next().value;
-      cache.delete(firstKey);
+      if (firstKey !== undefined) {
+        cache.delete(firstKey);
+      }
     }
     const result = fn(...args);
     cache.set(key, result);
@@ -206,7 +208,7 @@ function trampoline<T>(fn: TrampolineFn<T>): TrampolineFn<T> {
   };
 }
 
-function factorialTrampoline(n: number, accumulator: number = 1): number {
+function factorialTrampoline(n: number, accumulator: number = 1): number | (() => number | (() => any)) {
   if (n <= 1) return accumulator;
   return () => factorialTrampoline(n - 1, n * accumulator);
 }
@@ -218,24 +220,24 @@ console.log("  trampolinedFact(5):", trampolinedFact(5));
 console.log("\n8. Mutual recursion with trampoline:");
 type CheckFn = (n: number) => CheckFn | boolean;
 
-function trampolineMutual(fn: CheckFn): CheckFn {
-  return function(...args: any[]): boolean {
-    let result: boolean | CheckFn = fn(...args);
+function trampolineMutual(fn: CheckFn): (n: number) => boolean {
+  return function(n: number): boolean {
+    let result: CheckFn | boolean = fn(n);
 
     while (typeof result === 'function') {
-      result = (result as CheckFn)();
+      result = (result as CheckFn)(0);
     }
 
     return result as boolean;
   };
 }
 
-function isEven(n: number): CheckFn {
+function isEven(n: number): CheckFn | boolean {
   if (n === 0) return true;
   return () => isOdd(n - 1);
 }
 
-function isOdd(n: number): CheckFn {
+function isOdd(n: number): CheckFn | boolean {
   if (n === 0) return false;
   return () => isEven(n - 1);
 }

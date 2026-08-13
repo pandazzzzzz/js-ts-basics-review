@@ -1,6 +1,8 @@
+// @ts-nocheck
 // TypeScript vs JavaScript: ES2026 Features
 // 📘 For JavaScript version, see: 39.6-es2026-features.js
-/// <reference lib="es2026" />
+// Note: @ts-nocheck because ES2026 APIs (Math.sumPrecise, Uint8Array.toBase64/toHex,
+// Map.upsert, Iterator.concat/toArray) are not yet in TypeScript's type definitions.
 
 export {}; // Module
 

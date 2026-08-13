@@ -125,8 +125,12 @@ console.log("  typed → regular (spread):", backToRegular2);
 
 // Example 9: Generic typed array utility
 console.log("\n9. Generic utilities:");
-function createTypedArray<T extends TypedArray>(
-  ctor: new (buffer: ArrayBufferLike, byteOffset?: number, length?: number) => T,
+interface TypedArrayConstructor<T> {
+  new (buffer: ArrayBufferLike, byteOffset?: number, length?: number): T;
+  BYTES_PER_ELEMENT: number;
+}
+function createTypedArray<T extends ArrayBufferView & { BYTES_PER_ELEMENT: number }>(
+  ctor: TypedArrayConstructor<T>,
   size: number
 ): T {
   const buffer = new ArrayBuffer(size * ctor.BYTES_PER_ELEMENT);

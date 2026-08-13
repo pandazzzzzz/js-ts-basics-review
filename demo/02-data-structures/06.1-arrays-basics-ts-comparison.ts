@@ -50,7 +50,7 @@ console.log("  objects is { name: string }[]");
 console.log("\n3. Array constructor:");
 const typedArray: number[] = new Array<number>(5).fill(0);
 console.log("  new Array<number>(5):", typedArray);
-const fromLength: number[] = Array.from<number>({ length: 5 }, (_, i) => i);
+const fromLength: number[] = Array.from({ length: 5 }, (_, i) => i);
 console.log("  Array.from with type:", fromLength);
 
 // Example 4: Readonly arrays

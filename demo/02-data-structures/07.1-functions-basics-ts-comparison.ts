@@ -35,6 +35,7 @@ console.log("  add(5, 3):", add(5, 3));
 interface User {
   id: number;
   name: string;
+  age: number;
 }
 
 function createUser(name: string, age: number): User {
@@ -47,8 +48,8 @@ console.log("\n2. Arrow functions with types:");
 const multiply = (a: number, b: number): number => a * b;
 console.log("  multiply(4, 7):", multiply(4, 7));
 
-const makeUser = (id: number, name: string): User => ({ id, name });
-console.log("  makeUser(1, 'Bob'):", makeUser(1, 'Bob'));
+const makeUser = (id: number, name: string, age: number): User => ({ id, name, age });
+console.log("  makeUser(1, 'Bob', 25):", makeUser(1, 'Bob', 25));
 
 // Example 3: Default parameters
 console.log("\n3. Default parameters:");
@@ -111,6 +112,7 @@ console.log("\n6. Function overloading:");
 function display(value: string): void;
 function display(value: number): void;
 function display(value: boolean): void;
+function display(value: unknown[]): void;
 function display(value: any): void {
   console.log("  display:", value);
 }
@@ -136,7 +138,8 @@ const getName = (id: number) => `User ${id}`;
 
 const getUserById = (id: number): User => ({
   id,
-  name: `User ${id}`
+  name: `User ${id}`,
+  age: 0
 });
 
 // Example 9: Void return type

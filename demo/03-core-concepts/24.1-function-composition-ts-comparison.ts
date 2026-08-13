@@ -40,16 +40,16 @@ console.log("  curriedAdd(1)(2)(3):", curriedAdd(1)(2)(3));
 
 // Example 2: Generic curry function
 console.log("\n2. Generic curry function:");
-function curry<T extends any[]>(fn: (...args: T) => any): (...args: T) => any {
+function curry<T extends any[]>(fn: (...args: T) => any): (...args: any[]) => any {
   return function curried(...accumulated: any[]): any {
     if (accumulated.length >= fn.length) {
-      return fn(...accumulated);
+      return fn(...(accumulated as T));
     }
     return (...remaining: any[]) => curried(...accumulated, ...remaining);
   };
 }
 
-const curriedSum: (a: number) => (b: number) => (c: number) => number = curry(addThree);
+const curriedSum: any = curry(addThree);
 console.log("  curriedSum(1)(2)(3):", curriedSum(1)(2)(3));
 
 // Example 3: Function composition with types
@@ -105,8 +105,8 @@ function multiplier<T extends number>(factor: T): BinaryOp<T> {
   return (a: T, b: T) => (a * factor) as any;
 }
 
-const double: BinaryOp<number> = multiplier(2);
-const triple: BinaryOp<number> = multiplier(3);
+const double: BinaryOp<number> = multiplier(2 as number);
+const triple: BinaryOp<number> = multiplier(3 as number);
 console.log("  double(5, 3):", double(5, 3));
 console.log("  triple(5, 3):", triple(5, 3));
 
@@ -182,9 +182,9 @@ console.log("  memoizedFibonacci(10):", memoizedFibonacci(10));
 console.log("\n10. Placeholder partial application:");
 const PLACEHOLDER = Symbol('placeholder');
 
-function partialWithPlaceholders<T extends any[], A extends any[]>(
+function partialWithPlaceholders(
   fn: (...args: any[]) => any,
-  ...args: [...A, typeof PLACEHOLDER][]
+  ...args: any[]
 ): (...newArgs: any[]) => any {
   return function(...newArgs: any[]): any {
     let argIndex = 0;

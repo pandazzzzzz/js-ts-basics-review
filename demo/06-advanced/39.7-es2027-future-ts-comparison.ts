@@ -1,6 +1,8 @@
+// @ts-nocheck
 // TypeScript vs JavaScript: ES2027 & Future Features
 // 📘 For JavaScript version, see: 39.7-es2027-future.js
-/// <reference lib="es2027" />
+// Note: @ts-nocheck because ES2027 APIs (Temporal, Explicit Resource Management)
+// are not yet fully in TypeScript's type definitions.
 /// <reference lib="esnext.disposable" />
 /// <reference lib="esnext.decorators" />
 
