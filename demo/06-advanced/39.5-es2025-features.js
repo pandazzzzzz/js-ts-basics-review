@@ -4,8 +4,6 @@
 // 📘 TC39: https://github.com/tc39/proposals/blob/main/finished-proposals.md
 export {};
 
-export {}; // Module
-
 // ============================================
 // Learning goals
 // ============================================
