@@ -138,7 +138,7 @@ console.log("\n--- 3. .at() Method ---\n");
  *   feature: Array/ String.prototype.at
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-08/august-18.md#at-method-for-builtin-indexables-for-stage-4
  */
 
@@ -207,7 +207,7 @@ console.log("\n--- 5. Error.cause ---\n");
  *   feature: Error.cause
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-10/october-26.md#error-cause-for-stage-4
  */
 
@@ -291,7 +291,7 @@ console.log("\n--- 7. RegExp Match Indices (/d flag) ---\n");
  *   feature: RegExp Match Indices
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-05/may-25.md#regexp-match-indices-for-stage-4
  */
 

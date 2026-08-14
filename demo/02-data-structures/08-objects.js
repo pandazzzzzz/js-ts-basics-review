@@ -246,7 +246,7 @@ console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toStrin
  *   feature: Object.hasOwn
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("Object.hasOwn(person, 'name'):", Object.hasOwn(person, "name"));
@@ -552,7 +552,7 @@ thisObj.greet.apply(otherObj); // Same as call
  *   feature: Object.groupBy
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nObject.groupBy() - Array grouping:");

@@ -388,7 +388,7 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
  *   feature: Private class fields
  *   status: ES2022
  *   stage4Date: 2021-04
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 /**
@@ -591,7 +591,7 @@ console.log("Value:", legacy.getValue());
  *   feature: Class Static Block
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // A static block `static { ... }` runs once when the class is evaluated.
@@ -637,7 +637,7 @@ console.log("AppConfig.retries:", AppConfig.retries); // 3
  *   feature: Ergonomic brand checks
  *   status: ES2022
  *   stage4Date: 2021-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // `#field in obj` returns true/false: does `obj` possess the private field

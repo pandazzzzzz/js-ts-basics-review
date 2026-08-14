@@ -500,7 +500,7 @@ console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
  *   feature: Set methods
  *   status: ES2025
  *   stage4Date: 2024-04
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nES2025 Set Methods:");
@@ -579,7 +579,7 @@ console.log("  isDisjointFrom():", set1.isDisjointFrom(set2)); // false
  *   feature: Map.groupBy
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nMap.groupBy() - ES2024:");

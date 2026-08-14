@@ -154,7 +154,7 @@ console.log("\n--- 4. WeakRef (Weak References) ---\n");
  *   feature: WeakRef
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 
@@ -192,7 +192,7 @@ console.log("\n--- 5. FinalizationRegistry ---\n");
  *   feature: FinalizationRegistry
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 

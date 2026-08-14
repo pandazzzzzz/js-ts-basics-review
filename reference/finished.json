@@ -5,8 +5,8 @@
       "stage": 4,
       "stage4Date": "2026-03",
       "stage4DateType": "exact",
-      "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11); delayed publication to ES2027",
-      "url": "https://github.com/tc39/proposal-temporal"
+      "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11 'temporal-for-stage-4'); delayed publication to ES2027",
+      "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4"
     },
     "Atomics.pause": {
       "status": "ES2027",
@@ -29,8 +29,8 @@
       "stage": 4,
       "stage4Date": "2025-05",
       "stage4DateType": "milestone",
-      "note": "Conditional Stage 4 at 2025-05 (notes may-28 'Explicit Resource Management for Stage 4'); still conditional as of 2026-03. using/await using, Symbol.dispose/Symbol.asyncDispose",
-      "url": "https://github.com/tc39/proposal-explicit-resource-management"
+      "note": "Conditional Stage 4 at 2025-05 (notes may-28 'explicit-resource-management-for-stage-4'); still conditional as of 2026-03. using/await using, Symbol.dispose/Symbol.asyncDispose",
+      "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4"
     },
     "DisposableStack": {
       "status": "ES2027",

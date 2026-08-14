@@ -170,7 +170,7 @@ console.log("\n--- 3. RegExp.escape() ---");
  *   feature: RegExp.escape
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-regex-escaping
  */
 
@@ -207,7 +207,7 @@ console.log("\n--- 4. Promise.try() ---");
  *   feature: Promise.try
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-promise-try
  */
 
@@ -251,6 +251,15 @@ const safeFunction = (fn) => (...args) => Promise.try(() => fn(...args));
 // ============================================
 console.log("\n--- 5. Float16Array ---");
 
+/*
+ * verification:
+ *   feature: Float16Array
+ *   status: ES2025
+ *   stage4Date: 2025-02
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#float16array-for-stage-4
+ */
+
 // 16-bit floating point array (half-precision)
 // Uses 2 bytes per element instead of 4 (Float32) or 8 (Float64)
 const float16 = new Float16Array(3);
@@ -270,6 +279,15 @@ console.log("float16[2]:", float16[2]); // 100000 (exact for integers up to 2048
 // 6. JSON Modules
 // ============================================
 console.log("\n--- 6. JSON Modules ---");
+
+/*
+ * verification:
+ *   feature: JSON Modules
+ *   status: ES2025
+ *   stage4Date: 2024-10
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2024-10/october-08.md#import-attributes-and-json-modules-for-stage-4
+ */
 
 // Import JSON files directly as modules (with type attribute)
 // Example:
@@ -354,6 +372,15 @@ console.log("US date match:", match2?.groups?.date); // "01/01/2024"
 // ============================================
 console.log("\n--- 10. Redeclarable Global eval Vars ---");
 
+/*
+ * verification:
+ *   feature: Redeclarable global eval vars
+ *   status: ES2025
+ *   stage4Date: 2025-02
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#redeclarable-global-eval-vars-for-stage-4
+ */
+
 // var declarations in eval() no longer throw if variable exists in global scope
 var globalVar = 10;
 try {
@@ -377,7 +404,7 @@ console.log("\n--- 11. Intl.DurationFormat ---");
  *   feature: Intl.DurationFormat
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-intl-duration-format
  */
 

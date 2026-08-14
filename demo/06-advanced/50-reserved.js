@@ -60,7 +60,7 @@ console.log("\n=== Recent Standardized Features ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
@@ -112,7 +112,7 @@ console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
  * verification:
  *   feature: Composites
  *   status: Stage 1
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Composites (Stage 1) — future syntax, illustrative:");
@@ -128,7 +128,7 @@ console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 });
  * verification:
  *   feature: Decimal
  *   status: Stage 1
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Decimal (Stage 1) — future syntax, illustrative:");
@@ -144,7 +144,7 @@ console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
  * verification:
  *   feature: Do Expressions
  *   status: Stage 1
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Do Expressions (Stage 1) — future syntax, illustrative:");
@@ -157,7 +157,7 @@ console.log("//   }; // evaluates to 'yes' or 'no'");
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 1
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pattern Matching (Stage 1) — future syntax, illustrative:");
@@ -172,7 +172,7 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");

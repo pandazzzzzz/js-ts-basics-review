@@ -90,7 +90,7 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
  *   feature: Array.prototype.findLast / findLastIndex
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/june-13.md#arrayfindlast-and-arrayfindlastindex-for-stage-4
  */
 
@@ -142,7 +142,7 @@ console.log("\n--- 3. Hashbang Grammar ---\n");
  *   feature: Hashbang Syntax
  *   status: ES2023
  *   stage4Date: 2022-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2022-07/july-20.md#hashbang-grammar-for-stage-4
  */
 

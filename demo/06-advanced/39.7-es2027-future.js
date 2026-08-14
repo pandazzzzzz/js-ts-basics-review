@@ -41,21 +41,12 @@ console.log("\n--- 1. Temporal API (ES2027) ---\n");
  *   feature: Temporal
  *   status: ES2027
  *   stage4Date: 2026-03
- *   lastVerified: 2026-07-31
- *   source: https://github.com/tc39/proposal-temporal
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4
  */
 
 // Modern replacement for the Date object
 // Note: Temporal is shipping in ES2027, enable with browser flags or polyfill today
-
-/*
- * verification:
- *   feature: Temporal API
- *   status: ES2027
- *   stage4Date: 2026-03
- *   lastVerified: 2026-07-31
- *   source: https://github.com/tc39/notes/blob/main/meetings/2026-03/march-11.md#temporal-for-stage-4
- */
 
 // Uncomment when Temporal is available:
 /*
@@ -109,20 +100,11 @@ console.log("\n--- 2. Explicit Resource Management (ES2027) ---\n");
 
 /*
  * verification:
- *   feature: Explicit Resource Management
- *   status: ES2027
- *   stage4Date: 2024-06
- *   lastVerified: 2026-07-31
- *   source: https://github.com/tc39/notes/blob/main/meetings/2024-06/june-5.md#explicit-resource-management-for-stage-4
- */
-
-/*
- * verification:
  *   feature: using (Explicit Resource Management)
  *   status: ES2027
  *   stage4Date: 2025-05
- *   lastVerified: 2026-07-31
- *   source: https://github.com/tc39/proposal-explicit-resource-management
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4
  */
 
 // using declaration automatically disposes resources when they go out of scope
@@ -182,6 +164,14 @@ async function processFile() {
 
 // DisposableStack for multiple resources
 /*
+ * verification:
+ *   feature: DisposableStack
+ *   status: ES2027
+ *   stage4Date: 2025-05
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/proposal-explicit-resource-management
+ */
+/*
 function processMultipleResources() {
   using stack = new DisposableStack();
 
@@ -207,7 +197,7 @@ console.log("\n--- 3. Joint Iteration (ES2027) ---\n");
  *   feature: Joint Iteration
  *   status: ES2027
  *   stage4Date: 2026-05
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-joint-iteration
  */
 
@@ -275,7 +265,7 @@ console.log("\n--- 4. Atomics.pause() (ES2027) ---\n");
  *   feature: Atomics.pause
  *   status: ES2027
  *   stage4Date: 2026-06
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-atomics-microwait
  */
 

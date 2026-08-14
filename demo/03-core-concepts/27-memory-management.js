@@ -269,7 +269,7 @@ console.log("\nSymbol as WeakMap key (ES2023):");
  *   feature: Symbols as WeakMap keys
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const wm = new WeakMap();

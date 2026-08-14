@@ -77,7 +77,7 @@ if (typeof Math.sumPrecise === "function") {
  *   feature: Math.sumPrecise
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-math-sum
  */
 
@@ -91,7 +91,7 @@ console.log("\n--- 2. Array.fromAsync() ---\n");
  *   feature: Array.fromAsync
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-array-from-async
  */
 
@@ -174,7 +174,7 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
  *   feature: Uint8Array Base64
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-arraybuffer-base64
  */
 
@@ -223,7 +223,7 @@ console.log("\n--- 5. Map.prototype.upsert() ---\n");
  *   feature: Upsert
  *   status: ES2026
  *   stage4Date: 2026-01
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-upsert
  */
 
@@ -282,7 +282,7 @@ console.log("\n--- 6. JSON.parse Source Text Access ---\n");
  *   feature: JSON.parse source text access
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-json-parse-source
  */
 
@@ -337,7 +337,7 @@ console.log("\n--- 7. Iterator Sequencing ---\n");
  *   feature: Iterator Sequencing
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposal-iterator-sequencing
  */
 

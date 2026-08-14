@@ -40,7 +40,7 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
  *   feature: Object.groupBy / Map.groupBy
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-29.md#array-grouping-for-stage-4
  */
 
@@ -98,7 +98,7 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
  *   feature: Promise.withResolvers
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-29.md#promise-withresolvers-for-stage-4
  */
 
@@ -208,6 +208,24 @@ console.log("'User123':", validName.test("User123")); // false (numbers not allo
 // ============================================
 console.log("\n--- 4. Resizable ArrayBuffer and ArrayBuffer.transfer() ---\n");
 
+/*
+ * verification:
+ *   feature: Resizable ArrayBuffer
+ *   status: ES2024
+ *   stage4Date: 2023-09
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2023-09/september-26.md#resizable-buffers-for-stage-4
+ */
+
+/*
+ * verification:
+ *   feature: ArrayBuffer.transfer
+ *   status: ES2024
+ *   stage4Date: 2024-02
+ *   lastVerified: 2026-08-14
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2024-02/feb-6.md#arraybuffer-transfer-for-stage-4
+ */
+
 // Resizable ArrayBuffer allows changing size after creation
 const buffer = new ArrayBuffer(8, { maxByteLength: 16 });
 console.log("Initial buffer.byteLength:", buffer.byteLength); // 8
@@ -271,7 +289,7 @@ console.log("\n--- 5. Atomics.waitAsync() ---\n");
  *   feature: Atomics.waitAsync
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-07-31
+ *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/notes/blob/main/meetings/2023-05/may-17.md#atomicswaitasync-for-stage-4
  */
 
