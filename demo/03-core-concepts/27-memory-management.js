@@ -434,6 +434,81 @@ console.log('  Good: Closure only captures needed primitive value');
 
 
 // ============================================
+// 3.6 END-TO-END LEAK DIAGNOSIS WALKTHROUGH (实战排查案例)
+// ============================================
+// 这是一个完整的内存泄漏排查演练：从"检测"→"定位"→"修复"→"验证"。
+// 对应真实场景：大型 SPA 长时间运行后内存持续上涨、页面变卡。
+
+console.log("\n=== 3.6 End-to-End Leak Diagnosis Walkthrough ===");
+console.log(`
+真实场景：一个任务看板页面运行 8 小时后，内存从 80MB 涨到 2.4GB，
+Chrome 任务管理器提示"内存占用过高"，页面开始卡顿。
+`);
+
+// ---- 第 1 步：检测 - 确认是否真的泄漏，而不是正常波动 ----
+console.log("步骤 1 检测（Diagnose）：");
+console.log("- 用 Chrome DevTools Memory 面板看 Heap Snapshot 两次快照差");
+console.log("- 或用 performance.measureUserAgentSpecificMemory()（cross-origin isolation）");
+console.log("- 关键：GC 后堆大小是否回到基线。若 GC 后仍持续上涨，则是泄漏");
+
+// 模拟：写一个会累积引用的"泄漏版"模块
+function LeakyTodoStore() {
+  this._completions = [];       // 无限增长的数组
+  this._onComplete = (id) => {  // 闭包捕获 this，被反复注册
+    this._completions.push(id);
+  };
+}
+LeakyTodoStore.prototype.handleTask = function (id) {
+  // 模拟每完成一个任务就注册一次监听且从不清理
+  this._onComplete(id);
+};
+
+// ---- 第 2 步：定位 - 用堆快照找"不可达却仍被引用"的对象 ----
+console.log("\n步骤 2 定位（Isolate）：");
+console.log("- 打 3 次 Heap Snapshot，过滤 'retained size' 最大的对象");
+console.log("- 关注泄漏版 store 的 _completions 数组 retained size 是否只增不减");
+console.log("- 'Constructor' 视图按 retained size 排序，点开数组看引用链");
+
+// ---- 第 3 步：修复 - 找到根因并改造 ----
+function FixedTodoStore() {
+  // 修复1：不再把回调永远 push 进数组，改为有界或事件式
+  this._onComplete = null; // 只持有一个最新回调，避免无限累积
+}
+FixedTodoStore.prototype.handleTask = function (id, cb) {
+  this._onComplete = cb || this._onComplete; // 覆盖式赋值，不累积
+  // 用后即清，避免闭包捕获 this 太久
+  const fn = this._onComplete;
+  this._onComplete = null;
+  return fn(id);
+};
+
+// ---- 第 4 步：验证 - 修复后内存是否回到基线 ----
+console.log("\n步骤 4 验证（Verify）：");
+console.log("- 跑同样的任务量，GC 后堆大小应回到基线");
+console.log("- 连续 N 次 Heap Snapshot，retained size 不再单调上涨");
+console.log("- 对比修复前后：修复前 _completions.length 无限增长，修复后为 0");
+
+// 演示两种实现的差异
+const leakyStore = new LeakyTodoStore();
+const fixedStore = new FixedTodoStore();
+
+// 泄漏版：数组持续累积
+for (let i = 0; i < 5; i++) leakyStore.handleTask(i);
+console.log(`\n❌ 泄漏版：_completions 累积了 ${leakyStore._completions.length} 条（只增不减）`);
+
+// 修复版：不累积
+let lastResult;
+for (let i = 0; i < 5; i++) lastResult = fixedStore.handleTask(i, (id) => id * 2);
+console.log(`✅ 修复版：_completions 不存在，最新结果 = ${lastResult}（不累积）`);
+
+console.log("\n排查要点总结：");
+console.log("1. 先确认再修：GC 后堆不回基线才是泄漏");
+console.log("2. 优先看全局/闭包/事件监听这三大引用源");
+console.log("3. 修复思路：有界容器、覆盖式赋值、用后即清、显式清理");
+console.log("4. 改完必须验证内存回落到基线，避免盲目优化");
+
+
+// ============================================
 // 4. OBJECT POOLING
 // ============================================
 /**
