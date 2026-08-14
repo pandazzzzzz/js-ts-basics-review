@@ -79,6 +79,53 @@ resources.slice(0, 3).forEach(resource => {
 // ⚠️ Too many measurements can impact performance
 // ⚠️ Browser differences in precision
 
+// ---- 实际测量案例：用 performance.now() 对比两种查找实现 ----
+// 真实场景：一个高频调用的"去重"工具，用户反馈大数据量下变卡。
+// 用 Performance API 实测，让数据说话，而不是凭感觉优化。
+console.log("\n-- 实测案例：数组 indexOf vs Set.has 查找性能 --");
+
+function benchmark(name, fn, iterations) {
+  const t0 = performance.now();
+  for (let i = 0; i < iterations; i++) fn(i);
+  const t1 = performance.now();
+  const ms = (t1 - t0).toFixed(2);
+  console.log(`${name}: ${ms}ms`);
+  return t1 - t0;
+}
+
+// 构造 10 万条已存在的记录用于去重
+const records = Array.from({ length: 100000 }, (_, i) => `rec-${i}`);
+const recordSet = new Set(records);
+console.log(`构建 10 万条记录 + Set: done`);
+
+const lookups = Array.from({ length: 10000 }, (_, i) => `rec-${i * 3}`);
+
+// 实现 A：数组 indexOf（每次 O(n)）
+function dedupeWithIndexOf(items, existing) {
+  const seen = [];
+  for (const it of items) if (existing.indexOf(it) === -1) seen.push(it);
+  return seen;
+}
+
+// 实现 B：Set.has（每次 O(1)）
+function dedupeWithSet(items, existing) {
+  const seen = [];
+  for (const it of items) if (!existing.has(it)) seen.push(it);
+  return seen;
+}
+
+// 实测（各跑 5 次取稳定值）
+let idxTotal = 0, setTotal = 0;
+for (let run = 0; run < 5; run++) {
+  idxTotal += benchmark('数组 indexOf', () => dedupeWithIndexOf(lookups, records), 1);
+  setTotal += benchmark('Set.has', () => dedupeWithSet(lookups, recordSet), 1);
+}
+const idxAvg = (idxTotal / 5).toFixed(2);
+const setAvg = (setTotal / 5).toFixed(2);
+console.log(`\n平均耗时对比 → 数组 indexOf: ${idxAvg}ms  |  Set.has: ${setAvg}ms`);
+console.log(`结论：Set.has 通常快一个数量级，因为 indexOf 是 O(n) 而 Set.has 是 O(1)`);
+console.log("正是这种实测，才让「用 Set 代替 indexOf」的优化有据可依");
+
 // ============================================
 // Section 2: Performance Observer (W3C / WHATWG Web API)
 // ============================================
