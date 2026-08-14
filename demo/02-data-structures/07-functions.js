@@ -36,20 +36,20 @@ export {};
 // ============================================
 /**
  * Function Declaration - Traditional function definition (ES3)
- * 
+ *
  * Characteristics:
  * - Hoisted to the top of scope (can be called before declaration)
  * - Creates a named function visible in current scope
  * - Has its own 'this' binding (depends on how it's called)
  * - Has 'arguments' object to access all passed parameters
  * - Can be used as constructor with 'new' keyword
- * 
+ *
  * Use Cases:
  * - When hoisting is needed
  * - When 'this' binding is required
  * - When used as constructor function
  * - Recursive functions (can call itself by name)
- * 
+ *
  * Common Pitfalls:
  * - Hoisting can reduce code readability
  * - 'this' value is determined at runtime, easy to get wrong
@@ -102,20 +102,20 @@ console.log(person1); // Person { name: 'Alice', age: 30 }
 // ============================================
 /**
  * Function Expression - Assigning function to a variable (ES3)
- * 
+ *
  * Characteristics:
  * - Not hoisted, can only be called after definition
  * - Can be anonymous or named
  * - Has its own 'this' binding
  * - Has 'arguments' object
  * - Can be used as IIFE (Immediately Invoked Function Expression)
- * 
+ *
  * Use Cases:
  * - Passing functions as values
  * - Callback functions
  * - Conditionally creating functions
  * - Creating closures
- * 
+ *
  * Common Pitfalls:
  * - Temporal Dead Zone (TDZ) with const/let declarations
  * - Anonymous functions have poor stack traces for debugging
@@ -143,7 +143,7 @@ console.log(factorial(5)); // 120
 
 // Conditional function creation
 const isDevelopment = true;
-const logger = isDevelopment 
+const logger = isDevelopment
   ? function(msg) { console.log("[DEV]", msg); }
   : function(msg) { /* do nothing */ };
 
@@ -155,21 +155,21 @@ logger("Conditional function created");
 // ============================================
 /**
  * Arrow Function - ES6 concise function syntax (ES6)
- * 
+ *
  * Characteristics:
  * - More concise syntax
- * - No own 'this' - inherits from enclosing scope (lexical this)
+ * - No own 'this' - inherits from enclosing scope (lexical 'this')
  * - No 'arguments' object (use rest parameters instead)
  * - Cannot be used as constructor (cannot use 'new')
  * - No 'prototype' property
  * - Cannot be used as Generator (cannot use 'yield')
- * 
+ *
  * Use Cases:
  * - Short function logic
  * - Callback functions (especially array methods)
  * - When you need to preserve outer 'this'
  * - Functional programming
- * 
+ *
  * Common Pitfalls:
  * - Returning object literals requires parentheses: () => ({ key: value })
  * - Cannot be used as constructor
@@ -218,7 +218,7 @@ const obj = {
     setTimeout(() => {
       console.log("Nested arrow this:", this.name); // "Object"
     }, 100);
-    
+
     // Compare: regular function needs to save 'this'
     setTimeout(function() {
       console.log("Nested regular this:", this); // undefined or global
@@ -242,16 +242,16 @@ console.log(sumAllArrow(1, 2, 3, 4, 5)); // 15
 // ============================================
 /**
  * Default Parameters - Provide default values for function parameters (ES6)
- * 
+ *
  * Characteristics:
  * - Used when parameter is not passed or is undefined
  * - Default value can be expression or function call
  * - Later parameters can reference earlier parameters
- * 
+ *
  * Use Cases:
  * - Optional parameters
  * - Default configuration values
- * 
+ *
  * Common Pitfalls:
  * - null does NOT trigger default value
  * - Default parameters not counted in arguments.length
@@ -288,16 +288,16 @@ console.log(calculateArea(5, 10)); // 50 (rectangle)
 // ============================================
 /**
  * Rest Parameters - Collect multiple arguments into an array (ES6)
- * 
+ *
  * Characteristics:
  * - Uses ... syntax
  * - Must be the last parameter
  * - Is a real array, can use array methods
- * 
+ *
  * Use Cases:
  * - Functions with variable number of arguments
  * - Replacement for 'arguments' object
- * 
+ *
  * Common Pitfalls:
  * - Can only have one rest parameter
  * - Must be the last parameter
@@ -320,11 +320,11 @@ function processData({ name, age, ...otherInfo }) {
   console.log("Other info:", otherInfo);
 }
 
-processData({ 
-  name: "Charlie", 
-  age: 28, 
-  city: "NYC", 
-  country: "USA" 
+processData({
+  name: "Charlie",
+  age: 28,
+  city: "NYC",
+  country: "USA"
 });
 
 
@@ -333,12 +333,12 @@ processData({
 // ============================================
 /**
  * Higher-Order Functions - Functions that accept or return functions (ES3)
- * 
+ *
  * Characteristics:
  * - Functions are first-class citizens
  * - Supports functional programming paradigm
  * - Can create closures
- * 
+ *
  * Use Cases:
  * - Callback functions
  * - Function composition
@@ -382,17 +382,17 @@ console.log(addOneThenDouble(5)); // 12
 // ============================================
 /**
  * Closures - Functions can access variables from outer scope (ES3)
- * 
+ *
  * Characteristics:
  * - Inner function can access outer function's variables
  * - Variables persist even after outer function returns
  * - Can create private variables
- * 
+ *
  * Use Cases:
  * - Data encapsulation and private variables
  * - Factory functions
  * - Module pattern
- * 
+ *
  * Common Pitfalls:
  * - Closure trap in loops
  * - Memory leak risk
@@ -402,7 +402,7 @@ console.log("\n=== Closures Demo ===");
 
 function createCounter() {
   let count = 0; // Private variable
-  
+
   return {
     increment: function() {
       return ++count;
@@ -454,17 +454,17 @@ for (var k = 0; k < 3; k++) {
 // ============================================
 /**
  * Async Functions - Handle asynchronous operations with async/await (ES2017)
- * 
+ *
  * Characteristics:
  * - async function always returns a Promise
  * - await can only be used inside async functions
  * - Makes asynchronous code look synchronous
- * 
+ *
  * Use Cases:
  * - Handling Promises
  * - Sequential asynchronous operations
  * - Error handling
- * 
+ *
  * Common Pitfalls:
  * - Forgetting await results in Promise instead of value
  * - Parallel operations become sequential
@@ -480,7 +480,7 @@ function delay(ms) {
 
 async function fetchData() {
   console.log("Fetching data...");
-  await delay(1000);
+  await delay(100);
   return { data: "Sample data" };
 }
 
@@ -499,9 +499,9 @@ processDataAsync();
 // Parallel execution of multiple async operations
 async function fetchMultiple() {
   const [result1, result2, result3] = await Promise.all([
-    delay(1000).then(() => "Data 1"),
-    delay(500).then(() => "Data 2"),
-    delay(800).then(() => "Data 3")
+    delay(100).then(() => "Data 1"),
+    delay(50).then(() => "Data 2"),
+    delay(80).then(() => "Data 3")
   ]);
   console.log("All data:", result1, result2, result3);
 }
@@ -514,19 +514,19 @@ fetchMultiple();
 // ============================================
 /**
  * Generator Functions - Functions that can pause and resume execution (ES6)
- * 
+ *
  * Characteristics:
  * - Uses function* syntax
  * - Uses yield keyword to pause execution
  * - Returns iterator object
  * - Enables lazy evaluation
- * 
+ *
  * Use Cases:
  * - Implementing iterators
  * - Lazy sequences
  * - State machines
  * - Async flow control (replaced by async/await)
- * 
+ *
  * Common Pitfalls:
  * - Must call next() to execute
  * - yield can only be used inside generator functions
@@ -577,7 +577,6 @@ console.log("Fibonacci:", fib.next().value); // 5
 
 // yield* - Delegating to another generator (ES6)
 // - Delegates iteration to another generator or iterable
-// - Can be used to compose generators
 function* innerGenerator() {
   yield 1;
   yield 2;
@@ -620,7 +619,7 @@ console.log("\nAsync Generator Functions (ES2018):");
 
 async function* asyncNumberGenerator() {
   for (let i = 1; i <= 3; i++) {
-    await new Promise(resolve => setTimeout(resolve, 100)); // Simulate async
+    await new Promise(resolve => setTimeout(resolve, 50)); // Simulate async
     yield i;
   }
 }
@@ -637,7 +636,7 @@ async function* asyncNumberGenerator() {
 async function* fetchInBatches(ids) {
   for (const id of ids) {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 30));
     yield { id, data: `Data for ${id}` };
   }
 }
@@ -666,12 +665,12 @@ async function* fetchInBatches(ids) {
 // ============================================
 /**
  * Method Definitions - ES6 shorthand syntax for object methods (ES6)
- * 
+ *
  * Characteristics:
  * - More concise syntax
  * - Can use super keyword
  * - Cannot be used as constructor
- * 
+ *
  * Use Cases:
  * - Object methods
  * - Class methods
@@ -681,23 +680,23 @@ console.log("\n=== Method Definitions Demo ===");
 
 const calculator = {
   value: 0,
-  
+
   // ES6 method shorthand
   add(n) {
     this.value += n;
     return this;
   },
-  
+
   subtract(n) {
     this.value -= n;
     return this;
   },
-  
+
   // Getter
   get result() {
     return this.value;
   },
-  
+
   // Setter
   set reset(val) {
     this.value = val;
@@ -715,12 +714,12 @@ console.log("After reset:", calculator.result); // 0
 // ============================================
 /**
  * Function Binding - Control function's 'this' value (ES5)
- * 
+ *
  * Methods:
  * - call: Invoke immediately with argument list
  * - apply: Invoke immediately with argument array
  * - bind: Return new function with preset 'this' and arguments
- * 
+ *
  * Use Cases:
  * - Change 'this' context
  * - Partial application (partial functions)
@@ -758,12 +757,12 @@ console.log(sayHello("!")); // Hello, David!
 // ============================================
 /**
  * Currying - Transform multi-parameter function into sequence of single-parameter functions
- * 
+ *
  * Characteristics:
  * - Functional programming technique
  * - Parameter reuse
  * - Delayed execution
- * 
+ *
  * Use Cases:
  * - Parameter reuse
  * - Function composition
@@ -811,12 +810,12 @@ console.log(curriedSum(1)(2, 3)); // 6
 // ============================================
 /**
  * Function Properties - Every function has built-in properties and methods
- * 
+ *
  * Properties:
  * - name: Function name as string
  * - length: Number of parameters (excluding rest parameters and defaults)
  * - prototype: Object used when function is called with 'new'
- * 
+ *
  * Methods:
  * - toString(): Returns function source code as string
  * - call(): Invoke with specific 'this' and arguments
@@ -877,13 +876,13 @@ console.log(arrowConstructor.prototype); // undefined
 // ============================================
 /**
  * IIFE (Immediately Invoked Function Expression) - Advanced patterns
- * 
+ *
  * Use Cases:
  * - Module pattern for encapsulation
  * - Avoiding global namespace pollution
  * - Creating private variables
  * - Initialization code
- * 
+ *
  * Patterns:
  * - Classic IIFE: (function() {})()
  * - Arrow IIFE: (() => {})()
@@ -893,17 +892,17 @@ console.log(arrowConstructor.prototype); // undefined
 
 console.log("\n=== IIFE Patterns ===");
 
-// Module Pattern with IIFE
+// Module pattern with IIFE
 const CounterModule = (function() {
   // Private variables
   let count = 0;
   const maxCount = 100;
-  
+
   // Private function
   function validateCount(value) {
     return value >= 0 && value <= maxCount;
   }
-  
+
   // Public API
   return {
     increment() {
@@ -939,17 +938,17 @@ console.log(CounterModule.setCount(50)); // true
 console.log(CounterModule.getCount()); // 50
 // console.log(count); // Error: count is not defined (private)
 
-// Namespace Pattern
+// Namespace pattern
 let MyApp = {};
 
 (function(namespace) {
   // Private utilities
   const version = "1.0.0";
-  
+
   function log(message) {
     console.log(`[MyApp v${version}] ${message}`);
   }
-  
+
   // Public API
   namespace.utils = {
     greet(name) {
@@ -984,18 +983,18 @@ console.log("Version:", MyApp.utils.getVersion());
 // ============================================
 /**
  * Tail Call Optimization - ES6 feature for optimizing recursive functions
- * 
+ *
  * Characteristics:
  * - Only works in strict mode
  * - Function call must be in tail position (last operation)
  * - Prevents stack overflow for deep recursion
  * - Limited browser support (mainly Safari)
- * 
+ *
  * Tail Position:
- * - return functionCall(); ✅
- * - return functionCall() + 1; ❌ (not in tail position)
- * - return x ? functionCall() : value; ✅ (both branches in tail position)
- * 
+ * - return functionCall(); ✓
+ * - return functionCall() + 1; ✗ (not in tail position)
+ * - return x ? functionCall() : value; ✓ (both branches in tail position)
+ *
  * Common Pitfalls:
  * - Not widely supported yet
  * - Must be in strict mode
@@ -1007,13 +1006,13 @@ console.log("\n=== Tail Call Optimization ===");
 // Non-tail-recursive factorial (can cause stack overflow)
 function factorialNonTCO(n) {
   if (n <= 1) return 1;
-  return n * factorialNonTCO(n - 1); // ❌ Not tail call (multiplication after)
+  return n * factorialNonTCO(n - 1); // ✗ Not tail call (multiplication after)
 }
 
 // Tail-recursive factorial (TCO-friendly)
 function factorialTCO(n, accumulator = 1) {
   if (n <= 1) return accumulator;
-  return factorialTCO(n - 1, n * accumulator); // ✅ Tail call (works in strict mode)
+  return factorialTCO(n - 1, n * accumulator); // ✓ Tail call (works in strict mode)
 }
 
 console.log("Factorial (non-TCO):", factorialNonTCO(5)); // 120
@@ -1022,13 +1021,13 @@ console.log("Factorial (TCO):", factorialTCO(5)); // 120
 // Non-tail-recursive sum
 function sumToN(n) {
   if (n <= 0) return 0;
-  return n + sumToN(n - 1); // ❌ Not tail call
+  return n + sumToN(n - 1); // ✗ Not tail call
 }
 
 // Tail-recursive sum
 function sumToNTCO(n, accumulator = 0) {
   if (n <= 0) return accumulator;
-  return sumToNTCO(n - 1, accumulator + n); // ✅ Tail call (works in strict mode)
+  return sumToNTCO(n - 1, accumulator + n); // ✓ Tail call (works in strict mode)
 }
 
 console.log("Sum 1 to 10 (non-TCO):", sumToN(10)); // 55
@@ -1060,20 +1059,20 @@ console.log("Factorial (trampoline):", trampolinedFactorial(5)); // 120
 // ============================================
 /**
  * Pure Functions - Functions with no side effects
- * 
+ *
  * Characteristics:
  * - Same input always produces same output (deterministic)
  * - No side effects (doesn't modify external state)
  * - Doesn't depend on external state
  * - Easier to test and reason about
- * 
+ *
  * Benefits:
  * - Predictable behavior
  * - Easy to test
  * - Can be memoized
  * - Thread-safe (in multi-threaded environments)
  * - Easier to debug
- * 
+ *
  * Common Pitfalls:
  * - Mutating input parameters
  * - Accessing/modifying global variables
@@ -1087,13 +1086,13 @@ console.log("\n=== Pure Functions ===");
 // Impure function - modifies external state
 let total = 0;
 function addToTotal(value) {
-  total += value; // ❌ Side effect: modifies external variable
+  total += value; // ✗ Side effect: modifies external variable
   return total;
 }
 
 // Pure function - no side effects
 function pureAdd(a, b) {
-  return a + b; // ✅ Pure: only depends on inputs
+  return a + b; // ✓ Pure: only depends on inputs
 }
 
 console.log("Pure add:", pureAdd(5, 3)); // 8
@@ -1101,13 +1100,13 @@ console.log("Pure add:", pureAdd(5, 3)); // 8 (always same result)
 
 // Impure - mutates input
 function impureAddProperty(obj) {
-  obj.newProp = "value"; // ❌ Mutates input
+  obj.newProp = "value"; // ✗ Mutates input
   return obj;
 }
 
 // Pure - creates new object
 function pureAddProperty(obj) {
-  return { ...obj, newProp: "value" }; // ✅ Returns new object
+  return { ...obj, newProp: "value" }; // ✓ Returns new object
 }
 
 const original = { name: "test" };
@@ -1176,15 +1175,15 @@ console.log(`
 │ Feature             │ Function │ Function │  Arrow   │   Async     │Generator │
 │                     │ Decl.    │ Expr.    │ Function │  Function   │ Function │
 ├─────────────────────┼──────────┼──────────┼──────────┼─────────────┼──────────┤
-│ Hoisting            │    ✓     │    ✗     │    ✗     │      ✗      │    ✗     │
-│ Own 'this'          │    ✓     │    ✓     │    ✗     │      ✓      │    ✓     │
-│ 'arguments' object  │    ✓     │    ✓     │    ✗     │      ✓      │    ✓     │
-│ Constructor (new)   │    ✓     │    ✓     │    ✗     │      ✗      │    ✗     │
-│ 'prototype'         │    ✓     │    ✓     │    ✗     │      ✗      │    ✓     │
-│ Returns Promise     │    ✗     │    ✗     │    ✗     │      ✓      │    ✗     │
-│ Can use 'yield'     │    ✗     │    ✗     │    ✗     │      ✗      │    ✓     │
-│ Can use 'await'     │    ✗     │    ✗     │    ✗     │      ✓      │    ✗     │
-│ ES Version          │   ES3    │   ES3    │   ES6    │     ES8     │   ES6    │
+│ Hoisting            │    ✓     │    ✗     │    ✗     │      ✗     │    ✗     │
+│ Own 'this'          │    ✓     │    ✓     │    ✗     │      ✓     │    ✓     │
+│ 'arguments' object  │    ✓     │    ✓     │    ✗     │      ✓     │    ✓     │
+│ Constructor (new)   │    ✓     │    ✓     │    ✗     │      ✗     │    ✗     │
+│ 'prototype'         │    ✓     │    ✓     │    ✗     │      ✗     │    ✓     │
+│ Returns Promise     │    ✗     │    ✗     │    ✗     │      ✓     │    ✗     │
+│ Can use 'yield'     │    ✗     │    ✗     │    ✗     │      ✗     │    ✓     │
+│ Can use 'await'     │    ✗     │    ✗     │    ✗     │      ✓     │    ✗     │
+│ ES Version          │   ES3    │   ES3    │   ES6    │    ES8     │   ES6    │
 └─────────────────────┴──────────┴──────────┴──────────┴─────────────┴──────────┘
 
 BEST PRACTICES:
@@ -1202,284 +1201,15 @@ BEST PRACTICES:
 
 
 // ============================================
-// TYPESCRIPT COMPARISON NOTES
+// Best Practices
 // ============================================
-/*
-🔍 Key Differences in TypeScript:
-
-1. PARAMETER TYPE ANNOTATIONS
-   JS:  function add(a, b) { return a + b; }
-   TS:  function add(a: number, b: number): number { return a + b; }
-   
-   Benefits:
-   - Catches type errors at compile time
-   - Better IDE autocomplete and IntelliSense
-   - Self-documenting code
-
-2. RETURN TYPE ANNOTATIONS
-   JS:  function getValue() { return 42; }
-   TS:  function getValue(): number { return 42; }
-   
-   Benefits:
-   - Prevents accidental return type changes
-   - Explicit contract for function behavior
-   - Better error messages
-
-3. FUNCTION OVERLOADS (TS-Only)
-   JS:  function format(input) {
-          if (typeof input === "string") return input.toUpperCase();
-          if (typeof input === "number") return input.toFixed(2);
-        }
-   
-   TS:  function format(input: string): string;
-        function format(input: number): string;
-        function format(input: string | number): string {
-          if (typeof input === "string") return input.toUpperCase();
-          if (typeof input === "number") return input.toFixed(2);
-          return String(input);
-        }
-   
-   Benefits:
-   - Multiple type signatures for same function
-   - Better type inference for callers
-   - More precise API documentation
-
-4. OPTIONAL PARAMETERS
-   JS:  function greet(name, greeting) {
-          greeting = greeting || "Hello";
-          return greeting + ", " + name;
-        }
-   
-   TS:  function greet(name: string, greeting?: string): string {
-          return (greeting || "Hello") + ", " + name;
-        }
-   
-   Benefits:
-   - Explicit optional parameters with ?
-   - Type checking for optional values
-   - Clear function signature
-
-5. GENERIC FUNCTIONS (TS-Only)
-   JS:  function identity(value) { return value; }
-   
-   TS:  function identity<T>(value: T): T { return value; }
-   
-   Benefits:
-   - Type-safe generic code
-   - Preserves type information
-   - Reusable with any type
-
-6. 'this' PARAMETER (TS-Only)
-   JS:  const obj = {
-          value: 42,
-          getValue: function() { return this.value; }
-        };
-   
-   TS:  interface Obj {
-          value: number;
-          getValue(this: Obj): number;
-        }
-        const obj: Obj = {
-          value: 42,
-          getValue(this: Obj) { return this.value; }
-        };
-   
-   Benefits:
-   - Explicit 'this' type checking
-   - Prevents 'this' context loss
-   - Better error messages
-
-7. VOID, NEVER, UNDEFINED RETURN TYPES
-   JS:  function log() { console.log("message"); }
-        function throwErr() { throw new Error(); }
-   
-   TS:  function log(): void { console.log("message"); }
-        function throwErr(): never { throw new Error(); }
-   
-   - void: Function doesn't return meaningful value
-   - never: Function never returns (throws or infinite loop)
-   - undefined: Function explicitly returns undefined
-
-8. ASYNC FUNCTION TYPES
-   JS:  async function fetchData() { return { data: "value" }; }
-   
-   TS:  async function fetchData(): Promise<{ data: string }> {
-          return { data: "value" };
-        }
-   
-   Benefits:
-   - Explicit Promise return type
-   - Type checking for async operations
-   - Better error handling
-
-9. CALLBACK FUNCTION TYPES
-   JS:  function map(array, callback) {
-          return array.map(callback);
-        }
-   
-   TS:  function map<T, U>(
-          array: T[],
-          callback: (item: T, index: number) => U
-        ): U[] {
-          return array.map(callback);
-        }
-   
-   Benefits:
-   - Type-safe callbacks
-   - Generic type preservation
-   - Better IDE support
-
-10. FUNCTION TYPE ALIASES
-    JS:  // No type aliases
-    
-    TS:  type MathOperation = (a: number, b: number) => number;
-         const add: MathOperation = (a, b) => a + b;
-    
-    Benefits:
-    - Reusable function types
-    - Better code organization
-    - Self-documenting code
-
-⚠️ COMMON CONFUSION POINTS:
-
-1. OPTIONAL VS DEFAULT PARAMETERS
-   - Optional (?): Can be omitted, value is undefined
-   - Default (=): Has fallback value if not provided
-   
-   function example(a?: string, b: string = "default") {}
-   example(); // a is undefined, b is "default"
-
-2. VOID VS UNDEFINED VS NEVER
-   - void: Function doesn't return meaningful value (can return undefined)
-   - undefined: Function explicitly returns undefined
-   - never: Function never returns (throws or infinite loop)
-   
-   function voidFn(): void { console.log("hi"); }
-   function undefinedFn(): undefined { return undefined; }
-   function neverFn(): never { throw new Error(); }
-
-3. FUNCTION OVERLOADS ORDER
-   - More specific overloads must come first
-   - Implementation signature must cover all overloads
-   - Implementation signature is NOT part of public API
-   
-   function fn(x: string): string;        // ✅ Specific first
-   function fn(x: string | number): string; // ✅ General second
-   function fn(x: string | number): string { return String(x); }
-
-4. ARROW FUNCTIONS AND 'this'
-   - Arrow functions don't have their own 'this'
-   - They inherit 'this' from enclosing scope
-   - Cannot use 'this' parameter with arrow functions
-   
-   const obj = {
-     value: 42,
-     arrow: () => this.value,  // ❌ 'this' is not obj
-     regular: function() { return this.value; } // ✅ 'this' is obj
-   };
-
-5. GENERIC TYPE INFERENCE
-   - TypeScript infers generic types from arguments
-   - Can explicitly specify generic types when needed
-   
-   function identity<T>(value: T): T { return value; }
-   identity(42);           // T inferred as number
-   identity<string>("hi"); // T explicitly set to string
-
-6. ASYNC FUNCTION RETURN TYPES
-   - Async functions always return Promise
-   - Must wrap return type in Promise<T>
-   
-   async function getData(): Promise<string> { // ✅ Correct
-     return "data";
-   }
-   
-   async function getData(): string { // ❌ Error
-     return "data";
-   }
-
-7. REST PARAMETERS TYPE
-   - Rest parameters are typed as arrays
-   - Must be last parameter
-   
-   function sum(...numbers: number[]): number { // ✅ Correct
-     return numbers.reduce((a, b) => a + b, 0);
-   }
-
-8. CALLBACK VOID RETURN TYPE
-   - Callbacks with void return can return values
-   - Return value is ignored (by design for flexibility)
-   
-   function execute(callback: () => void): void {
-     callback();
-   }
-   execute(() => 42); // ✅ OK, return value ignored
-
-9. TYPE ASSERTIONS IN FUNCTIONS
-   - Type assertions don't perform runtime checks
-   - Use type guards instead when possible
-   
-   function bad(value: unknown): string {
-     return (value as string).toUpperCase(); // ❌ Unsafe
-   }
-   
-   function good(value: unknown): string {
-     if (typeof value === "string") {
-       return value.toUpperCase(); // ✅ Safe with type guard
-     }
-     return "";
-   }
-
-10. FUNCTION EXPRESSION TYPE INFERENCE
-    - Return type is inferred from implementation
-    - Explicit return type prevents accidental changes
-    
-    const inferred = (x: number) => x * 2; // Return type inferred
-    const explicit = (x: number): number => x * 2; // Return type explicit
-
-🎯 BEST PRACTICES:
-
-1. ALWAYS TYPE FUNCTION PARAMETERS
-   ❌ function add(a, b) { return a + b; }
-   ✅ function add(a: number, b: number): number { return a + b; }
-
-2. SPECIFY RETURN TYPES FOR PUBLIC APIs
-   ❌ export function getData() { return { data: "value" }; }
-   ✅ export function getData(): { data: string } { return { data: "value" }; }
-
-3. USE GENERICS FOR REUSABLE FUNCTIONS
-   ❌ function identity(value: any): any { return value; }
-   ✅ function identity<T>(value: T): T { return value; }
-
-4. USE FUNCTION OVERLOADS FOR MULTIPLE SIGNATURES
-   ✅ function format(input: string): string;
-      function format(input: number): string;
-      function format(input: string | number): string { ... }
-
-5. USE 'this' PARAMETER FOR METHODS
-   ✅ interface Counter {
-        increment(this: Counter): void;
-      }
-
-6. USE void FOR SIDE-EFFECT FUNCTIONS
-   ✅ function log(message: string): void { console.log(message); }
-
-7. USE never FOR FUNCTIONS THAT THROW
-   ✅ function throwError(msg: string): never { throw new Error(msg); }
-
-8. TYPE ASYNC FUNCTION RETURNS
-   ✅ async function fetchData(): Promise<Data> { ... }
-
-9. USE TYPE ALIASES FOR COMPLEX FUNCTION TYPES
-   ✅ type Callback = (error: Error | null, data?: string) => void;
-
-10. PREFER TYPE GUARDS OVER TYPE ASSERTIONS
-    ✅ if (typeof value === "string") { value.toUpperCase(); }
-
-📘 For detailed TypeScript examples and comparisons, see:
-   demo/02-data-structures/07-functions-ts-comparison.ts
-*/
-
+console.log("\n=== Best Practices ===");
+console.log("1. Prefer function expressions with const for predictable hoisting");
+console.log("2. Use default parameters instead of manual undefined checks");
+console.log("3. Use rest parameters instead of the deprecated arguments object");
+console.log("4. Keep functions pure and single-responsibility for testability");
+console.log("5. Use arrow functions for callbacks, regular functions for methods");
+console.log("6. Name functions descriptively to improve stack traces");
 
 // ============================================
 // Cross-references

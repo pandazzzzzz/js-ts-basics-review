@@ -4,8 +4,6 @@
 // This file is the index for the ES2022+ features collection (now split by version)
 export {};
 
-export {}; // Module
-
 // ============================================
 // Learning goals
 // ============================================
@@ -85,6 +83,15 @@ console.log("\n=== Verification ===");
 console.log("All ES version annotations are verified against TC39 official documentation");
 console.log("Last verified: 2026-07-31");
 
+
+// ============================================
+// Best Practices
+// ============================================
+console.log("\n=== Best Practices ===");
+console.log("1. Open the version-specific file (39.1-39.7) for the feature you need");
+console.log("2. Check browser/runtime support before using newer ES features in production");
+console.log("3. Prefer polyfills or transpilation for targets that lack ES2025+ support");
+console.log("4. Use verification blocks to confirm which features are Stage 4 standard");
 
 // ============================================
 // Cross-references
