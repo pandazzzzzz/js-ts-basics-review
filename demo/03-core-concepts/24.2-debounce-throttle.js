@@ -51,6 +51,7 @@ console.log("=== Function Patterns - Debounce & Throttle Demo ===\n");
 console.log("=== 1. Debounce Demo ===");
 
 // 1.1 Basic debounce implementation
+// - Debounce 延迟执行直到停顿，防抖核心模式 (ES5)，基于闭包 + setTimeout
 function debounce(fn, delayMs) {
   let timeoutId = null;
 
@@ -176,6 +177,7 @@ cancelableSearch.cancel(); // Cancels pending call
 console.log("\n=== 2. Throttle Demo ===");
 
 // 2.1 Basic throttle (trailing)
+// - Throttle 限流到每周期一次，节流核心模式 (ES5)，基于闭包 + Date.now
 function throttle(fn, limitMs) {
   let lastCall = 0;
   let timeoutId = null;

@@ -51,7 +51,7 @@ const API_BASE = "https://jsonplaceholder.typicode.com";
 
 console.log("1. Basic GET Request:");
 
-// Using Promise chains
+// Using Promise chains (ES6)
 fetch(`${API_BASE}/posts/1`)
   .then(response => {
     console.log("   Response received, status:", response.status);

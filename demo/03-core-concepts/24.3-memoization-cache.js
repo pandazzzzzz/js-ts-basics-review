@@ -54,6 +54,7 @@ console.log("=== Function Patterns - Memoization & Cache Demo ===\n");
 console.log("=== 1. Basic Memoization ===");
 
 // 1.1 Simple memoize with Map
+// - 记忆化核心模式，基于 Map 缓存参数→结果 (ES6)
 function memoize(fn) {
   const cache = new Map();
 
@@ -101,6 +102,7 @@ console.log("sum(2, 3):", sum(2, 3));
 console.log("sum(2, 3):", sum(2, 3)); // Cache hit
 
 // 1.3 WeakMap memoize for object arguments
+// - 用 WeakMap 缓存对象参数，键被回收时自动清理 (ES6)
 function memoizeWeak(fn) {
   const cache = new WeakMap();
 
@@ -159,6 +161,7 @@ function memoizeMaxSize(fn, maxSize = 100) {
 
 console.log("\n=== 2. LRU Cache ===");
 
+// - LRU 缓存，用 Map 插入顺序实现 O(1) get/put (ES6)
 class LRUCache {
   constructor(maxSize = 100) {
     this.cache = new Map(); // Doubles as hash map + linked list via insertion order
@@ -266,6 +269,7 @@ expensive(1); // Recomputes
 console.log("\n=== 3. Trampolines ===");
 
 // 3.1 Basic trampoline
+// - 蹦床函数，用循环代替递归避免栈溢出 (ES5)，比 TCO 兼容性更好
 function trampoline(fn) {
   return function(...args) {
     let result = fn(...args);

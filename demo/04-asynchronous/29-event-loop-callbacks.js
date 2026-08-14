@@ -171,7 +171,7 @@ console.log("Doubled:", doubled);
 
 console.log("\n=== setTimeout and setInterval Demo ===\n");
 
-// setTimeout - single execution
+// setTimeout - single execution (ES1)
 console.log("Before setTimeout");
 
 setTimeout(() => {
@@ -450,7 +450,7 @@ function step4() {
 
 setTimeout(step1, 500);
 
-// ✅ Solution 2: Promises
+// ✅ Solution 2: Promises (ES6)
 function promiseSolution() {
   console.log("\nPromise solution:");
   
@@ -476,6 +476,7 @@ setTimeout(() => promiseSolution(), 1000);
 
 // ✅ Solution 3: Async/await (best)
 async function asyncAwaitSolution() {
+  // - async/await 简化异步链，比 Promise 链更可读 (ES2017)
   console.log("\nAsync/await solution:");
   
   await new Promise(resolve => setTimeout(() => {

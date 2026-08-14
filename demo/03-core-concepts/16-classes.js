@@ -58,6 +58,9 @@ export {};
 console.log("=== 1. Class Basic Syntax Demo ===");
 
 // 1.1 Class declaration
+// - class 关键字定义类，本质是构造函数的语法糖
+// - 类声明有提升(TDZ)，必须先声明后使用
+// - 实例方法定义在 prototype 上，不可枚举
 class Person {
   constructor(name, age) {
     this.name = name;

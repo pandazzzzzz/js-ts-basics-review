@@ -101,6 +101,7 @@ fetch(`${API_BASE}/posts/1`)
 console.log("\n=== Response Methods Demo ===\n");
 
 // Helper to demonstrate different response methods
+// - Fetch 返回 Promise，配合 async/await 使用 (ES2017)
 async function demonstrateResponseMethods() {
   try {
     // JSON response (most common for APIs)

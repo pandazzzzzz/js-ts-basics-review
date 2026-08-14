@@ -43,6 +43,7 @@ const API_BASE = "https://jsonplaceholder.typicode.com";
 console.log("1. API client wrapper:");
 
 const createApiClient = (baseURL, defaultHeaders = {}) => {
+  // - API 客户端封装，基于 async/await (ES2017) 和 fetch
   return {
     async get(endpoint, options = {}) {
       const response = await fetch(`${baseURL}${endpoint}`, {

@@ -139,7 +139,7 @@ errorPropagation();
 /**
  * Timeout Pattern - Cancel requests that take too long
  *
- * Using Promise.race between fetch and timeout promise
+ * Using Promise.race between fetch and timeout promise (ES6)
  */
 
 console.log("\n=== Timeout Patterns ===\n");
