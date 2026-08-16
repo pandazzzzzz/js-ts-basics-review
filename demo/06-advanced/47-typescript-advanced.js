@@ -431,8 +431,8 @@ console.log("8. Reflect vs Object method differences");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 24.1-function-composition.ts - Function composition TS");
-console.log("📘 23-proxy-reflect.ts - Proxy TS comparison");
+console.log("📘 24.1-function-composition-ts-comparison.ts - Function composition TS");
+console.log("📘 23-proxy-reflect-ts-comparison.ts - Proxy TS comparison");
 console.log("📘 48-security.js - Type-safe security");
 
 // ============================================

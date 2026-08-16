@@ -1,5 +1,5 @@
 // Fetch API - Streams & Advanced Demo
-// 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 33.4-fetch-streams-advanced-ts-comparison.ts
 
 export {};
 
@@ -424,5 +424,5 @@ console.log("📘 31-async-await.js - Async/await patterns");
 // TypeScript Comparison
 // ============================================
 /*
-📘 See TypeScript comparison file: 33-fetch-api-ts-comparison.ts
+📘 See TypeScript comparison file: 33.4-fetch-streams-advanced-ts-comparison.ts
 */

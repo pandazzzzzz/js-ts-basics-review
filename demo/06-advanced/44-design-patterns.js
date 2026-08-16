@@ -16,14 +16,17 @@ export {};
 // Table of Contents
 // ============================================
 
-// 1. Factory and Abstract Factory
-// 2. Singleton
-// 3. Observer
-// 4. Strategy
-// 5. Decorator
-// 6. Adapter and Facade
-// 7. Command and State
-// 8. Common pitfalls and best practices
+// 1. Factory Pattern
+// 2. Singleton Pattern
+// 3. Observer Pattern
+// 4. Strategy Pattern
+// 5. Decorator Pattern
+// 6. Adapter Pattern
+// 7. Facade Pattern
+// 8. Command Pattern
+// 9. State Pattern
+// 10. Common Pitfalls
+// 11. Best Practices
 
 // ============================================
 

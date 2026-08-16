@@ -1,5 +1,5 @@
 // Fetch API - Practical Patterns Demo
-// 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 33.3-fetch-practical-patterns-ts-comparison.ts
 
 export {};
 
@@ -467,5 +467,5 @@ console.log("📘 34-async-error-handling.js - Circuit breaker and advanced erro
 // TypeScript Comparison
 // ============================================
 /*
-📘 See TypeScript comparison file: 33-fetch-api-ts-comparison.ts
+📘 See TypeScript comparison file: 33.3-fetch-practical-patterns-ts-comparison.ts
 */

@@ -1,5 +1,5 @@
 // Fetch API - Basics Demo
-// 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 33.1-fetch-basics-ts-comparison.ts
 
 export {};
 
@@ -339,5 +339,5 @@ console.log("📘 33.4-fetch-streams-advanced.js - Stream API and caching");
 // TypeScript Comparison
 // ============================================
 /*
-📘 See TypeScript comparison file: 33-fetch-api-ts-comparison.ts
+📘 See TypeScript comparison file: 33.1-fetch-basics-ts-comparison.ts
 */

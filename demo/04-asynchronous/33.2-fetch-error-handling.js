@@ -1,5 +1,5 @@
 // Fetch API - Error Handling & Async/Await Demo
-// 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+// 📘 For TypeScript comparison, see: 33.2-fetch-error-handling-ts-comparison.ts
 
 export {};
 
@@ -400,5 +400,5 @@ console.log("📘 34-async-error-handling.js - Circuit breaker and retry pattern
 // TypeScript Comparison
 // ============================================
 /*
-📘 See TypeScript comparison file: 33-fetch-api-ts-comparison.ts
+📘 See TypeScript comparison file: 33.2-fetch-error-handling-ts-comparison.ts
 */
