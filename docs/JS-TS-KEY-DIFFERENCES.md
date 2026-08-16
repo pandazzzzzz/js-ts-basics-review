@@ -285,7 +285,7 @@ function add(a: number, b: number): number {
 
 #### Resource Management (ES2027 / TS 5.2+)
 ```typescript
-// using declaration - automatic cleanup (ES2027, conditional Stage 4 since May 2025)
+// using declaration - automatic cleanup (ES2027, Stage 4)
 using file = new FileHandle("data.txt");
 // file[Symbol.dispose]() called at block end
 
@@ -293,7 +293,7 @@ await using db = new DatabaseConnection();
 // db[Symbol.asyncDispose]() called at block end
 ```
 
-Note: `using` reached conditional Stage 4 in May 2025 (still conditional as of 2026-03) and is targeted for ES2027. TypeScript 5.2+ supports the syntax.
+Note: `using` reached conditional Stage 4 in May 2025; all conditions were met and it advanced to full Stage 4 in May 2026 (ES2027). TypeScript 5.2+ supports the syntax.
 
 **See**: `demo/06-advanced/39-es2022-plus-features.js`
 
