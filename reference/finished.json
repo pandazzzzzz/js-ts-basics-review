@@ -11,33 +11,33 @@
     "Atomics.pause": {
       "status": "ES2027",
       "stage": 4,
-      "stage4Date": "2026-06",
-      "stage4DateType": "milestone",
-      "note": "ECMA-262 PR #3847 merged at 2026-06-02T18:01:26Z (proposal repo: atomics-microwait)",
-      "url": "https://github.com/tc39/proposal-atomics-microwait"
+      "stage4Date": "2026-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 reached May 2026 (notes 2026-05/may-19 'atomics-pause-for-stage-4'); part of ES2027",
+      "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4"
     },
     "Joint Iteration": {
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2026-05",
-      "stage4DateType": "milestone",
-      "note": "2025-11 is the Stage 3 meeting; proposal repo 'Stage 4' commit dated 2026-05-29 implies Stage 4 at 2026-05 plenary (notes not yet published). Iterator.zip([iter1, iter2, ...]) produces [[v1, v2], ...]",
-      "url": "https://github.com/tc39/proposal-joint-iteration"
+      "stage4DateType": "exact",
+      "note": "Stage 4 reached May 2026 (notes 2026-05/may-19 'joint-iteration-for-stage-4'); part of ES2027. Iterator.zip([iter1, iter2, ...]) produces [[v1, v2], ...]",
+      "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4"
     },
     "using (Explicit Resource Management)": {
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2025-05",
-      "stage4DateType": "milestone",
-      "note": "Conditional Stage 4 at 2025-05 (notes may-28 'explicit-resource-management-for-stage-4'); still conditional as of 2026-03. using/await using, Symbol.dispose/Symbol.asyncDispose",
+      "stage4DateType": "exact",
+      "note": "Conditional Stage 4 at 2025-05 (notes may-28 'explicit-resource-management-for-stage-4'); all conditions met and advanced to full Stage 4 at 2026-05 (notes may-19). using/await using, Symbol.dispose/Symbol.asyncDispose, part of ES2027",
       "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4"
     },
     "DisposableStack": {
       "status": "ES2027",
       "stage": 4,
       "stage4Date": "2025-05",
-      "stage4DateType": "milestone",
-      "note": "Part of Explicit Resource Management (conditional Stage 4 May 2025)",
+      "stage4DateType": "exact",
+      "note": "Part of Explicit Resource Management (conditional Stage 4 May 2025; all conditions met May 2026), part of ES2027",
       "url": "https://github.com/tc39/proposal-explicit-resource-management"
     },
     "Array.fromAsync": {

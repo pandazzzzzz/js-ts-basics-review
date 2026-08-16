@@ -264,9 +264,9 @@ console.log("\n--- 4. Atomics.pause() (ES2027) ---\n");
  * verification:
  *   feature: Atomics.pause
  *   status: ES2027
- *   stage4Date: 2026-06
- *   lastVerified: 2026-08-14
- *   source: https://github.com/tc39/proposal-atomics-microwait
+ *   stage4Date: 2026-05
+ *   lastVerified: 2026-08-17
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4
  */
 
 // Atomics.pause() provides a hint to the CPU that we're in a spin-wait loop
