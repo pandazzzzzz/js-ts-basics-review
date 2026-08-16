@@ -42,6 +42,7 @@ Rationale:
   ✅ Consistent structure across all demo files
   ✅ Better maintainability (add new ES versions as they are released)
   ✅ All original content preserved, no features removed
+  ✅ ES2018 features (e.g. Intl.PluralRules) are covered in 42-intl-api.js rather than this 39.x chain
 `);
 
 // ============================================

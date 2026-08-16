@@ -9,8 +9,8 @@ JavaScript/TypeScript fundamentals — 76 JS demo files + 76 TypeScript comparis
 node demo/01-basics/01-variables.js
 node demo/06-advanced/39.5-es2025-features.js   # ES2025 features
 
-# Run a TS comparison file (auto-installs ts-node on first run)
-npx ts-node demo/01-basics/01-variables-ts-comparison.ts
+# Run a TS comparison file (via ts-node; installed as a dev dependency)
+node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts
 
 # Type-check all TS files
 npx tsc --noEmit
@@ -31,6 +31,8 @@ npx tsc --noEmit
 ✅ 76/76 JS + 76/76 TS complete · 6 long files split into 27 focused sub-files · All use ESM (`export {}`) strict mode
 📅 Updated 2026-08-14 · 📊 Coverage: Stages 1-6 Complete
 
+> The audit-tool directories (`js-fundamentals-review/`, `basics-review/`, `operators-review/`, `audit/`, `array-audit/`) are **local-only dev tooling, not part of the git repo** — they are not shipped and not recoverable from a clone. They exist on disk in the original working directory only.
+
 ## Documentation
 
 - [TODOLIST.md](docs/TODOLIST.md) — Learning roadmap
@@ -40,9 +42,10 @@ npx tsc --noEmit
 
 | Issue | Solution |
 |-------|----------|
-| `ts-node` not found | `npx ts-node` auto-installs on first run |
+| `ts-node` not found | `npm install` (ts-node is a dev dependency) |
 | ES2022+ syntax error | Ensure Node.js 18+; ES2025 requires 22+ |
 | TypeScript type errors | Run `npx tsc --noEmit`; verify tsconfig.json |
+| TS comparison won't run | Browser-DOM (35–38, 43, 45, 48) and future-ES (39.4/39.6/39.7) demos need a browser or a newer runtime; decorator demos (16, 17, 39.7, 44, 46, 50) are Stage 2.7 illustrative snippets. See each file's header. |
 
 ## References
 

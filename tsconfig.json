@@ -14,9 +14,10 @@
     "resolveJsonModule": true
   },
   "ts-node": {
+    "esm": true,
     "compilerOptions": {
-      "module": "CommonJS",
-      "moduleResolution": "Node"
+      "module": "ESNext",
+      "moduleResolution": "bundler"
     }
   },
   "include": ["demo/**/*.ts"],
