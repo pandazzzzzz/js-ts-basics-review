@@ -1,5 +1,14 @@
 // Fetch API Demo
 // 📘 For TypeScript comparison, see: 33-fetch-api-ts-comparison.ts
+//
+// 📌 NOTE: This file is the consolidated "all-in-one" version of the Fetch API.
+// It has been split into focused sub-files for easier learning. Either version
+// can be studied independently; the sub-files are the recommended path:
+//   33.1-fetch-basics.js              → Fetch Basics (GET, Response Methods, HTTP Methods, FormData)
+//   33.2-fetch-error-handling.js      → Error Handling & Async/Await Patterns
+//   33.3-fetch-practical-patterns.js  → Practical Patterns (API Client, Retry, AbortController)
+//   33.4-fetch-streams-advanced.js    → Streams & Advanced (Stream API, Progress, Cancellation)
+// The sub-files have their own -ts-comparison.ts counterparts.
 export {};
 
 // ============================================

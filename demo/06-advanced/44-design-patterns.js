@@ -550,10 +550,10 @@ decoratedAdd(5, 3);
 
 
 // ============================================
-// 1. Section 6: Adapter Pattern (ES5/ES6)
-// ============================================
+// Section 6: Adapter Pattern (ES5/ES6)
 // - Converts one interface to another expected by the client
 // - Uses ES6 classes and composition
+// ============================================
 
 console.log("\n=== Adapter Pattern ===");
 
@@ -609,10 +609,10 @@ greetNew({ name: "Alice", age: 30 });
 
 
 // ============================================
-// 2. Section 7: Facade Pattern (ES5/ES6)
-// ============================================
+// Section 7: Facade Pattern (ES5/ES6)
 // - Provides a simplified interface to a complex subsystem
 // - Uses ES6 classes and composition
+// ============================================
 
 console.log("\n=== Facade Pattern ===");
 
@@ -666,10 +666,10 @@ console.log("  // Facade hides fetch, error handling, JSON parsing, base URL");
 
 
 // ============================================
-// 3. Section 8: Command Pattern (ES5/ES6)
-// ============================================
+// Section 8: Command Pattern (ES5/ES6)
 // - Encapsulates a request as an object, allowing parameterization and queuing
 // - Uses ES6 classes and closures
+// ============================================
 
 console.log("\n=== Command Pattern ===");
 
@@ -786,10 +786,10 @@ console.log("Undo:", incrementCmd.undo()); // 0
 
 
 // ============================================
-// 4. Section 9: State Pattern (ES6)
-// ============================================
+// Section 9: State Pattern (ES6)
 // - Allows an object to alter its behavior when its internal state changes
 // - Uses ES6 classes and polymorphism
+// ============================================
 
 console.log("\n=== State Pattern ===");
 
@@ -908,7 +908,7 @@ orderMachine.transition("pay"); // Invalid (already delivered)
 
 
 // ============================================
-// 5. Section 10: Common Pitfalls
+// Section 10: Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -944,7 +944,7 @@ console.log("  Each decorator adds a layer of indirection that compounds over ti
 console.log("  Fix: Limit decorator depth; consider composition or middleware patterns instead");
 
 // ============================================
-// 6. Section 11: Best Practices
+// Section 11: Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");

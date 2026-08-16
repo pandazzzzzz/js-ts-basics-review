@@ -1,5 +1,8 @@
 // Fetch API - Practical Patterns Demo
 // 📘 For TypeScript comparison, see: 33.3-fetch-practical-patterns-ts-comparison.ts
+//
+// 📌 Part of the split Fetch API series (33.1-33.4). For the consolidated
+// all-in-one version with the full Table of Contents, see: 33-fetch-api.js
 
 export {};
 

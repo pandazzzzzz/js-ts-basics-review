@@ -5,6 +5,21 @@
 export {}; // Make this file a module
 
 // ============================================
+// Table of Contents
+// ============================================
+// 1. Factory Pattern - Type Safety
+// 2. Singleton Pattern - Private Constructor
+// 3. Observer Pattern - Type-safe Event Maps
+// 4. Strategy Pattern - Interface Contracts
+// 5. Decorator Pattern - Metadata & Generic Decorators
+// 6. Adapter Pattern - Interface Compatibility
+// 7. Facade Pattern - Simplified Interface
+// 8. Command Pattern - Encapsulated Requests
+// 9. State Pattern - Typed State Transitions
+// 10. Common Pitfalls (TypeScript-specific)
+// 11. Best Practices (TypeScript-specific)
+
+// ============================================
 // Section 1: Factory Pattern - Type Safety
 // ============================================
 
@@ -362,23 +377,381 @@ class Calculator {
 }
 
 // ============================================
-// Best Practices
+// Section 6: Adapter Pattern - Interface Compatibility
 // ============================================
 
-console.log("\n=== Best Practices ===\n");
+console.log("\n=== Adapter Pattern - Type Safety ===\n");
+
+// Define typed interfaces for incompatible APIs
+interface ModernPaymentResult {
+  success: boolean;
+  transactionId: string;
+}
+
+interface LegacyPaymentResult {
+  success: boolean;
+  legacyId: string;
+}
+
+interface ModernPaymentGateway {
+  charge(amount: number, currency: string): ModernPaymentResult;
+}
+
+class OldPaymentSystem {
+  processPayment(amountInCents: number, currencyCode: string): LegacyPaymentResult {
+    console.log(`Paid ${amountInCents} ${currencyCode} via legacy system`);
+    return { success: true, legacyId: "legacy_" + Date.now() };
+  }
+}
+
+// Type-safe adapter implements the modern interface
+class PaymentAdapter implements ModernPaymentGateway {
+  constructor(private oldSystem: OldPaymentSystem) {}
+
+  charge(amount: number, currency: string): ModernPaymentResult {
+    const amountInCents = Math.round(amount * 100);
+    const result = this.oldSystem.processPayment(amountInCents, currency);
+    // TypeScript enforces correct adaptation — can't return LegacyPaymentResult here
+    return { success: result.success, transactionId: result.legacyId };
+  }
+}
+
+const oldSystem = new OldPaymentSystem();
+const adapter = new PaymentAdapter(oldSystem);
+console.log("Through typed adapter:", JSON.stringify(adapter.charge(9.99, "USD")));
+
+// Functional adapter with generic types
+function createAdapter<TArgs extends any[], UArgs extends any[], R>(
+  oldFn: (...args: UArgs) => R,
+  transform: (...args: TArgs) => UArgs
+): (...args: TArgs) => R {
+  return (...args: TArgs) => oldFn(...transform(...args));
+}
+
+function greetOld(name: string, age: number): string {
+  return `Hello ${name}, you are ${age} years old`;
+}
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+const greetNew = createAdapter(
+  greetOld,
+  (p: Person): [string, number] => [p.name, p.age]
+);
+console.log("\nFunctional typed adapter:", greetNew({ name: "Alice", age: 30 }));
+
+// ============================================
+// Section 7: Facade Pattern - Simplified Interface
+// ============================================
+
+console.log("\n=== Facade Pattern - Type Safety ===\n");
+
+// Subsystem components with proper types
+class CPU {
+  freeze(): string { return "CPU frozen"; }
+  jump(position: string): string { return `CPU jumping to ${position}`; }
+  execute(): string { return "CPU executing"; }
+}
+
+class Memory {
+  load(position: string, data: string): string { return `Memory loaded "${data}" at ${position}`; }
+}
+
+class HardDrive {
+  read(lba: string, size: number): string { return `HardDrive reading ${size} bytes from ${lba}`; }
+}
+
+// Facade hides subsystem complexity behind a simple typed interface
+interface IComputer {
+  start(): void;
+  shutdown(): void;
+}
+
+class ComputerFacade implements IComputer {
+  private cpu: CPU;
+  private memory: Memory;
+  private hardDrive: HardDrive;
+
+  constructor() {
+    this.cpu = new CPU();
+    this.memory = new Memory();
+    this.hardDrive = new HardDrive();
+  }
+
+  start(): void {
+    console.log("Starting computer...");
+    console.log("  " + this.cpu.freeze());
+    console.log("  " + this.memory.load("0x00", "boot_loader"));
+    console.log("  " + this.cpu.jump("0x00"));
+    console.log("  " + this.cpu.execute());
+    console.log("  " + this.hardDrive.read("0x1000", 4096));
+    console.log("Computer started successfully!");
+  }
+
+  shutdown(): void {
+    console.log("Shutting down... saving state, powering off.");
+  }
+}
+
+const computer: IComputer = new ComputerFacade();
+computer.start();
+computer.shutdown();
+
+// ============================================
+// Section 8: Command Pattern - Encapsulated Requests
+// ============================================
+
+console.log("\n=== Command Pattern - Type Safety ===\n");
+
+// Command interface with typed execute/undo
+interface Command {
+  execute(): number;
+  undo(): number;
+}
+
+class CalculatorReceiver {
+  value: number = 0;
+  add(n: number): void { this.value += n; }
+  subtract(n: number): void { this.value -= n; }
+  multiply(n: number): void { this.value *= n; }
+  divide(n: number): void { this.value /= n; }
+}
+
+// Each command satisfies the Command interface
+class AddCommand implements Command {
+  constructor(private calculator: CalculatorReceiver, private amount: number) {}
+
+  execute(): number {
+    this.calculator.add(this.amount);
+    return this.calculator.value;
+  }
+
+  undo(): number {
+    this.calculator.subtract(this.amount);
+    return this.calculator.value;
+  }
+}
+
+class MultiplyCommand implements Command {
+  constructor(private calculator: CalculatorReceiver, private amount: number) {}
+
+  execute(): number {
+    this.calculator.multiply(this.amount);
+    return this.calculator.value;
+  }
+
+  undo(): number {
+    this.calculator.divide(this.amount);
+    return this.calculator.value;
+  }
+}
+
+// Invoker with typed command history
+class CommandHistory {
+  private history: Command[] = [];
+  private redoStack: Command[] = [];
+
+  execute(command: Command): number {
+    const result = command.execute();
+    this.history.push(command);
+    this.redoStack = [];
+    return result;
+  }
+
+  undo(): number | null {
+    const command = this.history.pop();
+    if (command) {
+      this.redoStack.push(command);
+      return command.undo();
+    }
+    return null;
+  }
+
+  redo(): number | null {
+    const command = this.redoStack.pop();
+    if (command) {
+      this.history.push(command);
+      return command.execute();
+    }
+    return null;
+  }
+}
+
+const calc = new CalculatorReceiver();
+const history = new CommandHistory();
+
+console.log("Initial:", calc.value);
+console.log("Add 10:", history.execute(new AddCommand(calc, 10)));
+console.log("Multiply 3:", history.execute(new MultiplyCommand(calc, 3)));
+console.log("Undo:", history.undo());
+console.log("Undo:", history.undo());
+console.log("Redo:", history.redo());
+
+// ============================================
+// Section 9: State Pattern - Typed State Transitions
+// ============================================
+
+console.log("\n=== State Pattern - Type Safety ===\n");
+
+// State interface — all states must implement these methods
+interface TrafficLightState {
+  change(): void;
+  getColor(): string;
+}
+
+// Context class — delegates to the current state
+class TrafficLight {
+  private state: TrafficLightState;
+
+  constructor() {
+    this.state = new RedState(this);
+  }
+
+  setState(state: TrafficLightState): void {
+    this.state = state;
+  }
+
+  change(): void {
+    this.state.change();
+  }
+
+  getColor(): string {
+    return this.state.getColor();
+  }
+}
+
+// Concrete states reference context for transitions
+class RedState implements TrafficLightState {
+  constructor(private context: TrafficLight) {}
+
+  change(): void {
+    console.log("🔴 Red → 🟢 Green");
+    this.context.setState(new GreenState(this.context));
+  }
+
+  getColor(): string {
+    return "red";
+  }
+}
+
+class GreenState implements TrafficLightState {
+  constructor(private context: TrafficLight) {}
+
+  change(): void {
+    console.log("🟢 Green → 🟡 Yellow");
+    this.context.setState(new YellowState(this.context));
+  }
+
+  getColor(): string {
+    return "green";
+  }
+}
+
+class YellowState implements TrafficLightState {
+  constructor(private context: TrafficLight) {}
+
+  change(): void {
+    console.log("🟡 Yellow → 🔴 Red");
+    this.context.setState(new RedState(this.context));
+  }
+
+  getColor(): string {
+    return "yellow";
+  }
+}
+
+const light = new TrafficLight();
+for (let i = 0; i < 4; i++) {
+  console.log("Current color:", light.getColor());
+  light.change();
+}
+
+// Order state machine example with discriminated union states
+type OrderStatus = "pending" | "paid" | "shipped" | "delivered";
+
+interface OrderState {
+  status: OrderStatus;
+}
+
+class OrderMachine {
+  private state: OrderState = { status: "pending" };
+
+  transition(action: "pay" | "ship" | "deliver"): void {
+    switch (this.state.status) {
+      case "pending":
+        if (action === "pay") { this.state = { status: "paid" }; console.log("pending --pay--> paid"); }
+        else console.log(`Invalid transition: ${action} from pending`);
+        break;
+      case "paid":
+        if (action === "ship") { this.state = { status: "shipped" }; console.log("paid --ship--> shipped"); }
+        else console.log(`Invalid transition: ${action} from paid`);
+        break;
+      case "shipped":
+        if (action === "deliver") { this.state = { status: "delivered" }; console.log("shipped --deliver--> delivered"); }
+        else console.log(`Invalid transition: ${action} from shipped`);
+        break;
+      case "delivered":
+        console.log("Order already delivered");
+        break;
+    }
+  }
+
+  getStatus(): OrderStatus {
+    return this.state.status;
+  }
+}
+
+const orderMachine = new OrderMachine();
+orderMachine.transition("pay");
+orderMachine.transition("ship");
+orderMachine.transition("deliver");
+orderMachine.transition("pay");
+
+// ============================================
+// Section 10: Common Pitfalls (TypeScript-specific)
+// ============================================
+
+console.log("\n=== Common Pitfalls (TypeScript) ===\n");
+
+console.log("⚠️ Pitfall 1: Overusing `any` defeats type safety in patterns");
+console.log("  Bad:  createUser(data: any): User");
+console.log("  Good: createUser<T extends User>(data: T): T");
+
+console.log("\n⚠️ Pitfall 2: Decorators add runtime indirection");
+console.log("  Each decorator wraps the original method; debug stack traces get longer");
+console.log("  Fix: Limit decorator depth; prefer composition for simple cases");
+
+console.log("\n⚠️ Pitfall 3: Singletons with private constructors can't be subclassed");
+console.log("  Fix: Use dependency injection instead of hard-coded singletons when testability matters");
+
+console.log("\n⚠️ Pitfall 4: Over-engineering with patterns");
+console.log("  A simple object literal or closure is often enough; don't introduce patterns prematurely");
+
+console.log("\n⚠️ Pitfall 5: Type assertions hiding bugs in adapters");
+console.log("  Bad:  return oldResult as ModernResult  // lies about shape");
+console.log("  Good: explicitly map each field, letting TS catch missing properties");
+
+// ============================================
+// Section 11: Best Practices (TypeScript-specific)
+// ============================================
+
+console.log("\n=== Best Practices (TypeScript) ===\n");
 
 console.log("✅ DO:");
-console.log("1. Use interfaces to define contracts");
-console.log("2. Leverage generics for reusable patterns");
-console.log("3. Use private constructors for Singletons");
-console.log("4. Type event emitters with event maps");
-console.log("5. Use decorators for cross-cutting concerns");
+console.log("1. Define interfaces for every pattern's contract (Command, State, Strategy, etc.)");
+console.log("2. Use generics to make factories and adapters type-safe without casting");
+console.log("3. Use private constructors for singletons to enforce single-instance at compile time");
+console.log("4. Use discriminated unions for state machines — exhaustiveness checked by compiler");
+console.log("5. Prefer composition over inheritance; type composition via intersection types");
 
 console.log("\n❌ DON'T:");
-console.log("1. Don't use any type in pattern implementations");
-console.log("2. Don't ignore type constraints in factories");
-console.log("3. Don't forget to type event data");
-console.log("4. Don't overuse decorators");
+console.log("1. Don't use `any` in pattern implementations — it defeats the purpose of TS");
+console.log("2. Don't ignore type errors with `@ts-ignore` — fix the types instead");
+console.log("3. Don't overuse decorators; they add runtime overhead and complexity");
+console.log("4. Don't apply patterns blindly — let the problem drive the choice");
 
 console.log("\n📊 Comparison:");
 console.log(`
@@ -404,5 +777,21 @@ console.log(`
 │ Decorator Pattern:                                                  │
 │   JavaScript: Function wrapping                                     │
 │   TypeScript: @decorator syntax with metadata                       │
+│                                                                      │
+│ Adapter Pattern:                                                    │
+│   JavaScript: Duck-typed object wrapping                            │
+│   TypeScript: implements interface enforces correct adaptation      │
+│                                                                      │
+│ Facade Pattern:                                                     │
+│   JavaScript: Plain class hiding subsystem                          │
+│   TypeScript: Interface defines the simplified public surface       │
+│                                                                      │
+│ Command Pattern:                                                    │
+│   JavaScript: Duck-typed { execute, undo } objects                  │
+│   TypeScript: Command interface — type-safe history/redo/undo       │
+│                                                                      │
+│ State Pattern:                                                      │
+│   JavaScript: State objects assigned to this.state                  │
+│   TypeScript: State interface + discriminated unions for status     │
 └─────────────────────────────────────────────────────────────────────┘
 `);

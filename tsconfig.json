@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -16,8 +16,8 @@
   "ts-node": {
     "esm": true,
     "compilerOptions": {
-      "module": "ESNext",
-      "moduleResolution": "bundler"
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext"
     }
   },
   "include": ["demo/**/*.ts"],

@@ -8,10 +8,11 @@
 
 // TypeScript: import type for type-only imports (avoids runtime import)
 // @ts-ignore — demo imports the untyped JS companion file (no @types available)
-import type { Calculator } from "./32-modules";
+// Note: NodeNext resolution requires the explicit .js extension in ESM imports
+import type { Calculator } from "./32-modules.js";
 
 // Regular import (includes runtime value)
-// import { Calculator } from "./32-modules";
+// import { Calculator } from "./32-modules.js";
 
 // Combined: type-only and value imports
 // import Calculator, { type CalculatorOptions } from "./module";
