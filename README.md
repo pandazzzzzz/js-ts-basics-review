@@ -32,9 +32,7 @@ npx tsc --noEmit
 ## Status
 
 ✅ 76/76 JS + 76/76 TS complete · 6 long files split into 27 focused sub-files · All use ESM (`export {}`) strict mode
-📅 Updated 2026-08-14 · 📊 Coverage: Stages 1-6 Complete
-
-> The audit-tool directories (`js-fundamentals-review/`, `basics-review/`, `operators-review/`, `audit/`, `array-audit/`) are **local-only dev tooling, not part of the git repo** — they are not shipped and not recoverable from a clone. They exist on disk in the original working directory only.
+📅 Updated 2026-08-16 · 📊 Coverage: Stages 1-6 Complete
 
 ## Documentation
 

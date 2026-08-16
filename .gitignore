@@ -1,20 +1,10 @@
-# ============================================
-# 忽略所有文件和文件夹（默认）
-# ============================================
 *
-
-# ============================================
-# 保留核心文件和文件夹
-# ============================================
-# 核心文件夹
 !demo/
 !demo/**
 !docs/
 !docs/**
 !reference/
 !reference/**
-
-# 核心文件
 !.gitignore
 !.gitattributes
 !.editorconfig
@@ -23,25 +13,3 @@
 !package.json
 !package-lock.json
 !tsconfig.json
-
-# ============================================
-# 说明
-# ============================================
-# 此配置确保以下内容被同步到远程分支：
-# - demo/ 文件夹及其所有内容（核心学习内容）
-# - docs/ 文件夹及其所有内容（TODOLIST、JS-TS 差异）
-# - reference/ 文件夹及其所有内容（ES 版本参考数据）
-# - 根目录核心文档（README）
-# - 根目录配置文件（package.json、tsconfig.json、package-lock.json）
-#
-# 仅本地保留（不提交到远程）：
-# - scripts/ 文件夹（验证脚本、pre-commit hook）— 本地开发工具
-# - CLAUDE.md（Claude Code 项目指南）
-# - handoff.md（交接文档）
-# - 临时文档（CHANGELOG.md、CONTRIBUTING.md、KNOWLEDGE-GAP-ANALYSIS.md）
-# - 历史归档（archives/、reports/）
-# - 测试文件（tests/）
-# - 工具类项目（js-fundamentals-review、audit、basics-review、
-#   operators-review、array-audit）— 本地开发用
-# - node_modules/、.venv/、__pycache__/ 等依赖和缓存
-# - main.py、pyproject.toml、uv.lock、specout.html 等临时/孤儿文件
