@@ -1,5 +1,5 @@
 // Arrays - Search & Sort TypeScript Comparison
-// 📘 Complementary to: 06.3-arrays-search-sort.ts
+// 📘 Complementary to: 06.3-arrays-search-sort.js
 
 export {};
 
@@ -21,7 +21,7 @@ console.log("=== Arrays - Search & Sort TypeScript Comparison ===\n");
  *    TS:  (element: T) => element is U - type guard predicate
  *
  * 4. IMMUTABLE METHODS (ES2023+)
- *    JS:  toSorted() returns same reference
+ *    JS:  toSorted() returns a NEW array (does not mutate original)
  *    TS:  toSorted() returns new array with same type
  */
 
@@ -158,9 +158,9 @@ console.log("  findByName('Bob'):", byName);
 
 // Example 11: Type-safe includes check
 console.log("\n11. Type-safe includes:");
+const keys = ["name", "age", "email"] as const; // literal union type
 const key: string = "name";
-const keys: string[] = ["name", "age", "email"];
-if (keys.includes(key)) {
+if ((keys as readonly string[]).includes(key)) {
   console.log("  key 'name' is valid");
 }
 

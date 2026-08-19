@@ -183,15 +183,16 @@ const configWithoutSatisfies: ConfigType = {
 };
 // configWithoutSatisfies.name is just 'string'
 
-// With satisfies - preserves literal types
+// With satisfies - validates against ConfigType, but does NOT preserve literal
+// types for properties constrained by the target type: name is still 'string'.
 const configWithSatisfies = {
   name: "test",
   value: 42
 } satisfies ConfigType;
-// configWithSatisfies.name is literal 'test'
+// configWithSatisfies.name is 'string' (widened by ConfigType.name: string)
 
 console.log("\n=== Satisfies Operator ===");
-console.log(configWithSatisfies.name); // Type: "test"
+console.log(configWithSatisfies.name); // Type: string (not the literal 'test')
 
 
 // ============================================================================

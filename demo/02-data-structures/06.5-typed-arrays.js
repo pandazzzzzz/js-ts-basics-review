@@ -4,24 +4,8 @@
 export {};
 
 // ============================================
-// Learning goals
-// ============================================
-// This file covers typed arrays for binary data processing:
-// 1. TypedArray types and creation
-// 2. ArrayBuffer for raw binary memory
-// 3. DataView for flexible data access
-// 4. Use cases and common patterns
-
-// ============================================
-// Table of Contents
-// ============================================
-
-// 1. Typed Arrays Overview
-// 2. Typed Array Types
-// 3. ArrayBuffer - Raw Binary Memory
-// 4. DataView - Flexible Data Access
-// 5. Typed Array Methods and Patterns
-
+// This file covers typed arrays (ES6) for binary data:
+//   1. TypedArray types  2. ArrayBuffer  3. DataView  4. Methods/patterns
 // ============================================
 
 console.log("=== Arrays - Typed Arrays Demo ===\n");
@@ -87,7 +71,7 @@ console.log("=== 2. Typed Array Types ===");
 const int8 = new Int8Array([10, 20, 30, 127, -128]);
 console.log("Int8Array:", int8);
 console.log("Bytes per element:", Int8Array.BYTES_PER_ELEMENT);
-console.log("Byte length:", int8.byteLength); // 4 (4 elements × 1 byte)
+console.log("Byte length:", int8.byteLength); // 5 (5 elements × 1 byte)
 
 // Uint8Array - unsigned 8-bit (0-255)
 const uint8 = new Uint8Array(5); // Creates array of 5 zeros
@@ -158,11 +142,11 @@ console.log("\n=== 3. ArrayBuffer ===");
 // 3.1 Creating an ArrayBuffer
 const buffer = new ArrayBuffer(16); // 16 bytes of raw memory
 console.log("ArrayBuffer byte length:", buffer.byteLength); // 16
-console.log("ArrayBuffer is resizable:", buffer.resizable); // false (default)
+console.log("ArrayBuffer is resizable:", buffer.resizable); // false (default); .resizable/.resize() are ES2024
 
 // 3.2 Multiple views on same buffer
 const int32View = new Int32Array(buffer, 0, 2);   // First 8 bytes as 2 Int32s
-const uint8View = new Uint8Array(buffer, 8, 8);    // Next 8 bytes as 8 Uint8s
+const uint8View = new Uint8Array(buffer, 0, 8);    // Same first 8 bytes as 8 Uint8s
 
 // Write through Int32 view
 int32View[0] = 1000;
@@ -170,8 +154,8 @@ int32View[1] = 2000;
 
 console.log("\nShared ArrayBuffer:");
 console.log("Int32 view:", [...int32View]); // [1000, 2000]
-console.log("Uint8 view of first Int32 (1000 in little-endian):", [...uint8View]);
-// In little-endian: 1000 = 0x3E8 = [232, 3, 0, 0, ...]
+console.log("Same bytes as Uint8 (little-endian):", [...uint8View]); // [232,3,0,0, 208,7,0,0]
+// 1000 = 0x3E8 = [232, 3, 0, 0]; 2000 = 0x7D0 = [208, 7, 0, 0]
 console.log("⚠️  Views share memory - writing to one affects others!");
 
 // 3.3 Overlapping views example

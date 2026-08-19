@@ -34,27 +34,9 @@ export {};
 // ============================================
 // 1. GLOBAL SCOPE
 // ============================================
-/**
- * Global Scope - Variables accessible everywhere in the program (ES1)
- *
- * Characteristics:
- * - Variables declared outside any function or block
- * - Accessible from anywhere in the code
- * - In browsers: attached to window object (module scope in Node.js)
- * - In Node.js: attached to global object when not in module
- * - var, let, const at top level create module-scoped variables
- *
- * Use Cases:
- * - Configuration constants
- * - Utility functions
- * - Application-wide state (use sparingly)
- *
- * Common Pitfalls:
- * - Global namespace pollution
- * - Name collisions
- * - Hard to track dependencies
- * - Memory leaks (never garbage collected)
- */
+// Variables declared outside any function/block — accessible everywhere.
+// In browsers they attach to `window`; in Node.js to `global` (unless a module).
+// ⚠️ Pitfalls: namespace pollution, name collisions, never garbage-collected.
 
 // Global variables
 var globalVar = "I am global (var)";
@@ -101,24 +83,9 @@ strictMode();
 // ============================================
 // 2. FUNCTION (LOCAL) SCOPE
 // ============================================
-/**
- * Function Scope (also called Local Scope) - Variables accessible only within the function (ES1)
- * 
- * Characteristics:
- * - Variables declared with var inside function
- * - Not accessible outside the function
- * - Each function call creates new scope
- * - Inner functions can access outer function variables
- * 
- * Use Cases:
- * - Encapsulation
- * - Private variables
- * - Temporary calculations
- * 
- * Common Pitfalls:
- * - var is function-scoped, not block-scoped
- * - Hoisting can cause confusion
- */
+// Variables declared inside a function are only accessible within it.
+// `var` is function-scoped (ignores blocks); each call creates a fresh scope.
+// Inner functions can access outer-function variables.
 
 console.log("\n=== Function Scope Demo ===");
 
@@ -154,24 +121,8 @@ console.log(greet("Alice"));
 // ============================================
 // 3. BLOCK SCOPE
 // ============================================
-/**
- * Block Scope - Variables accessible only within the block {} (ES6)
- * 
- * Characteristics:
- * - Variables declared with let or const inside {}
- * - Not accessible outside the block
- * - Includes if, for, while, switch blocks
- * - More predictable than function scope
- * 
- * Use Cases:
- * - Loop variables
- * - Conditional variables
- * - Limiting variable lifetime
- * 
- * Common Pitfalls:
- * - var does NOT respect block scope
- * - Temporal Dead Zone (TDZ) with let/const
- */
+// `let`/`const` inside `{}` are scoped to that block (if/for/while/switch).
+// ⚠️ `var` does NOT respect block scope; `let`/`const` have a Temporal Dead Zone.
 
 console.log("\n=== Block Scope Demo ===");
 
@@ -227,24 +178,9 @@ switch (true) {
 // ============================================
 // 4. LEXICAL SCOPE (STATIC SCOPE)
 // ============================================
-/**
- * Lexical Scope - Scope determined by code structure, not runtime (ES1)
- * 
- * Characteristics:
- * - Inner functions can access outer function variables
- * - Scope determined at write-time, not call-time
- * - Forms the basis of closures
- * - Scope chain follows nesting structure
- * 
- * Use Cases:
- * - Closures
- * - Private variables
- * - Function factories
- * 
- * Common Pitfalls:
- * - Can be confused with dynamic scope (not in JavaScript)
- * - Nested functions can shadow outer variables
- */
+// Scope is determined by code structure (write-time), not call-time.
+// Inner functions see outer variables — this is the basis of closures.
+// ⚠️ Not dynamic scope: a function always resolves names against its definition site.
 
 console.log("\n=== Lexical Scope Demo ===");
 
@@ -500,23 +436,10 @@ try {
 // ============================================
 // 8. CLOSURES - DATA PRIVACY
 // ============================================
-/**
- * Closures for Data Privacy - Creating private variables (ES3)
- * 
- * Characteristics:
- * - Inner function retains access to outer variables
- * - Variables not accessible from outside
- * - Each closure has its own copy of variables
- * 
- * Use Cases:
- * - Private state
- * - Encapsulation
- * - Information hiding
- * 
- * Common Pitfalls:
- * - Memory usage (variables not garbage collected)
- * - Can't access private variables for debugging
- */
+// An inner function retains access to its outer scope's variables.
+// Encapsulates private state; each closure gets its own copy.
+// ⚠️ Pitfall: variables are not garbage-collected while the closure is referenced.
+// 📘 Full detail: 13.3-closures-basics.js
 
 console.log("\n=== Closures - Data Privacy Demo ===");
 
@@ -563,19 +486,9 @@ console.log("Account 2:", account2.getBalance()); // 200
 // ============================================
 // 9. CLOSURES - FUNCTION FACTORIES
 // ============================================
-/**
- * Function Factories - Functions that create customized functions
- * 
- * Characteristics:
- * - Returns function with preset parameters
- * - Each returned function has its own closure
- * - Enables function customization
- * 
- * Use Cases:
- * - Creating specialized functions
- * - Configuration
- * - Partial application
- */
+// Functions that return customized functions with preset behavior.
+// Each returned function closes over its own captured parameters.
+// 📘 Full detail: 13.4-closures-patterns.js
 
 console.log("\n=== Function Factories Demo ===");
 
@@ -618,19 +531,8 @@ console.log("isValidAge(25):", isValidAge(25)); // true
 // ============================================
 // 10. CLOSURES - PARTIAL APPLICATION
 // ============================================
-/**
- * Partial Application - Pre-filling function arguments
- * 
- * Characteristics:
- * - Creates new function with some arguments preset
- * - Reduces function arity
- * - Enables function specialization
- * 
- * Use Cases:
- * - Creating specialized functions
- * - Reducing repetition
- * - Function composition
- */
+// Pre-fill some arguments of a function to create a more specific one.
+// 📘 Full detail: 13.4-closures-patterns.js
 
 console.log("\n=== Partial Application Demo ===");
 
@@ -665,23 +567,9 @@ infoLog(new Date().toISOString(), "Operation completed");
 // ============================================
 // 11. CLOSURES - MEMOIZATION
 // ============================================
-/**
- * Memoization - Caching function results for performance
- * 
- * Characteristics:
- * - Stores computed results
- * - Returns cached result for same input
- * - Uses closure to maintain cache
- * 
- * Use Cases:
- * - Expensive computations
- * - Recursive functions
- * - API call caching
- * 
- * Common Pitfalls:
- * - Memory usage grows with unique inputs
- * - Only works for pure functions
- */
+// Cache function results by input; a closure holds the cache.
+// ⚠️ Pitfalls: memory grows with unique inputs; only works for pure functions.
+// 📘 Full detail: 13.4-closures-patterns.js + 24.3-memoization-cache.js
 
 console.log("\n=== Memoization Demo ===");
 
@@ -731,24 +619,9 @@ console.log("factorial(5) again:", factorial(5));
 // ============================================
 // 12. MODULE PATTERN
 // ============================================
-/**
- * Module Pattern - Encapsulation using closures and IIFE (ES3)
- * 
- * Characteristics:
- * - Creates private and public members
- * - Uses IIFE to create scope
- * - Returns public API
- * - Prevents global namespace pollution
- * 
- * Use Cases:
- * - Code organization
- * - Encapsulation
- * - Creating libraries
- * 
- * Common Pitfalls:
- * - Cannot access private members for testing
- * - ES6 modules are now preferred
- */
+// Encapsulate private state + expose a public API via a closure/IIFE.
+// ⚠️ Prefer native ES6 modules (32-modules.js) in modern code.
+// 📘 Full detail: 13.4-closures-patterns.js
 
 console.log("\n=== Module Pattern Demo ===");
 

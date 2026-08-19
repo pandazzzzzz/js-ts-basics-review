@@ -122,12 +122,16 @@ interface ImportMeta {
 
 // Usage
 // Vite provides import.meta.env via `vite/client` types; declared above as ImportMeta.
+// import.meta.env is NOT present in plain Node — use optional chaining + fallback so
+// this demo runs cleanly outside a Vite build.
 // @ts-ignore — import.meta.env is supplied by the Vite build tool at runtime
-const apiUrl: string = import.meta.env.VITE_API_URL;
+const apiUrl: string = import.meta.env?.VITE_API_URL ?? "http://localhost:5173";
 // @ts-ignore — import.meta.env is supplied by the Vite build tool at runtime
-const appTitle: string = import.meta.env.VITE_APP_TITLE;
+const appTitle: string = import.meta.env?.VITE_APP_TITLE ?? "Demo App";
 
 console.log("Type-safe environment variables");
+console.log("  API URL:", apiUrl);
+console.log("  App title:", appTitle);
 
 // ============================================
 // Section 3: Code Splitting - Type-Safe Imports

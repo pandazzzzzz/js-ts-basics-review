@@ -102,7 +102,16 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
  *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-29.md#promise-withresolvers-for-stage-4
  */
 
-// Shorthand for creating a promise with resolve/reject accessible outside the constructor
+// 📘 Official MDN example (Promise.withResolvers):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
+// Promise.withResolvers() is exactly equivalent to the following pre-ES2024 pattern,
+// but more concise — no `let` bindings leaking the resolvers out of the executor:
+const { promise: mdnPromise, resolve: mdnResolve, reject: mdnReject } = Promise.withResolvers();
+mdnResolve("MDN withResolvers resolved");
+mdnPromise.then((value) => console.log("  MDN withResolvers:", value));
+// MDN withResolvers resolved
+
+// Practical use: resolve/reject are needed *outside* the Promise constructor
 function delay(ms) {
   const { promise, resolve } = Promise.withResolvers();
   setTimeout(() => resolve(`Resolved after ${ms}ms`), ms);

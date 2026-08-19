@@ -655,6 +655,7 @@ const server = setupServer(
   }),
 
   http.post('/api/users', async ({ request }) => {
+    const body = await request.json();
     return Response.json({ id: 1, ...body }, { status: 201 });
   })
 );

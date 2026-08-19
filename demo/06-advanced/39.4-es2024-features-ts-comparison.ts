@@ -160,8 +160,9 @@ if (buffer.resizable) {
   console.log("New length:", buffer.byteLength);
 }
 
-// Transfer returns ArrayBuffer
-const newBuffer = buffer.transfer(20);
+// Transfer returns ArrayBuffer — note: new length must be <= maxByteLength (16 here),
+// so transfer(20) would throw RangeError. Matching the JS demo, transfer to 16.
+const newBuffer = buffer.transfer(16);
 console.log("Old buffer detached:", buffer.detached); // boolean
 console.log("New buffer length:", newBuffer.byteLength);
 

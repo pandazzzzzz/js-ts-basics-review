@@ -56,7 +56,7 @@ interface Calculator {
   add(n: number): Calculator;
   subtract(n: number): Calculator;
   readonly result: number;
-  reset: number;  // setter: assignment triggers reset
+  reset: number;  // accessor: read/write current value
 }
 
 const calculator: Calculator = {
@@ -73,6 +73,10 @@ const calculator: Calculator = {
   },
 
   get result(): number {
+    return this.value;
+  },
+
+  get reset(): number {
     return this.value;
   },
 
@@ -105,8 +109,7 @@ class Counter {
 }
 
 const c: Counter = new Counter(5);
-c.increment();
-console.log("  Class counter:", c);
+console.log("  Class counter (after increment):", c.increment()); // 6
 
 // Example 3: Function properties
 console.log("\n3. Function properties:");
@@ -143,17 +146,20 @@ interface CounterModule {
 
 const CounterModule: CounterModule = (function(): CounterModule {
   let count: number = 0;
+  const maxCount: number = 100;
 
   function validateCount(value: number): boolean {
-    return value >= 0;
+    return value >= 0 && value <= maxCount;
   }
 
   return {
     increment(): number {
-      return ++count;
+      if (count < maxCount) count++;
+      return count;
     },
     decrement(): number {
-      return --count;
+      if (count > 0) count--;
+      return count;
     },
     getCount(): number {
       return count;
@@ -184,8 +190,10 @@ interface Utils {
 const utils: Utils = (function() {
   const version: string = '1.0.0';
 
+  const log: LoggerFn = (message) => console.log(`[MyApp v${version}] ${message}`);
+
   function greet(name: string): void {
-    console.log(`[MyApp v${version}] Hello, ${name}!`);
+    log(`Hello, ${name}!`);
   }
 
   function getVersion(): string {
@@ -215,15 +223,12 @@ const pureAdd: BinaryOp = (a, b) => a + b;
 console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 
-interface Obj {
-  a: number;
-  [key: string]: any;
-}
+// Generic: preserves input type, adds a typed property (no `any` needed)
+const pureAddProperty = <T extends object>(obj: T): T & { processed: boolean } =>
+  ({ ...obj, processed: true });
 
-const pureAddProperty = (obj: Obj): Obj => ({ ...obj, processed: true });
-
-const original: Obj = { a: 1 };
-const modified: Obj = pureAddProperty(original);
+const original = { name: "test" };
+const modified = pureAddProperty(original);
 console.log("  Original:", original);
 console.log("  Modified:", modified);
 

@@ -213,7 +213,7 @@ console.log("toBigInt(100):", toBigInt(100)); // 100n
 console.log('toBigInt("200"):', toBigInt("200")); // 200n
 
 // BigInt comparison types
-// @ts-expect-error - Demonstrating that bigint can be compared with number using ==
+// @ts-expect-error - TS flags bigint == number (TS2367), even though JS runtime allows 10n == 10
 const comparison1: boolean = 10n == 10; // true (loose equality)
 const comparison2: boolean = 10n === 10n; // true (same type)
 // const comparison3: boolean = 10n === 10; // ❌ Error: always false

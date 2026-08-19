@@ -215,6 +215,22 @@ const entriesArray = [["a", 1], ["b", 2], ["c", 3]];
 const fromEntries = Object.fromEntries(entriesArray);
 console.log("\nObject.fromEntries():", fromEntries);
 
+// 📘 Official MDN examples (Object.fromEntries):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries
+// Converting a Map to an Object
+const map = new Map([
+  ["foo", "bar"],
+  ["baz", 42],
+]);
+console.log("MDN Map → Object:", Object.fromEntries(map)); // { foo: "bar", baz: 42 }
+
+// Object transformation (entries → map → fromEntries)
+const object1 = { a: 1, b: 2, c: 3 };
+const object2 = Object.fromEntries(
+  Object.entries(object1).map(([key, val]) => [key, val * 2]),
+);
+console.log("MDN transform:", object2); // { a: 2, b: 4, c: 6 }
+
 // Object.getOwnPropertyNames() - Get all property names (ES5)
 // - Includes non-enumerable properties
 // - Does not include symbols
@@ -578,6 +594,32 @@ console.log("Grouped by age category:", groupedByAge);
 const words = ["hello", "world", "hi", "there", "a", "an"];
 const groupedByLength = Object.groupBy(words, word => `length-${word.length}`);
 console.log("Grouped by length:", groupedByLength);
+
+// 📘 Official MDN example (Object.groupBy):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
+// Group an inventory by its `type` field.
+const inventory = [
+  { name: "asparagus", type: "vegetables", quantity: 9 },
+  { name: "bananas", type: "fruit", quantity: 5 },
+  { name: "goat", type: "meat", quantity: 23 },
+  { name: "cherries", type: "fruit", quantity: 12 },
+  { name: "fish", type: "meat", quantity: 22 },
+];
+const groupedInventory = Object.groupBy(inventory, ({ type }) => type);
+/* Result is:
+{
+  vegetables: [{ name: "asparagus", type: "vegetables", quantity: 9 }],
+  fruit: [
+    { name: "bananas", type: "fruit", quantity: 5 },
+    { name: "cherries", type: "fruit", quantity: 12 },
+  ],
+  meat: [
+    { name: "goat", type: "meat", quantity: 23 },
+    { name: "fish", type: "meat", quantity: 22 },
+  ],
+}
+*/
+console.log("MDN inventory example:", groupedInventory);
 
 // ============================================
 // 12. Common Pitfalls & Best Practices

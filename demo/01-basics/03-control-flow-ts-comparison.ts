@@ -622,12 +622,12 @@ interface Success<T> {
   data: T;
 }
 
-interface Error {
+interface ErrorResult {
   status: "error";
   message: string;
 }
 
-type Result<T> = Success<T> | Error;
+type Result<T> = Success<T> | ErrorResult;
 
 function handleResult<T>(result: Result<T>): void {
   switch (result.status) {
@@ -641,8 +641,7 @@ function handleResult<T>(result: Result<T>): void {
       break;
     default:
       // Exhaustiveness check
-      const _exhaustive: never = result;
-      throw new Error(`Unhandled result: ${_exhaustive}`);
+      return assertNever(result);
   }
 }
 

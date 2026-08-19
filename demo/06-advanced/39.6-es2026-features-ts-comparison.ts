@@ -13,39 +13,46 @@ console.log("\n=== TypeScript ES2026 Features Comparison ===\n");
 // ============================================
 console.log("\n--- 1. Math.sumPrecise() ---\n");
 
-// Math.sumPrecise takes Iterable<number> and returns number
-const numbers: number[] = [0.1, 0.2, 0.3, 0.4, 0.5];
-const sum: number = Math.sumPrecise(numbers);
-console.log("Precise sum:", sum); // 1.5
+// Math.sumPrecise takes Iterable<number> and returns number.
+// It is ES2026 (not in Node 24), so feature-detect before calling — matching
+// the JS demo's guard. An unguarded call would throw TypeError on this runtime.
+if (typeof Math.sumPrecise === "function") {
+  const numbers: number[] = [0.1, 0.2, 0.3, 0.4, 0.5];
+  const sum: number = Math.sumPrecise(numbers);
+  console.log("Precise sum:", sum); // 1.5
 
-// Type safety: Only accepts iterables of numbers
-const mixed = [1, 2, "3"];
-// Math.sumPrecise(mixed); // ❌ Error: Type 'string' is not assignable to type 'number'
+  // Type safety: Only accepts iterables of numbers
+  // const mixed = [1, 2, "3"];
+  // Math.sumPrecise(mixed); // ❌ Error: Type 'string' is not assignable to type 'number'
 
-// Works with any numeric iterable
-const set = new Set([1.5, 2.5, 3.5]);
-const setSum: number = Math.sumPrecise(set);
-console.log("Set sum:", setSum); // 7.5
+  // Works with any numeric iterable
+  const set = new Set([1.5, 2.5, 3.5]);
+  const setSum: number = Math.sumPrecise(set);
+  console.log("Set sum:", setSum); // 7.5
 
-// Typed arrays
-const float32 = new Float32Array([0.1, 0.2, 0.3]);
-const floatSum: number = Math.sumPrecise(float32);
-console.log("Float32 sum:", floatSum); // 0.6
+  // Typed arrays
+  const float32 = new Float32Array([0.1, 0.2, 0.3]);
+  const floatSum: number = Math.sumPrecise(float32);
+  console.log("Float32 sum:", floatSum); // 0.6
 
-// Financial calculation example
-interface Transaction {
-  amount: number;
-  description: string;
+  // Financial calculation example
+  interface Transaction {
+    amount: number;
+    description: string;
+  }
+
+  const transactions: Transaction[] = [
+    { amount: 1.99, description: "Item 1" },
+    { amount: 2.99, description: "Item 2" },
+    { amount: 3.99, description: "Item 3" }
+  ];
+
+  const total: number = Math.sumPrecise(transactions.map(t => t.amount));
+  console.log("Transaction total: $" + total.toFixed(2)); // $8.97
+} else {
+  console.log("⚠️ Math.sumPrecise is not available in this Node.js version");
+  console.log("It will be added when your runtime supports ES2026+");
 }
-
-const transactions: Transaction[] = [
-  { amount: 1.99, description: "Item 1" },
-  { amount: 2.99, description: "Item 2" },
-  { amount: 3.99, description: "Item 3" }
-];
-
-const total: number = Math.sumPrecise(transactions.map(t => t.amount));
-console.log("Transaction total: $" + total.toFixed(2)); // $8.97
 
 // ============================================
 // 2. Array.fromAsync()
@@ -125,43 +132,50 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
 
 const data: Uint8Array = new Uint8Array([72, 101, 108, 108, 111]); // "Hello"
 
-// Base64
-const base64: string = data.toBase64();
-console.log("Base64:", base64); // "SGVsbG8="
+// Uint8Array.toBase64/toHex/fromBase64/fromHex are ES2026 (not in Node 24).
+// Feature-detect before calling, matching the JS demo's guard.
+if (typeof Uint8Array.prototype.toBase64 === "function") {
+  // Base64
+  const base64: string = data.toBase64();
+  console.log("Base64:", base64); // "SGVsbG8="
 
-const decodedBase64: Uint8Array = Uint8Array.fromBase64(base64);
-console.log("Decoded base64:", new TextDecoder().decode(decodedBase64)); // "Hello"
+  const decodedBase64: Uint8Array = Uint8Array.fromBase64(base64);
+  console.log("Decoded base64:", new TextDecoder().decode(decodedBase64)); // "Hello"
 
-// Base64 options
-interface Base64Options {
-  urlSafe?: boolean;
-  omitPadding?: boolean;
-}
-
-const urlSafeBase64: string = data.toBase64({ urlSafe: true, omitPadding: true });
-console.log("URL-safe base64:", urlSafeBase64); // "SGVsbG8"
-
-// Hex
-const hex: string = data.toHex();
-console.log("Hex:", hex); // "48656c6c6f"
-
-const decodedHex: Uint8Array = Uint8Array.fromHex(hex);
-console.log("Decoded hex:", new TextDecoder().decode(decodedHex)); // "Hello"
-
-// Type safety: fromBase64/fromHex only accept strings
-// Uint8Array.fromBase64(123); // ❌ Error: Argument of type 'number' is not assignable to parameter of type 'string'
-
-// Use case: Type-safe binary data serialization
-function serializeData(data: Uint8Array): string {
-  return data.toBase64();
-}
-
-function deserializeData(str: string): Uint8Array {
-  try {
-    return Uint8Array.fromBase64(str);
-  } catch (e) {
-    throw new Error("Invalid base64 data");
+  // Base64 options
+  interface Base64Options {
+    urlSafe?: boolean;
+    omitPadding?: boolean;
   }
+
+  const urlSafeBase64: string = data.toBase64({ urlSafe: true, omitPadding: true });
+  console.log("URL-safe base64:", urlSafeBase64); // "SGVsbG8"
+
+  // Hex
+  const hex: string = data.toHex();
+  console.log("Hex:", hex); // "48656c6c6f"
+
+  const decodedHex: Uint8Array = Uint8Array.fromHex(hex);
+  console.log("Decoded hex:", new TextDecoder().decode(decodedHex)); // "Hello"
+
+  // Type safety: fromBase64/fromHex only accept strings
+  // Uint8Array.fromBase64(123); // ❌ Error: Argument of type 'number' is not assignable to parameter of type 'string'
+
+  // Use case: Type-safe binary data serialization
+  function serializeData(data: Uint8Array): string {
+    return data.toBase64();
+  }
+
+  function deserializeData(str: string): Uint8Array {
+    try {
+      return Uint8Array.fromBase64(str);
+    } catch (e) {
+      throw new Error("Invalid base64 data");
+    }
+  }
+} else {
+  console.log("⚠️ Uint8Array.toBase64/toHex is not available in this Node.js version");
+  console.log("It will be added when your runtime supports ES2026+");
 }
 
 // ============================================
@@ -169,38 +183,44 @@ function deserializeData(str: string): Uint8Array {
 // ============================================
 console.log("\n--- 5. Map.prototype.upsert() ---\n");
 
-// Map.upsert preserves type information
-const map: Map<string, number> = new Map([["a", 1], ["b", 2]]);
+// Map.upsert is ES2026 (not in Node 24). Feature-detect before calling.
+if (typeof Map.prototype.upsert === "function") {
+  // Map.upsert preserves type information
+  const map: Map<string, number> = new Map([["a", 1], ["b", 2]]);
 
-// Update existing key: update function receives number, returns number
-const aValue: number = map.upsert("a", 10, (old: number, key: string) => {
-  console.log(`Updating key ${key}: ${old} → ${old * 2}`);
-  return old * 2;
-});
-console.log("aValue:", aValue); // 2
+  // Update existing key: update function receives number, returns number
+  const aValue: number = map.upsert("a", 10, (old: number, key: string) => {
+    console.log(`Updating key ${key}: ${old} → ${old * 2}`);
+    return old * 2;
+  });
+  console.log("aValue:", aValue); // 2
 
-// Insert new key: insert value must match map value type
-const cValue: number = map.upsert("c", 3, (old) => old * 2);
-console.log("cValue:", cValue); // 3
+  // Insert new key: insert value must match map value type
+  const cValue: number = map.upsert("c", 3, (old) => old * 2);
+  console.log("cValue:", cValue); // 3
 
-// Type safety: insert value must match map type
-// map.upsert("d", "string", old => old); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
+  // Type safety: insert value must match map type
+  // map.upsert("d", "string", old => old); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 
-// Update function must return matching type
-// map.upsert("a", 10, old => old.toString()); // ❌ Error: Type 'string' is not assignable to type 'number'
+  // Update function must return matching type
+  // map.upsert("a", 10, old => old.toString()); // ❌ Error: Type 'string' is not assignable to type 'number'
 
-// Use case: Typed counters
-type CounterKey = "views" | "clicks" | "conversions";
-const counters = new Map<CounterKey, number>();
+  // Use case: Typed counters
+  type CounterKey = "views" | "clicks" | "conversions";
+  const counters = new Map<CounterKey, number>();
 
-function incrementCounter(key: CounterKey): number {
-  return counters.upsert(key, 1, count => count + 1);
+  function incrementCounter(key: CounterKey): number {
+    return counters.upsert(key, 1, count => count + 1);
+  }
+
+  incrementCounter("views");
+  incrementCounter("views");
+  incrementCounter("clicks");
+  console.log("Counters:", Object.fromEntries(counters)); // { views: 2, clicks: 1 }
+} else {
+  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
+  console.log("It will be added when your runtime supports ES2026+");
 }
-
-incrementCounter("views");
-incrementCounter("views");
-incrementCounter("clicks");
-console.log("Counters:", Object.fromEntries(counters)); // { views: 2, clicks: 1 }
 
 // ============================================
 // 6. JSON.parse Source Text Access
@@ -253,31 +273,37 @@ console.log("Timestamp:", financialData.timestamp); // number
 // ============================================
 console.log("\n--- 7. Iterator Sequencing ---\n");
 
-// Iterator.concat preserves type information
-const iter1: Iterator<number> = [1, 2, 3].values();
-const iter2: Iterator<number> = [4, 5, 6].values();
-const combined: Iterator<number> = iter1.concat(iter2);
-const combinedArray: number[] = combined.toArray();
-console.log("Combined numbers:", combinedArray); // [1, 2, 3, 4, 5, 6]
+// Iterator.concat/toArray are ES2026 (not in Node 24). Feature-detect first.
+if (typeof Iterator.prototype.concat === "function") {
+  // Iterator.concat preserves type information
+  const iter1: Iterator<number> = [1, 2, 3].values();
+  const iter2: Iterator<number> = [4, 5, 6].values();
+  const combined: Iterator<number> = iter1.concat(iter2);
+  const combinedArray: number[] = combined.toArray();
+  console.log("Combined numbers:", combinedArray); // [1, 2, 3, 4, 5, 6]
 
-// Concat different iterable types
-function* genStrings(): Generator<string> {
-  yield "a";
-  yield "b";
+  // Concat different iterable types
+  function* genStrings(): Generator<string> {
+    yield "a";
+    yield "b";
+  }
+
+  const stringIter: Iterator<string> = genStrings();
+  const arrayStrings: string[] = ["c", "d"];
+  const allStrings: Iterator<string> = stringIter.concat(arrayStrings);
+  console.log("Combined strings:", allStrings.toArray()); // ["a", "b", "c", "d"]
+
+  // Chaining with helper methods preserves type
+  const result: number[] = [1, 2, 3].values()
+    .concat([4, 5, 6].values())
+    .filter(n => n % 2 === 0)
+    .map(n => n * 2)
+    .toArray();
+  console.log("Chained result:", result); // [4, 8, 12]
+} else {
+  console.log("⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version");
+  console.log("It will be added when your runtime supports ES2026+");
 }
-
-const stringIter: Iterator<string> = genStrings();
-const arrayStrings: string[] = ["c", "d"];
-const allStrings: Iterator<string> = stringIter.concat(arrayStrings);
-console.log("Combined strings:", allStrings.toArray()); // ["a", "b", "c", "d"]
-
-// Chaining with helper methods preserves type
-const result: number[] = [1, 2, 3].values()
-  .concat([4, 5, 6].values())
-  .filter(n => n % 2 === 0)
-  .map(n => n * 2)
-  .toArray();
-console.log("Chained result:", result); // [4, 8, 12]
 
 // ============================================
 // 8. TypeScript-specific Enhancements

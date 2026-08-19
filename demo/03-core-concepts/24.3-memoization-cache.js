@@ -360,6 +360,8 @@ function deepReduce(obj, fn, acc) {
   for (const key in obj) {
     if (typeof obj[key] === 'object' && obj[key] !== null) {
       acc = deepReduce(obj[key], fn, acc);
+    } else {
+      acc = fn(acc, obj[key]); // Apply fn to leaf values
     }
   }
 

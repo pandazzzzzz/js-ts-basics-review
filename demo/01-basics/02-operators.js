@@ -76,8 +76,9 @@ const power = 2 ** 3; // 8
 const squared = 5 ** 2; // 25
 
 console.log("Arithmetic Operators:");
-console.log({ sum, difference, product, quotient, remainder, power });
+console.log({ sum, difference, product, quotient, remainder, power, squared });
 console.log({ concat, mixed, divByZero, negativeRemainder });
+console.log("stringMath ('10' - '5'):", stringMath); // 5 (strings converted to numbers)
 
 // Unary Plus (+) and Unary Minus (-) (ES1)
 // - Unary plus converts to number
@@ -205,15 +206,12 @@ console.log("false ?? true:", false ?? true); // false
 
 // ⚠️ Pitfall: ?? CANNOT be mixed with || or && without parentheses
 // - Mixing `??` with `||`/`&&` in the same expression is a SyntaxError.
-// - This rule prevents ambiguity about precedence (e.g. does `(a ?? b) || c`
-//   or `a ?? (b || c)` happen first?).
+//   This prevents ambiguity about which binding takes precedence.
 // - You MUST add explicit parentheses to disambiguate.
-// console.log(null || undefined ?? "foo"); // ❌ SyntaxError: Mixed binary operators
 console.log("\n?? cannot mix with || / && (SyntaxError without parentheses):");
-// Demonstrate the SyntaxError by attempting to eval the mixed expression
+// Demonstrate the SyntaxError by evaluating the raw source at runtime so the
+// surrounding file still parses cleanly.
 try {
-  // Function constructor lets us evaluate the raw source at runtime so the
-  // surrounding file still parses cleanly.
   new Function('null || undefined ?? "foo"')();
 } catch (e) {
   console.log("null || undefined ?? \"foo\" →", e.name + ":", e.message); // SyntaxError

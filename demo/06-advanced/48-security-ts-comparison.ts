@@ -25,10 +25,16 @@ function renderHTML(html: SanitizedHTML): void {
 }
 
 const userInput: UnsafeHTML = '<script>alert("XSS")</script>';
-const safe = sanitizeHTML(userInput);
-renderHTML(safe); // Type-safe
 
-// renderHTML(userInput); // Error: UnsafeHTML not assignable to SanitizedHTML
+// Execution uses `document`, which is browser-only — guard for Node.js
+if (typeof document !== "undefined") {
+  const safe = sanitizeHTML(userInput);
+  renderHTML(safe); // Type-safe
+
+  // renderHTML(userInput); // Error: UnsafeHTML not assignable to SanitizedHTML
+} else {
+  console.log("⚠️ document is browser-only; skipping XSS demo in Node.js");
+}
 
 // Type-safe DOMPurify wrapper
 interface DOMPurifyConfig {

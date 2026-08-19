@@ -1,5 +1,5 @@
 // Arrays - Manipulation TypeScript Comparison
-// 📘 Complementary to: 06.4-arrays-manipulation.ts
+// 📘 Complementary to: 06.4-arrays-manipulation.js
 
 export {};
 

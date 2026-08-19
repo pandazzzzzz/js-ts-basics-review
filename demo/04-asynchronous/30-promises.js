@@ -323,6 +323,22 @@ Promise.allSettled(promises)
     });
   });
 
+// 📘 Official MDN example (Promise.allSettled):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled
+// Always resolves with an array of { status: 'fulfilled', value } / { status: 'rejected', reason }.
+Promise.allSettled([
+  Promise.resolve(33),
+  new Promise((resolve) => setTimeout(() => resolve(66), 0)),
+  99,
+  Promise.reject(new Error("an error")),
+]).then((values) => console.log("MDN allSettled:", values));
+// [
+//   { status: 'fulfilled', value: 33 },
+//   { status: 'fulfilled', value: 66 },
+//   { status: 'fulfilled', value: 99 },
+//   { status: 'rejected', reason: Error: an error }
+// ]
+
 // ============================================
 // 7. PROMISE.ANY - FIRST SUCCESS
 // ============================================
@@ -378,6 +394,23 @@ Promise.any([
   .catch(error => {
     console.error("Promise.any - all rejected:", error.constructor.name); // AggregateError
   });
+
+// 📘 Official MDN example (Promise.any):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any
+// Promise.any() fulfills with the FIRST promise to fulfill, even if another rejects first.
+// This contrasts with Promise.race(), which settles (fulfill OR reject) on the first to settle.
+const pErr = new Promise((resolve, reject) => {
+  reject(new Error("Always fails"));
+});
+const pSlow = new Promise((resolve, reject) => {
+  setTimeout(resolve, 500, "Done eventually");
+});
+const pFast = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "Done quick");
+});
+Promise.any([pErr, pSlow, pFast]).then((value) => {
+  console.log("MDN Promise.any:", value); // pFast fulfills first → "Done quick"
+});
 
 // ============================================
 // 8. PROMISE.WITHRESOLVERS() - EXTERNAL RESOLVE/REJECT
@@ -439,7 +472,7 @@ const emitter = new EventEmitter();
 emitter.once('ready').then(msg => console.log("Event:", msg));
 
 // ============================================
-// 8. ERROR HANDLING PATTERNS
+// 9. ERROR HANDLING PATTERNS
 // ============================================
 
 /**

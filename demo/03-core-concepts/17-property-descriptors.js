@@ -734,15 +734,17 @@ try {
 }
 console.log("Still 42:", pitfall1.prop);
 
-// Pitfall 2: Cannot mix data and accessor descriptors
-let pitfall2 = { value: 10 };
+// Pitfall 2: Cannot mix data and accessor attributes in one descriptor
+let pitfall2 = {};
 try {
   Object.defineProperty(pitfall2, 'value', {
-    get() { return 20; }
+    value: 10,
+    get() { return 20; } // mixing data + accessor in one descriptor
   });
 } catch (error) {
   console.log("Pitfall 2 - Cannot mix:", error.message);
 }
+// prints: "Invalid property descriptor. Cannot both specify accessors and a value or writable attribute"
 
 // Pitfall 3: configurable: false is permanent
 let pitfall3 = {};
@@ -863,18 +865,6 @@ console.log("\n=== Property Descriptors Demo Complete ===");
 */
 // ============================================
 // CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Property Descriptors:
-- 23-proxy-reflect.js (Proxy and Reflect API for property access)
-- 19-symbol-deep.js (Symbols as property keys)
-`);
-
-
-// ============================================
-// Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 08-objects.js - Objects and properties");

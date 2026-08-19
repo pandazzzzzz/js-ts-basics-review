@@ -95,36 +95,38 @@ console.log("\n--- 2. Array.fromAsync() ---\n");
  *   source: https://github.com/tc39/proposal-array-from-async
  */
 
-// Convert async iterables to arrays
-async function* generateNumbers() {
-  yield 1;
-  yield 2;
-  yield 3;
-  await new Promise(resolve => setTimeout(resolve, 10));
-  yield 4;
-}
+// 📘 Official MDN examples (Array.fromAsync):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync
 
-// Usage:
-// const numbersArray = await Array.fromAsync(generateNumbers());
-// console.log("From async generator:", numbersArray); // [1, 2, 3, 4]
-
-// Also works with sync iterables, promises, and array-like objects
-const promiseArray = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
-// const resolved = await Array.fromAsync(promiseArray);
-// console.log("Resolved promises:", resolved); // [1, 2, 3]
-
-// With map function
-// const doubled = await Array.fromAsync(generateNumbers(), n => n * 2);
-// console.log("Doubled async values:", doubled); // [2, 4, 6, 8]
-
-// Before ES2026: Had to use for-await-of loop
-async function fromAsyncManual(iterable) {
-  const result = [];
-  for await (const item of iterable) {
-    result.push(item);
+// Array from an async iterable
+const asyncIterable = (async function* () {
+  for (let i = 0; i < 5; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 10 * i));
+    yield i;
   }
-  return result;
-}
+})();
+
+Array.fromAsync(asyncIterable).then((array) => console.log("  MDN async iterable:", array));
+// [0, 1, 2, 3, 4]
+
+// Array from a sync iterable
+Array.fromAsync(
+  new Map([
+    [1, 2],
+    [3, 4],
+  ]),
+).then((array) => console.log("  MDN sync iterable (Map):", array));
+// [[1, 2], [3, 4]]
+
+// Array from a sync iterable that yields promises
+Array.fromAsync(
+  new Set([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]),
+).then((array) => console.log("  MDN Set of promises:", array));
+// [1, 2, 3]
+
+// Array.fromAsync is equivalent to (but more concise than) for-await-of:
+//   const result = [];
+//   for await (const element of items) { result.push(element); }
 
 console.log("Array.fromAsync converts async iterables, promises, and array-like objects to arrays");
 console.log("Useful for processing streams, async generators, and collections of promises");

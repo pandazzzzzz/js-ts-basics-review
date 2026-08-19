@@ -375,7 +375,8 @@ console.log("curriedSum(1, 2)(3):", curriedSum(1, 2)(3)); // 6
 console.log("curriedSum(1)(2, 3):", curriedSum(1)(2, 3)); // 6
 
 // Practical use case - configurable API
-function calculatePrice(price, tax, discount) {
+// Reorder args so tax/discount (config) come first, price (data) last — currying pre-fills config
+function calculatePrice(tax, discount, price) {
   return price * (1 + tax) * (1 - discount);
 }
 

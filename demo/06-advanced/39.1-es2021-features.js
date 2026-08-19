@@ -33,6 +33,11 @@ console.log("\n=== ES2021 Features ===\n");
 // ============================================
 console.log("\n--- 1. String.prototype.replaceAll() ---\n");
 
+// 📘 Official MDN example (String.replaceAll):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll
+console.log("MDN 'aabbcc'.replaceAll('b', '.'):", "aabbcc".replaceAll("b", "."));
+// 'aa..cc'
+
 // Before ES2021: only replace first occurrence, or use regex with /g flag
 const str = "foo foo foo";
 console.log("Original:", str);

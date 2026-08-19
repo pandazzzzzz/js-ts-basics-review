@@ -38,7 +38,7 @@ const hexColor = 0x00FF00; // Green color
 
 // Octal (base 8) - Prefix with 0o (ES6)
 // - Digits: 0-7
-// - Old syntax: 077 (deprecated in strict mode)
+// - Old syntax: 077 (SyntaxError in strict mode; legacy octal in sloppy mode)
 const octal = 0o77; // 63
 const octalAlt = 0o755; // 493 (common for file permissions)
 
@@ -140,7 +140,8 @@ console.log("\nEpsilon comparison:");
 console.log("Number.EPSILON:", Number.EPSILON); // ~2.22e-16
 
 function areEqual(a, b) {
-  return Math.abs(a - b) < Number.EPSILON;
+  // Absolute epsilon fails for large magnitudes — use relative epsilon
+  return Math.abs(a - b) < Number.EPSILON * Math.max(Math.abs(a), Math.abs(b));
 }
 
 console.log("areEqual(0.1 + 0.2, 0.3):", areEqual(0.1 + 0.2, 0.3)); // true

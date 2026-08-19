@@ -345,8 +345,10 @@ console.log("flatMap for filter+transform:", filteredTransformed); // [20, 40]
 // 5.5 flatMap vs map + flat performance
 // flatMap is more efficient because it's a single pass
 const bigArray = Array.from({ length: 1000 }, (_, i) => i);
-console.log("\nPerformance note: flatMap is more efficient than map().flat()");
-console.log("(single pass instead of two passes)");
+const viaFlatMap = bigArray.flatMap(n => [n, n]);
+const viaMapFlat = bigArray.map(n => [n, n]).flat(1);
+console.log("\nflatMap vs map().flat():", JSON.stringify(viaFlatMap) === JSON.stringify(viaMapFlat)); // true (same result)
+console.log("Performance note: flatMap is more efficient (single pass vs two passes)");
 
 // ============================================
 // Common Pitfalls

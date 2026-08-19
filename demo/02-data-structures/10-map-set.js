@@ -505,24 +505,28 @@ console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
  */
 console.log("\nES2025 Set Methods:");
 
-// First, polyfill if not available
+// First, polyfill if not available (per MDN: coerce `other` to a Set to support set-like objects)
 if (typeof Set.prototype.union !== "function") {
   Set.prototype.union = function(other) {
+    other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) result.add(item);
     return result;
   };
   Set.prototype.intersection = function(other) {
+    other = new Set(other); // set-like or iterable
     const result = new Set();
     for (const item of other) if (this.has(item)) result.add(item);
     return result;
   };
   Set.prototype.difference = function(other) {
+    other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) result.delete(item);
     return result;
   };
   Set.prototype.symmetricDifference = function(other) {
+    other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) {
       if (this.has(item)) result.delete(item);
@@ -531,14 +535,17 @@ if (typeof Set.prototype.union !== "function") {
     return result;
   };
   Set.prototype.isSubsetOf = function(other) {
+    other = new Set(other); // set-like or iterable
     for (const item of this) if (!other.has(item)) return false;
     return true;
   };
   Set.prototype.isSupersetOf = function(other) {
+    other = new Set(other); // set-like or iterable
     for (const item of other) if (!this.has(item)) return false;
     return true;
   };
   Set.prototype.isDisjointFrom = function(other) {
+    other = new Set(other); // set-like or iterable
     for (const item of this) if (other.has(item)) return false;
     return true;
   };
@@ -572,6 +579,13 @@ console.log("  isSupersetOf():", set2.isSupersetOf(set1)); // false
 const set4 = new Set([9, 10]);
 console.log("  isDisjointFrom():", set1.isDisjointFrom(set4)); // true
 console.log("  isDisjointFrom():", set1.isDisjointFrom(set2)); // false
+
+// 📘 Official MDN example (Set.prototype.union):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/union
+// Computes the union between the set of even numbers (<10) and perfect squares (<10).
+const evens = new Set([2, 4, 6, 8]);
+const squares = new Set([1, 4, 9]);
+console.log("  MDN union example:", evens.union(squares)); // Set(6) { 2, 4, 6, 8, 1, 9 }
 
 // Map.groupBy() - ES2024 array grouping (similar to Object.groupBy)
 /*

@@ -239,8 +239,9 @@ function validateNumber(min: number, max: number) {
 class ValidatedConfig {
   private _volume: number = 50;
 
-  // @ts-expect-error — legacy accessor decorator requires experimentalDecorators: true
-  @validateNumber(0, 100)
+  // Decorator application is commented out — ts-node ESM does NOT transpile
+  // legacy accessor decorators, so an active `@` crashes at runtime.
+  // @validateNumber(0, 100)
   set volume(value: number) {
     this._volume = value;
   }

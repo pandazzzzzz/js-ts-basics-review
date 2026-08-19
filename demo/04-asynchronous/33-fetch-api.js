@@ -1290,7 +1290,7 @@ console.log("\n=== Common Pitfalls Demo ===\n");
 
 // Pitfall 1: Assuming fetch rejects on 404
 async function pitfall_404() {
-  console.log("21. Pitfall: fetch doesn't reject on 404:");
+  console.log("27. Pitfall: fetch doesn't reject on 404:");
 
   // WRONG: This won't catch 404!
   fetch(`${API_BASE}/posts/999999`)
@@ -1311,7 +1311,7 @@ async function pitfall_404() {
 pitfall_404();
 
 // Pitfall 2: CORS issues (browser only)
-console.log("\n22. CORS note:");
+console.log("\n28. CORS note:");
 console.log("   - CORS is a browser security feature");
 console.log("   - Server must include Access-Control-Allow-Origin header");
 console.log("   - For development: use proxy or disable CORS");
@@ -1319,7 +1319,7 @@ console.log("   - In Node.js, CORS is not an issue");
 
 // Pitfall 3: Credentials not sent by default
 async function pitfall_credentials() {
-  console.log("\n23. Credentials (cookies) note:");
+  console.log("\n29. Credentials (cookies) note:");
 
   // Without explicit credentials: cookies/auth headers sent by default to same origin
   // (credentials default: 'same-origin')
@@ -1339,7 +1339,7 @@ pitfall_credentials();
 
 // Pitfall 4: Forgetting Content-Type
 async function pitfall_contentType() {
-  console.log("\n24. Content-Type header:");
+  console.log("\n30. Content-Type header:");
 
   // WRONG: Server won't parse body as JSON
   await fetch(`${API_BASE}/posts`, {
@@ -1360,7 +1360,7 @@ async function pitfall_contentType() {
 
 // Pitfall 5: Not closing response body (memory leak)
 async function pitfall_memoryLeak() {
-  console.log("\n25. Memory leak from unclosed responses:");
+  console.log("\n31. Memory leak from unclosed responses:");
   console.log("   - Always consume response body (json(), text(), etc.)");
   console.log("   - Or explicitly clone and ignore: response.clone()");
 

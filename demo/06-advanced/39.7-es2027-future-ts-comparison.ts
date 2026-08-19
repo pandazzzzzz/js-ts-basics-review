@@ -263,9 +263,13 @@ function readonly(target: any, propertyKey: string | symbol): void {
   });
 }
 
-@logged
+// Decorator applications below are commented out — ts-node ESM does NOT transpile
+// Stage 2.7 decorators, so an active `@` crashes at runtime. The decorator
+// factories above are illustrative; compile with tsc (target esnext, lib
+// esnext.decorators) or run in a supporting runtime to exercise them.
+// @logged
 class User {
-  @readonly
+  // @readonly
   id: number = Math.random();
 
   name: string;
@@ -274,7 +278,7 @@ class User {
     this.name = name;
   }
 
-  @measure
+  // @measure
   doHeavyWork(): string {
     for (let i = 0; i < 1000000; i++) {}
     return "done";

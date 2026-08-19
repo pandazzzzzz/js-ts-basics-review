@@ -151,6 +151,16 @@ console.log("arr.at(-1):", arr.at(-1)); // 50 (last element)
 console.log("arr.at(-2):", arr.at(-2)); // 40 (second last)
 console.log("arr.at(5):", arr.at(5)); // undefined (out of bounds)
 
+// 📘 Official MDN example (Array.at):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
+const cart = ["apple", "banana", "pear"];
+function returnLast(array) {
+  return array.at(-1);
+}
+console.log("MDN returnLast(cart):", returnLast(cart)); // 'pear'
+cart.push("orange");
+console.log("MDN returnLast(cart) after push:", returnLast(cart)); // 'orange'
+
 // Before ES2022: need to calculate length for negative indices
 console.log("\nBefore at(): last element = arr[arr.length - 1]:", arr[arr.length - 1]); // 50
 
@@ -181,7 +191,27 @@ const obj = {
 console.log("obj.hasOwnProperty('a'):", obj.hasOwnProperty("a")); // ❌ false (incorrect due to override)
 console.log("Object.hasOwn(obj, 'a'):", Object.hasOwn(obj, "a")); // ✅ true (correct)
 
-// Also works for objects created with Object.create(null)
+// 📘 Official MDN example (Object.hasOwn):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn
+// Direct vs. inherited properties, and handling null/undefined values.
+const example = {};
+console.log("MDN undefined property:", Object.hasOwn(example, "prop")); // false
+
+example.prop = "exists";
+console.log("MDN defined property:", Object.hasOwn(example, "prop")); // true
+
+example.prop = null;
+console.log("MDN null value:", Object.hasOwn(example, "prop")); // true (value null still counts)
+
+example.prop = undefined;
+console.log("MDN undefined value:", Object.hasOwn(example, "prop")); // true (value undefined still counts)
+
+// Difference from `in` operator (which checks prototype chain too):
+console.log("MDN 'prop' in example:", "prop" in example); // true
+console.log("MDN 'toString' in example:", "toString" in example); // true (inherited)
+console.log("MDN Object.hasOwn(example, 'toString'):", Object.hasOwn(example, "toString")); // false (not own)
+
+// Also works for objects created with `Object.create(null)`
 const nullObj = Object.create(null);
 nullObj.b = 2;
 // nullObj.hasOwnProperty('b'); // ❌ Error: hasOwnProperty is not a function

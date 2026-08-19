@@ -52,24 +52,28 @@ class TypedStorage<T> {
   }
 }
 
-// Usage
 interface UserPreferences {
   theme: "light" | "dark";
   language: string;
   notifications: boolean;
 }
 
-const prefsStorage = new TypedStorage<UserPreferences>();
-// prefsStorage.set("prefs", {
-//   theme: "dark",
-//   language: "en",
-//   notifications: true
-// });
+// Usage (browser-only: `localStorage` is not defined in Node.js, so guard it)
+if (typeof localStorage !== "undefined") {
+  const prefsStorage = new TypedStorage<UserPreferences>();
+  // prefsStorage.set("prefs", {
+  //   theme: "dark",
+  //   language: "en",
+  //   notifications: true
+  // });
 
-// const prefs = prefsStorage.get("prefs");
-// if (prefs) {
-//   console.log("Theme:", prefs.theme);
-// }
+  // const prefs = prefsStorage.get("prefs");
+  // if (prefs) {
+  //   console.log("Theme:", prefs.theme);
+  // }
+} else {
+  console.log("⚠️ localStorage is browser-only; skipping in Node.js");
+}
 
 console.log(`
 TypeScript Storage benefits:
@@ -645,8 +649,13 @@ console.log("\n=== History API Types ===\n");
 // TypeScript: Built-in types for History API
 // History interface with typed methods
 
-// history.state is typed as any by default
-const currentState: unknown = history.state;
+// history.state is typed as any by default (browser-only API)
+let currentState: unknown;
+if (typeof history !== "undefined") {
+  currentState = history.state;
+} else {
+  currentState = null; // Node.js has no History API
+}
 
 // Type-safe state management
 interface RouteState {
@@ -679,20 +688,22 @@ function updateProfileTab(userId: number, tab: string): void {
   history.replaceState(state, '', `/profile/${userId}?tab=${tab}`);
 }
 
-// Type-safe popstate handler
-window.addEventListener('popstate', (event: PopStateEvent) => {
-  const state = event.state as RouteState | null;
-  
-  if (state) {
-    console.log('Navigated to:', state.page);
-    if (state.userId) {
-      console.log('User ID:', state.userId);
+// Type-safe popstate handler (browser-only: `window` is not defined in Node.js)
+if (typeof window !== "undefined") {
+  window.addEventListener('popstate', (event: PopStateEvent) => {
+    const state = event.state as RouteState | null;
+
+    if (state) {
+      console.log('Navigated to:', state.page);
+      if (state.userId) {
+        console.log('User ID:', state.userId);
+      }
+      if (state.scrollPosition !== undefined) {
+        window.scrollTo(0, state.scrollPosition);
+      }
     }
-    if (state.scrollPosition !== undefined) {
-      window.scrollTo(0, state.scrollPosition);
-    }
-  }
-});
+  });
+}
 
 // Type-safe router class
 interface Route<T = unknown> {
@@ -732,18 +743,23 @@ interface AppState {
   data?: unknown;
 }
 
-const router = new TypedRouter<AppState>();
+// Usage (browser-only: the TypedRouter constructor registers window listeners)
+if (typeof window !== "undefined") {
+  const router = new TypedRouter<AppState>();
 
-router.route('/', (state) => {
-  console.log('Home view:', state.view);
-});
+  router.route('/', (state) => {
+    console.log('Home view:', state.view);
+  });
 
-router.route('/profile', (state) => {
-  console.log('Profile view:', state.view, state.data);
-});
+  router.route('/profile', (state) => {
+    console.log('Profile view:', state.view, state.data);
+  });
 
-// Navigate with type safety
-router.navigate('/profile', { view: 'profile', data: { userId: 123 } });
+  // Navigate with type safety
+  router.navigate('/profile', { view: 'profile', data: { userId: 123 } });
+} else {
+  console.log("⚠️ History API / TypedRouter is browser-only; skipping in Node.js");
+}
 
 console.log("History API TypeScript Features:");
 console.log("  - Type-safe state objects");
@@ -757,71 +773,76 @@ console.log("  - Type-safe navigation methods");
 
 console.log("\n=== Server-Sent Events Types ===\n");
 
-// TypeScript: Built-in EventSource types
-const eventSource: EventSource = new EventSource('/events');
+// EventSource is browser-only; guard the demo for Node.js compatibility
+if (typeof EventSource !== "undefined") {
+  // TypeScript: Built-in EventSource types
+  const eventSource: EventSource = new EventSource('/events');
 
-// EventSource properties are typed
-const url: string = eventSource.url;
-const readyState: number = eventSource.readyState;
-const withCredentials: boolean = eventSource.withCredentials;
+  // EventSource properties are typed
+  const url: string = eventSource.url;
+  const readyState: number = eventSource.readyState;
+  const withCredentials: boolean = eventSource.withCredentials;
 
-// Type-safe event handlers
-eventSource.addEventListener('open', (event: Event) => {
-  console.log('Connection opened');
-});
+  // Type-safe event handlers
+  eventSource.addEventListener('open', (event: Event) => {
+    console.log('Connection opened');
+  });
 
-eventSource.addEventListener('message', (event: MessageEvent) => {
-  const data: string = event.data;
-  const lastEventId: string = event.lastEventId;
-  const origin: string = event.origin;
-  
-  console.log('Message:', data);
-});
+  eventSource.addEventListener('message', (event: MessageEvent) => {
+    const data: string = event.data;
+    const lastEventId: string = event.lastEventId;
+    const origin: string = event.origin;
 
-eventSource.addEventListener('error', (event: Event) => {
-  if (eventSource.readyState === EventSource.CLOSED) {
-    console.log('Connection closed');
+    console.log('Message:', data);
+  });
+
+  eventSource.addEventListener('error', (event: Event) => {
+    if (eventSource.readyState === EventSource.CLOSED) {
+      console.log('Connection closed');
+    }
+  });
+
+  // Type-safe custom events
+  interface NotificationData {
+    title: string;
+    message: string;
+    timestamp: number;
   }
-});
 
-// Type-safe custom events
-interface NotificationData {
-  title: string;
-  message: string;
-  timestamp: number;
+  eventSource.addEventListener('notification', (event: MessageEvent) => {
+    const data: NotificationData = JSON.parse(event.data);
+    console.log('Notification:', data.title);
+  });
+
+  // Usage with typed events — see TypedEventSource class definition above
+  interface AppEvents {
+    notification: NotificationData;
+    userJoined: { userId: number; name: string };
+    message: { text: string; from: string };
+  }
+
+  const typedEventSource = new TypedEventSource<AppEvents>('/events');
+
+  typedEventSource.on('notification', (data) => {
+    // data is typed as NotificationData
+    console.log(data.title, data.message);
+  });
+
+  typedEventSource.on('userJoined', (data) => {
+    // data is typed as { userId: number; name: string }
+    console.log(`User ${data.name} joined`);
+  });
+
+  typedEventSource.onOpen(() => {
+    console.log('Connected');
+  });
+
+  typedEventSource.onError((error) => {
+    console.error('SSE error:', error);
+  });
+} else {
+  console.log("⚠️ EventSource is browser-only; skipping in Node.js");
 }
-
-eventSource.addEventListener('notification', (event: MessageEvent) => {
-  const data: NotificationData = JSON.parse(event.data);
-  console.log('Notification:', data.title);
-});
-
-// Usage with typed events — see TypedEventSource class definition above
-interface AppEvents {
-  notification: NotificationData;
-  userJoined: { userId: number; name: string };
-  message: { text: string; from: string };
-}
-
-const typedEventSource = new TypedEventSource<AppEvents>('/events');
-
-typedEventSource.on('notification', (data) => {
-  // data is typed as NotificationData
-  console.log(data.title, data.message);
-});
-
-typedEventSource.on('userJoined', (data) => {
-  // data is typed as { userId: number; name: string }
-  console.log(`User ${data.name} joined`);
-});
-
-typedEventSource.onOpen(() => {
-  console.log('Connected');
-});
-
-typedEventSource.onError((error) => {
-  console.error('SSE error:', error);
-});
 
 // Type-safe SSE with React hook pattern
 interface UseSSEOptions {

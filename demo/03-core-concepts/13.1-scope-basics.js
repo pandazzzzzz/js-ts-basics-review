@@ -468,7 +468,7 @@ console.log(`
    - Avoid namespace pollution
 
 ✅ Understand the scope chain
-'   - Know where variables are defined
+   - Know where variables are defined
    - Variable lookup: inner → outer → global
    - Deep nesting can impact performance
 

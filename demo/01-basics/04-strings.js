@@ -645,10 +645,10 @@ console.log("\nSQL Query:", query);
 // - Useful for regex, file paths, LaTeX
 // - Static method on String constructor
 console.log("\n=== String.raw() ===");
-console.log(String.raw`C:\Users\Name\file.txt`); 
+console.log(String.raw`C:\Users\Name\file.txt`);
 // "C:\Users\Name\file.txt" (backslashes not escaped)
 console.log(`C:\Users\Name\file.txt`);
-// "C:UsersName\file.txt" (\U \S \N are unrecognized escapes — backslash dropped; \f is form-feed escape — backslash consumed, replaced by form-feed char)
+// "C:UsersName\file.txt" — unrecognized escapes (\U, \S, \N) drop the backslash; \f becomes a form-feed char
 
 const path = String.raw`C:\Program Files\App`;
 console.log("Path:", path); // "C:\Program Files\App"

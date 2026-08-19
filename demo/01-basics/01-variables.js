@@ -4,26 +4,9 @@
 export {};
 
 // ============================================
-// Learning goals
+// Variables and Data Types — var/let/const, primitive types, type coercion, BigInt, globalThis
+// Sections: 1. HTML 2. Code Structure 3. "use strict" 4. Variables 5. Types 6. Coercion 7. Naming 8. Global 9. Pitfalls 10. Best Practices
 // ============================================
-// This file introduces the basic building blocks of JavaScript.
-// Read the sections in order to see how variables, values, and simple syntax work together.
-
-// ============================================
-// Table of Contents
-// ============================================
-
-// 1. JavaScript in HTML
-// 2. Code Structure
-// 3. "use strict" - Modern Mode
-// 4. Variable Declarations (var/let/const)
-// 5. Primitive Data Types
-// 6. Type Coercion
-// 7. Variable Naming
-// 8. Global Object
-// 9. Common Pitfalls
-// 10. Best Practices
-// 11. Cross-references
 
 // ============================================
 // 1. JavaScript in HTML (JS.info 2.1)
@@ -70,21 +53,20 @@ export {};
 
 console.log("\n=== Strict Mode Demo ===");
 
-// Without strict mode, assignment to undeclared variable creates a global
-// In strict mode, this would throw ReferenceError:
-(function sloppyMode() {
-  // accidentallyGlobal = "oops"; // ReferenceError in strict mode!
-})();
-
-// In strict mode, `this` is undefined in regular functions (not window/global)
+// In strict mode, assigning to an undeclared variable throws a ReferenceError.
+// Run the throwing code via Function so the surrounding file still parses.
 (function strictDemo() {
   "use strict";
   try {
-    // In strict mode, assigning to undeclared variable throws:
-    // undeclaredVar = 5; // ReferenceError!
+    new Function("undeclaredVar = 5")();
   } catch (e) {
-    console.log("Strict mode prevents accidental globals:", e.message);
+    console.log("Strict mode prevents accidental globals:", e.name + ":", e.message);
   }
+})();
+
+// In sloppy (non-strict) mode, the same assignment silently creates a global.
+(function sloppyMode() {
+  console.log("Sloppy mode typeof global:", typeof globalThis.__sloppyLeak); // "undefined"
 })();
 
 console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
@@ -94,80 +76,49 @@ console.log("ES6 modules and classes are strict by default — no 'use strict' n
 // 4. Variable Declarations
 // ============================================
 
-// var - Function-scoped or globally-scoped (ES5)
-// - Hoisted to the top of function/global scope
-// - Can be redeclared and updated
-// - No block scope (ignores if, for, while blocks)
-// - Common pitfall: accessible before declaration (undefined)
+// var — function- or globally-scoped (ES5)
+// Hoisted to the top of its scope; can be redeclared; no block scope.
 var oldStyle = "var is function-scoped";
 
-// let - Block-scoped (ES6/ES2015)
-// - Only accessible within the block {...} where it's defined
-// - Cannot be redeclared in the same scope
-// - Temporal Dead Zone: cannot access before declaration (ReferenceError)
-// - Preferred for variables that will change
+// let — block-scoped (ES2015)
+// Temporal Dead Zone: cannot be accessed before declaration.
+// Preferred for variables that will change.
 let modernStyle = "let is block-scoped";
 
-// const - Block-scoped constant (ES6/ES2015)
-// - Must be initialized at declaration
-// - Cannot be reassigned (but object properties can be modified)
-// - Use for values that shouldn't change
-// - Best practice: use const by default, let when needed
+// const — block-scoped constant (ES2015)
+// Must be initialized at declaration; cannot be reassigned
+// (though object/array contents can still be modified).
+// Best practice: use const by default, let only when reassignment is needed.
 const constant = "const cannot be reassigned";
 
 // ============================================
 // 5. Primitive Data Types (7 types in ES2020+)
 // ============================================
 
-// 1. String - Text data (ES1)
-// - Immutable sequence of characters
-// - Can use single quotes, double quotes, or backticks
-// - typeof returns "string"
+// 1. String — immutable text; single/double quotes or backticks.
+//    typeof "hello" → "string"
 const stringType = "Hello World";
 
-// 2. Number - Numeric data (ES1)
-// - 64-bit floating point (IEEE 754)
-// - Range: ±(2^-1074 to 2^1024)
-// - Special values: Infinity, -Infinity, NaN
-// - Pitfall: 0.1 + 0.2 !== 0.3 (floating point precision)
-// - typeof returns "number"
+// 2. Number — 64-bit float (IEEE 754); includes Infinity and NaN.
+//    typeof 42 → "number"
 const numberType = 42;
 
-// 3. Boolean - Logical data (ES1)
-// - Only two values: true or false
-// - Used in conditional statements
-// - Falsy values: false, 0, "", null, undefined, NaN
-// - typeof returns "boolean"
+// 3. Boolean — true or false.
+//    Falsy values: false, 0, "", null, undefined, NaN.
+//    typeof true → "boolean"
 const booleanType = true;
 
-// 4. Null - Intentional absence of value (ES1)
-// - Represents "nothing" or "empty"
-// - Must be assigned explicitly
-// - typeof returns "object" (historical bug in JavaScript)
-// - Use for: explicitly setting "no value"
+// 4. Null — intentional absence of a value.
+//    typeof null === "object" (a historical bug, kept for compatibility).
 const nullType = null;
 
-// 5. Undefined - Uninitialized variable (ES1)
-// - Default value for uninitialized variables
-// - Function returns undefined if no return statement
-// - typeof returns "undefined"
-// - Difference from null: undefined = not assigned, null = intentionally empty
+// 5. Undefined — default value for uninitialized variables.
 const undefinedType = undefined;
 
-// 6. Symbol - Unique identifier (ES6/ES2015)
-// - Always unique, even with same description
-// - Used for object property keys to avoid name collisions
-// - Not enumerable in for...in loops
-// - typeof returns "symbol"
-// - Use case: private object properties, unique constants
+// 6. Symbol — unique identifier (ES2015); useful for non-colliding property keys.
 const symbolType = Symbol("unique");
 
-// 7. BigInt - Large integers (ES2020)
-// - Can represent integers larger than 2^53 - 1
-// - Created by appending 'n' to integer or BigInt() constructor
-// - Cannot mix with regular numbers in operations
-// - typeof returns "bigint"
-// - Use case: cryptography, precise large number calculations
+// 7. BigInt — arbitrary-precision integer (ES2020); append n or use BigInt().
 const bigIntType = 9007199254740991n;
 
 console.log("Variables Demo:");

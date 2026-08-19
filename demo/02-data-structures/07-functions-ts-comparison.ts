@@ -174,8 +174,8 @@ console.log(tsMultiply(4, 5)); // 20
 console.log(divide(10, 2)); // 5
 
 // ⚠️ PITFALL: Returning object literals
-// const createUser = (name: string) => { name: name }; // ❌ Syntax error
-const createUser = (name: string): { name: string } => ({ name }); // ✅ Correct
+// const createUser = (name: string) => { name: name }; // ⚠️ returns undefined — `{ name: name }` is a block with a label, not an object literal
+const createUser = (name: string): { name: string } => ({ name }); // ✅ Correct: wrap in parens
 
 // ✅ BEST PRACTICE: Use type aliases for complex function types
 type Callback = (error: Error | null, data?: string) => void;
@@ -275,8 +275,8 @@ function infiniteLoop(): never {
 
 // TypeScript: undefined as explicit return type
 function explicitUndefined(): undefined {
-  return undefined; // Must explicitly return undefined
-  // return; // ❌ Error: A function whose declared type is neither 'void' nor 'any' must return a value
+  return undefined; // Valid: explicitly returns undefined
+  // return; // Also valid — undefined (like void/any) permits a bare `return;`
 }
 
 console.log("\n=== Return Types ===");
@@ -507,7 +507,7 @@ const obj = {
     return this.value; // 'this' refers to obj
   },
   arrowMethod: () => {
-    // return this.value; // ❌ Error: 'this' implicitly has type 'any'
+    // return this.value; // ❌ Error (module scope): TS2532 'Object is possibly undefined' — arrow captures module/global this, not obj
   }
 };
 

@@ -41,6 +41,18 @@ const sorted = arr.toSorted();
 console.log("\ntoSorted():", sorted); // [1, 1, 2, 3, 4, 5, 6, 9]
 console.log("Original unchanged:", arr); // [3, 1, 4, 1, 5, 9, 2, 6]
 
+// 📘 Official MDN example (Array.toSorted):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted
+const months = ["Mar", "Jan", "Feb", "Dec"];
+const sortedMonths = months.toSorted();
+console.log("MDN months:", sortedMonths); // ['Dec', 'Feb', 'Jan', 'Mar']
+console.log("MDN original unchanged:", months); // ['Mar', 'Jan', 'Feb', 'Dec']
+
+const values = [1, 10, 21, 2];
+const sortedValues = values.toSorted((a, b) => a - b);
+console.log("MDN values:", sortedValues); // [1, 2, 10, 21]
+console.log("MDN values original unchanged:", values); // [1, 10, 21, 2]
+
 // Custom comparator
 const descending = arr.toSorted((a, b) => b - a);
 console.log("toSorted(descending):", descending); // [9, 6, 5, 4, 3, 2, 1, 1]
@@ -103,6 +115,21 @@ console.log("findLast even number:", lastEven); // 10
 
 const lastGreaterThan5 = numbers.findLast(n => n > 5);
 console.log("findLast >5:", lastGreaterThan5); // 10
+
+// 📘 Official MDN example (Array.findLast):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast
+// Find last object in an array matching on element properties.
+const inventory = [
+  { name: "apples", quantity: 2 },
+  { name: "bananas", quantity: 0 },
+  { name: "fish", quantity: 1 },
+  { name: "cherries", quantity: 5 },
+];
+function isNotEnough(item) {
+  return item.quantity < 2;
+}
+console.log("MDN findLast (low stock):", inventory.findLast(isNotEnough));
+// { name: "fish", quantity: 1 }
 
 // findLastIndex() - Find index of last element matching predicate
 const lastEvenIndex = numbers.findLastIndex(n => n % 2 === 0);

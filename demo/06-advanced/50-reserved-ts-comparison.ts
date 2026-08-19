@@ -127,19 +127,23 @@ console.log("satisfies preserves literal types while still type-checking");
 
 console.log("\n=== TypeScript Decorators ===\n");
 
-// Class decorator
+// Decorators are Stage 3 TC39; TypeScript supports them (legacy via
+// experimentalDecorators, or native Stage 3 in TS 5.0+). They are NOT
+// transpiled by ts-node ESM, so the `@` applications below are illustrative
+// and commented out — the decorator factories are valid runnable TS.
+
+// Class decorator (legacy signature: constructor)
 function logged(constructor: Function) {
   console.log(`Class ${constructor.name} is being decorated`);
 }
-
-@logged
+// @logged
 class Example {
   greet(name: string): string {
     return `Hello, ${name}!`;
   }
 }
 
-// Method decorator
+// Method decorator (legacy 3-arg: target, propertyKey, descriptor)
 function enumerable(value: boolean) {
   return function (
     target: any,
@@ -149,29 +153,25 @@ function enumerable(value: boolean) {
     descriptor.enumerable = value;
   };
 }
-
+// @enumerable(false)
 class Calculator {
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @enumerable(false)
   add(a: number, b: number): number {
     return a + b;
   }
 }
 
-// Property decorator
+// Property decorator (legacy 2-arg: target, propertyKey)
 function format(pattern: string) {
   return function (target: any, propertyKey: string) {
     console.log(`Decorating ${propertyKey} with pattern ${pattern}`);
   };
 }
-
+// @format('YYYY-MM-DD')
 class Formatted {
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @format('YYYY-MM-DD')
   date!: string;
 }
 
-// Accessor decorator
+// Accessor decorator (legacy 3-arg: target, propertyKey, descriptor)
 function configurable(value: boolean) {
   return function (
     target: any,
@@ -181,18 +181,16 @@ function configurable(value: boolean) {
     descriptor.configurable = value;
   };
 }
-
+// @configurable(false)
 class ConfigurableExample {
   private _value: number = 0;
 
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @configurable(false)
   get value(): number {
     return this._value;
   }
 }
 
-console.log("Decorators enable metaprogramming patterns");
+console.log("Decorators enable metaprogramming patterns (see commented @ applications)");
 
 // ============================================
 // Section 3: Import Attributes (TS 5.3+)
@@ -299,6 +297,9 @@ type Increment<N extends number> = N extends N
 type TupleOf<N extends number, T extends any[] = []> = T['length'] extends N
   ? T
   : TupleOf<N, [...T, any]>;
+
+type Incremented = Increment<3>; // 4
+type TwiceIncremented = Increment<Increment<3>>; // 5
 
 // Type-level array manipulation
 type DropFirst<T extends any[]> = T extends [any, ...infer Rest] ? Rest : [];

@@ -345,6 +345,16 @@ aggregate.errors.forEach((err, i) => {
   console.log(`  Error ${i + 1}:`, err.message);
 });
 
+// 📘 Official MDN example (AggregateError — catching one from Promise.any):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError
+// Promise.any() rejects with an AggregateError when NO promise fulfills.
+Promise.any([Promise.reject(new Error("some error"))]).catch((e) => {
+  console.log("MDN AggregateError instanceof:", e instanceof AggregateError); // true
+  console.log("MDN AggregateError name:", e.name); // "AggregateError"
+  console.log("MDN AggregateError errors:", e.errors); // [ Error: "some error" ]
+  // Note: the .message text is implementation-dependent (e.g. "All promises were rejected")
+});
+
 // 4.2 Promise.allSettled with AggregateError
 async function processAll(items) {
   const results = await Promise.allSettled(
@@ -1342,25 +1352,12 @@ console.log("\n=== Async Error Handling Advanced Demo Complete ===");
 */
 
 // ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Async Error Handling:
-- 20-error-handling.js (synchronous error handling)
-- 24-function-patterns-advanced.js (retry and debounce)
-- 26-optimization-performance.js (promise performance)
-`);
-
-
-// ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
+console.log("📘 30-promises.js - Promise error handling");
 console.log("📘 33.2-fetch-error-handling.js - Fetch error handling");
 console.log("📘 33.3-fetch-practical-patterns.js - Retry patterns");
-console.log("📘 30-promises.js - Promise error handling");
 
 // ============================================
 // TypeScript Comparison

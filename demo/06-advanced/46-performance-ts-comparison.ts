@@ -309,15 +309,15 @@ function Memoize<T extends (...args: any[]) => any>(
 }
 
 class Calculator {
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @Memoize
+  // Decorator applications are commented out — ts-node ESM does NOT transpile
+  // legacy method decorators, so an active `@` crashes at runtime.
+  // @Memoize
   fibonacci(n: number): number {
     if (n <= 1) return n;
     return this.fibonacci(n - 1) + this.fibonacci(n - 2);
   }
 
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @Memoize
+  // @Memoize
   factorial(n: number): number {
     if (n <= 1) return 1;
     return n * this.factorial(n - 1);

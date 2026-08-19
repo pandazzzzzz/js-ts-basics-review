@@ -61,8 +61,12 @@ flexibleValue = undefined; // ✅ OK
 let anyValue: any = 42;
 anyValue = "string"; // ✅ OK
 anyValue = true; // ✅ OK
-anyValue.nonExistentMethod(); // ✅ No error (dangerous!)
-// ⚠️ PITFALL: 'any' defeats the purpose of TypeScript
+// ⚠️ PITFALL: 'any' bypasses type checks — this throws at runtime
+try {
+  anyValue.nonExistentMethod(); // ✅ Compiles, but fails at runtime
+} catch (e) {
+  console.log("Runtime error:", (e as Error).message);
+}
 
 // 'unknown' - Type-safe alternative to 'any'
 let unknownValue: unknown = 42;
@@ -165,10 +169,8 @@ function processValue(value: string | number) {
 console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
 // ⚠️ PITFALL 1: Type assertions don't perform runtime checks
-// (Same idea as the `wrongAssertion` example above, restated in the pitfalls section.)
-let redundantAssertion = (42 as any) as string;
-// redundantAssertion.toUpperCase(); // Runtime error! TypeScript won't catch this
-console.log("Type assertions bypass compile-time checks");
+// (Demonstrated earlier with wrongAssertion, restated briefly for clarity)
+console.log("Type assertions bypass compile-time checks — validate at runtime!");
 
 // PITFALL 2: Array type confusion
 let tsArrayExample: number[] = [1, 2, 3];
@@ -184,30 +186,6 @@ interface Person {
 const person: Person = { name: "Alice", age: 30 };
 console.log(person.name); // ✅ OK
 // console.log(person.email); // ❌ Error: Property 'email' does not exist
-
-// PITFALL 4: Non-null assertion can cause runtime errors
-// (The dedicated section 10 below covers the non-null assertion operator
-//  in depth; here we reuse the same idea under different identifiers.)
-interface UserProfile {
-  name: string;
-  age: number;
-}
-
-function fetchProfile(): UserProfile | null {
-  return { name: "Bob", age: 25 };
-}
-
-const maybeProfile = fetchProfile();
-
-// Safe way:
-const safeName = maybeProfile?.name; // ✅ Safe: string | undefined
-console.log("Safe access:", safeName);
-
-// Dangerous way (non-null assertion):
-const forcedName = maybeProfile!.name; // ⚠️ Tells TS "trust me, it's not null"
-console.log("Non-null assertion:", forcedName);
-
-// ✅ BEST PRACTICE: Use optional chaining or explicit null checks
 
 // ============================================
 // 8. Best Practices Summary

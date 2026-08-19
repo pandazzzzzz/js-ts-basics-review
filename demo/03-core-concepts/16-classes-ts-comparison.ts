@@ -269,10 +269,14 @@ function format(pattern: string) {
   };
 }
 
-@sealed
+// Decorator applications are commented out below — ts-node ESM does NOT transpile
+// decorators (legacy or Stage 2.7), so an active `@` here crashes at runtime.
+// The decorator factories above are valid runnable TS; the applications are
+// illustrative. Run these through a real build (tsc --experimentalDecorators)
+// or a browser to exercise them.
+// @sealed
 class DataService {
-  // @ts-expect-error — legacy decorators require experimentalDecorators: true
-  @logExecution
+  // @logExecution
   fetchData(id: number): { id: number; data: string } {
     return { id, data: "Sample data" };
   }
