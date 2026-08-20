@@ -19,20 +19,13 @@ export {};
 // 3. Removing Elements
 // 4. Batch Operations and Performance
 // 5. Special APIs for Tables and Lists
-// 6. Best Practices & Summary
-// 7. MutationObserver
+// 6. MutationObserver
+// 7. Best Practices & Summary
 
-// ============================================
-// Section 1: Creating Elements
-// ============================================
-// Description: Dynamically creating DOM elements and text nodes
-// ES Spec: DOM Core Level 1+
-// Characteristics:
-//   - createElement creates element nodes with specified tag
-//   - createTextNode creates plain text (HTML automatically escaped)
-//   - cloneNode duplicates existing elements
-// Use Cases: Dynamic lists, modals, notifications
-// Common Pitfalls: cloneNode doesn't copy event listeners, deep clone performance cost
+// 1. Creating Elements
+// createElement(tag), createTextNode(text) — text nodes auto-escape HTML
+// cloneNode(deep) duplicates elements; ⚠️ does NOT copy event listeners
+// DocumentFragment: lightweight container for batch DOM updates (single reflow)
 
 console.log("=== Section 1: Creating Elements ===\n");
 
@@ -108,16 +101,11 @@ if (typeof document !== 'undefined') {
 }
 
 // ============================================
-// Section 2: Inserting Elements
-// ============================================
-// Description: Inserting elements into the DOM tree at specified positions
-// ES Spec: DOM4 (2015), Living Standard
-// Characteristics:
-//   - Modern methods are more flexible (append/prepend/before/after/replaceWith)
-//   - Traditional methods return the operated node
-//   - insertAdjacent* provides precise position control
-// Use Cases: Dynamic content loading, list item addition, component insertion
-// Common Pitfalls: Same element can only exist in one place, moving removes from original position
+// 2. Inserting Elements
+// Modern: append/prepend/before/after/replaceWith — accept multiple nodes/strings, return undefined
+// Traditional: appendChild/insertBefore/replaceChild — single node, return the node
+// insertAdjacentHTML/Element/Text: precise position (beforebegin/afterbegin/beforeend/afterend)
+// ⚠️ Appending an existing element moves it (removes from original position); use cloneNode to copy
 
 console.log("\n=== Section 2: Inserting Elements ===\n");
 
@@ -250,16 +238,10 @@ cloned.textContent = 'Modified'; // Modifies the clone, not original
 `);
 
 // ============================================
-// Section 3: Removing Elements
-// ============================================
-// Description: Removing elements from the DOM tree
-// ES Spec: DOM4 (element.remove()), DOM Core (removeChild)
-// Characteristics:
-//   - remove() is the modern concise method
-//   - removeChild() requires parent element reference
-//   - Removed elements can still be kept in memory
-// Use Cases: Closing modals, deleting list items, cleaning temporary elements
-// Common Pitfalls: Memory leaks (keeping references), leftover event listeners
+// 3. Removing Elements
+// Modern: element.remove() — no parent reference needed
+// Traditional: parent.removeChild(child) — returns the removed node
+// Removed nodes stay in memory if references exist; clean up event listeners to avoid leaks
 
 console.log("\n=== Section 3: Removing Elements ===\n");
 
@@ -319,17 +301,10 @@ console.log(`
    }
 `);
 
-// ============================================
-// Section 4: Batch Operations and Performance
-// ============================================
-// Description: Optimizing large DOM operations
-// ES Spec: Various
-// Characteristics:
-//   - Minimizing reflows is key
-//   - DocumentFragment and cloneNode are common techniques
-//   - requestAnimationFrame is used for animation optimization
-// Use Cases: Large data list rendering, table updates, animation effects
-// Common Pitfalls: Frequent DOM reads/writes causing forced synchronous layout
+// 4. Batch Operations and Performance
+// Minimize reflows: batch DOM writes before reads; use DocumentFragment for bulk insertions
+// requestAnimationFrame for animations; virtual scrolling for very long lists
+// Avoid layout thrashing (alternating read/write causes forced synchronous layouts)
 
 console.log("\n=== Section 4: Batch Operations and Performance ===\n");
 
@@ -434,46 +409,14 @@ elements.forEach((el, i) => {                         // Batch writes
 `);
 
 console.log("\n💡 Virtual DOM Concept:");
-console.log(`
-React/Vue framework core optimization ideas:
+console.log("  React/Vue core idea: represent the DOM as JS objects, diff changes in memory, then batch-apply to the real DOM");
+console.log("  Solves: direct DOM manipulation is slow (reflow/repaint overhead), so minimize real DOM mutations");
+console.log("  Flow: vNode (JS object) → diff() → patch() applies only the minimal real DOM changes");
 
-1. Problem: Direct DOM manipulation is slow
-   - DOM API calls have overhead
-   - Reflows and repaints are expensive
-
-2. Solution: Virtual DOM
-   - Represent DOM structure in memory using JS objects
-   - Calculate changes in virtual DOM first
-   - Find minimum change set via diff algorithm
-   - Batch apply to real DOM
-
-3. Simplified example:
-   // Virtual node representation
-   const vNode = {
-     tag: 'div',
-     props: { class: 'container' },
-     children: [
-       { tag: 'h1', props: {}, children: ['Title'] }
-     ]
-   };
-
-   // Diff then batch apply updates
-   function patch(realDOM, vdomChanges) {
-     // Calculate differences...
-     // Batch apply changes...
-   }
-`);
-
-// ============================================
-// Section 5: Special APIs for Tables and Lists
-// ============================================
-// Description: Convenient operation methods for specific element types
-// ES Spec: HTML5
-// Characteristics:
-//   - Tables have dedicated row and cell manipulation interfaces
-//   - Select elements have options collection management
-// Use Cases: Dynamic table editing, dropdown menu management
-// Common Pitfalls: Index changes after operations, forget to re-render
+// 5. Special APIs for Tables and Lists
+// HTMLTableElement: table.rows/caption/tBodies/tHead; insertRow/deleteRow; row.insertCell/deleteCell
+// HTMLSelectElement: select.options/add/remove; option.value/text/selected; selectedIndex/value
+// These specialized APIs provide convenient shortcuts for common table/select operations
 
 console.log("\n=== Section 5: Special APIs for Tables and Lists ===\n");
 
@@ -609,26 +552,10 @@ console.log("4. innerHTML = '' to empty container: modern engines GC removed chi
 console.log("5. Don't mix reads and writes of styles in tight loops");
 console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
 
-// ============================================
-// Section 6: MutationObserver
-// ============================================
-// Description: React to DOM changes without polling (DOM Living Standard)
-// ES Spec: WHATWG DOM Living Standard (2012+)
-// Characteristics:
-//   - Observes mutations: child list, attributes, character data
-//   - Delivers batches of mutations asynchronously (microtask queue)
-//   - Replaces deprecated Mutation Events (DOMAttrModified, etc.)
-//   - More efficient than polling with setInterval
-// Use Cases:
-//   - Auto-save on contenteditable changes
-//   - Lazy-load elements as they appear (prefer IntersectionObserver for that)
-//   - Detect third-party DOM modifications
-//   - Highlight elements when attributes change
-// Common Pitfalls:
-//   - subtree: true can be expensive on large DOM trees
-//   - Forgetting to call disconnect() causes memory leaks
-//   - Observing attribute changes triggers for every attribute set, even if value unchanged
-//   - Mutation records are batched — don't expect synchronous callbacks
+// 6. MutationObserver
+// Watches DOM changes (childList, attributes, characterData, subtree) and delivers batches asynchronously
+// Use cases: auto-save on contenteditable, detecting third-party DOM changes
+// ⚠️ subtree:true is expensive on large DOM; always disconnect() to avoid leaks; callbacks are batched (microtask)
 
 console.log("\n=== Section 6: MutationObserver Demo ===\n");
 

@@ -22,17 +22,11 @@ export {};
 // 6. Custom Events
 // 7. Best Practices & Summary
 
-// ============================================
-// Section 1: Event Basics
-// ============================================
-// Description: The DOM event system is the core mechanism for user interaction and programmatic response
-// ES Spec: DOM Level 2 Events, DOM Living Standard
-// Characteristics:
-//   - Based on publish-subscribe pattern
-//   - Supports multiple listeners
-//   - Event objects contain rich context information
-// Use Cases: User interaction, state synchronization, component communication
-// Common Pitfalls: `this` pointing issues, memory leaks, event delegation misuse
+// 1. Event Basics
+// Publish-subscribe model: multiple listeners, rich event object context
+// Binding: addEventListener(type, handler, {capture, once, passive, signal}) is the modern way
+// element.onclick = fn binds a single handler (later overwrites); inline HTML onclick is not recommended
+// ⚠️ Watch `this` in handlers, remove listeners to avoid leaks
 
 console.log("=== Section 1: Event Basics ===\n");
 
@@ -166,17 +160,10 @@ element.addEventListener('click', () => console.log('3'));
 element.addEventListener('click', () => console.log('once'), { once: true });
 `);
 
-// ============================================
-// Section 2: Event Bubbling and Capturing
-// ============================================
-// Description: The three-phase mechanism for event propagation
-// ES Spec: DOM Level 3 Events
-// Characteristics:
-//   - Default triggers in bubble phase
-//   Capture phase is rarely used directly
-//   - Propagation can be stopped
-// Use Cases: Event delegation relies on bubbling, capture for special interception
-// Common Pitfalls: stopPropagation abuse affecting other logic
+// 2. Event Propagation: Capturing → Target → Bubbling
+// Most events bubble; default listeners run in the bubble phase, capture phase runs top-down first
+// stopPropagation() halts further propagation (⚠️ use sparingly); stopImmediatePropagation() also stops other listeners
+// Delegation relies on bubbling — a single parent listener handles events from many children
 
 console.log("\n=== Section 2: Event Bubbling and Capturing ===\n");
 
@@ -248,17 +235,9 @@ console.log(`
 // - Use mouseover/mouseout instead of mouseenter/mouseleave
 `);
 
-// ============================================
-// Section 3: Event Delegation
-// ============================================
-// Description: Using bubbling mechanism to handle child elements' events on parent
-// Pattern: Behavior pattern, data-driven
-// Characteristics:
-//   - Reduces memory usage
-//   - Automatically supports dynamically added elements
-//   - Needs target element filtering
-// Use Cases: List operations, dynamic content, table interactions
-// Common Pitfalls: target selector inaccurate, ignoring non-target elements
+// 3. Event Delegation
+// Bind one listener on a parent, use event.target to find the clicked child (reduces listeners, supports dynamic content)
+// Use closest(selector) to filter targets; ⚠️ guard against clicks outside the target area
 
 console.log("\n=== Section 3: Event Delegation ===\n");
 
@@ -376,17 +355,10 @@ toolbar.addEventListener('click', (e) => {
 </script>
 `);
 
-// ============================================
-// Section 4: Browser Default Behavior
-// ============================================
-// Description: Browser built-in interaction behaviors and how to control them
-// ES Spec: DOM Living Standard
-// Characteristics:
-//   - Most are cancelable
-//   - passive option optimizes scroll performance
-//   - Should not be over-prevented
-// Use Cases: Form validation, SPA navigation, custom controls
-// Common Pitfalls: Forgetting to check defaultPrevented, passive listeners calling preventDefault
+// 4. Browser Default Behavior
+// preventDefault() cancels built-in behavior (link navigation, form submit, context menu)
+// Many events are cancelable; check event.defaultPrevented to detect if a listener already canceled
+// passive: true listeners cannot call preventDefault (throws in strict); good for scroll performance
 
 console.log("\n=== Section 4: Browser Default Behavior ===\n");
 
@@ -474,16 +446,11 @@ console.log(`
 └──────────────────────┴─────────────────────────────────┘
 `);
 
-// ============================================
-// Section 5: Common Event Types
-// ============================================
-// Description: Various standard events and their properties
-// ES Spec: UI Events, Input Events, etc.
-// Characteristics:
-//   - Different event types have different event object properties
-//   - Some events have specific methods
-// Use Cases: Comprehensive coverage of user interaction scenarios
-// Common Pitfalls: Confusing mouseover/mouseenter, input/change
+// 5. Common Event Types
+// Mouse: click/dblclick/mouseover (bubbles, includes children) vs mouseenter (no bubble, self only)
+// Keyboard: keydown/keyup (any key, keyCode)/keypress (char only, deprecated); input (any change) vs change (fires on blur for text)
+// Focus: focus/blur (no bubble) vs focusin/focusout (bubble); scroll (no bubble) vs wheel; load/DOMContentLoaded
+// Pointer Events unify mouse/touch/pen: pointerdown/up/move/enter/leave
 
 console.log("\n=== Section 5: Common Event Types ===\n");
 
@@ -683,17 +650,10 @@ console.log(`
 `);
 
 
-// ============================================
-// Section 6: Custom Events
-// ============================================
-// Description: Creating and triggering custom events for component communication
-// ES Spec: DOM Level 4
-// Characteristics:
-//   - CustomEvent can carry arbitrary data
-//   - Supports bubbling and capturing
-//   - Fully type-safe (in TS）
-// Use Cases: Component decoupled communication, plugin system, status notifications
-// Common Pitfalls: Forgetting to set bubbles, object reference issues in detail
+// 6. Custom Events
+// new Event(name, {bubbles, cancelable}) or new CustomEvent(name, {detail}) to carry data
+// Dispatch with element.dispatchEvent(event); listen like any native event
+// ⚠️ Set bubbles:true if you need delegation; detail is read-only
 
 console.log("\n=== Section 6: Custom Events ===\n");
 

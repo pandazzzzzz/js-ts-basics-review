@@ -1383,25 +1383,13 @@ console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 */
 
 // ============================================
-// CROSS-REFERENCES
-// ============================================
-console.log(`
-📘 See related files for additional patterns:
-
-Inheritance Patterns:
-- 15-prototypes-inheritance.js (prototypal inheritance)
-- 16-classes.js (ES6 class syntax)
-- 24-function-patterns-advanced.js (functional composition)
-`);
-
-
-// ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 15-prototypes-inheritance.js - Prototypes");
-console.log("📘 16-classes.js - Classes");
-console.log("📘 44-design-patterns.js - Design patterns");
+console.log("📘 15-prototypes-inheritance.js - Prototypal inheritance");
+console.log("📘 16-classes.js - ES6 class syntax");
+console.log("📘 24-function-patterns-advanced.js - Functional patterns & composition");
+console.log("📘 44-design-patterns.js - More design patterns");
 
 // ============================================
 // TypeScript Comparison

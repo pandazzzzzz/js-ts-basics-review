@@ -1210,14 +1210,14 @@ try {
  * - Promise.allSettled() for safer handling
  */
 
-console.log("\n=== 13. Async Error Handling (Basic) ===");
+console.log("\n=== 8. Async Error Handling (Basic) ===");
 
-// 9.1 Basic Promise error handling
+// 8.1 Basic Promise error handling
 console.log("\nPromise error handling:");
 Promise.reject(new Error("Promise failed"))
   .catch(error => console.log("  Caught:", error.message));
 
-// 9.2 async/await with try/catch
+// 8.2 async/await with try/catch
 async function basicAsyncError() {
   try {
     await Promise.reject(new Error("Async failed"));
@@ -1227,7 +1227,7 @@ async function basicAsyncError() {
 }
 basicAsyncError();
 
-// 9.3 Promise.allSettled for safer handling
+// 8.3 Promise.allSettled for safer handling
 async function saferAsyncHandling() {
   const results = await Promise.allSettled([
     Promise.resolve("Success"),
@@ -1268,7 +1268,7 @@ saferAsyncHandling();
  * - Debugging complex systems
  */
 
-console.log("\n=== 14. Error Chaining Demo ===");
+console.log("\n=== 9. Error Chaining Demo ===");
 
 function lowLevelOperation() {
   throw new Error("Connection timeout");
@@ -1320,9 +1320,9 @@ try {
  *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
-console.log("\n=== 15. AggregateError Demo ===");
+console.log("\n=== 10. AggregateError Demo ===");
 
-// 11.1 Creating AggregateError
+// 10.1 Creating AggregateError
 const multipleErrors = [
   new Error("First error"),
   new Error("Second error"),
@@ -1338,7 +1338,7 @@ aggregateErr.errors.forEach((err, i) => {
   console.log(`  Error ${i + 1}:`, err.message);
 });
 
-// 11.2 Promise.any() with AggregateError
+// 10.2 Promise.any() with AggregateError
 console.log("\nPromise.any() produces AggregateError:");
 
 const promises = [
@@ -1371,7 +1371,7 @@ Promise.any(promises)
  * - Transient error handling
  */
 
-console.log("\n=== 16. Retry Pattern Demo ===");
+console.log("\n=== 11. Retry Pattern Demo ===");
 
 async function retry(fn, maxRetries = 3, baseDelay = 100) {
   let lastError;
@@ -1422,7 +1422,7 @@ retry(flakyOperation, 5, 50)
  * - window.onerror in browsers
  */
 
-console.log("\n=== 17. Global Error Handling Demo ===");
+console.log("\n=== 12. Global Error Handling Demo ===");
 
 // Node.js unhandled rejection handler
 if (typeof process !== 'undefined') {

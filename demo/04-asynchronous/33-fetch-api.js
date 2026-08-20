@@ -110,7 +110,7 @@ fetch(`${API_BASE}/posts/1`)
 console.log("\n=== Response Methods Demo ===\n");
 
 // Helper to demonstrate different response methods
-// - Fetch 返回 Promise，配合 async/await 使用 (ES2017)
+// - fetch returns a Promise; use async/await to consume it (ES2017)
 async function demonstrateResponseMethods() {
   try {
     // JSON response (most common for APIs)
@@ -1094,7 +1094,7 @@ async function downloadWithProgress(url, onProgress) {
 
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 'unknown';
-        onProgress(loaded, total, percent); // 调用进度回调
+        onProgress(loaded, total, percent); // Invoke the progress callback
         console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
       }
     }

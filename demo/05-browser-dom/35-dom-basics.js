@@ -22,16 +22,11 @@ export {};
 // 6. Best Practices & Summary
 
 // ============================================
-// Section 1: DOM Tree Structure
-// ============================================
-// Description: The Document Object Model (DOM) is a programming interface for HTML/XML documents
-// ES Spec: DOM Level 1 (1998), Living Standard
-// Characteristics:
-//   - Represents the document as a tree structure of nodes
-//   - Each node has a specific type and set of properties
-//   - Can be read and modified using JavaScript
-// Use Cases: Dynamic web content, interactive applications, data visualization
-// Common Pitfalls: Live collection traps, whitespace text nodes, attribute vs property confusion
+
+// 1. DOM Tree Structure
+// Nodes form a tree; key node types: ELEMENT_NODE=1, TEXT_NODE=3, COMMENT_NODE=8, DOCUMENT_NODE=9
+// Navigate with: parentNode/childNodes/firstChild/nextSibling (all nodes) or parentElement/children/firstElementChild/nextElementSibling (elements only)
+// Watch out for: whitespace text nodes, live collections auto-updating
 
 console.log("=== Section 1: DOM Tree Structure ===\n");
 
@@ -78,16 +73,10 @@ if (typeof document !== 'undefined') {
   console.log("Please run these examples in browser console or with jsdom");
 }
 
-// ============================================
-// Section 2: Searching and Getting Elements
-// ============================================
-// Description: Methods for finding elements in the DOM
-// ES Spec: DOM Selectors API Level 1/2
-// Characteristics:
-//   - Returns single element or collection of elements
-//   - Distinction between live collections and static snapshots
-// Use Cases: Accessing page elements for manipulation, event binding, style modification
-// Common Pitfalls: Live collections auto-update causing element skips during iteration
+// 2. Searching and Getting Elements
+// getElementById/querySelector return single element; getElementsBy*/querySelectorAll return collections
+// Live collections (HTMLCollection from getElementsBy*) auto-update — iterate over [...coll] to avoid skipping elements
+// closest(selector) finds nearest ancestor matching selector; matches(selector) tests if element matches
 
 console.log("\n=== Section 2: Searching and Getting Elements ===\n");
 
@@ -163,16 +152,10 @@ for (let i = items.length - 1; i >= 0; i--) {
 }
 `);
 
-// ============================================
-// Section 3: Node Properties and Content
-// ============================================
-// Description: Getting and setting element content and attributes
-// ES Spec: DOM Parsing and Serialization, HTML5
-// Characteristics:
-//   - innerHTML parses HTML, textContent is plain text
-//   - textContent has better performance than innerText
-// Use Cases: Content updates, XSS protection, text extraction
-// Common Pitfalls: innerHTML XSS risk, innerText triggers reflow
+// 3. Node Properties and Content
+// innerHTML: parses HTML, ⚠️ XSS risk with untrusted content; textContent: plain text, safe, fast
+// innerText: CSS-aware, triggers reflow (slow); outerHTML: includes element itself
+// nodeValue/data: for text/comment nodes; hidden: HTML5 boolean (can be overridden by CSS)
 
 console.log("\n=== Section 3: Node Properties and Content ===\n");
 
@@ -236,17 +219,11 @@ console.log("│ innerText   │ ❌ Escaped│ ✅ Safe   │ Slow(reflow)│ �
 console.log("│ outerHTML   │ ✅ Kept  │ ⚠️ Risk  │ Slow      │ ✅ Inc.  │");
 console.log("└─────────────┴──────────┴──────────┴──────────┴──────────┘\n");
 
-// ============================================
-// Section 4: Attribute Operations
-// ============================================
-// Description: Difference between HTML attributes and DOM properties
-// ES Spec: DOM Core, HTML5
-// Characteristics:
-//   - Standard attributes usually sync (e.g., id, class)
-//   - Non-standard attributes need dataset or getAttribute
-//   - Some attributes don't sync (e.g., href, value)
-// Use Cases: Data storage, state marking, configuration passing
-// Common Pitfalls: Confusing attribute vs property, href/value sync issues
+// 4. Attribute Operations
+// HTML attribute vs DOM property: attributes are strings in HTML; properties are on the JS object (any type)
+// Standard attributes (id, class) auto-sync; non-standard use getAttribute/setAttribute or dataset for data-*
+// ⚠️ input.value property reflects current typed value; getAttribute('value') returns the initial HTML value
+// className maps to `class` attribute; htmlFor maps to `for`; classList provides add/remove/toggle/contains
 
 console.log("\n=== Section 4: Attribute Operations ===\n");
 
@@ -338,17 +315,11 @@ console.log("│ Cell span      │ colspan/rowspan     │ colSpan/rowSpan     
 console.log("│ Content edit.  │ contenteditable     │ contentEditable     │");
 console.log("└────────────────┴─────────────────────┴─────────────────────┘\n");
 
-// ============================================
-// Section 5: Styles and Classes
-// ============================================
-// Description: Manipulating element classes and inline styles
-// ES Spec: CSSOM, CSS Object Model
-// Characteristics:
-//   - classList is the modern recommended way to manipulate classes
-//   - style object corresponds to inline styles, has highest priority
-//   - getComputedStyle gets final calculated styles
-// Use Cases: Theme switching, status indicators, animation effects
-// Common Pitfalls: style only reads inline styles, getComputedStyle is read-only
+// 5. Styles and Classes
+// classList: add/remove/toggle/contains/replace — preferred over className string manipulation
+// element.style: inline styles only (camelCase: backgroundColor); cssText for bulk set
+// getComputedStyle(el): read-only computed values (resolved units, includes CSS rules); accepts ::after/::before
+// CSS custom properties: element.style.setProperty('--name', val); getComputedStyle(el).getPropertyValue('--name')
 
 console.log("\n=== Section 5: Styles and Classes ===\n");
 

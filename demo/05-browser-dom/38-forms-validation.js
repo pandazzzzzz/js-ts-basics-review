@@ -22,17 +22,9 @@ export {};
 // 5. Clipboard and Selection
 // 6. Best Practices & Summary
 
-// ============================================
-// Section 1: Form Element Access
-// ============================================
-// Description: Multiple ways to access and manipulate forms and their controls
-// ES Spec: HTML5 Forms API
-// Characteristics:
-//   - document.forms returns named forms collection
-//   - form.elements returns form controls
-//   - Supports accessing by name attribute
-// Use Cases: Form data collection, dynamic form generation, batch validation
-// Common Pitfalls: Same-name controls return collection instead of single element
+// 1. Form Element Access
+// document.forms → HTMLCollection of forms; form.elements → controls; both support access by name/id
+// Access via form.elements.name or form.name; ⚠️ same-name radio buttons return a RadioNodeList collection
 
 console.log("=== Section 1: Form Element Access ===\n");
 
@@ -159,16 +151,10 @@ console.log('has avatar after delete:', formData.has('avatar')); // false
 `);
 
 
-// ============================================
-// Section 2: Form Events
-// ============================================
-// Description: Form-related events for responding to user interaction
-// ES Spec: HTML5 Events
-// Characteristics:
-//   - focus/blur don't bubble, focusin/focusout bubble
-//   - input triggers real-time, change triggers on confirmation
-// Use Cases: Real-time validation, auto-save, user experience optimization
-// Common Pitfalls: change vs input confusion, blur timing issues
+// 2. Form Events
+// submit: fires on form submission (button click or Enter); reset: clears form
+// input: real-time on every change; change: fires on blur/confirmation for text, immediately for checkboxes/selects
+// focus/blur don't bubble; focusin/focusout bubble — useful for delegated validation
 
 console.log("\n=== Section 2: Form Events ===\n");
 
@@ -240,17 +226,11 @@ if (validateCustom(form)) {
 }
 `);
 
-// ============================================
-// Section 3: Constraint Validation API
-// ============================================
-// Description: HTML5 built-in form validation API
-// ES Spec: HTML5 Constraint Validation
-// Characteristics:
-//   - Based on HTML attributes declarative validation
-//   - Can set custom error messages
-//   - CSS :valid/:invalid pseudo-classes for styling
-// Use Cases: Client-side pre-validation, instant feedback
-// Common Pitfalls: Relying only on client validation (not secure）
+// 3. Constraint Validation API
+// HTML attributes (required, minlength, pattern, type) drive validation; :valid/:invalid CSS pseudo-classes style it
+// API: checkValidity() → boolean; validity object exposes whichRuleFailed (tooShort, patternMismatch, ...)
+// setCustomValidity(msg) sets custom error (empty string clears it); validationMessage returns current message
+// requestSubmit() triggers validation; submit() does NOT
 
 console.log("\n=== Section 3: Constraint Validation API ===\n");
 
@@ -376,17 +356,10 @@ input:required {
 }
 `);
 
-// ============================================
-// Section 4: Custom Validation Logic
-// ============================================
-// Description: Beyond HTML5 validation complex business rules
-// ES Spec: N/A (Application Logic)
-// Characteristics:
-//   - Combines multiple validation rules
-//   - Cross-field dependency validation
-//   - Async server validation
-// Use Cases: Password strength, duplicate password, uniqueness check
-// Common Pitfalls: Validation timing issues, improper debounce handling
+// 4. Custom Validation Logic
+// For rules HTML5 can't express: cross-field (password match), async (uniqueness), password strength
+// Use setCustomValidity + validationMessage for a unified error UI; debounce real-time checks
+// ⚠️ Always re-validate on the server — client-side checks are bypassable
 
 console.log("\n=== Section 4: Custom Validation Logic ===\n");
 
@@ -536,16 +509,10 @@ class FormValidator {
 new FormValidator(document.getElementById('myForm'));
 `);
 
-// ============================================
-// Section 5: Clipboard and Selection
-// ============================================
-// Description: Accessing clipboard and text selection APIs
-// ES Spec: Clipboard API, Selection API
-// Characteristics:
-//   - Clipboard operations need user gesture to trigger
-//   - Async API returns Promise
-// Use Cases: Copy to clipboard, rich text editor, formatted paste
-// Common Pitfalls: Permission issues, synchronous API deprecated
+// 5. Clipboard and Selection
+// Modern: navigator.clipboard.writeText/readText (async, needs user gesture + permission); fallback to execCommand
+// Copy/cut/paste events let you intercept; e.clipboardData holds the payload
+// Selection: window.getSelection() + document.createRange() for programmatic text selection
 
 console.log("\n=== Section 5: Clipboard and Selection ===\n");
 
