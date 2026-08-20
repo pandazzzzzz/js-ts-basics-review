@@ -250,6 +250,16 @@ console.log("'a'.localeCompare('a'):", 'a'.localeCompare('a')); // 0
 // Section 4: Intl.PluralRules - Plural Rules
 // ============================================
 
+/*
+ * verification:
+ *   feature: Intl.PluralRules
+ *   status: ES2018
+ *   stage4Date: 2017-12
+ *   stage4DateType: milestone
+ *   lastVerified: 2026-08-20
+ *   source: https://github.com/tc39/proposals/blob/main/ecma402/finished-proposals.md
+ */
+
 console.log("\n=== Intl.PluralRules ===");
 
 // Different languages have different plural rules

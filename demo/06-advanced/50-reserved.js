@@ -99,6 +99,14 @@ console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current stan
 // --- Records & Tuples (Withdrawn - not current standard) ---
 // Originally planned immutable value-semantics data structures (#{} / #[]), deep equality.
 // Proposal withdrawn, succeeded by the Composites proposal. See tc39/proposal-record-tuple.
+/*
+ * verification:
+ *   feature: Records & Tuples
+ *   status: Withdrawn
+ *   stage: -1
+ *   lastVerified: 2026-08-20
+ *   source: https://github.com/tc39/proposal-record-tuple
+ */
 console.log("// Records & Tuples (Withdrawn) — historical syntax:");
 console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
 console.log("//   const t = #[1, 2, 3];        // tuple, immutable");
