@@ -207,10 +207,10 @@ console.log("//     return (...args) => { console.log('call', context.name); ret
 console.log("//   }");
 console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
 
-// --- Module Fragments (Stage 1 proposal - not current standard) ---
+// --- Module Fragments (Stage 2 proposal - not current standard) ---
 // Inline module fragments within a file, for organizing code and tests.
 // See tc39/proposal-module-fragments.
-console.log("// Module Fragments (Stage 1) — future syntax, illustrative:");
+console.log("// Module Fragments (Stage 2) — future syntax, illustrative:");
 console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
 console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
 
