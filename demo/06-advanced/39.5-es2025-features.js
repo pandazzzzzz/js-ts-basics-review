@@ -505,3 +505,91 @@ console.log("📘 Intl API: 42-intl-api.js");
 /*
 📘 See TypeScript comparison file: 39.5-es2025-features-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Intl.DurationFormat
+// stage4Date: 2025-07
+// stage4DateType: milestone
+// source: https://tc39.es/proposal-intl-duration-format
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Set methods
+// stage4Date: 2024-04
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-set-methods
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Iterator helpers
+// stage4Date: 2024-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-iterator-helpers
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: RegExp.escape
+// stage4Date: 2025-02
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-regex-escaping
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Promise.try
+// stage4Date: 2024-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-promise-try
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Float16Array
+// stage4Date: 2025-02
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-float16array
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: JSON Modules
+// stage4Date: 2024-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-json-modules
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Import Attributes
+// stage4Date: 2024-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-import-attributes
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: RegExp Modifiers
+// stage4Date: 2024-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-regexp-modifiers
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Duplicate Named Capture Groups
+// stage4Date: 2024-04
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-duplicate-named-capturing-groups
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Redeclarable global eval vars
+// stage4Date: 2025-02
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-redeclarable-global-eval-vars
+// lastVerified: 2026-08-21
+// == end verification block ==

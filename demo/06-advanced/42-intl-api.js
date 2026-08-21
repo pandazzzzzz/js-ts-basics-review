@@ -826,3 +826,19 @@ console.log("📘 50-reserved.js - Temporal API");
 /*
 📘 See TypeScript comparison file: 42-intl-api-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Intl.PluralRules
+// stage4Date: 2017-12
+// stage4DateType: milestone
+// source: https://github.com/tc39/proposal-intl-plural-rules
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Intl.DurationFormat
+// stage4Date: 2025-07
+// stage4DateType: milestone
+// source: https://tc39.es/proposal-intl-duration-format
+// lastVerified: 2026-08-21
+// == end verification block ==

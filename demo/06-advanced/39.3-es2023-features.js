@@ -288,3 +288,67 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 /*
 📘 See TypeScript comparison file: 39.3-es2023-features-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Symbols as WeakMap keys
+// stage4Date: 2023-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-symbols-as-weakmap-keys
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: toSorted
+// stage4Date: 2023-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-change-array-by-copy
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: toReversed
+// stage4Date: 2023-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-change-array-by-copy
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: with
+// stage4Date: 2023-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-change-array-by-copy
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: toSpliced
+// stage4Date: 2023-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-change-array-by-copy
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: findLast
+// stage4Date: 2022-06
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-array-find-from-last
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: findLastIndex
+// stage4Date: 2022-06
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-array-find-from-last
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Hashbang Syntax
+// stage4Date: 2022-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-hashbang
+// lastVerified: 2026-08-21
+// == end verification block ==

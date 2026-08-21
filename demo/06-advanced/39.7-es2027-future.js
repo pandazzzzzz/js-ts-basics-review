@@ -426,3 +426,43 @@ console.log("🌐 TC39 Proposals: https://github.com/tc39/proposals");
 /*
 📘 See TypeScript comparison file: 39.7-es2027-future-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Temporal
+// stage4Date: 2026-03
+// stage4DateType: exact
+// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Atomics.pause
+// stage4Date: 2026-05
+// stage4DateType: exact
+// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Joint Iteration
+// stage4Date: 2026-05
+// stage4DateType: exact
+// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: using (Explicit Resource Management)
+// stage4Date: 2025-05
+// stage4DateType: exact
+// source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: DisposableStack
+// stage4Date: 2025-05
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-explicit-resource-management
+// lastVerified: 2026-08-21
+// == end verification block ==

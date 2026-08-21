@@ -447,3 +447,67 @@ console.log("📘 Strings: 04-strings.js");
 /*
 📘 See TypeScript comparison file: 39.2-es2022-features-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Class Static Block
+// stage4Date: 2021-08
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-class-static-block
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: at
+// stage4Date: 2021-08
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-relative-indexing-method
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Object.hasOwn
+// stage4Date: 2021-08
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-accessible-object-hasownproperty
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Ergonomic brand checks
+// stage4Date: 2021-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-private-fields-in-in
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Error.cause
+// stage4Date: 2021-10
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-error-cause
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Top-level await
+// stage4Date: 2021-05
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-top-level-await
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Private class fields
+// stage4Date: 2021-04
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-class-fields
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: RegExp Match Indices
+// stage4Date: 2021-05
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-regexp-match-indices
+// lastVerified: 2026-08-21
+// == end verification block ==

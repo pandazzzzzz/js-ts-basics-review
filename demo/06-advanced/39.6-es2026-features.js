@@ -451,3 +451,59 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 /*
 📘 See TypeScript comparison file: 39.6-es2026-features-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: Array.fromAsync
+// stage4Date: 2025-05
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-array-from-async
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Math.sumPrecise
+// stage4Date: 2025-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-math-sum
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Error.isError
+// stage4Date: 2025-05
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-error-iserror
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Uint8Array Base64
+// stage4Date: 2025-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-arraybuffer-base64
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Upsert
+// stage4Date: 2026-01
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-upsert
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: JSON.parse source text access
+// stage4Date: 2025-11
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-json-parse-source
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Iterator Sequencing
+// stage4Date: 2025-11
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-iterator-sequencing
+// lastVerified: 2026-08-21
+// == end verification block ==

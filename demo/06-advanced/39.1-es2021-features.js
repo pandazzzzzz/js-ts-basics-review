@@ -281,3 +281,59 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 /*
 📘 See TypeScript comparison file: 39.1-es2021-features-ts-comparison.ts
 */
+
+// == verification block ==
+// feature: replaceAll
+// stage4Date: 2020-06
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-string-replaceall
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Logical Assignment
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-logical-assignment
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Numeric Separators
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-numeric-separator
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: WeakRef
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-weakrefs
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: FinalizationRegistry
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-weakrefs
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: Promise.any
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-promise-any
+// lastVerified: 2026-08-21
+// == end verification block ==
+
+// == verification block ==
+// feature: AggregateError
+// stage4Date: 2020-07
+// stage4DateType: exact
+// source: https://github.com/tc39/proposal-promise-any
+// lastVerified: 2026-08-21
+// == end verification block ==
