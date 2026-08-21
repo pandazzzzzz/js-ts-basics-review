@@ -1,6 +1,7 @@
 // TypeScript Numbers and Math Comparison
 // This file demonstrates TypeScript-specific number features
 // 📘 For JavaScript runtime behavior, see: 05-numbers-math.js
+export {};
 
 // Wrap in block scope to avoid conflicts with other files
 {
