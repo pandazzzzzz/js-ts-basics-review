@@ -1091,6 +1091,7 @@ console.log("📘 13.1-scope-basics.js - Scope basics");
 console.log("📘 13.2-scope-tdz-strict.js - TDZ and strict mode");
 console.log("📘 13.3-closures-basics.js - Closures basics");
 console.log("📘 13.4-closures-patterns.js - Closures patterns");
+console.log("📘 13.5-scope-pitfalls.js - Scope and closure pitfalls");
 
 // ============================================
 // TypeScript Comparison
