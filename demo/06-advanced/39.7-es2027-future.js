@@ -359,17 +359,16 @@ console.log("\n--- 6. Other Upcoming Proposals ---\n");
 
 console.log("\n📌 Stage 2 Proposals (likely future ES versions):");
 console.log("1. Pipeline Operator (|>) - Functional pipelines: 'value |> func1 |> func2'");
-console.log("2. Pattern Matching - Match values against patterns: 'match (value) { when <pattern>: ... }'");
-console.log("3. Record & Tuple - Immutable value types: '#{ x: 1, y: 2 }' and '#[1, 2, 3]'");
-console.log("4. Decimal Type - Exact decimal arithmetic: '0.1m + 0.2m === 0.3m'");
-console.log("5. Module Expressions - Inline modules: 'module { export function foo() {} }'");
-console.log("6. Async Context - Track context across async operations: similar to Node.js AsyncLocalStorage");
 
 console.log("\n📌 Stage 1 Proposals (early development):");
-console.log("1. Intl.MessageFormat - Internationalized message formatting");
-console.log("2. Observable - Push-based event streams");
-console.log("3. JSON Modules improvements");
-console.log("4. WebAssembly JS Integration improvements");
+console.log("1. Pattern Matching - Match values against patterns: 'match (value) { when <pattern>: ... }'");
+console.log("2. Decimal Type - Exact decimal arithmetic: '0.1m + 0.2m === 0.3m'");
+console.log("3. Do Expressions - 'do { ... }' statement expressions");
+console.log("4. Composites - Deeply immutable value types (successor to Records & Tuples): '#{ x: 1, y: 2 }'");
+console.log("5. Intl.MessageFormat - Internationalized message formatting");
+console.log("6. Observable - Push-based event streams");
+console.log("7. JSON Modules improvements");
+console.log("8. WebAssembly JS Integration improvements");
 
 // ============================================
 // 7. Common Pitfalls
