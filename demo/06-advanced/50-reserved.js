@@ -180,7 +180,7 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-08-22
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
@@ -190,6 +190,13 @@ console.log("//     |> trim");
 console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(input)))");
 
 // --- Partial Application (Stage 1 proposal - not current standard) ---
+/*
+ * verification:
+ *   feature: Partial Application
+ *   status: Stage 1
+ *   lastVerified: 2026-08-22
+ *   source: https://github.com/tc39/proposals/blob/main/stage-1-proposals.md
+ */
 // `?` placeholder for partial application, deriving new functions from existing ones.
 // See tc39/proposal-partial-application.
 console.log("// Partial Application (Stage 1) — future syntax, illustrative:");
@@ -198,6 +205,13 @@ console.log("//   const addFive = add(5, ?, ?);");
 console.log("//   addFive(3, 2); // 10");
 
 // --- Decorators (Stage 2.7 proposal - not current standard) ---
+/*
+ * verification:
+ *   feature: Decorators
+ *   status: Stage 2.7
+ *   lastVerified: 2026-08-22
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 // Class/method decorators for metadata-style programming, similar to Python/Java
 // annotations. Nearing Stage 3, not yet finalized.
 // See tc39/proposal-decorators (TS 5.0 already supports Stage 2.7 semantics).
@@ -208,6 +222,13 @@ console.log("//   }");
 console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
 
 // --- Module Fragments (Stage 2 proposal - not current standard) ---
+/*
+ * verification:
+ *   feature: Module Fragments
+ *   status: Stage 2
+ *   lastVerified: 2026-08-22
+ *   source: https://github.com/tc39/proposals/blob/main/README.md
+ */
 // Inline module fragments within a file, for organizing code and tests.
 // See tc39/proposal-module-fragments.
 console.log("// Module Fragments (Stage 2) — future syntax, illustrative:");

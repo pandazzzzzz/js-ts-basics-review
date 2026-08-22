@@ -359,6 +359,7 @@ console.log("\n--- 6. Other Upcoming Proposals ---\n");
 
 console.log("\n📌 Stage 2 Proposals (likely future ES versions):");
 console.log("1. Pipeline Operator (|>) - Functional pipelines: 'value |> func1 |> func2'");
+console.log("2. Module Fragments - Inline module fragments within a file: 'module fragment Utils { }'");
 
 console.log("\n📌 Stage 1 Proposals (early development):");
 console.log("1. Pattern Matching - Match values against patterns: 'match (value) { when <pattern>: ... }'");
