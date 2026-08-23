@@ -13,7 +13,7 @@ export {};
 // count = "string"; // No error in JS!
 
 // TypeScript: Type inference for let/const
-let inferredCount = 5;        // Type inferred as number
+let inferredCount = 5; // Type inferred as number
 const inferredName = "Alice"; // Type inferred as string
 
 // Explicit type annotations
@@ -29,7 +29,6 @@ console.log(inferredCount, explicitCount);
 // ✅ BEST PRACTICE: Let TypeScript infer types when obvious
 const pi = 3.14159; // Inferred as number
 const greeting = "Hello"; // Inferred as string
-
 
 // ============================================================================
 // 2. CLOSURE TYPE CAPTURES
@@ -65,13 +64,12 @@ const capturedClosure = ((initialValue: number) => {
       value += amount;
       return value;
     },
-    getValue: (): number => value
+    getValue: (): number => value,
   };
 })(10);
 
 console.log(capturedClosure.increment(5)); // 15
-console.log(capturedClosure.getValue());   // 15
-
+console.log(capturedClosure.getValue()); // 15
 
 // ============================================================================
 // 3. GENERIC FUNCTIONS IN CLOSURES
@@ -106,7 +104,6 @@ const memoizedAdd = memoize((a: number, b: number): number => a + b);
 console.log(memoizedAdd(2, 3)); // Computes
 console.log(memoizedAdd(2, 3)); // Cache hit
 
-
 // ============================================================================
 // 4. FUNCTION TYPE ALIASES FOR CLOSURES
 // ============================================================================
@@ -138,7 +135,6 @@ const lazyExpensive = createLazyInitializer(() => {
 console.log(lazyExpensive()); // Computes
 console.log(lazyExpensive()); // Returns cached
 
-
 // ============================================================================
 // 5. CONST ASSERTIONS FOR IMMUTABLE VALUES
 // ============================================================================
@@ -149,12 +145,12 @@ console.log(lazyExpensive()); // Returns cached
 // TypeScript: const assertions create deeply readonly types
 const jsConfig = {
   apiUrl: "https://api.example.com",
-  timeout: 5000
+  timeout: 5000,
 };
 
 const tsConfig = {
   apiUrl: "https://api.example.com",
-  timeout: 5000
+  timeout: 5000,
 } as const;
 
 console.log("\n=== Const Assertions ===");
@@ -164,7 +160,6 @@ console.log(tsConfig.apiUrl); // Literal type "https://api.example.com"
 // ⚠️ PITFALL: Regular objects allow reassignment
 // jsConfig.timeout = 10000; // ✅ OK in TS (if not readonly)
 // tsConfig.timeout = 10000; // ❌ Error: Cannot assign to readonly
-
 
 // ============================================================================
 // 6. SATISFIES OPERATOR (TS 4.9+)
@@ -179,7 +174,7 @@ type ConfigType = {
 // Without satisfies - type is widened
 const configWithoutSatisfies: ConfigType = {
   name: "test",
-  value: 42
+  value: 42,
 };
 // configWithoutSatisfies.name is just 'string'
 
@@ -187,13 +182,12 @@ const configWithoutSatisfies: ConfigType = {
 // types for properties constrained by the target type: name is still 'string'.
 const configWithSatisfies = {
   name: "test",
-  value: 42
+  value: 42,
 } satisfies ConfigType;
 // configWithSatisfies.name is 'string' (widened by ConfigType.name: string)
 
 console.log("\n=== Satisfies Operator ===");
 console.log(configWithSatisfies.name); // Type: string (not the literal 'test')
-
 
 // ============================================================================
 // 7. TYPE GUARDS IN CLOSURES
@@ -213,9 +207,8 @@ function createTypedValidator<T>(predicate: (value: unknown) => value is T) {
 
 console.log("\n=== Type Guards in Closures ===");
 const validateNumber = createTypedValidator(isNumber);
-console.log(validateNumber(42));    // true
-console.log(validateNumber("42"));  // false
-
+console.log(validateNumber(42)); // true
+console.log(validateNumber("42")); // false
 
 // ============================================================================
 // 8. TEMPORAL DEAD ZONE WITH TYPES
@@ -240,7 +233,6 @@ function demonstrateTDZ(): void {
 
 console.log("\n=== TDZ with Types ===");
 demonstrateTDZ();
-
 
 // ============================================================================
 // 9. SCOPE CHAIN TYPE INFERENCE
@@ -287,7 +279,6 @@ function demonstrateShadowing(): void {
 
 demonstrateShadowing();
 
-
 // ============================================================================
 // 10. MODULE SCOPE AND CLOSURES
 // ============================================================================
@@ -305,7 +296,7 @@ const modulePrivateState = (() => {
     has: (key: string): boolean => _privateData.has(key),
     clear: (): void => {
       _privateData.clear();
-    }
+    },
   };
 })();
 
@@ -313,7 +304,6 @@ console.log("\n=== Module Scope Pattern ===");
 modulePrivateState.set("counter", 0);
 modulePrivateState.set("max", 100);
 console.log(modulePrivateState.get("counter")); // 0
-
 
 // ============================================================================
 // 11. COMPARISON TABLE
@@ -349,4 +339,6 @@ KEY TAKEAWAYS:
 7. Type-safe variable shadowing with different types
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

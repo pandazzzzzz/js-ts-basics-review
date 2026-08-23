@@ -66,7 +66,7 @@ function getPropertyTs<T, K extends keyof T>(obj: T, key: K): T[K] {
 }
 const userTs = { name: "Alice", age: 30 };
 const nameTs = getPropertyTs(userTs, "name"); // type: string
-const ageTs = getPropertyTs(userTs, "age");   // type: number
+const ageTs = getPropertyTs(userTs, "age"); // type: number
 
 console.log("JavaScript: Returns 'any' type, no type safety");
 console.log("TypeScript: Returns correct type, type-safe");
@@ -80,8 +80,8 @@ console.log("\n=== Conditional Types ===\n");
 
 // TypeScript-only feature
 type IsString<T> = T extends string ? true : false;
-type A = IsString<string>;  // true
-type B = IsString<number>;  // false
+type A = IsString<string>; // true
+type B = IsString<number>; // false
 
 // Infer keyword (example of how ReturnType utility type works under the hood)
 // NOTE: This is a demonstration only — ReturnType is a built-in utility type!
@@ -107,9 +107,9 @@ interface User {
 }
 
 // TypeScript built-in utility types
-type PartialUser = Partial<User>;     // All properties optional
-type RequiredUser = Required<User>;   // All properties required
-type ReadonlyUser = Readonly<User>;   // All properties readonly
+type PartialUser = Partial<User>; // All properties optional
+type RequiredUser = Required<User>; // All properties required
+type ReadonlyUser = Readonly<User>; // All properties readonly
 
 console.log("JavaScript: No built-in type transformation");
 console.log("TypeScript: Built-in utility types");
@@ -144,14 +144,22 @@ console.log("Event handlers: onClick, onFocus, onBlur");
 
 console.log("\n=== Decorators ===\n");
 
-console.log("JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)");
+console.log(
+  "JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)"
+);
 console.log("TypeScript: Legacy syntax requires --experimentalDecorators flag");
-console.log("TS 5.0+: Stage 2.7 syntax available with experimentalDecorators: false");
+console.log(
+  "TS 5.0+: Stage 2.7 syntax available with experimentalDecorators: false"
+);
 
 // Legacy TypeScript decorator example (requires experimentalDecorators: true)
-function LogTs(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+function LogTs(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
   const originalMethod = descriptor.value;
-  descriptor.value = function(...args: any[]) {
+  descriptor.value = function (...args: any[]) {
     console.log(`Calling ${propertyKey} with:`, args);
     const result = originalMethod.apply(this, args);
     console.log(`Result:`, result);

@@ -33,13 +33,13 @@ export {};
 
 /**
  * Call Stack - LIFO (Last In, First Out) data structure
- * 
+ *
  * Characteristics:
  * - Tracks function execution
  * - Synchronous execution
  * - One thing at a time (single-threaded)
  * - Stack frames added on function call, removed on return
- * 
+ *
  * Use Cases:
  * - Understanding execution order
  * - Debugging stack traces
@@ -82,21 +82,21 @@ console.log("6. Back in global scope");
 
 /**
  * Callback Functions - Functions passed as arguments
- * 
+ *
  * ES Specification: ES3 (concept)
- * 
+ *
  * Characteristics:
  * - Functions are first-class citizens
  * - Can be passed as arguments
  * - Executed at a later time
  * - Foundation of asynchronous JavaScript
- * 
+ *
  * Use Cases:
  * - Event handlers
  * - Asynchronous operations
  * - Array methods (map, filter, etc.)
  * - Higher-order functions
- * 
+ *
  * Common Pitfalls:
  * - Callback hell (nested callbacks)
  * - Error handling complexity
@@ -112,7 +112,7 @@ function processData(data, callback) {
   callback(result);
 }
 
-processData("hello", (result) => {
+processData("hello", result => {
   console.log("Callback result:", result);
 });
 
@@ -150,19 +150,19 @@ console.log("Doubled:", doubled);
 /**
  * setTimeout - Execute function after delay
  * setInterval - Execute function repeatedly
- * 
+ *
  * Characteristics:
  * - Asynchronous execution
  * - Minimum delay, not guaranteed exact timing
  * - Returns timer ID for cancellation
  * - Part of Web APIs (browser) / Node.js APIs
- * 
+ *
  * Use Cases:
  * - Delayed execution
  * - Debouncing
  * - Polling
  * - Animations
- * 
+ *
  * Common Pitfalls:
  * - Delay is minimum, not exact
  * - Forgetting to clear intervals
@@ -181,9 +181,14 @@ setTimeout(() => {
 console.log("After setTimeout (but before execution)");
 
 // setTimeout with arguments
-setTimeout((name, age) => {
-  console.log(`setTimeout with args: ${name}, ${age}`);
-}, 150, "Alice", 30);
+setTimeout(
+  (name, age) => {
+    console.log(`setTimeout with args: ${name}, ${age}`);
+  },
+  150,
+  "Alice",
+  30
+);
 
 // Canceling setTimeout
 const timeoutId = setTimeout(() => {
@@ -198,7 +203,7 @@ let count = 0;
 const intervalId = setInterval(() => {
   count++;
   console.log(`setInterval: Execution ${count}`);
-  
+
   if (count >= 3) {
     clearInterval(intervalId);
     console.log("setInterval stopped");
@@ -211,14 +216,14 @@ const intervalId = setInterval(() => {
 
 /**
  * Event Loop - Coordinates execution of code
- * 
+ *
  * Components:
  * 1. Call Stack - Executes synchronous code
  * 2. Web APIs / Node APIs - Handle async operations
  * 3. Callback Queue (Task Queue) - Holds callbacks
  * 4. Microtask Queue - Holds Promise callbacks
  * 5. Event Loop - Moves tasks from queues to stack
- * 
+ *
  * Process:
  * 1. Execute synchronous code on call stack
  * 2. When async operation completes, callback goes to queue
@@ -253,12 +258,12 @@ console.log("2. More synchronous code");
 
 /**
  * Callback Queue (Macrotask Queue):
- * 
+ *
  * - Holds callbacks from setTimeout, setInterval, I/O
  * - FIFO (First In, First Out)
  * - Processed after call stack is empty
  * - Processed after microtask queue
- * 
+ *
  * Examples of macrotasks:
  * - setTimeout
  * - setInterval
@@ -290,19 +295,19 @@ console.log("End");
 
 /**
  * Microtasks vs Macrotasks:
- * 
+ *
  * Microtasks (higher priority):
  * - Promise callbacks (.then, .catch, .finally)
  * - queueMicrotask()
  * - MutationObserver
  * - Process.nextTick (Node.js)
- * 
+ *
  * Macrotasks (lower priority):
  * - setTimeout
  * - setInterval
  * - setImmediate (Node.js)
  * - I/O operations
- * 
+ *
  * Execution order:
  * 1. Execute all synchronous code
  * 2. Execute ALL microtasks
@@ -359,10 +364,10 @@ console.log("F: Synchronous");
 // Example 2: Nested callbacks
 setTimeout(() => {
   console.log("\nExample 2: Nested setTimeout");
-  
+
   setTimeout(() => {
     console.log("  Nested level 1");
-    
+
     setTimeout(() => {
       console.log("    Nested level 2");
     }, 0);
@@ -373,11 +378,11 @@ setTimeout(() => {
 setTimeout(() => {
   console.log("\nExample 3:");
   console.log("  1. setTimeout");
-  
+
   Promise.resolve().then(() => {
     console.log("  2. Promise (runs before next setTimeout)");
   });
-  
+
   setTimeout(() => {
     console.log("  3. Next setTimeout");
   }, 0);
@@ -389,13 +394,13 @@ setTimeout(() => {
 
 /**
  * Callback Hell - Deeply nested callbacks
- * 
+ *
  * Problems:
  * - Hard to read and maintain
  * - Difficult error handling
  * - Hard to reason about flow
  * - Pyramid of doom
- * 
+ *
  * Solutions:
  * - Named functions
  * - Promises
@@ -407,16 +412,16 @@ console.log("\n=== Callback Hell Demo ===\n");
 // ❌ Callback hell example
 function callbackHell() {
   console.log("Callback hell example:");
-  
+
   setTimeout(() => {
     console.log("  Step 1");
-    
+
     setTimeout(() => {
       console.log("  Step 2");
-      
+
       setTimeout(() => {
         console.log("  Step 3");
-        
+
         setTimeout(() => {
           console.log("  Step 4 - This is hard to read!");
         }, 100);
@@ -453,23 +458,40 @@ setTimeout(step1, 500);
 // ✅ Solution 2: Promises (ES6)
 function promiseSolution() {
   console.log("\nPromise solution:");
-  
-  return new Promise(resolve => setTimeout(() => {
-    console.log("  Step 1");
-    resolve();
-  }, 100))
-    .then(() => new Promise(resolve => setTimeout(() => {
-      console.log("  Step 2");
+
+  return new Promise(resolve =>
+    setTimeout(() => {
+      console.log("  Step 1");
       resolve();
-    }, 100)))
-    .then(() => new Promise(resolve => setTimeout(() => {
-      console.log("  Step 3");
-      resolve();
-    }, 100)))
-    .then(() => new Promise(resolve => setTimeout(() => {
-      console.log("  Step 4 - Clean and flat!");
-      resolve();
-    }, 100)));
+    }, 100)
+  )
+    .then(
+      () =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            console.log("  Step 2");
+            resolve();
+          }, 100)
+        )
+    )
+    .then(
+      () =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            console.log("  Step 3");
+            resolve();
+          }, 100)
+        )
+    )
+    .then(
+      () =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            console.log("  Step 4 - Clean and flat!");
+            resolve();
+          }, 100)
+        )
+    );
 }
 
 setTimeout(() => promiseSolution(), 1000);
@@ -478,26 +500,34 @@ setTimeout(() => promiseSolution(), 1000);
 async function asyncAwaitSolution() {
   // - async/await 简化异步链，比 Promise 链更可读 (ES2017)
   console.log("\nAsync/await solution:");
-  
-  await new Promise(resolve => setTimeout(() => {
-    console.log("  Step 1");
-    resolve();
-  }, 100));
-  
-  await new Promise(resolve => setTimeout(() => {
-    console.log("  Step 2");
-    resolve();
-  }, 100));
-  
-  await new Promise(resolve => setTimeout(() => {
-    console.log("  Step 3");
-    resolve();
-  }, 100));
-  
-  await new Promise(resolve => setTimeout(() => {
-    console.log("  Step 4 - Most readable!");
-    resolve();
-  }, 100));
+
+  await new Promise(resolve =>
+    setTimeout(() => {
+      console.log("  Step 1");
+      resolve();
+    }, 100)
+  );
+
+  await new Promise(resolve =>
+    setTimeout(() => {
+      console.log("  Step 2");
+      resolve();
+    }, 100)
+  );
+
+  await new Promise(resolve =>
+    setTimeout(() => {
+      console.log("  Step 3");
+      resolve();
+    }, 100)
+  );
+
+  await new Promise(resolve =>
+    setTimeout(() => {
+      console.log("  Step 4 - Most readable!");
+      resolve();
+    }, 100)
+  );
 }
 
 setTimeout(() => asyncAwaitSolution(), 1500);
@@ -567,15 +597,17 @@ console.log("\n=== Practical Examples ===\n");
 // Example 1: Debouncing (see 24.2-debounce-throttle.js for full implementation)
 // Debounce delays execution until after a pause — uses the event loop's
 // macrotask queue (setTimeout) to coalesce rapid calls into one.
-const debouncedLog = ((delay) => {
+const debouncedLog = (delay => {
   let timeoutId;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => console.log("Debounced:", args[0]), delay);
   };
 })(200);
 
-console.log("Example 1: Debouncing (coalesces rapid calls via macrotask queue)");
+console.log(
+  "Example 1: Debouncing (coalesces rapid calls via macrotask queue)"
+);
 debouncedLog("Call 1");
 debouncedLog("Call 2");
 debouncedLog("Call 3"); // Only this will execute
@@ -583,13 +615,15 @@ debouncedLog("Call 3"); // Only this will execute
 // Example 2: Throttling (see 24.2-debounce-throttle.js for full implementation)
 // Throttle limits execution to once per interval — uses the event loop's
 // timer mechanism to enforce a minimum gap between calls.
-const throttledLog = ((limit) => {
+const throttledLog = (limit => {
   let inThrottle;
-  return function(...args) {
+  return function (...args) {
     if (!inThrottle) {
       console.log("Throttled:", args[0]);
       inThrottle = true;
-      setTimeout(() => { inThrottle = false; }, limit);
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit);
     }
   };
 })(200);
@@ -602,13 +636,13 @@ throttledLog("Call 3"); // Ignored
 // Example 3: Polling
 function poll(fn, interval, maxAttempts) {
   let attempts = 0;
-  
+
   const intervalId = setInterval(() => {
     attempts++;
     console.log(`Polling attempt ${attempts}`);
-    
+
     const result = fn();
-    
+
     if (result || attempts >= maxAttempts) {
       clearInterval(intervalId);
       console.log(result ? "Success!" : "Max attempts reached");
@@ -619,49 +653,53 @@ function poll(fn, interval, maxAttempts) {
 setTimeout(() => {
   console.log("\nExample 3: Polling");
   let count = 0;
-  poll(() => {
-    count++;
-    return count >= 3; // Success on 3rd attempt
-  }, 100, 5);
+  poll(
+    () => {
+      count++;
+      return count >= 3; // Success on 3rd attempt
+    },
+    100,
+    5
+  );
 }, 2000);
 
 // Example 4: Sequential async operations
 function sequentialAsync(tasks, callback) {
   let index = 0;
   const results = [];
-  
+
   function next() {
     if (index >= tasks.length) {
       callback(null, results);
       return;
     }
-    
+
     const task = tasks[index];
     index++;
-    
+
     task((error, result) => {
       if (error) {
         callback(error);
         return;
       }
-      
+
       results.push(result);
       next();
     });
   }
-  
+
   next();
 }
 
 setTimeout(() => {
   console.log("\nExample 4: Sequential async operations");
-  
+
   const tasks = [
-    (cb) => setTimeout(() => cb(null, "Task 1"), 100),
-    (cb) => setTimeout(() => cb(null, "Task 2"), 100),
-    (cb) => setTimeout(() => cb(null, "Task 3"), 100)
+    cb => setTimeout(() => cb(null, "Task 1"), 100),
+    cb => setTimeout(() => cb(null, "Task 2"), 100),
+    cb => setTimeout(() => cb(null, "Task 3"), 100),
   ];
-  
+
   sequentialAsync(tasks, (error, results) => {
     if (error) {
       console.error("Error:", error);
@@ -680,20 +718,20 @@ console.log("\n=== Common Pitfalls ===\n");
 // Pitfall 1: 'this' binding in callbacks
 const obj = {
   name: "Object",
-  
+
   // ❌ Regular function loses 'this'
-  regularCallback: function() {
-    setTimeout(function() {
+  regularCallback: function () {
+    setTimeout(function () {
       console.log("Pitfall 1 - Regular function this:", this); // undefined or global
     }, 100);
   },
-  
+
   // ✅ Arrow function preserves 'this'
-  arrowCallback: function() {
+  arrowCallback: function () {
     setTimeout(() => {
       console.log("Pitfall 1 - Arrow function this:", this.name); // "Object"
     }, 100);
-  }
+  },
 };
 
 setTimeout(() => {
@@ -797,7 +835,7 @@ setTimeout(() => {
 
     if (frameCount < 5) {
       // Schedule next frame
-      if (typeof requestAnimationFrame !== 'undefined') {
+      if (typeof requestAnimationFrame !== "undefined") {
         requestAnimationFrame(animate);
       } else {
         // Fallback for Node.js: use setTimeout to simulate animation frame (~16.67ms for 60fps)
@@ -811,10 +849,12 @@ setTimeout(() => {
   }
 
   // Start animation loop (with browser fallback)
-  if (typeof requestAnimationFrame !== 'undefined') {
+  if (typeof requestAnimationFrame !== "undefined") {
     requestAnimationFrame(animate);
   } else {
-    console.log("   Browser-only: requestAnimationFrame not available, using setTimeout fallback");
+    console.log(
+      "   Browser-only: requestAnimationFrame not available, using setTimeout fallback"
+    );
     animate();
   }
 
@@ -841,9 +881,9 @@ setTimeout(() => {
     }
 
     // Execution order:
-    updateDOM();           // 1. DOM update
-    processMicrotasks();     // 2-3. Microtasks run before rendering
-    scheduleMacrotask();     // 4-6. Rendering, then macrotask
+    updateDOM(); // 1. DOM update
+    processMicrotasks(); // 2-3. Microtasks run before rendering
+    scheduleMacrotask(); // 4-6. Rendering, then macrotask
 
     console.log("   5. Synchronous code done");
     // Rendering happens here (after microtasks, before macrotask)
@@ -877,15 +917,14 @@ setTimeout(() => {
       loop() {
         if (!this.isRunning) return;
 
-        const currentTime = typeof performance !== 'undefined'
-          ? performance.now()
-          : Date.now();
+        const currentTime =
+          typeof performance !== "undefined" ? performance.now() : Date.now();
         const deltaTime = currentTime - this.lastTime;
         this.lastTime = currentTime;
 
         this.updateCallback(deltaTime);
 
-        if (typeof requestAnimationFrame !== 'undefined') {
+        if (typeof requestAnimationFrame !== "undefined") {
           requestAnimationFrame(() => this.loop());
         } else {
           // Node.js fallback
@@ -895,7 +934,7 @@ setTimeout(() => {
     }
 
     // Example usage
-    const animationLoop = new AnimationLoop((deltaTime) => {
+    const animationLoop = new AnimationLoop(deltaTime => {
       // Update animation based on delta time
       // deltaTime is in milliseconds
     });
@@ -955,7 +994,6 @@ setTimeout(() => {
     console.log("  - Excessive microtasks can delay rendering");
     console.log("  - Layout thrashing triggers unnecessary repaints");
   }, 7000);
-
 }, 4000);
 
 // ============================================
@@ -1007,7 +1045,7 @@ setTimeout(() => {
 
 // process.nextTick (Node.js only)
 console.log("\nprocess.nextTick (Node.js only):");
-if (typeof process !== 'undefined' && process.nextTick) {
+if (typeof process !== "undefined" && process.nextTick) {
   console.log("  - Runs BEFORE microtasks (Promise, queueMicrotask)");
   console.log("  - Can starve I/O if used recursively");
   console.log("  - Use queueMicrotask or setImmediate instead for most cases");
@@ -1022,7 +1060,7 @@ if (typeof process !== 'undefined' && process.nextTick) {
 
 // setImmediate (Node.js only)
 console.log("\nsetImmediate (Node.js only):");
-if (typeof setImmediate !== 'undefined') {
+if (typeof setImmediate !== "undefined") {
   console.log("  - Schedules callback in 'check' phase of event loop");
   console.log("  - Similar to setTimeout(fn, 0) but more efficient");
   console.log("  - Runs after I/O callbacks, before close callbacks");
@@ -1045,10 +1083,7 @@ console.log(`
   └─────────────────────┴──────────────┴──────────────────────┘
 `);
 
-
-
 // Best Practices Summary
-
 
 setTimeout(() => {
   console.log("\n=== Best Practices Summary ===\n");
@@ -1067,7 +1102,6 @@ setTimeout(() => {
 12. UNDERSTAND the difference between microtasks and macrotasks
   `);
 }, 3500);
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1200,7 +1234,6 @@ setTimeout(() => {
 📘 See 29-event-loop-callbacks-ts-comparison.ts for detailed examples!
 */
 
-
 // ============================================
 // Cross-references
 // ============================================
@@ -1208,7 +1241,9 @@ console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promises");
 console.log("📘 31-async-await.js - Async/await");
 console.log("📘 33.1-fetch-basics.js - Fetch API basics");
-console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
+console.log(
+  "📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations"
+);
 
 // ============================================
 // TypeScript Comparison

@@ -34,7 +34,7 @@ export {};
 // - Immutable - cannot change individual characters
 // - Primitive type, but can use methods (auto-boxing)
 // - typeof returns "string"
-const singleQuote = 'Hello World';
+const singleQuote = "Hello World";
 const doubleQuote = "Hello World";
 const backtick = `Hello World`;
 
@@ -127,46 +127,46 @@ const searchStr = "The quick brown fox jumps over the lazy dog";
 // - Case-sensitive
 // - fromIndex is optional starting position
 console.log("\n=== indexOf() Method ===");
-console.log("indexOf('the'):", searchStr.indexOf('the')); // 31 (finds second "the")
-console.log("indexOf('The'):", searchStr.indexOf('The')); // 0 (case-sensitive)
-console.log("indexOf('cat'):", searchStr.indexOf('cat')); // -1 (not found)
-console.log("indexOf('the', 32):", searchStr.indexOf('the', 32)); // -1 (starts searching at position 32, past the 'the' at 31)
+console.log("indexOf('the'):", searchStr.indexOf("the")); // 31 (finds second "the")
+console.log("indexOf('The'):", searchStr.indexOf("The")); // 0 (case-sensitive)
+console.log("indexOf('cat'):", searchStr.indexOf("cat")); // -1 (not found)
+console.log("indexOf('the', 32):", searchStr.indexOf("the", 32)); // -1 (starts searching at position 32, past the 'the' at 31)
 
 // lastIndexOf(searchValue, fromIndex) - Find last occurrence (ES1)
 // - Returns index of last match, or -1 if not found
 // - Searches backwards from end or fromIndex
 // - Case-sensitive
 console.log("\n=== lastIndexOf() Method ===");
-console.log("lastIndexOf('the'):", searchStr.lastIndexOf('the')); // 31
-console.log("lastIndexOf('o'):", searchStr.lastIndexOf('o')); // 41
-console.log("lastIndexOf('o', 20):", searchStr.lastIndexOf('o', 20)); // 17
+console.log("lastIndexOf('the'):", searchStr.lastIndexOf("the")); // 31
+console.log("lastIndexOf('o'):", searchStr.lastIndexOf("o")); // 41
+console.log("lastIndexOf('o', 20):", searchStr.lastIndexOf("o", 20)); // 17
 
 // includes(searchString, position) - Check if contains substring (ES6/ES2015)
 // - Returns boolean
 // - Case-sensitive
 // - More readable than indexOf() !== -1
 console.log("\n=== includes() Method ===");
-console.log("includes('fox'):", searchStr.includes('fox')); // true
-console.log("includes('cat'):", searchStr.includes('cat')); // false
-console.log("includes('FOX'):", searchStr.includes('FOX')); // false (case-sensitive)
+console.log("includes('fox'):", searchStr.includes("fox")); // true
+console.log("includes('cat'):", searchStr.includes("cat")); // false
+console.log("includes('FOX'):", searchStr.includes("FOX")); // false (case-sensitive)
 
 // startsWith(searchString, position) - Check if starts with substring (ES6/ES2015)
 // - Returns boolean
 // - Case-sensitive
 // - position is optional starting position
 console.log("\n=== startsWith() Method ===");
-console.log("startsWith('The'):", searchStr.startsWith('The')); // true
-console.log("startsWith('quick'):", searchStr.startsWith('quick')); // false
-console.log("startsWith('quick', 4):", searchStr.startsWith('quick', 4)); // true
+console.log("startsWith('The'):", searchStr.startsWith("The")); // true
+console.log("startsWith('quick'):", searchStr.startsWith("quick")); // false
+console.log("startsWith('quick', 4):", searchStr.startsWith("quick", 4)); // true
 
 // endsWith(searchString, length) - Check if ends with substring (ES6/ES2015)
 // - Returns boolean
 // - Case-sensitive
 // - length is optional string length to consider
 console.log("\n=== endsWith() Method ===");
-console.log("endsWith('dog'):", searchStr.endsWith('dog')); // true
-console.log("endsWith('lazy'):", searchStr.endsWith('lazy')); // false
-console.log("endsWith('lazy', 39):", searchStr.endsWith('lazy', 39)); // true (endPosition is exclusive)
+console.log("endsWith('dog'):", searchStr.endsWith("dog")); // true
+console.log("endsWith('lazy'):", searchStr.endsWith("lazy")); // false
+console.log("endsWith('lazy', 39):", searchStr.endsWith("lazy", 39)); // true (endPosition is exclusive)
 
 // ============================================
 // String Methods - Modification
@@ -179,9 +179,9 @@ const modStr = "  Hello World  ";
 // - count must be non-negative integer
 // - Useful for padding, formatting
 console.log("\n=== repeat() Method ===");
-console.log("'Ha'.repeat(3):", 'Ha'.repeat(3)); // "HaHaHa"
-console.log("'-'.repeat(10):", '-'.repeat(10)); // "----------"
-console.log("'0'.repeat(5):", '0'.repeat(5)); // "00000"
+console.log("'Ha'.repeat(3):", "Ha".repeat(3)); // "HaHaHa"
+console.log("'-'.repeat(10):", "-".repeat(10)); // "----------"
+console.log("'0'.repeat(5):", "0".repeat(5)); // "00000"
 
 // trim() - Remove whitespace from both ends (ES5)
 // - Removes spaces, tabs, newlines
@@ -208,19 +208,19 @@ console.log("trimEnd():", `"${modStr.trimEnd()}"`); // "  Hello World"
 // - padString defaults to space
 // - Useful for formatting numbers, alignment
 console.log("\n=== padStart() Method ===");
-console.log("'5'.padStart(3, '0'):", '5'.padStart(3, '0')); // "005"
-console.log("'42'.padStart(5, '0'):", '42'.padStart(5, '0')); // "00042"
-console.log("'Hi'.padStart(10):", `"${'Hi'.padStart(10)}"`); // "        Hi"
-console.log("'7'.padStart(4, 'ab'):", '7'.padStart(4, 'ab')); // "aba7"
+console.log("'5'.padStart(3, '0'):", "5".padStart(3, "0")); // "005"
+console.log("'42'.padStart(5, '0'):", "42".padStart(5, "0")); // "00042"
+console.log("'Hi'.padStart(10):", `"${"Hi".padStart(10)}"`); // "        Hi"
+console.log("'7'.padStart(4, 'ab'):", "7".padStart(4, "ab")); // "aba7"
 
 // padEnd(targetLength, padString) - Pad from end (ES2017)
 // - Pads string to reach target length
 // - padString defaults to space
 // - Useful for formatting, alignment
 console.log("\n=== padEnd() Method ===");
-console.log("'5'.padEnd(3, '0'):", '5'.padEnd(3, '0')); // "500"
-console.log("'Hi'.padEnd(10):", `"${'Hi'.padEnd(10)}"`); // "Hi        "
-console.log("'7'.padEnd(4, 'ab'):", '7'.padEnd(4, 'ab')); // "7aba"
+console.log("'5'.padEnd(3, '0'):", "5".padEnd(3, "0")); // "500"
+console.log("'Hi'.padEnd(10):", `"${"Hi".padEnd(10)}"`); // "Hi        "
+console.log("'7'.padEnd(4, 'ab'):", "7".padEnd(4, "ab")); // "7aba"
 
 // ============================================
 // String Methods - Splitting and Joining
@@ -235,10 +235,10 @@ const sentence = "The quick brown fox";
 // - limit is optional max array length
 // - Empty separator splits every character
 console.log("\n=== split() Method ===");
-console.log("split(','):", csvData.split(',')); // ["apple", "banana", "cherry", "date"]
-console.log("split(' '):", sentence.split(' ')); // ["The", "quick", "brown", "fox"]
-console.log("split(' ', 2):", sentence.split(' ', 2)); // ["The", "quick"]
-console.log("split(''):", "Hello".split('')); // ["H", "e", "l", "l", "o"]
+console.log("split(','):", csvData.split(",")); // ["apple", "banana", "cherry", "date"]
+console.log("split(' '):", sentence.split(" ")); // ["The", "quick", "brown", "fox"]
+console.log("split(' ', 2):", sentence.split(" ", 2)); // ["The", "quick"]
+console.log("split(''):", "Hello".split("")); // ["H", "e", "l", "l", "o"]
 
 // ============================================
 // String Methods - Replacement
@@ -252,9 +252,9 @@ const replaceStr = "The cat sat on the mat. The cat was happy.";
 // - replaceValue can be string or function
 // - Returns new string
 console.log("\n=== replace() Method ===");
-console.log("replace('cat', 'dog'):", replaceStr.replace('cat', 'dog'));
+console.log("replace('cat', 'dog'):", replaceStr.replace("cat", "dog"));
 // "The dog sat on the mat. The cat was happy."
-console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, 'dog'));
+console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, "dog"));
 // "The dog sat on the mat. The dog was happy."
 
 // replaceAll(searchValue, replaceValue) - Replace all matches (ES2021)
@@ -270,14 +270,14 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, 'dog'));
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== replaceAll() Method ===");
-console.log("replaceAll('cat', 'dog'):", replaceStr.replaceAll('cat', 'dog'));
+console.log("replaceAll('cat', 'dog'):", replaceStr.replaceAll("cat", "dog"));
 // "The dog sat on the mat. The dog was happy."
-console.log("replaceAll('the', 'a'):", replaceStr.replaceAll('the', 'a'));
+console.log("replaceAll('the', 'a'):", replaceStr.replaceAll("the", "a"));
 // "The cat sat on a mat. The cat was happy."
 
 // Replace with function
 const withNumbers = "I have 5 apples and 3 oranges";
-const doubled = withNumbers.replace(/\d+/g, (match) => match * 2);
+const doubled = withNumbers.replace(/\d+/g, match => match * 2);
 console.log("Replace with function:", doubled);
 // "I have 10 apples and 6 oranges"
 
@@ -304,7 +304,7 @@ console.log("toUpperCase():", mixedCase.toUpperCase()); // "HELLO WORLD"
 // - Important for Turkish, Lithuanian, etc.
 console.log("\n=== toLocaleLowerCase() Method ===");
 console.log("toLocaleLowerCase():", mixedCase.toLocaleLowerCase()); // "hello world"
-console.log("Turkish İ:", "İstanbul".toLocaleLowerCase('tr')); // "istanbul"
+console.log("Turkish İ:", "İstanbul".toLocaleLowerCase("tr")); // "istanbul"
 
 // toLocaleUpperCase() - Locale-aware uppercase (ES3)
 // - Respects locale-specific rules
@@ -347,8 +347,10 @@ console.log("codePointAt(0):", "A".codePointAt(0)); // 65
 // - Static method
 // - Takes multiple code values
 console.log("\n=== String.fromCharCode() ===");
-console.log("fromCharCode(72, 101, 108, 108, 111):", 
-  String.fromCharCode(72, 101, 108, 108, 111)); // "Hello"
+console.log(
+  "fromCharCode(72, 101, 108, 108, 111):",
+  String.fromCharCode(72, 101, 108, 108, 111)
+); // "Hello"
 
 // String.fromCodePoint() - Create string from code points (ES6/ES2015)
 // - Static method
@@ -362,7 +364,10 @@ console.log("fromCodePoint(65, 66, 67):", String.fromCodePoint(65, 66, 67)); // 
 // - With global flag, returns all matches
 console.log("\n=== match() Method ===");
 console.log("match(/[0-9]+/):", "I have 5 apples".match(/[0-9]+/)); // ["5"]
-console.log("match(/[0-9]+/g):", "I have 5 apples and 3 oranges".match(/[0-9]+/g)); // ["5", "3"]
+console.log(
+  "match(/[0-9]+/g):",
+  "I have 5 apples and 3 oranges".match(/[0-9]+/g)
+); // ["5", "3"]
 
 // search() - Search with regex (ES3)
 // - Returns index of first match or -1
@@ -376,35 +381,42 @@ console.log("search(/cat/):", "dog".search(/cat/)); // -1
 // - Respects locale-specific sorting rules
 // - Use case: sorting names, internationalization
 console.log("\n=== localeCompare() Method ===");
-console.log("'a'.localeCompare('b'):", 'a'.localeCompare('b')); // -1 (a comes before b)
-console.log("'b'.localeCompare('a'):", 'b'.localeCompare('a')); // 1 (b comes after a)
-console.log("'a'.localeCompare('a'):", 'a'.localeCompare('a')); // 0 (equal)
+console.log("'a'.localeCompare('b'):", "a".localeCompare("b")); // -1 (a comes before b)
+console.log("'b'.localeCompare('a'):", "b".localeCompare("a")); // 1 (b comes after a)
+console.log("'a'.localeCompare('a'):", "a".localeCompare("a")); // 0 (equal)
 
 // Locale-specific sorting
-const names = ['Ärger', 'Apfel', 'Zorn'];
-console.log("German sort:", names.sort((a, b) => a.localeCompare(b, 'de'))); 
+const names = ["Ärger", "Apfel", "Zorn"];
+console.log(
+  "German sort:",
+  names.sort((a, b) => a.localeCompare(b, "de"))
+);
 // ['Apfel', 'Ärger', 'Zorn'] (German collation)
 
 // Case-insensitive comparison
-console.log("'A'.localeCompare('a', 'en', { sensitivity: 'base' }):", 
-  'A'.localeCompare('a', 'en', { sensitivity: 'base' })); // 0 (case-insensitive)
+console.log(
+  "'A'.localeCompare('a', 'en', { sensitivity: 'base' }):",
+  "A".localeCompare("a", "en", { sensitivity: "base" })
+); // 0 (case-insensitive)
 
 // normalize() - Unicode normalization (ES6/ES2015)
 // - NFC, NFD, NFKC, NFKD forms
 // - Use case: comparing strings with accents
 console.log("\n=== normalize() Method ===");
-const str1 = '\u00F1'; // ñ (single character)
-const str2 = '\u006E\u0303'; // ñ (n + combining tilde)
+const str1 = "\u00F1"; // ñ (single character)
+const str2 = "\u006E\u0303"; // ñ (n + combining tilde)
 console.log("str1 === str2:", str1 === str2); // false (different representations)
-console.log("str1.normalize() === str2.normalize():", 
-  str1.normalize() === str2.normalize()); // true (normalized to same form)
+console.log(
+  "str1.normalize() === str2.normalize():",
+  str1.normalize() === str2.normalize()
+); // true (normalized to same form)
 
 // Different normalization forms
-const accentStr = 'café';
-console.log("NFC:", accentStr.normalize('NFC')); // Canonical composition
-console.log("NFD:", accentStr.normalize('NFD')); // Canonical decomposition
-console.log("NFKC:", accentStr.normalize('NFKC')); // Compatibility composition
-console.log("NFKD:", accentStr.normalize('NFKD')); // Compatibility decomposition
+const accentStr = "café";
+console.log("NFC:", accentStr.normalize("NFC")); // Canonical composition
+console.log("NFD:", accentStr.normalize("NFD")); // Canonical decomposition
+console.log("NFKC:", accentStr.normalize("NFKC")); // Compatibility composition
+console.log("NFKD:", accentStr.normalize("NFKD")); // Compatibility decomposition
 
 // matchAll() - Global regex matches (ES2020)
 // - Returns iterator of all matches
@@ -424,7 +436,10 @@ matches.forEach(match => {
 // Comparing with match()
 console.log("\nmatch() vs matchAll():");
 console.log("match(/test(\\d)/g):", textMatchAll.match(/test(\d)/g)); // ["test1", "test2", "test3"] (no groups)
-console.log("matchAll() with groups:", [...textMatchAll.matchAll(/test(\d)/g)].map(m => m[1])); // ["1", "2", "3"]
+console.log(
+  "matchAll() with groups:",
+  [...textMatchAll.matchAll(/test(\d)/g)].map(m => m[1])
+); // ["1", "2", "3"]
 
 // at() - Access character with negative indexing (ES2022)
 // - Supports negative indices
@@ -540,16 +555,16 @@ console.log(`User: ${user.name} (${user.role})`); // "User: Bob (Developer)"
 
 // Conditional expressions
 const isLoggedIn = true;
-console.log(`Status: ${isLoggedIn ? 'Online' : 'Offline'}`); // "Status: Online"
+console.log(`Status: ${isLoggedIn ? "Online" : "Offline"}`); // "Status: Online"
 
 // Array methods
 const numbers = [1, 2, 3, 4, 5];
-console.log(`Numbers: ${numbers.join(', ')}`); // "Numbers: 1, 2, 3, 4, 5"
+console.log(`Numbers: ${numbers.join(", ")}`); // "Numbers: 1, 2, 3, 4, 5"
 
 // Nested template literals
-const items = ['apple', 'banana', 'cherry'];
+const items = ["apple", "banana", "cherry"];
 const list = `Items:
-${items.map(item => `  - ${item}`).join('\n')}`;
+${items.map(item => `  - ${item}`).join("\n")}`;
 console.log(list);
 
 // ============================================
@@ -566,8 +581,8 @@ function simple(strings, ...values) {
   console.log("Strings:", strings); // Array of string parts
   console.log("Values:", values); // Array of interpolated values
   return strings.reduce((result, str, i) => {
-    return result + str + (values[i] || '');
-  }, '');
+    return result + str + (values[i] || "");
+  }, "");
 }
 
 console.log("\n=== Tagged Template Literals ===");
@@ -576,16 +591,17 @@ console.log("Result:", result);
 
 // HTML escaping tag
 function html(strings, ...values) {
-  const escape = (str) => String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-  
+  const escape = str =>
+    String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
   return strings.reduce((result, str, i) => {
-    return result + str + (values[i] ? escape(values[i]) : '');
-  }, '');
+    return result + str + (values[i] ? escape(values[i]) : "");
+  }, "");
 }
 
 const userInput = '<script>alert("XSS")</script>';
@@ -597,11 +613,9 @@ console.log("\nSafe HTML:", safeHTML);
 function currency(strings, ...values) {
   return strings.reduce((result, str, i) => {
     const value = values[i];
-    const formatted = value !== undefined 
-      ? `$${value.toFixed(2)}` 
-      : '';
+    const formatted = value !== undefined ? `$${value.toFixed(2)}` : "";
     return result + str + formatted;
-  }, '');
+  }, "");
 }
 
 const price = 19.99;
@@ -612,11 +626,9 @@ console.log(currency`Total: ${price + tax}`); // "Total: $22.49"
 function highlight(strings, ...values) {
   return strings.reduce((result, str, i) => {
     const value = values[i];
-    const highlighted = value !== undefined 
-      ? `**${value}**` 
-      : '';
+    const highlighted = value !== undefined ? `**${value}**` : "";
     return result + str + highlighted;
-  }, '');
+  }, "");
 }
 
 console.log(highlight`Hello ${name}, you are ${age} years old`);
@@ -628,9 +640,9 @@ function sql(strings, ...values) {
   // In production, use proper parameterized queries
   return {
     text: strings.reduce((result, str, i) => {
-      return result + str + (values[i] !== undefined ? `$${i + 1}` : '');
-    }, ''),
-    values: values
+      return result + str + (values[i] !== undefined ? `$${i + 1}` : "");
+    }, ""),
+    values: values,
   };
 }
 
@@ -718,44 +730,47 @@ console.log("Good formatting:", goodIndent);
 // indexOf returns -1 for not found, includes returns boolean
 const checkStr = "Hello World";
 console.log("\nindexOf vs includes:");
-console.log("indexOf('World'):", checkStr.indexOf('World')); // 6
-console.log("includes('World'):", checkStr.includes('World')); // true
-console.log("indexOf('xyz'):", checkStr.indexOf('xyz')); // -1
-console.log("includes('xyz'):", checkStr.includes('xyz')); // false
+console.log("indexOf('World'):", checkStr.indexOf("World")); // 6
+console.log("includes('World'):", checkStr.includes("World")); // true
+console.log("indexOf('xyz'):", checkStr.indexOf("xyz")); // -1
+console.log("includes('xyz'):", checkStr.includes("xyz")); // false
 
 // Common mistake: using indexOf in boolean context
-if (checkStr.indexOf('Hello')) { // ❌ Wrong! indexOf returns 0, which is falsy
+if (checkStr.indexOf("Hello")) {
+  // ❌ Wrong! indexOf returns 0, which is falsy
   console.log("This won't print");
 }
-if (checkStr.indexOf('Hello') !== -1) { // ✅ Correct
+if (checkStr.indexOf("Hello") !== -1) {
+  // ✅ Correct
   console.log("This will print");
 }
-if (checkStr.includes('Hello')) { // ✅ Better
+if (checkStr.includes("Hello")) {
+  // ✅ Better
   console.log("This is clearest");
 }
 
 // Pitfall 5: replace() only replaces first match
 const replaceTest = "cat cat cat";
 console.log("\nreplace() vs replaceAll():");
-console.log("replace('cat', 'dog'):", replaceTest.replace('cat', 'dog')); // "dog cat cat"
-console.log("replaceAll('cat', 'dog'):", replaceTest.replaceAll('cat', 'dog')); // "dog dog dog"
-console.log("replace(/cat/g, 'dog'):", replaceTest.replace(/cat/g, 'dog')); // "dog dog dog"
+console.log("replace('cat', 'dog'):", replaceTest.replace("cat", "dog")); // "dog cat cat"
+console.log("replaceAll('cat', 'dog'):", replaceTest.replaceAll("cat", "dog")); // "dog dog dog"
+console.log("replace(/cat/g, 'dog'):", replaceTest.replace(/cat/g, "dog")); // "dog dog dog"
 
 // Pitfall 6: Comparing strings
 // Use === for exact comparison
 // Use localeCompare() for locale-aware sorting
 console.log("\nString comparison:");
-console.log("'a' < 'b':", 'a' < 'b'); // true (lexicographic)
-console.log("'A' < 'a':", 'A' < 'a'); // true (uppercase comes first in Unicode)
-console.log("'10' < '2':", '10' < '2'); // true (lexicographic, not numeric)
-console.log("'ä'.localeCompare('z'):", 'ä'.localeCompare('z')); // -1 (locale-aware)
+console.log("'a' < 'b':", "a" < "b"); // true (lexicographic)
+console.log("'A' < 'a':", "A" < "a"); // true (uppercase comes first in Unicode)
+console.log("'10' < '2':", "10" < "2"); // true (lexicographic, not numeric)
+console.log("'ä'.localeCompare('z'):", "ä".localeCompare("z")); // -1 (locale-aware)
 
 // Pitfall 7: Empty string vs null vs undefined
 console.log("\nEmpty string checks:");
 const empty = "";
 const nullStr = null;
 const undefinedStr = undefined;
-console.log("empty === '':", empty === ''); // true
+console.log("empty === '':", empty === ""); // true
 console.log("empty.length:", empty.length); // 0
 console.log("Boolean(empty):", Boolean(empty)); // false
 // console.log("nullStr.length:", nullStr.length); // ❌ TypeError!
@@ -775,14 +790,13 @@ console.log("emoji.charAt(0):", emoji.charAt(0)); // � (invalid)
 console.log("emoji.codePointAt(0):", emoji.codePointAt(0)); // 128512 (correct)
 console.log("[...emoji].length:", [...emoji].length); // 1 (correct with spread)
 
-
 console.log("\n=== Best Practices ===");
 
 // 1. Use template literals for string interpolation
 const firstName = "John";
 const lastName = "Doe";
 // ❌ Avoid: const fullName = firstName + " " + lastName;
-// ✅ Prefer: 
+// ✅ Prefer:
 const fullName = `${firstName} ${lastName}`;
 console.log("1. Template literals:", fullName);
 
@@ -790,7 +804,7 @@ console.log("1. Template literals:", fullName);
 const text2 = "Hello World";
 // ❌ Avoid: if (text2.indexOf('World') !== -1)
 // ✅ Prefer:
-if (text2.includes('World')) {
+if (text2.includes("World")) {
   console.log("2. Use includes() for checks");
 }
 
@@ -798,7 +812,7 @@ if (text2.includes('World')) {
 const filename = "document.pdf";
 // ❌ Avoid: if (filename.slice(-4) === '.pdf')
 // ✅ Prefer:
-if (filename.endsWith('.pdf')) {
+if (filename.endsWith(".pdf")) {
   console.log("3. Use endsWith() for suffix checks");
 }
 
@@ -816,16 +830,16 @@ console.log("5. Use slice():", strSlice.slice(0, 5));
 const text3 = "foo foo foo";
 // ❌ Avoid: text3.replace(/foo/g, 'bar')
 // ✅ Prefer:
-console.log("6. Use replaceAll():", text3.replaceAll('foo', 'bar'));
+console.log("6. Use replaceAll():", text3.replaceAll("foo", "bar"));
 
 // 7. Use padStart()/padEnd() for formatting
 const id = "42";
-const paddedId = id.padStart(5, '0');
+const paddedId = id.padStart(5, "0");
 console.log("7. Padded ID:", paddedId); // "00042"
 
 // 8. Use split() with limit for performance
 const longText = "a,b,c,d,e,f,g,h,i,j";
-const firstThree = longText.split(',', 3);
+const firstThree = longText.split(",", 3);
 console.log("8. Split with limit:", firstThree); // ["a", "b", "c"]
 
 // 9. Use spread operator for Unicode-aware operations
@@ -836,14 +850,20 @@ console.log("   Regular length:", text4.length); // 14 (counts emoji as 2)
 // 10. Use tagged templates for sanitization
 // Always sanitize user input in templates
 function sanitize(strings, ...values) {
-  const escape = (str) => String(str)
-    .replace(/[<>'"&]/g, char => {
-      const entities = { '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;', '&': '&amp;' };
+  const escape = str =>
+    String(str).replace(/[<>'"&]/g, char => {
+      const entities = {
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
+        "&": "&amp;",
+      };
       return entities[char];
     });
   return strings.reduce((result, str, i) => {
-    return result + str + (values[i] ? escape(values[i]) : '');
-  }, '');
+    return result + str + (values[i] ? escape(values[i]) : "");
+  }, "");
 }
 
 const untrusted = '<script>alert("xss")</script>';

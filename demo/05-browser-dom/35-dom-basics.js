@@ -32,20 +32,30 @@ console.log("=== Section 1: DOM Tree Structure ===\n");
 
 // DOM Node Type Constants
 console.log("DOM Node Type Constants:");
-console.log(`Node.ELEMENT_NODE = ${typeof Node !== 'undefined' ? Node.ELEMENT_NODE : 1}`);           // 1 - Element node
-console.log(`Node.TEXT_NODE = ${typeof Node !== 'undefined' ? Node.TEXT_NODE : 3}`);                 // 3 - Text node
-console.log(`Node.COMMENT_NODE = ${typeof Node !== 'undefined' ? Node.COMMENT_NODE : 8}`);           // 8 - Comment node
-console.log(`Node.DOCUMENT_NODE = ${typeof Node !== 'undefined' ? Node.DOCUMENT_NODE : 9}`);         // 9 - Document node
-console.log(`Node.DOCUMENT_TYPE_NODE = ${typeof Node !== 'undefined' ? Node.DOCUMENT_TYPE_NODE : 10}`); // 10 - DOCTYPE
+console.log(
+  `Node.ELEMENT_NODE = ${typeof Node !== "undefined" ? Node.ELEMENT_NODE : 1}`
+); // 1 - Element node
+console.log(
+  `Node.TEXT_NODE = ${typeof Node !== "undefined" ? Node.TEXT_NODE : 3}`
+); // 3 - Text node
+console.log(
+  `Node.COMMENT_NODE = ${typeof Node !== "undefined" ? Node.COMMENT_NODE : 8}`
+); // 8 - Comment node
+console.log(
+  `Node.DOCUMENT_NODE = ${typeof Node !== "undefined" ? Node.DOCUMENT_NODE : 9}`
+); // 9 - Document node
+console.log(
+  `Node.DOCUMENT_TYPE_NODE = ${typeof Node !== "undefined" ? Node.DOCUMENT_TYPE_NODE : 10}`
+); // 10 - DOCTYPE
 
 // DOM navigation examples in browser environment (using conditional check for Node.js compatibility)
-if (typeof document !== 'undefined') {
+if (typeof document !== "undefined") {
   console.log("\n⚠️ Browser environment detected - DOM navigation examples:");
 
   // Root node access
   console.log("document.documentElement:", document.documentElement?.tagName); // <html>
-  console.log("document.head:", document.head?.tagName);                       // <head>
-  console.log("document.body:", document.body?.tagName);                       // <body>
+  console.log("document.head:", document.head?.tagName); // <head>
+  console.log("document.body:", document.body?.tagName); // <body>
 
   // Node hierarchy relationship example code (needs to run in actual HTML)
   console.log(`
@@ -69,7 +79,9 @@ if (typeof document !== 'undefined') {
 //   elem.previousElementSibling - Previous sibling element
   `);
 } else {
-  console.log("\n⚠️ Non-browser environment, DOM navigation examples cannot execute");
+  console.log(
+    "\n⚠️ Non-browser environment, DOM navigation examples cannot execute"
+  );
   console.log("Please run these examples in browser console or with jsdom");
 }
 
@@ -100,7 +112,9 @@ console.log("   Iteration: forEach, for...of, [...nodeList]\n");
 console.log("4. getElementsByClassName() - Live HTMLCollection ⚠️");
 console.log("   Syntax: element.getElementsByClassName(classNames)");
 console.log("   Returns: HTMLCollection (live collection!)");
-console.log("   ⚠️ Trap: Iterating live collection while modifying DOM will skip elements!\n");
+console.log(
+  "   ⚠️ Trap: Iterating live collection while modifying DOM will skip elements!\n"
+);
 
 console.log("5. getElementsByTagName() - Live HTMLCollection ⚠️");
 console.log("   Syntax: element.getElementsByTagName(tagName)");
@@ -110,12 +124,16 @@ console.log("6. getElementsByName() - Mainly for forms");
 console.log("   Syntax: document.getElementsByName(name)");
 console.log("   Returns: NodeList\n");
 
-console.log("7. closest() - Search upwards for ancestor (DOM / WHATWG Living Standard)");
+console.log(
+  "7. closest() - Search upwards for ancestor (DOM / WHATWG Living Standard)"
+);
 console.log("   Syntax: element.closest(selector)");
 console.log("   Returns: Element | null (includes itself)");
 console.log("   Use case: Finding specific ancestor in event delegation\n");
 
-console.log("8. matches() / matchesSelector() - Match check (DOM / WHATWG; matchesSelector is the deprecated legacy alias)");
+console.log(
+  "8. matches() / matchesSelector() - Match check (DOM / WHATWG; matchesSelector is the deprecated legacy alias)"
+);
 console.log("   Syntax: element.matches(selector)");
 console.log("   Returns: boolean");
 console.log("   Use case: Filtering target element in event delegation\n");
@@ -169,10 +187,14 @@ console.log("   Example: element.innerHTML = '<strong>Bold</strong>'\n");
 
 console.log("2. textContent");
 console.log("   - Gets/sets plain text content (doesn't include HTML tags)");
-console.log("   - ✅ Safe: Treats value as plain text, never parsed as HTML (no script execution)");
+console.log(
+  "   - ✅ Safe: Treats value as plain text, never parsed as HTML (no script execution)"
+);
 console.log("   - ✅ Better performance: Doesn't trigger HTML parsing");
 console.log("   - Returns content of hidden elements");
-console.log("   Example: element.textContent = '<script>not executed</script>'\n");
+console.log(
+  "   Example: element.textContent = '<script>not executed</script>'\n"
+);
 
 console.log("3. innerText");
 console.log("   - Similar to textContent, but considers CSS rendering");
@@ -202,7 +224,9 @@ console.log(`
 
 console.log("\n6. hidden property");
 console.log("   - HTML5 boolean attribute");
-console.log("   - Applies display:none via user-agent stylesheet, but CAN be overridden by author CSS (e.g. display:block)");
+console.log(
+  "   - Applies display:none via user-agent stylesheet, but CAN be overridden by author CSS (e.g. display:block)"
+);
 console.log("   - Can be customized with CSS [hidden] { display: none }");
 console.log(`
    element.hidden = true;  // Hide
@@ -215,7 +239,9 @@ console.log("│ Property    │ HTML tags │ Security │ Performance│ Hidde
 console.log("├─────────────┼──────────┼──────────┼──────────┼──────────┤");
 console.log("│ innerHTML   │ ✅ Kept  │ ⚠️ Risk  │ Slow(parse)│ ✅ Inc.  │");
 console.log("│ textContent │ ❌ Escaped│ ✅ Safe   │ Fast      │ ✅ Inc.  │");
-console.log("│ innerText   │ ❌ Escaped│ ✅ Safe   │ Slow(reflow)│ ❌ Excl.  │");
+console.log(
+  "│ innerText   │ ❌ Escaped│ ✅ Safe   │ Slow(reflow)│ ❌ Excl.  │"
+);
 console.log("│ outerHTML   │ ✅ Kept  │ ⚠️ Risk  │ Slow      │ ✅ Inc.  │");
 console.log("└─────────────┴──────────┴──────────┴──────────┴──────────┘\n");
 
@@ -229,7 +255,9 @@ console.log("\n=== Section 4: Attribute Operations ===\n");
 
 console.log("📖 HTML Attribute vs DOM Property:\n");
 console.log("- HTML Attribute: String written in HTML tag");
-console.log("- DOM Property: Property on JavaScript object (can be any type)\n");
+console.log(
+  "- DOM Property: Property on JavaScript object (can be any type)\n"
+);
 
 console.log("🔗 Standard Attributes Usually Auto-Sync:");
 console.log(`
@@ -441,11 +469,19 @@ function getCSSVariable(name) {
 
 console.log("\n📊 Style Operation Methods Comparison:\n");
 console.log("┌────────────────────┬──────────────┬──────────┬────────────┐");
-console.log("│ Method             │ Modify       │ Read     │ Priority   │ CSS Files  │");
+console.log(
+  "│ Method             │ Modify       │ Read     │ Priority   │ CSS Files  │"
+);
 console.log("├────────────────────┼──────────────┼──────────┼────────────┤");
-console.log("│ element.style.xxx  │ ✅ Yes       │ ⚠️ Inline│ Highest    │ ❌ No      │");
-console.log("│ getComputedStyle   │ ❌ No        │ ✅ All    │ N/A        │ ✅ Yes     │");
-console.log("│ classList          │ ✅ Yes       │ ✅ Yes    │ Varies     │ N/A        │");
+console.log(
+  "│ element.style.xxx  │ ✅ Yes       │ ⚠️ Inline│ Highest    │ ❌ No      │"
+);
+console.log(
+  "│ getComputedStyle   │ ❌ No        │ ✅ All    │ N/A        │ ✅ Yes     │"
+);
+console.log(
+  "│ classList          │ ✅ Yes       │ ✅ Yes    │ Varies     │ N/A        │"
+);
 console.log("└────────────────────┴──────────────┴──────────┴────────────┘\n");
 
 // ============================================
@@ -499,10 +535,14 @@ console.log("2. Don't use innerHTML for string concatenation in loops");
 console.log("3. Don't confuse attribute and property");
 console.log("4. Don't modify DOM while iterating live HTMLCollection");
 console.log("5. Don't overuse getComputedStyle (triggers reflow)");
-console.log("6. Don't rely on input.getAttribute('value') to get current value\n");
+console.log(
+  "6. Don't rely on input.getAttribute('value') to get current value\n"
+);
 
 console.log("📚 Reference Documentation:\n");
-console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model");
+console.log(
+  "- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model"
+);
 console.log("- javascript.info: https://javascript.info/document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
 console.log("- CSSOM: https://www.w3.org/TR/cssom-1/\n");

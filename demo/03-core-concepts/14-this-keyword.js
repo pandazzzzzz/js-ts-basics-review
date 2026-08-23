@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 14-this-keyword-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -59,7 +58,7 @@ console.log("=== 1. this Basic Rules Demo ===");
 console.log("Global this === globalThis:", this === globalThis);
 
 // In strict mode, global this is still globalThis
-(function() {
+(function () {
   "use strict";
   console.log("Strict mode global this === globalThis:", this === globalThis);
 })();
@@ -69,7 +68,7 @@ let person = {
   name: "Alice",
   greet() {
     console.log("Hello, I'm", this.name);
-  }
+  },
 };
 
 person.greet(); // "Hello, I'm Alice" - this is person
@@ -97,9 +96,9 @@ let obj3 = {
     console.log("Shorthand this.value:", this.value);
   },
   // Function property - this also works when called as method
-  functionProperty: function() {
+  functionProperty: function () {
     console.log("Function property this.value:", this.value);
-  }
+  },
 };
 
 obj3.methodShorthand(); // 1
@@ -111,7 +110,6 @@ function standalone() {
 }
 
 standalone(); // true (this is globalThis)
-
 
 // ============================================
 // 2. THIS LOSS PROBLEMS
@@ -145,7 +143,7 @@ let user = {
   name: "Bob",
   sayName() {
     console.log("My name is", this.name);
-  }
+  },
 };
 
 let sayNameFunc = user.sayName;
@@ -166,7 +164,7 @@ let counter = {
   increment() {
     this.count++;
     console.log("Count:", this.count);
-  }
+  },
 };
 
 console.log("\nsetTimeout with method:");
@@ -184,11 +182,11 @@ let numbers = {
   multiplier: 2,
 
   multiply() {
-    return this.values.map(function(val) {
+    return this.values.map(function (val) {
       console.log("this in callback:", this); // globalThis or undefined
       return val * this.multiplier; // NaN or error
     });
-  }
+  },
 };
 
 console.log("\nArray callback (broken):");
@@ -204,10 +202,10 @@ let numbersFixed = {
   multiplier: 2,
 
   multiply() {
-    return this.values.map(function(val) {
+    return this.values.map(function (val) {
       return val * this.multiplier;
     }, this); // Pass this as second argument
-  }
+  },
 };
 
 console.log("Array callback (fixed with thisArg):", numbersFixed.multiply());
@@ -219,7 +217,7 @@ let numbersArrow = {
 
   multiply() {
     return this.values.map(val => val * this.multiplier);
-  }
+  },
 };
 
 console.log("Array callback (fixed with arrow):", numbersArrow.multiply());
@@ -235,7 +233,7 @@ let calculator = {
   base: 10,
   add(x) {
     return this.base + x;
-  }
+  },
 };
 
 let { add } = calculator;
@@ -247,7 +245,6 @@ try {
   console.log("add(5) loses this (strict mode):", e.message);
   console.log("Fix: add.call(calculator, 5) →", add.call(calculator, 5)); // 15
 }
-
 
 // ============================================
 // 3. EXPLICIT BINDING - call/apply/bind
@@ -292,7 +289,7 @@ let person2 = { name: "Diana" };
 
 console.log("\ncall() examples:");
 greet.call(person1, "Hello", "!"); // "Hello, I'm Charlie!"
-greet.call(person2, "Hi", "!");    // "Hi, I'm Diana!"
+greet.call(person2, "Hi", "!"); // "Hi, I'm Diana!"
 
 // 3.2 apply() - Call with specified this and array arguments
 let args = ["Hey", "!!!"];
@@ -308,7 +305,7 @@ let arrayLike = {
   0: "a",
   1: "b",
   2: "c",
-  length: 3
+  length: 3,
 };
 
 console.log("\nMethod borrowing:");
@@ -333,7 +330,7 @@ let timer = {
   tick() {
     this.seconds++;
     console.log("Seconds:", this.seconds);
-  }
+  },
 };
 
 console.log("\nbind with setTimeout:");
@@ -351,14 +348,13 @@ function showThis() {
 }
 
 console.log("\nnull/undefined this:");
-showThis.call(null);    // true in non-strict (this becomes globalThis)
+showThis.call(null); // true in non-strict (this becomes globalThis)
 showThis.call(undefined); // true in non-strict
 
-(function() {
+(function () {
   "use strict";
   console.log("Strict mode null:", this === null); // true (strict .call(null) preserves null)
 }).call(null);
-
 
 // ============================================
 // 4. ARROW FUNCTION this
@@ -408,19 +404,19 @@ let objWithArrow = {
   },
   arrowMethod: () => {
     console.log("Arrow method this:", this === globalThis); // globalThis!
-  }
+  },
 };
 
 console.log("\nArrow function as object method:");
 objWithArrow.regularMethod(); // "ArrowObj"
-objWithArrow.arrowMethod();   // undefined (this is globalThis, not objWithArrow)
+objWithArrow.arrowMethod(); // undefined (this is globalThis, not objWithArrow)
 
 // 4.3 Arrow function in callback - preserves this
 let counter2 = {
   count: 0,
 
   startRegular() {
-    setInterval(function() {
+    setInterval(function () {
       console.log("Regular callback this:", this); // globalThis
       this.count++; // Doesn't work!
     }, 1000);
@@ -431,7 +427,7 @@ let counter2 = {
       console.log("Arrow callback this.count:", this.count); // Works!
       this.count++;
     }, 1000);
-  }
+  },
 };
 
 console.log("\nArrow in callback (won't actually run setTimeout):");
@@ -484,7 +480,6 @@ let arrowTimer = new Timer();
 let arrowTimerTick = arrowTimer.tick; // Can extract without losing this
 arrowTimerTick(); // Works! seconds = 1
 
-
 // ============================================
 // 5. CONSTRUCTOR this
 // ============================================
@@ -519,7 +514,7 @@ function Person(name, age) {
   this.name = name;
   this.age = age;
 
-  this.introduce = function() {
+  this.introduce = function () {
     console.log(`Hi, I'm ${this.name}, ${this.age} years old`);
   };
 }
@@ -577,7 +572,7 @@ function EfficientPerson(name) {
 }
 
 // Method on prototype - shared by all instances
-EfficientPerson.prototype.introduce = function() {
+EfficientPerson.prototype.introduce = function () {
   console.log(`I'm ${this.name}`);
 };
 
@@ -585,7 +580,6 @@ let p1 = new EfficientPerson("P1");
 let p2 = new EfficientPerson("P2");
 console.log("\nPrototype method (shared):");
 console.log("p1.introduce === p2.introduce:", p1.introduce === p2.introduce); // true
-
 
 // ============================================
 // 6. CLASS this
@@ -708,7 +702,6 @@ class MathUtil {
 console.log("\nStatic method this:");
 MathUtil.calculate(); // true
 
-
 // ============================================
 // 7. COMMON PITFALLS AND globalThis
 // ============================================
@@ -744,7 +737,7 @@ let nestedObj = {
       console.log("Inner this:", this === globalThis); // true in non-strict
     }
     inner();
-  }
+  },
 };
 
 console.log("\nNested function this:");
@@ -758,7 +751,7 @@ let nestedFixed = {
       console.log("Arrow inner this:", this.name); // "Outer"
     };
     inner();
-  }
+  },
 };
 
 nestedFixed.outer();
@@ -775,7 +768,7 @@ let chainObj = {
   multiply(n) {
     this.value *= n;
     return this;
-  }
+  },
 };
 
 console.log("\nMethod chaining:");
@@ -794,7 +787,7 @@ console.log("globalThis in Node:", globalThis === global); // true in Node.js
 
 // 7.4 'use strict' affects default binding
 console.log("\nStrict mode default binding:");
-(function() {
+(function () {
   "use strict";
   function strictFunc() {
     console.log("Strict this is undefined:", this === undefined);
@@ -805,8 +798,10 @@ console.log("\nStrict mode default binding:");
 // 7.5 Indirect this reference (eval)
 console.log("\nIndirect this:");
 let indirect = eval;
-console.log("indirect('this') === globalThis:", indirect("this") === globalThis);
-
+console.log(
+  "indirect('this') === globalThis:",
+  indirect("this") === globalThis
+);
 
 // ============================================
 // BEST PRACTICES
@@ -849,7 +844,7 @@ let processor = {
   multiplier: 2,
   process() {
     return this.data.map(x => x * this.multiplier);
-  }
+  },
 };
 
 // Good: bind in constructor for event-style callbacks
@@ -868,7 +863,7 @@ class Button {
 let badObj = {
   value: 42,
   // Don't do this - can't access this.value dynamically
-  getValue: () => this.value // undefined!
+  getValue: () => this.value, // undefined!
 };
 
 // Do this instead
@@ -876,9 +871,8 @@ let goodObj = {
   value: 42,
   getValue() {
     return this.value;
-  }
+  },
 };
-
 
 // ============================================
 // SUMMARY
@@ -907,7 +901,6 @@ let goodObj = {
  */
 
 console.log("\n=== this Keyword Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -994,7 +987,6 @@ Advanced Patterns:
 - 24-function-patterns-advanced.js (bind, call, apply patterns)
 - 23-proxy-reflect.js (Proxy and this interaction)
 `);
-
 
 // ============================================
 // Cross-references

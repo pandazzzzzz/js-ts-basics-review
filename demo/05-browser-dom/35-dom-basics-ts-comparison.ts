@@ -353,7 +353,11 @@ console.log("5. Use hasAttribute() for boolean checks, not getAttribute()");
 console.log("6. Use type guards for narrowing element types\n");
 
 console.log("❌ DON'T:\n");
-console.log("1. Don't use non-null assertion (!) unless certain element exists");
+console.log(
+  "1. Don't use non-null assertion (!) unless certain element exists"
+);
 console.log("2. Don't forget that getAttribute returns string | null");
-console.log("3. Don't use style for reading computed styles (use getComputedStyle)");
+console.log(
+  "3. Don't use style for reading computed styles (use getComputedStyle)"
+);
 console.log("4. Don't modify getComputedStyle result (it's readonly)\n");

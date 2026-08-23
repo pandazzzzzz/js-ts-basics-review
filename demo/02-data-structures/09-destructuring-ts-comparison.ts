@@ -33,7 +33,6 @@ const tuple: [number, string, boolean] = [1, "hello", true];
 const [tNum, tStr, tBool] = tuple;
 console.log("Tuple destructuring:", { tNum, tStr, tBool });
 
-
 // ============================================================================
 // 2. OBJECT DESTRUCTURING WITH TYPE ANNOTATIONS
 // ============================================================================
@@ -64,7 +63,6 @@ const { value: renamedValue }: { value: number } = obj;
 // First colon is renaming, second colon (after destructuring) is type annotation
 console.log("Renamed:", renamedValue);
 
-
 // ============================================================================
 // 3. DEFAULT VALUES WITH TYPES
 // ============================================================================
@@ -79,7 +77,10 @@ console.log("\n=== Default Values with Types ===");
 console.log("Array default:", withDefault); // 100
 
 // Object destructuring with defaults
-const { greeting = "Hello", target = "World" }: { greeting?: string; target?: string } = { greeting: "Hi" };
+const {
+  greeting = "Hello",
+  target = "World",
+}: { greeting?: string; target?: string } = { greeting: "Hi" };
 console.log("Object defaults:", { greeting, target }); // "Hi", "World"
 
 // Combining default with rename
@@ -95,7 +96,6 @@ console.log("Null doesn't trigger default:", value); // null, not "default"
 // ✅ SOLUTION: Use nullish coalescing or check explicitly
 const safeValue = nullObj.value ?? "default";
 console.log("With nullish coalescing:", safeValue);
-
 
 // ============================================================================
 // 4. REST ELEMENTS AND PROPERTIES TYPING
@@ -124,7 +124,6 @@ console.log("Remaining:", remaining); // { b: 2, c: 3, d: 4 }
 // ⚠️ PITFALL: Rest elements must be last
 // const [...all, last] = [1, 2, 3]; // ❌ Error: Rest element must be last
 
-
 // ============================================================================
 // 5. FUNCTION PARAMETER DESTRUCTURING TYPING
 // ============================================================================
@@ -149,12 +148,18 @@ interface UserConfig {
   role?: string;
 }
 
-function configureUser({ username, isActive, role = "user" }: UserConfig): string {
+function configureUser({
+  username,
+  isActive,
+  role = "user",
+}: UserConfig): string {
   return `${username} (${role}) - ${isActive ? "active" : "inactive"}`;
 }
 
 console.log(configureUser({ username: "bob", isActive: true }));
-console.log(configureUser({ username: "alice", isActive: false, role: "admin" }));
+console.log(
+  configureUser({ username: "alice", isActive: false, role: "admin" })
+);
 
 // Array parameter destructuring
 function sumPair([a, b]: [number, number]): number {
@@ -175,17 +180,18 @@ interface ComplexUser {
   };
 }
 
-function getUserDisplayName({ profile: { firstName, lastName } }: ComplexUser): string {
+function getUserDisplayName({
+  profile: { firstName, lastName },
+}: ComplexUser): string {
   return `${firstName} ${lastName}`;
 }
 
 const complexUser: ComplexUser = {
   profile: { firstName: "John", lastName: "Doe" },
-  settings: { theme: "dark", notifications: true }
+  settings: { theme: "dark", notifications: true },
 };
 
 console.log("Display name:", getUserDisplayName(complexUser));
-
 
 // ============================================================================
 // 6. TUPLE DESTRUCTURING
@@ -229,7 +235,6 @@ console.log("After push:", mutableTuple); // [1, "hello", 999]
 const readonlyTuple: readonly [number, string] = [1, "hello"];
 // readonlyTuple.push(999); // ❌ Error: Property 'push' does not exist
 
-
 // ============================================================================
 // 7. COMPUTED PROPERTY NAME DESTRUCTURING
 // ============================================================================
@@ -256,7 +261,6 @@ const selectedKey: keyof KnownKeys = "value1";
 const { [selectedKey]: selectedValue } = knownObj;
 console.log("Selected:", selectedValue);
 
-
 // ============================================================================
 // 8. NESTED DESTRUCTURING PATTERNS
 // ============================================================================
@@ -280,16 +284,16 @@ interface NestedStructure {
 const nestedData: NestedStructure = {
   outer: {
     inner: { value: 42, name: "answer" },
-    metadata: { created: new Date() }
-  }
+    metadata: { created: new Date() },
+  },
 };
 
 // Deep destructuring
 const {
   outer: {
     inner: { value: nestedValue, name: nestedName },
-    metadata: { created }
-  }
+    metadata: { created },
+  },
 } = nestedData;
 
 console.log("\n=== Nested Destructuring ===");
@@ -302,20 +306,22 @@ interface MixedNested {
 }
 
 const mixedData: MixedNested = {
-  users: [{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }],
-  settings: { active: true }
+  users: [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+  ],
+  settings: { active: true },
 };
 
 const {
   users: [firstUser, secondUser],
-  settings: { active }
+  settings: { active },
 } = mixedData;
 
 console.log("Mixed nested:", { firstUser, secondUser, active });
 
 // ⚠️ PITFALL: Deep destructuring reduces readability
 // Consider using intermediate variables for deeply nested structures
-
 
 // ============================================================================
 // 9. DESTRUCTURING WITH ITERABLES
@@ -335,10 +341,12 @@ const [setFirst, setSecond] = new Set([1, 2, 3]);
 console.log("Set items:", { setFirst, setSecond });
 
 // Map entries destructuring
-const userMap = new Map<string, string | number>([["id", 1], ["name", "Alice"]]);
+const userMap = new Map<string, string | number>([
+  ["id", 1],
+  ["name", "Alice"],
+]);
 const [[firstKey, firstValue], [secondKey, secondValue]] = userMap;
 console.log("Map entries:", { firstKey, firstValue, secondKey, secondValue });
-
 
 // ============================================================================
 // 10. DESTRUCTURING TO DECLARED VARIABLES
@@ -359,7 +367,6 @@ console.log("Existing:", { existingA, existingB });
 let arrX: number, arrY: number;
 [arrX, arrY] = [100, 200];
 console.log("Array to existing:", { arrX, arrY });
-
 
 // ============================================================================
 // 11. SWAPPING VARIABLES
@@ -382,7 +389,6 @@ let swapY: string = "second";
 [swapX, swapY] = [swapY, swapX];
 console.log("String swap:", { swapX, swapY });
 
-
 // ============================================================================
 // 12. FOR...OF LOOP DESTRUCTURING
 // ============================================================================
@@ -399,7 +405,7 @@ interface User {
 const users: User[] = [
   { id: 1, name: "Alice" },
   { id: 2, name: "Bob" },
-  { id: 3, name: "Charlie" }
+  { id: 3, name: "Charlie" },
 ];
 
 console.log("\n=== for...of Destructuring ===");
@@ -408,7 +414,10 @@ for (const { id, name } of users) {
 }
 
 // With Map entries
-const configMap = new Map<string, string | number>([["host", "localhost"], ["port", 3000]]);
+const configMap = new Map<string, string | number>([
+  ["host", "localhost"],
+  ["port", 3000],
+]);
 console.log("\nMap iteration:");
 for (const [key, value] of configMap) {
   console.log(`  ${key}: ${value}`);
@@ -420,7 +429,6 @@ console.log("\nWith index:");
 for (const [index, value] of items.entries()) {
   console.log(`  ${index}: ${value}`);
 }
-
 
 // ============================================================================
 // 13. COMMON PITFALLS
@@ -443,7 +451,8 @@ shallowReadonly[0].name = "Bob"; // ✅ Allowed! Shallow readonly
 console.log("Shallow readonly mutated:", shallowReadonly);
 
 // PITFALL 3: Type narrowing doesn't work with destructured union types
-type Animal = { kind: "dog"; bark: () => void } | { kind: "cat"; meow: () => void };
+type Animal =
+  { kind: "dog"; bark: () => void } | { kind: "cat"; meow: () => void };
 
 function makeSound(animal: Animal): void {
   // Direct property access with type guard works
@@ -470,7 +479,6 @@ const coordObj = { x: originalX, y: originalY };
 let { x: refX, y: refY } = coordObj;
 refX = 100; // Only changes refX, not coordObj.x or originalX
 console.log("\nReference vs value:", { refX, originalX, objX: coordObj.x });
-
 
 // ============================================================================
 // 14. BEST PRACTICES SUMMARY
@@ -541,7 +549,6 @@ console.log("\nReference vs value:", { refX, originalX, objX: coordObj.x });
 
 🎯 RECOMMENDATION: Use TypeScript for all production code!
 */
-
 
 // ============================================================================
 // 15. COMPARISON TABLE

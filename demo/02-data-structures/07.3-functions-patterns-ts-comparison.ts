@@ -33,21 +33,31 @@ interface User {
 }
 
 const user: User = {
-  name: 'David',
+  name: "David",
   greet(greeting: string, punctuation: string): string {
     return `${greeting}, ${this.name}${punctuation}`;
-  }
+  },
 };
 
-console.log("  user.greet.call({ name: 'Eve' }, 'Hi', '.'):", user.greet.call({ name: 'Eve' }, 'Hi', '.'));
+console.log(
+  "  user.greet.call({ name: 'Eve' }, 'Hi', '.'):",
+  user.greet.call({ name: "Eve" }, "Hi", ".")
+);
 
-console.log("  user.greet.apply({ name: 'Frank' }, ['Hey', '?']):", user.greet.apply({ name: 'Frank' }, ['Hey', '?']));
+console.log(
+  "  user.greet.apply({ name: 'Frank' }, ['Hey', '?']):",
+  user.greet.apply({ name: "Frank" }, ["Hey", "?"])
+);
 
-const greetEve: (greeting: string, punctuation: string) => string = user.greet.bind({ name: 'Eve' });
-console.log("  greetEve('Good morning', '!'):", greetEve('Good morning', '!'));
+const greetEve: (greeting: string, punctuation: string) => string =
+  user.greet.bind({ name: "Eve" });
+console.log("  greetEve('Good morning', '!'):", greetEve("Good morning", "!"));
 
-const sayHello: (punctuation: string) => string = user.greet.bind(user, 'Hello');
-console.log("  sayHello('!'):", sayHello('!'));
+const sayHello: (punctuation: string) => string = user.greet.bind(
+  user,
+  "Hello"
+);
+console.log("  sayHello('!'):", sayHello("!"));
 
 // Example 2: Method definitions
 console.log("\n2. Method definitions:");
@@ -56,7 +66,7 @@ interface Calculator {
   add(n: number): Calculator;
   subtract(n: number): Calculator;
   readonly result: number;
-  reset: number;  // accessor: read/write current value
+  reset: number; // accessor: read/write current value
 }
 
 const calculator: Calculator = {
@@ -82,7 +92,7 @@ const calculator: Calculator = {
 
   set reset(value: number) {
     this.value = value;
-  }
+  },
 };
 
 calculator.add(10).subtract(3);
@@ -118,7 +128,9 @@ function namedFunction(a: number, b: number): number {
 }
 
 const anonymousFn: (a: number, b: number) => number = (a, b) => a + b;
-const namedExpr: (a: number, b: number) => number = function myName(a, b) { return a + b; };
+const namedExpr: (a: number, b: number) => number = function myName(a, b) {
+  return a + b;
+};
 const arrowFn: (n: number) => number = n => n * n;
 
 console.log("  Function names:");
@@ -144,7 +156,7 @@ interface CounterModule {
   setCount(value: number): boolean;
 }
 
-const CounterModule: CounterModule = (function(): CounterModule {
+const CounterModule: CounterModule = (function (): CounterModule {
   let count: number = 0;
   const maxCount: number = 100;
 
@@ -170,7 +182,7 @@ const CounterModule: CounterModule = (function(): CounterModule {
         return true;
       }
       return false;
-    }
+    },
   };
 })();
 
@@ -187,10 +199,11 @@ interface Utils {
   getVersion(): string;
 }
 
-const utils: Utils = (function() {
-  const version: string = '1.0.0';
+const utils: Utils = (function () {
+  const version: string = "1.0.0";
 
-  const log: LoggerFn = (message) => console.log(`[MyApp v${version}] ${message}`);
+  const log: LoggerFn = message =>
+    console.log(`[MyApp v${version}] ${message}`);
 
   function greet(name: string): void {
     log(`Hello, ${name}!`);
@@ -203,7 +216,7 @@ const utils: Utils = (function() {
   return { greet, getVersion };
 })();
 
-utils.greet('World');
+utils.greet("World");
 console.log("  Version:", utils.getVersion());
 
 // Example 6: Tail call optimization
@@ -224,8 +237,9 @@ console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 
 // Generic: preserves input type, adds a typed property (no `any` needed)
-const pureAddProperty = <T extends object>(obj: T): T & { processed: boolean } =>
-  ({ ...obj, processed: true });
+const pureAddProperty = <T extends object>(
+  obj: T
+): T & { processed: boolean } => ({ ...obj, processed: true });
 
 const original = { name: "test" };
 const modified = pureAddProperty(original);

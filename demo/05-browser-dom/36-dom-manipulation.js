@@ -29,20 +29,25 @@ export {};
 
 console.log("=== Section 1: Creating Elements ===\n");
 
-if (typeof document !== 'undefined') {
-  console.log("✅ Browser environment detected, following code is executable:\n");
+if (typeof document !== "undefined") {
+  console.log(
+    "✅ Browser environment detected, following code is executable:\n"
+  );
 
   // 1.1 createElement - Create element node
   console.log("1. document.createElement(tagName)");
-  const div = document.createElement('div');
-  div.id = 'myDiv';
-  div.className = 'container';
-  div.textContent = 'Hello, DOM!';
+  const div = document.createElement("div");
+  div.id = "myDiv";
+  div.className = "container";
+  div.textContent = "Hello, DOM!";
   console.log("Created element:", div.outerHTML);
 
   // Create namespaced element (SVG, MathML)
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const circle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "circle"
+  );
   console.log("SVG element created:", svg.tagName);
 
   // 1.2 createTextNode - Create text node
@@ -52,13 +57,13 @@ if (typeof document !== 'undefined') {
   console.log("Note: HTML tags are treated as literal text, not executed!");
 
   // Comparison: innerHTML parses HTML
-  const unsafeDiv = document.createElement('div');
+  const unsafeDiv = document.createElement("div");
   // unsafeDiv.innerHTML = '<script>alert("xss")</script>'; // ❌ XSS risk!
 
   // 1.3 cloneNode - Clone node
   console.log("\n3. elem.cloneNode(deep)");
-  const original = document.createElement('div');
-  original.innerHTML = '<p>Paragraph <span>with span</span></p>';
+  const original = document.createElement("div");
+  original.innerHTML = "<p>Paragraph <span>with span</span></p>";
 
   // Shallow clone - Only clones element itself, doesn't include child nodes
   const shallowClone = original.cloneNode(false);
@@ -77,14 +82,14 @@ if (typeof document !== 'undefined') {
 `);
 
   // Fix duplicate ID problem
-  deepClone.id = 'myDiv-clone-' + Date.now();
+  deepClone.id = "myDiv-clone-" + Date.now();
 
   // 1.4 DocumentFragment - Lightweight container
   console.log("\n4. DocumentFragment - Bulk operation optimization");
   const fragment = document.createDocumentFragment();
 
   for (let i = 1; i <= 5; i++) {
-    const li = document.createElement('li');
+    const li = document.createElement("li");
     li.textContent = `Item ${i}`;
     fragment.appendChild(li);
   }
@@ -94,10 +99,14 @@ if (typeof document !== 'undefined') {
 
   // One-time insertion to DOM
   // ul.appendChild(fragment); // Only triggers one reflow!
-  console.log("After append, fragment becomes empty:", fragment.childNodes.length === 0);
-
+  console.log(
+    "After append, fragment becomes empty:",
+    fragment.childNodes.length === 0
+  );
 } else {
-  console.log("\n⚠️ Non-browser environment, creating element examples shown in code form");
+  console.log(
+    "\n⚠️ Non-browser environment, creating element examples shown in code form"
+  );
 }
 
 // ============================================
@@ -156,7 +165,9 @@ console.log("\n📜 Traditional Insertion Methods:\n");
 console.log("6. parent.appendChild(node)");
 console.log("   - Adds at the end, single child node");
 console.log("   - Returns added node");
-console.log("   - If node already exists, removes from original position (move operation)");
+console.log(
+  "   - If node already exists, removes from original position (move operation)"
+);
 console.log(`
    const added = parent.appendChild(child);
    console.log(added === child); // true
@@ -409,9 +420,15 @@ elements.forEach((el, i) => {                         // Batch writes
 `);
 
 console.log("\n💡 Virtual DOM Concept:");
-console.log("  React/Vue core idea: represent the DOM as JS objects, diff changes in memory, then batch-apply to the real DOM");
-console.log("  Solves: direct DOM manipulation is slow (reflow/repaint overhead), so minimize real DOM mutations");
-console.log("  Flow: vNode (JS object) → diff() → patch() applies only the minimal real DOM changes");
+console.log(
+  "  React/Vue core idea: represent the DOM as JS objects, diff changes in memory, then batch-apply to the real DOM"
+);
+console.log(
+  "  Solves: direct DOM manipulation is slow (reflow/repaint overhead), so minimize real DOM mutations"
+);
+console.log(
+  "  Flow: vNode (JS object) → diff() → patch() applies only the minimal real DOM changes"
+);
 
 // 5. Special APIs for Tables and Lists
 // HTMLTableElement: table.rows/caption/tBodies/tHead; insertRow/deleteRow; row.insertCell/deleteCell
@@ -548,9 +565,13 @@ console.log("❌ DON'T:\n");
 console.log("1. Don't frequently manipulate DOM in loops");
 console.log("2. Don't use innerHTML for complex construction (XSS risk)");
 console.log("3. Don't forget to modify id after cloneNode (duplicate IDs)");
-console.log("4. innerHTML = '' to empty container: modern engines GC removed children and their listeners (only leaks if you retain JS references to them)");
+console.log(
+  "4. innerHTML = '' to empty container: modern engines GC removed children and their listeners (only leaks if you retain JS references to them)"
+);
 console.log("5. Don't mix reads and writes of styles in tight loops");
-console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
+console.log(
+  "6. Don't use anonymous functions for event listeners (can't remove)\n"
+);
 
 // 6. MutationObserver
 // Watches DOM changes (childList, attributes, characterData, subtree) and delivers batches asynchronously
@@ -559,8 +580,10 @@ console.log("6. Don't use anonymous functions for event listeners (can't remove)
 
 console.log("\n=== Section 6: MutationObserver Demo ===\n");
 
-if (typeof MutationObserver === 'undefined') {
-  console.log("⚠️ Non-browser environment, MutationObserver examples shown in code form");
+if (typeof MutationObserver === "undefined") {
+  console.log(
+    "⚠️ Non-browser environment, MutationObserver examples shown in code form"
+  );
 
   console.log(`
 // Basic usage: watch for changes to an element
@@ -607,35 +630,39 @@ const pending = observer.takeRecords();
 `);
 } else {
   // Browser environment demo (runnable with a real DOM)
-  console.log("✅ Browser environment detected — running MutationObserver demo");
+  console.log(
+    "✅ Browser environment detected — running MutationObserver demo"
+  );
 
   // Create a target element if document exists
-  const target = document.createElement('div');
-  target.id = 'watched';
+  const target = document.createElement("div");
+  target.id = "watched";
   document.body?.appendChild(target);
 
   const mutationsLog = [];
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach(m => mutationsLog.push({
-      type: m.type,
-      attributeName: m.attributeName,
-      addedCount: m.addedNodes?.length || 0,
-      removedCount: m.removedNodes?.length || 0
-    }));
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m =>
+      mutationsLog.push({
+        type: m.type,
+        attributeName: m.attributeName,
+        addedCount: m.addedNodes?.length || 0,
+        removedCount: m.removedNodes?.length || 0,
+      })
+    );
   });
 
   observer.observe(target, {
     childList: true,
     attributes: true,
-    attributeOldValue: true
+    attributeOldValue: true,
   });
 
   // Trigger mutations
-  const child = document.createElement('span');
-  child.textContent = 'Hello';
-  target.appendChild(child);       // childList mutation
-  target.setAttribute('class', 'active'); // attributes mutation
-  child.textContent = 'World';     // characterData (NOT observed without subtree)
+  const child = document.createElement("span");
+  child.textContent = "Hello";
+  target.appendChild(child); // childList mutation
+  target.setAttribute("class", "active"); // attributes mutation
+  child.textContent = "World"; // characterData (NOT observed without subtree)
 
   // Force flush by disconnecting
   observer.disconnect();
@@ -652,13 +679,15 @@ console.log("- Use ResizeObserver for size changes");
 console.log("- Use MutationObserver for structural/attribute changes");
 console.log("- Avoid polling with setInterval for DOM changes\n");
 
-
 console.log("📚 Reference Documentation:\n");
-console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement");
+console.log(
+  "- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"
+);
 console.log("- javascript.info: https://javascript.info/modifying-document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
-console.log("- High Performance Animations: https://web.dev/animations-guide/\n");
-
+console.log(
+  "- High Performance Animations: https://web.dev/animations-guide/\n"
+);
 
 // ============================================
 // Cross-references

@@ -85,8 +85,10 @@ const manualGroup = inventory.reduce((acc, item) => {
   acc[key].push(item);
   return acc;
 }, {});
-console.log("\nManual reduce grouping same result:",
-  JSON.stringify(manualGroup) === JSON.stringify(groupedByType)); // true
+console.log(
+  "\nManual reduce grouping same result:",
+  JSON.stringify(manualGroup) === JSON.stringify(groupedByType)
+); // true
 
 // ============================================
 // 2. Promise.withResolvers()
@@ -106,9 +108,13 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
 // Promise.withResolvers() is exactly equivalent to the following pre-ES2024 pattern,
 // but more concise — no `let` bindings leaking the resolvers out of the executor:
-const { promise: mdnPromise, resolve: mdnResolve, reject: mdnReject } = Promise.withResolvers();
+const {
+  promise: mdnPromise,
+  resolve: mdnResolve,
+  reject: mdnReject,
+} = Promise.withResolvers();
 mdnResolve("MDN withResolvers resolved");
-mdnPromise.then((value) => console.log("  MDN withResolvers:", value));
+mdnPromise.then(value => console.log("  MDN withResolvers:", value));
 // MDN withResolvers resolved
 
 // Practical use: resolve/reject are needed *outside* the Promise constructor
@@ -370,13 +376,13 @@ const numbersArr = [1, 2, 3, 4, 5];
 const grouped = Object.groupBy(numbersArr, n => n % 2);
 console.log("grouped keys:", Object.keys(grouped)); // ["0", "1"] (string keys, not numbers)
 console.log("grouped[0]:", grouped[0]); // [2,4]
-console.log("grouped['0']:", grouped['0']); // same as above
+console.log("grouped['0']:", grouped["0"]); // same as above
 
 // Pitfall 2: Map.groupBy keys preserve type
 const mapGrouped = Map.groupBy(numbersArr, n => n % 2);
 console.log("\nMap.groupBy keys are numbers:");
 console.log("mapGrouped.get(0):", mapGrouped.get(0)); // [2,4] (number key works)
-console.log("mapGrouped.get('0'):", mapGrouped.get('0')); // undefined (string key doesn't)
+console.log("mapGrouped.get('0'):", mapGrouped.get("0")); // undefined (string key doesn't)
 
 // Pitfall 3: Resizable ArrayBuffer can change underfoot
 const resizableBuf = new ArrayBuffer(8, { maxByteLength: 16 });
@@ -395,14 +401,30 @@ console.log("\nbuf1 detached after transfer:", buf1.detached); // true
 // ============================================
 console.log("\n--- 8. Best Practices ---\n");
 
-console.log("✅ Use Object.groupBy/Map.groupBy instead of manual reduce for grouping");
-console.log("✅ Use Map.groupBy when you need non-string keys or want to preserve key types");
-console.log("✅ Use Promise.withResolvers for cleaner promise creation when resolve/reject are needed outside");
-console.log("✅ Use v flag regex for complex Unicode matching and set operations");
-console.log("✅ Use resizable ArrayBuffer for dynamic binary data instead of concatenating buffers");
-console.log("✅ Always validate user input strings with isWellFormed() before processing");
-console.log("⚠️  Remember that Object.groupBy returns a plain object with prototype (use Object.create(null) if needed)");
-console.log("⚠️  Atomics.waitAsync is only useful with SharedArrayBuffer (requires COOP/COEP headers in browsers)");
+console.log(
+  "✅ Use Object.groupBy/Map.groupBy instead of manual reduce for grouping"
+);
+console.log(
+  "✅ Use Map.groupBy when you need non-string keys or want to preserve key types"
+);
+console.log(
+  "✅ Use Promise.withResolvers for cleaner promise creation when resolve/reject are needed outside"
+);
+console.log(
+  "✅ Use v flag regex for complex Unicode matching and set operations"
+);
+console.log(
+  "✅ Use resizable ArrayBuffer for dynamic binary data instead of concatenating buffers"
+);
+console.log(
+  "✅ Always validate user input strings with isWellFormed() before processing"
+);
+console.log(
+  "⚠️  Remember that Object.groupBy returns a plain object with prototype (use Object.create(null) if needed)"
+);
+console.log(
+  "⚠️  Atomics.waitAsync is only useful with SharedArrayBuffer (requires COOP/COEP headers in browsers)"
+);
 
 // ============================================
 // 9. Cross-references

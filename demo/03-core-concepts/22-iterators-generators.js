@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 22-iterators-generators-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -66,7 +65,7 @@ let manualIterator = {
       return { value: this.current++, done: false };
     }
     return { done: true };
-  }
+  },
 };
 
 console.log("Manual iterator:");
@@ -88,14 +87,14 @@ let range = {
           return { value: current++, done: false };
         }
         return { done: true };
-      }
+      },
     };
 
     // Make iterator iterable (return itself)
     iterator[Symbol.iterator] = () => iterator;
 
     return iterator;
-  }
+  },
 };
 
 console.log("\nIterable with for...of:");
@@ -147,9 +146,9 @@ let reusableRange = {
           return { value: this.current++, done: false };
         }
         return { done: true };
-      }
+      },
     };
-  }
+  },
 };
 
 console.log("\nReusable iterable:");
@@ -157,7 +156,6 @@ console.log("First loop:");
 for (let num of reusableRange) console.log(num);
 console.log("Second loop:");
 for (let num of reusableRange) console.log(num);
-
 
 // ============================================
 // 2. CUSTOM ITERATORS
@@ -204,7 +202,7 @@ class UniqueChars {
           }
         }
         return { done: true };
-      }
+      },
     };
   }
 }
@@ -229,7 +227,7 @@ class ReverseIterable {
           return { value: this.arr[index--], done: false };
         }
         return { done: true };
-      }
+      },
     };
   }
 }
@@ -258,7 +256,7 @@ class FilteredIterable {
           }
         }
         return { done: true };
-      }
+      },
     };
   }
 }
@@ -276,9 +274,9 @@ function createCounter(start = 0) {
       return {
         next() {
           return { value: count++, done: false };
-        }
+        },
       };
-    }
+    },
   };
 }
 
@@ -289,7 +287,6 @@ for (let num of counter) {
   if (count++ >= 5) break;
   console.log(num); // 10, 11, 12, 13, 14
 }
-
 
 // ============================================
 // 3. GENERATOR FUNCTIONS
@@ -358,7 +355,7 @@ let obj = {
     yield "a";
     yield "b";
     yield "c";
-  }
+  },
 };
 
 console.log("\nGenerator method:");
@@ -367,7 +364,7 @@ for (let value of obj.generatorMethod()) {
 }
 
 // 3.6 Generator expression (not declaration)
-const genExpr = function*() {
+const genExpr = function* () {
   yield 1;
   yield 2;
 };
@@ -388,7 +385,6 @@ let stateGen = statefulGen();
 console.log(stateGen.next().value); // 1
 console.log(stateGen.next().value); // 2
 console.log(stateGen.next().value); // 3
-
 
 // ============================================
 // 4. GENERATOR METHODS
@@ -481,7 +477,6 @@ console.log(catchGenInst.next().value); // 1
 console.log(catchGenInst.next().value); // 2
 console.log(catchGenInst.throw(new Error("test")).value); // "recovered"
 console.log(catchGenInst.next().value); // 3
-
 
 // ============================================
 // 5. YIELD* DELEGATION
@@ -585,7 +580,6 @@ child1.addChild(new TreeNode("E"));
 
 console.log("\nTree traversal:");
 console.log([...root.traverse()]); // ['A', 'B', 'D', 'E', 'C']
-
 
 // ============================================
 // 6. PRACTICAL USE CASES
@@ -691,7 +685,6 @@ console.log(ids.next().value); // user-1
 console.log(ids.next().value); // user-2
 console.log(ids.next().value); // user-3
 
-
 // ============================================
 // 7. ASYNC ITERATORS
 // ============================================
@@ -740,9 +733,9 @@ let asyncRange = {
           return { value: this.current++, done: false };
         }
         return { done: true };
-      }
+      },
     };
-  }
+  },
 };
 
 console.log("Async iterator with for await...of:");
@@ -798,7 +791,6 @@ console.log("\nCollect async values:");
   let collected = await collectAsync(asyncGen());
   console.log(collected); // [1, 2, 3]
 })();
-
 
 // ============================================
 // 8. COMMON PATTERNS
@@ -881,7 +873,6 @@ function* chain(...iterables) {
 console.log("\nChain:");
 console.log([...chain([1, 2], [3, 4], [5, 6])]); // [1, 2, 3, 4, 5, 6]
 
-
 // ============================================
 // 9. COMMON PITFALLS
 // ============================================
@@ -933,7 +924,6 @@ console.log("\nReturn in finally:");
 let fg = finallyGen();
 console.log(fg.next()); // { value: 1, done: false }
 console.log(fg.return()); // Logs "Cleanup!", { value: "cleaned", done: true }
-
 
 // ============================================
 // 9b. ITERATOR HELPERS (ES2025)
@@ -1005,7 +995,10 @@ console.log([...doubled]); // [2, 4, 6, 8, 10]
 
 // filter — Keep even numbers
 console.log("\nfilter — keep even numbers:");
-const evens = filterIterator([1, 2, 3, 4, 5, 6][Symbol.iterator](), x => x % 2 === 0);
+const evens = filterIterator(
+  [1, 2, 3, 4, 5, 6][Symbol.iterator](),
+  x => x % 2 === 0
+);
 console.log([...evens]); // [2, 4, 6]
 
 // take — First 3 values
@@ -1037,7 +1030,10 @@ const setIter = Iterator.from(set);
 console.log(setIter.next()); // { value: 'a', done: false }
 
 console.log("\nIterator.from() with Map:");
-const sampleMap = new Map([["x", 1], ["y", 2]]);
+const sampleMap = new Map([
+  ["x", 1],
+  ["y", 2],
+]);
 const mapIter2 = Iterator.from(sampleMap);
 console.log(mapIter2.next()); // { value: ['x', 1], done: false }
 
@@ -1060,24 +1056,33 @@ console.log("\n=== 9b.1 Native Iterator Helper Chaining (ES2025) ===");
 if (Iterator.prototype && typeof Iterator.prototype.map === "function") {
   // Same pipeline the generators emulated: double → keep >4 → take 2 → array
   const nativeChain = Iterator.from([1, 2, 3, 4, 5])
-    .map(x => x * 2)      // [2, 4, 6, 8, 10]
-    .filter(x => x > 4)   // [6, 8, 10]
-    .take(2)              // [6, 8]   (lazy: stops pulling after 2 values)
-    .toArray();           // terminal — materializes [6, 8]
+    .map(x => x * 2) // [2, 4, 6, 8, 10]
+    .filter(x => x > 4) // [6, 8, 10]
+    .take(2) // [6, 8]   (lazy: stops pulling after 2 values)
+    .toArray(); // terminal — materializes [6, 8]
   console.log("native chain result:", nativeChain); // [6, 8]
 
   // Laziness proof: a side-effect in map only runs for values actually pulled.
   // take(1) means map never even sees the 3rd value onward.
   let mapCalls = 0;
   const lazy = Iterator.from([10, 20, 30, 40])
-    .map(x => { mapCalls++; return x; })
+    .map(x => {
+      mapCalls++;
+      return x;
+    })
     .take(1)
     .toArray();
-  console.log("lazy take(1) result:", lazy, "| map invoked", mapCalls, "time(s)"); // [10] | 1
+  console.log(
+    "lazy take(1) result:",
+    lazy,
+    "| map invoked",
+    mapCalls,
+    "time(s)"
+  ); // [10] | 1
 
   // drop + reduce (a non-array terminal)
   const sum = Iterator.from([1, 2, 3, 4, 5])
-    .drop(2)              // [3, 4, 5]
+    .drop(2) // [3, 4, 5]
     .reduce((acc, x) => acc + x, 0);
   console.log("drop(2).reduce sum:", sum); // 12
 
@@ -1087,10 +1092,13 @@ if (Iterator.prototype && typeof Iterator.prototype.map === "function") {
     .find(x => x > 10);
   console.log("first even > 10:", firstBigEven); // 14
 } else {
-  console.log("Native Iterator helpers not supported in this runtime (needs Node 22+ / ES2025)");
-  console.log("Expected: Iterator.from([1,2,3,4,5]).map(x=>x*2).filter(x=>x>4).take(2).toArray() -> [6,8]");
+  console.log(
+    "Native Iterator helpers not supported in this runtime (needs Node 22+ / ES2025)"
+  );
+  console.log(
+    "Expected: Iterator.from([1,2,3,4,5]).map(x=>x*2).filter(x=>x>4).take(2).toArray() -> [6,8]"
+  );
 }
-
 
 // ============================================
 // 10. TYPESCRIPT TYPES
@@ -1136,7 +1144,6 @@ console.log("See TypeScript documentation for full type definitions");
 
 console.log("\n=== Iterators and Generators Demo Complete ===");
 
-
 // ============================================
 // SUMMARY
 // ============================================
@@ -1163,7 +1170,6 @@ console.log("\n=== Iterators and Generators Demo Complete ===");
  * - When Array methods suffice (map, filter)
  * - Unnecessary complexity
  */
-
 
 // ============================================
 // Cross-references

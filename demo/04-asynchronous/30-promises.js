@@ -29,22 +29,22 @@ export {};
 
 /**
  * Promise - Object representing eventual completion or failure of async operation
- * 
+ *
  * ES Specification: ES6/ES2015
- * 
+ *
  * Characteristics:
  * - Has three states: pending, fulfilled, rejected
  * - Once settled (fulfilled/rejected), state cannot change
  * - Provides then/catch/finally methods for handling results
  * - Chainable for sequential operations
  * - Better alternative to callback hell
- * 
+ *
  * Use Cases:
  * - Asynchronous operations (API calls, file I/O, timers)
  * - Sequential async operations
  * - Parallel async operations
  * - Error handling in async code
- * 
+ *
  * Common Pitfalls:
  * - Forgetting to return in then() causes promise chain issues
  * - Unhandled promise rejections can crash Node.js
@@ -56,7 +56,7 @@ console.log("=== Promise Basics Demo ===\n");
 // Creating a Promise with the constructor
 const simplePromise = new Promise((resolve, reject) => {
   const success = true;
-  
+
   if (success) {
     resolve("Operation successful!");
   } else {
@@ -78,24 +78,24 @@ simplePromise
 
 /**
  * Promise States:
- * 
+ *
  * 1. Pending - Initial state, neither fulfilled nor rejected
  * 2. Fulfilled - Operation completed successfully
  * 3. Rejected - Operation failed
- * 
+ *
  * Once a promise is fulfilled or rejected, it is "settled" and cannot change state.
  */
 
 console.log("\n=== Promise States Demo ===\n");
 
 // Pending promise
-const pendingPromise = new Promise((resolve) => {
+const pendingPromise = new Promise(resolve => {
   // Never resolves - stays pending
   console.log("Promise created - state: pending");
 });
 
 // Fulfilled promise
-const fulfilledPromise = new Promise((resolve) => {
+const fulfilledPromise = new Promise(resolve => {
   resolve("Fulfilled!");
 });
 
@@ -118,11 +118,11 @@ rejectedPromise.catch(error => {
 
 /**
  * Promise Methods:
- * 
+ *
  * - then(onFulfilled, onRejected) - Handle fulfilled or rejected promise
  * - catch(onRejected) - Handle rejected promise (syntactic sugar for then(null, onRejected))
  * - finally(onFinally) - Execute code regardless of promise outcome (ES2018)
- * 
+ *
  * Chaining:
  * - Each then() returns a new promise
  * - Return value becomes the resolved value of the new promise
@@ -183,20 +183,20 @@ asyncOperation(10)
 
 /**
  * Promise.all(iterable) - Wait for all promises to fulfill
- * 
+ *
  * ES Specification: ES6/ES2015
- * 
+ *
  * Characteristics:
  * - Takes array of promises
  * - Returns single promise that resolves when ALL promises resolve
  * - Resolves with array of results in same order
  * - Rejects immediately if ANY promise rejects (fail-fast)
- * 
+ *
  * Use Cases:
  * - Multiple independent async operations
  * - Fetching data from multiple APIs
  * - Parallel processing
- * 
+ *
  * Common Pitfalls:
  * - One rejection fails entire operation
  * - Results order matches input order, not completion order
@@ -235,14 +235,14 @@ Promise.all([successPromise1, failingPromise, successPromise2])
 
 /**
  * Promise.race(iterable) - Wait for first promise to settle
- * 
+ *
  * ES Specification: ES6/ES2015
- * 
+ *
  * Characteristics:
  * - Returns promise that settles with first settled promise
  * - Can resolve or reject depending on which finishes first
  * - Other promises continue running but results are ignored
- * 
+ *
  * Use Cases:
  * - Timeout implementations
  * - Fastest response wins
@@ -263,18 +263,17 @@ function delayedPromise(value, delay) {
 Promise.race([
   delayedPromise("fast", 100),
   delayedPromise("medium", 200),
-  delayedPromise("slow", 300)
-])
-  .then(result => {
-    console.log("Promise.race winner:", result); // "fast"
-  });
+  delayedPromise("slow", 300),
+]).then(result => {
+  console.log("Promise.race winner:", result); // "fast"
+});
 
 // Timeout pattern
 function withTimeout(promise, ms) {
   const timeout = new Promise((_, reject) => {
     setTimeout(() => reject(new Error("Timeout")), ms);
   });
-  
+
   return Promise.race([promise, timeout]);
 }
 
@@ -288,14 +287,14 @@ withTimeout(delayedPromise("data", 500), 200)
 
 /**
  * Promise.allSettled(iterable) - Wait for all promises to settle
- * 
+ *
  * ES Specification: ES2020
- * 
+ *
  * Characteristics:
  * - Waits for ALL promises to settle (fulfill or reject)
  * - Never rejects - always fulfills with array of results
  * - Each result has status ("fulfilled" or "rejected") and value/reason
- * 
+ *
  * Use Cases:
  * - When you need all results regardless of failures
  * - Batch operations where some can fail
@@ -308,30 +307,31 @@ const promises = [
   asyncOperation(1),
   asyncOperation(2, true), // This will fail
   asyncOperation(3),
-  asyncOperation(4, true)  // This will also fail
+  asyncOperation(4, true), // This will also fail
 ];
 
-Promise.allSettled(promises)
-  .then(results => {
-    console.log("Promise.allSettled results:");
-    results.forEach((result, index) => {
-      if (result.status === "fulfilled") {
-        console.log(`  Promise ${index}: fulfilled with value ${result.value}`);
-      } else {
-        console.log(`  Promise ${index}: rejected with reason ${result.reason.message}`);
-      }
-    });
+Promise.allSettled(promises).then(results => {
+  console.log("Promise.allSettled results:");
+  results.forEach((result, index) => {
+    if (result.status === "fulfilled") {
+      console.log(`  Promise ${index}: fulfilled with value ${result.value}`);
+    } else {
+      console.log(
+        `  Promise ${index}: rejected with reason ${result.reason.message}`
+      );
+    }
   });
+});
 
 // 📘 Official MDN example (Promise.allSettled):
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled
 // Always resolves with an array of { status: 'fulfilled', value } / { status: 'rejected', reason }.
 Promise.allSettled([
   Promise.resolve(33),
-  new Promise((resolve) => setTimeout(() => resolve(66), 0)),
+  new Promise(resolve => setTimeout(() => resolve(66), 0)),
   99,
   Promise.reject(new Error("an error")),
-]).then((values) => console.log("MDN allSettled:", values));
+]).then(values => console.log("MDN allSettled:", values));
 // [
 //   { status: 'fulfilled', value: 33 },
 //   { status: 'fulfilled', value: 66 },
@@ -345,14 +345,14 @@ Promise.allSettled([
 
 /**
  * Promise.any(iterable) - Wait for first promise to fulfill
- * 
+ *
  * ES Specification: ES2021
- * 
+ *
  * Characteristics:
  * - Returns first fulfilled promise
  * - Ignores rejections unless ALL promises reject
  * - Rejects with AggregateError if all promises reject
- * 
+ *
  * Use Cases:
  * - Fastest successful response
  * - Fallback to multiple sources
@@ -371,9 +371,9 @@ console.log("\n=== Promise.any Demo ===\n");
  */
 
 Promise.any([
-  asyncOperation(1, true),  // Fails
-  asyncOperation(2),         // Succeeds
-  asyncOperation(3)          // Succeeds
+  asyncOperation(1, true), // Fails
+  asyncOperation(2), // Succeeds
+  asyncOperation(3), // Succeeds
 ])
   .then(result => {
     console.log("Promise.any first success:", result); // 2
@@ -386,7 +386,7 @@ Promise.any([
 Promise.any([
   asyncOperation(1, true),
   asyncOperation(2, true),
-  asyncOperation(3, true)
+  asyncOperation(3, true),
 ])
   .then(result => {
     console.log("This won't execute");
@@ -408,7 +408,7 @@ const pSlow = new Promise((resolve, reject) => {
 const pFast = new Promise((resolve, reject) => {
   setTimeout(resolve, 100, "Done quick");
 });
-Promise.any([pErr, pSlow, pFast]).then((value) => {
+Promise.any([pErr, pSlow, pFast]).then(value => {
   console.log("MDN Promise.any:", value); // pFast fulfills first → "Done quick"
 });
 
@@ -469,7 +469,7 @@ class EventEmitter {
 }
 
 const emitter = new EventEmitter();
-emitter.once('ready').then(msg => console.log("Event:", msg));
+emitter.once("ready").then(msg => console.log("Event:", msg));
 
 // ============================================
 // 9. ERROR HANDLING PATTERNS
@@ -477,7 +477,7 @@ emitter.once('ready').then(msg => console.log("Event:", msg));
 
 /**
  * Error Handling Best Practices:
- * 
+ *
  * 1. Always add catch() to promise chains
  * 2. Use finally() for cleanup code
  * 3. Return promises in then() for proper chaining
@@ -539,7 +539,11 @@ function fetchUser(userId) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (userId > 0) {
-        resolve({ id: userId, name: `User${userId}`, email: `user${userId}@example.com` });
+        resolve({
+          id: userId,
+          name: `User${userId}`,
+          email: `user${userId}@example.com`,
+        });
       } else {
         reject(new Error("Invalid user ID"));
       }
@@ -548,11 +552,11 @@ function fetchUser(userId) {
 }
 
 function fetchUserPosts(userId) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve([
         { id: 1, title: "Post 1", userId },
-        { id: 2, title: "Post 2", userId }
+        { id: 2, title: "Post 2", userId },
       ]);
     }, 100);
   });
@@ -574,11 +578,7 @@ fetchUser(1)
 
 // Example 2: Parallel operations
 console.log("\nExample 2: Parallel API calls");
-Promise.all([
-  fetchUser(1),
-  fetchUser(2),
-  fetchUser(3)
-])
+Promise.all([fetchUser(1), fetchUser(2), fetchUser(3)])
   .then(users => {
     console.log("  Fetched users:", users.map(u => u.name).join(", "));
   })
@@ -618,16 +618,13 @@ console.log("\n=== Common Pitfalls ===\n");
 
 // Pitfall 1: Promise Hell (nested promises)
 console.log("Pitfall 1: Promise Hell");
-asyncOperation(1)
-  .then(result1 => {
-    asyncOperation(result1 * 2)
-      .then(result2 => {
-        asyncOperation(result2 + 10)
-          .then(result3 => {
-            console.log("  ❌ Nested result:", result3);
-          });
-      });
+asyncOperation(1).then(result1 => {
+  asyncOperation(result1 * 2).then(result2 => {
+    asyncOperation(result2 + 10).then(result3 => {
+      console.log("  ❌ Nested result:", result3);
+    });
   });
+});
 
 // Better: Flat chain
 asyncOperation(1)
@@ -661,10 +658,9 @@ console.log("\nPitfall 3: Unhandled rejections");
 // asyncOperation(10, true);
 
 // ✅ Always add catch
-asyncOperation(10, true)
-  .catch(error => {
-    console.log("  ✅ Error handled:", error.message);
-  });
+asyncOperation(10, true).catch(error => {
+  console.log("  ✅ Error handled:", error.message);
+});
 
 // Pitfall 4: Creating unnecessary promises
 console.log("\nPitfall 4: Promise constructor anti-pattern");
@@ -683,12 +679,11 @@ function goodFetchUser(id) {
   return fetchUser(id);
 }
 
-goodFetchUser(1)
-  .then(user => console.log("  ✅ User fetched correctly:", user.name));
-
+goodFetchUser(1).then(user =>
+  console.log("  ✅ User fetched correctly:", user.name)
+);
 
 // Best Practices Summary
-
 
 console.log("\n=== Best Practices Summary ===\n");
 console.log(`
@@ -808,12 +803,14 @@ verbose.then(obj => console.log("Verbose way:", obj.name));
 
 // Modern ES2025 way: Promise.try wraps the sync function directly
 if (typeof Promise.try === "function") {
-  Promise.try(() => JSON.parse(jsonStr))
-    .then(obj => console.log("Promise.try way:", obj.name));
+  Promise.try(() => JSON.parse(jsonStr)).then(obj =>
+    console.log("Promise.try way:", obj.name)
+  );
 
   // Errors thrown synchronously inside the callback become a rejected promise
-  Promise.try(() => JSON.parse("{ invalid json"))
-    .catch(err => console.log("Promise.try error caught:", err.message));
+  Promise.try(() => JSON.parse("{ invalid json")).catch(err =>
+    console.log("Promise.try error caught:", err.message)
+  );
 } else {
   console.log("Promise.try not supported in this Node version");
 }

@@ -21,13 +21,15 @@ console.log("=== Typed Spread Operator ===");
 console.log({ arr2, obj2 });
 
 // TypeScript: Spread with generic constraints
-function mergeObjects<T extends object, U extends object>(obj1: T, obj2: U): T & U {
+function mergeObjects<T extends object, U extends object>(
+  obj1: T,
+  obj2: U
+): T & U {
   return { ...obj1, ...obj2 };
 }
 
 const merged = mergeObjects({ a: 1 }, { b: 2 });
 console.log("Merged:", merged);
-
 
 // ============================================================================
 // 2. TYPED DESTRUCTURING
@@ -62,7 +64,6 @@ const user: User = { username: "alice", email: "alice@example.com" };
 const { username: displayName, email: emailAddress } = user;
 console.log("Renamed destructuring:", displayName, emailAddress);
 
-
 // ============================================================================
 // 3. OPTIONAL CHAINING WITH TYPES
 // ============================================================================
@@ -83,7 +84,7 @@ interface UserProfile {
 
 const typedUser: UserProfile = {
   name: "Alice",
-  address: { city: "NYC", zip: "10001" }
+  address: { city: "NYC", zip: "10001" },
 };
 
 console.log("\n=== Optional Chaining Types ===");
@@ -94,7 +95,6 @@ console.log("Missing nested:", typedUser?.address?.email); // undefined
 function getUserEmail(obj: UserProfile): string | undefined {
   return obj?.address?.city;
 }
-
 
 // ============================================================================
 // 4. NULLISH COALESCING WITH TYPES
@@ -108,21 +108,15 @@ interface Config {
   timeout?: number;
 }
 
-function getConfig(
-  userConfig: Partial<Config> = {},
-  defaults: Config
-): Config {
+function getConfig(userConfig: Partial<Config> = {}, defaults: Config): Config {
   return {
     port: userConfig.port ?? defaults.port,
-    timeout: userConfig.timeout ?? defaults.timeout
+    timeout: userConfig.timeout ?? defaults.timeout,
   };
 }
 
 console.log("\n=== Nullish Coalescing Types ===");
-const typedConfig = getConfig(
-  { port: 8080 },
-  { port: 3000, timeout: 5000 }
-);
+const typedConfig = getConfig({ port: 8080 }, { port: 3000, timeout: 5000 });
 console.log(typedConfig);
 
 // TypeScript: Nullish coalescing with type narrowing
@@ -131,7 +125,6 @@ type MaybeString = string | null | undefined;
 function getString(value: MaybeString, fallback: string): string {
   return value ?? fallback;
 }
-
 
 // ============================================================================
 // 5. TYPED DEFAULT PARAMETERS
@@ -159,7 +152,6 @@ function createGreeting(
 
 console.log(createGreeting("Alice")); // "Hello, Alice!"
 
-
 // ============================================================================
 // 6. TYPED REST PARAMETERS
 // ============================================================================
@@ -175,12 +167,15 @@ console.log("\n=== Typed Rest Parameters ===");
 console.log(sum(1, 2, 3, 4, 5)); // 15
 
 // TypeScript: Rest parameter with specific tuple type
-function processTuple(first: number, second: number, ...rest: number[]): string {
-  return `${first}, ${second}, [${rest.join(', ')}]`;
+function processTuple(
+  first: number,
+  second: number,
+  ...rest: number[]
+): string {
+  return `${first}, ${second}, [${rest.join(", ")}]`;
 }
 
 console.log(processTuple(1, 2, 3, 4, 5)); // "1, 2, [3, 4, 5]"
-
 
 // ============================================================================
 // 7. TYPED ARROW FUNCTIONS
@@ -212,7 +207,6 @@ class Counter {
 
 const counter = new Counter();
 counter.increment();
-
 
 // ============================================================================
 // 8. TYPED CLASSES - BASIC SYNTAX
@@ -249,7 +243,6 @@ const dog = new Dog("Max", "Golden Retriever");
 console.log("\n=== Typed Classes ===");
 console.log(dog.speak()); // "Max barks!"
 
-
 // ============================================================================
 // 9. TYPED STATIC MEMBERS
 // ============================================================================
@@ -272,7 +265,6 @@ console.log("\n=== Typed Static Members ===");
 console.log("MathUtils.PI:", MathUtils.PI);
 console.log("MathUtils.square(5):", MathUtils.square(5));
 console.log("MathUtils.circleArea(3):", MathUtils.circleArea(3).toFixed(2));
-
 
 // ============================================================================
 // 10. PRIVATE FIELDS: JS # vs TS private
@@ -329,8 +321,9 @@ class Child extends Parent {
 
 console.log("\n=== Private Fields Comparison ===");
 console.log("JS #: Runtime enforced, cannot be accessed outside");
-console.log("TS private: Compile-time checked, accessible at runtime via workarounds");
-
+console.log(
+  "TS private: Compile-time checked, accessible at runtime via workarounds"
+);
 
 // ============================================================================
 // 11. TYPED GETTERS AND SETTERS
@@ -353,11 +346,11 @@ class Temperature {
   }
 
   get fahrenheit(): number {
-    return this.#celsius * 9/5 + 32;
+    return (this.#celsius * 9) / 5 + 32;
   }
 
   set fahrenheit(value: number) {
-    this.#celsius = (value - 32) * 5/9;
+    this.#celsius = ((value - 32) * 5) / 9;
   }
 }
 
@@ -368,7 +361,6 @@ console.log("Fahrenheit:", temp.fahrenheit.toFixed(1)); // 77.0
 
 temp.fahrenheit = 86;
 console.log("After setting to 86°F:", temp.celsius); // 30
-
 
 // ============================================================================
 // 12. ABSTRACT CLASSES
@@ -394,7 +386,10 @@ class Circle extends Shape {
 }
 
 class Rectangle extends Shape {
-  constructor(private width: number, private height: number) {
+  constructor(
+    private width: number,
+    private height: number
+  ) {
     super();
   }
 
@@ -410,7 +405,6 @@ const rectangle = new Rectangle(4, 6);
 console.log("\n=== Typed Abstract Classes ===");
 console.log("Circle area:", circle.getArea().toFixed(2));
 console.log("Rectangle area:", rectangle.getArea());
-
 
 // ============================================================================
 // SUMMARY

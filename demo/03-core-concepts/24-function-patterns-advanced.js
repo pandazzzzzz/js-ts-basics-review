@@ -52,7 +52,7 @@ console.log("\n=== 1. Trampolines Demo ===");
 function trampoline(fn) {
   let result = fn();
 
-  while (typeof result === 'function') {
+  while (typeof result === "function") {
     result = result();
   }
 
@@ -73,7 +73,10 @@ function factorial(n, acc = 1) {
 }
 
 console.log("Trampoline factorial:");
-console.log("trampoline(() => factorial(10)):", trampoline(() => factorial(10))); // 3628800
+console.log(
+  "trampoline(() => factorial(10)):",
+  trampoline(() => factorial(10))
+); // 3628800
 
 // 1.4 Even/odd with mutual recursion
 function even(n) {
@@ -87,9 +90,14 @@ function odd(n) {
 }
 
 console.log("\nMutual recursion:");
-console.log("trampoline(() => even(10)):", trampoline(() => even(10))); // true
-console.log("trampoline(() => even(9)):", trampoline(() => even(9))); // false
-
+console.log(
+  "trampoline(() => even(10)):",
+  trampoline(() => even(10))
+); // true
+console.log(
+  "trampoline(() => even(9)):",
+  trampoline(() => even(9))
+); // false
 
 // ============================================
 // 2. RECURSION PATTERNS
@@ -141,13 +149,13 @@ const tree = {
   left: {
     value: 2,
     left: { value: 4 },
-    right: { value: 5 }
+    right: { value: 5 },
   },
   right: {
     value: 3,
     left: { value: 6 },
-    right: { value: 7 }
-  }
+    right: { value: 7 },
+  },
 };
 
 function traverseTree(node, result = []) {
@@ -166,7 +174,7 @@ function deepReduce(obj, fn, acc) {
   acc = fn(acc, obj);
 
   for (const key in obj) {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
       acc = deepReduce(obj[key], fn, acc);
     } else {
       acc = fn(acc, obj[key]); // Apply fn to leaf values
@@ -179,16 +187,19 @@ function deepReduce(obj, fn, acc) {
 const nestedObject = {
   a: 1,
   b: { c: 2, d: { e: 3 } },
-  f: 4
+  f: 4,
 };
 
-const sum = deepReduce(nestedObject, (acc, val) => {
-  return typeof val === 'number' ? acc + val : acc;
-}, 0);
+const sum = deepReduce(
+  nestedObject,
+  (acc, val) => {
+    return typeof val === "number" ? acc + val : acc;
+  },
+  0
+);
 
 console.log("\nRecursive reducer:");
 console.log("Sum of nested values:", sum); // 10
-
 
 // ============================================
 // 3. POINT-FREE STYLE
@@ -217,15 +228,15 @@ console.log("\n=== 3. Point-Free Style Demo ===");
 
 // Pipe helper (full details in 24.1-function-composition.js)
 function pipe(...fns) {
-  return function(x) {
+  return function (x) {
     return fns.reduce((acc, fn) => fn(acc), x);
   };
 }
 
 // 3.1 Regular style
-const add1 = (x) => x + 1;
-const multiply2 = (x) => x * 2;
-const regularTransform = (x) => multiply2(add1(x));
+const add1 = x => x + 1;
+const multiply2 = x => x * 2;
+const regularTransform = x => multiply2(add1(x));
 
 console.log("Regular style:");
 console.log("regularTransform(5):", regularTransform(5)); // 12
@@ -237,17 +248,14 @@ console.log("\nPoint-free style:");
 console.log("pointFreeTransform(5):", pointFreeTransform(5)); // 12
 
 // 3.3 Practical example - array processing
-const isEven = (x) => x % 2 === 0;
-const doubleValue = (x) => x * 2;
+const isEven = x => x % 2 === 0;
+const doubleValue = x => x * 2;
 
 const numbers = [1, 2, 3, 4, 5];
-const result = numbers
-  .filter(isEven)
-  .map(doubleValue);
+const result = numbers.filter(isEven).map(doubleValue);
 
 console.log("\nArray processing:");
 console.log("result:", result); // [4, 8]
-
 
 // ============================================
 // COMMON PITFALLS
@@ -270,9 +278,9 @@ function factorialWithTrampoline(n, accumulator = 1) {
 }
 
 function trampolineWrapper(fn) {
-  return function(...args) {
+  return function (...args) {
     let result = fn(...args);
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = result();
     }
     return result;
@@ -280,24 +288,34 @@ function trampolineWrapper(fn) {
 }
 
 const trampolinedFactorial = trampolineWrapper(factorialWithTrampoline);
-console.log("Trampolined factorial(10000) works:", trampolinedFactorial(10000).toString().slice(0, 20) + "...");
+console.log(
+  "Trampolined factorial(10000) works:",
+  trampolinedFactorial(10000).toString().slice(0, 20) + "..."
+);
 
 // Pitfall 2: Memory leak with unclosed functions
 console.log("\nPitfall 2 - Memory leaks:");
-console.log("❌ Bad: Caching without eviction policy (see 24.3-memoization-cache.js for LRU)");
-console.log("✅ Good: Use an LRU cache with a size limit — full example in 24.3-memoization-cache.js");
+console.log(
+  "❌ Bad: Caching without eviction policy (see 24.3-memoization-cache.js for LRU)"
+);
+console.log(
+  "✅ Good: Use an LRU cache with a size limit — full example in 24.3-memoization-cache.js"
+);
 
 // Pitfall 3: Incorrect debounce/throttle timing
 console.log("\nPitfall 3 - Wrong timing values:");
 console.log("❌ Bad: Debounce too short for API calls");
-console.log("✅ Good: Choose delay based on use case — see 24.2-debounce-throttle.js");
+console.log(
+  "✅ Good: Choose delay based on use case — see 24.2-debounce-throttle.js"
+);
 console.log("Search: 200-500ms, Resize: 50-150ms, Scroll: 100-300ms");
 
 // Pitfall 4: Over-composing functions
 console.log("\nPitfall 4 - Over-composition:");
 console.log("❌ Bad: Too many composed functions are hard to debug");
-console.log("✅ Good: Keep composition chains short and readable — see 24.1-function-composition.js");
-
+console.log(
+  "✅ Good: Keep composition chains short and readable — see 24.1-function-composition.js"
+);
 
 // ============================================
 // SUMMARY

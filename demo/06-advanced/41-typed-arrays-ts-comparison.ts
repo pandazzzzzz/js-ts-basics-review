@@ -58,7 +58,7 @@ const fromArray = new Uint8Array([10, 20, 30, 40]);
 // fromArray: Uint8Array
 
 // TypeScript enforces correct types
-int8[0] = 127;  // OK
+int8[0] = 127; // OK
 // int8[0] = "string"; // Error: Type 'string' is not assignable to type 'number'
 
 // BigInt arrays require BigInt values
@@ -115,9 +115,9 @@ const dataBuffer: ArrayBuffer = new ArrayBuffer(8);
 const dataView: DataView = new DataView(dataBuffer);
 
 // All DataView methods are fully typed
-dataView.setInt8(0, 127);           // (byteOffset: number, value: number) => void
-dataView.setInt16(1, 32767);        // (byteOffset: number, value: number, littleEndian?: boolean) => void
-dataView.setFloat32(3, 3.14);       // (byteOffset: number, value: number, littleEndian?: boolean) => void
+dataView.setInt8(0, 127); // (byteOffset: number, value: number) => void
+dataView.setInt16(1, 32767); // (byteOffset: number, value: number, littleEndian?: boolean) => void
+dataView.setFloat32(3, 3.14); // (byteOffset: number, value: number, littleEndian?: boolean) => void
 
 // Return types are correctly inferred
 const int8Value: number = dataView.getInt8(0);
@@ -126,7 +126,7 @@ const float32Value: number = dataView.getFloat32(3);
 
 // Endianness parameter is typed as boolean
 dataView.setUint32(0, 0x12345678, false); // Big-endian
-dataView.setUint32(0, 0x12345678, true);  // Little-endian
+dataView.setUint32(0, 0x12345678, true); // Little-endian
 
 // Type-safe DataView wrapper
 class TypedDataView {
@@ -256,7 +256,7 @@ function parseHeader(buffer: ArrayBuffer): ProtocolHeader {
     version: view.getUint8(0),
     type: view.getUint8(1),
     length: view.getUint16(2, false),
-    timestamp: view.getUint32(4, false)
+    timestamp: view.getUint32(4, false),
   };
 }
 
@@ -275,7 +275,7 @@ const headerBuffer = serializeHeader({
   version: 1,
   type: 2,
   length: 1024,
-  timestamp: Date.now()
+  timestamp: Date.now(),
 });
 
 const parsed: ProtocolHeader = parseHeader(headerBuffer);
@@ -438,7 +438,6 @@ console.log(`
 └─────────────────────────────────────────────────────────────────────┘
 `);
 
-
 // ============================================
 // TEXTENCODER AND TEXTDECODER TYPES
 // ============================================
@@ -467,7 +466,10 @@ interface EncodeIntoResult {
 }
 
 const targetBuffer: Uint8Array = new Uint8Array(50);
-const result: TextEncoderEncodeIntoResult = encoder.encodeInto(text, targetBuffer);
+const result: TextEncoderEncodeIntoResult = encoder.encodeInto(
+  text,
+  targetBuffer
+);
 
 // result.read and result.written are typed as numbers
 const charsRead: number = result.read;
@@ -476,7 +478,7 @@ const bytesWritten: number = result.written;
 console.log(`encodeInto: read ${charsRead} chars, wrote ${bytesWritten} bytes`);
 
 // TextDecoder with types
-const decoder: TextDecoder = new TextDecoder('utf-8');
+const decoder: TextDecoder = new TextDecoder("utf-8");
 const decoderEncoding: string = decoder.encoding;
 const fatal: boolean = decoder.fatal;
 const ignoreBOM: boolean = decoder.ignoreBOM;
@@ -497,8 +499,8 @@ interface TextDecodeOptions {
   stream?: boolean;
 }
 
-const strictDecoder: TextDecoder = new TextDecoder('utf-8', { fatal: true });
-const streamDecoder: TextDecoder = new TextDecoder('utf-8', { fatal: false });
+const strictDecoder: TextDecoder = new TextDecoder("utf-8", { fatal: true });
+const streamDecoder: TextDecoder = new TextDecoder("utf-8", { fatal: false });
 
 // Streaming decode with types
 const chunk1: Uint8Array = new Uint8Array([72, 101, 108]);
@@ -515,7 +517,7 @@ function encodeText(text: string): Uint8Array {
   return encoder.encode(text);
 }
 
-function decodeBytes(bytes: Uint8Array, encoding: string = 'utf-8'): string {
+function decodeBytes(bytes: Uint8Array, encoding: string = "utf-8"): string {
   const decoder = new TextDecoder(encoding);
   return decoder.decode(bytes);
 }
@@ -524,18 +526,22 @@ function decodeBytes(bytes: Uint8Array, encoding: string = 'utf-8'): string {
 function convertEncoding(
   bytes: Uint8Array,
   fromEncoding: string,
-  toEncoding: string = 'utf-8'
+  toEncoding: string = "utf-8"
 ): Uint8Array {
   const decoder = new TextDecoder(fromEncoding);
   const text = decoder.decode(bytes);
-  
+
   const encoder = new TextEncoder(); // Always UTF-8
   return encoder.encode(text);
 }
 
 // Usage with type safety
 const latin1Bytes: Uint8Array = new Uint8Array([72, 233, 108, 108, 111]);
-const utf8Bytes: Uint8Array = convertEncoding(latin1Bytes, 'iso-8859-1', 'utf-8');
+const utf8Bytes: Uint8Array = convertEncoding(
+  latin1Bytes,
+  "iso-8859-1",
+  "utf-8"
+);
 
 console.log("Converted encoding:", decodeBytes(utf8Bytes));
 
@@ -543,26 +549,26 @@ console.log("Converted encoding:", decodeBytes(utf8Bytes));
 async function readTextFile(file: File): Promise<string> {
   const arrayBuffer: ArrayBuffer = await file.arrayBuffer();
   const bytes: Uint8Array = new Uint8Array(arrayBuffer);
-  const decoder: TextDecoder = new TextDecoder('utf-8');
+  const decoder: TextDecoder = new TextDecoder("utf-8");
   return decoder.decode(bytes);
 }
 
 // WebSocket binary message handling with types
 interface WebSocketMessage {
-  type: 'text' | 'binary';
+  type: "text" | "binary";
   data: string | Uint8Array;
 }
 
 function handleWebSocketMessage(event: MessageEvent): WebSocketMessage {
-  if (typeof event.data === 'string') {
-    return { type: 'text', data: event.data };
+  if (typeof event.data === "string") {
+    return { type: "text", data: event.data };
   } else if (event.data instanceof ArrayBuffer) {
     const decoder = new TextDecoder();
     const bytes = new Uint8Array(event.data);
     const text = decoder.decode(bytes);
-    return { type: 'binary', data: bytes };
+    return { type: "binary", data: bytes };
   }
-  throw new Error('Unknown message type');
+  throw new Error("Unknown message type");
 }
 
 // Base64 encoding with types
@@ -575,28 +581,30 @@ function base64EncodeTyped(text: string): string {
 
 function base64DecodeTyped(base64: string): string {
   const binString = atob(base64);
-  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0)!);
+  const bytes = Uint8Array.from(binString, m => m.codePointAt(0)!);
   const decoder = new TextDecoder();
   return decoder.decode(bytes);
 }
 
 // Type-safe CSV parsing
-async function parseCSVFromBinary(arrayBuffer: ArrayBuffer): Promise<string[][]> {
-  const decoder = new TextDecoder('utf-8');
+async function parseCSVFromBinary(
+  arrayBuffer: ArrayBuffer
+): Promise<string[][]> {
+  const decoder = new TextDecoder("utf-8");
   const text = decoder.decode(arrayBuffer);
-  const lines = text.split('\\n');
-  return lines.map(line => line.split(','));
+  const lines = text.split("\\n");
+  return lines.map(line => line.split(","));
 }
 
 // Crypto operations with typed encoding
 async function hashTextTyped(text: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
   const hashArray = new Uint8Array(hashBuffer);
   return Array.from(hashArray)
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 console.log("\nTextEncoder/TextDecoder TypeScript Features:");

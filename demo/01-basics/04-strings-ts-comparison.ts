@@ -10,7 +10,7 @@ export {};
 {
   // Basic string type
   const greeting: string = "Hello, World!";
-  const name: string = 'Alice';
+  const name: string = "Alice";
   const message: string = `Welcome ${name}`;
 
   // Example usage
@@ -54,7 +54,7 @@ setStatus("active"); // ✅ OK
 // Const assertions for literal types
 const direction2 = "north" as const; // Type: "north" (not string)
 const directions2 = ["north", "south", "east", "west"] as const;
-type Direction2 = typeof directions2[number]; // "north" | "south" | "east" | "west"
+type Direction2 = (typeof directions2)[number]; // "north" | "south" | "east" | "west"
 
 console.log("direction type:", direction2);
 console.log("directions:", directions2);
@@ -202,7 +202,7 @@ interface StringMap {
 const translations: StringMap = {
   hello: "你好",
   goodbye: "再见",
-  thanks: "谢谢"
+  thanks: "谢谢",
 };
 
 console.log("\n=== String Index Signatures ===");
@@ -213,7 +213,7 @@ type TranslationMap = Record<string, string>;
 
 const messages: TranslationMap = {
   success: "Operation successful",
-  error: "An error occurred"
+  error: "An error occurred",
 };
 
 console.log("Message:", messages["success"]);
@@ -229,7 +229,7 @@ const config: Config = {
   apiKey: "abc123",
   endpoint: "https://api.example.com",
   timeout: 5000,
-  retries: 3
+  retries: 3,
 };
 
 console.log("Config:", config);
@@ -239,11 +239,14 @@ console.log("Config:", config);
 // ============================================
 
 // TypeScript ensures tagged template functions receive correct types
-function htmlTag(strings: TemplateStringsArray, ...values: (string | number)[]): string {
+function htmlTag(
+  strings: TemplateStringsArray,
+  ...values: (string | number)[]
+): string {
   return strings.reduce((result, str, i) => {
-    const value = values[i] !== undefined ? String(values[i]) : '';
+    const value = values[i] !== undefined ? String(values[i]) : "";
     return result + str + value;
-  }, '');
+  }, "");
 }
 
 // SQL query builder with typed return
@@ -252,10 +255,13 @@ interface SqlQuery {
   values: (string | number)[];
 }
 
-function sqlQuery(strings: TemplateStringsArray, ...values: (string | number)[]): SqlQuery {
+function sqlQuery(
+  strings: TemplateStringsArray,
+  ...values: (string | number)[]
+): SqlQuery {
   const text = strings.reduce((result, str, i) => {
-    return result + str + (values[i] !== undefined ? `$${i + 1}` : '');
-  }, '');
+    return result + str + (values[i] !== undefined ? `$${i + 1}` : "");
+  }, "");
   return { text, values };
 }
 
@@ -273,7 +279,7 @@ enum LogLevel {
   Debug = "DEBUG",
   Info = "INFO",
   Warning = "WARNING",
-  Error = "ERROR"
+  Error = "ERROR",
 }
 
 function log(level: LogLevel, message: string): void {
@@ -289,7 +295,7 @@ const enum DirectionEnum {
   North = "NORTH",
   South = "SOUTH",
   East = "EAST",
-  West = "WEST"
+  West = "WEST",
 }
 
 function move(direction: DirectionEnum): void {
@@ -303,7 +309,7 @@ move(DirectionEnum.North);
 // ============================================
 
 // Type-safe state management
-type LoadingState = 
+type LoadingState =
   | { status: "idle" }
   | { status: "loading" }
   | { status: "success"; data: string }
@@ -375,7 +381,7 @@ interface User {
 
 const user2: User = {
   id: "user-123",
-  name: "Alice"
+  name: "Alice",
 };
 
 console.log("\n=== Readonly Strings ===");
@@ -432,7 +438,7 @@ function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
 const person = {
   name: "Alice",
   age: 30,
-  email: "alice@example.com"
+  email: "alice@example.com",
 };
 
 console.log("\n=== Generic String Functions ===");
@@ -449,7 +455,7 @@ function transform<T extends string>(
   return transformer(value);
 }
 
-const transformed = transform("hello", (s) => s.toUpperCase());
+const transformed = transform("hello", s => s.toUpperCase());
 console.log("Transformed:", transformed);
 
 // ============================================
@@ -484,7 +490,7 @@ const handlers: Record<EventHandler, () => void> = {
   onClick: () => console.log("Clicked"),
   onFocus: () => console.log("Focused"),
   onBlur: () => console.log("Blurred"),
-  onChange: () => console.log("Changed")
+  onChange: () => console.log("Changed"),
 };
 
 handlers.onClick();
@@ -508,7 +514,7 @@ type Uppercased = UppercaseKeys<Original>;
 
 const data: Uppercased = {
   NAME: "Alice",
-  AGE: 30
+  AGE: 30,
 };
 
 console.log("\n=== String Manipulation with Mapped Types ===");
@@ -529,7 +535,7 @@ type EnvConfig = Prefixed<Config2, "APP_">;
 
 const envConfig: EnvConfig = {
   APP_host: "localhost",
-  APP_port: 3000
+  APP_port: 3000,
 };
 
 console.log("Env config:", envConfig);
@@ -541,14 +547,14 @@ console.log("Env config:", envConfig);
 // Without const assertion - type is widened
 const config1 = {
   apiUrl: "https://api.example.com",
-  timeout: 5000
+  timeout: 5000,
 };
 // Type: { apiUrl: string; timeout: number; }
 
 // With const assertion - type is literal
 const config2 = {
   apiUrl: "https://api.example.com",
-  timeout: 5000
+  timeout: 5000,
 } as const;
 // Type: { readonly apiUrl: "https://api.example.com"; readonly timeout: 5000; }
 
@@ -636,7 +642,10 @@ function compareStrings(a: string, b: string, locale: Locale): number {
 
 console.log("\n=== String Comparison ===");
 console.log("Compare 'a' and 'b':", compareStrings("a", "b", "en-US"));
-console.log("Compare '苹果' and '香蕉':", compareStrings("苹果", "香蕉", "zh-CN"));
+console.log(
+  "Compare '苹果' and '香蕉':",
+  compareStrings("苹果", "香蕉", "zh-CN")
+);
 
 console.log("\n=== TypeScript String Features Complete ===");
 console.log("=== See 04-strings.js for runtime behavior ===");

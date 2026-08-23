@@ -42,7 +42,7 @@ console.log("=== 1. Function Factories ===");
 
 // 1.1 Math operations factory
 function createMultiplier(multiplier) {
-  return function(number) {
+  return function (number) {
     return number * multiplier;
   };
 }
@@ -55,7 +55,7 @@ console.log("  triple(5):", triple(5)); // 15
 
 // 1.2 String formatting factory
 function createGreeter(greeting) {
-  return function(name) {
+  return function (name) {
     return `${greeting}, ${name}!`;
   };
 }
@@ -68,7 +68,7 @@ console.log("  sayHi('Bob'):", sayHi("Bob"));
 
 // 1.3 Validation factory
 function createValidator(min, max) {
-  return function(value) {
+  return function (value) {
     if (value < min || value > max) {
       throw new Error(`Value ${value} not in range [${min}, ${max}]`);
     }
@@ -84,7 +84,7 @@ console.log("  isValidScore(85):", isValidScore(85));
 
 // 1.4 API client factory (practical)
 function createApiClient(baseUrl) {
-  return function(endpoint) {
+  return function (endpoint) {
     return `${baseUrl}/${endpoint}`;
   };
 }
@@ -97,7 +97,7 @@ console.log("  v2 users:", apiV2("users"));
 
 // 1.5 Event handler factory
 function createClickHandler(buttonId) {
-  return function(event) {
+  return function (event) {
     console.log(`Button ${buttonId} clicked`);
     console.log("Event details:", event.type);
   };
@@ -122,7 +122,7 @@ console.log("\n=== 2. Partial Application ===");
 
 // 2.1 Manual partial implementation
 function partial(fn, ...presetArgs) {
-  return function(...laterArgs) {
+  return function (...laterArgs) {
     return fn(...presetArgs, ...laterArgs);
   };
 }
@@ -166,7 +166,7 @@ console.log("  doubleAll(3, 4):", doubleAll(3, 4)); // 2*1*3*4 = 24
 const PLACEHOLDER = Symbol("placeholder");
 
 function partialPlaceholders(fn, ...presetArgs) {
-  return function(...laterArgs) {
+  return function (...laterArgs) {
     const finalArgs = [];
     let laterIndex = 0;
 
@@ -184,7 +184,9 @@ function partialPlaceholders(fn, ...presetArgs) {
 
 const greetWithDefaults = partialPlaceholders(
   (greeting, name, punctuation) => `${greeting}, ${name}${punctuation}`,
-  "Hello", PLACEHOLDER, "!"
+  "Hello",
+  PLACEHOLDER,
+  "!"
 );
 
 console.log("\nPartial with placeholders:");
@@ -205,7 +207,7 @@ console.log("\n=== 3. Memoization ===");
 function memoize(fn) {
   const cache = {}; // Private cache in closure
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
 
     if (key in cache) {
@@ -248,7 +250,7 @@ console.log("factorial(5) again:", factorial(5));
 function memoizeMap(fn) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
 
     if (cache.has(key)) {
@@ -265,7 +267,7 @@ function memoizeMap(fn) {
 function memoizeWithLimit(fn, maxSize = 100) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
 
     if (cache.has(key)) {
@@ -302,7 +304,7 @@ console.log("limitedMemo(20):", limitedMemo(20));
 console.log("\n=== 4. Module Pattern ===");
 
 // 4.1 Standard module pattern
-const Calculator = (function() {
+const Calculator = (function () {
   // Private variables and functions
   let result = 0;
 
@@ -338,7 +340,7 @@ const Calculator = (function() {
       result = 0;
       log("Reset", result);
       return this;
-    }
+    },
   };
 })();
 
@@ -348,7 +350,7 @@ console.log("  Result:", Calculator.getResult()); // 15
 Calculator.reset();
 
 // 4.2 Revealing module pattern
-const Counter = (function() {
+const Counter = (function () {
   // All private
   let count = 0;
 
@@ -368,7 +370,7 @@ const Counter = (function() {
   return {
     increment,
     decrement,
-    getCount
+    getCount,
   };
 })();
 
@@ -378,12 +380,12 @@ Counter.increment();
 console.log("  Counter:", Counter.getCount()); // 2
 
 // 4.3 Module with configuration
-const AppConfig = (function() {
+const AppConfig = (function () {
   // Private configuration
   const config = {
     apiUrl: "https://api.example.com",
     timeout: 5000,
-    retries: 3
+    retries: 3,
   };
 
   // Private validation
@@ -408,7 +410,7 @@ const AppConfig = (function() {
 
     getAll() {
       return { ...config }; // Return copy
-    }
+    },
   };
 })();
 
@@ -428,7 +430,7 @@ console.log("\n=== 5. IIFE Patterns ===");
 
 // 5.1 Basic IIFE syntax
 console.log("Basic IIFE:");
-(function() {
+(function () {
   const privateVar = "I'm private to this IIFE";
   console.log("  IIFE executed immediately");
   console.log("  privateVar inside IIFE:", privateVar);
@@ -442,7 +444,7 @@ console.log("\nArrow function IIFE:");
 })();
 
 // 5.3 IIFE returning value
-const result = (function() {
+const result = (function () {
   const privateData = "computed value";
   return privateData.toUpperCase();
 })();
@@ -452,23 +454,24 @@ console.log("  ", result); // "COMPUTED VALUE"
 
 // 5.4 IIFE with parameters
 console.log("\nIIFE with parameters:");
-(function(a, b) {
+(function (a, b) {
   console.log("  Sum:", a + b); // 30
 })(10, 20);
 
 // 5.5 IIFE for initialization
-const APP_CONFIG = (function() {
+const APP_CONFIG = (function () {
   // Private initialization logic
   const defaultTimeout = 5000;
   const apiBase = "https://api.example.com";
 
   // Compute configuration
-  const isDev = typeof window !== "undefined" && window.location.hostname === "localhost";
+  const isDev =
+    typeof window !== "undefined" && window.location.hostname === "localhost";
 
   return {
     timeout: defaultTimeout,
     apiUrl: apiBase,
-    isProduction: !isDev
+    isProduction: !isDev,
   };
 })();
 
@@ -476,7 +479,7 @@ console.log("\nIIFE initialization module:");
 console.log("  APP_CONFIG:", APP_CONFIG);
 
 // 5.6 IIFE revealing module pattern
-const UserModule = (function() {
+const UserModule = (function () {
   const users = [];
 
   function add(user) {
@@ -496,7 +499,7 @@ const UserModule = (function() {
   return {
     addUser: add,
     getUsers: getAll,
-    userCount: getCount
+    userCount: getCount,
   };
 })();
 
@@ -514,7 +517,7 @@ console.log("  let creates new binding per iteration");
 // Simplified example without delays:
 const delayedFunctions = [];
 for (var i = 0; i < 3; i++) {
-  (function(index) {
+  (function (index) {
     delayedFunctions.push(() => index);
   })(i);
 }

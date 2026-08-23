@@ -89,8 +89,8 @@ const user = {
   name: "Alice",
   address: {
     city: "NYC",
-    zip: "10001"
-  }
+    zip: "10001",
+  },
 };
 
 console.log("\nOptional Chaining:");
@@ -186,7 +186,7 @@ const counter = {
       this.count++;
       console.log("\nArrow Function 'this':", this.count);
     }, 100);
-  }
+  },
 };
 
 counter.increment();
@@ -660,13 +660,13 @@ console.log("Private fields provide true encapsulation");
 // ============================================
 /*
  * Modules (import/export) are covered in detail in demo/04-asynchronous/32-modules.js
- * 
+ *
  * ES6 introduced native module system with import/export syntax:
  * - export: Make values available to other modules
  * - import: Use values from other modules
  * - default export: Single main export per module
  * - named exports: Multiple exports per module
- * 
+ *
  * See demo/04-asynchronous/32-modules.js for comprehensive coverage of:
  * - import and export syntax
  * - default vs named exports
@@ -701,15 +701,15 @@ console.log("\n=== Object Property Shorthand ===");
   const userOld = {
     name: name,
     age: age,
-    email: email
+    email: email,
   };
   console.log("Pre-ES6 object:", userOld);
 
   // With property shorthand (ES6+)
   const userNew = {
     name, // Same as name: name
-    age,  // Same as age: age
-    email // Same as email: email
+    age, // Same as age: age
+    email, // Same as email: email
   };
   console.log("ES6 shorthand object:", userNew); // Same as userOld
 }
@@ -722,7 +722,7 @@ console.log("\n=== Computed Property Names ===");
   const user = {
     name: "Bob",
     [key]: 12345, // Computed property name
-    [`${key}_hash`]: "abc123" // Computed with template literal
+    [`${key}_hash`]: "abc123", // Computed with template literal
   };
   console.log("User with computed keys:", user);
   console.log("user[key]:", user[key]); // 12345
@@ -732,20 +732,18 @@ console.log("\n=== Computed Property Names ===");
   const obj = {
     [methodName]() {
       return "Hello!";
-    }
+    },
   };
   console.log("Dynamic method call:", obj.greet()); // "Hello!"
 
   // Common use case: mapping arrays to objects
   const users = [
     { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" }
+    { id: 2, name: "Bob" },
   ];
 
   // Create map by id
-  const userMap = Object.fromEntries(
-    users.map(u => [u.id, u])
-  );
+  const userMap = Object.fromEntries(users.map(u => [u.id, u]));
   console.log("User map by id:", userMap);
   console.log("userMap[2]:", userMap[2]); // { id: 2, name: "Bob" }
 }
@@ -757,9 +755,15 @@ console.log("\n=== Computed Property Names ===");
 // Array.from() - Create array from array-like or iterable
 console.log("\nArray.from():");
 console.log("Array.from('hello'):", Array.from("hello")); // ['h', 'e', 'l', 'l', 'o']
-console.log("Array.from([1, 2, 3], x => x*2):", Array.from([1, 2, 3], x => x*2)); // [2, 4, 6]
+console.log(
+  "Array.from([1, 2, 3], x => x*2):",
+  Array.from([1, 2, 3], x => x * 2)
+); // [2, 4, 6]
 // Note: mapFn receives (element, index) - with {length}, use index for sequence
-console.log("Array.from({length: 3}, (_, i) => i*2):", Array.from({length: 3}, (_, i) => i*2)); // [0, 2, 4]
+console.log(
+  "Array.from({length: 3}, (_, i) => i*2):",
+  Array.from({ length: 3 }, (_, i) => i * 2)
+); // [0, 2, 4]
 
 // Array.of() - Create array from arguments
 console.log("\nArray.of():");
@@ -769,7 +773,10 @@ console.log("Array(5):", Array(5)); // [, , , , ] (empty slots - different!)
 
 // Object.fromEntries() - Convert.entries to object
 console.log("\nObject.fromEntries():");
-const entries = [['name', 'Alice'], ['age', 30]];
+const entries = [
+  ["name", "Alice"],
+  ["age", 30],
+];
 console.log("From entries:", Object.fromEntries(entries)); // { name: 'Alice', age: 30 }
 
 // Array.prototype.at() - Access with negative indices (ES2022)
@@ -783,8 +790,14 @@ console.log("arr.at(-2):", arr.at(-2)); // 40 (second to last)
 // Array.prototype.findLast() (ES2023)
 console.log("\nArray.findLast():");
 const nums = [1, 2, 3, 4, 5];
-console.log("findLast even:", nums.findLast(n => n % 2 === 0)); // 4
-console.log("findLast > 3:", nums.findLast(n => n > 3)); // 5
+console.log(
+  "findLast even:",
+  nums.findLast(n => n % 2 === 0)
+); // 4
+console.log(
+  "findLast > 3:",
+  nums.findLast(n => n > 3)
+); // 5
 
 // Immutable Array Methods (ES2023) - Return new arrays instead of mutating
 console.log("\nImmutable Array Methods (ES2023):");
@@ -814,7 +827,6 @@ console.log("with result:", replaced); // [100, 1, 2]
 // These methods enable functional/immutable array programming patterns
 // without needing to copy the array first (e.g., [...arr].sort())
 
-
 // ============================================
 // 17. STRING METHODS (ES2021/ES2022)
 // ============================================
@@ -832,7 +844,6 @@ console.log("trimStart:", '"' + padded.trimStart() + '"'); // "hello   "
 console.log("trimEnd:", '"' + padded.trimEnd() + '"'); // "   hello"
 console.log("trim:", '"' + padded.trim() + '"'); // "hello"
 
-
 // ============================================
 // ============================================
 // 18. NUMERIC SEPARATORS (ES2021) AND BIGINT (ES2020)
@@ -842,7 +853,7 @@ console.log("trim:", '"' + padded.trim() + '"'); // "hello"
 console.log("\nNumeric Separators (ES2021):");
 const billion = 1_000_000_000; // Much more readable than 1000000000
 console.log("1_000_000_000:", billion); // 1000000000
-const hex = 0xFF_FF_FF_FF;
+const hex = 0xff_ff_ff_ff;
 console.log("0xFF_FF_FF_FF:", hex); // 4294967295
 const binary = 0b1010_0101_1100_0011;
 console.log("0b1010_0101_1100_0011:", binary);
@@ -896,7 +907,6 @@ console.log("\nHashbang Grammar (ES2023):");
 console.log("ES2023 standardized the hashbang (#!) grammar for CLI scripts");
 console.log("Example: #!/usr/bin/env node at the top of a .js file");
 
-
 // ============================================
 // 19. LOGICAL ASSIGNMENT OPERATORS (ES2021)
 // ============================================
@@ -918,7 +928,6 @@ console.log("c ??= 'default':", c);
 let d = "value";
 d ??= "default"; // d = d ?? "default" → "value" (already set)
 console.log("d ??= 'default':", d);
-
 
 // ============================================
 // 20. PROMISE METHODS
@@ -944,9 +953,9 @@ console.log("\nPromise.any() - First success:");
 async function demoPromiseAny() {
   try {
     const result = await Promise.any([
-      Promise.reject(new Error('Source 1 failed')),
-      Promise.resolve('Data from Source 2'),
-      Promise.resolve('Data from Source 3')
+      Promise.reject(new Error("Source 1 failed")),
+      Promise.resolve("Data from Source 2"),
+      Promise.resolve("Data from Source 3"),
     ]);
     console.log("  First success:", result);
   } catch (error) {
@@ -954,7 +963,6 @@ async function demoPromiseAny() {
   }
 }
 demoPromiseAny().catch(() => {});
-
 
 // ============================================
 // 21. MODERN FEATURES SUMMARY
@@ -973,7 +981,6 @@ Key modern features (ES2020-ES2023):
 - Promise.any() - First fulfilled promise
 - TypedArray methods - copyWithin(), at(), etc.
 `);
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1037,8 +1044,13 @@ console.log("\n=== Additional ES2020-ES2024 Features ===");
 // - Waits for all promises to settle (never rejects)
 // - Each result is { status, value/reason }
 console.log("\nPromise.allSettled (ES2020):");
-Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))])
-  .then(results => console.log("  Settled results:", results.map(r => r.status)));
+Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))]).then(
+  results =>
+    console.log(
+      "  Settled results:",
+      results.map(r => r.status)
+    )
+);
 // 📘 See demo/04-asynchronous/30-promises.js for full coverage of Promise combinators
 
 // 22.2 String.prototype.matchAll (ES2020)
@@ -1048,7 +1060,10 @@ console.log("\nString.matchAll (ES2020):");
 const matchAllRe = /(\w)(\d)/g;
 const matchAllInput = "a1 b2 c3";
 const allMatches = [...matchAllInput.matchAll(matchAllRe)];
-console.log("  Matches:", allMatches.map(m => m[0])); // ['a1', 'b2', 'c3']
+console.log(
+  "  Matches:",
+  allMatches.map(m => m[0])
+); // ['a1', 'b2', 'c3']
 
 // 22.3 globalThis (ES2020)
 // - Universal top-level this that works across browsers, Node.js, workers
@@ -1118,7 +1133,9 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
  */
 console.log("\nTop-level await (ES2022):");
 console.log("  // In an ES Module (.mjs or type:module) you can write:");
-console.log("  // const data = await fetch('https://api.example.com').then(r => r.json());");
+console.log(
+  "  // const data = await fetch('https://api.example.com').then(r => r.json());"
+);
 console.log("  // No async IIFE wrapper needed at module top level");
 
 // 22.7 WeakRef / FinalizationRegistry (ES2021)
@@ -1155,7 +1172,7 @@ console.log("\nObject.groupBy / Map.groupBy (ES2024):");
 const inventory = [
   { name: "apple", type: "fruit" },
   { name: "carrot", type: "veg" },
-  { name: "banana", type: "fruit" }
+  { name: "banana", type: "fruit" },
 ];
 const grouped = Object.groupBy(inventory, item => item.type);
 console.log("  Object.groupBy:", Object.keys(grouped)); // ['fruit', 'veg']
@@ -1216,7 +1233,6 @@ const symWm = new WeakMap();
 const symKey = Symbol("metadata");
 symWm.set(symKey, "symbol-keyed value");
 console.log("  WeakMap.get(symbolKey):", symWm.get(symKey)); // 'symbol-keyed value'
-
 
 // ============================================
 // CROSS-REFERENCES

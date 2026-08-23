@@ -39,7 +39,9 @@ console.log("Problem: All closures capture same var variable");
 
 // Demonstrate the problem (simplified for immediate execution)
 console.log("var in loop (problem):");
-console.log("  When using var, all closures capture the same variable reference");
+console.log(
+  "  When using var, all closures capture the same variable reference"
+);
 console.log("  Result: All would print final value 3");
 
 // Solution 1: Use let (modern, recommended)
@@ -71,7 +73,9 @@ function noAccidentalGlobal() {
 noAccidentalGlobal();
 
 // Strict mode prevents accidental globals (already in ES modules)
-console.log("Strict mode error: Assignment to undeclared variable fails in strict mode");
+console.log(
+  "Strict mode error: Assignment to undeclared variable fails in strict mode"
+);
 
 // Pitfall 1.3: Memory leaks with closures
 console.log("\nPitfall 1.3: Memory leaks with closures");
@@ -79,7 +83,7 @@ console.log("\nPitfall 1.3: Memory leaks with closures");
 function createLeak() {
   const largeData = new Array(1000).fill("data");
 
-  return function() {
+  return function () {
     // This closure keeps largeData in memory
     console.log("Large data length:", largeData.length);
   };
@@ -93,7 +97,7 @@ function noLeak() {
   const largeData = new Array(1000).fill("data");
   const length = largeData.length; // Capture only needed value
 
-  return function() {
+  return function () {
     console.log("Cached length:", length);
   };
 }
@@ -106,7 +110,7 @@ console.log("\nPitfall 1.4: Modifying loop variable");
 
 const functions = [];
 for (let i = 0; i < 3; i++) {
-  functions.push(function() {
+  functions.push(function () {
     return i;
   });
 }
@@ -180,7 +184,7 @@ function createLongLivedClosure() {
     },
     trigger() {
       events.forEach(handler => handler(data));
-    }
+    },
   };
 }
 
@@ -205,12 +209,14 @@ function createCleanClosure() {
     },
     trigger() {
       handlers.forEach(handler => handler(data));
-    }
+    },
   };
 }
 
 const cleanClosure = createCleanClosure();
-const unsubscribe = cleanClosure.addHandler(() => console.log("Handler called"));
+const unsubscribe = cleanClosure.addHandler(() =>
+  console.log("Handler called")
+);
 console.log("✅ Provide unsubscribe function to release references");
 
 // Issue 2.2: Circular references in closures
@@ -223,14 +229,16 @@ function createCircularReference() {
   objA.ref = objB;
   objB.ref = objA; // Circular reference
 
-  return function() {
+  return function () {
     return objA;
   };
 }
 
 const circularClosure = createCircularReference();
 console.log("⚠️  Circular references can complicate garbage collection");
-console.log("   (Modern GC handles this, but can cause issues in older engines)");
+console.log(
+  "   (Modern GC handles this, but can cause issues in older engines)"
+);
 
 // ============================================
 // 3. PERFORMANCE CONSIDERATIONS
@@ -269,7 +277,9 @@ function level1() {
 }
 
 console.log("Deep nesting result:", level1());
-console.log("⚠️  Deep nesting has lookup cost (though modern engines optimize)");
+console.log(
+  "⚠️  Deep nesting has lookup cost (though modern engines optimize)"
+);
 
 // Consideration 3.2: Closure creation overhead
 console.log("\nConsideration 3.2: Closure creation has runtime cost");
@@ -303,15 +313,15 @@ console.log("\nConsideration 3.3: Memoization - memory vs speed");
 function memoize(fn) {
   const cache = {};
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     return cache[key] || (cache[key] = fn(...args));
   };
 }
 
-const expensive = (n) => {
+const expensive = n => {
   // Simulate expensive computation
-  for (let i = 0; i < 10000; i++) { }
+  for (let i = 0; i < 10000; i++) {}
   return n * n;
 };
 
@@ -515,7 +525,9 @@ console.log("📘 13.1-scope-basics.js - Scope fundamentals");
 console.log("📘 13.2-scope-tdz-strict.js - TDZ and strict mode");
 console.log("📘 13.3-closures-basics.js - Closure basics");
 console.log("📘 13.4-closures-patterns.js - Closure patterns");
-console.log("📘 27-memory-management.js - Memory management and garbage collection");
+console.log(
+  "📘 27-memory-management.js - Memory management and garbage collection"
+);
 console.log("📘 26-optimization-performance.js - Performance optimization");
 console.log("📘 48-security.js - Security best practices");
 

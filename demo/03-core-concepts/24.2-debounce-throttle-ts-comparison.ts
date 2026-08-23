@@ -3,7 +3,9 @@
 
 export {};
 
-console.log("=== Function Patterns - Debounce & Throttle TypeScript Comparison ===\n");
+console.log(
+  "=== Function Patterns - Debounce & Throttle TypeScript Comparison ===\n"
+);
 
 /**
  * 🔍 Key Differences in TypeScript:
@@ -32,7 +34,7 @@ type AnyFn = (...args: any[]) => any;
 function debounce<T extends AnyFn>(fn: T, delayMs: number): T {
   let timeoutId: NodeJS.Timeout | null = null;
 
-  return function(this: any, ...args: any[]): any {
+  return function (this: any, ...args: any[]): any {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
@@ -47,7 +49,7 @@ function debounce<T extends AnyFn>(fn: T, delayMs: number): T {
 const searchAPI = debounce((query: string) => {
   console.log(`Searching for: "${query}"`);
 }, 300);
-searchAPI('test query');
+searchAPI("test query");
 
 // Example 2: Debounce with immediate option
 console.log("\n2. Debounce with immediate:");
@@ -58,7 +60,7 @@ function debounceImmediate<T extends AnyFn>(
 ): T & { cancel(): void } {
   let timeoutId: NodeJS.Timeout | null = null;
 
-  const debounced = function(this: any, ...args: any[]): any {
+  const debounced = function (this: any, ...args: any[]): any {
     const callNow = immediate && !timeoutId;
 
     if (timeoutId !== null) {
@@ -93,7 +95,7 @@ function throttle<T extends AnyFn>(fn: T, limitMs: number): T {
   let lastCall: number = 0;
   let timeoutId: NodeJS.Timeout | null = null;
 
-  return function(this: any, ...args: any[]): any {
+  return function (this: any, ...args: any[]): any {
     const now = Date.now();
 
     if (now - lastCall >= limitMs) {
@@ -103,11 +105,14 @@ function throttle<T extends AnyFn>(fn: T, limitMs: number): T {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);
       }
-      timeoutId = setTimeout(() => {
-        fn.apply(this, args);
-        lastCall = Date.now();
-        timeoutId = null;
-      }, limitMs - (now - lastCall));
+      timeoutId = setTimeout(
+        () => {
+          fn.apply(this, args);
+          lastCall = Date.now();
+          timeoutId = null;
+        },
+        limitMs - (now - lastCall)
+      );
     }
   } as any as T;
 }
@@ -145,7 +150,7 @@ function throttleWithOptions<T extends AnyFn>(
     }
   };
 
-  const throttled = function(this: any, ...args: any[]): any {
+  const throttled = function (this: any, ...args: any[]): any {
     const now = Date.now();
 
     if (!lastCall && !leading) {
@@ -200,7 +205,7 @@ function createDebouncedHandler<T extends EventHandler>(
 }
 
 const handleResize = (event: Event) => {
-  console.log('Resize handled:', event);
+  console.log("Resize handled:", event);
 };
 
 const debouncedResize = createDebouncedHandler(handleResize, 250);
@@ -215,7 +220,7 @@ function debouncePromise<T extends any[], R>(
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   return (...args: T): Promise<R> => {
-    return new Promise<R>((resolve) => {
+    return new Promise<R>(resolve => {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);
       }
@@ -234,7 +239,7 @@ console.log("\n7. Function type guards:");
 type DebouncedFunction<T> = T & { cancel(): void };
 
 function isDebounced<T>(fn: unknown): fn is DebouncedFunction<T> {
-  return typeof fn === 'function' && 'cancel' in fn;
+  return typeof fn === "function" && "cancel" in fn;
 }
 
 // Example 8: Generic rate limiter

@@ -13,7 +13,9 @@ console.log("=== Typed Memoization ===");
 // TypeScript: Generic memoization with type safety
 function memoize<T extends (...args: any[]) => R, R>(
   fn: T,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (
+    ...args: Parameters<T>
+  ) => string
 ): T {
   const cache = new Map<string, R>();
   return ((...args: Parameters<T>) => {
@@ -79,7 +81,6 @@ console.log("LRU get(1):", lru.get(1));
 lru.set(4, "four"); // Evicts 2
 console.log("LRU has(2):", lru.has(2));
 
-
 // ============================================================================
 // 2. TYPED LAZY EVALUATION
 // ============================================================================
@@ -123,7 +124,10 @@ function* map<T, U>(gen: Generator<T>, fn: (x: T) => U): Generator<U> {
   }
 }
 
-function* filter<T>(gen: Generator<T>, predicate: (x: T) => boolean): Generator<T> {
+function* filter<T>(
+  gen: Generator<T>,
+  predicate: (x: T) => boolean
+): Generator<T> {
   for (const x of gen) {
     if (predicate(x)) {
       yield x;
@@ -132,10 +136,12 @@ function* filter<T>(gen: Generator<T>, predicate: (x: T) => boolean): Generator<
 }
 
 const result = [
-  ...map(filter(range(1, 10), x => x % 2 === 0), x => x * 2)
+  ...map(
+    filter(range(1, 10), x => x % 2 === 0),
+    x => x * 2
+  ),
 ];
 console.log("Generator pipeline:", result);
-
 
 // ============================================================================
 // 3. TYPED OBJECT POOLING
@@ -184,13 +190,17 @@ class TypedObjectPool<T extends Poolable> {
     return {
       available: this.available.length,
       inUse: this.inUse.size,
-      total: this.available.length + this.inUse.size
+      total: this.available.length + this.inUse.size,
     };
   }
 }
 
 class Vector implements Poolable {
-  constructor(public x = 0, public y = 0, public z = 0) {}
+  constructor(
+    public x = 0,
+    public y = 0,
+    public z = 0
+  ) {}
 
   reset(): void {
     this.x = 0;
@@ -210,7 +220,6 @@ const v2 = vectorPool.acquire();
 console.log("After acquire stats:", vectorPool.stats);
 vectorPool.release(v1);
 console.log("After release stats:", vectorPool.stats);
-
 
 // ============================================================================
 // 4. TYPED PERFORMANCE MONITORING
@@ -257,7 +266,6 @@ const resultSync = monitor.measureSync("sync", () => {
   return sum;
 });
 
-
 // ============================================================================
 // 5. TYPED ARRAYS
 // ============================================================================
@@ -287,7 +295,6 @@ const data = new Float64Array([1, 4, 9, 16, 25]);
 const processed = processTypedArray(data);
 console.log("Processed typed array:", [...processed]);
 
-
 // ============================================================================
 // 6. CONST ASSERTIONS
 // ============================================================================
@@ -300,8 +307,8 @@ const config = {
   retries: 3,
   endpoints: {
     api: "https://api.example.com",
-    auth: "https://auth.example.com"
-  }
+    auth: "https://auth.example.com",
+  },
 } as const;
 
 // config.timeout = 10000; // ❌ Error: read-only
@@ -309,7 +316,7 @@ const config = {
 
 // TypeScript: String enum pattern
 const HTTP_METHODS = ["GET", "POST", "PUT", "DELETE"] as const;
-type HttpMethod = typeof HTTP_METHODS[number]; // "GET" | "POST" | "PUT" | "DELETE"
+type HttpMethod = (typeof HTTP_METHODS)[number]; // "GET" | "POST" | "PUT" | "DELETE"
 
 function makeRequest(method: HttpMethod, url: string): void {
   console.log(`${method} ${url}`);
@@ -317,7 +324,6 @@ function makeRequest(method: HttpMethod, url: string): void {
 
 makeRequest("GET", "/users");
 // makeRequest("INVALID", "/users"); // ❌ Type error
-
 
 // ============================================================================
 // 7. TEMPLATE LITERAL TYPES
@@ -344,7 +350,6 @@ const userRoute: Route = "/users/123";
 const postRoute: Route = "/posts/456";
 // const invalidRoute: Route = "/comments/789"; // ❌ Type error
 
-
 // ============================================================================
 // SUMMARY
 // ============================================================================
@@ -360,6 +365,8 @@ console.log("7. Template literal types");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe data structures");
-console.log("- Better tooling/refactoring (types are erased at runtime; no JIT gain)");
+console.log(
+  "- Better tooling/refactoring (types are erased at runtime; no JIT gain)"
+);
 console.log("- Clear performance contracts");
 console.log("- Immutable value enforcement");

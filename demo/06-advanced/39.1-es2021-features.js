@@ -35,7 +35,10 @@ console.log("\n--- 1. String.prototype.replaceAll() ---\n");
 
 // 📘 Official MDN example (String.replaceAll):
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll
-console.log("MDN 'aabbcc'.replaceAll('b', '.'):", "aabbcc".replaceAll("b", "."));
+console.log(
+  "MDN 'aabbcc'.replaceAll('b', '.'):",
+  "aabbcc".replaceAll("b", ".")
+);
 // 'aa..cc'
 
 // Before ES2021: only replace first occurrence, or use regex with /g flag
@@ -134,7 +137,7 @@ console.log("PI with separators:", pi); // 3.141592653589
 
 // Works with different bases
 const binary = 0b1010_0001_1000_0101;
-const hex = 0xFF_FF_FF_FF;
+const hex = 0xff_ff_ff_ff;
 console.log("Binary 0b1010_0001_1000_0101:", binary); // 41349
 console.log("Hex 0xFF_FF_FF_FF:", hex); // 4294967295
 
@@ -183,7 +186,9 @@ if (deref) {
 // If target is set to null and GC runs, weakRef.deref() may return undefined
 target = null;
 // Note: GC is non-deterministic, so we can't reliably demonstrate collection here
-console.log("Note: WeakRef targets may be GC'd when no strong references exist");
+console.log(
+  "Note: WeakRef targets may be GC'd when no strong references exist"
+);
 
 // Important: Use WeakRef sparingly, GC behavior is implementation-dependent
 
@@ -205,7 +210,7 @@ console.log("\n--- 5. FinalizationRegistry ---\n");
 // Use case: cleaning up external resources associated with an object
 
 // Create a registry with a cleanup callback
-const registry = new FinalizationRegistry((heldValue) => {
+const registry = new FinalizationRegistry(heldValue => {
   console.log(`Cleaning up: ${heldValue}`);
 });
 
@@ -216,8 +221,12 @@ registry.register(resource, heldValue);
 
 // When resource is GC'd, the callback will be called with "resource-123"
 resource = null;
-console.log("Registered resource for finalization. Callback will run when GC collects it.");
-console.log("Note: Finalization callbacks run at an unspecified time, don't rely on them for critical logic.");
+console.log(
+  "Registered resource for finalization. Callback will run when GC collects it."
+);
+console.log(
+  "Note: Finalization callbacks run at an unspecified time, don't rely on them for critical logic."
+);
 
 // Unregister if needed
 // const unregisterToken = {};
@@ -257,13 +266,23 @@ console.log("JSON.stringify(apiData):", JSON.stringify(apiData)); // {"id":12345
 // ============================================
 console.log("\n--- 7. Best Practices ---\n");
 
-console.log("✅ Use replaceAll() instead of regex /g for simple string replacements");
-console.log("✅ Use ??= for default values when you want to preserve 0 and empty strings");
+console.log(
+  "✅ Use replaceAll() instead of regex /g for simple string replacements"
+);
+console.log(
+  "✅ Use ??= for default values when you want to preserve 0 and empty strings"
+);
 console.log("✅ Use ||= only when you want to replace all falsy values");
-console.log("✅ Use numeric separators for numbers with more than 4 digits to improve readability");
-console.log("⚠️  Use WeakRef/FinalizationRegistry only for specialized use cases (caching, resource cleanup)");
+console.log(
+  "✅ Use numeric separators for numbers with more than 4 digits to improve readability"
+);
+console.log(
+  "⚠️  Use WeakRef/FinalizationRegistry only for specialized use cases (caching, resource cleanup)"
+);
 console.log("⚠️  Don't rely on GC timing for application logic");
-console.log("✅ Group numeric separators by thousands, bytes, or logical units");
+console.log(
+  "✅ Group numeric separators by thousands, bytes, or logical units"
+);
 
 // ============================================
 // Cross-references

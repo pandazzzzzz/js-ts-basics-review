@@ -33,7 +33,10 @@ console.log("1. Type-preserving map:");
 const numbers: number[] = [1, 2, 3, 4, 5];
 const doubled: number[] = numbers.map(n => n * 2);
 const strings: string[] = numbers.map(n => n.toString());
-const objects: { value: number; index: number }[] = numbers.map((n, i) => ({ value: n, index: i }));
+const objects: { value: number; index: number }[] = numbers.map((n, i) => ({
+  value: n,
+  index: i,
+}));
 console.log("  doubled (number[]):", doubled);
 console.log("  strings (string[]):", strings);
 console.log("  objects:", objects);
@@ -41,8 +44,8 @@ console.log("  objects:", objects);
 // Example 2: Filter with type guards
 console.log("\n2. Filter with type guards:");
 const mixed: (string | number)[] = [1, "hello", 2, "world", 3];
-const nums: number[] = mixed.filter((x): x is number => typeof x === 'number');
-const strs: string[] = mixed.filter((x): x is string => typeof x === 'string');
+const nums: number[] = mixed.filter((x): x is number => typeof x === "number");
+const strs: string[] = mixed.filter((x): x is string => typeof x === "string");
 console.log("  numbers:", nums);
 console.log("  strings:", strs);
 
@@ -57,7 +60,7 @@ const users: (User | null)[] = [
   { id: 1, name: "Alice", email: "alice@example.com" },
   null,
   { id: 2, name: "Bob" },
-  { id: 3, name: "Charlie", email: "charlie@example.com" }
+  { id: 3, name: "Charlie", email: "charlie@example.com" },
 ];
 const validUsers: User[] = users.filter((u): u is User => u !== null);
 console.log("  validUsers:", validUsers);
@@ -73,7 +76,9 @@ console.log("  sumSquared:", sumSquared);
 
 // Example 5: Reduce for object construction
 console.log("\n5. Reduce to object:");
-const numberMap: Record<string, number> = numbers.reduce<Record<string, number>>((acc, num) => {
+const numberMap: Record<string, number> = numbers.reduce<
+  Record<string, number>
+>((acc, num) => {
   acc[`num${num}`] = num * num;
   return acc;
 }, {});
@@ -82,7 +87,7 @@ console.log("  numberMap:", numberMap);
 // Example 6: forEach with thisArg
 console.log("\n6. forEach with thisArg:");
 const multiplier = { factor: 10 };
-numbers.forEach(function(this: typeof multiplier, num) {
+numbers.forEach(function (this: typeof multiplier, num) {
   console.log(`  ${num} * ${this.factor} = ${num * this.factor}`);
 }, multiplier);
 
@@ -129,7 +134,7 @@ interface Person {
 const people: Person[] = [
   { name: "Alice", age: 25, email: "alice@example.com" },
   { name: "Bob", age: 30, email: "bob@example.com" },
-  { name: "Charlie", age: 35, email: "charlie@example.com" }
+  { name: "Charlie", age: 35, email: "charlie@example.com" },
 ];
 
 const adults: Person[] = people.filter(p => p.age >= 30);

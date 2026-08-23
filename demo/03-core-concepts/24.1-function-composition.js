@@ -60,8 +60,8 @@ function addThree(a, b, c) {
 
 // Manually curried version
 function curriedAdd(a) {
-  return function(b) {
-    return function(c) {
+  return function (b) {
+    return function (c) {
       return a + b + c;
     };
   };
@@ -76,7 +76,7 @@ function curry(fn) {
     if (args.length >= fn.length) {
       return fn.apply(this, args);
     }
-    return function(...more) {
+    return function (...more) {
       return curried.apply(this, args.concat(more));
     };
   };
@@ -93,7 +93,7 @@ function calculatePrice(price, tax, discount) {
 }
 
 const calculateWithTax = curry(calculatePrice)(0.08); // 8% tax
-const calculateFinal = calculateWithTax(0.10); // 10% discount
+const calculateFinal = calculateWithTax(0.1); // 10% discount
 
 console.log("\nPractical use case:");
 console.log("calculateFinal(100):", calculateFinal(100)); // 100 * 1.08 * 0.9 = 97.2
@@ -147,7 +147,7 @@ function increment(x) {
 
 // 2.2 Compose - right to left
 function compose(...fns) {
-  return function(x) {
+  return function (x) {
     return fns.reduceRight((acc, fn) => fn(acc), x);
   };
 }
@@ -159,7 +159,7 @@ console.log("compose(square, double, increment)(3):", composed(3));
 
 // 2.3 Pipe - left to right
 function pipe(...fns) {
-  return function(x) {
+  return function (x) {
     return fns.reduce((acc, fn) => fn(acc), x);
   };
 }
@@ -171,7 +171,9 @@ console.log("pipe(increment, double, square)(3):", piped(3));
 
 // 2.4 Practical use case - data validation pipeline
 function validateEmail(email) {
-  return email.includes('@') ? { valid: true, email } : { valid: false, error: 'Invalid email' };
+  return email.includes("@")
+    ? { valid: true, email }
+    : { valid: false, error: "Invalid email" };
 }
 
 function toLower(data) {
@@ -184,11 +186,14 @@ function sanitize(data) {
 
 const processEmail = pipe(validateEmail, toLower, sanitize);
 console.log("\nData processing pipeline:");
-console.log("processEmail(' USER@EXAMPLE.COM '):", processEmail(' USER@EXAMPLE.COM '));
+console.log(
+  "processEmail(' USER@EXAMPLE.COM '):",
+  processEmail(" USER@EXAMPLE.COM ")
+);
 
 // 2.5 Composition with multiple arguments
 function composeN(...fns) {
-  return function(...args) {
+  return function (...args) {
     return fns.reduceRight((acc, fn) => {
       return Array.isArray(acc) ? fn(...acc) : fn(acc);
     }, args);
@@ -235,35 +240,44 @@ console.log("\n=== 3. Advanced Partial Application Demo ===");
 
 // 3.1 Basic partial application
 function bind(fn, ...fixedArgs) {
-  return function(...remainingArgs) {
+  return function (...remainingArgs) {
     return fn(...fixedArgs, ...remainingArgs);
   };
 }
 
-const greet = (greeting, name, punctuation) => `${greeting}, ${name}${punctuation}`;
-const sayHello = bind(greet, 'Hello');
+const greet = (greeting, name, punctuation) =>
+  `${greeting}, ${name}${punctuation}`;
+const sayHello = bind(greet, "Hello");
 
 console.log("Basic partial application:");
-console.log("sayHello('World', '!'):", sayHello('World', '!')); // 'Hello, World!'
+console.log("sayHello('World', '!'):", sayHello("World", "!")); // 'Hello, World!'
 
 // 3.2 Partial application from right
 function partialRight(fn, ...fixedArgs) {
-  return function(...remainingArgs) {
+  return function (...remainingArgs) {
     return fn(...remainingArgs, ...fixedArgs);
   };
 }
 
-const log = (level, message, timestamp) => `[${timestamp}] ${level}: ${message}`;
-const logError = partialRight(log, 'ERROR', new Date().toISOString().split('T')[0]);
+const log = (level, message, timestamp) =>
+  `[${timestamp}] ${level}: ${message}`;
+const logError = partialRight(
+  log,
+  "ERROR",
+  new Date().toISOString().split("T")[0]
+);
 
 console.log("\nPartial application from right:");
-console.log("logError('Something went wrong'):", logError('Something went wrong'));
+console.log(
+  "logError('Something went wrong'):",
+  logError("Something went wrong")
+);
 
 // 3.3 Partial application with placeholders
-const _ = Symbol('placeholder');
+const _ = Symbol("placeholder");
 
 function partialWithPlaceholders(fn, ...args) {
-  return function(...newArgs) {
+  return function (...newArgs) {
     let argIndex = 0;
     const finalArgs = args.map(arg => {
       if (arg === _) {
@@ -309,24 +323,24 @@ console.log("\n=== 4. Function Factories Demo ===");
 
 // 4.1 Logger factory
 function createLogger(level) {
-  return function(message) {
-    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+  return function (message) {
+    const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
     console.log(`[${timestamp}] [${level}] ${message}`);
   };
 }
 
-const info = createLogger('INFO');
-const warn = createLogger('WARN');
-const error = createLogger('ERROR');
+const info = createLogger("INFO");
+const warn = createLogger("WARN");
+const error = createLogger("ERROR");
 
 console.log("\nLogger factory:");
-info('Application started');
-warn('Configuration not found');
-error('Failed to connect');
+info("Application started");
+warn("Configuration not found");
+error("Failed to connect");
 
 // 4.2 Validator factory
 function createValidator(predicate, errorMessage) {
-  return function(value) {
+  return function (value) {
     if (predicate(value)) {
       return { valid: true, value };
     }
@@ -335,41 +349,40 @@ function createValidator(predicate, errorMessage) {
 }
 
 const isNotEmpty = createValidator(
-  (str) => str && str.length > 0,
-  'Value cannot be empty'
+  str => str && str.length > 0,
+  "Value cannot be empty"
 );
 
 const isEmail = createValidator(
-  (str) => str.includes('@'),
-  'Invalid email format'
+  str => str.includes("@"),
+  "Invalid email format"
 );
 
 console.log("\nValidator factory:");
-console.log("isNotEmpty('hello'):", isNotEmpty('hello'));
-console.log("isNotEmpty(''):", isNotEmpty(''));
-console.log("isEmail('test@example.com'):", isEmail('test@example.com'));
+console.log("isNotEmpty('hello'):", isNotEmpty("hello"));
+console.log("isNotEmpty(''):", isNotEmpty(""));
+console.log("isEmail('test@example.com'):", isEmail("test@example.com"));
 
 // 4.3 API client factory
 function createAPIClient(baseURL, defaultHeaders) {
-  return async function(endpoint, options = {}) {
+  return async function (endpoint, options = {}) {
     const url = `${baseURL}${endpoint}`;
     const headers = { ...defaultHeaders, ...options.headers };
 
     console.log(`Making request to: ${url}`);
-    console.log('Headers:', headers);
+    console.log("Headers:", headers);
 
     // Simulated fetch
     return { status: 200, data: `Response from ${url}` };
   };
 }
 
-const apiClient = createAPIClient(
-  'https://api.example.com',
-  { 'Content-Type': 'application/json' }
-);
+const apiClient = createAPIClient("https://api.example.com", {
+  "Content-Type": "application/json",
+});
 
 console.log("\nAPI client factory:");
-apiClient('/users');
+apiClient("/users");
 
 // ============================================
 // 5. Higher-Order Functions - Function Transformers
@@ -399,7 +412,7 @@ console.log("\n=== 5. Higher-Order Functions Demo ===");
 
 // 5.1 Function decorators
 function withLogging(fn) {
-  return function(...args) {
+  return function (...args) {
     console.log(`Calling ${fn.name} with args:`, args);
     const result = fn.apply(this, args);
     console.log(`${fn.name} returned:`, result);
@@ -417,7 +430,7 @@ loggedAdd(5, 3);
 
 // 5.2 Timing decorator
 function withTiming(fn) {
-  return function(...args) {
+  return function (...args) {
     const start = performance.now();
     const result = fn.apply(this, args);
     const end = performance.now();
@@ -439,13 +452,13 @@ withTiming(slowFunction)();
 function memoize(fn) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
-      console.log('Cache hit for:', args);
+      console.log("Cache hit for:", args);
       return cache.get(key);
     }
-    console.log('Cache miss for:', args);
+    console.log("Cache miss for:", args);
     const result = fn.apply(this, args);
     cache.set(key, result);
     return result;
@@ -489,7 +502,9 @@ console.log("goodTransform(5):", goodTransform(5));
 console.log("\nPitfall 2 - Context loss:");
 const counterObj = {
   count: 0,
-  inc: function() { return ++this.count; }
+  inc: function () {
+    return ++this.count;
+  },
 };
 const unboundInc = counterObj.inc;
 try {

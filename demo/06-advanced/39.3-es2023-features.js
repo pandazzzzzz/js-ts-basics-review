@@ -216,7 +216,10 @@ console.log("\nWeakSet.has(sym):", weakSet.has(sym)); // true
 
 let ephemeralKey = Symbol("temporary");
 weakMap.set(ephemeralKey, "temporary value");
-console.log("\nBefore GC: weakMap.has(ephemeralKey):", weakMap.has(ephemeralKey)); // true
+console.log(
+  "\nBefore GC: weakMap.has(ephemeralKey):",
+  weakMap.has(ephemeralKey)
+); // true
 
 // If we remove the reference, the entry can be GC'd
 ephemeralKey = null;
@@ -230,16 +233,19 @@ console.log("\n--- 5. Common Pitfalls ---\n");
 // Pitfall 1: Assuming toSorted() sorts numbers correctly by default
 const nums = [10, 2, 1, 20];
 console.log("nums.toSorted():", nums.toSorted()); // [1, 10, 2, 20] ❌ lexicographical sort
-console.log("nums.toSorted((a,b) => a - b):", nums.toSorted((a,b) => a - b)); // [1, 2, 10, 20] ✅ numeric sort
+console.log(
+  "nums.toSorted((a,b) => a - b):",
+  nums.toSorted((a, b) => a - b)
+); // [1, 2, 10, 20] ✅ numeric sort
 
 // Pitfall 2: Forgetting that with() returns a new array
-const arr1 = [1,2,3];
+const arr1 = [1, 2, 3];
 const arr2 = arr1.with(0, 99);
 console.log("\narr1:", arr1); // [1,2,3] unchanged
 console.log("arr2:", arr2); // [99,2,3] new array
 
 // Pitfall 3: findLast() returns undefined when no match
-const result = [1,2,3].findLast(n => n > 5);
+const result = [1, 2, 3].findLast(n => n > 5);
 console.log("\nfindLast >5:", result); // undefined (not null)
 if (result === undefined) {
   console.log("No match found");
@@ -259,13 +265,27 @@ console.log("\nWeakMap still has value:", wm.get(ref)); // "test value"
 // ============================================
 console.log("\n--- 6. Best Practices ---\n");
 
-console.log("✅ Use immutable array methods (toSorted/toReversed/with/toSpliced) for pure functions");
-console.log("✅ Use findLast/findLastIndex instead of reversing and finding for better performance");
-console.log("✅ Add hashbang to CLI scripts for better cross-engine compatibility");
-console.log("✅ Use Symbols as WeakMap keys when you need unique, garbage-collectable keys");
-console.log("⚠️  Remember that all immutable array methods return shallow copies");
-console.log("⚠️  Always provide a comparator function to toSorted() for numeric arrays");
-console.log("✅ Prefer these methods over mutable ones in React/Vue state updates");
+console.log(
+  "✅ Use immutable array methods (toSorted/toReversed/with/toSpliced) for pure functions"
+);
+console.log(
+  "✅ Use findLast/findLastIndex instead of reversing and finding for better performance"
+);
+console.log(
+  "✅ Add hashbang to CLI scripts for better cross-engine compatibility"
+);
+console.log(
+  "✅ Use Symbols as WeakMap keys when you need unique, garbage-collectable keys"
+);
+console.log(
+  "⚠️  Remember that all immutable array methods return shallow copies"
+);
+console.log(
+  "⚠️  Always provide a comparator function to toSorted() for numeric arrays"
+);
+console.log(
+  "✅ Prefer these methods over mutable ones in React/Vue state updates"
+);
 
 // React state update example:
 // const [items, setItems] = useState([3,1,2]);

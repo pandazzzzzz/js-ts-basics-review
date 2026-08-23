@@ -18,7 +18,6 @@ const flags: RegExp = /test/gi;
 console.log("=== RegExp Type ===");
 console.log(pattern.test("hello")); // true
 
-
 // ============================================================================
 // 2. TEMPLATE LITERAL TYPES FOR PATTERNS (TS 4.1+)
 // ============================================================================
@@ -62,7 +61,6 @@ const digitRegex = createRegex("\\d+");
 console.log(`Pattern: ${digitRegex.pattern}`);
 console.log(digitRegex.test("123"));
 
-
 // ============================================================================
 // 3. STRING LITERAL TYPES FOR VALIDATION
 // ============================================================================
@@ -91,7 +89,6 @@ if (isValidUrl(url)) {
   console.log(`Valid URL: ${url}`);
 }
 
-
 // ============================================================================
 // 4. REGEXP EXEC RETURN TYPE
 // ============================================================================
@@ -114,16 +111,15 @@ function extractDateGroups(date: string): DateMatchGroups | null {
   const match = regex.exec(date);
   if (!match?.groups) return null;
   return {
-    year: match.groups.year || '',
-    month: match.groups.month || '',
-    day: match.groups.day || ''
+    year: match.groups.year || "",
+    month: match.groups.month || "",
+    day: match.groups.day || "",
   };
 }
 
 console.log("\n=== RegExp Exec Return Type ===");
 console.log(extractYear("2024-01-15")); // 2024
 console.log(extractDateGroups("2024-01-15"));
-
 
 // ============================================================================
 // 5. MATCH RESULT TYPING
@@ -146,7 +142,6 @@ console.log("\n=== Match Result Typing ===");
 const numbers = findAllMatches("a1b2c3", /\d/g);
 console.log(numbers); // ['1', '2', '3']
 
-
 // ============================================================================
 // 6. REPLACEMENT FUNCTION TYPING
 // ============================================================================
@@ -168,7 +163,6 @@ function swapWords(text: string): string {
 console.log("\n=== Replacement Function Typing ===");
 console.log(doubleNumbers("Items: 5, 10, 15"));
 console.log(swapWords("Hello World"));
-
 
 // ============================================================================
 // 7. REGEX UTILITY TYPES
@@ -195,14 +189,13 @@ function parsePhoneNumber(phone: string): PhoneNumberMatch | null {
   return {
     areaCode: match.groups.areaCode,
     prefix: match.groups.prefix,
-    lineNumber: match.groups.lineNumber
+    lineNumber: match.groups.lineNumber,
   };
 }
 
 console.log("\n=== Regex Utility Types ===");
 console.log(extractDigits("Order #123, Qty: 456"));
 console.log(parsePhoneNumber("123-456-7890"));
-
 
 // ============================================================================
 // 8. PATTERN VALIDATOR CLASS
@@ -245,7 +238,6 @@ console.log(`Email valid: ${validator.validate("email", "test@example.com")}`);
 console.log(`Phone valid: ${validator.validate("phone", "123-456-7890")}`);
 console.log(`Date valid: ${validator.validate("date", "2024-01-15")}`);
 
-
 // ============================================================================
 // 9. ASYNC PATTERN MATCHING
 // ============================================================================
@@ -255,7 +247,10 @@ async function* matchAllAsync(
   text: string,
   pattern: RegExp
 ): AsyncGenerator<RegExpExecArray> {
-  const regex = new RegExp(pattern.source, pattern.flags.includes("g") ? pattern.flags : pattern.flags + "g");
+  const regex = new RegExp(
+    pattern.source,
+    pattern.flags.includes("g") ? pattern.flags : pattern.flags + "g"
+  );
 
   let match: RegExpExecArray | null;
   while ((match = regex.exec(text)) !== null) {
@@ -273,7 +268,6 @@ console.log("\n=== Async Pattern Matching ===");
     console.log(`Found email: ${match[0]}`);
   }
 })();
-
 
 // ============================================================================
 // 10. TYPE-SAFE REGEX BUILDER
@@ -375,7 +369,6 @@ const phoneRegex = new RegexBuilder()
 console.log(phoneRegex);
 console.log(phoneRegex.test("123-456-7890"));
 
-
 // ============================================================================
 // 11. COMPARISON TABLE
 // ============================================================================
@@ -405,4 +398,6 @@ KEY TAKEAWAYS:
 5. Runtime regex behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

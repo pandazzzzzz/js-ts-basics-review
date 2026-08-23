@@ -62,7 +62,7 @@ numbers.forEach((num, index) => {
 // 1.2 forEach with thisArg parameter
 const multiplier = { factor: 10 };
 console.log("\nforEach with thisArg:");
-numbers.forEach(function(num) {
+numbers.forEach(function (num) {
   console.log(`  ${num} * ${this.factor} = ${num * this.factor}`);
 }, multiplier);
 
@@ -113,7 +113,7 @@ const withIndex = numbers.map((num, index, arr) => ({
   value: num,
   index: index,
   isFirst: index === 0,
-  isLast: index === arr.length - 1
+  isLast: index === arr.length - 1,
 }));
 console.log("With index metadata:", withIndex);
 
@@ -121,15 +121,13 @@ console.log("With index metadata:", withIndex);
 const people = [
   { name: "Alice", age: 25 },
   { name: "Bob", age: 30 },
-  { name: "Charlie", age: 35 }
+  { name: "Charlie", age: 35 },
 ];
 const names = people.map(p => p.name);
 console.log("Names extracted:", names); // ['Alice', 'Bob', 'Charlie']
 
 // 2.4 Chaining map with other methods
-const result = numbers
-  .map(n => n * 2)
-  .map(n => n + 1);
+const result = numbers.map(n => n * 2).map(n => n + 1);
 console.log("Chained map (double then add 1):", result);
 
 // 2.5 Common pitfall: map with parseInt
@@ -186,14 +184,14 @@ const truthyOnly = withFalsy.filter(Boolean);
 console.log("Truthy values only:", truthyOnly); // [1, 'hello', true]
 
 // 3.5 Chaining filter + map
-const doubledEvens = numbers
-  .filter(n => n % 2 === 0)
-  .map(n => n * 2);
+const doubledEvens = numbers.filter(n => n % 2 === 0).map(n => n * 2);
 console.log("Filter then map (doubled evens):", doubledEvens);
 
 // 3.6 Finding unique values
 const duplicates = [1, 2, 2, 3, 3, 3, 4, 5, 5];
-const unique = duplicates.filter((val, index, arr) => arr.indexOf(val) === index);
+const unique = duplicates.filter(
+  (val, index, arr) => arr.indexOf(val) === index
+);
 console.log("Unique values:", unique); // [1, 2, 3, 4, 5]
 // Note: Set is more efficient for this: [...new Set(duplicates)]
 
@@ -250,7 +248,7 @@ const items = [
   { type: "vegetable", name: "carrot" },
   { type: "fruit", name: "banana" },
   { type: "vegetable", name: "broccoli" },
-  { type: "fruit", name: "orange" }
+  { type: "fruit", name: "orange" },
 ];
 
 const groupedByType = items.reduce((acc, item) => {
@@ -347,8 +345,13 @@ console.log("flatMap for filter+transform:", filteredTransformed); // [20, 40]
 const bigArray = Array.from({ length: 1000 }, (_, i) => i);
 const viaFlatMap = bigArray.flatMap(n => [n, n]);
 const viaMapFlat = bigArray.map(n => [n, n]).flat(1);
-console.log("\nflatMap vs map().flat():", JSON.stringify(viaFlatMap) === JSON.stringify(viaMapFlat)); // true (same result)
-console.log("Performance note: flatMap is more efficient (single pass vs two passes)");
+console.log(
+  "\nflatMap vs map().flat():",
+  JSON.stringify(viaFlatMap) === JSON.stringify(viaMapFlat)
+); // true (same result)
+console.log(
+  "Performance note: flatMap is more efficient (single pass vs two passes)"
+);
 
 // ============================================
 // Common Pitfalls

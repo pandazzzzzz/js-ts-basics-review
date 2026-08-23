@@ -62,7 +62,7 @@ async function readStream() {
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
-    let result = '';
+    let result = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -101,8 +101,8 @@ async function downloadWithProgress(url, onProgress) {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const contentLength = response.headers.get('content-length');
-    const total = parseInt(contentLength || '0', 10);
+    const contentLength = response.headers.get("content-length");
+    const total = parseInt(contentLength || "0", 10);
     let loaded = 0;
 
     const reader = response.body.getReader();
@@ -119,7 +119,9 @@ async function downloadWithProgress(url, onProgress) {
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 0;
         onProgress(loaded, total, percent);
-        console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
+        console.log(
+          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
+        );
       }
     }
 
@@ -171,7 +173,7 @@ async function transformStream() {
       const chunk = decoder.decode(value, { stream: true });
       charCount += chunk.length;
 
-      const newlines = chunk.split('\n').length - 1;
+      const newlines = chunk.split("\n").length - 1;
       lineCount += newlines;
 
       console.log(`  Processed ${chunk.length} characters`);
@@ -193,7 +195,7 @@ async function cancelableStream() {
 
   try {
     const response = await fetch(`${API_BASE}/posts/1`, {
-      signal: controller.signal
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -208,7 +210,7 @@ async function cancelableStream() {
     // Cancel after 30ms
     setTimeout(() => {
       console.log("  Cancelling stream...");
-      controller.abort('User cancelled');
+      controller.abort("User cancelled");
     }, 30);
 
     try {
@@ -224,14 +226,14 @@ async function cancelableStream() {
         console.log(`  Read ${value.length} bytes`);
       }
     } catch (error) {
-      if (error.name === 'AbortError') {
+      if (error.name === "AbortError") {
         console.log(`  ✓ Stream cancelled after ${byteCount} bytes`);
       } else {
         throw error;
       }
     }
   } catch (error) {
-    if (error.name !== 'AbortError') {
+    if (error.name !== "AbortError") {
       console.error("  Error:", error.message);
     }
   }
@@ -251,7 +253,9 @@ async function compareReadingMethods() {
   const response1 = await fetch(`${API_BASE}/posts/1`);
   const data1 = await response1.json();
   const time1 = Date.now() - start1;
-  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
+  console.log(
+    `    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`
+  );
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -318,7 +322,10 @@ fetch(`${API_BASE}/posts/999999`)
     console.log("   Data (empty object from 404):", data);
   })
   .catch(error => {
-    console.error("   This won't run for 404! Only network errors:", error.message);
+    console.error(
+      "   This won't run for 404! Only network errors:",
+      error.message
+    );
   });
 
 // Pitfall 2: CORS issues (browser only)
@@ -333,10 +340,12 @@ async function pitfallCredentials() {
   console.log("\n9. Credentials (cookies) note:");
 
   const withoutCredentials = await fetch(`${API_BASE}/posts/1`);
-  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
+  console.log(
+    "   Default credentials ('same-origin'): cookies sent to same origin"
+  );
 
   const withCredentials = await fetch(`${API_BASE}/posts/1`, {
-    credentials: "include"
+    credentials: "include",
   });
   console.log("   With credentials: 'include', cookies ARE sent to any origin");
 }
@@ -349,8 +358,10 @@ console.log("\n10. Content-Type header:");
 fetch(`${API_BASE}/posts`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ title: "Content-Type Test" })
-}).then(r => r.json()).then(d => console.log("   With Content-Type:", d.id));
+  body: JSON.stringify({ title: "Content-Type Test" }),
+})
+  .then(r => r.json())
+  .then(d => console.log("   With Content-Type:", d.id));
 
 // Pitfall 5: Not closing response body (memory leak)
 console.log("\n11. Memory leak from unclosed responses:");
@@ -419,7 +430,9 @@ Stream API Best Practices:
 console.log("\n=== Cross-references ===");
 console.log("📘 33.1-fetch-basics.js - Fetch basics and HTTP methods");
 console.log("📘 33.2-fetch-error-handling.js - Error handling and async/await");
-console.log("📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController");
+console.log(
+  "📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController"
+);
 console.log("📘 30-promises.js - Promise fundamentals");
 console.log("📘 31-async-await.js - Async/await patterns");
 

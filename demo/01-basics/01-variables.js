@@ -60,7 +60,11 @@ console.log("\n=== Strict Mode Demo ===");
   try {
     new Function("undeclaredVar = 5")();
   } catch (e) {
-    console.log("Strict mode prevents accidental globals:", e.name + ":", e.message);
+    console.log(
+      "Strict mode prevents accidental globals:",
+      e.name + ":",
+      e.message
+    );
   }
 })();
 
@@ -69,8 +73,9 @@ console.log("\n=== Strict Mode Demo ===");
   console.log("Sloppy mode typeof global:", typeof globalThis.__sloppyLeak); // "undefined"
 })();
 
-console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
-
+console.log(
+  "ES6 modules and classes are strict by default — no 'use strict' needed."
+);
 
 // ============================================
 // 4. Variable Declarations
@@ -125,7 +130,6 @@ console.log("Variables Demo:");
 console.log({ stringType, numberType, booleanType });
 console.log({ nullType, undefinedType, symbolType, bigIntType });
 
-
 // ============================================
 // 6. globalThis - Cross-Environment Global (ES2020)
 // ============================================
@@ -152,7 +156,6 @@ console.log("globalThis === global (Node):", globalThis === global); // true in 
 globalThis.__myTempGlobal = "set via globalThis";
 console.log("__myTempGlobal:", __myTempGlobal); // "set via globalThis"
 
-
 // ============================================
 // 7. Type Conversions (JS.info 2.7)
 // ============================================
@@ -160,46 +163,45 @@ console.log("__myTempGlobal:", __myTempGlobal); // "set via globalThis"
 console.log("\n=== Type Conversions ===");
 
 // String conversion — String() or .toString()
-console.log("String(42):", String(42));           // "42"
-console.log("String(true):", String(true));       // "true"
-console.log("String(null):", String(null));       // "null"
+console.log("String(42):", String(42)); // "42"
+console.log("String(true):", String(true)); // "true"
+console.log("String(null):", String(null)); // "null"
 console.log("String(undefined):", String(undefined)); // "undefined"
 console.log("(42).toString():", (42).toString()); // "42"
 
 // Numeric conversion — Number() or unary +
 console.log("\nNumeric conversion:");
-console.log("Number('42'):", Number("42"));       // 42
-console.log("Number('42px'):", Number("42px"));   // NaN
-console.log("Number(true):", Number(true));       // 1
-console.log("Number(false):", Number(false));     // 0
-console.log("Number(null):", Number(null));       // 0
+console.log("Number('42'):", Number("42")); // 42
+console.log("Number('42px'):", Number("42px")); // NaN
+console.log("Number(true):", Number(true)); // 1
+console.log("Number(false):", Number(false)); // 0
+console.log("Number(null):", Number(null)); // 0
 console.log("Number(undefined):", Number(undefined)); // NaN
-console.log("+'42':", +"42");                     // 42 (unary plus shortcut)
+console.log("+'42':", +"42"); // 42 (unary plus shortcut)
 console.log("parseInt('42px'):", parseInt("42px")); // 42 (tolerates non-numeric)
 console.log("parseFloat('3.14px'):", parseFloat("3.14px")); // 3.14
 
 // Boolean conversion — Boolean() or double negation !!
 console.log("\nBoolean conversion:");
-console.log("Boolean(1):", Boolean(1));           // true
-console.log("Boolean(0):", Boolean(0));           // false
+console.log("Boolean(1):", Boolean(1)); // true
+console.log("Boolean(0):", Boolean(0)); // false
 console.log("Boolean('hello'):", Boolean("hello")); // true
-console.log("Boolean(''):", Boolean(""));         // false
-console.log("Boolean(null):", Boolean(null));     // false
+console.log("Boolean(''):", Boolean("")); // false
+console.log("Boolean(null):", Boolean(null)); // false
 console.log("Boolean(undefined):", Boolean(undefined)); // false
-console.log("Boolean(NaN):", Boolean(NaN));       // false
-console.log("!!42:", !!42);                       // true (double negation shortcut)
+console.log("Boolean(NaN):", Boolean(NaN)); // false
+console.log("!!42:", !!42); // true (double negation shortcut)
 
 // Falsy values summary: false, 0, "", null, undefined, NaN
 // Everything else is truthy (including "0", "false", [], {})
 
 // Loose equality (==) performs type coercion, strict equality (===) does not
 console.log("\nEquality with coercion:");
-console.log("0 == false:", 0 == false);           // true (both coerced to 0)
-console.log("0 === false:", 0 === false);         // false (different types)
-console.log("'' == false:", "" == false);         // true
+console.log("0 == false:", 0 == false); // true (both coerced to 0)
+console.log("0 === false:", 0 === false); // false (different types)
+console.log("'' == false:", "" == false); // true
 console.log("null == undefined:", null == undefined); // true (special case)
 console.log("null === undefined:", null === undefined); // false
-
 
 // ============================================
 // 8. Browser Interaction (JS.info 2.6)
@@ -222,7 +224,6 @@ console.log("null === undefined:", null === undefined); // false
 
 console.log("\nNote: alert/prompt/confirm are browser-only APIs.");
 console.log("In Node.js, use console.log() and process.stdin for I/O.");
-
 
 // ============================================
 // Common Pitfalls & Best Practices
@@ -279,4 +280,3 @@ console.log("📘 13.1-scope-basics.js - Scope fundamentals");
 /*
 📘 See TypeScript comparison file: 01-variables-ts-comparison.ts
 */
-

@@ -33,8 +33,8 @@ const decimalFloat = 3.14159;
 // Hexadecimal (base 16) - Prefix with 0x
 // - Used for colors, memory addresses
 // - Digits: 0-9, A-F (case insensitive)
-const hex = 0xFF; // 255
-const hexColor = 0x00FF00; // Green color
+const hex = 0xff; // 255
+const hexColor = 0x00ff00; // Green color
 
 // Octal (base 8) - Prefix with 0o (ES6)
 // - Digits: 0-7
@@ -83,7 +83,7 @@ console.log("1.5e-9:", nano);
 const largeNumber = 1_000_000; // 1 million
 const billion2 = 1_000_000_000;
 const creditCard = 1234_5678_9012_3456;
-const bytes = 0xFF_FF_FF_FF; // 4,294,967,295
+const bytes = 0xff_ff_ff_ff; // 4,294,967,295
 const binary2 = 0b1111_0000_1010_0101;
 
 console.log("\n=== Numeric Separators (ES2021) ===");
@@ -124,7 +124,10 @@ console.log("0.1 + 0.2 === 0.3:", 0.1 + 0.2 === 0.3); // false
 const sum = 0.1 + 0.2;
 console.log("\ntoFixed solution:");
 console.log("(0.1 + 0.2).toFixed(2):", sum.toFixed(2)); // "0.30"
-console.log("parseFloat((0.1 + 0.2).toFixed(10)):", parseFloat(sum.toFixed(10))); // 0.3
+console.log(
+  "parseFloat((0.1 + 0.2).toFixed(10)):",
+  parseFloat(sum.toFixed(10))
+); // 0.3
 
 // Solution 2: Multiply, calculate, divide
 // - Convert to integers, do math, convert back
@@ -282,8 +285,14 @@ console.log('Number.isInteger("123"):', Number.isInteger("123")); // false
 // - Safe integers can be represented exactly
 console.log("\n=== Number.isSafeInteger() ===");
 console.log("Number.isSafeInteger(123):", Number.isSafeInteger(123)); // true
-console.log("Number.isSafeInteger(9007199254740991):", Number.isSafeInteger(9007199254740991)); // true (MAX_SAFE_INTEGER)
-console.log("Number.isSafeInteger(9007199254740992):", Number.isSafeInteger(9007199254740992)); // false
+console.log(
+  "Number.isSafeInteger(9007199254740991):",
+  Number.isSafeInteger(9007199254740991)
+); // true (MAX_SAFE_INTEGER)
+console.log(
+  "Number.isSafeInteger(9007199254740992):",
+  Number.isSafeInteger(9007199254740992)
+); // false
 console.log("Number.isSafeInteger(123.45):", Number.isSafeInteger(123.45)); // false
 
 // ============================================
@@ -330,35 +339,47 @@ console.log("(12345).toExponential(1):", (12345).toExponential(1)); // "1.2e+4"
 // - Use case: displaying numbers to users
 console.log("\n=== toLocaleString() ===");
 const bigNum = 1234567.89;
-console.log("US format:", bigNum.toLocaleString('en-US')); // "1,234,567.89"
-console.log("DE format:", bigNum.toLocaleString('de-DE')); // "1.234.567,89"
-console.log("FR format:", bigNum.toLocaleString('fr-FR')); // "1 234 567,89"
-console.log("IN format:", bigNum.toLocaleString('en-IN')); // "12,34,567.89" (Indian numbering)
+console.log("US format:", bigNum.toLocaleString("en-US")); // "1,234,567.89"
+console.log("DE format:", bigNum.toLocaleString("de-DE")); // "1.234.567,89"
+console.log("FR format:", bigNum.toLocaleString("fr-FR")); // "1 234 567,89"
+console.log("IN format:", bigNum.toLocaleString("en-IN")); // "12,34,567.89" (Indian numbering)
 
 // Currency formatting
 const price = 1234.56;
 console.log("\nCurrency formatting:");
-console.log("USD:", price.toLocaleString('en-US', { 
-  style: 'currency', 
-  currency: 'USD' 
-})); // "$1,234.56"
-console.log("EUR:", price.toLocaleString('de-DE', { 
-  style: 'currency', 
-  currency: 'EUR' 
-})); // "1.234,56 €"
-console.log("JPY:", price.toLocaleString('ja-JP', { 
-  style: 'currency', 
-  currency: 'JPY' 
-})); // "￥1,235" (no decimals for yen)
+console.log(
+  "USD:",
+  price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  })
+); // "$1,234.56"
+console.log(
+  "EUR:",
+  price.toLocaleString("de-DE", {
+    style: "currency",
+    currency: "EUR",
+  })
+); // "1.234,56 €"
+console.log(
+  "JPY:",
+  price.toLocaleString("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+  })
+); // "￥1,235" (no decimals for yen)
 
 // Percent formatting
 const percent = 0.1234;
 console.log("\nPercent formatting:");
-console.log("Percent:", percent.toLocaleString('en-US', { 
-  style: 'percent',
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1
-})); // "12.3%"
+console.log(
+  "Percent:",
+  percent.toLocaleString("en-US", {
+    style: "percent",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })
+); // "12.3%"
 
 // toString(base) - Convert to string with base
 // - Default base is 10
@@ -376,9 +397,9 @@ console.log("n.toString(36):", n.toString(36)); // "73" (base 36, uses 0-9 and a
 // Direct method call on number literal
 // - Need double dot or parentheses
 console.log("\n=== Direct Method Calls ===");
-console.log("123..toString():", 123..toString()); // "123"
+console.log("123..toString():", (123).toString()); // "123"
 console.log("(123).toString():", (123).toString()); // "123"
-console.log("123 .toString():", 123 .toString()); // "123" (space works too)
+console.log("123 .toString():", (123).toString()); // "123" (space works too)
 // console.log("123.toString():", 123.toString()); // ❌ Syntax error (dot seen as decimal)
 
 // Number.parseFloat() and Number.parseInt() (ES6)
@@ -387,7 +408,10 @@ console.log("123 .toString():", 123 .toString()); // "123" (space works too)
 // - Avoids global namespace pollution
 console.log("\n=== Number.parseFloat() / Number.parseInt() ===");
 console.log('Number.parseFloat("123.45"):', Number.parseFloat("123.45")); // 123.45
-console.log('Number.parseFloat("  456.78  "):', Number.parseFloat("  456.78  ")); // 456.78
+console.log(
+  'Number.parseFloat("  456.78  "):',
+  Number.parseFloat("  456.78  ")
+); // 456.78
 console.log('Number.parseInt("123", 10):', Number.parseInt("123", 10)); // 123
 console.log('Number.parseInt("FF", 16):', Number.parseInt("FF", 16)); // 255
 
@@ -616,67 +640,67 @@ console.log("Math.atanh(0.5):", Math.atanh(0.5)); // 0.549...
 console.log("\n=== Intl.NumberFormat ===");
 
 // Currency formatting with options
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
   minimumFractionDigits: 2,
-  maximumFractionDigits: 2
+  maximumFractionDigits: 2,
 });
 console.log("Formatted currency:", formatter.format(1234.5)); // "$1,234.50"
 
 // Different currencies
-const eurFormatter = new Intl.NumberFormat('de-DE', {
-  style: 'currency',
-  currency: 'EUR'
+const eurFormatter = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
 });
 console.log("EUR format:", eurFormatter.format(1234.56)); // "1.234,56 €"
 
-const jpyFormatter = new Intl.NumberFormat('ja-JP', {
-  style: 'currency',
-  currency: 'JPY'
+const jpyFormatter = new Intl.NumberFormat("ja-JP", {
+  style: "currency",
+  currency: "JPY",
 });
 console.log("JPY format:", jpyFormatter.format(1234.56)); // "￥1,235" (no decimals)
 
 // Unit formatting
-const unitFormatter = new Intl.NumberFormat('en-US', {
-  style: 'unit',
-  unit: 'kilometer-per-hour'
+const unitFormatter = new Intl.NumberFormat("en-US", {
+  style: "unit",
+  unit: "kilometer-per-hour",
 });
 console.log("Speed:", unitFormatter.format(120)); // "120 km/h"
 
-const tempFormatter = new Intl.NumberFormat('en-US', {
-  style: 'unit',
-  unit: 'celsius'
+const tempFormatter = new Intl.NumberFormat("en-US", {
+  style: "unit",
+  unit: "celsius",
 });
 console.log("Temperature:", tempFormatter.format(25)); // "25°C"
 
 // Percent formatting
-const percentFormatter = new Intl.NumberFormat('en-US', {
-  style: 'percent',
+const percentFormatter = new Intl.NumberFormat("en-US", {
+  style: "percent",
   minimumFractionDigits: 1,
-  maximumFractionDigits: 1
+  maximumFractionDigits: 1,
 });
 console.log("Percent:", percentFormatter.format(0.1234)); // "12.3%"
 
 // Compact notation (ES2020)
-const compactFormatter = new Intl.NumberFormat('en-US', {
-  notation: 'compact',
-  compactDisplay: 'short'
+const compactFormatter = new Intl.NumberFormat("en-US", {
+  notation: "compact",
+  compactDisplay: "short",
 });
 console.log("Compact 1M:", compactFormatter.format(1000000)); // "1M"
 console.log("Compact 1.5M:", compactFormatter.format(1500000)); // "1.5M"
 console.log("Compact 1B:", compactFormatter.format(1000000000)); // "1B"
 
 // Scientific notation
-const scientificFormatter = new Intl.NumberFormat('en-US', {
-  notation: 'scientific'
+const scientificFormatter = new Intl.NumberFormat("en-US", {
+  notation: "scientific",
 });
 console.log("Scientific:", scientificFormatter.format(123456)); // "1.235E5"
 
 // Significant digits
-const sigDigitsFormatter = new Intl.NumberFormat('en-US', {
+const sigDigitsFormatter = new Intl.NumberFormat("en-US", {
   minimumSignificantDigits: 3,
-  maximumSignificantDigits: 5
+  maximumSignificantDigits: 5,
 });
 console.log("Sig digits 123:", sigDigitsFormatter.format(123)); // "123"
 console.log("Sig digits 0.00123:", sigDigitsFormatter.format(0.00123)); // "0.00123"
@@ -744,9 +768,12 @@ console.log("-10n:", -10n); // -10n (unary - works)
 // 3. Cannot use with JSON.stringify directly
 const obj = { value: 123n };
 // console.log("JSON.stringify(obj):", JSON.stringify(obj)); // ❌ TypeError
-console.log("Workaround:", JSON.stringify(obj, (key, value) =>
-  typeof value === 'bigint' ? value.toString() : value
-)); // {"value":"123"}
+console.log(
+  "Workaround:",
+  JSON.stringify(obj, (key, value) =>
+    typeof value === "bigint" ? value.toString() : value
+  )
+); // {"value":"123"}
 
 // 4. Division always truncates
 console.log("10n / 3n:", 10n / 3n); // 3n (not 3.333...)
@@ -790,8 +817,10 @@ console.log("Use Number.isNaN() to check");
 
 // Pitfall 4: MAX_SAFE_INTEGER
 console.log("\n4. MAX_SAFE_INTEGER:");
-console.log("9007199254740992 === 9007199254740993:", 
-  9007199254740992 === 9007199254740993); // true (precision lost!)
+console.log(
+  "9007199254740992 === 9007199254740993:",
+  9007199254740992 === 9007199254740993
+); // true (precision lost!)
 console.log("Use BigInt for large integers");
 
 // Pitfall 5: Math.random() is not cryptographically secure
@@ -853,7 +882,10 @@ console.log('+"123":', +"123"); // 123 (shorter)
 // 9. Check for safe integers
 console.log("\n9. Check for safe integers:");
 const bigNumSafe = 9007199254740992;
-console.log("Number.isSafeInteger(bigNumSafe):", Number.isSafeInteger(bigNumSafe)); // false
+console.log(
+  "Number.isSafeInteger(bigNumSafe):",
+  Number.isSafeInteger(bigNumSafe)
+); // false
 console.log("Use BigInt if not safe");
 
 // 10. Use numeric separators for readability

@@ -70,7 +70,7 @@ console.log("\n=== TypedArray Views ===");
 const buf = new ArrayBuffer(8);
 const int8View = new Int8Array(buf);
 const int16View = new Int16Array(buf);
-console.log("Int8 length:", int8View.length);   // 8 elements (8 bytes / 1 byte each)
+console.log("Int8 length:", int8View.length); // 8 elements (8 bytes / 1 byte each)
 console.log("Int16 length:", int16View.length); // 4 elements (8 bytes / 2 bytes each)
 
 // 2. From length
@@ -87,16 +87,16 @@ console.log("Copied:", copied); // [10, 20, 30, 40]
 
 // TypedArray properties
 console.log("\nTypedArray properties:");
-console.log("buffer:", uint8.buffer);           // Underlying ArrayBuffer
-console.log("byteLength:", uint8.byteLength);   // 4 bytes
-console.log("byteOffset:", uint8.byteOffset);   // 0 (start position in buffer)
-console.log("length:", uint8.length);           // 4 elements
+console.log("buffer:", uint8.buffer); // Underlying ArrayBuffer
+console.log("byteLength:", uint8.byteLength); // 4 bytes
+console.log("byteOffset:", uint8.byteOffset); // 0 (start position in buffer)
+console.log("length:", uint8.length); // 4 elements
 console.log("BYTES_PER_ELEMENT:", Uint8Array.BYTES_PER_ELEMENT); // 1
 
 // Uint8ClampedArray - Special clamping behavior
 const clamped = new Uint8ClampedArray(4);
-clamped[0] = 300;  // Clamped to 255
-clamped[1] = -10;  // Clamped to 0
+clamped[0] = 300; // Clamped to 255
+clamped[1] = -10; // Clamped to 0
 console.log("Clamped array:", clamped); // [255, 0, 0, 0]
 
 // BigInt TypedArrays (ES2020)
@@ -118,13 +118,13 @@ const dataBuffer = new ArrayBuffer(8);
 const dataView = new DataView(dataBuffer);
 
 // Writing different types
-dataView.setInt8(0, 127);           // 1 byte at offset 0
-dataView.setInt16(1, 32767);        // 2 bytes at offset 1
-dataView.setFloat32(3, 3.14);       // 4 bytes at offset 3
+dataView.setInt8(0, 127); // 1 byte at offset 0
+dataView.setInt16(1, 32767); // 2 bytes at offset 1
+dataView.setFloat32(3, 3.14); // 4 bytes at offset 3
 
 // Reading back
-console.log("Int8 at 0:", dataView.getInt8(0));       // 127
-console.log("Int16 at 1:", dataView.getInt16(1));     // 32767
+console.log("Int8 at 0:", dataView.getInt8(0)); // 127
+console.log("Int16 at 1:", dataView.getInt16(1)); // 32767
 console.log("Float32 at 3:", dataView.getFloat32(3)); // 3.14...
 
 // Endianness - Byte order
@@ -137,7 +137,7 @@ const endianView = new DataView(endianBuffer);
 endianView.setUint32(0, 0x12345678, false); // Big-endian
 console.log("Big-endian bytes:", new Uint8Array(endianBuffer)); // [0x12, 0x34, 0x56, 0x78]
 
-endianView.setUint32(0, 0x12345678, true);  // Little-endian
+endianView.setUint32(0, 0x12345678, true); // Little-endian
 console.log("Little-endian bytes:", new Uint8Array(endianBuffer)); // [0x78, 0x56, 0x34, 0x12]
 
 // When to use DataView vs TypedArray:
@@ -153,13 +153,31 @@ console.log("\n=== TypedArray Methods ===");
 const numbers = new Uint8Array([1, 2, 3, 4, 5]);
 
 // Shared with regular arrays:
-console.log("map:", numbers.map(x => x * 2));        // [2, 4, 6, 8, 10]
-console.log("filter:", numbers.filter(x => x > 2));  // [3, 4, 5]
-console.log("find:", numbers.find(x => x > 3));      // 4
-console.log("reduce:", numbers.reduce((a, b) => a + b, 0)); // 15
+console.log(
+  "map:",
+  numbers.map(x => x * 2)
+); // [2, 4, 6, 8, 10]
+console.log(
+  "filter:",
+  numbers.filter(x => x > 2)
+); // [3, 4, 5]
+console.log(
+  "find:",
+  numbers.find(x => x > 3)
+); // 4
+console.log(
+  "reduce:",
+  numbers.reduce((a, b) => a + b, 0)
+); // 15
 numbers.forEach(x => console.log("forEach:", x));
-console.log("some:", numbers.some(x => x > 4));      // true
-console.log("every:", numbers.every(x => x > 0));    // true
+console.log(
+  "some:",
+  numbers.some(x => x > 4)
+); // true
+console.log(
+  "every:",
+  numbers.every(x => x > 0)
+); // true
 console.log("sort:", new Uint8Array([3, 1, 2]).sort()); // [1, 2, 3]
 
 // Methods NOT available (would change size):
@@ -265,7 +283,9 @@ console.log("Shared Int32Array length:", sharedArray.length);
 console.log("\nSecurity requirements (browser):");
 console.log("- Cross-Origin-Opener-Policy: same-origin");
 console.log("- Cross-Origin-Embedder-Policy: require-corp");
-console.log("Note: Cross-Origin-Resource-Policy (CORP) is a different security feature");
+console.log(
+  "Note: Cross-Origin-Resource-Policy (CORP) is a different security feature"
+);
 console.log("Reason: Prevent Spectre-style attacks");
 
 // Atomics - Thread-safe operations on SharedArrayBuffer
@@ -282,8 +302,12 @@ console.log("- Atomics.sub(typedArray, index, value): Subtract and return old");
 console.log("- Atomics.and(typedArray, index, value): Bitwise AND");
 console.log("- Atomics.or(typedArray, index, value): Bitwise OR");
 console.log("- Atomics.xor(typedArray, index, value): Bitwise XOR");
-console.log("- Atomics.exchange(typedArray, index, value): Swap and return old");
-console.log("- Atomics.compareExchange(typedArray, index, expected, replacement): Conditional swap");
+console.log(
+  "- Atomics.exchange(typedArray, index, value): Swap and return old"
+);
+console.log(
+  "- Atomics.compareExchange(typedArray, index, expected, replacement): Conditional swap"
+);
 
 // Example: Atomic operations
 sharedArray[0] = 10;
@@ -311,8 +335,12 @@ console.log("Current value:", sharedArray[0]); // 100 if was 25, else unchanged
 
 // Wait/wake operations for synchronization
 console.log("\nSynchronization operations:");
-console.log("- Atomics.wait(typedArray, index, expected, timeout): Block until value changes");
-console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents");
+console.log(
+  "- Atomics.wait(typedArray, index, expected, timeout): Block until value changes"
+);
+console.log(
+  "- Atomics.notify(typedArray, index, count): Wake up waiting agents"
+);
 
 /*
  * verification:
@@ -322,7 +350,9 @@ console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents"
  *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
-console.log("- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)");
+console.log(
+  "- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)"
+);
 
 console.log("\nUse cases:");
 console.log("- Multi-threaded computation (Web Workers)");
@@ -332,9 +362,13 @@ console.log("- Parallel data processing");
 console.log("- Real-time collaborative editing");
 
 console.log("\n⚠️ NOTE:");
-console.log("- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)");
+console.log(
+  "- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)"
+);
 console.log("- Not for Float32Array or Float64Array");
-console.log("- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer");
+console.log(
+  "- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer"
+);
 
 // ============================================
 // Section 7: Encoding API (TextEncoder/TextDecoder)
@@ -344,10 +378,10 @@ console.log("\n=== Encoding API ===");
 
 /**
  * Encoding API - Convert between text and binary data
- * 
+ *
  * TextEncoder: String → Uint8Array (UTF-8 encoding)
  * TextDecoder: Uint8Array → String (various encodings)
- * 
+ *
  * Use Cases:
  * - File I/O with text content
  * - Network protocols with text data
@@ -391,7 +425,7 @@ console.log("  '🌍' - 1 char, 4 bytes (emoji)");
 const encodeBuffer = new Uint8Array(50);
 const encodeResult = encoder.encodeInto("Hello", encodeBuffer);
 console.log("\nencodeInto() result:");
-console.log("  read:", encodeResult.read);       // Characters read from source
+console.log("  read:", encodeResult.read); // Characters read from source
 console.log("  written:", encodeResult.written); // Bytes written to buffer
 console.log("  buffer:", encodeBuffer.slice(0, encodeResult.written));
 
@@ -410,9 +444,9 @@ const decoded = decoder.decode(bytes);
 console.log("Decoded text:", decoded);
 
 // Decode with different encodings
-const utf8Decoder = new TextDecoder('utf-8');
-const utf16Decoder = new TextDecoder('utf-16');
-const latin1Decoder = new TextDecoder('iso-8859-1');
+const utf8Decoder = new TextDecoder("utf-8");
+const utf16Decoder = new TextDecoder("utf-16");
+const latin1Decoder = new TextDecoder("iso-8859-1");
 
 console.log("\nSupported encodings:");
 console.log("  - utf-8 (default)");
@@ -423,18 +457,32 @@ console.log("  - and many more...");
 
 // Decode special characters
 const specialBytes = new Uint8Array([
-  72, 101, 108, 108, 111, 32,           // "Hello "
-  228, 184, 150, 231, 149, 140, 32,     // "世界 "
-  240, 159, 140, 141                     // "🌍"
+  72,
+  101,
+  108,
+  108,
+  111,
+  32, // "Hello "
+  228,
+  184,
+  150,
+  231,
+  149,
+  140,
+  32, // "世界 "
+  240,
+  159,
+  140,
+  141, // "🌍"
 ]);
 const specialDecoded = decoder.decode(specialBytes);
 console.log("\nDecoded special chars:", specialDecoded);
 
 // Streaming decode (for large data)
-const streamDecoder = new TextDecoder('utf-8', { stream: true });
+const streamDecoder = new TextDecoder("utf-8", { stream: true });
 
 const chunk1 = new Uint8Array([72, 101, 108]); // "Hel"
-const chunk2 = new Uint8Array([108, 111]);     // "lo"
+const chunk2 = new Uint8Array([108, 111]); // "lo"
 
 const part1 = streamDecoder.decode(chunk1, { stream: true });
 const part2 = streamDecoder.decode(chunk2, { stream: false });
@@ -445,10 +493,10 @@ console.log("  Chunk 2:", part2);
 console.log("  Combined:", part1 + part2);
 
 // Error handling options
-const strictDecoder = new TextDecoder('utf-8', { fatal: true });
-const lenientDecoder = new TextDecoder('utf-8', { fatal: false });
+const strictDecoder = new TextDecoder("utf-8", { fatal: true });
+const lenientDecoder = new TextDecoder("utf-8", { fatal: false });
 
-const invalidBytes = new Uint8Array([0xFF, 0xFE]); // Invalid UTF-8
+const invalidBytes = new Uint8Array([0xff, 0xfe]); // Invalid UTF-8
 
 try {
   strictDecoder.decode(invalidBytes);
@@ -532,7 +580,7 @@ function base64Encode(text) {
 
 function base64Decode(base64) {
   const binString = atob(base64);
-  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+  const bytes = Uint8Array.from(binString, m => m.codePointAt(0));
   const decoder = new TextDecoder();
   return decoder.decode(bytes);
 }
@@ -591,17 +639,17 @@ function convertEncoding(bytes, fromEncoding, toEncoding) {
   // Decode from source encoding
   const decoder = new TextDecoder(fromEncoding);
   const text = decoder.decode(bytes);
-  
+
   // Encode to target encoding
   const encoder = new TextEncoder(); // Always UTF-8
   const converted = encoder.encode(text);
-  
+
   return converted;
 }
 
 // Example: Latin1 to UTF-8
 const latin1Bytes = new Uint8Array([72, 233, 108, 108, 111]); // "Héllo" in Latin1
-const utf8Bytes = convertEncoding(latin1Bytes, 'iso-8859-1', 'utf-8');
+const utf8Bytes = convertEncoding(latin1Bytes, "iso-8859-1", "utf-8");
 console.log("Latin1 bytes:", latin1Bytes);
 console.log("UTF-8 bytes:", utf8Bytes);
 console.log("Decoded:", new TextDecoder().decode(utf8Bytes));
@@ -609,22 +657,22 @@ console.log("Decoded:", new TextDecoder().decode(utf8Bytes));
 // Detect encoding (heuristic)
 function detectEncoding(bytes) {
   // Check for BOM (Byte Order Mark)
-  if (bytes[0] === 0xEF && bytes[1] === 0xBB && bytes[2] === 0xBF) {
-    return 'utf-8';
+  if (bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf) {
+    return "utf-8";
   }
-  if (bytes[0] === 0xFE && bytes[1] === 0xFF) {
-    return 'utf-16be';
+  if (bytes[0] === 0xfe && bytes[1] === 0xff) {
+    return "utf-16be";
   }
-  if (bytes[0] === 0xFF && bytes[1] === 0xFE) {
-    return 'utf-16le';
+  if (bytes[0] === 0xff && bytes[1] === 0xfe) {
+    return "utf-16le";
   }
-  
+
   // Default to UTF-8
-  return 'utf-8';
+  return "utf-8";
 }
 
 console.log("\nEncoding detection:");
-const utf8BOM = new Uint8Array([0xEF, 0xBB, 0xBF, 72, 101, 108, 108, 111]);
+const utf8BOM = new Uint8Array([0xef, 0xbb, 0xbf, 72, 101, 108, 108, 111]);
 console.log("  Detected:", detectEncoding(utf8BOM));
 
 // ============================================
@@ -688,7 +736,7 @@ console.log("- Apply filters, effects");
 // const ctx = canvas.getContext('2d');
 // const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 // const pixels = imageData.data; // Uint8ClampedArray [R, G, B, A, R, G, B, A, ...]
-// 
+//
 // // Invert colors
 // for (let i = 0; i < pixels.length; i += 4) {
 //   pixels[i] = 255 - pixels[i];     // Red
@@ -696,7 +744,7 @@ console.log("- Apply filters, effects");
 //   pixels[i+2] = 255 - pixels[i+2]; // Blue
 //   // pixels[i+3] is alpha, leave unchanged
 // }
-// 
+//
 // ctx.putImageData(imageData, 0, 0);
 
 // Application 2: Audio processing (Web Audio API)
@@ -709,7 +757,7 @@ console.log("- Apply effects, filters");
 // const audioContext = new AudioContext();
 // const buffer = audioContext.createBuffer(1, 44100, 44100); // 1 second
 // const channelData = buffer.getChannelData(0); // Float32Array
-// 
+//
 // // Generate sine wave
 // for (let i = 0; i < channelData.length; i++) {
 //   channelData[i] = Math.sin(2 * Math.PI * 440 * i / 44100); // 440 Hz
@@ -723,14 +771,14 @@ console.log("- More efficient than JSON for large data");
 // Example:
 // const ws = new WebSocket('ws://example.com');
 // ws.binaryType = 'arraybuffer';
-// 
+//
 // ws.onmessage = (event) => {
 //   if (event.data instanceof ArrayBuffer) {
 //     const view = new Uint8Array(event.data);
 //     console.log('Received binary data:', view);
 //   }
 // };
-// 
+//
 // // Send binary data
 // const data = new Uint8Array([1, 2, 3, 4]);
 // ws.send(data.buffer);
@@ -772,14 +820,14 @@ function parseHeader(buffer) {
     version: view.getUint8(0),
     type: view.getUint8(1),
     length: view.getUint16(2, false), // Big-endian
-    timestamp: view.getUint32(4, false)
+    timestamp: view.getUint32(4, false),
   };
 }
 
 const headerBuffer = new ArrayBuffer(8);
 const headerView = new DataView(headerBuffer);
-headerView.setUint8(0, 1);           // version
-headerView.setUint8(1, 2);           // type
+headerView.setUint8(0, 1); // version
+headerView.setUint8(1, 2); // type
 headerView.setUint16(2, 1024, false); // length
 headerView.setUint32(4, Date.now(), false); // timestamp
 

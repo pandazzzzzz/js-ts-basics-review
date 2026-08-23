@@ -44,7 +44,7 @@ if (typeof Math.sumPrecise === "function") {
   const transactions: Transaction[] = [
     { amount: 1.99, description: "Item 1" },
     { amount: 2.99, description: "Item 2" },
-    { amount: 3.99, description: "Item 3" }
+    { amount: 3.99, description: "Item 3" },
   ];
 
   const total: number = Math.sumPrecise(transactions.map(t => t.amount));
@@ -76,7 +76,11 @@ async function* generateNumbers(): AsyncGenerator<number> {
 // const syncPromise = Array.fromAsync([1, 2, 3]); // Promise<number[]>
 
 // Array of promises
-const promiseArray: Promise<number>[] = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
+const promiseArray: Promise<number>[] = [
+  Promise.resolve(1),
+  Promise.resolve(2),
+  Promise.resolve(3),
+];
 // const resolved = await Array.fromAsync(promiseArray); // number[]
 
 // Type-safe async processing
@@ -148,7 +152,10 @@ if (typeof Uint8Array.prototype.toBase64 === "function") {
     omitPadding?: boolean;
   }
 
-  const urlSafeBase64: string = data.toBase64({ urlSafe: true, omitPadding: true });
+  const urlSafeBase64: string = data.toBase64({
+    urlSafe: true,
+    omitPadding: true,
+  });
   console.log("URL-safe base64:", urlSafeBase64); // "SGVsbG8"
 
   // Hex
@@ -174,7 +181,9 @@ if (typeof Uint8Array.prototype.toBase64 === "function") {
     }
   }
 } else {
-  console.log("⚠️ Uint8Array.toBase64/toHex is not available in this Node.js version");
+  console.log(
+    "⚠️ Uint8Array.toBase64/toHex is not available in this Node.js version"
+  );
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -186,7 +195,10 @@ console.log("\n--- 5. Map.prototype.upsert() ---\n");
 // Map.upsert is ES2026 (not in Node 24). Feature-detect before calling.
 if (typeof Map.prototype.upsert === "function") {
   // Map.upsert preserves type information
-  const map: Map<string, number> = new Map([["a", 1], ["b", 2]]);
+  const map: Map<string, number> = new Map([
+    ["a", 1],
+    ["b", 2],
+  ]);
 
   // Update existing key: update function receives number, returns number
   const aValue: number = map.upsert("a", 10, (old: number, key: string) => {
@@ -196,7 +208,7 @@ if (typeof Map.prototype.upsert === "function") {
   console.log("aValue:", aValue); // 2
 
   // Insert new key: insert value must match map value type
-  const cValue: number = map.upsert("c", 3, (old) => old * 2);
+  const cValue: number = map.upsert("c", 3, old => old * 2);
   console.log("cValue:", cValue); // 3
 
   // Type safety: insert value must match map type
@@ -218,7 +230,9 @@ if (typeof Map.prototype.upsert === "function") {
   incrementCounter("clicks");
   console.log("Counters:", Object.fromEntries(counters)); // { views: 2, clicks: 1 }
 } else {
-  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
+  console.log(
+    "⚠️ Map.prototype.upsert is not available in this Node.js version"
+  );
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -232,7 +246,12 @@ interface ReviverContext {
   source: string;
 }
 
-type ReviverFn = (this: any, key: string, value: any, context: ReviverContext) => any;
+type ReviverFn = (
+  this: any,
+  key: string,
+  value: any,
+  context: ReviverContext
+) => any;
 
 // Parse numbers larger than MAX_SAFE_INTEGER as BigInt
 const json = `{"small": 123, "large": 9007199254740993}`;
@@ -294,14 +313,17 @@ if (typeof Iterator.prototype.concat === "function") {
   console.log("Combined strings:", allStrings.toArray()); // ["a", "b", "c", "d"]
 
   // Chaining with helper methods preserves type
-  const result: number[] = [1, 2, 3].values()
+  const result: number[] = [1, 2, 3]
+    .values()
     .concat([4, 5, 6].values())
     .filter(n => n % 2 === 0)
     .map(n => n * 2)
     .toArray();
   console.log("Chained result:", result); // [4, 8, 12]
 } else {
-  console.log("⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version");
+  console.log(
+    "⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version"
+  );
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -317,14 +339,19 @@ type UserData = { name: string; email: string };
 const userMap = new Map<UserId, UserData>();
 
 function updateUser(id: UserId, data: Partial<UserData>): UserData {
-  return userMap.upsert(id, { name: "New User", email: "new@example.com", ...data }, (existing) => ({
-    ...existing,
-    ...data
-  }));
+  return userMap.upsert(
+    id,
+    { name: "New User", email: "new@example.com", ...data },
+    existing => ({
+      ...existing,
+      ...data,
+    })
+  );
 }
 
 // 2. Narrowing with Error.isError
-type Result<T> = { success: true; data: T } | { success: false; error: unknown };
+type Result<T> =
+  { success: true; data: T } | { success: false; error: unknown };
 
 function handleResult<T>(result: Result<T>): void {
   if (!result.success) {
@@ -358,6 +385,8 @@ console.log("\n--- 9. tsconfig.json Configuration ---\n");
 console.log("To use ES2026 features in TypeScript:");
 console.log('1. Set "target": "ES2026" or higher (TypeScript 5.7+)');
 console.log('2. Add "ES2026" to "lib" array if target is lower');
-console.log('3. For async iterators: Ensure "downlevelIteration" is enabled if targeting older runtimes');
+console.log(
+  '3. For async iterators: Ensure "downlevelIteration" is enabled if targeting older runtimes'
+);
 
 console.log("\n✅ ES2026 TypeScript comparison completed");

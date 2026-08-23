@@ -52,11 +52,14 @@ interface User {
 const users: User[] = [
   { name: "Alice", age: 30 },
   { name: "Bob", age: 25 },
-  { name: "Charlie", age: 35 }
+  { name: "Charlie", age: 35 },
 ];
 
 const sortedByAge: User[] = users.toSorted((a, b) => a.age - b.age);
-console.log("Sorted by age:", sortedByAge.map(u => `${u.name} (${u.age})`));
+console.log(
+  "Sorted by age:",
+  sortedByAge.map(u => `${u.name} (${u.age})`)
+);
 
 // ============================================
 // 2. findLast() and findLastIndex()
@@ -79,12 +82,14 @@ const userList: User2[] = [
   { name: "Alice", role: "user" },
   { name: "Bob", role: "admin" },
   { name: "Charlie", role: "user" },
-  { name: "Diana", role: "admin" }
+  { name: "Diana", role: "admin" },
 ];
 
-const lastAdmin = userList.findLast((user): user is User2 & { role: "admin" } => {
-  return user.role === "admin";
-});
+const lastAdmin = userList.findLast(
+  (user): user is User2 & { role: "admin" } => {
+    return user.role === "admin";
+  }
+);
 // lastAdmin is User2 & { role: "admin" } | undefined
 
 if (lastAdmin) {
@@ -140,7 +145,10 @@ weakSet.add(sym);
 console.log("WeakSet has sym:", weakSet.has(sym)); // true
 
 // Use case: Metadata storage with unique symbol keys
-const metadataMap = new WeakMap<symbol, { createdAt: Date; description: string }>();
+const metadataMap = new WeakMap<
+  symbol,
+  { createdAt: Date; description: string }
+>();
 
 function createEntity(description: string): symbol {
   const id = Symbol("entity");
@@ -148,7 +156,9 @@ function createEntity(description: string): symbol {
   return id;
 }
 
-function getMetadata(id: symbol): { createdAt: Date; description: string } | undefined {
+function getMetadata(
+  id: symbol
+): { createdAt: Date; description: string } | undefined {
   return metadataMap.get(id);
 }
 
@@ -171,7 +181,11 @@ const newArray: readonly number[] = readonlyArray.toSorted(); // ✅ Returns new
 
 // 2. Exact types for array operations
 const tuple: [number, string, boolean] = [1, "hello", true];
-const reversedTuple: [boolean, string, number] = tuple.toReversed() as [boolean, string, number];
+const reversedTuple: [boolean, string, number] = tuple.toReversed() as [
+  boolean,
+  string,
+  number,
+];
 console.log("Reversed tuple:", reversedTuple);
 
 // 3. Type-safe state updates (common in React/Redux)
@@ -182,11 +196,18 @@ interface AppState {
 
 const initialState: AppState = {
   users: [{ name: "Alice", age: 30 }],
-  currentUser: null
+  currentUser: null,
 };
 
-function updateUserAt(state: AppState, index: number, updates: Partial<User>): AppState {
-  const newUsers = state.users.with(index, { ...state.users[index], ...updates });
+function updateUserAt(
+  state: AppState,
+  index: number,
+  updates: Partial<User>
+): AppState {
+  const newUsers = state.users.with(index, {
+    ...state.users[index],
+    ...updates,
+  });
   return { ...state, users: newUsers };
 }
 
@@ -217,7 +238,7 @@ console.log("\n--- 6. tsconfig.json Configuration ---\n");
 console.log("To use ES2023 features in TypeScript:");
 console.log('1. Set "target": "ES2023" or higher');
 console.log('2. Add "ES2023" to "lib" array if target is lower');
-console.log('3. For immutable array methods: Ensure TypeScript 5.0+');
-console.log('4. For Symbols in WeakMap: Ensure TypeScript 5.1+');
+console.log("3. For immutable array methods: Ensure TypeScript 5.0+");
+console.log("4. For Symbols in WeakMap: Ensure TypeScript 5.1+");
 
 console.log("\n✅ ES2023 TypeScript comparison completed");

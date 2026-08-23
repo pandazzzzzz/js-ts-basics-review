@@ -642,6 +642,8 @@ console.log("7. Use explicit this parameter for regular functions\n");
 console.log("❌ DON'T:\n");
 console.log("1. Don't use 'as any' to bypass type checking");
 console.log("2. Don't ignore event.target type assertion needs");
-console.log("3. Don't use arrow functions when you need this to be the element");
+console.log(
+  "3. Don't use arrow functions when you need this to be the element"
+);
 console.log("4. Don't forget to handle null returns from query methods");
 console.log("5. Don't create untyped custom events without interfaces\n");

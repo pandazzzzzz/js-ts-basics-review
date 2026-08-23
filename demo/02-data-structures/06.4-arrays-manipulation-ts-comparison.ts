@@ -88,7 +88,11 @@ console.log("  tuple[0]:", tuple[0]); // string
 console.log("  tuple[1]:", tuple[1]); // number
 
 // Named tuple elements
-const namedTuple: [name: string, age: number, active: boolean] = ["Alice", 30, true];
+const namedTuple: [name: string, age: number, active: boolean] = [
+  "Alice",
+  30,
+  true,
+];
 console.log("  named tuple:", namedTuple);
 
 // Example 6: Spread with tuples
@@ -114,7 +118,7 @@ console.log("  ReadonlyArray<number>:", readonlyArray);
 console.log("\n8. as const for literal types:");
 const config = {
   port: 8080,
-  host: "localhost"
+  host: "localhost",
 } as const;
 console.log("  config.port:", config.port); // Type is 8080 (not number)
 console.log("  config.host:", config.host); // Type is "localhost" (not string)

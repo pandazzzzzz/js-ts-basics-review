@@ -93,7 +93,7 @@ export interface MathConstants {
 export const mathConstants: MathConstants = {
   PI: 3.14159,
   E: 2.71828,
-  GoldenRatio: 1.61803
+  GoldenRatio: 1.61803,
 };
 
 // Export mapped type
@@ -117,7 +117,7 @@ const defaultExport: {
 } = {
   name: "MathLib",
   version: "1.0.0",
-  calculate: add
+  calculate: add,
 };
 
 export default defaultExport;
@@ -150,7 +150,7 @@ export const MathUtils = {
   subtract,
   PI,
   E,
-  constants: mathConstants
+  constants: mathConstants,
 };
 
 console.log("\n=== Namespace Exports ===");
@@ -174,7 +174,9 @@ declare global {
 }
 
 console.log("\n=== Module Augmentation ===");
-console.log("Module augmentation requires target module to have TypeScript types");
+console.log(
+  "Module augmentation requires target module to have TypeScript types"
+);
 
 // ============================================================================
 // 7. DECLARATION FILES (.d.ts)
@@ -203,14 +205,17 @@ interface LocalConfig {
 export function createConfig(config: LocalConfig): LocalConfig {
   return {
     ...config,
-    retries: config.retries ?? 3
+    retries: config.retries ?? 3,
   };
 }
 
 export type ConfigOption = keyof LocalConfig;
 
 console.log("\n=== Declaration Files ===");
-const config = createConfig({ apiUrl: "https://api.example.com", timeout: 5000 });
+const config = createConfig({
+  apiUrl: "https://api.example.com",
+  timeout: 5000,
+});
 console.log("Created config:", config);
 
 const option: ConfigOption = "apiUrl";
@@ -226,7 +231,7 @@ async function loadModule(): Promise<void> {
 
   // Dynamic import with type assertion
   // @ts-ignore — demo imports the untyped JS companion file (no @types available)
-  const module = await import("./32-modules.js") as {
+  const module = (await import("./32-modules.js")) as {
     default?: unknown;
     [key: string]: unknown;
   };
@@ -272,7 +277,7 @@ export function createRepository<T, ID = number>(
     },
     async delete(id: ID): Promise<boolean> {
       return entities.delete(id);
-    }
+    },
   };
 }
 
@@ -285,12 +290,15 @@ interface User {
 
 const userMap = new Map<number, User>([
   [1, { id: 1, name: "Alice" }],
-  [2, { id: 2, name: "Bob" }]
+  [2, { id: 2, name: "Bob" }],
 ]);
 
 const userRepository = createRepository<User>(userMap);
 userRepository.findAll().then(users => {
-  console.log("Users:", users.map(u => u.name));
+  console.log(
+    "Users:",
+    users.map(u => u.name)
+  );
 });
 
 // ============================================================================
@@ -301,7 +309,7 @@ userRepository.findAll().then(users => {
 export const API_ENDPOINTS = {
   users: "/api/users",
   posts: "/api/posts",
-  comments: "/api/comments"
+  comments: "/api/comments",
 } as const;
 
 // Type is now:
@@ -315,11 +323,11 @@ export const HTTP_STATUS = {
   OK: 200,
   CREATED: 201,
   NOT_FOUND: 404,
-  SERVER_ERROR: 500
+  SERVER_ERROR: 500,
 } as const;
 
 // Inferred type preserves literal values
-type HttpStatus = typeof HTTP_STATUS[keyof typeof HTTP_STATUS];
+type HttpStatus = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS];
 // Type is: 200 | 201 | 404 | 500
 
 console.log("\n=== Const Assertions ===");
@@ -345,13 +353,13 @@ export const routes = {
   getUsers: {
     path: "/users",
     method: "GET" as const,
-    handler: "getUsers"
+    handler: "getUsers",
   },
   createUser: {
     path: "/users",
     method: "POST" as const,
-    handler: "createUser"
-  }
+    handler: "createUser",
+  },
 } satisfies Record<string, RouteConfig>;
 
 // Type is preserved with literal values
@@ -373,7 +381,7 @@ console.log("Route method:", routes.getUsers.method); // Type: "GET"
 // Modern ES modules prefer:
 export const esModuleExport = {
   name: "ESModule",
-  version: "1.0.0"
+  version: "1.0.0",
 };
 
 console.log("\n=== Export Equals ===");
@@ -543,12 +551,12 @@ export const MathLibrary = {
   constants: mathConstants,
   operations: {
     add,
-    subtract
+    subtract,
   },
   types: {
     Calculator: TypedCalculator,
-    Repository: createRepository
-  }
+    Repository: createRepository,
+  },
 };
 
 console.log("\n=== Barrel Exports ===");

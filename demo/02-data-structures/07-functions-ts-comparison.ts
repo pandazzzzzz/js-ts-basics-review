@@ -38,7 +38,6 @@ function explicitReturn(x: number): number {
 // - Better documentation
 // - Catches errors earlier
 
-
 // ============================================================================
 // 2. OPTIONAL AND DEFAULT PARAMETERS
 // ============================================================================
@@ -65,9 +64,9 @@ console.log(tsGreetDefault("Bob", "Hi")); // Hi, Bob!
 
 // ⚠️ CONFUSION POINT: Optional vs Default vs Undefined
 function confusingParams(
-  optional?: string,        // Can be omitted or undefined
-  withDefault: string = "default",  // Has default value
-  nullable: string | undefined = undefined  // Explicitly nullable
+  optional?: string, // Can be omitted or undefined
+  withDefault: string = "default", // Has default value
+  nullable: string | undefined = undefined // Explicitly nullable
 ): void {
   console.log({ optional, withDefault, nullable });
 }
@@ -79,7 +78,6 @@ confusingParams(undefined, undefined, undefined); // Same result
 // - Use optional (?) for parameters that can be omitted
 // - Use default values for parameters with fallback values
 // - Use union with undefined for explicitly nullable parameters
-
 
 // ============================================================================
 // 3. REST PARAMETERS WITH TYPES
@@ -107,7 +105,6 @@ console.log(tsSum(1, 2, 3, 4, 5)); // 15
 function typedRest(first: string, ...rest: number[]): void {
   console.log(`First: ${first}, Rest: ${rest}`);
 }
-
 
 // ============================================================================
 // 4. FUNCTION OVERLOADS (TS-Only Feature)
@@ -154,7 +151,6 @@ function goodOverload(x: string | number): string | number {
   return x;
 }
 
-
 // ============================================================================
 // 5. ARROW FUNCTIONS WITH TYPES
 // ============================================================================
@@ -184,7 +180,6 @@ const handleResult: Callback = (error, data) => {
   else console.log(data);
 };
 
-
 // ============================================================================
 // 6. 'this' PARAMETER (TS-Only Feature)
 // ============================================================================
@@ -211,7 +206,7 @@ const tsCounter: Counter = {
   },
   getValue(this: Counter) {
     return this.value;
-  }
+  },
 };
 
 console.log("\n=== 'this' Parameter ===");
@@ -238,11 +233,10 @@ interface SafeCounter {
 // For truly stable 'this', use arrow function in implementation:
 const safeCounter: SafeCounter = {
   value: 0,
-  increment: function() {
+  increment: function () {
     this.value++; // 'this' works when called as safeCounter.increment()
-  }
+  },
 };
-
 
 // ============================================================================
 // 7. VOID, NEVER, AND UNDEFINED RETURN TYPES
@@ -292,7 +286,6 @@ tsVoidReturn(); // No return value
 // - Use never for functions that throw or never exit
 // - Rarely use undefined as return type (void is usually better)
 
-
 // ============================================================================
 // 8. FUNCTION TYPE EXPRESSIONS
 // ============================================================================
@@ -328,7 +321,6 @@ const fn2: MethodSignature = x => x * 2;
 // Both are equivalent, but call signatures allow overloads
 
 // ✅ BEST PRACTICE: Use type aliases for reusable function types
-
 
 // ============================================================================
 // 9. GENERIC FUNCTIONS
@@ -377,7 +369,6 @@ const explicit = genericExample<string>("hello"); // T explicitly set to string
 // - Use explicit type arguments when inference fails or for clarity
 // - Use constraints (extends) to restrict generic types
 
-
 // ============================================================================
 // 10. ASYNC FUNCTIONS WITH TYPES
 // ============================================================================
@@ -423,7 +414,6 @@ async function fetchGeneric<T>(url: string): Promise<T> {
 // - Use generics for flexible async functions
 // - Handle errors with try-catch or .catch()
 
-
 // ============================================================================
 // 11. CALLBACK FUNCTIONS WITH TYPES
 // ============================================================================
@@ -440,8 +430,8 @@ function tsMap<T, U>(array: T[], callback: (item: T, index: number) => U): U[] {
 
 console.log("\n=== Callback Functions ===");
 const numbers = [1, 2, 3, 4, 5];
-const doubled = tsMap(numbers, (n) => n * 2); // Type is number[]
-const strings = tsMap(numbers, (n) => `Number: ${n}`); // Type is string[]
+const doubled = tsMap(numbers, n => n * 2); // Type is number[]
+const strings = tsMap(numbers, n => `Number: ${n}`); // Type is string[]
 
 console.log(doubled);
 console.log(strings);
@@ -450,7 +440,6 @@ console.log(strings);
 // tsMap(numbers, (n: string) => n.toUpperCase()); // ❌ Error: Type mismatch
 
 // ✅ BEST PRACTICE: Use generics for flexible callback types
-
 
 // ============================================================================
 // 12. FUNCTION DECLARATIONS VS EXPRESSIONS IN TS
@@ -464,7 +453,7 @@ function declaredFunction(x: number): number {
 }
 
 // Function expression with types
-const expressedFunction = function(x: number): number {
+const expressedFunction = function (x: number): number {
   return x * 2;
 };
 
@@ -480,7 +469,6 @@ const explicitExpression = (x: number): number => x * 2; // Return type explicit
 // - Use arrow functions for callbacks and short functions
 // - Always type function parameters
 // - Specify return types for public APIs
-
 
 // ============================================================================
 // 13. COMMON PITFALLS: JS vs TS FUNCTIONS
@@ -503,12 +491,12 @@ function goodRest(first: string, ...rest: number[]): void {
 // PITFALL 3: 'this' in arrow functions
 const obj = {
   value: 42,
-  regularMethod: function() {
+  regularMethod: function () {
     return this.value; // 'this' refers to obj
   },
   arrowMethod: () => {
     // return this.value; // ❌ Error (module scope): TS2532 'Object is possibly undefined' — arrow captures module/global this, not obj
-  }
+  },
 };
 
 console.log(obj.regularMethod()); // 42
@@ -543,7 +531,6 @@ executeCallback2(() => 42); // ✅ OK! Return value is ignored
 executeCallback2(() => "hello"); // ✅ OK! Return value is ignored
 
 // This is intentional for flexibility with callbacks
-
 
 // ============================================================================
 // 14. BEST PRACTICES SUMMARY
@@ -587,7 +574,6 @@ executeCallback2(() => "hello"); // ✅ OK! Return value is ignored
 10. Implementation signature must cover all overloads
 */
 
-
 // ============================================================================
 // 15. ADVANCED: FUNCTION TYPES AND UTILITY TYPES
 // ============================================================================
@@ -614,7 +600,6 @@ console.log("Parameters:", typeof tsAdd);
 console.log("ReturnType:", typeof tsAdd);
 
 // ✅ BEST PRACTICE: Use utility types for type transformations
-
 
 // ============================================================================
 // 16. COMPARISON TABLE

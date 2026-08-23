@@ -31,37 +31,41 @@ class PerformanceMonitor {
     performance.mark(name);
   }
 
-  measure(name: string, startMark: string, endMark: string): PerformanceTiming | null {
+  measure(
+    name: string,
+    startMark: string,
+    endMark: string
+  ): PerformanceTiming | null {
     performance.measure(name, startMark, endMark);
-    const entries = performance.getEntriesByName(name, 'measure');
-    
+    const entries = performance.getEntriesByName(name, "measure");
+
     if (entries.length > 0) {
       const entry = entries[0];
       return {
         name: entry.name,
         duration: entry.duration,
-        startTime: entry.startTime
+        startTime: entry.startTime,
       };
     }
     return null;
   }
 
   getMetrics(): PerformanceTiming[] {
-    const measures = performance.getEntriesByType('measure');
+    const measures = performance.getEntriesByType("measure");
     return measures.map(entry => ({
       name: entry.name,
       duration: entry.duration,
-      startTime: entry.startTime
+      startTime: entry.startTime,
     }));
   }
 }
 
 const monitor = new PerformanceMonitor();
-monitor.mark('operation-start');
+monitor.mark("operation-start");
 // Operation
-monitor.mark('operation-end');
-const timing = monitor.measure('operation', 'operation-start', 'operation-end');
-console.log('Timing:', timing);
+monitor.mark("operation-end");
+const timing = monitor.measure("operation", "operation-start", "operation-end");
+console.log("Timing:", timing);
 
 // ============================================
 // Section 2: Debounce and Throttle - Generics
@@ -75,8 +79,8 @@ function debounce<T extends (...args: any[]) => any>(
   delay: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
-  
-  return function(this: any, ...args: Parameters<T>): void {
+
+  return function (this: any, ...args: Parameters<T>): void {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func.apply(this, args), delay);
   };
@@ -88,12 +92,12 @@ function throttle<T extends (...args: any[]) => any>(
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean = false;
-  
-  return function(this: any, ...args: Parameters<T>): void {
+
+  return function (this: any, ...args: Parameters<T>): void {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }
@@ -104,10 +108,10 @@ const searchAPI = (query: string, filters?: string[]): void => {
 };
 
 const debouncedSearch = debounce(searchAPI, 300);
-debouncedSearch('hello', ['recent']); // Type-safe
+debouncedSearch("hello", ["recent"]); // Type-safe
 
 const handleScroll = (event: Event): void => {
-  console.log('Scroll:', (event.target as Element).scrollTop);
+  console.log("Scroll:", (event.target as Element).scrollTop);
 };
 
 const throttledScroll = throttle(handleScroll, 200);
@@ -120,11 +124,11 @@ console.log("\n=== Lazy Loading - Type-Safe Imports ===\n");
 
 // Type-safe dynamic imports
 // @ts-ignore — './module' is a demo-only placeholder that does not exist on disk
-type ModuleType = typeof import('./module');
+type ModuleType = typeof import("./module");
 
 async function loadModule(): Promise<ModuleType> {
   // @ts-ignore — './module' is a demo-only placeholder that does not exist on disk
-  const module = await import('./module');
+  const module = await import("./module");
   return module;
 }
 
@@ -147,7 +151,7 @@ class LazyLoader<T> {
     this.loading = this.importFn();
     this.module = await this.loading;
     this.loading = null;
-    
+
     return this.module;
   }
 
@@ -182,11 +186,11 @@ class VirtualScroller<T> {
     this.items = items;
     this.options = {
       ...options,
-      overscan: options.overscan ?? 3
+      overscan: options.overscan ?? 3,
     };
-    this.visibleCount = Math.ceil(
-      options.containerHeight / options.itemHeight
-    ) + this.options.overscan;
+    this.visibleCount =
+      Math.ceil(options.containerHeight / options.itemHeight) +
+      this.options.overscan;
   }
 
   getVisibleItems(): { items: T[]; startIndex: number; endIndex: number } {
@@ -194,11 +198,11 @@ class VirtualScroller<T> {
       this.startIndex + this.visibleCount,
       this.items.length
     );
-    
+
     return {
       items: this.items.slice(this.startIndex, endIndex),
       startIndex: this.startIndex,
-      endIndex
+      endIndex,
     };
   }
 
@@ -219,16 +223,16 @@ interface ListItem {
 
 const items: ListItem[] = Array.from({ length: 10000 }, (_, i) => ({
   id: i,
-  name: `Item ${i}`
+  name: `Item ${i}`,
 }));
 
 const scroller = new VirtualScroller(items, {
   itemHeight: 50,
   containerHeight: 500,
-  overscan: 5
+  overscan: 5,
 });
 
-console.log('Visible items:', scroller.getVisibleItems().items.length);
+console.log("Visible items:", scroller.getVisibleItems().items.length);
 
 // ============================================
 // Section 5: Memory Optimization - Typed Cache
@@ -256,7 +260,7 @@ class TypedCache<K extends object, V> {
     if (this.cache.has(key)) {
       return this.cache.get(key)!;
     }
-    
+
     const value = compute(key);
     this.cache.set(key, value);
     return value;
@@ -277,9 +281,9 @@ interface UserStats {
 const userStatsCache = new TypedCache<User, UserStats>();
 
 function getUserStats(user: User): UserStats {
-  return userStatsCache.getOrCompute(user, (u) => ({
+  return userStatsCache.getOrCompute(user, u => ({
     posts: 0,
-    followers: 0
+    followers: 0,
   }));
 }
 
@@ -292,11 +296,14 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function(this: any, ...args: Parameters<T>): ReturnType<T> {
+  descriptor.value = function (
+    this: any,
+    ...args: Parameters<T>
+  ): ReturnType<T> {
     const key = JSON.stringify(args);
 
     if (cache.has(key)) {
-      console.log('📦 Cache hit');
+      console.log("📦 Cache hit");
       return cache.get(key)!;
     }
 

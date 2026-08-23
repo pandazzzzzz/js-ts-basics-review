@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 21-regex-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -91,7 +90,6 @@ console.log("\nEmpty pattern:");
 console.log("Empty literal:", empty1.test("")); // true
 console.log("Empty constructor:", empty2.test("")); // true
 
-
 // ============================================
 // 2. BASIC PATTERNS
 // ============================================
@@ -163,7 +161,10 @@ console.log("^hello matches 'hello world':", /^hello/.test("hello world")); // t
 console.log("^hello matches 'say hello':", /^hello/.test("say hello")); // false
 console.log("world$ matches 'hello world':", /world$/.test("hello world")); // true
 console.log("world$ matches 'world hello':", /world$/.test("world hello")); // false
-console.log("\\bword\\b matches 'a word here':", /\bword\b/.test("a word here")); // true
+console.log(
+  "\\bword\\b matches 'a word here':",
+  /\bword\b/.test("a word here")
+); // true
 console.log("\\bword\\b matches 'a wording':", /\bword\b/.test("a wording")); // false
 
 // 2.6 Full match with anchors
@@ -171,7 +172,6 @@ let exactRe = /^\d{3}-\d{4}$/;
 console.log("\nExact match:");
 console.log("Exact '123-4567':", exactRe.test("123-4567")); // true
 console.log("Exact '123-4567 extra':", exactRe.test("123-4567 extra")); // false
-
 
 // ============================================
 // 3. REGULAR EXPRESSION METHODS
@@ -272,7 +272,6 @@ console.log("Split by comma:", "a,b,c".split(/,/)); // ['a', 'b', 'c']
 console.log("Split by whitespace:", "one two   three".split(/\s+/)); // ['one', 'two', 'three']
 console.log("Split by digits:", "abc123def456".split(/\d+/)); // ['abc', 'def', '']
 
-
 // ============================================
 // 4. FLAGS
 // ============================================
@@ -323,7 +322,10 @@ console.log("With s:", /hello.world/s.test(newlineStr)); // true
 // 4.5 Combined flags
 let combined = /HELLO/gim;
 console.log("\nCombined flags (gim):");
-console.log("Find all HELLO (case insensitive):", "Hello\nhello\nHELLO".match(combined));
+console.log(
+  "Find all HELLO (case insensitive):",
+  "Hello\nhello\nHELLO".match(combined)
+);
 
 // 4.6 u flag - Unicode
 console.log("\nUnicode flag:");
@@ -336,7 +338,6 @@ let stickyRe = /foo/y;
 stickyRe.lastIndex = 6; // Start at position 6
 console.log("\nSticky flag:");
 console.log("Match at lastIndex:", stickyRe.exec(stickyStr)); // ['foo']
-
 
 // ============================================
 // 5. CAPTURING GROUPS
@@ -407,7 +408,6 @@ let duplicateRe = /\b(\w+)\s+\1\b/g;
 let dupStr = "This is is a test test";
 console.log("\nFind duplicates:");
 console.log("Duplicates:", dupStr.match(duplicateRe)); // ['is is', 'test test']
-
 
 // ============================================
 // 6. LOOKAHEAD AND LOOKBEHIND
@@ -520,8 +520,12 @@ const source = "Error at line 42: Invalid input";
 const errorRe = /line (\d+)/d;
 const errorMatch = errorRe.exec(source);
 if (errorMatch) {
-  console.log(`Found "${errorMatch[0]}" at position ${errorMatch.indices[0][0]}-${errorMatch.indices[0][1]}`);
-  console.log(`Line number "${errorMatch[1]}" at position ${errorMatch.indices[1][0]}-${errorMatch.indices[1][1]}`);
+  console.log(
+    `Found "${errorMatch[0]}" at position ${errorMatch.indices[0][0]}-${errorMatch.indices[0][1]}`
+  );
+  console.log(
+    `Line number "${errorMatch[1]}" at position ${errorMatch.indices[1][0]}-${errorMatch.indices[1][1]}`
+  );
 }
 
 // 6.9 Optimization tips
@@ -539,7 +543,6 @@ let anchored = /^\d{3}-\d{4}$/; // Better than /\d{3}-\d{4}/ for exact match
 console.log("Character class test:", charClass.test("a"));
 console.log("Non-capturing group:", "123".match(nonCapture));
 console.log("Anchored pattern:", anchored.test("123-456"));
-
 
 // ============================================
 // 7. PRACTICAL USE CASES
@@ -660,7 +663,6 @@ console.log("Cyrillic:", "Hello Привет World".match(cyrillic));
 let unicodeNameRe = /[\p{L}\p{M}\p{Z}]+/gu;
 console.log("Names:", "José María 中文".match(unicodeNameRe));
 
-
 // ============================================
 // 8. COMMON PITFALLS
 // ============================================
@@ -720,7 +722,6 @@ let goodRe2 = /^a+$/;
 console.log("\nPerformance:");
 console.log("Good pattern is fast:", goodRe2.test("aaaaaa")); // true
 
-
 // ============================================
 // 9. BEST PRACTICES
 // ============================================
@@ -775,7 +776,6 @@ console.log("\nEscaped pattern:", escapedRe.test("test.txt"));
 let exactMatchRe = /^\d+$/; // Only digits, entire string
 console.log("Anchored exact match:", exactMatchRe.test("12345")); // true
 
-
 // ============================================
 // 10. TYPESCRIPT CONSIDERATIONS
 // ============================================
@@ -819,7 +819,6 @@ if (result) {
 }
 
 console.log("\n=== Regular Expressions Demo Complete ===");
-
 
 // ============================================
 // 11. NEWER REGEXP FEATURES (ES2024 & ES2025)
@@ -892,9 +891,14 @@ if (typeof RegExp.escape === "function") {
   // Practical use: safely build a regex from user input
   const userInput = "price: $5.00 (each)";
   const safeRe = new RegExp(RegExp.escape(userInput));
-  console.log("user input match:", safeRe.test("The price: $5.00 (each) is firm")); // true
+  console.log(
+    "user input match:",
+    safeRe.test("The price: $5.00 (each) is firm")
+  ); // true
 } else {
-  console.log("RegExp.escape not supported in this runtime (needs Node 24+ / ES2025)");
+  console.log(
+    "RegExp.escape not supported in this runtime (needs Node 24+ / ES2025)"
+  );
 }
 
 // 11.3 Duplicate Named Capture Groups (ES2025)
@@ -920,7 +924,12 @@ try {
   const kvRe = /^(?:(?<key>\w+):(?<value>\w+)|(?<key>\w+)=(?<value>\w+))$/;
   const colonMatch = kvRe.exec("name:Alice");
   const eqMatch = kvRe.exec("name=Bob");
-  console.log("colon form:", colonMatch.groups.key, "=", colonMatch.groups.value); // name = Alice
+  console.log(
+    "colon form:",
+    colonMatch.groups.key,
+    "=",
+    colonMatch.groups.value
+  ); // name = Alice
   console.log("equals form:", eqMatch.groups.key, "=", eqMatch.groups.value); // name = Bob
 } catch (e) {
   console.log("Duplicate named groups not supported:", e.message);
@@ -953,7 +962,6 @@ try {
   console.log("RegExp modifiers not supported:", e.message);
 }
 
-
 // ============================================
 // SUMMARY
 // ============================================
@@ -979,7 +987,6 @@ try {
  * - Complex nested structures
  * - When string methods suffice
  */
-
 
 // ============================================
 // Cross-references

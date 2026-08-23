@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 13-scope-closures-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -44,8 +43,8 @@ let globalLet = "I am global (let)";
 const globalConst = "I am global (const)";
 
 function accessGlobal() {
-  console.log(globalVar);   // Accessible
-  console.log(globalLet);   // Accessible
+  console.log(globalVar); // Accessible
+  console.log(globalLet); // Accessible
   console.log(globalConst); // Accessible
 }
 
@@ -79,7 +78,6 @@ function strictMode() {
 }
 strictMode();
 
-
 // ============================================
 // 2. FUNCTION (LOCAL) SCOPE
 // ============================================
@@ -91,13 +89,13 @@ console.log("\n=== Function Scope Demo ===");
 
 function outerFunction() {
   var functionScoped = "I am function-scoped";
-  
+
   if (true) {
     var alsoFunctionScoped = "var ignores blocks";
   }
-  
-  console.log(functionScoped);      // Accessible
-  console.log(alsoFunctionScoped);  // Accessible (var is function-scoped)
+
+  console.log(functionScoped); // Accessible
+  console.log(alsoFunctionScoped); // Accessible (var is function-scoped)
 }
 
 outerFunction();
@@ -109,14 +107,14 @@ try {
 }
 
 // Function scope with parameters
-function greet(name) { // 'name' is function-scoped
+function greet(name) {
+  // 'name' is function-scoped
   var greeting = "Hello";
   return `${greeting}, ${name}!`;
 }
 
 console.log(greet("Alice"));
 // console.log(name); // ReferenceError
-
 
 // ============================================
 // 3. BLOCK SCOPE
@@ -130,9 +128,9 @@ if (true) {
   var varVariable = "var is function-scoped";
   let letVariable = "let is block-scoped";
   const constVariable = "const is block-scoped";
-  
-  console.log(varVariable);   // Accessible
-  console.log(letVariable);   // Accessible
+
+  console.log(varVariable); // Accessible
+  console.log(letVariable); // Accessible
   console.log(constVariable); // Accessible
 }
 
@@ -174,7 +172,6 @@ switch (true) {
   }
 }
 
-
 // ============================================
 // 4. LEXICAL SCOPE (STATIC SCOPE)
 // ============================================
@@ -186,13 +183,13 @@ console.log("\n=== Lexical Scope Demo ===");
 
 function outer() {
   const outerVar = "I am from outer";
-  
+
   function inner() {
     const innerVar = "I am from inner";
     console.log(outerVar); // Can access outer variable
     console.log(innerVar);
   }
-  
+
   inner();
   // console.log(innerVar); // ReferenceError - cannot access inner variable
 }
@@ -216,20 +213,20 @@ callShowX();
 // Nested lexical scopes
 function level1() {
   const a = 1;
-  
+
   function level2() {
     const b = 2;
-    
+
     function level3() {
       const c = 3;
       console.log("Level 3 can access:", a, b, c);
     }
-    
+
     level3();
     console.log("Level 2 can access:", a, b);
     // console.log(c); // ReferenceError
   }
-  
+
   level2();
   console.log("Level 1 can access:", a);
   // console.log(b); // ReferenceError
@@ -237,23 +234,22 @@ function level1() {
 
 level1();
 
-
 // ============================================
 // 5. SCOPE CHAIN
 // ============================================
 /**
  * Scope Chain - Mechanism for variable lookup through nested scopes (ES1)
- * 
+ *
  * Characteristics:
  * - JavaScript looks for variables from inner to outer scope
  * - Stops at first match
  * - Continues to global scope if not found
  * - ReferenceError if not found anywhere
- * 
+ *
  * Use Cases:
  * - Understanding variable resolution
  * - Debugging scope issues
- * 
+ *
  * Common Pitfalls:
  * - Performance impact with deep nesting
  * - Variable shadowing can hide outer variables
@@ -265,24 +261,24 @@ const global = "global";
 
 function first() {
   const firstVar = "first";
-  
+
   function second() {
     const secondVar = "second";
-    
+
     function third() {
       const thirdVar = "third";
-      
+
       // Scope chain: third -> second -> first -> global
       console.log("Scope chain lookup:");
-      console.log("thirdVar:", thirdVar);   // Found in third
+      console.log("thirdVar:", thirdVar); // Found in third
       console.log("secondVar:", secondVar); // Found in second
-      console.log("firstVar:", firstVar);   // Found in first
-      console.log("global:", global);       // Found in global
+      console.log("firstVar:", firstVar); // Found in first
+      console.log("global:", global); // Found in global
     }
-    
+
     third();
   }
-  
+
   second();
 }
 
@@ -291,35 +287,34 @@ first();
 // Scope chain stops at first match
 function shadowExample() {
   const value = "outer";
-  
+
   function inner() {
     const value = "inner"; // Shadows outer 'value'
     console.log("Inner sees:", value); // "inner"
   }
-  
+
   inner();
   console.log("Outer sees:", value); // "outer"
 }
 
 shadowExample();
 
-
 // ============================================
 // 6. VARIABLE SHADOWING
 // ============================================
 /**
  * Variable Shadowing - Inner variable hides outer variable with same name (ES1)
- * 
+ *
  * Characteristics:
  * - Inner scope variable "shadows" outer scope variable
  * - Outer variable still exists, just not accessible
  * - Can shadow at any scope level
  * - Parameters can shadow outer variables
- * 
+ *
  * Use Cases:
  * - Reusing common variable names
  * - Avoiding naming conflicts
- * 
+ *
  * Common Pitfalls:
  * - Can cause confusion and bugs
  * - Hard to access shadowed variable
@@ -332,14 +327,14 @@ const name = "Global Name";
 
 function shadowingExample() {
   const name = "Function Name"; // Shadows global 'name'
-  
+
   console.log("In function:", name); // "Function Name"
-  
+
   if (true) {
     const name = "Block Name"; // Shadows function 'name'
     console.log("In block:", name); // "Block Name"
   }
-  
+
   console.log("After block:", name); // "Function Name"
 }
 
@@ -349,7 +344,8 @@ console.log("In global:", name); // "Global Name"
 // Parameter shadowing
 const value = 100;
 
-function useParameter(value) { // Parameter shadows global 'value'
+function useParameter(value) {
+  // Parameter shadows global 'value'
   console.log("Parameter value:", value);
 }
 
@@ -361,23 +357,22 @@ function noReDeclare() {
   // let x = 2; // SyntaxError: Identifier 'x' has already been declared
 }
 
-
 // ============================================
 // 7. TEMPORAL DEAD ZONE (TDZ)
 // ============================================
 /**
  * Temporal Dead Zone - Period between scope start and variable declaration (ES6)
- * 
+ *
  * Characteristics:
  * - Applies to let and const (not var)
  * - Variable exists but cannot be accessed before declaration
  * - ReferenceError if accessed in TDZ
  * - Prevents use-before-declaration bugs
- * 
+ *
  * Use Cases:
  * - Enforcing declaration-before-use
  * - Catching initialization errors
- * 
+ *
  * Common Pitfalls:
  * - Confusing with hoisting
  * - typeof doesn't work in TDZ
@@ -387,13 +382,13 @@ console.log("\n=== Temporal Dead Zone Demo ===");
 
 function tdzExample() {
   // TDZ starts here for 'tdzVariable'
-  
+
   try {
     console.log(tdzVariable); // ReferenceError
   } catch (error) {
     console.log("TDZ error:", error.message);
   }
-  
+
   // TDZ ends here
   let tdzVariable = "Now accessible";
   console.log(tdzVariable); // Works
@@ -414,7 +409,7 @@ noTdzWithVar();
 function typeofTdz() {
   // console.log(typeof letVar); // ReferenceError in TDZ
   let letVar = 42;
-  
+
   console.log(typeof undeclaredVar); // "undefined" (no TDZ for undeclared)
 }
 
@@ -432,7 +427,6 @@ try {
   console.log("Default param TDZ:", error.message);
 }
 
-
 // ============================================
 // 8. CLOSURES - DATA PRIVACY
 // ============================================
@@ -445,7 +439,7 @@ console.log("\n=== Closures - Data Privacy Demo ===");
 
 function createBankAccount(initialBalance) {
   let balance = initialBalance; // Private variable
-  
+
   return {
     deposit(amount) {
       if (amount > 0) {
@@ -454,7 +448,7 @@ function createBankAccount(initialBalance) {
       }
       throw new Error("Amount must be positive");
     },
-    
+
     withdraw(amount) {
       if (amount > 0 && amount <= balance) {
         balance -= amount;
@@ -462,16 +456,16 @@ function createBankAccount(initialBalance) {
       }
       throw new Error("Invalid withdrawal amount");
     },
-    
+
     getBalance() {
       return balance;
-    }
+    },
   };
 }
 
 const account = createBankAccount(100);
 console.log("Initial balance:", account.getBalance()); // 100
-console.log("After deposit:", account.deposit(50));    // 150
+console.log("After deposit:", account.deposit(50)); // 150
 console.log("After withdrawal:", account.withdraw(30)); // 120
 // console.log(account.balance); // undefined - private!
 
@@ -481,7 +475,6 @@ const account2 = createBankAccount(200);
 account1.deposit(50);
 console.log("Account 1:", account1.getBalance()); // 150
 console.log("Account 2:", account2.getBalance()); // 200
-
 
 // ============================================
 // 9. CLOSURES - FUNCTION FACTORIES
@@ -497,7 +490,7 @@ console.log("\n=== Function Factories Demo ===");
 
 // 9.1 Math operations
 function createMultiplier(multiplier) {
-  return function(number) {
+  return function (number) {
     return number * multiplier;
   };
 }
@@ -509,7 +502,7 @@ console.log("triple(5):", triple(5)); // 15
 
 // 9.2 String formatting
 function createGreeter(greeting) {
-  return function(name) {
+  return function (name) {
     return `${greeting}, ${name}!`;
   };
 }
@@ -519,14 +512,13 @@ console.log(sayHello("Alice")); // Hello, Alice!
 
 // 9.3 Validation
 function createValidator(min, max) {
-  return function(value) {
+  return function (value) {
     return value >= min && value <= max;
   };
 }
 
 const isValidAge = createValidator(0, 120);
 console.log("isValidAge(25):", isValidAge(25)); // true
-
 
 // ============================================
 // 10. CLOSURES - PARTIAL APPLICATION
@@ -541,7 +533,7 @@ function add(a, b, c) {
 }
 
 function partial(fn, ...presetArgs) {
-  return function(...laterArgs) {
+  return function (...laterArgs) {
     return fn(...presetArgs, ...laterArgs);
   };
 }
@@ -563,7 +555,6 @@ const infoLog = partial(log, "INFO");
 errorLog(new Date().toISOString(), "Something went wrong");
 infoLog(new Date().toISOString(), "Operation completed");
 
-
 // ============================================
 // 11. CLOSURES - MEMOIZATION
 // ============================================
@@ -575,15 +566,15 @@ console.log("\n=== Memoization Demo ===");
 
 function memoize(fn) {
   const cache = {}; // Private cache
-  
-  return function(...args) {
+
+  return function (...args) {
     const key = JSON.stringify(args);
-    
+
     if (key in cache) {
       console.log("Returning cached result for:", args);
       return cache[key];
     }
-    
+
     console.log("Computing result for:", args);
     const result = fn(...args);
     cache[key] = result;
@@ -615,7 +606,6 @@ console.log("\nFactorial:");
 console.log("factorial(5):", factorial(5));
 console.log("factorial(5) again:", factorial(5));
 
-
 // ============================================
 // 12. MODULE PATTERN
 // ============================================
@@ -625,14 +615,14 @@ console.log("factorial(5) again:", factorial(5));
 
 console.log("\n=== Module Pattern Demo ===");
 
-const Calculator = (function() {
+const Calculator = (function () {
   // Private variables and functions
   let result = 0;
-  
+
   function log(operation, value) {
     console.log(`${operation}: ${value}`);
   }
-  
+
   // Public API
   return {
     add(n) {
@@ -640,28 +630,28 @@ const Calculator = (function() {
       log("Added", n);
       return this;
     },
-    
+
     subtract(n) {
       result -= n;
       log("Subtracted", n);
       return this;
     },
-    
+
     multiply(n) {
       result *= n;
       log("Multiplied by", n);
       return this;
     },
-    
+
     getResult() {
       return result;
     },
-    
+
     reset() {
       result = 0;
       log("Reset", result);
       return this;
-    }
+    },
   };
 })();
 
@@ -670,33 +660,32 @@ console.log("Result:", Calculator.getResult()); // 15
 Calculator.reset();
 
 // Revealing module pattern
-const Counter = (function() {
+const Counter = (function () {
   let count = 0;
-  
+
   function increment() {
     count++;
   }
-  
+
   function decrement() {
     count--;
   }
-  
+
   function getCount() {
     return count;
   }
-  
+
   // Reveal public methods
   return {
     increment,
     decrement,
-    getCount
+    getCount,
   };
 })();
 
 Counter.increment();
 Counter.increment();
 console.log("Counter:", Counter.getCount()); // 2
-
 
 // ============================================
 // 13. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
@@ -725,7 +714,7 @@ console.log("Counter:", Counter.getCount()); // 2
 console.log("\n=== 13. IIFE Demo ===");
 
 // 13.1 Basic IIFE syntax
-(function() {
+(function () {
   var privateVar = "I'm private to this IIFE";
   console.log("IIFE executed immediately");
   console.log("privateVar inside IIFE:", privateVar);
@@ -738,7 +727,7 @@ console.log("\n=== 13. IIFE Demo ===");
 })();
 
 // 13.3 IIFE returning value
-const result = (function() {
+const result = (function () {
   var privateData = "computed value";
   return privateData.toUpperCase();
 })();
@@ -746,12 +735,12 @@ const result = (function() {
 console.log("IIFE returned value:", result);
 
 // 13.4 IIFE with parameters
-(function(a, b) {
+(function (a, b) {
   console.log("IIFE with parameters:", a + b);
 })(10, 20);
 
 // 13.5 IIFE for initialization
-const APP_CONFIG = (function() {
+const APP_CONFIG = (function () {
   // Private initialization logic
   var defaultTimeout = 5000;
   var apiBase = "https://api.example.com";
@@ -759,7 +748,7 @@ const APP_CONFIG = (function() {
   return {
     timeout: defaultTimeout,
     apiUrl: apiBase,
-    isProduction: false
+    isProduction: false,
   };
 })();
 
@@ -767,7 +756,7 @@ console.log("\nIIFE module pattern:");
 console.log("APP_CONFIG:", APP_CONFIG);
 
 // 13.6 IIFE revealing module pattern
-const UserModule = (function() {
+const UserModule = (function () {
   var users = [];
 
   function add(user) {
@@ -787,7 +776,7 @@ const UserModule = (function() {
   return {
     addUser: add,
     getUsers: getAll,
-    userCount: getCount
+    userCount: getCount,
   };
 })();
 
@@ -799,8 +788,8 @@ console.log("Total users:", UserModule.userCount());
 // 13.7 IIFE in loops (solving var closure problem)
 console.log("\nIIFE solving closure in loop:");
 for (var i = 0; i < 3; i++) {
-  (function(index) {
-    setTimeout(function() {
+  (function (index) {
+    setTimeout(function () {
       console.log("IIFE preserved i:", index);
     }, 50);
   })(i);
@@ -808,11 +797,10 @@ for (var i = 0; i < 3; i++) {
 
 // Note: Modern alternative is to use let
 for (let j = 0; j < 3; j++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("let preserved j:", j);
   }, 50);
 }
-
 
 // ============================================
 // 14. eval() AND with - DYNAMIC SCOPE (AVOID!)
@@ -847,7 +835,7 @@ console.log("Security: Never eval user input!");
 // Malicious: eval("alert('XSS')")
 
 // 14.3 Safer alternatives
-var funcAdd = new Function('a', 'b', 'return a + b');
+var funcAdd = new Function("a", "b", "return a + b");
 console.log("Function constructor:", funcAdd(2, 3)); // 5
 
 var jsonString = '{"name": "Alice"}';
@@ -876,7 +864,6 @@ console.log("Destructuring (alternative):", withName, withAge);
 
 console.log("with is deprecated: use destructuring instead");
 
-
 // ============================================
 // 15. Common Pitfalls & Best Practices
 // ============================================
@@ -886,14 +873,14 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Closure in loops with var
 console.log("Pitfall 1: Closure in loops");
 for (var i = 0; i < 3; i++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("var i:", i); // All print 3
   }, 100);
 }
 
 // Solution: Use let
 for (let j = 0; j < 3; j++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("let j:", j); // Prints 0, 1, 2
   }, 100);
 }
@@ -909,8 +896,8 @@ function createAccidentalGlobal() {
 console.log("\nPitfall 3: Memory leaks");
 function createLeak() {
   const largeData = new Array(1000000).fill("data");
-  
-  return function() {
+
+  return function () {
     // This closure keeps largeData in memory
     console.log(largeData[0]);
   };
@@ -921,7 +908,7 @@ function createLeak() {
 console.log("\nPitfall 4: Modifying loop variable");
 const functions = [];
 for (let i = 0; i < 3; i++) {
-  functions.push(function() {
+  functions.push(function () {
     return i;
   });
 }
@@ -979,7 +966,6 @@ console.log(`
     ✅ Better tooling
     ✅ Static analysis
 `);
-
 
 // ============================================
 // SCOPE AND CLOSURES SUMMARY
@@ -1081,7 +1067,6 @@ Advanced Patterns:
  * - 'declare' keyword in TS adds to type scope without runtime code
  *
  */
-
 
 // ============================================
 // Cross-references

@@ -37,7 +37,6 @@ console.log("Timestamp:", timestamp);
 const parsedDate: Date = new Date(timestamp);
 console.log("Parsed date:", parsedDate);
 
-
 // ============================================================================
 // 2. TYPE-SAFE DATE FUNCTIONS
 // ============================================================================
@@ -68,7 +67,10 @@ const baseDate = new Date("2024-06-15");
 console.log("Base date:", formatDate(baseDate));
 console.log("+ 7 days:", formatDate(addDays(baseDate, 7)));
 console.log("+ 3 months:", formatDate(addMonths(baseDate, 3)));
-console.log("Days until 2024-12-31:", getDiffInDays(baseDate, new Date("2024-12-31")));
+console.log(
+  "Days until 2024-12-31:",
+  getDiffInDays(baseDate, new Date("2024-12-31"))
+);
 
 // Type-safe date comparison
 function isBefore(date1: Date, date2: Date): boolean {
@@ -89,7 +91,6 @@ console.log("\nDate comparisons:");
 console.log("Is before:", isBefore(date1, date2));
 console.log("Is after:", isAfter(date1, date2));
 console.log("Is same day:", isSameDay(date1, new Date("2024-06-15")));
-
 
 // ============================================================================
 // 3. BRANDED TYPES FOR TYPE-SAFE TIMESTAMPS
@@ -130,7 +131,6 @@ console.log("Unix timestamp:", unix);
 // ✅ BENEFIT: Can't accidentally mix different timestamp types
 // const wrong: UnixTimestamp = ts; // ❌ Error: Types not compatible
 
-
 // ============================================================================
 // 4. BRANDED TYPES FOR ISO DATE STRINGS
 // ============================================================================
@@ -167,14 +167,15 @@ function isoDateToDate(iso: ISODateString): Date {
 
 console.log("\n=== Branded ISO Date Strings ===");
 const isoDate: ISODateString = createISODate("2024-06-15");
-const isoDateTime: ISODateTimeString = createISODateTime("2024-06-15T10:30:00.000Z");
+const isoDateTime: ISODateTimeString = createISODateTime(
+  "2024-06-15T10:30:00.000Z"
+);
 console.log("ISO date:", isoDate);
 console.log("ISO datetime:", isoDateTime);
 
 // Parse ISO string back to Date
 const parsedFromISO = isoDateToDate(isoDate);
 console.log("Parsed from ISO:", parsedFromISO);
-
 
 // ============================================================================
 // 5. UTILITY TYPES FOR DATE OPERATIONS
@@ -197,7 +198,8 @@ type DateInterval = {
 };
 
 // Type for date precision
-type DatePrecision = "year" | "month" | "day" | "hour" | "minute" | "second" | "millisecond";
+type DatePrecision =
+  "year" | "month" | "day" | "hour" | "minute" | "second" | "millisecond";
 
 // Date part type
 type DatePart =
@@ -223,9 +225,11 @@ function isDateInRange(date: Date, range: DateRange): boolean {
 
 const range = createDateRange(new Date("2024-01-01"), new Date("2024-12-31"));
 const testDate = new Date("2024-06-15");
-console.log("Date range:", { start: formatDate(range.start), end: formatDate(range.end) });
+console.log("Date range:", {
+  start: formatDate(range.start),
+  end: formatDate(range.end),
+});
 console.log("Is in range:", isDateInRange(testDate, range));
-
 
 // ============================================================================
 // 6. TYPE-SAFE DATE ARITHMETIC
@@ -241,33 +245,55 @@ function addInterval(date: Date, interval: DateInterval): Date {
   if (interval.months) result.setMonth(result.getMonth() + interval.months);
   if (interval.days) result.setDate(result.getDate() + interval.days);
   if (interval.hours) result.setHours(result.getHours() + interval.hours);
-  if (interval.minutes) result.setMinutes(result.getMinutes() + interval.minutes);
-  if (interval.seconds) result.setSeconds(result.getSeconds() + interval.seconds);
+  if (interval.minutes)
+    result.setMinutes(result.getMinutes() + interval.minutes);
+  if (interval.seconds)
+    result.setSeconds(result.getSeconds() + interval.seconds);
   return result;
 }
 
 function getDatePart(date: Date, part: DatePrecision): number {
   switch (part) {
-    case "year": return date.getFullYear();
-    case "month": return date.getMonth() + 1; // 1-indexed
-    case "day": return date.getDate();
-    case "hour": return date.getHours();
-    case "minute": return date.getMinutes();
-    case "second": return date.getSeconds();
-    case "millisecond": return date.getMilliseconds();
-    default: throw new Error(`Unknown date part: ${part}`);
+    case "year":
+      return date.getFullYear();
+    case "month":
+      return date.getMonth() + 1; // 1-indexed
+    case "day":
+      return date.getDate();
+    case "hour":
+      return date.getHours();
+    case "minute":
+      return date.getMinutes();
+    case "second":
+      return date.getSeconds();
+    case "millisecond":
+      return date.getMilliseconds();
+    default:
+      throw new Error(`Unknown date part: ${part}`);
   }
 }
 
 function setDatePart(date: Date, part: DatePart): Date {
   const result = new Date(date);
   switch (part.type) {
-    case "year": result.setFullYear(part.value); break;
-    case "month": result.setMonth(part.value - 1); break; // 0-indexed internally
-    case "day": result.setDate(part.value); break;
-    case "hour": result.setHours(part.value); break;
-    case "minute": result.setMinutes(part.value); break;
-    case "second": result.setSeconds(part.value); break;
+    case "year":
+      result.setFullYear(part.value);
+      break;
+    case "month":
+      result.setMonth(part.value - 1);
+      break; // 0-indexed internally
+    case "day":
+      result.setDate(part.value);
+      break;
+    case "hour":
+      result.setHours(part.value);
+      break;
+    case "minute":
+      result.setMinutes(part.value);
+      break;
+    case "second":
+      result.setSeconds(part.value);
+      break;
   }
   return result;
 }
@@ -286,7 +312,6 @@ console.log("  Day:", getDatePart(base, "day"));
 
 const modified = setDatePart(base, { type: "day", value: 25 });
 console.log("\nWith day set to 25:", formatDate(modified));
-
 
 // ============================================================================
 // 7. DATE VALIDATION TYPES
@@ -343,7 +368,6 @@ if (past) {
   recordHistory(past, "Project started");
 }
 
-
 // ============================================================================
 // 8. TIMEZONE-AWARE TYPES
 // ============================================================================
@@ -356,7 +380,9 @@ function createUTCDate(year: number, month: number, day: number): UTCDate {
 }
 
 function toUTCDate(localDate: Date): UTCDate {
-  const utc = new Date(localDate.getTime() + localDate.getTimezoneOffset() * 60000);
+  const utc = new Date(
+    localDate.getTime() + localDate.getTimezoneOffset() * 60000
+  );
   return utc as UTCDate;
 }
 
@@ -372,7 +398,6 @@ const shanghaiTime = formatInTimezone(new Date(), "Asia/Shanghai");
 const nyTime = formatInTimezone(new Date(), "America/New_York");
 console.log("Current time in Shanghai:", shanghaiTime);
 console.log("Current time in New York:", nyTime);
-
 
 // ============================================================================
 // 9. DATE FORMATTING TYPES
@@ -400,11 +425,11 @@ function formatDateTyped(date: Date, options: FormatOptions): string {
       return date.toISOString();
     case "LOCALE_DATE":
       return date.toLocaleDateString(options.locale || "en-US", {
-        timeZone: options.timezone
+        timeZone: options.timezone,
       });
     case "LOCALE_DATETIME":
       return date.toLocaleString(options.locale || "en-US", {
-        timeZone: options.timezone
+        timeZone: options.timezone,
       });
     case "CUSTOM":
       // Custom pattern implementation would go here
@@ -417,10 +442,18 @@ function formatDateTyped(date: Date, options: FormatOptions): string {
 console.log("\n=== Date Formatting Types ===");
 const sampleDate = new Date("2024-06-15T10:30:00Z");
 console.log("ISO format:", formatDateTyped(sampleDate, { format: "ISO" }));
-console.log("ISO datetime:", formatDateTyped(sampleDate, { format: "ISO_DATETIME" }));
-console.log("Locale date:", formatDateTyped(sampleDate, { format: "LOCALE_DATE" }));
-console.log("Locale datetime:", formatDateTyped(sampleDate, { format: "LOCALE_DATETIME" }));
-
+console.log(
+  "ISO datetime:",
+  formatDateTyped(sampleDate, { format: "ISO_DATETIME" })
+);
+console.log(
+  "Locale date:",
+  formatDateTyped(sampleDate, { format: "LOCALE_DATE" })
+);
+console.log(
+  "Locale datetime:",
+  formatDateTyped(sampleDate, { format: "LOCALE_DATETIME" })
+);
 
 // ============================================================================
 // 10. GENERIC DATE HELPERS
@@ -455,16 +488,17 @@ interface Event {
 const events: Event[] = [
   { id: "1", name: "Event A", scheduledDate: new Date("2024-06-20") },
   { id: "2", name: "Event B", scheduledDate: new Date("2024-06-10") },
-  { id: "3", name: "Event C", scheduledDate: new Date("2024-06-15") }
+  { id: "3", name: "Event C", scheduledDate: new Date("2024-06-15") },
 ];
 
-const byDate = createDateComparator<Event>((e) => e.scheduledDate.getTime());
+const byDate = createDateComparator<Event>(e => e.scheduledDate.getTime());
 const sortedEvents = [...events].sort(byDate);
 
 console.log("\n=== Generic Date Helpers ===");
 console.log("Sorted events:");
-sortedEvents.forEach(e => console.log(`  ${e.name}: ${formatDate(e.scheduledDate)}`));
-
+sortedEvents.forEach(e =>
+  console.log(`  ${e.name}: ${formatDate(e.scheduledDate)}`)
+);
 
 // ============================================================================
 // 11. COMMON PITFALLS
@@ -481,9 +515,18 @@ console.log("December:", formatDate(december));
 
 // ✅ SOLUTION: Use constants or helper functions
 const Months = {
-  January: 0, February: 1, March: 2, April: 3,
-  May: 4, June: 5, July: 6, August: 7,
-  September: 8, October: 9, November: 10, December: 11
+  January: 0,
+  February: 1,
+  March: 2,
+  April: 3,
+  May: 4,
+  June: 5,
+  July: 6,
+  August: 7,
+  September: 8,
+  October: 9,
+  November: 10,
+  December: 11,
 } as const;
 
 const juneDate = new Date(2024, Months.June, 15);
@@ -539,7 +582,6 @@ const rollover = new Date(2024, 1, 30); // Feb 30 doesn't exist
 rollover.setMonth(1); // Setting month again
 rollover.setDate(30); // Rolls over to March
 console.log("Rollover result:", formatDate(rollover));
-
 
 // ============================================================================
 // 12. BEST PRACTICES SUMMARY
@@ -611,7 +653,6 @@ console.log("Rollover result:", formatDate(rollover));
 🎯 RECOMMENDATION: Use TypeScript with date-fns or Luxon for production!
 */
 
-
 // ============================================================================
 // 13. COMPARISON TABLE
 // ============================================================================
@@ -647,4 +688,6 @@ KEY TAKEAWAYS:
 
 console.log("\n=== TypeScript provides type safety at compile time ===");
 console.log("=== But runtime behavior follows JavaScript rules ===");
-console.log("=== Consider using date-fns or Temporal API for complex date handling ===");
+console.log(
+  "=== Consider using date-fns or Temporal API for complex date handling ==="
+);

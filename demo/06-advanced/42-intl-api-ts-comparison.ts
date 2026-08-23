@@ -18,10 +18,13 @@ const numberFormatOptions: Intl.NumberFormatOptions = {
   style: "currency",
   currency: "USD",
   minimumFractionDigits: 2,
-  maximumFractionDigits: 2
+  maximumFractionDigits: 2,
 };
 
-const formatter: Intl.NumberFormat = new Intl.NumberFormat("en-US", numberFormatOptions);
+const formatter: Intl.NumberFormat = new Intl.NumberFormat(
+  "en-US",
+  numberFormatOptions
+);
 const formatted: string = formatter.format(number);
 
 console.log("Formatted:", formatted);
@@ -34,7 +37,7 @@ function formatCurrency(
 ): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency
+    currency,
   }).format(amount);
 }
 
@@ -44,7 +47,7 @@ console.log("EUR:", formatCurrency(1234.56, "EUR", "de-DE"));
 // Compact notation with types
 const compactOptions: Intl.NumberFormatOptions = {
   notation: "compact",
-  compactDisplay: "short"
+  compactDisplay: "short",
 };
 
 const compactFormatter = new Intl.NumberFormat("en-US", compactOptions);
@@ -54,7 +57,7 @@ console.log("Compact:", compactFormatter.format(1234567890));
 const unitOptions: Intl.NumberFormatOptions = {
   style: "unit",
   unit: "kilometer",
-  unitDisplay: "long"
+  unitDisplay: "long",
 };
 
 console.log(`
@@ -82,7 +85,7 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
   hour: "numeric",
   minute: "numeric",
   weekday: "long",
-  timeZone: "America/New_York"
+  timeZone: "America/New_York",
 };
 
 const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(
@@ -132,7 +135,7 @@ console.log("\n=== Intl.Collator Types ===\n");
 // Collator options are fully typed
 const collatorOptions: Intl.CollatorOptions = {
   numeric: true,
-  sensitivity: "base"
+  sensitivity: "base",
 };
 
 const collator: Intl.Collator = new Intl.Collator("en-US", collatorOptions);
@@ -170,10 +173,13 @@ console.log("\n=== Intl.PluralRules Types ===\n");
 
 // PluralRules options are fully typed
 const pluralOptions: Intl.PluralRulesOptions = {
-  type: "cardinal"
+  type: "cardinal",
 };
 
-const pluralRules: Intl.PluralRules = new Intl.PluralRules("en-US", pluralOptions);
+const pluralRules: Intl.PluralRules = new Intl.PluralRules(
+  "en-US",
+  pluralOptions
+);
 
 // select returns specific string literals
 type PluralCategory = "zero" | "one" | "two" | "few" | "many" | "other";
@@ -222,7 +228,7 @@ console.log("\n=== Intl.RelativeTimeFormat Types ===\n");
 // RelativeTimeFormat options are fully typed
 const relativeTimeOptions: Intl.RelativeTimeFormatOptions = {
   numeric: "auto",
-  style: "long"
+  style: "long",
 };
 
 const rtf: Intl.RelativeTimeFormat = new Intl.RelativeTimeFormat(
@@ -236,14 +242,7 @@ console.log("Relative time:", relative);
 
 // Type-safe relative time formatting
 type RelativeTimeUnit =
-  | "year"
-  | "quarter"
-  | "month"
-  | "week"
-  | "day"
-  | "hour"
-  | "minute"
-  | "second";
+  "year" | "quarter" | "month" | "week" | "day" | "hour" | "minute" | "second";
 
 function formatRelativeTime(
   value: number,
@@ -278,7 +277,7 @@ console.log("\n=== Intl.ListFormat Types ===\n");
 // ListFormat options are fully typed
 const listFormatOptions: Intl.ListFormatOptions = {
   style: "long",
-  type: "conjunction"
+  type: "conjunction",
 };
 
 const listFormatter: Intl.ListFormat = new Intl.ListFormat(
@@ -318,7 +317,7 @@ console.log("\n=== Intl.Segmenter Types (ES2022) ===\n");
 
 // Segmenter options are fully typed
 const segmenterOptions: Intl.SegmenterOptions = {
-  granularity: "word"
+  granularity: "word",
 };
 
 const segmenter: Intl.Segmenter = new Intl.Segmenter("en-US", segmenterOptions);
@@ -332,7 +331,7 @@ for (const segment of segments) {
   const segmentText: string = segment.segment;
   const index: number = segment.index;
   const isWordLike: boolean | undefined = segment.isWordLike;
-  
+
   if (isWordLike) {
     console.log("Word:", segmentText);
   }
@@ -380,7 +379,7 @@ console.log("Region:", region);
 const localeOptions: Intl.LocaleOptions = {
   calendar: "gregory",
   numberingSystem: "latn",
-  hourCycle: "h12"
+  hourCycle: "h12",
 };
 
 const customLocale = new Intl.Locale("en-US", localeOptions);
@@ -412,7 +411,7 @@ class CurrencyFormatter {
   ) {
     this.formatter = new Intl.NumberFormat(locale, {
       style: "currency",
-      currency
+      currency,
     });
   }
 
@@ -436,10 +435,7 @@ class MultiLocaleFormatter {
 
   format(value: number, locale: string): string {
     if (!this.formatters.has(locale)) {
-      this.formatters.set(
-        locale,
-        new Intl.NumberFormat(locale, this.options)
-      );
+      this.formatters.set(locale, new Intl.NumberFormat(locale, this.options));
     }
     return this.formatters.get(locale)!.format(value);
   }

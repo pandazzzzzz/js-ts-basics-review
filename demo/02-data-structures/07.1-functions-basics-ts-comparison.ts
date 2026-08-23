@@ -41,15 +41,19 @@ interface User {
 function createUser(name: string, age: number): User {
   return { id: Date.now(), name, age };
 }
-console.log("  createUser('Alice', 30):", createUser('Alice', 30));
+console.log("  createUser('Alice', 30):", createUser("Alice", 30));
 
 // Example 2: Arrow functions with types
 console.log("\n2. Arrow functions with types:");
 const multiply = (a: number, b: number): number => a * b;
 console.log("  multiply(4, 7):", multiply(4, 7));
 
-const makeUser = (id: number, name: string, age: number): User => ({ id, name, age });
-console.log("  makeUser(1, 'Bob', 25):", makeUser(1, 'Bob', 25));
+const makeUser = (id: number, name: string, age: number): User => ({
+  id,
+  name,
+  age,
+});
+console.log("  makeUser(1, 'Bob', 25):", makeUser(1, "Bob", 25));
 
 // Example 3: Default parameters
 console.log("\n3. Default parameters:");
@@ -57,14 +61,16 @@ function greet(name: string = "Guest", greeting: string = "Hello"): string {
   return `${greeting}, ${name}!`;
 }
 console.log("  greet():", greet());
-console.log("  greet('Alice'):", greet('Alice'));
-console.log("  greet('Bob', 'Hi'):", greet('Bob', 'Hi'));
+console.log("  greet('Alice'):", greet("Alice"));
+console.log("  greet('Bob', 'Hi'):", greet("Bob", "Hi"));
 
 const getDefaultConfig = (): { port: number; host: string } => ({
   port: 3000,
-  host: "localhost"
+  host: "localhost",
 });
-function createConfig(override: ReturnType<typeof getDefaultConfig> = getDefaultConfig()): void {
+function createConfig(
+  override: ReturnType<typeof getDefaultConfig> = getDefaultConfig()
+): void {
   console.log("  Config:", override);
 }
 
@@ -83,9 +89,9 @@ function processObject(params: { name: string; [key: string]: any }): void {
 }
 
 processObject({
-  name: 'Charlie',
+  name: "Charlie",
   age: 28,
-  city: 'NYC'
+  city: "NYC",
 });
 
 // Example 5: Function types as values
@@ -100,12 +106,12 @@ interface UserContext {
 }
 
 const user: UserContext = {
-  name: 'Alice',
+  name: "Alice",
   greet(greeting: string): string {
     return `${greeting}, ${this.name}!`;
-  }
+  },
 };
-console.log("  user.greet('Hello'):", user.greet('Hello'));
+console.log("  user.greet('Hello'):", user.greet("Hello"));
 
 // Example 6: Overloading
 console.log("\n6. Function overloading:");
@@ -125,12 +131,12 @@ display([1, 2, 3]);
 // Example 7: Optional parameters
 console.log("\n7. Optional parameters:");
 function fetchData(url: string, timeout?: number): Promise<string> {
-  console.log(`Fetching ${url}${timeout ? ` (timeout: ${timeout})` : ''}`);
-  return Promise.resolve('data');
+  console.log(`Fetching ${url}${timeout ? ` (timeout: ${timeout})` : ""}`);
+  return Promise.resolve("data");
 }
 
-fetchData('https://api.example.com');
-fetchData('https://api.example.com', 5000);
+fetchData("https://api.example.com");
+fetchData("https://api.example.com", 5000);
 
 // Example 8: Return type inference
 console.log("\n8. Return type inference:");
@@ -139,7 +145,7 @@ const getName = (id: number) => `User ${id}`;
 const getUserById = (id: number): User => ({
   id,
   name: `User ${id}`,
-  age: 0
+  age: 0,
 });
 
 // Example 9: Void return type

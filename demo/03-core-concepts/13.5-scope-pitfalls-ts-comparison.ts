@@ -78,7 +78,9 @@ interface User {
 // Merged! User now has both name and age
 const user: User = { name: "Alice", age: 30 };
 console.log("  Merged interface User:", user);
-console.log("  ⚠️  Interfaces with same name in same scope automatically merge");
+console.log(
+  "  ⚠️  Interfaces with same name in same scope automatically merge"
+);
 
 // Example 5: Enum scope
 console.log("\n5. Enum scope:");

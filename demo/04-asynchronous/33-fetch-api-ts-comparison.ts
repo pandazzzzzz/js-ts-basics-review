@@ -43,9 +43,9 @@ async function typedRequestInit(): Promise<void> {
   const options: RequestInit = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title: "Post", body: "Content", userId: 1 })
+    body: JSON.stringify({ title: "Post", body: "Content", userId: 1 }),
   };
 
   console.log("RequestInit method:", options.method);
@@ -58,13 +58,13 @@ async function typedRequestInit(): Promise<void> {
 async function customHeaders(): Promise<void> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer token123",
-    "X-Custom-Header": "value"
+    Authorization: "Bearer token123",
+    "X-Custom-Header": "value",
   };
 
   const response = await fetch("https://example.com/api", {
     method: "POST",
-    headers
+    headers,
   });
 
   console.log("Custom headers set:", Object.keys(headers).length);
@@ -80,7 +80,9 @@ async function customHeaders(): Promise<void> {
 async function typedResponse(): Promise<void> {
   console.log("\n=== Response Type ===");
 
-  const response: Response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  const response: Response = await fetch(
+    "https://jsonplaceholder.typicode.com/posts/1"
+  );
 
   // Response properties (all typed)
   const status: number = response.status;
@@ -125,12 +127,12 @@ async function fetchApi<T>(
     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
   }
 
-  const data = await response.json() as T;
+  const data = (await response.json()) as T;
 
   return {
     data,
     status: response.status,
-    statusText: response.statusText
+    statusText: response.statusText,
   };
 }
 
@@ -153,11 +155,15 @@ async function useGenericFetch(): Promise<void> {
   console.log("\n=== Generic Fetch Wrapper ===");
 
   // Explicit type parameter - T is User
-  const userResponse = await fetchApi<User>("https://jsonplaceholder.typicode.com/users/1");
+  const userResponse = await fetchApi<User>(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
   console.log("User:", userResponse.data.name, userResponse.data.email);
 
   // Explicit type parameter - T is Post[]
-  const postsResponse = await fetchApi<Post[]>("https://jsonplaceholder.typicode.com/posts");
+  const postsResponse = await fetchApi<Post[]>(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
   console.log("Posts count:", postsResponse.data.length);
 }
 
@@ -199,8 +205,8 @@ class FetchClient {
       method,
       headers: {
         "Content-Type": "application/json",
-        ...this.defaultHeaders
-      }
+        ...this.defaultHeaders,
+      },
     };
 
     if (body !== undefined) {
@@ -211,14 +217,17 @@ class FetchClient {
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
     try {
-      const response = await fetch(url, { ...options, signal: controller.signal });
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
       clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
-      return await response.json() as T;
+      return (await response.json()) as T;
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         throw new Error("Request timeout");
@@ -250,7 +259,7 @@ async function useFetchClient(): Promise<void> {
 
   const client = new FetchClient({
     baseUrl: "https://jsonplaceholder.typicode.com",
-    timeout: 5000
+    timeout: 5000,
   });
 
   // get<User>() - T is inferred as User
@@ -261,7 +270,7 @@ async function useFetchClient(): Promise<void> {
   const newPost = await client.post<Post, Omit<Post, "id">>("/posts", {
     title: "New Post",
     body: "Post content",
-    userId: 1
+    userId: 1,
   });
   console.log("Created post:", newPost.id);
 }
@@ -289,7 +298,10 @@ type FetchResult<T> =
   | { success: true; data: T; response: Response }
   | { success: false; error: FetchError };
 
-async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchResult<T>> {
+async function safeFetch<T>(
+  url: string,
+  options?: RequestInit
+): Promise<FetchResult<T>> {
   try {
     const response = await fetch(url, options);
 
@@ -301,16 +313,16 @@ async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchRe
           response.status,
           response.statusText,
           url
-        )
+        ),
       };
     }
 
-    const data = await response.json() as T;
+    const data = (await response.json()) as T;
 
     return {
       success: true,
       data,
-      response
+      response,
     };
   } catch (error) {
     if (error instanceof FetchError) {
@@ -323,13 +335,15 @@ async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchRe
         0,
         "",
         url
-      )
+      ),
     };
   }
 }
 
 // Type guard for FetchResult
-function isSuccess<T>(result: FetchResult<T>): result is { success: true; data: T; response: Response } {
+function isSuccess<T>(
+  result: FetchResult<T>
+): result is { success: true; data: T; response: Response } {
   return result.success;
 }
 
@@ -337,7 +351,9 @@ async function useSafeFetch(): Promise<void> {
   console.log("\n=== Error Handling Types ===");
 
   // Success case
-  const successResult = await safeFetch<User>("https://jsonplaceholder.typicode.com/users/1");
+  const successResult = await safeFetch<User>(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
 
   if (isSuccess(successResult)) {
     // TypeScript knows data and response exist after type guard
@@ -349,7 +365,9 @@ async function useSafeFetch(): Promise<void> {
   }
 
   // Error case (invalid URL)
-  const errorResult = await safeFetch<User>("https://invalid-url-example.com/api");
+  const errorResult = await safeFetch<User>(
+    "https://invalid-url-example.com/api"
+  );
 
   if (!isSuccess(errorResult)) {
     // TypeScript knows error exists after type guard
@@ -378,11 +396,15 @@ function createCancellableFetcher(baseUrl: string) {
 
   const fetcher = {
     fetch: <T>(endpoint: string): Promise<T> =>
-      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(r => r.json() as T),
+      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(
+        r => r.json() as T
+      ),
 
     cancel: (): void => controller.abort(),
 
-    get signal(): AbortSignal { return controller.signal; }
+    get signal(): AbortSignal {
+      return controller.signal;
+    },
   };
 
   return fetcher;
@@ -391,7 +413,9 @@ function createCancellableFetcher(baseUrl: string) {
 async function useCancellableFetch(): Promise<void> {
   console.log("\n=== AbortSignal Typing ===");
 
-  const fetcher = createCancellableFetcher("https://jsonplaceholder.typicode.com");
+  const fetcher = createCancellableFetcher(
+    "https://jsonplaceholder.typicode.com"
+  );
 
   try {
     // Start fetch
@@ -406,7 +430,10 @@ async function useCancellableFetch(): Promise<void> {
     if (error instanceof Error && error.name === "AbortError") {
       console.log("Fetch was cancelled");
     } else {
-      console.log("Fetch error:", error instanceof Error ? error.message : error);
+      console.log(
+        "Fetch error:",
+        error instanceof Error ? error.message : error
+      );
     }
   }
 }
@@ -428,7 +455,7 @@ class InterceptorFetch {
   private interceptors: Interceptors<unknown> = {
     request: [],
     response: [],
-    error: []
+    error: [],
   };
 
   // Add request interceptor
@@ -453,7 +480,9 @@ class InterceptorFetch {
   }
 
   // Execute interceptors
-  private async applyRequestInterceptors(config: RequestInit): Promise<RequestInit> {
+  private async applyRequestInterceptors(
+    config: RequestInit
+  ): Promise<RequestInit> {
     let currentConfig = config;
 
     for (const interceptor of this.interceptors.request) {
@@ -463,7 +492,9 @@ class InterceptorFetch {
     return currentConfig;
   }
 
-  private async applyResponseInterceptors(response: Response): Promise<unknown> {
+  private async applyResponseInterceptors(
+    response: Response
+  ): Promise<unknown> {
     let currentResponse: unknown = response;
 
     for (const interceptor of this.interceptors.response) {
@@ -492,25 +523,27 @@ async function useInterceptors(): Promise<void> {
   const client = new InterceptorFetch();
 
   // Request interceptor - add auth header
-  client.useRequestInterceptor((config) => {
+  client.useRequestInterceptor(config => {
     console.log("Request interceptor: Adding auth header");
     return {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: "Bearer token"
-      }
+        Authorization: "Bearer token",
+      },
     };
   });
 
   // Response interceptor - log status
-  client.useResponseInterceptor((response) => {
+  client.useResponseInterceptor(response => {
     console.log("Response interceptor: Status", response.status);
     return response;
   });
 
   // Use the client
-  const data = await client.fetch<User>("https://jsonplaceholder.typicode.com/users/1");
+  const data = await client.fetch<User>(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
   console.log("User with interceptors:", data.name);
 }
 
@@ -535,7 +568,10 @@ function buildQueryString(params: Record<string, QueryValue>): string {
   return searchParams.toString();
 }
 
-function buildUrl(baseUrl: string, params?: Record<string, QueryValue>): string {
+function buildUrl(
+  baseUrl: string,
+  params?: Record<string, QueryValue>
+): string {
   if (!params) return baseUrl;
 
   const queryString = buildQueryString(params);
@@ -557,11 +593,11 @@ async function fetchUsers(params: UserQueryParams): Promise<User[]> {
     limit: params.limit,
     sortBy: params.sortBy,
     order: params.order,
-    search: params.search
+    search: params.search,
   });
 
   const response = await fetch(url);
-  return await response.json() as User[];
+  return (await response.json()) as User[];
 }
 
 async function useQueryParams(): Promise<void> {
@@ -571,7 +607,7 @@ async function useQueryParams(): Promise<void> {
     page: 1,
     limit: 10,
     sortBy: "name",
-    order: "asc"
+    order: "asc",
   });
 
   console.log("Fetched users:", users.length);
@@ -597,12 +633,12 @@ async function fetchWithTransform<T, U>(
     throw new Error(`HTTP ${response.status}`);
   }
 
-  const data = await response.json() as T;
+  const data = (await response.json()) as T;
   return transformer(data);
 }
 
 // Usage
-const userTransformer: Transformer<User, string> = (user) => {
+const userTransformer: Transformer<User, string> = user => {
   return `${user.name} <${user.email}>`;
 };
 
@@ -626,15 +662,13 @@ async function useTransformers(): Promise<void> {
 // TypeScript: Partial types for optional fetch configuration
 type PartialRequestInit = Partial<RequestInit>;
 
-function createDefaultRequest(
-  overrides: PartialRequestInit = {}
-): RequestInit {
+function createDefaultRequest(overrides: PartialRequestInit = {}): RequestInit {
   return {
     method: "GET",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -648,7 +682,7 @@ async function usePartialTypes(): Promise<void> {
   // Only add body
   const bodyRequest = createDefaultRequest({
     method: "POST",
-    body: JSON.stringify({ key: "value" })
+    body: JSON.stringify({ key: "value" }),
   });
   console.log("Body request:", bodyRequest.body);
 }
@@ -681,14 +715,14 @@ async function useMappedHeaderTypes(): Promise<void> {
 
   const headers: Record<string, string> = {
     "content-type": "application/json",
-    "authorization": "Bearer secret123",
-    "x-custom": "value"
+    authorization: "Bearer secret123",
+    "x-custom": "value",
   };
 
   // Transform specific headers
   const transformed = transformHeaders(headers, {
-    authorization: (value) => value.replace(/Bearer .+/, "Bearer [REDACTED]"),
-    "x-custom": (value) => value.toUpperCase()
+    authorization: value => value.replace(/Bearer .+/, "Bearer [REDACTED]"),
+    "x-custom": value => value.toUpperCase(),
   });
 
   console.log("Transformed headers:", transformed);
@@ -797,7 +831,7 @@ async function useUtilityTypes(): Promise<void> {
   const createUser: CreateUserInput = {
     name: "John Doe",
     email: "john@example.com",
-    username: "johndoe"
+    username: "johndoe",
   };
   console.log("Create user input:", createUser);
 
@@ -871,7 +905,6 @@ console.log(`
 📘 See 33-fetch-api.js for JavaScript fundamentals!
 `);
 
-
 // ============================================================================
 // ABORTCONTROLLER AND ABORTSIGNAL TYPES
 // ============================================================================
@@ -886,24 +919,24 @@ console.log("\n=== AbortController and AbortSignal Types ===");
 async function typedAbortController(): Promise<void> {
   const controller: AbortController = new AbortController();
   const signal: AbortSignal = controller.signal;
-  
+
   // AbortSignal properties
   const isAborted: boolean = signal.aborted;
   const reason: unknown = signal.reason; // TypeScript 4.7+
-  
+
   // Event listener with typed event
-  signal.addEventListener('abort', (event: Event) => {
-    console.log('Aborted:', signal.reason);
+  signal.addEventListener("abort", (event: Event) => {
+    console.log("Aborted:", signal.reason);
   });
-  
+
   try {
-    const response: Response = await fetch('https://api.example.com/data', {
-      signal
+    const response: Response = await fetch("https://api.example.com/data", {
+      signal,
     });
     const data: unknown = await response.json();
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      console.log('Request was aborted');
+    if (error instanceof DOMException && error.name === "AbortError") {
+      console.log("Request was aborted");
     }
   }
 }
@@ -916,21 +949,21 @@ function fetchWithTimeout<T = unknown>(
 ): Promise<Response> {
   const controller = new AbortController();
   const { signal: originalSignal, ...restOptions } = options;
-  
+
   // Combine signals if provided
   if (originalSignal) {
-    originalSignal.addEventListener('abort', () => {
+    originalSignal.addEventListener("abort", () => {
       controller.abort(originalSignal.reason);
     });
   }
-  
+
   const timeoutId = setTimeout(() => {
     controller.abort(new Error(`Timeout after ${timeoutMs}ms`));
   }, timeoutMs);
-  
+
   return fetch(url, {
     ...restOptions,
-    signal: controller.signal
+    signal: controller.signal,
   }).finally(() => {
     clearTimeout(timeoutId);
   });
@@ -940,14 +973,14 @@ function fetchWithTimeout<T = unknown>(
 async function useTypedTimeout(): Promise<void> {
   try {
     const response = await fetchWithTimeout(
-      'https://api.example.com/data',
-      { method: 'GET' },
+      "https://api.example.com/data",
+      { method: "GET" },
       3000
     );
     const data: unknown = await response.json();
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      console.log('Request timed out');
+    if (error instanceof DOMException && error.name === "AbortError") {
+      console.log("Request timed out");
     }
   }
 }
@@ -955,16 +988,16 @@ async function useTypedTimeout(): Promise<void> {
 // Typed search controller
 class TypedSearchController<T> {
   private currentController: AbortController | null = null;
-  
+
   async search(query: string, endpoint: string): Promise<T[] | null> {
     // Cancel previous search
     if (this.currentController) {
-      this.currentController.abort('New search started');
+      this.currentController.abort("New search started");
     }
-    
+
     this.currentController = new AbortController();
     const { signal } = this.currentController;
-    
+
     try {
       const response = await fetch(`${endpoint}?q=${query}`, { signal });
       if (!response.ok) {
@@ -973,16 +1006,16 @@ class TypedSearchController<T> {
       const results: T[] = await response.json();
       return results;
     } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') {
+      if (error instanceof DOMException && error.name === "AbortError") {
         return null; // Search was cancelled
       }
       throw error;
     }
   }
-  
+
   cancel(): void {
     if (this.currentController) {
-      this.currentController.abort('User cancelled');
+      this.currentController.abort("User cancelled");
       this.currentController = null;
     }
   }
@@ -997,8 +1030,8 @@ interface SearchResult {
 
 async function useTypedSearchController(): Promise<void> {
   const searchController = new TypedSearchController<SearchResult>();
-  
-  const results = await searchController.search('typescript', '/api/search');
+
+  const results = await searchController.search("typescript", "/api/search");
   if (results) {
     results.forEach(result => {
       console.log(result.title); // Type-safe access
@@ -1011,12 +1044,12 @@ async function typedSignalTimeout(): Promise<void> {
   try {
     // Type-safe timeout signal
     const signal: AbortSignal = AbortSignal.timeout(5000);
-    
-    const response = await fetch('https://api.example.com/data', { signal });
+
+    const response = await fetch("https://api.example.com/data", { signal });
     const data: unknown = await response.json();
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'TimeoutError') {
-      console.log('Request timed out');
+    if (error instanceof DOMException && error.name === "TimeoutError") {
+      console.log("Request timed out");
     }
   }
 }
@@ -1024,18 +1057,22 @@ async function typedSignalTimeout(): Promise<void> {
 // Combining signals with types
 function combineSignals(...signals: AbortSignal[]): AbortSignal {
   const controller = new AbortController();
-  
+
   for (const signal of signals) {
     if (signal.aborted) {
       controller.abort(signal.reason);
       break;
     }
-    
-    signal.addEventListener('abort', () => {
-      controller.abort(signal.reason);
-    }, { once: true });
+
+    signal.addEventListener(
+      "abort",
+      () => {
+        controller.abort(signal.reason);
+      },
+      { once: true }
+    );
   }
-  
+
   return controller.signal;
 }
 
@@ -1062,7 +1099,7 @@ function useFetch<T = unknown>(
     data: null,
     loading: false,
     error: null,
-    refetch: () => {}
+    refetch: () => {},
   };
 }
 

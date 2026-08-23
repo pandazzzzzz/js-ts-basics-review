@@ -33,20 +33,20 @@ export {};
 
 /**
  * Async Functions - Syntactic sugar for working with Promises (ES2017)
- * 
+ *
  * Characteristics:
  * - async keyword makes function return a Promise
  * - await keyword pauses execution until Promise resolves
  * - Makes asynchronous code look synchronous
  * - Easier error handling with try/catch
  * - Can only use await inside async functions (or top-level in modules)
- * 
+ *
  * Use Cases:
  * - Cleaner Promise handling
  * - Sequential async operations
  * - Complex async logic
  * - Error handling in async code
- * 
+ *
  * Common Pitfalls:
  * - Forgetting await makes code run asynchronously
  * - Sequential await when parallel execution is better
@@ -91,7 +91,7 @@ promise.then(result => {
 
 /**
  * Async Function Syntax Variations:
- * 
+ *
  * - Async function declaration
  * - Async function expression
  * - Async arrow function
@@ -110,7 +110,7 @@ async function asyncDeclaration() {
 // Async function expression (ES2017)
 // - Function expression assigned to variable
 // - Not hoisted, must be declared before use
-const asyncExpression = async function() {
+const asyncExpression = async function () {
   return await delay(50, "Expression");
 };
 
@@ -127,7 +127,7 @@ const asyncArrow = async () => {
 const obj = {
   async asyncMethod() {
     return await delay(50, "Method");
-  }
+  },
 };
 
 // Async method in class (ES8/ES2017)
@@ -155,7 +155,7 @@ class MyClass {
 
 /**
  * Await Keyword:
- * 
+ *
  * - Pauses async function execution
  * - Waits for Promise to resolve
  * - Returns resolved value
@@ -167,19 +167,19 @@ console.log("\n=== Await Keyword Usage Demo ===\n");
 
 async function awaitDemo() {
   console.log("Step 1: Start");
-  
+
   // Await a Promise
   const result1 = await delay(100, "First");
   console.log("Step 2:", result1);
-  
+
   // Await another Promise
   const result2 = await delay(100, "Second");
   console.log("Step 3:", result2);
-  
+
   // Await can be used in expressions
-  const combined = await delay(100, "Third") + " Result";
+  const combined = (await delay(100, "Third")) + " Result";
   console.log("Step 4:", combined);
-  
+
   return "Complete";
 }
 
@@ -188,11 +188,11 @@ awaitDemo().then(result => console.log("Final:", result));
 // Forgetting await - common mistake
 async function forgotAwait() {
   console.log("\nForgot await example:");
-  
+
   // ❌ Without await - returns Promise
   const wrong = delay(100, "Wrong");
   console.log("Without await:", wrong); // Promise object
-  
+
   // ✅ With await - returns value
   const correct = await delay(100, "Correct");
   console.log("With await:", correct); // "Correct"
@@ -206,7 +206,7 @@ forgotAwait();
 
 /**
  * Error Handling in Async Functions (try-catch blocks):
- * 
+ *
  * - Use try/catch blocks for synchronous-style error handling
  * - Catch block handles rejected Promises
  * - Can use finally for cleanup
@@ -232,7 +232,7 @@ async function basicErrorHandling() {
   try {
     const result = await failingOperation(false);
     console.log("Success case:", result);
-    
+
     const failed = await failingOperation(true);
     console.log("This won't execute");
   } catch (error) {
@@ -245,13 +245,13 @@ basicErrorHandling();
 // Try/catch with finally
 async function errorHandlingWithFinally() {
   let resource = null;
-  
+
   try {
     console.log("\nAcquiring resource...");
     resource = { data: "Important data" };
-    
+
     await failingOperation(true);
-    
+
     console.log("This won't execute");
   } catch (error) {
     console.error("Error occurred:", error.message);
@@ -266,21 +266,21 @@ errorHandlingWithFinally();
 // Multiple try/catch blocks
 async function multipleTryCatch() {
   console.log("\nMultiple try/catch blocks:");
-  
+
   try {
     const result1 = await failingOperation(false);
     console.log("First operation:", result1);
   } catch (error) {
     console.error("First operation failed:", error.message);
   }
-  
+
   try {
     const result2 = await failingOperation(true);
     console.log("This won't execute");
   } catch (error) {
     console.error("Second operation failed:", error.message);
   }
-  
+
   console.log("Function continues after errors");
 }
 
@@ -292,12 +292,12 @@ multipleTryCatch();
 
 /**
  * Sequential vs Parallel Execution:
- * 
+ *
  * Sequential (one after another):
  * - Use await for each operation
  * - Total time = sum of all operations
  * - Use when operations depend on each other
- * 
+ *
  * Parallel (all at once):
  * - Use Promise.all() with await
  * - Total time = longest operation
@@ -310,11 +310,11 @@ console.log("\n=== Sequential vs Parallel Execution Demo ===\n");
 async function sequential() {
   console.log("Sequential: Starting...");
   const start = Date.now();
-  
+
   const result1 = await delay(200, "First");
   const result2 = await delay(200, "Second");
   const result3 = await delay(200, "Third");
-  
+
   const duration = Date.now() - start;
   console.log(`Sequential: ${result1}, ${result2}, ${result3}`);
   console.log(`Sequential: Took ${duration}ms (≈600ms)`);
@@ -324,13 +324,13 @@ async function sequential() {
 async function parallel() {
   console.log("\nParallel: Starting...");
   const start = Date.now();
-  
+
   const [result1, result2, result3] = await Promise.all([
     delay(200, "First"),
     delay(200, "Second"),
-    delay(200, "Third")
+    delay(200, "Third"),
   ]);
-  
+
   const duration = Date.now() - start;
   console.log(`Parallel: ${result1}, ${result2}, ${result3}`);
   console.log(`Parallel: Took ${duration}ms (≈200ms)`);
@@ -345,18 +345,18 @@ async function parallel() {
 // Mixed: Some sequential, some parallel
 async function mixed() {
   console.log("\nMixed execution:");
-  
+
   // First operation must complete first
   const user = await delay(100, { id: 1, name: "Alice" });
   console.log("Fetched user:", user.name);
-  
+
   // These can run in parallel
   const [posts, comments, likes] = await Promise.all([
     delay(100, ["Post 1", "Post 2"]),
     delay(100, ["Comment 1", "Comment 2"]),
-    delay(100, [10, 20])
+    delay(100, [10, 20]),
   ]);
-  
+
   console.log("Fetched posts:", posts.length);
   console.log("Fetched comments:", comments.length);
   console.log("Fetched likes:", likes.length);
@@ -370,20 +370,20 @@ mixed();
 
 /**
  * Top-Level Await - Use await outside async functions
- * 
+ *
  * ES Specification: ES2022
- * 
+ *
  * Characteristics:
  * - Can use await at module top level
  * - Only works in ES modules (type="module")
  * - Module execution pauses until Promise resolves
  * - Useful for module initialization
- * 
+ *
  * Use Cases:
  * - Loading configuration
  * - Dynamic imports
  * - Resource initialization
- * 
+ *
  * Common Pitfalls:
  * - Blocks module loading
  * - Not available in CommonJS
@@ -407,11 +407,14 @@ console.log("\n=== Top-Level Await Demo ===\n");
 // Simulated top-level await
 (async () => {
   console.log("Simulating top-level await...");
-  
+
   // Load configuration
-  const config = await delay(100, { apiUrl: "https://api.example.com", timeout: 5000 });
+  const config = await delay(100, {
+    apiUrl: "https://api.example.com",
+    timeout: 5000,
+  });
   console.log("Config loaded:", config);
-  
+
   // Dynamic import (simulated)
   const module = await delay(100, { feature: "enabled" });
   console.log("Module loaded:", module);
@@ -423,7 +426,7 @@ console.log("\n=== Top-Level Await Demo ===\n");
 
 /**
  * Async/Await and Promises:
- * 
+ *
  * - Async/await is syntactic sugar over Promises
  * - Async functions return Promises
  * - Can mix async/await with .then()/.catch()
@@ -459,11 +462,11 @@ async function mixedApproach() {
   const result = await Promise.all([
     delay(100, "A"),
     delay(100, "B"),
-    delay(100, "C")
+    delay(100, "C"),
   ]);
-  
+
   console.log("Mixed approach:", result);
-  
+
   return result.join(", ");
 }
 
@@ -515,7 +518,10 @@ console.log("\n=== Promise Combinators with async/await ===\n");
 async function fetchUserAndPosts(id) {
   const [user, posts] = await Promise.all([
     delay(100, { id, name: `User${id}` }),
-    delay(150, [{ id: 1, userId: id }, { id: 2, userId: id }])
+    delay(150, [
+      { id: 1, userId: id },
+      { id: 2, userId: id },
+    ]),
   ]);
   console.log("User:", user.name, "| Posts:", posts.length);
   return { user, posts };
@@ -528,9 +534,7 @@ async function multiFetchWithFallback(urls) {
   const results = await Promise.allSettled(
     urls.map(u => delay(Math.random() * 200, u))
   );
-  const ok = results
-    .filter(r => r.status === "fulfilled")
-    .map(r => r.value);
+  const ok = results.filter(r => r.status === "fulfilled").map(r => r.value);
   console.log("allSettled:", results.length, "total,", ok.length, "fulfilled");
   return ok;
 }
@@ -597,11 +601,13 @@ async function* fetchPaginatedData(pageSize = 10) {
 
     // Simulate API call
     const data = await delay(50, {
-      items: Array(pageSize).fill(0).map((_, i) => ({
-        id: (page - 1) * pageSize + i + 1,
-        name: `Item ${(page - 1) * pageSize + i + 1}`
-      })),
-      nextPage: page < 3 ? page + 1 : null
+      items: Array(pageSize)
+        .fill(0)
+        .map((_, i) => ({
+          id: (page - 1) * pageSize + i + 1,
+          name: `Item ${(page - 1) * pageSize + i + 1}`,
+        })),
+      nextPage: page < 3 ? page + 1 : null,
     });
 
     yield* data.items; // Yield all items
@@ -629,7 +635,7 @@ class AsyncQueue {
     this.processing = false;
   }
 
-  async* process() {
+  async *process() {
     while (this.queue.length > 0 || this.processing) {
       if (this.queue.length === 0) {
         // Wait for new items
@@ -695,13 +701,13 @@ async function fetchUserData(userId) {
   try {
     console.log(`Fetching user ${userId}...`);
     const user = await delay(100, { id: userId, name: `User${userId}` });
-    
+
     console.log(`Fetching posts for ${user.name}...`);
     const posts = await delay(100, [
       { id: 1, title: "Post 1" },
-      { id: 2, title: "Post 2" }
+      { id: 2, title: "Post 2" },
     ]);
-    
+
     return { user, posts };
   } catch (error) {
     console.error("Error fetching user data:", error.message);
@@ -720,7 +726,7 @@ async function fetchWithRetry(fn, retries = 3, delayMs = 1000) {
       return await fn();
     } catch (error) {
       console.log(`Attempt ${i + 1} failed: ${error.message}`);
-      
+
       if (i < retries - 1) {
         console.log(`Retrying in ${delayMs}ms...`);
         await delay(delayMs);
@@ -732,13 +738,17 @@ async function fetchWithRetry(fn, retries = 3, delayMs = 1000) {
 }
 
 let attemptCount = 0;
-fetchWithRetry(async () => {
-  attemptCount++;
-  if (attemptCount < 3) {
-    throw new Error("Temporary failure");
-  }
-  return "Success!";
-}, 3, 100)
+fetchWithRetry(
+  async () => {
+    attemptCount++;
+    if (attemptCount < 3) {
+      throw new Error("Temporary failure");
+    }
+    return "Success!";
+  },
+  3,
+  100
+)
   .then(result => console.log("Retry result:", result))
   .catch(error => console.error("Retry failed:", error.message));
 
@@ -747,20 +757,20 @@ async function fetchMultipleUsers(userIds) {
   const results = await Promise.allSettled(
     userIds.map(id => fetchUserData(id))
   );
-  
+
   const successful = results
     .filter(r => r.status === "fulfilled")
     .map(r => r.value);
-  
+
   const failed = results
     .filter(r => r.status === "rejected")
     .map(r => r.reason.message);
-  
+
   console.log(`Fetched ${successful.length} users successfully`);
   if (failed.length > 0) {
     console.log(`Failed to fetch ${failed.length} users`);
   }
-  
+
   return successful;
 }
 
@@ -771,7 +781,7 @@ async function withTimeout(promise, timeoutMs) {
   const timeoutPromise = new Promise((_, reject) => {
     setTimeout(() => reject(new Error("Timeout")), timeoutMs);
   });
-  
+
   return Promise.race([promise, timeoutPromise]);
 }
 
@@ -787,13 +797,13 @@ withTimeout(slowOperation(), 500)
 async function processItems(items) {
   console.log("\nProcessing items sequentially:");
   let total = 0;
-  
+
   for (const item of items) {
     const result = await delay(100, item * 2);
     total += result;
     console.log(`Processed item ${item}, result: ${result}, total: ${total}`);
   }
-  
+
   return total;
 }
 
@@ -810,11 +820,11 @@ console.log("\n=== Common Pitfalls ===\n");
 // Pitfall 1: Forgetting await
 async function forgettingAwait() {
   console.log("Pitfall 1: Forgetting await");
-  
+
   // ❌ Without await - doesn't wait
   delay(100, "Wrong");
   console.log("  ❌ Continued immediately");
-  
+
   // ✅ With await - waits
   await delay(100, "Correct");
   console.log("  ✅ Waited for completion");
@@ -826,25 +836,25 @@ forgettingAwait();
 async function unnecessarySequential() {
   console.log("\nPitfall 2: Unnecessary sequential execution");
   const start = Date.now();
-  
+
   // ❌ Sequential - slow
   const a = await delay(200, "A");
   const b = await delay(200, "B");
   const c = await delay(200, "C");
-  
+
   console.log(`  ❌ Sequential took ${Date.now() - start}ms`);
 }
 
 async function betterParallel() {
   const start = Date.now();
-  
+
   // ✅ Parallel - fast
   const [a, b, c] = await Promise.all([
     delay(200, "A"),
     delay(200, "B"),
-    delay(200, "C")
+    delay(200, "C"),
   ]);
-  
+
   console.log(`  ✅ Parallel took ${Date.now() - start}ms`);
 }
 
@@ -856,7 +866,7 @@ async function betterParallel() {
 // Pitfall 3: Not handling errors
 async function unhandledError() {
   console.log("\nPitfall 3: Unhandled errors");
-  
+
   // ❌ No try/catch - error propagates
   try {
     await failingOperation(true);
@@ -872,19 +882,17 @@ async function awaitInLoop() {
   console.log("\nPitfall 4: Await in loop");
   const items = [1, 2, 3, 4, 5];
   const start = Date.now();
-  
+
   // ❌ Sequential processing
   const results1 = [];
   for (const item of items) {
     results1.push(await delay(100, item * 2));
   }
   console.log(`  ❌ Loop took ${Date.now() - start}ms`);
-  
+
   // ✅ Parallel processing
   const start2 = Date.now();
-  const results2 = await Promise.all(
-    items.map(item => delay(100, item * 2))
-  );
+  const results2 = await Promise.all(items.map(item => delay(100, item * 2)));
   console.log(`  ✅ Parallel took ${Date.now() - start2}ms`);
 }
 
@@ -893,13 +901,13 @@ awaitInLoop();
 // Pitfall 5: Mixing callbacks with async/await
 async function mixingCallbacks() {
   console.log("\nPitfall 5: Mixing callbacks with async/await");
-  
+
   // ❌ Callback doesn't work with await
   setTimeout(async () => {
     const result = await delay(100, "Callback result");
     console.log("  ❌ This works but is confusing");
   }, 100);
-  
+
   // ✅ Use Promise-based approach
   await delay(100);
   const result = await delay(100, "Promise result");
@@ -908,9 +916,7 @@ async function mixingCallbacks() {
 
 mixingCallbacks();
 
-
 // Best Practices Summary
-
 
 console.log("\n=== Best Practices Summary ===\n");
 console.log(`

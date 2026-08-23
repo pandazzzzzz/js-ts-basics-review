@@ -56,8 +56,8 @@ class FetchClient {
       method,
       headers: {
         "Content-Type": "application/json",
-        ...this.defaultHeaders
-      }
+        ...this.defaultHeaders,
+      },
     };
 
     if (body !== undefined) {
@@ -68,14 +68,17 @@ class FetchClient {
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
     try {
-      const response = await fetch(url, { ...options, signal: controller.signal });
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
       clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
-      return await response.json() as T;
+      return (await response.json()) as T;
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         throw new Error("Request timeout");
@@ -109,7 +112,7 @@ class FetchClient {
 async function useFetchClient(): Promise<void> {
   const client = new FetchClient({
     baseUrl: "https://jsonplaceholder.typicode.com",
-    timeout: 10000
+    timeout: 10000,
   });
 
   // get<User>() - T is inferred as User
@@ -120,7 +123,7 @@ async function useFetchClient(): Promise<void> {
   const newPost = await client.post<Post, Omit<Post, "id">>("/posts", {
     title: "New Post",
     body: "Post content",
-    userId: 1
+    userId: 1,
   });
   console.log("Created post:", newPost.id);
 }
@@ -141,17 +144,23 @@ interface RetryConfig {
 
 const defaultRetryConfig: RetryConfig = {
   maxRetries: 3,
-  baseDelayMs: 1000
+  baseDelayMs: 1000,
 };
 
 async function fetchWithRetry<T = unknown>(
-  url: string, options: RequestInit = {}, config: Partial<RetryConfig> = defaultRetryConfig
+  url: string,
+  options: RequestInit = {},
+  config: Partial<RetryConfig> = defaultRetryConfig
 ): Promise<T> {
-  const { maxRetries, baseDelayMs, shouldRetry } = { ...defaultRetryConfig, ...config };
+  const { maxRetries, baseDelayMs, shouldRetry } = {
+    ...defaultRetryConfig,
+    ...config,
+  };
   let lastError: unknown;
 
   const shouldRetryDefault = (error: unknown): boolean => {
-    if (error instanceof Error && error.message.startsWith("HTTP 4")) return false;
+    if (error instanceof Error && error.message.startsWith("HTTP 4"))
+      return false;
     return true;
   };
 
@@ -160,7 +169,7 @@ async function fetchWithRetry<T = unknown>(
       const response = await fetch(url, options);
 
       if (response.ok) {
-        return await response.json() as T;
+        return (await response.json()) as T;
       }
 
       lastError = new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -171,11 +180,15 @@ async function fetchWithRetry<T = unknown>(
     } catch (error) {
       lastError = error;
 
-      const willRetry = attempt < maxRetries && (shouldRetry?.(error) ?? shouldRetryDefault(error));
+      const willRetry =
+        attempt < maxRetries &&
+        (shouldRetry?.(error) ?? shouldRetryDefault(error));
 
       if (willRetry) {
         const delay = Math.pow(2, attempt - 1) * baseDelayMs;
-        console.log(`Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
+        console.log(
+          `Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
+        );
         await new Promise(resolve => setTimeout(resolve, delay));
       } else {
         throw error;
@@ -188,7 +201,11 @@ async function fetchWithRetry<T = unknown>(
 
 async function demonstrateRetry(): Promise<void> {
   try {
-    const data = await fetchWithRetry<Post>("https://jsonplaceholder.typicode.com/posts/1", {}, { maxRetries: 3, baseDelayMs: 500 });
+    const data = await fetchWithRetry<Post>(
+      "https://jsonplaceholder.typicode.com/posts/1",
+      {},
+      { maxRetries: 3, baseDelayMs: 500 }
+    );
     console.log("Fetched with retry logic:", data.title);
   } catch (error) {
     console.error("All retries exhausted:", error);
@@ -218,18 +235,24 @@ function createCancellableFetcher(baseUrl: string) {
 
   const fetcher = {
     fetch: <T>(endpoint: string): Promise<T> =>
-      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(r => r.json() as T),
+      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(
+        r => r.json() as T
+      ),
 
     cancel: (): void => controller.abort(),
 
-    get signal(): AbortSignal { return controller.signal; }
+    get signal(): AbortSignal {
+      return controller.signal;
+    },
   };
 
   return fetcher;
 }
 
 async function useCancellableFetch(): Promise<void> {
-  const fetcher = createCancellableFetcher("https://jsonplaceholder.typicode.com");
+  const fetcher = createCancellableFetcher(
+    "https://jsonplaceholder.typicode.com"
+  );
 
   try {
     // Start fetch
@@ -302,9 +325,16 @@ async function useTypedSearchController(): Promise<void> {
   const searchController = new TypedSearchController<SearchResult>();
 
   // Simulate search-as-you-type (cancels previous)
-  searchController.search("java", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
-  searchController.search("javasc", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
-  const results = await searchController.search("typescript", "https://jsonplaceholder.typicode.com/posts");
+  searchController
+    .search("java", "https://jsonplaceholder.typicode.com/posts")
+    .catch(() => {});
+  searchController
+    .search("javasc", "https://jsonplaceholder.typicode.com/posts")
+    .catch(() => {});
+  const results = await searchController.search(
+    "typescript",
+    "https://jsonplaceholder.typicode.com/posts"
+  );
 
   if (results) {
     console.log("Search completed, results count:", results.length);
@@ -330,9 +360,13 @@ function combineSignals(...signals: AbortSignal[]): AbortSignal {
       break;
     }
 
-    signal.addEventListener("abort", () => {
-      controller.abort(signal.reason);
-    }, { once: true });
+    signal.addEventListener(
+      "abort",
+      () => {
+        controller.abort(signal.reason);
+      },
+      { once: true }
+    );
   }
 
   return controller.signal;
@@ -346,7 +380,10 @@ async function typedSignalTimeout(): Promise<void> {
       // Type-safe timeout signal
       const signal = (AbortSignal as any).timeout(10000);
 
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", { signal });
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts/1",
+        { signal }
+      );
       const data = await response.json();
       console.log("Fetched with signal timeout completed successfully");
     } catch (error) {
@@ -376,7 +413,7 @@ class InterceptorFetch {
   private interceptors: Interceptors<unknown> = {
     request: [],
     response: [],
-    error: []
+    error: [],
   };
 
   // Add request interceptor
@@ -401,7 +438,9 @@ class InterceptorFetch {
   }
 
   // Execute interceptors
-  private async applyRequestInterceptors(config: RequestInit): Promise<RequestInit> {
+  private async applyRequestInterceptors(
+    config: RequestInit
+  ): Promise<RequestInit> {
     let currentConfig = config;
 
     for (const interceptor of this.interceptors.request) {
@@ -411,7 +450,9 @@ class InterceptorFetch {
     return currentConfig;
   }
 
-  private async applyResponseInterceptors(response: Response): Promise<unknown> {
+  private async applyResponseInterceptors(
+    response: Response
+  ): Promise<unknown> {
     let currentResponse: unknown = response;
 
     for (const interceptor of this.interceptors.response) {
@@ -438,25 +479,27 @@ async function useInterceptors(): Promise<void> {
   const client = new InterceptorFetch();
 
   // Request interceptor - add auth header
-  client.useRequestInterceptor((config) => {
+  client.useRequestInterceptor(config => {
     console.log("Request interceptor called");
     return {
       ...config,
       headers: {
         ...config.headers,
-        "X-App-Version": "1.0.0"
-      }
+        "X-App-Version": "1.0.0",
+      },
     };
   });
 
   // Response interceptor - log status
-  client.useResponseInterceptor((response) => {
+  client.useResponseInterceptor(response => {
     console.log("Response interceptor called, status:", response.status);
     return response;
   });
 
   // Use the client
-  const data = await client.fetch<User>("https://jsonplaceholder.typicode.com/users/1");
+  const data = await client.fetch<User>(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
   console.log("User with interceptors:", data.name);
 }
 
@@ -516,6 +559,12 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log("📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript");
-console.log("📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript");
-console.log("📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript");
+console.log(
+  "📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript"
+);
+console.log(
+  "📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript"
+);
+console.log(
+  "📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript"
+);

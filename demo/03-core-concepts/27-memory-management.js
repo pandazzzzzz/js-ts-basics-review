@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 27-memory-management-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -56,11 +55,11 @@ console.log("=== 1. WeakRef and FinalizationRegistry Demo ===");
 // 1.1 WeakRef basics
 console.log("\nWeakRef basics:");
 
-let targetObject = { data: 'important data' };
+let targetObject = { data: "important data" };
 const weakRef = new WeakRef(targetObject);
 
-console.log('Strong reference exists:', targetObject !== undefined);
-console.log('WeakRef deref():', weakRef.deref());
+console.log("Strong reference exists:", targetObject !== undefined);
+console.log("WeakRef deref():", weakRef.deref());
 
 // Clear strong reference
 targetObject = null;
@@ -68,9 +67,9 @@ targetObject = null;
 // Force garbage collection hint (only works with --expose-gc flag)
 if (global.gc) {
   global.gc();
-  console.log('After GC, WeakRef deref():', weakRef.deref());
+  console.log("After GC, WeakRef deref():", weakRef.deref());
 } else {
-  console.log('(Run with --expose-gc to see GC effect)');
+  console.log("(Run with --expose-gc to see GC effect)");
 }
 
 // 1.2 FinalizationRegistry basics
@@ -79,14 +78,14 @@ console.log("\nFinalizationRegistry:");
 // Note: FinalizationRegistry callbacks are non-deterministic — they may never
 // fire (e.g. if the process exits before GC), so don't rely on them for
 // critical cleanup. Use try/finally or `using` (ES2027) for deterministic cleanup.
-const registry = new FinalizationRegistry((heldValue) => {
+const registry = new FinalizationRegistry(heldValue => {
   console.log(`  Cleanup callback: ${heldValue} was garbage collected`);
 });
 
 {
-  let obj = { name: 'temporary' };
-  registry.register(obj, 'obj-1');
-  console.log('Registered obj-1 for finalization');
+  let obj = { name: "temporary" };
+  registry.register(obj, "obj-1");
+  console.log("Registered obj-1 for finalization");
   obj = null; // Allow GC
 }
 
@@ -94,7 +93,7 @@ const registry = new FinalizationRegistry((heldValue) => {
 class CacheWithWeakRefs {
   constructor() {
     this.cache = new Map();
-    this.registry = new FinalizationRegistry((key) => {
+    this.registry = new FinalizationRegistry(key => {
       console.log(`  Cache entry "${key}" cleaned up`);
       this.cache.delete(key);
     });
@@ -122,16 +121,15 @@ class CacheWithWeakRefs {
 }
 
 const cache = new CacheWithWeakRefs();
-let cachedObj1 = { id: 1, data: 'large data' };
-let cachedObj2 = { id: 2, data: 'more data' };
+let cachedObj1 = { id: 1, data: "large data" };
+let cachedObj2 = { id: 2, data: "more data" };
 
-cache.set('obj1', cachedObj1);
-cache.set('obj2', cachedObj2);
+cache.set("obj1", cachedObj1);
+cache.set("obj2", cachedObj2);
 
-console.log('\nCache get obj1:', cache.get('obj1'));
+console.log("\nCache get obj1:", cache.get("obj1"));
 
 cachedObj1 = null; // Allow GC
-
 
 // ============================================
 // 2. WEAKMAP AND WEAKSET PATTERNS
@@ -177,14 +175,14 @@ class SecureClass {
     const data = privateData.get(this);
     return {
       hasSecret: !!data?.secret,
-      createdAt: data?.createdAt
+      createdAt: data?.createdAt,
     };
   }
 }
 
-const secure = new SecureClass('my-secret-key');
-console.log('Secret:', secure.getSecret());
-console.log('Info:', secure.getInfo());
+const secure = new SecureClass("my-secret-key");
+console.log("Secret:", secure.getSecret());
+console.log("Info:", secure.getInfo());
 
 // 2.2 WeakMap for DOM associations (simulated)
 console.log("\nWeakMap for DOM associations:");
@@ -197,13 +195,13 @@ class DOMElementSimulator {
   }
 }
 
-const button1 = new DOMElementSimulator('btn-1');
-const button2 = new DOMElementSimulator('btn-2');
+const button1 = new DOMElementSimulator("btn-1");
+const button2 = new DOMElementSimulator("btn-2");
 
 elementData.set(button1, { clickCount: 0, handler: () => {} });
 elementData.set(button2, { clickCount: 5, handler: () => {} });
 
-console.log('button1 data:', elementData.get(button1));
+console.log("button1 data:", elementData.get(button1));
 
 // When button1 is "removed" (dereferenced), its data becomes eligible for GC
 const button1Ref = button1; // Keep reference for demo
@@ -215,18 +213,24 @@ const memoCache = new WeakMap();
 
 function memoizedMethod(obj, computeFn) {
   if (!memoCache.has(obj)) {
-    console.log('  Computing result...');
+    console.log("  Computing result...");
     const result = computeFn(obj);
     memoCache.set(obj, result);
   } else {
-    console.log('  Returning cached result...');
+    console.log("  Returning cached result...");
   }
   return memoCache.get(obj);
 }
 
 const target = { value: 42 };
-console.log('First call:', memoizedMethod(target, (o) => o.value * 2));
-console.log('Second call:', memoizedMethod(target, (o) => o.value * 2));
+console.log(
+  "First call:",
+  memoizedMethod(target, o => o.value * 2)
+);
+console.log(
+  "Second call:",
+  memoizedMethod(target, o => o.value * 2)
+);
 
 // 2.4 WeakSet for object tracking
 console.log("\nWeakSet for tracking:");
@@ -235,12 +239,12 @@ const visitedObjects = new WeakSet();
 
 function processObject(obj) {
   if (visitedObjects.has(obj)) {
-    console.log('  Already processed, skipping circular reference');
+    console.log("  Already processed, skipping circular reference");
     return;
   }
 
   visitedObjects.add(obj);
-  console.log('  Processing object...');
+  console.log("  Processing object...");
 
   // Simulate processing nested objects
   if (obj.nested) {
@@ -248,7 +252,7 @@ function processObject(obj) {
   }
 }
 
-const circularObj = { name: 'root', nested: { name: 'child' } };
+const circularObj = { name: "root", nested: { name: "child" } };
 circularObj.nested.parent = circularObj; // Circular reference
 
 processObject(circularObj);
@@ -275,8 +279,7 @@ console.log("\nSymbol as WeakMap key (ES2023):");
 const wm = new WeakMap();
 const s = Symbol("k");
 wm.set(s, "v");
-console.log('  wm.get(s):', wm.get(s)); // 'v'
-
+console.log("  wm.get(s):", wm.get(s)); // 'v'
 
 // ============================================
 // 3. COMMON MEMORY LEAK PATTERNS
@@ -310,8 +313,8 @@ console.log("\nLeak pattern 1 - Global accumulation:");
 function leakyGlobalAccumulation() {
   // Bad: Adding to global without cleanup
   // window.leakyData = new Array(1000000).fill('data');
-  console.log('  Bad: window.leakyData = largeArray');
-  console.log('  Good: Use local variables or clean up globals');
+  console.log("  Bad: window.leakyData = largeArray");
+  console.log("  Good: Use local variables or clean up globals");
 }
 
 leakyGlobalAccumulation();
@@ -340,10 +343,10 @@ class LeakyEventEmitter {
 const emitter = new LeakyEventEmitter();
 
 function problematicComponent() {
-  const handler = (data) => console.log('Handler called:', data);
+  const handler = data => console.log("Handler called:", data);
   emitter.addListener(handler);
   // Problem: Never removing listener when component unmounts
-  console.log('  Bad: Listener added, never removed');
+  console.log("  Bad: Listener added, never removed");
 }
 
 problematicComponent();
@@ -357,12 +360,12 @@ class ProperComponent {
   }
 
   handle(data) {
-    console.log('  Proper handler:', data);
+    console.log("  Proper handler:", data);
   }
 
   destroy() {
     this.emitter.removeListener(this.handler);
-    console.log('  Good: Listener removed on destroy');
+    console.log("  Good: Listener removed on destroy");
   }
 }
 
@@ -376,7 +379,7 @@ class TimerLeak {
   start() {
     // Bad: Interval never cleared
     // setInterval(() => this.doWork(), 1000);
-    console.log('  Bad: setInterval without clearInterval');
+    console.log("  Bad: setInterval without clearInterval");
   }
 }
 
@@ -393,19 +396,19 @@ class TimerProper {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
-      console.log('  Good: Interval cleared');
+      console.log("  Good: Interval cleared");
     }
   }
 
   doWork() {
-    console.log('  Working...');
+    console.log("  Working...");
   }
 }
 
 // 3.4 Leak: Detached DOM trees (conceptual)
 console.log("\nLeak pattern 4 - Detached DOM trees:");
-console.log('  Bad: Keeping reference to removed DOM element');
-console.log('  Good: Nullify references when removing elements');
+console.log("  Bad: Keeping reference to removed DOM element");
+console.log("  Good: Nullify references when removing elements");
 
 // 3.5 Leak: Closure capturing large objects
 console.log("\nLeak pattern 5 - Closure capturing:");
@@ -429,9 +432,8 @@ const bigArray = new Array(1000000).fill(0);
 const leakyFn = createLeakyClosure(bigArray);
 const optimizedFn = createOptimizedClosure(bigArray);
 
-console.log('  Bad: Closure captures entire largeData array');
-console.log('  Good: Closure only captures needed primitive value');
-
+console.log("  Bad: Closure captures entire largeData array");
+console.log("  Good: Closure only captures needed primitive value");
 
 // ============================================
 // 3.6 END-TO-END LEAK DIAGNOSIS WALKTHROUGH (实战排查案例)
@@ -448,13 +450,16 @@ Chrome 任务管理器提示"内存占用过高"，页面开始卡顿。
 // ---- 第 1 步：检测 - 确认是否真的泄漏，而不是正常波动 ----
 console.log("步骤 1 检测（Diagnose）：");
 console.log("- 用 Chrome DevTools Memory 面板看 Heap Snapshot 两次快照差");
-console.log("- 或用 performance.measureUserAgentSpecificMemory()（cross-origin isolation）");
+console.log(
+  "- 或用 performance.measureUserAgentSpecificMemory()（cross-origin isolation）"
+);
 console.log("- 关键：GC 后堆大小是否回到基线。若 GC 后仍持续上涨，则是泄漏");
 
 // 模拟：写一个会累积引用的"泄漏版"模块
 function LeakyTodoStore() {
-  this._completions = [];       // 无限增长的数组
-  this._onComplete = (id) => {  // 闭包捕获 this，被反复注册
+  this._completions = []; // 无限增长的数组
+  this._onComplete = id => {
+    // 闭包捕获 this，被反复注册
     this._completions.push(id);
   };
 }
@@ -466,7 +471,9 @@ LeakyTodoStore.prototype.handleTask = function (id) {
 // ---- 第 2 步：定位 - 用堆快照找"不可达却仍被引用"的对象 ----
 console.log("\n步骤 2 定位（Isolate）：");
 console.log("- 打 3 次 Heap Snapshot，过滤 'retained size' 最大的对象");
-console.log("- 关注泄漏版 store 的 _completions 数组 retained size 是否只增不减");
+console.log(
+  "- 关注泄漏版 store 的 _completions 数组 retained size 是否只增不减"
+);
 console.log("- 'Constructor' 视图按 retained size 排序，点开数组看引用链");
 
 // ---- 第 3 步：修复 - 找到根因并改造 ----
@@ -494,19 +501,22 @@ const fixedStore = new FixedTodoStore();
 
 // 泄漏版：数组持续累积
 for (let i = 0; i < 5; i++) leakyStore.handleTask(i);
-console.log(`\n❌ 泄漏版：_completions 累积了 ${leakyStore._completions.length} 条（只增不减）`);
+console.log(
+  `\n❌ 泄漏版：_completions 累积了 ${leakyStore._completions.length} 条（只增不减）`
+);
 
 // 修复版：不累积
 let lastResult;
-for (let i = 0; i < 5; i++) lastResult = fixedStore.handleTask(i, (id) => id * 2);
-console.log(`✅ 修复版：_completions 不存在，最新结果 = ${lastResult}（不累积）`);
+for (let i = 0; i < 5; i++) lastResult = fixedStore.handleTask(i, id => id * 2);
+console.log(
+  `✅ 修复版：_completions 不存在，最新结果 = ${lastResult}（不累积）`
+);
 
 console.log("\n排查要点总结：");
 console.log("1. 先确认再修：GC 后堆不回基线才是泄漏");
 console.log("2. 优先看全局/闭包/事件监听这三大引用源");
 console.log("3. 修复思路：有界容器、覆盖式赋值、用后即清、显式清理");
 console.log("4. 改完必须验证内存回落到基线，避免盲目优化");
-
 
 // ============================================
 // 4. OBJECT POOLING
@@ -555,7 +565,7 @@ class ObjectPool {
       obj = this.available.pop();
     } else {
       obj = this.factory();
-      console.log('  Pool expanded - created new object');
+      console.log("  Pool expanded - created new object");
     }
 
     this.inUse.add(obj);
@@ -574,7 +584,7 @@ class ObjectPool {
     return {
       available: this.available.length,
       inUse: this.inUse.size,
-      total: this.available.length + this.inUse.size
+      total: this.available.length + this.inUse.size,
     };
   }
 }
@@ -582,28 +592,36 @@ class ObjectPool {
 // 4.2 Example: Vector pool for games/math
 const vectorPool = new ObjectPool(
   () => ({ x: 0, y: 0, z: 0 }),
-  (vec) => { vec.x = 0; vec.y = 0; vec.z = 0; },
+  vec => {
+    vec.x = 0;
+    vec.y = 0;
+    vec.z = 0;
+  },
   5
 );
 
 console.log("\nVector pool:");
-console.log('Initial stats:', vectorPool.stats);
+console.log("Initial stats:", vectorPool.stats);
 
 const v1 = vectorPool.acquire();
 const v2 = vectorPool.acquire();
 const v3 = vectorPool.acquire();
 
-v1.x = 10; v1.y = 20; v1.z = 30;
-v2.x = 5; v2.y = 5; v2.z = 5;
+v1.x = 10;
+v1.y = 20;
+v1.z = 30;
+v2.x = 5;
+v2.y = 5;
+v2.z = 5;
 
-console.log('After acquiring 3 vectors:', vectorPool.stats);
+console.log("After acquiring 3 vectors:", vectorPool.stats);
 
 vectorPool.release(v1);
-console.log('After releasing v1:', vectorPool.stats);
+console.log("After releasing v1:", vectorPool.stats);
 
 const v4 = vectorPool.acquire();
-console.log('Acquired v4 (reused v1):', vectorPool.stats);
-console.log('v4 values:', v4); // Should be zeroed
+console.log("Acquired v4 (reused v1):", vectorPool.stats);
+console.log("v4 values:", v4); // Should be zeroed
 
 // 4.3 Example: Buffer pool for I/O
 class BufferPool {
@@ -633,12 +651,11 @@ const bufferPool = new BufferPool(256, 3);
 console.log("\nBuffer pool created with 3 buffers");
 
 const buf1 = bufferPool.acquire();
-buf1.write('Hello');
-console.log('buf1 content:', buf1.toString().trim());
+buf1.write("Hello");
+console.log("buf1 content:", buf1.toString().trim());
 
 bufferPool.release(buf1);
-console.log('Buffer released and cleared');
-
+console.log("Buffer released and cleared");
 
 // ============================================
 // 5. GARBAGE COLLECTION BASICS
@@ -667,16 +684,18 @@ console.log("\n=== 5. Garbage Collection Basics Demo ===");
 
 // 5.1 GC generations (conceptual)
 console.log("\nGC Generations:");
-console.log('  Young generation (Eden space): Short-lived objects');
-console.log('  Old generation: Long-lived objects');
-console.log('  Code space / Large object space: V8-specific (no "Permanent generation" — that is JVM terminology)');
+console.log("  Young generation (Eden space): Short-lived objects");
+console.log("  Old generation: Long-lived objects");
+console.log(
+  '  Code space / Large object space: V8-specific (no "Permanent generation" — that is JVM terminology)'
+);
 
 // 5.2 GC-friendly patterns
 console.log("\nGC-friendly patterns:");
 
 // Bad: Creating many temporary objects
 function gcUnfriendly(n) {
-  let result = '';
+  let result = "";
   for (let i = 0; i < n; i++) {
     result += String.fromCharCode(65 + (i % 26));
     // Each concatenation creates a new string
@@ -690,16 +709,16 @@ function gcFriendly(n) {
   for (let i = 0; i < n; i++) {
     chars.push(String.fromCharCode(65 + (i % 26)));
   }
-  return chars.join('');
+  return chars.join("");
 }
 
-console.time('GC-unfriendly');
+console.time("GC-unfriendly");
 gcUnfriendly(10000);
-console.timeEnd('GC-unfriendly');
+console.timeEnd("GC-unfriendly");
 
-console.time('GC-friendly');
+console.time("GC-friendly");
 gcFriendly(10000);
-console.timeEnd('GC-friendly');
+console.timeEnd("GC-friendly");
 
 // 5.3 Explicit dereferencing
 console.log("\nExplicit dereferencing:");
@@ -710,16 +729,15 @@ class DataProcessor {
   }
 
   process() {
-    console.log('  Processing data...');
+    console.log("  Processing data...");
     // After processing, explicitly clear reference
     this.data = null;
-    console.log('  Data reference cleared');
+    console.log("  Data reference cleared");
   }
 }
 
 const processor = new DataProcessor(new Array(1000000).fill(0));
 processor.process();
-
 
 // ============================================
 // 6. LARGE DATA HANDLING
@@ -763,9 +781,17 @@ for (let i = 0; i < 1000000; i++) {
 // Note: this regular-array estimate assumes 8 bytes/element (a HeapNumber pointer),
 // but V8 optimizes small-integer arrays with PACKED_SMI_ELEMENTS (~4 bytes/element),
 // so the real ratio vs TypedArray is often closer to 1-2x, not 7x.
-console.log('Regular array size estimate (upper bound, 8 bytes/elem):', `${(regularArray.length * 8 / 1024 / 1024).toFixed(2)} MB`);
-console.log('TypedArray size:', `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`);
-console.log('TypedArray wins most for fixed-encoding types (Int32=4 bytes, Float64=8 bytes)');
+console.log(
+  "Regular array size estimate (upper bound, 8 bytes/elem):",
+  `${((regularArray.length * 8) / 1024 / 1024).toFixed(2)} MB`
+);
+console.log(
+  "TypedArray size:",
+  `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`
+);
+console.log(
+  "TypedArray wins most for fixed-encoding types (Int32=4 bytes, Float64=8 bytes)"
+);
 
 // 6.2 Chunked processing
 console.log("\nChunked processing:");
@@ -819,7 +845,6 @@ function consumeStream(generator, limit = 5) {
 
 consumeStream(streamLargeData(1000000), 5);
 
-
 // ============================================
 // 7. NODE.JS MEMORY CONSIDERATIONS
 // ============================================
@@ -846,25 +871,30 @@ consumeStream(streamLargeData(1000000), 5);
 console.log("\n=== 7. Node.js Memory Considerations Demo ===");
 
 // 7.1 Memory usage inspection
-if (typeof process !== 'undefined' && process.memoryUsage) {
+if (typeof process !== "undefined" && process.memoryUsage) {
   console.log("\nCurrent memory usage:");
   const memUsage = process.memoryUsage();
-  console.log('  Heap Used:', `${(memUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
-  console.log('  Heap Total:', `${(memUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`);
-  console.log('  RSS:', `${(memUsage.rss / 1024 / 1024).toFixed(2)} MB`);
+  console.log(
+    "  Heap Used:",
+    `${(memUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`
+  );
+  console.log(
+    "  Heap Total:",
+    `${(memUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`
+  );
+  console.log("  RSS:", `${(memUsage.rss / 1024 / 1024).toFixed(2)} MB`);
 }
 
 // 7.2 Buffer memory (outside V8 heap)
 console.log("\nBuffer allocation:");
 
 const buffer1 = Buffer.alloc(1024 * 1024); // 1MB
-console.log('Allocated 1MB buffer (outside V8 heap)');
+console.log("Allocated 1MB buffer (outside V8 heap)");
 
 // 7.3 Stream-based processing (memory efficient)
 console.log("\nStream processing concept:");
-console.log('  Bad: fs.readFileSync (loads entire file)');
-console.log('  Good: fs.createReadStream (chunks data)');
-
+console.log("  Bad: fs.readFileSync (loads entire file)");
+console.log("  Good: fs.createReadStream (chunks data)");
 
 // ============================================
 // 8. BROWSER MEMORY CONSIDERATIONS
@@ -893,13 +923,13 @@ console.log("\n=== 8. Browser Memory Considerations Demo ===");
 
 // 8.1 DOM memory management (conceptual)
 console.log("\nDOM memory patterns:");
-console.log('  Bad: Keeping reference to removed element');
-console.log('  Good: Nullify references on removal');
+console.log("  Bad: Keeping reference to removed element");
+console.log("  Good: Nullify references on removal");
 
 // 8.2 Image/video memory
 console.log("\nMedia memory:");
-console.log('  Bad: Loading full-resolution images unnecessarily');
-console.log('  Good: Use responsive images, lazy loading');
+console.log("  Bad: Loading full-resolution images unnecessarily");
+console.log("  Good: Use responsive images, lazy loading");
 
 // 8.3 Virtual scrolling pattern
 console.log("\nVirtual scrolling concept:");
@@ -917,7 +947,6 @@ function virtualScrollPattern(totalItems, visibleRange) {
 
 const visibleItems = virtualScrollPattern(10000, [0, 20]);
 console.log(`Rendering ${visibleItems.length} items out of 10000 total`);
-
 
 // ============================================
 // 9. MEMORY PROFILING TOOLS
@@ -946,15 +975,15 @@ console.log("\n=== 9. Memory Profiling Tools Demo ===");
 
 // 9.1 Chrome DevTools memory panel
 console.log("\nChrome DevTools memory tools:");
-console.log('  1. Heap Snapshot - Point-in-time memory state');
-console.log('  2. Allocation Timeline - Track allocations over time');
-console.log('  3. Allocation Sampling - Statistical allocation view');
+console.log("  1. Heap Snapshot - Point-in-time memory state");
+console.log("  2. Allocation Timeline - Track allocations over time");
+console.log("  3. Allocation Sampling - Statistical allocation view");
 
 // 9.2 Node.js memory profiling
 console.log("\nNode.js memory tools:");
-console.log('  --inspect flag for DevTools connection');
-console.log('  clinic.js for automated analysis');
-console.log('  heapdump module for snapshots');
+console.log("  --inspect flag for DevTools connection");
+console.log("  clinic.js for automated analysis");
+console.log("  heapdump module for snapshots");
 
 // 9.3 Simple allocation tracker
 class AllocationTracker {
@@ -966,7 +995,7 @@ class AllocationTracker {
   track(label, size) {
     this.allocations.set(label, {
       size,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
     this.totalAllocations++;
   }
@@ -975,7 +1004,7 @@ class AllocationTracker {
     const report = {
       totalAllocations: this.totalAllocations,
       currentAllocations: this.allocations.size,
-      items: []
+      items: [],
     };
 
     this.allocations.forEach((info, label) => {
@@ -987,12 +1016,11 @@ class AllocationTracker {
 }
 
 const tracker = new AllocationTracker();
-tracker.track('userCache', 1024 * 1024);
-tracker.track('sessionData', 512 * 1024);
+tracker.track("userCache", 1024 * 1024);
+tracker.track("sessionData", 512 * 1024);
 
 console.log("\nAllocation tracker:");
 console.log(tracker.getReport());
-
 
 // ============================================
 // 10. MEMORY OPTIMIZATION TECHNIQUES
@@ -1026,8 +1054,8 @@ console.log("\nData structure comparison:");
 const lookupArray = Array.from({ length: 10000 }, (_, i) => i);
 const lookupSet = new Set(lookupArray);
 
-console.log('Array.includes() for lookup: O(n)');
-console.log('Set.has() for lookup: O(1)');
+console.log("Array.includes() for lookup: O(n)");
+console.log("Set.has() for lookup: O(1)");
 
 // 10.2 Lazy initialization
 class LazyInitialized {
@@ -1037,21 +1065,21 @@ class LazyInitialized {
 
   get expensiveData() {
     if (!this._expensiveData) {
-      console.log('  Initializing expensive data...');
-      this._expensiveData = new Array(100000).fill('data');
+      console.log("  Initializing expensive data...");
+      this._expensiveData = new Array(100000).fill("data");
     }
     return this._expensiveData;
   }
 
   clearExpensiveData() {
     this._expensiveData = null;
-    console.log('  Expensive data cleared');
+    console.log("  Expensive data cleared");
   }
 }
 
 const lazy = new LazyInitialized();
-console.log('\nLazy initialization:');
-console.log('Object created, data not initialized yet');
+console.log("\nLazy initialization:");
+console.log("Object created, data not initialized yet");
 lazy.expensiveData; // Now initialized
 lazy.clearExpensiveData(); // Clean up
 
@@ -1069,13 +1097,12 @@ const obj4 = { a: 3, b: 4 }; // Same addition order → shared hidden class
 // Pitfall: `delete` on an object transitions it to dictionary (slow) mode.
 // Prefer setting to undefined/null over delete for frequently-accessed objects.
 
-console.log('Consistent property order enables hidden class optimization');
+console.log("Consistent property order enables hidden class optimization");
 
 // 10.4 Null vs undefined
 console.log("\nNull vs Undefined:");
 console.log('null: Explicit "no value" (use for clearing references)');
-console.log('undefined: Default for uninitialized (don\'t assign manually)');
-
+console.log("undefined: Default for uninitialized (don't assign manually)");
 
 // ============================================
 // BEST PRACTICES
@@ -1141,14 +1168,13 @@ class ResourceManager {
     });
     this.resources.clear();
     this.cleanupCallbacks.clear();
-    console.log('All resources disposed');
+    console.log("All resources disposed");
   }
 }
 
 const rm = new ResourceManager();
-rm.acquire('conn1', {}, () => console.log('  Cleaning connection'));
-rm.release('conn1');
-
+rm.acquire("conn1", {}, () => console.log("  Cleaning connection"));
+rm.release("conn1");
 
 // ============================================
 // SUMMARY
@@ -1179,7 +1205,6 @@ rm.release('conn1');
  */
 
 console.log("\n=== Memory Management Demo Complete ===");
-
 
 // ============================================
 // Cross-references

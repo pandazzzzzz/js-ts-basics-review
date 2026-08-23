@@ -27,13 +27,12 @@ interface Entity {
 
 const entity: Entity = {
   [UNIQUE_ID]: 1,
-  [UNIQUE_NAME]: "Test"
+  [UNIQUE_NAME]: "Test",
 };
 
 console.log("=== Unique Symbol Type ===");
 console.log(entity[UNIQUE_ID]);
 console.log(entity[UNIQUE_NAME]);
-
 
 // ============================================================================
 // 2. SYMBOL INDEX SIGNATURES
@@ -64,7 +63,6 @@ for (const item of new CustomIterable()) {
   console.log(item);
 }
 
-
 // ============================================================================
 // 3. WELL-KNOWN SYMBOL TYPING
 // ============================================================================
@@ -93,7 +91,7 @@ class NumberRange implements Range {
           return { done: false, value: current++ };
         }
         return { done: true, value: undefined };
-      }
+      },
     };
   }
 }
@@ -102,7 +100,6 @@ console.log("\n=== Well-Known Symbol Typing ===");
 for (const num of new NumberRange(1, 5)) {
   console.log(num);
 }
-
 
 // ============================================================================
 // 4. SYMBOL.TO PRIMITIVE TYPING
@@ -117,7 +114,7 @@ class Money {
 
   [Symbol.toPrimitive](hint: string): string | number {
     if (hint === "string") {
-      return `${this.dollars}.${this.cents.toString().padStart(2, '0')} USD`;
+      return `${this.dollars}.${this.cents.toString().padStart(2, "0")} USD`;
     }
     if (hint === "number") {
       return this.dollars + this.cents / 100;
@@ -130,7 +127,6 @@ console.log("\n=== Symbol.toPrimitive Typing ===");
 const money = new Money(100, 50);
 console.log(String(money)); // "100.50 USD"
 console.log(+money); // 100.5
-
 
 // ============================================================================
 // 5. SYMBOL.TO STRING TAG TYPING
@@ -158,8 +154,7 @@ const validator = new Validator();
 const client = new ApiClient();
 
 console.log(Object.prototype.toString.call(validator)); // [object Validator]
-console.log(Object.prototype.toString.call(client));    // [object ApiClient]
-
+console.log(Object.prototype.toString.call(client)); // [object ApiClient]
 
 // ============================================================================
 // 6. SYMBOL.HAS INSTANCE CUSTOMIZATION
@@ -177,10 +172,9 @@ console.log("\n=== Symbol.hasInstance Typing ===");
 const testValue1: unknown = 4;
 const testValue2: unknown = 3;
 const testValue3: unknown = "4";
-console.log(EvenNumber[Symbol.hasInstance](testValue1));   // true
-console.log(EvenNumber[Symbol.hasInstance](testValue2));   // false
-console.log(EvenNumber[Symbol.hasInstance](testValue3));   // false
-
+console.log(EvenNumber[Symbol.hasInstance](testValue1)); // true
+console.log(EvenNumber[Symbol.hasInstance](testValue2)); // false
+console.log(EvenNumber[Symbol.hasInstance](testValue3)); // false
 
 // ============================================================================
 // 7. SYMBOL.FOR AND GLOBAL REGISTRY TYPING
@@ -200,7 +194,6 @@ function isGlobalSymbol(sym: symbol): sym is symbol {
 console.log("\n=== Symbol.for Global Registry ===");
 console.log(`Global symbol key: ${key}`);
 console.log(Symbol.for("app.global") === GLOBAL_SYMBOL); // true
-
 
 // ============================================================================
 // 8. SYMBOL IN INTERFACES AND TYPES
@@ -231,7 +224,6 @@ class DataCollection implements Iterable<string>, SymbolMethods {
 
 console.log("\n=== Symbol in Interfaces ===");
 
-
 // ============================================================================
 // 9. ASYNC ITERATOR TYPING
 // ============================================================================
@@ -259,7 +251,6 @@ console.log("\n=== Async Iterator Typing ===");
   }
 })();
 
-
 // ============================================================================
 // 10. SYMBOL UTILITY TYPES
 // ============================================================================
@@ -286,7 +277,6 @@ type MyStringKeys = StringKeys<MixedKeys>;
 
 console.log("\n=== Symbol Utility Types ===");
 
-
 // ============================================================================
 // 11. BRAND SYMBOLS FOR NOMINAL TYPING
 // ============================================================================
@@ -310,7 +300,6 @@ function processOrder(id: OrderId): void {
 console.log("\n=== Brand Symbols ===");
 const userId = createUserId("user-123");
 // processOrder(userId); // ❌ Error: UserId is not assignable to OrderId
-
 
 // ============================================================================
 // 12. COMPARISON TABLE
@@ -342,4 +331,6 @@ KEY TAKEAWAYS:
 5. Runtime Symbol behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

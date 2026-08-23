@@ -108,7 +108,7 @@ const x = "global x";
 
 function makeClosure() {
   const x = "local x";
-  return function() {
+  return function () {
     return x; // Returns "local x" (lexical scope, not dynamic)
   };
 }
@@ -121,9 +121,15 @@ function sharedScopeExample() {
   let shared = 0;
 
   return {
-    increment: function() { return ++shared; },
-    decrement: function() { return --shared; },
-    get: function() { return shared; }
+    increment: function () {
+      return ++shared;
+    },
+    decrement: function () {
+      return --shared;
+    },
+    get: function () {
+      return shared;
+    },
   };
 }
 
@@ -139,7 +145,7 @@ console.log("After decrement:", shared.decrement()); // 1
 // Principle 3: Independent closures
 function createCounter() {
   let count = 0;
-  return function() {
+  return function () {
     return ++count;
   };
 }
@@ -201,7 +207,7 @@ function createBankAccount(initialBalance) {
 
     getBalance() {
       return balance;
-    }
+    },
   };
 }
 
@@ -262,13 +268,16 @@ function outer() {
 }
 
 const efficientClosure = outer();
-console.log("Efficient closure uses only needed variables:", efficientClosure()); // 84
+console.log(
+  "Efficient closure uses only needed variables:",
+  efficientClosure()
+); // 84
 
 // Memory leak example
 function createLeak() {
   const largeData = new Array(100000).fill("data");
 
-  return function() {
+  return function () {
     // This closure keeps largeData in memory!
     return largeData.length;
   };
@@ -284,7 +293,7 @@ function noLeak() {
   const largeData = new Array(100000).fill("data");
   const length = largeData.length; // Capture only the value
 
-  return function() {
+  return function () {
     return length; // Only 'length' is captured
   };
 }
@@ -336,19 +345,19 @@ function createStore(initialState) {
     subscribe(listener) {
       listeners.push(listener);
       // Return unsubscribe function
-      return function() {
+      return function () {
         const index = listeners.indexOf(listener);
         if (index > -1) {
           listeners.splice(index, 1);
         }
       };
-    }
+    },
   };
 }
 
 const store = createStore({ count: 0, name: "Demo" });
 
-const unsubscribe = store.subscribe((state) => {
+const unsubscribe = store.subscribe(state => {
   console.log("State updated:", state);
 });
 
@@ -358,7 +367,7 @@ unsubscribe(); // Clean up
 
 // Pattern 2: Function factory (see 13.4 for more)
 function createMultiplier(multiplier) {
-  return function(number) {
+  return function (number) {
     return number * multiplier;
   };
 }
@@ -372,7 +381,7 @@ console.log("triple(5):", triple(5)); // 15
 
 // Pattern 3: Event handler with context
 function createButtonHandler(userId) {
-  return function(event) {
+  return function (event) {
     // This closure remembers userId
     console.log(`Button clicked by user ${userId}`);
     console.log(`Event type: ${event.type}`);
@@ -497,7 +506,9 @@ console.log("\n=== Cross-references ===");
 console.log("📘 13.1-scope-basics.js - Scope fundamentals");
 console.log("📘 13.4-closures-patterns.js - Advanced closure patterns");
 console.log("📘 16-classes.js - ES2022+ # private fields (modern alternative)");
-console.log("📘 27-memory-management.js - Memory management and garbage collection");
+console.log(
+  "📘 27-memory-management.js - Memory management and garbage collection"
+);
 console.log("📘 24-function-patterns-advanced.js - Memoization and caching");
 
 // ============================================

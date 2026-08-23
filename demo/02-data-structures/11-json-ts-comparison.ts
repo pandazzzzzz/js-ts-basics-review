@@ -33,7 +33,6 @@ interface Person {
 const personAsserted = JSON.parse(jsonString) as Person;
 console.log("With assertion:", personAsserted.name, personAsserted.age);
 
-
 // ============================================================================
 // 2. TYPE ASSERTIONS FOR PARSED JSON
 // ============================================================================
@@ -91,7 +90,6 @@ const wronglyTyped = JSON.parse(invalidJson) as User; // No error at parse time
 console.log("Wrongly typed (no runtime error):", wronglyTyped);
 // But accessing wronglyTyped.id as number would fail
 
-
 // ============================================================================
 // 3. TYPE GUARDS FOR JSON VALIDATION
 // ============================================================================
@@ -141,11 +139,12 @@ function isUserArray(obj: unknown): obj is User[] {
   return Array.isArray(obj) && obj.every(isUser);
 }
 
-const maybeUsers = JSON.parse('[{"id": 1, "username": "a", "email": "a@a.com"}]');
+const maybeUsers = JSON.parse(
+  '[{"id": 1, "username": "a", "email": "a@a.com"}]'
+);
 if (isUserArray(maybeUsers)) {
   console.log("Valid users count:", maybeUsers.length);
 }
-
 
 // ============================================================================
 // 4. INTERFACE DEFINITIONS FOR JSON DATA
@@ -174,9 +173,9 @@ const successResponse: ApiResponse<Product> = {
     id: 1,
     name: "Laptop",
     price: 999.99,
-    inStock: true
+    inStock: true,
   },
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
 };
 
 // Serialize with known structure
@@ -186,17 +185,25 @@ console.log("Serialized response:", serialized.slice(0, 100) + "...");
 // Parse with proper typing
 const parsedResponse = JSON.parse(serialized) as ApiResponse<Product>;
 if (parsedResponse.status === "success" && parsedResponse.data) {
-  console.log("Product:", parsedResponse.data.name, "-", parsedResponse.data.price);
+  console.log(
+    "Product:",
+    parsedResponse.data.name,
+    "-",
+    parsedResponse.data.price
+  );
 }
 
 // Discriminated union for response handling
 type ApiResult<T> =
-  | { success: true; data: T }
-  | { success: false; error: string };
+  { success: true; data: T } | { success: false; error: string };
 
 function handleApiResult<T>(json: string): ApiResult<T> {
   try {
-    const parsed = JSON.parse(json) as { success: boolean; data?: T; error?: string };
+    const parsed = JSON.parse(json) as {
+      success: boolean;
+      data?: T;
+      error?: string;
+    };
     if (parsed.success && parsed.data !== undefined) {
       return { success: true, data: parsed.data };
     } else {
@@ -206,7 +213,6 @@ function handleApiResult<T>(json: string): ApiResult<T> {
     return { success: false, error: "Invalid JSON" };
   }
 }
-
 
 // ============================================================================
 // 5. JSON.STRINGIFY RETURN TYPE
@@ -235,7 +241,7 @@ const sensitive: SensitiveData = {
   name: "Alice",
   password: "secret123",
   apiKey: "sk-xxx",
-  email: "alice@example.com"
+  email: "alice@example.com",
 };
 
 type ReplacerFn = (key: string, value: unknown) => unknown;
@@ -249,7 +255,6 @@ const safeReplacer: ReplacerFn = (key, value) => {
 
 const safeJson = JSON.stringify(sensitive, safeReplacer, 2);
 console.log("Sanitized JSON:\n", safeJson);
-
 
 // ============================================================================
 // 6. HANDLING UNKNOWN TYPES FROM JSON
@@ -301,7 +306,6 @@ try {
   console.error("Assertion failed");
 }
 
-
 // ============================================================================
 // 7. REVIVER/REPLACER FUNCTION TYPES
 // ============================================================================
@@ -351,16 +355,15 @@ const genericReviver: ReviverFn = (key, value) => {
 const complexJson = JSON.stringify({
   created: { __type: "Date", value: "2024-01-15T10:00:00.000Z" },
   pattern: { __type: "RegExp", source: "test", flags: "g" },
-  tags: { __type: "Set", values: ["a", "b", "c"] }
+  tags: { __type: "Set", values: ["a", "b", "c"] },
 });
 
 const restored = JSON.parse(complexJson, genericReviver);
 console.log("Restored types:", {
   date: restored.created instanceof Date,
   regex: restored.pattern instanceof RegExp,
-  set: restored.tags instanceof Set
+  set: restored.tags instanceof Set,
 });
-
 
 // ============================================================================
 // 8. UTILITY TYPES FOR JSON
@@ -370,12 +373,7 @@ console.log("\n=== Utility Types for JSON ===");
 
 // JSON-safe type (serializable types)
 type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+  string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
 // Helper to ensure values are JSON-safe
 function ensureJsonSafe<T extends Record<string, unknown>>(obj: T): JSONValue {
@@ -386,8 +384,8 @@ function ensureJsonSafe<T extends Record<string, unknown>>(obj: T): JSONValue {
 type Jsonify<T> = T extends { toJSON(): infer J }
   ? J
   : T extends object
-  ? { [K in keyof T]: Jsonify<T[K]> }
-  : T;
+    ? { [K in keyof T]: Jsonify<T[K]> }
+    : T;
 
 // Usage example
 interface ComplexObject {
@@ -401,13 +399,12 @@ const complex: ComplexObject = {
   name: "test",
   date: new Date(),
   regex: /test/g,
-  func: () => {}
+  func: () => {},
 };
 
 const jsonified = JSON.parse(JSON.stringify(complex)) as Jsonify<ComplexObject>;
 // date becomes string, regex becomes {}, func is omitted
 console.log("Jsonified:", jsonified);
-
 
 // ============================================================================
 // 9. COMMON PITFALLS
@@ -475,7 +472,6 @@ const restoredPerson = JSON.parse(personJson) as { name: string };
 console.log("Restored person (no methods):", restoredPerson);
 // restoredPerson.greet(); // ❌ Error: greet doesn't exist
 
-
 // ============================================================================
 // 10. VALIDATION LIBRARY PATTERNS (Conceptual)
 // ============================================================================
@@ -488,21 +484,23 @@ type Validator<T> = (value: unknown) => value is T;
 // Schema builder interface
 interface Schema<T> {
   parse: (value: unknown) => T;
-  safeParse: (value: unknown) => { success: true; data: T } | { success: false; error: string };
+  safeParse: (
+    value: unknown
+  ) => { success: true; data: T } | { success: false; error: string };
 }
 
 // Example: Simple string validator
 const stringSchema: Schema<string> = {
-  parse: (value) => {
+  parse: value => {
     if (typeof value !== "string") throw new Error("Expected string");
     return value;
   },
-  safeParse: (value) => {
+  safeParse: value => {
     if (typeof value !== "string") {
       return { success: false, error: "Expected string" };
     }
     return { success: true, data: value };
-  }
+  },
 };
 
 // Example: Object schema builder
@@ -510,7 +508,7 @@ function objectSchema<T extends Record<string, Schema<any>>>(
   shape: T
 ): Schema<{ [K in keyof T]: T[K] extends Schema<infer U> ? U : never }> {
   return {
-    parse: (value) => {
+    parse: value => {
       if (typeof value !== "object" || value === null) {
         throw new Error("Expected object");
       }
@@ -521,26 +519,25 @@ function objectSchema<T extends Record<string, Schema<any>>>(
       }
       return result as any;
     },
-    safeParse: (value) => {
+    safeParse: value => {
       try {
         return { success: true, data: objectSchema(shape).parse(value) };
       } catch (e) {
         return { success: false, error: String(e) };
       }
-    }
+    },
   };
 }
 
 // Usage
 const userSchema = objectSchema({
   id: stringSchema,
-  name: stringSchema
+  name: stringSchema,
 });
 
 const validData = { id: "123", name: "Alice" };
 const result = userSchema.safeParse(validData);
 console.log("Schema validation:", result);
-
 
 // ============================================================================
 // 11. BEST PRACTICES SUMMARY
@@ -611,7 +608,6 @@ console.log("Schema validation:", result);
 
 🎯 RECOMMENDATION: Always validate external JSON!
 */
-
 
 // ============================================================================
 // 12. COMPARISON TABLE

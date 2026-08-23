@@ -45,9 +45,9 @@ const user = {
   hobbies: ["reading", "coding", "gaming"],
   address: {
     city: "New York",
-    zip: "10001"
+    zip: "10001",
   },
-  spouse: null
+  spouse: null,
 };
 
 const jsonString = JSON.stringify(user);
@@ -105,7 +105,10 @@ function logObject(obj, label = "Object") {
   console.log(`\n  === ${label} ===`);
   console.log(JSON.stringify(obj, null, 2));
 }
-logObject({ status: "success", data: { id: 1, value: "test" } }, "API Response");
+logObject(
+  { status: "success", data: { id: 1, value: "test" } },
+  "API Response"
+);
 
 // ============================================
 // Section 4: stringify Options - replacer Function
@@ -124,7 +127,7 @@ const objWithPrivate = {
   name: "Charlie",
   password: "secret123",
   apiKey: "sk-xxx",
-  email: "charlie@example.com"
+  email: "charlie@example.com",
 };
 
 function replacer(key, value) {
@@ -143,7 +146,9 @@ console.log("  " + sanitized.replace(/\n/g, "\n  "));
 const mixedObj = {
   date: new Date("2024-01-15"),
   regex: /test/g,
-  func: function() { return 42; }
+  func: function () {
+    return 42;
+  },
 };
 
 function typeReplacer(key, value) {
@@ -177,7 +182,7 @@ console.log("\nparse reviver Function:");
 // Restore Date objects
 const dateJson = '{"title":"Meeting","date":"2024-06-15T10:00:00.000Z"}';
 
-const meetup = JSON.parse(dateJson, function(key, value) {
+const meetup = JSON.parse(dateJson, function (key, value) {
   if (key === "date") {
     return new Date(value);
   }
@@ -197,7 +202,7 @@ const scheduleJson = `{
   ]
 }`;
 
-const schedule = JSON.parse(scheduleJson, function(key, value) {
+const schedule = JSON.parse(scheduleJson, function (key, value) {
   if (key === "date") {
     return new Date(value);
   }
@@ -227,11 +232,15 @@ function genericReviver(key, value) {
   return value;
 }
 
-const complexJson = JSON.stringify({
-  created: { __type: "Date", value: "2024-01-15T10:00:00.000Z" },
-  pattern: { __type: "RegExp", source: "test", flags: "g" },
-  tags: { __type: "Set", values: ["a", "b", "c"] }
-}, null, 2);
+const complexJson = JSON.stringify(
+  {
+    created: { __type: "Date", value: "2024-01-15T10:00:00.000Z" },
+    pattern: { __type: "RegExp", source: "test", flags: "g" },
+    tags: { __type: "Set", values: ["a", "b", "c"] },
+  },
+  null,
+  2
+);
 
 console.log("\n  Generic reviver parsing:");
 const restored = JSON.parse(complexJson, genericReviver);
@@ -248,18 +257,20 @@ console.log("\nSpecial Value Handling:");
 
 // BigInt needs custom toJSON to serialize
 if (typeof BigInt.prototype.toJSON === "undefined") {
-  BigInt.prototype.toJSON = function() {
+  BigInt.prototype.toJSON = function () {
     return { __type: "BigInt", value: this.toString() };
   };
 }
 
 const specialObj = {
   a: undefined,
-  b: function() { return 42; },
+  b: function () {
+    return 42;
+  },
   c: Symbol("test"),
   d: null,
   e: "normal",
-  f: 123n
+  f: 123n,
 };
 
 console.log("  Original object:", specialObj);
@@ -267,7 +278,7 @@ console.log("  After stringify:", JSON.stringify(specialObj));
 console.log("  Note: undefined, function, symbol omitted, BigInt needs toJSON");
 
 // Special values in arrays
-const specialArr = [1, undefined, function() {}, null, "test", Symbol("s")];
+const specialArr = [1, undefined, function () {}, null, "test", Symbol("s")];
 console.log("\n  Special Values in Array:");
 console.log("  Original:", specialArr);
 console.log("  stringify:", JSON.stringify(specialArr));
@@ -279,7 +290,7 @@ const customObj = {
   value: 42,
   toJSON() {
     return { name: this.name, serialized: true };
-  }
+  },
 };
 
 console.log("\n  toJSON Custom Serialization:");
@@ -298,7 +309,7 @@ console.log("\nDate Serialization Patterns:");
 // Pattern 1: ISO string (recommended)
 const event = {
   title: "Meeting",
-  date: new Date("2024-06-15T10:00:00Z")
+  date: new Date("2024-06-15T10:00:00Z"),
 };
 const eventJson = JSON.stringify(event);
 console.log("  ISO String:", eventJson);
@@ -315,14 +326,14 @@ console.log("  After restoration date type:", parsedEvent.date instanceof Date);
 // Pattern 2: Timestamp
 const timestampObj = {
   title: "Event",
-  timestamp: Date.now()
+  timestamp: Date.now(),
 };
 console.log("\n  Timestamp:", JSON.stringify(timestampObj));
 
 // Pattern 3: Type-tagged (for complex scenarios)
 const taggedDate = {
   __type: "Date",
-  iso: new Date().toISOString()
+  iso: new Date().toISOString(),
 };
 console.log("\n  Type-tagged:", JSON.stringify(taggedDate));
 
@@ -338,8 +349,8 @@ const apiRequest = {
   endpoint: "/api/users",
   body: {
     name: "New User",
-    email: "user@example.com"
-  }
+    email: "user@example.com",
+  },
 };
 
 const requestJson = JSON.stringify(apiRequest);
@@ -347,7 +358,8 @@ console.log("  API Request:");
 console.log("  ", requestJson);
 
 // Simulated server response
-const serverResponse = '{"status":"success","data":{"id":123,"name":"New User"}}';
+const serverResponse =
+  '{"status":"success","data":{"id":123,"name":"New User"}}';
 const response = JSON.parse(serverResponse);
 console.log("  API Response:", response.status, "- ID:", response.data.id);
 
@@ -355,7 +367,7 @@ console.log("  API Response:", response.status, "- ID:", response.data.id);
 const storage = {
   theme: "dark",
   language: "zh-CN",
-  notifications: true
+  notifications: true,
 };
 
 // Node.js doesn't have localStorage, using Map to simulate
@@ -370,7 +382,7 @@ console.log("    Loaded:", JSON.stringify(loaded));
 const original = {
   name: "Original",
   nested: { value: 42 },
-  arr: [1, 2, 3]
+  arr: [1, 2, 3],
 };
 const deepCopy = JSON.parse(JSON.stringify(original));
 deepCopy.nested.value = 100;
@@ -379,19 +391,22 @@ deepCopy.arr[0] = 999;
 console.log("\n  Deep Copy:");
 console.log("    original:", JSON.stringify(original));
 console.log("    deepCopy:", JSON.stringify(deepCopy));
-console.log("    Is independent:", original.nested.value !== deepCopy.nested.value);
+console.log(
+  "    Is independent:",
+  original.nested.value !== deepCopy.nested.value
+);
 
 // Use case 4: Configuration serialization
 const config = {
   version: "1.0.0",
   features: {
     darkMode: true,
-    beta: false
+    beta: false,
   },
   limits: {
     maxUsers: 100,
-    timeout: 30000
-  }
+    timeout: 30000,
+  },
 };
 
 const configJson = JSON.stringify(config, null, 2);
@@ -410,7 +425,7 @@ function isValidJSON(str) {
 
 console.log("\n  JSON Validation:");
 console.log("    Valid:", isValidJSON('{"a": 1}'));
-console.log("    Invalid:", isValidJSON('{a: 1}')); // JSON requires double quotes
+console.log("    Invalid:", isValidJSON("{a: 1}")); // JSON requires double quotes
 
 // ============================================
 // Section 9: Error Handling
@@ -489,7 +504,7 @@ console.log("\nES2019 JSON Improvements:");
 // - Escapes lone surrogates (U+D800 to U+DFFF)
 // - Previously, lone surrogates could break JSON.parse
 const withLoneSurrogate = {
-  loneSurrogate: "\uD800" // Lone high surrogate
+  loneSurrogate: "\uD800", // Lone high surrogate
 };
 
 console.log("  Well-formed JSON.stringify (ES2019):");
@@ -512,7 +527,7 @@ console.log("\n  JSON Superset (ES2019):");
 // Now they're valid in JavaScript string literals
 const withLineSeparators = {
   message: "Hello\u2028World", // LINE SEPARATOR
-  text: "Paragraph\u2029End"   // PARAGRAPH SEPARATOR
+  text: "Paragraph\u2029End", // PARAGRAPH SEPARATOR
 };
 
 const jsonWithSeparators = JSON.stringify(withLineSeparators);
@@ -526,7 +541,7 @@ console.log("    Parsed successfully:", parsedWithSeparators);
 // - Symbol keys are silently ignored in JSON.stringify
 const objWithSymbols = {
   [Symbol("id")]: 123,
-  name: "Test"
+  name: "Test",
 };
 console.log("\n  Symbol keys in JSON.stringify:");
 console.log("    Object:", objWithSymbols);
@@ -567,15 +582,19 @@ try {
 // Solution: Use replacer to handle circular references
 function safeStringify(obj, indent = 2) {
   let cache = new Set();
-  const val = JSON.stringify(obj, (key, value) => {
-    if (typeof value === "object" && value !== null) {
-      if (cache.has(value)) {
-        return "[Circular]";
+  const val = JSON.stringify(
+    obj,
+    (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (cache.has(value)) {
+          return "[Circular]";
+        }
+        cache.add(value);
       }
-      cache.add(value);
-    }
-    return value;
-  }, indent);
+      return value;
+    },
+    indent
+  );
   cache = null;
   return val;
 }
@@ -604,16 +623,19 @@ console.log("    Note: Prototype chain methods lost during serialization");
 // Pitfall 3: undefined omitted
 const objWithUndefined = {
   defined: "value",
-  undefined: undefined
+  undefined: undefined,
 };
 console.log("\n  Pitfall 3 - undefined:");
 console.log("    stringify:", JSON.stringify(objWithUndefined));
-console.log("    has undefined after parse:", "undefined" in JSON.parse(JSON.stringify(objWithUndefined)));
+console.log(
+  "    has undefined after parse:",
+  "undefined" in JSON.parse(JSON.stringify(objWithUndefined))
+);
 
 // Pitfall 4: Large number precision loss
 const bigNum = {
   id: 9007199254740993n, // Exceeds Number.MAX_SAFE_INTEGER
-  safe: 9007199254740991
+  safe: 9007199254740991,
 };
 
 console.log("\n  Pitfall 4 - Large Number Precision:");
@@ -630,7 +652,9 @@ console.log("  2. Use the replacer argument to filter sensitive fields");
 console.log("  3. Provide a toJSON() method for custom serialization");
 console.log("  4. Handle BigInt explicitly (JSON.stringify throws otherwise)");
 console.log("  5. Use try/catch around JSON.parse for malformed input");
-console.log("  6. Prefer JSON.stringify(obj, null, 2) for readable debugging output");
+console.log(
+  "  6. Prefer JSON.stringify(obj, null, 2) for readable debugging output"
+);
 
 // ============================================
 // TypeScript Comparison Notes
@@ -663,7 +687,6 @@ console.log("  6. Prefer JSON.stringify(obj, null, 2) for readable debugging out
 
 📘 See related: 08-objects.js (objects), 33-fetch-api.js (network requests)
 */
-
 
 // ============================================
 // Cross-references

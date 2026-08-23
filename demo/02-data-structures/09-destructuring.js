@@ -58,19 +58,23 @@ console.log("  surname:", surname); // "Anonymous" (default)
 
 // Default values can be expressions (evaluated only when needed)
 let promptCalled = false;
-const [x = (promptCalled = true, "default")] = ["provided"];
+const [x = ((promptCalled = true), "default")] = ["provided"];
 console.log("  Default value not evaluated:", !promptCalled); // true
 
 // Swapping variables (ES6)
 // - Swap without temporary variable
-let x1 = 1, y1 = 2;
+let x1 = 1,
+  y1 = 2;
 [x1, y1] = [y1, x1];
 console.log("\nSwapping Variables:");
 console.log("  x1:", x1, "y1:", y1); // 2, 1
 
 // Nested destructuring (ES6)
 // - Destructure nested arrays
-const nested = [[1, 2], [3, 4]];
+const nested = [
+  [1, 2],
+  [3, 4],
+];
 const [[a1, b1], [c1, d1]] = nested;
 console.log("\nNested Destructuring:");
 console.log("  a1:", a1, "b1:", b1, "c1:", c1, "d1:", d1); // 1, 2, 3, 4
@@ -88,7 +92,10 @@ const [setFirst, setSecond] = new Set([1, 2, 3]);
 console.log("  Set:", setFirst, setSecond); // 1, 2
 
 // Map (destructure entries)
-const map = new Map([["a", 1], ["b", 2]]);
+const map = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 const [entry1, entry2] = map;
 console.log("  Map entries:", entry1, entry2); // ["a", 1], ["b", 2]
 
@@ -133,12 +140,12 @@ console.log("  remainingProps:", remainingProps); // { height: 200, width: 100 }
 const complexObj = {
   size: { width: 100, height: 200 },
   items: ["Cake", "Donut"],
-  extra: true
+  extra: true,
 };
 const {
   size: { width, height },
   items: [item1, item2],
-  extra
+  extra,
 } = complexObj;
 console.log("\nNested Destructuring:");
 console.log("  width:", width, "height:", height); // 100, 200
@@ -146,7 +153,11 @@ console.log("  item1:", item1, "item2:", item2); // "Cake", "Donut"
 
 // Deep nested + default values
 const deepNested = { user: { profile: { email: "test@example.com" } } };
-const { user: { profile: { email, phone = "N/A" } } } = deepNested;
+const {
+  user: {
+    profile: { email, phone = "N/A" },
+  },
+} = deepNested;
 console.log("  email:", email, "phone:", phone); // "test@example.com", "N/A"
 
 // Computed property name destructuring (ES6)
@@ -177,7 +188,10 @@ function configure({ width = 100, height = 200, title = "Untitled" } = {}) {
 console.log("\nParameter Destructuring with Default Values:");
 console.log("  No args:", configure()); // { width: 100, height: 200, title: "Untitled" }
 console.log("  Partial args:", configure({ width: 50 })); // { width: 50, height: 200, title: "Untitled" }
-console.log("  Full override:", configure({ width: 50, height: 100, title: "Custom" }));
+console.log(
+  "  Full override:",
+  configure({ width: 50, height: 100, title: "Custom" })
+);
 
 // Array parameter destructuring (ES6)
 function sumPair([a, b]) {
@@ -189,15 +203,22 @@ console.log("  sumPair([3, 4]):", sumPair([3, 4])); // 7
 // Complex parameter destructuring - nested + defaults + renaming
 function createUser({
   profile: { firstName: fn, lastName: ln } = {},
-  settings: { theme = "light", notifications = true } = {}
+  settings: { theme = "light", notifications = true } = {},
 } = {}) {
-  return { fullName: `${fn || "Unknown"} ${ln || ""}`.trim(), theme, notifications };
+  return {
+    fullName: `${fn || "Unknown"} ${ln || ""}`.trim(),
+    theme,
+    notifications,
+  };
 }
 console.log("\nComplex Parameter Destructuring:");
-console.log(" ", createUser({
-  profile: { firstName: "John", lastName: "Doe" },
-  settings: { theme: "dark" }
-}));
+console.log(
+  " ",
+  createUser({
+    profile: { firstName: "John", lastName: "Doe" },
+    settings: { theme: "dark" },
+  })
+);
 // { fullName: "John Doe", theme: "dark", notifications: true }
 
 // ============================================
@@ -214,7 +235,7 @@ console.log("  existingA:", existingA, "existingB:", existingB); // 10, 20
 // Destructuring in for...of loops (ES6)
 const users = [
   { id: 1, name: "Alice" },
-  { id: 2, name: "Bob" }
+  { id: 2, name: "Bob" },
 ];
 console.log("\nfor...of Loop Destructuring:");
 for (const { id, name } of users) {
@@ -222,7 +243,10 @@ for (const { id, name } of users) {
 }
 
 // Map.entries() destructuring (ES6)
-const userMap = new Map([["id", 1], ["name", "Alice"]]);
+const userMap = new Map([
+  ["id", 1],
+  ["name", "Alice"],
+]);
 console.log("\nMap.entries() Destructuring:");
 for (const [mapKey, mapValue] of userMap) {
   console.log(`  ${mapKey}: ${mapValue}`);
@@ -235,8 +259,17 @@ console.log("\nArray Index Destructuring:");
 console.log("  firstElem:", firstElem, "lastElem:", lastElem); // "a", "c"
 
 // Destructuring with JSON data (ES6)
-const jsonData = JSON.stringify({ users: [{ name: "Alice", posts: [{ title: "Hello" }] }] });
-const { users: [{ name: userName2, posts: [{ title: firstPost }] }] } = JSON.parse(jsonData);
+const jsonData = JSON.stringify({
+  users: [{ name: "Alice", posts: [{ title: "Hello" }] }],
+});
+const {
+  users: [
+    {
+      name: userName2,
+      posts: [{ title: firstPost }],
+    },
+  ],
+} = JSON.parse(jsonData);
 console.log("\nJSON Data Destructuring:");
 console.log(`  User: ${userName2}, First post: ${firstPost}`);
 
@@ -284,7 +317,7 @@ function initApp({
   port = 3000,
   host = "localhost",
   debug = false,
-  database = { url: "localhost", port: 5432 }
+  database = { url: "localhost", port: 5432 },
 } = {}) {
   console.log("\nConfiguration Object Pattern Example:");
   console.log(`  Server: ${host}:${port}, Debug: ${debug}`);

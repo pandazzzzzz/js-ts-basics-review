@@ -31,16 +31,21 @@ function addThree(a: number, b: number, c: number): number {
   return a + b + c;
 }
 
-function curried<A, B, C>(fn: (a: A, b: B, c: C) => any): (a: A) => (b: B) => (c: C) => any {
+function curried<A, B, C>(
+  fn: (a: A, b: B, c: C) => any
+): (a: A) => (b: B) => (c: C) => any {
   return (a: A) => (b: B) => (c: C) => fn(a, b, c);
 }
 
-const curriedAdd: (a: number) => (b: number) => (c: number) => number = curried(addThree);
+const curriedAdd: (a: number) => (b: number) => (c: number) => number =
+  curried(addThree);
 console.log("  curriedAdd(1)(2)(3):", curriedAdd(1)(2)(3));
 
 // Example 2: Generic curry function
 console.log("\n2. Generic curry function:");
-function curry<T extends any[]>(fn: (...args: T) => any): (...args: any[]) => any {
+function curry<T extends any[]>(
+  fn: (...args: T) => any
+): (...args: any[]) => any {
   return function curried(...accumulated: any[]): any {
     if (accumulated.length >= fn.length) {
       return fn(...(accumulated as T));
@@ -85,15 +90,19 @@ function pipeN<T>(...fns: UnaryFn<T>[]): UnaryFn<T> {
 
 // Example 5: Partial application with types
 console.log("\n5. Partial application:");
-function bind<T>(fn: (...args: any[]) => T, ...fixedArgs: any[]): (...remaining: any[]) => T {
-  return function(...remaining: any[]): T {
+function bind<T>(
+  fn: (...args: any[]) => T,
+  ...fixedArgs: any[]
+): (...remaining: any[]) => T {
+  return function (...remaining: any[]): T {
     return fn(...fixedArgs, ...remaining);
   };
 }
 
-const greet = (greeting: string, name: string, punctuation: string) => `${greeting}, ${name}${punctuation}`;
-const sayHello = bind(greet, 'Hello');
-console.log("  sayHello('World', '!'):", sayHello('World', '!'));
+const greet = (greeting: string, name: string, punctuation: string) =>
+  `${greeting}, ${name}${punctuation}`;
+const sayHello = bind(greet, "Hello");
+console.log("  sayHello('World', '!'):", sayHello("World", "!"));
 
 // Example 6: Higher-order function types
 console.log("\n6. Higher-order function types:");
@@ -117,28 +126,28 @@ type LoggerFactory = (level: string) => Logger;
 
 function createLogger(level: string): Logger {
   return (message: string) => {
-    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+    const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
     console.log(`[${timestamp}] [${level}] ${message}`);
   };
 }
 
-const info: Logger = createLogger('INFO');
-const warn: Logger = createLogger('WARN');
-const error: Logger = createLogger('ERROR');
+const info: Logger = createLogger("INFO");
+const warn: Logger = createLogger("WARN");
+const error: Logger = createLogger("ERROR");
 
 console.log("  Logger created:");
-info('Application started');
-warn('Configuration not found');
-error('Failed to connect');
+info("Application started");
+warn("Configuration not found");
+error("Failed to connect");
 
 // Example 8: Decorator types
 console.log("\n8. Decorator types:");
 type TimedFn<T> = (...args: any[]) => T;
 
 function withTiming<T>(fn: TimedFn<T>): TimedFn<T> {
-  return function(...args: any[]): T {
+  return function (...args: any[]): T {
     const start = performance.now();
-    const result = fn(...args as any[]);
+    const result = fn(...(args as any[]));
     const end = performance.now();
     console.log(`${fn.name} took ${(end - start).toFixed(2)}ms`);
     return result;
@@ -159,7 +168,7 @@ type Fn<T extends any[], R> = (...args: T) => R;
 function memoize<T extends any[], R>(fn: Fn<T, R>): Fn<T, R> {
   const cache = new Map<string, R>();
 
-  return function(...args: T): R {
+  return function (...args: T): R {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key)!;
@@ -180,13 +189,13 @@ console.log("  memoizedFibonacci(10):", memoizedFibonacci(10));
 
 // Example 10: Placeholder partial application
 console.log("\n10. Placeholder partial application:");
-const PLACEHOLDER = Symbol('placeholder');
+const PLACEHOLDER = Symbol("placeholder");
 
 function partialWithPlaceholders(
   fn: (...args: any[]) => any,
   ...args: any[]
 ): (...newArgs: any[]) => any {
-  return function(...newArgs: any[]): any {
+  return function (...newArgs: any[]): any {
     let argIndex = 0;
     const finalArgs: any[] = args.map(arg => {
       if (arg === PLACEHOLDER) {
@@ -199,7 +208,12 @@ function partialWithPlaceholders(
 }
 
 const subtract = (a: number, b: number) => a - b;
-const subtractFrom10 = partialWithPlaceholders(subtract, 10, PLACEHOLDER, PLACEHOLDER);
+const subtractFrom10 = partialWithPlaceholders(
+  subtract,
+  10,
+  PLACEHOLDER,
+  PLACEHOLDER
+);
 console.log("  subtractFrom10(3):", subtractFrom10(3));
 
 /**

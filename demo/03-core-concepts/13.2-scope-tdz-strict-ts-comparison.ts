@@ -57,7 +57,9 @@ console.log("⚠️  eval() returns 'any' type - use with caution");
 
 // Example 4: with statement disallowed in TS
 console.log("\n4. with statement:");
-console.log("❌ with statement is completely disallowed in TS (compiler error)");
+console.log(
+  "❌ with statement is completely disallowed in TS (compiler error)"
+);
 console.log("✅ Use destructuring instead");
 
 // Example 5: Strict compiler options
@@ -69,7 +71,7 @@ const options = [
   "strictPropertyInitialization",
   "noImplicitReturns",
   "noUnusedLocals",
-  "noUnusedParameters"
+  "noUnusedParameters",
 ];
 console.log("  Recommended strict flags:", options.join(", "));
 

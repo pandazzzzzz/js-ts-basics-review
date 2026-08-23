@@ -86,11 +86,11 @@ console.log("  at(99):", atExample.at(99)); // undefined
 console.log("\n8. Type guard with Array.isArray:");
 function process(value: unknown): number[] {
   if (Array.isArray(value)) {
-    return value.filter((item): item is number => typeof item === 'number');
+    return value.filter((item): item is number => typeof item === "number");
   }
   return [];
 }
-console.log("  process([1, 'a', 2]):", process([1, 'a', 2]));
+console.log("  process([1, 'a', 2]):", process([1, "a", 2]));
 
 /**
  * 📋 Key Takeaways:

@@ -53,7 +53,9 @@ console.log("Zoned date:", zoned.toString());
 console.log("Time zone:", zoned.timeZoneId); // string
 */
 
-console.log("Temporal API has full TypeScript support with strong typing for all date/time operations");
+console.log(
+  "Temporal API has full TypeScript support with strong typing for all date/time operations"
+);
 console.log("Eliminates entire classes of date/time bugs through type safety");
 
 // ============================================
@@ -144,7 +146,7 @@ function createTempFile(): TempFile {
     },
     [Symbol.dispose](): void {
       console.log("Deleting temp file:", path);
-    }
+    },
   };
 }
 
@@ -205,7 +207,11 @@ console.log("Count:", count); // 5
 console.log("\n--- 4. Atomics.pause() ---\n");
 
 // Atomics.pause is typed correctly
-function waitForFlag(sab: SharedArrayBuffer, index: number, expected: number): void {
+function waitForFlag(
+  sab: SharedArrayBuffer,
+  index: number,
+  expected: number
+): void {
   const int32 = new Int32Array(sab);
   while (Atomics.load(int32, index) !== expected) {
     Atomics.pause(); // No return value
@@ -222,7 +228,9 @@ console.log("\n--- 5. Decorators (Stage 2.7) ---\n");
 // TypeScript has supported decorators for a long time (experimental) and now supports standard decorators
 
 // Class decorator type
-type ClassDecorator = <T extends new (...args: any[]) => any>(target: T) => T | void;
+type ClassDecorator = <T extends new (...args: any[]) => any>(
+  target: T
+) => T | void;
 
 function logged<T extends new (...args: any[]) => any>(target: T): T {
   return class extends target {
@@ -246,7 +254,7 @@ function measure<T>(
   descriptor: TypedPropertyDescriptor<(...args: any[]) => T>
 ): TypedPropertyDescriptor<(...args: any[]) => T> {
   const original = descriptor.value!;
-  descriptor.value = function(...args: any[]): T {
+  descriptor.value = function (...args: any[]): T {
     const start = performance.now();
     const result = original.apply(this, args);
     const end = performance.now();
@@ -259,7 +267,7 @@ function measure<T>(
 // Property decorator
 function readonly(target: any, propertyKey: string | symbol): void {
   Object.defineProperty(target, propertyKey, {
-    writable: false
+    writable: false,
   });
 }
 
@@ -312,9 +320,15 @@ console.log("\n--- 7. tsconfig.json Configuration ---\n");
 console.log("To use ES2027 features in TypeScript:");
 console.log('1. Set "target": "ES2027" or higher (TypeScript 5.8+)');
 console.log('2. Add "ES2027" to "lib" array');
-console.log('3. For Explicit Resource Management: Add "ESNext.Disposable" to lib');
-console.log('4. For Decorators: Set "experimentalDecorators": false (use standard decorators)');
-console.log('   Or "experimentalDecorators": true for legacy TypeScript decorators');
-console.log('5. For Temporal: Install @js-temporal/polyfill and add its types');
+console.log(
+  '3. For Explicit Resource Management: Add "ESNext.Disposable" to lib'
+);
+console.log(
+  '4. For Decorators: Set "experimentalDecorators": false (use standard decorators)'
+);
+console.log(
+  '   Or "experimentalDecorators": true for legacy TypeScript decorators'
+);
+console.log("5. For Temporal: Install @js-temporal/polyfill and add its types");
 
 console.log("\n✅ ES2027 & Future Features TypeScript comparison completed");

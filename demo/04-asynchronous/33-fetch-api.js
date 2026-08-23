@@ -141,13 +141,16 @@ async function demonstrateResponseMethods() {
     // Inspecting response properties
     console.log("\n5. Response properties:");
     const inspectResponse = await fetch(`${API_BASE}/posts/1`);
-    console.log("   response.ok:", inspectResponse.ok);           // true if status 200-299
-    console.log("   response.status:", inspectResponse.status);   // 200, 404, 500, etc.
+    console.log("   response.ok:", inspectResponse.ok); // true if status 200-299
+    console.log("   response.status:", inspectResponse.status); // 200, 404, 500, etc.
     console.log("   response.statusText:", inspectResponse.statusText); // "OK", "Not Found"
-    console.log("   response.type:", inspectResponse.type);       // "cors", "basic", "opaque"
-    console.log("   response.url:", inspectResponse.url);         // Final URL after redirects
-    console.log("   response.headers:", [...inspectResponse.headers.entries()].length, "headers");
-
+    console.log("   response.type:", inspectResponse.type); // "cors", "basic", "opaque"
+    console.log("   response.url:", inspectResponse.url); // Final URL after redirects
+    console.log(
+      "   response.headers:",
+      [...inspectResponse.headers.entries()].length,
+      "headers"
+    );
   } catch (error) {
     console.error("   Error in response methods demo:", error.message);
   }
@@ -179,7 +182,7 @@ async function createPost() {
   const newPost = {
     title: "My New Post",
     body: "This is the content of my new post.",
-    userId: 1
+    userId: 1,
   };
 
   console.log("6. POST with JSON body:");
@@ -189,9 +192,9 @@ async function createPost() {
     const response = await fetch(`${API_BASE}/posts`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPost)
+      body: JSON.stringify(newPost),
     });
 
     if (!response.ok) {
@@ -214,7 +217,7 @@ async function updatePost() {
     id: 1,
     title: "Updated Title",
     body: "Updated content here.",
-    userId: 1
+    userId: 1,
   };
 
   console.log("\n7. PUT request (full update):");
@@ -223,9 +226,9 @@ async function updatePost() {
     const response = await fetch(`${API_BASE}/posts/1`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedPost)
+      body: JSON.stringify(updatedPost),
     });
 
     const result = await response.json();
@@ -240,7 +243,7 @@ updatePost();
 // PATCH request (partial update)
 async function patchPost() {
   const partialUpdate = {
-    title: "Partially Updated Title"
+    title: "Partially Updated Title",
   };
 
   console.log("\n8. PATCH request (partial update):");
@@ -249,9 +252,9 @@ async function patchPost() {
     const response = await fetch(`${API_BASE}/posts/1`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(partialUpdate)
+      body: JSON.stringify(partialUpdate),
     });
 
     const result = await response.json();
@@ -269,7 +272,7 @@ async function deletePost() {
 
   try {
     const response = await fetch(`${API_BASE}/posts/1`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     console.log("   Delete status:", response.status); // 200 or 204 (no content)
@@ -293,7 +296,7 @@ async function uploadWithFormData() {
   try {
     const response = await fetch(`${API_BASE}/posts`, {
       method: "POST",
-      body: formData
+      body: formData,
       // Note: Don't set Content-Type header with FormData
       // Browser sets it automatically with boundary
     });
@@ -512,7 +515,7 @@ async function sequentialVsParallel() {
     const [post1, post2, post3] = await Promise.all([
       fetch(`${API_BASE}/posts/1`).then(r => r.json()),
       fetch(`${API_BASE}/posts/2`).then(r => r.json()),
-      fetch(`${API_BASE}/posts/3`).then(r => r.json())
+      fetch(`${API_BASE}/posts/3`).then(r => r.json()),
     ]);
 
     const endPar = Date.now();
@@ -550,9 +553,9 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
         headers: {
           "Content-Type": "application/json",
           ...defaultHeaders,
-          ...options.headers
+          ...options.headers,
         },
-        ...options
+        ...options,
       });
 
       if (!response.ok) {
@@ -568,10 +571,10 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
         headers: {
           "Content-Type": "application/json",
           ...defaultHeaders,
-          ...options.headers
+          ...options.headers,
         },
         body: JSON.stringify(data),
-        ...options
+        ...options,
       });
 
       if (!response.ok) {
@@ -579,7 +582,7 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
       }
 
       return await response.json();
-    }
+    },
   };
 };
 
@@ -587,7 +590,7 @@ async function useApiClient() {
   console.log("17. API client wrapper:");
 
   const api = createApiClient(API_BASE, {
-    "X-Custom-Header": "MyApp/1.0"
+    "X-Custom-Header": "MyApp/1.0",
   });
 
   try {
@@ -597,7 +600,7 @@ async function useApiClient() {
     const created = await api.post("/posts", {
       title: "New Post",
       body: "Post content",
-      userId: 1
+      userId: 1,
     });
     console.log("   Created via API client, ID:", created.id);
   } catch (error) {
@@ -626,7 +629,6 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
 
       // Server errors (5xx) might be temporary, retry
       lastError = new Error(`HTTP ${response.status}: ${response.statusText}`);
-
     } catch (error) {
       lastError = error;
 
@@ -639,7 +641,9 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
     if (attempt < maxRetries) {
       // Exponential backoff: 1s, 2s, 4s, etc.
       const delay = Math.pow(2, attempt - 1) * 1000;
-      console.log(`   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
+      console.log(
+        `   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
+      );
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
@@ -666,16 +670,16 @@ console.log("\n19. AbortController Deep Dive:");
 
 /**
  * AbortController & AbortSignal - Cancel async operations
- * 
+ *
  * ES Specification: DOM Standard (living standard)
- * 
+ *
  * Characteristics:
  * - Cancel fetch requests
  * - Cancel multiple operations with one signal
  * - Timeout implementation
  * - Event-based cancellation
  * - Works with any API that accepts AbortSignal
- * 
+ *
  * Use Cases:
  * - Search-as-you-type (cancel previous requests)
  * - Component unmount cleanup
@@ -687,23 +691,23 @@ console.log("\n19. AbortController Deep Dive:");
 // Basic AbortController usage
 async function basicAbortExample() {
   console.log("\n19.1 Basic AbortController:");
-  
+
   const controller = new AbortController();
   const signal = controller.signal;
-  
+
   // Listen for abort event
-  signal.addEventListener('abort', () => {
+  signal.addEventListener("abort", () => {
     console.log("   Signal aborted, reason:", signal.reason);
   });
-  
+
   try {
     const fetchPromise = fetch(`${API_BASE}/posts/1`, { signal });
-    
+
     // Abort after 100ms
     setTimeout(() => {
-      controller.abort('Timeout after 100ms');
+      controller.abort("Timeout after 100ms");
     }, 100);
-    
+
     const response = await fetchPromise;
     const data = await response.json();
     console.log("   Completed before abort:", data.id);
@@ -723,21 +727,21 @@ basicAbortExample();
 function fetchWithAbortTimeout(url, options = {}, timeoutMs = 5000) {
   const controller = new AbortController();
   const { signal: originalSignal, ...restOptions } = options;
-  
+
   // Combine with existing signal if provided
   if (originalSignal) {
-    originalSignal.addEventListener('abort', () => {
+    originalSignal.addEventListener("abort", () => {
       controller.abort(originalSignal.reason);
     });
   }
-  
+
   const timeoutId = setTimeout(() => {
     controller.abort(new Error(`Request timeout after ${timeoutMs}ms`));
   }, timeoutMs);
-  
+
   return fetch(url, {
     ...restOptions,
-    signal: controller.signal
+    signal: controller.signal,
   }).finally(() => {
     clearTimeout(timeoutId);
   });
@@ -745,9 +749,13 @@ function fetchWithAbortTimeout(url, options = {}, timeoutMs = 5000) {
 
 async function demonstrateTimeout() {
   console.log("\n19.2 Timeout with AbortController:");
-  
+
   try {
-    const response = await fetchWithAbortTimeout(`${API_BASE}/posts/1`, {}, 10000);
+    const response = await fetchWithAbortTimeout(
+      `${API_BASE}/posts/1`,
+      {},
+      10000
+    );
     const data = await response.json();
     console.log("   ✓ Fetched within timeout:", data.id);
   } catch (error) {
@@ -764,27 +772,30 @@ demonstrateTimeout();
 // Cancel multiple operations with one signal
 async function cancelMultipleOperations() {
   console.log("\n19.3 Cancel multiple operations:");
-  
+
   const controller = new AbortController();
   const { signal } = controller;
-  
+
   try {
     // Start multiple requests with same signal
     const requests = [
       fetch(`${API_BASE}/posts/1`, { signal }),
       fetch(`${API_BASE}/posts/2`, { signal }),
-      fetch(`${API_BASE}/posts/3`, { signal })
+      fetch(`${API_BASE}/posts/3`, { signal }),
     ];
-    
+
     // Cancel all after 50ms
     setTimeout(() => {
       console.log("   Aborting all requests...");
-      controller.abort('User cancelled');
+      controller.abort("User cancelled");
     }, 50);
-    
+
     const responses = await Promise.all(requests);
     const data = await Promise.all(responses.map(r => r.json()));
-    console.log("   ✓ All completed:", data.map(d => d.id));
+    console.log(
+      "   ✓ All completed:",
+      data.map(d => d.id)
+    );
   } catch (error) {
     if (error.name === "AbortError") {
       console.log("   ✓ All requests cancelled");
@@ -799,17 +810,17 @@ class SearchController {
   constructor() {
     this.currentController = null;
   }
-  
+
   async search(query) {
     // Cancel previous search
     if (this.currentController) {
-      this.currentController.abort('New search started');
+      this.currentController.abort("New search started");
     }
-    
+
     // Create new controller for this search
     this.currentController = new AbortController();
     const { signal } = this.currentController;
-    
+
     try {
       const response = await fetch(`${API_BASE}/posts?q=${query}`, { signal });
       const results = await response.json();
@@ -826,14 +837,14 @@ class SearchController {
 
 async function demonstrateSearchAsYouType() {
   console.log("\n19.4 Search-as-you-type pattern:");
-  
+
   const searchController = new SearchController();
-  
+
   // Simulate rapid typing
-  searchController.search('java').catch(() => {});      // Will be cancelled
-  searchController.search('javasc').catch(() => {});    // Will be cancelled
-  const results = await searchController.search('javascript'); // Final search
-  
+  searchController.search("java").catch(() => {}); // Will be cancelled
+  searchController.search("javasc").catch(() => {}); // Will be cancelled
+  const results = await searchController.search("javascript"); // Final search
+
   if (results) {
     console.log("   ✓ Search completed for: javascript");
   }
@@ -878,45 +889,49 @@ function UserProfile({ userId }) {
 // Combining multiple AbortSignals
 function combineSignals(...signals) {
   const controller = new AbortController();
-  
+
   for (const signal of signals) {
     if (signal.aborted) {
       controller.abort(signal.reason);
       break;
     }
-    
-    signal.addEventListener('abort', () => {
-      controller.abort(signal.reason);
-    }, { once: true });
+
+    signal.addEventListener(
+      "abort",
+      () => {
+        controller.abort(signal.reason);
+      },
+      { once: true }
+    );
   }
-  
+
   return controller.signal;
 }
 
 async function demonstrateCombinedSignals() {
   console.log("\n19.6 Combining multiple signals:");
-  
+
   const userController = new AbortController();
   const timeoutController = new AbortController();
-  
+
   // Timeout after 5 seconds
   setTimeout(() => {
-    timeoutController.abort('Timeout');
+    timeoutController.abort("Timeout");
   }, 5000);
-  
+
   const combinedSignal = combineSignals(
     userController.signal,
     timeoutController.signal
   );
-  
+
   try {
     // User cancels immediately
     setTimeout(() => {
-      userController.abort('User cancelled');
+      userController.abort("User cancelled");
     }, 10);
-    
+
     const response = await fetch(`${API_BASE}/posts/1`, {
-      signal: combinedSignal
+      signal: combinedSignal,
     });
     const data = await response.json();
     console.log("   ✓ Completed:", data.id);
@@ -932,12 +947,12 @@ demonstrateCombinedSignals();
 // AbortSignal.timeout() - Modern API (DOM Standard, not ES specification)
 async function demonstrateSignalTimeout() {
   console.log("\n19.7 AbortSignal.timeout() (Modern):");
-  
+
   try {
     // Modern browsers support AbortSignal.timeout()
-    if (typeof AbortSignal.timeout === 'function') {
+    if (typeof AbortSignal.timeout === "function") {
       const response = await fetch(`${API_BASE}/posts/1`, {
-        signal: AbortSignal.timeout(5000) // 5 second timeout
+        signal: AbortSignal.timeout(5000), // 5 second timeout
       });
       const data = await response.json();
       console.log("   ✓ Fetched with timeout:", data.id);
@@ -988,12 +1003,16 @@ async function sequentialDependentCalls() {
     console.log("   Got user:", user.name);
 
     // Then, get posts by that user
-    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(r => r.json());
+    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(
+      r => r.json()
+    );
     console.log("   User has", userPosts.length, "posts");
 
     // Get comments on first post
     if (userPosts.length > 0) {
-      const comments = await fetch(`${API_BASE}/posts/${userPosts[0].id}/comments`).then(r => r.json());
+      const comments = await fetch(
+        `${API_BASE}/posts/${userPosts[0].id}/comments`
+      ).then(r => r.json());
       console.log("   First post has", comments.length, "comments");
     }
   } catch (error) {
@@ -1041,7 +1060,7 @@ async function readStream() {
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
-    let result = '';
+    let result = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -1077,7 +1096,7 @@ async function downloadWithProgress(url, onProgress) {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const contentLength = response.headers.get('content-length');
+    const contentLength = response.headers.get("content-length");
     const total = parseInt(contentLength, 10);
     let loaded = 0;
 
@@ -1093,9 +1112,11 @@ async function downloadWithProgress(url, onProgress) {
       loaded += value.length;
 
       if (onProgress) {
-        const percent = total ? Math.round((loaded / total) * 100) : 'unknown';
+        const percent = total ? Math.round((loaded / total) * 100) : "unknown";
         onProgress(loaded, total, percent); // Invoke the progress callback
-        console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
+        console.log(
+          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
+        );
       }
     }
 
@@ -1150,7 +1171,7 @@ async function transformStream() {
       charCount += chunk.length;
 
       // Count newlines (simplified)
-      const newlines = chunk.split('\n').length - 1;
+      const newlines = chunk.split("\n").length - 1;
       lineCount += newlines;
 
       console.log(`  Processed ${chunk.length} characters`);
@@ -1172,7 +1193,7 @@ async function cancelableStream() {
 
   try {
     const response = await fetch(`${API_BASE}/posts/1`, {
-      signal: controller.signal
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -1187,7 +1208,7 @@ async function cancelableStream() {
     // Cancel after 50ms
     setTimeout(() => {
       console.log("  Cancelling stream...");
-      controller.abort('User cancelled');
+      controller.abort("User cancelled");
     }, 50);
 
     try {
@@ -1203,14 +1224,14 @@ async function cancelableStream() {
         console.log(`  Read ${value.length} bytes`);
       }
     } catch (error) {
-      if (error.name === 'AbortError') {
+      if (error.name === "AbortError") {
         console.log(`  ✓ Stream cancelled after ${byteCount} bytes`);
       } else {
         throw error;
       }
     }
   } catch (error) {
-    if (error.name !== 'AbortError') {
+    if (error.name !== "AbortError") {
       console.error("  Error:", error.message);
     }
   }
@@ -1230,7 +1251,9 @@ async function compareReadingMethods() {
   const response1 = await fetch(`${API_BASE}/posts/1`);
   const data1 = await response1.json();
   const time1 = Date.now() - start1;
-  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
+  console.log(
+    `    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`
+  );
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -1326,11 +1349,13 @@ async function pitfall_credentials() {
   const withoutCredentials = await fetch(`${API_BASE}/posts/1`, {
     // credentials: 'include' // Need this to send cookies for cross-origin requests
   });
-  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
+  console.log(
+    "   Default credentials ('same-origin'): cookies sent to same origin"
+  );
 
   // With credentials for cross-origin
   const withCredentials = await fetch(`${API_BASE}/posts/1`, {
-    credentials: "include" // Required to send cookies for cross-origin requests
+    credentials: "include", // Required to send cookies for cross-origin requests
   });
   console.log("   With credentials: 'include', cookies ARE sent to any origin");
 }
@@ -1344,16 +1369,20 @@ async function pitfall_contentType() {
   // WRONG: Server won't parse body as JSON
   await fetch(`${API_BASE}/posts`, {
     method: "POST",
-    body: JSON.stringify({ title: "Test" })
+    body: JSON.stringify({ title: "Test" }),
     // Missing: Content-Type: application/json
-  }).then(r => r.json()).then(d => console.log("   Without Content-Type:", d));
+  })
+    .then(r => r.json())
+    .then(d => console.log("   Without Content-Type:", d));
 
   // CORRECT: Server knows it's JSON
   await fetch(`${API_BASE}/posts`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title: "Test" })
-  }).then(r => r.json()).then(d => console.log("   With Content-Type:", d.id));
+    body: JSON.stringify({ title: "Test" }),
+  })
+    .then(r => r.json())
+    .then(d => console.log("   With Content-Type:", d.id));
 }
 
 // pitfall_contentType(); // Commented to avoid duplicate POST
@@ -1465,7 +1494,6 @@ console.log('Cached entries:', keys.length);
 // - Cache API: async, Request/Response pairs, designed for HTTP caching
 // - Best for: API responses, static assets, offline support
 `);
-
 
 // ============================================
 // 10. BEST PRACTICES SUMMARY
@@ -1613,7 +1641,6 @@ See also:
 
 📘 See 33-fetch-api-ts-comparison.ts for detailed examples!
 */
-
 
 // ============================================
 // Cross-references

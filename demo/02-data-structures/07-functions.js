@@ -96,7 +96,6 @@ function Person(name, age) {
 const person1 = new Person("Alice", 30);
 console.log(person1); // Person { name: 'Alice', age: 30 }
 
-
 // ============================================
 // Section 2: Function Expression
 // ============================================
@@ -122,7 +121,7 @@ console.log(person1); // Person { name: 'Alice', age: 30 }
  * - 'this' binding same as function declaration, can be confusing
  */
 
-const add = function(a, b) {
+const add = function (a, b) {
   return a + b;
 };
 
@@ -137,18 +136,21 @@ const factorial = function fact(n) {
 console.log(factorial(5)); // 120
 
 // IIFE (Immediately Invoked Function Expression)
-(function() {
+(function () {
   console.log("IIFE executed immediately!");
 })();
 
 // Conditional function creation
 const isDevelopment = true;
 const logger = isDevelopment
-  ? function(msg) { console.log("[DEV]", msg); }
-  : function(msg) { /* do nothing */ };
+  ? function (msg) {
+      console.log("[DEV]", msg);
+    }
+  : function (msg) {
+      /* do nothing */
+    };
 
 logger("Conditional function created");
-
 
 // ============================================
 // Section 3: Arrow Function
@@ -207,23 +209,23 @@ console.log(createUser("Bob", 25)); // { name: 'Bob', age: 25 }
 // 'this' binding example
 const obj = {
   name: "Object",
-  regularFunction: function() {
+  regularFunction: function () {
     console.log("Regular function this:", this.name); // "Object"
   },
   arrowFunction: () => {
     console.log("Arrow function this:", this); // Inherits outer 'this'
   },
-  nestedExample: function() {
+  nestedExample: function () {
     // Arrow function inherits outer 'this' - typical use case
     setTimeout(() => {
       console.log("Nested arrow this:", this.name); // "Object"
     }, 100);
 
     // Compare: regular function needs to save 'this'
-    setTimeout(function() {
+    setTimeout(function () {
       console.log("Nested regular this:", this); // undefined or global
     }, 100);
-  }
+  },
 };
 
 obj.regularFunction();
@@ -235,7 +237,6 @@ const sumAllArrow = (...numbers) => {
   return numbers.reduce((sum, num) => sum + num, 0);
 };
 console.log(sumAllArrow(1, 2, 3, 4, 5)); // 15
-
 
 // ============================================
 // Section 4: Default Parameters
@@ -282,7 +283,6 @@ function calculateArea(width, height = width) {
 console.log(calculateArea(5)); // 25 (square)
 console.log(calculateArea(5, 10)); // 50 (rectangle)
 
-
 // ============================================
 // Section 5: Rest Parameters
 // ============================================
@@ -324,9 +324,8 @@ processData({
   name: "Charlie",
   age: 28,
   city: "NYC",
-  country: "USA"
+  country: "USA",
 });
-
 
 // ============================================
 // Section 6: Higher-Order Functions
@@ -355,11 +354,11 @@ function repeat(n, action) {
   }
 }
 
-repeat(3, (i) => console.log(`Iteration ${i}`));
+repeat(3, i => console.log(`Iteration ${i}`));
 
 // Return function
 function multiplier(factor) {
-  return function(number) {
+  return function (number) {
     return number * factor;
   };
 }
@@ -370,12 +369,11 @@ console.log(double(5)); // 10
 console.log(triple(5)); // 15
 
 // Function composition
-const compose = (f, g) => (x) => f(g(x));
+const compose = (f, g) => x => f(g(x));
 const addOne = x => x + 1;
 const multiplyByTwo = x => x * 2;
 const addOneThenDouble = compose(multiplyByTwo, addOne);
 console.log(addOneThenDouble(5)); // 12
-
 
 // ============================================
 // Section 7: Closures
@@ -404,15 +402,15 @@ function createCounter() {
   let count = 0; // Private variable
 
   return {
-    increment: function() {
+    increment: function () {
       return ++count;
     },
-    decrement: function() {
+    decrement: function () {
       return --count;
     },
-    getCount: function() {
+    getCount: function () {
       return count;
-    }
+    },
   };
 }
 
@@ -426,14 +424,14 @@ console.log(counter.decrement()); // 1
 // Closure trap in loops
 console.log("Closure trap with var:");
 for (var i = 0; i < 3; i++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("var i:", i); // All print 3
   }, 100);
 }
 
 console.log("Fixed with let:");
 for (let j = 0; j < 3; j++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("let j:", j); // Prints 0, 1, 2
   }, 100);
 }
@@ -441,13 +439,12 @@ for (let j = 0; j < 3; j++) {
 // Fix var issue with IIFE
 console.log("Fixed with IIFE:");
 for (var k = 0; k < 3; k++) {
-  (function(index) {
-    setTimeout(function() {
+  (function (index) {
+    setTimeout(function () {
       console.log("IIFE k:", index); // Prints 0, 1, 2
     }, 100);
   })(k);
 }
-
 
 // ============================================
 // Section 8: Async Functions
@@ -501,13 +498,12 @@ async function fetchMultiple() {
   const [result1, result2, result3] = await Promise.all([
     delay(100).then(() => "Data 1"),
     delay(50).then(() => "Data 2"),
-    delay(80).then(() => "Data 3")
+    delay(80).then(() => "Data 3"),
   ]);
   console.log("All data:", result1, result2, result3);
 }
 
 fetchMultiple();
-
 
 // ============================================
 // Section 9: Generator Functions
@@ -659,7 +655,6 @@ async function* fetchInBatches(ids) {
   console.log(await asyncGen.next()); // { value: undefined, done: true }
 })();
 
-
 // ============================================
 // Section 10: Method Definitions
 // ============================================
@@ -700,14 +695,13 @@ const calculator = {
   // Setter
   set reset(val) {
     this.value = val;
-  }
+  },
 };
 
 calculator.add(10).subtract(3);
 console.log("Calculator result:", calculator.result); // 7
 calculator.reset = 0;
 console.log("After reset:", calculator.result); // 0
-
 
 // ============================================
 // Section 11: Function Binding
@@ -730,9 +724,9 @@ console.log("\n=== Function Binding Demo ===");
 
 const user = {
   name: "David",
-  greet: function(greeting, punctuation) {
+  greet: function (greeting, punctuation) {
     return `${greeting}, ${this.name}${punctuation}`;
-  }
+  },
 };
 
 console.log(user.greet("Hello", "!")); // Hello, David!
@@ -750,7 +744,6 @@ console.log(greetEve("Good morning", "!")); // Good morning, Eve!
 // Partial application
 const sayHello = user.greet.bind(user, "Hello");
 console.log(sayHello("!")); // Hello, David!
-
 
 // ============================================
 // Section 12: Currying
@@ -773,8 +766,8 @@ console.log("\n=== Currying Demo ===");
 
 // Manual currying
 function curriedAdd(a) {
-  return function(b) {
-    return function(c) {
+  return function (b) {
+    return function (c) {
       return a + b + c;
     };
   };
@@ -788,7 +781,7 @@ function curry(fn) {
     if (args.length >= fn.length) {
       return fn.apply(this, args);
     } else {
-      return function(...nextArgs) {
+      return function (...nextArgs) {
         return curried.apply(this, args.concat(nextArgs));
       };
     }
@@ -803,7 +796,6 @@ const curriedSum = curry(sumThree);
 console.log(curriedSum(1)(2)(3)); // 6
 console.log(curriedSum(1, 2)(3)); // 6
 console.log(curriedSum(1)(2, 3)); // 6
-
 
 // ============================================
 // Section 13: Function Properties and Methods
@@ -827,7 +819,7 @@ console.log("\n=== Function Properties and Methods ===");
 
 // name property
 function namedFunction() {}
-const anonymousFunc = function() {};
+const anonymousFunc = function () {};
 const namedExpr = function myName() {};
 const arrowFunc = () => {};
 
@@ -870,7 +862,6 @@ console.log(Constructor.prototype.constructor === Constructor); // true
 const arrowConstructor = () => {};
 console.log(arrowConstructor.prototype); // undefined
 
-
 // ============================================
 // Section 14: IIFE Patterns and Use Cases
 // ============================================
@@ -893,7 +884,7 @@ console.log(arrowConstructor.prototype); // undefined
 console.log("\n=== IIFE Patterns ===");
 
 // Module pattern with IIFE
-const CounterModule = (function() {
+const CounterModule = (function () {
   // Private variables
   let count = 0;
   const maxCount = 100;
@@ -926,7 +917,7 @@ const CounterModule = (function() {
         return true;
       }
       return false;
-    }
+    },
   };
 })();
 
@@ -941,7 +932,7 @@ console.log(CounterModule.getCount()); // 50
 // Namespace pattern
 let MyApp = {};
 
-(function(namespace) {
+(function (namespace) {
   // Private utilities
   const version = "1.0.0";
 
@@ -956,7 +947,7 @@ let MyApp = {};
     },
     getVersion() {
       return version;
-    }
+    },
   };
 })(MyApp);
 
@@ -965,7 +956,7 @@ MyApp.utils.greet("World");
 console.log("Version:", MyApp.utils.getVersion());
 
 // Async IIFE for top-level await alternative
-(async function() {
+(async function () {
   console.log("\nAsync IIFE:");
   await new Promise(resolve => setTimeout(resolve, 100));
   console.log("Async operation completed");
@@ -976,7 +967,6 @@ console.log("Version:", MyApp.utils.getVersion());
   const privateVar = "I'm private";
   console.log("\nArrow IIFE executed");
 })();
-
 
 // ============================================
 // Section 15: Tail Call Optimization (TCO)
@@ -1035,9 +1025,9 @@ console.log("Sum 1 to 10 (TCO):", sumToNTCO(10)); // 55
 
 // Trampoline pattern - Alternative to TCO for better compatibility
 function trampoline(fn) {
-  return function(...args) {
+  return function (...args) {
     let result = fn(...args);
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = result();
     }
     return result;
@@ -1052,7 +1042,6 @@ function factorialTrampoline(n, accumulator = 1) {
 
 const trampolinedFactorial = trampoline(factorialTrampoline);
 console.log("Factorial (trampoline):", trampolinedFactorial(5)); // 120
-
 
 // ============================================
 // Section 16: Pure Functions and Functional Programming
@@ -1120,10 +1109,16 @@ const doubleValue = x => x * 2;
 const squareValue = x => x * x;
 
 // Compose functions right-to-left
-const composeRight = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
+const composeRight =
+  (...fns) =>
+  x =>
+    fns.reduceRight((acc, fn) => fn(acc), x);
 
 // Pipe functions left-to-right
-const pipeLeft = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);
+const pipeLeft =
+  (...fns) =>
+  x =>
+    fns.reduce((acc, fn) => fn(acc), x);
 
 const incrementThenDouble = composeRight(doubleValue, increment);
 const incrementThenDoubleAlt = pipeLeft(increment, doubleValue);
@@ -1135,7 +1130,7 @@ console.log("pipe(increment, double)(5):", incrementThenDoubleAlt(5)); // 12
 // Memoization - caching results of pure functions
 function memoize(fn) {
   const cache = new Map();
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log("Cache hit for:", key);
@@ -1148,7 +1143,7 @@ function memoize(fn) {
   };
 }
 
-const expensiveCalculation = (n) => {
+const expensiveCalculation = n => {
   // Simulate expensive operation
   let result = 0;
   for (let i = 0; i < n; i++) {
@@ -1164,7 +1159,6 @@ console.log(memoizedCalc(1000)); // Computing
 console.log(memoizedCalc(1000)); // Cache hit
 console.log(memoizedCalc(2000)); // Computing
 console.log(memoizedCalc(1000)); // Cache hit
-
 
 // ============================================
 // SUMMARY - Function Types Comparison
@@ -1199,16 +1193,21 @@ BEST PRACTICES:
 10. Use descriptive function names for better debugging and code readability
 `);
 
-
 // ============================================
 // Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
-console.log("1. Prefer function expressions with const for predictable hoisting");
+console.log(
+  "1. Prefer function expressions with const for predictable hoisting"
+);
 console.log("2. Use default parameters instead of manual undefined checks");
-console.log("3. Use rest parameters instead of the deprecated arguments object");
+console.log(
+  "3. Use rest parameters instead of the deprecated arguments object"
+);
 console.log("4. Keep functions pure and single-responsibility for testability");
-console.log("5. Use arrow functions for callbacks, regular functions for methods");
+console.log(
+  "5. Use arrow functions for callbacks, regular functions for methods"
+);
 console.log("6. Name functions descriptively to improve stack traces");
 
 // ============================================

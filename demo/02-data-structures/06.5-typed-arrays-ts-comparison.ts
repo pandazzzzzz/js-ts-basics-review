@@ -77,11 +77,17 @@ const endianView: DataView = new DataView(endianBuffer);
 
 endianView.setUint32(0, 0x12345678, false); // big-endian
 const bytesBig: Uint8Array = new Uint8Array(endianBuffer);
-console.log("  big-endian:", [...bytesBig].map(b => b.toString(16)));
+console.log(
+  "  big-endian:",
+  [...bytesBig].map(b => b.toString(16))
+);
 
 endianView.setUint32(0, 0x12345678, true); // little-endian
 const bytesLittle: Uint8Array = new Uint8Array(endianBuffer);
-console.log("  little-endian:", [...bytesLittle].map(b => b.toString(16)));
+console.log(
+  "  little-endian:",
+  [...bytesLittle].map(b => b.toString(16))
+);
 
 // Example 6: TypedArray iteration methods
 console.log("\n6. TypedArray iteration:");
@@ -129,10 +135,9 @@ interface TypedArrayConstructor<T> {
   new (buffer: ArrayBufferLike, byteOffset?: number, length?: number): T;
   BYTES_PER_ELEMENT: number;
 }
-function createTypedArray<T extends ArrayBufferView & { BYTES_PER_ELEMENT: number }>(
-  ctor: TypedArrayConstructor<T>,
-  size: number
-): T {
+function createTypedArray<
+  T extends ArrayBufferView & { BYTES_PER_ELEMENT: number },
+>(ctor: TypedArrayConstructor<T>, size: number): T {
   const buffer = new ArrayBuffer(size * ctor.BYTES_PER_ELEMENT);
   return new ctor(buffer);
 }

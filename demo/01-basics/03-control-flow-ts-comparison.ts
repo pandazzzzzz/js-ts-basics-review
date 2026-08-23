@@ -16,7 +16,7 @@ function processValue(value: string | number | null) {
     console.log("Value is null");
     return;
   }
-  
+
   if (typeof value === "string") {
     // TypeScript knows value is string here
     console.log("String length:", value.length);
@@ -49,7 +49,7 @@ function isAdmin(user: User | Admin): user is Admin {
 
 function handleUser(user: User | Admin) {
   console.log("User name:", user.name);
-  
+
   if (isAdmin(user)) {
     // TypeScript knows user is Admin here
     console.log("Permissions:", user.permissions.join(", "));
@@ -58,7 +58,11 @@ function handleUser(user: User | Admin) {
 
 // Example usage
 const regularUser: User = { name: "Alice", email: "alice@example.com" };
-const adminUser: Admin = { name: "Bob", email: "bob@example.com", permissions: ["read", "write"] };
+const adminUser: Admin = {
+  name: "Bob",
+  email: "bob@example.com",
+  permissions: ["read", "write"],
+};
 handleUser(regularUser);
 handleUser(adminUser);
 
@@ -137,7 +141,10 @@ function getArea(shape: Shape): number {
 console.log("\nDiscriminated unions:");
 console.log("Circle area:", getArea({ kind: "circle", radius: 5 }));
 console.log("Square area:", getArea({ kind: "square", size: 4 }));
-console.log("Rectangle area:", getArea({ kind: "rectangle", width: 3, height: 6 }));
+console.log(
+  "Rectangle area:",
+  getArea({ kind: "rectangle", width: 3, height: 6 })
+);
 
 // ============================================
 // 4. For Loops with Type Inference
@@ -166,7 +173,7 @@ for (const fruit of fruits) {
 const entries: [string, number][] = [
   ["apple", 5],
   ["banana", 3],
-  ["cherry", 8]
+  ["cherry", 8],
 ];
 
 console.log("\nFor...of with tuples:");
@@ -187,7 +194,7 @@ interface StringMap {
 const colors: StringMap = {
   red: "#FF0000",
   green: "#00FF00",
-  blue: "#0000FF"
+  blue: "#0000FF",
 };
 
 console.log("\nFor...in with index signature:");
@@ -204,7 +211,7 @@ interface Person {
 
 const person: Person = {
   name: "Alice",
-  age: 30
+  age: 30,
 };
 
 console.log("\nFor...in with typed object:");
@@ -229,12 +236,12 @@ for (const [key, value] of Object.entries(person)) {
 function processQueue(queue: (string | number)[]): void {
   while (queue.length > 0) {
     const item = queue.shift();
-    
+
     // TypeScript knows item is string | number | undefined
     if (item === undefined) {
       break;
     }
-    
+
     // Type narrowing within while loop
     if (typeof item === "string") {
       console.log("String item:", item.toUpperCase());
@@ -259,14 +266,14 @@ function example(x: string | number | boolean) {
     console.log("String:", x.toUpperCase());
     return;
   }
-  
+
   // x is number | boolean (string eliminated)
   if (typeof x === "number") {
     // x is number
     console.log("Number:", x.toFixed(2));
     return;
   }
-  
+
   // x is boolean (string and number eliminated)
   console.log("Boolean:", x ? "true" : "false");
 }
@@ -288,12 +295,12 @@ function getLength(value: string | null | undefined): number {
     console.log("Value is null");
     return 0;
   }
-  
+
   if (value === undefined) {
     console.log("Value is undefined");
     return 0;
   }
-  
+
   // TypeScript knows value is string here
   return value.length;
 }
@@ -326,7 +333,7 @@ interface Product {
 const products: Product[] = [
   { id: 1, name: "Laptop", price: 999 },
   { id: 2, name: "Mouse", price: 25 },
-  { id: 3, name: "Keyboard", price: 75 }
+  { id: 3, name: "Keyboard", price: 75 },
 ];
 
 console.log("\nArray type safety:");
@@ -337,7 +344,10 @@ for (const product of products) {
 
 // Type-safe filtering
 const expensiveProducts = products.filter(p => p.price > 50);
-console.log("Expensive products:", expensiveProducts.map(p => p.name));
+console.log(
+  "Expensive products:",
+  expensiveProducts.map(p => p.name)
+);
 
 // ============================================
 // 10. Break and Continue with Type Safety
@@ -364,7 +374,7 @@ console.log("First even:", findFirstEven([1, 3, 5, 7]));
 
 // TypeScript's const assertions work with loops
 const statusList = ["pending", "approved", "rejected"] as const;
-type StatusType = typeof statusList[number]; // "pending" | "approved" | "rejected"
+type StatusType = (typeof statusList)[number]; // "pending" | "approved" | "rejected"
 
 console.log("\nConst assertions:");
 for (const status of statusList) {
@@ -377,7 +387,10 @@ for (const status of statusList) {
 // ============================================
 
 // TypeScript generics work with control flow
-function findItem<T>(items: T[], predicate: (item: T) => boolean): T | undefined {
+function findItem<T>(
+  items: T[],
+  predicate: (item: T) => boolean
+): T | undefined {
   for (const item of items) {
     if (predicate(item)) {
       return item;
@@ -391,7 +404,9 @@ console.log("\nGeneric find:");
 const foundNumber = findItem([1, 2, 3, 4, 5], n => n > 3);
 console.log("Found number:", foundNumber); // Type: number | undefined
 
-const foundString = findItem(["apple", "banana", "cherry"], s => s.startsWith("b"));
+const foundString = findItem(["apple", "banana", "cherry"], s =>
+  s.startsWith("b")
+);
 console.log("Found string:", foundString); // Type: string | undefined
 
 // ============================================
@@ -403,7 +418,7 @@ enum Direction {
   North = "NORTH",
   South = "SOUTH",
   East = "EAST",
-  West = "WEST"
+  West = "WEST",
 }
 
 function getOpposite(direction: Direction): Direction {
@@ -497,13 +512,13 @@ function pitfall1(value: string | number) {
   if (typeof value === "string") {
     // value is string here
     console.log("Before function call:", value.toUpperCase());
-    
+
     // After any function call, TypeScript "forgets" the narrowing
     console.log("Some function call");
-    
+
     // value is still string | number (narrowing lost)
     // console.log(value.toUpperCase()); // ❌ Error in strict mode
-    
+
     // Need to narrow again
     if (typeof value === "string") {
       console.log("After re-narrowing:", value.toUpperCase());
@@ -529,7 +544,7 @@ console.log("\nArray methods don't auto-narrow:");
 for (const item of mixed) {
   // item is string | number, not narrowed
   // item.toUpperCase(); // ❌ Error
-  
+
   // Need explicit narrowing
   if (typeof item === "string") {
     console.log("String:", item.toUpperCase());
@@ -555,7 +570,7 @@ function getAreaPitfall(shape: ShapeUnion): number {
   //   case shape.size !== undefined:
   //     return shape.size ** 2;
   // }
-  
+
   // ✅ Use type guards instead
   if ("radius" in shape) {
     return Math.PI * shape.radius ** 2;

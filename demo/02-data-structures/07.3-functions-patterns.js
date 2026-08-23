@@ -69,7 +69,7 @@ const calculator = {
   // Setter
   set reset(val) {
     this.value = val;
-  }
+  },
 };
 
 calculator.add(10).subtract(3);
@@ -83,7 +83,8 @@ class Counter {
     this.count = 0;
   }
 
-  increment() { // Method definition in class
+  increment() {
+    // Method definition in class
     this.count++;
   }
 
@@ -117,27 +118,33 @@ console.log("Class counter:", c.count); // 2
 console.log("\n=== 2. Function Binding Demo ===");
 
 const user = {
-  name: 'David',
-  greet: function(greeting, punctuation) {
+  name: "David",
+  greet: function (greeting, punctuation) {
     return `${greeting}, ${this.name}${punctuation}`;
-  }
+  },
 };
 
-console.log("user.greet('Hello', '!'):", user.greet('Hello', '!')); // 'Hello, David!'
+console.log("user.greet('Hello', '!'):", user.greet("Hello", "!")); // 'Hello, David!'
 
 // call
-console.log("user.greet.call({ name: 'Eve' }, 'Hi', '.'):", user.greet.call({ name: 'Eve' }, 'Hi', '.')); // 'Hi, Eve.'
+console.log(
+  "user.greet.call({ name: 'Eve' }, 'Hi', '.'):",
+  user.greet.call({ name: "Eve" }, "Hi", ".")
+); // 'Hi, Eve.'
 
 // apply
-console.log("user.greet.apply({ name: 'Frank' }, ['Hey', '?']):", user.greet.apply({ name: 'Frank' }, ['Hey', '?'])); // 'Hey, Frank?'
+console.log(
+  "user.greet.apply({ name: 'Frank' }, ['Hey', '?']):",
+  user.greet.apply({ name: "Frank" }, ["Hey", "?"])
+); // 'Hey, Frank?'
 
 // bind
-const greetEve = user.greet.bind({ name: 'Eve' });
-console.log("greetEve('Good morning', '!'):", greetEve('Good morning', '!')); // 'Good morning, Eve!'
+const greetEve = user.greet.bind({ name: "Eve" });
+console.log("greetEve('Good morning', '!'):", greetEve("Good morning", "!")); // 'Good morning, Eve!'
 
 // Partial application
-const sayHello = user.greet.bind(user, 'Hello');
-console.log("sayHello('!'):", sayHello('!')); // 'Hello, David!'
+const sayHello = user.greet.bind(user, "Hello");
+console.log("sayHello('!'):", sayHello("!")); // 'Hello, David!'
 
 // ============================================
 // 3. Function Properties and Methods
@@ -161,7 +168,7 @@ console.log("\n=== 3. Function Properties and Methods ===");
 
 // name property
 function namedFunction() {}
-const anonymousFunc = function() {};
+const anonymousFunc = function () {};
 const namedExpr = function myName() {};
 const arrowFunc = () => {};
 
@@ -197,7 +204,10 @@ console.log(exampleFunc.toString());
 function Constructor() {}
 console.log("\nFunction prototype:");
 console.log("Constructor.prototype:", Constructor.prototype); // {}
-console.log("Constructor.prototype.constructor === Constructor:", Constructor.prototype.constructor === Constructor); // true
+console.log(
+  "Constructor.prototype.constructor === Constructor:",
+  Constructor.prototype.constructor === Constructor
+); // true
 
 // Arrow functions don't have prototype
 const arrowConstructor = () => {};
@@ -225,7 +235,7 @@ console.log("arrowConstructor.prototype:", arrowConstructor.prototype); // undef
 console.log("\n=== 4. IIFE Patterns ===");
 
 // Module Pattern with IIFE
-const CounterModule = (function() {
+const CounterModule = (function () {
   // Private variables
   let count = 0;
   const maxCount = 100;
@@ -254,7 +264,7 @@ const CounterModule = (function() {
         return true;
       }
       return false;
-    }
+    },
   };
 })();
 
@@ -268,9 +278,9 @@ console.log("CounterModule.getCount():", CounterModule.getCount()); // 50
 // Namespace Pattern
 let MyApp = {};
 
-(function(namespace) {
+(function (namespace) {
   // Private utilities
-  const version = '1.0.0';
+  const version = "1.0.0";
 
   function log(message) {
     console.log(`[MyApp v${version}] ${message}`);
@@ -283,16 +293,16 @@ let MyApp = {};
     },
     getVersion() {
       return version;
-    }
+    },
   };
 })(MyApp);
 
 console.log("\nNamespace pattern:");
-MyApp.utils.greet('World');
+MyApp.utils.greet("World");
 console.log("Version:", MyApp.utils.getVersion());
 
 // Async IIFE for top-level await alternative
-(async function() {
+(async function () {
   console.log("\nAsync IIFE executed!");
 })();
 
@@ -359,9 +369,9 @@ console.log("sumToNTCO(10):", sumToNTCO(10)); // 55
 
 // Trampoline pattern - Alternative to TCO for better compatibility
 function trampoline(fn) {
-  return function(...args) {
+  return function (...args) {
     let result = fn(...args);
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = result();
     }
     return result;
@@ -423,16 +433,16 @@ console.log("pureAdd(5, 3):", pureAdd(5, 3)); // 8 (always same for same inputs)
 
 // Impure - mutates input
 function impureAddProperty(obj) {
-  obj.newProp = 'value'; // ❌ Mutates input
+  obj.newProp = "value"; // ❌ Mutates input
   return obj;
 }
 
 // Pure - creates new object
 function pureAddProperty(obj) {
-  return { ...obj, newProp: 'value' }; // ✅ Returns new object
+  return { ...obj, newProp: "value" }; // ✅ Returns new object
 }
 
-const original = { name: 'test' };
+const original = { name: "test" };
 const modified = pureAddProperty(original);
 console.log("Original unchanged:", original); // { name: 'test' }
 console.log("New object:", modified); // { name: 'test', newProp: 'value' }
@@ -443,10 +453,16 @@ const doubleValue = x => x * 2;
 const squareValue = x => x * x;
 
 // Compose functions right-to-left
-const composeRight = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
+const composeRight =
+  (...fns) =>
+  x =>
+    fns.reduceRight((acc, fn) => fn(acc), x);
 
 // Pipe functions left-to-right
-const pipeLeft = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);
+const pipeLeft =
+  (...fns) =>
+  x =>
+    fns.reduce((acc, fn) => fn(acc), x);
 
 const incrementThenDouble = composeRight(doubleValue, increment);
 const incrementThenDoubleAlt = pipeLeft(increment, doubleValue);
@@ -458,20 +474,20 @@ console.log("pipe(increment, double)(5):", incrementThenDoubleAlt(5)); // 12
 // Memoization - caching results of pure functions
 function memoize(fn) {
   const cache = new Map();
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
-      console.log('Cache hit for:', key);
+      console.log("Cache hit for:", key);
       return cache.get(key);
     }
-    console.log('Computing for:', key);
+    console.log("Computing for:", key);
     const result = fn(...args);
     cache.set(key, result);
     return result;
   };
 }
 
-const expensiveComputation = (n) => {
+const expensiveComputation = n => {
   let result = 0;
   for (let i = 0; i < n; i++) result += i;
   return result;
@@ -491,23 +507,25 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Accidentally mutating arguments
 console.log("\nPitfall 1 - Mutating arguments:");
 const objA = { a: 1 };
-const badMutate = (obj) => { obj.a = 2; };
+const badMutate = obj => {
+  obj.a = 2;
+};
 badMutate(objA);
-console.log('Original objA mutated:', objA); // { a: 2 } ❌
+console.log("Original objA mutated:", objA); // { a: 2 } ❌
 
-const goodMutate = (obj) => ({ ...obj, a: 2 });
+const goodMutate = obj => ({ ...obj, a: 2 });
 const objB = { b: 1 };
 const newObj = goodMutate(objB);
-console.log('Original objB unchanged:', objB); // { b: 1 } ✅
-console.log('New object created:', newObj); // { b: 1, a: 2 } ✅
+console.log("Original objB unchanged:", objB); // { b: 1 } ✅
+console.log("New object created:", newObj); // { b: 1, a: 2 } ✅
 
 // Pitfall 2: Forgetting bind for event handlers (common in React)
 console.log("\nPitfall 2 - Event handler context:");
 const handlerObj = {
-  name: 'Handler',
+  name: "Handler",
   handle() {
-    console.log('this.name:', this?.name);
-  }
+    console.log("this.name:", this?.name);
+  },
 };
 const unbound = handlerObj.handle;
 unbound(); // undefined ❌

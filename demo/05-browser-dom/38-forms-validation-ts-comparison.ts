@@ -767,7 +767,9 @@ usernameInput.addEventListener('input', async (e) => {
 console.log("\n=== Best Practices & Summary ===\n");
 
 console.log("✅ DO:\n");
-console.log("1. Use specific form element types (HTMLInputElement, HTMLSelectElement)");
+console.log(
+  "1. Use specific form element types (HTMLInputElement, HTMLSelectElement)"
+);
 console.log("2. Always assert form.elements access with proper types");
 console.log("3. Use type guards (instanceof) for event target narrowing");
 console.log("4. Define validation rules as typed functions");

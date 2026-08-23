@@ -30,14 +30,13 @@ const typedIterator: Iterator<number> = (() => {
         return { value: current++, done: false };
       }
       return { done: true, value: undefined };
-    }
+    },
   };
 })();
 
 console.log("=== Iterator<T> Interface ===");
 console.log(typedIterator.next()); // { value: 0, done: false }
 console.log(typedIterator.next()); // { value: 1, done: false }
-
 
 // ============================================================================
 // 2. GENERATOR<T, TReturn, TNext> TYPE
@@ -58,10 +57,9 @@ function* numberGenerator(): Generator<number, string, boolean> {
 
 console.log("\n=== Generator<T, TReturn, TNext> Type ===");
 const gen = numberGenerator();
-console.log(gen.next());      // { value: 0, done: false }
-console.log(gen.next(true));  // { value: 1, done: false }
+console.log(gen.next()); // { value: 0, done: false }
+console.log(gen.next(true)); // { value: 1, done: false }
 console.log(gen.next(false)); // { value: "finished", done: true }
-
 
 // ============================================================================
 // 3. ASYNC ITERATOR AND GENERATOR TYPES
@@ -95,7 +93,7 @@ class AsyncRange implements AsyncIterable<number> {
           return { value: current++, done: false };
         }
         return { done: true, value: undefined };
-      }
+      },
     };
   }
 }
@@ -106,7 +104,6 @@ console.log("\n=== Async Iterator and Generator Types ===");
     console.log(num);
   }
 })();
-
 
 // ============================================================================
 // 4. ITERABLE<T> INTERFACE
@@ -130,7 +127,7 @@ class CustomCollection implements Iterable<string> {
           return { value: items[index++], done: false };
         }
         return { done: true, value: undefined };
-      }
+      },
     };
   }
 }
@@ -144,7 +141,6 @@ collection.add("cherry");
 for (const item of collection) {
   console.log(item);
 }
-
 
 // ============================================================================
 // 5. SYMBOL.ITERATOR TYPING
@@ -167,7 +163,7 @@ class Range implements Iterable<number> {
           return { value: current++, done: false };
         }
         return { done: true, value: undefined };
-      }
+      },
     };
   }
 }
@@ -175,7 +171,6 @@ class Range implements Iterable<number> {
 console.log("\n=== Symbol.iterator Typing ===");
 const range = new Range(1, 5);
 console.log([...range]); // [1, 2, 3, 4, 5]
-
 
 // ============================================================================
 // 6. ITERATOR RESULT UTILITIES
@@ -192,15 +187,14 @@ function createIteratorHelper<T>() {
     },
     asReturn<R>(value: R): ReturnResult<R> {
       return { done: true, value };
-    }
+    },
   };
 }
 
 const helper = createIteratorHelper<number>();
 console.log("\n=== Iterator Result Utilities ===");
-console.log(helper.asYield(42));   // { done: false, value: 42 }
+console.log(helper.asYield(42)); // { done: false, value: 42 }
 console.log(helper.asReturn("done")); // { done: true, value: "done" }
-
 
 // ============================================================================
 // 7. GENERATOR DELEGATION WITH YIELD*
@@ -227,7 +221,6 @@ function* combined(): Generator<string | number, void, unknown> {
 console.log("\n=== Generator Delegation with yield* ===");
 console.log([...combined()]); // ['a', 'b', 'c', 1, 2, 3]
 
-
 // ============================================================================
 // 8. GENERIC ITERATORS
 // ============================================================================
@@ -247,9 +240,9 @@ function mapIterator<T, U>(
       }
       return {
         done: false,
-        value: mapper(result.value, index++)
+        value: mapper(result.value, index++),
       };
-    }
+    },
   };
 }
 
@@ -268,15 +261,18 @@ function filterIterator<T>(
           return result;
         }
       }
-    }
+    },
   };
 }
 
 console.log("\n=== Generic Iterators ===");
 const numIterator = [1, 2, 3, 4, 5][Symbol.iterator]();
 const doubled = mapIterator(numIterator, n => n * 2);
-console.log(Array.from({ length: 5 }, () => doubled.next()).filter(r => !r.done).map(r => r.value!));
-
+console.log(
+  Array.from({ length: 5 }, () => doubled.next())
+    .filter(r => !r.done)
+    .map(r => r.value!)
+);
 
 // ============================================================================
 // 9. CUSTOM ITERATOR STATE MACHINE
@@ -291,7 +287,8 @@ interface TreeNode {
 }
 
 class TreeIterator implements Iterator<[TreeState, TreeNode]> {
-  private stack: Array<{ node: TreeNode; state: TreeState; index: number }> = [];
+  private stack: Array<{ node: TreeNode; state: TreeState; index: number }> =
+    [];
 
   constructor(root: TreeNode) {
     this.stack.push({ node: root, state: "enter", index: 0 });
@@ -321,7 +318,6 @@ class TreeIterator implements Iterator<[TreeState, TreeNode]> {
 }
 
 console.log("\n=== Custom Iterator State Machine ===");
-
 
 // ============================================================================
 // 10. ASYNC ITERABLE UTILITIES
@@ -363,7 +359,6 @@ console.log("\n=== Async Iterable Utilities ===");
   console.log(collected);
 })();
 
-
 // ============================================================================
 // 11. TYPE INFERENCE FOR GENERATORS
 // ============================================================================
@@ -388,8 +383,11 @@ function* take<T>(iterator: Iterator<T>, n: number): Generator<T> {
 
 console.log("\n=== Type Inference for Generators ===");
 const taken = take([1, 2, 3, 4, 5][Symbol.iterator](), 3);
-console.log(Array.from({ length: 3 }, () => taken.next()).filter(r => !r.done).map(r => r.value!));
-
+console.log(
+  Array.from({ length: 3 }, () => taken.next())
+    .filter(r => !r.done)
+    .map(r => r.value!)
+);
 
 // ============================================================================
 // 12. COMPARISON TABLE
@@ -420,4 +418,6 @@ KEY TAKEAWAYS:
 5. Runtime iterator behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

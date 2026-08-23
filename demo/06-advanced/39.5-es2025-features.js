@@ -137,7 +137,8 @@ console.log("forEach:");
 [1, 2, 3].values().forEach(n => console.log("  ", n));
 
 // 2.9 Chaining helpers
-const result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].values()
+const result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  .values()
   .filter(n => n % 2 === 0) // Even numbers: [2,4,6,8,10]
   .map(n => n * 2) // Double: [4,8,12,16,20]
   .drop(2) // Skip first 2: [12,16,20]
@@ -146,7 +147,8 @@ console.log("\nChained result:", [...result]); // [12, 16]
 
 // Works with generators too
 function* fibonacci() {
-  let a = 0, b = 1;
+  let a = 0,
+    b = 1;
   while (true) {
     yield a;
     [a, b] = [b, a + b];
@@ -188,7 +190,10 @@ console.log("Regex match:", regex.test("Hello. How are you? [123] more text")); 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-console.log("\nManual escape same as RegExp.escape:", escapeRegExp(userInput) === escaped); // true
+console.log(
+  "\nManual escape same as RegExp.escape:",
+  escapeRegExp(userInput) === escaped
+); // true
 
 // Use case: Search user input safely
 function search(text, query) {
@@ -237,14 +242,17 @@ function getConfigOld(path) {
     try {
       if (!path) throw new Error("Path is required");
       resolve(fetch(path).then(res => res.json()));
-    } catch(err) {
+    } catch (err) {
       reject(err);
     }
   });
 }
 
 // Use case: Wrapping functions that may throw or return promises
-const safeFunction = (fn) => (...args) => Promise.try(() => fn(...args));
+const safeFunction =
+  fn =>
+  (...args) =>
+    Promise.try(() => fn(...args));
 
 // ============================================
 // 5. Float16Array
@@ -297,7 +305,9 @@ console.log("\n--- 6. JSON Modules ---");
 // Before: Had to fetch and parse, or use require()
 // const config = await fetch("./config.json").then(res => res.json());
 
-console.log("JSON modules allow importing .json files directly with import syntax");
+console.log(
+  "JSON modules allow importing .json files directly with import syntax"
+);
 console.log('Use: import data from "./data.json" with { type: "json" }');
 
 // ============================================
@@ -340,7 +350,10 @@ console.log("Case-sensitive matches:", text1.match(caseSensitive)); // ["Hello"]
 // Multiple modifiers: i = case-insensitive, m = multiline
 const multiLine = /(?im:^hello)/g;
 const multiLineText = "hello world\nHELLO there";
-console.log("Multiline case-insensitive matches:", multiLineText.match(multiLine)); // ["hello", "HELLO"]
+console.log(
+  "Multiline case-insensitive matches:",
+  multiLineText.match(multiLine)
+); // ["hello", "HELLO"]
 
 // Turn off modifiers: (?i:hello (?-i:WORLD))
 const mixed = /(?i:hello (?-i:WORLD))/g;
@@ -392,7 +405,9 @@ try {
 
 // Before ES2025: This threw SyntaxError: Identifier 'globalVar' has already been declared
 
-console.log("var declarations in eval() can now redeclare existing global variables");
+console.log(
+  "var declarations in eval() can now redeclare existing global variables"
+);
 
 // ============================================
 // 11. Intl.DurationFormat
@@ -415,7 +430,7 @@ const duration = {
   days: 3,
   hours: 4,
   minutes: 5,
-  seconds: 6
+  seconds: 6,
 };
 
 // English (US)
@@ -438,9 +453,12 @@ const digitalFormat = new Intl.DurationFormat("en-US", {
   style: "digital",
   hours: "2-digit",
   minutes: "2-digit",
-  seconds: "2-digit"
+  seconds: "2-digit",
 });
-console.log("Digital format:", digitalFormat.format({ hours: 2, minutes: 30, seconds: 15 }));
+console.log(
+  "Digital format:",
+  digitalFormat.format({ hours: 2, minutes: 30, seconds: 15 })
+);
 // "2:30:15"
 
 // ============================================
@@ -476,15 +494,33 @@ console.log("\nRegExp.escape for HTML:", escapedRegex); // Escapes regex chars o
 // ============================================
 console.log("\n--- 13. Best Practices ---");
 
-console.log("✅ Use Set methods for set operations instead of manual implementation");
-console.log("✅ Use iterator helpers for lazy processing of large/infinite sequences");
-console.log("✅ Always use RegExp.escape() when inserting user input into regular expressions");
-console.log("✅ Use Promise.try() to wrap functions that may throw synchronously or return promises");
-console.log("✅ Use Float16Array for graphics/ML where memory is constrained and lower precision is acceptable");
-console.log("✅ Use JSON modules with import attributes for type-safe JSON imports");
-console.log("✅ Use Intl.DurationFormat for locale-aware duration formatting instead of manual string building");
-console.log("⚠️  Remember that iterator helpers consume their source iterator, they are not reusable");
-console.log("⚠️  Set methods create new sets, chain operations when needed to avoid intermediate allocations");
+console.log(
+  "✅ Use Set methods for set operations instead of manual implementation"
+);
+console.log(
+  "✅ Use iterator helpers for lazy processing of large/infinite sequences"
+);
+console.log(
+  "✅ Always use RegExp.escape() when inserting user input into regular expressions"
+);
+console.log(
+  "✅ Use Promise.try() to wrap functions that may throw synchronously or return promises"
+);
+console.log(
+  "✅ Use Float16Array for graphics/ML where memory is constrained and lower precision is acceptable"
+);
+console.log(
+  "✅ Use JSON modules with import attributes for type-safe JSON imports"
+);
+console.log(
+  "✅ Use Intl.DurationFormat for locale-aware duration formatting instead of manual string building"
+);
+console.log(
+  "⚠️  Remember that iterator helpers consume their source iterator, they are not reusable"
+);
+console.log(
+  "⚠️  Set methods create new sets, chain operations when needed to avoid intermediate allocations"
+);
 
 // ============================================
 // 14. Cross-references

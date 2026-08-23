@@ -23,7 +23,7 @@ async function typedReadStream(): Promise<void> {
     // TypeScript: ReadableStream types
     const reader = response.body!.getReader();
     const decoder = new TextDecoder();
-    let result = '';
+    let result = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -53,7 +53,10 @@ typedReadStream();
 
 console.log("\n=== Download with Progress Types ===");
 
-async function typedDownloadWithProgress(url: string, onProgress?: (loaded: number, total: number, percent: number) => void): Promise<Uint8Array> {
+async function typedDownloadWithProgress(
+  url: string,
+  onProgress?: (loaded: number, total: number, percent: number) => void
+): Promise<Uint8Array> {
   try {
     const response = await fetch(url);
 
@@ -61,8 +64,8 @@ async function typedDownloadWithProgress(url: string, onProgress?: (loaded: numb
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const contentLength = response.headers.get('content-length');
-    const total = parseInt(contentLength || '0', 10);
+    const contentLength = response.headers.get("content-length");
+    const total = parseInt(contentLength || "0", 10);
     let loaded = 0;
 
     const reader = response.body!.getReader();
@@ -79,7 +82,9 @@ async function typedDownloadWithProgress(url: string, onProgress?: (loaded: numb
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 0;
         onProgress(loaded, total, percent);
-        console.log(`  Progress: ${loaded}/${total || '?'} bytes (${percent}%)`);
+        console.log(
+          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
+        );
       }
     }
 
@@ -135,7 +140,7 @@ async function typedTransformStream(): Promise<void> {
       const chunk = decoder.decode(value, { stream: true });
       charCount += chunk.length;
 
-      const newlines = chunk.split('\n').length - 1;
+      const newlines = chunk.split("\n").length - 1;
       lineCount += newlines;
 
       console.log(`  Processed ${chunk.length} characters`);
@@ -161,7 +166,7 @@ async function typedCancelableStream(): Promise<void> {
 
   try {
     const response = await fetch(`${API_BASE}/posts/1`, {
-      signal: controller.signal
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -176,7 +181,7 @@ async function typedCancelableStream(): Promise<void> {
     // Cancel after 30ms (demonstrate only)
     setTimeout(() => {
       console.log("  Cancelling stream...");
-      controller.abort('User cancelled');
+      controller.abort("User cancelled");
     }, 30);
 
     try {
@@ -192,15 +197,15 @@ async function typedCancelableStream(): Promise<void> {
         console.log(`  Read ${value.length} bytes`);
       }
     } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') {
+      if (error instanceof DOMException && error.name === "AbortError") {
         console.log(`  ✓ Stream cancelled after ${byteCount} bytes`);
       } else {
         throw error;
       }
     }
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      console.log('  Request was aborted at fetch level');
+    if (error instanceof DOMException && error.name === "AbortError") {
+      console.log("  Request was aborted at fetch level");
     }
   }
 }
@@ -227,9 +232,11 @@ async function typedCompareReadingMethods(): Promise<void> {
   console.log("  Method 1: Read all at once");
   const start1 = Date.now();
   const response1 = await fetch(`${API_BASE}/posts/1`);
-  const data1 = await response1.json() as Post;
+  const data1 = (await response1.json()) as Post;
   const time1 = Date.now() - start1;
-  console.log(`    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`);
+  console.log(
+    `    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`
+  );
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -303,7 +310,7 @@ async function useUtilityTypes(): Promise<void> {
   const createUser: CreateUserInput = {
     name: "John Doe",
     email: "john@example.com",
-    username: "johndoe"
+    username: "johndoe",
   };
   console.log("Create user input:", createUser.name);
 
@@ -339,7 +346,10 @@ function buildQueryString(params: Record<string, QueryValue>): string {
   return searchParams.toString();
 }
 
-function buildUrl(baseUrl: string, params?: Record<string, QueryValue>): string {
+function buildUrl(
+  baseUrl: string,
+  params?: Record<string, QueryValue>
+): string {
   if (!params) return baseUrl;
 
   const queryString = buildQueryString(params);
@@ -359,14 +369,19 @@ async function fetchUsers(params: UserQueryParams): Promise<User[]> {
   const url = buildUrl(`${API_BASE}/users`, params);
 
   const response = await fetch(url);
-  return await response.json() as User[];
+  return (await response.json()) as User[];
 }
 
 async function useQueryParams(): Promise<void> {
   const users = await fetchUsers({
-    _page: 1, _limit: 3 });
+    _page: 1,
+    _limit: 3,
+  });
 
-  console.log("Fetched users:", users.map(u => u.name));
+  console.log(
+    "Fetched users:",
+    users.map(u => u.name)
+  );
 }
 
 useQueryParams();
@@ -391,7 +406,7 @@ async function fetchWithTransform<T, U>(
     throw new Error(`HTTP ${response.status}`);
   }
 
-  const data = await response.json() as T;
+  const data = (await response.json()) as T;
   return transformer(data);
 }
 
@@ -468,6 +483,12 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log("📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript");
-console.log("📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript");
-console.log("📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript");
+console.log(
+  "📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript"
+);
+console.log(
+  "📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript"
+);
+console.log(
+  "📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript"
+);

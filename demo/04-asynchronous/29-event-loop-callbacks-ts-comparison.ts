@@ -22,7 +22,7 @@ function processData(data: string, callback: Callback<string>): void {
 }
 
 // Usage with type inference
-processData("hello", (result) => {
+processData("hello", result => {
   // result is typed as string
   console.log("Callback result:", result);
 });
@@ -30,7 +30,10 @@ processData("hello", (result) => {
 // Error-first callback pattern (Node.js style)
 type ErrorFirstCallback<T> = (error: Error | null, result?: T) => void;
 
-function fetchData(id: number, callback: ErrorFirstCallback<{ id: number; name: string }>): void {
+function fetchData(
+  id: number,
+  callback: ErrorFirstCallback<{ id: number; name: string }>
+): void {
   setTimeout(() => {
     if (id > 0) {
       callback(null, { id, name: "User" });
@@ -68,8 +71,8 @@ interface StringProcessor {
   (input: string): string;
 }
 
-const toUpper: StringProcessor = (input) => input.toUpperCase();
-const toLower: StringProcessor = (input) => input.toLowerCase();
+const toUpper: StringProcessor = input => input.toUpperCase();
+const toLower: StringProcessor = input => input.toLowerCase();
 
 // Method 3: Inline function type
 function processArray(
@@ -83,7 +86,10 @@ console.log("\n=== Function Type Definitions ===");
 console.log("Add:", add(5, 3)); // 8
 console.log("Multiply:", multiply(5, 3)); // 15
 console.log("ToUpper:", toUpper("hello")); // "HELLO"
-console.log("Process array:", processArray([1, 2, 3], x => x * 2)); // [2, 4, 6]
+console.log(
+  "Process array:",
+  processArray([1, 2, 3], x => x * 2)
+); // [2, 4, 6]
 
 // ============================================================================
 // 3. THIS TYPING IN CALLBACKS
@@ -100,19 +106,19 @@ const processor: Processor = {
   process(value: string): string {
     // 'this' is typed as Processor
     return `${this.prefix}: ${value}`;
-  }
+  },
 };
 
 // Explicit this binding
 function createCounter() {
   let count = 0;
   return {
-    increment: function(this: { count: number }): void {
+    increment: function (this: { count: number }): void {
       this.count++;
     },
-    getCount: function(this: { count: number }): number {
+    getCount: function (this: { count: number }): number {
       return this.count;
-    }
+    },
   };
 }
 
@@ -176,7 +182,7 @@ console.log("\n=== Timer Function Types ===");
 
 // Typed setTimeout with Promise
 function delay(ms: number, value?: string): Promise<string> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve(value ?? "delayed");
     }, ms);
@@ -194,10 +200,7 @@ delay(100, "hello").then(result => {
 // TypeScript: Generic callback types for reusability
 type AsyncCallback<T> = (result: T) => Promise<void> | void;
 
-function fetchWithCallback<T>(
-  url: string,
-  callback: AsyncCallback<T>
-): void {
+function fetchWithCallback<T>(url: string, callback: AsyncCallback<T>): void {
   // Simulated fetch
   setTimeout(() => {
     const mockData = { url, timestamp: Date.now() } as T;
@@ -211,12 +214,12 @@ interface UserData {
   name: string;
 }
 
-fetchWithCallback<UserData>("/api/users", (result) => {
+fetchWithCallback<UserData>("/api/users", result => {
   // result is typed as UserData
   console.log("User data:", result.name);
 });
 
-fetchWithCallback<{ url: string; timestamp: number }>("/api/posts", (result) => {
+fetchWithCallback<{ url: string; timestamp: number }>("/api/posts", result => {
   // result is typed as { url: string; timestamp: number }
   console.log("Post data:", result.url);
 });
@@ -228,9 +231,7 @@ console.log("\n=== Generic Callback Types ===");
 // ============================================================================
 
 // TypeScript: Union types for flexible callback parameters
-type Result<T> =
-  | { success: true; data: T }
-  | { success: false; error: Error };
+type Result<T> = { success: true; data: T } | { success: false; error: Error };
 
 type ResultCallback<T> = (result: Result<T>) => void;
 
@@ -248,15 +249,16 @@ function asyncOperation(
 }
 
 // Usage with type guard
-asyncOperation(true, (result) => {
+asyncOperation(true, result => {
   if (result.success) {
     // TypeScript knows result.data exists
     console.log("Success data:", result.data);
   } else {
     // Use type narrowing - result is { success: false; error: Error }
-    const errorMsg = "error" in result && result.error instanceof Error
-      ? result.error.message
-      : String(result);
+    const errorMsg =
+      "error" in result && result.error instanceof Error
+        ? result.error.message
+        : String(result);
     console.log("Error:", errorMsg);
   }
 });
@@ -269,7 +271,10 @@ console.log("\n=== Union Types in Callbacks ===");
 
 // TypeScript: Function overloads with callbacks
 function fetchDataWithOverload(callback: (data: string) => void): void;
-function fetchDataWithOverload(id: number, callback: (data: { id: number; name: string }) => void): void;
+function fetchDataWithOverload(
+  id: number,
+  callback: (data: { id: number; name: string }) => void
+): void;
 function fetchDataWithOverload(
   idOrCallback: number | ((data: string) => void),
   callback?: (data: { id: number; name: string }) => void
@@ -355,7 +360,7 @@ function optionalExecution(callback?: OptionalCallback<string>): void {
 }
 
 // Usage
-optionalExecution((result) => {
+optionalExecution(result => {
   // result is typed as string | undefined
   if (result !== undefined) {
     console.log("Result:", result);
@@ -374,7 +379,7 @@ interface EventData {
 
 type PartialEventCallback = (event: Partial<EventData>) => void;
 
-const handleEvent: PartialEventCallback = (event) => {
+const handleEvent: PartialEventCallback = event => {
   // All properties are optional
   console.log("Event type:", event.type);
   console.log("Has target:", event.target !== null);
@@ -422,12 +427,12 @@ console.log("\n=== Async Callback Types ===");
 type EventHandler<T extends Event = Event> = (event: T) => void;
 
 // Mouse event handler
-const mouseHandler: EventHandler<MouseEvent> = (event) => {
+const mouseHandler: EventHandler<MouseEvent> = event => {
   console.log("Mouse at:", event.clientX, event.clientY);
 };
 
 // Keyboard event handler
-const keyboardHandler: EventHandler<KeyboardEvent> = (event) => {
+const keyboardHandler: EventHandler<KeyboardEvent> = event => {
   console.log("Key pressed:", event.key);
 };
 
@@ -437,9 +442,11 @@ interface CustomEventDetail {
   action: string;
 }
 
-type CustomEventHandler = EventHandler<CustomEvent & { detail: CustomEventDetail }>;
+type CustomEventHandler = EventHandler<
+  CustomEvent & { detail: CustomEventDetail }
+>;
 
-const customHandler: CustomEventHandler = (event) => {
+const customHandler: CustomEventHandler = event => {
   console.log("User", event.detail.userId, "performed", event.detail.action);
 };
 
@@ -458,7 +465,7 @@ function createTransformer<T, U, V>(
   transform2: TransformCallback<U, V>
 ): TransformCallback<T, V> {
   return (input: T, done: (output: V) => void) => {
-    transform1(input, (intermediate) => {
+    transform1(input, intermediate => {
       transform2(intermediate, done);
     });
   };
@@ -474,7 +481,7 @@ const numberToString: TransformCallback<number, string> = (input, done) => {
 };
 
 const composed = createTransformer(stringToNumber, numberToString);
-composed("42", (result) => {
+composed("42", result => {
   console.log("Composed result:", result); // "42"
 });
 
@@ -490,11 +497,15 @@ type ApiResult<T> =
   | { status: "error"; message: string }
   | { status: "pending" };
 
-function isApiSuccess<T>(result: ApiResult<T>): result is { status: "success"; data: T } {
+function isApiSuccess<T>(
+  result: ApiResult<T>
+): result is { status: "success"; data: T } {
   return result.status === "success";
 }
 
-function isApiError<T>(result: ApiResult<T>): result is { status: "error"; message: string } {
+function isApiError<T>(
+  result: ApiResult<T>
+): result is { status: "error"; message: string } {
   return result.status === "error";
 }
 
@@ -525,9 +536,7 @@ handleApiResult({ status: "pending" });
 type CurriedCallback<T> = (arg1: number) => (arg2: number) => (arg3: T) => void;
 
 const curriedCallback: CurriedCallback<string> =
-  (arg1: number) =>
-  (arg2: number) =>
-  (arg3: string) => {
+  (arg1: number) => (arg2: number) => (arg3: string) => {
     console.log(`Curried: ${arg1}, ${arg2}, ${arg3}`);
   };
 

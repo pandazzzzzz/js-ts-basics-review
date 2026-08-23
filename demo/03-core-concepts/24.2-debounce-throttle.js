@@ -55,7 +55,7 @@ console.log("=== 1. Debounce Demo ===");
 function debounce(fn, delayMs) {
   let timeoutId = null;
 
-  return function(...args) {
+  return function (...args) {
     // Cancel previous pending execution
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
@@ -73,7 +73,7 @@ function debounce(fn, delayMs) {
 function debounceImmediate(fn, delayMs, immediate = false) {
   let timeoutId = null;
 
-  return function(...args) {
+  return function (...args) {
     const callNow = immediate && !timeoutId;
 
     if (timeoutId !== null) {
@@ -94,21 +94,25 @@ function debounceImmediate(fn, delayMs, immediate = false) {
 }
 
 // 1.3 Search input simulation
-const searchAPI = debounce((query) => {
+const searchAPI = debounce(query => {
   console.log(`Searching for: "${query}"`);
 }, 300);
 
 console.log("\nDebounce - Search simulation:");
-searchAPI('a');
-searchAPI('ab');
-searchAPI('abc');
-searchAPI('abcd');
+searchAPI("a");
+searchAPI("ab");
+searchAPI("abc");
+searchAPI("abcd");
 // Only "abcd" will be searched after 300ms pause
 
 // 1.4 Window resize handler (immediate)
-const handleResize = debounceImmediate(() => {
-  console.log('Resize handled (immediate)');
-}, 250, true);
+const handleResize = debounceImmediate(
+  () => {
+    console.log("Resize handled (immediate)");
+  },
+  250,
+  true
+);
 
 console.log("\nDebounce - Immediate resize simulation:");
 handleResize(); // Executes immediately
@@ -120,7 +124,7 @@ handleResize();
 function debounceCancelable(fn, delayMs) {
   let timeoutId = null;
 
-  const debounced = function(...args) {
+  const debounced = function (...args) {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
@@ -131,7 +135,7 @@ function debounceCancelable(fn, delayMs) {
     }, delayMs);
   };
 
-  debounced.cancel = function() {
+  debounced.cancel = function () {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       timeoutId = null;
@@ -142,11 +146,11 @@ function debounceCancelable(fn, delayMs) {
 }
 
 console.log("\nDebounce - Cancelable:");
-const cancelableSearch = debounceCancelable((q) => {
+const cancelableSearch = debounceCancelable(q => {
   console.log(`Cancelable search for: "${q}"`);
 }, 300);
-cancelableSearch('test1');
-cancelableSearch('test2');
+cancelableSearch("test1");
+cancelableSearch("test2");
 cancelableSearch.cancel(); // Cancels pending call
 
 // ============================================
@@ -182,7 +186,7 @@ function throttle(fn, limitMs) {
   let lastCall = 0;
   let timeoutId = null;
 
-  return function(...args) {
+  return function (...args) {
     const now = Date.now();
 
     if (now - lastCall >= limitMs) {
@@ -194,11 +198,14 @@ function throttle(fn, limitMs) {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);
       }
-      timeoutId = setTimeout(() => {
-        fn.apply(this, args);
-        lastCall = Date.now();
-        timeoutId = null;
-      }, limitMs - (now - lastCall));
+      timeoutId = setTimeout(
+        () => {
+          fn.apply(this, args);
+          lastCall = Date.now();
+          timeoutId = null;
+        },
+        limitMs - (now - lastCall)
+      );
     }
   };
 }
@@ -207,7 +214,7 @@ function throttle(fn, limitMs) {
 function throttleNoTrailing(fn, limitMs) {
   let lastCall = 0;
 
-  return function(...args) {
+  return function (...args) {
     const now = Date.now();
 
     if (now - lastCall >= limitMs) {
@@ -219,7 +226,7 @@ function throttleNoTrailing(fn, limitMs) {
 }
 
 // 2.3 Scroll handler simulation
-const scrollHandler = throttle((scrollY) => {
+const scrollHandler = throttle(scrollY => {
   console.log(`Scroll handled at: ${scrollY}px`);
 }, 200);
 
@@ -232,7 +239,7 @@ scrollHandler(400); // Throttled, but will have trailing call
 
 // 2.4 Button click protection (no trailing)
 const clickHandler = throttleNoTrailing(() => {
-  console.log('Button clicked (protected)');
+  console.log("Button clicked (protected)");
 }, 1000);
 
 console.log("\nThrottle - Click protection:");
@@ -245,7 +252,7 @@ function throttleCancelable(fn, limitMs) {
   let lastCall = 0;
   let timeoutId = null;
 
-  const throttled = function(...args) {
+  const throttled = function (...args) {
     const now = Date.now();
 
     if (now - lastCall >= limitMs) {
@@ -255,15 +262,18 @@ function throttleCancelable(fn, limitMs) {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);
       }
-      timeoutId = setTimeout(() => {
-        fn.apply(this, args);
-        lastCall = Date.now();
-        timeoutId = null;
-      }, limitMs - (now - lastCall));
+      timeoutId = setTimeout(
+        () => {
+          fn.apply(this, args);
+          lastCall = Date.now();
+          timeoutId = null;
+        },
+        limitMs - (now - lastCall)
+      );
     }
   };
 
-  throttled.cancel = function() {
+  throttled.cancel = function () {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
       timeoutId = null;
@@ -282,8 +292,8 @@ console.log("\n=== 3. Implementation Variations ===");
 function debouncePromise(fn, delayMs) {
   let timeoutId = null;
 
-  return function(...args) {
-    return new Promise((resolve) => {
+  return function (...args) {
+    return new Promise(resolve => {
       if (timeoutId !== null) {
         clearTimeout(timeoutId);
       }
@@ -313,7 +323,7 @@ function debounceWithMaxWait(fn, delayMs, maxWaitMs) {
     lastCallTime = Date.now();
   };
 
-  return function(...args) {
+  return function (...args) {
     const now = Date.now();
     const timeSinceLastCall = now - lastCallTime;
 
@@ -324,27 +334,34 @@ function debounceWithMaxWait(fn, delayMs, maxWaitMs) {
     if (lastCallTime === 0 || timeSinceLastCall >= maxWaitMs) {
       execute(this, args);
     } else {
-      timeoutId = setTimeout(() => {
-        execute(this, args);
-        timeoutId = null;
-      }, Math.min(delayMs, maxWaitMs - timeSinceLastCall));
+      timeoutId = setTimeout(
+        () => {
+          execute(this, args);
+          timeoutId = null;
+        },
+        Math.min(delayMs, maxWaitMs - timeSinceLastCall)
+      );
     }
   };
 }
 
 console.log("\nDebounce with max wait:");
 const maxWaitSearch = debounceWithMaxWait(
-  (q) => console.log(`Max wait search: "${q}"`),
+  q => console.log(`Max wait search: "${q}"`),
   300,
   1000
 );
-maxWaitSearch('a');
-maxWaitSearch('b');
-maxWaitSearch('c');
+maxWaitSearch("a");
+maxWaitSearch("b");
+maxWaitSearch("c");
 // Will execute after 300ms OR 1000ms after first call (whichever comes first)
 
 // 3.3 Throttle with leading + trailing options
-function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) {
+function throttleOptions(
+  fn,
+  limitMs,
+  { leading = true, trailing = true } = {}
+) {
   let lastCall = 0;
   let timeoutId = null;
   let lastArgs = null;
@@ -359,7 +376,7 @@ function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) 
     }
   };
 
-  const throttled = function(...args) {
+  const throttled = function (...args) {
     const now = Date.now();
 
     if (!lastCall && !leading) {
@@ -387,7 +404,7 @@ function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) 
     }
   };
 
-  throttled.cancel = function() {
+  throttled.cancel = function () {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
@@ -401,10 +418,13 @@ function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) 
 }
 
 console.log("\nThrottle with options:");
-const trailingOnly = throttleOptions((v) => console.log('Trailing:', v), 200, { leading: false, trailing: true });
-trailingOnly('a');
-trailingOnly('b');
-trailingOnly('c');
+const trailingOnly = throttleOptions(v => console.log("Trailing:", v), 200, {
+  leading: false,
+  trailing: true,
+});
+trailingOnly("a");
+trailingOnly("b");
+trailingOnly("c");
 
 // ============================================
 // 4. Use Case Examples
@@ -413,18 +433,18 @@ console.log("\n=== 4. Use Case Examples ===");
 
 // 4.1 Autosave form
 console.log("\n4.1 Autosave:");
-const saveDraft = debounce((content) => {
+const saveDraft = debounce(content => {
   console.log(`Auto-saving draft: "${content.substring(0, 20)}..."`);
 }, 500);
-saveDraft('Hello world');
-saveDraft('Hello world, how are');
-saveDraft('Hello world, how are you?');
+saveDraft("Hello world");
+saveDraft("Hello world, how are");
+saveDraft("Hello world, how are you?");
 
 // 4.2 Infinite scroll
 console.log("\n4.2 Infinite scroll:");
 const checkScroll = throttle((scrollTop, clientHeight, scrollHeight) => {
   if (scrollTop + clientHeight >= scrollHeight - 100) {
-    console.log('Loading more items...');
+    console.log("Loading more items...");
   }
 }, 150);
 checkScroll(500, 800, 2000);
@@ -443,7 +463,7 @@ updatePosition(20, 30);
 // 4.4 Double-click prevention
 console.log("\n4.4 Double-click prevention:");
 const purchase = throttleNoTrailing(() => {
-  console.log('Purchase submitted (once)');
+  console.log("Purchase submitted (once)");
 }, 1000);
 purchase(); // Submitted
 purchase(); // Ignored
@@ -457,7 +477,9 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Forgetting to cancel debounced functions in cleanups
 console.log("\nPitfall 1 - Memory leaks:");
 console.log("❌ Bad: Not canceling debounced timers in component unmounts");
-console.log("✅ Good: Always cancel debounced/throttled functions when no longer needed");
+console.log(
+  "✅ Good: Always cancel debounced/throttled functions when no longer needed"
+);
 
 // Pitfall 2: Too short/long delays
 console.log("\nPitfall 2 - Bad delay values:");
@@ -483,10 +505,14 @@ console.log("\n=== Best Practices ===");
 console.log("✅ Use debounce for: Search inputs, resize, autosave");
 console.log("✅ Use throttle for: Scroll, mousemove, button protection");
 console.log("✅ Use cancelable versions for cleanup");
-console.log("✅ Choose delay based on use case: 200-500ms for search, 100-200ms for scroll");
+console.log(
+  "✅ Choose delay based on use case: 200-500ms for search, 100-200ms for scroll"
+);
 console.log("✅ Consider max wait for debounce to guarantee updates");
 console.log("⚠️  Always clean up timers to avoid memory leaks");
-console.log("⚠️  Beware of 'this' context - bind or use arrow functions carefully");
+console.log(
+  "⚠️  Beware of 'this' context - bind or use arrow functions carefully"
+);
 console.log("⚠️  Test edge cases (rapid fire, component unmount mid-delay)");
 
 // ============================================

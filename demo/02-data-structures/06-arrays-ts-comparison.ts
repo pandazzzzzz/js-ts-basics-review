@@ -39,7 +39,6 @@ mixed.push("hello"); // ✅ OK
 const explicit: number[] = [1, 2, 3];
 const unionArray: (number | string)[] = [1, "two", 3];
 
-
 // ============================================================================
 // 2. READONLY ARRAYS - IMMUTABILITY
 // ============================================================================
@@ -63,16 +62,21 @@ console.log("Readonly array:", readonlyArray);
 const readonlyAlt: ReadonlyArray<number> = [1, 2, 3];
 
 // ⚠️ PITFALL: readonly is shallow
-const nestedArray: readonly number[][] = [[1, 2], [3, 4]];
+const nestedArray: readonly number[][] = [
+  [1, 2],
+  [3, 4],
+];
 // nestedArray.push([5, 6]); // ❌ Error: Cannot push to outer array
-nestedArray[0].push(99);     // ✅ Allowed! Inner array is mutable
+nestedArray[0].push(99); // ✅ Allowed! Inner array is mutable
 
 console.log("Nested array after mutation:", nestedArray); // [[1, 2, 99], [3, 4]]
 
 // ✅ SOLUTION: Deep readonly
-const deepReadonly: readonly (readonly number[])[] = [[1, 2], [3, 4]];
+const deepReadonly: readonly (readonly number[])[] = [
+  [1, 2],
+  [3, 4],
+];
 // deepReadonly[0].push(99); // ❌ Error: Now inner arrays are readonly too
-
 
 // ============================================================================
 // 3. TUPLE TYPES - FIXED LENGTH & TYPES
@@ -105,8 +109,8 @@ const readonlyTuple: readonly [number, string] = [1, "hello"];
 type Point2D = [number, number];
 type Point3D = [number, number, number?]; // z is optional
 
-const point2D: Point3D = [10, 20];       // ✅ OK
-const point3D: Point3D = [10, 20, 30];   // ✅ OK
+const point2D: Point3D = [10, 20]; // ✅ OK
+const point3D: Point3D = [10, 20, 30]; // ✅ OK
 
 const [x, y, z] = point2D; // z: number | undefined
 console.log("Point 2D:", { x, y, z });
@@ -115,7 +119,6 @@ console.log("Point 2D:", { x, y, z });
 type RGB = [red: number, green: number, blue: number];
 const color: RGB = [255, 128, 0];
 console.log("Color:", color);
-
 
 // ============================================================================
 // 4. ARRAY METHOD TYPE SAFETY
@@ -149,10 +152,13 @@ const sum = numbers.reduce((acc, n) => acc + n, 0); // number
 console.log("Sum:", sum);
 
 // ⚠️ PITFALL: Empty object needs type assertion
-const numberMap = numbers.reduce((acc, n) => {
-  acc[n] = n * 2;
-  return acc;
-}, {} as Record<number, number>); // Need type assertion
+const numberMap = numbers.reduce(
+  (acc, n) => {
+    acc[n] = n * 2;
+    return acc;
+  },
+  {} as Record<number, number>
+); // Need type assertion
 console.log("Number map:", numberMap);
 
 // find() - Returns T | undefined
@@ -170,7 +176,6 @@ if (found !== undefined) {
 
 // 3. Non-null assertion (use carefully!)
 // console.log("Found with assertion:", found!.toFixed(2)); // ⚠️ Runtime error if undefined
-
 
 // ============================================================================
 // 5. ARRAY DESTRUCTURING WITH TYPES
@@ -193,7 +198,6 @@ const pair: [number, string] = [1, "hello"];
 const [a, b, c] = pair as [number, string, unknown?]; // c: undefined (TS won't flag the access)
 console.log("Destructured:", { a, b, c });
 
-
 // ============================================================================
 // 6. CONST ASSERTIONS FOR LITERAL TYPES
 // ============================================================================
@@ -210,18 +214,17 @@ const literalArray = [1, 2, 3] as const; // readonly [1, 2, 3]
 // literalArray.push(4);  // ❌ Error: Property 'push' does not exist
 // literalArray[0] = 99;  // ❌ Error: Cannot assign to '0' because it is a read-only property
 
-type FirstElement = typeof literalArray[0]; // 1 (literal type, not number)
+type FirstElement = (typeof literalArray)[0]; // 1 (literal type, not number)
 console.log("Literal array:", literalArray);
 
 // Const assertion with objects in arrays
 const config = [
   { name: "dev", port: 3000 },
-  { name: "prod", port: 8080 }
+  { name: "prod", port: 8080 },
 ] as const;
 
 // config[0].port = 4000; // ❌ Error: Cannot assign to 'port' because it is a read-only property
-type ConfigName = typeof config[0]["name"]; // "dev" (literal type)
-
+type ConfigName = (typeof config)[0]["name"]; // "dev" (literal type)
 
 // ============================================================================
 // 7. ARRAY UTILITY TYPES
@@ -252,7 +255,6 @@ const tripleExample: Triple<string> = ["a", "b", "c"]; // ✅ OK
 type Concat<T extends any[], U extends any[]> = [...T, ...U];
 type Result = Concat<[1, 2], [3, 4]>; // [1, 2, 3, 4]
 
-
 // ============================================================================
 // 8. SPARSE ARRAYS AND UNDEFINED
 // ============================================================================
@@ -276,7 +278,6 @@ console.log("Sparse from constructor:", sparseFromConstructor);
 const filledArray = Array.from({ length: 3 }, (_, i) => i); // [0, 1, 2]
 const filledWithValue = new Array(3).fill(0); // [0, 0, 0]
 console.log("Filled arrays:", { filledArray, filledWithValue });
-
 
 // ============================================================================
 // 9. ARRAY METHODS RETURN TYPES
@@ -305,7 +306,6 @@ testArray.forEach(n => console.log(n)); // void
 
 console.log("Method return types verified");
 
-
 // ============================================================================
 // 10. COMMON PITFALLS: JS vs TS ARRAYS
 // ============================================================================
@@ -319,12 +319,12 @@ type ArraySyntax2 = number[];
 
 // PITFALL 2: Empty array initialization
 const emptyArray = []; // Inferred as any[]
-emptyArray.push(1);    // ✅ OK
+emptyArray.push(1); // ✅ OK
 emptyArray.push("two"); // ✅ OK (dangerous!)
 
 // ✅ SOLUTION: Specify type
 const typedEmpty: number[] = [];
-typedEmpty.push(1);    // ✅ OK
+typedEmpty.push(1); // ✅ OK
 // typedEmpty.push("two"); // ❌ Error
 
 // PITFALL 3: Readonly doesn't prevent reassignment of elements (only mutation)
@@ -340,7 +340,6 @@ console.log("Mutable tuple after push:", mutableTuple);
 // PITFALL 5: Type widening with const
 const widenedArray = [1, 2, 3]; // number[] (widened)
 const literalArrayConst = [1, 2, 3] as const; // readonly [1, 2, 3] (literal)
-
 
 // ============================================================================
 // 11. BEST PRACTICES SUMMARY

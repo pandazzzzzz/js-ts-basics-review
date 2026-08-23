@@ -21,7 +21,7 @@ const dataDescriptor: PropertyDescriptor = {
   value: 42,
   writable: true,
   enumerable: true,
-  configurable: true
+  configurable: true,
 };
 
 const accessorDescriptor: PropertyDescriptor = {
@@ -32,12 +32,11 @@ const accessorDescriptor: PropertyDescriptor = {
     console.log(`Setting value to ${value}`);
   },
   enumerable: true,
-  configurable: true
+  configurable: true,
 };
 
 console.log("=== PropertyDescriptor Interface ===");
 console.log(dataDescriptor.value);
-
 
 // ============================================================================
 // 2. READONLY VS WRITABLE: FALSE
@@ -61,11 +60,11 @@ class ConfigClass {
 
 // Runtime readonly via defineProperty
 const runtimeReadonly: Record<string, any> = {};
-Object.defineProperty(runtimeReadonly, 'runtimeConstant', {
+Object.defineProperty(runtimeReadonly, "runtimeConstant", {
   value: 42,
   writable: false,
   enumerable: true,
-  configurable: false
+  configurable: false,
 });
 
 console.log("\n=== Readonly vs Writable: false ===");
@@ -82,14 +81,13 @@ function defineReadonlyProperty<T extends object, K extends keyof T>(
     value,
     writable: false,
     enumerable: true,
-    configurable: false
+    configurable: false,
   });
 }
 
 const myObj: Record<string, number> = {};
-defineReadonlyProperty(myObj, 'fixed', 100);
+defineReadonlyProperty(myObj, "fixed", 100);
 console.log(myObj.fixed); // 100
-
 
 // ============================================================================
 // 3. THISTYPE<T> FOR DESCRIPTOR METHODS
@@ -113,14 +111,13 @@ const typedDescriptor: ComputedDescriptor = {
   },
   set(value: number): void {
     this._value = value / this.multiplier;
-  }
+  },
 };
 
 console.log("\n=== ThisType for Descriptor Methods ===");
 const model: DataModel = { _value: 10, multiplier: 2 };
 typedDescriptor.set.call(model, 20);
 console.log(typedDescriptor.get.call(model)); // 20
-
 
 // ============================================================================
 // 4. TYPE-SAFE OBJECT.DEFINEPROPERTY
@@ -155,24 +152,23 @@ interface Person {
 
 const person: Partial<Person> = {};
 
-typedDefineProperty(person as Person, 'name', {
+typedDefineProperty(person as Person, "name", {
   value: "Alice",
   writable: true,
   enumerable: true,
-  configurable: false
+  configurable: false,
 });
 
-typedDefineProperty(person as Person, 'id', {
+typedDefineProperty(person as Person, "id", {
   get(): string {
     return crypto.randomUUID();
   },
   enumerable: true,
-  configurable: false
+  configurable: false,
 });
 
 console.log("\n=== Type-safe Object.defineProperty ===");
 console.log(person.name);
-
 
 // ============================================================================
 // 5. GETTERS AND SETTERS WITH PROPER TYPES
@@ -212,22 +208,27 @@ console.log(`Radius: ${circle.radius}`);
 console.log(`Area: ${circle.area.toFixed(2)}`);
 console.log(`Circumference: ${circle.circumference.toFixed(2)}`);
 
-
 // ============================================================================
 // 6. ACCESSOR DECORATORS (TS 5.0+)
 // ============================================================================
 
 // Accessor decorator for validation
 function validateNumber(min: number, max: number) {
-  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
     const originalSet = descriptor.set;
 
     descriptor.set = function (value: number) {
-      if (typeof value !== 'number') {
+      if (typeof value !== "number") {
         throw new TypeError(`${propertyKey} must be a number`);
       }
       if (value < min || value > max) {
-        throw new RangeError(`${propertyKey} must be between ${min} and ${max}`);
+        throw new RangeError(
+          `${propertyKey} must be between ${min} and ${max}`
+        );
       }
       originalSet?.call(this, value);
     };
@@ -262,7 +263,6 @@ try {
   console.log("Validation error caught:", (e as Error).message);
 }
 
-
 // ============================================================================
 // 7. CONST ASSERTIONS FOR IMMUTABLE DESCRIPTORS
 // ============================================================================
@@ -272,7 +272,7 @@ const immutableDescriptor = {
   value: "constant",
   writable: false as const,
   enumerable: false as const,
-  configurable: false as const
+  configurable: false as const,
 } as const;
 
 // All properties are now deeply readonly
@@ -280,7 +280,6 @@ const immutableDescriptor = {
 
 console.log("\n=== Const Assertions ===");
 console.log("Const assertion creates deeply immutable descriptor objects");
-
 
 // ============================================================================
 // 8. PROPERTY DESCRIPTOR UTILITY FUNCTIONS
@@ -315,7 +314,6 @@ const original = { name: "Original", value: 42 };
 const cloned = cloneWithDescriptors(original);
 console.log(cloned);
 
-
 // ============================================================================
 // 9. MAPPED TYPES FOR PROPERTY TRANSFORMATION
 // ============================================================================
@@ -349,7 +347,6 @@ console.log("\n=== Mapped Types ===");
 const readonlyObj: ReadonlySource = { name: "test", active: true };
 // readonlyObj.name = "changed"; // ❌ Error
 
-
 // ============================================================================
 // 10. COMPARISON TABLE
 // ============================================================================
@@ -379,4 +376,6 @@ KEY TAKEAWAYS:
 5. Runtime descriptor behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

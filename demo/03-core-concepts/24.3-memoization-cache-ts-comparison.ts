@@ -3,7 +3,9 @@
 
 export {};
 
-console.log("=== Function Patterns - Memoization & Cache TypeScript Comparison ===\n");
+console.log(
+  "=== Function Patterns - Memoization & Cache TypeScript Comparison ===\n"
+);
 
 /**
  * 🔍 Key Differences in TypeScript:
@@ -32,7 +34,7 @@ type AnyFn<T extends any[], R> = (...args: T) => R;
 function memoize<T extends any[], R>(fn: (...args: T) => R): AnyFn<T, R> {
   const cache = new Map<string, R>();
 
-  return function(...args: T): R {
+  return function (...args: T): R {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key)!;
@@ -60,7 +62,7 @@ function memoizeWithKey<T extends any[], R, K>(
 ): AnyFn<T, R> {
   const cache = new Map<K, R>();
 
-  return function(...args: T): R {
+  return function (...args: T): R {
     const key = keyGenerator(...args);
     if (cache.has(key)) {
       return cache.get(key)!;
@@ -71,7 +73,10 @@ function memoizeWithKey<T extends any[], R, K>(
   };
 }
 
-const sum = memoizeWithKey((a: number, b: number) => a + b, (...args) => `sum:${args[0]}+${args[1]}`);
+const sum = memoizeWithKey(
+  (a: number, b: number) => a + b,
+  (...args) => `sum:${args[0]}+${args[1]}`
+);
 console.log("  sum(2, 3):", sum(2, 3));
 
 // Example 3: WeakMap memoization for objects
@@ -79,7 +84,7 @@ console.log("\n3. WeakMap memoization:");
 function memoizeWeak<T extends object, R>(fn: (arg: T) => R): (arg: T) => R {
   const cache = new WeakMap<T, R>();
 
-  return function(arg: T): R {
+  return function (arg: T): R {
     if (cache.has(arg)) {
       return cache.get(arg)!;
     }
@@ -89,7 +94,10 @@ function memoizeWeak<T extends object, R>(fn: (arg: T) => R): (arg: T) => R {
   };
 }
 
-const processObj = memoizeWeak((obj: { id: number }) => ({ ...obj, processed: true }));
+const processObj = memoizeWeak((obj: { id: number }) => ({
+  ...obj,
+  processed: true,
+}));
 const obj1 = { id: 1 };
 console.log("  processObj(obj1):", processObj(obj1));
 console.log("  processObj(obj1):", processObj(obj1));
@@ -102,7 +110,7 @@ function memoizeMaxSize<T extends any[], R>(
 ): AnyFn<T, R> {
   const cache = new Map<string, R>();
 
-  return function(...args: T): R {
+  return function (...args: T): R {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key)!;
@@ -167,10 +175,14 @@ class LRUCache<K, V> {
 }
 
 const lru = new LRUCache<string, number>(3);
-lru.set('a', 1);
-lru.set('b', 2);
-lru.set('c', 3);
-console.log("  LRUCache:", { a: lru.get('a'), b: lru.get('b'), c: lru.get('c') });
+lru.set("a", 1);
+lru.set("b", 2);
+lru.set("c", 3);
+console.log("  LRUCache:", {
+  a: lru.get("a"),
+  b: lru.get("b"),
+  c: lru.get("c"),
+});
 
 // Example 6: Memoize with LRU
 console.log("\n6. Memoize with LRU:");
@@ -180,7 +192,7 @@ function memoizeLRU<T extends any[], R>(
 ): AnyFn<T, R> {
   const lruCache = new LRUCache<string, R>(maxSize);
 
-  return function(...args: T): R {
+  return function (...args: T): R {
     const key = JSON.stringify(args);
     if (lruCache.has(key)) {
       return lruCache.get(key)!;
@@ -197,10 +209,10 @@ type Thunk<T> = () => T;
 type TrampolineFn<T> = (...args: any[]) => T;
 
 function trampoline<T>(fn: TrampolineFn<T>): TrampolineFn<T> {
-  return function(...args: any[]): T {
+  return function (...args: any[]): T {
     let result: T | Thunk<T> = fn(...args);
 
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = (result as Thunk<T>)();
     }
 
@@ -208,7 +220,10 @@ function trampoline<T>(fn: TrampolineFn<T>): TrampolineFn<T> {
   };
 }
 
-function factorialTrampoline(n: number, accumulator: number = 1): number | (() => number | (() => any)) {
+function factorialTrampoline(
+  n: number,
+  accumulator: number = 1
+): number | (() => number | (() => any)) {
   if (n <= 1) return accumulator;
   return () => factorialTrampoline(n - 1, n * accumulator);
 }
@@ -221,10 +236,10 @@ console.log("\n8. Mutual recursion with trampoline:");
 type CheckFn = (n: number) => CheckFn | boolean;
 
 function trampolineMutual(fn: CheckFn): (n: number) => boolean {
-  return function(n: number): boolean {
+  return function (n: number): boolean {
     let result: CheckFn | boolean = fn(n);
 
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = (result as CheckFn)(0);
     }
 
@@ -295,8 +310,8 @@ function createLRUCache<K, V>(maxSize: number): CacheFactory<K, V> {
 
 const createStringCache = createLRUCache<string, number>(50);
 const stringCache = createStringCache();
-stringCache.set('key1', 1);
-stringCache.set('key2', 2);
+stringCache.set("key1", 1);
+stringCache.set("key2", 2);
 console.log("  String cache size:", stringCache.size);
 
 /**

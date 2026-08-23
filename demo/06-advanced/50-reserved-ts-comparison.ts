@@ -13,14 +13,14 @@ console.log("=== TypeScript Advanced Type Features ===\n");
 // 1. Template Literal Types
 console.log("1. Template Literal Types:");
 
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
-type Endpoint = 'users' | 'posts' | 'comments';
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+type Endpoint = "users" | "posts" | "comments";
 
 type ApiRoute = `/api/${Endpoint}`;
-const userRoute: ApiRoute = '/api/users';
+const userRoute: ApiRoute = "/api/users";
 
 type EventName<T extends string> = `${T}Changed` | `${T}Updated`;
-type UserEvent = EventName<'user'>; // "userChanged" | "userUpdated"
+type UserEvent = EventName<"user">; // "userChanged" | "userUpdated"
 
 console.log(`Template literal types create union types from string patterns`);
 
@@ -28,16 +28,16 @@ console.log(`Template literal types create union types from string patterns`);
 console.log("\n2. Conditional Types:");
 
 type IsString<T> = T extends string ? true : false;
-type A = IsString<string>;  // true
-type B = IsString<number>;  // false
+type A = IsString<string>; // true
+type B = IsString<number>; // false
 
 // Infer keyword in conditional types
 type Flatten<T> = T extends Array<infer U> ? U : T;
-type C = Flatten<string[]>;        // string
+type C = Flatten<string[]>; // string
 type D = Flatten<Array<{ id: number }>>; // { id: number }
 
 // Extract utility type (built-in)
-type E = Extract<'a' | 'b' | 'c', 'a' | 'd'>; // 'a'
+type E = Extract<"a" | "b" | "c", "a" | "d">; // 'a'
 
 console.log("Conditional types enable type-level programming");
 
@@ -79,7 +79,7 @@ function merge<T extends unknown[]>(...args: T): [...T] {
   return [...args];
 }
 
-const result = merge('hello', 42, true);
+const result = merge("hello", 42, true);
 console.log("Variadic tuples enable precise function typing");
 
 // 5. const Type Parameters (TS 5.0+)
@@ -190,7 +190,9 @@ class ConfigurableExample {
   }
 }
 
-console.log("Decorators enable metaprogramming patterns (see commented @ applications)");
+console.log(
+  "Decorators enable metaprogramming patterns (see commented @ applications)"
+);
 
 // ============================================
 // Section 3: Import Attributes (TS 5.3+)
@@ -268,8 +270,8 @@ function sendEmail(to: Email, subject: string): void {
   console.log(`Sending to ${to}: ${subject}`);
 }
 
-const userId: UserId = createUserId('user-123');
-const email: Email = 'test@example.com' as Email;
+const userId: UserId = createUserId("user-123");
+const email: Email = "test@example.com" as Email;
 
 // Type mismatch caught at compile time
 // sendEmail(userId, 'Test'); // Error: UserId is not Email
@@ -287,14 +289,14 @@ type TrimLeft<S extends string> = S extends ` ${infer T}` ? TrimLeft<T> : S;
 type TrimRight<S extends string> = S extends `${infer T} ` ? TrimRight<T> : S;
 type Trim<S extends string> = TrimLeft<TrimRight<S>>;
 
-type Trimmed = Trim<'  hello world  '>; // "hello world"
+type Trimmed = Trim<"  hello world  ">; // "hello world"
 
 // Type-level number operations
 type Increment<N extends number> = N extends N
-  ? [...TupleOf<N>, any]['length'] & number
+  ? [...TupleOf<N>, any]["length"] & number
   : never;
 
-type TupleOf<N extends number, T extends any[] = []> = T['length'] extends N
+type TupleOf<N extends number, T extends any[] = []> = T["length"] extends N
   ? T
   : TupleOf<N, [...T, any]>;
 
@@ -408,7 +410,9 @@ console.log("- Pattern matching support when ES standardizes");
 console.log("\n=== Summary ===\n");
 
 console.log("TypeScript provides advanced type features today that may become");
-console.log("part of future JavaScript standards. Using TypeScript allows you to:");
+console.log(
+  "part of future JavaScript standards. Using TypeScript allows you to:"
+);
 console.log("1. Write safer code with compile-time checks");
 console.log("2. Use future JS features before browser support");
 console.log("3. Leverage powerful type-level programming");

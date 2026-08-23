@@ -62,8 +62,8 @@ let globalLet = "I am global (let)";
 const globalConst = "I am global (const)";
 
 function accessGlobal() {
-  console.log(globalVar);   // Accessible
-  console.log(globalLet);   // Accessible
+  console.log(globalVar); // Accessible
+  console.log(globalLet); // Accessible
   console.log(globalConst); // Accessible
 }
 
@@ -121,8 +121,8 @@ function outerFunction() {
     var alsoFunctionScoped = "var ignores blocks";
   }
 
-  console.log(functionScoped);      // Accessible
-  console.log(alsoFunctionScoped);  // Accessible (var is function-scoped)
+  console.log(functionScoped); // Accessible
+  console.log(alsoFunctionScoped); // Accessible (var is function-scoped)
 }
 
 outerFunction();
@@ -134,7 +134,8 @@ try {
 }
 
 // Function scope with parameters
-function greet(name) { // 'name' is function-scoped
+function greet(name) {
+  // 'name' is function-scoped
   var greeting = "Hello";
   return `${greeting}, ${name}!`;
 }
@@ -172,8 +173,8 @@ if (true) {
   const constVariable = "const is block-scoped";
 
   console.log("Inside block:");
-  console.log("  varVariable:", varVariable);   // Accessible
-  console.log("  letVariable:", letVariable);   // Accessible
+  console.log("  varVariable:", varVariable); // Accessible
+  console.log("  letVariable:", letVariable); // Accessible
   console.log("  constVariable:", constVariable); // Accessible
 }
 
@@ -336,10 +337,10 @@ function first() {
 
       // Scope chain: third -> second -> first -> global
       console.log("Scope chain lookup:");
-      console.log("  thirdVar:", thirdVar);   // Found in third
+      console.log("  thirdVar:", thirdVar); // Found in third
       console.log("  secondVar:", secondVar); // Found in second
-      console.log("  firstVar:", firstVar);   // Found in first
-      console.log("  global:", global);       // Found in global
+      console.log("  firstVar:", firstVar); // Found in first
+      console.log("  global:", global); // Found in global
     }
 
     third();
@@ -411,7 +412,8 @@ console.log("In global:", name); // "Global Name"
 // Parameter shadowing
 const value = 100;
 
-function useParameter(value) { // Parameter shadows global 'value'
+function useParameter(value) {
+  // Parameter shadows global 'value'
   console.log("Parameter value:", value);
 }
 
@@ -519,10 +521,14 @@ KEY CONCEPTS:
 console.log("\n=== Cross-references ===");
 console.log("📘 13.2-scope-tdz-strict.js - TDZ and strict mode details");
 console.log("📘 13.3-closures-basics.js - Closures and data privacy");
-console.log("📘 13.4-closures-patterns.js - Function factories and advanced patterns");
+console.log(
+  "📘 13.4-closures-patterns.js - Function factories and advanced patterns"
+);
 console.log("📘 13.5-scope-pitfalls.js - Common pitfalls and best practices");
 console.log("📘 14-this-keyword.js - this binding in different contexts");
-console.log("📘 15-prototypes-inheritance.js - Prototype chain and inheritance");
+console.log(
+  "📘 15-prototypes-inheritance.js - Prototype chain and inheritance"
+);
 
 // ============================================
 // TypeScript Comparison

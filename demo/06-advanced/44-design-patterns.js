@@ -42,20 +42,24 @@ console.log("\n=== Factory Pattern ===");
 class UserFactory {
   static createUser(type, name) {
     switch (type) {
-      case 'admin':
-        return { name, role: 'admin', permissions: ['read', 'write', 'delete'] };
-      case 'editor':
-        return { name, role: 'editor', permissions: ['read', 'write'] };
-      case 'viewer':
-        return { name, role: 'viewer', permissions: ['read'] };
+      case "admin":
+        return {
+          name,
+          role: "admin",
+          permissions: ["read", "write", "delete"],
+        };
+      case "editor":
+        return { name, role: "editor", permissions: ["read", "write"] };
+      case "viewer":
+        return { name, role: "viewer", permissions: ["read"] };
       default:
         throw new Error(`Unknown user type: ${type}`);
     }
   }
 }
 
-const admin = UserFactory.createUser('admin', 'Alice');
-const editor = UserFactory.createUser('editor', 'Bob');
+const admin = UserFactory.createUser("admin", "Alice");
+const editor = UserFactory.createUser("editor", "Bob");
 console.log("Admin:", admin);
 console.log("Editor:", editor);
 
@@ -74,7 +78,7 @@ class NotificationFactory {
 class EmailNotificationFactory extends NotificationFactory {
   createNotification() {
     return {
-      send: (message) => console.log(`📧 Email: ${message}`)
+      send: message => console.log(`📧 Email: ${message}`),
     };
   }
 }
@@ -82,7 +86,7 @@ class EmailNotificationFactory extends NotificationFactory {
 class SMSNotificationFactory extends NotificationFactory {
   createNotification() {
     return {
-      send: (message) => console.log(`📱 SMS: ${message}`)
+      send: message => console.log(`📱 SMS: ${message}`),
     };
   }
 }
@@ -200,7 +204,7 @@ const ConfigManager = (() => {
       },
       getAll() {
         return { ...config };
-      }
+      },
     };
   }
 
@@ -210,14 +214,14 @@ const ConfigManager = (() => {
         instance = createInstance();
       }
       return instance;
-    }
+    },
   };
 })();
 
 const config1 = ConfigManager.getInstance();
 const config2 = ConfigManager.getInstance();
-config1.set('apiUrl', 'https://api.example.com');
-console.log("config2 apiUrl:", config2.get('apiUrl')); // Same config
+config1.set("apiUrl", "https://api.example.com");
+console.log("config2 apiUrl:", config2.get("apiUrl")); // Same config
 
 // Use cases:
 // - Database connections
@@ -281,32 +285,32 @@ class StockMarket extends EventEmitter {
 
   updatePrice(symbol, price) {
     this.prices[symbol] = price;
-    this.emit('priceUpdate', { symbol, price });
+    this.emit("priceUpdate", { symbol, price });
   }
 }
 
 const market = new StockMarket();
 
 // Observer 1: Display
-market.on('priceUpdate', ({ symbol, price }) => {
+market.on("priceUpdate", ({ symbol, price }) => {
   console.log(`📊 Display: ${symbol} is now $${price}`);
 });
 
 // Observer 2: Alert
-market.on('priceUpdate', ({ symbol, price }) => {
+market.on("priceUpdate", ({ symbol, price }) => {
   if (price > 100) {
     console.log(`🚨 Alert: ${symbol} exceeded $100!`);
   }
 });
 
 // Observer 3: Logger (one-time)
-market.once('priceUpdate', ({ symbol, price }) => {
+market.once("priceUpdate", ({ symbol, price }) => {
   console.log(`📝 First update logged: ${symbol} = $${price}`);
 });
 
-market.updatePrice('AAPL', 150);
-market.updatePrice('GOOGL', 95);
-market.updatePrice('MSFT', 120);
+market.updatePrice("AAPL", 150);
+market.updatePrice("GOOGL", 95);
+market.updatePrice("MSFT", 120);
 
 // Use cases:
 // - Event handling systems
@@ -341,7 +345,9 @@ class CreditCardPayment extends PaymentStrategy {
   }
 
   pay(amount) {
-    console.log(`💳 Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`);
+    console.log(
+      `💳 Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`
+    );
   }
 }
 
@@ -363,7 +369,9 @@ class CryptoPayment extends PaymentStrategy {
   }
 
   pay(amount) {
-    console.log(`₿ Paid $${amount} with crypto to ${this.walletAddress.slice(0, 10)}...`);
+    console.log(
+      `₿ Paid $${amount} with crypto to ${this.walletAddress.slice(0, 10)}...`
+    );
   }
 }
 
@@ -403,20 +411,22 @@ cart.checkout();
 cart.setPaymentStrategy(new PayPalPayment("user@example.com"));
 cart.checkout();
 
-cart.setPaymentStrategy(new CryptoPayment("0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"));
+cart.setPaymentStrategy(
+  new CryptoPayment("0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb")
+);
 cart.checkout();
 
 // Functional approach (without classes)
 const sortStrategies = {
   byName: (a, b) => a.name.localeCompare(b.name),
   byAge: (a, b) => a.age - b.age,
-  byDate: (a, b) => new Date(a.date) - new Date(b.date)
+  byDate: (a, b) => new Date(a.date) - new Date(b.date),
 };
 
 const users = [
   { name: "Charlie", age: 30, date: "2023-01-15" },
   { name: "Alice", age: 25, date: "2023-03-20" },
-  { name: "Bob", age: 35, date: "2023-02-10" }
+  { name: "Bob", age: 35, date: "2023-02-10" },
 ];
 
 console.log("\nSorted by name:", users.slice().sort(sortStrategies.byName));
@@ -510,7 +520,7 @@ console.log(`${myCoffee.description()} - $${myCoffee.cost()}`);
 
 // Functional decorator approach
 function withLogging(fn) {
-  return function(...args) {
+  return function (...args) {
     console.log(`📝 Calling ${fn.name} with args:`, args);
     const result = fn(...args);
     console.log(`📝 Result:`, result);
@@ -519,7 +529,7 @@ function withLogging(fn) {
 }
 
 function withTiming(fn) {
-  return function(...args) {
+  return function (...args) {
     const start = performance.now();
     const result = fn(...args);
     const end = performance.now();
@@ -547,7 +557,6 @@ decoratedAdd(5, 3);
 // ⚠️ Decorators are not identical to original object
 // ⚠️ Order of decorators matters
 // ⚠️ Can be hard to debug
-
 
 // ============================================
 // Section 6: Adapter Pattern (ES5/ES6)
@@ -607,7 +616,6 @@ const greetNew = createAdapter(greetOld, ([obj]) => [obj.name, obj.age]);
 console.log("\nFunctional adapter:");
 greetNew({ name: "Alice", age: 30 });
 
-
 // ============================================
 // Section 7: Facade Pattern (ES5/ES6)
 // - Provides a simplified interface to a complex subsystem
@@ -618,17 +626,27 @@ console.log("\n=== Facade Pattern ===");
 
 // Complex subsystem with many classes and methods
 class CPU {
-  freeze() { return "CPU frozen"; }
-  jump(position) { return `CPU jumping to ${position}`; }
-  execute() { return "CPU executing"; }
+  freeze() {
+    return "CPU frozen";
+  }
+  jump(position) {
+    return `CPU jumping to ${position}`;
+  }
+  execute() {
+    return "CPU executing";
+  }
 }
 
 class Memory {
-  load(position, data) { return `Memory loaded "${data}" at ${position}`; }
+  load(position, data) {
+    return `Memory loaded "${data}" at ${position}`;
+  }
 }
 
 class HardDrive {
-  read(lba, size) { return `HardDrive reading ${size} bytes from ${lba}`; }
+  read(lba, size) {
+    return `HardDrive reading ${size} bytes from ${lba}`;
+  }
 }
 
 // Facade — provides a simple interface to the complex subsystem
@@ -664,7 +682,6 @@ console.log("  const api = new APIFacade('https://api.example.com');");
 console.log("  const users = await api.get('/users');");
 console.log("  // Facade hides fetch, error handling, JSON parsing, base URL");
 
-
 // ============================================
 // Section 8: Command Pattern (ES5/ES6)
 // - Encapsulates a request as an object, allowing parameterization and queuing
@@ -682,10 +699,18 @@ class Calculator {
     this.value = 0;
   }
 
-  add(n) { this.value += n; }
-  subtract(n) { this.value -= n; }
-  multiply(n) { this.value *= n; }
-  divide(n) { this.value /= n; }
+  add(n) {
+    this.value += n;
+  }
+  subtract(n) {
+    this.value -= n;
+  }
+  multiply(n) {
+    this.value *= n;
+  }
+  divide(n) {
+    this.value /= n;
+  }
 }
 
 // Concrete Commands — each wraps a specific operation
@@ -783,7 +808,6 @@ const incrementCmd = createCommand(
 commands.push(incrementCmd);
 console.log("\nFunctional command:", incrementCmd.execute()); // 1
 console.log("Undo:", incrementCmd.undo()); // 0
-
 
 // ============================================
 // Section 9: State Pattern (ES6)
@@ -886,7 +910,7 @@ function createStateMachine(initialState, transitions) {
         console.log(`Invalid transition: ${current} --${action}--> ?`);
       }
       return current;
-    }
+    },
   };
 }
 
@@ -897,7 +921,7 @@ const orderMachine = createStateMachine("pending", {
   shipped: { deliver: "delivered" },
   delivered: {},
   cancelled: {},
-  refunded: {}
+  refunded: {},
 });
 
 console.log("\nOrder State Machine:");
@@ -905,7 +929,6 @@ orderMachine.transition("pay"); // pending --pay--> paid
 orderMachine.transition("ship"); // paid --ship--> shipped
 orderMachine.transition("deliver"); // shipped --deliver--> delivered
 orderMachine.transition("pay"); // Invalid (already delivered)
-
 
 // ============================================
 // Section 10: Common Pitfalls
@@ -915,33 +938,59 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Overusing Singletons
 console.log("\nPitfall 1: Overusing Singletons");
-console.log("  Singletons create global state that is difficult to test and debug");
+console.log(
+  "  Singletons create global state that is difficult to test and debug"
+);
 console.log("  They hide dependencies and make unit testing nearly impossible");
-console.log("  Fix: Use dependency injection instead of relying on global singletons");
+console.log(
+  "  Fix: Use dependency injection instead of relying on global singletons"
+);
 
 // Pitfall 2: Abstract Factory Complexity
 console.log("\nPitfall 2: Abstract Factory Over-Engineering");
-console.log("  Creating factory families for simple object creation adds unnecessary complexity");
-console.log("  Abstract Factory should only be used when you need families of related objects");
-console.log("  Fix: Start with a simple factory; introduce abstract factory only when genuinely needed");
+console.log(
+  "  Creating factory families for simple object creation adds unnecessary complexity"
+);
+console.log(
+  "  Abstract Factory should only be used when you need families of related objects"
+);
+console.log(
+  "  Fix: Start with a simple factory; introduce abstract factory only when genuinely needed"
+);
 
 // Pitfall 3: Observer Memory Leaks
 console.log("\nPitfall 3: Observer Memory Leaks");
-console.log("  Failing to unsubscribe from events causes memory leaks and stale callbacks");
-console.log("  Accumulated listeners can also cause the same handler to fire multiple times");
-console.log("  Fix: Always call .off() / .removeEventListener() when components unmount or are destroyed");
+console.log(
+  "  Failing to unsubscribe from events causes memory leaks and stale callbacks"
+);
+console.log(
+  "  Accumulated listeners can also cause the same handler to fire multiple times"
+);
+console.log(
+  "  Fix: Always call .off() / .removeEventListener() when components unmount or are destroyed"
+);
 
 // Pitfall 4: Too Many Strategies
 console.log("\nPitfall 4: Too Many Strategy Classes");
-console.log("  Creating a strategy for every minor variation leads to class explosion");
+console.log(
+  "  Creating a strategy for every minor variation leads to class explosion"
+);
 console.log("  Each strategy class adds overhead and increases cognitive load");
-console.log("  Fix: Use configuration objects or functional approaches for simple variations");
+console.log(
+  "  Fix: Use configuration objects or functional approaches for simple variations"
+);
 
 // Pitfall 5: Complex Decorator Chains
 console.log("\nPitfall 5: Complex Decorator Chains");
-console.log("  Long chains of decorators become hard to reason about and debug");
-console.log("  Each decorator adds a layer of indirection that compounds over time");
-console.log("  Fix: Limit decorator depth; consider composition or middleware patterns instead");
+console.log(
+  "  Long chains of decorators become hard to reason about and debug"
+);
+console.log(
+  "  Each decorator adds a layer of indirection that compounds over time"
+);
+console.log(
+  "  Fix: Limit decorator depth; consider composition or middleware patterns instead"
+);
 
 // ============================================
 // Section 11: Best Practices
@@ -951,20 +1000,31 @@ console.log("\n=== Best Practices ===");
 
 console.log("✅ DO:");
 console.log("1. Use patterns for real problems, not hypothetical ones");
-console.log("2. Keep patterns simple - start small and add complexity only when needed");
-console.log("3. Prefer composition over inheritance and deep class hierarchies");
-console.log("4. Document pattern usage so the team understands when and why they are applied");
+console.log(
+  "2. Keep patterns simple - start small and add complexity only when needed"
+);
+console.log(
+  "3. Prefer composition over inheritance and deep class hierarchies"
+);
+console.log(
+  "4. Document pattern usage so the team understands when and why they are applied"
+);
 
 console.log("\n❌ DON'T:");
 console.log("1. Over-engineer simple code with unnecessary patterns");
 console.log("2. Force patterns where a straightforward solution works");
-console.log("3. Use design patterns when a simpler alternative would be clearer");
+console.log(
+  "3. Use design patterns when a simpler alternative would be clearer"
+);
 
 console.log("\n⚠️ WATCH OUT FOR:");
 console.log("1. Complexity creep - patterns should simplify, not complicate");
-console.log("2. Testing difficulties - some patterns (Singleton, Observer) complicate unit tests");
-console.log("3. Performance overhead - extra abstraction layers can impact performance");
-
+console.log(
+  "2. Testing difficulties - some patterns (Singleton, Observer) complicate unit tests"
+);
+console.log(
+  "3. Performance overhead - extra abstraction layers can impact performance"
+);
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1014,7 +1074,6 @@ console.log("3. Performance overhead - extra abstraction layers can impact perfo
 - 23-proxy-reflect.js (Proxy pattern)
 - 07-functions.js (Higher-order functions for functional patterns)
 */
-
 
 // ============================================
 // Cross-references

@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 19-symbol-deep-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -60,13 +59,16 @@ console.log("Symbol description property:", sym2.description);
 // 1.2 Uniqueness - each Symbol is unique
 console.log("\nUniqueness check:");
 console.log("sym2 === sym3:", sym2 === sym3); // false
-console.log("Symbol('test') === Symbol('test'):", Symbol('test') === Symbol('test')); // false
+console.log(
+  "Symbol('test') === Symbol('test'):",
+  Symbol("test") === Symbol("test")
+); // false
 
 // 1.3 Symbol as object property keys
 let obj = {
   [sym1]: "value1",
   [sym2]: "value2",
-  normal: "normal value"
+  normal: "normal value",
 };
 
 console.log("\nSymbol as property keys:");
@@ -86,7 +88,10 @@ for (let key in obj) {
 // 1.5 Getting Symbol properties
 const symKeys = Object.getOwnPropertySymbols(obj);
 console.log("\nSymbol keys:", symKeys);
-console.log("Symbol values:", symKeys.map(s => obj[s]));
+console.log(
+  "Symbol values:",
+  symKeys.map(s => obj[s])
+);
 
 // 1.6 Symbol.toString() and description
 console.log("\nSymbol.toString():");
@@ -102,7 +107,6 @@ try {
 
 // Correct: Use toString() or description
 console.log("Correct concatenation:", sym2.toString() + " test");
-
 
 // ============================================
 // 2. GLOBAL SYMBOL REGISTRY
@@ -156,7 +160,7 @@ const POST_ID = Symbol.for("constants.postId");
 
 let database = {
   [USER_ID]: 12345,
-  [POST_ID]: 67890
+  [POST_ID]: 67890,
 };
 
 console.log("\nShared constants:");
@@ -173,7 +177,6 @@ function createContext2() {
 
 console.log("\nCross-context sharing:");
 console.log("Same symbol:", createContext1() === createContext2()); // true
-
 
 // ============================================
 // 3. WELL-KNOWN SYMBOLS
@@ -218,9 +221,9 @@ let range = {
           return { done: false, value: this.current++ };
         }
         return { done: true };
-      }
+      },
     };
-  }
+  },
 };
 
 console.log("\nSymbol.iterator:");
@@ -237,14 +240,14 @@ let money = {
   [Symbol.toPrimitive](hint) {
     console.log(`toPrimitive hint: ${hint}`);
     if (hint === "string") {
-      return `${this.dollars}.${this.cents.toString().padStart(2, '0')} USD`;
+      return `${this.dollars}.${this.cents.toString().padStart(2, "0")} USD`;
     }
     if (hint === "number") {
       return this.dollars + this.cents / 100;
     }
     // default
     return this.dollars + this.cents / 100;
-  }
+  },
 };
 
 console.log("\nSymbol.toPrimitive:");
@@ -261,7 +264,10 @@ class Validator {
 
 const validator = new Validator();
 console.log("\nSymbol.toStringTag:");
-console.log("Object.prototype.toString:", Object.prototype.toString.call(validator));
+console.log(
+  "Object.prototype.toString:",
+  Object.prototype.toString.call(validator)
+);
 // "[object Validator]"
 
 // Built-in examples
@@ -279,7 +285,10 @@ class PrimitiveNumber {
 
 console.log("\nSymbol.hasInstance:");
 console.log("42 instanceof PrimitiveNumber:", 42 instanceof PrimitiveNumber); // true
-console.log("'str' instanceof PrimitiveNumber:", "str" instanceof PrimitiveNumber); // false
+console.log(
+  "'str' instanceof PrimitiveNumber:",
+  "str" instanceof PrimitiveNumber
+); // false
 
 // 3.5 Symbol.isConcatSpreadable - Control concat behavior
 let arr1 = [1, 2];
@@ -327,7 +336,7 @@ class CaseInsensitiveMatcher {
   [Symbol.replace](string, replacement) {
     // Use a case-insensitive RegExp to preserve non-match casing
     // (toLowerCase().replaceAll would lowercase the whole string)
-    return string.replace(new RegExp(this.pattern, 'gi'), replacement);
+    return string.replace(new RegExp(this.pattern, "gi"), replacement);
   }
 
   [Symbol.search](string) {
@@ -342,7 +351,10 @@ class CaseInsensitiveMatcher {
 console.log("\nSymbol.match/replace/search/split:");
 const matcher = new CaseInsensitiveMatcher("HELLO");
 console.log("'hello world hello'.match:", "hello world hello".match(matcher));
-console.log("'HELLO WORLD'.replace:", matcher[Symbol.replace]("HELLO WORLD", "hi"));
+console.log(
+  "'HELLO WORLD'.replace:",
+  matcher[Symbol.replace]("HELLO WORLD", "hi")
+);
 console.log("'Say HELLO'.search:", "Say HELLO".search(matcher));
 console.log("'aHELLOb'.split:", "aHELLOb".split(matcher));
 
@@ -354,10 +366,19 @@ console.log("Array[Symbol.unscopables]:", Array.prototype[Symbol.unscopables]);
 // These methods are excluded from 'with' scope binding
 
 // Built-in objects with Symbol.unscopables
-const unscopables = ['copyWithin', 'entries', 'fill', 'find', 'findIndex',
-                     'flat', 'flatMap', 'includes', 'keys', 'values'];
+const unscopables = [
+  "copyWithin",
+  "entries",
+  "fill",
+  "find",
+  "findIndex",
+  "flat",
+  "flatMap",
+  "includes",
+  "keys",
+  "values",
+];
 console.log("Methods excluded from 'with':", unscopables.slice(0, 5));
-
 
 // ============================================
 // 4. SYMBOL PRACTICAL APPLICATIONS
@@ -387,7 +408,7 @@ console.log("Methods excluded from 'with':", unscopables.slice(0, 5));
 console.log("\n=== 4. Symbol Practical Applications Demo ===");
 
 // 4.1 "Private" properties with Symbol (not truly private!)
-let idSymbol = Symbol('id');
+let idSymbol = Symbol("id");
 
 class User {
   constructor(name, id) {
@@ -415,13 +436,13 @@ console.log("Value accessible:", user[symbols[0]]);
 let plugin1 = {
   [Symbol.for("plugin.init")]() {
     console.log("Plugin 1 initialized");
-  }
+  },
 };
 
 let plugin2 = {
   [Symbol.for("plugin.init")]() {
     console.log("Plugin 2 initialized");
-  }
+  },
 };
 
 let app = {
@@ -431,7 +452,7 @@ let app = {
     // Each plugin has its own symbol-keyed method
     plugin1[Symbol.for("plugin.init")]();
     plugin2[Symbol.for("plugin.init")]();
-  }
+  },
 };
 
 console.log("\nAvoiding naming conflicts:");
@@ -443,7 +464,7 @@ let customIterable = {
     yield 1;
     yield 2;
     yield 3;
-  }
+  },
 };
 
 console.log("\nCustom iterable protocol:");
@@ -460,7 +481,7 @@ function getMetadata(target) {
   return target[metadataSymbol];
 }
 
-let annotatedFunction = function() {};
+let annotatedFunction = function () {};
 addMetadata(annotatedFunction, { version: "1.0", author: "Dev" });
 
 console.log("\nMetadata storage:");
@@ -469,12 +490,11 @@ console.log("Metadata:", getMetadata(annotatedFunction));
 // 4.5 JSON.stringify ignores Symbol properties
 let objWithSymbols = {
   name: "Test",
-  [Symbol("secret")]: "hidden value"
+  [Symbol("secret")]: "hidden value",
 };
 
 console.log("\nJSON.stringify ignores Symbols:");
 console.log("JSON.stringify:", JSON.stringify(objWithSymbols)); // {"name":"Test"}
-
 
 // ============================================
 // 5. SYMBOL WITH OTHER FEATURES
@@ -514,9 +534,9 @@ let collection = {
           return { done: false, value: this.items[index++] };
         }
         return { done: true };
-      }
+      },
     };
-  }
+  },
 };
 
 console.log("\nfor...of with Symbol.iterator:");
@@ -533,7 +553,7 @@ let asyncCollection = {
       await new Promise(resolve => setTimeout(resolve, 10));
       yield item;
     }
-  }
+  },
 };
 
 console.log("\nfor await...of with Symbol.asyncIterator:");
@@ -547,25 +567,31 @@ console.log("\nfor await...of with Symbol.asyncIterator:");
 let objWithMultipleSymbols = {
   stringProp: "string",
   [Symbol("sym1")]: "symbol1",
-  [Symbol("sym2")]: "symbol2"
+  [Symbol("sym2")]: "symbol2",
 };
 
 console.log("\nObject methods with Symbols:");
 console.log("Object.keys():", Object.keys(objWithMultipleSymbols));
-console.log("Object.getOwnPropertyNames():", Object.getOwnPropertyNames(objWithMultipleSymbols));
-console.log("Object.getOwnPropertySymbols():", Object.getOwnPropertySymbols(objWithMultipleSymbols));
+console.log(
+  "Object.getOwnPropertyNames():",
+  Object.getOwnPropertyNames(objWithMultipleSymbols)
+);
+console.log(
+  "Object.getOwnPropertySymbols():",
+  Object.getOwnPropertySymbols(objWithMultipleSymbols)
+);
 console.log("Reflect.ownKeys():", Reflect.ownKeys(objWithMultipleSymbols));
 
 // 5.4 Proxy intercepting Symbol operations
 let target = {
-  [Symbol("hidden")]: "secret"
+  [Symbol("hidden")]: "secret",
 };
 
 let handler = {
   getOwnPropertyDescriptor(trapTarget, prop) {
     console.log(`Getting descriptor for: ${String(prop)}`);
     return Object.getOwnPropertyDescriptor(trapTarget, prop);
-  }
+  },
 };
 
 let proxy = new Proxy(target, handler);
@@ -581,7 +607,6 @@ console.log("String spread:", [...str]); // ['h', 'e', 'l', 'l', 'o']
 let [first, ...rest] = collection;
 console.log("\nDestructuring:");
 console.log("First:", first, "Rest:", rest);
-
 
 // ============================================
 // BEST PRACTICES
@@ -621,7 +646,7 @@ console.log("\n=== Symbol Best Practices Demo ===");
 const API_EVENTS = {
   INIT: Symbol.for("api.init"),
   READY: Symbol.for("api.ready"),
-  ERROR: Symbol.for("api.error")
+  ERROR: Symbol.for("api.error"),
 };
 
 // Good: Using Symbol description for debugging
@@ -638,7 +663,6 @@ class BadExample {
     this[Symbol("secret")] = "password"; // Not truly private!
   }
 }
-
 
 // ============================================
 // COMMON PITFALLS
@@ -663,13 +687,13 @@ try {
 // Pitfall 3: JSON.stringify ignores Symbol properties
 let data = {
   name: "test",
-  [Symbol("id")]: 123
+  [Symbol("id")]: 123,
 };
 console.log("Pitfall 3 - JSON.stringify:", JSON.stringify(data)); // {"name":"test"}
 
 // Pitfall 4: Symbols are not truly private
 let symObj = {
-  [Symbol("private")]: "secret"
+  [Symbol("private")]: "secret",
 };
 let symSymbols = Object.getOwnPropertySymbols(symObj);
 console.log("Pitfall 4 - Can discover:", symObj[symSymbols[0]]);
@@ -679,7 +703,6 @@ let local = Symbol("test");
 let global = Symbol.for("test");
 console.log("Pitfall 5 - keyFor local:", Symbol.keyFor(local)); // undefined
 console.log("Pitfall 5 - keyFor global:", Symbol.keyFor(global)); // "test"
-
 
 // ============================================
 // SUMMARY
@@ -707,7 +730,6 @@ console.log("Pitfall 5 - keyFor global:", Symbol.keyFor(global)); // "test"
  */
 
 console.log("\n=== Symbol Deep Dive Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -767,7 +789,6 @@ Symbols & Weak Collections:
 - 23-proxy-reflect.js (well-known symbols)
 - 17-property-descriptors.js (property descriptors with symbols)
 `);
-
 
 // ============================================
 // Cross-references

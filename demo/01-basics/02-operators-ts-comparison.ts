@@ -89,7 +89,7 @@ console.log("user1.id === user2.id:", user1.id === user2.id); // true (same valu
 // TypeScript narrows types with logical operators
 function getUserName(user: { name: string } | null): string {
   // Using && for type narrowing
-  return user && user.name || "Guest";
+  return (user && user.name) || "Guest";
 }
 
 // ✅ BETTER: Use optional chaining with nullish coalescing
@@ -137,7 +137,7 @@ interface Config {
 
 const config: Config = {
   port: 0, // Valid port number
-  timeout: undefined
+  timeout: undefined,
 };
 
 // ✅ BEST PRACTICE: Use ?? for optional properties
@@ -174,8 +174,8 @@ const person: Person = {
   age: 30,
   address: {
     street: "123 Main St",
-    city: "NYC"
-  }
+    city: "NYC",
+  },
 };
 
 // ✅ TypeScript provides type safety with optional chaining
@@ -226,7 +226,7 @@ function checkNull(value: string | null) {
     // This includes null! TypeScript knows this
     console.log("Value is null or object");
   }
-  
+
   // ✅ CORRECT: Check for null explicitly
   if (value === null) {
     console.log("Value is null");
@@ -269,7 +269,7 @@ class Dog extends Animal {
 
 function handleAnimal(animal: Animal) {
   console.log(animal.speak());
-  
+
   // TypeScript narrows type with instanceof
   if (animal instanceof Dog) {
     // TypeScript knows animal is Dog here
@@ -285,7 +285,10 @@ handleAnimal(dog);
 console.log("\ninstanceof with primitives:");
 // @ts-expect-error - Demonstrating that primitives are not instances
 console.log("'hello' instanceof String:", "hello" instanceof String); // false (primitive)
-console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
+console.log(
+  "new String('hello') instanceof String:",
+  new String("hello") instanceof String
+); // true (object)
 
 // ============================================
 // 8. Spread and Rest - Type Safety
@@ -315,7 +318,7 @@ const baseConfig: BaseConfig = { host: "localhost", port: 3000 };
 const extendedConfig: ExtendedConfig = {
   ...baseConfig,
   timeout: 5000,
-  retries: 3
+  retries: 3,
 }; // ✅ OK
 
 console.log("\nSpread with type safety:", extendedConfig);
@@ -433,7 +436,7 @@ interface Product {
 const product: Product = {
   id: 1,
   name: "Widget",
-  description: "A useful widget"
+  description: "A useful widget",
 };
 
 // ✅ Can delete optional properties

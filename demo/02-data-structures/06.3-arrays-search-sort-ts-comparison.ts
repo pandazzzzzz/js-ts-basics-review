@@ -47,7 +47,7 @@ interface User {
 }
 const users: User[] = [
   { id: 1, name: "Alice" },
-  { id: 2, name: "Bob", email: "bob@example.com" }
+  { id: 2, name: "Bob", email: "bob@example.com" },
 ];
 
 // Find user with email
@@ -70,14 +70,20 @@ console.log("\n4. Sort objects:");
 const people: { name: string; age: number }[] = [
   { name: "Charlie", age: 35 },
   { name: "Alice", age: 25 },
-  { name: "Bob", age: 30 }
+  { name: "Bob", age: 30 },
 ];
 
 const sortedByAge = [...people].sort((a, b) => a.age - b.age);
 const sortedByName = [...people].sort((a, b) => a.name.localeCompare(b.name));
 
-console.log("  sortedByAge:", sortedByAge.map(p => `${p.name}(${p.age})`));
-console.log("  sortedByName:", sortedByName.map(p => p.name));
+console.log(
+  "  sortedByAge:",
+  sortedByAge.map(p => `${p.name}(${p.age})`)
+);
+console.log(
+  "  sortedByName:",
+  sortedByName.map(p => p.name)
+);
 
 // Example 5: Multi-key sorting
 console.log("\n5. Multi-key sorting:");
@@ -89,7 +95,7 @@ interface Product {
 const products: Product[] = [
   { category: "electronics", name: "Phone", price: 999 },
   { category: "books", name: "Novel", price: 20 },
-  { category: "electronics", name: "Laptop", price: 1299 }
+  { category: "electronics", name: "Laptop", price: 1299 },
 ];
 
 const multiSorted = [...products].sort((a, b) => {

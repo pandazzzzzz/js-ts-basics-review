@@ -140,10 +140,13 @@ class CookieManager {
     return null;
   }
 
-  static remove(name: string, attributes?: Pick<CookieAttributes, "path" | "domain">): void {
+  static remove(
+    name: string,
+    attributes?: Pick<CookieAttributes, "path" | "domain">
+  ): void {
     CookieManager.set(name, "", {
       ...attributes,
-      maxAge: -1
+      maxAge: -1,
     });
   }
 }
@@ -153,7 +156,7 @@ CookieManager.set("sessionId", "abc123", {
   path: "/",
   maxAge: 3600,
   secure: true,
-  sameSite: "strict"
+  sameSite: "strict",
 });
 
 console.log(`
@@ -201,7 +204,7 @@ class TypedDB<Schema extends Record<string, any>> {
         resolve();
       };
 
-      request.onupgradeneeded = (event) => {
+      request.onupgradeneeded = event => {
         const db = (event.target as IDBOpenDBRequest).result;
         // Create object stores and indexes
         console.log("Database upgrade needed");
@@ -216,7 +219,10 @@ class TypedDB<Schema extends Record<string, any>> {
     if (!this.db) throw new Error("Database not opened");
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([storeName as string], "readwrite");
+      const transaction = this.db!.transaction(
+        [storeName as string],
+        "readwrite"
+      );
       const store = transaction.objectStore(storeName as string);
       const request = store.add(value);
 
@@ -232,7 +238,10 @@ class TypedDB<Schema extends Record<string, any>> {
     if (!this.db) throw new Error("Database not opened");
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction([storeName as string], "readonly");
+      const transaction = this.db!.transaction(
+        [storeName as string],
+        "readonly"
+      );
       const store = transaction.objectStore(storeName as string);
       const request = store.get(key);
 
@@ -274,7 +283,7 @@ class TypedFetch {
   static async get<T>(url: string, options?: RequestInit): Promise<T> {
     const response = await fetch(url, {
       ...options,
-      method: "GET"
+      method: "GET",
     });
 
     if (!response.ok) {
@@ -294,9 +303,9 @@ class TypedFetch {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...options?.headers
+        ...options?.headers,
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
@@ -367,7 +376,7 @@ class TypedWebSocket<SendMsg = unknown, ReceiveMsg = unknown> {
       this.ws = new WebSocket(url);
 
       this.ws.addEventListener("open", () => resolve());
-      this.ws.addEventListener("error", (event) => reject(event));
+      this.ws.addEventListener("error", event => reject(event));
 
       this.ws.addEventListener("message", (event: MessageEvent) => {
         try {
@@ -392,10 +401,7 @@ class TypedWebSocket<SendMsg = unknown, ReceiveMsg = unknown> {
     this.ws.send(JSON.stringify(message));
   }
 
-  on<T extends ReceiveMsg>(
-    type: string,
-    handler: (payload: T) => void
-  ): void {
+  on<T extends ReceiveMsg>(type: string, handler: (payload: T) => void): void {
     this.messageHandlers.set(type, handler);
   }
 
@@ -464,7 +470,7 @@ class TypedEventSource<EventMap extends Record<string, any>> {
       console.log("Connection opened");
     });
 
-    this.eventSource.addEventListener("error", (event) => {
+    this.eventSource.addEventListener("error", event => {
       console.error("Error:", event);
     });
   }
@@ -552,7 +558,7 @@ class TypedFormData<T extends Record<string, any>> {
   private formData = new FormData();
 
   append<K extends keyof T>(name: K, value: T[K]): this {
-    if (typeof value === 'object' && value !== null && 'size' in value) {
+    if (typeof value === "object" && value !== null && "size" in value) {
       // Likely a Blob or File
       this.formData.append(name as string, value as any);
     } else {
@@ -639,7 +645,6 @@ console.log(`
 └─────────────────────────────────────────────────────────────────────┘
 `);
 
-
 // ============================================
 // HISTORY API TYPES
 // ============================================
@@ -668,35 +673,35 @@ interface RouteState {
 // pushState with typed state
 function navigateToProfile(userId: number): void {
   const state: RouteState = {
-    page: 'profile',
+    page: "profile",
     userId,
     scrollPosition: window.scrollY,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
-  
-  history.pushState(state, '', `/profile/${userId}`);
+
+  history.pushState(state, "", `/profile/${userId}`);
 }
 
 // replaceState with typed state
 function updateProfileTab(userId: number, tab: string): void {
   const state: RouteState = {
-    page: 'profile',
+    page: "profile",
     userId,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
-  
-  history.replaceState(state, '', `/profile/${userId}?tab=${tab}`);
+
+  history.replaceState(state, "", `/profile/${userId}?tab=${tab}`);
 }
 
 // Type-safe popstate handler (browser-only: `window` is not defined in Node.js)
 if (typeof window !== "undefined") {
-  window.addEventListener('popstate', (event: PopStateEvent) => {
+  window.addEventListener("popstate", (event: PopStateEvent) => {
     const state = event.state as RouteState | null;
 
     if (state) {
-      console.log('Navigated to:', state.page);
+      console.log("Navigated to:", state.page);
       if (state.userId) {
-        console.log('User ID:', state.userId);
+        console.log("User ID:", state.userId);
       }
       if (state.scrollPosition !== undefined) {
         window.scrollTo(0, state.scrollPosition);
@@ -712,23 +717,23 @@ interface Route<T = unknown> {
 }
 
 class TypedRouter<TState = unknown> {
-  private routes: Map<string, Route<TState>['handler']> = new Map();
-  
+  private routes: Map<string, Route<TState>["handler"]> = new Map();
+
   constructor() {
-    window.addEventListener('popstate', (event: PopStateEvent) => {
+    window.addEventListener("popstate", (event: PopStateEvent) => {
       this.handleRoute(location.pathname, event.state as TState);
     });
   }
-  
+
   route(path: string, handler: (state: TState) => void): void {
     this.routes.set(path, handler);
   }
-  
+
   navigate(path: string, state: TState): void {
-    history.pushState(state, '', path);
+    history.pushState(state, "", path);
     this.handleRoute(path, state);
   }
-  
+
   private handleRoute(path: string, state: TState): void {
     const handler = this.routes.get(path);
     if (handler) {
@@ -739,7 +744,7 @@ class TypedRouter<TState = unknown> {
 
 // Usage with typed state
 interface AppState {
-  view: 'home' | 'profile' | 'settings';
+  view: "home" | "profile" | "settings";
   data?: unknown;
 }
 
@@ -747,18 +752,20 @@ interface AppState {
 if (typeof window !== "undefined") {
   const router = new TypedRouter<AppState>();
 
-  router.route('/', (state) => {
-    console.log('Home view:', state.view);
+  router.route("/", state => {
+    console.log("Home view:", state.view);
   });
 
-  router.route('/profile', (state) => {
-    console.log('Profile view:', state.view, state.data);
+  router.route("/profile", state => {
+    console.log("Profile view:", state.view, state.data);
   });
 
   // Navigate with type safety
-  router.navigate('/profile', { view: 'profile', data: { userId: 123 } });
+  router.navigate("/profile", { view: "profile", data: { userId: 123 } });
 } else {
-  console.log("⚠️ History API / TypedRouter is browser-only; skipping in Node.js");
+  console.log(
+    "⚠️ History API / TypedRouter is browser-only; skipping in Node.js"
+  );
 }
 
 console.log("History API TypeScript Features:");
@@ -776,7 +783,7 @@ console.log("\n=== Server-Sent Events Types ===\n");
 // EventSource is browser-only; guard the demo for Node.js compatibility
 if (typeof EventSource !== "undefined") {
   // TypeScript: Built-in EventSource types
-  const eventSource: EventSource = new EventSource('/events');
+  const eventSource: EventSource = new EventSource("/events");
 
   // EventSource properties are typed
   const url: string = eventSource.url;
@@ -784,21 +791,21 @@ if (typeof EventSource !== "undefined") {
   const withCredentials: boolean = eventSource.withCredentials;
 
   // Type-safe event handlers
-  eventSource.addEventListener('open', (event: Event) => {
-    console.log('Connection opened');
+  eventSource.addEventListener("open", (event: Event) => {
+    console.log("Connection opened");
   });
 
-  eventSource.addEventListener('message', (event: MessageEvent) => {
+  eventSource.addEventListener("message", (event: MessageEvent) => {
     const data: string = event.data;
     const lastEventId: string = event.lastEventId;
     const origin: string = event.origin;
 
-    console.log('Message:', data);
+    console.log("Message:", data);
   });
 
-  eventSource.addEventListener('error', (event: Event) => {
+  eventSource.addEventListener("error", (event: Event) => {
     if (eventSource.readyState === EventSource.CLOSED) {
-      console.log('Connection closed');
+      console.log("Connection closed");
     }
   });
 
@@ -809,9 +816,9 @@ if (typeof EventSource !== "undefined") {
     timestamp: number;
   }
 
-  eventSource.addEventListener('notification', (event: MessageEvent) => {
+  eventSource.addEventListener("notification", (event: MessageEvent) => {
     const data: NotificationData = JSON.parse(event.data);
-    console.log('Notification:', data.title);
+    console.log("Notification:", data.title);
   });
 
   // Usage with typed events — see TypedEventSource class definition above
@@ -821,24 +828,24 @@ if (typeof EventSource !== "undefined") {
     message: { text: string; from: string };
   }
 
-  const typedEventSource = new TypedEventSource<AppEvents>('/events');
+  const typedEventSource = new TypedEventSource<AppEvents>("/events");
 
-  typedEventSource.on('notification', (data) => {
+  typedEventSource.on("notification", data => {
     // data is typed as NotificationData
     console.log(data.title, data.message);
   });
 
-  typedEventSource.on('userJoined', (data) => {
+  typedEventSource.on("userJoined", data => {
     // data is typed as { userId: number; name: string }
     console.log(`User ${data.name} joined`);
   });
 
   typedEventSource.onOpen(() => {
-    console.log('Connected');
+    console.log("Connected");
   });
 
-  typedEventSource.onError((error) => {
-    console.error('SSE error:', error);
+  typedEventSource.onError(error => {
+    console.error("SSE error:", error);
   });
 } else {
   console.log("⚠️ EventSource is browser-only; skipping in Node.js");
@@ -858,14 +865,14 @@ interface UseSSEResult<T> {
 
 function useSSE<T>(
   url: string,
-  eventType: string = 'message',
+  eventType: string = "message",
   options?: UseSSEOptions
 ): UseSSEResult<T> {
   // Implementation would use useState, useEffect
   return {
     data: null,
     connected: false,
-    error: null
+    error: null,
   };
 }
 
@@ -892,4 +899,6 @@ console.log("  ✅ Type custom event handlers");
 console.log("  ✅ Handle connection states with types");
 console.log("  ✅ Create reusable typed hooks");
 
-console.log("\n📘 See 43-storage-network.js for detailed History API and SSE examples!");
+console.log(
+  "\n📘 See 43-storage-network.js for detailed History API and SSE examples!"
+);

@@ -12,25 +12,25 @@ console.log("=== Service Workers - Type Safety ===\n");
 
 // Type-safe Service Worker registration
 async function registerTypedServiceWorker(): Promise<ServiceWorkerRegistration | null> {
-  if ('serviceWorker' in navigator) {
+  if ("serviceWorker" in navigator) {
     try {
-      const registration: ServiceWorkerRegistration = 
-        await navigator.serviceWorker.register('/sw.js');
-      
-      console.log('✅ Service Worker registered:', registration.scope);
-      
-      registration.addEventListener('updatefound', () => {
+      const registration: ServiceWorkerRegistration =
+        await navigator.serviceWorker.register("/sw.js");
+
+      console.log("✅ Service Worker registered:", registration.scope);
+
+      registration.addEventListener("updatefound", () => {
         const newWorker: ServiceWorker | null = registration.installing;
         if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            console.log('State:', newWorker.state);
+          newWorker.addEventListener("statechange", () => {
+            console.log("State:", newWorker.state);
           });
         }
       });
-      
+
       return registration;
     } catch (error) {
-      console.error('❌ Registration failed:', error);
+      console.error("❌ Registration failed:", error);
       return null;
     }
   }
@@ -39,7 +39,7 @@ async function registerTypedServiceWorker(): Promise<ServiceWorkerRegistration |
 
 // Type-safe message passing
 interface ServiceWorkerMessage {
-  type: 'CACHE_UPDATE' | 'SYNC_DATA' | 'NOTIFICATION';
+  type: "CACHE_UPDATE" | "SYNC_DATA" | "NOTIFICATION";
   payload: any;
 }
 
@@ -56,14 +56,13 @@ function sendMessageToSW(message: ServiceWorkerMessage): void {
 console.log("\n=== Web Workers - Typed Messages ===\n");
 
 // Type-safe worker messages
-type WorkerRequest = 
-  | { type: 'calculate'; data: number }
-  | { type: 'fibonacci'; data: number }
-  | { type: 'sort'; data: number[] };
+type WorkerRequest =
+  | { type: "calculate"; data: number }
+  | { type: "fibonacci"; data: number }
+  | { type: "sort"; data: number[] };
 
-type WorkerResponse = 
-  | { type: 'result'; data: number }
-  | { type: 'error'; message: string };
+type WorkerResponse =
+  { type: "result"; data: number } | { type: "error"; message: string };
 
 class TypedWorker {
   private worker: Worker;
@@ -74,12 +73,15 @@ class TypedWorker {
   }
 
   private setupListeners(): void {
-    this.worker.addEventListener('message', (e: MessageEvent<WorkerResponse>) => {
-      console.log('📨 Worker response:', e.data);
-    });
+    this.worker.addEventListener(
+      "message",
+      (e: MessageEvent<WorkerResponse>) => {
+        console.log("📨 Worker response:", e.data);
+      }
+    );
 
-    this.worker.addEventListener('error', (e: ErrorEvent) => {
-      console.error('❌ Worker error:', e.message);
+    this.worker.addEventListener("error", (e: ErrorEvent) => {
+      console.error("❌ Worker error:", e.message);
     });
   }
 
@@ -99,7 +101,7 @@ class GenericWorker<TRequest, TResponse> {
 
   constructor(workerUrl: string) {
     this.worker = new Worker(workerUrl);
-    this.worker.addEventListener('message', (e: MessageEvent<TResponse>) => {
+    this.worker.addEventListener("message", (e: MessageEvent<TResponse>) => {
       this.handleMessage(e.data);
     });
   }
@@ -198,8 +200,8 @@ interface LocationData {
 class GeolocationService {
   async getCurrentPosition(): Promise<LocationData> {
     return new Promise((resolve, reject) => {
-      if (!('geolocation' in navigator)) {
-        reject(new Error('Geolocation not supported'));
+      if (!("geolocation" in navigator)) {
+        reject(new Error("Geolocation not supported"));
         return;
       }
 
@@ -213,7 +215,7 @@ class GeolocationService {
             altitude: coords.altitude,
             altitudeAccuracy: coords.altitudeAccuracy,
             heading: coords.heading,
-            speed: coords.speed
+            speed: coords.speed,
           });
         },
         (error: GeolocationPositionError) => {
@@ -222,7 +224,7 @@ class GeolocationService {
         {
           enableHighAccuracy: true,
           timeout: 5000,
-          maximumAge: 0
+          maximumAge: 0,
         }
       );
     });
@@ -241,7 +243,7 @@ class GeolocationService {
           altitude: position.coords.altitude,
           altitudeAccuracy: position.coords.altitudeAccuracy,
           heading: position.coords.heading,
-          speed: position.coords.speed
+          speed: position.coords.speed,
         });
       },
       (error: GeolocationPositionError) => {
@@ -273,11 +275,11 @@ class TypedWebSocket<TSend = any, TReceive = any> {
   }
 
   private setupListeners(): void {
-    this.ws.addEventListener('open', () => {
-      console.log('✅ WebSocket connected');
+    this.ws.addEventListener("open", () => {
+      console.log("✅ WebSocket connected");
     });
 
-    this.ws.addEventListener('message', (event: MessageEvent) => {
+    this.ws.addEventListener("message", (event: MessageEvent) => {
       try {
         const message: WebSocketMessage<TReceive> = JSON.parse(event.data);
         const handler = this.messageHandlers.get(message.type);
@@ -285,16 +287,16 @@ class TypedWebSocket<TSend = any, TReceive = any> {
           handler(message.payload);
         }
       } catch (error) {
-        console.error('Failed to parse message:', error);
+        console.error("Failed to parse message:", error);
       }
     });
 
-    this.ws.addEventListener('close', (event: CloseEvent) => {
-      console.log('❌ WebSocket closed:', event.code, event.reason);
+    this.ws.addEventListener("close", (event: CloseEvent) => {
+      console.log("❌ WebSocket closed:", event.code, event.reason);
     });
 
-    this.ws.addEventListener('error', () => {
-      console.error('❌ WebSocket error');
+    this.ws.addEventListener("error", () => {
+      console.error("❌ WebSocket error");
     });
   }
 
@@ -303,7 +305,7 @@ class TypedWebSocket<TSend = any, TReceive = any> {
       const message: WebSocketMessage<TSend> = {
         type,
         payload,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
       this.ws.send(JSON.stringify(message));
     }

@@ -30,7 +30,7 @@ const userHandler: ProxyHandler<User> = {
   set(target, prop, value, receiver) {
     console.log(`Setting ${String(prop)} to ${value}`);
     return Reflect.set(target, prop, value, receiver);
-  }
+  },
 };
 
 const user: User = { name: "Alice", age: 30 };
@@ -38,7 +38,6 @@ const proxiedUser = new Proxy(user, userHandler);
 
 console.log("=== ProxyHandler<T> Interface ===");
 console.log(proxiedUser.name); // Getting name, then "Alice"
-
 
 // ============================================================================
 // 2. GENERIC PROXY TYPES
@@ -54,7 +53,7 @@ function createLoggingProxy<T extends object>(obj: T): T {
     set(target, prop, value, receiver) {
       console.log(`[LOG] Setting property: ${String(prop)} = ${value}`);
       return Reflect.set(target, prop, value, receiver);
-    }
+    },
   };
 
   return new Proxy(obj, handler);
@@ -63,7 +62,6 @@ function createLoggingProxy<T extends object>(obj: T): T {
 console.log("\n=== Generic Proxy Types ===");
 const loggedObj = createLoggingProxy({ x: 1, y: 2 });
 console.log(loggedObj.x);
-
 
 // ============================================================================
 // 3. REFLECT METHOD TYPES
@@ -89,7 +87,6 @@ console.log(`a value: ${aValue}`);
 console.log(`set result: ${setResult}`);
 console.log(`has b: ${hasB}`);
 console.log(`own keys: ${keys}`);
-
 
 // ============================================================================
 // 4. TYPE-SAFE TRAP HANDLERS
@@ -122,7 +119,7 @@ class SafeProxyHandler<T extends object> {
           return false;
         }
         return Reflect.set(target, prop, value, receiver);
-      }
+      },
     };
   }
 }
@@ -135,7 +132,6 @@ safeHandler.addValidator("name", (v: string) => v.length > 0);
 const safeObj = new Proxy({ age: 25, name: "Bob" }, safeHandler.getHandler());
 safeObj.age = 30; // ✅ OK
 // safeObj.age = -5; // ❌ Validation fails
-
 
 // ============================================================================
 // 5. PROXY WITH CLASSES
@@ -158,12 +154,11 @@ const serviceProxy = new Proxy<DataService>(new DataService(), {
   get(target, prop, receiver) {
     console.log(`Accessing ${String(prop)}`);
     return Reflect.get(target, prop, receiver);
-  }
+  },
 });
 
 console.log("\n=== Proxy with Classes ===");
 serviceProxy.set("key", "value");
-
 
 // ============================================================================
 // 6. REVOCABLE PROXY TYPING
@@ -184,14 +179,13 @@ const revocable = createRevocableProxy(
   {
     get(target, prop, receiver) {
       return Reflect.get(target, prop, receiver);
-    }
+    },
   }
 );
 
 console.log(revocable.proxy.secret);
 revocable.revoke();
 // console.log(revocable.proxy.secret); // TypeError after revoke
-
 
 // ============================================================================
 // 7. REFLECT CONSTRUCT TYPING
@@ -214,7 +208,6 @@ const personInstance: Person = Reflect.construct(Person, ["Alice", 25]);
 
 console.log("\n=== Reflect Construct Typing ===");
 console.log(personInstance.introduce());
-
 
 // ============================================================================
 // 8. PROXY FOR VALIDATION
@@ -239,7 +232,7 @@ function createValidatedProxy<T extends Record<string, unknown>>(
       }
 
       return Reflect.set(target, prop, value, receiver);
-    }
+    },
   });
 }
 
@@ -247,14 +240,13 @@ console.log("\n=== Proxy for Validation ===");
 const validatedConfig = createValidatedProxy(
   { port: 3000, debug: true },
   {
-    port: (v) => typeof v === "number" && v > 0 && v < 65536,
-    debug: (v) => typeof v === "boolean"
+    port: v => typeof v === "number" && v > 0 && v < 65536,
+    debug: v => typeof v === "boolean",
   }
 );
 
 validatedConfig.port = 8080; // ✅ OK
 // validatedConfig.port = -1; // ❌ Throws error
-
 
 // ============================================================================
 // 9. MEMBRANE PATTERN WITH TYPES
@@ -284,7 +276,7 @@ class Membrane {
       },
       set: (target, prop, value, receiver) => {
         return Reflect.set(target, prop, this.unwrap(value), receiver);
-      }
+      },
     });
 
     this.wrapped.set(value, proxy);
@@ -312,7 +304,6 @@ const originalObj = { nested: { value: 42 } };
 const wrappedObj = membrane.wrap(originalObj);
 console.log(wrappedObj.nested.value);
 
-
 // ============================================================================
 // 10. PARTIAL PROXY IMPLEMENTATION
 // ============================================================================
@@ -323,14 +314,13 @@ const partialHandler: ProxyHandler<Record<string, number>> = {
   get(target, prop, receiver) {
     console.log(`Getting ${String(prop)}`);
     return Reflect.get(target, prop, receiver);
-  }
+  },
   // Other traps use default behavior
 };
 
 console.log("\n=== Partial Proxy Implementation ===");
 const partialProxy = new Proxy({ x: 1, y: 2 }, partialHandler);
 console.log(partialProxy.x);
-
 
 // ============================================================================
 // 11. ADVANCED: PROXY FOR AUTO-IMPLEMENTATION
@@ -344,7 +334,10 @@ interface Repository<T, ID> {
   delete(id: ID): Promise<void>;
 }
 
-function createMockRepository<T extends { id: unknown }, ID = number>(): Repository<T, ID> {
+function createMockRepository<
+  T extends { id: unknown },
+  ID = number,
+>(): Repository<T, ID> {
   return new Proxy({} as Repository<T, ID>, {
     get(target, prop) {
       return async (...args: unknown[]) => {
@@ -365,7 +358,7 @@ function createMockRepository<T extends { id: unknown }, ID = number>(): Reposit
 
         return null;
       };
-    }
+    },
   });
 }
 
@@ -373,7 +366,6 @@ console.log("\n=== Proxy for Auto-implementation ===");
 const mockRepo = createMockRepository<{ id: number; name: string }, number>();
 mockRepo.findById(1);
 mockRepo.findAll();
-
 
 // ============================================================================
 // 12. COMPARISON TABLE
@@ -404,4 +396,6 @@ KEY TAKEAWAYS:
 5. Runtime proxy behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

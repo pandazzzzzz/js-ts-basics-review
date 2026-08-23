@@ -13,3 +13,6 @@
 !package.json
 !package-lock.json
 !tsconfig.json
+!.prettierrc
+!.prettierignore
+!.eslintrc.json

@@ -41,28 +41,32 @@ const end = performance.now();
 console.log(`Operation took ${(end - start).toFixed(2)}ms`);
 
 // Performance marks and measures
-performance.mark('task-start');
+performance.mark("task-start");
 
 // Simulate task
 setTimeout(() => {
-  performance.mark('task-end');
-  performance.measure('task-duration', 'task-start', 'task-end');
-  
-  const measure = performance.getEntriesByName('task-duration')[0];
+  performance.mark("task-end");
+  performance.measure("task-duration", "task-start", "task-end");
+
+  const measure = performance.getEntriesByName("task-duration")[0];
   console.log(`Task duration: ${measure.duration.toFixed(2)}ms`);
 }, 100);
 
 // Navigation Timing
 console.log("\nNavigation Timing:");
-const navTiming = performance.getEntriesByType('navigation')[0];
+const navTiming = performance.getEntriesByType("navigation")[0];
 if (navTiming) {
-  console.log(`DOM Content Loaded: ${navTiming.domContentLoadedEventEnd - navTiming.domContentLoadedEventStart}ms`);
-  console.log(`Page Load: ${navTiming.loadEventEnd - navTiming.loadEventStart}ms`);
+  console.log(
+    `DOM Content Loaded: ${navTiming.domContentLoadedEventEnd - navTiming.domContentLoadedEventStart}ms`
+  );
+  console.log(
+    `Page Load: ${navTiming.loadEventEnd - navTiming.loadEventStart}ms`
+  );
 }
 
 // Resource Timing
 console.log("\nResource Timing:");
-const resources = performance.getEntriesByType('resource');
+const resources = performance.getEntriesByType("resource");
 resources.slice(0, 3).forEach(resource => {
   console.log(`${resource.name}: ${resource.duration.toFixed(2)}ms`);
 });
@@ -115,15 +119,24 @@ function dedupeWithSet(items, existing) {
 }
 
 // 实测（各跑 5 次取稳定值）
-let idxTotal = 0, setTotal = 0;
+let idxTotal = 0,
+  setTotal = 0;
 for (let run = 0; run < 5; run++) {
-  idxTotal += benchmark('数组 indexOf', () => dedupeWithIndexOf(lookups, records), 1);
-  setTotal += benchmark('Set.has', () => dedupeWithSet(lookups, recordSet), 1);
+  idxTotal += benchmark(
+    "数组 indexOf",
+    () => dedupeWithIndexOf(lookups, records),
+    1
+  );
+  setTotal += benchmark("Set.has", () => dedupeWithSet(lookups, recordSet), 1);
 }
 const idxAvg = (idxTotal / 5).toFixed(2);
 const setAvg = (setTotal / 5).toFixed(2);
-console.log(`\n平均耗时对比 → 数组 indexOf: ${idxAvg}ms  |  Set.has: ${setAvg}ms`);
-console.log(`结论：Set.has 通常快一个数量级，因为 indexOf 是 O(n) 而 Set.has 是 O(1)`);
+console.log(
+  `\n平均耗时对比 → 数组 indexOf: ${idxAvg}ms  |  Set.has: ${setAvg}ms`
+);
+console.log(
+  `结论：Set.has 通常快一个数量级，因为 indexOf 是 O(n) 而 Set.has 是 O(1)`
+);
 console.log("正是这种实测，才让「用 Set 代替 indexOf」的优化有据可依");
 
 // ============================================
@@ -133,34 +146,36 @@ console.log("正是这种实测，才让「用 Set 代替 indexOf」的优化有
 console.log("\n=== Performance Observer ===");
 
 // Observe performance entries
-const observer = new PerformanceObserver((list) => {
+const observer = new PerformanceObserver(list => {
   for (const entry of list.getEntries()) {
-    console.log(`📊 ${entry.entryType}: ${entry.name} - ${entry.duration.toFixed(2)}ms`);
+    console.log(
+      `📊 ${entry.entryType}: ${entry.name} - ${entry.duration.toFixed(2)}ms`
+    );
   }
 });
 
 // Observe specific entry types
-observer.observe({ 
-  entryTypes: ['measure', 'navigation', 'resource', 'paint']
+observer.observe({
+  entryTypes: ["measure", "navigation", "resource", "paint"],
 });
 
 // First Paint and First Contentful Paint
-const paintObserver = new PerformanceObserver((list) => {
+const paintObserver = new PerformanceObserver(list => {
   for (const entry of list.getEntries()) {
     console.log(`🎨 ${entry.name}: ${entry.startTime.toFixed(2)}ms`);
   }
 });
 
-paintObserver.observe({ entryTypes: ['paint'] });
+paintObserver.observe({ entryTypes: ["paint"] });
 
 // Largest Contentful Paint (LCP)
-const lcpObserver = new PerformanceObserver((list) => {
+const lcpObserver = new PerformanceObserver(list => {
   const entries = list.getEntries();
   const lastEntry = entries[entries.length - 1];
   console.log(`📏 LCP: ${lastEntry.startTime.toFixed(2)}ms`);
 });
 
-lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
 
 // Use cases:
 // - Real-time performance monitoring
@@ -186,27 +201,36 @@ console.log("\n=== Debounce and Throttle (Performance Optimization) ===");
 // - Both prevent layout thrashing and excessive re-renders
 
 // Quick debounce example (one-liner pattern):
-const debouncedSearch = ((delay) => {
-  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => console.log("Search:", a[0]), delay); };
+const debouncedSearch = (delay => {
+  let t;
+  return (...a) => {
+    clearTimeout(t);
+    t = setTimeout(() => console.log("Search:", a[0]), delay);
+  };
 })(300);
 
 console.log("Debounce - search input optimization (reduces API calls):");
-debouncedSearch('h');
-debouncedSearch('he');
-debouncedSearch('hel');
-debouncedSearch('hell');
-debouncedSearch('hello'); // Only this triggers
+debouncedSearch("h");
+debouncedSearch("he");
+debouncedSearch("hel");
+debouncedSearch("hell");
+debouncedSearch("hello"); // Only this triggers
 
 // Quick throttle example:
-const throttledScroll = ((limit) => {
+const throttledScroll = (limit => {
   let last = 0;
-  return (pos) => {
+  return pos => {
     const now = Date.now();
-    if (now - last >= limit) { console.log("Scroll:", pos); last = now; }
+    if (now - last >= limit) {
+      console.log("Scroll:", pos);
+      last = now;
+    }
   };
 })(200);
 
-console.log("\nThrottle - scroll event optimization (reduces layout recalculation):");
+console.log(
+  "\nThrottle - scroll event optimization (reduces layout recalculation):"
+);
 for (let i = 0; i < 5; i++) {
   throttledScroll(i * 100); // Only first in each 200ms window fires
 }
@@ -235,13 +259,13 @@ function lazyLoadImages() {
       if (entry.isIntersecting) {
         const img = entry.target;
         img.src = img.dataset.src;
-        img.classList.remove('lazy');
+        img.classList.remove("lazy");
         observer.unobserve(img);
       }
     });
   });
 
-  const images = document.querySelectorAll('img.lazy');
+  const images = document.querySelectorAll("img.lazy");
   images.forEach(img => imageObserver.observe(img));
 }
 
@@ -297,9 +321,9 @@ class VirtualScroller {
     this.itemHeight = itemHeight;
     this.visibleCount = Math.ceil(container.clientHeight / itemHeight);
     this.startIndex = 0;
-    
+
     this.render();
-    container.addEventListener('scroll', () => this.onScroll());
+    container.addEventListener("scroll", () => this.onScroll());
   }
 
   onScroll() {
@@ -311,16 +335,18 @@ class VirtualScroller {
   render() {
     const endIndex = this.startIndex + this.visibleCount;
     const visibleItems = this.items.slice(this.startIndex, endIndex);
-    
+
     // Update DOM with only visible items
     this.container.innerHTML = visibleItems
-      .map((item, i) => `
+      .map(
+        (item, i) => `
         <div style="height: ${this.itemHeight}px; position: absolute; top: ${(this.startIndex + i) * this.itemHeight}px;">
           ${item}
         </div>
-      `)
-      .join('');
-    
+      `
+      )
+      .join("");
+
     // Set container height for scrollbar
     this.container.style.height = `${this.items.length * this.itemHeight}px`;
   }
@@ -414,10 +440,10 @@ class Component {
 
   mount() {
     this.timerId = setInterval(() => {
-      console.log('Tick');
+      console.log("Tick");
     }, 1000);
-    
-    document.addEventListener('click', this.handleClick);
+
+    document.addEventListener("click", this.handleClick);
   }
 
   unmount() {
@@ -426,13 +452,13 @@ class Component {
       clearInterval(this.timerId);
       this.timerId = null;
     }
-    
+
     // Remove event listener
-    document.removeEventListener('click', this.handleClick);
+    document.removeEventListener("click", this.handleClick);
   }
 
   handleClick() {
-    console.log('Clicked');
+    console.log("Clicked");
   }
 }
 
@@ -443,7 +469,7 @@ function processObject(obj) {
   if (cache.has(obj)) {
     return cache.get(obj);
   }
-  
+
   const result = /* expensive operation */ obj;
   cache.set(obj, result);
   return result;
@@ -463,33 +489,57 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Premature optimization
 console.log("\nPitfall 1: Premature optimization");
-console.log("  Optimizing code paths that are not bottlenecks wastes time and adds complexity.");
-console.log("  Fix: Profile first with Performance API or DevTools, then optimize the hottest paths.");
+console.log(
+  "  Optimizing code paths that are not bottlenecks wastes time and adds complexity."
+);
+console.log(
+  "  Fix: Profile first with Performance API or DevTools, then optimize the hottest paths."
+);
 
 // Pitfall 2: Measuring without baseline
 console.log("\nPitfall 2: Measuring without baseline");
-console.log("  Without a baseline you cannot tell if a change improved or degraded performance.");
-console.log("  Fix: Record baseline metrics with performance.mark/measure before any optimization.");
+console.log(
+  "  Without a baseline you cannot tell if a change improved or degraded performance."
+);
+console.log(
+  "  Fix: Record baseline metrics with performance.mark/measure before any optimization."
+);
 
 // Pitfall 3: Debounce/throttle confusion
 console.log("\nPitfall 3: Debounce/throttle confusion");
-console.log("  Using debounce when you need throttle (or vice versa) causes missed events or laggy UX.");
-console.log("  Fix: Debounce for inputs that should fire once after typing stops; throttle for continuous events like scroll/mousemove.");
+console.log(
+  "  Using debounce when you need throttle (or vice versa) causes missed events or laggy UX."
+);
+console.log(
+  "  Fix: Debounce for inputs that should fire once after typing stops; throttle for continuous events like scroll/mousemove."
+);
 
 // Pitfall 4: Memory leaks from closures
 console.log("\nPitfall 4: Memory leaks from closures");
-console.log("  Closures can inadvertently hold references to large objects long after they are needed.");
-console.log("  Fix: Nullify references you no longer need and avoid capturing heavy objects in long-lived callbacks.");
+console.log(
+  "  Closures can inadvertently hold references to large objects long after they are needed."
+);
+console.log(
+  "  Fix: Nullify references you no longer need and avoid capturing heavy objects in long-lived callbacks."
+);
 
 // Pitfall 5: Not cleaning up observers
 console.log("\nPitfall 5: Not cleaning up observers");
-console.log("  PerformanceObserver and IntersectionObserver instances keep firing until disconnected.");
-console.log("  Fix: Always call observer.disconnect() in unmount/cleanup hooks.");
+console.log(
+  "  PerformanceObserver and IntersectionObserver instances keep firing until disconnected."
+);
+console.log(
+  "  Fix: Always call observer.disconnect() in unmount/cleanup hooks."
+);
 
 // Pitfall 6: Dynamic import waterfall
 console.log("\nPitfall 6: Dynamic import waterfall");
-console.log("  Sequentially awaiting dynamic imports (await A; await B) wastes time when modules are independent.");
-console.log("  Fix: Use Promise.all() to load independent modules in parallel: await Promise.all([import('./A'), import('./B')]);");
+console.log(
+  "  Sequentially awaiting dynamic imports (await A; await B) wastes time when modules are independent."
+);
+console.log(
+  "  Fix: Use Promise.all() to load independent modules in parallel: await Promise.all([import('./A'), import('./B')]);"
+);
 
 // ============================================
 // Core Web Vitals (2025 Update)
@@ -502,9 +552,13 @@ console.log("\n=== Core Web Vitals (2025 Update) ===");
 console.log("\n📊 Core Web Vitals (2025):");
 console.log("1. LCP (Largest Contentful Paint) - Loading performance");
 console.log("   - Good: ≤2.5s, Needs improvement: ≤4.0s");
-console.log("2. INP (Interaction to Next Paint) - Interactivity (replacing FID)");
+console.log(
+  "2. INP (Interaction to Next Paint) - Interactivity (replacing FID)"
+);
 console.log("   - Good: ≤200ms, Needs improvement: ≤500ms");
-console.log("   - FID was deprecated in March 2024, INP is the new official metric");
+console.log(
+  "   - FID was deprecated in March 2024, INP is the new official metric"
+);
 console.log("3. CLS (Cumulative Layout Shift) - Visual stability");
 console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
@@ -514,7 +568,9 @@ console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
 console.log("\n💡 INP vs FID:");
 console.log("- FID only measured first input delay");
-console.log("- INP measures ALL interactions' latencies (best representation of responsiveness)");
+console.log(
+  "- INP measures ALL interactions' latencies (best representation of responsiveness)"
+);
 console.log("- INP considers 98th percentile of interactions");
 console.log("- Measures clicks, taps, and keyboard interactions");
 console.log("- Excludes scroll and drag interactions");
@@ -549,17 +605,31 @@ console.log(inpCodeExample);
 console.log("\n=== Best Practices ===");
 
 console.log("\n✅ DO:");
-console.log("1. Measure first - always profile with real data before deciding what to optimize.");
-console.log("2. Use appropriate optimization - debounce inputs, throttle scroll/resize, virtualize long lists, lazy-load below-the-fold content.");
-console.log("3. Profile in production - use PerformanceObserver and Real User Monitoring (RUM) to catch regressions early.");
+console.log(
+  "1. Measure first - always profile with real data before deciding what to optimize."
+);
+console.log(
+  "2. Use appropriate optimization - debounce inputs, throttle scroll/resize, virtualize long lists, lazy-load below-the-fold content."
+);
+console.log(
+  "3. Profile in production - use PerformanceObserver and Real User Monitoring (RUM) to catch regressions early."
+);
 
 console.log("\n❌ DON'T:");
-console.log("1. Premature optimization - do not optimize code paths that have not been identified as bottlenecks.");
-console.log("2. Optimize without measuring - every change should be validated against a baseline.");
+console.log(
+  "1. Premature optimization - do not optimize code paths that have not been identified as bottlenecks."
+);
+console.log(
+  "2. Optimize without measuring - every change should be validated against a baseline."
+);
 
 console.log("\n⚠️ WATCH OUT FOR:");
-console.log("1. Measurement accuracy - warm up caches, run multiple iterations, and account for JIT compilation variance.");
-console.log("2. Real-world conditions - test on low-end devices and slow networks, not just your dev machine.");
+console.log(
+  "1. Measurement accuracy - warm up caches, run multiple iterations, and account for JIT compilation variance."
+);
+console.log(
+  "2. Real-world conditions - test on low-end devices and slow networks, not just your dev machine."
+);
 
 // ============================================
 // Cross-references
@@ -567,7 +637,9 @@ console.log("2. Real-world conditions - test on low-end devices and slow network
 console.log("\n=== Cross-references ===");
 console.log("📘 26-optimization-performance.js - Optimization patterns");
 console.log("📘 27-memory-management.js - Memory management");
-console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
+console.log(
+  "📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations"
+);
 console.log("📘 45-web-apis.js - Web APIs");
 
 // ============================================

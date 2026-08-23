@@ -205,8 +205,12 @@ console.log("\n=== Vite Configuration ===");
 console.log("\nVite 5.x Key Features:");
 console.log("1. Powered by Rollup 4 for improved build performance");
 console.log("2. Faster HMR with optimized dependency pre-bundling");
-console.log("3. Enhanced CSS handling: Lightning CSS default for minification in production");
-console.log("   - Optional transformer: 'lightningcss' to replace PostCSS completely");
+console.log(
+  "3. Enhanced CSS handling: Lightning CSS default for minification in production"
+);
+console.log(
+  "   - Optional transformer: 'lightningcss' to replace PostCSS completely"
+);
 console.log("4. Better TypeScript support with faster type checking");
 console.log("5. Improved ESM support for Node.js compatibility");
 console.log("6. Better error messages and debugging experience");
@@ -215,7 +219,9 @@ console.log("7. Cleaned up deprecated APIs and streamlined configuration");
 // Vite 7.x Features (June 2025)
 console.log("\nVite 7.x Key Features:");
 console.log("1. Node.js requirement: Node 20.19+ or Node 22.12+ minimum");
-console.log("2. baseline-widely-available build target replaces default targets");
+console.log(
+  "2. baseline-widely-available build target replaces default targets"
+);
 console.log("   - Broader browser compatibility out of the box");
 console.log("   - Replaces es2020/Chrome 87+ defaults");
 console.log("3. Removed Sass legacy API (Ruby Sass)");
@@ -340,7 +346,9 @@ export default defineConfig({
 `;
 
 console.log("\nVite with Lightning CSS (opt-in transformer):");
-console.log("// Note: Lightning CSS is used by default for CSS minification in production");
+console.log(
+  "// Note: Lightning CSS is used by default for CSS minification in production"
+);
 console.log(viteLightningConfig);
 
 // Vite with React
@@ -744,7 +752,6 @@ console.log("6. Build tool deprecation");
 console.log("7. Dependency compatibility");
 console.log("8. Environment variable exposure");
 
-
 // ============================================
 // 7. Section 5: Additional Build Tooling
 // ============================================
@@ -845,7 +852,6 @@ console.log(`
 // - Use eslint-config-prettier to avoid conflicts
 `);
 
-
 // ============================================
 // TypeScript Comparison Notes
 // ============================================
@@ -905,7 +911,6 @@ console.log(`
 - 46-performance.js (Performance optimization)
 - 39-es2022-plus-features.js (Dynamic imports)
 */
-
 
 // ============================================
 // Cross-references

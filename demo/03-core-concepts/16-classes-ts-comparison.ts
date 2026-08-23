@@ -15,9 +15,9 @@ export {};
 
 // TypeScript: Compile-time access modifiers
 class BankAccount {
-  public accountNumber: string;      // Accessible everywhere
-  protected accountType: string;     // Accessible in class and subclasses
-  private balance: number;           // Only accessible in this class
+  public accountNumber: string; // Accessible everywhere
+  protected accountType: string; // Accessible in class and subclasses
+  private balance: number; // Only accessible in this class
 
   constructor(accountNumber: string, initialBalance: number) {
     this.accountNumber = accountNumber;
@@ -43,10 +43,9 @@ class BankAccount {
 console.log("=== Access Modifiers ===");
 const account = new BankAccount("ACC-001", 1000);
 console.log(account.accountNumber); // ✅ OK - public
-console.log(account.getBalance());  // ✅ OK - public method
+console.log(account.getBalance()); // ✅ OK - public method
 // console.log(account.balance);    // ❌ Error - private
 // account.applyFee(10);            // ❌ Error - protected
-
 
 // ============================================================================
 // 2. PARAMETER PROPERTIES
@@ -82,7 +81,6 @@ const alice = new Person("Alice", 30);
 console.log(alice.introduce());
 console.log(alice.getAge());
 // alice.age = 31; // ❌ Error - private property
-
 
 // ============================================================================
 // 3. READONLY MODIFIER
@@ -121,13 +119,12 @@ const dbConfig: DatabaseConfig = {
   host: "localhost",
   port: 5432,
   username: "admin",
-  password: "secret"
+  password: "secret",
 };
 
 console.log("\n=== Readonly Modifier ===");
 // dbConfig.host = "production.db"; // ❌ Error - readonly
 dbConfig.username = "newuser"; // ✅ OK - not readonly
-
 
 // ============================================================================
 // 4. ABSTRACT CLASSES AND METHODS
@@ -157,12 +154,18 @@ abstract class Shape {
 
   // Concrete method using abstract methods
   logInfo(): void {
-    console.log(`${this.describe()}: Area=${this.getArea()}, Perimeter=${this.getPerimeter()}`);
+    console.log(
+      `${this.describe()}: Area=${this.getArea()}, Perimeter=${this.getPerimeter()}`
+    );
   }
 }
 
 class Triangle extends Shape {
-  constructor(public base: number, public height: number, color: string = "green") {
+  constructor(
+    public base: number,
+    public height: number,
+    color: string = "green"
+  ) {
     super(color);
   }
 
@@ -182,7 +185,6 @@ console.log(triangle.describe());
 triangle.logInfo();
 
 // const shape = new Shape("red"); // ❌ Error: Cannot create abstract class instance
-
 
 // ============================================================================
 // 5. IMPLEMENTS INTERFACE
@@ -230,7 +232,6 @@ sprite.translate(100, 200);
 sprite.scale(2);
 console.log(sprite.render());
 
-
 // ============================================================================
 // 6. DECORATORS (Legacy / Experimental)
 // ============================================================================
@@ -253,7 +254,7 @@ function logExecution(
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
-  descriptor.value = function(...args: any[]) {
+  descriptor.value = function (...args: any[]) {
     console.log(`Executing ${propertyKey} with args:`, args);
     const result = originalMethod.apply(this, args);
     console.log(`Completed ${propertyKey}`);
@@ -264,7 +265,7 @@ function logExecution(
 
 // Property decorator
 function format(pattern: string) {
-  return function(target: any, propertyKey: string) {
+  return function (target: any, propertyKey: string) {
     // Store the pattern for use in getter/setter
   };
 }
@@ -285,7 +286,6 @@ class DataService {
 console.log("\n=== Decorators ===");
 const service = new DataService();
 service.fetchData(42);
-
 
 // ============================================================================
 // 7. STATIC MEMBERS WITH TYPES
@@ -315,7 +315,6 @@ console.log("\n=== Static Members ===");
 console.log(`PI: ${MathUtils.PI}`);
 console.log(`Circle area (r=5): ${MathUtils.circleArea(5).toFixed(2)}`);
 console.log(`Identity: ${MathUtils.identity("hello")}`);
-
 
 // ============================================================================
 // 8. GETTERS AND SETTERS WITH TYPES
@@ -359,7 +358,6 @@ temp.fahrenheit = 212;
 console.log(`After setting Fahrenheit to 212:`);
 console.log(`Celsius: ${temp.celsius}`);
 
-
 // ============================================================================
 // 9. METHOD OVERLOADING
 // ============================================================================
@@ -385,10 +383,9 @@ class Calculator {
 
 console.log("\n=== Method Overloading ===");
 const calc = new Calculator();
-console.log(calc.add(2, 3));        // 5
-console.log(calc.add(2, 3, 4));     // 9
+console.log(calc.add(2, 3)); // 5
+console.log(calc.add(2, 3, 4)); // 9
 console.log(calc.add("Hello", " ")); // "Hello "
-
 
 // ============================================================================
 // 10. GENERIC CLASSES
@@ -446,7 +443,6 @@ console.log(numberBox.double());
 const kv = new KeyValuePair("name", "Alice");
 console.log(kv.toString());
 
-
 // ============================================================================
 // 11. CLASS EXPRESSIONS WITH TYPES
 // ============================================================================
@@ -472,7 +468,6 @@ console.log(animal.speak());
 
 const named = new NamedClass();
 console.log(named.getName());
-
 
 // ============================================================================
 // 12. COMPARISON TABLE
@@ -504,4 +499,6 @@ KEY TAKEAWAYS:
 5. Runtime class behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

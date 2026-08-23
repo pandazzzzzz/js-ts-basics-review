@@ -27,7 +27,10 @@ type FetchResult<T> =
   | { success: true; data: T; response: Response }
   | { success: false; error: FetchError };
 
-async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchResult<T>> {
+async function safeFetch<T>(
+  url: string,
+  options?: RequestInit
+): Promise<FetchResult<T>> {
   try {
     const response = await fetch(url, options);
 
@@ -39,16 +42,16 @@ async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchRe
           response.status,
           response.statusText,
           url
-        )
+        ),
       };
     }
 
-    const data = await response.json() as T;
+    const data = (await response.json()) as T;
 
     return {
       success: true,
       data,
-      response
+      response,
     };
   } catch (error) {
     if (error instanceof FetchError) {
@@ -61,13 +64,15 @@ async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchRe
         0,
         "",
         url
-      )
+      ),
     };
   }
 }
 
 // Type guard for FetchResult
-function isSuccess<T>(result: FetchResult<T>): result is { success: true; data: T; response: Response } {
+function isSuccess<T>(
+  result: FetchResult<T>
+): result is { success: true; data: T; response: Response } {
   return result.success;
 }
 
@@ -80,7 +85,9 @@ interface User {
 
 async function useSafeFetch(): Promise<void> {
   // Success case
-  const successResult = await safeFetch<User>("https://jsonplaceholder.typicode.com/users/1");
+  const successResult = await safeFetch<User>(
+    "https://jsonplaceholder.typicode.com/users/1"
+  );
 
   if (isSuccess(successResult)) {
     // TypeScript knows data and response exist after type guard
@@ -92,11 +99,18 @@ async function useSafeFetch(): Promise<void> {
   }
 
   // Error case (nonexistent post)
-  const errorResult = await safeFetch<User>("https://jsonplaceholder.typicode.com/posts/999999");
+  const errorResult = await safeFetch<User>(
+    "https://jsonplaceholder.typicode.com/posts/999999"
+  );
 
   if (!isSuccess(errorResult)) {
     // TypeScript knows error exists after type guard
-    console.log("HTTP error:", errorResult.error.message, "Status:", errorResult.error.status);
+    console.log(
+      "HTTP error:",
+      errorResult.error.message,
+      "Status:",
+      errorResult.error.status
+    );
   }
 }
 
@@ -119,7 +133,7 @@ function fetchWithTimeout<T = unknown>(
 
   // Combine signals if provided
   if (originalSignal) {
-    originalSignal.addEventListener('abort', () => {
+    originalSignal.addEventListener("abort", () => {
       controller.abort(originalSignal.reason);
     });
   }
@@ -130,7 +144,7 @@ function fetchWithTimeout<T = unknown>(
 
   return fetch(url, {
     ...restOptions,
-    signal: controller.signal
+    signal: controller.signal,
   }).finally(() => {
     clearTimeout(timeoutId);
   });
@@ -140,18 +154,18 @@ function fetchWithTimeout<T = unknown>(
 async function useTypedTimeout(): Promise<void> {
   try {
     const response = await fetchWithTimeout(
-      'https://jsonplaceholder.typicode.com/posts/1',
-      { method: 'GET' },
+      "https://jsonplaceholder.typicode.com/posts/1",
+      { method: "GET" },
       10000
     );
     const data: unknown = await response.json();
     console.log("Timed fetch completed successfully");
     console.log("Data:", data);
   } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      console.log('Request timed out');
+    if (error instanceof DOMException && error.name === "AbortError") {
+      console.log("Request timed out");
     } else if (error instanceof Error) {
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   }
 }
@@ -173,13 +187,15 @@ interface Post {
 }
 
 async function fetchPostClean(postId: number): Promise<Post> {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${postId}`
+  );
 
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
   }
 
-  return await response.json() as Post;
+  return (await response.json()) as Post;
 }
 
 async function demonstrateAsyncAwait(): Promise<void> {
@@ -205,9 +221,15 @@ async function sequentialVsParallel(): Promise<void> {
   const startSeq = Date.now();
 
   try {
-    const post1 = await fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Promise<Post>);
-    const post2 = await fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Promise<Post>);
-    const post3 = await fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Promise<Post>);
+    const post1 = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1"
+    ).then(r => r.json() as Promise<Post>);
+    const post2 = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/2"
+    ).then(r => r.json() as Promise<Post>);
+    const post3 = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/3"
+    ).then(r => r.json() as Promise<Post>);
 
     const endSeq = Date.now();
     console.log("Sequential time:", endSeq - startSeq, "ms");
@@ -222,9 +244,15 @@ async function sequentialVsParallel(): Promise<void> {
 
   try {
     const [post1, post2, post3] = await Promise.all([
-      fetch("https://jsonplaceholder.typicode.com/posts/1").then(r => r.json() as Promise<Post>),
-      fetch("https://jsonplaceholder.typicode.com/posts/2").then(r => r.json() as Promise<Post>),
-      fetch("https://jsonplaceholder.typicode.com/posts/3").then(r => r.json() as Promise<Post>)
+      fetch("https://jsonplaceholder.typicode.com/posts/1").then(
+        r => r.json() as Promise<Post>
+      ),
+      fetch("https://jsonplaceholder.typicode.com/posts/2").then(
+        r => r.json() as Promise<Post>
+      ),
+      fetch("https://jsonplaceholder.typicode.com/posts/3").then(
+        r => r.json() as Promise<Post>
+      ),
     ]);
 
     const endPar = Date.now();
@@ -287,12 +315,16 @@ function isV3Response(response: ApiResponse): response is ApiV3Response {
 async function handleVersionedResponse(): Promise<void> {
   // Mock responses to demonstrate type narrowing
   const v1Response: ApiV1Response = { version: "v1", data: { id: 1 } };
-  const v2Response: ApiV2Response = { version: "v2", data: { id: 1 }, meta: { page: 1, total: 100 } };
+  const v2Response: ApiV2Response = {
+    version: "v2",
+    data: { id: 1 },
+    meta: { page: 1, total: 100 },
+  };
   const v3Response: ApiV3Response = {
     version: "v3",
     data: { id: 1 },
     meta: { page: 1, total: 100 },
-    links: { self: "/api/v1", next: "/api/v1?page=2" }
+    links: { self: "/api/v1", next: "/api/v1?page=2" },
   };
 
   // Type narrowing with type guards
@@ -369,6 +401,12 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log("📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript");
-console.log("📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript");
-console.log("📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript");
+console.log(
+  "📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript"
+);
+console.log(
+  "📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript"
+);
+console.log(
+  "📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript"
+);

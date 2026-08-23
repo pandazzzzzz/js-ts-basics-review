@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 16-classes-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -127,8 +126,10 @@ try {
 
 // 1.6 Class methods are on prototype
 console.log("\nMethod on prototype:");
-console.log("alice.introduce === Person.prototype.introduce:",
-  alice.introduce === Person.prototype.introduce); // true
+console.log(
+  "alice.introduce === Person.prototype.introduce:",
+  alice.introduce === Person.prototype.introduce
+); // true
 
 // 1.7 typeof class is function
 console.log("\ntypeof class:", typeof Person); // "function"
@@ -137,8 +138,7 @@ console.log("Class is constructor:", Person.prototype.constructor === Person); /
 // 1.8 Class methods are non-enumerable
 console.log("\nClass methods non-enumerable:");
 console.log("Object.keys(alice):", Object.keys(alice)); // ['name', 'age']
-console.log("Methods not in keys:", !Object.keys(alice).includes('introduce'));
-
+console.log("Methods not in keys:", !Object.keys(alice).includes("introduce"));
 
 // ============================================
 // 2. CLASS INHERITANCE
@@ -247,11 +247,11 @@ console.log("redCircle instanceof Object:", redCircle instanceof Object); // tru
 
 // 2.5 Prototype chain verification
 console.log("\nPrototype chain:");
-console.log("Circle.prototype.__proto__ === Shape.prototype:",
-  Circle.prototype.__proto__ === Shape.prototype); // true
-console.log("Circle.__proto__ === Shape:",
-  Circle.__proto__ === Shape); // true (for statics)
-
+console.log(
+  "Circle.prototype.__proto__ === Shape.prototype:",
+  Circle.prototype.__proto__ === Shape.prototype
+); // true
+console.log("Circle.__proto__ === Shape:", Circle.__proto__ === Shape); // true (for statics)
 
 // ============================================
 // 3. STATIC PROPERTIES AND METHODS
@@ -381,7 +381,6 @@ class ClassWithStaticBlock {
 
 console.log("\nStatic block:");
 console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
-
 
 // ============================================
 // 4. PRIVATE PROPERTIES AND ENCAPSULATION PATTERNS
@@ -612,13 +611,22 @@ class AppConfig {
   static {
     // Complex initialization logic that would be awkward as field expressions
     try {
-      const entries = this.#rawSettings.split(";").map(s => s.trim()).filter(Boolean);
+      const entries = this.#rawSettings
+        .split(";")
+        .map(s => s.trim())
+        .filter(Boolean);
       for (const entry of entries) {
         const [key, value] = entry.split("=");
         switch (key) {
-          case "debug":   this.debug = value === "true"; break;
-          case "port":    this.port = Number(value); break;
-          case "retries": this.retries = Number(value); break;
+          case "debug":
+            this.debug = value === "true";
+            break;
+          case "port":
+            this.port = Number(value);
+            break;
+          case "retries":
+            this.retries = Number(value);
+            break;
         }
       }
       // Can read/validate after init — recomputation pattern
@@ -630,8 +638,8 @@ class AppConfig {
 }
 
 console.log("\nStatic initialization block (ES2022):");
-console.log("AppConfig.debug:", AppConfig.debug);   // true
-console.log("AppConfig.port:", AppConfig.port);      // 3000
+console.log("AppConfig.debug:", AppConfig.debug); // true
+console.log("AppConfig.port:", AppConfig.port); // 3000
 console.log("AppConfig.retries:", AppConfig.retries); // 3
 
 // 4.9 Ergonomic brand checks `#field in obj` (ES2022)
@@ -676,9 +684,14 @@ const fakeObject = Object.create(Token.prototype); // has prototype but NOT the 
 console.log("isToken(realToken):", Token.isToken(realToken)); // true
 console.log("isToken(plainObject):", Token.isToken(plainObject)); // false
 console.log("isToken(fakeObject):", Token.isToken(fakeObject)); // false (no private field)
-console.log("realToken.isSameBrand(realToken):", realToken.isSameBrand(realToken)); // true
-console.log("realToken.isSameBrand(plainObject):", realToken.isSameBrand(plainObject)); // false
-
+console.log(
+  "realToken.isSameBrand(realToken):",
+  realToken.isSameBrand(realToken)
+); // true
+console.log(
+  "realToken.isSameBrand(plainObject):",
+  realToken.isSameBrand(plainObject)
+); // false
 
 // ============================================
 // 5. INSTANCEOF AND TYPE CHECKING
@@ -710,7 +723,10 @@ console.log("\n=== 5. instanceof and Type Checking Demo ===");
 // 5.1 Basic instanceof
 console.log("Array instanceof Array:", [] instanceof Array); // true
 console.log("Date instanceof Date:", new Date() instanceof Date); // true
-console.log("Promise instanceof Promise:", Promise.resolve() instanceof Promise); // true
+console.log(
+  "Promise instanceof Promise:",
+  Promise.resolve() instanceof Promise
+); // true
 
 // 5.2 instanceof with class hierarchy
 class Base {}
@@ -752,7 +768,6 @@ let custom = new CustomType();
 console.log("\nCustom toStringTag:");
 console.log(Object.prototype.toString.call(custom)); // [object CustomType]
 
-
 // ============================================
 // 6. MIXIN PATTERN
 // ============================================
@@ -788,7 +803,7 @@ console.log("\n=== 6. Mixin Pattern Demo ===");
 let sayMixin = {
   say(phrase) {
     console.log(phrase);
-  }
+  },
 };
 
 let sayHiMixin = {
@@ -797,7 +812,7 @@ let sayHiMixin = {
   },
   sayBye() {
     this.say(`Bye ${this.name}!`);
-  }
+  },
 };
 
 class User {
@@ -839,7 +854,7 @@ let eventMixin = {
     if (this._eventHandlers && this._eventHandlers[event]) {
       this._eventHandlers[event].forEach(handler => handler(...args));
     }
-  }
+  },
 };
 
 class EventEmitter {
@@ -849,20 +864,20 @@ Object.assign(EventEmitter.prototype, eventMixin);
 
 let emitter = new EventEmitter();
 console.log("\nEvent mixin:");
-emitter.on("data", (data) => console.log("Received:", data));
+emitter.on("data", data => console.log("Received:", data));
 emitter.trigger("data", "Hello World");
 
 // 6.3 Mixin with inheritance
 let canFly = {
   fly() {
     console.log(`${this.name} is flying!`);
-  }
+  },
 };
 
 let canSwim = {
   swim() {
     console.log(`${this.name} is swimming!`);
-  }
+  },
 };
 
 class Duck {
@@ -887,7 +902,7 @@ function createTimestampMixin() {
     },
     log(message) {
       console.log(`[${this.getTimestamp()}] ${message}`);
-    }
+    },
   };
 }
 
@@ -897,7 +912,6 @@ Object.assign(Service.prototype, createTimestampMixin());
 let service = new Service();
 console.log("\nMixin factory:");
 service.log("Service started");
-
 
 // ============================================
 // 7. RELATIONSHIP WITH PROTOTYPES
@@ -932,7 +946,7 @@ console.log("\n=== 7. Relationship with Prototypes Demo ===");
 function PersonFunc(name) {
   this.name = name;
 }
-PersonFunc.prototype.introduce = function() {
+PersonFunc.prototype.introduce = function () {
   console.log(`Hi, I'm ${this.name}`);
 };
 
@@ -954,20 +968,25 @@ console.log("Class prototype:", PersonClass.prototype);
 
 // 7.2 Prototype chain verification
 console.log("\nPrototype chain:");
-console.log("funcPerson.__proto__ === PersonFunc.prototype:",
-  funcPerson.__proto__ === PersonFunc.prototype); // true
-console.log("classPerson.__proto__ === PersonClass.prototype:",
-  classPerson.__proto__ === PersonClass.prototype); // true
+console.log(
+  "funcPerson.__proto__ === PersonFunc.prototype:",
+  funcPerson.__proto__ === PersonFunc.prototype
+); // true
+console.log(
+  "classPerson.__proto__ === PersonClass.prototype:",
+  classPerson.__proto__ === PersonClass.prototype
+); // true
 
 // 7.3 extends sets up prototype chain
 class Parent2 {}
 class Child2 extends Parent2 {}
 
 console.log("\nextends prototype chain:");
-console.log("Child2.prototype.__proto__ === Parent2.prototype:",
-  Child2.prototype.__proto__ === Parent2.prototype); // true
-console.log("Child2.__proto__ === Parent2:",
-  Child2.__proto__ === Parent2); // true
+console.log(
+  "Child2.prototype.__proto__ === Parent2.prototype:",
+  Child2.prototype.__proto__ === Parent2.prototype
+); // true
+console.log("Child2.__proto__ === Parent2:", Child2.__proto__ === Parent2); // true
 
 // 7.4 Converting class to prototype
 class ModernClass {
@@ -984,7 +1003,7 @@ class ModernClass {
 function LegacyClass(value) {
   this.value = value;
 }
-LegacyClass.prototype.getValue = function() {
+LegacyClass.prototype.getValue = function () {
   return this.value;
 };
 
@@ -995,8 +1014,9 @@ console.log("Legacy:", new LegacyClass(42).getValue());
 // 7.5 When to use class vs prototype
 console.log("\nWhen to use:");
 console.log("- Class: New code, cleaner syntax, team familiarity");
-console.log("- Prototype: Library code, maximum compatibility, advanced patterns");
-
+console.log(
+  "- Prototype: Library code, maximum compatibility, advanced patterns"
+);
 
 // ============================================
 // BEST PRACTICES
@@ -1060,7 +1080,6 @@ class Canary2 extends Bird2 {
 // Avoid: Deep inheritance chains
 // class Animal -> class Mammal -> class Carnivore -> class Felidae -> class Cat
 
-
 // ============================================
 // COMMON PITFALLS
 // ============================================
@@ -1091,7 +1110,11 @@ try {
 
 // Pitfall 3: this before super
 try {
-  class Parent3 { constructor() { this.x = 1; } }
+  class Parent3 {
+    constructor() {
+      this.x = 1;
+    }
+  }
   class Child3 extends Parent3 {
     constructor() {
       console.log(this.x); // ReferenceError
@@ -1110,8 +1133,10 @@ class WithPrivate {
 let wp = new WithPrivate();
 // "#secret" in wp is a string-property check (false); the brand check `#secret in wp`
 // returns true but only inside the WithPrivate class body.
-console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in wp); // false
-
+console.log(
+  "Pitfall 4 - Private not accessible (string check):",
+  "#secret" in wp
+); // false
 
 // ============================================
 // SUMMARY

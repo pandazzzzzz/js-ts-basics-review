@@ -39,7 +39,7 @@ const userMetadata = new WeakMap<User, UserMetadata>();
 const user: User = { id: 1, name: "Alice" };
 userMetadata.set(user, {
   createdAt: new Date(),
-  lastLogin: new Date()
+  lastLogin: new Date(),
 });
 
 console.log("User metadata:", userMetadata.get(user));
@@ -61,7 +61,6 @@ const obj2 = { id: 2 };
 processObject(obj1);
 processObject(obj1); // Already processed
 processObject(obj2);
-
 
 // ============================================================================
 // 2. TYPED WEAKREF AND FINALIZATIONREGISTRY
@@ -94,13 +93,12 @@ interface CleanupData {
   id: number;
 }
 
-const registry = new FinalizationRegistry<CleanupData>((heldValue) => {
+const registry = new FinalizationRegistry<CleanupData>(heldValue => {
   console.log(`Finalizing ${heldValue.name} (ID: ${heldValue.id})`);
 });
 
 let trackedResource = new ExpensiveResource("Temp File");
 registry.register(trackedResource, { name: trackedResource.name, id: 1 });
-
 
 // ============================================================================
 // 3. TYPED OBJECT POOLING
@@ -131,7 +129,7 @@ class MemoryPool<T extends Resettable> {
     if (this.available.length > 0) {
       // pop() returns T | undefined; guard instead of non-null assertion
       const pooled = this.available.pop();
-      if (!pooled) throw new Error('pool unexpectedly empty');
+      if (!pooled) throw new Error("pool unexpectedly empty");
       obj = pooled;
     } else {
       obj = this.factory();
@@ -152,7 +150,7 @@ class MemoryPool<T extends Resettable> {
     return {
       available: this.available.length,
       inUse: this.inUse.size,
-      total: this.available.length + this.inUse.size
+      total: this.available.length + this.inUse.size,
     };
   }
 }
@@ -181,7 +179,6 @@ console.log("After acquire stats:", bufferPool.stats);
 bufferPool.release(buf1);
 console.log("After release stats:", bufferPool.stats);
 
-
 // ============================================================================
 // 4. TYPED ARRAYS WITH STRONG TYPING
 // ============================================================================
@@ -200,13 +197,20 @@ const buffers = {
   float32: new Float32Array(100),
   float64: new Float64Array(100),
   bigInt64: new BigInt64Array(100),
-  bigUint64: new BigUint64Array(100)
+  bigUint64: new BigUint64Array(100),
 };
 
 // TypeScript: Generic function for typed arrays
 // Note: Use a union of typed array types since there is no single TypedArray type
-type TypedArrayLike = Int8Array | Uint8Array | Int16Array | Uint16Array |
-  Int32Array | Uint32Array | Float32Array | Float64Array;
+type TypedArrayLike =
+  | Int8Array
+  | Uint8Array
+  | Int16Array
+  | Uint16Array
+  | Int32Array
+  | Uint32Array
+  | Float32Array
+  | Float64Array;
 
 function processTypedArray<T extends TypedArrayLike>(
   array: T,
@@ -230,7 +234,6 @@ view.setFloat64(8, Math.PI, true);
 console.log("DataView int32:", view.getInt32(0, true));
 console.log("DataView float64:", view.getFloat64(8, true));
 
-
 // ============================================================================
 // 5. BRANDED TYPES FOR OBJECT TRACKING
 // ============================================================================
@@ -240,25 +243,24 @@ console.log("\n=== Branded Types for Object Tracking ===");
 // TypeScript: Branded types for object identity
 type ManagedObject = object & { readonly __brand: unique symbol };
 
-const ManagedObjectSymbol = Symbol('ManagedObject');
+const ManagedObjectSymbol = Symbol("ManagedObject");
 
 function createManaged<T extends object>(obj: T): T & ManagedObject {
-  return Object.defineProperty(obj, '__brand', {
+  return Object.defineProperty(obj, "__brand", {
     value: ManagedObjectSymbol,
-    enumerable: false
+    enumerable: false,
   }) as T & ManagedObject;
 }
 
 function isManaged(obj: object): obj is ManagedObject {
-  return '__brand' in obj;
+  return "__brand" in obj;
 }
 
-const tracked = createManaged({ id: 1, data: 'test' });
-const untracked = { id: 2, data: 'test' };
+const tracked = createManaged({ id: 1, data: "test" });
+const untracked = { id: 2, data: "test" };
 
 console.log("isManaged(tracked):", isManaged(tracked));
 console.log("isManaged(untracked):", isManaged(untracked));
-
 
 // ============================================================================
 // 6. TYPED MEMORY USAGE MONITORING
@@ -284,10 +286,10 @@ class MemoryTracker {
       heapUsed: 0,
       heapTotal: 0,
       external: 0,
-      arrayBuffers: 0
+      arrayBuffers: 0,
     };
 
-    if (typeof process !== 'undefined' && process.memoryUsage) {
+    if (typeof process !== "undefined" && process.memoryUsage) {
       const usage = process.memoryUsage();
       snapshot.heapUsed = usage.heapUsed;
       snapshot.heapTotal = usage.heapTotal;
@@ -317,7 +319,6 @@ const largeArray = new Array(1000000).fill(0);
 const snapshot = tracker.takeSnapshot();
 console.log("Memory snapshot taken at:", snapshot.timestamp);
 
-
 // ============================================================================
 // 7. DISCRIMINATED UNIONS FOR OBJECT TYPES
 // ============================================================================
@@ -326,9 +327,9 @@ console.log("\n=== Discriminated Unions for Object Types ===");
 
 // TypeScript: Discriminated unions for different object types
 type ResourceType =
-  | { type: 'buffer'; buffer: ArrayBuffer; size: number }
-  | { type: 'canvas'; canvas: object; width: number; height: number }
-  | { type: 'worker'; worker: object; url: string };
+  | { type: "buffer"; buffer: ArrayBuffer; size: number }
+  | { type: "canvas"; canvas: object; width: number; height: number }
+  | { type: "worker"; worker: object; url: string };
 
 class ResourceManager {
   private readonly resources = new Map<number, ResourceType>();
@@ -344,13 +345,13 @@ class ResourceManager {
     let total = 0;
     for (const resource of this.resources.values()) {
       switch (resource.type) {
-        case 'buffer':
+        case "buffer":
           total += resource.size;
           break;
-        case 'canvas':
+        case "canvas":
           total += resource.width * resource.height * 4;
           break;
-        case 'worker':
+        case "worker":
           total += 1024;
           break;
       }
@@ -360,10 +361,9 @@ class ResourceManager {
 }
 
 const manager = new ResourceManager();
-manager.add({ type: 'buffer', buffer: new ArrayBuffer(1024), size: 1024 });
-manager.add({ type: 'canvas', canvas: {}, width: 100, height: 100 });
+manager.add({ type: "buffer", buffer: new ArrayBuffer(1024), size: 1024 });
+manager.add({ type: "canvas", canvas: {}, width: 100, height: 100 });
 console.log("Total estimated memory:", manager.getTotalSize());
-
 
 // ============================================================================
 // 8. TYPED MEMORY LEAK PATTERNS
@@ -404,7 +404,10 @@ class TypedEventEmitter {
 
     const listeners = this.listeners.get(event)!;
     if (callback) {
-      this.listeners.set(event, listeners.filter(l => l.callback !== callback));
+      this.listeners.set(
+        event,
+        listeners.filter(l => l.callback !== callback)
+      );
     } else {
       this.listeners.set(event, []);
     }
@@ -422,14 +425,16 @@ class TypedEventEmitter {
 }
 
 const typedEmitter = new TypedEventEmitter();
-const cleanup = typedEmitter.on('data', (data) => console.log('Received:', data));
-typedEmitter.emit('data', 'test');
+const cleanup = typedEmitter.on("data", data => console.log("Received:", data));
+typedEmitter.emit("data", "test");
 cleanup(); // Properly remove listener
 
 // TypeScript: Type-safe timer management
 class TimerManager {
-  private readonly timers: Map<number, ReturnType<typeof setTimeout>> = new Map();
-  private readonly intervals: Map<number, ReturnType<typeof setInterval>> = new Map();
+  private readonly timers: Map<number, ReturnType<typeof setTimeout>> =
+    new Map();
+  private readonly intervals: Map<number, ReturnType<typeof setInterval>> =
+    new Map();
   private nextId = 0;
 
   setTimeout(callback: () => void, delay: number): number {
@@ -475,15 +480,14 @@ class TimerManager {
   get stats(): { timeouts: number; intervals: number } {
     return {
       timeouts: this.timers.size,
-      intervals: this.intervals.size
+      intervals: this.intervals.size,
     };
   }
 }
 
 const timerManager = new TimerManager();
-const timerId = timerManager.setTimeout(() => console.log('Timer fired'), 1000);
-console.log('Active timers:', timerManager.stats);
-
+const timerId = timerManager.setTimeout(() => console.log("Timer fired"), 1000);
+console.log("Active timers:", timerManager.stats);
 
 // ============================================================================
 // 9. TYPED GARBAGE COLLECTION CONCEPTS
@@ -518,7 +522,9 @@ class WeakCache<K extends object, V> implements GCFriendlyCache<K, V> {
   clear(): void {
     // WeakMap cannot be cleared or iterated; throw rather than silently no-op
     // (callers must drop all key references and let GC reclaim entries).
-    throw new Error("WeakCache.clear() is unsupported: WeakMap is not iterable");
+    throw new Error(
+      "WeakCache.clear() is unsupported: WeakMap is not iterable"
+    );
   }
 }
 
@@ -548,23 +554,22 @@ class TypedMemoryMonitor {
       heapUsedMB: usage.heapUsed / 1024 / 1024,
       heapTotalMB: usage.heapTotal / 1024 / 1024,
       externalMB: usage.external / 1024 / 1024,
-      arrayBuffersMB: usage.arrayBuffers / 1024 / 1024
+      arrayBuffersMB: usage.arrayBuffers / 1024 / 1024,
     };
   }
 
-  checkThresholds(): 'ok' | 'warn' | 'error' {
+  checkThresholds(): "ok" | "warn" | "error" {
     const stats = this.getStats();
-    if (stats.heapUsedMB > this.thresholds.errorMB) return 'error';
-    if (stats.heapUsedMB > this.thresholds.warnMB) return 'warn';
-    return 'ok';
+    if (stats.heapUsedMB > this.thresholds.errorMB) return "error";
+    if (stats.heapUsedMB > this.thresholds.warnMB) return "warn";
+    return "ok";
   }
 }
 
 const monitor = new TypedMemoryMonitor({ warnMB: 50, errorMB: 200 });
 const memStats = monitor.getStats();
-console.log('Memory stats:', memStats);
-console.log('Threshold status:', monitor.checkThresholds());
-
+console.log("Memory stats:", memStats);
+console.log("Threshold status:", monitor.checkThresholds());
 
 // ============================================================================
 // 10. TYPED LARGE DATA HANDLING
@@ -617,15 +622,14 @@ interface StreamItem {
 }
 
 const dataStream = typedStreamGenerator<StreamItem>(
-  (i) => ({ id: i, timestamp: Date.now(), value: `item-${i}` }),
+  i => ({ id: i, timestamp: Date.now(), value: `item-${i}` }),
   10
 );
 
-console.log('Streaming typed data:');
+console.log("Streaming typed data:");
 for (const item of dataStream) {
   console.log(`  Item ${item.id}: ${item.value}`);
 }
-
 
 // ============================================================================
 // SUMMARY

@@ -68,7 +68,7 @@ function createUser(name, id) {
   return {
     id,
     name,
-    active: true
+    active: true,
   };
 }
 
@@ -108,7 +108,9 @@ console.log("4. Can gradually adopt TypeScript");
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
-console.log("\n=== Decorators (Stage 2.7 proposal - not current standard) ===\n");
+console.log(
+  "\n=== Decorators (Stage 2.7 proposal - not current standard) ===\n"
+);
 
 // Decorators are a TC39 Stage 2.7 proposal (as of 2026-06, not yet part of the ECMAScript standard).
 // TS 5.0+ already supports it (experimentalDecorators: false); Babel 7.21+ supports it.
@@ -142,7 +144,7 @@ const obj = {
   age: 30,
   greet() {
     return `Hello, ${this.name}!`;
-  }
+  },
 };
 
 // Reflect.get - Get property value
@@ -192,7 +194,7 @@ console.log("\n=== Proxy Object (ES6) ===\n");
 // which can intercept and redefine fundamental operations
 
 const target = {
-  message: "Hello"
+  message: "Hello",
 };
 
 // Basic proxy with get trap
@@ -204,7 +206,7 @@ const proxy = new Proxy(target, {
   set(target, property, value, receiver) {
     console.log(`Setting property: ${property} = ${value}`);
     return Reflect.set(target, property, value, receiver);
-  }
+  },
 });
 
 console.log("proxy.message:", proxy.message);
@@ -221,7 +223,7 @@ const validator = {
     }
     target[property] = value;
     return true;
-  }
+  },
 };
 
 const personValidator = new Proxy({}, validator);
@@ -262,12 +264,15 @@ console.log("KEY === ANOTHER_KEY:", KEY === ANOTHER_KEY); // false
 // Using symbols as object keys
 const objWithSymbols = {
   [KEY]: "secret value",
-  public: "public value"
+  public: "public value",
 };
 
 console.log("objWithSymbols[KEY]:", objWithSymbols[KEY]);
 console.log("Object.keys(objWithSymbols):", Object.keys(objWithSymbols));
-console.log("Reflect.ownKeys(objWithSymbols):", Reflect.ownKeys(objWithSymbols));
+console.log(
+  "Reflect.ownKeys(objWithSymbols):",
+  Reflect.ownKeys(objWithSymbols)
+);
 
 // Well-known symbols
 console.log("\nWell-known symbols:");
@@ -276,8 +281,12 @@ console.log("Symbol.asyncIterator - Async iterator");
 console.log("Symbol.hasInstance - instanceof behavior");
 console.log("Symbol.toStringTag - Object.prototype.toString()");
 console.log("Symbol.toPrimitive - Convert to primitive");
-console.log("Symbol.dispose - Explicit resource management (ES2027, Stage 4 May 2025)");
-console.log("Symbol.asyncDispose - Async resource management (ES2027, Stage 4 May 2025)");
+console.log(
+  "Symbol.dispose - Explicit resource management (ES2027, Stage 4 May 2025)"
+);
+console.log(
+  "Symbol.asyncDispose - Async resource management (ES2027, Stage 4 May 2025)"
+);
 
 // Example: Symbol.toStringTag
 class MyClass {
@@ -285,8 +294,10 @@ class MyClass {
     return "MyClass";
   }
 }
-console.log("Object.prototype.toString.call(new MyClass()):",
-  Object.prototype.toString.call(new MyClass()));
+console.log(
+  "Object.prototype.toString.call(new MyClass()):",
+  Object.prototype.toString.call(new MyClass())
+);
 
 // ============================================
 // Section 6: Type Coercion and Type Checking
@@ -304,7 +315,7 @@ console.log("typeof undefined:", typeof undefined);
 console.log("typeof null:", typeof null); // "object" (historical bug!)
 console.log("typeof {}:", typeof {});
 console.log("typeof []:", typeof []);
-console.log("typeof function(){}:", typeof function(){});
+console.log("typeof function(){}:", typeof function () {});
 
 // Better type checking
 function getType(value) {
@@ -431,7 +442,9 @@ console.log("8. Reflect vs Object method differences");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 24.1-function-composition-ts-comparison.ts - Function composition TS");
+console.log(
+  "📘 24.1-function-composition-ts-comparison.ts - Function composition TS"
+);
 console.log("📘 23-proxy-reflect-ts-comparison.ts - Proxy TS comparison");
 console.log("📘 48-security.js - Type-safe security");
 

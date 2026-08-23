@@ -250,7 +250,7 @@ async function sequentialVsParallel() {
     const [post1, post2, post3] = await Promise.all([
       fetch(`${API_BASE}/posts/1`).then(r => r.json()),
       fetch(`${API_BASE}/posts/2`).then(r => r.json()),
-      fetch(`${API_BASE}/posts/3`).then(r => r.json())
+      fetch(`${API_BASE}/posts/3`).then(r => r.json()),
     ]);
 
     const endPar = Date.now();
@@ -395,9 +395,15 @@ console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promise fundamentals and Promise.all/race");
 console.log("📘 31-async-await.js - Async/await syntax and error handling");
 console.log("📘 33.1-fetch-basics.js - Fetch basics and request methods");
-console.log("📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController");
-console.log("📘 33.4-fetch-streams-advanced.js - Stream API and common pitfalls");
-console.log("📘 34-async-error-handling.js - Circuit breaker and retry patterns");
+console.log(
+  "📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController"
+);
+console.log(
+  "📘 33.4-fetch-streams-advanced.js - Stream API and common pitfalls"
+);
+console.log(
+  "📘 34-async-error-handling.js - Circuit breaker and retry patterns"
+);
 
 // ============================================
 // TypeScript Comparison

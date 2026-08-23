@@ -214,7 +214,7 @@ console.log("\n?? cannot mix with || / && (SyntaxError without parentheses):");
 try {
   new Function('null || undefined ?? "foo"')();
 } catch (e) {
-  console.log("null || undefined ?? \"foo\" →", e.name + ":", e.message); // SyntaxError
+  console.log('null || undefined ?? "foo" →', e.name + ":", e.message); // SyntaxError
 }
 
 // Correct: wrap the || subexpression in parentheses first, then ??
@@ -398,8 +398,8 @@ console.log("\nOperator Precedence:");
 console.log("2 + 3 * 4:", 2 + 3 * 4); // 14 (not 20, * before +)
 console.log("(2 + 3) * 4:", (2 + 3) * 4); // 20 (parentheses first)
 console.log("10 - 5 - 2:", 10 - 5 - 2); // 3 (left-to-right)
-console.log("2 ** 3 ** 2:", 2 ** 3 ** 2); // 512 (right-to-left for **)
-console.log("true || false && false:", true || false && false); // true (&& before ||)
+console.log("2 ** 3 ** 2:", 2 ** (3 ** 2)); // 512 (right-to-left for **)
+console.log("true || false && false:", true || (false && false)); // true (&& before ||)
 console.log("(true || false) && false:", (true || false) && false); // false
 
 // ============================================
@@ -431,7 +431,10 @@ console.log("[] instanceof Array:", [] instanceof Array); // true
 console.log("{} instanceof Object:", {} instanceof Object); // true
 console.log("[] instanceof Object:", [] instanceof Object); // true (Array extends Object)
 console.log("'hello' instanceof String:", "hello" instanceof String); // false (primitive)
-console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
+console.log(
+  "new String('hello') instanceof String:",
+  new String("hello") instanceof String
+); // true (object)
 
 // in operator - Check if property exists in object (ES1)
 // - Returns true if property exists in object or prototype chain
@@ -440,14 +443,14 @@ console.log("new String('hello') instanceof String:", new String("hello") instan
 // - Common pitfall: checks prototype chain, not just own properties
 console.log("\nin Operator:");
 const car = { make: "Toyota", model: "Camry" };
-console.log("'make' in car:", 'make' in car); // true
-console.log("'year' in car:", 'year' in car); // false
-console.log("'toString' in car:", 'toString' in car); // true (inherited from Object.prototype)
+console.log("'make' in car:", "make" in car); // true
+console.log("'year' in car:", "year" in car); // false
+console.log("'toString' in car:", "toString" in car); // true (inherited from Object.prototype)
 
-const arrIn = ['a', 'b', 'c'];
+const arrIn = ["a", "b", "c"];
 console.log("0 in arrIn:", 0 in arrIn); // true (index exists)
 console.log("3 in arrIn:", 3 in arrIn); // false (index doesn't exist)
-console.log("'length' in arrIn:", 'length' in arrIn); // true (array property)
+console.log("'length' in arrIn:", "length" in arrIn); // true (array property)
 
 // Use case: Safe property access
 function printProperty(obj, prop) {
@@ -457,8 +460,8 @@ function printProperty(obj, prop) {
     console.log(`${prop} does not exist`);
   }
 }
-printProperty(car, 'make'); // "make: Toyota"
-printProperty(car, 'year'); // "year does not exist"
+printProperty(car, "make"); // "make: Toyota"
+printProperty(car, "year"); // "year does not exist"
 
 // ============================================
 // 9. Spread and Rest Operators
@@ -548,11 +551,11 @@ const user = {
   name: "Alice",
   address: {
     city: "NYC",
-    zip: "10001"
+    zip: "10001",
   },
-  getEmail: function() {
+  getEmail: function () {
     return "alice@example.com";
-  }
+  },
 };
 
 // Safe property access
@@ -573,7 +576,7 @@ console.log("nullArr?.[0]:", nullArr?.[0]); // undefined (no error!)
 
 // Edge case: Optional chaining with function calls
 const obj3 = {
-  method: null
+  method: null,
 };
 console.log("obj3.method?.():", obj3.method?.()); // undefined (method is null)
 // console.log("obj3.method():", obj3.method()); // ❌ Error: obj3.method is not a function
@@ -592,12 +595,12 @@ console.log("\nthis Keyword:");
 
 const person = {
   name: "Bob",
-  greet: function() {
+  greet: function () {
     console.log(`Hello, I'm ${this.name}`);
   },
   greetArrow: () => {
     console.log(`Arrow function this:`, this); // inherits from outer scope
-  }
+  },
 };
 
 person.greet(); // "Hello, I'm Bob" (this = person)
@@ -630,7 +633,7 @@ class Animal {
   constructor(name) {
     this.name = name;
   }
-  
+
   speak() {
     return `${this.name} makes a sound`;
   }
@@ -641,7 +644,7 @@ class Dog extends Animal {
     super(name); // Must call super() before using this
     this.breed = breed;
   }
-  
+
   speak() {
     const parentSpeak = super.speak(); // Call parent method
     return `${parentSpeak} and barks!`;
@@ -719,7 +722,10 @@ console.log("isNaN('hello'):", isNaN("hello")); // true (legacy, converts to num
 console.log("\nPitfall 2: Floating Point Precision");
 console.log("0.1 + 0.2:", 0.1 + 0.2); // 0.30000000000000004
 console.log("0.1 + 0.2 === 0.3:", 0.1 + 0.2 === 0.3); // false
-console.log("Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON:", Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON); // true
+console.log(
+  "Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON:",
+  Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON
+); // true
 console.log("0.3 - 0.2:", 0.3 - 0.2); // 0.09999999999999998
 console.log("0.3 - 0.1:", 0.3 - 0.1); // 0.19999999999999998
 // Best Practice: Use epsilon comparison for floating point equality, or work with integers
@@ -757,9 +763,9 @@ console.log("-1 >>> 0:", -1 >>> 0); // 4294967295 (converts to unsigned 32-bit)
 console.log("\nPitfall 6: Operator Precedence");
 console.log("2 + 3 * 4:", 2 + 3 * 4); // 14 (not 20, * before +)
 console.log("(2 + 3) * 4:", (2 + 3) * 4); // 20 (parentheses first)
-console.log("true || false && false:", true || false && false); // true (&& before ||)
+console.log("true || false && false:", true || (false && false)); // true (&& before ||)
 console.log("(true || false) && false:", (true || false) && false); // false
-console.log("2 ** 3 ** 2:", 2 ** 3 ** 2); // 512 (right-to-left: 2 ** (3 ** 2))
+console.log("2 ** 3 ** 2:", 2 ** (3 ** 2)); // 512 (right-to-left: 2 ** (3 ** 2))
 console.log("(2 ** 3) ** 2:", (2 ** 3) ** 2); // 64
 // Best Practice: Use parentheses for clarity, even if not strictly needed
 
@@ -797,7 +803,7 @@ console.log("false || true:", false || true); // true (false is falsy)
 console.log("\nPitfall 10: Optional Chaining with Function Calls");
 const optionalObj = {
   method: null,
-  validMethod: () => "success"
+  validMethod: () => "success",
 };
 console.log("optionalObj.method?.():", optionalObj.method?.()); // undefined (method is null)
 console.log("optionalObj.validMethod?.():", optionalObj.validMethod?.()); // "success"
@@ -827,7 +833,9 @@ console.log("\n=== Best Practices Summary ===");
 console.log("\nBest Practice: Use Strict Equality (=== and !==)");
 console.log("Always use === instead of ==");
 console.log("Always use !== instead of !=");
-console.log("Reason: Avoids unexpected type coercion and makes code more predictable");
+console.log(
+  "Reason: Avoids unexpected type coercion and makes code more predictable"
+);
 // Good: if (x === 5) { }
 // Bad:  if (x == 5) { }
 
@@ -855,7 +863,9 @@ console.log("Reason: Makes code more readable and prevents bugs");
 // Best Practice 5: Use parentheses for clarity
 console.log("\nBest Practice: Use Parentheses for Clarity");
 console.log("Add parentheses to make operator precedence explicit");
-console.log("Reason: Improves readability and prevents precedence-related bugs");
+console.log(
+  "Reason: Improves readability and prevents precedence-related bugs"
+);
 // Good: const result = (a + b) * c;
 // Bad:  const result = a + b * c; // unclear intent
 

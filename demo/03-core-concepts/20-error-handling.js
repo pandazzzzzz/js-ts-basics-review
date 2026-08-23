@@ -56,7 +56,7 @@ try {
   console.log("\nError details:");
   console.log("Name:", error.name); // "SyntaxError"
   console.log("Message:", error.message);
-  console.log("Stack:", error.stack.split('\n')[0]); // First line of stack trace
+  console.log("Stack:", error.stack.split("\n")[0]); // First line of stack trace
 }
 
 // finally block - Always executes (ES3)
@@ -86,11 +86,11 @@ function readFile(filename) {
   try {
     file = { name: filename, open: true }; // Simulated file
     console.log(`\nOpened file: ${filename}`);
-    
+
     if (filename === "missing.txt") {
       throw new Error("File not found");
     }
-    
+
     return `Contents of ${filename}`;
   } catch (error) {
     console.log("Error reading file:", error.message);
@@ -134,7 +134,7 @@ try {
 // Throwing different types (not recommended)
 function demonstrateThrowTypes() {
   console.log("\n=== Throwing Different Types ===");
-  
+
   // Throwing string (❌ Avoid)
   try {
     throw "This is a string error";
@@ -142,21 +142,21 @@ function demonstrateThrowTypes() {
     console.log("Caught string:", error);
     console.log("No stack trace available!");
   }
-  
+
   // Throwing number (❌ Avoid)
   try {
     throw 404;
   } catch (error) {
     console.log("Caught number:", error);
   }
-  
+
   // Throwing object (❌ Avoid)
   try {
     throw { code: 500, message: "Server error" };
   } catch (error) {
     console.log("Caught object:", error);
   }
-  
+
   // Throwing Error object (✅ Recommended)
   try {
     throw new Error("Proper error with stack trace");
@@ -170,7 +170,7 @@ demonstrateThrowTypes();
 
 // Conditional throwing
 function validateAge(age) {
-  if (typeof age !== 'number') {
+  if (typeof age !== "number") {
     throw new TypeError("Age must be a number");
   }
   if (age < 0) {
@@ -221,8 +221,16 @@ function attemptOperation(fn) {
     return null;
   }
 }
-console.log("attemptOperation with error:", attemptOperation(() => { throw new Error("fail"); })); // null
-console.log("attemptOperation success:", attemptOperation(() => "result")); // "result"
+console.log(
+  "attemptOperation with error:",
+  attemptOperation(() => {
+    throw new Error("fail");
+  })
+); // null
+console.log(
+  "attemptOperation success:",
+  attemptOperation(() => "result")
+); // "result"
 
 /*
  * verification:
@@ -234,10 +242,14 @@ console.log("attemptOperation success:", attemptOperation(() => "result")); // "
  */
 // Error.isError() (ES2026) — Reliable cross-realm Error checking
 console.log("\n=== Error.isError() (ES2026) ===");
-console.log("Error.isError(new Error()):", Error.isError?.(new Error()) ?? "not yet available");
+console.log(
+  "Error.isError(new Error()):",
+  Error.isError?.(new Error()) ?? "not yet available"
+);
 console.log("Error.isError({}):", Error.isError?.({}) ?? "not yet available");
-console.log("Note: Error.isError() requires Node.js 24.3+ (partial in 24.0-24.3) or browsers supporting ES2026");
-
+console.log(
+  "Note: Error.isError() requires Node.js 24.3+ (partial in 24.0-24.3) or browsers supporting ES2026"
+);
 
 // ============================================
 // 3. Built-in Error Types
@@ -278,7 +290,7 @@ try {
 // Manual TypeError
 try {
   function greet(name) {
-    if (typeof name !== 'string') {
+    if (typeof name !== "string") {
       throw new TypeError("Name must be a string");
     }
     return `Hello, ${name}!`;
@@ -303,7 +315,7 @@ try {
 // Manual ReferenceError
 try {
   function checkVariable(name) {
-    if (typeof window !== 'undefined' && !(name in window)) {
+    if (typeof window !== "undefined" && !(name in window)) {
       throw new ReferenceError(`${name} is not defined`);
     }
   }
@@ -334,7 +346,7 @@ try {
 // Manual SyntaxError
 try {
   function parseExpression(expr) {
-    if (!expr.includes('=')) {
+    if (!expr.includes("=")) {
       throw new SyntaxError("Expression must contain '='");
     }
   }
@@ -390,7 +402,7 @@ console.log("\n6. Other Error Types:");
 
 // URIError - Invalid URI handling
 try {
-  decodeURIComponent('%'); // Invalid URI component
+  decodeURIComponent("%"); // Invalid URI component
 } catch (error) {
   console.log("   URIError:", error.message);
 }
@@ -437,7 +449,7 @@ class DatabaseError extends Error {
     this.query = query;
     this.timestamp = new Date();
   }
-  
+
   toString() {
     return `${this.name} [${this.code}]: ${this.message}`;
   }
@@ -465,19 +477,19 @@ class HttpError extends Error {
     this.name = "HttpError";
     this.statusCode = statusCode;
   }
-  
+
   static badRequest(message = "Bad Request") {
     return new HttpError(400, message);
   }
-  
+
   static unauthorized(message = "Unauthorized") {
     return new HttpError(401, message);
   }
-  
+
   static notFound(message = "Not Found") {
     return new HttpError(404, message);
   }
-  
+
   static serverError(message = "Internal Server Error") {
     return new HttpError(500, message);
   }
@@ -524,7 +536,7 @@ class NotFoundError extends ApplicationError {
 // Using error hierarchy
 function handleError(error) {
   console.log("\nHandling error:");
-  
+
   if (error instanceof AuthenticationError) {
     console.log("→ Redirect to login");
   } else if (error instanceof AuthorizationError) {
@@ -651,7 +663,6 @@ asyncOperation((error, result) => {
 setTimeout(() => {
   console.log("\n=== Error Propagation Complete ===");
 }, 100);
-
 
 // ============================================
 // 6. Common Pitfalls & Best Practices
@@ -856,7 +867,6 @@ function validateInput(input) {
 // Note: throw stops execution, no return needed
 // But be aware of unreachable code
 
-
 console.log("\n=== Best Practices ===");
 
 // 1. Always use Error objects
@@ -904,7 +914,7 @@ try {
 // 4. Use specific error types
 console.log("\n4. Specific Error Types:");
 function withdraw(amount, balance) {
-  if (typeof amount !== 'number') {
+  if (typeof amount !== "number") {
     throw new TypeError("Amount must be a number");
   }
   if (amount < 0) {
@@ -987,9 +997,9 @@ function createUser(username, email, age) {
   // Validate all inputs at start
   if (!username) throw new Error("Username required");
   if (!email) throw new Error("Email required");
-  if (!email.includes('@')) throw new Error("Invalid email");
+  if (!email.includes("@")) throw new Error("Invalid email");
   if (age < 18) throw new Error("Must be 18+");
-  
+
   // Proceed with valid data
   return { username, email, age };
 }
@@ -1057,25 +1067,31 @@ class FormValidationError extends Error {
 
 function validateForm(formData) {
   const errors = [];
-  
+
   try {
     if (!formData.email) {
       throw new FormValidationError("email", "Email is required");
     }
-    if (!formData.email.includes('@')) {
+    if (!formData.email.includes("@")) {
       throw new FormValidationError("email", "Invalid email format");
     }
     if (!formData.password) {
       throw new FormValidationError("password", "Password is required");
     }
     if (formData.password.length < 8) {
-      throw new FormValidationError("password", "Password must be 8+ characters");
+      throw new FormValidationError(
+        "password",
+        "Password must be 8+ characters"
+      );
     }
-    
+
     return { valid: true, errors: [] };
   } catch (error) {
     if (error instanceof FormValidationError) {
-      return { valid: false, errors: [{ field: error.field, message: error.message }] };
+      return {
+        valid: false,
+        errors: [{ field: error.field, message: error.message }],
+      };
     }
     throw error;
   }
@@ -1094,11 +1110,11 @@ class ApiError extends Error {
     this.statusCode = statusCode;
     this.endpoint = endpoint;
   }
-  
+
   isClientError() {
     return this.statusCode >= 400 && this.statusCode < 500;
   }
-  
+
   isServerError() {
     return this.statusCode >= 500;
   }
@@ -1128,7 +1144,7 @@ try {
 console.log("\n3. Retry Logic:");
 function retryOperation(operation, maxRetries = 3) {
   let lastError;
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       console.log(`   Attempt ${attempt}/${maxRetries}`);
@@ -1136,9 +1152,11 @@ function retryOperation(operation, maxRetries = 3) {
     } catch (error) {
       lastError = error;
       console.log(`   Failed: ${error.message}`);
-      
+
       if (attempt === maxRetries) {
-        throw new Error(`Failed after ${maxRetries} attempts: ${error.message}`);
+        throw new Error(
+          `Failed after ${maxRetries} attempts: ${error.message}`
+        );
       }
     }
   }
@@ -1170,14 +1188,14 @@ class ResourceError extends Error {
 
 function useResource(resourceType) {
   const resource = { type: resourceType, acquired: true };
-  
+
   try {
     console.log(`   Acquired ${resourceType}`);
-    
+
     if (Math.random() > 0.5) {
       throw new ResourceError("Operation failed", resourceType);
     }
-    
+
     return "Success";
   } catch (error) {
     console.log(`   Error with ${resourceType}:`, error.message);
@@ -1193,7 +1211,6 @@ try {
 } catch (error) {
   console.log("   Handled at caller level");
 }
-
 
 // ============================================
 // 8. ASYNC ERROR HANDLING (BASIC)
@@ -1214,8 +1231,9 @@ console.log("\n=== 8. Async Error Handling (Basic) ===");
 
 // 8.1 Basic Promise error handling
 console.log("\nPromise error handling:");
-Promise.reject(new Error("Promise failed"))
-  .catch(error => console.log("  Caught:", error.message));
+Promise.reject(new Error("Promise failed")).catch(error =>
+  console.log("  Caught:", error.message)
+);
 
 // 8.2 async/await with try/catch
 async function basicAsyncError() {
@@ -1231,11 +1249,15 @@ basicAsyncError();
 async function saferAsyncHandling() {
   const results = await Promise.allSettled([
     Promise.resolve("Success"),
-    Promise.reject(new Error("Failed"))
+    Promise.reject(new Error("Failed")),
   ]);
 
   results.forEach((result, i) => {
-    console.log(`  ${i}:`, result.status, result.value || result.reason?.message);
+    console.log(
+      `  ${i}:`,
+      result.status,
+      result.value || result.reason?.message
+    );
   });
 }
 saferAsyncHandling();
@@ -1299,7 +1321,6 @@ try {
   console.log("  Root cause:", error.cause?.cause?.message);
 }
 
-
 // ============================================
 // 10. AGGREGATEERROR - MULTIPLE ERRORS
 // ============================================
@@ -1326,10 +1347,13 @@ console.log("\n=== 10. AggregateError Demo ===");
 const multipleErrors = [
   new Error("First error"),
   new Error("Second error"),
-  new Error("Third error")
+  new Error("Third error"),
 ];
 
-const aggregateErr = new AggregateError(multipleErrors, "Multiple operations failed");
+const aggregateErr = new AggregateError(
+  multipleErrors,
+  "Multiple operations failed"
+);
 
 console.log("\nAggregateError:");
 console.log("  Message:", aggregateErr.message);
@@ -1344,7 +1368,7 @@ console.log("\nPromise.any() produces AggregateError:");
 const promises = [
   Promise.reject(new Error("Failed 1")),
   Promise.reject(new Error("Failed 2")),
-  Promise.reject(new Error("Failed 3"))
+  Promise.reject(new Error("Failed 3")),
 ];
 
 Promise.any(promises)
@@ -1357,7 +1381,6 @@ Promise.any(promises)
       });
     }
   });
-
 
 // ============================================
 // 11. RETRY WITH BACKOFF
@@ -1409,7 +1432,6 @@ retry(flakyOperation, 5, 50)
   .then(result => console.log("  Final:", result))
   .catch(error => console.log("  All retries exhausted:", error.message));
 
-
 // ============================================
 // 12. GLOBAL ERROR HANDLING
 // ============================================
@@ -1425,8 +1447,8 @@ retry(flakyOperation, 5, 50)
 console.log("\n=== 12. Global Error Handling Demo ===");
 
 // Node.js unhandled rejection handler
-if (typeof process !== 'undefined') {
-  process.on('unhandledRejection', (reason, promise) => {
+if (typeof process !== "undefined") {
+  process.on("unhandledRejection", (reason, promise) => {
     console.log("  Unhandled Rejection:", reason);
   });
 }
@@ -1435,7 +1457,6 @@ console.log("\nGlobal handlers registered:");
 console.log("  process.on('unhandledRejection')");
 console.log("  process.on('uncaughtException')");
 console.log("  Always handle errors locally first!");
-
 
 // ============================================
 // Cross-references

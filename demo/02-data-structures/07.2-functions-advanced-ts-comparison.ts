@@ -75,7 +75,7 @@ function createCounter(): Counter {
     },
     getCount(): number {
       return count;
-    }
+    },
   };
 }
 
@@ -91,23 +91,23 @@ interface Data {
 }
 
 async function fetchData(): Promise<Data> {
-  console.log('Fetching data...');
+  console.log("Fetching data...");
   await new Promise(resolve => setTimeout(resolve, 10));
-  return { data: 'Sample data' };
+  return { data: "Sample data" };
 }
 
 async function processData(): Promise<Data> {
   try {
     const result = await fetchData();
-    console.log('Data received:', result);
+    console.log("Data received:", result);
     return result;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     throw error;
   }
 }
 
-processData().catch(err => console.error('Caught:', err));
+processData().catch(err => console.error("Caught:", err));
 
 // Example 4: Generator function types
 console.log("\n4. Generator function types:");
@@ -167,7 +167,7 @@ const simpleAdd: NumericFn = (a, b) => a + b;
 const simpleConcat: StringFn = (a, b) => a + b;
 
 console.log("  simpleAdd(1, 2):", simpleAdd(1, 2));
-console.log("  simpleConcat('a', 'b'):", simpleConcat('a', 'b'));
+console.log("  simpleConcat('a', 'b'):", simpleConcat("a", "b"));
 
 // Example 8: Type predicate for functions
 console.log("\n8. Type predicate:");

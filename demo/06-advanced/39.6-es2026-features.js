@@ -101,12 +101,14 @@ console.log("\n--- 2. Array.fromAsync() ---\n");
 // Array from an async iterable
 const asyncIterable = (async function* () {
   for (let i = 0; i < 5; i++) {
-    await new Promise((resolve) => setTimeout(resolve, 10 * i));
+    await new Promise(resolve => setTimeout(resolve, 10 * i));
     yield i;
   }
 })();
 
-Array.fromAsync(asyncIterable).then((array) => console.log("  MDN async iterable:", array));
+Array.fromAsync(asyncIterable).then(array =>
+  console.log("  MDN async iterable:", array)
+);
 // [0, 1, 2, 3, 4]
 
 // Array from a sync iterable
@@ -114,22 +116,26 @@ Array.fromAsync(
   new Map([
     [1, 2],
     [3, 4],
-  ]),
-).then((array) => console.log("  MDN sync iterable (Map):", array));
+  ])
+).then(array => console.log("  MDN sync iterable (Map):", array));
 // [[1, 2], [3, 4]]
 
 // Array from a sync iterable that yields promises
 Array.fromAsync(
-  new Set([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)]),
-).then((array) => console.log("  MDN Set of promises:", array));
+  new Set([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])
+).then(array => console.log("  MDN Set of promises:", array));
 // [1, 2, 3]
 
 // Array.fromAsync is equivalent to (but more concise than) for-await-of:
 //   const result = [];
 //   for await (const element of items) { result.push(element); }
 
-console.log("Array.fromAsync converts async iterables, promises, and array-like objects to arrays");
-console.log("Useful for processing streams, async generators, and collections of promises");
+console.log(
+  "Array.fromAsync converts async iterables, promises, and array-like objects to arrays"
+);
+console.log(
+  "Useful for processing streams, async generators, and collections of promises"
+);
 
 // ============================================
 // 3. Error.isError()
@@ -139,10 +145,13 @@ console.log("\n--- 3. Error.isError() ---\n");
 // Reliably check if a value is an Error object
 console.log("Error.isError(new Error()):", Error.isError(new Error())); // true
 console.log("Error.isError(new TypeError()):", Error.isError(new TypeError())); // true
-console.log("Error.isError({ name: 'Error', message: 'fake' }):", Error.isError({ name: 'Error', message: 'fake' })); // false
+console.log(
+  "Error.isError({ name: 'Error', message: 'fake' }):",
+  Error.isError({ name: "Error", message: "fake" })
+); // false
 console.log("Error.isError(null):", Error.isError(null)); // false
 console.log("Error.isError(undefined):", Error.isError(undefined)); // false
-console.log("Error.isError('string'):", Error.isError('string')); // false
+console.log("Error.isError('string'):", Error.isError("string")); // false
 console.log("Error.isError(42):", Error.isError(42)); // false
 
 // Works with cross-realm errors (from iframes, workers, other realms)
@@ -180,7 +189,9 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
  *   source: https://github.com/tc39/proposal-arraybuffer-base64
  */
 
-const data = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]); // "Hello World"
+const data = new Uint8Array([
+  72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100,
+]); // "Hello World"
 console.log("Original Uint8Array:", data);
 
 if (typeof data.toBase64 === "function") {
@@ -201,7 +212,9 @@ if (typeof data.toBase64 === "function") {
   const decodedUrl = Uint8Array.fromBase64(base64url, { urlSafe: true });
   console.log("fromBase64 URL-safe:", new TextDecoder().decode(decodedUrl)); // "Hello World"
 } else {
-  console.log("⚠️ Uint8Array.prototype.toBase64 / fromBase64 / toHex / fromHex are not available in this Node.js version");
+  console.log(
+    "⚠️ Uint8Array.prototype.toBase64 / fromBase64 / toHex / fromHex are not available in this Node.js version"
+  );
 }
 
 if (typeof data.toHex === "function") {
@@ -212,7 +225,9 @@ if (typeof data.toHex === "function") {
   console.log("fromHex():", decodedHex);
   console.log("Decoded hex to string:", new TextDecoder().decode(decodedHex)); // "Hello World"
 } else {
-  console.log("⚠️ Hex encoding methods also not available in this Node.js version");
+  console.log(
+    "⚠️ Hex encoding methods also not available in this Node.js version"
+  );
 }
 
 // ============================================
@@ -233,18 +248,18 @@ if (typeof new Map().upsert === "function") {
   // Update or insert a value in a Map atomically
   const map = new Map([
     ["a", 1],
-    ["b", 2]
+    ["b", 2],
   ]);
   console.log("Original map:", Object.fromEntries(map));
 
   // If key exists: update with update function, else insert with insert value
-  const aValue = map.upsert("a", 10, (oldValue) => oldValue * 2);
+  const aValue = map.upsert("a", 10, oldValue => oldValue * 2);
   console.log("\nupsert('a') - existing key:");
   console.log("Return value:", aValue); // 2 (old value 1 * 2)
   console.log("Map now:", Object.fromEntries(map)); // { a: 2, b: 2 }
 
   // If key doesn't exist: insert value
-  const cValue = map.upsert("c", 3, (oldValue) => oldValue * 2);
+  const cValue = map.upsert("c", 3, oldValue => oldValue * 2);
   console.log("\nupsert('c') - new key:");
   console.log("Return value:", cValue); // 3 (insert value)
   console.log("Map now:", Object.fromEntries(map)); // { a: 2, b: 2, c: 3 }
@@ -258,7 +273,9 @@ if (typeof new Map().upsert === "function") {
   console.log("\nWord counts:", Object.fromEntries(counts));
   // { hello: 3, world: 2, test: 1 }
 } else {
-  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
+  console.log(
+    "⚠️ Map.prototype.upsert is not available in this Node.js version"
+  );
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -326,8 +343,20 @@ const reviver = (key, value, { source }) => {
 const financialJSON = '{"price": 19.99, "quantity": 100}';
 const financialData = JSON.parse(financialJSON, reviver);
 console.log("\nFinancial data with preserved decimals:");
-console.log("price:", financialData.price, "(type:", typeof financialData.price, ")"); // "19.99" string
-console.log("quantity:", financialData.quantity, "(type:", typeof financialData.quantity, ")"); // 100 number
+console.log(
+  "price:",
+  financialData.price,
+  "(type:",
+  typeof financialData.price,
+  ")"
+); // "19.99" string
+console.log(
+  "quantity:",
+  financialData.quantity,
+  "(type:",
+  typeof financialData.quantity,
+  ")"
+); // 100 number
 
 // ============================================
 // 7. Iterator Sequencing (concat)
@@ -353,20 +382,29 @@ if (typeof Iterator.prototype.concat === "function") {
   console.log("Combined iterator:", [...combined]); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   // Works with any iterable, not just arrays
-  function* genA() { yield "a"; yield "b"; }
-  function* genB() { yield "c"; yield "d"; }
+  function* genA() {
+    yield "a";
+    yield "b";
+  }
+  function* genB() {
+    yield "c";
+    yield "d";
+  }
   const letters = genA().concat(genB(), ["e", "f"]);
   console.log("Combined generators and array:", [...letters]); // ["a", "b", "c", "d", "e", "f"]
 
   // Chaining with other iterator helpers
-  const result = [1, 2, 3].values()
+  const result = [1, 2, 3]
+    .values()
     .concat([4, 5, 6].values())
     .filter(n => n % 2 === 0)
     .map(n => n * 2)
     .toArray();
   console.log("\nChained concat with helpers:", result); // [4, 8, 12]
 } else {
-  console.log("⚠️ Iterator.prototype.concat is not available in this Node.js version");
+  console.log(
+    "⚠️ Iterator.prototype.concat is not available in this Node.js version"
+  );
 }
 
 // ============================================
@@ -403,7 +441,10 @@ if (typeof Uint8Array.fromBase64 === "function") {
 if (typeof new Map().upsert === "function") {
   let called = false;
   const m = new Map();
-  m.upsert("new-key", 0, () => { called = true; return 1; });
+  m.upsert("new-key", 0, () => {
+    called = true;
+    return 1;
+  });
   console.log("\nPitfall4: upsert for new key - update called:", called); // false (update not called)
 } else {
   console.log("\nPitfall4: Map.prototype.upsert not available in this runtime");
@@ -421,15 +462,31 @@ JSON.parse('"  test  "', (k, v, { source }) => {
 // ============================================
 console.log("\n--- 9. Best Practices ---\n");
 
-console.log("✅ Use Math.sumPrecise() for financial/scientific calculations requiring exact summation");
-console.log("✅ Use Array.fromAsync() to convert async iterables to arrays cleanly");
-console.log("✅ Use Error.isError() for reliable error detection, especially across realms");
-console.log("✅ Use Uint8Array base64/hex methods instead of manual btoa/atob conversions");
-console.log("✅ Use Map.upsert() for atomic update/insert operations (better than has+get+set)");
-console.log("✅ Use JSON.parse source access for parsing large numbers/decimals without precision loss");
+console.log(
+  "✅ Use Math.sumPrecise() for financial/scientific calculations requiring exact summation"
+);
+console.log(
+  "✅ Use Array.fromAsync() to convert async iterables to arrays cleanly"
+);
+console.log(
+  "✅ Use Error.isError() for reliable error detection, especially across realms"
+);
+console.log(
+  "✅ Use Uint8Array base64/hex methods instead of manual btoa/atob conversions"
+);
+console.log(
+  "✅ Use Map.upsert() for atomic update/insert operations (better than has+get+set)"
+);
+console.log(
+  "✅ Use JSON.parse source access for parsing large numbers/decimals without precision loss"
+);
 console.log("✅ Use Iterator.concat() to combine multiple iterators lazily");
-console.log("⚠️  Always handle exceptions from base64/hex decoding of untrusted input");
-console.log("⚠️  Remember that Math.sumPrecise() returns a Number, it just does intermediate steps precisely");
+console.log(
+  "⚠️  Always handle exceptions from base64/hex decoding of untrusted input"
+);
+console.log(
+  "⚠️  Remember that Math.sumPrecise() returns a Number, it just does intermediate steps precisely"
+);
 
 // ============================================
 // 10. Cross-references

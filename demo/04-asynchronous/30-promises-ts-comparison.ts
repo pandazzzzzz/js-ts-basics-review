@@ -14,7 +14,7 @@ export {};
 // });
 
 // TypeScript: Promise<T> generic type enforces resolved value type
-const typedPromise: Promise<number> = new Promise<number>((resolve) => {
+const typedPromise: Promise<number> = new Promise<number>(resolve => {
   resolve(42);
   // resolve("string"); // ❌ Error: Type 'string' is not assignable to type 'number'
 });
@@ -40,7 +40,10 @@ typedPromise.then(value => {
 // ============================================================================
 
 // TypeScript: Explicit return type for promise-returning functions
-function asyncOperation(value: number, shouldFail: boolean = false): Promise<number> {
+function asyncOperation(
+  value: number,
+  shouldFail: boolean = false
+): Promise<number> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldFail) {
@@ -101,14 +104,13 @@ console.log("\n=== Promise.all with Tuple Types ===");
 
 // TypeScript: Promise.allSettled returns typed settled results
 type SettledResult<T> =
-  | { status: "fulfilled"; value: T }
-  | { status: "rejected"; reason: unknown };
+  { status: "fulfilled"; value: T } | { status: "rejected"; reason: unknown };
 
 async function mixedPromises(): Promise<void> {
   const promises = [
     asyncOperation(1),
     asyncOperation(2, true), // Will fail
-    asyncOperation(3)
+    asyncOperation(3),
   ];
 
   const results = await Promise.allSettled(promises);
@@ -122,7 +124,9 @@ async function mixedPromises(): Promise<void> {
     } else {
       // result.reason is typed as unknown (must narrow to access properties)
       if (result.reason instanceof Error) {
-        console.log(`Promise ${index}: rejected with reason ${result.reason.message}`);
+        console.log(
+          `Promise ${index}: rejected with reason ${result.reason.message}`
+        );
       }
     }
   });
@@ -174,12 +178,14 @@ class TypedResult<T> implements MyPromiseLike<T> {
 
 console.log("\n=== Custom Promise Implementation ===");
 const customPromise = new TypedResult<number>(42);
-customPromise.then(value => {
-  console.log("Custom promise value:", value);
-  return value * 2;
-}).then(value => {
-  console.log("Chained value:", value);
-});
+customPromise
+  .then(value => {
+    console.log("Custom promise value:", value);
+    return value * 2;
+  })
+  .then(value => {
+    console.log("Chained value:", value);
+  });
 
 // ============================================================================
 // 6. ERROR HANDLING WITH TYPED CATCH
@@ -223,7 +229,9 @@ async function fetchWithTypedError(): Promise<void> {
   } catch (error: unknown) {
     if (error instanceof ApiError) {
       // TypeScript knows error has statusCode and endpoint properties
-      console.log(`API Error ${error.statusCode} at ${error.endpoint}: ${error.message}`);
+      console.log(
+        `API Error ${error.statusCode} at ${error.endpoint}: ${error.message}`
+      );
     }
   }
 }
@@ -290,12 +298,12 @@ async function fetchApi<T>(
     throw new ApiError(`HTTP ${response.status}`, response.status, url);
   }
 
-  const data = await response.json() as T;
+  const data = (await response.json()) as T;
 
   return {
     data,
     status: response.status,
-    message: "Success"
+    message: "Success",
   };
 }
 
@@ -399,7 +407,7 @@ interface IntermediateResult {
 Promise.resolve(5)
   .then((value: number): IntermediateResult => ({
     doubled: value * 2,
-    original: value
+    original: value,
   }))
   .then((result: IntermediateResult) => {
     // TypeScript provides autocomplete for result properties
@@ -414,7 +422,7 @@ Promise.resolve(5)
 // Promise.race - returns type of first settled promise
 const racePromises: Promise<number | string>[] = [
   Promise.resolve(42),
-  Promise.resolve("hello")
+  Promise.resolve("hello"),
 ];
 
 Promise.race(racePromises).then(result => {
@@ -426,16 +434,18 @@ Promise.race(racePromises).then(result => {
 const anyPromises = [
   Promise.reject(new Error("fail")),
   Promise.resolve(100),
-  Promise.resolve(200)
+  Promise.resolve(200),
 ];
 
-Promise.any(anyPromises).then(result => {
-  // result is typed as number (only fulfilled values)
-  console.log("Any result:", result);
-}).catch(error => {
-  // error is AggregateError when all promises reject
-  console.log("All rejected:", error.constructor.name);
-});
+Promise.any(anyPromises)
+  .then(result => {
+    // result is typed as number (only fulfilled values)
+    console.log("Any result:", result);
+  })
+  .catch(error => {
+    // error is AggregateError when all promises reject
+    console.log("All rejected:", error.constructor.name);
+  });
 
 console.log("\n=== Promise.race and Promise.any Types ===");
 
@@ -489,17 +499,23 @@ async function typedAllSettled(): Promise<void> {
   const results = await Promise.allSettled([
     Promise.resolve(1),
     Promise.reject(new Error("fail")),
-    Promise.resolve(3)
+    Promise.resolve(3),
   ]);
 
   const fulfilled = results.filter(isFulfilled);
   const rejected = results.filter(isRejected);
 
   // fulfilled has type PromiseFulfilledResult<number>[]
-  console.log("Fulfilled values:", fulfilled.map(r => r.value));
+  console.log(
+    "Fulfilled values:",
+    fulfilled.map(r => r.value)
+  );
 
   // rejected has type PromiseRejectedResult[]
-  console.log("Rejected reasons:", rejected.map(r => r.reason));
+  console.log(
+    "Rejected reasons:",
+    rejected.map(r => r.reason)
+  );
 }
 
 console.log("\n=== Type Guards with Promises ===");

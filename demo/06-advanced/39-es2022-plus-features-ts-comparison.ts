@@ -35,7 +35,9 @@ Rationale:
 // ============================================
 
 console.log("\n=== Quick Reference ===");
-console.log("Open individual comparison files for detailed TypeScript coverage.");
+console.log(
+  "Open individual comparison files for detailed TypeScript coverage."
+);
 console.log("File naming matches the corresponding JS demo files.");
 
 // ============================================

@@ -46,7 +46,7 @@ const mapFromArray = new Map([
   ["name", "Alice"],
   ["age", 30],
   [1, "one"],
-  [true, "boolean"]
+  [true, "boolean"],
 ]);
 console.log("\nCreating Map from Array:");
 console.log("  mapFromArray:", Object.fromEntries(mapFromArray.entries()));
@@ -63,10 +63,7 @@ console.log("\nset() Method:");
 console.log("  userMap:", Object.fromEntries(userMap.entries()));
 
 // Chaining
-const chainedMap = new Map()
-  .set("a", 1)
-  .set("b", 2)
-  .set("c", 3);
+const chainedMap = new Map().set("a", 1).set("b", 2).set("c", 3);
 console.log("  Chaining:", Object.fromEntries(chainedMap.entries()));
 
 // get(key) - Get value by key
@@ -86,14 +83,21 @@ userMap.delete("city");
 console.log("  After deleting city:", Object.fromEntries(userMap.entries()));
 
 // clear() - Clear all entries
-const tempMap = new Map([["a", 1], ["b", 2]]);
+const tempMap = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 console.log("\nclear() Method:");
 console.log("  size before clear:", tempMap.size); // 2
 tempMap.clear();
 console.log("  size after clear:", tempMap.size); // 0
 
 // size property - Get number of key-value pairs
-const sizeMap = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const sizeMap = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
+]);
 console.log("\nsize Property:");
 console.log("  size:", sizeMap.size); // 3
 
@@ -104,7 +108,7 @@ console.log("  size:", sizeMap.size); // 3
 const iterMap = new Map([
   ["mon", "Monday"],
   ["tue", "Tuesday"],
-  ["wed", "Wednesday"]
+  ["wed", "Wednesday"],
 ]);
 
 // keys() - Iterate over keys
@@ -237,7 +241,7 @@ for (const entry of iterSet.entries()) {
 
 // forEach()
 console.log("\nSet Iteration - forEach():");
-iterSet.forEach((value) => {
+iterSet.forEach(value => {
   console.log(`  ${value}`);
 });
 
@@ -246,7 +250,7 @@ console.log("\nSet Conversion:");
 const setArray = [...iterSet];
 console.log("  Set -> Array:", setArray);
 
-const setObj = Object.fromEntries([...iterSet].map((item) => [item, true]));
+const setObj = Object.fromEntries([...iterSet].map(item => [item, true]));
 console.log("  Set -> Object:", setObj);
 
 // Array deduplication utility function
@@ -416,7 +420,9 @@ console.log("\nWeakMap/WeakSet vs Map/Set:");
 console.log("  Iterable: Map✓ Set✓ WeakMap✗ WeakSet✗");
 console.log("  size property: Map✓ Set✓ WeakMap✗ WeakSet✗");
 console.log("  clear(): Map✓ Set✓ WeakMap✗ WeakSet✗");
-console.log("  Key/Value types: any/any Map, any Set, object/symbol WeakMap, object/symbol WeakSet (ES2023+)");
+console.log(
+  "  Key/Value types: any/any Map, any Set, object/symbol WeakMap, object/symbol WeakSet (ES2023+)"
+);
 console.log("  Weak reference: Map✗ Set✗ WeakMap✓ WeakSet✓");
 
 // ============================================
@@ -428,7 +434,7 @@ console.log("\nPractical Use Cases:");
 // Use case 1: Caching (Memoization)
 function createMemoizedFn(fn) {
   const cache = new Map();
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log("    [Cache hit]");
@@ -487,11 +493,11 @@ console.log("\nSet Operations:");
 console.log("  Union A∪B:", [...union]); // [1, 2, 3, 4, 5, 6, 7, 8]
 
 // Intersection
-const intersection = new Set([...setA].filter((x) => setB.has(x)));
+const intersection = new Set([...setA].filter(x => setB.has(x)));
 console.log("  Intersection A∩B:", [...intersection]); // [4, 5]
 
 // Difference (A - B)
-const difference = new Set([...setA].filter((x) => !setB.has(x)));
+const difference = new Set([...setA].filter(x => !setB.has(x)));
 console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
 
 // ES2025 Set Methods (Supported in modern engines)
@@ -507,25 +513,25 @@ console.log("\nES2025 Set Methods:");
 
 // First, polyfill if not available (per MDN: coerce `other` to a Set to support set-like objects)
 if (typeof Set.prototype.union !== "function") {
-  Set.prototype.union = function(other) {
+  Set.prototype.union = function (other) {
     other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) result.add(item);
     return result;
   };
-  Set.prototype.intersection = function(other) {
+  Set.prototype.intersection = function (other) {
     other = new Set(other); // set-like or iterable
     const result = new Set();
     for (const item of other) if (this.has(item)) result.add(item);
     return result;
   };
-  Set.prototype.difference = function(other) {
+  Set.prototype.difference = function (other) {
     other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) result.delete(item);
     return result;
   };
-  Set.prototype.symmetricDifference = function(other) {
+  Set.prototype.symmetricDifference = function (other) {
     other = new Set(other); // set-like or iterable
     const result = new Set(this);
     for (const item of other) {
@@ -534,17 +540,17 @@ if (typeof Set.prototype.union !== "function") {
     }
     return result;
   };
-  Set.prototype.isSubsetOf = function(other) {
+  Set.prototype.isSubsetOf = function (other) {
     other = new Set(other); // set-like or iterable
     for (const item of this) if (!other.has(item)) return false;
     return true;
   };
-  Set.prototype.isSupersetOf = function(other) {
+  Set.prototype.isSupersetOf = function (other) {
     other = new Set(other); // set-like or iterable
     for (const item of other) if (!this.has(item)) return false;
     return true;
   };
-  Set.prototype.isDisjointFrom = function(other) {
+  Set.prototype.isDisjointFrom = function (other) {
     other = new Set(other); // set-like or iterable
     for (const item of this) if (other.has(item)) return false;
     return true;
@@ -601,7 +607,7 @@ const scores = [90, 85, 95, 70, 80, 65];
 try {
   if (typeof Map.groupBy === "function") {
     const scoresGrouped = Map.groupBy(scores, score =>
-      score >= 85 ? 'A' : score >= 70 ? 'B' : 'C'
+      score >= 85 ? "A" : score >= 70 ? "B" : "C"
     );
     console.log("  Scores grouped by grade:", scoresGrouped);
   } else {
@@ -646,10 +652,16 @@ try {
 }
 
 // Pitfall 4: JSON serialization
-const mapToJson = new Map([["a", 1], ["b", 2]]);
+const mapToJson = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 console.log("\n  Pitfall 4 - JSON serialization:");
 console.log("    JSON.stringify(Map):", JSON.stringify(mapToJson)); // {}
-console.log("    Correct: JSON.stringify(Object.fromEntries(map)):", JSON.stringify(Object.fromEntries(mapToJson)));
+console.log(
+  "    Correct: JSON.stringify(Object.fromEntries(map)):",
+  JSON.stringify(Object.fromEntries(mapToJson))
+);
 
 // Pitfall 5: Map key equality (SameValueZero algorithm)
 // - Map uses SameValueZero for key comparison
@@ -674,8 +686,12 @@ console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
 console.log("\nBest Practices:");
 console.log("  1. Use Map when keys are non-strings or order matters");
 console.log("  2. Use Set for uniqueness checks (faster than array.indexOf)");
-console.log("  3. Prefer Object.fromEntries() to convert Map back to plain object");
-console.log("  4. Use WeakMap/WeakSet for memory-safe caches and event listeners");
+console.log(
+  "  3. Prefer Object.fromEntries() to convert Map back to plain object"
+);
+console.log(
+  "  4. Use WeakMap/WeakSet for memory-safe caches and event listeners"
+);
 console.log("  5. Check Map.size/Set.size instead of .length (undefined)");
 console.log("  6. Use Set for de-duplicating arrays: [...new Set(arr)]");
 

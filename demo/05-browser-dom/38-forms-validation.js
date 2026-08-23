@@ -28,8 +28,10 @@ export {};
 
 console.log("=== Section 1: Form Element Access ===\n");
 
-if (typeof document !== 'undefined') {
-  console.log("✅ Browser environment detected, following code is executable:\n");
+if (typeof document !== "undefined") {
+  console.log(
+    "✅ Browser environment detected, following code is executable:\n"
+  );
 
   // 1.1 document.forms - Collection of all forms in page
   console.log("1. document.forms - Forms collection");
@@ -106,9 +108,10 @@ const fileInput = form.querySelector('input[type="file"]');
 fileInput.files;             // FileList object
 fileInput.files[0];          // First file
   `);
-
 } else {
-  console.log("⚠️ Non-browser environment, form access examples shown in code form");
+  console.log(
+    "⚠️ Non-browser environment, form access examples shown in code form"
+  );
 }
 
 // FormData API — Programmatic form data handling
@@ -149,7 +152,6 @@ console.log('has avatar after delete:', formData.has('avatar')); // false
 // - Automatically sets Content-Type to multipart/form-data with fetch
 // - Works with <form> elements for easy data extraction
 `);
-
 
 // 2. Form Events
 // submit: fires on form submission (button click or Enter); reset: clears form
@@ -634,7 +636,9 @@ selection.removeAllRanges();
 console.log("\n=== Best Practices & Summary ===\n");
 
 console.log("✅ DO:\n");
-console.log("1. Always do server-side validation (client-side validation can be bypassed）");
+console.log(
+  "1. Always do server-side validation (client-side validation can be bypassed）"
+);
 console.log("2. Use FormData object to collect form data");
 console.log("3. Provide clear error messages and guidance");
 console.log("4. Use debounce for real-time validation");
@@ -643,16 +647,26 @@ console.log("6. Test keyboard navigation and accessibility\n");
 
 console.log("❌ DON'T:\n");
 console.log("1. Don't rely solely on client-side validation");
-console.log("2. Don't show validation errors too early (wait for user to complete input）");
+console.log(
+  "2. Don't show validation errors too early (wait for user to complete input）"
+);
 console.log("3. Don't block UI during validation (async validation）");
 console.log("4. Don't forget to clear setCustomValidity errors");
 console.log("5. Don't use synchronous clipboard API (deprecated）\n");
 
 console.log("📚 Reference Documentation:\n");
-console.log("- MDN Forms: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms");
-console.log("- Constraint Validation: https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation");
-console.log("- Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API");
-console.log("- FormData: https://developer.mozilla.org/en-US/docs/Web/API/FormData\n");
+console.log(
+  "- MDN Forms: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms"
+);
+console.log(
+  "- Constraint Validation: https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation"
+);
+console.log(
+  "- Clipboard API: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API"
+);
+console.log(
+  "- FormData: https://developer.mozilla.org/en-US/docs/Web/API/FormData\n"
+);
 
 console.log("♿ Form Accessibility (ARIA):\n");
 console.log(`
@@ -691,13 +705,14 @@ input.setAttribute('autocomplete', 'email'); // Standardized values
 // Common: name, email, tel, address, cc-number, new-password, current-password
 `);
 
-
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 37-events.js - Event handling");
-console.log("📘 24.2-debounce-throttle.js - Debounce/throttle for real-time validation");
+console.log(
+  "📘 24.2-debounce-throttle.js - Debounce/throttle for real-time validation"
+);
 console.log("📘 43-storage-network.js - Storage and network");
 console.log("📘 48-security.js - Security and input validation");
 

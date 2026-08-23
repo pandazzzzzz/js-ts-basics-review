@@ -32,26 +32,30 @@ interface Product {
 }
 
 interface User extends Product {
-  role: 'admin' | 'editor' | 'viewer';
+  role: "admin" | "editor" | "viewer";
   permissions: string[];
 }
 
 class TypedUserFactory {
-  static createUser(type: User['role'], name: string): User {
+  static createUser(type: User["role"], name: string): User {
     const baseUser = { id: crypto.randomUUID(), name };
-    
+
     switch (type) {
-      case 'admin':
-        return { ...baseUser, role: 'admin', permissions: ['read', 'write', 'delete'] };
-      case 'editor':
-        return { ...baseUser, role: 'editor', permissions: ['read', 'write'] };
-      case 'viewer':
-        return { ...baseUser, role: 'viewer', permissions: ['read'] };
+      case "admin":
+        return {
+          ...baseUser,
+          role: "admin",
+          permissions: ["read", "write", "delete"],
+        };
+      case "editor":
+        return { ...baseUser, role: "editor", permissions: ["read", "write"] };
+      case "viewer":
+        return { ...baseUser, role: "viewer", permissions: ["read"] };
     }
   }
 }
 
-const admin: User = TypedUserFactory.createUser('admin', 'Alice');
+const admin: User = TypedUserFactory.createUser("admin", "Alice");
 console.log("Typed admin:", admin);
 
 // Abstract Factory with interfaces
@@ -74,14 +78,14 @@ class DarkThemeFactory implements UIFactory {
   createButton(): Button {
     return {
       render: () => console.log("🔘 Dark Button"),
-      onClick: (handler) => console.log("Dark button clicked")
+      onClick: handler => console.log("Dark button clicked"),
     };
   }
-  
+
   createInput(): Input {
     return {
       render: () => console.log("📝 Dark Input"),
-      getValue: () => ""
+      getValue: () => "",
     };
   }
 }
@@ -146,7 +150,7 @@ db1.insert({ id: 1, name: "Alice" });
 // Generic Singleton
 class GenericSingleton<T> {
   private static instances = new Map<string, any>();
-  
+
   static getInstance<T>(key: string, creator: () => T): T {
     if (!this.instances.has(key)) {
       this.instances.set(key, creator());
@@ -180,7 +184,10 @@ class TypedEventEmitter<T extends Record<string, any>> {
     this.events[event]!.push(listener);
   }
 
-  off<K extends keyof T>(event: K, listenerToRemove: (data: T[K]) => void): void {
+  off<K extends keyof T>(
+    event: K,
+    listenerToRemove: (data: T[K]) => void
+  ): void {
     if (!this.events[event]) return;
     this.events[event] = this.events[event]!.filter(
       listener => listener !== listenerToRemove
@@ -198,21 +205,21 @@ class TypedStockMarket extends TypedEventEmitter<EventMap> {
 
   updatePrice(symbol: string, price: number): void {
     this.prices.set(symbol, price);
-    this.emit('priceUpdate', { symbol, price });
+    this.emit("priceUpdate", { symbol, price });
   }
 }
 
 const market = new TypedStockMarket();
 
-market.on('priceUpdate', ({ symbol, price }) => {
+market.on("priceUpdate", ({ symbol, price }) => {
   console.log(`📊 ${symbol} is now $${price}`);
 });
 
-market.on('error', ({ message, code }) => {
+market.on("error", ({ message, code }) => {
   console.log(`❌ Error ${code}: ${message}`);
 });
 
-market.updatePrice('AAPL', 150);
+market.updatePrice("AAPL", 150);
 
 // ============================================
 // Section 4: Strategy Pattern - Interface-Based
@@ -228,7 +235,9 @@ class TypedCreditCardPayment implements PaymentStrategy {
   constructor(private cardNumber: string) {}
 
   pay(amount: number): void {
-    console.log(`💳 Paid $${amount} with card ending in ${this.cardNumber.slice(-4)}`);
+    console.log(
+      `💳 Paid $${amount} with card ending in ${this.cardNumber.slice(-4)}`
+    );
   }
 }
 
@@ -288,10 +297,10 @@ class SortStrategy<T> implements Strategy<T[], T[]> {
 console.log("\n=== Decorator Pattern - Metadata ===\n");
 
 // Class decorator
-function Singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
+function Singleton<T extends { new (...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
     static instance: any;
-    
+
     constructor(...args: any[]) {
       super(...args);
       const Class = this.constructor as any;
@@ -306,14 +315,14 @@ function Singleton<T extends { new(...args: any[]): {} }>(constructor: T) {
 // Method decorator
 function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
-  
-  descriptor.value = function(...args: any[]) {
+
+  descriptor.value = function (...args: any[]) {
     console.log(`📝 Calling ${propertyKey} with:`, args);
     const result = originalMethod.apply(this, args);
     console.log(`📝 Result:`, result);
     return result;
   };
-  
+
   return descriptor;
 }
 
@@ -321,7 +330,7 @@ function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
 function ReadOnly(target: any, propertyKey: string) {
   Object.defineProperty(target, propertyKey, {
     writable: false,
-    configurable: false
+    configurable: false,
   });
 }
 
@@ -353,7 +362,10 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function(this: any, ...args: Parameters<T>): ReturnType<T> {
+  descriptor.value = function (
+    this: any,
+    ...args: Parameters<T>
+  ): ReturnType<T> {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log("📦 Cache hit");
@@ -397,7 +409,10 @@ interface ModernPaymentGateway {
 }
 
 class OldPaymentSystem {
-  processPayment(amountInCents: number, currencyCode: string): LegacyPaymentResult {
+  processPayment(
+    amountInCents: number,
+    currencyCode: string
+  ): LegacyPaymentResult {
     console.log(`Paid ${amountInCents} ${currencyCode} via legacy system`);
     return { success: true, legacyId: "legacy_" + Date.now() };
   }
@@ -417,7 +432,10 @@ class PaymentAdapter implements ModernPaymentGateway {
 
 const oldSystem = new OldPaymentSystem();
 const adapter = new PaymentAdapter(oldSystem);
-console.log("Through typed adapter:", JSON.stringify(adapter.charge(9.99, "USD")));
+console.log(
+  "Through typed adapter:",
+  JSON.stringify(adapter.charge(9.99, "USD"))
+);
 
 // Functional adapter with generic types
 function createAdapter<TArgs extends any[], UArgs extends any[], R>(
@@ -436,11 +454,14 @@ interface Person {
   age: number;
 }
 
-const greetNew = createAdapter(
-  greetOld,
-  (p: Person): [string, number] => [p.name, p.age]
+const greetNew = createAdapter(greetOld, (p: Person): [string, number] => [
+  p.name,
+  p.age,
+]);
+console.log(
+  "\nFunctional typed adapter:",
+  greetNew({ name: "Alice", age: 30 })
 );
-console.log("\nFunctional typed adapter:", greetNew({ name: "Alice", age: 30 }));
 
 // ============================================
 // Section 7: Facade Pattern - Simplified Interface
@@ -450,17 +471,27 @@ console.log("\n=== Facade Pattern - Type Safety ===\n");
 
 // Subsystem components with proper types
 class CPU {
-  freeze(): string { return "CPU frozen"; }
-  jump(position: string): string { return `CPU jumping to ${position}`; }
-  execute(): string { return "CPU executing"; }
+  freeze(): string {
+    return "CPU frozen";
+  }
+  jump(position: string): string {
+    return `CPU jumping to ${position}`;
+  }
+  execute(): string {
+    return "CPU executing";
+  }
 }
 
 class Memory {
-  load(position: string, data: string): string { return `Memory loaded "${data}" at ${position}`; }
+  load(position: string, data: string): string {
+    return `Memory loaded "${data}" at ${position}`;
+  }
 }
 
 class HardDrive {
-  read(lba: string, size: number): string { return `HardDrive reading ${size} bytes from ${lba}`; }
+  read(lba: string, size: number): string {
+    return `HardDrive reading ${size} bytes from ${lba}`;
+  }
 }
 
 // Facade hides subsystem complexity behind a simple typed interface
@@ -513,15 +544,26 @@ interface Command {
 
 class CalculatorReceiver {
   value: number = 0;
-  add(n: number): void { this.value += n; }
-  subtract(n: number): void { this.value -= n; }
-  multiply(n: number): void { this.value *= n; }
-  divide(n: number): void { this.value /= n; }
+  add(n: number): void {
+    this.value += n;
+  }
+  subtract(n: number): void {
+    this.value -= n;
+  }
+  multiply(n: number): void {
+    this.value *= n;
+  }
+  divide(n: number): void {
+    this.value /= n;
+  }
 }
 
 // Each command satisfies the Command interface
 class AddCommand implements Command {
-  constructor(private calculator: CalculatorReceiver, private amount: number) {}
+  constructor(
+    private calculator: CalculatorReceiver,
+    private amount: number
+  ) {}
 
   execute(): number {
     this.calculator.add(this.amount);
@@ -535,7 +577,10 @@ class AddCommand implements Command {
 }
 
 class MultiplyCommand implements Command {
-  constructor(private calculator: CalculatorReceiver, private amount: number) {}
+  constructor(
+    private calculator: CalculatorReceiver,
+    private amount: number
+  ) {}
 
   execute(): number {
     this.calculator.multiply(this.amount);
@@ -681,16 +726,22 @@ class OrderMachine {
   transition(action: "pay" | "ship" | "deliver"): void {
     switch (this.state.status) {
       case "pending":
-        if (action === "pay") { this.state = { status: "paid" }; console.log("pending --pay--> paid"); }
-        else console.log(`Invalid transition: ${action} from pending`);
+        if (action === "pay") {
+          this.state = { status: "paid" };
+          console.log("pending --pay--> paid");
+        } else console.log(`Invalid transition: ${action} from pending`);
         break;
       case "paid":
-        if (action === "ship") { this.state = { status: "shipped" }; console.log("paid --ship--> shipped"); }
-        else console.log(`Invalid transition: ${action} from paid`);
+        if (action === "ship") {
+          this.state = { status: "shipped" };
+          console.log("paid --ship--> shipped");
+        } else console.log(`Invalid transition: ${action} from paid`);
         break;
       case "shipped":
-        if (action === "deliver") { this.state = { status: "delivered" }; console.log("shipped --deliver--> delivered"); }
-        else console.log(`Invalid transition: ${action} from shipped`);
+        if (action === "deliver") {
+          this.state = { status: "delivered" };
+          console.log("shipped --deliver--> delivered");
+        } else console.log(`Invalid transition: ${action} from shipped`);
         break;
       case "delivered":
         console.log("Order already delivered");
@@ -720,18 +771,30 @@ console.log("  Bad:  createUser(data: any): User");
 console.log("  Good: createUser<T extends User>(data: T): T");
 
 console.log("\n⚠️ Pitfall 2: Decorators add runtime indirection");
-console.log("  Each decorator wraps the original method; debug stack traces get longer");
-console.log("  Fix: Limit decorator depth; prefer composition for simple cases");
+console.log(
+  "  Each decorator wraps the original method; debug stack traces get longer"
+);
+console.log(
+  "  Fix: Limit decorator depth; prefer composition for simple cases"
+);
 
-console.log("\n⚠️ Pitfall 3: Singletons with private constructors can't be subclassed");
-console.log("  Fix: Use dependency injection instead of hard-coded singletons when testability matters");
+console.log(
+  "\n⚠️ Pitfall 3: Singletons with private constructors can't be subclassed"
+);
+console.log(
+  "  Fix: Use dependency injection instead of hard-coded singletons when testability matters"
+);
 
 console.log("\n⚠️ Pitfall 4: Over-engineering with patterns");
-console.log("  A simple object literal or closure is often enough; don't introduce patterns prematurely");
+console.log(
+  "  A simple object literal or closure is often enough; don't introduce patterns prematurely"
+);
 
 console.log("\n⚠️ Pitfall 5: Type assertions hiding bugs in adapters");
 console.log("  Bad:  return oldResult as ModernResult  // lies about shape");
-console.log("  Good: explicitly map each field, letting TS catch missing properties");
+console.log(
+  "  Good: explicitly map each field, letting TS catch missing properties"
+);
 
 // ============================================
 // Section 11: Best Practices (TypeScript-specific)
@@ -740,17 +803,35 @@ console.log("  Good: explicitly map each field, letting TS catch missing propert
 console.log("\n=== Best Practices (TypeScript) ===\n");
 
 console.log("✅ DO:");
-console.log("1. Define interfaces for every pattern's contract (Command, State, Strategy, etc.)");
-console.log("2. Use generics to make factories and adapters type-safe without casting");
-console.log("3. Use private constructors for singletons to enforce single-instance at compile time");
-console.log("4. Use discriminated unions for state machines — exhaustiveness checked by compiler");
-console.log("5. Prefer composition over inheritance; type composition via intersection types");
+console.log(
+  "1. Define interfaces for every pattern's contract (Command, State, Strategy, etc.)"
+);
+console.log(
+  "2. Use generics to make factories and adapters type-safe without casting"
+);
+console.log(
+  "3. Use private constructors for singletons to enforce single-instance at compile time"
+);
+console.log(
+  "4. Use discriminated unions for state machines — exhaustiveness checked by compiler"
+);
+console.log(
+  "5. Prefer composition over inheritance; type composition via intersection types"
+);
 
 console.log("\n❌ DON'T:");
-console.log("1. Don't use `any` in pattern implementations — it defeats the purpose of TS");
-console.log("2. Don't ignore type errors with `@ts-ignore` — fix the types instead");
-console.log("3. Don't overuse decorators; they add runtime overhead and complexity");
-console.log("4. Don't apply patterns blindly — let the problem drive the choice");
+console.log(
+  "1. Don't use `any` in pattern implementations — it defeats the purpose of TS"
+);
+console.log(
+  "2. Don't ignore type errors with `@ts-ignore` — fix the types instead"
+);
+console.log(
+  "3. Don't overuse decorators; they add runtime overhead and complexity"
+);
+console.log(
+  "4. Don't apply patterns blindly — let the problem drive the choice"
+);
 
 console.log("\n📊 Comparison:");
 console.log(`

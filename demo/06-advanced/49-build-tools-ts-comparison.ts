@@ -50,7 +50,7 @@ export default config;
 
 // Type-safe environment config
 interface BuildEnvironment {
-  mode: 'development' | 'production';
+  mode: "development" | "production";
   apiUrl: string;
   enableSourceMaps: boolean;
 }
@@ -59,7 +59,7 @@ function createWebpackConfig(env: BuildEnvironment) {
   console.log("Creating config for:", env.mode);
   return {
     mode: env.mode,
-    devtool: env.enableSourceMaps ? 'source-map' : false
+    devtool: env.enableSourceMaps ? "source-map" : false,
   };
 }
 
@@ -142,11 +142,11 @@ console.log("\n=== Code Splitting - Type-Safe Imports ===\n");
 // Type-safe dynamic imports
 // './module' is a placeholder path resolved by the bundler at build time.
 // @ts-ignore — placeholder module resolved by the bundler at build time
-type ModuleType = typeof import('./module');
+type ModuleType = typeof import("./module");
 
 async function loadModule(): Promise<ModuleType> {
   // @ts-ignore — placeholder module resolved by the bundler at build time
-  const module = await import('./module');
+  const module = await import("./module");
   return module;
 }
 
@@ -202,7 +202,7 @@ console.log("\n=== Build Scripts - Type Safety ===\n");
 
 // Type-safe build configuration
 interface BuildConfig {
-  mode: 'development' | 'production' | 'test';
+  mode: "development" | "production" | "test";
   sourceMaps: boolean;
   minify: boolean;
   analyze: boolean;
@@ -213,11 +213,11 @@ class BuildManager {
 
   async build(): Promise<void> {
     console.log(`Building in ${this.config.mode} mode`);
-    
+
     if (this.config.minify) {
       await this.minify();
     }
-    
+
     if (this.config.analyze) {
       await this.analyze();
     }
@@ -234,26 +234,26 @@ class BuildManager {
 
 // Type-safe CLI arguments
 interface CLIArgs {
-  mode?: 'development' | 'production';
+  mode?: "development" | "production";
   watch?: boolean;
   port?: number;
 }
 
 function parseCLIArgs(args: string[]): CLIArgs {
   const parsed: CLIArgs = {};
-  
+
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--mode' && args[i + 1]) {
-      parsed.mode = args[i + 1] as 'development' | 'production';
+    if (args[i] === "--mode" && args[i + 1]) {
+      parsed.mode = args[i + 1] as "development" | "production";
     }
-    if (args[i] === '--watch') {
+    if (args[i] === "--watch") {
       parsed.watch = true;
     }
-    if (args[i] === '--port' && args[i + 1]) {
+    if (args[i] === "--port" && args[i + 1]) {
       parsed.port = parseInt(args[i + 1], 10);
     }
   }
-  
+
   return parsed;
 }
 
@@ -351,17 +351,17 @@ interface ChunkInfo {
 interface AssetInfo {
   name: string;
   size: number;
-  type: 'js' | 'css' | 'image' | 'font' | 'other';
+  type: "js" | "css" | "image" | "font" | "other";
 }
 
 class BundleAnalyzer {
   analyze(stats: BundleStats): void {
     console.log(`Total bundle size: ${this.formatSize(stats.totalSize)}`);
-    
+
     const largeChunks = stats.chunks
       .filter(chunk => chunk.size > 100000)
       .sort((a, b) => b.size - a.size);
-    
+
     console.log("Large chunks:");
     largeChunks.forEach(chunk => {
       console.log(`  ${chunk.name}: ${this.formatSize(chunk.size)}`);

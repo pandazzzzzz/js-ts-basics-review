@@ -42,7 +42,7 @@ const person = {
   city: "New York",
   greet() {
     return `Hi, I'm ${this.name}`;
-  }
+  },
 };
 
 console.log("Object Creation:");
@@ -93,8 +93,8 @@ console.log("Dynamic access:", person[propName]);
 // Invalid identifiers (require brackets)
 const obj = {
   "first-name": "Alice",
-  "2023": "year",
-  "hello world": "greeting"
+  2023: "year",
+  "hello world": "greeting",
 };
 console.log("Invalid identifier:", obj["first-name"]);
 console.log("Numeric key:", obj["2023"]);
@@ -128,7 +128,7 @@ const propKey = "dynamic";
 const computed = {
   [propKey]: "value",
   [`${propKey}2`]: "value2",
-  [1 + 2]: "three"
+  [1 + 2]: "three",
 };
 console.log("Computed properties:", computed);
 
@@ -136,7 +136,7 @@ console.log("Computed properties:", computed);
 // - Shorter syntax for methods
 const methodObj = {
   // Old way
-  oldMethod: function() {
+  oldMethod: function () {
     return "old";
   },
   // New way (ES6)
@@ -151,7 +151,7 @@ const methodObj = {
   *generatorMethod() {
     yield 1;
     yield 2;
-  }
+  },
 };
 console.log("\nMethod shorthand:");
 console.log("Old:", methodObj.oldMethod());
@@ -171,7 +171,7 @@ const account = {
       return;
     }
     this._balance = value;
-  }
+  },
 };
 console.log("\nGetters and setters:");
 console.log("Get balance:", account.balance);
@@ -211,7 +211,11 @@ for (const [key, value] of Object.entries(person)) {
 
 // Object.fromEntries() - Create object from entries (ES2019)
 // - Inverse of Object.entries()
-const entriesArray = [["a", 1], ["b", 2], ["c", 3]];
+const entriesArray = [
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
+];
 const fromEntries = Object.fromEntries(entriesArray);
 console.log("\nObject.fromEntries():", fromEntries);
 
@@ -227,7 +231,7 @@ console.log("MDN Map → Object:", Object.fromEntries(map)); // { foo: "bar", ba
 // Object transformation (entries → map → fromEntries)
 const object1 = { a: 1, b: 2, c: 3 };
 const object2 = Object.fromEntries(
-  Object.entries(object1).map(([key, val]) => [key, val * 2]),
+  Object.entries(object1).map(([key, val]) => [key, val * 2])
 );
 console.log("MDN transform:", object2); // { a: 2, b: 4, c: 6 }
 
@@ -252,7 +256,10 @@ console.log("'toString' in person:", "toString" in person); // Inherited
 // - Only checks own properties, not inherited
 console.log("\nhasOwnProperty():");
 console.log("person.hasOwnProperty('name'):", person.hasOwnProperty("name"));
-console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toString"));
+console.log(
+  "person.hasOwnProperty('toString'):",
+  person.hasOwnProperty("toString")
+);
 
 // Object.hasOwn() - Modern alternative (ES2022)
 // - Safer than hasOwnProperty
@@ -291,9 +298,9 @@ console.log("\nObject.defineProperty():");
 const strictObj = {};
 Object.defineProperty(strictObj, "readonly", {
   value: "cannot change",
-  writable: false,      // Cannot assign new value
-  enumerable: true,     // Visible in Object.keys()
-  configurable: false    // Cannot delete or redefine
+  writable: false, // Cannot assign new value
+  enumerable: true, // Visible in Object.keys()
+  configurable: false, // Cannot delete or redefine
 });
 console.log("Created with defineProperty:", strictObj);
 try {
@@ -309,19 +316,23 @@ Object.defineProperties(multiProps, {
   _id: {
     value: 1,
     writable: true,
-    enumerable: false // Hidden (starts with _ convention)
+    enumerable: false, // Hidden (starts with _ convention)
   },
   id: {
-    get() { return this._id; },
-    set(value) { this._id = value; },
-    enumerable: true
+    get() {
+      return this._id;
+    },
+    set(value) {
+      this._id = value;
+    },
+    enumerable: true,
   },
   name: {
     value: "Default",
     writable: true,
     enumerable: true,
-    configurable: true
-  }
+    configurable: true,
+  },
 });
 console.log("\nObject.defineProperties():", multiProps);
 console.log("Own enumerable props:", Object.keys(multiProps)); // ['id', 'name']
@@ -398,13 +409,19 @@ console.log("\nObject.freeze():");
 // All mutations throw TypeError in strict mode (ES modules); fail silently in sloppy mode
 try {
   frozen.a = 99;
-} catch (e) { console.log("Cannot modify frozen property:", e.message); }
+} catch (e) {
+  console.log("Cannot modify frozen property:", e.message);
+}
 try {
   frozen.c = 3;
-} catch (e) { console.log("Cannot add to frozen object:", e.message); }
+} catch (e) {
+  console.log("Cannot add to frozen object:", e.message);
+}
 try {
   delete frozen.b;
-} catch (e) { console.log("Cannot delete from frozen object:", e.message); }
+} catch (e) {
+  console.log("Cannot delete from frozen object:", e.message);
+}
 console.log("Frozen (unchanged):", frozen);
 
 // Check if frozen
@@ -424,10 +441,14 @@ console.log("\nObject.seal():");
 sealed.a = 99; // Works!
 try {
   sealed.c = 3; // Throws in strict mode (ES modules); fails silently in sloppy mode
-} catch (e) { console.log("Cannot add to sealed:", e.message); }
+} catch (e) {
+  console.log("Cannot add to sealed:", e.message);
+}
 try {
   delete sealed.b; // Throws in strict mode
-} catch (e) { console.log("Cannot delete from sealed:", e.message); }
+} catch (e) {
+  console.log("Cannot delete from sealed:", e.message);
+}
 console.log("Sealed (a modified):", sealed);
 
 // Check if sealed
@@ -442,7 +463,9 @@ preventExt.a = 99; // Works!
 delete preventExt.b; // Works!
 try {
   preventExt.c = 3; // Throws in strict mode (ES modules); fails silently in sloppy mode
-} catch (e) { console.log("Cannot add to non-extensible:", e.message); }
+} catch (e) {
+  console.log("Cannot add to non-extensible:", e.message);
+}
 console.log("Prevent extensions:", preventExt);
 
 // Check if extensible
@@ -477,11 +500,16 @@ const nested = {
   user: {
     id: 1,
     profile: {
-      email: "test@example.com"
-    }
-  }
+      email: "test@example.com",
+    },
+  },
 };
-const { user: { id, profile: { email } } } = nested;
+const {
+  user: {
+    id,
+    profile: { email },
+  },
+} = nested;
 console.log("Nested:", { id, email });
 
 // Destructuring in function parameters
@@ -536,7 +564,7 @@ const thisObj = {
   greetArrow: () => {
     // Arrow functions don't have own this
     console.log(`Arrow: ${this.name}`); // undefined or global
-  }
+  },
 };
 
 console.log("\nthis binding:");
@@ -575,7 +603,9 @@ console.log("\nObject.groupBy() - Array grouping:");
 
 // Group numbers by parity
 const numbersToGroup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const groupedByParity = Object.groupBy(numbersToGroup, num => num % 2 === 0 ? 'even' : 'odd');
+const groupedByParity = Object.groupBy(numbersToGroup, num =>
+  num % 2 === 0 ? "even" : "odd"
+);
 console.log("Grouped by parity:", groupedByParity);
 
 // Group people by age category
@@ -583,10 +613,10 @@ const peopleToGroup = [
   { name: "Alice", age: 25 },
   { name: "Bob", age: 35 },
   { name: "Charlie", age: 28 },
-  { name: "Diana", age: 42 }
+  { name: "Diana", age: 42 },
 ];
 const groupedByAge = Object.groupBy(peopleToGroup, person =>
-  person.age < 30 ? 'young' : person.age < 40 ? 'middle' : 'senior'
+  person.age < 30 ? "young" : person.age < 40 ? "middle" : "senior"
 );
 console.log("Grouped by age category:", groupedByAge);
 
@@ -638,7 +668,7 @@ console.log("Original nested.b:", shallowOriginal.nested.b); // 99!
 const callbackObj = {
   name: "Alice",
   delayedGreet() {
-    setTimeout(function() {
+    setTimeout(function () {
       // console.log(this.name); // undefined! this is lost
     }, 100);
   },
@@ -646,7 +676,7 @@ const callbackObj = {
     setTimeout(() => {
       console.log(`Arrow preserves this: ${this.name}`);
     }, 100);
-  }
+  },
 };
 callbackObj.delayedGreetArrow();
 
@@ -687,7 +717,7 @@ console.log("Safe access:", safeAccess);
 // Best Practice 4: Use Object.freeze for constants
 const CONFIG = Object.freeze({
   API_URL: "https://api.example.com",
-  TIMEOUT: 5000
+  TIMEOUT: 5000,
 });
 // CONFIG.API_URL = "other"; // Silently fails
 

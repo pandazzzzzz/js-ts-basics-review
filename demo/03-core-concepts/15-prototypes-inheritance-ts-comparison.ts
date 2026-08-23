@@ -59,7 +59,6 @@ const rect = new Rectangle("red", 10, 5);
 console.log(rect.describe());
 console.log(`Area: ${rect.getArea()}, Perimeter: ${rect.getPerimeter()}`);
 
-
 // ============================================================================
 // 2. CONSTRUCTOR TYPE CHECKING
 // ============================================================================
@@ -84,7 +83,6 @@ class MyClass {
 
 const instance = createInstance(MyClass, 21);
 console.log(instance.double()); // 42
-
 
 // ============================================================================
 // 3. INSTANCEOF TYPE GUARDS
@@ -130,7 +128,6 @@ interact(new Dog("Buddy"));
 interact(new Cat("Whiskers"));
 interact(new Animal("Generic"));
 
-
 // ============================================================================
 // 4. PROTOTYPE CHAIN TYPING
 // ============================================================================
@@ -163,7 +160,6 @@ const derived = new DerivedClass();
 const proto = getPrototype(derived);
 console.log("Prototype:", proto?.constructor.name); // DerivedClass
 
-
 // ============================================================================
 // 5. OBJECT.CREATE WITH TYPES
 // ============================================================================
@@ -176,7 +172,7 @@ interface ProtoType {
 const protoObj: ProtoType = {
   greet() {
     return "Hello from prototype";
-  }
+  },
 };
 
 // Create object with specific prototype
@@ -186,7 +182,6 @@ childObj.name = "Child";
 console.log("\n=== Object.create with Types ===");
 console.log(childObj.greet()); // "Hello from prototype"
 console.log(childObj.name); // "Child"
-
 
 // ============================================================================
 // 6. CLASS IMPLEMENTATION OF INTERFACES
@@ -225,7 +220,6 @@ const donald = new Duck("Donald", 100, 5);
 console.log(donald.fly());
 console.log(donald.swim());
 
-
 // ============================================================================
 // 7. ABSTRACT CLASS PATTERNS
 // ============================================================================
@@ -251,7 +245,10 @@ abstract class Shape {
 }
 
 class Circle extends Shape {
-  constructor(public radius: number, color: string = "blue") {
+  constructor(
+    public radius: number,
+    color: string = "blue"
+  ) {
     super(color);
   }
 
@@ -267,7 +264,6 @@ console.log(`Area: ${circle.getArea().toFixed(2)}`);
 
 // Cannot instantiate abstract class
 // const shape = new Shape("red"); // ❌ Error: Cannot create abstract class instance
-
 
 // ============================================================================
 // 8. TYPE INFERENCE IN INHERITANCE
@@ -310,8 +306,9 @@ class ElectricCar extends Vehicle {
 console.log("\n=== Type Inference in Inheritance ===");
 const tesla = new ElectricCar("Tesla", 75);
 tesla.accelerate(30);
-console.log(`Speed: ${tesla.speed}, Battery: ${tesla.batteryLevel.toFixed(1)}%`);
-
+console.log(
+  `Speed: ${tesla.speed}, Battery: ${tesla.batteryLevel.toFixed(1)}%`
+);
 
 // ============================================================================
 // 9. GENERIC CONSTRAINTS WITH EXTENDS
@@ -329,7 +326,6 @@ function printName<T extends HasName>(item: T): void {
 
 printName({ name: "Alice", age: 30 }); // ✅ OK
 // printName({ age: 30 }); // ❌ Error: Missing 'name' property
-
 
 // ============================================================================
 // 10. KEYOF AND INDEXED ACCESS TYPES
@@ -351,9 +347,8 @@ const person: Person = { name: "Bob", age: 25, email: "bob@example.com" };
 
 console.log("\n=== keyof and Indexed Access ===");
 console.log(getProperty(person, "name")); // Type: string
-console.log(getProperty(person, "age"));  // Type: number
+console.log(getProperty(person, "age")); // Type: number
 // getProperty(person, "invalid"); // ❌ Error: Argument not assignable
-
 
 // ============================================================================
 // 11. PARTIAL, PICK, OMIT UTILITY TYPES
@@ -379,12 +374,15 @@ type ProductWithoutId = Omit<Product, "id">;
 console.log("\n=== Utility Types ===");
 const partialProduct: PartialProduct = { name: "Widget" };
 const summary: ProductSummary = { id: 1, name: "Widget" };
-const withoutId: ProductWithoutId = { name: "Widget", price: 9.99, description: "A widget" };
+const withoutId: ProductWithoutId = {
+  name: "Widget",
+  price: 9.99,
+  description: "A widget",
+};
 
 console.log(partialProduct);
 console.log(summary);
 console.log(withoutId);
-
 
 // ============================================================================
 // 12. READONLY AND IMMUTABLE TYPES
@@ -408,10 +406,9 @@ console.log("\n=== Readonly Types ===");
 const config: ImmutableConfig = {
   apiUrl: "https://api.example.com",
   timeout: 5000,
-  debug: false
+  debug: false,
 };
 // config.debug = true; // ❌ Error: Cannot assign to readonly property
-
 
 // ============================================================================
 // 13. COMPARISON TABLE
@@ -443,4 +440,6 @@ KEY TAKEAWAYS:
 5. Runtime prototype chain follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

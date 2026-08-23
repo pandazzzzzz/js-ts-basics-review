@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Claude Code files
+.claude/
+.workbuddy/
+
+# Test files (if they exist)
+tests/
+test/
+specs/
+
+# Build output
+dist/
+build/
+*.min.js
+
+# Local files
+handoff.md
+CHANGELOG.md
+CONTRIBUTING.md
+DEEP-REVIEW-REPORT.md
+demo-audit-report.md
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (docs/ files are separate from code demos)
+docs/
+reference/
+
+# Root config files (keep them as-is)
+CLAUDE.md
+README.md
+LICENSE

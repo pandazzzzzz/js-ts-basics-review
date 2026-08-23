@@ -35,7 +35,6 @@ console.log(greet.call(user)); // "Hello, I'm Alice"
 const boundGreet = greet.bind(user);
 console.log(boundGreet()); // Works correctly
 
-
 // ============================================================================
 // 2. NO IMPLICIT THIS COMPILER OPTION
 // ============================================================================
@@ -44,18 +43,20 @@ console.log(boundGreet()); // Works correctly
 // TypeScript requires explicit this type when it can't be inferred
 
 // Without this annotation, noImplicitThis would cause an error
-function processItems(this: { items: string[] }, processor: (item: string) => void): void {
+function processItems(
+  this: { items: string[] },
+  processor: (item: string) => void
+): void {
   this.items.forEach(processor);
 }
 
 const container = {
   items: ["a", "b", "c"],
-  process: processItems
+  process: processItems,
 };
 
 console.log("\n=== No Implicit This ===");
 container.process.call(container, item => console.log(item));
-
 
 // ============================================================================
 // 3. THISTYPE<T> UTILITY TYPE
@@ -86,13 +87,12 @@ const loggerImplementation: LoggerWithThis = {
   },
   error(message: string) {
     console.error(`[${this.prefix}] ERROR: ${message}`);
-  }
+  },
 };
 
 console.log("\n=== ThisType Utility ===");
 const loggerContext: LoggerContext = { prefix: "App", level: "info" };
 loggerImplementation.log.call(loggerContext, "Application started");
-
 
 // ============================================================================
 // 3.5 THISTYPE IN COMPLEX SCENARIOS
@@ -125,17 +125,16 @@ const eventMixin = {
     const handlers = this.handlers.get(event) || [];
     const context: EventContext = {
       eventName: event,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     handlers.forEach(handler => {
       handler.call({ ...context, ...this }, data);
     });
-  }
+  },
 };
 
 console.log("\n=== ThisType in Complex Scenarios ===");
-
 
 // ============================================================================
 // 4. ARROW FUNCTION THIS TYPING
@@ -180,7 +179,6 @@ try {
   console.log("Regular method loses this context");
 }
 
-
 // ============================================================================
 // 5. THIS RETURN TYPE FOR FLUENT APIS
 // ============================================================================
@@ -222,14 +220,16 @@ const extended = new ExtendedBuilder();
 const extendedResult = extended.add(10).subtract(3).multiply(2);
 console.log(extendedResult.getValue()); // 14
 
-
 // ============================================================================
 // 6. THIS IN CLASS METHODS
 // ============================================================================
 
 // TypeScript automatically infers this type from class context
 class Person {
-  constructor(public name: string, public age: number) {}
+  constructor(
+    public name: string,
+    public age: number
+  ) {}
 
   // this is implicitly typed as Person
   introduce(): string {
@@ -246,7 +246,6 @@ console.log("\n=== This in Class Methods ===");
 const person = new Person("Bob", 30);
 console.log(person.introduce());
 
-
 // ============================================================================
 // 7. THIS IN INTERFACES AND OBJECT LITERALS
 // ============================================================================
@@ -260,27 +259,29 @@ function chainable<T = {}>(): Chainable<T> {
   // Type the builder as Chainable<T> so `this` is polymorphic and statically
   // checked — no `any` needed to make method chaining type-check.
   const result: Chainable<T> = {
-    option<U>(this: Chainable<T>, key: string, value: U): Chainable<T & { [K in keyof U]: U[K] }> {
+    option<U>(
+      this: Chainable<T>,
+      key: string,
+      value: U
+    ): Chainable<T & { [K in keyof U]: U[K] }> {
       // Real implementations accumulate into an internal record; the cast below
       // models the widening that the mapped type in the signature promises.
-      return { ...this, [key]: value } as Chainable<T & { [K in keyof U]: U[K] }>;
+      return { ...this, [key]: value } as Chainable<
+        T & { [K in keyof U]: U[K] }
+      >;
     },
     get(): T {
       return this as unknown as T;
-    }
+    },
   };
 
   return result;
 }
 
 console.log("\n=== This in Interfaces ===");
-const chained = chainable()
-  .option("foo", 123)
-  .option("bar", "hello")
-  .get();
+const chained = chainable().option("foo", 123).option("bar", "hello").get();
 
 console.log(chained);
-
 
 // ============================================================================
 // 8. CALL/APPLY/BIND WITH THIS TYPES
@@ -305,7 +306,6 @@ console.log(introduce.apply(person, ["Greetings"]));
 // bind returns properly typed function
 const boundIntroduce = introduce.bind(person);
 console.log(boundIntroduce("Hey"));
-
 
 // ============================================================================
 // 9. THIS IN ASYNC CONTEXTS
@@ -333,7 +333,6 @@ console.log("\n=== This in Async Contexts ===");
 const processor = new AsyncProcessor();
 processor.processAsync(["a", "b", "c"]); // Works - arrow function
 
-
 // ============================================================================
 // 10. COMMON PITFALLS: JS VS TS
 // ============================================================================
@@ -347,7 +346,7 @@ const badObject = {
   getValue: () => {
     // return this.value; // ❌ Error or wrong this
     return "wrong";
-  }
+  },
 };
 
 const goodObject = {
@@ -355,7 +354,7 @@ const goodObject = {
   // ✅ Use regular function for object methods
   getValue() {
     return this.value;
-  }
+  },
 };
 
 console.log("Good object:", goodObject.getValue()); // 42
@@ -391,7 +390,6 @@ const unboundMethod = instance.getData;
 const boundMethod = instance.getData.bind(instance);
 console.log("Bound method:", boundMethod()); // 42
 
-
 // ============================================================================
 // 11. BEST PRACTICES SUMMARY
 // ============================================================================
@@ -421,7 +419,6 @@ console.log(`
 4. this in async callbacks needs careful handling
 5. Event handlers often lose this context
 `);
-
 
 // ============================================================================
 // 12. COMPARISON TABLE

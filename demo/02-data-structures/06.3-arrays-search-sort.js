@@ -55,7 +55,7 @@ console.log("First > 3:", found); // 4
 const people = [
   { name: "Alice", age: 25 },
   { name: "Bob", age: 30 },
-  { name: "Charlie", age: 35 }
+  { name: "Charlie", age: 35 },
 ];
 const bob = people.find(p => p.name === "Bob");
 console.log("find object:", bob); // { name: 'Bob', age: 30 }
@@ -210,26 +210,35 @@ const peopleForSort = [
   { name: "Charlie", age: 35 },
   { name: "Alice", age: 25 },
   { name: "Bob", age: 30 },
-  { name: "alice", age: 28 }
+  { name: "alice", age: 28 },
 ];
 
 // Sort by number (age)
 const sortedByAge = [...peopleForSort].sort((a, b) => a.age - b.age);
 console.log("\nSort objects by age:");
-console.log("By age:", sortedByAge.map(p => `${p.name} (${p.age})`));
+console.log(
+  "By age:",
+  sortedByAge.map(p => `${p.name} (${p.age})`)
+);
 
 // Sort by string (name) - with localeCompare
 const sortedByName = [...peopleForSort].sort((a, b) =>
   a.name.localeCompare(b.name)
 );
 console.log("Sort by name (localeCompare):");
-console.log("By name:", sortedByName.map(p => p.name));
+console.log(
+  "By name:",
+  sortedByName.map(p => p.name)
+);
 
 // Case-insensitive sort
 const sortedByNameCI = [...peopleForSort].sort((a, b) =>
   a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
 );
-console.log("Case-insensitive sort:", sortedByNameCI.map(p => p.name));
+console.log(
+  "Case-insensitive sort:",
+  sortedByNameCI.map(p => p.name)
+);
 
 // 2.5 Multi-key sorting
 const multiSort = [...peopleForSort].sort((a, b) => {
@@ -395,7 +404,9 @@ console.log("✅ Use localeCompare for string sorting");
 console.log("✅ Use toSorted/toReversed/with/toSpliced for immutable updates");
 console.log("✅ Use findLast/findLastIndex for searching from end (ES2023+)");
 console.log("⚠️  Remember: sort() mutates the original array");
-console.log("⚠️  indexOf can't find NaN - use includes or Number.isNaN with find");
+console.log(
+  "⚠️  indexOf can't find NaN - use includes or Number.isNaN with find"
+);
 console.log("⚠️  Multi-key sorting: sort by secondary key first, then primary");
 
 // ============================================

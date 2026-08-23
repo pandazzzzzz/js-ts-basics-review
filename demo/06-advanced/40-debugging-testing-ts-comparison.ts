@@ -20,7 +20,7 @@ interface User {
 const user: User = {
   id: 1,
   name: "Alice",
-  email: "alice@example.com"
+  email: "alice@example.com",
   // Missing property would be caught at compile time
 };
 
@@ -164,7 +164,7 @@ function expect<T>(actual: T): Matchers<T> {
       if (!actual.includes(item)) {
         throw new Error(`Expected array to contain ${item}`);
       }
-    }
+    },
   };
 }
 
@@ -271,8 +271,7 @@ try {
 
 // Result type pattern for error handling
 type Result<T, E = Error> =
-  | { success: true; value: T }
-  | { success: false; error: E };
+  { success: true; value: T } | { success: false; error: E };
 
 function divide(a: number, b: number): Result<number> {
   if (b === 0) {
@@ -452,13 +451,13 @@ const mockUserService: UserService = {
   getUser: createMock(async (id: number) => ({
     id,
     name: "Mock User",
-    email: "mock@example.com"
+    email: "mock@example.com",
   })),
   updateUser: createMock(async (id: number, data: Partial<User>) => ({
     id,
     name: data.name || "Mock User",
-    email: data.email || "mock@example.com"
-  }))
+    email: data.email || "mock@example.com",
+  })),
 };
 
 // ============================================

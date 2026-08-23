@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 17-property-descriptors-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -53,11 +52,11 @@ console.log("=== 1. Property Flags Demo ===");
 // 1.1 Viewing property descriptors
 let user = {
   name: "John",
-  age: 30
+  age: 30,
 };
 
 // Get descriptor for a single property
-let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
+let descriptor = Object.getOwnPropertyDescriptor(user, "name");
 console.log("Descriptor for 'name':", descriptor);
 // { value: 'John', writable: true, enumerable: true, configurable: true }
 
@@ -70,16 +69,18 @@ let obj = {};
 
 // Assignment creates properties with all flags = true
 obj.prop1 = "value";
-console.log("Assignment flags:", Object.getOwnPropertyDescriptor(obj, 'prop1'));
+console.log("Assignment flags:", Object.getOwnPropertyDescriptor(obj, "prop1"));
 // { value: 'value', writable: true, enumerable: true, configurable: true }
 
 // Object.defineProperty creates properties with all flags = false by default
-Object.defineProperty(obj, 'prop2', {
-  value: "value"
+Object.defineProperty(obj, "prop2", {
+  value: "value",
 });
-console.log("defineProperty flags:", Object.getOwnPropertyDescriptor(obj, 'prop2'));
+console.log(
+  "defineProperty flags:",
+  Object.getOwnPropertyDescriptor(obj, "prop2")
+);
 // { value: 'value', writable: false, enumerable: false, configurable: false }
-
 
 // ============================================
 // 2. Object.defineProperty()
@@ -111,11 +112,11 @@ console.log("\n=== 2. Object.defineProperty() Demo ===");
 
 // 2.1 writable: false - Non-writable property
 let person = {
-  name: "Alice"
+  name: "Alice",
 };
 
-Object.defineProperty(person, 'name', {
-  writable: false
+Object.defineProperty(person, "name", {
+  writable: false,
 });
 
 console.log("Before assignment:", person.name); // Alice
@@ -130,10 +131,10 @@ console.log("After assignment:", person.name); // Alice (unchanged)
 
 // In sloppy mode, assignment fails silently instead
 // (demoed below via explicit "use strict" comparison)
-(function() {
+(function () {
   "use strict";
   let strictPerson = { name: "Charlie" };
-  Object.defineProperty(strictPerson, 'name', { writable: false });
+  Object.defineProperty(strictPerson, "name", { writable: false });
 
   try {
     strictPerson.name = "David";
@@ -145,12 +146,12 @@ console.log("After assignment:", person.name); // Alice (unchanged)
 // 2.2 enumerable: false - Non-enumerable property
 let product = {
   id: 1,
-  price: 100
+  price: 100,
 };
 
-Object.defineProperty(product, 'internalId', {
+Object.defineProperty(product, "internalId", {
   value: "SECRET-123",
-  enumerable: false
+  enumerable: false,
 });
 
 console.log("\nEnumerable check:");
@@ -160,16 +161,19 @@ for (let key in product) {
   console.log("  ", key);
 }
 console.log("Hidden property exists:", product.internalId); // SECRET-123
-console.log("Descriptor:", Object.getOwnPropertyDescriptor(product, 'internalId'));
+console.log(
+  "Descriptor:",
+  Object.getOwnPropertyDescriptor(product, "internalId")
+);
 
 // 2.3 configurable: false - Non-configurable property
 let config = {
-  apiKey: "abc123"
+  apiKey: "abc123",
 };
 
-Object.defineProperty(config, 'apiKey', {
+Object.defineProperty(config, "apiKey", {
   configurable: false,
-  writable: false
+  writable: false,
 });
 
 console.log("\nNon-configurable property:");
@@ -183,8 +187,8 @@ console.log("Still exists:", config.apiKey); // abc123
 
 try {
   // Cannot change flags when configurable: false
-  Object.defineProperty(config, 'apiKey', {
-    enumerable: false
+  Object.defineProperty(config, "apiKey", {
+    enumerable: false,
   });
 } catch (error) {
   console.log("Cannot reconfigure:", error.message);
@@ -192,19 +196,18 @@ try {
 
 // 2.4 configurable: false is irreversible
 let locked = { value: 42 };
-Object.defineProperty(locked, 'value', {
-  configurable: false
+Object.defineProperty(locked, "value", {
+  configurable: false,
 });
 
 // This is permanent - we cannot make it configurable again
 try {
-  Object.defineProperty(locked, 'value', {
-    configurable: true
+  Object.defineProperty(locked, "value", {
+    configurable: true,
   });
 } catch (error) {
   console.log("Cannot reverse configurable:", error.message);
 }
-
 
 // ============================================
 // 3. Object.defineProperties()
@@ -234,20 +237,22 @@ Object.defineProperties(book, {
   title: {
     value: "JavaScript Guide",
     writable: true,
-    enumerable: true
+    enumerable: true,
   },
   _price: {
     value: 29.99,
     writable: true,
-    enumerable: false
+    enumerable: false,
   },
   price: {
-    get() { return this._price; },
+    get() {
+      return this._price;
+    },
     set(value) {
       if (value > 0) this._price = value;
     },
-    enumerable: true
-  }
+    enumerable: true,
+  },
 });
 
 console.log("Book properties:", book);
@@ -258,19 +263,21 @@ let original = {
   name: "Original",
   get fullName() {
     return this.name + " Smith";
-  }
+  },
 };
-Object.defineProperty(original, 'secret', {
+Object.defineProperty(original, "secret", {
   value: "hidden",
-  enumerable: false
+  enumerable: false,
 });
 
 // Clone with all descriptors preserved
-let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(original));
+let clone = Object.defineProperties(
+  {},
+  Object.getOwnPropertyDescriptors(original)
+);
 console.log("\nClone name:", clone.name);
 console.log("Clone secret:", clone.secret);
 console.log("Clone fullName:", clone.fullName);
-
 
 // ============================================
 // 4. OBJECT-LEVEL RESTRICTION METHODS
@@ -330,15 +337,26 @@ console.log("\nBefore seal:", Object.isSealed(sealed)); // false
 Object.seal(sealed);
 
 // All mutations throw TypeError in strict mode (ES modules); fail silently in sloppy mode
-try { sealed.z = 3; } catch (e) { console.log("Cannot add to sealed:", e.message); }
-try { delete sealed.x; } catch (e) { console.log("Cannot delete from sealed:", e.message); }
+try {
+  sealed.z = 3;
+} catch (e) {
+  console.log("Cannot add to sealed:", e.message);
+}
+try {
+  delete sealed.x;
+} catch (e) {
+  console.log("Cannot delete from sealed:", e.message);
+}
 sealed.x = 100; // Can still modify existing properties
 
 console.log("After seal:", sealed); // { x: 100, y: 2 }
 console.log("Is sealed:", Object.isSealed(sealed)); // true
 
 // Check descriptor - configurable becomes false
-console.log("Descriptor after seal:", Object.getOwnPropertyDescriptor(sealed, 'x'));
+console.log(
+  "Descriptor after seal:",
+  Object.getOwnPropertyDescriptor(sealed, "x")
+);
 
 // 4.3 Object.freeze()
 let frozen = { count: 0, nested: { value: 1 } };
@@ -346,9 +364,21 @@ console.log("\nBefore freeze:", Object.isFrozen(frozen)); // false
 
 Object.freeze(frozen);
 
-try { frozen.count = 10; } catch (e) { console.log("Cannot modify frozen:", e.message); }
-try { frozen.newProp = "test"; } catch (e) { console.log("Cannot add to frozen:", e.message); }
-try { delete frozen.count; } catch (e) { console.log("Cannot delete from frozen:", e.message); }
+try {
+  frozen.count = 10;
+} catch (e) {
+  console.log("Cannot modify frozen:", e.message);
+}
+try {
+  frozen.newProp = "test";
+} catch (e) {
+  console.log("Cannot add to frozen:", e.message);
+}
+try {
+  delete frozen.count;
+} catch (e) {
+  console.log("Cannot delete from frozen:", e.message);
+}
 
 console.log("After freeze:", frozen); // { count: 0, nested: { value: 1 } }
 console.log("Is frozen:", Object.isFrozen(frozen)); // true
@@ -377,8 +407,8 @@ function deepFreeze(obj) {
 let deepObj = {
   a: 1,
   b: {
-    c: 2
-  }
+    c: 2,
+  },
 };
 
 deepFreeze(deepObj);
@@ -388,7 +418,6 @@ try {
   console.log("Deep frozen - nested cannot be modified:", e.message);
 }
 console.log("Value unchanged:", deepObj.b.c); // 2
-
 
 // ============================================
 // 5. GETTERS AND SETTERS
@@ -439,7 +468,7 @@ let circle = {
 
   get area() {
     return Math.PI * this._radius ** 2;
-  }
+  },
 };
 
 circle.radius = 5;
@@ -451,7 +480,7 @@ let temperature = {};
 
 let _celsius = 0;
 
-Object.defineProperty(temperature, 'celsius', {
+Object.defineProperty(temperature, "celsius", {
   get() {
     return _celsius;
   },
@@ -459,10 +488,10 @@ Object.defineProperty(temperature, 'celsius', {
     _celsius = value;
   },
   enumerable: true,
-  configurable: true
+  configurable: true,
 });
 
-Object.defineProperty(temperature, 'fahrenheit', {
+Object.defineProperty(temperature, "fahrenheit", {
   get() {
     return _celsius * 1.8 + 32;
   },
@@ -470,7 +499,7 @@ Object.defineProperty(temperature, 'fahrenheit', {
     _celsius = (value - 32) / 1.8;
   },
   enumerable: true,
-  configurable: true
+  configurable: true,
 });
 
 temperature.celsius = 25;
@@ -483,23 +512,23 @@ console.log("Celsius:", temperature.celsius.toFixed(2));
 
 // 5.3 Data validation with setter
 let userAccount = {
-  _age: 0
+  _age: 0,
 };
 
-Object.defineProperty(userAccount, 'age', {
+Object.defineProperty(userAccount, "age", {
   get() {
     return this._age;
   },
   set(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('Age must be a number');
+    if (typeof value !== "number") {
+      throw new TypeError("Age must be a number");
     }
     if (value < 0 || value > 150) {
-      throw new RangeError('Age must be between 0 and 150');
+      throw new RangeError("Age must be between 0 and 150");
     }
     this._age = value;
   },
-  enumerable: true
+  enumerable: true,
 });
 
 console.log("\nValidation example:");
@@ -514,14 +543,14 @@ try {
 
 // 5.4 Read-only property (getter without setter)
 let config2 = {
-  _version: "1.0.0"
+  _version: "1.0.0",
 };
 
-Object.defineProperty(config2, 'version', {
+Object.defineProperty(config2, "version", {
   get() {
     return this._version;
   },
-  enumerable: true
+  enumerable: true,
 });
 
 console.log("\nRead-only property:");
@@ -545,14 +574,13 @@ let expensiveObject = {
       this._data = Array.from({ length: 1000 }, (_, i) => i * i);
     }
     return this._data;
-  }
+  },
 };
 
 console.log("\nLazy initialization:");
 console.log("Before access, data is:", expensiveObject._data);
 console.log("First access:", expensiveObject.data.length);
 console.log("Second access (cached):", expensiveObject.data.length);
-
 
 // ============================================
 // 6. RELATIONSHIP WITH OTHER CONCEPTS
@@ -593,11 +621,11 @@ let proxyHandler = {
     console.log(`Defining property: ${prop}`);
     // Add validation or logging
     return Object.defineProperty(target, prop, descriptor);
-  }
+  },
 };
 
 let proxy = new Proxy(targetObj, proxyHandler);
-console.log("Proxy descriptor:", Object.getOwnPropertyDescriptor(proxy, 'x'));
+console.log("Proxy descriptor:", Object.getOwnPropertyDescriptor(proxy, "x"));
 
 // 6.2 Simple Vue 2 reactivity simulation
 function reactive(target) {
@@ -616,7 +644,7 @@ function reactive(target) {
         internalValue = newValue;
       },
       enumerable: true,
-      configurable: true
+      configurable: true,
     });
   });
 
@@ -626,7 +654,7 @@ function reactive(target) {
 let data = reactive({ message: "Hello" });
 console.log("\nReactive object:");
 console.log(data.message); // Logs "Getting message"
-data.message = "World";    // Logs "Setting message to World"
+data.message = "World"; // Logs "Setting message to World"
 
 // 6.3 Comparison: defineProperty vs assignment
 console.log("\n=== defineProperty vs Assignment ===");
@@ -642,12 +670,17 @@ obj1.a = 1;
 // });
 
 let obj2 = {};
-Object.defineProperty(obj2, 'a', { value: 1 });
+Object.defineProperty(obj2, "a", { value: 1 });
 // Flags are all false by default!
 
-console.log("Assignment descriptor:", Object.getOwnPropertyDescriptor(obj1, 'a'));
-console.log("defineProperty descriptor:", Object.getOwnPropertyDescriptor(obj2, 'a'));
-
+console.log(
+  "Assignment descriptor:",
+  Object.getOwnPropertyDescriptor(obj1, "a")
+);
+console.log(
+  "defineProperty descriptor:",
+  Object.getOwnPropertyDescriptor(obj2, "a")
+);
 
 // ============================================
 // BEST PRACTICES
@@ -689,7 +722,7 @@ const API_KEY = "secret"; // Already immutable
 // Good: Object-level protection
 const CONFIG = Object.freeze({
   apiUrl: "https://api.example.com",
-  timeout: 5000
+  timeout: 5000,
 });
 
 // Good: Class getter for computed property
@@ -706,17 +739,16 @@ class Rectangle {
 
 // Avoid: Over-engineered descriptor usage
 let badExample = {};
-Object.defineProperty(badExample, 'x', {
+Object.defineProperty(badExample, "x", {
   value: 42,
   writable: true,
   enumerable: true,
-  configurable: true
+  configurable: true,
   // This is just a normal property - use assignment instead!
 });
 
 // Better: Just use assignment
 let goodExample = { x: 42 };
-
 
 // ============================================
 // COMMON PITFALLS
@@ -725,7 +757,7 @@ console.log("\n=== Common Pitfalls Demo ===");
 
 // Pitfall 1: Forgetting default flags
 let pitfall1 = {};
-Object.defineProperty(pitfall1, 'prop', { value: 42 });
+Object.defineProperty(pitfall1, "prop", { value: 42 });
 console.log("Pitfall 1 - Not writable:", pitfall1.prop); // 42
 try {
   pitfall1.prop = 100; // Throws in strict mode (default flags: writable=false)
@@ -737,9 +769,11 @@ console.log("Still 42:", pitfall1.prop);
 // Pitfall 2: Cannot mix data and accessor attributes in one descriptor
 let pitfall2 = {};
 try {
-  Object.defineProperty(pitfall2, 'value', {
+  Object.defineProperty(pitfall2, "value", {
     value: 10,
-    get() { return 20; } // mixing data + accessor in one descriptor
+    get() {
+      return 20;
+    }, // mixing data + accessor in one descriptor
   });
 } catch (error) {
   console.log("Pitfall 2 - Cannot mix:", error.message);
@@ -748,14 +782,14 @@ try {
 
 // Pitfall 3: configurable: false is permanent
 let pitfall3 = {};
-Object.defineProperty(pitfall3, 'locked', {
+Object.defineProperty(pitfall3, "locked", {
   value: true,
-  configurable: false
+  configurable: false,
 });
 
 try {
-  Object.defineProperty(pitfall3, 'locked', {
-    configurable: true
+  Object.defineProperty(pitfall3, "locked", {
+    configurable: true,
   });
 } catch (error) {
   console.log("Pitfall 3 - Cannot unlock:", error.message);
@@ -763,7 +797,7 @@ try {
 
 // Pitfall 4: Shallow freeze
 let pitfall4 = Object.freeze({
-  nested: { value: 1 }
+  nested: { value: 1 },
 });
 pitfall4.nested.value = 100; // Works!
 console.log("Pitfall 4 - Shallow freeze:", pitfall4.nested.value);
@@ -773,12 +807,11 @@ let pitfall5 = {
   _value: 42,
   get value() {
     return this._value;
-  }
+  },
 };
 
 let extracted = pitfall5.value;
 console.log("Pitfall 5 - This is fine:", extracted);
-
 
 // ============================================
 // SUMMARY
@@ -805,7 +838,6 @@ console.log("Pitfall 5 - This is fine:", extracted);
  */
 
 console.log("\n=== Property Descriptors Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes

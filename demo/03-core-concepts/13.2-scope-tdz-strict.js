@@ -171,7 +171,9 @@ function strictScopeDemo() {
   // }
   // The demo above would throw: "Duplicate parameter name not allowed in this context"
   console.log("Duplicate parameters prevented in strict mode");
-  console.log("(SyntaxError occurs at parse time, cannot be caught with try-catch)");
+  console.log(
+    "(SyntaxError occurs at parse time, cannot be caught with try-catch)"
+  );
 }
 
 strictScopeDemo();
@@ -273,7 +275,7 @@ console.log("Note: ES modules are always strict, so eval creates own scope");
 console.log("\nSafer alternatives to eval:");
 
 // Function constructor (still requires caution)
-const add = new Function('a', 'b', 'return a + b');
+const add = new Function("a", "b", "return a + b");
 console.log("Function constructor: add(2, 3) =", add(2, 3)); // 5
 
 // JSON.parse for data
@@ -430,7 +432,9 @@ console.log("📘 13.1-scope-basics.js - Global, function, block, lexical scope"
 console.log("📘 13.3-closures-basics.js - Closures and data privacy");
 console.log("📘 01-variables.js - Variable declarations and hoisting");
 console.log("📘 07.1-functions-basics.js - Function parameters and scope");
-console.log("📘 48-security.js - Security implications of eval() and code injection");
+console.log(
+  "📘 48-security.js - Security implications of eval() and code injection"
+);
 
 // ============================================
 // TypeScript Comparison

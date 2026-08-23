@@ -113,7 +113,11 @@ console.log("\nCopy from another TypedArray:", copied); // Uint16Array [1, 2, 3]
 console.log("\n📋 All TypedArray types and sizes:");
 console.log("  Int8Array:", Int8Array.BYTES_PER_ELEMENT, "byte");
 console.log("  Uint8Array:", Uint8Array.BYTES_PER_ELEMENT, "byte");
-console.log("  Uint8ClampedArray:", Uint8ClampedArray.BYTES_PER_ELEMENT, "byte");
+console.log(
+  "  Uint8ClampedArray:",
+  Uint8ClampedArray.BYTES_PER_ELEMENT,
+  "byte"
+);
 console.log("  Int16Array:", Int16Array.BYTES_PER_ELEMENT, "bytes");
 console.log("  Uint16Array:", Uint16Array.BYTES_PER_ELEMENT, "bytes");
 console.log("  Int32Array:", Int32Array.BYTES_PER_ELEMENT, "bytes");
@@ -145,8 +149,8 @@ console.log("ArrayBuffer byte length:", buffer.byteLength); // 16
 console.log("ArrayBuffer is resizable:", buffer.resizable); // false (default); .resizable/.resize() are ES2024
 
 // 3.2 Multiple views on same buffer
-const int32View = new Int32Array(buffer, 0, 2);   // First 8 bytes as 2 Int32s
-const uint8View = new Uint8Array(buffer, 0, 8);    // Same first 8 bytes as 8 Uint8s
+const int32View = new Int32Array(buffer, 0, 2); // First 8 bytes as 2 Int32s
+const uint8View = new Uint8Array(buffer, 0, 8); // Same first 8 bytes as 8 Uint8s
 
 // Write through Int32 view
 int32View[0] = 1000;
@@ -166,7 +170,10 @@ const byteView = new Uint8Array(overlapBuf);
 uint32view[0] = 0x41424344; // "ABCD" as a 32-bit integer
 console.log("\nOverlapping views:");
 console.log("As Uint32:", uint32view[0].toString(16)); // 41424344
-console.log("As bytes:", [...byteView].map(b => String.fromCharCode(b)));
+console.log(
+  "As bytes:",
+  [...byteView].map(b => String.fromCharCode(b))
+);
 // In little-endian: ['D', 'C', 'B', 'A']
 
 // ============================================
@@ -193,10 +200,10 @@ const dvBuffer = new ArrayBuffer(16);
 const view = new DataView(dvBuffer);
 
 // Write various types at specific offsets
-view.setInt8(0, 42);           // 1 byte at offset 0
-view.setFloat64(1, Math.PI);    // 8 bytes at offset 1
-view.setUint32(9, 0x12345678);  // 4 bytes at offset 9
-view.setUint8(13, 255);         // 1 byte at offset 13
+view.setInt8(0, 42); // 1 byte at offset 0
+view.setFloat64(1, Math.PI); // 8 bytes at offset 1
+view.setUint32(9, 0x12345678); // 4 bytes at offset 9
+view.setUint8(13, 255); // 1 byte at offset 13
 
 // Read back
 console.log("DataView reads:");
@@ -212,11 +219,17 @@ const endianView = new DataView(endianBuf);
 
 endianView.setUint32(0, 0x12345678, false); // big-endian (network byte order)
 const bytesBig = new Uint8Array(endianBuf);
-console.log("Big-endian bytes:", [...bytesBig].map(b => b.toString(16))); // [12, 34, 56, 78]
+console.log(
+  "Big-endian bytes:",
+  [...bytesBig].map(b => b.toString(16))
+); // [12, 34, 56, 78]
 
 endianView.setUint32(0, 0x12345678, true); // little-endian (x86 native)
 const bytesLittle = new Uint8Array(endianBuf);
-console.log("Little-endian bytes:", [...bytesLittle].map(b => b.toString(16))); // [78, 56, 34, 12]
+console.log(
+  "Little-endian bytes:",
+  [...bytesLittle].map(b => b.toString(16))
+); // [78, 56, 34, 12]
 
 // Default is big-endian (false) for network protocol compatibility
 
@@ -277,7 +290,7 @@ console.log("\nAppend to TypedArray pattern:", withAppend); // [1, 2, 3, 4]
 // 5.3 set() - Copy data in bulk
 const target = new Int32Array(8);
 target.set([10, 20, 30]); // Write at offset 0
-target.set([40, 50], 3);  // Write at offset 3
+target.set([40, 50], 3); // Write at offset 3
 console.log("\nset() - bulk copy:", target); // [10, 20, 30, 40, 50, 0, 0, 0]
 
 // 5.4 subarray() - Create view without copying
@@ -333,7 +346,9 @@ console.log("✅ Use Uint8ClampedArray if you need clamping to 0-255");
 // Pitfall 2: Endianness
 console.log("\nPitfall 2 - Endianness:");
 console.log("❌ x86 is little-endian; network protocols use big-endian");
-console.log("✅ Use DataView with explicit endianness flag for binary protocols");
+console.log(
+  "✅ Use DataView with explicit endianness flag for binary protocols"
+);
 
 // Pitfall 3: Views share memory
 console.log("\nPitfall 3 - Shared buffer views:");
@@ -356,7 +371,9 @@ console.log("✅ Use Uint8ClampedArray for canvas/image pixel data");
 console.log("✅ Use DataView when parsing binary formats with mixed types");
 console.log("✅ Be explicit about endianness when reading/writing binary");
 console.log("✅ Remember TypedArrays have fixed size after creation");
-console.log("✅ Use set() for bulk copying (much faster than element-by-element)");
+console.log(
+  "✅ Use set() for bulk copying (much faster than element-by-element)"
+);
 console.log("⚠️  Views on same ArrayBuffer share memory (mutations propagate)");
 console.log("⚠️  Uint8Array wraps on overflow; Uint8ClampedArray clamps");
 console.log("⚠️  subarray() creates a view, not a copy (unlike slice())");
@@ -390,8 +407,12 @@ Key rules:
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 06.1-arrays-basics.js / 06.2-arrays-iteration.js / 06.3-arrays-search-sort.js / 06.4-arrays-manipulation.js - Regular array methods");
-console.log("📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)");
+console.log(
+  "📘 06.1-arrays-basics.js / 06.2-arrays-iteration.js / 06.3-arrays-search-sort.js / 06.4-arrays-manipulation.js - Regular array methods"
+);
+console.log(
+  "📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)"
+);
 console.log("📘 43-storage-network.js - Fetch API with ArrayBuffer");
 
 // ============================================

@@ -37,7 +37,7 @@ console.error("Error message");
 const users = [
   { id: 1, name: "Alice", role: "Admin" },
   { id: 2, name: "Bob", role: "User" },
-  { id: 3, name: "Charlie", role: "User" }
+  { id: 3, name: "Charlie", role: "User" },
 ];
 console.table(users);
 
@@ -246,7 +246,9 @@ function expect(actual) {
     },
     toEqual(expected) {
       if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-        throw new Error(`Expected ${JSON.stringify(expected)} but got ${JSON.stringify(actual)}`);
+        throw new Error(
+          `Expected ${JSON.stringify(expected)} but got ${JSON.stringify(actual)}`
+        );
       }
     },
     toThrow() {
@@ -256,7 +258,7 @@ function expect(actual) {
       } catch (error) {
         // Expected
       }
-    }
+    },
   };
 }
 
@@ -731,14 +733,18 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Using console.log for everything
 console.log("\nPitfall 1: Using console.log for everything");
 console.log("  console.log is great but has limitations.");
-console.log("  Doesn't show line numbers consistently, no object expansion by default.");
+console.log(
+  "  Doesn't show line numbers consistently, no object expansion by default."
+);
 console.log("  Fix: Use console.table for arrays, console.dir for objects.");
 
 // Pitfall 2: Not handling errors in tests
 console.log("\nPitfall 2: Not handling errors in tests");
 console.log("  Tests that don't catch expected errors fail unexpectedly.");
 console.log("  async/await errors without expect().rejects fail tests.");
-console.log("  Fix: Use expect().rejects.toThrow() or try/catch with assert.rejects.");
+console.log(
+  "  Fix: Use expect().rejects.toThrow() or try/catch with assert.rejects."
+);
 
 // Pitfall 3: Test dependencies affecting each other
 console.log("\nPitfall 3: Test dependencies affecting each other");

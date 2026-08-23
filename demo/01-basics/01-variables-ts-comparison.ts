@@ -108,7 +108,7 @@ let strLength1: number = (someValue as string).length;
 let strLength2: number = (<string>someValue).length;
 
 // ⚠️ PITFALL: Type assertions don't perform runtime checks
-let wrongAssertion = (42 as any) as string;
+let wrongAssertion = 42 as any as string;
 // wrongAssertion.toUpperCase(); // Runtime error! TypeScript won't catch this
 
 // ✅ BEST PRACTICE: Use type guards instead of assertions
@@ -170,7 +170,9 @@ console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
 // ⚠️ PITFALL 1: Type assertions don't perform runtime checks
 // (Demonstrated earlier with wrongAssertion, restated briefly for clarity)
-console.log("Type assertions bypass compile-time checks — validate at runtime!");
+console.log(
+  "Type assertions bypass compile-time checks — validate at runtime!"
+);
 
 // PITFALL 2: Array type confusion
 let tsArrayExample: number[] = [1, 2, 3];

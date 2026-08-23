@@ -58,13 +58,13 @@ console.log("=== 1. Basic Memoization ===");
 function memoize(fn) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
-      console.log('Cache hit:', key);
+      console.log("Cache hit:", key);
       return cache.get(key);
     }
-    console.log('Cache miss:', key);
+    console.log("Cache miss:", key);
     const result = fn.apply(this, args);
     cache.set(key, result);
     return result;
@@ -85,7 +85,7 @@ console.log("Fibonacci(10):", memoizedFib(10)); // Cache hit
 function memoizeWithKey(fn, keyGenerator = JSON.stringify) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = keyGenerator(args);
     if (cache.has(key)) {
       return cache.get(key);
@@ -97,7 +97,10 @@ function memoizeWithKey(fn, keyGenerator = JSON.stringify) {
 }
 
 console.log("\nCustom key generator:");
-const sum = memoizeWithKey((a, b) => a + b, (args) => `sum:${args[0]}+${args[1]}`);
+const sum = memoizeWithKey(
+  (a, b) => a + b,
+  args => `sum:${args[0]}+${args[1]}`
+);
 console.log("sum(2, 3):", sum(2, 3));
 console.log("sum(2, 3):", sum(2, 3)); // Cache hit
 
@@ -106,7 +109,7 @@ console.log("sum(2, 3):", sum(2, 3)); // Cache hit
 function memoizeWeak(fn) {
   const cache = new WeakMap();
 
-  return function(arg) {
+  return function (arg) {
     if (cache.has(arg)) {
       return cache.get(arg);
     }
@@ -117,7 +120,7 @@ function memoizeWeak(fn) {
 }
 
 console.log("\nWeakMap memoization:");
-const processObj = memoizeWeak((obj) => ({ ...obj, processed: true }));
+const processObj = memoizeWeak(obj => ({ ...obj, processed: true }));
 const obj1 = { id: 1 };
 console.log("processObj(obj1):", processObj(obj1));
 console.log("processObj(obj1):", processObj(obj1)); // Cache hit
@@ -126,7 +129,7 @@ console.log("processObj(obj1):", processObj(obj1)); // Cache hit
 function memoizeMaxSize(fn, maxSize = 100) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       return cache.get(key);
@@ -212,22 +215,22 @@ class LRUCache {
 // LRU usage
 console.log("LRU Cache:");
 const lru = new LRUCache(3);
-lru.set('a', 1);
-lru.set('b', 2);
-lru.set('c', 3);
+lru.set("a", 1);
+lru.set("b", 2);
+lru.set("c", 3);
 console.log("After 3 inserts:", [...lru.cache.keys()]); // ['a', 'b', 'c']
 
-lru.get('a'); // Access 'a' → moves to end
+lru.get("a"); // Access 'a' → moves to end
 console.log("After get('a'):", [...lru.cache.keys()]); // ['b', 'c', 'a']
 
-lru.set('d', 4); // Evicts 'b' (least recently used)
+lru.set("d", 4); // Evicts 'b' (least recently used)
 console.log("After set('d'):", [...lru.cache.keys()]); // ['c', 'a', 'd']
 
 // Memoize with LRU
 function memoizeLRU(fn, maxSize = 100) {
   const lruCache = new LRUCache(maxSize);
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (lruCache.has(key)) {
       return lruCache.get(key);
@@ -239,7 +242,7 @@ function memoizeLRU(fn, maxSize = 100) {
 }
 
 console.log("\nMemoize with LRU:");
-const expensive = memoizeLRU((n) => {
+const expensive = memoizeLRU(n => {
   console.log(`Computing for ${n}`);
   return n * n;
 }, 2);
@@ -271,10 +274,10 @@ console.log("\n=== 3. Trampolines ===");
 // 3.1 Basic trampoline
 // - 蹦床函数，用循环代替递归避免栈溢出 (ES5)，比 TCO 兼容性更好
 function trampoline(fn) {
-  return function(...args) {
+  return function (...args) {
     let result = fn(...args);
 
-    while (typeof result === 'function') {
+    while (typeof result === "function") {
       result = result();
     }
 
@@ -290,7 +293,11 @@ function factorialTrampoline(n, accumulator = 1) {
 
 const trampolinedFact = trampoline(factorialTrampoline);
 console.log("Factorial(10):", trampolinedFact(10)); // 3628800
-console.log("Factorial(1000) works:", String(trampolinedFact(1000)).substring(0, 30), "...");
+console.log(
+  "Factorial(1000) works:",
+  String(trampolinedFact(1000)).substring(0, 30),
+  "..."
+);
 
 // 3.3 Mutual recursion with trampoline
 function isEven(n) {
@@ -328,20 +335,20 @@ function sumArray(arr, index = 0) {
   if (index >= arr.length) return 0;
   return arr[index] + sumArray(arr, index + 1);
 }
-console.log("sumArray([1,2,3,4,5]):", sumArray([1,2,3,4,5])); // 15
+console.log("sumArray([1,2,3,4,5]):", sumArray([1, 2, 3, 4, 5])); // 15
 
 // 4.2 Tail recursion - sum array
 function tailSumArray(arr, index = 0, accumulator = 0) {
   if (index >= arr.length) return accumulator;
   return tailSumArray(arr, index + 1, accumulator + arr[index]);
 }
-console.log("tailSumArray([1,2,3,4,5]):", tailSumArray([1,2,3,4,5])); // 15
+console.log("tailSumArray([1,2,3,4,5]):", tailSumArray([1, 2, 3, 4, 5])); // 15
 
 // 4.3 Tree recursion - tree traversal
 const tree = {
   value: 1,
   left: { value: 2, left: { value: 4 }, right: { value: 5 } },
-  right: { value: 3, left: { value: 6 }, right: { value: 7 } }
+  right: { value: 3, left: { value: 6 }, right: { value: 7 } },
 };
 
 function traverseTree(node, result = []) {
@@ -358,7 +365,7 @@ function deepReduce(obj, fn, acc) {
   acc = fn(acc, obj);
 
   for (const key in obj) {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
       acc = deepReduce(obj[key], fn, acc);
     } else {
       acc = fn(acc, obj[key]); // Apply fn to leaf values
@@ -369,9 +376,13 @@ function deepReduce(obj, fn, acc) {
 }
 
 const nestedObject = { a: 1, b: { c: 2, d: { e: 3 } }, f: 4 };
-const nestedSum = deepReduce(nestedObject, (acc, val) => {
-  return typeof val === 'number' ? acc + val : acc;
-}, 0);
+const nestedSum = deepReduce(
+  nestedObject,
+  (acc, val) => {
+    return typeof val === "number" ? acc + val : acc;
+  },
+  0
+);
 console.log("Nested sum:", nestedSum); // 10
 
 // ============================================
@@ -393,8 +404,14 @@ console.log("Nested sum:", nestedSum); // 10
 console.log("\n=== 5. Point-Free Style ===");
 
 // Helper compose/pipe
-const compose = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
-const pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);
+const compose =
+  (...fns) =>
+  x =>
+    fns.reduceRight((acc, fn) => fn(acc), x);
+const pipe =
+  (...fns) =>
+  x =>
+    fns.reduce((acc, fn) => fn(acc), x);
 
 // 5.1 Regular vs point-free
 const add1 = x => x + 1;
@@ -414,8 +431,8 @@ const trim = str => str.trim();
 const toUpper = str => str.toUpperCase();
 const addPrefix = prefix => str => `${prefix} ${str}`;
 
-const formatName = pipe(trim, toUpper, addPrefix('Dr.'));
-console.log("\nPoint-free formatName:", formatName('  alice smith  '));
+const formatName = pipe(trim, toUpper, addPrefix("Dr."));
+console.log("\nPoint-free formatName:", formatName("  alice smith  "));
 
 // ============================================
 // 6. Performance Considerations
@@ -442,27 +459,29 @@ function sumLoop(n) {
 }
 
 function sumReduce(n) {
-  return Array.from({ length: n }, (_, i) => i)
-    .reduce((acc, val) => acc + val, 0);
+  return Array.from({ length: n }, (_, i) => i).reduce(
+    (acc, val) => acc + val,
+    0
+  );
 }
 
 console.log("Performance comparison (loop vs reduce):");
-console.time('loop');
+console.time("loop");
 sumLoop(1000000);
-console.timeEnd('loop');
+console.timeEnd("loop");
 
-console.time('reduce');
+console.time("reduce");
 sumReduce(1000000);
-console.timeEnd('reduce');
+console.timeEnd("reduce");
 
 // 6.2 Lazy evaluation
 function lazy(fn) {
   let evaluated = false;
   let result;
 
-  return function() {
+  return function () {
     if (!evaluated) {
-      console.log('Evaluating lazily');
+      console.log("Evaluating lazily");
       result = fn();
       evaluated = true;
     }
@@ -490,7 +509,9 @@ const objA = getObject();
 objA.data = 999;
 const objB = getObject(); // ❌ objB is the same modified object!
 console.log("objB.data:", objB.data); // 999 (should be 0)
-console.log("✅ Good: Return immutable objects or copies from memoized functions");
+console.log(
+  "✅ Good: Return immutable objects or copies from memoized functions"
+);
 
 // Pitfall 2: Memory leaks with unbounded caches
 console.log("\nPitfall 2 - Unbounded cache:");
@@ -500,7 +521,9 @@ console.log("✅ Good: Use LRU or TTL-based caches for production");
 // Pitfall 3: Recursion without base case
 console.log("\nPitfall 3 - Infinite recursion:");
 console.log("❌ Bad: Forgetting base case in recursion");
-console.log("✅ Good: Always test base case first, consider trampolines for deep recursion");
+console.log(
+  "✅ Good: Always test base case first, consider trampolines for deep recursion"
+);
 
 // ============================================
 // Best Practices
@@ -509,11 +532,17 @@ console.log("\n=== Best Practices ===");
 
 console.log("✅ Use memoization only for pure functions");
 console.log("✅ Use LRU cache for production to avoid memory leaks");
-console.log("✅ Use trampolines for deep recursion (better compatibility than TCO)");
-console.log("✅ Use WeakMap for memoizing objects (auto-gc when keys are unreachable)");
+console.log(
+  "✅ Use trampolines for deep recursion (better compatibility than TCO)"
+);
+console.log(
+  "✅ Use WeakMap for memoizing objects (auto-gc when keys are unreachable)"
+);
 console.log("✅ Prefer iteration over recursion for simple loops");
 console.log("✅ Consider performance before over-using composition");
-console.log("⚠️  Be careful with JSON.stringify for cache keys (circular refs, undefined, Symbols)");
+console.log(
+  "⚠️  Be careful with JSON.stringify for cache keys (circular refs, undefined, Symbols)"
+);
 console.log("⚠️  Don't over-use point-free style when clarity suffers");
 console.log("⚠️  Test cache invalidation logic carefully");
 

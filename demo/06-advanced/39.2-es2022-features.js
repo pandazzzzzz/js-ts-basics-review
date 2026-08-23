@@ -65,11 +65,16 @@ console.log("verifyPassword('secret123'):", user.verifyPassword("secret123")); /
 // } catch (e) {
 //   console.log("Accessing private field from outside:", e.message);
 // }
-console.log("Note: Accessing #password from outside the class is a SyntaxError (caught at parse time)");
+console.log(
+  "Note: Accessing #password from outside the class is a SyntaxError (caught at parse time)"
+);
 
 // Private fields are truly private, not just "hidden"
 console.log("\nObject.keys(user):", Object.keys(user)); // ["name"] - #password not included
-console.log("user.hasOwnProperty('#password'):", user.hasOwnProperty("#password")); // false
+console.log(
+  "user.hasOwnProperty('#password'):",
+  user.hasOwnProperty("#password")
+); // false
 
 // Private methods (ES2022 also supports private methods)
 class Calculator {
@@ -83,7 +88,7 @@ class Calculator {
 }
 
 const calc = new Calculator();
-console.log("\nCalculator sum([1,2,3]):", calc.sum([1,2,3])); // 6
+console.log("\nCalculator sum([1,2,3]):", calc.sum([1, 2, 3])); // 6
 // calc.#add(1,2); // ❌ Private method, can't access from outside (SyntaxError)
 
 // ============================================
@@ -162,7 +167,10 @@ cart.push("orange");
 console.log("MDN returnLast(cart) after push:", returnLast(cart)); // 'orange'
 
 // Before ES2022: need to calculate length for negative indices
-console.log("\nBefore at(): last element = arr[arr.length - 1]:", arr[arr.length - 1]); // 50
+console.log(
+  "\nBefore at(): last element = arr[arr.length - 1]:",
+  arr[arr.length - 1]
+); // 50
 
 // Works with strings
 const str = "hello world";
@@ -209,7 +217,10 @@ console.log("MDN undefined value:", Object.hasOwn(example, "prop")); // true (va
 // Difference from `in` operator (which checks prototype chain too):
 console.log("MDN 'prop' in example:", "prop" in example); // true
 console.log("MDN 'toString' in example:", "toString" in example); // true (inherited)
-console.log("MDN Object.hasOwn(example, 'toString'):", Object.hasOwn(example, "toString")); // false (not own)
+console.log(
+  "MDN Object.hasOwn(example, 'toString'):",
+  Object.hasOwn(example, "toString")
+); // false (not own)
 
 // Also works for objects created with `Object.create(null)`
 const nullObj = Object.create(null);
@@ -223,9 +234,12 @@ function hasProperty(obj, prop) {
   return Object.hasOwn(obj, prop);
 }
 
-console.log("\nhasProperty({x:1}, 'x'):", hasProperty({x:1}, 'x')); // true
-console.log("hasProperty({x:1}, 'y'):", hasProperty({x:1}, 'y')); // false
-console.log("hasProperty(Object.create(null), 'toString'):", hasProperty(Object.create(null), 'toString')); // false
+console.log("\nhasProperty({x:1}, 'x'):", hasProperty({ x: 1 }, "x")); // true
+console.log("hasProperty({x:1}, 'y'):", hasProperty({ x: 1 }, "y")); // false
+console.log(
+  "hasProperty(Object.create(null), 'toString'):",
+  hasProperty(Object.create(null), "toString")
+); // false
 
 // ============================================
 // 5. Error.cause
@@ -309,7 +323,9 @@ console.log("\n--- 6. Top-level await ---\n");
 //   console.log(data);
 // })();
 
-console.log("Note: Top-level await works in ES modules only (add type=\"module\" in script tag or use .mjs)");
+console.log(
+  'Note: Top-level await works in ES modules only (add type="module" in script tag or use .mjs)'
+);
 
 // ============================================
 // 7. RegExp Match Indices (/d flag)
@@ -334,9 +350,22 @@ while ((match = regex.exec(text)) !== null) {
   console.log(`\nMatch: "${match[0]}"`);
   console.log("Capture group 1:", match[1]);
   console.log("Indices:", match.indices);
-  console.log("Full match position: start", match.indices[0][0], "end", match.indices[0][1]);
-  console.log("Group 1 position: start", match.indices[1][0], "end", match.indices[1][1]);
-  console.log("Matched substring:", text.slice(match.indices[1][0], match.indices[1][1]));
+  console.log(
+    "Full match position: start",
+    match.indices[0][0],
+    "end",
+    match.indices[0][1]
+  );
+  console.log(
+    "Group 1 position: start",
+    match.indices[1][0],
+    "end",
+    match.indices[1][1]
+  );
+  console.log(
+    "Matched substring:",
+    text.slice(match.indices[1][0], match.indices[1][1])
+  );
 }
 
 // Output:
@@ -383,7 +412,9 @@ console.log("User2.isUser({}):", User2.isUser({})); // false
 // Before ES2022: Had to use try/catch inside the class
 // The try/catch approach only works inside the class where #id is in scope
 // For external checks, you'd need a static method on the class
-console.log("\nNote: Before ES2022, checking for private fields required try/catch inside the class scope");
+console.log(
+  "\nNote: Before ES2022, checking for private fields required try/catch inside the class scope"
+);
 console.log("Brand checks with '#id in obj' are cleaner and more reliable");
 
 // ============================================
@@ -421,12 +452,18 @@ class Derived extends Base {
 console.log("\n--- 10. Best Practices ---\n");
 
 console.log("✅ Use # private fields for true encapsulation in classes");
-console.log("✅ Use Object.hasOwn() instead of obj.hasOwnProperty() for safety");
-console.log("✅ Use .at() for negative indexing instead of arr[arr.length - n]");
+console.log(
+  "✅ Use Object.hasOwn() instead of obj.hasOwnProperty() for safety"
+);
+console.log(
+  "✅ Use .at() for negative indexing instead of arr[arr.length - n]"
+);
 console.log("✅ Use Error.cause to chain errors and preserve original context");
 console.log("✅ Use static blocks for complex class initialization logic");
 console.log("✅ Use /d flag for regex when you need match positions");
-console.log("⚠️  Use top-level await sparingly at module level (can delay module loading)");
+console.log(
+  "⚠️  Use top-level await sparingly at module level (can delay module loading)"
+);
 console.log("✅ Use '#field in obj' for brand checking instead of try/catch");
 
 // ============================================

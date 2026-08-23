@@ -13,7 +13,7 @@ export {};
 const person: { name: string; age: number; city: string } = {
   name: "Alice",
   age: 30,
-  city: "New York"
+  city: "New York",
 };
 
 console.log("=== Object Type Annotations ===");
@@ -29,7 +29,7 @@ interface User {
 const user: User = {
   name: "Bob",
   age: 25,
-  email: "bob@example.com"
+  email: "bob@example.com",
 };
 
 console.log("User:", user);
@@ -44,7 +44,7 @@ type Product = {
 const product: Product = {
   id: 1,
   name: "Laptop",
-  price: 999
+  price: 999,
 };
 
 console.log("Product:", product);
@@ -69,7 +69,7 @@ interface Person {
 const alice: Person = {
   id: 1,
   name: "Alice",
-  age: 30
+  age: 30,
   // email and phone are optional
 };
 
@@ -85,7 +85,7 @@ console.log("Updated Alice:", alice);
 // Readonly utility type
 const readonlyConfig: Readonly<{ apiKey: string; endpoint: string }> = {
   apiKey: "abc123",
-  endpoint: "https://api.example.com"
+  endpoint: "https://api.example.com",
 };
 
 // readonlyConfig.apiKey = "new-key"; // ❌ Error: Cannot assign to readonly property
@@ -103,7 +103,7 @@ interface StringMap {
 const translations: StringMap = {
   hello: "你好",
   goodbye: "再见",
-  thanks: "谢谢"
+  thanks: "谢谢",
 };
 
 console.log("\n=== Index Signatures ===");
@@ -128,7 +128,7 @@ const mixed: MixedMap = {
   name: "Alice",
   age: 30,
   city: "NYC",
-  zipCode: 10001
+  zipCode: 10001,
 };
 
 console.log("Mixed:", mixed);
@@ -138,7 +138,7 @@ type TranslationMap = Record<string, string>;
 
 const messages: TranslationMap = {
   success: "Operation successful",
-  error: "An error occurred"
+  error: "An error occurred",
 };
 
 console.log("Messages:", messages);
@@ -170,12 +170,12 @@ const employee: Employee = {
   address: {
     street: "123 Main St",
     city: "NYC",
-    country: "USA"
+    country: "USA",
   },
   department: {
     name: "Engineering",
-    code: "ENG"
-  }
+    code: "ENG",
+  },
 };
 
 console.log("\n=== Nested Objects ===");
@@ -213,7 +213,7 @@ const calculator: Calculator = {
   divide(n: number): number {
     if (n === 0) throw new Error("Division by zero");
     return this.value / n;
-  }
+  },
 };
 
 console.log("\n=== Object Methods ===");
@@ -239,7 +239,7 @@ const counter: Counter = {
   },
   reset() {
     this.count = 0;
-  }
+  },
 };
 
 console.log("Counter:", counter.count);
@@ -297,7 +297,7 @@ interface Config {
 const serverConfig: Config = {
   host: "localhost",
   port: 3000,
-  timeout: 5000
+  timeout: 5000,
 };
 
 console.log("\n=== Object Methods with Types ===");
@@ -345,14 +345,14 @@ interface ExtendedUser extends BaseUser {
 
 const baseUser: BaseUser = {
   name: "Alice",
-  email: "alice@example.com"
+  email: "alice@example.com",
 };
 
 // Spread with type inference
 const extendedUser: ExtendedUser = {
   ...baseUser,
   age: 30,
-  city: "NYC"
+  city: "NYC",
 };
 
 console.log("\n=== Object Spreading ===");
@@ -366,7 +366,7 @@ function updateUser(user: User, updates: Partial<User>): User {
 const originalUser: User = {
   name: "Bob",
   age: 25,
-  email: "bob@example.com"
+  email: "bob@example.com",
 };
 
 const updatedUser = updateUser(originalUser, { age: 26 });
@@ -380,7 +380,7 @@ interface UserWithAddress {
 
 const user1: UserWithAddress = {
   name: "Alice",
-  address: { city: "NYC", country: "USA" }
+  address: { city: "NYC", country: "USA" },
 };
 
 const user2 = { ...user1 };
@@ -429,12 +429,17 @@ const profile: UserProfile = {
     name: "Alice",
     settings: {
       theme: "dark",
-      notifications: true
-    }
-  }
+      notifications: true,
+    },
+  },
 };
 
-const { user: { id, settings: { theme } } } = profile;
+const {
+  user: {
+    id,
+    settings: { theme },
+  },
+} = profile;
 console.log("User ID:", id);
 console.log("Theme:", theme);
 
@@ -461,7 +466,7 @@ console.log("\n=== Utility Types ===");
 // Partial<T> - All properties optional
 type PartialTodo = Partial<Todo>;
 const partialTodo: PartialTodo = {
-  title: "Learn TypeScript"
+  title: "Learn TypeScript",
   // Other properties are optional
 };
 console.log("Partial todo:", partialTodo);
@@ -475,7 +480,7 @@ const readonlyTodo: ReadonlyTodo = {
   title: "Read docs",
   description: "TypeScript documentation",
   completed: false,
-  createdAt: new Date()
+  createdAt: new Date(),
 };
 // readonlyTodo.completed = true; // ❌ Error
 console.log("Readonly todo:", readonlyTodo);
@@ -484,7 +489,7 @@ console.log("Readonly todo:", readonlyTodo);
 type TodoPreview = Pick<Todo, "title" | "completed">;
 const preview: TodoPreview = {
   title: "Learn TS",
-  completed: false
+  completed: false,
 };
 console.log("Preview:", preview);
 
@@ -493,7 +498,7 @@ type TodoWithoutDate = Omit<Todo, "createdAt">;
 const todoNoDate: TodoWithoutDate = {
   title: "Task",
   description: "Description",
-  completed: false
+  completed: false,
 };
 console.log("Todo without date:", todoNoDate);
 
@@ -502,7 +507,7 @@ type UserRoles = Record<string, "admin" | "user" | "guest">;
 const roles: UserRoles = {
   alice: "admin",
   bob: "user",
-  charlie: "guest"
+  charlie: "guest",
 };
 console.log("Roles:", roles);
 
@@ -571,15 +576,16 @@ interface Identifiable {
 }
 
 // Combine multiple types
-type Entity = Identifiable & Timestamped & {
-  name: string;
-};
+type Entity = Identifiable &
+  Timestamped & {
+    name: string;
+  };
 
 const entity: Entity = {
   id: 1,
   name: "Item",
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
 };
 
 console.log("\n=== Intersection Types ===");
@@ -602,7 +608,7 @@ const obj: LoggableSerializable = {
   },
   serialize() {
     return JSON.stringify(this);
-  }
+  },
 };
 
 obj.log();
@@ -641,7 +647,7 @@ type NullableUser = Nullable<User>;
 const nullableUser: NullableUser = {
   name: "Alice",
   age: null,
-  email: "alice@example.com"
+  email: "alice@example.com",
 };
 console.log("Nullable user:", nullableUser);
 
@@ -776,7 +782,7 @@ type KeyValuePair<K, V> = {
 
 const pair: KeyValuePair<string, number> = {
   key: "age",
-  value: 30
+  value: 30,
 };
 console.log("Pair:", pair);
 
@@ -787,7 +793,7 @@ console.log("Pair:", pair);
 // Object.freeze() with type safety
 const frozenConfig = Object.freeze({
   apiKey: "abc123",
-  endpoint: "https://api.example.com"
+  endpoint: "https://api.example.com",
 });
 
 // TypeScript infers readonly properties
@@ -815,12 +821,12 @@ interface NestedConfig {
 const deepFrozen: DeepReadonly<NestedConfig> = {
   server: {
     host: "localhost",
-    port: 3000
+    port: 3000,
   },
   database: {
     url: "mongodb://localhost",
-    timeout: 5000
-  }
+    timeout: 5000,
+  },
 };
 
 // deepFrozen.server.host = "new-host"; // ❌ Error
@@ -864,7 +870,7 @@ interface FlexiblePoint {
 const flexPoint: FlexiblePoint = {
   x: 10,
   y: 20,
-  z: 30
+  z: 30,
 };
 
 console.log("\n=== Excess Property Checking ===");
@@ -901,11 +907,7 @@ class NumberBuilder implements Builder {
 }
 
 console.log("\n=== This Type ===");
-const result = new NumberBuilder()
-  .add(5)
-  .multiply(2)
-  .add(3)
-  .build();
+const result = new NumberBuilder().add(5).multiply(2).add(3).build();
 console.log("Result:", result); // 13
 
 // ============================================
@@ -964,7 +966,7 @@ interface StringDict {
 
 const dict: StringDict = {
   name: "Alice",
-  email: "alice@example.com"
+  email: "alice@example.com",
 };
 
 // This doesn't error even though property doesn't exist

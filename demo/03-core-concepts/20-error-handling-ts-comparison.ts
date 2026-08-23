@@ -39,7 +39,6 @@ function safeJsonParse(json: string): unknown {
   }
 }
 
-
 // ============================================================================
 // 2. CUSTOM ERROR TYPES WITH PROPERTIES
 // ============================================================================
@@ -94,15 +93,12 @@ try {
   }
 }
 
-
 // ============================================================================
 // 3. ERROR UNION TYPES
 // ============================================================================
 
 // TypeScript: Result/Either pattern with union types
-type Result<T, E = Error> =
-  | { ok: true; value: T }
-  | { ok: false; error: E };
+type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
 
 function divide(
   a: number,
@@ -111,7 +107,7 @@ function divide(
   if (b === 0) {
     return {
       ok: false,
-      error: { type: "DivisionByZero", message: "Cannot divide by zero" }
+      error: { type: "DivisionByZero", message: "Cannot divide by zero" },
     };
   }
   return { ok: true, value: a / b };
@@ -129,7 +125,6 @@ if (result2.ok === false) {
 } else {
   console.log(`Result: ${result2.value}`);
 }
-
 
 // ============================================================================
 // 4. TYPE GUARDS FOR ERRORS
@@ -160,7 +155,10 @@ function handleError(error: unknown): void {
 
 // Error hierarchy
 class ApplicationError extends Error {
-  constructor(message: string, public code: string) {
+  constructor(
+    message: string,
+    public code: string
+  ) {
     super(message);
     this.name = "ApplicationError";
     Object.setPrototypeOf(this, ApplicationError.prototype);
@@ -204,7 +202,6 @@ try {
   handleError(error);
 }
 
-
 // ============================================================================
 // 5. NEVER TYPE FOR FUNCTIONS THAT THROW
 // ============================================================================
@@ -223,9 +220,19 @@ function infiniteLoop(): never {
 // Use in exhaustive checks
 type Shape = Circle | Square | Triangle;
 
-interface Circle { kind: "circle"; radius: number }
-interface Square { kind: "square"; side: number }
-interface Triangle { kind: "triangle"; base: number; height: number }
+interface Circle {
+  kind: "circle";
+  radius: number;
+}
+interface Square {
+  kind: "square";
+  side: number;
+}
+interface Triangle {
+  kind: "triangle";
+  base: number;
+  height: number;
+}
 
 function getArea(shape: Shape): number {
   switch (shape.kind) {
@@ -241,8 +248,9 @@ function getArea(shape: Shape): number {
 }
 
 console.log("\n=== Never Type ===");
-console.log(`Circle area: ${getArea({ kind: "circle", radius: 5 }).toFixed(2)}`);
-
+console.log(
+  `Circle area: ${getArea({ kind: "circle", radius: 5 }).toFixed(2)}`
+);
 
 // ============================================================================
 // 6. ASSERTION FUNCTIONS
@@ -276,7 +284,6 @@ const testValue: unknown = "test";
 assertString(testValue);
 console.log(testValue.toUpperCase()); // ✅ OK after assertion
 
-
 // ============================================================================
 // 7. STRICT NULL CHECKS IN ERROR HANDLING
 // ============================================================================
@@ -301,16 +308,21 @@ function handleResponse(response: ApiResponse): string {
 
   // Check for error
   if (response.error) {
-    throw new Error(`API Error ${response.error.code}: ${response.error.message}`);
+    throw new Error(
+      `API Error ${response.error.code}: ${response.error.message}`
+    );
   }
 
   return userName;
 }
 
 console.log("\n=== Strict Null Checks ===");
-console.log(handleResponse({ data: { user: { name: "Alice", email: "alice@example.com" } } }));
+console.log(
+  handleResponse({
+    data: { user: { name: "Alice", email: "alice@example.com" } },
+  })
+);
 console.log(handleResponse({})); // Returns "Anonymous"
-
 
 // ============================================================================
 // 8. ERROR FACTORY FUNCTIONS
@@ -341,10 +353,11 @@ try {
   throw ApiErrorFactory.notFound("User");
 } catch (error: unknown) {
   if (error instanceof HttpError) {
-    console.log(`${error.name}: ${error.message} (Status: ${error.statusCode})`);
+    console.log(
+      `${error.name}: ${error.message} (Status: ${error.statusCode})`
+    );
   }
 }
-
 
 // ============================================================================
 // 9. ASYNC ERROR HANDLING WITH TYPES
@@ -360,7 +373,7 @@ async function fetchUserData(
     if (!response.ok) {
       return {
         ok: false,
-        error: new Error(`HTTP ${response.status}`)
+        error: new Error(`HTTP ${response.status}`),
       };
     }
 
@@ -369,7 +382,7 @@ async function fetchUserData(
   } catch (error: unknown) {
     return {
       ok: false,
-      error: error instanceof Error ? error : new Error(String(error))
+      error: error instanceof Error ? error : new Error(String(error)),
     };
   }
 }
@@ -388,7 +401,6 @@ async function withErrorBoundary<T>(
 
 console.log("\n=== Async Error Handling ===");
 
-
 // ============================================================================
 // 10. ERROR INTERFACES VS CLASSES
 // ============================================================================
@@ -404,9 +416,11 @@ interface SerializableError {
 // Type guard: narrows an unknown value to one carrying a numeric/string `code`.
 // Avoids triple type assertion (`as unknown as Record<...> as ...`).
 function hasCode(e: unknown): e is { code: string | number } {
-  if (typeof e !== 'object' || e === null || !('code' in e)) return false;
-  return typeof (e as Record<string, unknown>).code === 'string' ||
-    typeof (e as Record<string, unknown>).code === 'number';
+  if (typeof e !== "object" || e === null || !("code" in e)) return false;
+  return (
+    typeof (e as Record<string, unknown>).code === "string" ||
+    typeof (e as Record<string, unknown>).code === "number"
+  );
 }
 
 function serializeError(error: unknown): SerializableError {
@@ -414,7 +428,7 @@ function serializeError(error: unknown): SerializableError {
     const result: SerializableError = {
       name: error.name,
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
     };
     // Error may carry extra `code` at runtime (e.g. Node's SystemError);
     // narrow with a type guard rather than a triple cast.
@@ -427,7 +441,7 @@ function serializeError(error: unknown): SerializableError {
   if (typeof error === "object" && error !== null) {
     const result: SerializableError = {
       name: "UnknownError",
-      message: String(error)
+      message: String(error),
     };
     if (hasCode(error)) {
       result.code = error.code;
@@ -437,14 +451,13 @@ function serializeError(error: unknown): SerializableError {
 
   return {
     name: "UnknownError",
-    message: String(error)
+    message: String(error),
   };
 }
 
 console.log("\n=== Error Interfaces ===");
 const serialized = serializeError(new Error("Test"));
 console.log(serialized);
-
 
 // ============================================================================
 // 11. COMPARISON TABLE
@@ -475,4 +488,6 @@ KEY TAKEAWAYS:
 5. Runtime error behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);

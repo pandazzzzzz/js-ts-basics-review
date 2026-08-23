@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 23-proxy-reflect-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -65,7 +64,7 @@ console.log("=== 1. Proxy Basics Demo ===");
 // 1.1 Basic Proxy
 let target = {
   name: "Target",
-  value: 42
+  value: 42,
 };
 
 let handler = {};
@@ -78,14 +77,14 @@ console.log("proxy.value:", proxy.value); // 42
 // 1.2 Proxy with get trap
 let target2 = {
   name: "Target2",
-  secret: "hidden"
+  secret: "hidden",
 };
 
 let handler2 = {
   get(target, prop, receiver) {
     console.log(`Getting ${prop}`);
     return target[prop];
-  }
+  },
 };
 
 let proxy2 = new Proxy(target2, handler2);
@@ -93,11 +92,14 @@ console.log("\nProxy with get trap:");
 console.log(proxy2.name); // Logs "Getting name", then "Target2"
 
 // 1.3 Proxy with default values
-let defaultProxy = new Proxy({}, {
-  get(target, prop) {
-    return prop in target ? target[prop] : "default value";
+let defaultProxy = new Proxy(
+  {},
+  {
+    get(target, prop) {
+      return prop in target ? target[prop] : "default value";
+    },
   }
-});
+);
 
 defaultProxy.existing = "I exist";
 console.log("\nProxy with default values:");
@@ -118,7 +120,6 @@ console.log("\nPass-through proxy:");
 console.log(passThrough.name); // "test"
 passThrough.newProp = "value";
 console.log(passThrough.newProp); // "value"
-
 
 // ============================================
 // 2. GET TRAP
@@ -153,14 +154,14 @@ console.log("\n=== 2. get Trap Demo ===");
 // 2.1 Logging property access
 let loggingTarget = {
   name: "Logging Object",
-  value: 100
+  value: 100,
 };
 
 let loggingHandler = {
   get(target, prop, receiver) {
     console.log(`[LOG] Accessing: ${String(prop)}`);
     return Reflect.get(target, prop, receiver);
-  }
+  },
 };
 
 let loggingProxy = new Proxy(loggingTarget, loggingHandler);
@@ -169,17 +170,20 @@ console.log(loggingProxy.name);
 console.log(loggingProxy.value);
 
 // 2.2 Computed properties
-let computedProxy = new Proxy({
-  firstName: "John",
-  lastName: "Doe"
-}, {
-  get(target, prop) {
-    if (prop === "fullName") {
-      return `${target.firstName} ${target.lastName}`;
-    }
-    return target[prop];
+let computedProxy = new Proxy(
+  {
+    firstName: "John",
+    lastName: "Doe",
+  },
+  {
+    get(target, prop) {
+      if (prop === "fullName") {
+        return `${target.firstName} ${target.lastName}`;
+      }
+      return target[prop];
+    },
   }
-});
+);
 
 console.log("\nComputed property:");
 console.log(computedProxy.fullName); // "John Doe"
@@ -197,7 +201,7 @@ function createArrayProxy(arr) {
         return Reflect.get(target, String(index), receiver);
       }
       return Reflect.get(target, prop, receiver);
-    }
+    },
   });
 }
 
@@ -209,17 +213,20 @@ console.log("proxyArr[-1]:", proxyArr[-1]); // 5 (last element)
 console.log("proxyArr[-2]:", proxyArr[-2]); // 4
 
 // 2.4 Type-safe property access
-let safeProxy = new Proxy({
-  age: 25,
-  name: "Alice"
-}, {
-  get(target, prop) {
-    if (!(prop in target)) {
-      throw new ReferenceError(`Property "${String(prop)}" does not exist`);
-    }
-    return target[prop];
+let safeProxy = new Proxy(
+  {
+    age: 25,
+    name: "Alice",
+  },
+  {
+    get(target, prop) {
+      if (!(prop in target)) {
+        throw new ReferenceError(`Property "${String(prop)}" does not exist`);
+      }
+      return target[prop];
+    },
   }
-});
+);
 
 console.log("\nSafe property access:");
 console.log(safeProxy.age); // 25
@@ -228,7 +235,6 @@ try {
 } catch (e) {
   console.log("Error:", e.message);
 }
-
 
 // ============================================
 // 3. SET TRAP
@@ -261,7 +267,7 @@ console.log("\n=== 3. set Trap Demo ===");
 // 3.1 Data validation
 let validatedTarget = {
   age: 0,
-  name: ""
+  name: "",
 };
 
 let validatedProxy = new Proxy(validatedTarget, {
@@ -277,7 +283,7 @@ let validatedProxy = new Proxy(validatedTarget, {
       }
     }
     return Reflect.set(target, prop, value, receiver);
-  }
+  },
 });
 
 console.log("Validated proxy:");
@@ -293,15 +299,18 @@ try {
 }
 
 // 3.2 Type coercion
-let coercingProxy = new Proxy({}, {
-  set(target, prop, value, receiver) {
-    // Auto-convert number strings to numbers
-    if (typeof value === "string" && /^\d+$/.test(value)) {
-      value = Number(value);
-    }
-    return Reflect.set(target, prop, value, receiver);
+let coercingProxy = new Proxy(
+  {},
+  {
+    set(target, prop, value, receiver) {
+      // Auto-convert number strings to numbers
+      if (typeof value === "string" && /^\d+$/.test(value)) {
+        value = Number(value);
+      }
+      return Reflect.set(target, prop, value, receiver);
+    },
   }
-});
+);
 
 console.log("\nType coercion:");
 coercingProxy.count = "42";
@@ -310,17 +319,20 @@ console.log("count:", coercingProxy.count, typeof coercingProxy.count); // 42, n
 // 3.3 Change notification (simple reactivity)
 let listeners = [];
 
-let reactiveProxy = new Proxy({}, {
-  set(target, prop, value, receiver) {
-    let oldValue = target[prop];
-    let result = Reflect.set(target, prop, value, receiver);
+let reactiveProxy = new Proxy(
+  {},
+  {
+    set(target, prop, value, receiver) {
+      let oldValue = target[prop];
+      let result = Reflect.set(target, prop, value, receiver);
 
-    // Notify listeners
-    listeners.forEach(fn => fn(prop, value, oldValue));
+      // Notify listeners
+      listeners.forEach(fn => fn(prop, value, oldValue));
 
-    return result;
+      return result;
+    },
   }
-});
+);
 
 console.log("\nChange notification:");
 listeners.push((prop, newVal, oldVal) => {
@@ -329,7 +341,6 @@ listeners.push((prop, newVal, oldVal) => {
 
 reactiveProxy.x = 10;
 reactiveProxy.x = 20;
-
 
 // ============================================
 // 4. HAS TRAP
@@ -359,7 +370,7 @@ console.log("\n=== 4. has Trap Demo ===");
 // 4.1 Hiding properties
 let hiddenTarget = {
   public: "visible",
-  _private: "hidden"
+  _private: "hidden",
 };
 
 let hiddenProxy = new Proxy(hiddenTarget, {
@@ -369,7 +380,7 @@ let hiddenProxy = new Proxy(hiddenTarget, {
       return false;
     }
     return prop in target;
-  }
+  },
 });
 
 console.log("Hiding properties:");
@@ -378,27 +389,29 @@ console.log("'_private' in proxy:", "_private" in hiddenProxy); // false
 console.log("Actual value:", hiddenProxy._private); // Still accessible directly!
 
 // 4.2 Virtual properties
-let virtualProxy = new Proxy({}, {
-  has(target, prop) {
-    // Make certain properties appear to exist
-    if (prop.startsWith("is")) {
-      return true;
-    }
-    return prop in target;
-  },
+let virtualProxy = new Proxy(
+  {},
+  {
+    has(target, prop) {
+      // Make certain properties appear to exist
+      if (prop.startsWith("is")) {
+        return true;
+      }
+      return prop in target;
+    },
 
-  get(target, prop) {
-    if (prop.startsWith("is")) {
-      return true;
-    }
-    return target[prop];
+    get(target, prop) {
+      if (prop.startsWith("is")) {
+        return true;
+      }
+      return target[prop];
+    },
   }
-});
+);
 
 console.log("\nVirtual properties:");
 console.log("'isActive' in proxy:", "isActive" in virtualProxy); // true
 console.log("proxy.isActive:", virtualProxy.isActive); // true
-
 
 // ============================================
 // 5. DELETEPROPERTY TRAP
@@ -427,18 +440,21 @@ console.log("proxy.isActive:", virtualProxy.isActive); // true
 console.log("\n=== 5. deleteProperty Trap Demo ===");
 
 // 5.1 Preventing deletion
-let protectedProxy = new Proxy({
-  important: "data",
-  removable: "can delete"
-}, {
-  deleteProperty(target, prop) {
-    if (prop === "important") {
-      console.log("Cannot delete important property");
-      return false;
-    }
-    return Reflect.deleteProperty(target, prop);
+let protectedProxy = new Proxy(
+  {
+    important: "data",
+    removable: "can delete",
+  },
+  {
+    deleteProperty(target, prop) {
+      if (prop === "important") {
+        console.log("Cannot delete important property");
+        return false;
+      }
+      return Reflect.deleteProperty(target, prop);
+    },
   }
-});
+);
 
 console.log("Preventing deletion:");
 console.log("Before delete:", protectedProxy.important);
@@ -453,16 +469,18 @@ try {
 console.log("After delete important:", protectedProxy.important); // Still "data"
 
 // 5.2 Deletion logging
-let loggedProxy = new Proxy({ a: 1, b: 2 }, {
-  deleteProperty(target, prop) {
-    console.log(`Deleting property: ${String(prop)}`);
-    return Reflect.deleteProperty(target, prop);
+let loggedProxy = new Proxy(
+  { a: 1, b: 2 },
+  {
+    deleteProperty(target, prop) {
+      console.log(`Deleting property: ${String(prop)}`);
+      return Reflect.deleteProperty(target, prop);
+    },
   }
-});
+);
 
 console.log("\nDeletion logging:");
 delete loggedProxy.a;
-
 
 // ============================================
 // 6. APPLY TRAP
@@ -502,26 +520,29 @@ let loggedFunction = new Proxy(greet, {
     let result = Reflect.apply(target, thisArg, args);
     console.log(`Function returned:`, result);
     return result;
-  }
+  },
 });
 
 console.log("Function logging:");
 console.log(loggedFunction("Alice", "Hello"));
 
 // 6.2 Argument validation
-let validatedFunction = new Proxy(function(a, b) {
-  return a + b;
-}, {
-  apply(target, thisArg, args) {
-    // Ensure all arguments are numbers
-    for (let arg of args) {
-      if (typeof arg !== "number") {
-        throw new TypeError("All arguments must be numbers");
+let validatedFunction = new Proxy(
+  function (a, b) {
+    return a + b;
+  },
+  {
+    apply(target, thisArg, args) {
+      // Ensure all arguments are numbers
+      for (let arg of args) {
+        if (typeof arg !== "number") {
+          throw new TypeError("All arguments must be numbers");
+        }
       }
-    }
-    return Reflect.apply(target, thisArg, args);
+      return Reflect.apply(target, thisArg, args);
+    },
   }
-});
+);
 
 console.log("\nArgument validation:");
 console.log(validatedFunction(5, 3)); // 8
@@ -548,14 +569,13 @@ let memoizedFunction = new Proxy(expensive, {
     let result = Reflect.apply(target, thisArg, args);
     cache.set(key, result);
     return result;
-  }
+  },
 });
 
 console.log("\nMemoization:");
 console.log(memoizedFunction(5)); // Computes
 console.log(memoizedFunction(5)); // Cache hit
 console.log(memoizedFunction(6)); // Computes
-
 
 // ============================================
 // 7. CONSTRUCT TRAP
@@ -599,7 +619,7 @@ let ValidatedPerson = new Proxy(Person, {
     }
 
     return Reflect.construct(target, args);
-  }
+  },
 });
 
 console.log("Constructor validation:");
@@ -613,22 +633,24 @@ try {
 }
 
 // 7.2 Singleton pattern
-let SingletonProxy = new Proxy(function() {
-  this.data = "singleton data";
-}, {
-  construct(target, args) {
-    if (!this.instance) {
-      this.instance = Reflect.construct(target, args);
-    }
-    return this.instance;
+let SingletonProxy = new Proxy(
+  function () {
+    this.data = "singleton data";
+  },
+  {
+    construct(target, args) {
+      if (!this.instance) {
+        this.instance = Reflect.construct(target, args);
+      }
+      return this.instance;
+    },
   }
-});
+);
 
 console.log("\nSingleton pattern:");
 let s1 = new SingletonProxy();
 let s2 = new SingletonProxy();
 console.log("s1 === s2:", s1 === s2); // true
-
 
 // ============================================
 // 8. OTHER TRAPS
@@ -674,7 +696,7 @@ let ownKeysProxy = new Proxy(ownKeysTarget, {
   ownKeys(target) {
     // Filter out hidden properties
     return Object.keys(target).filter(k => !k.startsWith("_"));
-  }
+  },
 });
 
 console.log("ownKeys trap:");
@@ -691,42 +713,47 @@ let descriptorProxy = new Proxy(descriptorTarget, {
   getOwnPropertyDescriptor(target, prop) {
     console.log(`Getting descriptor for: ${String(prop)}`);
     return Reflect.getOwnPropertyDescriptor(target, prop);
-  }
+  },
 });
 
 console.log("\ngetOwnPropertyDescriptor:");
 Object.getOwnPropertyDescriptor(descriptorProxy, "visible");
 
 // 8.3 defineProperty trap
-let defineProxy = new Proxy({}, {
-  defineProperty(target, prop, descriptor) {
-    console.log(`Defining property: ${String(prop)}`);
-    // Add configurable: true by default
-    descriptor.configurable = true;
-    return Reflect.defineProperty(target, prop, descriptor);
+let defineProxy = new Proxy(
+  {},
+  {
+    defineProperty(target, prop, descriptor) {
+      console.log(`Defining property: ${String(prop)}`);
+      // Add configurable: true by default
+      descriptor.configurable = true;
+      return Reflect.defineProperty(target, prop, descriptor);
+    },
   }
-});
+);
 
 console.log("\ndefineProperty:");
 Object.defineProperty(defineProxy, "test", { value: 42 });
 
 // 8.4 preventExtensions trap
-let preventProxy = new Proxy({}, {
-  preventExtensions(target) {
-    console.log("preventExtensions called");
-    return Reflect.preventExtensions(target);
-  },
+let preventProxy = new Proxy(
+  {},
+  {
+    preventExtensions(target) {
+      console.log("preventExtensions called");
+      return Reflect.preventExtensions(target);
+    },
 
-  isExtensible(target) {
-    console.log("isExtensible called");
-    return Reflect.isExtensible(target);
+    isExtensible(target) {
+      console.log("isExtensible called");
+      return Reflect.isExtensible(target);
+    },
   }
-});
+);
 
 console.log("\npreventExtensions/isExtensible:");
 console.log("Is extensible:", Object.isExtensible(preventProxy));
 Object.preventExtensions(preventProxy);
-
 
 // ============================================
 // 9. REFLECT API (Reflect API)
@@ -804,23 +831,25 @@ let p2 = Reflect.construct(Person2, ["Alice"]);
 console.log("Constructed:", p2.name);
 
 // 9.7 Reflect in Proxy traps (best practice)
-let bestPracticeProxy = new Proxy({ x: 10 }, {
-  get(target, prop, receiver) {
-    // Always use Reflect.get for forwarding
-    return Reflect.get(target, prop, receiver);
-  },
+let bestPracticeProxy = new Proxy(
+  { x: 10 },
+  {
+    get(target, prop, receiver) {
+      // Always use Reflect.get for forwarding
+      return Reflect.get(target, prop, receiver);
+    },
 
-  set(target, prop, value, receiver) {
-    // Always use Reflect.set for forwarding
-    console.log(`Setting ${String(prop)} to ${value}`);
-    return Reflect.set(target, prop, value, receiver);
+    set(target, prop, value, receiver) {
+      // Always use Reflect.set for forwarding
+      console.log(`Setting ${String(prop)} to ${value}`);
+      return Reflect.set(target, prop, value, receiver);
+    },
   }
-});
+);
 
 console.log("\nBest practice proxy:");
 console.log(bestPracticeProxy.x);
 bestPracticeProxy.y = 20;
-
 
 // ============================================
 // 10. PRACTICAL EXAMPLES
@@ -858,11 +887,11 @@ function createReactiveObject(initial = {}) {
       }
 
       return result;
-    }
+    },
   });
 
-  proxy.on = (fn) => listeners.add(fn);
-  proxy.off = (fn) => listeners.delete(fn);
+  proxy.on = fn => listeners.add(fn);
+  proxy.off = fn => listeners.delete(fn);
 
   return proxy;
 }
@@ -890,7 +919,7 @@ function createReadonly(obj) {
     deleteProperty(target, prop) {
       console.log(`Cannot delete ${String(prop)}: readonly object`);
       return false;
-    }
+    },
   });
 }
 
@@ -913,19 +942,18 @@ function createAutoSave(obj, saveFn) {
         saveFn(target);
       }
       return result;
-    }
+    },
   });
 }
 
 console.log("\nAuto-save proxy:");
 let data = { name: "test" };
-let savedData = createAutoSave(data, (obj) => {
+let savedData = createAutoSave(data, obj => {
   console.log("Saving:", JSON.stringify(obj));
 });
 
 savedData.name = "updated";
 savedData.value = 42;
-
 
 // ============================================
 // 11. PERFORMANCE AND PITFALLS
@@ -944,7 +972,7 @@ let user = {
   name: "Alice",
   greet() {
     return `Hello, I'm ${this.name}`;
-  }
+  },
 };
 
 let userProxy = new Proxy(user, {});
@@ -986,17 +1014,13 @@ try {
   console.log("Private field limitation:", e.message);
 }
 
-
 // ============================================
 // 12. ADVANCED PATTERNS
 // ============================================
 console.log("\n=== 12. Advanced Patterns Demo ===");
 
 // 12.1 Revocable proxy
-let { proxy: revocableProxy, revoke } = Proxy.revocable(
-  { secret: "data" },
-  {}
-);
+let { proxy: revocableProxy, revoke } = Proxy.revocable({ secret: "data" }, {});
 
 console.log("Revocable proxy:");
 console.log("Before revoke:", revocableProxy.secret);
@@ -1013,14 +1037,14 @@ let proxy1 = new Proxy(base, {
   get(target, prop) {
     console.log("Proxy 1 get");
     return target[prop];
-  }
+  },
 });
 
 let proxyChain2 = new Proxy(proxy1, {
   get(target, prop) {
     console.log("Proxy 2 get");
     return target[prop];
-  }
+  },
 });
 
 console.log("\nProxy chain:");
@@ -1046,7 +1070,7 @@ function createMembrane() {
       },
       set(target, prop, value, receiver) {
         return Reflect.set(target, prop, unwrap(value), receiver);
-      }
+      },
     });
 
     wrapped.set(value, proxy);
@@ -1070,7 +1094,6 @@ let membrane = createMembrane();
 let originalObj = { nested: { value: 42 } };
 let wrappedObj = membrane(originalObj);
 console.log("Wrapped access:", wrappedObj.nested.value);
-
 
 // ============================================
 // SUMMARY
@@ -1099,7 +1122,6 @@ console.log("Wrapped access:", wrappedObj.nested.value);
  */
 
 console.log("\n=== Proxy and Reflect Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1169,14 +1191,15 @@ Proxy & Reflect:
 - 19-symbol-deep.js (well-known symbols)
 `);
 
-
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 17-property-descriptors.js - Property descriptors");
 console.log("📘 19-symbol-deep.js - Well-known Symbols");
-console.log("📘 24.1-function-composition.js - Function composition and decorators");
+console.log(
+  "📘 24.1-function-composition.js - Function composition and decorators"
+);
 
 // ============================================
 // TypeScript Comparison

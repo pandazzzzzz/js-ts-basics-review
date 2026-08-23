@@ -48,7 +48,6 @@ objKeyMap.set(key1, "First object");
 objKeyMap.set(key2, "Second object");
 console.log("\nObject key map size:", objKeyMap.size); // 2 (different references)
 
-
 // ============================================================================
 // 2. SET TYPE ANNOTATIONS - Set<T>
 // ============================================================================
@@ -82,7 +81,6 @@ userSet.add(bob);
 userSet.add(alice); // Duplicate reference, won't be added
 
 console.log("\nUser set size:", userSet.size); // 2
-
 
 // ============================================================================
 // 3. WEAKMAP AND WEAKSET TYPING
@@ -121,7 +119,6 @@ console.log("WeakSet.has(weakObj1):", weakSet.has(weakObj1));
 // ⚠️ PITFALL: WeakMap/WeakSet only accept objects as keys/values
 // const badWeakMap: WeakMap<string, number> = new WeakMap(); // ❌ Error: Type 'string' does not satisfy the constraint 'object'
 
-
 // ============================================================================
 // 4. ITERATION TYPE INFERENCE
 // ============================================================================
@@ -129,7 +126,11 @@ console.log("WeakSet.has(weakObj1):", weakSet.has(weakObj1));
 console.log("\n=== Iteration Type Inference ===");
 
 // Map iteration - TypeScript infers correct types
-const iterMap: Map<string, number> = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const iterMap: Map<string, number> = new Map([
+  ["a", 1],
+  ["b", 2],
+  ["c", 3],
+]);
 
 // for...of iteration - inferred as [string, number]
 console.log("Map iteration:");
@@ -171,7 +172,6 @@ for (const value of iterSet) {
   console.log(`  ${value.toUpperCase()}`);
 }
 
-
 // ============================================================================
 // 5. MAP METHODS TYPE SAFETY
 // ============================================================================
@@ -203,14 +203,21 @@ if (methodMap.has("alice")) {
 }
 
 // Type-safe wrapper function
-function getUserOrDefault(map: Map<string, User>, key: string, defaultUser: User): User {
+function getUserOrDefault(
+  map: Map<string, User>,
+  key: string,
+  defaultUser: User
+): User {
   return map.get(key) ?? defaultUser;
 }
 
-const defaultUser: User = { id: 0, name: "Unknown", email: "unknown@example.com" };
+const defaultUser: User = {
+  id: 0,
+  name: "Unknown",
+  email: "unknown@example.com",
+};
 const foundUser = getUserOrDefault(methodMap, "nonexistent", defaultUser);
 console.log("With default:", foundUser.name);
-
 
 // ============================================================================
 // 6. SET OPERATIONS WITH GENERICS
@@ -233,7 +240,10 @@ console.log("Union:", [...unionSet]);
 // Intersection
 type IntersectionOperation = <T>(a: Set<T>, b: Set<T>) => Set<T>;
 
-const intersection: IntersectionOperation = <T>(a: Set<T>, b: Set<T>): Set<T> => {
+const intersection: IntersectionOperation = <T>(
+  a: Set<T>,
+  b: Set<T>
+): Set<T> => {
   return new Set([...a].filter(x => b.has(x)));
 };
 
@@ -250,7 +260,6 @@ const difference: DifferenceOperation = <T>(a: Set<T>, b: Set<T>): Set<T> => {
 const differenceSet = difference(setA, setB);
 console.log("Difference (A - B):", [...differenceSet]);
 
-
 // ============================================================================
 // 7. CONVERTING TO/FROM ARRAYS
 // ============================================================================
@@ -258,12 +267,19 @@ console.log("Difference (A - B):", [...differenceSet]);
 console.log("\n=== Converting To/From Arrays ===");
 
 // Map to array - type preservation
-const sourceMap: Map<string, number> = new Map([["a", 1], ["b", 2]]);
+const sourceMap: Map<string, number> = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 const mapArray: [string, number][] = [...sourceMap];
 console.log("Map to array:", mapArray);
 
 // Array back to Map
-const entries: [string, number][] = [["x", 10], ["y", 20], ["z", 30]];
+const entries: [string, number][] = [
+  ["x", 10],
+  ["y", 20],
+  ["z", 30],
+];
 const fromArray: Map<string, number> = new Map(entries);
 console.log("Array to Map:", Object.fromEntries(fromArray));
 
@@ -280,9 +296,10 @@ console.log("Deduplicated:", [...deduped]);
 // Array to Map with index
 type IndexedMap<T> = Map<number, T>;
 const items: string[] = ["apple", "banana", "cherry"];
-const indexedMap: IndexedMap<string> = new Map(items.map((item, index) => [index, item]));
+const indexedMap: IndexedMap<string> = new Map(
+  items.map((item, index) => [index, item])
+);
 console.log("Indexed map:", Object.fromEntries(indexedMap));
-
 
 // ============================================================================
 // 8. UTILITY TYPES FOR MAP/SET
@@ -318,7 +335,6 @@ type ExtractedKey = MapKey<NumberStringMap>; // number
 type ExtractedValue = MapValue<NumberStringMap>; // string
 console.log("Extracted key/value types: number, string");
 
-
 // ============================================================================
 // 9. COMMON PITFALLS
 // ============================================================================
@@ -339,7 +355,10 @@ const safeValue: number | undefined = unsafeMap.get("missing");
 console.log("Safe undefined:", safeValue);
 
 // PITFALL 3: JSON.stringify() on Map/Set returns {}
-const jsonMap: Map<string, number> = new Map([["a", 1], ["b", 2]]);
+const jsonMap: Map<string, number> = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 const jsonSet: Set<number> = new Set([1, 2, 3]);
 console.log("JSON.stringify(Map):", JSON.stringify(jsonMap)); // {}
 console.log("JSON.stringify(Set):", JSON.stringify(jsonSet)); // {}
@@ -353,7 +372,10 @@ console.log("Correct Set JSON:", JSON.stringify([...jsonSet]));
 
 // PITFALL 5: forEach callback types
 type CallbackMap = Map<string, number>;
-const cbMap: CallbackMap = new Map([["a", 1], ["b", 2]]);
+const cbMap: CallbackMap = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
 cbMap.forEach((value, key, map) => {
   // TypeScript infers: (value: number, key: string, map: Map<string, number>) => void
   console.log(`  ${key}: ${value}`);
@@ -362,12 +384,12 @@ cbMap.forEach((value, key, map) => {
 // PITFALL 6: Map/Set size is number, always truthy for non-empty
 type SizeCheckMap = Map<string, string>;
 const sizeMap: SizeCheckMap = new Map();
-if (sizeMap.size) { // 0 is falsy, so this won't execute
+if (sizeMap.size) {
+  // 0 is falsy, so this won't execute
   console.log("Map has items");
 } else {
   console.log("Map is empty (size check works)");
 }
-
 
 // ============================================================================
 // 10. BEST PRACTICES SUMMARY
@@ -439,7 +461,6 @@ if (sizeMap.size) { // 0 is falsy, so this won't execute
 🎯 RECOMMENDATION: Use TypeScript for all collection handling!
 */
 
-
 // ============================================================================
 // 11. ADVANCED: CUSTOM MAP/SET TYPES
 // ============================================================================
@@ -483,7 +504,7 @@ console.log("Reverse lookup:", biMap.getKey(2));
 interface EventMap {
   "user:login": { userId: number; timestamp: Date };
   "user:logout": { userId: number; timestamp: Date };
-  "error": { message: string; code: number };
+  error: { message: string; code: number };
 }
 
 class TypedEventEmitter<T extends Record<string, any>> {
@@ -505,11 +526,10 @@ class TypedEventEmitter<T extends Record<string, any>> {
 }
 
 const emitter = new TypedEventEmitter<EventMap>();
-emitter.on("user:login", (data) => {
+emitter.on("user:login", data => {
   console.log(`User ${data.userId} logged in at ${data.timestamp}`);
 });
 emitter.emit("user:login", { userId: 1, timestamp: new Date() });
-
 
 // ============================================================================
 // 12. COMPARISON TABLE

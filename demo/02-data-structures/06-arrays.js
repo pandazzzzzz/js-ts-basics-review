@@ -83,7 +83,7 @@ numbers.forEach((num, index) => {
 
 // forEach with thisArg parameter
 const multiplier = { factor: 10 };
-numbers.forEach(function(num) {
+numbers.forEach(function (num) {
   console.log(`  ${num} * ${this.factor} = ${num * this.factor}`);
 }, multiplier);
 
@@ -99,7 +99,7 @@ console.log("Doubled:", doubled);
 const withIndex = numbers.map((num, index, arr) => ({
   value: num,
   index: index,
-  isLast: index === arr.length - 1
+  isLast: index === arr.length - 1,
 }));
 console.log("With index:", withIndex);
 
@@ -238,7 +238,10 @@ console.log("at(-1):", atArray.at(-1)); // 50 (last element)
 console.log("at(-2):", atArray.at(-2)); // 40 (second to last)
 console.log("at(99):", atArray.at(99)); // undefined
 console.log("at(-99):", atArray.at(-99)); // undefined
-console.log("Comparison: arr[arr.length-1] vs arr.at(-1):", [atArray[atArray.length - 1], atArray.at(-1)]);
+console.log("Comparison: arr[arr.length-1] vs arr.at(-1):", [
+  atArray[atArray.length - 1],
+  atArray.at(-1),
+]);
 
 // indexOf - Find first index of value (ES5)
 // - Returns index or -1
@@ -279,7 +282,7 @@ console.log("Sorted descending:", sortedDesc);
 const people = [
   { name: "Charlie", age: 35 },
   { name: "Alice", age: 25 },
-  { name: "Bob", age: 30 }
+  { name: "Bob", age: 30 },
 ];
 const sortedByAge = [...people].sort((a, b) => a.age - b.age);
 console.log("Sorted by age:", sortedByAge);
@@ -458,7 +461,10 @@ console.log("Reversed:", toReversedExample.toReversed());
 const toSortedExample = [3, 1, 4, 1, 5];
 console.log("\ntoSorted - Immutable sort:");
 console.log("Original:", toSortedExample);
-console.log("Sorted:", toSortedExample.toSorted((a, b) => a - b));
+console.log(
+  "Sorted:",
+  toSortedExample.toSorted((a, b) => a - b)
+);
 
 // toSpliced - Create spliced copy (ES2023)
 // - Returns new array
@@ -528,8 +534,14 @@ console.log("\nTypedArray methods:");
 const typedArr = new Int16Array([5, 3, 8, 1, 9, 4]);
 console.log("  Original:", typedArr);
 console.log("  sort:", typedArr.sort()); // Sorts in place
-console.log("  map:", typedArr.map(x => x * 2)); // Returns same-typed TypedArray
-console.log("  filter:", typedArr.filter(x => x > 5)); // Returns same-typed TypedArray
+console.log(
+  "  map:",
+  typedArr.map(x => x * 2)
+); // Returns same-typed TypedArray
+console.log(
+  "  filter:",
+  typedArr.filter(x => x > 5)
+); // Returns same-typed TypedArray
 
 // ============================================
 // 7. Array Destructuring (ES6/ES2015)
@@ -563,7 +575,10 @@ console.log("\n=== Common Pitfalls ===");
 const numberSort = [1, 10, 2, 20, 3];
 console.log("\nPitfall - Default sort:");
 console.log("Wrong:", [...numberSort].sort()); // [1, 10, 2, 20, 3]
-console.log("Correct:", [...numberSort].sort((a, b) => a - b));
+console.log(
+  "Correct:",
+  [...numberSort].sort((a, b) => a - b)
+);
 
 // Pitfall 2: Mutating vs non-mutating methods
 console.log("\nPitfall - Mutation:");

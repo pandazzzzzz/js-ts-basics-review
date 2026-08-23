@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 25-inheritance-patterns-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -58,19 +57,19 @@ console.log("  Can lead to 'class explosion' and fragile base class problem");
 // 1.2 Good: Composition with mixins
 function canEat(obj) {
   return {
-    eat: () => console.log(`${obj.name} is eating`)
+    eat: () => console.log(`${obj.name} is eating`),
   };
 }
 
 function canSwim(obj) {
   return {
-    swim: () => console.log(`${obj.name} is swimming`)
+    swim: () => console.log(`${obj.name} is swimming`),
   };
 }
 
 function canFly(obj) {
   return {
-    fly: () => console.log(`${obj.name} is flying`)
+    fly: () => console.log(`${obj.name} is flying`),
   };
 }
 
@@ -80,7 +79,7 @@ function createDuck(name) {
     ...duck,
     ...canEat(duck),
     ...canSwim(duck),
-    ...canFly(duck)
+    ...canFly(duck),
   };
 }
 
@@ -89,12 +88,12 @@ function createFish(name) {
   return {
     ...fish,
     ...canEat(fish),
-    ...canSwim(fish)
+    ...canSwim(fish),
   };
 }
 
-const duck = createDuck('Duck');
-const fish = createFish('Fish');
+const duck = createDuck("Duck");
+const fish = createFish("Fish");
 
 console.log("\nGood: Composition with mixins");
 duck.eat();
@@ -108,14 +107,18 @@ class Engine {
   constructor(horsepower) {
     this.horsepower = horsepower;
   }
-  start() { console.log(`Engine with ${this.horsepower}HP started`); }
+  start() {
+    console.log(`Engine with ${this.horsepower}HP started`);
+  }
 }
 
 class Wheels {
   constructor(count) {
     this.count = count;
   }
-  rotate() { console.log(`${this.count} wheels rotating`); }
+  rotate() {
+    console.log(`${this.count} wheels rotating`);
+  }
 }
 
 class Car {
@@ -134,14 +137,16 @@ class Car {
 
 const v8Engine = new Engine(450);
 const fourWheels = new Wheels(4);
-const sportsCar = new Car('Sports Car', v8Engine, fourWheels);
+const sportsCar = new Car("Sports Car", v8Engine, fourWheels);
 
 console.log("\nComponent composition:");
 sportsCar.start();
 
 // 1.4 Dependency injection composition
 class Logger {
-  log(message) { console.log(`[LOG] ${message}`); }
+  log(message) {
+    console.log(`[LOG] ${message}`);
+  }
 }
 
 class Database {
@@ -158,8 +163,7 @@ const logger = new Logger();
 const db = new Database(logger);
 
 console.log("\nDependency injection:");
-db.query('SELECT * FROM users');
-
+db.query("SELECT * FROM users");
 
 // ============================================
 // 2. FUNCTIONAL MIXINS
@@ -188,21 +192,23 @@ db.query('SELECT * FROM users');
 console.log("\n=== 2. Functional Mixins Demo ===");
 
 // 2.1 Basic mixin function
-const Loggable = (superclass) => class extends superclass {
-  log(message) {
-    console.log(`[${this.constructor.name}] ${message}`);
-  }
-};
+const Loggable = superclass =>
+  class extends superclass {
+    log(message) {
+      console.log(`[${this.constructor.name}] ${message}`);
+    }
+  };
 
-const Serializable = (superclass) => class extends superclass {
-  toJSON() {
-    return JSON.stringify(this);
-  }
+const Serializable = superclass =>
+  class extends superclass {
+    toJSON() {
+      return JSON.stringify(this);
+    }
 
-  static fromJSON(json) {
-    return Object.assign(new this(), JSON.parse(json));
-  }
-};
+    static fromJSON(json) {
+      return Object.assign(new this(), JSON.parse(json));
+    }
+  };
 
 class User {
   constructor(name) {
@@ -214,21 +220,22 @@ class LoggableUser extends Loggable(User) {}
 class LoggableSerializableUser extends Serializable(Loggable(User)) {}
 
 console.log("Basic mixins:");
-const logUser = new LoggableUser('Alice');
-logUser.log('Hello from loggable user');
+const logUser = new LoggableUser("Alice");
+logUser.log("Hello from loggable user");
 
 // 2.2 Mixin with state
-const Timestampable = (superclass) => class extends superclass {
-  constructor(...args) {
-    super(...args);
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
-  }
+const Timestampable = superclass =>
+  class extends superclass {
+    constructor(...args) {
+      super(...args);
+      this.createdAt = new Date();
+      this.updatedAt = new Date();
+    }
 
-  touch() {
-    this.updatedAt = new Date();
-  }
-};
+    touch() {
+      this.updatedAt = new Date();
+    }
+  };
 
 class Document {
   constructor(content) {
@@ -239,42 +246,41 @@ class Document {
 class TimestampedDocument extends Timestampable(Document) {}
 
 console.log("\nMixin with state:");
-const doc = new TimestampedDocument('Hello world');
-console.log('Created at:', doc.createdAt);
+const doc = new TimestampedDocument("Hello world");
+console.log("Created at:", doc.createdAt);
 
 // 2.3 Composable mixins with pipe
 function mix(...mixins) {
-  return (superclass) => mixins.reduce(
-    (cls, mixin) => mixin(cls),
-    superclass
-  );
+  return superclass => mixins.reduce((cls, mixin) => mixin(cls), superclass);
 }
 
 const FullFeaturedUser = mix(Loggable, Serializable, Timestampable)(User);
 
 console.log("\nComposed mixins:");
-const fullUser = new FullFeaturedUser('Bob');
-fullUser.log('Composed mixins work!');
-console.log('Created at:', fullUser.createdAt);
+const fullUser = new FullFeaturedUser("Bob");
+fullUser.log("Composed mixins work!");
+console.log("Created at:", fullUser.createdAt);
 
 // 2.4 Mixin collision detection
 // When multiple mixins define methods with the same name,
 // later mixins silently override earlier ones. Collision detection
 // warns about name conflicts to prevent subtle bugs.
 function mixWithCollisionDetection(...mixins) {
-  return (superclass) => {
+  return superclass => {
     const seen = new Map(); // methodName -> mixinName
 
     for (const mixin of mixins) {
-      const mixinName = mixin.name || 'anonymous';
+      const mixinName = mixin.name || "anonymous";
       const proto = mixin(class {}).prototype;
 
       for (const name of Object.getOwnPropertyNames(proto)) {
-        if (name === 'constructor') continue;
+        if (name === "constructor") continue;
         if (seen.has(name)) {
-          console.warn(`Mixin collision: "${name}" defined by both ` +
-            `${seen.get(name)} and ${mixinName}. ` +
-            `${mixinName} will take precedence.`);
+          console.warn(
+            `Mixin collision: "${name}" defined by both ` +
+              `${seen.get(name)} and ${mixinName}. ` +
+              `${mixinName} will take precedence.`
+          );
         } else {
           seen.set(name, mixinName);
         }
@@ -286,45 +292,51 @@ function mixWithCollisionDetection(...mixins) {
 }
 
 // Example: two mixins both define a "serialize" method
-const JSONSerializable = (superclass) => class extends superclass {
-  serialize() {
-    return JSON.stringify({ ...this });
-  }
-};
+const JSONSerializable = superclass =>
+  class extends superclass {
+    serialize() {
+      return JSON.stringify({ ...this });
+    }
+  };
 
-const FormSerializable = (superclass) => class extends superclass {
-  serialize() {
-    return new URLSearchParams({ ...this }).toString();
-  }
-};
+const FormSerializable = superclass =>
+  class extends superclass {
+    serialize() {
+      return new URLSearchParams({ ...this }).toString();
+    }
+  };
 
 console.log("\nMixin collision detection:");
 console.log("Creating class with two mixins that both define 'serialize'...");
 const CollidingUser = mixWithCollisionDetection(
-  Loggable, JSONSerializable, FormSerializable
+  Loggable,
+  JSONSerializable,
+  FormSerializable
 )(User);
 console.log("(Warning message above shows the collision)");
 
-const collisionUser = new CollidingUser('Test');
+const collisionUser = new CollidingUser("Test");
 console.log("serialize() result (last mixin wins):", collisionUser.serialize());
 
 // 2.5 Conditional mixins
 function withFeature(featureEnabled) {
   return featureEnabled
-    ? (superclass) => class extends superclass {
-        feature() { console.log('Feature enabled'); }
-      }
-    : (superclass) => superclass;
+    ? superclass =>
+        class extends superclass {
+          feature() {
+            console.log("Feature enabled");
+          }
+        }
+    : superclass => superclass;
 }
 
 const MaybeWithFeature = withFeature(true)(User);
-const maybeUser = new MaybeWithFeature('Test');
+const maybeUser = new MaybeWithFeature("Test");
 
 console.log("\nConditional mixin:");
 if (maybeUser.feature) {
   maybeUser.feature();
 }
-
 
 // ============================================
 // 3. PARASITIC COMPOSITION
@@ -364,9 +376,9 @@ function createEmployee(name, title) {
   return person;
 }
 
-const emp = createEmployee('Alice', 'Engineer');
+const emp = createEmployee("Alice", "Engineer");
 console.log("Basic parasitic composition:");
-console.log('Employee:', emp.name, emp.getTitle());
+console.log("Employee:", emp.name, emp.getTitle());
 
 // 3.2 Parasitic inheritance
 function inheritPrototype(subType, superType) {
@@ -379,7 +391,7 @@ function Animal2(name) {
   this.name = name;
 }
 
-Animal2.prototype.eat = function() {
+Animal2.prototype.eat = function () {
   console.log(`${this.name} is eating`);
 };
 
@@ -390,11 +402,11 @@ function Dog(name, breed) {
 
 inheritPrototype(Dog, Animal2);
 
-Dog.prototype.bark = function() {
+Dog.prototype.bark = function () {
   console.log(`${this.name} says woof!`);
 };
 
-const dog = new Dog('Buddy', 'Golden Retriever');
+const dog = new Dog("Buddy", "Golden Retriever");
 console.log("\nParasitic inheritance:");
 dog.eat();
 dog.bark();
@@ -402,7 +414,7 @@ dog.bark();
 // 3.3 Factory with parasitic composition
 function withLogging(obj) {
   const logger = {
-    log: (msg) => console.log(`[${obj.name || 'unknown'}] ${msg}`)
+    log: msg => console.log(`[${obj.name || "unknown"}] ${msg}`),
   };
   return { ...obj, ...logger };
 }
@@ -411,19 +423,18 @@ function withCaching(obj, cacheKey) {
   const cache = new Map();
   return {
     ...obj,
-    getCache: (key) => cache.get(key),
-    setCache: (key, value) => cache.set(key, value)
+    getCache: key => cache.get(key),
+    setCache: (key, value) => cache.set(key, value),
   };
 }
 
-const baseService = { name: 'UserService', fetch: () => ({ id: 1 }) };
-const enhancedService = withCaching(withLogging(baseService), 'users');
+const baseService = { name: "UserService", fetch: () => ({ id: 1 }) };
+const enhancedService = withCaching(withLogging(baseService), "users");
 
 console.log("\nFactory composition:");
-enhancedService.log('Fetching user');
-enhancedService.setCache('user:1', { id: 1, name: 'Bob' });
-console.log('Cached value:', enhancedService.getCache('user:1'));
-
+enhancedService.log("Fetching user");
+enhancedService.setCache("user:1", { id: 1, name: "Bob" });
+console.log("Cached value:", enhancedService.getCache("user:1"));
 
 // ============================================
 // 4. STRATEGY PATTERN
@@ -454,7 +465,7 @@ console.log("\n=== 4. Strategy Pattern Demo ===");
 // 4.1 Payment strategies
 class PaymentStrategy {
   pay(amount) {
-    throw new Error('Implement pay method');
+    throw new Error("Implement pay method");
   }
 }
 
@@ -464,8 +475,10 @@ class CreditCardStrategy extends PaymentStrategy {
     this.cardNumber = cardNumber;
   }
   pay(amount) {
-    console.log(`Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`);
-    return { success: true, method: 'credit_card' };
+    console.log(
+      `Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`
+    );
+    return { success: true, method: "credit_card" };
   }
 }
 
@@ -476,7 +489,7 @@ class PayPalStrategy extends PaymentStrategy {
   }
   pay(amount) {
     console.log(`Paid $${amount} with PayPal: ${this.email}`);
-    return { success: true, method: 'paypal' };
+    return { success: true, method: "paypal" };
   }
 }
 
@@ -487,7 +500,7 @@ class BitcoinStrategy extends PaymentStrategy {
   }
   pay(amount) {
     console.log(`Paid $${amount} in Bitcoin to ${this.walletAddress}`);
-    return { success: true, method: 'bitcoin' };
+    return { success: true, method: "bitcoin" };
   }
 }
 
@@ -506,23 +519,29 @@ class PaymentProcessor {
 }
 
 console.log("Payment strategies:");
-const processor = new PaymentProcessor(new CreditCardStrategy('4111-1111-1111-1111'));
+const processor = new PaymentProcessor(
+  new CreditCardStrategy("4111-1111-1111-1111")
+);
 processor.processPayment(100);
 
-processor.setStrategy(new PayPalStrategy('user@example.com'));
+processor.setStrategy(new PayPalStrategy("user@example.com"));
 processor.processPayment(50);
 
-processor.setStrategy(new BitcoinStrategy('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'));
+processor.setStrategy(
+  new BitcoinStrategy("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa")
+);
 processor.processPayment(200);
 
 // 4.2 Sorting strategies
 class SortStrategy {
-  sort(arr) { throw new Error('Implement sort'); }
+  sort(arr) {
+    throw new Error("Implement sort");
+  }
 }
 
 class BubbleSort extends SortStrategy {
   sort(arr) {
-    console.log('Using bubble sort');
+    console.log("Using bubble sort");
     const result = [...arr];
     for (let i = 0; i < result.length; i++) {
       for (let j = 0; j < result.length - i - 1; j++) {
@@ -537,7 +556,7 @@ class BubbleSort extends SortStrategy {
 
 class QuickSort extends SortStrategy {
   sort(arr) {
-    console.log('Using quick sort');
+    console.log("Using quick sort");
     if (arr.length <= 1) return arr;
     const pivot = arr[0];
     const left = arr.slice(1).filter(x => x <= pivot);
@@ -561,7 +580,6 @@ console.log(smallSorter.sort([3, 1, 4, 1, 5]));
 
 const largeSorter = new Sorter(new QuickSort());
 console.log(largeSorter.sort([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]));
-
 
 // ============================================
 // 5. OBSERVER PATTERN
@@ -611,7 +629,7 @@ class Subject {
 
 class Observer {
   update(data) {
-    console.log('Observer received:', data);
+    console.log("Observer received:", data);
   }
 }
 
@@ -632,13 +650,13 @@ class NewsSubscriber {
 }
 
 const publisher = new NewsPublisher();
-const sub1 = new NewsSubscriber('Alice');
-const sub2 = new NewsSubscriber('Bob');
+const sub1 = new NewsSubscriber("Alice");
+const sub2 = new NewsSubscriber("Bob");
 
 publisher.subscribe(sub1);
 publisher.subscribe(sub2);
 
-publisher.publishNews('JavaScript 2024 released!');
+publisher.publishNews("JavaScript 2024 released!");
 
 // 5.2 Event emitter style
 class EventEmitter {
@@ -676,13 +694,13 @@ class EventEmitter {
 }
 
 const emitter = new EventEmitter();
-emitter.on('click', (x, y) => console.log(`Click at (${x}, ${y})`));
-emitter.once('init', () => console.log('Initialized once'));
+emitter.on("click", (x, y) => console.log(`Click at (${x}, ${y})`));
+emitter.once("init", () => console.log("Initialized once"));
 
 console.log("\nEvent emitter:");
-emitter.emit('click', 100, 200);
-emitter.emit('init');
-emitter.emit('init'); // Doesn't log
+emitter.emit("click", 100, 200);
+emitter.emit("init");
+emitter.emit("init"); // Doesn't log
 
 // 5.3 Reactive style
 class ReactiveValue {
@@ -717,12 +735,11 @@ class ReactiveValue {
 
 console.log("\nReactive value:");
 const counter = new ReactiveValue(0);
-const unsubscribe = counter.subscribe(val => console.log('Counter:', val));
+const unsubscribe = counter.subscribe(val => console.log("Counter:", val));
 counter.set(1);
 counter.set(2);
 unsubscribe();
 counter.set(3); // No output
-
 
 // ============================================
 // 6. TEMPLATE METHOD PATTERN
@@ -771,29 +788,29 @@ class DataProcessor {
   }
 
   save(data) {
-    throw new Error('Implement save method');
+    throw new Error("Implement save method");
   }
 
   notify(data) {
-    console.log('Processing complete:', data);
+    console.log("Processing complete:", data);
   }
 }
 
 class CSVProcessor extends DataProcessor {
   validate(data) {
-    if (!data.includes(',')) {
-      throw new Error('CSV data must contain commas');
+    if (!data.includes(",")) {
+      throw new Error("CSV data must contain commas");
     }
     return data;
   }
 
   transform(data) {
-    return data.split(',').map(row => row.trim());
+    return data.split(",").map(row => row.trim());
   }
 
   save(data) {
-    console.log('Saving CSV rows to database');
-    return { type: 'csv', rows: data };
+    console.log("Saving CSV rows to database");
+    return { type: "csv", rows: data };
   }
 }
 
@@ -808,8 +825,8 @@ class JSONProcessor extends DataProcessor {
   }
 
   save(data) {
-    console.log('Saving JSON object to database');
-    return { type: 'json', data };
+    console.log("Saving JSON object to database");
+    return { type: "json", data };
   }
 
   notify(data) {
@@ -820,7 +837,7 @@ class JSONProcessor extends DataProcessor {
 console.log("Template method:");
 const csvProcessor = new CSVProcessor();
 try {
-  csvProcessor.process('a,b,c,d');
+  csvProcessor.process("a,b,c,d");
 } catch (e) {
   console.log(e.message);
 }
@@ -839,7 +856,7 @@ class GameAI {
   }
 
   collectResources() {
-    console.log('Collecting default resources');
+    console.log("Collecting default resources");
   }
 
   buildStructures() {
@@ -851,35 +868,35 @@ class GameAI {
   }
 
   attack() {
-    throw new Error('Implement attack strategy');
+    throw new Error("Implement attack strategy");
   }
 }
 
 class OrcAI extends GameAI {
   collectResources() {
-    console.log('Orcs collect gold and lumber');
+    console.log("Orcs collect gold and lumber");
   }
 
   buildStructures() {
-    console.log('Orcs build barracks and war mill');
+    console.log("Orcs build barracks and war mill");
   }
 
   attack() {
-    console.log('Orcs charge with brute force!');
+    console.log("Orcs charge with brute force!");
   }
 }
 
 class ElfAI extends GameAI {
   collectResources() {
-    console.log('Elves collect magic and lumber');
+    console.log("Elves collect magic and lumber");
   }
 
   buildUnits() {
-    console.log('Elves train archers and mages');
+    console.log("Elves train archers and mages");
   }
 
   attack() {
-    console.log('Elves attack from range with precision!');
+    console.log("Elves attack from range with precision!");
   }
 }
 
@@ -890,7 +907,6 @@ orc.takeTurn();
 console.log();
 const elf = new ElfAI();
 elf.takeTurn();
-
 
 // ============================================
 // 7. VISITOR PATTERN
@@ -943,11 +959,11 @@ class Directory {
 
 class FileSystemVisitor {
   visitFile(file) {
-    throw new Error('Implement visitFile');
+    throw new Error("Implement visitFile");
   }
 
   visitDirectory(directory) {
-    throw new Error('Implement visitDirectory');
+    throw new Error("Implement visitDirectory");
   }
 }
 
@@ -981,12 +997,10 @@ class FileLister extends FileSystemVisitor {
   }
 }
 
-const root = new Directory('root', [
-  new File('file1.txt', 100),
-  new File('file2.txt', 200),
-  new Directory('subdir', [
-    new File('file3.txt', 300)
-  ])
+const root = new Directory("root", [
+  new File("file1.txt", 100),
+  new File("file2.txt", 200),
+  new Directory("subdir", [new File("file3.txt", 300)]),
 ]);
 
 const sizeCalc = new SizeCalculator();
@@ -996,8 +1010,8 @@ const fileLister = new FileLister();
 root.accept(fileLister);
 
 console.log("File system visitor:");
-console.log('Total size:', sizeCalc.totalSize, 'bytes');
-console.log('Files:', fileLister.files);
+console.log("Total size:", sizeCalc.totalSize, "bytes");
+console.log("Files:", fileLister.files);
 
 // 7.2 Expression evaluator
 class NumberNode {
@@ -1067,9 +1081,8 @@ const evaluator = new Evaluator();
 const printer = new Printer();
 
 console.log("\nExpression evaluator:");
-console.log('Expression:', printer.visitMultiply(expression));
-console.log('Result:', evaluator.visitMultiply(expression));
-
+console.log("Expression:", printer.visitMultiply(expression));
+console.log("Result:", evaluator.visitMultiply(expression));
 
 // ============================================
 // 8. TRAITS PATTERN
@@ -1100,7 +1113,7 @@ console.log("\n=== 8. Traits Pattern Demo ===");
 const TEquality = {
   equals(other) {
     return this === other;
-  }
+  },
 };
 
 const TSerializable = {
@@ -1110,14 +1123,14 @@ const TSerializable = {
   static: {
     deserialize(json) {
       return Object.assign(new this(), JSON.parse(json));
-    }
-  }
+    },
+  },
 };
 
 const TLoggable = {
   log(message) {
     console.log(`[${this.constructor.name}] ${message}`);
-  }
+  },
 };
 
 // 8.2 Trait composer with conflict resolution
@@ -1135,7 +1148,7 @@ function composeTraits(...traits) {
   });
 
   if (conflicts.size > 0) {
-    console.warn('Trait conflicts:', Array.from(conflicts.keys()));
+    console.warn("Trait conflicts:", Array.from(conflicts.keys()));
   }
 
   return composed;
@@ -1157,10 +1170,9 @@ applyTraits(Entity, TEquality, TLoggable, TSerializable);
 
 const entity = new Entity(123);
 console.log("Traits applied:");
-entity.log('Entity created');
-console.log('Serialized:', entity.serialize());
-console.log('Equals self:', entity.equals(entity));
-
+entity.log("Entity created");
+console.log("Serialized:", entity.serialize());
+console.log("Equals self:", entity.equals(entity));
 
 // ============================================
 // BEST PRACTICES
@@ -1204,16 +1216,16 @@ class UserService {
   }
 
   createUser(data) {
-    this.logger.log('Creating user');
-    return this.db.insert('users', data);
+    this.logger.log("Creating user");
+    return this.db.insert("users", data);
   }
 }
 
 // Good: Strategy for validation
 const ValidatorStrategy = {
-  email: (value) => value.includes('@'),
-  phone: (value) => /^\d{10}$/.test(value),
-  required: (value) => value && value.length > 0
+  email: value => value.includes("@"),
+  phone: value => /^\d{10}$/.test(value),
+  required: value => value && value.length > 0,
 };
 
 class Validator {
@@ -1237,17 +1249,16 @@ class Validator {
 
 console.log("Good patterns:");
 const validator = new Validator({
-  email: ['required', 'email'],
-  phone: ['phone']
+  email: ["required", "email"],
+  phone: ["phone"],
 });
 
 const result = validator.validate({
-  email: 'test@example.com',
-  phone: '1234567890'
+  email: "test@example.com",
+  phone: "1234567890",
 });
 
-console.log('Validation result:', result);
-
+console.log("Validation result:", result);
 
 // ============================================
 // COMMON PITFALLS
@@ -1270,7 +1281,6 @@ console.log("Always handle method name conflicts explicitly");
 // Pitfall 4: Over-engineering with patterns
 console.log("\nPitfall 4 - Over-engineering:");
 console.log("Use patterns when they solve actual problems, not for 'elegance'");
-
 
 // ============================================
 // SUMMARY
@@ -1299,7 +1309,6 @@ console.log("Use patterns when they solve actual problems, not for 'elegance'");
  */
 
 console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1388,7 +1397,9 @@ console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 console.log("\n=== Cross-references ===");
 console.log("📘 15-prototypes-inheritance.js - Prototypal inheritance");
 console.log("📘 16-classes.js - ES6 class syntax");
-console.log("📘 24-function-patterns-advanced.js - Functional patterns & composition");
+console.log(
+  "📘 24-function-patterns-advanced.js - Functional patterns & composition"
+);
 console.log("📘 44-design-patterns.js - More design patterns");
 
 // ============================================

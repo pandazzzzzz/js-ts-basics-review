@@ -292,7 +292,7 @@ for (let i = 0, j = 10; i < 5; i++, j--) {
 const person = {
   name: "Alice",
   age: 30,
-  city: "New York"
+  city: "New York",
 };
 
 console.log("\nFor...in Loop (Object):");
@@ -309,7 +309,9 @@ const numbers = [10, 20, 30];
 
 console.log("\nFor...in Loop (Array - NOT RECOMMENDED):");
 for (const index in numbers) {
-  console.log(`index: ${index} (type: ${typeof index}), value: ${numbers[index]}`);
+  console.log(
+    `index: ${index} (type: ${typeof index}), value: ${numbers[index]}`
+  );
 }
 
 // for...of loop - Iterates over iterable values (ES6/ES2015)
@@ -342,7 +344,7 @@ for (const [index, fruit] of fruits.entries()) {
 const userRoles = new Map([
   ["alice", "admin"],
   ["bob", "user"],
-  ["charlie", "moderator"]
+  ["charlie", "moderator"],
 ]);
 
 console.log("\nFor...of Loop (Map):");
@@ -588,7 +590,7 @@ try {
 // try-catch with invalid JSON
 console.log("\nTry-Catch with Error:");
 try {
-  const invalidData = JSON.parse('invalid json');
+  const invalidData = JSON.parse("invalid json");
   console.log("This won't execute");
 } catch (error) {
   console.log("Caught error:", error.message); // e.g. "Unexpected token 'i', \"invalid json\" is not valid JSON"
@@ -706,14 +708,15 @@ console.log("\nOptional Catch Binding (ES2019):");
 function parseConfig(raw) {
   try {
     return JSON.parse(raw);
-  } catch { // No `(error)` binding — error value is unused
+  } catch {
+    // No `(error)` binding — error value is unused
     console.log("caught without binding — returning default config");
     return { defaults: true };
   }
 }
 
 console.log("parseConfig('{\"a\":1}'):", parseConfig('{"a":1}')); // { a: 1 }
-console.log("parseConfig('bad'):", parseConfig('bad')); // logs message, returns { defaults: true }
+console.log("parseConfig('bad'):", parseConfig("bad")); // logs message, returns { defaults: true }
 
 // When you DO need the error, keep the binding (both styles valid)
 try {
@@ -873,7 +876,11 @@ if (emptyArray.length === 0) console.log("Array is empty (explicit check)");
 console.log("\nPitfall 8: Nested Loop Performance");
 
 // BAD: O(n²) complexity
-const matrix = [[1, 2], [3, 4], [5, 6]];
+const matrix = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 console.log("Nested loops (O(n²)):");
 for (let i = 0; i < matrix.length; i++) {
   for (let j = 0; j < matrix[i].length; j++) {
@@ -983,4 +990,3 @@ console.log("📘 20-error-handling.js - Error handling patterns");
 /*
 📘 See TypeScript comparison file: 03-control-flow-ts-comparison.ts
 */
-

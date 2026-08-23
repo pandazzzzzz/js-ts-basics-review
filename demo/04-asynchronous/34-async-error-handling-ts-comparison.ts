@@ -36,7 +36,6 @@ async function processUser(id: number): Promise<void> {
 processUser(123);
 processUser(-1);
 
-
 // ============================================================================
 // 2. RESULT TYPE FOR EXPLICIT ERROR HANDLING
 // ============================================================================
@@ -44,14 +43,14 @@ processUser(-1);
 console.log("\n=== Result Type for Explicit Error Handling ===");
 
 // TypeScript: Result type pattern
-type Result<T, E = Error> =
-  | { ok: true; value: T }
-  | { ok: false; error: E };
+type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
 
 const ok = <T>(value: T): Result<T, never> => ({ ok: true, value });
 const err = <E>(error: E): Result<never, E> => ({ ok: false, error });
 
-async function safeFetchUser(id: number): Promise<Result<{ id: number; name: string }, string>> {
+async function safeFetchUser(
+  id: number
+): Promise<Result<{ id: number; name: string }, string>> {
   try {
     if (id < 0) {
       return err("Invalid user ID");
@@ -74,7 +73,6 @@ async function processWithResult(id: number): Promise<void> {
 processWithResult(123);
 processWithResult(-1);
 
-
 // ============================================================================
 // 3. ERROR CLASSES WITH TYPE NARROWING
 // ============================================================================
@@ -84,21 +82,30 @@ console.log("\n=== Error Classes with Type Narrowing ===");
 // TypeScript: Custom error classes
 class NetworkError extends Error {
   override name = "NetworkError" as const;
-  constructor(message: string, public statusCode: number) {
+  constructor(
+    message: string,
+    public statusCode: number
+  ) {
     super(message);
   }
 }
 
 class ValidationError extends Error {
   override name = "ValidationError" as const;
-  constructor(message: string, public field: string) {
+  constructor(
+    message: string,
+    public field: string
+  ) {
     super(message);
   }
 }
 
 class AuthError extends Error {
   override name = "AuthError" as const;
-  constructor(message: string, public reason: string) {
+  constructor(
+    message: string,
+    public reason: string
+  ) {
     super(message);
   }
 }
@@ -126,7 +133,6 @@ async function handleErrors(): Promise<void> {
 }
 
 handleErrors();
-
 
 // ============================================================================
 // 4. TYPED CIRCUIT BREAKER
@@ -192,9 +198,8 @@ async function unstableService(): Promise<string> {
 
 const breaker = new TypedCircuitBreaker(unstableService, {
   failureThreshold: 3,
-  resetTimeout: 5000
+  resetTimeout: 5000,
 });
-
 
 // ============================================================================
 // 5. TYPED AGGREGATEERROR
@@ -224,7 +229,6 @@ async function processTasks(tasks: Array<() => Promise<void>>): Promise<void> {
   }
 }
 
-
 // ============================================================================
 // 6. ERROR CAUSE WITH TYPES
 // ============================================================================
@@ -233,20 +237,14 @@ console.log("\n=== Error Cause with Types ===");
 
 // TypeScript: Error.cause typing (TypeScript 4.6+)
 class DatabaseError extends Error {
-  constructor(
-    message: string,
-    options?: { cause?: unknown }
-  ) {
+  constructor(message: string, options?: { cause?: unknown }) {
     super(message, options);
     this.name = "DatabaseError";
   }
 }
 
 class ServiceError extends Error {
-  constructor(
-    message: string,
-    options?: { cause?: unknown }
-  ) {
+  constructor(message: string, options?: { cause?: unknown }) {
     super(message, options);
     this.name = "ServiceError";
   }
@@ -279,7 +277,6 @@ async function handleChainedError(): Promise<void> {
 
 handleChainedError();
 
-
 // ============================================================================
 // 7. TYPED RETRY WITH GENERICS
 // ============================================================================
@@ -288,8 +285,10 @@ console.log("\n=== Typed Retry with Generics ===");
 
 // TypeScript: Generic retry function
 function isRetryable(error: unknown): boolean {
-  return error instanceof NetworkError ||
-         (error instanceof Error && error.message.includes("timeout"));
+  return (
+    error instanceof NetworkError ||
+    (error instanceof Error && error.message.includes("timeout"))
+  );
 }
 
 async function retry<T>(
@@ -322,7 +321,6 @@ async function retry<T>(
   throw lastError;
 }
 
-
 // ============================================================================
 // 8. TYPED TIMEOUT AND CANCELLATION
 // ============================================================================
@@ -353,9 +351,7 @@ withTimeout(slowOperation(), 100)
   .catch(error => console.log("Error:", error.message));
 
 // TypeScript: AbortController with types
-async function cancellableOperation(
-  signal: AbortSignal
-): Promise<string> {
+async function cancellableOperation(signal: AbortSignal): Promise<string> {
   for (let i = 0; i < 10; i++) {
     if (signal.aborted) {
       throw new Error("Operation cancelled");
@@ -379,7 +375,6 @@ setTimeout(() => {
   console.log("Operation aborted by user");
 }, 300);
 
-
 // ============================================================================
 // 9. TYPED ERROR CONTEXT PRESERVATION
 // ============================================================================
@@ -395,10 +390,7 @@ class TypedAppError extends Error {
   public readonly timestamp: Date;
   public readonly context: Readonly<ErrorContext>;
 
-  constructor(
-    message: string,
-    context: ErrorContext = {}
-  ) {
+  constructor(message: string, context: ErrorContext = {}) {
     super(message);
     this.name = "TypedAppError";
     this.timestamp = new Date();
@@ -418,7 +410,7 @@ class TypedAppError extends Error {
       message: this.message,
       timestamp: this.timestamp.getTime(),
       context: this.context,
-      stack: this.stack
+      stack: this.stack,
     };
   }
 }
@@ -434,7 +426,7 @@ class DatabaseConnectionError extends TypedAppError {
       host,
       port,
       errorCode: originalError?.message,
-      retryable: true
+      retryable: true,
     });
     this.name = "DatabaseConnectionError";
   }
@@ -450,7 +442,7 @@ class UserValidationError extends TypedAppError {
       field,
       value,
       reason,
-      type: "VALIDATION_ERROR"
+      type: "VALIDATION_ERROR",
     });
     this.name = "UserValidationError";
   }
@@ -460,7 +452,11 @@ class UserValidationError extends TypedAppError {
 console.log("Enhanced typed errors:");
 
 try {
-  throw new DatabaseConnectionError("localhost", 5432, new Error("ECONNREFUSED"));
+  throw new DatabaseConnectionError(
+    "localhost",
+    5432,
+    new Error("ECONNREFUSED")
+  );
 } catch (error) {
   if (error instanceof TypedAppError) {
     console.log("\nDatabase error:", error.toJSON());
@@ -468,13 +464,16 @@ try {
 }
 
 try {
-  throw new UserValidationError("email", "invalid", "Must be valid email format");
+  throw new UserValidationError(
+    "email",
+    "invalid",
+    "Must be valid email format"
+  );
 } catch (error) {
   if (error instanceof UserValidationError) {
     console.log("\nValidation error:", error.toJSON());
   }
 }
-
 
 // ============================================================================
 // 10. TYPED ERROR MIDDLEWARE PATTERNS
@@ -533,19 +532,25 @@ interface ProcessedData extends ProcessingData {
   transformed: boolean;
 }
 
-const typedLoggingMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
+const typedLoggingMiddleware = async (
+  data: ProcessingData
+): Promise<ProcessingData> => {
   console.log("Processing:", data);
   return data;
 };
 
-const typedValidationMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
+const typedValidationMiddleware = async (
+  data: ProcessingData
+): Promise<ProcessingData> => {
   if (!data || typeof data !== "object" || !data.name) {
     throw new Error("Invalid data format: name required");
   }
   return data;
 };
 
-const typedTransformationMiddleware = async (data: ProcessingData): Promise<ProcessedData> => {
+const typedTransformationMiddleware = async (
+  data: ProcessingData
+): Promise<ProcessedData> => {
   return { ...data, transformed: true };
 };
 
@@ -558,13 +563,15 @@ interface ClientErrorResponse {
   };
 }
 
-const typedFormatErrorHandler = async (error: unknown): Promise<ClientErrorResponse> => {
+const typedFormatErrorHandler = async (
+  error: unknown
+): Promise<ClientErrorResponse> => {
   return {
     success: false,
     error: {
       message: error instanceof Error ? error.message : "Unknown error",
-      type: error instanceof Error ? error.constructor.name : "UnknownError"
-    }
+      type: error instanceof Error ? error.constructor.name : "UnknownError",
+    },
   };
 };
 
@@ -576,19 +583,34 @@ const typedLoggingErrorHandler = async (error: unknown): Promise<unknown> => {
 };
 
 // Build and run typed pipeline
-const typedPipeline = new TypedPipeline<ProcessingData, ProcessedData | ClientErrorResponse>();
+const typedPipeline = new TypedPipeline<
+  ProcessingData,
+  ProcessedData | ClientErrorResponse
+>();
 typedPipeline
-  .use(typedLoggingMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
-  .use(typedValidationMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
-  .use(typedTransformationMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
+  .use(
+    typedLoggingMiddleware as Middleware<
+      ProcessingData | ProcessedData | ClientErrorResponse
+    >
+  )
+  .use(
+    typedValidationMiddleware as Middleware<
+      ProcessingData | ProcessedData | ClientErrorResponse
+    >
+  )
+  .use(
+    typedTransformationMiddleware as Middleware<
+      ProcessingData | ProcessedData | ClientErrorResponse
+    >
+  )
   .useError(typedLoggingErrorHandler)
   .useError(typedFormatErrorHandler);
 
 console.log("\nTyped pipeline execution:");
-typedPipeline.execute({ name: "test" })
+typedPipeline
+  .execute({ name: "test" })
   .then(result => console.log("Success:", result))
   .catch(error => console.log("Final error:", error));
-
 
 // ============================================================================
 // 11. TYPED GLOBAL ERROR HANDLING
@@ -605,7 +627,10 @@ function safeExecute<T extends (...args: any[]) => Promise<R>, R>(
     try {
       return await fn(...args);
     } catch (error) {
-      console.log("Safe execute caught:", error instanceof Error ? error.message : String(error));
+      console.log(
+        "Safe execute caught:",
+        error instanceof Error ? error.message : String(error)
+      );
       return typeof fallback === "function"
         ? (fallback as (error: unknown) => R)(error)
         : fallback;
@@ -625,14 +650,13 @@ const typedSafeDivide = safeExecute<
   },
   (error: unknown) => ({
     error: error instanceof Error ? error.message : "Unknown error",
-    result: 0
+    result: 0,
   })
 );
 
 console.log("\nTyped safe execute:");
 typedSafeDivide(10, 2).then(result => console.log("10 / 2 =", result));
 typedSafeDivide(10, 0).then(result => console.log("10 / 0 =", result));
-
 
 // ============================================================================
 // SUMMARY

@@ -2,7 +2,6 @@
 // 📘 For TypeScript comparison, see: 26-optimization-performance-ts-comparison.ts
 export {};
 
-
 // ============================================
 // Learning goals
 // ============================================
@@ -75,14 +74,14 @@ console.log("Tail factorial(5):", factorialTail(5)); // 120
 // 1.3 Trampoline pattern for environments without TCO
 function trampoline(fn) {
   let result = fn();
-  while (typeof result === 'function') {
+  while (typeof result === "function") {
     result = result();
   }
   return result;
 }
 
 function makeTailRecursive(f) {
-  return function(...args) {
+  return function (...args) {
     return trampoline(() => f(...args));
   };
 }
@@ -103,8 +102,8 @@ function sumArrayTail(arr, index = 0, acc = 0) {
 console.log("\nTail-recursive sum:", sumArrayTail([1, 2, 3, 4, 5])); // 15
 
 // 1.5 Mutual recursion with trampoline
-const isEvenT = (n) => n === 0 ? true : () => isOddT(n - 1);
-const isOddT = (n) => n === 0 ? false : () => isEvenT(n - 1);
+const isEvenT = n => (n === 0 ? true : () => isOddT(n - 1));
+const isOddT = n => (n === 0 ? false : () => isEvenT(n - 1));
 
 function mutualIsEven(n) {
   return trampoline(() => isEvenT(n));
@@ -112,7 +111,6 @@ function mutualIsEven(n) {
 
 console.log("\nMutual recursion:");
 console.log("isEven(1000):", mutualIsEven(1000)); // true
-
 
 // ============================================
 // 2. ADVANCED MEMOIZATION
@@ -144,7 +142,7 @@ console.log("\n=== 2. Advanced Memoization Demo ===");
 function memoize(fn) {
   const cache = new Map();
 
-  return function(...args) {
+  return function (...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log(`  [Cache hit] ${key}`);
@@ -176,9 +174,9 @@ function fibonacci(n) {
 const memoizedFib = memoize(fibonacci);
 
 console.log("\nFibonacci memoization (performance comparison):");
-console.time('fib(35) memoized');
+console.time("fib(35) memoized");
 console.log("fib(35):", memoizedFib(35));
-console.timeEnd('fib(35) memoized');
+console.timeEnd("fib(35) memoized");
 // Naive fib(35) without memoization would take seconds; memoized is instant
 // after the first call. This is the core performance benefit of memoization.
 
@@ -189,7 +187,6 @@ console.timeEnd('fib(35) memoized');
 //   - memoizeWithKey / memoizeWithSerializer (custom key generation)
 //   - memoizeWeak (WeakMap-based, GC-friendly)
 //   - memoizeMaxSize (simple size limit)
-
 
 // ============================================
 // 3. LAZY EVALUATION
@@ -229,9 +226,9 @@ class Lazy {
     if (!this.evaluated) {
       this.value = this.fn();
       this.evaluated = true;
-      console.log('  [Lazy evaluation executed]');
+      console.log("  [Lazy evaluation executed]");
     } else {
-      console.log('  [Lazy value returned from cache]');
+      console.log("  [Lazy value returned from cache]");
     }
     return this.value;
   }
@@ -263,17 +260,17 @@ class LazyArray {
   }
 
   map(fn) {
-    this.operations.push({ type: 'map', fn });
+    this.operations.push({ type: "map", fn });
     return this;
   }
 
   filter(fn) {
-    this.operations.push({ type: 'filter', fn });
+    this.operations.push({ type: "filter", fn });
     return this;
   }
 
   take(n) {
-    this.operations.push({ type: 'take', n });
+    this.operations.push({ type: "take", n });
     return this.execute();
   }
 
@@ -281,11 +278,11 @@ class LazyArray {
     let result = [...this.array];
 
     for (const op of this.operations) {
-      if (op.type === 'map') {
+      if (op.type === "map") {
         result = result.map(op.fn);
-      } else if (op.type === 'filter') {
+      } else if (op.type === "filter") {
         result = result.filter(op.fn);
-      } else if (op.type === 'take') {
+      } else if (op.type === "take") {
         result = result.slice(0, op.n);
         break;
       }
@@ -361,7 +358,6 @@ for (let i = 0; i < 10; i++) {
 }
 console.log(first10);
 
-
 // ============================================
 // 4. EVENT LOOP OPTIMIZATION
 // ============================================
@@ -392,18 +388,18 @@ console.log("\n=== 4. Event Loop Optimization Demo ===");
 console.log("\nTask scheduling order:");
 
 Promise.resolve().then(() => {
-  console.log('  Promise (microtask) 1');
+  console.log("  Promise (microtask) 1");
 });
 
 setTimeout(() => {
-  console.log('  Timeout (macrotask) 1');
+  console.log("  Timeout (macrotask) 1");
 }, 0);
 
 Promise.resolve().then(() => {
-  console.log('  Promise (microtask) 2');
+  console.log("  Promise (microtask) 2");
 });
 
-console.log('  Synchronous code');
+console.log("  Synchronous code");
 
 // 4.2 Chunking large tasks
 async function processLargeArray(array, processFn, chunkSize = 1000) {
@@ -426,10 +422,9 @@ async function processLargeArray(array, processFn, chunkSize = 1000) {
 const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
 console.log("\nChunked processing:");
-processLargeArray(largeArray, x => Math.sqrt(x), 2500)
-  .then(results => {
-    console.log(`  Processed ${results.length} items`);
-  });
+processLargeArray(largeArray, x => Math.sqrt(x), 2500).then(results => {
+  console.log(`  Processed ${results.length} items`);
+});
 
 // 4.3 Using MessageChannel for task (macrotask) scheduling
 // Note: MessageChannel posts a TASK (macrotask), NOT a microtask.
@@ -446,12 +441,12 @@ function scheduleTask(fn) {
 
 console.log("\nTask scheduling via MessageChannel (macrotask, not microtask):");
 scheduleTask(() => {
-  console.log('  Executed via MessageChannel');
+  console.log("  Executed via MessageChannel");
 });
 
 // 4.4 requestIdleCallback for non-critical work
 function scheduleIdleWork(fn) {
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
     requestIdleCallback(fn);
   } else {
     setTimeout(fn, 1);
@@ -461,9 +456,8 @@ function scheduleIdleWork(fn) {
 // Simulated idle callback
 console.log("\nIdle work scheduling (simulated):");
 setTimeout(() => {
-  console.log('  Idle callback executed');
+  console.log("  Idle callback executed");
 }, 10);
-
 
 // ============================================
 // 5. BATCHING AND COALESCING
@@ -522,7 +516,10 @@ class RequestBatcher {
     console.log(`  Flushing batch of ${batch.length} requests`);
 
     // Simulate batch processing
-    const results = batch.map(({ request }) => ({ success: true, data: request }));
+    const results = batch.map(({ request }) => ({
+      success: true,
+      data: request,
+    }));
 
     batch.forEach(({ resolve }, i) => {
       resolve(results[i]);
@@ -558,7 +555,7 @@ class StateManager {
 
   commit() {
     Object.assign(this.state, this.pendingUpdates);
-    console.log('  State committed:', this.state);
+    console.log("  State committed:", this.state);
     this.pendingUpdates = {};
   }
 
@@ -573,7 +570,6 @@ console.log("\nDebounced state updates:");
 stateMgr.update({ a: 1 });
 stateMgr.update({ b: 2 });
 stateMgr.update({ c: 3 });
-
 
 // ============================================
 // 6. WEB WORKERS FOR PARALLEL PROCESSING
@@ -640,7 +636,7 @@ class SimulatedWorker {
 
 // CPU-intensive task simulation
 async function heavyComputation(data) {
-  console.log('  Worker processing:', data);
+  console.log("  Worker processing:", data);
   let sum = 0;
   for (let i = 0; i < data.n; i++) {
     sum += Math.sqrt(i);
@@ -649,8 +645,8 @@ async function heavyComputation(data) {
 }
 
 const worker = new SimulatedWorker(heavyComputation);
-worker.onmessage = (e) => {
-  console.log('  Result from worker:', e.data.result.toFixed(2));
+worker.onmessage = e => {
+  console.log("  Result from worker:", e.data.result.toFixed(2));
 };
 
 console.log("\nSimulated worker:");
@@ -661,7 +657,7 @@ class WorkerPool {
   constructor(workerFactory, size = 4) {
     this.workers = Array.from({ length: size }, () => ({
       worker: workerFactory(),
-      busy: false
+      busy: false,
     }));
     this.taskQueue = [];
   }
@@ -692,7 +688,6 @@ class WorkerPool {
     }
   }
 }
-
 
 // ============================================
 // 7. requestAnimationFrame OPTIMIZATION
@@ -738,7 +733,7 @@ function simulateRAF(callback, duration = 1000) {
 
 console.log("\nSimulated animation frames:");
 let frameCount = 0;
-simulateRAF((time) => {
+simulateRAF(time => {
   frameCount++;
   if (frameCount <= 5 || frameCount % 10 === 0) {
     console.log(`  Frame ${frameCount} at ${Math.round(time)}ms`);
@@ -749,7 +744,7 @@ simulateRAF((time) => {
 function createSmoothScrollHandler(handler) {
   let ticking = false;
 
-  return function(event) {
+  return function (event) {
     if (!ticking) {
       requestAnimationFrame(() => {
         handler.call(this, event);
@@ -766,9 +761,10 @@ class AnimationBatcher {
     this.callbacks = [];
     this.scheduled = false;
     // Fallback for Node.js environments
-    this.raf = typeof requestAnimationFrame !== 'undefined'
-      ? requestAnimationFrame
-      : (cb) => setTimeout(cb, 16);
+    this.raf =
+      typeof requestAnimationFrame !== "undefined"
+        ? requestAnimationFrame
+        : cb => setTimeout(cb, 16);
   }
 
   add(callback) {
@@ -790,9 +786,8 @@ class AnimationBatcher {
 }
 
 const animBatcher = new AnimationBatcher();
-animBatcher.add(() => console.log('  Batched animation 1'));
-animBatcher.add(() => console.log('  Batched animation 2'));
-
+animBatcher.add(() => console.log("  Batched animation 1"));
+animBatcher.add(() => console.log("  Batched animation 2"));
 
 // ============================================
 // 8. PERFORMANCE BENCHMARKING
@@ -843,7 +838,7 @@ function benchmark(fn, iterations = 10000) {
   return {
     totalMs,
     avgMs: totalMs / iterations,
-    opsPerSec: iterations / (totalMs / 1000)
+    opsPerSec: iterations / (totalMs / 1000),
   };
 }
 
@@ -859,25 +854,27 @@ function compareImplementations(name, fn1, fn2, iterations = 10000) {
 
   const faster = result1.opsPerSec > result2.opsPerSec ? 1 : 2;
   const ratio = result1.opsPerSec / result2.opsPerSec;
-  console.log(`  Winner: Implementation ${faster} (${ratio.toFixed(2)}x faster)`);
+  console.log(
+    `  Winner: Implementation ${faster} (${ratio.toFixed(2)}x faster)`
+  );
 }
 
 // 8.3 Example: string concatenation methods
 compareImplementations(
-  'String Concatenation (1000 iterations)',
+  "String Concatenation (1000 iterations)",
   () => {
-    let str = '';
+    let str = "";
     for (let i = 0; i < 100; i++) {
-      str += 'a';
+      str += "a";
     }
     return str;
   },
   () => {
     const parts = [];
     for (let i = 0; i < 100; i++) {
-      parts.push('a');
+      parts.push("a");
     }
-    return parts.join('');
+    return parts.join("");
   },
   1000
 );
@@ -897,14 +894,16 @@ function memoryBenchmark(fn, iterations = 1000) {
   return {
     memoryDelta,
     memoryPerOp: memoryDelta / iterations,
-    resultCount: results.length
+    resultCount: results.length,
   };
 }
 
 console.log("\nMemory benchmark:");
-const memResult = memoryBenchmark(() => ({ data: new Array(100).fill(0) }), 100);
+const memResult = memoryBenchmark(
+  () => ({ data: new Array(100).fill(0) }),
+  100
+);
 console.log(`  Memory delta: ${(memResult.memoryDelta / 1024).toFixed(2)} KB`);
-
 
 // ============================================
 // 9. COMMON PERFORMANCE PITFALLS
@@ -986,7 +985,9 @@ for (const chunk of chunkedProcess(hugeArray, 1000)) {
   // await new Promise(resolve => setTimeout(resolve, 0));
 }
 console.timeEnd("good-array-process");
-console.log("Chunked processing allows main thread to handle other tasks between chunks");
+console.log(
+  "Chunked processing allows main thread to handle other tasks between chunks"
+);
 
 // 9.4 Pitfall: Excessive DOM manipulation
 console.log("\nPitfall 4 - DOM thrashing:");
@@ -1001,7 +1002,9 @@ elements.forEach(el => {
   el.style.height = `${height + 10}px`;
 }); // Causes layout recalculation for EVERY element
 */
-console.log("Interleaved read/write causes forced synchronous layouts (layout thrashing)");
+console.log(
+  "Interleaved read/write causes forced synchronous layouts (layout thrashing)"
+);
 
 console.log("\n✅ Good: Batch DOM operations");
 /*
@@ -1040,7 +1043,6 @@ const t2 = performance.now();
 efficientSum(testN);
 console.log(`Efficient: ${(performance.now() - t2).toFixed(2)}ms`);
 
-
 // ============================================
 // 10. V8 ENGINE INTERNALS
 // ============================================
@@ -1072,8 +1074,8 @@ const o1 = { a: 1, b: 2 };
 const o2 = { b: 2, a: 1 }; // same keys, different insertion order
 
 console.log("\nHidden classes (maps):");
-console.log("o1:", o1);          // { a: 1, b: 2 }
-console.log("o2:", o2);          // { b: 2, a: 1 }
+console.log("o1:", o1); // { a: 1, b: 2 }
+console.log("o2:", o2); // { b: 2, a: 1 }
 console.log("Note: o1 and o2 have DIFFERENT hidden classes in V8");
 console.log("  because property insertion order differs (a,b vs b,a).");
 console.log("Tip: Construct objects of the same logical type in a");
@@ -1084,14 +1086,14 @@ console.log("  consistent field order so they share a hidden class.");
 // Adding fields dynamically in different orders creates divergent class
 // chains, which defeats inline-cache optimizations.
 function makePointA(x, y) {
-  const p = { x };   // hidden class C0 -> C1 (x)
-  p.y = y;           // transitions to C2 (x, y)
+  const p = { x }; // hidden class C0 -> C1 (x)
+  p.y = y; // transitions to C2 (x, y)
   return p;
 }
 
 function makePointB(x, y) {
-  const p = { y };   // hidden class C0' -> C1' (y)
-  p.x = x;           // transitions to C2' (y, x) — different class!
+  const p = { y }; // hidden class C0' -> C1' (y)
+  p.x = x; // transitions to C2' (y, x) — different class!
   return p;
 }
 
@@ -1115,19 +1117,17 @@ function readX(obj) {
 
 const monomorphic = [makePointA(1, 1), makePointA(2, 2), makePointA(3, 3)];
 console.log("\nInline cache states (conceptual):");
-console.log("Monomorphic site (all same shape):",
-  monomorphic.map(readX)); // [1, 2, 3] — IC stays monomorphic (fast)
+console.log("Monomorphic site (all same shape):", monomorphic.map(readX)); // [1, 2, 3] — IC stays monomorphic (fast)
 
 // Polymorphic / megamorphic: feed the SAME call site objects of many shapes
 const mixed = [
-  { x: 1 },            // shape S1
-  { x: 2, y: 2 },      // shape S2
-  { x: 3, z: 3 },      // shape S3
-  { x: 4, w: 4 },      // shape S4
-  { x: 5, q: 5 }       // shape S5 -> megamorphic (5+ shapes)
+  { x: 1 }, // shape S1
+  { x: 2, y: 2 }, // shape S2
+  { x: 3, z: 3 }, // shape S3
+  { x: 4, w: 4 }, // shape S4
+  { x: 5, q: 5 }, // shape S5 -> megamorphic (5+ shapes)
 ];
-console.log("Polymorphic/megamorphic site (many shapes):",
-  mixed.map(readX));    // [1, 2, 3, 4, 5] — IC degrades to megamorphic (slow)
+console.log("Polymorphic/megamorphic site (many shapes):", mixed.map(readX)); // [1, 2, 3, 4, 5] — IC degrades to megamorphic (slow)
 console.log("Tip: Keep call sites monomorphic by passing objects that share");
 console.log("  a hidden class (same fields, same order).");
 
@@ -1157,10 +1157,11 @@ console.log("\nV8 performance takeaways:");
 console.log("- Always initialize object fields in the same order.");
 console.log("- Avoid mixing many object shapes at one call site.");
 console.log("- Prefer `x = undefined` over `delete x` to preserve shape.");
-console.log("- Allocate \"hot\" objects via constructors/classes for stable shapes.");
+console.log(
+  '- Allocate "hot" objects via constructors/classes for stable shapes.'
+);
 console.log("- These are engine details: profile with V8 flags / DevTools");
 console.log("  before micro-optimizing.");
-
 
 // ============================================
 // BEST PRACTICES
@@ -1203,7 +1204,6 @@ console.log("2. Implement targeted fix");
 console.log("3. Verify with benchmark");
 console.log("4. Document the optimization");
 
-
 // ============================================
 // SUMMARY
 // ============================================
@@ -1232,7 +1232,6 @@ console.log("4. Document the optimization");
  */
 
 console.log("\n=== Performance Optimization Demo Complete ===");
-
 
 // ============================================
 // TypeScript Comparison Notes
@@ -1331,7 +1330,6 @@ Performance & Optimization:
 - 27-memory-management.js (garbage collection, object pooling)
 - 22-iterators-generators.js (generator-based streaming)
 `);
-
 
 // ============================================
 // Cross-references

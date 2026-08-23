@@ -71,7 +71,9 @@ console.log("  MathUtils.add(2, 3):", MathUtils.add(2, 3));
 // Example 4: declare keyword (ambient declarations)
 console.log("\n4. Ambient declarations:");
 console.log("  'declare var process' adds type info without runtime code");
-console.log("  Used for type safety with global variables not defined in your code");
+console.log(
+  "  Used for type safety with global variables not defined in your code"
+);
 
 /**
  * 📋 Key Takeaways:

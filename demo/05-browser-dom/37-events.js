@@ -649,7 +649,6 @@ console.log(`
 // Use e.dataTransfer.setData/getData for data sharing
 `);
 
-
 // 6. Custom Events
 // new Event(name, {bubbles, cancelable}) or new CustomEvent(name, {detail}) to carry data
 // Dispatch with element.dispatchEvent(event); listen like any native event
@@ -780,7 +779,9 @@ console.log("📚 Reference Documentation:\n");
 console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/Events");
 console.log("- javascript.info: https://javascript.info/events");
 console.log("- UI Events: https://www.w3.org/TR/uievents/");
-console.log("- Custom Events: https://dom.spec.whatwg.org/#interface-customevent\n");
+console.log(
+  "- Custom Events: https://dom.spec.whatwg.org/#interface-customevent\n"
+);
 
 // ============================================
 // Cross-references

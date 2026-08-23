@@ -72,7 +72,6 @@ const entity = new Entity()
   .addComponent("health", new Component({ hp: 100 }));
 console.log("Entity components:", entity.getComponent("position")?.data);
 
-
 // ============================================================================
 // 2. ABSTRACT CLASSES AND TEMPLATE METHOD
 // ============================================================================
@@ -111,7 +110,6 @@ class CSVProcessor extends DataProcessor {
 
 const csvProcessor = new CSVProcessor();
 csvProcessor.process(["a,b,c", "d,e,f", "invalid"]);
-
 
 // ============================================================================
 // 3. STRATEGY PATTERN WITH POLYMORPHISM
@@ -159,11 +157,12 @@ class PaymentProcessor {
   }
 }
 
-const processor = new PaymentProcessor(new CreditCardStrategy("4111-1111-1111-1111"));
+const processor = new PaymentProcessor(
+  new CreditCardStrategy("4111-1111-1111-1111")
+);
 processor.processPayment(100);
 processor.setStrategy(new PayPalStrategy("user@example.com"));
 processor.processPayment(50);
-
 
 // ============================================================================
 // 4. MIXINS WITH TYPES
@@ -191,7 +190,10 @@ function Serializable<TBase extends Constructor>(Base: TBase) {
 }
 
 class BaseUser {
-  constructor(public name: string, public age: number) {}
+  constructor(
+    public name: string,
+    public age: number
+  ) {}
 }
 
 class User extends Serializable(Loggable(BaseUser)) {}
@@ -199,7 +201,6 @@ class User extends Serializable(Loggable(BaseUser)) {}
 const user = new User("Alice", 30);
 user.log("User created");
 console.log("Serialized:", user.serialize());
-
 
 // ============================================================================
 // 5. DISCRIMINATED UNIONS
@@ -233,7 +234,6 @@ const rectangle: Shape = { kind: "rectangle", width: 10, height: 20 };
 console.log("Circle area:", calculateArea(circle));
 console.log("Rectangle area:", calculateArea(rectangle));
 
-
 // ============================================================================
 // 6. VISITOR PATTERN WITH INTERFACES
 // ============================================================================
@@ -246,7 +246,10 @@ interface FileSystemNode {
 }
 
 class FileNode implements FileSystemNode {
-  constructor(public name: string, public size: number) {}
+  constructor(
+    public name: string,
+    public size: number
+  ) {}
 
   accept<T>(visitor: FileSystemVisitor<T>): T {
     return visitor.visitFile(this);
@@ -254,7 +257,10 @@ class FileNode implements FileSystemNode {
 }
 
 class DirectoryNode implements FileSystemNode {
-  constructor(public name: string, public children: FileSystemNode[] = []) {}
+  constructor(
+    public name: string,
+    public children: FileSystemNode[] = []
+  ) {}
 
   accept<T>(visitor: FileSystemVisitor<T>): T {
     return visitor.visitDirectory(this);
@@ -272,21 +278,21 @@ class SizeCalculator implements FileSystemVisitor<number> {
   }
 
   visitDirectory(directory: DirectoryNode): number {
-    return directory.children.reduce((sum, child) => sum + child.accept(this), 0);
+    return directory.children.reduce(
+      (sum, child) => sum + child.accept(this),
+      0
+    );
   }
 }
 
 const root = new DirectoryNode("root", [
   new FileNode("file1.txt", 100),
   new FileNode("file2.txt", 200),
-  new DirectoryNode("subdir", [
-    new FileNode("file3.txt", 300)
-  ])
+  new DirectoryNode("subdir", [new FileNode("file3.txt", 300)]),
 ]);
 
 const sizeCalculator = new SizeCalculator();
 console.log("Total size:", root.accept(sizeCalculator));
-
 
 // ============================================================================
 // 7. GENERIC CONSTRAINTS
@@ -329,7 +335,6 @@ userRepository.add({ id: 2, name: "Bob", email: "bob@example.com" });
 console.log("User with id 1:", userRepository.findById(1));
 console.log("Users named Alice:", userRepository.findByName("Alice"));
 
-
 // ============================================================================
 // 8. PARASITIC COMPOSITION WITH TYPES
 // ============================================================================
@@ -346,13 +351,13 @@ function createEmployee(name: string, title: string) {
   return {
     ...person,
     title,
-    getTitle: (): string => title
+    getTitle: (): string => title,
   };
 }
 
-const emp = createEmployee('Alice', 'Engineer');
+const emp = createEmployee("Alice", "Engineer");
 console.log("Parasitic composition:");
-console.log('Employee:', emp.name, emp.getTitle());
+console.log("Employee:", emp.name, emp.getTitle());
 
 // TypeScript: Typed parasitic inheritance
 interface Animal {
@@ -363,7 +368,7 @@ interface Animal {
 function Animal2(name: string): Animal {
   return {
     name,
-    eat: () => console.log(`${name} is eating`)
+    eat: () => console.log(`${name} is eating`),
   };
 }
 
@@ -377,11 +382,11 @@ function createDog(name: string, breed: string): Dog {
   return {
     ...animal,
     breed,
-    bark: () => console.log(`${name} says woof!`)
+    bark: () => console.log(`${name} says woof!`),
   };
 }
 
-const typedDog = createDog('Buddy', 'Golden Retriever');
+const typedDog = createDog("Buddy", "Golden Retriever");
 console.log("\nParasitic inheritance:");
 typedDog.eat();
 typedDog.bark();
@@ -399,7 +404,7 @@ interface Cacheable<K, V> {
 function withLogging<T extends { name?: string }>(obj: T): T & Loggable {
   return {
     ...obj,
-    log: (msg: string) => console.log(`[${obj.name || 'unknown'}] ${msg}`)
+    log: (msg: string) => console.log(`[${obj.name || "unknown"}] ${msg}`),
   };
 }
 
@@ -408,18 +413,19 @@ function withCaching<T, K, V>(obj: T, _cacheKey: string): T & Cacheable<K, V> {
   return {
     ...obj,
     getCache: (key: K) => cache.get(key),
-    setCache: (key: K, value: V) => { cache.set(key, value); }
+    setCache: (key: K, value: V) => {
+      cache.set(key, value);
+    },
   };
 }
 
-const baseService = { name: 'UserService', fetch: () => ({ id: 1 }) };
-const enhancedService = withCaching(withLogging(baseService), 'users');
+const baseService = { name: "UserService", fetch: () => ({ id: 1 }) };
+const enhancedService = withCaching(withLogging(baseService), "users");
 
 console.log("\nFactory composition:");
-enhancedService.log('Fetching user');
-enhancedService.setCache('user:1', { id: 1, name: 'Bob' });
-console.log('Cached value:', enhancedService.getCache('user:1'));
-
+enhancedService.log("Fetching user");
+enhancedService.setCache("user:1", { id: 1, name: "Bob" });
+console.log("Cached value:", enhancedService.getCache("user:1"));
 
 // ============================================================================
 // 9. TYPED TRAITS PATTERN
@@ -437,7 +443,7 @@ interface TEquality {
 const TEquality = {
   equals(this: object, other: unknown): boolean {
     return this === other;
-  }
+  },
 };
 
 interface TSerializable {
@@ -451,10 +457,13 @@ const TSerializable = {
   },
   // `this` carries a `constructor` so we can reconstruct; typed via a constraint
   // instead of `any` to keep the call site checked.
-  deserialize(this: object & { constructor: new () => unknown }, json: string): object {
+  deserialize(
+    this: object & { constructor: new () => unknown },
+    json: string
+  ): object {
     const target = new this.constructor() as object;
     return Object.assign(target, JSON.parse(json));
-  }
+  },
 };
 
 interface TLoggable {
@@ -464,13 +473,15 @@ interface TLoggable {
 const TLoggable = {
   log(this: { constructor: { name: string } }, message: string): void {
     console.log(`[${this.constructor.name}] ${message}`);
-  }
+  },
 };
 
 // TypeScript: Trait composer with conflict resolution
 // Each trait is a bag of methods: typed as Record<string, unknown> so we can
 // index it without `as any`.
-function composeTraits(...traits: Record<string, unknown>[]): Record<string, unknown> {
+function composeTraits(
+  ...traits: Record<string, unknown>[]
+): Record<string, unknown> {
   const composed: Record<string, unknown> = {};
   const conflicts: Map<string, number> = new Map();
 
@@ -485,7 +496,7 @@ function composeTraits(...traits: Record<string, unknown>[]): Record<string, unk
   });
 
   if (conflicts.size > 0) {
-    console.warn('Trait conflicts:', Array.from(conflicts.keys()));
+    console.warn("Trait conflicts:", Array.from(conflicts.keys()));
   }
 
   return composed;
@@ -514,10 +525,9 @@ applyTraits(TraitEntity, TEquality, TLoggable, TSerializable);
 
 const traitEntity = new TraitEntity(123);
 console.log("Traits applied:");
-traitEntity.log('Entity created');
-console.log('Serialized:', traitEntity.serialize());
-console.log('Equals self:', traitEntity.equals(traitEntity));
-
+traitEntity.log("Entity created");
+console.log("Serialized:", traitEntity.serialize());
+console.log("Equals self:", traitEntity.equals(traitEntity));
 
 // ============================================================================
 // 10. OBSERVER PATTERN WITH TYPES
@@ -572,7 +582,6 @@ typedSubject.notify("Hello observers!");
 unsubscribe1();
 typedSubject.notify("After unsubscribe");
 
-
 // ============================================================================
 // 9. COMPARISON TABLE
 // ============================================================================
@@ -603,8 +612,9 @@ KEY TAKEAWAYS:
 6. Runtime pattern behavior follows JavaScript rules
 `);
 
-console.log("=== TypeScript provides type safety without changing runtime behavior ===");
-
+console.log(
+  "=== TypeScript provides type safety without changing runtime behavior ==="
+);
 
 // ============================================================================
 // SUMMARY

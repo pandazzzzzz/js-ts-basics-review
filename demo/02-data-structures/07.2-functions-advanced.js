@@ -54,11 +54,11 @@ function repeat(n, action) {
   }
 }
 
-repeat(3, (i) => console.log(`Iteration ${i}`));
+repeat(3, i => console.log(`Iteration ${i}`));
 
 // Return function
 function multiplier(factor) {
-  return function(number) {
+  return function (number) {
     return number * factor;
   };
 }
@@ -69,7 +69,7 @@ console.log("double(5):", double(5)); // 10
 console.log("triple(5):", triple(5)); // 15
 
 // Function composition
-const compose = (f, g) => (x) => f(g(x));
+const compose = (f, g) => x => f(g(x));
 const addOne = x => x + 1;
 const multiplyByTwo = x => x * 2;
 const addOneThenDouble = compose(multiplyByTwo, addOne);
@@ -102,15 +102,15 @@ function createCounter() {
   let count = 0; // Private variable
 
   return {
-    increment: function() {
+    increment: function () {
       return ++count;
     },
-    decrement: function() {
+    decrement: function () {
       return --count;
     },
-    getCount: function() {
+    getCount: function () {
       return count;
-    }
+    },
   };
 }
 
@@ -123,14 +123,14 @@ console.log("counter.decrement():", counter.decrement()); // 1
 // Closure trap in loops
 console.log("\nClosure trap with var:");
 for (var i = 0; i < 3; i++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("var i:", i); // All print 3
   }, 0);
 }
 
 console.log("Fixed with let:");
 for (let j = 0; j < 3; j++) {
-  setTimeout(function() {
+  setTimeout(function () {
     console.log("let j:", j); // Prints 0, 1, 2
   }, 0);
 }
@@ -138,8 +138,8 @@ for (let j = 0; j < 3; j++) {
 // Fix var issue with IIFE
 console.log("Fixed with IIFE:");
 for (var k = 0; k < 3; k++) {
-  (function(index) {
-    setTimeout(function() {
+  (function (index) {
+    setTimeout(function () {
       console.log("IIFE k:", index); // Prints 0, 1, 2
     }, 0);
   })(k);
@@ -175,18 +175,18 @@ function delay(ms) {
 }
 
 async function fetchData() {
-  console.log('Fetching data...');
+  console.log("Fetching data...");
   await delay(10);
-  return { data: 'Sample data' };
+  return { data: "Sample data" };
 }
 
 async function processData() {
   try {
     const result = await fetchData();
-    console.log('Data received:', result);
+    console.log("Data received:", result);
     return result;
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
@@ -195,11 +195,11 @@ processData();
 // Parallel execution of multiple async operations
 async function fetchMultiple() {
   const [result1, result2, result3] = await Promise.all([
-    delay(10).then(() => 'Data 1'),
-    delay(5).then(() => 'Data 2'),
-    delay(8).then(() => 'Data 3')
+    delay(10).then(() => "Data 1"),
+    delay(5).then(() => "Data 2"),
+    delay(8).then(() => "Data 3"),
   ]);
-  console.log('All data:', result1, result2, result3);
+  console.log("All data:", result1, result2, result3);
 }
 
 fetchMultiple();
@@ -287,7 +287,7 @@ console.log("Result:", [...outerGenerator()]); // [0, 1, 2, 3]
 
 // yield* with string (strings are iterable)
 function* stringGenerator() {
-  yield* 'hello';
+  yield* "hello";
 }
 console.log("yield* string:", [...stringGenerator()]); // ['h', 'e', 'l', 'l', 'o']
 
@@ -316,7 +316,7 @@ async function* asyncNumberGenerator() {
 
 // Consuming async generator
 (async () => {
-  console.log('Async generator results:');
+  console.log("Async generator results:");
   for await (const num of asyncNumberGenerator()) {
     console.log(`  Received: ${num}`);
   }
@@ -343,8 +343,8 @@ console.log("\n=== 5. Currying Demo ===");
 
 // Manual currying
 function curriedAdd(a) {
-  return function(b) {
-    return function(c) {
+  return function (b) {
+    return function (c) {
       return a + b + c;
     };
   };
@@ -358,7 +358,7 @@ function curry(fn) {
     if (args.length >= fn.length) {
       return fn.apply(this, args);
     } else {
-      return function(...nextArgs) {
+      return function (...nextArgs) {
         return curried.apply(this, args.concat(nextArgs));
       };
     }
@@ -381,7 +381,7 @@ function calculatePrice(tax, discount, price) {
 }
 
 const calculateWithTax = curry(calculatePrice)(0.08); // 8% tax
-const calculateFinal = calculateWithTax(0.10); // 10% discount
+const calculateFinal = calculateWithTax(0.1); // 10% discount
 console.log("\ncalculateFinal(100):", calculateFinal(100)); // 100 * 1.08 * 0.9 = 97.2
 
 // ============================================
@@ -392,22 +392,24 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Forgetting await on async functions
 async function badAsync() {
   const data = fetchData(); // ❌ Missing await
-  console.log('Data without await:', data); // Promise { ... }
+  console.log("Data without await:", data); // Promise { ... }
 }
 badAsync();
 
 async function goodAsync() {
   const data = await fetchData(); // ✅ With await
-  console.log('Data with await:', data); // { data: 'Sample data' }
+  console.log("Data with await:", data); // { data: 'Sample data' }
 }
 goodAsync();
 
 // Pitfall 2: Confusing generator.next() value vs done
 console.log("\nGenerator pitfall:");
-function* g() { yield 1; }
+function* g() {
+  yield 1;
+}
 const it = g();
-console.log('First next():', it.next()); // { value: 1, done: false }
-console.log('Second next():', it.next()); // { value: undefined, done: true }
+console.log("First next():", it.next()); // { value: 1, done: false }
+console.log("Second next():", it.next()); // { value: undefined, done: true }
 
 // Pitfall 3: Closures retaining references to loop variables (already covered earlier)
 
@@ -421,16 +423,22 @@ console.log("✅ Always handle errors with try-catch in async functions");
 console.log("✅ Use closures for private state encapsulation");
 console.log("✅ Use generators for lazy evaluation of sequences");
 console.log("✅ Consider currying for reusable partially-applied functions");
-console.log("⚠️  Avoid unnecessary currying when simple function calls suffice");
+console.log(
+  "⚠️  Avoid unnecessary currying when simple function calls suffice"
+);
 console.log("⚠️  Be mindful of memory leaks with long-lived closures");
 
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 07.1-functions-basics.js - Function basics: declarations, expressions, parameters");
+console.log(
+  "📘 07.1-functions-basics.js - Function basics: declarations, expressions, parameters"
+);
 console.log("📘 07.3-functions-patterns.js - Advanced function patterns");
-console.log("📘 24-function-patterns-advanced.js - Advanced patterns (currying, composition)");
+console.log(
+  "📘 24-function-patterns-advanced.js - Advanced patterns (currying, composition)"
+);
 console.log("📘 31-async-await.js - Async/await in depth");
 console.log("📘 13-scope-closures.js - Closures and scope in depth");
 

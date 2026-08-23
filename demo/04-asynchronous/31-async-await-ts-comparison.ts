@@ -108,7 +108,9 @@ interface Identifiable {
   id: number;
 }
 
-async function fetchWithConstraint<T extends Identifiable>(id: number): Promise<T> {
+async function fetchWithConstraint<T extends Identifiable>(
+  id: number
+): Promise<T> {
   return { id, name: "Item" } as unknown as T;
 }
 
@@ -165,9 +167,11 @@ class ApiError extends Error {
 }
 
 function isApiError(error: unknown): error is ApiError {
-  return error instanceof ApiError &&
-         typeof error.statusCode === "number" &&
-         typeof error.endpoint === "string";
+  return (
+    error instanceof ApiError &&
+    typeof error.statusCode === "number" &&
+    typeof error.endpoint === "string"
+  );
 }
 
 async function fetchWithCustomError(): Promise<void> {
@@ -198,7 +202,7 @@ async function promiseAllTypes(): Promise<void> {
   const [num, str, bool] = await Promise.all([
     numPromise,
     strPromise,
-    boolPromise
+    boolPromise,
   ]);
 
   // Each variable has correct type
@@ -216,7 +220,7 @@ promiseAllTypes();
 async function promiseAllWithoutDestructuring(): Promise<void> {
   const results: [number, string] = await Promise.all([
     Promise.resolve(100),
-    Promise.resolve("world")
+    Promise.resolve("world"),
   ]);
 
   // results has tuple type [number, string]
@@ -231,11 +235,11 @@ promiseAllWithoutDestructuring();
 // ============================================================================
 
 // TypeScript: Explicit type for async arrow functions
-const asyncFn: (x: number) => Promise<number> = async (x) => x * 2;
+const asyncFn: (x: number) => Promise<number> = async x => x * 2;
 
 // With multiple parameters
-const asyncFnMulti: (a: number, b: number) => Promise<number> =
-  async (a, b) => a + b;
+const asyncFnMulti: (a: number, b: number) => Promise<number> = async (a, b) =>
+  a + b;
 
 // With object parameters
 interface Options {
@@ -243,8 +247,10 @@ interface Options {
   multiplier: number;
 }
 
-const asyncFnObject: (opts: Options) => Promise<number> =
-  async ({ value, multiplier }) => value * multiplier;
+const asyncFnObject: (opts: Options) => Promise<number> = async ({
+  value,
+  multiplier,
+}) => value * multiplier;
 
 console.log("\n=== Async Arrow Function Types ===");
 asyncFn(5).then(result => {
@@ -289,11 +295,16 @@ async function complexFunction(): Promise<ComplexData> {
 type ComplexReturn = Awaited<ReturnType<typeof complexFunction>>; // ComplexData
 
 console.log("\n=== Awaited<T> Utility Type ===");
-const typeCheck: ComplexReturn = { users: [{ id: 1, name: "Test", email: "test@example.com" }], total: 1 };
+const typeCheck: ComplexReturn = {
+  users: [{ id: 1, name: "Test", email: "test@example.com" }],
+  total: 1,
+};
 console.log("Type check:", typeCheck.total);
 
 // Generic function using Awaited
-async function processAsync<T>(promise: Promise<T>): Promise<Awaited<Promise<T>>> {
+async function processAsync<T>(
+  promise: Promise<T>
+): Promise<Awaited<Promise<T>>> {
   const result: Awaited<Promise<T>> = await promise;
   return result;
 }
@@ -339,7 +350,12 @@ async function useOverloads(): Promise<void> {
   // Returns Promise<Blob>
   const blobData = await fetchData("/api/data", "blob");
 
-  console.log("Overload types:", typeof jsonData, typeof textData, typeof blobData);
+  console.log(
+    "Overload types:",
+    typeof jsonData,
+    typeof textData,
+    typeof blobData
+  );
 }
 
 console.log("\n=== Async Function Overloads ===");
@@ -438,7 +454,7 @@ class AsyncRange implements AsyncIterable<number> {
           return { value: current++, done: false };
         }
         return { done: true, value: undefined };
-      }
+      },
     };
   }
 }
@@ -473,11 +489,12 @@ type B = UnwrapPromise<number>; // number
 type C = UnwrapPromise<Promise<{ id: number }>>; // { id: number }
 
 // More complex conditional
-type DeepUnwrap<T> = T extends Promise<infer U>
-  ? DeepUnwrap<U>
-  : T extends Array<infer U>
-    ? DeepUnwrap<U>[]
-    : T;
+type DeepUnwrap<T> =
+  T extends Promise<infer U>
+    ? DeepUnwrap<U>
+    : T extends Array<infer U>
+      ? DeepUnwrap<U>[]
+      : T;
 
 type D = DeepUnwrap<Promise<Promise<string>>>; // string
 type E = DeepUnwrap<Promise<number[]>>; // number[]
@@ -523,14 +540,14 @@ async function useMappedTypes(): Promise<void> {
   const asyncConfig: AsyncConfig = {
     apiUrl: Promise.resolve("https://api.example.com"),
     timeout: Promise.resolve(5000),
-    retries: Promise.resolve(3)
+    retries: Promise.resolve(3),
   };
 
   // Use Promise.all with object values (not keys)
   const results = await Promise.all([
     asyncConfig.apiUrl,
     asyncConfig.timeout,
-    asyncConfig.retries
+    asyncConfig.retries,
   ]);
 
   const apiUrl = results[0];
@@ -573,17 +590,25 @@ async function useRetry(): Promise<void> {
   console.log("\n=== Type-Safe Retry Pattern ===");
 
   // TypeScript knows result type is string
-  const result = await retry(async () => {
-    return "success";
-  }, 3, 100);
+  const result = await retry(
+    async () => {
+      return "success";
+    },
+    3,
+    100
+  );
 
   // result is typed as string
   console.log("Retry result:", result.toUpperCase());
 
   // With object type
-  const userData = await retry(async (): Promise<User> => {
-    return { id: 1, name: "User", email: "user@example.com" };
-  }, 3, 100);
+  const userData = await retry(
+    async (): Promise<User> => {
+      return { id: 1, name: "User", email: "user@example.com" };
+    },
+    3,
+    100
+  );
 
   // userData is typed as User
   console.log("User data:", userData.name);
@@ -613,7 +638,7 @@ function createCancellableFetcher() {
     cancel: () => controller.abort(),
     get signal(): AbortSignal {
       return controller.signal;
-    }
+    },
   };
 }
 
@@ -652,11 +677,11 @@ async function sequentialPattern(): Promise<void> {
 
 async function parallelPattern(): Promise<void> {
   // Parallel - tuple types preserved
-  const [num, str, bool] = await Promise.all([
+  const [num, str, bool] = (await Promise.all([
     Promise.resolve(100),
     Promise.resolve("parallel"),
-    Promise.resolve(true)
-  ]) as [number, string, boolean];
+    Promise.resolve(true),
+  ])) as [number, string, boolean];
 
   // Types: num: number, str: string, bool: boolean
   console.log("Parallel:", num, str, bool);

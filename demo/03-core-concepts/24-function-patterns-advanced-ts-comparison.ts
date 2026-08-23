@@ -17,11 +17,13 @@ export {};
 // }
 
 // TypeScript: Typed curry function
-type Curry = <T extends any[], R>(fn: (...args: T) => R) =>
-  <A extends any[]>(...args: A) =>
-    A['length'] extends T['length']
-      ? R
-      : <B extends any[]>(...more: B) => ReturnType<typeof curry>;
+type Curry = <T extends any[], R>(
+  fn: (...args: T) => R
+) => <A extends any[]>(
+  ...args: A
+) => A["length"] extends T["length"]
+  ? R
+  : <B extends any[]>(...more: B) => ReturnType<typeof curry>;
 
 function curry<T extends any[], R>(fn: (...args: T) => R) {
   return function curried(...args: any[]): any {
@@ -40,14 +42,16 @@ console.log(curriedAdd(1)(2)(3)); // 6
 // TypeScript: Function composition with type safety
 type Compose = <A, B, C>(f: (b: B) => C, g: (a: A) => B) => (a: A) => C;
 
-const compose: Compose = (f, g) => (a) => f(g(a));
-const pipe = <A, B, C>(g: (a: A) => B, f: (b: B) => C) => (a: A) => f(g(a));
+const compose: Compose = (f, g) => a => f(g(a));
+const pipe =
+  <A, B, C>(g: (a: A) => B, f: (b: B) => C) =>
+  (a: A) =>
+    f(g(a));
 
 const double = (x: number): number => x * 2;
 const square = (x: number): number => x * x;
 const doubleThenSquare = compose(square, double);
 console.log(doubleThenSquare(3)); // 36
-
 
 // ============================================================================
 // 2. HIGHER-ORDER FUNCTIONS WITH GENERICS
@@ -58,7 +62,9 @@ console.log("\n=== Generic Higher-Order Functions ===");
 // Generic memoization
 function memoize<T extends (...args: any[]) => R, R>(
   fn: T,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (
+    ...args: Parameters<T>
+  ) => string
 ): T {
   const cache = new Map<string, R>();
   return ((...args: Parameters<T>) => {
@@ -109,7 +115,6 @@ function throttle<T extends (...args: any[]) => any>(
   };
 }
 
-
 // ============================================================================
 // 3. RESULT TYPE PATTERN
 // ============================================================================
@@ -117,9 +122,7 @@ function throttle<T extends (...args: any[]) => any>(
 console.log("\n=== Result Type Pattern ===");
 
 // TypeScript: Result type for explicit error handling
-type Result<T, E = Error> =
-  | { ok: true; value: T }
-  | { ok: false; error: E };
+type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
 
 // Helper functions
 const ok = <T>(value: T): Result<T, never> => ({ ok: true, value });
@@ -141,7 +144,6 @@ if (!result2.ok) {
   console.log("Error:", result2.error); // "Division by zero"
 }
 
-
 // ============================================================================
 // 4. FUNCTION OVERLOADS
 // ============================================================================
@@ -153,8 +155,8 @@ function add(a: number, b: number): number;
 function add(a: string, b: string): string;
 function add(a: number[], b: number[]): number[];
 function add(a: any, b: any): any {
-  if (typeof a === 'number' && typeof b === 'number') return a + b;
-  if (typeof a === 'string' && typeof b === 'string') return a + b;
+  if (typeof a === "number" && typeof b === "number") return a + b;
+  if (typeof a === "string" && typeof b === "string") return a + b;
   if (Array.isArray(a) && Array.isArray(b)) return [...a, ...b];
   throw new Error("Invalid arguments");
 }
@@ -162,7 +164,6 @@ function add(a: any, b: any): any {
 console.log(add(2, 3)); // 5
 console.log(add("Hello", " World")); // "Hello World"
 console.log(add([1, 2], [3, 4])); // [1, 2, 3, 4]
-
 
 // ============================================================================
 // 5. TYPE GUARDS AND PREDICATES
@@ -180,7 +181,7 @@ interface Cat {
 }
 
 function isDog(animal: Dog | Cat): animal is Dog {
-  return 'bark' in animal;
+  return "bark" in animal;
 }
 
 function makeSound(animal: Dog | Cat): void {
@@ -199,10 +200,9 @@ function assert(condition: unknown, message?: string): asserts condition {
 }
 
 function processValue(value: unknown): void {
-  assert(typeof value === 'string', 'Value must be string');
+  assert(typeof value === "string", "Value must be string");
   console.log(value.toUpperCase()); // TypeScript knows value is string
 }
-
 
 // ============================================================================
 // 6. TYPED PROMISES
@@ -223,7 +223,6 @@ async function processUsers(ids: number[]): Promise<void> {
 
 processUsers([1, 2, 3]);
 
-
 // ============================================================================
 // 7. BRANDED TYPES
 // ============================================================================
@@ -231,8 +230,8 @@ processUsers([1, 2, 3]);
 console.log("\n=== Branded Types ===");
 
 // TypeScript: Branded types for nominal typing
-type UserId = number & { __brand: 'UserId' };
-type ProductId = number & { __brand: 'ProductId' };
+type UserId = number & { __brand: "UserId" };
+type ProductId = number & { __brand: "ProductId" };
 
 function createUserId(id: number): UserId {
   return id as UserId;
@@ -251,7 +250,6 @@ const productId = createProductId(456);
 
 getUser(userId); // OK
 // getUser(productId); // ❌ Type error: ProductId not assignable to UserId
-
 
 // ============================================================================
 // 8. DECORATORS (EXPERIMENTAL)
@@ -284,7 +282,6 @@ console.log("\n=== Decorators ===");
 // const calc = new Calculator();
 // calc.add(2, 3); // Logs call and result
 
-
 // ============================================================================
 // 9. TRAMPOLINE PATTERN FOR RECURSION
 // ============================================================================
@@ -304,7 +301,7 @@ type Thunk<T> = () => T | Thunk<T>;
 function trampoline<T>(fn: Thunk<T>): T {
   let result: T | Thunk<T> = fn();
 
-  while (typeof result === 'function') {
+  while (typeof result === "function") {
     result = (result as Thunk<T>)();
   }
 
@@ -329,7 +326,10 @@ function factorial(n: number, acc: number = 1): number | (() => number) {
   return thunk(factorial, n - 1, n * acc);
 }
 
-console.log("Trampoline factorial(10):", trampoline(() => factorial(10))); // 3628800
+console.log(
+  "Trampoline factorial(10):",
+  trampoline(() => factorial(10))
+); // 3628800
 
 // Mutual recursion with trampoline
 function isEven(n: number): boolean | (() => boolean | (() => boolean)) {
@@ -342,9 +342,14 @@ function isOdd(n: number): boolean | (() => boolean | (() => boolean)) {
   return thunk(isEven, n - 1);
 }
 
-console.log("isEven(10):", trampoline(() => isEven(10))); // true
-console.log("isEven(9):", trampoline(() => isEven(9))); // false
-
+console.log(
+  "isEven(10):",
+  trampoline(() => isEven(10))
+); // true
+console.log(
+  "isEven(9):",
+  trampoline(() => isEven(9))
+); // false
 
 // ============================================================================
 // 10. POINT-FREE STYLE WITH TYPES
@@ -358,7 +363,7 @@ function pipe3<A, B, C, D>(
   f2: (b: B) => C,
   f3: (c: C) => D
 ): (a: A) => D {
-  return (a) => f3(f2(f1(a)));
+  return a => f3(f2(f1(a)));
 }
 
 // Point-free style functions with types
@@ -378,18 +383,18 @@ const isEvenNumber = (x: number): boolean => x % 2 === 0;
 const doubleValue = (x: number): number => x * 2;
 const trim = (str: string): string => str.trim();
 const toUpper = (str: string): string => str.toUpperCase();
-const addPrefix = (prefix: string) => (str: string): string => `${prefix} ${str}`;
+const addPrefix =
+  (prefix: string) =>
+  (str: string): string =>
+    `${prefix} ${str}`;
 
 const numbers = [1, 2, 3, 4, 5];
-const result = numbers
-  .filter(isEvenNumber)
-  .map(doubleValue);
+const result = numbers.filter(isEvenNumber).map(doubleValue);
 console.log("\nArray processing:", result); // [4, 8]
 
 // Point-free data transformation pipeline
-const formatName = pipe3(trim, toUpper, addPrefix('Dr.'));
-console.log("Name formatting:", formatName('  alice  ')); // "Dr. ALICE"
-
+const formatName = pipe3(trim, toUpper, addPrefix("Dr."));
+console.log("Name formatting:", formatName("  alice  ")); // "Dr. ALICE"
 
 // ============================================================================
 // 11. PERFORMANCE CONSIDERATIONS WITH TYPES
@@ -407,8 +412,10 @@ function sumLoop(n: number): number {
 }
 
 function sumReduce(n: number): number {
-  return Array.from({ length: n }, (_, i) => i)
-    .reduce((acc, val) => acc + val, 0);
+  return Array.from({ length: n }, (_, i) => i).reduce(
+    (acc, val) => acc + val,
+    0
+  );
 }
 
 console.log("Performance comparison (conceptual):");
@@ -419,7 +426,9 @@ console.log("- sumReduce: Array creation + reduce, more overhead");
 function memoizeWithMaxSize<T extends (...args: any[]) => R, R>(
   fn: T,
   maxSize: number = 100,
-  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (...args: Parameters<T>) => string
+  keyFn: (...args: Parameters<T>) => string = JSON.stringify as unknown as (
+    ...args: Parameters<T>
+  ) => string
 ): (...args: Parameters<T>) => R {
   const cache = new Map<string, R>();
 
@@ -480,9 +489,7 @@ console.log("First call:", expensiveComputation()); // Logs "Computing..."
 console.log("Second call:", expensiveComputation()); // No log
 
 // TypeScript: WeakMap-based cache for GC-friendly memoization
-function weakMemoize<T extends object, R>(
-  fn: (obj: T) => R
-): (obj: T) => R {
+function weakMemoize<T extends object, R>(fn: (obj: T) => R): (obj: T) => R {
   const cache = new WeakMap<T, R>();
 
   return (obj: T): R => {
@@ -509,7 +516,6 @@ const data: DataObject = { id: 1, value: 100 };
 console.log("\nWeakMap memoization:");
 console.log(processData(data)); // Processes
 console.log(processData(data)); // Uses cache
-
 
 // ============================================================================
 // 12. LRU CACHE WITH GENERICS
@@ -619,7 +625,6 @@ console.log("Has user 1?", userCache.has(1)); // true
 // userCache.set("string-key", { id: 5, name: "Error", email: "e@e.com" });
 // const wrongType = userCache.get(1)?.nonExistentProperty;
 
-
 // ============================================================================
 // SUMMARY
 // ============================================================================
@@ -646,4 +651,3 @@ console.log("- Self-documenting code");
 console.log("- Type-safe function composition");
 console.log("- GC-friendly memoization with WeakMap");
 console.log("- Generic cache implementations with type safety");
-

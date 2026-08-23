@@ -117,13 +117,16 @@ async function demonstrateResponseMethods() {
     // Inspecting response properties
     console.log("\n5. Response properties:");
     const inspectResponse = await fetch(`${API_BASE}/posts/1`);
-    console.log("   response.ok:", inspectResponse.ok);           // true if status 200-299
-    console.log("   response.status:", inspectResponse.status);   // 200, 404, 500, etc.
+    console.log("   response.ok:", inspectResponse.ok); // true if status 200-299
+    console.log("   response.status:", inspectResponse.status); // 200, 404, 500, etc.
     console.log("   response.statusText:", inspectResponse.statusText); // "OK", "Not Found"
-    console.log("   response.type:", inspectResponse.type);       // "cors", "basic", "opaque"
-    console.log("   response.url:", inspectResponse.url);         // Final URL after redirects
-    console.log("   response.headers:", [...inspectResponse.headers.entries()].length, "headers");
-
+    console.log("   response.type:", inspectResponse.type); // "cors", "basic", "opaque"
+    console.log("   response.url:", inspectResponse.url); // Final URL after redirects
+    console.log(
+      "   response.headers:",
+      [...inspectResponse.headers.entries()].length,
+      "headers"
+    );
   } catch (error) {
     console.error("   Error in response methods demo:", error.message);
   }
@@ -154,7 +157,7 @@ async function createPost() {
   const newPost = {
     title: "My New Post",
     body: "This is the content of my new post.",
-    userId: 1
+    userId: 1,
   };
 
   console.log("6. POST with JSON body:");
@@ -164,9 +167,9 @@ async function createPost() {
     const response = await fetch(`${API_BASE}/posts`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPost)
+      body: JSON.stringify(newPost),
     });
 
     if (!response.ok) {
@@ -189,7 +192,7 @@ async function updatePost() {
     id: 1,
     title: "Updated Title",
     body: "Updated content here.",
-    userId: 1
+    userId: 1,
   };
 
   console.log("\n7. PUT request (full update):");
@@ -198,9 +201,9 @@ async function updatePost() {
     const response = await fetch(`${API_BASE}/posts/1`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedPost)
+      body: JSON.stringify(updatedPost),
     });
 
     const result = await response.json();
@@ -215,7 +218,7 @@ updatePost();
 // PATCH request (partial update)
 async function patchPost() {
   const partialUpdate = {
-    title: "Partially Updated Title"
+    title: "Partially Updated Title",
   };
 
   console.log("\n8. PATCH request (partial update):");
@@ -224,9 +227,9 @@ async function patchPost() {
     const response = await fetch(`${API_BASE}/posts/1`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(partialUpdate)
+      body: JSON.stringify(partialUpdate),
     });
 
     const result = await response.json();
@@ -244,7 +247,7 @@ async function deletePost() {
 
   try {
     const response = await fetch(`${API_BASE}/posts/1`, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     console.log("   Delete status:", response.status); // 200 or 204 (no content)
@@ -280,7 +283,7 @@ async function uploadWithFormData() {
   try {
     const response = await fetch(`${API_BASE}/posts`, {
       method: "POST",
-      body: formData
+      body: formData,
       // Note: Don't set Content-Type header with FormData
       // Browser sets it automatically with boundary
     });
@@ -313,7 +316,9 @@ console.log("✅ Always set headers: { 'Content-Type': 'application/json' }");
 
 console.log("\nPitfall 4 - Credentials not sent cross-origin:");
 console.log("❌ Cookies not sent cross-origin by default");
-console.log("✅ Use credentials: 'include' for cross-origin requests with cookies");
+console.log(
+  "✅ Use credentials: 'include' for cross-origin requests with cookies"
+);
 
 // ============================================
 // Best Practices
@@ -325,7 +330,9 @@ console.log("✅ Use try/catch with async/await");
 console.log("✅ Set Content-Type: application/json for JSON requests");
 console.log("✅ Don't set Content-Type with FormData (browser does it)");
 console.log("✅ Use credentials: 'include' when cross-origin auth needed");
-console.log("⚠️ Remember: fetch only rejects on network errors, not HTTP errors");
+console.log(
+  "⚠️ Remember: fetch only rejects on network errors, not HTTP errors"
+);
 console.log("⚠️ Response body is consumed after first read");
 
 // ============================================

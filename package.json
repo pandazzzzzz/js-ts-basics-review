@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
-    "demo": "node demo/01-basics/01-variables.js"
+    "demo": "node demo/01-basics/01-variables.js",
+    "format": "prettier --write \"demo/**/*.js\" \"demo/**/*.ts\"",
+    "format:check": "prettier --check \"demo/**/*.js\" \"demo/**/*.ts\"",
+    "lint": "eslint demo/"
   },
   "keywords": [
     "javascript",
@@ -18,6 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.2.0",
+    "eslint": "^10.9.0",
+    "prettier": "^3.9.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.0"
   }

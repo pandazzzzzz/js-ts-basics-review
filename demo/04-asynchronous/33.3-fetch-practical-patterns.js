@@ -53,9 +53,9 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
         headers: {
           "Content-Type": "application/json",
           ...defaultHeaders,
-          ...options.headers
+          ...options.headers,
         },
-        ...options
+        ...options,
       });
 
       if (!response.ok) {
@@ -71,10 +71,10 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
         headers: {
           "Content-Type": "application/json",
           ...defaultHeaders,
-          ...options.headers
+          ...options.headers,
         },
         body: JSON.stringify(data),
-        ...options
+        ...options,
       });
 
       if (!response.ok) {
@@ -82,13 +82,13 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
       }
 
       return await response.json();
-    }
+    },
   };
 };
 
 async function useApiClient() {
   const api = createApiClient(API_BASE, {
-    "X-Custom-Header": "MyApp/1.0"
+    "X-Custom-Header": "MyApp/1.0",
   });
 
   try {
@@ -98,7 +98,7 @@ async function useApiClient() {
     const created = await api.post("/posts", {
       title: "New Post",
       body: "Post content",
-      userId: 1
+      userId: 1,
     });
     console.log("   Created via API client, ID:", created.id);
   } catch (error) {
@@ -140,7 +140,6 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
 
       // Server errors (5xx) might be temporary, retry
       lastError = new Error(`HTTP ${response.status}: ${response.statusText}`);
-
     } catch (error) {
       lastError = error;
 
@@ -155,7 +154,9 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
     if (attempt < maxRetries) {
       // Exponential backoff: 1s, 2s, 4s, etc.
       const delay = Math.pow(2, attempt - 1) * 1000;
-      console.log(`   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
+      console.log(
+        `   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
+      );
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
@@ -203,7 +204,7 @@ async function basicAbortExample() {
   const controller = new AbortController();
   const signal = controller.signal;
 
-  signal.addEventListener('abort', () => {
+  signal.addEventListener("abort", () => {
     console.log("   Signal aborted, reason:", signal.reason);
   });
 
@@ -212,7 +213,7 @@ async function basicAbortExample() {
 
     // Abort after 50ms (very fast to demonstrate)
     setTimeout(() => {
-      controller.abort('Timeout after 50ms');
+      controller.abort("Timeout after 50ms");
     }, 50);
 
     const response = await fetchPromise;
@@ -236,7 +237,7 @@ function fetchWithAbortTimeout(url, options = {}, timeoutMs = 5000) {
 
   // Combine with existing signal if provided
   if (originalSignal) {
-    originalSignal.addEventListener('abort', () => {
+    originalSignal.addEventListener("abort", () => {
       controller.abort(originalSignal.reason);
     });
   }
@@ -247,7 +248,7 @@ function fetchWithAbortTimeout(url, options = {}, timeoutMs = 5000) {
 
   return fetch(url, {
     ...restOptions,
-    signal: controller.signal
+    signal: controller.signal,
   }).finally(() => {
     clearTimeout(timeoutId);
   });
@@ -257,7 +258,11 @@ async function demonstrateAbortTimeout() {
   console.log("\n3.2 Timeout with AbortController:");
 
   try {
-    const response = await fetchWithAbortTimeout(`${API_BASE}/posts/1`, {}, 10000);
+    const response = await fetchWithAbortTimeout(
+      `${API_BASE}/posts/1`,
+      {},
+      10000
+    );
     const data = await response.json();
     console.log("   ✓ Fetched within timeout:", data.id);
   } catch (error) {
@@ -282,18 +287,21 @@ async function cancelMultipleOperations() {
     const requests = [
       fetch(`${API_BASE}/posts/1`, { signal }),
       fetch(`${API_BASE}/posts/2`, { signal }),
-      fetch(`${API_BASE}/posts/3`, { signal })
+      fetch(`${API_BASE}/posts/3`, { signal }),
     ];
 
     // Cancel all after 50ms
     setTimeout(() => {
       console.log("   Aborting all requests...");
-      controller.abort('User cancelled');
+      controller.abort("User cancelled");
     }, 50);
 
     const responses = await Promise.all(requests);
     const data = await Promise.all(responses.map(r => r.json()));
-    console.log("   ✓ All completed:", data.map(d => d.id));
+    console.log(
+      "   ✓ All completed:",
+      data.map(d => d.id)
+    );
   } catch (error) {
     if (error.name === "AbortError") {
       console.log("   ✓ All requests cancelled");
@@ -312,7 +320,7 @@ class SearchController {
   async search(query) {
     // Cancel previous search
     if (this.currentController) {
-      this.currentController.abort('New search started');
+      this.currentController.abort("New search started");
     }
 
     this.currentController = new AbortController();
@@ -338,9 +346,9 @@ async function demonstrateSearchAsYouType() {
   const searchController = new SearchController();
 
   // Simulate rapid typing
-  searchController.search('java').catch(() => {});
-  searchController.search('javasc').catch(() => {});
-  const results = await searchController.search('javascript');
+  searchController.search("java").catch(() => {});
+  searchController.search("javasc").catch(() => {});
+  const results = await searchController.search("javascript");
 
   if (results) {
     console.log("   ✓ Search completed for: javascript");
@@ -359,9 +367,13 @@ function combineSignals(...signals) {
       break;
     }
 
-    signal.addEventListener('abort', () => {
-      controller.abort(signal.reason);
-    }, { once: true });
+    signal.addEventListener(
+      "abort",
+      () => {
+        controller.abort(signal.reason);
+      },
+      { once: true }
+    );
   }
 
   return controller.signal;
@@ -369,13 +381,21 @@ function combineSignals(...signals) {
 
 // 3.6 AbortSignal.timeout() and AbortSignal.any() (modern APIs)
 console.log("\n3.5 Modern AbortSignal APIs:");
-if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+if (
+  typeof AbortSignal !== "undefined" &&
+  typeof AbortSignal.timeout === "function"
+) {
   console.log("   ✓ AbortSignal.timeout() available (one-line timeout)");
   console.log("   Example: fetch(url, { signal: AbortSignal.timeout(5000) })");
 }
-if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.any === 'function') {
+if (
+  typeof AbortSignal !== "undefined" &&
+  typeof AbortSignal.any === "function"
+) {
   console.log("   ✓ AbortSignal.any() available (combine signals)");
-  console.log("   Example: AbortSignal.any([userSignal, AbortSignal.timeout(5000)])");
+  console.log(
+    "   Example: AbortSignal.any([userSignal, AbortSignal.timeout(5000)])"
+  );
 }
 
 // 3.7 AbortController Best Practices
@@ -406,12 +426,16 @@ async function sequentialDependentCalls() {
     console.log("   Got user:", user.name);
 
     // Then, get posts by that user
-    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(r => r.json());
+    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(
+      r => r.json()
+    );
     console.log("   User has", userPosts.length, "posts");
 
     // Get comments on first post
     if (userPosts.length > 0) {
-      const comments = await fetch(`${API_BASE}/posts/${userPosts[0].id}/comments`).then(r => r.json());
+      const comments = await fetch(
+        `${API_BASE}/posts/${userPosts[0].id}/comments`
+      ).then(r => r.json());
       console.log("   First post has", comments.length, "comments");
     }
   } catch (error) {
@@ -427,7 +451,9 @@ sequentialDependentCalls();
 console.log("\n=== Common Pitfalls ===");
 
 console.log("\nPitfall 1 - Not cancelling previous requests:");
-console.log("❌ Search-as-you-type without cancellation creates race conditions");
+console.log(
+  "❌ Search-as-you-type without cancellation creates race conditions"
+);
 console.log("✅ Use AbortController to cancel stale requests");
 
 console.log("\nPitfall 2 - Retrying all errors:");
@@ -463,7 +489,9 @@ console.log("\n=== Cross-references ===");
 console.log("📘 33.1-fetch-basics.js - Fetch basics and HTTP methods");
 console.log("📘 33.2-fetch-error-handling.js - Error handling and async/await");
 console.log("📘 33.4-fetch-streams-advanced.js - Stream API and caching");
-console.log("📘 34-async-error-handling.js - Circuit breaker and advanced error patterns");
+console.log(
+  "📘 34-async-error-handling.js - Circuit breaker and advanced error patterns"
+);
 
 // ============================================
 // TypeScript Comparison
