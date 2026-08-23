@@ -88,11 +88,7 @@ console.log("  tuple[0]:", tuple[0]); // string
 console.log("  tuple[1]:", tuple[1]); // number
 
 // Named tuple elements
-const namedTuple: [name: string, age: number, active: boolean] = [
-  "Alice",
-  30,
-  true,
-];
+const namedTuple: [name: string, age: number, active: boolean] = ["Alice", 30, true];
 console.log("  named tuple:", namedTuple);
 
 // Example 6: Spread with tuples

@@ -82,9 +82,7 @@ async function typedDownloadWithProgress(
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 0;
         onProgress(loaded, total, percent);
-        console.log(
-          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
-        );
+        console.log(`  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`);
       }
     }
 
@@ -234,9 +232,7 @@ async function typedCompareReadingMethods(): Promise<void> {
   const response1 = await fetch(`${API_BASE}/posts/1`);
   const data1 = (await response1.json()) as Post;
   const time1 = Date.now() - start1;
-  console.log(
-    `    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`
-  );
+  console.log(`    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`);
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -346,10 +342,7 @@ function buildQueryString(params: Record<string, QueryValue>): string {
   return searchParams.toString();
 }
 
-function buildUrl(
-  baseUrl: string,
-  params?: Record<string, QueryValue>
-): string {
+function buildUrl(baseUrl: string, params?: Record<string, QueryValue>): string {
   if (!params) return baseUrl;
 
   const queryString = buildQueryString(params);
@@ -416,10 +409,7 @@ const userTransformer: Transformer<User, string> = (user: User) => {
 };
 
 async function useTransformers(): Promise<void> {
-  const userString = await fetchWithTransform<User, string>(
-    `${API_BASE}/users/1`,
-    userTransformer
-  );
+  const userString = await fetchWithTransform<User, string>(`${API_BASE}/users/1`, userTransformer);
 
   console.log("Transformed user:", userString);
 }
@@ -483,12 +473,8 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log(
-  "📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript"
-);
-console.log(
-  "📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript"
-);
+console.log("📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript");
+console.log("📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript");
 console.log(
   "📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript"
 );

@@ -170,9 +170,7 @@ console.log("\n=== TypeScript-Specific Pitfalls ===\n");
 
 // ⚠️ PITFALL 1: Type assertions don't perform runtime checks
 // (Demonstrated earlier with wrongAssertion, restated briefly for clarity)
-console.log(
-  "Type assertions bypass compile-time checks — validate at runtime!"
-);
+console.log("Type assertions bypass compile-time checks — validate at runtime!");
 
 // PITFALL 2: Array type confusion
 let tsArrayExample: number[] = [1, 2, 3];

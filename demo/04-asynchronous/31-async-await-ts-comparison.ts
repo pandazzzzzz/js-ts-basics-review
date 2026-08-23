@@ -108,9 +108,7 @@ interface Identifiable {
   id: number;
 }
 
-async function fetchWithConstraint<T extends Identifiable>(
-  id: number
-): Promise<T> {
+async function fetchWithConstraint<T extends Identifiable>(id: number): Promise<T> {
   return { id, name: "Item" } as unknown as T;
 }
 
@@ -199,11 +197,7 @@ async function promiseAllTypes(): Promise<void> {
   const boolPromise: Promise<boolean> = Promise.resolve(true);
 
   // TypeScript infers tuple type [number, string, boolean]
-  const [num, str, bool] = await Promise.all([
-    numPromise,
-    strPromise,
-    boolPromise,
-  ]);
+  const [num, str, bool] = await Promise.all([numPromise, strPromise, boolPromise]);
 
   // Each variable has correct type
   const doubled: number = num * 2;
@@ -238,8 +232,7 @@ promiseAllWithoutDestructuring();
 const asyncFn: (x: number) => Promise<number> = async x => x * 2;
 
 // With multiple parameters
-const asyncFnMulti: (a: number, b: number) => Promise<number> = async (a, b) =>
-  a + b;
+const asyncFnMulti: (a: number, b: number) => Promise<number> = async (a, b) => a + b;
 
 // With object parameters
 interface Options {
@@ -247,10 +240,8 @@ interface Options {
   multiplier: number;
 }
 
-const asyncFnObject: (opts: Options) => Promise<number> = async ({
-  value,
-  multiplier,
-}) => value * multiplier;
+const asyncFnObject: (opts: Options) => Promise<number> = async ({ value, multiplier }) =>
+  value * multiplier;
 
 console.log("\n=== Async Arrow Function Types ===");
 asyncFn(5).then(result => {
@@ -302,9 +293,7 @@ const typeCheck: ComplexReturn = {
 console.log("Type check:", typeCheck.total);
 
 // Generic function using Awaited
-async function processAsync<T>(
-  promise: Promise<T>
-): Promise<Awaited<Promise<T>>> {
+async function processAsync<T>(promise: Promise<T>): Promise<Awaited<Promise<T>>> {
   const result: Awaited<Promise<T>> = await promise;
   return result;
 }
@@ -350,12 +339,7 @@ async function useOverloads(): Promise<void> {
   // Returns Promise<Blob>
   const blobData = await fetchData("/api/data", "blob");
 
-  console.log(
-    "Overload types:",
-    typeof jsonData,
-    typeof textData,
-    typeof blobData
-  );
+  console.log("Overload types:", typeof jsonData, typeof textData, typeof blobData);
 }
 
 console.log("\n=== Async Function Overloads ===");
@@ -490,11 +474,7 @@ type C = UnwrapPromise<Promise<{ id: number }>>; // { id: number }
 
 // More complex conditional
 type DeepUnwrap<T> =
-  T extends Promise<infer U>
-    ? DeepUnwrap<U>
-    : T extends Array<infer U>
-      ? DeepUnwrap<U>[]
-      : T;
+  T extends Promise<infer U> ? DeepUnwrap<U> : T extends Array<infer U> ? DeepUnwrap<U>[] : T;
 
 type D = DeepUnwrap<Promise<Promise<string>>>; // string
 type E = DeepUnwrap<Promise<number[]>>; // number[]
@@ -544,11 +524,7 @@ async function useMappedTypes(): Promise<void> {
   };
 
   // Use Promise.all with object values (not keys)
-  const results = await Promise.all([
-    asyncConfig.apiUrl,
-    asyncConfig.timeout,
-    asyncConfig.retries,
-  ]);
+  const results = await Promise.all([asyncConfig.apiUrl, asyncConfig.timeout, asyncConfig.retries]);
 
   const apiUrl = results[0];
   const timeout = results[1];
@@ -621,10 +597,7 @@ useRetry();
 // ============================================================================
 
 // TypeScript: AbortSignal in async functions
-async function fetchWithCancellation(
-  url: string,
-  signal: AbortSignal
-): Promise<Response> {
+async function fetchWithCancellation(url: string, signal: AbortSignal): Promise<Response> {
   const response = await fetch(url, { signal });
   return response;
 }

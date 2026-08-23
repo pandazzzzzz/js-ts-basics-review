@@ -77,10 +77,9 @@ console.log("\n=== Default Values with Types ===");
 console.log("Array default:", withDefault); // 100
 
 // Object destructuring with defaults
-const {
-  greeting = "Hello",
-  target = "World",
-}: { greeting?: string; target?: string } = { greeting: "Hi" };
+const { greeting = "Hello", target = "World" }: { greeting?: string; target?: string } = {
+  greeting: "Hi",
+};
 console.log("Object defaults:", { greeting, target }); // "Hi", "World"
 
 // Combining default with rename
@@ -148,18 +147,12 @@ interface UserConfig {
   role?: string;
 }
 
-function configureUser({
-  username,
-  isActive,
-  role = "user",
-}: UserConfig): string {
+function configureUser({ username, isActive, role = "user" }: UserConfig): string {
   return `${username} (${role}) - ${isActive ? "active" : "inactive"}`;
 }
 
 console.log(configureUser({ username: "bob", isActive: true }));
-console.log(
-  configureUser({ username: "alice", isActive: false, role: "admin" })
-);
+console.log(configureUser({ username: "alice", isActive: false, role: "admin" }));
 
 // Array parameter destructuring
 function sumPair([a, b]: [number, number]): number {
@@ -180,9 +173,7 @@ interface ComplexUser {
   };
 }
 
-function getUserDisplayName({
-  profile: { firstName, lastName },
-}: ComplexUser): string {
+function getUserDisplayName({ profile: { firstName, lastName } }: ComplexUser): string {
   return `${firstName} ${lastName}`;
 }
 
@@ -451,8 +442,7 @@ shallowReadonly[0].name = "Bob"; // ✅ Allowed! Shallow readonly
 console.log("Shallow readonly mutated:", shallowReadonly);
 
 // PITFALL 3: Type narrowing doesn't work with destructured union types
-type Animal =
-  { kind: "dog"; bark: () => void } | { kind: "cat"; meow: () => void };
+type Animal = { kind: "dog"; bark: () => void } | { kind: "cat"; meow: () => void };
 
 function makeSound(animal: Animal): void {
   // Direct property access with type guard works

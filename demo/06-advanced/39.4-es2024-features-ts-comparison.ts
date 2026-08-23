@@ -126,9 +126,7 @@ class Queue<T> {
 
 const stringQueue = new Queue<string>();
 stringQueue.enqueue("test");
-stringQueue
-  .dequeue()
-  .then(value => console.log("Queue value:", value.toUpperCase())); // ✅ value is string
+stringQueue.dequeue().then(value => console.log("Queue value:", value.toUpperCase())); // ✅ value is string
 
 // ============================================
 // 3. RegExp v Flag
@@ -226,8 +224,7 @@ type Vegetable = Extract<InventoryItem, { type: "vegetable" }>;
 type Meat = Extract<InventoryItem, { type: "meat" }>;
 
 const isFruit = (item: InventoryItem): item is Fruit => item.type === "fruit";
-const isVegetable = (item: InventoryItem): item is Vegetable =>
-  item.type === "vegetable";
+const isVegetable = (item: InventoryItem): item is Vegetable => item.type === "vegetable";
 const isMeat = (item: InventoryItem): item is Meat => item.type === "meat";
 
 const fruitOnly = inventory.filter(isFruit); // Fruit[]
@@ -238,9 +235,7 @@ const groupedTyped = Object.groupBy(inventory, (item): GroupKey => item.type);
 // groupedTyped is Record<GroupKey, InventoryItem[]> (no Partial, since we know all keys exist)
 
 // 3. Promise.withResolvers in generic functions
-function promisify<T>(
-  fn: (callback: (err: Error | null, result?: T) => void) => void
-): Promise<T> {
+function promisify<T>(fn: (callback: (err: Error | null, result?: T) => void) => void): Promise<T> {
   const { promise, resolve, reject } = Promise.withResolvers<T>();
   fn((err, result) => {
     if (err) reject(err);

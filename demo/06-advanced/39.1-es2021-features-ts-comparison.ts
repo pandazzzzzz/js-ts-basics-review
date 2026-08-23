@@ -125,10 +125,7 @@ Promise.any([p1, p2, p3])
   .catch((error: AggregateError) => console.log("All rejected:", error.errors));
 
 // AggregateError type
-const aggregateError = new AggregateError(
-  [new Error("1"), new Error("2")],
-  "Multiple errors"
-);
+const aggregateError = new AggregateError([new Error("1"), new Error("2")], "Multiple errors");
 console.log("AggregateError message:", aggregateError.message);
 console.log("Number of errors:", aggregateError.errors.length);
 

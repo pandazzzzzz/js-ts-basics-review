@@ -293,11 +293,7 @@ function factorialTrampoline(n, accumulator = 1) {
 
 const trampolinedFact = trampoline(factorialTrampoline);
 console.log("Factorial(10):", trampolinedFact(10)); // 3628800
-console.log(
-  "Factorial(1000) works:",
-  String(trampolinedFact(1000)).substring(0, 30),
-  "..."
-);
+console.log("Factorial(1000) works:", String(trampolinedFact(1000)).substring(0, 30), "...");
 
 // 3.3 Mutual recursion with trampoline
 function isEven(n) {
@@ -459,10 +455,7 @@ function sumLoop(n) {
 }
 
 function sumReduce(n) {
-  return Array.from({ length: n }, (_, i) => i).reduce(
-    (acc, val) => acc + val,
-    0
-  );
+  return Array.from({ length: n }, (_, i) => i).reduce((acc, val) => acc + val, 0);
 }
 
 console.log("Performance comparison (loop vs reduce):");
@@ -509,9 +502,7 @@ const objA = getObject();
 objA.data = 999;
 const objB = getObject(); // ❌ objB is the same modified object!
 console.log("objB.data:", objB.data); // 999 (should be 0)
-console.log(
-  "✅ Good: Return immutable objects or copies from memoized functions"
-);
+console.log("✅ Good: Return immutable objects or copies from memoized functions");
 
 // Pitfall 2: Memory leaks with unbounded caches
 console.log("\nPitfall 2 - Unbounded cache:");
@@ -521,9 +512,7 @@ console.log("✅ Good: Use LRU or TTL-based caches for production");
 // Pitfall 3: Recursion without base case
 console.log("\nPitfall 3 - Infinite recursion:");
 console.log("❌ Bad: Forgetting base case in recursion");
-console.log(
-  "✅ Good: Always test base case first, consider trampolines for deep recursion"
-);
+console.log("✅ Good: Always test base case first, consider trampolines for deep recursion");
 
 // ============================================
 // Best Practices
@@ -532,12 +521,8 @@ console.log("\n=== Best Practices ===");
 
 console.log("✅ Use memoization only for pure functions");
 console.log("✅ Use LRU cache for production to avoid memory leaks");
-console.log(
-  "✅ Use trampolines for deep recursion (better compatibility than TCO)"
-);
-console.log(
-  "✅ Use WeakMap for memoizing objects (auto-gc when keys are unreachable)"
-);
+console.log("✅ Use trampolines for deep recursion (better compatibility than TCO)");
+console.log("✅ Use WeakMap for memoizing objects (auto-gc when keys are unreachable)");
 console.log("✅ Prefer iteration over recursion for simple loops");
 console.log("✅ Consider performance before over-using composition");
 console.log(

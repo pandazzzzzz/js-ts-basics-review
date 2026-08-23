@@ -431,10 +431,8 @@ cleanup(); // Properly remove listener
 
 // TypeScript: Type-safe timer management
 class TimerManager {
-  private readonly timers: Map<number, ReturnType<typeof setTimeout>> =
-    new Map();
-  private readonly intervals: Map<number, ReturnType<typeof setInterval>> =
-    new Map();
+  private readonly timers: Map<number, ReturnType<typeof setTimeout>> = new Map();
+  private readonly intervals: Map<number, ReturnType<typeof setInterval>> = new Map();
   private nextId = 0;
 
   setTimeout(callback: () => void, delay: number): number {
@@ -522,9 +520,7 @@ class WeakCache<K extends object, V> implements GCFriendlyCache<K, V> {
   clear(): void {
     // WeakMap cannot be cleared or iterated; throw rather than silently no-op
     // (callers must drop all key references and let GC reclaim entries).
-    throw new Error(
-      "WeakCache.clear() is unsupported: WeakMap is not iterable"
-    );
+    throw new Error("WeakCache.clear() is unsupported: WeakMap is not iterable");
   }
 }
 
@@ -606,10 +602,7 @@ class DataStreamProcessor<T, R> {
 }
 
 // TypeScript: Generator-based stream with types
-function* typedStreamGenerator<T>(
-  generator: (index: number) => T,
-  total: number
-): Generator<T> {
+function* typedStreamGenerator<T>(generator: (index: number) => T, total: number): Generator<T> {
   for (let i = 0; i < total; i++) {
     yield generator(i);
   }

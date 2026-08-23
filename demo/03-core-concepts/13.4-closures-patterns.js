@@ -465,8 +465,7 @@ const APP_CONFIG = (function () {
   const apiBase = "https://api.example.com";
 
   // Compute configuration
-  const isDev =
-    typeof window !== "undefined" && window.location.hostname === "localhost";
+  const isDev = typeof window !== "undefined" && window.location.hostname === "localhost";
 
   return {
     timeout: defaultTimeout,

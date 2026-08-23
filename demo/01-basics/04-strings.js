@@ -347,10 +347,7 @@ console.log("codePointAt(0):", "A".codePointAt(0)); // 65
 // - Static method
 // - Takes multiple code values
 console.log("\n=== String.fromCharCode() ===");
-console.log(
-  "fromCharCode(72, 101, 108, 108, 111):",
-  String.fromCharCode(72, 101, 108, 108, 111)
-); // "Hello"
+console.log("fromCharCode(72, 101, 108, 108, 111):", String.fromCharCode(72, 101, 108, 108, 111)); // "Hello"
 
 // String.fromCodePoint() - Create string from code points (ES6/ES2015)
 // - Static method
@@ -364,10 +361,7 @@ console.log("fromCodePoint(65, 66, 67):", String.fromCodePoint(65, 66, 67)); // 
 // - With global flag, returns all matches
 console.log("\n=== match() Method ===");
 console.log("match(/[0-9]+/):", "I have 5 apples".match(/[0-9]+/)); // ["5"]
-console.log(
-  "match(/[0-9]+/g):",
-  "I have 5 apples and 3 oranges".match(/[0-9]+/g)
-); // ["5", "3"]
+console.log("match(/[0-9]+/g):", "I have 5 apples and 3 oranges".match(/[0-9]+/g)); // ["5", "3"]
 
 // search() - Search with regex (ES3)
 // - Returns index of first match or -1
@@ -406,10 +400,7 @@ console.log("\n=== normalize() Method ===");
 const str1 = "\u00F1"; // ñ (single character)
 const str2 = "\u006E\u0303"; // ñ (n + combining tilde)
 console.log("str1 === str2:", str1 === str2); // false (different representations)
-console.log(
-  "str1.normalize() === str2.normalize():",
-  str1.normalize() === str2.normalize()
-); // true (normalized to same form)
+console.log("str1.normalize() === str2.normalize():", str1.normalize() === str2.normalize()); // true (normalized to same form)
 
 // Different normalization forms
 const accentStr = "café";

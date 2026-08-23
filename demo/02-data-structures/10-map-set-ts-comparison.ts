@@ -203,11 +203,7 @@ if (methodMap.has("alice")) {
 }
 
 // Type-safe wrapper function
-function getUserOrDefault(
-  map: Map<string, User>,
-  key: string,
-  defaultUser: User
-): User {
+function getUserOrDefault(map: Map<string, User>, key: string, defaultUser: User): User {
   return map.get(key) ?? defaultUser;
 }
 
@@ -240,10 +236,7 @@ console.log("Union:", [...unionSet]);
 // Intersection
 type IntersectionOperation = <T>(a: Set<T>, b: Set<T>) => Set<T>;
 
-const intersection: IntersectionOperation = <T>(
-  a: Set<T>,
-  b: Set<T>
-): Set<T> => {
+const intersection: IntersectionOperation = <T>(a: Set<T>, b: Set<T>): Set<T> => {
   return new Set([...a].filter(x => b.has(x)));
 };
 
@@ -296,9 +289,7 @@ console.log("Deduplicated:", [...deduped]);
 // Array to Map with index
 type IndexedMap<T> = Map<number, T>;
 const items: string[] = ["apple", "banana", "cherry"];
-const indexedMap: IndexedMap<string> = new Map(
-  items.map((item, index) => [index, item])
-);
+const indexedMap: IndexedMap<string> = new Map(items.map((item, index) => [index, item]));
 console.log("Indexed map:", Object.fromEntries(indexedMap));
 
 // ============================================================================

@@ -40,10 +40,7 @@ typedPromise.then(value => {
 // ============================================================================
 
 // TypeScript: Explicit return type for promise-returning functions
-function asyncOperation(
-  value: number,
-  shouldFail: boolean = false
-): Promise<number> {
+function asyncOperation(value: number, shouldFail: boolean = false): Promise<number> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldFail) {
@@ -103,8 +100,7 @@ console.log("\n=== Promise.all with Tuple Types ===");
 // ============================================================================
 
 // TypeScript: Promise.allSettled returns typed settled results
-type SettledResult<T> =
-  { status: "fulfilled"; value: T } | { status: "rejected"; reason: unknown };
+type SettledResult<T> = { status: "fulfilled"; value: T } | { status: "rejected"; reason: unknown };
 
 async function mixedPromises(): Promise<void> {
   const promises = [
@@ -124,9 +120,7 @@ async function mixedPromises(): Promise<void> {
     } else {
       // result.reason is typed as unknown (must narrow to access properties)
       if (result.reason instanceof Error) {
-        console.log(
-          `Promise ${index}: rejected with reason ${result.reason.message}`
-        );
+        console.log(`Promise ${index}: rejected with reason ${result.reason.message}`);
       }
     }
   });
@@ -229,9 +223,7 @@ async function fetchWithTypedError(): Promise<void> {
   } catch (error: unknown) {
     if (error instanceof ApiError) {
       // TypeScript knows error has statusCode and endpoint properties
-      console.log(
-        `API Error ${error.statusCode} at ${error.endpoint}: ${error.message}`
-      );
+      console.log(`API Error ${error.statusCode} at ${error.endpoint}: ${error.message}`);
     }
   }
 }
@@ -288,10 +280,7 @@ interface ApiResponse<T> {
   message: string;
 }
 
-async function fetchApi<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponse<T>> {
+async function fetchApi<T>(url: string, options?: RequestInit): Promise<ApiResponse<T>> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
@@ -420,10 +409,7 @@ Promise.resolve(5)
 // ============================================================================
 
 // Promise.race - returns type of first settled promise
-const racePromises: Promise<number | string>[] = [
-  Promise.resolve(42),
-  Promise.resolve("hello"),
-];
+const racePromises: Promise<number | string>[] = [Promise.resolve(42), Promise.resolve("hello")];
 
 Promise.race(racePromises).then(result => {
   // result is typed as number | string (union of all input types)
@@ -431,11 +417,7 @@ Promise.race(racePromises).then(result => {
 });
 
 // Promise.any - returns type of first fulfilled promise
-const anyPromises = [
-  Promise.reject(new Error("fail")),
-  Promise.resolve(100),
-  Promise.resolve(200),
-];
+const anyPromises = [Promise.reject(new Error("fail")), Promise.resolve(100), Promise.resolve(200)];
 
 Promise.any(anyPromises)
   .then(result => {
@@ -482,15 +464,11 @@ console.log("\n=== Function Type for Promise Callbacks ===");
 // ============================================================================
 
 // Type guard for promise results
-function isFulfilled<T>(
-  result: PromiseSettledResult<T>
-): result is PromiseFulfilledResult<T> {
+function isFulfilled<T>(result: PromiseSettledResult<T>): result is PromiseFulfilledResult<T> {
   return result.status === "fulfilled";
 }
 
-function isRejected(
-  result: PromiseSettledResult<unknown>
-): result is PromiseRejectedResult {
+function isRejected(result: PromiseSettledResult<unknown>): result is PromiseRejectedResult {
   return result.status === "rejected";
 }
 
@@ -526,10 +504,7 @@ typedAllSettled();
 // ============================================================================
 
 // TypeScript: AbortSignal typing for cancellable operations
-async function fetchWithAbort(
-  url: string,
-  signal: AbortSignal
-): Promise<Response> {
+async function fetchWithAbort(url: string, signal: AbortSignal): Promise<Response> {
   const response = await fetch(url, { signal });
   return response;
 }

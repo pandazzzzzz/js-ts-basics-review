@@ -459,11 +459,7 @@ awaitPromiseFunction();
 
 // Mixing async/await with Promise methods
 async function mixedApproach() {
-  const result = await Promise.all([
-    delay(100, "A"),
-    delay(100, "B"),
-    delay(100, "C"),
-  ]);
+  const result = await Promise.all([delay(100, "A"), delay(100, "B"), delay(100, "C")]);
 
   console.log("Mixed approach:", result);
 
@@ -531,9 +527,7 @@ fetchUserAndPosts(42);
 
 // Promise.allSettled - never throws, inspect each result
 async function multiFetchWithFallback(urls) {
-  const results = await Promise.allSettled(
-    urls.map(u => delay(Math.random() * 200, u))
-  );
+  const results = await Promise.allSettled(urls.map(u => delay(Math.random() * 200, u)));
   const ok = results.filter(r => r.status === "fulfilled").map(r => r.value);
   console.log("allSettled:", results.length, "total,", ok.length, "fulfilled");
   return ok;
@@ -754,17 +748,11 @@ fetchWithRetry(
 
 // Example 3: Parallel requests with error handling
 async function fetchMultipleUsers(userIds) {
-  const results = await Promise.allSettled(
-    userIds.map(id => fetchUserData(id))
-  );
+  const results = await Promise.allSettled(userIds.map(id => fetchUserData(id)));
 
-  const successful = results
-    .filter(r => r.status === "fulfilled")
-    .map(r => r.value);
+  const successful = results.filter(r => r.status === "fulfilled").map(r => r.value);
 
-  const failed = results
-    .filter(r => r.status === "rejected")
-    .map(r => r.reason.message);
+  const failed = results.filter(r => r.status === "rejected").map(r => r.reason.message);
 
   console.log(`Fetched ${successful.length} users successfully`);
   if (failed.length > 0) {
@@ -849,11 +837,7 @@ async function betterParallel() {
   const start = Date.now();
 
   // ✅ Parallel - fast
-  const [a, b, c] = await Promise.all([
-    delay(200, "A"),
-    delay(200, "B"),
-    delay(200, "C"),
-  ]);
+  const [a, b, c] = await Promise.all([delay(200, "A"), delay(200, "B"), delay(200, "C")]);
 
   console.log(`  ✅ Parallel took ${Date.now() - start}ms`);
 }

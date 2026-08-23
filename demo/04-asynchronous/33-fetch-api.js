@@ -146,11 +146,7 @@ async function demonstrateResponseMethods() {
     console.log("   response.statusText:", inspectResponse.statusText); // "OK", "Not Found"
     console.log("   response.type:", inspectResponse.type); // "cors", "basic", "opaque"
     console.log("   response.url:", inspectResponse.url); // Final URL after redirects
-    console.log(
-      "   response.headers:",
-      [...inspectResponse.headers.entries()].length,
-      "headers"
-    );
+    console.log("   response.headers:", [...inspectResponse.headers.entries()].length, "headers");
   } catch (error) {
     console.error("   Error in response methods demo:", error.message);
   }
@@ -641,9 +637,7 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
     if (attempt < maxRetries) {
       // Exponential backoff: 1s, 2s, 4s, etc.
       const delay = Math.pow(2, attempt - 1) * 1000;
-      console.log(
-        `   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
-      );
+      console.log(`   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
@@ -751,11 +745,7 @@ async function demonstrateTimeout() {
   console.log("\n19.2 Timeout with AbortController:");
 
   try {
-    const response = await fetchWithAbortTimeout(
-      `${API_BASE}/posts/1`,
-      {},
-      10000
-    );
+    const response = await fetchWithAbortTimeout(`${API_BASE}/posts/1`, {}, 10000);
     const data = await response.json();
     console.log("   ✓ Fetched within timeout:", data.id);
   } catch (error) {
@@ -919,10 +909,7 @@ async function demonstrateCombinedSignals() {
     timeoutController.abort("Timeout");
   }, 5000);
 
-  const combinedSignal = combineSignals(
-    userController.signal,
-    timeoutController.signal
-  );
+  const combinedSignal = combineSignals(userController.signal, timeoutController.signal);
 
   try {
     // User cancels immediately
@@ -1003,16 +990,14 @@ async function sequentialDependentCalls() {
     console.log("   Got user:", user.name);
 
     // Then, get posts by that user
-    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(
-      r => r.json()
-    );
+    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(r => r.json());
     console.log("   User has", userPosts.length, "posts");
 
     // Get comments on first post
     if (userPosts.length > 0) {
-      const comments = await fetch(
-        `${API_BASE}/posts/${userPosts[0].id}/comments`
-      ).then(r => r.json());
+      const comments = await fetch(`${API_BASE}/posts/${userPosts[0].id}/comments`).then(r =>
+        r.json()
+      );
       console.log("   First post has", comments.length, "comments");
     }
   } catch (error) {
@@ -1114,9 +1099,7 @@ async function downloadWithProgress(url, onProgress) {
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : "unknown";
         onProgress(loaded, total, percent); // Invoke the progress callback
-        console.log(
-          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
-        );
+        console.log(`  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`);
       }
     }
 
@@ -1251,9 +1234,7 @@ async function compareReadingMethods() {
   const response1 = await fetch(`${API_BASE}/posts/1`);
   const data1 = await response1.json();
   const time1 = Date.now() - start1;
-  console.log(
-    `    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`
-  );
+  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -1349,9 +1330,7 @@ async function pitfall_credentials() {
   const withoutCredentials = await fetch(`${API_BASE}/posts/1`, {
     // credentials: 'include' // Need this to send cookies for cross-origin requests
   });
-  console.log(
-    "   Default credentials ('same-origin'): cookies sent to same origin"
-  );
+  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
 
   // With credentials for cross-origin
   const withCredentials = await fetch(`${API_BASE}/posts/1`, {

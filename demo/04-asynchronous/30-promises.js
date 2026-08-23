@@ -316,9 +316,7 @@ Promise.allSettled(promises).then(results => {
     if (result.status === "fulfilled") {
       console.log(`  Promise ${index}: fulfilled with value ${result.value}`);
     } else {
-      console.log(
-        `  Promise ${index}: rejected with reason ${result.reason.message}`
-      );
+      console.log(`  Promise ${index}: rejected with reason ${result.reason.message}`);
     }
   });
 });
@@ -383,11 +381,7 @@ Promise.any([
   });
 
 // All rejections case
-Promise.any([
-  asyncOperation(1, true),
-  asyncOperation(2, true),
-  asyncOperation(3, true),
-])
+Promise.any([asyncOperation(1, true), asyncOperation(2, true), asyncOperation(3, true)])
   .then(result => {
     console.log("This won't execute");
   })
@@ -679,9 +673,7 @@ function goodFetchUser(id) {
   return fetchUser(id);
 }
 
-goodFetchUser(1).then(user =>
-  console.log("  ✅ User fetched correctly:", user.name)
-);
+goodFetchUser(1).then(user => console.log("  ✅ User fetched correctly:", user.name));
 
 // Best Practices Summary
 
@@ -803,9 +795,7 @@ verbose.then(obj => console.log("Verbose way:", obj.name));
 
 // Modern ES2025 way: Promise.try wraps the sync function directly
 if (typeof Promise.try === "function") {
-  Promise.try(() => JSON.parse(jsonStr)).then(obj =>
-    console.log("Promise.try way:", obj.name)
-  );
+  Promise.try(() => JSON.parse(jsonStr)).then(obj => console.log("Promise.try way:", obj.name));
 
   // Errors thrown synchronously inside the callback become a rejected promise
   Promise.try(() => JSON.parse("{ invalid json")).catch(err =>

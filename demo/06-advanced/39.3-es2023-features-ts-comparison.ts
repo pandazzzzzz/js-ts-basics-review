@@ -85,11 +85,9 @@ const userList: User2[] = [
   { name: "Diana", role: "admin" },
 ];
 
-const lastAdmin = userList.findLast(
-  (user): user is User2 & { role: "admin" } => {
-    return user.role === "admin";
-  }
-);
+const lastAdmin = userList.findLast((user): user is User2 & { role: "admin" } => {
+  return user.role === "admin";
+});
 // lastAdmin is User2 & { role: "admin" } | undefined
 
 if (lastAdmin) {
@@ -145,10 +143,7 @@ weakSet.add(sym);
 console.log("WeakSet has sym:", weakSet.has(sym)); // true
 
 // Use case: Metadata storage with unique symbol keys
-const metadataMap = new WeakMap<
-  symbol,
-  { createdAt: Date; description: string }
->();
+const metadataMap = new WeakMap<symbol, { createdAt: Date; description: string }>();
 
 function createEntity(description: string): symbol {
   const id = Symbol("entity");
@@ -156,9 +151,7 @@ function createEntity(description: string): symbol {
   return id;
 }
 
-function getMetadata(
-  id: symbol
-): { createdAt: Date; description: string } | undefined {
+function getMetadata(id: symbol): { createdAt: Date; description: string } | undefined {
   return metadataMap.get(id);
 }
 
@@ -181,11 +174,7 @@ const newArray: readonly number[] = readonlyArray.toSorted(); // ✅ Returns new
 
 // 2. Exact types for array operations
 const tuple: [number, string, boolean] = [1, "hello", true];
-const reversedTuple: [boolean, string, number] = tuple.toReversed() as [
-  boolean,
-  string,
-  number,
-];
+const reversedTuple: [boolean, string, number] = tuple.toReversed() as [boolean, string, number];
 console.log("Reversed tuple:", reversedTuple);
 
 // 3. Type-safe state updates (common in React/Redux)
@@ -199,11 +188,7 @@ const initialState: AppState = {
   currentUser: null,
 };
 
-function updateUserAt(
-  state: AppState,
-  index: number,
-  updates: Partial<User>
-): AppState {
+function updateUserAt(state: AppState, index: number, updates: Partial<User>): AppState {
   const newUsers = state.users.with(index, {
     ...state.users[index],
     ...updates,

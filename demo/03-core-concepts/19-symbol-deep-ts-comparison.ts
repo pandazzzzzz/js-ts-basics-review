@@ -331,6 +331,4 @@ KEY TAKEAWAYS:
 5. Runtime Symbol behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

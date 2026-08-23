@@ -63,49 +63,29 @@ console.log("\n=== Recent Standardized Features ===");
  *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
-console.log(
-  "- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };"
-);
+console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
 
 // ES2026
-console.log(
-  "- Array.fromAsync (ES2026): const arr = await Array.fromAsync(asyncIter);"
-);
-console.log(
-  "- Math.sumPrecise (ES2026): Math.sumPrecise([1e16, 1, 1, 1]) // exact"
-);
+console.log("- Array.fromAsync (ES2026): const arr = await Array.fromAsync(asyncIter);");
+console.log("- Math.sumPrecise (ES2026): Math.sumPrecise([1e16, 1, 1, 1]) // exact");
 console.log("- Error.isError (ES2026): cross-realm reliable Error check");
-console.log(
-  "- Uint8Array Base64 (ES2026): bytes.toBase64() / Uint8Array.fromBase64(s)"
-);
+console.log("- Uint8Array Base64 (ES2026): bytes.toBase64() / Uint8Array.fromBase64(s)");
 console.log("- Upsert (ES2026): map.upsert(key, insertFn, updateFn)");
-console.log(
-  "- JSON.parse source text access (ES2026): access original JSON string"
-);
-console.log(
-  "- Iterator Sequencing (ES2026): Iterator.concat(iter1, iter2) concatenation"
-);
+console.log("- JSON.parse source text access (ES2026): access original JSON string");
+console.log("- Iterator Sequencing (ES2026): Iterator.concat(iter1, iter2) concatenation");
 
 // ES2027
 console.log(
   "- Temporal (ES2027): Temporal.Now.plainDateISO() / Temporal.PlainDate.from('1990-01-15')"
 );
-console.log(
-  "- using / await using (ES2027, Explicit Resource Management): auto-dispose"
-);
+console.log("- using / await using (ES2027, Explicit Resource Management): auto-dispose");
 console.log("- Joint Iteration (ES2027): Iterator.zip multiple iterables");
 
 // Commented example (ES2026/ES2027 syntax, illustrative)
 console.log("// ES2026/ES2027 example (commented, illustrative):");
-console.log(
-  "//   const arr = await Array.fromAsync(asyncIter);      // ES2026"
-);
-console.log(
-  "//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027, auto-close"
-);
-console.log(
-  "//   for (const [n, a] of Iterator.zip([names, ages])) console.log(n, a); // ES2027"
-);
+console.log("//   const arr = await Array.fromAsync(asyncIter);      // ES2026");
+console.log("//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027, auto-close");
+console.log("//   for (const [n, a] of Iterator.zip([names, ages])) console.log(n, a); // ES2027");
 
 // ============================================
 // Section 3+: Unfinalized proposals / Withdrawn proposals
@@ -116,9 +96,7 @@ console.log(
 // ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
 
-console.log(
-  "\n=== Unfinalized proposals / Withdrawn proposals (not current standard) ==="
-);
+console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current standard) ===");
 
 // --- Records & Tuples (Withdrawn - not current standard) ---
 // Originally planned immutable value-semantics data structures (#{} / #[]), deep equality.
@@ -148,14 +126,10 @@ console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Composites (Stage 1) — future syntax, illustrative:");
-console.log(
-  "//   const p = Composite { x: 1, y: 2 };   // immutable, value equality"
-);
+console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
 console.log("//   const a = Composite { x: 1 } , b = Composite { x: 1 };");
 console.log("//   a === b;            // true (value, not reference)");
-console.log(
-  "//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 }); // 'o'"
-);
+console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 }); // 'o'");
 
 // --- Decimal (Stage 1 proposal - not current standard) ---
 // High-precision decimal type to avoid binary floating-point error (0.1 + 0.2 !== 0.3).
@@ -215,9 +189,7 @@ console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
 console.log("//   const r = input");
 console.log("//     |> lowercase");
 console.log("//     |> trim");
-console.log(
-  "//     |> capitalize;  // instead of capitalize(trim(lowercase(input)))"
-);
+console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(input)))");
 
 // --- Partial Application (Stage 1 proposal - not current standard) ---
 /*
@@ -264,12 +236,8 @@ console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
 // Inline module fragments within a file, for organizing code and tests.
 // See tc39/proposal-module-fragments.
 console.log("// Module Fragments (Stage 2) — future syntax, illustrative:");
-console.log(
-  "//   module fragment Utils { export function helper() { /* ... */ } }"
-);
-console.log(
-  "//   module fragment Tests { import { helper } from Utils; /* ... */ }"
-);
+console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
+console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
 
 // --- Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard) ---
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
@@ -287,15 +255,11 @@ console.log("//   mf.format({ count: 5 });  // 'You have 5 items.'");
 console.log("\n=== JavaScript Runtime Evolution ===");
 console.log("- Deno: secure-by-default, TS-native, npm-compatible (2.0+)");
 console.log("- Bun: fast runtime, built-in transpiler/test runner/pkg manager");
-console.log(
-  "- WinterCG: portable web APIs (fetch/URL/Headers) across runtimes"
-);
+console.log("- WinterCG: portable web APIs (fetch/URL/Headers) across runtimes");
 
 console.log("\n=== Web Platform Future APIs ===");
 console.log("- Compute Pressure API: monitor system load, adapt dynamically");
-console.log(
-  "- Speculation Rules API: prefetch/prerender for instant navigation"
-);
+console.log("- Speculation Rules API: prefetch/prerender for instant navigation");
 console.log("- WebAssembly: GC, Components, stack switching, multi-memory");
 
 console.log("\n=== TypeScript Evolution ===");
@@ -304,15 +268,11 @@ console.log(
 );
 console.log("- TS 6.0: ignoreDeprecations, last JS-based compiler");
 console.log("- TS 7.0: Go-based rewrite (typescript-go), major perf gains");
-console.log(
-  "- Advanced types: template literal / conditional / mapped / variadic tuple types"
-);
+console.log("- Advanced types: template literal / conditional / mapped / variadic tuple types");
 
 console.log("\n=== Ecosystem Trends ===");
 console.log("- Build: Vite / Turbopack / Rspack / Bun bundler");
-console.log(
-  "- Framework: Server Components / Islands / Edge / Hybrid rendering"
-);
+console.log("- Framework: Server Components / Islands / Edge / Hybrid rendering");
 console.log("- Testing: Vitest / Playwright / Bun test");
 
 // ============================================
@@ -322,39 +282,23 @@ console.log("- Testing: Vitest / Playwright / Bun test");
 console.log("\n=== Best Practices for Future-Proofing ===");
 
 console.log("\n✅ DO:");
-console.log(
-  "1. Use TypeScript for type safety and early access to future features"
-);
-console.log(
-  "2. Write ESM modules (import/export); use native APIs (fetch, URL, FormData)"
-);
-console.log(
-  "3. Keep deps updated; follow TC39 proposals; prefer Web Standard APIs"
-);
+console.log("1. Use TypeScript for type safety and early access to future features");
+console.log("2. Write ESM modules (import/export); use native APIs (fetch, URL, FormData)");
+console.log("3. Keep deps updated; follow TC39 proposals; prefer Web Standard APIs");
 console.log("4. Write cross-runtime compatible code; consider WinterCG");
-console.log(
-  "5. Use transpilation/polyfills for older targets; test in target environments"
-);
+console.log("5. Use transpilation/polyfills for older targets; test in target environments");
 
 console.log("\n❌ DON'T:");
-console.log(
-  "1. Use deprecated Node-specific APIs or bundler-specific features"
-);
-console.log(
-  "2. Use CommonJS require() for new projects; assume Node is the only runtime"
-);
+console.log("1. Use deprecated Node-specific APIs or bundler-specific features");
+console.log("2. Use CommonJS require() for new projects; assume Node is the only runtime");
 console.log("3. Use experimental (Stage 1/2) features in production");
 console.log("4. Ignore deprecation warnings or browser compatibility");
 
 console.log("\n⚠️ WATCH OUT FOR:");
 console.log("1. TC39 proposal stage changes (syntax may break before Stage 4)");
 console.log("2. Browser support variations (check caniuse.com)");
-console.log(
-  "3. Runtime compatibility differences; deprecated API removal timelines"
-);
-console.log(
-  "4. Polyfill quality/maintenance; breaking changes in major versions"
-);
+console.log("3. Runtime compatibility differences; deprecated API removal timelines");
+console.log("4. Polyfill quality/maintenance; breaking changes in major versions");
 
 console.log("\n=== Common Pitfalls ===");
 
@@ -369,9 +313,7 @@ console.log("\nPitfall 3: Ignoring browser/runtime compatibility");
 console.log("  Fix: Check caniuse.com / node.green before using new features.");
 
 console.log("\nPitfall 4: Temporal API vs Date confusion");
-console.log(
-  "  Temporal is a new API, not a Date replacement. Learn it separately."
-);
+console.log("  Temporal is a new API, not a Date replacement. Learn it separately.");
 
 console.log("\n🔗 Resources:");
 console.log("- TC39 Proposals: https://github.com/tc39/proposals");

@@ -108,9 +108,7 @@ console.log("4. Can gradually adopt TypeScript");
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
-console.log(
-  "\n=== Decorators (Stage 2.7 proposal - not current standard) ===\n"
-);
+console.log("\n=== Decorators (Stage 2.7 proposal - not current standard) ===\n");
 
 // Decorators are a TC39 Stage 2.7 proposal (as of 2026-06, not yet part of the ECMAScript standard).
 // TS 5.0+ already supports it (experimentalDecorators: false); Babel 7.21+ supports it.
@@ -269,10 +267,7 @@ const objWithSymbols = {
 
 console.log("objWithSymbols[KEY]:", objWithSymbols[KEY]);
 console.log("Object.keys(objWithSymbols):", Object.keys(objWithSymbols));
-console.log(
-  "Reflect.ownKeys(objWithSymbols):",
-  Reflect.ownKeys(objWithSymbols)
-);
+console.log("Reflect.ownKeys(objWithSymbols):", Reflect.ownKeys(objWithSymbols));
 
 // Well-known symbols
 console.log("\nWell-known symbols:");
@@ -281,12 +276,8 @@ console.log("Symbol.asyncIterator - Async iterator");
 console.log("Symbol.hasInstance - instanceof behavior");
 console.log("Symbol.toStringTag - Object.prototype.toString()");
 console.log("Symbol.toPrimitive - Convert to primitive");
-console.log(
-  "Symbol.dispose - Explicit resource management (ES2027, Stage 4 May 2025)"
-);
-console.log(
-  "Symbol.asyncDispose - Async resource management (ES2027, Stage 4 May 2025)"
-);
+console.log("Symbol.dispose - Explicit resource management (ES2027, Stage 4 May 2025)");
+console.log("Symbol.asyncDispose - Async resource management (ES2027, Stage 4 May 2025)");
 
 // Example: Symbol.toStringTag
 class MyClass {
@@ -442,9 +433,7 @@ console.log("8. Reflect vs Object method differences");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log(
-  "📘 24.1-function-composition-ts-comparison.ts - Function composition TS"
-);
+console.log("📘 24.1-function-composition-ts-comparison.ts - Function composition TS");
 console.log("📘 23-proxy-reflect-ts-comparison.ts - Proxy TS comparison");
 console.log("📘 48-security.js - Type-safe security");
 

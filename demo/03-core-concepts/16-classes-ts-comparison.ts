@@ -154,9 +154,7 @@ abstract class Shape {
 
   // Concrete method using abstract methods
   logInfo(): void {
-    console.log(
-      `${this.describe()}: Area=${this.getArea()}, Perimeter=${this.getPerimeter()}`
-    );
+    console.log(`${this.describe()}: Area=${this.getArea()}, Perimeter=${this.getPerimeter()}`);
   }
 }
 
@@ -248,11 +246,7 @@ function sealed<T extends new (...args: any[]) => any>(constructor: T) {
 }
 
 // Method decorator
-function logExecution(
-  target: any,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) {
+function logExecution(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
   descriptor.value = function (...args: any[]) {
     console.log(`Executing ${propertyKey} with args:`, args);
@@ -499,6 +493,4 @@ KEY TAKEAWAYS:
 5. Runtime class behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

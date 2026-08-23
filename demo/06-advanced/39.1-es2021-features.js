@@ -35,10 +35,7 @@ console.log("\n--- 1. String.prototype.replaceAll() ---\n");
 
 // 📘 Official MDN example (String.replaceAll):
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll
-console.log(
-  "MDN 'aabbcc'.replaceAll('b', '.'):",
-  "aabbcc".replaceAll("b", ".")
-);
+console.log("MDN 'aabbcc'.replaceAll('b', '.'):", "aabbcc".replaceAll("b", "."));
 // 'aa..cc'
 
 // Before ES2021: only replace first occurrence, or use regex with /g flag
@@ -186,9 +183,7 @@ if (deref) {
 // If target is set to null and GC runs, weakRef.deref() may return undefined
 target = null;
 // Note: GC is non-deterministic, so we can't reliably demonstrate collection here
-console.log(
-  "Note: WeakRef targets may be GC'd when no strong references exist"
-);
+console.log("Note: WeakRef targets may be GC'd when no strong references exist");
 
 // Important: Use WeakRef sparingly, GC behavior is implementation-dependent
 
@@ -221,9 +216,7 @@ registry.register(resource, heldValue);
 
 // When resource is GC'd, the callback will be called with "resource-123"
 resource = null;
-console.log(
-  "Registered resource for finalization. Callback will run when GC collects it."
-);
+console.log("Registered resource for finalization. Callback will run when GC collects it.");
 console.log(
   "Note: Finalization callbacks run at an unspecified time, don't rely on them for critical logic."
 );
@@ -266,23 +259,15 @@ console.log("JSON.stringify(apiData):", JSON.stringify(apiData)); // {"id":12345
 // ============================================
 console.log("\n--- 7. Best Practices ---\n");
 
-console.log(
-  "✅ Use replaceAll() instead of regex /g for simple string replacements"
-);
-console.log(
-  "✅ Use ??= for default values when you want to preserve 0 and empty strings"
-);
+console.log("✅ Use replaceAll() instead of regex /g for simple string replacements");
+console.log("✅ Use ??= for default values when you want to preserve 0 and empty strings");
 console.log("✅ Use ||= only when you want to replace all falsy values");
-console.log(
-  "✅ Use numeric separators for numbers with more than 4 digits to improve readability"
-);
+console.log("✅ Use numeric separators for numbers with more than 4 digits to improve readability");
 console.log(
   "⚠️  Use WeakRef/FinalizationRegistry only for specialized use cases (caching, resource cleanup)"
 );
 console.log("⚠️  Don't rely on GC timing for application logic");
-console.log(
-  "✅ Group numeric separators by thousands, bytes, or logical units"
-);
+console.log("✅ Group numeric separators by thousands, bytes, or logical units");
 
 // ============================================
 // Cross-references

@@ -521,14 +521,10 @@ KEY CONCEPTS:
 console.log("\n=== Cross-references ===");
 console.log("📘 13.2-scope-tdz-strict.js - TDZ and strict mode details");
 console.log("📘 13.3-closures-basics.js - Closures and data privacy");
-console.log(
-  "📘 13.4-closures-patterns.js - Function factories and advanced patterns"
-);
+console.log("📘 13.4-closures-patterns.js - Function factories and advanced patterns");
 console.log("📘 13.5-scope-pitfalls.js - Common pitfalls and best practices");
 console.log("📘 14-this-keyword.js - this binding in different contexts");
-console.log(
-  "📘 15-prototypes-inheritance.js - Prototype chain and inheritance"
-);
+console.log("📘 15-prototypes-inheritance.js - Prototype chain and inheritance");
 
 // ============================================
 // TypeScript Comparison

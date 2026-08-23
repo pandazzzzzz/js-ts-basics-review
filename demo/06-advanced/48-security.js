@@ -83,9 +83,7 @@ console.log(
 // 2. CSRF (Cross-Site Request Forgery) Protection
 // ============================================
 console.log("\n2. CSRF Protection:");
-console.log(
-  "  Attack: Tricks user into making unwanted state-changing requests"
-);
+console.log("  Attack: Tricks user into making unwanted state-changing requests");
 
 // ✅ Protection Methods:
 console.log(
@@ -94,9 +92,7 @@ console.log(
 console.log(
   "  2. SameSite Cookies: Strict (same-site only), Lax (top-level navigation), None (cross-site, requires Secure)"
 );
-console.log(
-  "  3. Double Submit Cookie: CSRF token in cookie + header, server compares values"
-);
+console.log("  3. Double Submit Cookie: CSRF token in cookie + header, server compares values");
 
 console.log(
   "\n  Secure cookie example: res.cookie('session', id, { sameSite: 'strict', secure: true, httpOnly: true });"
@@ -107,9 +103,7 @@ console.log("  ⚠️  Never use GET requests for state-changing operations");
 // 3. Content Security Policy (CSP)
 // ============================================
 console.log("\n3. Content Security Policy (CSP):");
-console.log(
-  "  Prevents XSS and resource injection by whitelisting allowed content sources"
-);
+console.log("  Prevents XSS and resource injection by whitelisting allowed content sources");
 
 // ✅ Implementation:
 console.log(
@@ -123,9 +117,7 @@ console.log("\n  Common directives:");
 console.log(
   "  default-src (fallback), script-src, style-src, img-src, connect-src, frame-ancestors (clickjacking protection)"
 );
-console.log(
-  "  Nonce: Random per-request value for allowing specific inline scripts/styles"
-);
+console.log("  Nonce: Random per-request value for allowing specific inline scripts/styles");
 console.log(
   "  Reporting: Use report-uri / report-to to collect violation reports without enforcing"
 );
@@ -136,14 +128,10 @@ console.log(
 console.log("\n4. Secure Storage:");
 
 // ❌ INSECURE: Never store sensitive data in localStorage/sessionStorage (vulnerable to XSS)
-console.log(
-  "  ❌ localStorage.setItem('password', 'secret123'); // NEVER DO THIS"
-);
+console.log("  ❌ localStorage.setItem('password', 'secret123'); // NEVER DO THIS");
 
 // ✅ SECURE:
-console.log(
-  "  1. HttpOnly Cookies: For session tokens, not accessible via JavaScript"
-);
+console.log("  1. HttpOnly Cookies: For session tokens, not accessible via JavaScript");
 console.log(
   "  2. Encryption: Use Web Crypto API to encrypt sensitive data if must store client-side"
 );
@@ -151,9 +139,7 @@ console.log(
   "  3. Secure attributes: Always use secure: true (HTTPS only), sameSite: strict, short maxAge"
 );
 
-console.log(
-  "\n  Secure cookie attributes: httpOnly, secure, sameSite, maxAge, domain, path"
-);
+console.log("\n  Secure cookie attributes: httpOnly, secure, sameSite, maxAge, domain, path");
 
 // ============================================
 // 5. Input Validation
@@ -200,9 +186,7 @@ console.log("\n  Common use cases:");
 console.log(
   "  - Hashing: SHA-256 for password hashing (use with salt, 100k+ iterations via PBKDF2)"
 );
-console.log(
-  "  - Encryption: AES-GCM for symmetric encryption, RSA-OAEP for asymmetric"
-);
+console.log("  - Encryption: AES-GCM for symmetric encryption, RSA-OAEP for asymmetric");
 console.log("  - Signing: ECDSA/RSA-PSS for data integrity");
 console.log(
   "  - Random number generation: crypto.getRandomValues() for secure randomness (never Math.random())"
@@ -219,18 +203,12 @@ console.log(
 // 7. OWASP Top 10 Additional Considerations
 // ============================================
 console.log("\n7. OWASP Top 10 Considerations:");
-console.log(
-  "  A01: Broken Access Control - Enforce authorization checks on every request"
-);
+console.log("  A01: Broken Access Control - Enforce authorization checks on every request");
 console.log(
   "  A02: Cryptographic Failures - Use strong, up-to-date algorithms, never hardcode secrets"
 );
-console.log(
-  "  A03: Injection - Sanitize all inputs, use parameterized queries"
-);
-console.log(
-  "  A04: Insecure Design - Build security into architecture, not as an afterthought"
-);
+console.log("  A03: Injection - Sanitize all inputs, use parameterized queries");
+console.log("  A04: Insecure Design - Build security into architecture, not as an afterthought");
 console.log(
   "  A05: Security Misconfiguration - Keep systems patched, remove debug features, use secure defaults"
 );
@@ -253,9 +231,7 @@ console.log("\n8. Modern Security Features:");
 console.log(
   "  Trusted Types: Prevent DOM XSS by enforcing type checks for dangerous sink functions (innerHTML, eval, etc.)"
 );
-console.log(
-  "  Enable via CSP: Content-Security-Policy: require-trusted-types-for 'script';"
-);
+console.log("  Enable via CSP: Content-Security-Policy: require-trusted-types-for 'script';");
 
 // COOP/COEP
 console.log(
@@ -276,9 +252,7 @@ console.log("❌ Storing sensitive data in localStorage");
 console.log("❌ Using innerHTML with untrusted user input");
 console.log("❌ Not validating CSRF tokens on state-changing requests");
 console.log("❌ Using insecure cryptographic algorithms (MD5, SHA-1, AES-ECB)");
-console.log(
-  "❌ Trusting client-side validation only (always validate server-side)"
-);
+console.log("❌ Trusting client-side validation only (always validate server-side)");
 console.log("❌ Hardcoding secrets in source code / client-side bundles");
 console.log("❌ Not using HTTPS for all traffic");
 console.log("❌ Disabling security features for 'convenience' in production");
@@ -291,14 +265,10 @@ console.log("✅ Defense in depth: Apply multiple layers of security controls");
 console.log(
   "✅ Use secure defaults: Features should be secure by default, opt-in for less secure behavior"
 );
-console.log(
-  "✅ Least privilege: Give users/processes only the permissions they need"
-);
+console.log("✅ Least privilege: Give users/processes only the permissions they need");
 console.log("✅ Sanitize all inputs: Both client-side and server-side");
 console.log("✅ Encrypt data in transit (HTTPS) and at rest");
-console.log(
-  "✅ Keep dependencies updated: Regularly patch security vulnerabilities"
-);
+console.log("✅ Keep dependencies updated: Regularly patch security vulnerabilities");
 console.log("✅ Implement proper logging and monitoring for security events");
 console.log("✅ Conduct regular security audits and penetration testing");
 

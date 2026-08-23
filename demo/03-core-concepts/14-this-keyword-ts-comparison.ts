@@ -43,10 +43,7 @@ console.log(boundGreet()); // Works correctly
 // TypeScript requires explicit this type when it can't be inferred
 
 // Without this annotation, noImplicitThis would cause an error
-function processItems(
-  this: { items: string[] },
-  processor: (item: string) => void
-): void {
+function processItems(this: { items: string[] }, processor: (item: string) => void): void {
   this.items.forEach(processor);
 }
 
@@ -259,16 +256,10 @@ function chainable<T = {}>(): Chainable<T> {
   // Type the builder as Chainable<T> so `this` is polymorphic and statically
   // checked — no `any` needed to make method chaining type-check.
   const result: Chainable<T> = {
-    option<U>(
-      this: Chainable<T>,
-      key: string,
-      value: U
-    ): Chainable<T & { [K in keyof U]: U[K] }> {
+    option<U>(this: Chainable<T>, key: string, value: U): Chainable<T & { [K in keyof U]: U[K] }> {
       // Real implementations accumulate into an internal record; the cast below
       // models the widening that the mapped type in the signature promises.
-      return { ...this, [key]: value } as Chainable<
-        T & { [K in keyof U]: U[K] }
-      >;
+      return { ...this, [key]: value } as Chainable<T & { [K in keyof U]: U[K] }>;
     },
     get(): T {
       return this as unknown as T;

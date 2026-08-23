@@ -21,10 +21,7 @@ console.log("=== Typed Spread Operator ===");
 console.log({ arr2, obj2 });
 
 // TypeScript: Spread with generic constraints
-function mergeObjects<T extends object, U extends object>(
-  obj1: T,
-  obj2: U
-): T & U {
+function mergeObjects<T extends object, U extends object>(obj1: T, obj2: U): T & U {
   return { ...obj1, ...obj2 };
 }
 
@@ -167,11 +164,7 @@ console.log("\n=== Typed Rest Parameters ===");
 console.log(sum(1, 2, 3, 4, 5)); // 15
 
 // TypeScript: Rest parameter with specific tuple type
-function processTuple(
-  first: number,
-  second: number,
-  ...rest: number[]
-): string {
+function processTuple(first: number, second: number, ...rest: number[]): string {
   return `${first}, ${second}, [${rest.join(", ")}]`;
 }
 
@@ -321,9 +314,7 @@ class Child extends Parent {
 
 console.log("\n=== Private Fields Comparison ===");
 console.log("JS #: Runtime enforced, cannot be accessed outside");
-console.log(
-  "TS private: Compile-time checked, accessible at runtime via workarounds"
-);
+console.log("TS private: Compile-time checked, accessible at runtime via workarounds");
 
 // ============================================================================
 // 11. TYPED GETTERS AND SETTERS

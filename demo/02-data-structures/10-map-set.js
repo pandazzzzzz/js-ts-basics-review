@@ -686,12 +686,8 @@ console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
 console.log("\nBest Practices:");
 console.log("  1. Use Map when keys are non-strings or order matters");
 console.log("  2. Use Set for uniqueness checks (faster than array.indexOf)");
-console.log(
-  "  3. Prefer Object.fromEntries() to convert Map back to plain object"
-);
-console.log(
-  "  4. Use WeakMap/WeakSet for memory-safe caches and event listeners"
-);
+console.log("  3. Prefer Object.fromEntries() to convert Map back to plain object");
+console.log("  4. Use WeakMap/WeakSet for memory-safe caches and event listeners");
 console.log("  5. Check Map.size/Set.size instead of .length (undefined)");
 console.log("  6. Use Set for de-duplicating arrays: [...new Set(arr)]");
 

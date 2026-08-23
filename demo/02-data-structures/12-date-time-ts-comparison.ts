@@ -67,10 +67,7 @@ const baseDate = new Date("2024-06-15");
 console.log("Base date:", formatDate(baseDate));
 console.log("+ 7 days:", formatDate(addDays(baseDate, 7)));
 console.log("+ 3 months:", formatDate(addMonths(baseDate, 3)));
-console.log(
-  "Days until 2024-12-31:",
-  getDiffInDays(baseDate, new Date("2024-12-31"))
-);
+console.log("Days until 2024-12-31:", getDiffInDays(baseDate, new Date("2024-12-31")));
 
 // Type-safe date comparison
 function isBefore(date1: Date, date2: Date): boolean {
@@ -167,9 +164,7 @@ function isoDateToDate(iso: ISODateString): Date {
 
 console.log("\n=== Branded ISO Date Strings ===");
 const isoDate: ISODateString = createISODate("2024-06-15");
-const isoDateTime: ISODateTimeString = createISODateTime(
-  "2024-06-15T10:30:00.000Z"
-);
+const isoDateTime: ISODateTimeString = createISODateTime("2024-06-15T10:30:00.000Z");
 console.log("ISO date:", isoDate);
 console.log("ISO datetime:", isoDateTime);
 
@@ -198,8 +193,7 @@ type DateInterval = {
 };
 
 // Type for date precision
-type DatePrecision =
-  "year" | "month" | "day" | "hour" | "minute" | "second" | "millisecond";
+type DatePrecision = "year" | "month" | "day" | "hour" | "minute" | "second" | "millisecond";
 
 // Date part type
 type DatePart =
@@ -245,10 +239,8 @@ function addInterval(date: Date, interval: DateInterval): Date {
   if (interval.months) result.setMonth(result.getMonth() + interval.months);
   if (interval.days) result.setDate(result.getDate() + interval.days);
   if (interval.hours) result.setHours(result.getHours() + interval.hours);
-  if (interval.minutes)
-    result.setMinutes(result.getMinutes() + interval.minutes);
-  if (interval.seconds)
-    result.setSeconds(result.getSeconds() + interval.seconds);
+  if (interval.minutes) result.setMinutes(result.getMinutes() + interval.minutes);
+  if (interval.seconds) result.setSeconds(result.getSeconds() + interval.seconds);
   return result;
 }
 
@@ -380,9 +372,7 @@ function createUTCDate(year: number, month: number, day: number): UTCDate {
 }
 
 function toUTCDate(localDate: Date): UTCDate {
-  const utc = new Date(
-    localDate.getTime() + localDate.getTimezoneOffset() * 60000
-  );
+  const utc = new Date(localDate.getTime() + localDate.getTimezoneOffset() * 60000);
   return utc as UTCDate;
 }
 
@@ -442,18 +432,9 @@ function formatDateTyped(date: Date, options: FormatOptions): string {
 console.log("\n=== Date Formatting Types ===");
 const sampleDate = new Date("2024-06-15T10:30:00Z");
 console.log("ISO format:", formatDateTyped(sampleDate, { format: "ISO" }));
-console.log(
-  "ISO datetime:",
-  formatDateTyped(sampleDate, { format: "ISO_DATETIME" })
-);
-console.log(
-  "Locale date:",
-  formatDateTyped(sampleDate, { format: "LOCALE_DATE" })
-);
-console.log(
-  "Locale datetime:",
-  formatDateTyped(sampleDate, { format: "LOCALE_DATETIME" })
-);
+console.log("ISO datetime:", formatDateTyped(sampleDate, { format: "ISO_DATETIME" }));
+console.log("Locale date:", formatDateTyped(sampleDate, { format: "LOCALE_DATE" }));
+console.log("Locale datetime:", formatDateTyped(sampleDate, { format: "LOCALE_DATETIME" }));
 
 // ============================================================================
 // 10. GENERIC DATE HELPERS
@@ -473,9 +454,7 @@ class DateCache<TKey> {
 }
 
 // Typed date comparator
-function createDateComparator<T>(
-  extractFn: (item: T) => number
-): (a: T, b: T) => number {
+function createDateComparator<T>(extractFn: (item: T) => number): (a: T, b: T) => number {
   return (a, b) => extractFn(a) - extractFn(b);
 }
 
@@ -496,9 +475,7 @@ const sortedEvents = [...events].sort(byDate);
 
 console.log("\n=== Generic Date Helpers ===");
 console.log("Sorted events:");
-sortedEvents.forEach(e =>
-  console.log(`  ${e.name}: ${formatDate(e.scheduledDate)}`)
-);
+sortedEvents.forEach(e => console.log(`  ${e.name}: ${formatDate(e.scheduledDate)}`));
 
 // ============================================================================
 // 11. COMMON PITFALLS
@@ -688,6 +665,4 @@ KEY TAKEAWAYS:
 
 console.log("\n=== TypeScript provides type safety at compile time ===");
 console.log("=== But runtime behavior follows JavaScript rules ===");
-console.log(
-  "=== Consider using date-fns or Temporal API for complex date handling ==="
-);
+console.log("=== Consider using date-fns or Temporal API for complex date handling ===");

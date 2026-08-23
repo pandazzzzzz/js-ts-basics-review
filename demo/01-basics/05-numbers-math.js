@@ -124,10 +124,7 @@ console.log("0.1 + 0.2 === 0.3:", 0.1 + 0.2 === 0.3); // false
 const sum = 0.1 + 0.2;
 console.log("\ntoFixed solution:");
 console.log("(0.1 + 0.2).toFixed(2):", sum.toFixed(2)); // "0.30"
-console.log(
-  "parseFloat((0.1 + 0.2).toFixed(10)):",
-  parseFloat(sum.toFixed(10))
-); // 0.3
+console.log("parseFloat((0.1 + 0.2).toFixed(10)):", parseFloat(sum.toFixed(10))); // 0.3
 
 // Solution 2: Multiply, calculate, divide
 // - Convert to integers, do math, convert back
@@ -285,14 +282,8 @@ console.log('Number.isInteger("123"):', Number.isInteger("123")); // false
 // - Safe integers can be represented exactly
 console.log("\n=== Number.isSafeInteger() ===");
 console.log("Number.isSafeInteger(123):", Number.isSafeInteger(123)); // true
-console.log(
-  "Number.isSafeInteger(9007199254740991):",
-  Number.isSafeInteger(9007199254740991)
-); // true (MAX_SAFE_INTEGER)
-console.log(
-  "Number.isSafeInteger(9007199254740992):",
-  Number.isSafeInteger(9007199254740992)
-); // false
+console.log("Number.isSafeInteger(9007199254740991):", Number.isSafeInteger(9007199254740991)); // true (MAX_SAFE_INTEGER)
+console.log("Number.isSafeInteger(9007199254740992):", Number.isSafeInteger(9007199254740992)); // false
 console.log("Number.isSafeInteger(123.45):", Number.isSafeInteger(123.45)); // false
 
 // ============================================
@@ -408,10 +399,7 @@ console.log("123 .toString():", (123).toString()); // "123" (space works too)
 // - Avoids global namespace pollution
 console.log("\n=== Number.parseFloat() / Number.parseInt() ===");
 console.log('Number.parseFloat("123.45"):', Number.parseFloat("123.45")); // 123.45
-console.log(
-  'Number.parseFloat("  456.78  "):',
-  Number.parseFloat("  456.78  ")
-); // 456.78
+console.log('Number.parseFloat("  456.78  "):', Number.parseFloat("  456.78  ")); // 456.78
 console.log('Number.parseInt("123", 10):', Number.parseInt("123", 10)); // 123
 console.log('Number.parseInt("FF", 16):', Number.parseInt("FF", 16)); // 255
 
@@ -770,9 +758,7 @@ const obj = { value: 123n };
 // console.log("JSON.stringify(obj):", JSON.stringify(obj)); // ❌ TypeError
 console.log(
   "Workaround:",
-  JSON.stringify(obj, (key, value) =>
-    typeof value === "bigint" ? value.toString() : value
-  )
+  JSON.stringify(obj, (key, value) => (typeof value === "bigint" ? value.toString() : value))
 ); // {"value":"123"}
 
 // 4. Division always truncates
@@ -817,10 +803,7 @@ console.log("Use Number.isNaN() to check");
 
 // Pitfall 4: MAX_SAFE_INTEGER
 console.log("\n4. MAX_SAFE_INTEGER:");
-console.log(
-  "9007199254740992 === 9007199254740993:",
-  9007199254740992 === 9007199254740993
-); // true (precision lost!)
+console.log("9007199254740992 === 9007199254740993:", 9007199254740992 === 9007199254740993); // true (precision lost!)
 console.log("Use BigInt for large integers");
 
 // Pitfall 5: Math.random() is not cryptographically secure
@@ -882,10 +865,7 @@ console.log('+"123":', +"123"); // 123 (shorter)
 // 9. Check for safe integers
 console.log("\n9. Check for safe integers:");
 const bigNumSafe = 9007199254740992;
-console.log(
-  "Number.isSafeInteger(bigNumSafe):",
-  Number.isSafeInteger(bigNumSafe)
-); // false
+console.log("Number.isSafeInteger(bigNumSafe):", Number.isSafeInteger(bigNumSafe)); // false
 console.log("Use BigInt if not safe");
 
 // 10. Use numeric separators for readability

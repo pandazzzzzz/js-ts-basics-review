@@ -145,11 +145,7 @@ class Example {
 
 // Method decorator (legacy 3-arg: target, propertyKey, descriptor)
 function enumerable(value: boolean) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     descriptor.enumerable = value;
   };
 }
@@ -173,11 +169,7 @@ class Formatted {
 
 // Accessor decorator (legacy 3-arg: target, propertyKey, descriptor)
 function configurable(value: boolean) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     descriptor.configurable = value;
   };
 }
@@ -190,9 +182,7 @@ class ConfigurableExample {
   }
 }
 
-console.log(
-  "Decorators enable metaprogramming patterns (see commented @ applications)"
-);
+console.log("Decorators enable metaprogramming patterns (see commented @ applications)");
 
 // ============================================
 // Section 3: Import Attributes (TS 5.3+)
@@ -292,9 +282,7 @@ type Trim<S extends string> = TrimLeft<TrimRight<S>>;
 type Trimmed = Trim<"  hello world  ">; // "hello world"
 
 // Type-level number operations
-type Increment<N extends number> = N extends N
-  ? [...TupleOf<N>, any]["length"] & number
-  : never;
+type Increment<N extends number> = N extends N ? [...TupleOf<N>, any]["length"] & number : never;
 
 type TupleOf<N extends number, T extends any[] = []> = T["length"] extends N
   ? T
@@ -410,9 +398,7 @@ console.log("- Pattern matching support when ES standardizes");
 console.log("\n=== Summary ===\n");
 
 console.log("TypeScript provides advanced type features today that may become");
-console.log(
-  "part of future JavaScript standards. Using TypeScript allows you to:"
-);
+console.log("part of future JavaScript standards. Using TypeScript allows you to:");
 console.log("1. Write safer code with compile-time checks");
 console.log("2. Use future JS features before browser support");
 console.log("3. Leverage powerful type-level programming");

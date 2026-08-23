@@ -119,9 +119,7 @@ async function downloadWithProgress(url, onProgress) {
       if (onProgress) {
         const percent = total ? Math.round((loaded / total) * 100) : 0;
         onProgress(loaded, total, percent);
-        console.log(
-          `  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`
-        );
+        console.log(`  Progress: ${loaded}/${total || "?"} bytes (${percent}%)`);
       }
     }
 
@@ -253,9 +251,7 @@ async function compareReadingMethods() {
   const response1 = await fetch(`${API_BASE}/posts/1`);
   const data1 = await response1.json();
   const time1 = Date.now() - start1;
-  console.log(
-    `    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`
-  );
+  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
 
   // Method 2: Read as stream
   console.log("\n  Method 2: Read as stream");
@@ -322,10 +318,7 @@ fetch(`${API_BASE}/posts/999999`)
     console.log("   Data (empty object from 404):", data);
   })
   .catch(error => {
-    console.error(
-      "   This won't run for 404! Only network errors:",
-      error.message
-    );
+    console.error("   This won't run for 404! Only network errors:", error.message);
   });
 
 // Pitfall 2: CORS issues (browser only)
@@ -340,9 +333,7 @@ async function pitfallCredentials() {
   console.log("\n9. Credentials (cookies) note:");
 
   const withoutCredentials = await fetch(`${API_BASE}/posts/1`);
-  console.log(
-    "   Default credentials ('same-origin'): cookies sent to same origin"
-  );
+  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
 
   const withCredentials = await fetch(`${API_BASE}/posts/1`, {
     credentials: "include",
@@ -430,9 +421,7 @@ Stream API Best Practices:
 console.log("\n=== Cross-references ===");
 console.log("📘 33.1-fetch-basics.js - Fetch basics and HTTP methods");
 console.log("📘 33.2-fetch-error-handling.js - Error handling and async/await");
-console.log(
-  "📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController"
-);
+console.log("📘 33.3-fetch-practical-patterns.js - Advanced patterns and AbortController");
 console.log("📘 30-promises.js - Promise fundamentals");
 console.log("📘 31-async-await.js - Async/await patterns");
 

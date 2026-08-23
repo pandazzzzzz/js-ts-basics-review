@@ -306,9 +306,7 @@ class ElectricCar extends Vehicle {
 console.log("\n=== Type Inference in Inheritance ===");
 const tesla = new ElectricCar("Tesla", 75);
 tesla.accelerate(30);
-console.log(
-  `Speed: ${tesla.speed}, Battery: ${tesla.batteryLevel.toFixed(1)}%`
-);
+console.log(`Speed: ${tesla.speed}, Battery: ${tesla.batteryLevel.toFixed(1)}%`);
 
 // ============================================================================
 // 9. GENERIC CONSTRAINTS WITH EXTENDS
@@ -440,6 +438,4 @@ KEY TAKEAWAYS:
 5. Runtime prototype chain follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

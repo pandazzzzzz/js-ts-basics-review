@@ -140,10 +140,7 @@ class CookieManager {
     return null;
   }
 
-  static remove(
-    name: string,
-    attributes?: Pick<CookieAttributes, "path" | "domain">
-  ): void {
+  static remove(name: string, attributes?: Pick<CookieAttributes, "path" | "domain">): void {
     CookieManager.set(name, "", {
       ...attributes,
       maxAge: -1,
@@ -219,10 +216,7 @@ class TypedDB<Schema extends Record<string, any>> {
     if (!this.db) throw new Error("Database not opened");
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(
-        [storeName as string],
-        "readwrite"
-      );
+      const transaction = this.db!.transaction([storeName as string], "readwrite");
       const store = transaction.objectStore(storeName as string);
       const request = store.add(value);
 
@@ -238,10 +232,7 @@ class TypedDB<Schema extends Record<string, any>> {
     if (!this.db) throw new Error("Database not opened");
 
     return new Promise((resolve, reject) => {
-      const transaction = this.db!.transaction(
-        [storeName as string],
-        "readonly"
-      );
+      const transaction = this.db!.transaction([storeName as string], "readonly");
       const store = transaction.objectStore(storeName as string);
       const request = store.get(key);
 
@@ -293,11 +284,7 @@ class TypedFetch {
     return response.json() as Promise<T>;
   }
 
-  static async post<T, B = unknown>(
-    url: string,
-    body: B,
-    options?: RequestInit
-  ): Promise<T> {
+  static async post<T, B = unknown>(url: string, body: B, options?: RequestInit): Promise<T> {
     const response = await fetch(url, {
       ...options,
       method: "POST",
@@ -475,10 +462,7 @@ class TypedEventSource<EventMap extends Record<string, any>> {
     });
   }
 
-  on<K extends keyof EventMap>(
-    eventType: K,
-    handler: (data: EventMap[K]) => void
-  ): void {
+  on<K extends keyof EventMap>(eventType: K, handler: (data: EventMap[K]) => void): void {
     if (!this.eventSource) {
       throw new Error("EventSource not connected");
     }
@@ -763,9 +747,7 @@ if (typeof window !== "undefined") {
   // Navigate with type safety
   router.navigate("/profile", { view: "profile", data: { userId: 123 } });
 } else {
-  console.log(
-    "⚠️ History API / TypedRouter is browser-only; skipping in Node.js"
-  );
+  console.log("⚠️ History API / TypedRouter is browser-only; skipping in Node.js");
 }
 
 console.log("History API TypeScript Features:");
@@ -899,6 +881,4 @@ console.log("  ✅ Type custom event handlers");
 console.log("  ✅ Handle connection states with types");
 console.log("  ✅ Create reusable typed hooks");
 
-console.log(
-  "\n📘 See 43-storage-network.js for detailed History API and SSE examples!"
-);
+console.log("\n📘 See 43-storage-network.js for detailed History API and SSE examples!");

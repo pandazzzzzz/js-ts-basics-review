@@ -1197,17 +1197,11 @@ BEST PRACTICES:
 // Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
-console.log(
-  "1. Prefer function expressions with const for predictable hoisting"
-);
+console.log("1. Prefer function expressions with const for predictable hoisting");
 console.log("2. Use default parameters instead of manual undefined checks");
-console.log(
-  "3. Use rest parameters instead of the deprecated arguments object"
-);
+console.log("3. Use rest parameters instead of the deprecated arguments object");
 console.log("4. Keep functions pure and single-responsibility for testability");
-console.log(
-  "5. Use arrow functions for callbacks, regular functions for methods"
-);
+console.log("5. Use arrow functions for callbacks, regular functions for methods");
 console.log("6. Name functions descriptively to improve stack traces");
 
 // ============================================

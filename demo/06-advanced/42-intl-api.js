@@ -275,10 +275,7 @@ console.log("\n=== Intl.Collator ===");
 const names = ["Ä", "Z", "A", "Ö"];
 console.log("Default sort:", names.slice().sort()); // ['A', 'Z', 'Ä', 'Ö'] (wrong!)
 
-console.log(
-  "Collator sort:",
-  names.slice().sort(new Intl.Collator("de-DE").compare)
-); // ['A', 'Ä', 'Ö', 'Z'] (correct!)
+console.log("Collator sort:", names.slice().sort(new Intl.Collator("de-DE").compare)); // ['A', 'Ä', 'Ö', 'Z'] (correct!)
 
 // Numeric sorting
 const files = ["file1.txt", "file10.txt", "file2.txt", "file20.txt"];
@@ -294,25 +291,13 @@ console.log(
 const words1 = ["resume", "Resume", "résumé", "RESUME"];
 console.log("\nSensitivity options:");
 
-console.log(
-  "base:",
-  words1.sort(new Intl.Collator("en", { sensitivity: "base" }).compare)
-); // Ignores case and accents
+console.log("base:", words1.sort(new Intl.Collator("en", { sensitivity: "base" }).compare)); // Ignores case and accents
 
-console.log(
-  "accent:",
-  words1.sort(new Intl.Collator("en", { sensitivity: "accent" }).compare)
-); // Considers accents, ignores case
+console.log("accent:", words1.sort(new Intl.Collator("en", { sensitivity: "accent" }).compare)); // Considers accents, ignores case
 
-console.log(
-  "case:",
-  words1.sort(new Intl.Collator("en", { sensitivity: "case" }).compare)
-); // Considers case, ignores accents
+console.log("case:", words1.sort(new Intl.Collator("en", { sensitivity: "case" }).compare)); // Considers case, ignores accents
 
-console.log(
-  "variant:",
-  words1.sort(new Intl.Collator("en", { sensitivity: "variant" }).compare)
-); // Considers both case and accents
+console.log("variant:", words1.sort(new Intl.Collator("en", { sensitivity: "variant" }).compare)); // Considers both case and accents
 
 // Relationship with String.prototype.localeCompare()
 console.log("\nlocaleCompare uses Collator internally:");
@@ -496,9 +481,7 @@ console.log("Graphemes:", graphemes);
 // Word segmentation
 const wordSegmenter = new Intl.Segmenter("en-US", { granularity: "word" });
 const text2 = "Hello, world! How are you?";
-const words2 = [...wordSegmenter.segment(text2)]
-  .filter(s => s.isWordLike)
-  .map(s => s.segment);
+const words2 = [...wordSegmenter.segment(text2)].filter(s => s.isWordLike).map(s => s.segment);
 console.log("Words:", words2);
 // ["Hello", "world", "How", "are", "you"]
 
@@ -551,10 +534,8 @@ function timeAgo(date) {
   const rtf = new Intl.RelativeTimeFormat("en-US", { numeric: "auto" });
 
   if (diffInSeconds < 60) return rtf.format(-diffInSeconds, "second");
-  if (diffInSeconds < 3600)
-    return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
-  if (diffInSeconds < 86400)
-    return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
+  if (diffInSeconds < 3600) return rtf.format(-Math.floor(diffInSeconds / 60), "minute");
+  if (diffInSeconds < 86400) return rtf.format(-Math.floor(diffInSeconds / 3600), "hour");
   return rtf.format(-Math.floor(diffInSeconds / 86400), "day");
 }
 
@@ -893,9 +874,7 @@ console.log("- Intl.ListFormat.formatToParts()");
  *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/ecma402/README.md
  */
-console.log(
-  "\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ==="
-);
+console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");
 
 // MessageFormat 2.0 is a Stage 1 proposal, not yet part of the ECMAScript standard.
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.

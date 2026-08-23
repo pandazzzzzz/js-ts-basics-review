@@ -60,11 +60,7 @@ console.log("\n=== Strict Mode Demo ===");
   try {
     new Function("undeclaredVar = 5")();
   } catch (e) {
-    console.log(
-      "Strict mode prevents accidental globals:",
-      e.name + ":",
-      e.message
-    );
+    console.log("Strict mode prevents accidental globals:", e.name + ":", e.message);
   }
 })();
 
@@ -73,9 +69,7 @@ console.log("\n=== Strict Mode Demo ===");
   console.log("Sloppy mode typeof global:", typeof globalThis.__sloppyLeak); // "undefined"
 })();
 
-console.log(
-  "ES6 modules and classes are strict by default — no 'use strict' needed."
-);
+console.log("ES6 modules and classes are strict by default — no 'use strict' needed.");
 
 // ============================================
 // 4. Variable Declarations

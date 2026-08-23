@@ -995,10 +995,7 @@ console.log([...doubled]); // [2, 4, 6, 8, 10]
 
 // filter — Keep even numbers
 console.log("\nfilter — keep even numbers:");
-const evens = filterIterator(
-  [1, 2, 3, 4, 5, 6][Symbol.iterator](),
-  x => x % 2 === 0
-);
+const evens = filterIterator([1, 2, 3, 4, 5, 6][Symbol.iterator](), x => x % 2 === 0);
 console.log([...evens]); // [2, 4, 6]
 
 // take — First 3 values
@@ -1072,13 +1069,7 @@ if (Iterator.prototype && typeof Iterator.prototype.map === "function") {
     })
     .take(1)
     .toArray();
-  console.log(
-    "lazy take(1) result:",
-    lazy,
-    "| map invoked",
-    mapCalls,
-    "time(s)"
-  ); // [10] | 1
+  console.log("lazy take(1) result:", lazy, "| map invoked", mapCalls, "time(s)"); // [10] | 1
 
   // drop + reduce (a non-array terminal)
   const sum = Iterator.from([1, 2, 3, 4, 5])
@@ -1092,9 +1083,7 @@ if (Iterator.prototype && typeof Iterator.prototype.map === "function") {
     .find(x => x > 10);
   console.log("first even > 10:", firstBigEven); // 14
 } else {
-  console.log(
-    "Native Iterator helpers not supported in this runtime (needs Node 22+ / ES2025)"
-  );
+  console.log("Native Iterator helpers not supported in this runtime (needs Node 22+ / ES2025)");
   console.log(
     "Expected: Iterator.from([1,2,3,4,5]).map(x=>x*2).filter(x=>x>4).take(2).toArray() -> [6,8]"
   );

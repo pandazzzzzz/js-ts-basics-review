@@ -246,10 +246,7 @@ function mapIterator<T, U>(
   };
 }
 
-function filterIterator<T>(
-  iterator: Iterator<T>,
-  predicate: (item: T) => boolean
-): Iterator<T> {
+function filterIterator<T>(iterator: Iterator<T>, predicate: (item: T) => boolean): Iterator<T> {
   return {
     next(): IteratorResult<T> {
       while (true) {
@@ -287,8 +284,7 @@ interface TreeNode {
 }
 
 class TreeIterator implements Iterator<[TreeState, TreeNode]> {
-  private stack: Array<{ node: TreeNode; state: TreeState; index: number }> =
-    [];
+  private stack: Array<{ node: TreeNode; state: TreeState; index: number }> = [];
 
   constructor(root: TreeNode) {
     this.stack.push({ node: root, state: "enter", index: 0 });
@@ -418,6 +414,4 @@ KEY TAKEAWAYS:
 5. Runtime iterator behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

@@ -171,9 +171,7 @@ console.log("pipe(increment, double, square)(3):", piped(3));
 
 // 2.4 Practical use case - data validation pipeline
 function validateEmail(email) {
-  return email.includes("@")
-    ? { valid: true, email }
-    : { valid: false, error: "Invalid email" };
+  return email.includes("@") ? { valid: true, email } : { valid: false, error: "Invalid email" };
 }
 
 function toLower(data) {
@@ -186,10 +184,7 @@ function sanitize(data) {
 
 const processEmail = pipe(validateEmail, toLower, sanitize);
 console.log("\nData processing pipeline:");
-console.log(
-  "processEmail(' USER@EXAMPLE.COM '):",
-  processEmail(" USER@EXAMPLE.COM ")
-);
+console.log("processEmail(' USER@EXAMPLE.COM '):", processEmail(" USER@EXAMPLE.COM "));
 
 // 2.5 Composition with multiple arguments
 function composeN(...fns) {
@@ -245,8 +240,7 @@ function bind(fn, ...fixedArgs) {
   };
 }
 
-const greet = (greeting, name, punctuation) =>
-  `${greeting}, ${name}${punctuation}`;
+const greet = (greeting, name, punctuation) => `${greeting}, ${name}${punctuation}`;
 const sayHello = bind(greet, "Hello");
 
 console.log("Basic partial application:");
@@ -259,19 +253,11 @@ function partialRight(fn, ...fixedArgs) {
   };
 }
 
-const log = (level, message, timestamp) =>
-  `[${timestamp}] ${level}: ${message}`;
-const logError = partialRight(
-  log,
-  "ERROR",
-  new Date().toISOString().split("T")[0]
-);
+const log = (level, message, timestamp) => `[${timestamp}] ${level}: ${message}`;
+const logError = partialRight(log, "ERROR", new Date().toISOString().split("T")[0]);
 
 console.log("\nPartial application from right:");
-console.log(
-  "logError('Something went wrong'):",
-  logError("Something went wrong")
-);
+console.log("logError('Something went wrong'):", logError("Something went wrong"));
 
 // 3.3 Partial application with placeholders
 const _ = Symbol("placeholder");
@@ -348,15 +334,9 @@ function createValidator(predicate, errorMessage) {
   };
 }
 
-const isNotEmpty = createValidator(
-  str => str && str.length > 0,
-  "Value cannot be empty"
-);
+const isNotEmpty = createValidator(str => str && str.length > 0, "Value cannot be empty");
 
-const isEmail = createValidator(
-  str => str.includes("@"),
-  "Invalid email format"
-);
+const isEmail = createValidator(str => str.includes("@"), "Invalid email format");
 
 console.log("\nValidator factory:");
 console.log("isNotEmpty('hello'):", isNotEmpty("hello"));

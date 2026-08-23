@@ -854,9 +854,7 @@ function compareImplementations(name, fn1, fn2, iterations = 10000) {
 
   const faster = result1.opsPerSec > result2.opsPerSec ? 1 : 2;
   const ratio = result1.opsPerSec / result2.opsPerSec;
-  console.log(
-    `  Winner: Implementation ${faster} (${ratio.toFixed(2)}x faster)`
-  );
+  console.log(`  Winner: Implementation ${faster} (${ratio.toFixed(2)}x faster)`);
 }
 
 // 8.3 Example: string concatenation methods
@@ -899,10 +897,7 @@ function memoryBenchmark(fn, iterations = 1000) {
 }
 
 console.log("\nMemory benchmark:");
-const memResult = memoryBenchmark(
-  () => ({ data: new Array(100).fill(0) }),
-  100
-);
+const memResult = memoryBenchmark(() => ({ data: new Array(100).fill(0) }), 100);
 console.log(`  Memory delta: ${(memResult.memoryDelta / 1024).toFixed(2)} KB`);
 
 // ============================================
@@ -985,9 +980,7 @@ for (const chunk of chunkedProcess(hugeArray, 1000)) {
   // await new Promise(resolve => setTimeout(resolve, 0));
 }
 console.timeEnd("good-array-process");
-console.log(
-  "Chunked processing allows main thread to handle other tasks between chunks"
-);
+console.log("Chunked processing allows main thread to handle other tasks between chunks");
 
 // 9.4 Pitfall: Excessive DOM manipulation
 console.log("\nPitfall 4 - DOM thrashing:");
@@ -1002,9 +995,7 @@ elements.forEach(el => {
   el.style.height = `${height + 10}px`;
 }); // Causes layout recalculation for EVERY element
 */
-console.log(
-  "Interleaved read/write causes forced synchronous layouts (layout thrashing)"
-);
+console.log("Interleaved read/write causes forced synchronous layouts (layout thrashing)");
 
 console.log("\n✅ Good: Batch DOM operations");
 /*
@@ -1157,9 +1148,7 @@ console.log("\nV8 performance takeaways:");
 console.log("- Always initialize object fields in the same order.");
 console.log("- Avoid mixing many object shapes at one call site.");
 console.log("- Prefer `x = undefined` over `delete x` to preserve shape.");
-console.log(
-  '- Allocate "hot" objects via constructors/classes for stable shapes.'
-);
+console.log('- Allocate "hot" objects via constructors/classes for stable shapes.');
 console.log("- These are engine details: profile with V8 flags / DevTools");
 console.log("  before micro-optimizing.");
 

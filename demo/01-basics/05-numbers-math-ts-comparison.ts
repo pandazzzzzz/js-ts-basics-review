@@ -519,10 +519,7 @@ export {};
   console.log("isPositive(-5):", isPositive(-5)); // false
   console.log("isInteger(5):", isInteger(5)); // true
   console.log("isInteger(5.5):", isInteger(5.5)); // false
-  console.log(
-    "isSafeInteger(9007199254740991):",
-    isSafeInteger(9007199254740991)
-  ); // true
+  console.log("isSafeInteger(9007199254740991):", isSafeInteger(9007199254740991)); // true
 
   // ============================================
   // 17. Mapped Types with Numbers

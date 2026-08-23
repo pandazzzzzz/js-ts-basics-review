@@ -283,9 +283,7 @@ console.log("Shared Int32Array length:", sharedArray.length);
 console.log("\nSecurity requirements (browser):");
 console.log("- Cross-Origin-Opener-Policy: same-origin");
 console.log("- Cross-Origin-Embedder-Policy: require-corp");
-console.log(
-  "Note: Cross-Origin-Resource-Policy (CORP) is a different security feature"
-);
+console.log("Note: Cross-Origin-Resource-Policy (CORP) is a different security feature");
 console.log("Reason: Prevent Spectre-style attacks");
 
 // Atomics - Thread-safe operations on SharedArrayBuffer
@@ -302,9 +300,7 @@ console.log("- Atomics.sub(typedArray, index, value): Subtract and return old");
 console.log("- Atomics.and(typedArray, index, value): Bitwise AND");
 console.log("- Atomics.or(typedArray, index, value): Bitwise OR");
 console.log("- Atomics.xor(typedArray, index, value): Bitwise XOR");
-console.log(
-  "- Atomics.exchange(typedArray, index, value): Swap and return old"
-);
+console.log("- Atomics.exchange(typedArray, index, value): Swap and return old");
 console.log(
   "- Atomics.compareExchange(typedArray, index, expected, replacement): Conditional swap"
 );
@@ -335,12 +331,8 @@ console.log("Current value:", sharedArray[0]); // 100 if was 25, else unchanged
 
 // Wait/wake operations for synchronization
 console.log("\nSynchronization operations:");
-console.log(
-  "- Atomics.wait(typedArray, index, expected, timeout): Block until value changes"
-);
-console.log(
-  "- Atomics.notify(typedArray, index, count): Wake up waiting agents"
-);
+console.log("- Atomics.wait(typedArray, index, expected, timeout): Block until value changes");
+console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents");
 
 /*
  * verification:
@@ -350,9 +342,7 @@ console.log(
  *   lastVerified: 2026-08-14
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
-console.log(
-  "- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)"
-);
+console.log("- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)");
 
 console.log("\nUse cases:");
 console.log("- Multi-threaded computation (Web Workers)");
@@ -362,13 +352,9 @@ console.log("- Parallel data processing");
 console.log("- Real-time collaborative editing");
 
 console.log("\n⚠️ NOTE:");
-console.log(
-  "- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)"
-);
+console.log("- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)");
 console.log("- Not for Float32Array or Float64Array");
-console.log(
-  "- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer"
-);
+console.log("- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer");
 
 // ============================================
 // Section 7: Encoding API (TextEncoder/TextDecoder)

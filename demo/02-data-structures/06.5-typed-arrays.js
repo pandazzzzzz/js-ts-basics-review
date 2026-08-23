@@ -113,11 +113,7 @@ console.log("\nCopy from another TypedArray:", copied); // Uint16Array [1, 2, 3]
 console.log("\n📋 All TypedArray types and sizes:");
 console.log("  Int8Array:", Int8Array.BYTES_PER_ELEMENT, "byte");
 console.log("  Uint8Array:", Uint8Array.BYTES_PER_ELEMENT, "byte");
-console.log(
-  "  Uint8ClampedArray:",
-  Uint8ClampedArray.BYTES_PER_ELEMENT,
-  "byte"
-);
+console.log("  Uint8ClampedArray:", Uint8ClampedArray.BYTES_PER_ELEMENT, "byte");
 console.log("  Int16Array:", Int16Array.BYTES_PER_ELEMENT, "bytes");
 console.log("  Uint16Array:", Uint16Array.BYTES_PER_ELEMENT, "bytes");
 console.log("  Int32Array:", Int32Array.BYTES_PER_ELEMENT, "bytes");
@@ -346,9 +342,7 @@ console.log("✅ Use Uint8ClampedArray if you need clamping to 0-255");
 // Pitfall 2: Endianness
 console.log("\nPitfall 2 - Endianness:");
 console.log("❌ x86 is little-endian; network protocols use big-endian");
-console.log(
-  "✅ Use DataView with explicit endianness flag for binary protocols"
-);
+console.log("✅ Use DataView with explicit endianness flag for binary protocols");
 
 // Pitfall 3: Views share memory
 console.log("\nPitfall 3 - Shared buffer views:");
@@ -371,9 +365,7 @@ console.log("✅ Use Uint8ClampedArray for canvas/image pixel data");
 console.log("✅ Use DataView when parsing binary formats with mixed types");
 console.log("✅ Be explicit about endianness when reading/writing binary");
 console.log("✅ Remember TypedArrays have fixed size after creation");
-console.log(
-  "✅ Use set() for bulk copying (much faster than element-by-element)"
-);
+console.log("✅ Use set() for bulk copying (much faster than element-by-element)");
 console.log("⚠️  Views on same ArrayBuffer share memory (mutations propagate)");
 console.log("⚠️  Uint8Array wraps on overflow; Uint8ClampedArray clamps");
 console.log("⚠️  subarray() creates a view, not a copy (unlike slice())");
@@ -410,9 +402,7 @@ console.log("\n=== Cross-references ===");
 console.log(
   "📘 06.1-arrays-basics.js / 06.2-arrays-iteration.js / 06.3-arrays-search-sort.js / 06.4-arrays-manipulation.js - Regular array methods"
 );
-console.log(
-  "📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)"
-);
+console.log("📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)");
 console.log("📘 43-storage-network.js - Fetch API with ArrayBuffer");
 
 // ============================================

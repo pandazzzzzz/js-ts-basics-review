@@ -80,9 +80,7 @@ async function customHeaders(): Promise<void> {
 async function typedResponse(): Promise<void> {
   console.log("\n=== Response Type ===");
 
-  const response: Response = await fetch(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
+  const response: Response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
 
   // Response properties (all typed)
   const status: number = response.status;
@@ -117,10 +115,7 @@ interface ApiResponseType<T> {
   statusText: string;
 }
 
-async function fetchApi<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponseType<T>> {
+async function fetchApi<T>(url: string, options?: RequestInit): Promise<ApiResponseType<T>> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
@@ -155,15 +150,11 @@ async function useGenericFetch(): Promise<void> {
   console.log("\n=== Generic Fetch Wrapper ===");
 
   // Explicit type parameter - T is User
-  const userResponse = await fetchApi<User>(
-    "https://jsonplaceholder.typicode.com/users/1"
-  );
+  const userResponse = await fetchApi<User>("https://jsonplaceholder.typicode.com/users/1");
   console.log("User:", userResponse.data.name, userResponse.data.email);
 
   // Explicit type parameter - T is Post[]
-  const postsResponse = await fetchApi<Post[]>(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
+  const postsResponse = await fetchApi<Post[]>("https://jsonplaceholder.typicode.com/posts");
   console.log("Posts count:", postsResponse.data.length);
 }
 
@@ -194,11 +185,7 @@ class FetchClient {
   }
 
   // Generic request method
-  async request<T>(
-    endpoint: string,
-    method: HttpMethod = "GET",
-    body?: unknown
-  ): Promise<T> {
+  async request<T>(endpoint: string, method: HttpMethod = "GET", body?: unknown): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
     const options: RequestInit = {
@@ -295,13 +282,9 @@ class FetchError extends Error {
 }
 
 type FetchResult<T> =
-  | { success: true; data: T; response: Response }
-  | { success: false; error: FetchError };
+  { success: true; data: T; response: Response } | { success: false; error: FetchError };
 
-async function safeFetch<T>(
-  url: string,
-  options?: RequestInit
-): Promise<FetchResult<T>> {
+async function safeFetch<T>(url: string, options?: RequestInit): Promise<FetchResult<T>> {
   try {
     const response = await fetch(url, options);
 
@@ -330,12 +313,7 @@ async function safeFetch<T>(
     }
     return {
       success: false,
-      error: new FetchError(
-        error instanceof Error ? error.message : "Unknown error",
-        0,
-        "",
-        url
-      ),
+      error: new FetchError(error instanceof Error ? error.message : "Unknown error", 0, "", url),
     };
   }
 }
@@ -351,9 +329,7 @@ async function useSafeFetch(): Promise<void> {
   console.log("\n=== Error Handling Types ===");
 
   // Success case
-  const successResult = await safeFetch<User>(
-    "https://jsonplaceholder.typicode.com/users/1"
-  );
+  const successResult = await safeFetch<User>("https://jsonplaceholder.typicode.com/users/1");
 
   if (isSuccess(successResult)) {
     // TypeScript knows data and response exist after type guard
@@ -365,9 +341,7 @@ async function useSafeFetch(): Promise<void> {
   }
 
   // Error case (invalid URL)
-  const errorResult = await safeFetch<User>(
-    "https://invalid-url-example.com/api"
-  );
+  const errorResult = await safeFetch<User>("https://invalid-url-example.com/api");
 
   if (!isSuccess(errorResult)) {
     // TypeScript knows error exists after type guard
@@ -382,10 +356,7 @@ async function useSafeFetch(): Promise<void> {
 // ============================================================================
 
 // TypeScript: AbortController and AbortSignal types
-async function fetchWithAbort(
-  url: string,
-  signal: AbortSignal
-): Promise<Response> {
+async function fetchWithAbort(url: string, signal: AbortSignal): Promise<Response> {
   const response = await fetch(url, { signal });
   return response;
 }
@@ -396,9 +367,7 @@ function createCancellableFetcher(baseUrl: string) {
 
   const fetcher = {
     fetch: <T>(endpoint: string): Promise<T> =>
-      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(
-        r => r.json() as T
-      ),
+      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(r => r.json() as T),
 
     cancel: (): void => controller.abort(),
 
@@ -413,9 +382,7 @@ function createCancellableFetcher(baseUrl: string) {
 async function useCancellableFetch(): Promise<void> {
   console.log("\n=== AbortSignal Typing ===");
 
-  const fetcher = createCancellableFetcher(
-    "https://jsonplaceholder.typicode.com"
-  );
+  const fetcher = createCancellableFetcher("https://jsonplaceholder.typicode.com");
 
   try {
     // Start fetch
@@ -430,10 +397,7 @@ async function useCancellableFetch(): Promise<void> {
     if (error instanceof Error && error.name === "AbortError") {
       console.log("Fetch was cancelled");
     } else {
-      console.log(
-        "Fetch error:",
-        error instanceof Error ? error.message : error
-      );
+      console.log("Fetch error:", error instanceof Error ? error.message : error);
     }
   }
 }
@@ -466,23 +430,17 @@ class InterceptorFetch {
   }
 
   // Add response interceptor
-  useResponseInterceptor(
-    interceptor: (response: Response) => unknown | Promise<unknown>
-  ): void {
+  useResponseInterceptor(interceptor: (response: Response) => unknown | Promise<unknown>): void {
     this.interceptors.response.push(interceptor);
   }
 
   // Add error interceptor
-  useErrorInterceptor(
-    interceptor: (error: Error) => never | Promise<never>
-  ): void {
+  useErrorInterceptor(interceptor: (error: Error) => never | Promise<never>): void {
     this.interceptors.error.push(interceptor);
   }
 
   // Execute interceptors
-  private async applyRequestInterceptors(
-    config: RequestInit
-  ): Promise<RequestInit> {
+  private async applyRequestInterceptors(config: RequestInit): Promise<RequestInit> {
     let currentConfig = config;
 
     for (const interceptor of this.interceptors.request) {
@@ -492,9 +450,7 @@ class InterceptorFetch {
     return currentConfig;
   }
 
-  private async applyResponseInterceptors(
-    response: Response
-  ): Promise<unknown> {
+  private async applyResponseInterceptors(response: Response): Promise<unknown> {
     let currentResponse: unknown = response;
 
     for (const interceptor of this.interceptors.response) {
@@ -541,9 +497,7 @@ async function useInterceptors(): Promise<void> {
   });
 
   // Use the client
-  const data = await client.fetch<User>(
-    "https://jsonplaceholder.typicode.com/users/1"
-  );
+  const data = await client.fetch<User>("https://jsonplaceholder.typicode.com/users/1");
   console.log("User with interceptors:", data.name);
 }
 
@@ -568,10 +522,7 @@ function buildQueryString(params: Record<string, QueryValue>): string {
   return searchParams.toString();
 }
 
-function buildUrl(
-  baseUrl: string,
-  params?: Record<string, QueryValue>
-): string {
+function buildUrl(baseUrl: string, params?: Record<string, QueryValue>): string {
   if (!params) return baseUrl;
 
   const queryString = buildQueryString(params);
@@ -1089,10 +1040,7 @@ interface UseFetchResult<T> {
 }
 
 // Example hook signature (implementation would use React)
-function useFetch<T = unknown>(
-  url: string,
-  options?: UseFetchOptions
-): UseFetchResult<T> {
+function useFetch<T = unknown>(url: string, options?: UseFetchOptions): UseFetchResult<T> {
   // Implementation would use useState, useEffect, etc.
   // This is just the type signature
   return {

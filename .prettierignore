@@ -25,16 +25,15 @@ CONTRIBUTING.md
 DEEP-REVIEW-REPORT.md
 demo-audit-report.md
 
-# Git files
-.git/
-.gitignore
-.gitattributes
-
-# Documentation (docs/ files are separate from code demos)
+# Documentation (hand-maintained tables/progress; Prettier would re-align heavily)
 docs/
-reference/
 
 # Root config files (keep them as-is)
 CLAUDE.md
 README.md
 LICENSE
+
+# Git metadata (do not format)
+.git/
+.gitignore
+.gitattributes

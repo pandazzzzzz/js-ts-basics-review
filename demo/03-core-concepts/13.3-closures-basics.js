@@ -268,10 +268,7 @@ function outer() {
 }
 
 const efficientClosure = outer();
-console.log(
-  "Efficient closure uses only needed variables:",
-  efficientClosure()
-); // 84
+console.log("Efficient closure uses only needed variables:", efficientClosure()); // 84
 
 // Memory leak example
 function createLeak() {
@@ -506,9 +503,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 13.1-scope-basics.js - Scope fundamentals");
 console.log("📘 13.4-closures-patterns.js - Advanced closure patterns");
 console.log("📘 16-classes.js - ES2022+ # private fields (modern alternative)");
-console.log(
-  "📘 27-memory-management.js - Memory management and garbage collection"
-);
+console.log("📘 27-memory-management.js - Memory management and garbage collection");
 console.log("📘 24-function-patterns-advanced.js - Memoization and caching");
 
 // ============================================

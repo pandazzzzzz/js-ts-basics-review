@@ -305,30 +305,20 @@ console.log("✅ Use Array.from() for converting iterables to arrays");
 console.log("✅ Use at() for negative index access (ES2022+)");
 console.log("✅ Use Array.isArray() for type checking");
 console.log("✅ Use destructuring to unpack array values cleanly");
-console.log(
-  "✅ Use const for arrays (prevents reassignment, still allows mutation)"
-);
-console.log(
-  "⚠️  Be careful with sparse arrays (holes can cause unexpected behavior)"
-);
+console.log("✅ Use const for arrays (prevents reassignment, still allows mutation)");
+console.log("⚠️  Be careful with sparse arrays (holes can cause unexpected behavior)");
 console.log("⚠️  Setting length directly can truncate data unexpectedly");
-console.log(
-  "⚠️  Default values in destructuring only apply to undefined, not null"
-);
+console.log("⚠️  Default values in destructuring only apply to undefined, not null");
 
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log(
-  "📘 06.2-arrays-iteration.js - Array iteration methods (map, filter, reduce)"
-);
+console.log("📘 06.2-arrays-iteration.js - Array iteration methods (map, filter, reduce)");
 console.log("📘 06.3-arrays-search-sort.js - Search and sort methods");
 console.log("📘 06.4-arrays-manipulation.js - Array manipulation methods");
 console.log("📘 06.5-typed-arrays.js - Typed arrays and ArrayBuffer");
-console.log(
-  "📘 09-destructuring.js - Full destructuring guide (objects + arrays)"
-);
+console.log("📘 09-destructuring.js - Full destructuring guide (objects + arrays)");
 
 // ============================================
 // TypeScript Comparison

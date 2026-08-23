@@ -3,9 +3,7 @@
 
 export {};
 
-console.log(
-  "=== Function Patterns - Debounce & Throttle TypeScript Comparison ===\n"
-);
+console.log("=== Function Patterns - Debounce & Throttle TypeScript Comparison ===\n");
 
 /**
  * 🔍 Key Differences in TypeScript:
@@ -197,10 +195,7 @@ interface EventHandler {
   (event: Event): void;
 }
 
-function createDebouncedHandler<T extends EventHandler>(
-  fn: T,
-  delayMs: number
-): T {
+function createDebouncedHandler<T extends EventHandler>(fn: T, delayMs: number): T {
   return debounce(fn, delayMs);
 }
 

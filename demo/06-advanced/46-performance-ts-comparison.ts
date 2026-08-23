@@ -31,11 +31,7 @@ class PerformanceMonitor {
     performance.mark(name);
   }
 
-  measure(
-    name: string,
-    startMark: string,
-    endMark: string
-  ): PerformanceTiming | null {
+  measure(name: string, startMark: string, endMark: string): PerformanceTiming | null {
     performance.measure(name, startMark, endMark);
     const entries = performance.getEntriesByName(name, "measure");
 
@@ -189,15 +185,11 @@ class VirtualScroller<T> {
       overscan: options.overscan ?? 3,
     };
     this.visibleCount =
-      Math.ceil(options.containerHeight / options.itemHeight) +
-      this.options.overscan;
+      Math.ceil(options.containerHeight / options.itemHeight) + this.options.overscan;
   }
 
   getVisibleItems(): { items: T[]; startIndex: number; endIndex: number } {
-    const endIndex = Math.min(
-      this.startIndex + this.visibleCount,
-      this.items.length
-    );
+    const endIndex = Math.min(this.startIndex + this.visibleCount, this.items.length);
 
     return {
       items: this.items.slice(this.startIndex, endIndex),
@@ -296,10 +288,7 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function (
-    this: any,
-    ...args: Parameters<T>
-  ): ReturnType<T> {
+  descriptor.value = function (this: any, ...args: Parameters<T>): ReturnType<T> {
     const key = JSON.stringify(args);
 
     if (cache.has(key)) {

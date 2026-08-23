@@ -130,9 +130,7 @@ console.log("  Default:    import defaultValue from './module.js';");
 console.log("  Mixed:      import calc, { version } from './calc.js';");
 console.log("  Renamed:    import { add as plus } from './math.js';");
 console.log("  Side effect: import './polyfills.js';");
-console.log(
-  "  ⚠️  File extensions are required in native ESM (works in bundlers without)\n"
-);
+console.log("  ⚠️  File extensions are required in native ESM (works in bundlers without)\n");
 
 // ============================================
 // 5. Namespace Imports (* as)
@@ -148,13 +146,9 @@ console.log("  Imports all exports as a single namespace object\n");
 console.log("6. Re-exporting (Barrel Files):");
 console.log("  Re-export named:  export { add, subtract } from './math.js';");
 console.log("  Re-export all:    export * from './utils.js';");
-console.log(
-  "  Re-export default: export { default as Calculator } from './calc.js';"
-);
+console.log("  Re-export default: export { default as Calculator } from './calc.js';");
 console.log("  Default re-export: export { default } from './plugin.js';");
-console.log(
-  "  Use case: Barrel files (index.js) simplify imports and hide internal structure\n"
-);
+console.log("  Use case: Barrel files (index.js) simplify imports and hide internal structure\n");
 
 // ============================================
 // 7. Dynamic Imports (ES2020)
@@ -165,18 +159,14 @@ console.log("7. Dynamic Imports (ES2020):");
 async function loadModuleConditionally(condition) {
   if (condition) {
     // const module = await import('./heavy-module.js');
-    console.log(
-      "  Dynamic import returns a promise: const mod = await import('./module.js');"
-    );
+    console.log("  Dynamic import returns a promise: const mod = await import('./module.js');");
   }
 }
 
 loadModuleConditionally(false); // won't output, just demonstrates the function exists
 
 console.log("  Use cases: code splitting, lazy loading, conditional loading");
-console.log(
-  "  Access exports: mod.default for default, mod.namedExport for named\n"
-);
+console.log("  Access exports: mod.default for default, mod.namedExport for named\n");
 
 // ============================================
 // 8. ES Modules vs CommonJS
@@ -186,32 +176,22 @@ console.log("8. ES Modules vs CommonJS:");
 console.log(
   "  CJS (Node.js traditional):  const mod = require('./mod'); module.exports = { ... };"
 );
-console.log(
-  "  ESM (ES6 standard):          import mod from './mod.js'; export const x = ...;"
-);
+console.log("  ESM (ES6 standard):          import mod from './mod.js'; export const x = ...;");
 
 console.log("\n  Key differences:");
-console.log(
-  "  Syntax       | CJS uses require()/module.exports | ESM uses import/export"
-);
-console.log(
-  "  Loading      | CJS sync / blocking              | ESM async / non-blocking"
-);
+console.log("  Syntax       | CJS uses require()/module.exports | ESM uses import/export");
+console.log("  Loading      | CJS sync / blocking              | ESM async / non-blocking");
 console.log(
   "  Analysis     | CJS dynamic (runtime)            | ESM static (parse-time, tree-shakeable)"
 );
 console.log(
   "  Exports      | CJS exports are copies           | ESM imports are live bindings (read-only)"
 );
-console.log(
-  "  Top-level    | CJS this === module.exports      | ESM this === undefined"
-);
+console.log("  Top-level    | CJS this === module.exports      | ESM this === undefined");
 console.log(
   '  Extensions   | CJS .js/.cjs                     | ESM .mjs or .js + "type":"module"'
 );
-console.log(
-  "  Top-level await | CJS: not supported           | ESM: supported (ES2022)"
-);
+console.log("  Top-level await | CJS: not supported           | ESM: supported (ES2022)");
 
 console.log("\n  Interop:");
 console.log(
@@ -250,20 +230,14 @@ export class Singleton {
 
 console.log("  Module code executes once on first import");
 console.log("  Subsequent imports return the cached module instance");
-console.log(
-  "  This makes the singleton pattern simple: export a shared object\n"
-);
+console.log("  This makes the singleton pattern simple: export a shared object\n");
 
 // ============================================
 // 10. Circular Dependencies
 // ============================================
 console.log("10. Circular Dependencies:");
-console.log(
-  "  Problem: Module A imports B, B imports A → values may be undefined during init"
-);
-console.log(
-  "  ES Modules handle circular deps better than CJS via live bindings"
-);
+console.log("  Problem: Module A imports B, B imports A → values may be undefined during init");
+console.log("  ES Modules handle circular deps better than CJS via live bindings");
 console.log(
   "  Solutions: extract shared code to third module, use dependency injection, redesign\n"
 );
@@ -272,13 +246,9 @@ console.log(
 // 11. Import Hoisting
 // ============================================
 console.log("11. Import Hoisting:");
-console.log(
-  "  Static imports are hoisted — they run before any other code in the module"
-);
+console.log("  Static imports are hoisted — they run before any other code in the module");
 console.log("  Cannot use static import conditionally or inside functions");
-console.log(
-  "  Use dynamic import() for conditional or runtime-dependent loading\n"
-);
+console.log("  Use dynamic import() for conditional or runtime-dependent loading\n");
 
 // ============================================
 // 12. Import Attributes (ES2025)
@@ -296,50 +266,32 @@ console.log(
 console.log("12. Import Attributes (ES2025):");
 console.log("  Syntax: import data from './data.json' with { type: 'json' };");
 console.log("  `with` provides import metadata to the module loader");
-console.log(
-  "  Renamed from Import Assertions (`assert`) — the old keyword is deprecated/removed"
-);
-console.log(
-  "  Dynamic: const mod = await import('./data.json', { with: { type: 'json' } });"
-);
+console.log("  Renamed from Import Assertions (`assert`) — the old keyword is deprecated/removed");
+console.log("  Dynamic: const mod = await import('./data.json', { with: { type: 'json' } });");
 
 // ============================================
 // Common Pitfalls
 // ============================================
 console.log("\n=== Common Pitfalls ===");
-console.log(
-  "❌ Default vs named export mismatch (check what the module actually exports)"
-);
+console.log("❌ Default vs named export mismatch (check what the module actually exports)");
 console.log("❌ Forgetting .js extensions in native ESM imports");
-console.log(
-  "❌ Trying to reassign imported bindings (they're read-only live bindings)"
-);
-console.log(
-  "❌ Not handling circular dependencies (values can be undefined during init)"
-);
-console.log(
-  "❌ Side effects on module load (makes modules harder to test and tree-shake)"
-);
+console.log("❌ Trying to reassign imported bindings (they're read-only live bindings)");
+console.log("❌ Not handling circular dependencies (values can be undefined during init)");
+console.log("❌ Side effects on module load (makes modules harder to test and tree-shake)");
 console.log("❌ `export default const x = ...` is a syntax error");
-console.log(
-  "❌ Using `assert` instead of `with` for import attributes (deprecated)"
-);
+console.log("❌ Using `assert` instead of `with` for import attributes (deprecated)");
 
 // ============================================
 // Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
-console.log(
-  "✅ Prefer named exports over default exports (better refactoring & tree-shaking)"
-);
+console.log("✅ Prefer named exports over default exports (better refactoring & tree-shaking)");
 console.log("✅ Use barrel files (index.js) for clean public APIs");
 console.log("✅ Keep modules focused on a single responsibility");
 console.log("✅ Use dynamic imports for code splitting and lazy loading");
 console.log("✅ Always include file extensions in relative imports");
 console.log("✅ Avoid circular dependencies — extract shared code instead");
-console.log(
-  "✅ Organize by feature, not by type (features/user/ over models/, services/)"
-);
+console.log("✅ Organize by feature, not by type (features/user/ over models/, services/)");
 
 // ============================================
 // Cross-references

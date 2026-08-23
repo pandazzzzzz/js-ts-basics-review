@@ -91,10 +91,7 @@ class DarkThemeFactory implements UIFactory {
 }
 
 // Generic factory function
-function createFactory<T extends Product>(
-  type: string,
-  creator: (type: string) => T
-): T {
+function createFactory<T extends Product>(type: string, creator: (type: string) => T): T {
   return creator(type);
 }
 
@@ -184,14 +181,9 @@ class TypedEventEmitter<T extends Record<string, any>> {
     this.events[event]!.push(listener);
   }
 
-  off<K extends keyof T>(
-    event: K,
-    listenerToRemove: (data: T[K]) => void
-  ): void {
+  off<K extends keyof T>(event: K, listenerToRemove: (data: T[K]) => void): void {
     if (!this.events[event]) return;
-    this.events[event] = this.events[event]!.filter(
-      listener => listener !== listenerToRemove
-    );
+    this.events[event] = this.events[event]!.filter(listener => listener !== listenerToRemove);
   }
 
   emit<K extends keyof T>(event: K, data: T[K]): void {
@@ -235,9 +227,7 @@ class TypedCreditCardPayment implements PaymentStrategy {
   constructor(private cardNumber: string) {}
 
   pay(amount: number): void {
-    console.log(
-      `💳 Paid $${amount} with card ending in ${this.cardNumber.slice(-4)}`
-    );
+    console.log(`💳 Paid $${amount} with card ending in ${this.cardNumber.slice(-4)}`);
   }
 }
 
@@ -362,10 +352,7 @@ function Memoize<T extends (...args: any[]) => any>(
   const originalMethod = descriptor.value!;
   const cache = new Map<string, ReturnType<T>>();
 
-  descriptor.value = function (
-    this: any,
-    ...args: Parameters<T>
-  ): ReturnType<T> {
+  descriptor.value = function (this: any, ...args: Parameters<T>): ReturnType<T> {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
       console.log("📦 Cache hit");
@@ -409,10 +396,7 @@ interface ModernPaymentGateway {
 }
 
 class OldPaymentSystem {
-  processPayment(
-    amountInCents: number,
-    currencyCode: string
-  ): LegacyPaymentResult {
+  processPayment(amountInCents: number, currencyCode: string): LegacyPaymentResult {
     console.log(`Paid ${amountInCents} ${currencyCode} via legacy system`);
     return { success: true, legacyId: "legacy_" + Date.now() };
   }
@@ -432,10 +416,7 @@ class PaymentAdapter implements ModernPaymentGateway {
 
 const oldSystem = new OldPaymentSystem();
 const adapter = new PaymentAdapter(oldSystem);
-console.log(
-  "Through typed adapter:",
-  JSON.stringify(adapter.charge(9.99, "USD"))
-);
+console.log("Through typed adapter:", JSON.stringify(adapter.charge(9.99, "USD")));
 
 // Functional adapter with generic types
 function createAdapter<TArgs extends any[], UArgs extends any[], R>(
@@ -454,14 +435,8 @@ interface Person {
   age: number;
 }
 
-const greetNew = createAdapter(greetOld, (p: Person): [string, number] => [
-  p.name,
-  p.age,
-]);
-console.log(
-  "\nFunctional typed adapter:",
-  greetNew({ name: "Alice", age: 30 })
-);
+const greetNew = createAdapter(greetOld, (p: Person): [string, number] => [p.name, p.age]);
+console.log("\nFunctional typed adapter:", greetNew({ name: "Alice", age: 30 }));
 
 // ============================================
 // Section 7: Facade Pattern - Simplified Interface
@@ -771,16 +746,10 @@ console.log("  Bad:  createUser(data: any): User");
 console.log("  Good: createUser<T extends User>(data: T): T");
 
 console.log("\n⚠️ Pitfall 2: Decorators add runtime indirection");
-console.log(
-  "  Each decorator wraps the original method; debug stack traces get longer"
-);
-console.log(
-  "  Fix: Limit decorator depth; prefer composition for simple cases"
-);
+console.log("  Each decorator wraps the original method; debug stack traces get longer");
+console.log("  Fix: Limit decorator depth; prefer composition for simple cases");
 
-console.log(
-  "\n⚠️ Pitfall 3: Singletons with private constructors can't be subclassed"
-);
+console.log("\n⚠️ Pitfall 3: Singletons with private constructors can't be subclassed");
 console.log(
   "  Fix: Use dependency injection instead of hard-coded singletons when testability matters"
 );
@@ -792,9 +761,7 @@ console.log(
 
 console.log("\n⚠️ Pitfall 5: Type assertions hiding bugs in adapters");
 console.log("  Bad:  return oldResult as ModernResult  // lies about shape");
-console.log(
-  "  Good: explicitly map each field, letting TS catch missing properties"
-);
+console.log("  Good: explicitly map each field, letting TS catch missing properties");
 
 // ============================================
 // Section 11: Best Practices (TypeScript-specific)
@@ -803,35 +770,19 @@ console.log(
 console.log("\n=== Best Practices (TypeScript) ===\n");
 
 console.log("✅ DO:");
-console.log(
-  "1. Define interfaces for every pattern's contract (Command, State, Strategy, etc.)"
-);
-console.log(
-  "2. Use generics to make factories and adapters type-safe without casting"
-);
+console.log("1. Define interfaces for every pattern's contract (Command, State, Strategy, etc.)");
+console.log("2. Use generics to make factories and adapters type-safe without casting");
 console.log(
   "3. Use private constructors for singletons to enforce single-instance at compile time"
 );
-console.log(
-  "4. Use discriminated unions for state machines — exhaustiveness checked by compiler"
-);
-console.log(
-  "5. Prefer composition over inheritance; type composition via intersection types"
-);
+console.log("4. Use discriminated unions for state machines — exhaustiveness checked by compiler");
+console.log("5. Prefer composition over inheritance; type composition via intersection types");
 
 console.log("\n❌ DON'T:");
-console.log(
-  "1. Don't use `any` in pattern implementations — it defeats the purpose of TS"
-);
-console.log(
-  "2. Don't ignore type errors with `@ts-ignore` — fix the types instead"
-);
-console.log(
-  "3. Don't overuse decorators; they add runtime overhead and complexity"
-);
-console.log(
-  "4. Don't apply patterns blindly — let the problem drive the choice"
-);
+console.log("1. Don't use `any` in pattern implementations — it defeats the purpose of TS");
+console.log("2. Don't ignore type errors with `@ts-ignore` — fix the types instead");
+console.log("3. Don't overuse decorators; they add runtime overhead and complexity");
+console.log("4. Don't apply patterns blindly — let the problem drive the choice");
 
 console.log("\n📊 Comparison:");
 console.log(`

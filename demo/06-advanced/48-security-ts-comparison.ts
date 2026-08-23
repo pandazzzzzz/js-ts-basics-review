@@ -114,11 +114,7 @@ interface SecureCookieOptions {
   path?: string;
 }
 
-function setSecureCookie(
-  name: string,
-  value: string,
-  options: SecureCookieOptions
-): void {
+function setSecureCookie(name: string, value: string, options: SecureCookieOptions): void {
   const cookieString = `${name}=${value}; ${Object.entries(options)
     .map(([key, val]) => `${key}=${val}`)
     .join("; ")}`;
@@ -147,8 +143,7 @@ type CSPDirective =
   | "form-action"
   | "frame-ancestors";
 
-type CSPSource =
-  "'self'" | "'none'" | "'unsafe-inline'" | "'unsafe-eval'" | string; // URLs
+type CSPSource = "'self'" | "'none'" | "'unsafe-inline'" | "'unsafe-eval'" | string; // URLs
 
 type CSPPolicy = Partial<Record<CSPDirective, CSPSource[]>>;
 
@@ -215,11 +210,7 @@ class SecureStorage {
     );
 
     const iv = crypto.getRandomValues(new Uint8Array(12));
-    const ciphertext = await crypto.subtle.encrypt(
-      { name: "AES-GCM", iv },
-      key,
-      dataBuffer
-    );
+    const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, dataBuffer);
 
     return { ciphertext, iv, salt };
   }
@@ -251,11 +242,7 @@ class SecureStorage {
     );
 
     const decryptParams: AesGcmParams = { name: "AES-GCM", iv: encrypted.iv };
-    const decrypted = await crypto.subtle.decrypt(
-      decryptParams,
-      key,
-      encrypted.ciphertext
-    );
+    const decrypted = await crypto.subtle.decrypt(decryptParams, key, encrypted.ciphertext);
 
     return decoder.decode(decrypted);
   }
@@ -413,10 +400,7 @@ async function hashSHA256Typed(message: string): Promise<string> {
 // Typed hash algorithm parameter
 type HashAlgorithm = "SHA-1" | "SHA-256" | "SHA-384" | "SHA-512";
 
-async function hashWithAlgorithm(
-  message: string,
-  algorithm: HashAlgorithm
-): Promise<ArrayBuffer> {
+async function hashWithAlgorithm(message: string, algorithm: HashAlgorithm): Promise<ArrayBuffer> {
   const encoder = new TextEncoder();
   const data = encoder.encode(message);
   return await crypto.subtle.digest(algorithm, data);
@@ -429,10 +413,7 @@ interface AESEncryptedData {
   salt: Uint8Array<ArrayBuffer>;
 }
 
-async function encryptAESGCMTyped(
-  plaintext: string,
-  password: string
-): Promise<AESEncryptedData> {
+async function encryptAESGCMTyped(plaintext: string, password: string): Promise<AESEncryptedData> {
   const encoder = new TextEncoder();
 
   // Import password key
@@ -533,20 +514,16 @@ async function generateRSAKeyPairTyped(): Promise<CryptoKeyPair> {
     publicExponent: new Uint8Array([1, 0, 1]),
     hash: "SHA-256",
   };
-  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(
-    keyGenParams,
-    true,
-    ["encrypt", "decrypt"]
-  );
+  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(keyGenParams, true, [
+    "encrypt",
+    "decrypt",
+  ]);
 
   return keyPair;
 }
 
 // RSA encryption with types
-async function encryptRSATyped(
-  plaintext: string,
-  publicKey: CryptoKey
-): Promise<Uint8Array> {
+async function encryptRSATyped(plaintext: string, publicKey: CryptoKey): Promise<Uint8Array> {
   const encoder = new TextEncoder();
   const encryptParams: RsaOaepParams = { name: "RSA-OAEP" };
   const encrypted: ArrayBuffer = await crypto.subtle.encrypt(
@@ -564,11 +541,7 @@ async function decryptRSATyped(
 ): Promise<string> {
   const decoder = new TextDecoder();
   const decryptParams: RsaOaepParams = { name: "RSA-OAEP" };
-  const decrypted: ArrayBuffer = await crypto.subtle.decrypt(
-    decryptParams,
-    privateKey,
-    encrypted
-  );
+  const decrypted: ArrayBuffer = await crypto.subtle.decrypt(decryptParams, privateKey, encrypted);
 
   return decoder.decode(decrypted);
 }
@@ -581,19 +554,15 @@ async function generateSigningKeyPairTyped(): Promise<CryptoKeyPair> {
     publicExponent: new Uint8Array([1, 0, 1]),
     hash: "SHA-256",
   };
-  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(
-    keyGenParams,
-    true,
-    ["sign", "verify"]
-  );
+  const keyPair: CryptoKeyPair = await crypto.subtle.generateKey(keyGenParams, true, [
+    "sign",
+    "verify",
+  ]);
 
   return keyPair;
 }
 
-async function signMessageTyped(
-  message: string,
-  privateKey: CryptoKey
-): Promise<Uint8Array> {
+async function signMessageTyped(message: string, privateKey: CryptoKey): Promise<Uint8Array> {
   const encoder = new TextEncoder();
   const signature: ArrayBuffer = await crypto.subtle.sign(
     "RSASSA-PKCS1-v1_5",
@@ -648,10 +617,7 @@ async function importAESKeyTyped(jwk: JsonWebKey): Promise<CryptoKey> {
 
 // Generic crypto utility class
 class CryptoUtils {
-  static async hash(
-    data: string,
-    algorithm: HashAlgorithm = "SHA-256"
-  ): Promise<string> {
+  static async hash(data: string, algorithm: HashAlgorithm = "SHA-256"): Promise<string> {
     const encoder = new TextEncoder();
     const buffer = await crypto.subtle.digest(algorithm, encoder.encode(data));
     const array = new Uint8Array(buffer);
@@ -661,11 +627,10 @@ class CryptoUtils {
   }
 
   static async generateAESKey(): Promise<CryptoKey> {
-    return await crypto.subtle.generateKey(
-      { name: "AES-GCM", length: 256 },
-      true,
-      ["encrypt", "decrypt"]
-    );
+    return await crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, [
+      "encrypt",
+      "decrypt",
+    ]);
   }
 
   static async encrypt(
@@ -678,11 +643,7 @@ class CryptoUtils {
     const encoder = new TextEncoder();
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const encryptParams: AesGcmParams = { name: "AES-GCM", iv };
-    const encrypted = await crypto.subtle.encrypt(
-      encryptParams,
-      key,
-      encoder.encode(data)
-    );
+    const encrypted = await crypto.subtle.encrypt(encryptParams, key, encoder.encode(data));
 
     return {
       encrypted: new Uint8Array(encrypted),
@@ -697,11 +658,7 @@ class CryptoUtils {
   ): Promise<string> {
     const decoder = new TextDecoder();
     const decryptParams: AesGcmParams = { name: "AES-GCM", iv };
-    const decrypted = await crypto.subtle.decrypt(
-      decryptParams,
-      key,
-      encrypted
-    );
+    const decrypted = await crypto.subtle.decrypt(decryptParams, key, encrypted);
 
     return decoder.decode(decrypted);
   }
@@ -746,11 +703,7 @@ async function hashPasswordTyped(password: string): Promise<PasswordHash> {
     iterations,
     hash: "SHA-256",
   };
-  const hash: ArrayBuffer = await crypto.subtle.deriveBits(
-    deriveParams,
-    passwordKey,
-    256
-  );
+  const hash: ArrayBuffer = await crypto.subtle.deriveBits(deriveParams, passwordKey, 256);
 
   return {
     hash: new Uint8Array(hash),
@@ -759,10 +712,7 @@ async function hashPasswordTyped(password: string): Promise<PasswordHash> {
   };
 }
 
-async function verifyPasswordTyped(
-  password: string,
-  storedHash: PasswordHash
-): Promise<boolean> {
+async function verifyPasswordTyped(password: string, storedHash: PasswordHash): Promise<boolean> {
   const encoder = new TextEncoder();
 
   const passwordKey: CryptoKey = await crypto.subtle.importKey(
@@ -779,11 +729,7 @@ async function verifyPasswordTyped(
     iterations: storedHash.iterations,
     hash: "SHA-256",
   };
-  const hash: ArrayBuffer = await crypto.subtle.deriveBits(
-    deriveParams,
-    passwordKey,
-    256
-  );
+  const hash: ArrayBuffer = await crypto.subtle.deriveBits(deriveParams, passwordKey, 256);
 
   const newHash = new Uint8Array(hash);
   return newHash.every((byte, i) => byte === storedHash.hash[i]);

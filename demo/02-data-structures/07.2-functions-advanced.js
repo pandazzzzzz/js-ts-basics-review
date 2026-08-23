@@ -423,22 +423,16 @@ console.log("✅ Always handle errors with try-catch in async functions");
 console.log("✅ Use closures for private state encapsulation");
 console.log("✅ Use generators for lazy evaluation of sequences");
 console.log("✅ Consider currying for reusable partially-applied functions");
-console.log(
-  "⚠️  Avoid unnecessary currying when simple function calls suffice"
-);
+console.log("⚠️  Avoid unnecessary currying when simple function calls suffice");
 console.log("⚠️  Be mindful of memory leaks with long-lived closures");
 
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log(
-  "📘 07.1-functions-basics.js - Function basics: declarations, expressions, parameters"
-);
+console.log("📘 07.1-functions-basics.js - Function basics: declarations, expressions, parameters");
 console.log("📘 07.3-functions-patterns.js - Advanced function patterns");
-console.log(
-  "📘 24-function-patterns-advanced.js - Advanced patterns (currying, composition)"
-);
+console.log("📘 24-function-patterns-advanced.js - Advanced patterns (currying, composition)");
 console.log("📘 31-async-await.js - Async/await in depth");
 console.log("📘 13-scope-closures.js - Closures and scope in depth");
 

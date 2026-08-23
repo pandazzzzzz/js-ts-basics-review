@@ -81,9 +81,7 @@ console.log("\n=== Response Type ===");
 
 // TypeScript: Response interface methods
 async function typedResponse(): Promise<void> {
-  const response: Response = await fetch(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
+  const response: Response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
 
   // Response properties (all typed)
   const status: number = response.status;
@@ -120,10 +118,7 @@ interface ApiResponseType<T> {
   statusText: string;
 }
 
-async function fetchApi<T>(
-  url: string,
-  options?: RequestInit
-): Promise<ApiResponseType<T>> {
+async function fetchApi<T>(url: string, options?: RequestInit): Promise<ApiResponseType<T>> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
@@ -156,9 +151,7 @@ interface Post {
 
 async function useGenericFetch(): Promise<void> {
   // Explicit type parameter - T is User
-  const userResponse = await fetchApi<User>(
-    "https://jsonplaceholder.typicode.com/users/1"
-  );
+  const userResponse = await fetchApi<User>("https://jsonplaceholder.typicode.com/users/1");
   console.log("User:", userResponse.data.name, userResponse.data.email);
 
   // Explicit type parameter - T is Post[]
@@ -185,16 +178,12 @@ async function responseMethods(): Promise<void> {
   console.log("JSON data:", jsonData.title);
 
   // text() - returns Promise<string>
-  const textResponse = await fetch(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
+  const textResponse = await fetch("https://jsonplaceholder.typicode.com/posts/1");
   const textData = await textResponse.text();
   console.log("Text data length:", textData.length);
 
   // arrayBuffer() - returns Promise<ArrayBuffer>
-  const abResponse = await fetch(
-    "https://jsonplaceholder.typicode.com/posts/1"
-  );
+  const abResponse = await fetch("https://jsonplaceholder.typicode.com/posts/1");
   const abData = await abResponse.arrayBuffer();
   console.log("ArrayBuffer byte length:", abData.byteLength);
 
@@ -276,12 +265,8 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log(
-  "📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript"
-);
+console.log("📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript");
 console.log(
   "📘 33.3-fetch-practical-patterns-ts-comparison.ts - Advanced patterns with TypeScript"
 );
-console.log(
-  "📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript"
-);
+console.log("📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript");

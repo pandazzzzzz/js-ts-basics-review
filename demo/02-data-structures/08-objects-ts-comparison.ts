@@ -517,9 +517,7 @@ console.log("Roles:", roles);
 
 // Type-safe state management with discriminated unions
 type ApiResponse<T> =
-  | { status: "loading" }
-  | { status: "success"; data: T }
-  | { status: "error"; error: string };
+  { status: "loading" } | { status: "success"; data: T } | { status: "error"; error: string };
 
 function handleResponse<T>(response: ApiResponse<T>): void {
   switch (response.status) {

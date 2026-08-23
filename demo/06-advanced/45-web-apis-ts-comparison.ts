@@ -61,8 +61,7 @@ type WorkerRequest =
   | { type: "fibonacci"; data: number }
   | { type: "sort"; data: number[] };
 
-type WorkerResponse =
-  { type: "result"; data: number } | { type: "error"; message: string };
+type WorkerResponse = { type: "result"; data: number } | { type: "error"; message: string };
 
 class TypedWorker {
   private worker: Worker;
@@ -73,12 +72,9 @@ class TypedWorker {
   }
 
   private setupListeners(): void {
-    this.worker.addEventListener(
-      "message",
-      (e: MessageEvent<WorkerResponse>) => {
-        console.log("📨 Worker response:", e.data);
-      }
-    );
+    this.worker.addEventListener("message", (e: MessageEvent<WorkerResponse>) => {
+      console.log("📨 Worker response:", e.data);
+    });
 
     this.worker.addEventListener("error", (e: ErrorEvent) => {
       console.error("❌ Worker error:", e.message);
@@ -134,10 +130,7 @@ interface ObserverOptions extends IntersectionObserverInit {
 class TypedIntersectionObserver {
   private observer: IntersectionObserver;
 
-  constructor(
-    callback: (entries: IntersectionObserverEntry[]) => void,
-    options?: ObserverOptions
-  ) {
+  constructor(callback: (entries: IntersectionObserverEntry[]) => void, options?: ObserverOptions) {
     this.observer = new IntersectionObserver(callback, options);
   }
 

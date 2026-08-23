@@ -216,10 +216,7 @@ console.log("\nWeakSet.has(sym):", weakSet.has(sym)); // true
 
 let ephemeralKey = Symbol("temporary");
 weakMap.set(ephemeralKey, "temporary value");
-console.log(
-  "\nBefore GC: weakMap.has(ephemeralKey):",
-  weakMap.has(ephemeralKey)
-); // true
+console.log("\nBefore GC: weakMap.has(ephemeralKey):", weakMap.has(ephemeralKey)); // true
 
 // If we remove the reference, the entry can be GC'd
 ephemeralKey = null;
@@ -271,21 +268,11 @@ console.log(
 console.log(
   "✅ Use findLast/findLastIndex instead of reversing and finding for better performance"
 );
-console.log(
-  "✅ Add hashbang to CLI scripts for better cross-engine compatibility"
-);
-console.log(
-  "✅ Use Symbols as WeakMap keys when you need unique, garbage-collectable keys"
-);
-console.log(
-  "⚠️  Remember that all immutable array methods return shallow copies"
-);
-console.log(
-  "⚠️  Always provide a comparator function to toSorted() for numeric arrays"
-);
-console.log(
-  "✅ Prefer these methods over mutable ones in React/Vue state updates"
-);
+console.log("✅ Add hashbang to CLI scripts for better cross-engine compatibility");
+console.log("✅ Use Symbols as WeakMap keys when you need unique, garbage-collectable keys");
+console.log("⚠️  Remember that all immutable array methods return shallow copies");
+console.log("⚠️  Always provide a comparator function to toSorted() for numeric arrays");
+console.log("✅ Prefer these methods over mutable ones in React/Vue state updates");
 
 // React state update example:
 // const [items, setItems] = useState([3,1,2]);

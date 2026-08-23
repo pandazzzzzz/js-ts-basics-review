@@ -358,11 +358,7 @@ console.log(
 console.log("\n=== Point-Free Style with Types ===");
 
 // Multi-parameter pipe with generics
-function pipe3<A, B, C, D>(
-  f1: (a: A) => B,
-  f2: (b: B) => C,
-  f3: (c: C) => D
-): (a: A) => D {
+function pipe3<A, B, C, D>(f1: (a: A) => B, f2: (b: B) => C, f3: (c: C) => D): (a: A) => D {
   return a => f3(f2(f1(a)));
 }
 
@@ -412,10 +408,7 @@ function sumLoop(n: number): number {
 }
 
 function sumReduce(n: number): number {
-  return Array.from({ length: n }, (_, i) => i).reduce(
-    (acc, val) => acc + val,
-    0
-  );
+  return Array.from({ length: n }, (_, i) => i).reduce((acc, val) => acc + val, 0);
 }
 
 console.log("Performance comparison (conceptual):");

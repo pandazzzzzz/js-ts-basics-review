@@ -242,10 +242,7 @@ console.log(
  */
 // Error.isError() (ES2026) — Reliable cross-realm Error checking
 console.log("\n=== Error.isError() (ES2026) ===");
-console.log(
-  "Error.isError(new Error()):",
-  Error.isError?.(new Error()) ?? "not yet available"
-);
+console.log("Error.isError(new Error()):", Error.isError?.(new Error()) ?? "not yet available");
 console.log("Error.isError({}):", Error.isError?.({}) ?? "not yet available");
 console.log(
   "Note: Error.isError() requires Node.js 24.3+ (partial in 24.0-24.3) or browsers supporting ES2026"
@@ -456,11 +453,7 @@ class DatabaseError extends Error {
 }
 
 try {
-  throw new DatabaseError(
-    "Connection failed",
-    "DB_CONN_001",
-    "SELECT * FROM users"
-  );
+  throw new DatabaseError("Connection failed", "DB_CONN_001", "SELECT * FROM users");
 } catch (error) {
   console.log("\nDatabase error:");
   console.log("Name:", error.name);
@@ -1079,10 +1072,7 @@ function validateForm(formData) {
       throw new FormValidationError("password", "Password is required");
     }
     if (formData.password.length < 8) {
-      throw new FormValidationError(
-        "password",
-        "Password must be 8+ characters"
-      );
+      throw new FormValidationError("password", "Password must be 8+ characters");
     }
 
     return { valid: true, errors: [] };
@@ -1154,9 +1144,7 @@ function retryOperation(operation, maxRetries = 3) {
       console.log(`   Failed: ${error.message}`);
 
       if (attempt === maxRetries) {
-        throw new Error(
-          `Failed after ${maxRetries} attempts: ${error.message}`
-        );
+        throw new Error(`Failed after ${maxRetries} attempts: ${error.message}`);
       }
     }
   }
@@ -1231,9 +1219,7 @@ console.log("\n=== 8. Async Error Handling (Basic) ===");
 
 // 8.1 Basic Promise error handling
 console.log("\nPromise error handling:");
-Promise.reject(new Error("Promise failed")).catch(error =>
-  console.log("  Caught:", error.message)
-);
+Promise.reject(new Error("Promise failed")).catch(error => console.log("  Caught:", error.message));
 
 // 8.2 async/await with try/catch
 async function basicAsyncError() {
@@ -1253,11 +1239,7 @@ async function saferAsyncHandling() {
   ]);
 
   results.forEach((result, i) => {
-    console.log(
-      `  ${i}:`,
-      result.status,
-      result.value || result.reason?.message
-    );
+    console.log(`  ${i}:`, result.status, result.value || result.reason?.message);
   });
 }
 saferAsyncHandling();
@@ -1350,10 +1332,7 @@ const multipleErrors = [
   new Error("Third error"),
 ];
 
-const aggregateErr = new AggregateError(
-  multipleErrors,
-  "Multiple operations failed"
-);
+const aggregateErr = new AggregateError(multipleErrors, "Multiple operations failed");
 
 console.log("\nAggregateError:");
 console.log("  Message:", aggregateErr.message);

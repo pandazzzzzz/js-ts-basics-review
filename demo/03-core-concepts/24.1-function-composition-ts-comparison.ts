@@ -31,21 +31,16 @@ function addThree(a: number, b: number, c: number): number {
   return a + b + c;
 }
 
-function curried<A, B, C>(
-  fn: (a: A, b: B, c: C) => any
-): (a: A) => (b: B) => (c: C) => any {
+function curried<A, B, C>(fn: (a: A, b: B, c: C) => any): (a: A) => (b: B) => (c: C) => any {
   return (a: A) => (b: B) => (c: C) => fn(a, b, c);
 }
 
-const curriedAdd: (a: number) => (b: number) => (c: number) => number =
-  curried(addThree);
+const curriedAdd: (a: number) => (b: number) => (c: number) => number = curried(addThree);
 console.log("  curriedAdd(1)(2)(3):", curriedAdd(1)(2)(3));
 
 // Example 2: Generic curry function
 console.log("\n2. Generic curry function:");
-function curry<T extends any[]>(
-  fn: (...args: T) => any
-): (...args: any[]) => any {
+function curry<T extends any[]>(fn: (...args: T) => any): (...args: any[]) => any {
   return function curried(...accumulated: any[]): any {
     if (accumulated.length >= fn.length) {
       return fn(...(accumulated as T));
@@ -90,10 +85,7 @@ function pipeN<T>(...fns: UnaryFn<T>[]): UnaryFn<T> {
 
 // Example 5: Partial application with types
 console.log("\n5. Partial application:");
-function bind<T>(
-  fn: (...args: any[]) => T,
-  ...fixedArgs: any[]
-): (...remaining: any[]) => T {
+function bind<T>(fn: (...args: any[]) => T, ...fixedArgs: any[]): (...remaining: any[]) => T {
   return function (...remaining: any[]): T {
     return fn(...fixedArgs, ...remaining);
   };
@@ -208,12 +200,7 @@ function partialWithPlaceholders(
 }
 
 const subtract = (a: number, b: number) => a - b;
-const subtractFrom10 = partialWithPlaceholders(
-  subtract,
-  10,
-  PLACEHOLDER,
-  PLACEHOLDER
-);
+const subtractFrom10 = partialWithPlaceholders(subtract, 10, PLACEHOLDER, PLACEHOLDER);
 console.log("  subtractFrom10(3):", subtractFrom10(3));
 
 /**

@@ -297,10 +297,7 @@ function createErrorWithCause(message, cause) {
   return error;
 }
 
-const polyfilledError = createErrorWithCause(
-  "Outer error",
-  new Error("Inner error")
-);
+const polyfilledError = createErrorWithCause("Outer error", new Error("Inner error"));
 console.log("\nPolyfilled error.cause:", polyfilledError.cause?.message);
 
 // ============================================
@@ -358,15 +355,11 @@ Promise.any([Promise.reject(new Error("some error"))]).catch(e => {
 async function processAll(items) {
   const results = await Promise.allSettled(
     items.map(item =>
-      item.valid
-        ? Promise.resolve(item.value)
-        : Promise.reject(new Error(`Invalid: ${item.name}`))
+      item.valid ? Promise.resolve(item.value) : Promise.reject(new Error(`Invalid: ${item.name}`))
     )
   );
 
-  const failures = results
-    .filter(r => r.status === "rejected")
-    .map(r => r.reason);
+  const failures = results.filter(r => r.status === "rejected").map(r => r.reason);
 
   if (failures.length > 0) {
     throw new AggregateError(failures, `${failures.length} operations failed`);
@@ -397,11 +390,7 @@ processAll(testItems)
 // 4.3 Validation with AggregateError
 class ValidationError extends Error {
   constructor(errors) {
-    super(
-      errors.length === 1
-        ? errors[0].message
-        : `${errors.length} validation errors occurred`
-    );
+    super(errors.length === 1 ? errors[0].message : `${errors.length} validation errors occurred`);
     this.errors = errors;
     this.name = "ValidationError";
   }
@@ -466,15 +455,9 @@ console.log("\n=== 4.4 Promise.any() Demo ===");
 // 4.4.1 Basic Promise.any() - first success
 async function fetchFromMultipleSources() {
   const sources = [
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Source 1 down")), 100)
-    ),
-    new Promise(resolve =>
-      setTimeout(() => resolve("Data from Source 2"), 200)
-    ),
-    new Promise(resolve =>
-      setTimeout(() => resolve("Data from Source 3"), 300)
-    ),
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Source 1 down")), 100)),
+    new Promise(resolve => setTimeout(() => resolve("Data from Source 2"), 200)),
+    new Promise(resolve => setTimeout(() => resolve("Data from Source 3"), 300)),
   ];
 
   try {
@@ -538,9 +521,7 @@ async function compareRaceVsAny() {
 }
 
 // Run demos
-Promise.all([fetchFromMultipleSources(), allFail(), compareRaceVsAny()]).catch(
-  () => {}
-);
+Promise.all([fetchFromMultipleSources(), allFail(), compareRaceVsAny()]).catch(() => {});
 
 // ============================================
 // 5. CIRCUIT BREAKER PATTERN
@@ -671,12 +652,7 @@ console.log("\n=== 6. Retry with Exponential Backoff Demo ===");
 
 // 6.1 Basic retry implementation
 async function retry(fn, options = {}) {
-  const {
-    maxRetries = 3,
-    baseDelay = 1000,
-    maxDelay = 10000,
-    jitter = true,
-  } = options;
+  const { maxRetries = 3, baseDelay = 1000, maxDelay = 10000, jitter = true } = options;
 
   let lastError;
 
@@ -691,16 +667,11 @@ async function retry(fn, options = {}) {
       }
 
       // Calculate delay with exponential backoff
-      const exponentialDelay = Math.min(
-        baseDelay * Math.pow(2, attempt - 1),
-        maxDelay
-      );
+      const exponentialDelay = Math.min(baseDelay * Math.pow(2, attempt - 1), maxDelay);
       const randomJitter = jitter ? Math.random() * 0.3 * exponentialDelay : 0;
       const delay = exponentialDelay + randomJitter;
 
-      console.log(
-        `Attempt ${attempt} failed. Retrying in ${Math.round(delay)}ms...`
-      );
+      console.log(`Attempt ${attempt} failed. Retrying in ${Math.round(delay)}ms...`);
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
@@ -939,21 +910,13 @@ class AuthorizationError extends AppError {
 console.log("Enhanced errors:");
 
 try {
-  throw new DatabaseConnectionError(
-    "localhost",
-    5432,
-    new Error("ECONNREFUSED")
-  );
+  throw new DatabaseConnectionError("localhost", 5432, new Error("ECONNREFUSED"));
 } catch (error) {
   console.log("\nDatabase error:", error.toJSON());
 }
 
 try {
-  throw new UserValidationError(
-    "email",
-    "invalid",
-    "Must be valid email format"
-  );
+  throw new UserValidationError("email", "invalid", "Must be valid email format");
 } catch (error) {
   console.log("\nValidation error:", error.toJSON());
 }

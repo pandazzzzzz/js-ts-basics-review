@@ -298,10 +298,7 @@ class BinarySerializer<T> {
 }
 
 // Usage
-const headerSerializer = new BinarySerializer<ProtocolHeader>(
-  serializeHeader,
-  parseHeader
-);
+const headerSerializer = new BinarySerializer<ProtocolHeader>(serializeHeader, parseHeader);
 
 // ============================================
 // Section 8: Type Guards for Binary Data
@@ -466,10 +463,7 @@ interface EncodeIntoResult {
 }
 
 const targetBuffer: Uint8Array = new Uint8Array(50);
-const result: TextEncoderEncodeIntoResult = encoder.encodeInto(
-  text,
-  targetBuffer
-);
+const result: TextEncoderEncodeIntoResult = encoder.encodeInto(text, targetBuffer);
 
 // result.read and result.written are typed as numbers
 const charsRead: number = result.read;
@@ -537,11 +531,7 @@ function convertEncoding(
 
 // Usage with type safety
 const latin1Bytes: Uint8Array = new Uint8Array([72, 233, 108, 108, 111]);
-const utf8Bytes: Uint8Array = convertEncoding(
-  latin1Bytes,
-  "iso-8859-1",
-  "utf-8"
-);
+const utf8Bytes: Uint8Array = convertEncoding(latin1Bytes, "iso-8859-1", "utf-8");
 
 console.log("Converted encoding:", decodeBytes(utf8Bytes));
 
@@ -587,9 +577,7 @@ function base64DecodeTyped(base64: string): string {
 }
 
 // Type-safe CSV parsing
-async function parseCSVFromBinary(
-  arrayBuffer: ArrayBuffer
-): Promise<string[][]> {
+async function parseCSVFromBinary(arrayBuffer: ArrayBuffer): Promise<string[][]> {
   const decoder = new TextDecoder("utf-8");
   const text = decoder.decode(arrayBuffer);
   const lines = text.split("\\n");

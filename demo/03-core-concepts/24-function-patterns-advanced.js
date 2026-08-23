@@ -295,9 +295,7 @@ console.log(
 
 // Pitfall 2: Memory leak with unclosed functions
 console.log("\nPitfall 2 - Memory leaks:");
-console.log(
-  "❌ Bad: Caching without eviction policy (see 24.3-memoization-cache.js for LRU)"
-);
+console.log("❌ Bad: Caching without eviction policy (see 24.3-memoization-cache.js for LRU)");
 console.log(
   "✅ Good: Use an LRU cache with a size limit — full example in 24.3-memoization-cache.js"
 );
@@ -305,9 +303,7 @@ console.log(
 // Pitfall 3: Incorrect debounce/throttle timing
 console.log("\nPitfall 3 - Wrong timing values:");
 console.log("❌ Bad: Debounce too short for API calls");
-console.log(
-  "✅ Good: Choose delay based on use case — see 24.2-debounce-throttle.js"
-);
+console.log("✅ Good: Choose delay based on use case — see 24.2-debounce-throttle.js");
 console.log("Search: 200-500ms, Resize: 50-150ms, Scroll: 100-300ms");
 
 // Pitfall 4: Over-composing functions

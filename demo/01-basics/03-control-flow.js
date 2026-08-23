@@ -309,9 +309,7 @@ const numbers = [10, 20, 30];
 
 console.log("\nFor...in Loop (Array - NOT RECOMMENDED):");
 for (const index in numbers) {
-  console.log(
-    `index: ${index} (type: ${typeof index}), value: ${numbers[index]}`
-  );
+  console.log(`index: ${index} (type: ${typeof index}), value: ${numbers[index]}`);
 }
 
 // for...of loop - Iterates over iterable values (ES6/ES2015)

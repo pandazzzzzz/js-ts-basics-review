@@ -222,9 +222,7 @@ console.log(
 );
 
 // Sort by string (name) - with localeCompare
-const sortedByName = [...peopleForSort].sort((a, b) =>
-  a.name.localeCompare(b.name)
-);
+const sortedByName = [...peopleForSort].sort((a, b) => a.name.localeCompare(b.name));
 console.log("Sort by name (localeCompare):");
 console.log(
   "By name:",
@@ -404,9 +402,7 @@ console.log("✅ Use localeCompare for string sorting");
 console.log("✅ Use toSorted/toReversed/with/toSpliced for immutable updates");
 console.log("✅ Use findLast/findLastIndex for searching from end (ES2023+)");
 console.log("⚠️  Remember: sort() mutates the original array");
-console.log(
-  "⚠️  indexOf can't find NaN - use includes or Number.isNaN with find"
-);
+console.log("⚠️  indexOf can't find NaN - use includes or Number.isNaN with find");
 console.log("⚠️  Multi-key sorting: sort by secondary key first, then primary");
 
 // ============================================

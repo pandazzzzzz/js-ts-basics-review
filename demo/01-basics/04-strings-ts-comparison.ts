@@ -239,10 +239,7 @@ console.log("Config:", config);
 // ============================================
 
 // TypeScript ensures tagged template functions receive correct types
-function htmlTag(
-  strings: TemplateStringsArray,
-  ...values: (string | number)[]
-): string {
+function htmlTag(strings: TemplateStringsArray, ...values: (string | number)[]): string {
   return strings.reduce((result, str, i) => {
     const value = values[i] !== undefined ? String(values[i]) : "";
     return result + str + value;
@@ -255,10 +252,7 @@ interface SqlQuery {
   values: (string | number)[];
 }
 
-function sqlQuery(
-  strings: TemplateStringsArray,
-  ...values: (string | number)[]
-): SqlQuery {
+function sqlQuery(strings: TemplateStringsArray, ...values: (string | number)[]): SqlQuery {
   const text = strings.reduce((result, str, i) => {
     return result + str + (values[i] !== undefined ? `$${i + 1}` : "");
   }, "");
@@ -448,10 +442,7 @@ console.log("Name:", personName);
 console.log("Age:", personAge);
 
 // Generic string transformation
-function transform<T extends string>(
-  value: T,
-  transformer: (s: string) => string
-): string {
+function transform<T extends string>(value: T, transformer: (s: string) => string): string {
   return transformer(value);
 }
 
@@ -642,10 +633,7 @@ function compareStrings(a: string, b: string, locale: Locale): number {
 
 console.log("\n=== String Comparison ===");
 console.log("Compare 'a' and 'b':", compareStrings("a", "b", "en-US"));
-console.log(
-  "Compare '苹果' and '香蕉':",
-  compareStrings("苹果", "香蕉", "zh-CN")
-);
+console.log("Compare '苹果' and '香蕉':", compareStrings("苹果", "香蕉", "zh-CN"));
 
 console.log("\n=== TypeScript String Features Complete ===");
 console.log("=== See 04-strings.js for runtime behavior ===");

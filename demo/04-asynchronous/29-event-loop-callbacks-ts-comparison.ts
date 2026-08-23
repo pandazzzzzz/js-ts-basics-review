@@ -30,10 +30,7 @@ processData("hello", result => {
 // Error-first callback pattern (Node.js style)
 type ErrorFirstCallback<T> = (error: Error | null, result?: T) => void;
 
-function fetchData(
-  id: number,
-  callback: ErrorFirstCallback<{ id: number; name: string }>
-): void {
+function fetchData(id: number, callback: ErrorFirstCallback<{ id: number; name: string }>): void {
   setTimeout(() => {
     if (id > 0) {
       callback(null, { id, name: "User" });
@@ -75,10 +72,7 @@ const toUpper: StringProcessor = input => input.toUpperCase();
 const toLower: StringProcessor = input => input.toLowerCase();
 
 // Method 3: Inline function type
-function processArray(
-  items: number[],
-  transformer: (item: number) => number
-): number[] {
+function processArray(items: number[], transformer: (item: number) => number): number[] {
   return items.map(transformer);
 }
 
@@ -235,10 +229,7 @@ type Result<T> = { success: true; data: T } | { success: false; error: Error };
 
 type ResultCallback<T> = (result: Result<T>) => void;
 
-function asyncOperation(
-  shouldSucceed: boolean,
-  callback: ResultCallback<string>
-): void {
+function asyncOperation(shouldSucceed: boolean, callback: ResultCallback<string>): void {
   setTimeout(() => {
     if (shouldSucceed) {
       callback({ success: true, data: "Operation succeeded" });
@@ -256,9 +247,7 @@ asyncOperation(true, result => {
   } else {
     // Use type narrowing - result is { success: false; error: Error }
     const errorMsg =
-      "error" in result && result.error instanceof Error
-        ? result.error.message
-        : String(result);
+      "error" in result && result.error instanceof Error ? result.error.message : String(result);
     console.log("Error:", errorMsg);
   }
 });
@@ -323,10 +312,7 @@ const errorCallback: NeverCallback = () => {
 };
 
 // Practical difference
-function executeCallback(
-  callback: VoidCallback,
-  shouldThrow: boolean = false
-): void {
+function executeCallback(callback: VoidCallback, shouldThrow: boolean = false): void {
   if (shouldThrow) {
     // Can't call never-returning function directly
     // Would need special handling
@@ -442,9 +428,7 @@ interface CustomEventDetail {
   action: string;
 }
 
-type CustomEventHandler = EventHandler<
-  CustomEvent & { detail: CustomEventDetail }
->;
+type CustomEventHandler = EventHandler<CustomEvent & { detail: CustomEventDetail }>;
 
 const customHandler: CustomEventHandler = event => {
   console.log("User", event.detail.userId, "performed", event.detail.action);
@@ -493,19 +477,13 @@ console.log("\n=== Composed Callback Types ===");
 
 // TypeScript: Type guards for callback results
 type ApiResult<T> =
-  | { status: "success"; data: T }
-  | { status: "error"; message: string }
-  | { status: "pending" };
+  { status: "success"; data: T } | { status: "error"; message: string } | { status: "pending" };
 
-function isApiSuccess<T>(
-  result: ApiResult<T>
-): result is { status: "success"; data: T } {
+function isApiSuccess<T>(result: ApiResult<T>): result is { status: "success"; data: T } {
   return result.status === "success";
 }
 
-function isApiError<T>(
-  result: ApiResult<T>
-): result is { status: "error"; message: string } {
+function isApiError<T>(result: ApiResult<T>): result is { status: "error"; message: string } {
   return result.status === "error";
 }
 

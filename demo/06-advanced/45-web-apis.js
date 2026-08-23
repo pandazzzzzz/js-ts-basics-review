@@ -517,9 +517,7 @@ document.addEventListener('visibilitychange', () => {
 
 // Battery Status API
 console.log("\n5. Battery Status API:");
-console.log(
-  "⚠️ DEPRECATED API: Limited browser support (Chrome/Edge only, removed from Firefox)"
-);
+console.log("⚠️ DEPRECATED API: Limited browser support (Chrome/Edge only, removed from Firefox)");
 console.log("Privacy concerns led to limited adoption.");
 console.log(`
 if ('getBattery' in navigator) {
@@ -674,9 +672,7 @@ console.log("\n=== Canvas API ===");
 // ctx.restore();   // Pop state back to before rotation
 
 console.log("Canvas API provides 2D drawing via <canvas> element");
-console.log(
-  "Common use cases: charts, games, image editing, data visualization"
-);
+console.log("Common use cases: charts, games, image editing, data visualization");
 console.log("For 3D graphics, see WebGL or WebGPU instead");
 
 // ============================================
@@ -787,16 +783,10 @@ console.log("\n=== Web Components ===");
 //   </template>
 // </host-element>
 
-console.log(
-  "Custom Elements: define new HTML tags with customElements.define()"
-);
-console.log(
-  "Shadow DOM: encapsulated DOM with scoped styles via attachShadow()"
-);
+console.log("Custom Elements: define new HTML tags with customElements.define()");
+console.log("Shadow DOM: encapsulated DOM with scoped styles via attachShadow()");
 console.log("HTML Templates: reusable markup via <template> and cloneNode()");
-console.log(
-  "Lifecycle: connectedCallback, disconnectedCallback, attributeChangedCallback"
-);
+console.log("Lifecycle: connectedCallback, disconnectedCallback, attributeChangedCallback");
 console.log("Key benefit: Framework-agnostic, built-in browser standard");
 
 // ============================================
@@ -835,9 +825,7 @@ console.log("Key benefit: Framework-agnostic, built-in browser standard");
  */
 
 console.log("\n=== Additional Web APIs Overview ===");
-console.log(
-  "Streams API: ReadableStream/WritableStream for streaming data processing"
-);
+console.log("Streams API: ReadableStream/WritableStream for streaming data processing");
 console.log("ResizeObserver: Efficient element size change detection");
 console.log("MutationObserver: Watch for DOM mutations");
 console.log("Pointer Events: Unified mouse/touch/pen input handling");
@@ -1050,9 +1038,7 @@ console.log(
 );
 
 console.log("\n❌ DON'T:");
-console.log(
-  "1. Assume an API exists without feature detection - browser support varies"
-);
+console.log("1. Assume an API exists without feature detection - browser support varies");
 console.log(
   "2. Forget cleanup - leaving workers running, observers active, or connections open causes memory leaks"
 );

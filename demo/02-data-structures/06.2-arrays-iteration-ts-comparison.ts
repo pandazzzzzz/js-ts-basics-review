@@ -76,9 +76,7 @@ console.log("  sumSquared:", sumSquared);
 
 // Example 5: Reduce for object construction
 console.log("\n5. Reduce to object:");
-const numberMap: Record<string, number> = numbers.reduce<
-  Record<string, number>
->((acc, num) => {
+const numberMap: Record<string, number> = numbers.reduce<Record<string, number>>((acc, num) => {
   acc[`num${num}`] = num * num;
   return acc;
 }, {});

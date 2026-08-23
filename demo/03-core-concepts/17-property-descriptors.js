@@ -76,10 +76,7 @@ console.log("Assignment flags:", Object.getOwnPropertyDescriptor(obj, "prop1"));
 Object.defineProperty(obj, "prop2", {
   value: "value",
 });
-console.log(
-  "defineProperty flags:",
-  Object.getOwnPropertyDescriptor(obj, "prop2")
-);
+console.log("defineProperty flags:", Object.getOwnPropertyDescriptor(obj, "prop2"));
 // { value: 'value', writable: false, enumerable: false, configurable: false }
 
 // ============================================
@@ -161,10 +158,7 @@ for (let key in product) {
   console.log("  ", key);
 }
 console.log("Hidden property exists:", product.internalId); // SECRET-123
-console.log(
-  "Descriptor:",
-  Object.getOwnPropertyDescriptor(product, "internalId")
-);
+console.log("Descriptor:", Object.getOwnPropertyDescriptor(product, "internalId"));
 
 // 2.3 configurable: false - Non-configurable property
 let config = {
@@ -271,10 +265,7 @@ Object.defineProperty(original, "secret", {
 });
 
 // Clone with all descriptors preserved
-let clone = Object.defineProperties(
-  {},
-  Object.getOwnPropertyDescriptors(original)
-);
+let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(original));
 console.log("\nClone name:", clone.name);
 console.log("Clone secret:", clone.secret);
 console.log("Clone fullName:", clone.fullName);
@@ -353,10 +344,7 @@ console.log("After seal:", sealed); // { x: 100, y: 2 }
 console.log("Is sealed:", Object.isSealed(sealed)); // true
 
 // Check descriptor - configurable becomes false
-console.log(
-  "Descriptor after seal:",
-  Object.getOwnPropertyDescriptor(sealed, "x")
-);
+console.log("Descriptor after seal:", Object.getOwnPropertyDescriptor(sealed, "x"));
 
 // 4.3 Object.freeze()
 let frozen = { count: 0, nested: { value: 1 } };
@@ -673,14 +661,8 @@ let obj2 = {};
 Object.defineProperty(obj2, "a", { value: 1 });
 // Flags are all false by default!
 
-console.log(
-  "Assignment descriptor:",
-  Object.getOwnPropertyDescriptor(obj1, "a")
-);
-console.log(
-  "defineProperty descriptor:",
-  Object.getOwnPropertyDescriptor(obj2, "a")
-);
+console.log("Assignment descriptor:", Object.getOwnPropertyDescriptor(obj1, "a"));
+console.log("defineProperty descriptor:", Object.getOwnPropertyDescriptor(obj2, "a"));
 
 // ============================================
 // BEST PRACTICES

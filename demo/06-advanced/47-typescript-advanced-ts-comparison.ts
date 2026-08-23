@@ -144,20 +144,12 @@ console.log("Event handlers: onClick, onFocus, onBlur");
 
 console.log("\n=== Decorators ===\n");
 
-console.log(
-  "JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)"
-);
+console.log("JavaScript: Stage 2.7 proposal (nearing Stage 3, not yet standardized)");
 console.log("TypeScript: Legacy syntax requires --experimentalDecorators flag");
-console.log(
-  "TS 5.0+: Stage 2.7 syntax available with experimentalDecorators: false"
-);
+console.log("TS 5.0+: Stage 2.7 syntax available with experimentalDecorators: false");
 
 // Legacy TypeScript decorator example (requires experimentalDecorators: true)
-function LogTs(
-  target: any,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) {
+function LogTs(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
   descriptor.value = function (...args: any[]) {
     console.log(`Calling ${propertyKey} with:`, args);

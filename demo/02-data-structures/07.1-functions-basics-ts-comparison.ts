@@ -68,9 +68,7 @@ const getDefaultConfig = (): { port: number; host: string } => ({
   port: 3000,
   host: "localhost",
 });
-function createConfig(
-  override: ReturnType<typeof getDefaultConfig> = getDefaultConfig()
-): void {
+function createConfig(override: ReturnType<typeof getDefaultConfig> = getDefaultConfig()): void {
   console.log("  Config:", override);
 }
 

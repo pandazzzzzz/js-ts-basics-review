@@ -122,11 +122,7 @@ async function demonstrateResponseMethods() {
     console.log("   response.statusText:", inspectResponse.statusText); // "OK", "Not Found"
     console.log("   response.type:", inspectResponse.type); // "cors", "basic", "opaque"
     console.log("   response.url:", inspectResponse.url); // Final URL after redirects
-    console.log(
-      "   response.headers:",
-      [...inspectResponse.headers.entries()].length,
-      "headers"
-    );
+    console.log("   response.headers:", [...inspectResponse.headers.entries()].length, "headers");
   } catch (error) {
     console.error("   Error in response methods demo:", error.message);
   }
@@ -316,9 +312,7 @@ console.log("✅ Always set headers: { 'Content-Type': 'application/json' }");
 
 console.log("\nPitfall 4 - Credentials not sent cross-origin:");
 console.log("❌ Cookies not sent cross-origin by default");
-console.log(
-  "✅ Use credentials: 'include' for cross-origin requests with cookies"
-);
+console.log("✅ Use credentials: 'include' for cross-origin requests with cookies");
 
 // ============================================
 // Best Practices
@@ -330,9 +324,7 @@ console.log("✅ Use try/catch with async/await");
 console.log("✅ Set Content-Type: application/json for JSON requests");
 console.log("✅ Don't set Content-Type with FormData (browser does it)");
 console.log("✅ Use credentials: 'include' when cross-origin auth needed");
-console.log(
-  "⚠️ Remember: fetch only rejects on network errors, not HTTP errors"
-);
+console.log("⚠️ Remember: fetch only rejects on network errors, not HTTP errors");
 console.log("⚠️ Response body is consumed after first read");
 
 // ============================================

@@ -308,11 +308,7 @@ const FormSerializable = superclass =>
 
 console.log("\nMixin collision detection:");
 console.log("Creating class with two mixins that both define 'serialize'...");
-const CollidingUser = mixWithCollisionDetection(
-  Loggable,
-  JSONSerializable,
-  FormSerializable
-)(User);
+const CollidingUser = mixWithCollisionDetection(Loggable, JSONSerializable, FormSerializable)(User);
 console.log("(Warning message above shows the collision)");
 
 const collisionUser = new CollidingUser("Test");
@@ -475,9 +471,7 @@ class CreditCardStrategy extends PaymentStrategy {
     this.cardNumber = cardNumber;
   }
   pay(amount) {
-    console.log(
-      `Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`
-    );
+    console.log(`Paid $${amount} with credit card ending in ${this.cardNumber.slice(-4)}`);
     return { success: true, method: "credit_card" };
   }
 }
@@ -519,17 +513,13 @@ class PaymentProcessor {
 }
 
 console.log("Payment strategies:");
-const processor = new PaymentProcessor(
-  new CreditCardStrategy("4111-1111-1111-1111")
-);
+const processor = new PaymentProcessor(new CreditCardStrategy("4111-1111-1111-1111"));
 processor.processPayment(100);
 
 processor.setStrategy(new PayPalStrategy("user@example.com"));
 processor.processPayment(50);
 
-processor.setStrategy(
-  new BitcoinStrategy("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa")
-);
+processor.setStrategy(new BitcoinStrategy("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"));
 processor.processPayment(200);
 
 // 4.2 Sorting strategies
@@ -1397,9 +1387,7 @@ console.log("\n=== Inheritance Patterns Advanced Demo Complete ===");
 console.log("\n=== Cross-references ===");
 console.log("📘 15-prototypes-inheritance.js - Prototypal inheritance");
 console.log("📘 16-classes.js - ES6 class syntax");
-console.log(
-  "📘 24-function-patterns-advanced.js - Functional patterns & composition"
-);
+console.log("📘 24-function-patterns-advanced.js - Functional patterns & composition");
 console.log("📘 44-design-patterns.js - More design patterns");
 
 // ============================================

@@ -141,10 +141,7 @@ function getArea(shape: Shape): number {
 console.log("\nDiscriminated unions:");
 console.log("Circle area:", getArea({ kind: "circle", radius: 5 }));
 console.log("Square area:", getArea({ kind: "square", size: 4 }));
-console.log(
-  "Rectangle area:",
-  getArea({ kind: "rectangle", width: 3, height: 6 })
-);
+console.log("Rectangle area:", getArea({ kind: "rectangle", width: 3, height: 6 }));
 
 // ============================================
 // 4. For Loops with Type Inference
@@ -387,10 +384,7 @@ for (const status of statusList) {
 // ============================================
 
 // TypeScript generics work with control flow
-function findItem<T>(
-  items: T[],
-  predicate: (item: T) => boolean
-): T | undefined {
+function findItem<T>(items: T[], predicate: (item: T) => boolean): T | undefined {
   for (const item of items) {
     if (predicate(item)) {
       return item;
@@ -404,9 +398,7 @@ console.log("\nGeneric find:");
 const foundNumber = findItem([1, 2, 3, 4, 5], n => n > 3);
 console.log("Found number:", foundNumber); // Type: number | undefined
 
-const foundString = findItem(["apple", "banana", "cherry"], s =>
-  s.startsWith("b")
-);
+const foundString = findItem(["apple", "banana", "cherry"], s => s.startsWith("b"));
 console.log("Found string:", foundString); // Type: string | undefined
 
 // ============================================

@@ -59,9 +59,7 @@ if (navTiming) {
   console.log(
     `DOM Content Loaded: ${navTiming.domContentLoadedEventEnd - navTiming.domContentLoadedEventStart}ms`
   );
-  console.log(
-    `Page Load: ${navTiming.loadEventEnd - navTiming.loadEventStart}ms`
-  );
+  console.log(`Page Load: ${navTiming.loadEventEnd - navTiming.loadEventStart}ms`);
 }
 
 // Resource Timing
@@ -122,21 +120,13 @@ function dedupeWithSet(items, existing) {
 let idxTotal = 0,
   setTotal = 0;
 for (let run = 0; run < 5; run++) {
-  idxTotal += benchmark(
-    "数组 indexOf",
-    () => dedupeWithIndexOf(lookups, records),
-    1
-  );
+  idxTotal += benchmark("数组 indexOf", () => dedupeWithIndexOf(lookups, records), 1);
   setTotal += benchmark("Set.has", () => dedupeWithSet(lookups, recordSet), 1);
 }
 const idxAvg = (idxTotal / 5).toFixed(2);
 const setAvg = (setTotal / 5).toFixed(2);
-console.log(
-  `\n平均耗时对比 → 数组 indexOf: ${idxAvg}ms  |  Set.has: ${setAvg}ms`
-);
-console.log(
-  `结论：Set.has 通常快一个数量级，因为 indexOf 是 O(n) 而 Set.has 是 O(1)`
-);
+console.log(`\n平均耗时对比 → 数组 indexOf: ${idxAvg}ms  |  Set.has: ${setAvg}ms`);
+console.log(`结论：Set.has 通常快一个数量级，因为 indexOf 是 O(n) 而 Set.has 是 O(1)`);
 console.log("正是这种实测，才让「用 Set 代替 indexOf」的优化有据可依");
 
 // ============================================
@@ -148,9 +138,7 @@ console.log("\n=== Performance Observer ===");
 // Observe performance entries
 const observer = new PerformanceObserver(list => {
   for (const entry of list.getEntries()) {
-    console.log(
-      `📊 ${entry.entryType}: ${entry.name} - ${entry.duration.toFixed(2)}ms`
-    );
+    console.log(`📊 ${entry.entryType}: ${entry.name} - ${entry.duration.toFixed(2)}ms`);
   }
 });
 
@@ -228,9 +216,7 @@ const throttledScroll = (limit => {
   };
 })(200);
 
-console.log(
-  "\nThrottle - scroll event optimization (reduces layout recalculation):"
-);
+console.log("\nThrottle - scroll event optimization (reduces layout recalculation):");
 for (let i = 0; i < 5; i++) {
   throttledScroll(i * 100); // Only first in each 200ms window fires
 }
@@ -489,18 +475,14 @@ console.log("\n=== Common Pitfalls ===");
 
 // Pitfall 1: Premature optimization
 console.log("\nPitfall 1: Premature optimization");
-console.log(
-  "  Optimizing code paths that are not bottlenecks wastes time and adds complexity."
-);
+console.log("  Optimizing code paths that are not bottlenecks wastes time and adds complexity.");
 console.log(
   "  Fix: Profile first with Performance API or DevTools, then optimize the hottest paths."
 );
 
 // Pitfall 2: Measuring without baseline
 console.log("\nPitfall 2: Measuring without baseline");
-console.log(
-  "  Without a baseline you cannot tell if a change improved or degraded performance."
-);
+console.log("  Without a baseline you cannot tell if a change improved or degraded performance.");
 console.log(
   "  Fix: Record baseline metrics with performance.mark/measure before any optimization."
 );
@@ -528,9 +510,7 @@ console.log("\nPitfall 5: Not cleaning up observers");
 console.log(
   "  PerformanceObserver and IntersectionObserver instances keep firing until disconnected."
 );
-console.log(
-  "  Fix: Always call observer.disconnect() in unmount/cleanup hooks."
-);
+console.log("  Fix: Always call observer.disconnect() in unmount/cleanup hooks.");
 
 // Pitfall 6: Dynamic import waterfall
 console.log("\nPitfall 6: Dynamic import waterfall");
@@ -552,13 +532,9 @@ console.log("\n=== Core Web Vitals (2025 Update) ===");
 console.log("\n📊 Core Web Vitals (2025):");
 console.log("1. LCP (Largest Contentful Paint) - Loading performance");
 console.log("   - Good: ≤2.5s, Needs improvement: ≤4.0s");
-console.log(
-  "2. INP (Interaction to Next Paint) - Interactivity (replacing FID)"
-);
+console.log("2. INP (Interaction to Next Paint) - Interactivity (replacing FID)");
 console.log("   - Good: ≤200ms, Needs improvement: ≤500ms");
-console.log(
-  "   - FID was deprecated in March 2024, INP is the new official metric"
-);
+console.log("   - FID was deprecated in March 2024, INP is the new official metric");
 console.log("3. CLS (Cumulative Layout Shift) - Visual stability");
 console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
@@ -568,9 +544,7 @@ console.log("   - Good: ≤0.1, Needs improvement: ≤0.25");
 
 console.log("\n💡 INP vs FID:");
 console.log("- FID only measured first input delay");
-console.log(
-  "- INP measures ALL interactions' latencies (best representation of responsiveness)"
-);
+console.log("- INP measures ALL interactions' latencies (best representation of responsiveness)");
 console.log("- INP considers 98th percentile of interactions");
 console.log("- Measures clicks, taps, and keyboard interactions");
 console.log("- Excludes scroll and drag interactions");
@@ -605,9 +579,7 @@ console.log(inpCodeExample);
 console.log("\n=== Best Practices ===");
 
 console.log("\n✅ DO:");
-console.log(
-  "1. Measure first - always profile with real data before deciding what to optimize."
-);
+console.log("1. Measure first - always profile with real data before deciding what to optimize.");
 console.log(
   "2. Use appropriate optimization - debounce inputs, throttle scroll/resize, virtualize long lists, lazy-load below-the-fold content."
 );
@@ -619,9 +591,7 @@ console.log("\n❌ DON'T:");
 console.log(
   "1. Premature optimization - do not optimize code paths that have not been identified as bottlenecks."
 );
-console.log(
-  "2. Optimize without measuring - every change should be validated against a baseline."
-);
+console.log("2. Optimize without measuring - every change should be validated against a baseline.");
 
 console.log("\n⚠️ WATCH OUT FOR:");
 console.log(
@@ -637,9 +607,7 @@ console.log(
 console.log("\n=== Cross-references ===");
 console.log("📘 26-optimization-performance.js - Optimization patterns");
 console.log("📘 27-memory-management.js - Memory management");
-console.log(
-  "📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations"
-);
+console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
 console.log("📘 45-web-apis.js - Web APIs");
 
 // ============================================

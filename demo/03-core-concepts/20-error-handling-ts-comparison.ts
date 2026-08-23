@@ -100,10 +100,7 @@ try {
 // TypeScript: Result/Either pattern with union types
 type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
 
-function divide(
-  a: number,
-  b: number
-): Result<number, { type: string; message: string }> {
+function divide(a: number, b: number): Result<number, { type: string; message: string }> {
   if (b === 0) {
     return {
       ok: false,
@@ -248,9 +245,7 @@ function getArea(shape: Shape): number {
 }
 
 console.log("\n=== Never Type ===");
-console.log(
-  `Circle area: ${getArea({ kind: "circle", radius: 5 }).toFixed(2)}`
-);
+console.log(`Circle area: ${getArea({ kind: "circle", radius: 5 }).toFixed(2)}`);
 
 // ============================================================================
 // 6. ASSERTION FUNCTIONS
@@ -308,9 +303,7 @@ function handleResponse(response: ApiResponse): string {
 
   // Check for error
   if (response.error) {
-    throw new Error(
-      `API Error ${response.error.code}: ${response.error.message}`
-    );
+    throw new Error(`API Error ${response.error.code}: ${response.error.message}`);
   }
 
   return userName;
@@ -353,9 +346,7 @@ try {
   throw ApiErrorFactory.notFound("User");
 } catch (error: unknown) {
   if (error instanceof HttpError) {
-    console.log(
-      `${error.name}: ${error.message} (Status: ${error.statusCode})`
-    );
+    console.log(`${error.name}: ${error.message} (Status: ${error.statusCode})`);
   }
 }
 
@@ -364,9 +355,7 @@ try {
 // ============================================================================
 
 // TypeScript: Typed async error handling
-async function fetchUserData(
-  userId: number
-): Promise<Result<{ id: number; name: string }, Error>> {
+async function fetchUserData(userId: number): Promise<Result<{ id: number; name: string }, Error>> {
   try {
     const response = await fetch(`/api/users/${userId}`);
 
@@ -488,6 +477,4 @@ KEY TAKEAWAYS:
 5. Runtime error behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

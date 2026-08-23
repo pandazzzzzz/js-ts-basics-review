@@ -684,14 +684,8 @@ const fakeObject = Object.create(Token.prototype); // has prototype but NOT the 
 console.log("isToken(realToken):", Token.isToken(realToken)); // true
 console.log("isToken(plainObject):", Token.isToken(plainObject)); // false
 console.log("isToken(fakeObject):", Token.isToken(fakeObject)); // false (no private field)
-console.log(
-  "realToken.isSameBrand(realToken):",
-  realToken.isSameBrand(realToken)
-); // true
-console.log(
-  "realToken.isSameBrand(plainObject):",
-  realToken.isSameBrand(plainObject)
-); // false
+console.log("realToken.isSameBrand(realToken):", realToken.isSameBrand(realToken)); // true
+console.log("realToken.isSameBrand(plainObject):", realToken.isSameBrand(plainObject)); // false
 
 // ============================================
 // 5. INSTANCEOF AND TYPE CHECKING
@@ -723,10 +717,7 @@ console.log("\n=== 5. instanceof and Type Checking Demo ===");
 // 5.1 Basic instanceof
 console.log("Array instanceof Array:", [] instanceof Array); // true
 console.log("Date instanceof Date:", new Date() instanceof Date); // true
-console.log(
-  "Promise instanceof Promise:",
-  Promise.resolve() instanceof Promise
-); // true
+console.log("Promise instanceof Promise:", Promise.resolve() instanceof Promise); // true
 
 // 5.2 instanceof with class hierarchy
 class Base {}
@@ -1014,9 +1005,7 @@ console.log("Legacy:", new LegacyClass(42).getValue());
 // 7.5 When to use class vs prototype
 console.log("\nWhen to use:");
 console.log("- Class: New code, cleaner syntax, team familiarity");
-console.log(
-  "- Prototype: Library code, maximum compatibility, advanced patterns"
-);
+console.log("- Prototype: Library code, maximum compatibility, advanced patterns");
 
 // ============================================
 // BEST PRACTICES
@@ -1133,10 +1122,7 @@ class WithPrivate {
 let wp = new WithPrivate();
 // "#secret" in wp is a string-property check (false); the brand check `#secret in wp`
 // returns true but only inside the WithPrivate class body.
-console.log(
-  "Pitfall 4 - Private not accessible (string check):",
-  "#secret" in wp
-); // false
+console.log("Pitfall 4 - Private not accessible (string check):", "#secret" in wp); // false
 
 // ============================================
 // SUMMARY

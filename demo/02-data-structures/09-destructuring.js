@@ -188,10 +188,7 @@ function configure({ width = 100, height = 200, title = "Untitled" } = {}) {
 console.log("\nParameter Destructuring with Default Values:");
 console.log("  No args:", configure()); // { width: 100, height: 200, title: "Untitled" }
 console.log("  Partial args:", configure({ width: 50 })); // { width: 50, height: 200, title: "Untitled" }
-console.log(
-  "  Full override:",
-  configure({ width: 50, height: 100, title: "Custom" })
-);
+console.log("  Full override:", configure({ width: 50, height: 100, title: "Custom" }));
 
 // Array parameter destructuring (ES6)
 function sumPair([a, b]) {

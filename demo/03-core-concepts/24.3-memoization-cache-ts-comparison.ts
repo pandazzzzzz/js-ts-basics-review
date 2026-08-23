@@ -3,9 +3,7 @@
 
 export {};
 
-console.log(
-  "=== Function Patterns - Memoization & Cache TypeScript Comparison ===\n"
-);
+console.log("=== Function Patterns - Memoization & Cache TypeScript Comparison ===\n");
 
 /**
  * 🔍 Key Differences in TypeScript:
@@ -186,10 +184,7 @@ console.log("  LRUCache:", {
 
 // Example 6: Memoize with LRU
 console.log("\n6. Memoize with LRU:");
-function memoizeLRU<T extends any[], R>(
-  fn: (...args: T) => R,
-  maxSize: number = 100
-): AnyFn<T, R> {
+function memoizeLRU<T extends any[], R>(fn: (...args: T) => R, maxSize: number = 100): AnyFn<T, R> {
   const lruCache = new LRUCache<string, R>(maxSize);
 
   return function (...args: T): R {

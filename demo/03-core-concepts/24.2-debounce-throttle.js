@@ -346,22 +346,14 @@ function debounceWithMaxWait(fn, delayMs, maxWaitMs) {
 }
 
 console.log("\nDebounce with max wait:");
-const maxWaitSearch = debounceWithMaxWait(
-  q => console.log(`Max wait search: "${q}"`),
-  300,
-  1000
-);
+const maxWaitSearch = debounceWithMaxWait(q => console.log(`Max wait search: "${q}"`), 300, 1000);
 maxWaitSearch("a");
 maxWaitSearch("b");
 maxWaitSearch("c");
 // Will execute after 300ms OR 1000ms after first call (whichever comes first)
 
 // 3.3 Throttle with leading + trailing options
-function throttleOptions(
-  fn,
-  limitMs,
-  { leading = true, trailing = true } = {}
-) {
+function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) {
   let lastCall = 0;
   let timeoutId = null;
   let lastArgs = null;
@@ -477,9 +469,7 @@ console.log("\n=== Common Pitfalls ===");
 // Pitfall 1: Forgetting to cancel debounced functions in cleanups
 console.log("\nPitfall 1 - Memory leaks:");
 console.log("❌ Bad: Not canceling debounced timers in component unmounts");
-console.log(
-  "✅ Good: Always cancel debounced/throttled functions when no longer needed"
-);
+console.log("✅ Good: Always cancel debounced/throttled functions when no longer needed");
 
 // Pitfall 2: Too short/long delays
 console.log("\nPitfall 2 - Bad delay values:");
@@ -505,14 +495,10 @@ console.log("\n=== Best Practices ===");
 console.log("✅ Use debounce for: Search inputs, resize, autosave");
 console.log("✅ Use throttle for: Scroll, mousemove, button protection");
 console.log("✅ Use cancelable versions for cleanup");
-console.log(
-  "✅ Choose delay based on use case: 200-500ms for search, 100-200ms for scroll"
-);
+console.log("✅ Choose delay based on use case: 200-500ms for search, 100-200ms for scroll");
 console.log("✅ Consider max wait for debounce to guarantee updates");
 console.log("⚠️  Always clean up timers to avoid memory leaks");
-console.log(
-  "⚠️  Beware of 'this' context - bind or use arrow functions carefully"
-);
+console.log("⚠️  Beware of 'this' context - bind or use arrow functions carefully");
 console.log("⚠️  Test edge cases (rapid fire, component unmount mid-delay)");
 
 // ============================================

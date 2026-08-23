@@ -247,16 +247,10 @@ console.log("  toUTCString():", fmtDate.toUTCString()); // Sat, 15 Jun 2024 02:3
 console.log("  toLocaleString('en-US'):", fmtDate.toLocaleString("en-US"));
 
 // toLocaleDateString() - Localized date
-console.log(
-  "  toLocaleDateString('en-US'):",
-  fmtDate.toLocaleDateString("en-US")
-);
+console.log("  toLocaleDateString('en-US'):", fmtDate.toLocaleDateString("en-US"));
 
 // toLocaleTimeString() - Localized time
-console.log(
-  "  toLocaleTimeString('en-US'):",
-  fmtDate.toLocaleTimeString("en-US")
-);
+console.log("  toLocaleTimeString('en-US'):", fmtDate.toLocaleTimeString("en-US"));
 
 // Custom localized format
 console.log("\n  Custom Localization:");
@@ -322,14 +316,8 @@ function addDays(date, days) {
 }
 
 console.log("\n  Add/Subtract Days:");
-console.log(
-  "    2024-06-15 + 7 days:",
-  formatDate(addDays(new Date("2024-06-15"), 7))
-);
-console.log(
-  "    2024-06-15 - 30 days:",
-  formatDate(addDays(new Date("2024-06-15"), -30))
-);
+console.log("    2024-06-15 + 7 days:", formatDate(addDays(new Date("2024-06-15"), 7)));
+console.log("    2024-06-15 - 30 days:", formatDate(addDays(new Date("2024-06-15"), -30)));
 
 // Add/subtract months
 function addMonths(date, months) {
@@ -339,14 +327,8 @@ function addMonths(date, months) {
 }
 
 console.log("\n  Add/Subtract Months:");
-console.log(
-  "    2024-06-15 + 3 months:",
-  formatDate(addMonths(new Date("2024-06-15"), 3))
-);
-console.log(
-  "    2024-06-15 - 6 months:",
-  formatDate(addMonths(new Date("2024-06-15"), -6))
-);
+console.log("    2024-06-15 + 3 months:", formatDate(addMonths(new Date("2024-06-15"), 3)));
+console.log("    2024-06-15 - 6 months:", formatDate(addMonths(new Date("2024-06-15"), -6)));
 
 // Calculate age
 function calculateAge(birthDate) {
@@ -419,10 +401,7 @@ function isDateInRange(date, start, end) {
 const checkDate = new Date("2024-06-15");
 const rangeStart = new Date("2024-01-01");
 const rangeEnd = new Date("2024-12-31");
-console.log(
-  "  2024-06-15 in range 2024:",
-  isDateInRange(checkDate, rangeStart, rangeEnd)
-);
+console.log("  2024-06-15 in range 2024:", isDateInRange(checkDate, rangeStart, rangeEnd));
 
 // ============================================
 // 9. Section 9: Timezone Handling
@@ -435,18 +414,12 @@ console.log("\nTimezone Handling:");
 const offset = new Date().getTimezoneOffset();
 const offsetHours = -offset / 60;
 console.log("  Local timezone offset:", offset, "minutes");
-console.log(
-  "  Converted to hours:",
-  offsetHours > 0 ? `+${offsetHours}` : offsetHours
-);
+console.log("  Converted to hours:", offsetHours > 0 ? `+${offsetHours}` : offsetHours);
 
 // Create date in specific timezone
 function createDateInTimezone(year, month, day, hour, minute, timezone) {
   const date = new Date(Date.UTC(year, month - 1, day, hour, minute));
-  console.log(
-    `  ${timezone}:`,
-    date.toLocaleString("en-US", { timeZone: timezone })
-  );
+  console.log(`  ${timezone}:`, date.toLocaleString("en-US", { timeZone: timezone }));
   return date;
 }
 
@@ -459,22 +432,10 @@ createDateInTimezone(2024, 6, 15, 10, 30, "Asia/Tokyo");
 // Convert timezone using toLocaleString
 const utcDate3 = new Date("2024-06-15T12:00:00Z");
 console.log("\n  UTC 2024-06-15 12:00 in different timezones:");
-console.log(
-  "    Shanghai:",
-  utcDate3.toLocaleString("en-US", { timeZone: "Asia/Shanghai" })
-);
-console.log(
-  "    New York:",
-  utcDate3.toLocaleString("en-US", { timeZone: "America/New_York" })
-);
-console.log(
-  "    London:",
-  utcDate3.toLocaleString("en-US", { timeZone: "Europe/London" })
-);
-console.log(
-  "    Tokyo:",
-  utcDate3.toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
-);
+console.log("    Shanghai:", utcDate3.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+console.log("    New York:", utcDate3.toLocaleString("en-US", { timeZone: "America/New_York" }));
+console.log("    London:", utcDate3.toLocaleString("en-US", { timeZone: "Europe/London" }));
+console.log("    Tokyo:", utcDate3.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
 // ============================================
 // 10. Section 10: Timestamp Operations
@@ -553,10 +514,7 @@ console.log("\n  Pitfall 4 - Date Comparison:");
 const d1 = new Date("2024-06-15");
 const d2 = new Date("2024-06-15");
 console.log("    d1 === d2:", d1 === d2); // false
-console.log(
-  "    d1.getTime() === d2.getTime():",
-  d1.getTime() === d2.getTime()
-); // true
+console.log("    d1.getTime() === d2.getTime():", d1.getTime() === d2.getTime()); // true
 
 // Pitfall 5: Month overflow
 console.log("\n  Pitfall 5 - Month Overflow:");
@@ -707,23 +665,15 @@ if (typeof Temporal !== "undefined") {
   console.log("    Temporal Instant:", temporalInstant.toString());
 
   // Convert to PlainDateTime in specific timezone
-  const plainDateTime = temporalInstant
-    .toZonedDateTimeISO("America/New_York")
-    .toPlainDateTime();
+  const plainDateTime = temporalInstant.toZonedDateTimeISO("America/New_York").toPlainDateTime();
   console.log("    In New York timezone:", plainDateTime.toString());
 } else {
-  console.log(
-    "    Temporal API (ES2027) not yet available in this environment"
-  );
-  console.log(
-    "    Polyfill for older environments: npm install @js-temporal/polyfill"
-  );
+  console.log("    Temporal API (ES2027) not yet available in this environment");
+  console.log("    Polyfill for older environments: npm install @js-temporal/polyfill");
   console.log("    Usage:");
   console.log("      const legacyDate = new Date('2024-06-15T10:30:00Z');");
   console.log("      const instant = legacyDate.toTemporalInstant();");
-  console.log(
-    "      const zoned = instant.toZonedDateTimeISO('America/New_York');"
-  );
+  console.log("      const zoned = instant.toZonedDateTimeISO('America/New_York');");
 }
 
 // Temporal vs Date comparison
@@ -739,9 +689,7 @@ console.log("      - Immutable (all operations return new objects)");
 console.log("      - Timezone-aware by design");
 console.log("      - Clear separation of concepts (Instant, PlainDate, etc.)");
 console.log("      - Consistent API across all types");
-console.log(
-  "      - ES2027 standardized API (Stage 4, March 2026, delayed publication)"
-);
+console.log("      - ES2027 standardized API (Stage 4, March 2026, delayed publication)");
 console.log("      - Better for internationalization");
 
 // Third-party library comparison
@@ -780,12 +728,8 @@ console.log("  1. Store timestamps as UTC (Date.now() / toISOString())");
 console.log("  2. Use Date.parse with ISO 8601 strings for reliable parsing");
 console.log("  3. Avoid Date mutators; create new Date instances instead");
 console.log("  4. Use Intl.DateTimeFormat for locale-aware formatting");
-console.log(
-  "  5. Consider Temporal (ES2027) for new projects (see 50-reserved.js)"
-);
-console.log(
-  "  6. Store dates as strings/numbers in JSON, not raw Date objects"
-);
+console.log("  5. Consider Temporal (ES2027) for new projects (see 50-reserved.js)");
+console.log("  6. Store dates as strings/numbers in JSON, not raw Date objects");
 
 // ============================================
 // TypeScript Comparison Notes

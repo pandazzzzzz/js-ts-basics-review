@@ -59,10 +59,7 @@ console.log("Symbol description property:", sym2.description);
 // 1.2 Uniqueness - each Symbol is unique
 console.log("\nUniqueness check:");
 console.log("sym2 === sym3:", sym2 === sym3); // false
-console.log(
-  "Symbol('test') === Symbol('test'):",
-  Symbol("test") === Symbol("test")
-); // false
+console.log("Symbol('test') === Symbol('test'):", Symbol("test") === Symbol("test")); // false
 
 // 1.3 Symbol as object property keys
 let obj = {
@@ -264,10 +261,7 @@ class Validator {
 
 const validator = new Validator();
 console.log("\nSymbol.toStringTag:");
-console.log(
-  "Object.prototype.toString:",
-  Object.prototype.toString.call(validator)
-);
+console.log("Object.prototype.toString:", Object.prototype.toString.call(validator));
 // "[object Validator]"
 
 // Built-in examples
@@ -285,10 +279,7 @@ class PrimitiveNumber {
 
 console.log("\nSymbol.hasInstance:");
 console.log("42 instanceof PrimitiveNumber:", 42 instanceof PrimitiveNumber); // true
-console.log(
-  "'str' instanceof PrimitiveNumber:",
-  "str" instanceof PrimitiveNumber
-); // false
+console.log("'str' instanceof PrimitiveNumber:", "str" instanceof PrimitiveNumber); // false
 
 // 3.5 Symbol.isConcatSpreadable - Control concat behavior
 let arr1 = [1, 2];
@@ -351,10 +342,7 @@ class CaseInsensitiveMatcher {
 console.log("\nSymbol.match/replace/search/split:");
 const matcher = new CaseInsensitiveMatcher("HELLO");
 console.log("'hello world hello'.match:", "hello world hello".match(matcher));
-console.log(
-  "'HELLO WORLD'.replace:",
-  matcher[Symbol.replace]("HELLO WORLD", "hi")
-);
+console.log("'HELLO WORLD'.replace:", matcher[Symbol.replace]("HELLO WORLD", "hi"));
 console.log("'Say HELLO'.search:", "Say HELLO".search(matcher));
 console.log("'aHELLOb'.split:", "aHELLOb".split(matcher));
 
@@ -572,10 +560,7 @@ let objWithMultipleSymbols = {
 
 console.log("\nObject methods with Symbols:");
 console.log("Object.keys():", Object.keys(objWithMultipleSymbols));
-console.log(
-  "Object.getOwnPropertyNames():",
-  Object.getOwnPropertyNames(objWithMultipleSymbols)
-);
+console.log("Object.getOwnPropertyNames():", Object.getOwnPropertyNames(objWithMultipleSymbols));
 console.log(
   "Object.getOwnPropertySymbols():",
   Object.getOwnPropertySymbols(objWithMultipleSymbols)

@@ -230,9 +230,7 @@ console.log("MDN Map → Object:", Object.fromEntries(map)); // { foo: "bar", ba
 
 // Object transformation (entries → map → fromEntries)
 const object1 = { a: 1, b: 2, c: 3 };
-const object2 = Object.fromEntries(
-  Object.entries(object1).map(([key, val]) => [key, val * 2])
-);
+const object2 = Object.fromEntries(Object.entries(object1).map(([key, val]) => [key, val * 2]));
 console.log("MDN transform:", object2); // { a: 2, b: 4, c: 6 }
 
 // Object.getOwnPropertyNames() - Get all property names (ES5)
@@ -256,10 +254,7 @@ console.log("'toString' in person:", "toString" in person); // Inherited
 // - Only checks own properties, not inherited
 console.log("\nhasOwnProperty():");
 console.log("person.hasOwnProperty('name'):", person.hasOwnProperty("name"));
-console.log(
-  "person.hasOwnProperty('toString'):",
-  person.hasOwnProperty("toString")
-);
+console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toString"));
 
 // Object.hasOwn() - Modern alternative (ES2022)
 // - Safer than hasOwnProperty
@@ -603,9 +598,7 @@ console.log("\nObject.groupBy() - Array grouping:");
 
 // Group numbers by parity
 const numbersToGroup = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const groupedByParity = Object.groupBy(numbersToGroup, num =>
-  num % 2 === 0 ? "even" : "odd"
-);
+const groupedByParity = Object.groupBy(numbersToGroup, num => (num % 2 === 0 ? "even" : "odd"));
 console.log("Grouped by parity:", groupedByParity);
 
 // Group people by age category

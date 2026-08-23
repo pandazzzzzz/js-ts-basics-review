@@ -285,10 +285,7 @@ handleAnimal(dog);
 console.log("\ninstanceof with primitives:");
 // @ts-expect-error - Demonstrating that primitives are not instances
 console.log("'hello' instanceof String:", "hello" instanceof String); // false (primitive)
-console.log(
-  "new String('hello') instanceof String:",
-  new String("hello") instanceof String
-); // true (object)
+console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
 
 // ============================================
 // 8. Spread and Rest - Type Safety

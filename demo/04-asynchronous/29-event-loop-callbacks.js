@@ -605,9 +605,7 @@ const debouncedLog = (delay => {
   };
 })(200);
 
-console.log(
-  "Example 1: Debouncing (coalesces rapid calls via macrotask queue)"
-);
+console.log("Example 1: Debouncing (coalesces rapid calls via macrotask queue)");
 debouncedLog("Call 1");
 debouncedLog("Call 2");
 debouncedLog("Call 3"); // Only this will execute
@@ -852,9 +850,7 @@ setTimeout(() => {
   if (typeof requestAnimationFrame !== "undefined") {
     requestAnimationFrame(animate);
   } else {
-    console.log(
-      "   Browser-only: requestAnimationFrame not available, using setTimeout fallback"
-    );
+    console.log("   Browser-only: requestAnimationFrame not available, using setTimeout fallback");
     animate();
   }
 
@@ -917,8 +913,7 @@ setTimeout(() => {
       loop() {
         if (!this.isRunning) return;
 
-        const currentTime =
-          typeof performance !== "undefined" ? performance.now() : Date.now();
+        const currentTime = typeof performance !== "undefined" ? performance.now() : Date.now();
         const deltaTime = currentTime - this.lastTime;
         this.lastTime = currentTime;
 
@@ -1241,9 +1236,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promises");
 console.log("📘 31-async-await.js - Async/await");
 console.log("📘 33.1-fetch-basics.js - Fetch API basics");
-console.log(
-  "📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations"
-);
+console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
 
 // ============================================
 // TypeScript Comparison

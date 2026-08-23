@@ -64,22 +64,13 @@ console.log("=== Prototype Basics Demo ===\n");
 // Every object has a prototype
 const obj = { name: "Object" };
 console.log("Object's prototype:", Object.getPrototypeOf(obj));
-console.log(
-  "Is Object.prototype?",
-  Object.getPrototypeOf(obj) === Object.prototype
-);
+console.log("Is Object.prototype?", Object.getPrototypeOf(obj) === Object.prototype);
 
 // Prototype chain visualization
 console.log("\nPrototype chain:");
 console.log("obj -> Object.prototype -> null");
-console.log(
-  "obj.__proto__ === Object.prototype:",
-  obj.__proto__ === Object.prototype
-);
-console.log(
-  "Object.prototype.__proto__ === null:",
-  Object.prototype.__proto__ === null
-);
+console.log("obj.__proto__ === Object.prototype:", obj.__proto__ === Object.prototype);
+console.log("Object.prototype.__proto__ === null:", Object.prototype.__proto__ === null);
 
 // ============================================
 // 2. __PROTO__ VS PROTOTYPE
@@ -122,10 +113,7 @@ console.log("  Animal.prototype:", Animal.prototype);
 console.log("  Animal.prototype.speak:", typeof Animal.prototype.speak);
 
 console.log("\nInstance has '__proto__' link:");
-console.log(
-  "  dog.__proto__ === Animal.prototype:",
-  dog.__proto__ === Animal.prototype
-);
+console.log("  dog.__proto__ === Animal.prototype:", dog.__proto__ === Animal.prototype);
 console.log("  dog.speak():", dog.speak());
 
 console.log("\nVisualization:");
@@ -182,14 +170,8 @@ console.log("  child -> parent -> grandparent -> Object.prototype -> null");
 
 console.log("\nHasOwnProperty check:");
 console.log("  child.hasOwnProperty('age'):", child.hasOwnProperty("age"));
-console.log(
-  "  child.hasOwnProperty('firstName'):",
-  child.hasOwnProperty("firstName")
-);
-console.log(
-  "  child.hasOwnProperty('surname'):",
-  child.hasOwnProperty("surname")
-);
+console.log("  child.hasOwnProperty('firstName'):", child.hasOwnProperty("firstName"));
+console.log("  child.hasOwnProperty('surname'):", child.hasOwnProperty("surname"));
 
 // ============================================
 // 4. OBJECT.CREATE() - PROTOTYPE-BASED INHERITANCE
@@ -230,10 +212,7 @@ car.wheels = 4;
 
 console.log("car.start():", car.start());
 console.log("car.wheels:", car.wheels);
-console.log(
-  "car inherits from vehicle:",
-  Object.getPrototypeOf(car) === vehicle
-);
+console.log("car inherits from vehicle:", Object.getPrototypeOf(car) === vehicle);
 
 // Creating object with no prototype
 const bareObject = Object.create(null);
@@ -469,15 +448,10 @@ console.log("  typeof Car:", typeof Car);
 console.log("\nMethods are on prototype:");
 console.log("  Car.prototype.start:", typeof Car.prototype.start);
 console.log("  Car.prototype.honk:", typeof Car.prototype.honk);
-console.log(
-  "  myCar.start === Car.prototype.start:",
-  myCar.start === Car.prototype.start
-);
+console.log("  myCar.start === Car.prototype.start:", myCar.start === Car.prototype.start);
 
 console.log("\nPrototype chain:");
-console.log(
-  "  myCar -> Car.prototype -> Vehicle.prototype -> Object.prototype -> null"
-);
+console.log("  myCar -> Car.prototype -> Vehicle.prototype -> Object.prototype -> null");
 console.log("  myCar instanceof Car:", myCar instanceof Car);
 console.log("  myCar instanceof Vehicle:", myCar instanceof Vehicle);
 console.log("  myCar instanceof Object:", myCar instanceof Object);
@@ -522,10 +496,7 @@ Object.setPrototypeOf(cat, animal);
 
 console.log("\nAfter setting prototype:");
 console.log("  cat.makeSound():", cat.makeSound());
-console.log(
-  "  Object.getPrototypeOf(cat) === animal:",
-  Object.getPrototypeOf(cat) === animal
-);
+console.log("  Object.getPrototypeOf(cat) === animal:", Object.getPrototypeOf(cat) === animal);
 
 // ⚠️ Performance warning
 console.log("\n⚠️ Performance Warning:");

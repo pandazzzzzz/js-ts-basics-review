@@ -105,10 +105,7 @@ function logObject(obj, label = "Object") {
   console.log(`\n  === ${label} ===`);
   console.log(JSON.stringify(obj, null, 2));
 }
-logObject(
-  { status: "success", data: { id: 1, value: "test" } },
-  "API Response"
-);
+logObject({ status: "success", data: { id: 1, value: "test" } }, "API Response");
 
 // ============================================
 // Section 4: stringify Options - replacer Function
@@ -358,8 +355,7 @@ console.log("  API Request:");
 console.log("  ", requestJson);
 
 // Simulated server response
-const serverResponse =
-  '{"status":"success","data":{"id":123,"name":"New User"}}';
+const serverResponse = '{"status":"success","data":{"id":123,"name":"New User"}}';
 const response = JSON.parse(serverResponse);
 console.log("  API Response:", response.status, "- ID:", response.data.id);
 
@@ -391,10 +387,7 @@ deepCopy.arr[0] = 999;
 console.log("\n  Deep Copy:");
 console.log("    original:", JSON.stringify(original));
 console.log("    deepCopy:", JSON.stringify(deepCopy));
-console.log(
-  "    Is independent:",
-  original.nested.value !== deepCopy.nested.value
-);
+console.log("    Is independent:", original.nested.value !== deepCopy.nested.value);
 
 // Use case 4: Configuration serialization
 const config = {
@@ -652,9 +645,7 @@ console.log("  2. Use the replacer argument to filter sensitive fields");
 console.log("  3. Provide a toJSON() method for custom serialization");
 console.log("  4. Handle BigInt explicitly (JSON.stringify throws otherwise)");
 console.log("  5. Use try/catch around JSON.parse for malformed input");
-console.log(
-  "  6. Prefer JSON.stringify(obj, null, 2) for readable debugging output"
-);
+console.log("  6. Prefer JSON.stringify(obj, null, 2) for readable debugging output");
 
 // ============================================
 // TypeScript Comparison Notes

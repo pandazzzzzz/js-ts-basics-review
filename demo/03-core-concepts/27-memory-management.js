@@ -450,9 +450,7 @@ Chrome 任务管理器提示"内存占用过高"，页面开始卡顿。
 // ---- 第 1 步：检测 - 确认是否真的泄漏，而不是正常波动 ----
 console.log("步骤 1 检测（Diagnose）：");
 console.log("- 用 Chrome DevTools Memory 面板看 Heap Snapshot 两次快照差");
-console.log(
-  "- 或用 performance.measureUserAgentSpecificMemory()（cross-origin isolation）"
-);
+console.log("- 或用 performance.measureUserAgentSpecificMemory()（cross-origin isolation）");
 console.log("- 关键：GC 后堆大小是否回到基线。若 GC 后仍持续上涨，则是泄漏");
 
 // 模拟：写一个会累积引用的"泄漏版"模块
@@ -471,9 +469,7 @@ LeakyTodoStore.prototype.handleTask = function (id) {
 // ---- 第 2 步：定位 - 用堆快照找"不可达却仍被引用"的对象 ----
 console.log("\n步骤 2 定位（Isolate）：");
 console.log("- 打 3 次 Heap Snapshot，过滤 'retained size' 最大的对象");
-console.log(
-  "- 关注泄漏版 store 的 _completions 数组 retained size 是否只增不减"
-);
+console.log("- 关注泄漏版 store 的 _completions 数组 retained size 是否只增不减");
 console.log("- 'Constructor' 视图按 retained size 排序，点开数组看引用链");
 
 // ---- 第 3 步：修复 - 找到根因并改造 ----
@@ -501,16 +497,12 @@ const fixedStore = new FixedTodoStore();
 
 // 泄漏版：数组持续累积
 for (let i = 0; i < 5; i++) leakyStore.handleTask(i);
-console.log(
-  `\n❌ 泄漏版：_completions 累积了 ${leakyStore._completions.length} 条（只增不减）`
-);
+console.log(`\n❌ 泄漏版：_completions 累积了 ${leakyStore._completions.length} 条（只增不减）`);
 
 // 修复版：不累积
 let lastResult;
 for (let i = 0; i < 5; i++) lastResult = fixedStore.handleTask(i, id => id * 2);
-console.log(
-  `✅ 修复版：_completions 不存在，最新结果 = ${lastResult}（不累积）`
-);
+console.log(`✅ 修复版：_completions 不存在，最新结果 = ${lastResult}（不累积）`);
 
 console.log("\n排查要点总结：");
 console.log("1. 先确认再修：GC 后堆不回基线才是泄漏");
@@ -785,13 +777,8 @@ console.log(
   "Regular array size estimate (upper bound, 8 bytes/elem):",
   `${((regularArray.length * 8) / 1024 / 1024).toFixed(2)} MB`
 );
-console.log(
-  "TypedArray size:",
-  `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`
-);
-console.log(
-  "TypedArray wins most for fixed-encoding types (Int32=4 bytes, Float64=8 bytes)"
-);
+console.log("TypedArray size:", `${(typedArray.byteLength / 1024 / 1024).toFixed(2)} MB`);
+console.log("TypedArray wins most for fixed-encoding types (Int32=4 bytes, Float64=8 bytes)");
 
 // 6.2 Chunked processing
 console.log("\nChunked processing:");
@@ -874,14 +861,8 @@ console.log("\n=== 7. Node.js Memory Considerations Demo ===");
 if (typeof process !== "undefined" && process.memoryUsage) {
   console.log("\nCurrent memory usage:");
   const memUsage = process.memoryUsage();
-  console.log(
-    "  Heap Used:",
-    `${(memUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`
-  );
-  console.log(
-    "  Heap Total:",
-    `${(memUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`
-  );
+  console.log("  Heap Used:", `${(memUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  console.log("  Heap Total:", `${(memUsage.heapTotal / 1024 / 1024).toFixed(2)} MB`);
   console.log("  RSS:", `${(memUsage.rss / 1024 / 1024).toFixed(2)} MB`);
 }
 

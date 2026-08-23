@@ -72,17 +72,11 @@ console.log("Even numbers:", evens); // [2, 4]
 
 // Type narrowing in filter
 type User = { name: string; age?: number };
-const users: User[] = [
-  { name: "Alice", age: 30 },
-  { name: "Bob" },
-  { name: "Charlie", age: 25 },
-];
+const users: User[] = [{ name: "Alice", age: 30 }, { name: "Bob" }, { name: "Charlie", age: 25 }];
 
-const usersWithAge = users
-  .values()
-  .filter((user): user is User & { age: number } => {
-    return user.age !== undefined;
-  }); // Iterator<User & { age: number }>
+const usersWithAge = users.values().filter((user): user is User & { age: number } => {
+  return user.age !== undefined;
+}); // Iterator<User & { age: number }>
 
 const agedUsers = usersWithAge.toArray();
 // agedUsers have age property guaranteed
@@ -95,9 +89,7 @@ console.log(
 const sum = [1, 2, 3, 4].values().reduce((acc, n) => acc + n, 0); // number
 console.log("Sum:", sum); // 10
 
-const stringReduce = [1, 2, 3, 4]
-  .values()
-  .reduce((acc, n) => acc + n.toString(), ""); // string
+const stringReduce = [1, 2, 3, 4].values().reduce((acc, n) => acc + n.toString(), ""); // string
 console.log("String reduce:", stringReduce); // "1234"
 
 // Generator type preservation
@@ -144,9 +136,7 @@ function getConfig(path: string): Promise<{ port: number; host: string }> {
     if (!path) throw new Error("Path is required"); // Sync error caught
 
     // Async result is typed
-    return fetch(path).then(
-      res => res.json() as Promise<{ port: number; host: string }>
-    );
+    return fetch(path).then(res => res.json() as Promise<{ port: number; host: string }>);
   });
 }
 
@@ -315,8 +305,6 @@ console.log("To use ES2025 features in TypeScript:");
 console.log('1. Set "target": "ES2025" or higher (TypeScript 5.4+)');
 console.log('2. Add "ES2025" to "lib" array if target is lower');
 console.log("3. For Set methods: Ensure TypeScript 5.4+");
-console.log(
-  '4. For iterator helpers: Enable "downlevelIteration" if targeting older runtimes'
-);
+console.log('4. For iterator helpers: Enable "downlevelIteration" if targeting older runtimes');
 
 console.log("\n✅ ES2025 TypeScript comparison completed");

@@ -1044,12 +1044,11 @@ console.log("\n=== Additional ES2020-ES2024 Features ===");
 // - Waits for all promises to settle (never rejects)
 // - Each result is { status, value/reason }
 console.log("\nPromise.allSettled (ES2020):");
-Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))]).then(
-  results =>
-    console.log(
-      "  Settled results:",
-      results.map(r => r.status)
-    )
+Promise.allSettled([Promise.resolve(1), Promise.reject(new Error("x"))]).then(results =>
+  console.log(
+    "  Settled results:",
+    results.map(r => r.status)
+  )
 );
 // 📘 See demo/04-asynchronous/30-promises.js for full coverage of Promise combinators
 
@@ -1133,9 +1132,7 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
  */
 console.log("\nTop-level await (ES2022):");
 console.log("  // In an ES Module (.mjs or type:module) you can write:");
-console.log(
-  "  // const data = await fetch('https://api.example.com').then(r => r.json());"
-);
+console.log("  // const data = await fetch('https://api.example.com').then(r => r.json());");
 console.log("  // No async IIFE wrapper needed at module top level");
 
 // 22.7 WeakRef / FinalizationRegistry (ES2021)

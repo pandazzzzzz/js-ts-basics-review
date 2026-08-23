@@ -124,10 +124,7 @@ function* map<T, U>(gen: Generator<T>, fn: (x: T) => U): Generator<U> {
   }
 }
 
-function* filter<T>(
-  gen: Generator<T>,
-  predicate: (x: T) => boolean
-): Generator<T> {
+function* filter<T>(gen: Generator<T>, predicate: (x: T) => boolean): Generator<T> {
   for (const x of gen) {
     if (predicate(x)) {
       yield x;
@@ -365,8 +362,6 @@ console.log("7. Template literal types");
 
 console.log("\n📘 Key TypeScript Benefits:");
 console.log("- Type-safe data structures");
-console.log(
-  "- Better tooling/refactoring (types are erased at runtime; no JIT gain)"
-);
+console.log("- Better tooling/refactoring (types are erased at runtime; no JIT gain)");
 console.log("- Clear performance contracts");
 console.log("- Immutable value enforcement");

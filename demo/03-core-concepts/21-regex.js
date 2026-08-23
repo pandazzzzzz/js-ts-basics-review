@@ -161,10 +161,7 @@ console.log("^hello matches 'hello world':", /^hello/.test("hello world")); // t
 console.log("^hello matches 'say hello':", /^hello/.test("say hello")); // false
 console.log("world$ matches 'hello world':", /world$/.test("hello world")); // true
 console.log("world$ matches 'world hello':", /world$/.test("world hello")); // false
-console.log(
-  "\\bword\\b matches 'a word here':",
-  /\bword\b/.test("a word here")
-); // true
+console.log("\\bword\\b matches 'a word here':", /\bword\b/.test("a word here")); // true
 console.log("\\bword\\b matches 'a wording':", /\bword\b/.test("a wording")); // false
 
 // 2.6 Full match with anchors
@@ -322,10 +319,7 @@ console.log("With s:", /hello.world/s.test(newlineStr)); // true
 // 4.5 Combined flags
 let combined = /HELLO/gim;
 console.log("\nCombined flags (gim):");
-console.log(
-  "Find all HELLO (case insensitive):",
-  "Hello\nhello\nHELLO".match(combined)
-);
+console.log("Find all HELLO (case insensitive):", "Hello\nhello\nHELLO".match(combined));
 
 // 4.6 u flag - Unicode
 console.log("\nUnicode flag:");
@@ -472,9 +466,7 @@ console.log("'$100' matches:", "price: $100".match(negLookbehind)); // ['00'] (\
 // 6.6 Lookahead with replacement
 let fruits = ["ripe orange A", "green orange B", "ripe orange C"];
 console.log("\nLookahead replacement:");
-let replacedFruits = fruits.map(fruit =>
-  fruit.replace(/(?<=ripe )orange/, "apple")
-);
+let replacedFruits = fruits.map(fruit => fruit.replace(/(?<=ripe )orange/, "apple"));
 console.log(replacedFruits);
 
 // 6.7 Possessive Quantifiers - Greedy without backtracking (JS does NOT support a++)
@@ -891,14 +883,9 @@ if (typeof RegExp.escape === "function") {
   // Practical use: safely build a regex from user input
   const userInput = "price: $5.00 (each)";
   const safeRe = new RegExp(RegExp.escape(userInput));
-  console.log(
-    "user input match:",
-    safeRe.test("The price: $5.00 (each) is firm")
-  ); // true
+  console.log("user input match:", safeRe.test("The price: $5.00 (each) is firm")); // true
 } else {
-  console.log(
-    "RegExp.escape not supported in this runtime (needs Node 24+ / ES2025)"
-  );
+  console.log("RegExp.escape not supported in this runtime (needs Node 24+ / ES2025)");
 }
 
 // 11.3 Duplicate Named Capture Groups (ES2025)
@@ -924,12 +911,7 @@ try {
   const kvRe = /^(?:(?<key>\w+):(?<value>\w+)|(?<key>\w+)=(?<value>\w+))$/;
   const colonMatch = kvRe.exec("name:Alice");
   const eqMatch = kvRe.exec("name=Bob");
-  console.log(
-    "colon form:",
-    colonMatch.groups.key,
-    "=",
-    colonMatch.groups.value
-  ); // name = Alice
+  console.log("colon form:", colonMatch.groups.key, "=", colonMatch.groups.value); // name = Alice
   console.log("equals form:", eqMatch.groups.key, "=", eqMatch.groups.value); // name = Bob
 } catch (e) {
   console.log("Duplicate named groups not supported:", e.message);

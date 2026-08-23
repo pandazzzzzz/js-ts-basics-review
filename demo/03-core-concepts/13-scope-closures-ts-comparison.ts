@@ -339,6 +339,4 @@ KEY TAKEAWAYS:
 7. Type-safe variable shadowing with different types
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

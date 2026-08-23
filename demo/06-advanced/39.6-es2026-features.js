@@ -106,9 +106,7 @@ const asyncIterable = (async function* () {
   }
 })();
 
-Array.fromAsync(asyncIterable).then(array =>
-  console.log("  MDN async iterable:", array)
-);
+Array.fromAsync(asyncIterable).then(array => console.log("  MDN async iterable:", array));
 // [0, 1, 2, 3, 4]
 
 // Array from a sync iterable
@@ -121,21 +119,17 @@ Array.fromAsync(
 // [[1, 2], [3, 4]]
 
 // Array from a sync iterable that yields promises
-Array.fromAsync(
-  new Set([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])
-).then(array => console.log("  MDN Set of promises:", array));
+Array.fromAsync(new Set([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])).then(array =>
+  console.log("  MDN Set of promises:", array)
+);
 // [1, 2, 3]
 
 // Array.fromAsync is equivalent to (but more concise than) for-await-of:
 //   const result = [];
 //   for await (const element of items) { result.push(element); }
 
-console.log(
-  "Array.fromAsync converts async iterables, promises, and array-like objects to arrays"
-);
-console.log(
-  "Useful for processing streams, async generators, and collections of promises"
-);
+console.log("Array.fromAsync converts async iterables, promises, and array-like objects to arrays");
+console.log("Useful for processing streams, async generators, and collections of promises");
 
 // ============================================
 // 3. Error.isError()
@@ -189,9 +183,7 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
  *   source: https://github.com/tc39/proposal-arraybuffer-base64
  */
 
-const data = new Uint8Array([
-  72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100,
-]); // "Hello World"
+const data = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]); // "Hello World"
 console.log("Original Uint8Array:", data);
 
 if (typeof data.toBase64 === "function") {
@@ -225,9 +217,7 @@ if (typeof data.toHex === "function") {
   console.log("fromHex():", decodedHex);
   console.log("Decoded hex to string:", new TextDecoder().decode(decodedHex)); // "Hello World"
 } else {
-  console.log(
-    "⚠️ Hex encoding methods also not available in this Node.js version"
-  );
+  console.log("⚠️ Hex encoding methods also not available in this Node.js version");
 }
 
 // ============================================
@@ -273,9 +263,7 @@ if (typeof new Map().upsert === "function") {
   console.log("\nWord counts:", Object.fromEntries(counts));
   // { hello: 3, world: 2, test: 1 }
 } else {
-  console.log(
-    "⚠️ Map.prototype.upsert is not available in this Node.js version"
-  );
+  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -343,20 +331,8 @@ const reviver = (key, value, { source }) => {
 const financialJSON = '{"price": 19.99, "quantity": 100}';
 const financialData = JSON.parse(financialJSON, reviver);
 console.log("\nFinancial data with preserved decimals:");
-console.log(
-  "price:",
-  financialData.price,
-  "(type:",
-  typeof financialData.price,
-  ")"
-); // "19.99" string
-console.log(
-  "quantity:",
-  financialData.quantity,
-  "(type:",
-  typeof financialData.quantity,
-  ")"
-); // 100 number
+console.log("price:", financialData.price, "(type:", typeof financialData.price, ")"); // "19.99" string
+console.log("quantity:", financialData.quantity, "(type:", typeof financialData.quantity, ")"); // 100 number
 
 // ============================================
 // 7. Iterator Sequencing (concat)
@@ -402,9 +378,7 @@ if (typeof Iterator.prototype.concat === "function") {
     .toArray();
   console.log("\nChained concat with helpers:", result); // [4, 8, 12]
 } else {
-  console.log(
-    "⚠️ Iterator.prototype.concat is not available in this Node.js version"
-  );
+  console.log("⚠️ Iterator.prototype.concat is not available in this Node.js version");
 }
 
 // ============================================
@@ -465,25 +439,15 @@ console.log("\n--- 9. Best Practices ---\n");
 console.log(
   "✅ Use Math.sumPrecise() for financial/scientific calculations requiring exact summation"
 );
-console.log(
-  "✅ Use Array.fromAsync() to convert async iterables to arrays cleanly"
-);
-console.log(
-  "✅ Use Error.isError() for reliable error detection, especially across realms"
-);
-console.log(
-  "✅ Use Uint8Array base64/hex methods instead of manual btoa/atob conversions"
-);
-console.log(
-  "✅ Use Map.upsert() for atomic update/insert operations (better than has+get+set)"
-);
+console.log("✅ Use Array.fromAsync() to convert async iterables to arrays cleanly");
+console.log("✅ Use Error.isError() for reliable error detection, especially across realms");
+console.log("✅ Use Uint8Array base64/hex methods instead of manual btoa/atob conversions");
+console.log("✅ Use Map.upsert() for atomic update/insert operations (better than has+get+set)");
 console.log(
   "✅ Use JSON.parse source access for parsing large numbers/decimals without precision loss"
 );
 console.log("✅ Use Iterator.concat() to combine multiple iterators lazily");
-console.log(
-  "⚠️  Always handle exceptions from base64/hex decoding of untrusted input"
-);
+console.log("⚠️  Always handle exceptions from base64/hex decoding of untrusted input");
 console.log(
   "⚠️  Remember that Math.sumPrecise() returns a Number, it just does intermediate steps precisely"
 );

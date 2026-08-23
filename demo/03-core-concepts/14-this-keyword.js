@@ -798,10 +798,7 @@ console.log("\nStrict mode default binding:");
 // 7.5 Indirect this reference (eval)
 console.log("\nIndirect this:");
 let indirect = eval;
-console.log(
-  "indirect('this') === globalThis:",
-  indirect("this") === globalThis
-);
+console.log("indirect('this') === globalThis:", indirect("this") === globalThis);
 
 // ============================================
 // BEST PRACTICES

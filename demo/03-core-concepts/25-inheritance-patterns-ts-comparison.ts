@@ -157,9 +157,7 @@ class PaymentProcessor {
   }
 }
 
-const processor = new PaymentProcessor(
-  new CreditCardStrategy("4111-1111-1111-1111")
-);
+const processor = new PaymentProcessor(new CreditCardStrategy("4111-1111-1111-1111"));
 processor.processPayment(100);
 processor.setStrategy(new PayPalStrategy("user@example.com"));
 processor.processPayment(50);
@@ -278,10 +276,7 @@ class SizeCalculator implements FileSystemVisitor<number> {
   }
 
   visitDirectory(directory: DirectoryNode): number {
-    return directory.children.reduce(
-      (sum, child) => sum + child.accept(this),
-      0
-    );
+    return directory.children.reduce((sum, child) => sum + child.accept(this), 0);
   }
 }
 
@@ -457,10 +452,7 @@ const TSerializable = {
   },
   // `this` carries a `constructor` so we can reconstruct; typed via a constraint
   // instead of `any` to keep the call site checked.
-  deserialize(
-    this: object & { constructor: new () => unknown },
-    json: string
-  ): object {
+  deserialize(this: object & { constructor: new () => unknown }, json: string): object {
     const target = new this.constructor() as object;
     return Object.assign(target, JSON.parse(json));
   },
@@ -479,9 +471,7 @@ const TLoggable = {
 // TypeScript: Trait composer with conflict resolution
 // Each trait is a bag of methods: typed as Record<string, unknown> so we can
 // index it without `as any`.
-function composeTraits(
-  ...traits: Record<string, unknown>[]
-): Record<string, unknown> {
+function composeTraits(...traits: Record<string, unknown>[]): Record<string, unknown> {
   const composed: Record<string, unknown> = {};
   const conflicts: Map<string, number> = new Map();
 
@@ -612,9 +602,7 @@ KEY TAKEAWAYS:
 6. Runtime pattern behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");
 
 // ============================================================================
 // SUMMARY

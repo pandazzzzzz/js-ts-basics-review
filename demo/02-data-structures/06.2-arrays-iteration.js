@@ -189,9 +189,7 @@ console.log("Filter then map (doubled evens):", doubledEvens);
 
 // 3.6 Finding unique values
 const duplicates = [1, 2, 2, 3, 3, 3, 4, 5, 5];
-const unique = duplicates.filter(
-  (val, index, arr) => arr.indexOf(val) === index
-);
+const unique = duplicates.filter((val, index, arr) => arr.indexOf(val) === index);
 console.log("Unique values:", unique); // [1, 2, 3, 4, 5]
 // Note: Set is more efficient for this: [...new Set(duplicates)]
 
@@ -349,9 +347,7 @@ console.log(
   "\nflatMap vs map().flat():",
   JSON.stringify(viaFlatMap) === JSON.stringify(viaMapFlat)
 ); // true (same result)
-console.log(
-  "Performance note: flatMap is more efficient (single pass vs two passes)"
-);
+console.log("Performance note: flatMap is more efficient (single pass vs two passes)");
 
 // ============================================
 // Common Pitfalls

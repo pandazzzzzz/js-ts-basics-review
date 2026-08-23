@@ -51,9 +51,7 @@ const users: User[] = [
 ];
 
 // Find user with email
-const userWithEmail: User | undefined = users.find(
-  (u): u is User & { email: string } => !!u.email
-);
+const userWithEmail: User | undefined = users.find((u): u is User & { email: string } => !!u.email);
 console.log("  userWithEmail:", userWithEmail);
 
 // Example 3: Type-safe sorting
@@ -149,11 +147,7 @@ console.log("  findIndex('Alice'):", userIndex);
 
 // Example 10: Generic search utility
 console.log("\n10. Generic search utility:");
-function findByProperty<T, K extends keyof T>(
-  arr: T[],
-  property: K,
-  value: T[K]
-): T | undefined {
+function findByProperty<T, K extends keyof T>(arr: T[], property: K, value: T[K]): T | undefined {
   return arr.find(item => item[property] === value);
 }
 

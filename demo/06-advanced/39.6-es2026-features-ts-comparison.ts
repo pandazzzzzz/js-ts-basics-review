@@ -181,9 +181,7 @@ if (typeof Uint8Array.prototype.toBase64 === "function") {
     }
   }
 } else {
-  console.log(
-    "⚠️ Uint8Array.toBase64/toHex is not available in this Node.js version"
-  );
+  console.log("⚠️ Uint8Array.toBase64/toHex is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -230,9 +228,7 @@ if (typeof Map.prototype.upsert === "function") {
   incrementCounter("clicks");
   console.log("Counters:", Object.fromEntries(counters)); // { views: 2, clicks: 1 }
 } else {
-  console.log(
-    "⚠️ Map.prototype.upsert is not available in this Node.js version"
-  );
+  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -246,12 +242,7 @@ interface ReviverContext {
   source: string;
 }
 
-type ReviverFn = (
-  this: any,
-  key: string,
-  value: any,
-  context: ReviverContext
-) => any;
+type ReviverFn = (this: any, key: string, value: any, context: ReviverContext) => any;
 
 // Parse numbers larger than MAX_SAFE_INTEGER as BigInt
 const json = `{"small": 123, "large": 9007199254740993}`;
@@ -321,9 +312,7 @@ if (typeof Iterator.prototype.concat === "function") {
     .toArray();
   console.log("Chained result:", result); // [4, 8, 12]
 } else {
-  console.log(
-    "⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version"
-  );
+  console.log("⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -339,19 +328,14 @@ type UserData = { name: string; email: string };
 const userMap = new Map<UserId, UserData>();
 
 function updateUser(id: UserId, data: Partial<UserData>): UserData {
-  return userMap.upsert(
-    id,
-    { name: "New User", email: "new@example.com", ...data },
-    existing => ({
-      ...existing,
-      ...data,
-    })
-  );
+  return userMap.upsert(id, { name: "New User", email: "new@example.com", ...data }, existing => ({
+    ...existing,
+    ...data,
+  }));
 }
 
 // 2. Narrowing with Error.isError
-type Result<T> =
-  { success: true; data: T } | { success: false; error: unknown };
+type Result<T> = { success: true; data: T } | { success: false; error: unknown };
 
 function handleResult<T>(result: Result<T>): void {
   if (!result.success) {

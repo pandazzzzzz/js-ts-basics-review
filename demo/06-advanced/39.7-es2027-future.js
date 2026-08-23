@@ -89,9 +89,7 @@ console.log("date1 < date2:", date1.since(date2).sign < 0); // true
 console.log("Days between:", date1.until(date2).days); // 365
 */
 
-console.log(
-  "Temporal API provides a modern, immutable, and easy-to-use date/time API"
-);
+console.log("Temporal API provides a modern, immutable, and easy-to-use date/time API");
 console.log(
   "Replaces the problematic Date object with separate types for dates, times, durations, and zoned times"
 );
@@ -188,12 +186,8 @@ function processMultipleResources() {
 }
 */
 
-console.log(
-  "Explicit Resource Management provides RAII-style automatic resource cleanup"
-);
-console.log(
-  "No more try/finally blocks for cleaning up connections, files, and other resources!"
-);
+console.log("Explicit Resource Management provides RAII-style automatic resource cleanup");
+console.log("No more try/finally blocks for cleaning up connections, files, and other resources!");
 
 // ============================================
 // 3. Joint Iteration (ES2027)
@@ -265,9 +259,7 @@ const cycle = [1, 2, 3].values().cycle().take(5);
 console.log("Cycle 5 elements:", [...cycle]); // [1, 2, 3, 1, 2]
 */
 
-console.log(
-  "Joint iteration features simplify working with multiple iterables in parallel"
-);
+console.log("Joint iteration features simplify working with multiple iterables in parallel");
 
 // ============================================
 // 4. Atomics.pause() (ES2027)
@@ -295,9 +287,7 @@ function waitForFlag(sharedArray, index, expectedValue) {
 }
 */
 
-console.log(
-  "Atomics.pause() improves performance of spin-wait loops in multi-threaded code"
-);
+console.log("Atomics.pause() improves performance of spin-wait loops in multi-threaded code");
 console.log("Useful in Web Workers and multi-threaded JavaScript applications");
 
 // ============================================
@@ -365,12 +355,8 @@ user.doHeavyWork(); // Logs "doHeavyWork took Xms"
 // user.id = 123; // Error: Cannot assign to read only property 'id'
 */
 
-console.log(
-  "Decorators provide a declarative way to add behavior to classes and their members"
-);
-console.log(
-  "Common use cases: logging, validation, caching, dependency injection, etc."
-);
+console.log("Decorators provide a declarative way to add behavior to classes and their members");
+console.log("Common use cases: logging, validation, caching, dependency injection, etc.");
 
 // ============================================
 // 6. Other Upcoming Proposals
@@ -378,9 +364,7 @@ console.log(
 console.log("\n--- 6. Other Upcoming Proposals ---\n");
 
 console.log("\n📌 Stage 2 Proposals (likely future ES versions):");
-console.log(
-  "1. Pipeline Operator (|>) - Functional pipelines: 'value |> func1 |> func2'"
-);
+console.log("1. Pipeline Operator (|>) - Functional pipelines: 'value |> func1 |> func2'");
 console.log(
   "2. Module Fragments - Inline module fragments within a file: 'module fragment Utils { }'"
 );
@@ -389,9 +373,7 @@ console.log("\n📌 Stage 1 Proposals (early development):");
 console.log(
   "1. Pattern Matching - Match values against patterns: 'match (value) { when <pattern>: ... }'"
 );
-console.log(
-  "2. Decimal Type - Exact decimal arithmetic: '0.1m + 0.2m === 0.3m'"
-);
+console.log("2. Decimal Type - Exact decimal arithmetic: '0.1m + 0.2m === 0.3m'");
 console.log("3. Do Expressions - 'do { ... }' statement expressions");
 console.log(
   "4. Composites - Deeply immutable value types (successor to Records & Tuples): '#{ x: 1, y: 2 }'"
@@ -430,23 +412,15 @@ console.log("\n--- 7. Common Pitfalls ---\n");
 // ============================================
 console.log("\n--- 8. Best Practices ---\n");
 
-console.log(
-  "✅ Start using Temporal API for all new date/time code (use polyfill if needed)"
-);
+console.log("✅ Start using Temporal API for all new date/time code (use polyfill if needed)");
 console.log(
   "✅ Use explicit resource management for all disposable resources (connections, files, etc.)"
 );
 console.log("✅ Replace manual zip implementations with Iterator.zip()");
 console.log("✅ Use Atomics.pause() in spin-wait loops in multi-threaded code");
-console.log(
-  "⚠️  Decorators are still experimental, use with caution in production"
-);
-console.log(
-  "⚠️  Check browser/Node.js support before using new features in production"
-);
-console.log(
-  "📅 Follow TC39 proposals for the latest updates on upcoming features"
-);
+console.log("⚠️  Decorators are still experimental, use with caution in production");
+console.log("⚠️  Check browser/Node.js support before using new features in production");
+console.log("📅 Follow TC39 proposals for the latest updates on upcoming features");
 
 // ============================================
 // 9. Cross-references

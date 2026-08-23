@@ -431,10 +431,7 @@ console.log("[] instanceof Array:", [] instanceof Array); // true
 console.log("{} instanceof Object:", {} instanceof Object); // true
 console.log("[] instanceof Object:", [] instanceof Object); // true (Array extends Object)
 console.log("'hello' instanceof String:", "hello" instanceof String); // false (primitive)
-console.log(
-  "new String('hello') instanceof String:",
-  new String("hello") instanceof String
-); // true (object)
+console.log("new String('hello') instanceof String:", new String("hello") instanceof String); // true (object)
 
 // in operator - Check if property exists in object (ES1)
 // - Returns true if property exists in object or prototype chain
@@ -833,9 +830,7 @@ console.log("\n=== Best Practices Summary ===");
 console.log("\nBest Practice: Use Strict Equality (=== and !==)");
 console.log("Always use === instead of ==");
 console.log("Always use !== instead of !=");
-console.log(
-  "Reason: Avoids unexpected type coercion and makes code more predictable"
-);
+console.log("Reason: Avoids unexpected type coercion and makes code more predictable");
 // Good: if (x === 5) { }
 // Bad:  if (x == 5) { }
 
@@ -863,9 +858,7 @@ console.log("Reason: Makes code more readable and prevents bugs");
 // Best Practice 5: Use parentheses for clarity
 console.log("\nBest Practice: Use Parentheses for Clarity");
 console.log("Add parentheses to make operator precedence explicit");
-console.log(
-  "Reason: Improves readability and prevents precedence-related bugs"
-);
+console.log("Reason: Improves readability and prevents precedence-related bugs");
 // Good: const result = (a + b) * c;
 // Bad:  const result = a + b * c; // unclear intent
 

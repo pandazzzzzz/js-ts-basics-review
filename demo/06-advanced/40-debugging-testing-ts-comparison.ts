@@ -43,13 +43,7 @@ console.log((data as { value: number }).value);
 
 // Type guards for runtime checks
 function isUser(obj: unknown): obj is User {
-  return (
-    typeof obj === "object" &&
-    obj !== null &&
-    "id" in obj &&
-    "name" in obj &&
-    "email" in obj
-  );
+  return typeof obj === "object" && obj !== null && "id" in obj && "name" in obj && "email" in obj;
 }
 
 const maybeUser: unknown = { id: 1, name: "Bob", email: "bob@example.com" };
@@ -136,9 +130,7 @@ function expect<T>(actual: T): Matchers<T> {
     },
     toEqual(expected: T): void {
       if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-        throw new Error(
-          `Expected ${JSON.stringify(expected)} but got ${JSON.stringify(actual)}`
-        );
+        throw new Error(`Expected ${JSON.stringify(expected)} but got ${JSON.stringify(actual)}`);
       }
     },
     toBeGreaterThan(expected: number): void {
@@ -270,8 +262,7 @@ try {
 }
 
 // Result type pattern for error handling
-type Result<T, E = Error> =
-  { success: true; value: T } | { success: false; error: E };
+type Result<T, E = Error> = { success: true; value: T } | { success: false; error: E };
 
 function divide(a: number, b: number): Result<number> {
   if (b === 0) {
@@ -424,9 +415,7 @@ type MockFn<T extends (...args: any[]) => any> = T & {
   };
 };
 
-function createMock<T extends (...args: any[]) => any>(
-  implementation?: T
-): MockFn<T> {
+function createMock<T extends (...args: any[]) => any>(implementation?: T): MockFn<T> {
   const calls: Parameters<T>[] = [];
   const results: ReturnType<T>[] = [];
 

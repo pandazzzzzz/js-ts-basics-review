@@ -71,10 +71,7 @@ console.log(
 
 // Private fields are truly private, not just "hidden"
 console.log("\nObject.keys(user):", Object.keys(user)); // ["name"] - #password not included
-console.log(
-  "user.hasOwnProperty('#password'):",
-  user.hasOwnProperty("#password")
-); // false
+console.log("user.hasOwnProperty('#password'):", user.hasOwnProperty("#password")); // false
 
 // Private methods (ES2022 also supports private methods)
 class Calculator {
@@ -167,10 +164,7 @@ cart.push("orange");
 console.log("MDN returnLast(cart) after push:", returnLast(cart)); // 'orange'
 
 // Before ES2022: need to calculate length for negative indices
-console.log(
-  "\nBefore at(): last element = arr[arr.length - 1]:",
-  arr[arr.length - 1]
-); // 50
+console.log("\nBefore at(): last element = arr[arr.length - 1]:", arr[arr.length - 1]); // 50
 
 // Works with strings
 const str = "hello world";
@@ -217,10 +211,7 @@ console.log("MDN undefined value:", Object.hasOwn(example, "prop")); // true (va
 // Difference from `in` operator (which checks prototype chain too):
 console.log("MDN 'prop' in example:", "prop" in example); // true
 console.log("MDN 'toString' in example:", "toString" in example); // true (inherited)
-console.log(
-  "MDN Object.hasOwn(example, 'toString'):",
-  Object.hasOwn(example, "toString")
-); // false (not own)
+console.log("MDN Object.hasOwn(example, 'toString'):", Object.hasOwn(example, "toString")); // false (not own)
 
 // Also works for objects created with `Object.create(null)`
 const nullObj = Object.create(null);
@@ -350,22 +341,9 @@ while ((match = regex.exec(text)) !== null) {
   console.log(`\nMatch: "${match[0]}"`);
   console.log("Capture group 1:", match[1]);
   console.log("Indices:", match.indices);
-  console.log(
-    "Full match position: start",
-    match.indices[0][0],
-    "end",
-    match.indices[0][1]
-  );
-  console.log(
-    "Group 1 position: start",
-    match.indices[1][0],
-    "end",
-    match.indices[1][1]
-  );
-  console.log(
-    "Matched substring:",
-    text.slice(match.indices[1][0], match.indices[1][1])
-  );
+  console.log("Full match position: start", match.indices[0][0], "end", match.indices[0][1]);
+  console.log("Group 1 position: start", match.indices[1][0], "end", match.indices[1][1]);
+  console.log("Matched substring:", text.slice(match.indices[1][0], match.indices[1][1]));
 }
 
 // Output:
@@ -452,18 +430,12 @@ class Derived extends Base {
 console.log("\n--- 10. Best Practices ---\n");
 
 console.log("✅ Use # private fields for true encapsulation in classes");
-console.log(
-  "✅ Use Object.hasOwn() instead of obj.hasOwnProperty() for safety"
-);
-console.log(
-  "✅ Use .at() for negative indexing instead of arr[arr.length - n]"
-);
+console.log("✅ Use Object.hasOwn() instead of obj.hasOwnProperty() for safety");
+console.log("✅ Use .at() for negative indexing instead of arr[arr.length - n]");
 console.log("✅ Use Error.cause to chain errors and preserve original context");
 console.log("✅ Use static blocks for complex class initialization logic");
 console.log("✅ Use /d flag for regex when you need match positions");
-console.log(
-  "⚠️  Use top-level await sparingly at module level (can delay module loading)"
-);
+console.log("⚠️  Use top-level await sparingly at module level (can delay module loading)");
 console.log("✅ Use '#field in obj' for brand checking instead of try/catch");
 
 // ============================================

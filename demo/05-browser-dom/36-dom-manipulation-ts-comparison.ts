@@ -8,9 +8,7 @@ export {}; // Make this file a module to avoid global scope conflicts
 // Section 1: Creating Elements - Type Precision
 // ============================================
 
-console.log(
-  "=== Section 1: Creating Elements - TypeScript Type Precision ===\n"
-);
+console.log("=== Section 1: Creating Elements - TypeScript Type Precision ===\n");
 
 console.log("🧬 createElement Type Inference:\n");
 
@@ -599,9 +597,7 @@ console.log("✅ DO:\n");
 console.log("1. Use generic querySelector: querySelector<T>()");
 console.log("2. Leverage createElement type inference for precise types");
 console.log("3. Use type guards (instanceof) for narrowing element types");
-console.log(
-  "4. Use element-specific navigation (parentElement, nextElementSibling)"
-);
+console.log("4. Use element-specific navigation (parentElement, nextElementSibling)");
 console.log("5. Assert cloneNode return types when needed");
 console.log("6. Create type-safe utility functions for common patterns");
 console.log("7. Use HTMLElementTagNameMap for generic element creation\n");
@@ -609,8 +605,6 @@ console.log("7. Use HTMLElementTagNameMap for generic element creation\n");
 console.log("❌ DON'T:\n");
 console.log("1. Don't use 'as any' to bypass type checking");
 console.log("2. Don't forget type assertions for cloneNode (returns Node)");
-console.log(
-  "3. Don't use parentNode/nextSibling without type guard or assertion"
-);
+console.log("3. Don't use parentNode/nextSibling without type guard or assertion");
 console.log("4. Don't ignore null returns from query methods");
 console.log("5. Don't mix text nodes and element nodes without checking\n");

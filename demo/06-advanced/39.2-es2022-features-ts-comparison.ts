@@ -65,8 +65,7 @@ class Config {
   static {
     // Type checking works inside static blocks
     const env = process?.env?.NODE_ENV || "development";
-    this.apiUrl =
-      env === "production" ? "https://api.prod.com" : "http://localhost:3000";
+    this.apiUrl = env === "production" ? "https://api.prod.com" : "http://localhost:3000";
     this.apiKey = "default-key";
     // this.timeout = 10000; // ❌ Error: Cannot assign to 'timeout' because it is a read-only property
   }
@@ -330,8 +329,6 @@ console.log("To use ES2022 features in TypeScript:");
 console.log('1. Set "target": "ES2022" or higher');
 console.log('2. Add "ES2022" to "lib" array if target is lower');
 console.log('3. For top-level await: set "module": "ESNext" or "NodeNext"');
-console.log(
-  "4. For private fields: no special config needed (supported since TS 3.8)"
-);
+console.log("4. For private fields: no special config needed (supported since TS 3.8)");
 
 console.log("\n✅ ES2022 TypeScript comparison completed");

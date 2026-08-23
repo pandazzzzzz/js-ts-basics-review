@@ -139,9 +139,7 @@ function isUserArray(obj: unknown): obj is User[] {
   return Array.isArray(obj) && obj.every(isUser);
 }
 
-const maybeUsers = JSON.parse(
-  '[{"id": 1, "username": "a", "email": "a@a.com"}]'
-);
+const maybeUsers = JSON.parse('[{"id": 1, "username": "a", "email": "a@a.com"}]');
 if (isUserArray(maybeUsers)) {
   console.log("Valid users count:", maybeUsers.length);
 }
@@ -185,17 +183,11 @@ console.log("Serialized response:", serialized.slice(0, 100) + "...");
 // Parse with proper typing
 const parsedResponse = JSON.parse(serialized) as ApiResponse<Product>;
 if (parsedResponse.status === "success" && parsedResponse.data) {
-  console.log(
-    "Product:",
-    parsedResponse.data.name,
-    "-",
-    parsedResponse.data.price
-  );
+  console.log("Product:", parsedResponse.data.name, "-", parsedResponse.data.price);
 }
 
 // Discriminated union for response handling
-type ApiResult<T> =
-  { success: true; data: T } | { success: false; error: string };
+type ApiResult<T> = { success: true; data: T } | { success: false; error: string };
 
 function handleApiResult<T>(json: string): ApiResult<T> {
   try {
@@ -263,10 +255,7 @@ console.log("Sanitized JSON:\n", safeJson);
 console.log("\n=== Handling Unknown Types from JSON ===");
 
 // Safe parsing with unknown
-function safeParse<T>(
-  json: string,
-  validator: (obj: unknown) => obj is T
-): T | null {
+function safeParse<T>(json: string, validator: (obj: unknown) => obj is T): T | null {
   try {
     const parsed: unknown = JSON.parse(json);
     if (validator(parsed)) {
@@ -372,8 +361,7 @@ console.log("Restored types:", {
 console.log("\n=== Utility Types for JSON ===");
 
 // JSON-safe type (serializable types)
-type JSONValue =
-  string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
+type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
 // Helper to ensure values are JSON-safe
 function ensureJsonSafe<T extends Record<string, unknown>>(obj: T): JSONValue {
@@ -484,9 +472,7 @@ type Validator<T> = (value: unknown) => value is T;
 // Schema builder interface
 interface Schema<T> {
   parse: (value: unknown) => T;
-  safeParse: (
-    value: unknown
-  ) => { success: true; data: T } | { success: false; error: string };
+  safeParse: (value: unknown) => { success: true; data: T } | { success: false; error: string };
 }
 
 // Example: Simple string validator

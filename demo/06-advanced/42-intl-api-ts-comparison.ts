@@ -21,20 +21,13 @@ const numberFormatOptions: Intl.NumberFormatOptions = {
   maximumFractionDigits: 2,
 };
 
-const formatter: Intl.NumberFormat = new Intl.NumberFormat(
-  "en-US",
-  numberFormatOptions
-);
+const formatter: Intl.NumberFormat = new Intl.NumberFormat("en-US", numberFormatOptions);
 const formatted: string = formatter.format(number);
 
 console.log("Formatted:", formatted);
 
 // Type-safe currency formatting
-function formatCurrency(
-  amount: number,
-  currency: string,
-  locale: string = "en-US"
-): string {
+function formatCurrency(amount: number, currency: string, locale: string = "en-US"): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
@@ -88,10 +81,7 @@ const dateFormatOptions: Intl.DateTimeFormatOptions = {
   timeZone: "America/New_York",
 };
 
-const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(
-  "en-US",
-  dateFormatOptions
-);
+const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat("en-US", dateFormatOptions);
 
 const formattedDate: string = dateFormatter.format(date);
 console.log("Formatted date:", formattedDate);
@@ -176,10 +166,7 @@ const pluralOptions: Intl.PluralRulesOptions = {
   type: "cardinal",
 };
 
-const pluralRules: Intl.PluralRules = new Intl.PluralRules(
-  "en-US",
-  pluralOptions
-);
+const pluralRules: Intl.PluralRules = new Intl.PluralRules("en-US", pluralOptions);
 
 // select returns specific string literals
 type PluralCategory = "zero" | "one" | "two" | "few" | "many" | "other";
@@ -197,11 +184,7 @@ interface PluralForms {
   other: string;
 }
 
-function pluralize(
-  count: number,
-  forms: PluralForms,
-  locale: string = "en-US"
-): string {
+function pluralize(count: number, forms: PluralForms, locale: string = "en-US"): string {
   const rule = new Intl.PluralRules(locale).select(count);
   const form = forms[rule] || forms.other;
   return `${count} ${form}`;
@@ -231,10 +214,7 @@ const relativeTimeOptions: Intl.RelativeTimeFormatOptions = {
   style: "long",
 };
 
-const rtf: Intl.RelativeTimeFormat = new Intl.RelativeTimeFormat(
-  "en-US",
-  relativeTimeOptions
-);
+const rtf: Intl.RelativeTimeFormat = new Intl.RelativeTimeFormat("en-US", relativeTimeOptions);
 
 // format returns string
 const relative: string = rtf.format(-1, "day");
@@ -249,10 +229,7 @@ function formatRelativeTime(
   unit: Intl.RelativeTimeFormatUnit,
   locale: string = "en-US"
 ): string {
-  return new Intl.RelativeTimeFormat(locale, { numeric: "auto" }).format(
-    value,
-    unit
-  );
+  return new Intl.RelativeTimeFormat(locale, { numeric: "auto" }).format(value, unit);
 }
 
 console.log("Yesterday:", formatRelativeTime(-1, "day"));
@@ -280,10 +257,7 @@ const listFormatOptions: Intl.ListFormatOptions = {
   type: "conjunction",
 };
 
-const listFormatter: Intl.ListFormat = new Intl.ListFormat(
-  "en-US",
-  listFormatOptions
-);
+const listFormatter: Intl.ListFormat = new Intl.ListFormat("en-US", listFormatOptions);
 
 const items = ["Apple", "Banana", "Orange"];
 const formattedList: string = listFormatter.format(items);
@@ -340,9 +314,7 @@ for (const segment of segments) {
 // Type-safe word extraction
 function extractWords(text: string, locale: string = "en-US"): string[] {
   const segmenter = new Intl.Segmenter(locale, { granularity: "word" });
-  return [...segmenter.segment(text)]
-    .filter(s => s.isWordLike)
-    .map(s => s.segment);
+  return [...segmenter.segment(text)].filter(s => s.isWordLike).map(s => s.segment);
 }
 
 console.log("Words:", extractWords(text));

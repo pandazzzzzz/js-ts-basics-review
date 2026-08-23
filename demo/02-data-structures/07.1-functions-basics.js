@@ -254,10 +254,7 @@ console.log("\n=== 4. Default Parameters Demo ===");
 console.log("greetWithDefault():", greetWithDefault()); // 'Hello, Guest!'
 console.log("greetWithDefault('Alice'):", greetWithDefault("Alice")); // 'Hello, Alice!'
 console.log("greetWithDefault('Bob', 'Hi'):", greetWithDefault("Bob", "Hi")); // 'Hi, Bob!'
-console.log(
-  "greetWithDefault(undefined, 'Hey'):",
-  greetWithDefault(undefined, "Hey")
-); // 'Hey, Guest!'
+console.log("greetWithDefault(undefined, 'Hey'):", greetWithDefault(undefined, "Hey")); // 'Hey, Guest!'
 console.log("greetWithDefault(null, 'Hey'):", greetWithDefault(null, "Hey")); // 'Hey, null!' (null doesn't trigger default)
 
 // Default value can be expression
@@ -370,18 +367,14 @@ console.log("Doubled array:", doubled);
 console.log("✅ Use function declarations for top-level functions (hoisting)");
 console.log("✅ Use rest parameters instead of the 'arguments' object");
 console.log("✅ Provide sensible defaults with default parameters");
-console.log(
-  "⚠️  Avoid arrow functions when you need 'this' to bind dynamically"
-);
+console.log("⚠️  Avoid arrow functions when you need 'this' to bind dynamically");
 console.log("⚠️  Avoid arrow functions as constructors (they don't work)");
 
 // ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log(
-  "📘 07.2-functions-advanced.js - Higher-order functions and closures"
-);
+console.log("📘 07.2-functions-advanced.js - Higher-order functions and closures");
 console.log("📘 07.3-functions-patterns.js - Advanced function patterns");
 console.log("📘 13-scope-closures.js - Closures and lexical scope");
 

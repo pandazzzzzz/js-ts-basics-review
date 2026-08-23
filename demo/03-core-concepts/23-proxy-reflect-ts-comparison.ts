@@ -100,10 +100,7 @@ class SafeProxyHandler<T extends object> {
     this.validators = new Map();
   }
 
-  addValidator<K extends keyof T>(
-    key: K,
-    validator: (value: T[K]) => boolean
-  ): void {
+  addValidator<K extends keyof T>(key: K, validator: (value: T[K]) => boolean): void {
     this.validators.set(key, validator as (value: unknown) => boolean);
   }
 
@@ -334,10 +331,7 @@ interface Repository<T, ID> {
   delete(id: ID): Promise<void>;
 }
 
-function createMockRepository<
-  T extends { id: unknown },
-  ID = number,
->(): Repository<T, ID> {
+function createMockRepository<T extends { id: unknown }, ID = number>(): Repository<T, ID> {
   return new Proxy({} as Repository<T, ID>, {
     get(target, prop) {
       return async (...args: unknown[]) => {
@@ -396,6 +390,4 @@ KEY TAKEAWAYS:
 5. Runtime proxy behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

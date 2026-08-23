@@ -49,14 +49,12 @@ console.log(
   user.greet.apply({ name: "Frank" }, ["Hey", "?"])
 );
 
-const greetEve: (greeting: string, punctuation: string) => string =
-  user.greet.bind({ name: "Eve" });
+const greetEve: (greeting: string, punctuation: string) => string = user.greet.bind({
+  name: "Eve",
+});
 console.log("  greetEve('Good morning', '!'):", greetEve("Good morning", "!"));
 
-const sayHello: (punctuation: string) => string = user.greet.bind(
-  user,
-  "Hello"
-);
+const sayHello: (punctuation: string) => string = user.greet.bind(user, "Hello");
 console.log("  sayHello('!'):", sayHello("!"));
 
 // Example 2: Method definitions
@@ -202,8 +200,7 @@ interface Utils {
 const utils: Utils = (function () {
   const version: string = "1.0.0";
 
-  const log: LoggerFn = message =>
-    console.log(`[MyApp v${version}] ${message}`);
+  const log: LoggerFn = message => console.log(`[MyApp v${version}] ${message}`);
 
   function greet(name: string): void {
     log(`Hello, ${name}!`);
@@ -237,9 +234,10 @@ console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 console.log("  pureAdd(5, 3):", pureAdd(5, 3));
 
 // Generic: preserves input type, adds a typed property (no `any` needed)
-const pureAddProperty = <T extends object>(
-  obj: T
-): T & { processed: boolean } => ({ ...obj, processed: true });
+const pureAddProperty = <T extends object>(obj: T): T & { processed: boolean } => ({
+  ...obj,
+  processed: true,
+});
 
 const original = { name: "test" };
 const modified = pureAddProperty(original);

@@ -50,12 +50,8 @@ Rationale:
 // ============================================
 
 console.log("\n=== Quick Reference ===");
-console.log(
-  "Open individual version files for detailed explanations and code examples."
-);
-console.log(
-  "Each file contains runnable examples, verification blocks, and best practices."
-);
+console.log("Open individual version files for detailed explanations and code examples.");
+console.log("Each file contains runnable examples, verification blocks, and best practices.");
 console.log("File naming matches the ECMA-262 version release schedule.");
 
 // ============================================
@@ -63,18 +59,14 @@ console.log("File naming matches the ECMA-262 version release schedule.");
 // ============================================
 
 console.log("\n=== ES Version Timeline ===");
-console.log(
-  "ES2021 · June 2021 · First release with yearly cadence established"
-);
+console.log("ES2021 · June 2021 · First release with yearly cadence established");
 console.log("ES2022 · June 2022 · Class features, error improvements");
 console.log("ES2023 · June 2023 · Immutable array methods");
 console.log("ES2024 · June 2024 · Grouping, resizable buffers");
 console.log("ES2025 · June 2025 · Set methods, iterator helpers");
 console.log("ES2026 · June 2026 · Math utilities, Base64 methods");
 console.log("ES2027 · June 2027 · Temporal, resource management");
-console.log(
-  "\n✅ All ES versions from 2021 onward are covered in the split files"
-);
+console.log("\n✅ All ES versions from 2021 onward are covered in the split files");
 
 // ============================================
 // See also
@@ -89,27 +81,17 @@ console.log("📘 String methods: 04-strings.js");
 console.log("📘 TypeScript advanced features: 47-typescript-advanced.js");
 
 console.log("\n=== Verification ===");
-console.log(
-  "All ES version annotations are verified against TC39 official documentation"
-);
+console.log("All ES version annotations are verified against TC39 official documentation");
 console.log("Last verified: 2026-07-31");
 
 // ============================================
 // Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
-console.log(
-  "1. Open the version-specific file (39.1-39.7) for the feature you need"
-);
-console.log(
-  "2. Check browser/runtime support before using newer ES features in production"
-);
-console.log(
-  "3. Prefer polyfills or transpilation for targets that lack ES2025+ support"
-);
-console.log(
-  "4. Use verification blocks to confirm which features are Stage 4 standard"
-);
+console.log("1. Open the version-specific file (39.1-39.7) for the feature you need");
+console.log("2. Check browser/runtime support before using newer ES features in production");
+console.log("3. Prefer polyfills or transpilation for targets that lack ES2025+ support");
+console.log("4. Use verification blocks to confirm which features are Stage 4 standard");
 
 // ============================================
 // Cross-references

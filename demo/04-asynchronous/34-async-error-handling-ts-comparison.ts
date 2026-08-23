@@ -48,9 +48,7 @@ type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
 const ok = <T>(value: T): Result<T, never> => ({ ok: true, value });
 const err = <E>(error: E): Result<never, E> => ({ ok: false, error });
 
-async function safeFetchUser(
-  id: number
-): Promise<Result<{ id: number; name: string }, string>> {
+async function safeFetchUser(id: number): Promise<Result<{ id: number; name: string }, string>> {
   try {
     if (id < 0) {
       return err("Invalid user ID");
@@ -286,8 +284,7 @@ console.log("\n=== Typed Retry with Generics ===");
 // TypeScript: Generic retry function
 function isRetryable(error: unknown): boolean {
   return (
-    error instanceof NetworkError ||
-    (error instanceof Error && error.message.includes("timeout"))
+    error instanceof NetworkError || (error instanceof Error && error.message.includes("timeout"))
   );
 }
 
@@ -452,11 +449,7 @@ class UserValidationError extends TypedAppError {
 console.log("Enhanced typed errors:");
 
 try {
-  throw new DatabaseConnectionError(
-    "localhost",
-    5432,
-    new Error("ECONNREFUSED")
-  );
+  throw new DatabaseConnectionError("localhost", 5432, new Error("ECONNREFUSED"));
 } catch (error) {
   if (error instanceof TypedAppError) {
     console.log("\nDatabase error:", error.toJSON());
@@ -464,11 +457,7 @@ try {
 }
 
 try {
-  throw new UserValidationError(
-    "email",
-    "invalid",
-    "Must be valid email format"
-  );
+  throw new UserValidationError("email", "invalid", "Must be valid email format");
 } catch (error) {
   if (error instanceof UserValidationError) {
     console.log("\nValidation error:", error.toJSON());
@@ -532,25 +521,19 @@ interface ProcessedData extends ProcessingData {
   transformed: boolean;
 }
 
-const typedLoggingMiddleware = async (
-  data: ProcessingData
-): Promise<ProcessingData> => {
+const typedLoggingMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
   console.log("Processing:", data);
   return data;
 };
 
-const typedValidationMiddleware = async (
-  data: ProcessingData
-): Promise<ProcessingData> => {
+const typedValidationMiddleware = async (data: ProcessingData): Promise<ProcessingData> => {
   if (!data || typeof data !== "object" || !data.name) {
     throw new Error("Invalid data format: name required");
   }
   return data;
 };
 
-const typedTransformationMiddleware = async (
-  data: ProcessingData
-): Promise<ProcessedData> => {
+const typedTransformationMiddleware = async (data: ProcessingData): Promise<ProcessedData> => {
   return { ...data, transformed: true };
 };
 
@@ -563,9 +546,7 @@ interface ClientErrorResponse {
   };
 }
 
-const typedFormatErrorHandler = async (
-  error: unknown
-): Promise<ClientErrorResponse> => {
+const typedFormatErrorHandler = async (error: unknown): Promise<ClientErrorResponse> => {
   return {
     success: false,
     error: {
@@ -583,20 +564,11 @@ const typedLoggingErrorHandler = async (error: unknown): Promise<unknown> => {
 };
 
 // Build and run typed pipeline
-const typedPipeline = new TypedPipeline<
-  ProcessingData,
-  ProcessedData | ClientErrorResponse
->();
+const typedPipeline = new TypedPipeline<ProcessingData, ProcessedData | ClientErrorResponse>();
 typedPipeline
+  .use(typedLoggingMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>)
   .use(
-    typedLoggingMiddleware as Middleware<
-      ProcessingData | ProcessedData | ClientErrorResponse
-    >
-  )
-  .use(
-    typedValidationMiddleware as Middleware<
-      ProcessingData | ProcessedData | ClientErrorResponse
-    >
+    typedValidationMiddleware as Middleware<ProcessingData | ProcessedData | ClientErrorResponse>
   )
   .use(
     typedTransformationMiddleware as Middleware<
@@ -627,13 +599,8 @@ function safeExecute<T extends (...args: any[]) => Promise<R>, R>(
     try {
       return await fn(...args);
     } catch (error) {
-      console.log(
-        "Safe execute caught:",
-        error instanceof Error ? error.message : String(error)
-      );
-      return typeof fallback === "function"
-        ? (fallback as (error: unknown) => R)(error)
-        : fallback;
+      console.log("Safe execute caught:", error instanceof Error ? error.message : String(error));
+      return typeof fallback === "function" ? (fallback as (error: unknown) => R)(error) : fallback;
     }
   };
 }

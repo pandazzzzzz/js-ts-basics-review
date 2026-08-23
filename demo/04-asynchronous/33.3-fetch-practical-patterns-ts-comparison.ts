@@ -45,11 +45,7 @@ class FetchClient {
   }
 
   // Generic request method
-  async request<T>(
-    endpoint: string,
-    method: HttpMethod = "GET",
-    body?: unknown
-  ): Promise<T> {
+  async request<T>(endpoint: string, method: HttpMethod = "GET", body?: unknown): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
     const options: RequestInit = {
@@ -159,8 +155,7 @@ async function fetchWithRetry<T = unknown>(
   let lastError: unknown;
 
   const shouldRetryDefault = (error: unknown): boolean => {
-    if (error instanceof Error && error.message.startsWith("HTTP 4"))
-      return false;
+    if (error instanceof Error && error.message.startsWith("HTTP 4")) return false;
     return true;
   };
 
@@ -180,15 +175,11 @@ async function fetchWithRetry<T = unknown>(
     } catch (error) {
       lastError = error;
 
-      const willRetry =
-        attempt < maxRetries &&
-        (shouldRetry?.(error) ?? shouldRetryDefault(error));
+      const willRetry = attempt < maxRetries && (shouldRetry?.(error) ?? shouldRetryDefault(error));
 
       if (willRetry) {
         const delay = Math.pow(2, attempt - 1) * baseDelayMs;
-        console.log(
-          `Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
-        );
+        console.log(`Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
       } else {
         throw error;
@@ -221,10 +212,7 @@ demonstrateRetry();
 console.log("\n=== AbortSignal Typing ===");
 
 // TypeScript: AbortController and AbortSignal types
-async function fetchWithAbort(
-  url: string,
-  signal: AbortSignal
-): Promise<Response> {
+async function fetchWithAbort(url: string, signal: AbortSignal): Promise<Response> {
   const response = await fetch(url, { signal });
   return response;
 }
@@ -235,9 +223,7 @@ function createCancellableFetcher(baseUrl: string) {
 
   const fetcher = {
     fetch: <T>(endpoint: string): Promise<T> =>
-      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(
-        r => r.json() as T
-      ),
+      fetch(`${baseUrl}${endpoint}`, { signal: controller.signal }).then(r => r.json() as T),
 
     cancel: (): void => controller.abort(),
 
@@ -250,9 +236,7 @@ function createCancellableFetcher(baseUrl: string) {
 }
 
 async function useCancellableFetch(): Promise<void> {
-  const fetcher = createCancellableFetcher(
-    "https://jsonplaceholder.typicode.com"
-  );
+  const fetcher = createCancellableFetcher("https://jsonplaceholder.typicode.com");
 
   try {
     // Start fetch
@@ -325,12 +309,8 @@ async function useTypedSearchController(): Promise<void> {
   const searchController = new TypedSearchController<SearchResult>();
 
   // Simulate search-as-you-type (cancels previous)
-  searchController
-    .search("java", "https://jsonplaceholder.typicode.com/posts")
-    .catch(() => {});
-  searchController
-    .search("javasc", "https://jsonplaceholder.typicode.com/posts")
-    .catch(() => {});
+  searchController.search("java", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
+  searchController.search("javasc", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
   const results = await searchController.search(
     "typescript",
     "https://jsonplaceholder.typicode.com/posts"
@@ -380,10 +360,7 @@ async function typedSignalTimeout(): Promise<void> {
       // Type-safe timeout signal
       const signal = (AbortSignal as any).timeout(10000);
 
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts/1",
-        { signal }
-      );
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", { signal });
       const data = await response.json();
       console.log("Fetched with signal timeout completed successfully");
     } catch (error) {
@@ -424,23 +401,17 @@ class InterceptorFetch {
   }
 
   // Add response interceptor
-  useResponseInterceptor(
-    interceptor: (response: Response) => unknown | Promise<unknown>
-  ): void {
+  useResponseInterceptor(interceptor: (response: Response) => unknown | Promise<unknown>): void {
     this.interceptors.response.push(interceptor);
   }
 
   // Add error interceptor
-  useErrorInterceptor(
-    interceptor: (error: Error) => never | Promise<never>
-  ): void {
+  useErrorInterceptor(interceptor: (error: Error) => never | Promise<never>): void {
     this.interceptors.error.push(interceptor);
   }
 
   // Execute interceptors
-  private async applyRequestInterceptors(
-    config: RequestInit
-  ): Promise<RequestInit> {
+  private async applyRequestInterceptors(config: RequestInit): Promise<RequestInit> {
     let currentConfig = config;
 
     for (const interceptor of this.interceptors.request) {
@@ -450,9 +421,7 @@ class InterceptorFetch {
     return currentConfig;
   }
 
-  private async applyResponseInterceptors(
-    response: Response
-  ): Promise<unknown> {
+  private async applyResponseInterceptors(response: Response): Promise<unknown> {
     let currentResponse: unknown = response;
 
     for (const interceptor of this.interceptors.response) {
@@ -497,9 +466,7 @@ async function useInterceptors(): Promise<void> {
   });
 
   // Use the client
-  const data = await client.fetch<User>(
-    "https://jsonplaceholder.typicode.com/users/1"
-  );
+  const data = await client.fetch<User>("https://jsonplaceholder.typicode.com/users/1");
   console.log("User with interceptors:", data.name);
 }
 
@@ -559,12 +526,6 @@ console.log(`
 // ============================================================================
 
 console.log("\n=== Cross References ===");
-console.log(
-  "📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript"
-);
-console.log(
-  "📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript"
-);
-console.log(
-  "📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript"
-);
+console.log("📘 33.1-fetch-basics-ts-comparison.ts - Fetch basics with TypeScript");
+console.log("📘 33.2-fetch-error-handling-ts-comparison.ts - Error handling with TypeScript");
+console.log("📘 33.4-fetch-streams-advanced-ts-comparison.ts - Streams with TypeScript");

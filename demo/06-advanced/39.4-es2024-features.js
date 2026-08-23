@@ -108,11 +108,7 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers
 // Promise.withResolvers() is exactly equivalent to the following pre-ES2024 pattern,
 // but more concise — no `let` bindings leaking the resolvers out of the executor:
-const {
-  promise: mdnPromise,
-  resolve: mdnResolve,
-  reject: mdnReject,
-} = Promise.withResolvers();
+const { promise: mdnPromise, resolve: mdnResolve, reject: mdnReject } = Promise.withResolvers();
 mdnResolve("MDN withResolvers resolved");
 mdnPromise.then(value => console.log("  MDN withResolvers:", value));
 // MDN withResolvers resolved
@@ -401,24 +397,16 @@ console.log("\nbuf1 detached after transfer:", buf1.detached); // true
 // ============================================
 console.log("\n--- 8. Best Practices ---\n");
 
-console.log(
-  "✅ Use Object.groupBy/Map.groupBy instead of manual reduce for grouping"
-);
-console.log(
-  "✅ Use Map.groupBy when you need non-string keys or want to preserve key types"
-);
+console.log("✅ Use Object.groupBy/Map.groupBy instead of manual reduce for grouping");
+console.log("✅ Use Map.groupBy when you need non-string keys or want to preserve key types");
 console.log(
   "✅ Use Promise.withResolvers for cleaner promise creation when resolve/reject are needed outside"
 );
-console.log(
-  "✅ Use v flag regex for complex Unicode matching and set operations"
-);
+console.log("✅ Use v flag regex for complex Unicode matching and set operations");
 console.log(
   "✅ Use resizable ArrayBuffer for dynamic binary data instead of concatenating buffers"
 );
-console.log(
-  "✅ Always validate user input strings with isWellFormed() before processing"
-);
+console.log("✅ Always validate user input strings with isWellFormed() before processing");
 console.log(
   "⚠️  Remember that Object.groupBy returns a plain object with prototype (use Object.create(null) if needed)"
 );

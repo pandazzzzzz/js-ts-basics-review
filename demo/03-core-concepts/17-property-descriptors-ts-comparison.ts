@@ -214,11 +214,7 @@ console.log(`Circumference: ${circle.circumference.toFixed(2)}`);
 
 // Accessor decorator for validation
 function validateNumber(min: number, max: number) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalSet = descriptor.set;
 
     descriptor.set = function (value: number) {
@@ -226,9 +222,7 @@ function validateNumber(min: number, max: number) {
         throw new TypeError(`${propertyKey} must be a number`);
       }
       if (value < min || value > max) {
-        throw new RangeError(
-          `${propertyKey} must be between ${min} and ${max}`
-        );
+        throw new RangeError(`${propertyKey} must be between ${min} and ${max}`);
       }
       originalSet?.call(this, value);
     };
@@ -376,6 +370,4 @@ KEY TAKEAWAYS:
 5. Runtime descriptor behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");

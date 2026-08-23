@@ -154,9 +154,7 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
     if (attempt < maxRetries) {
       // Exponential backoff: 1s, 2s, 4s, etc.
       const delay = Math.pow(2, attempt - 1) * 1000;
-      console.log(
-        `   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`
-      );
+      console.log(`   Retry attempt ${attempt}/${maxRetries}, waiting ${delay}ms...`);
       await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
@@ -258,11 +256,7 @@ async function demonstrateAbortTimeout() {
   console.log("\n3.2 Timeout with AbortController:");
 
   try {
-    const response = await fetchWithAbortTimeout(
-      `${API_BASE}/posts/1`,
-      {},
-      10000
-    );
+    const response = await fetchWithAbortTimeout(`${API_BASE}/posts/1`, {}, 10000);
     const data = await response.json();
     console.log("   ✓ Fetched within timeout:", data.id);
   } catch (error) {
@@ -381,21 +375,13 @@ function combineSignals(...signals) {
 
 // 3.6 AbortSignal.timeout() and AbortSignal.any() (modern APIs)
 console.log("\n3.5 Modern AbortSignal APIs:");
-if (
-  typeof AbortSignal !== "undefined" &&
-  typeof AbortSignal.timeout === "function"
-) {
+if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") {
   console.log("   ✓ AbortSignal.timeout() available (one-line timeout)");
   console.log("   Example: fetch(url, { signal: AbortSignal.timeout(5000) })");
 }
-if (
-  typeof AbortSignal !== "undefined" &&
-  typeof AbortSignal.any === "function"
-) {
+if (typeof AbortSignal !== "undefined" && typeof AbortSignal.any === "function") {
   console.log("   ✓ AbortSignal.any() available (combine signals)");
-  console.log(
-    "   Example: AbortSignal.any([userSignal, AbortSignal.timeout(5000)])"
-  );
+  console.log("   Example: AbortSignal.any([userSignal, AbortSignal.timeout(5000)])");
 }
 
 // 3.7 AbortController Best Practices
@@ -426,16 +412,14 @@ async function sequentialDependentCalls() {
     console.log("   Got user:", user.name);
 
     // Then, get posts by that user
-    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(
-      r => r.json()
-    );
+    const userPosts = await fetch(`${API_BASE}/posts?userId=${user.id}`).then(r => r.json());
     console.log("   User has", userPosts.length, "posts");
 
     // Get comments on first post
     if (userPosts.length > 0) {
-      const comments = await fetch(
-        `${API_BASE}/posts/${userPosts[0].id}/comments`
-      ).then(r => r.json());
+      const comments = await fetch(`${API_BASE}/posts/${userPosts[0].id}/comments`).then(r =>
+        r.json()
+      );
       console.log("   First post has", comments.length, "comments");
     }
   } catch (error) {
@@ -451,9 +435,7 @@ sequentialDependentCalls();
 console.log("\n=== Common Pitfalls ===");
 
 console.log("\nPitfall 1 - Not cancelling previous requests:");
-console.log(
-  "❌ Search-as-you-type without cancellation creates race conditions"
-);
+console.log("❌ Search-as-you-type without cancellation creates race conditions");
 console.log("✅ Use AbortController to cancel stale requests");
 
 console.log("\nPitfall 2 - Retrying all errors:");
@@ -489,9 +471,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 33.1-fetch-basics.js - Fetch basics and HTTP methods");
 console.log("📘 33.2-fetch-error-handling.js - Error handling and async/await");
 console.log("📘 33.4-fetch-streams-advanced.js - Stream API and caching");
-console.log(
-  "📘 34-async-error-handling.js - Circuit breaker and advanced error patterns"
-);
+console.log("📘 34-async-error-handling.js - Circuit breaker and advanced error patterns");
 
 // ============================================
 // TypeScript Comparison

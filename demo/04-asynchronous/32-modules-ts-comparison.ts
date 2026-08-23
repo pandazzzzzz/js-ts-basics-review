@@ -174,9 +174,7 @@ declare global {
 }
 
 console.log("\n=== Module Augmentation ===");
-console.log(
-  "Module augmentation requires target module to have TypeScript types"
-);
+console.log("Module augmentation requires target module to have TypeScript types");
 
 // ============================================================================
 // 7. DECLARATION FILES (.d.ts)
@@ -259,9 +257,7 @@ export interface Repository<T, ID = number> {
 }
 
 // Generic module factory
-export function createRepository<T, ID = number>(
-  entities: Map<ID, T>
-): Repository<T, ID> {
+export function createRepository<T, ID = number>(entities: Map<ID, T>): Repository<T, ID> {
   return {
     async findById(id: ID): Promise<T | null> {
       return entities.get(id) ?? null;

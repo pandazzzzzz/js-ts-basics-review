@@ -30,9 +30,7 @@ export {};
 console.log("=== Section 1: Creating Elements ===\n");
 
 if (typeof document !== "undefined") {
-  console.log(
-    "✅ Browser environment detected, following code is executable:\n"
-  );
+  console.log("✅ Browser environment detected, following code is executable:\n");
 
   // 1.1 createElement - Create element node
   console.log("1. document.createElement(tagName)");
@@ -44,10 +42,7 @@ if (typeof document !== "undefined") {
 
   // Create namespaced element (SVG, MathML)
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  const circle = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "circle"
-  );
+  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
   console.log("SVG element created:", svg.tagName);
 
   // 1.2 createTextNode - Create text node
@@ -99,14 +94,9 @@ if (typeof document !== "undefined") {
 
   // One-time insertion to DOM
   // ul.appendChild(fragment); // Only triggers one reflow!
-  console.log(
-    "After append, fragment becomes empty:",
-    fragment.childNodes.length === 0
-  );
+  console.log("After append, fragment becomes empty:", fragment.childNodes.length === 0);
 } else {
-  console.log(
-    "\n⚠️ Non-browser environment, creating element examples shown in code form"
-  );
+  console.log("\n⚠️ Non-browser environment, creating element examples shown in code form");
 }
 
 // ============================================
@@ -165,9 +155,7 @@ console.log("\n📜 Traditional Insertion Methods:\n");
 console.log("6. parent.appendChild(node)");
 console.log("   - Adds at the end, single child node");
 console.log("   - Returns added node");
-console.log(
-  "   - If node already exists, removes from original position (move operation)"
-);
+console.log("   - If node already exists, removes from original position (move operation)");
 console.log(`
    const added = parent.appendChild(child);
    console.log(added === child); // true
@@ -569,9 +557,7 @@ console.log(
   "4. innerHTML = '' to empty container: modern engines GC removed children and their listeners (only leaks if you retain JS references to them)"
 );
 console.log("5. Don't mix reads and writes of styles in tight loops");
-console.log(
-  "6. Don't use anonymous functions for event listeners (can't remove)\n"
-);
+console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
 
 // 6. MutationObserver
 // Watches DOM changes (childList, attributes, characterData, subtree) and delivers batches asynchronously
@@ -581,9 +567,7 @@ console.log(
 console.log("\n=== Section 6: MutationObserver Demo ===\n");
 
 if (typeof MutationObserver === "undefined") {
-  console.log(
-    "⚠️ Non-browser environment, MutationObserver examples shown in code form"
-  );
+  console.log("⚠️ Non-browser environment, MutationObserver examples shown in code form");
 
   console.log(`
 // Basic usage: watch for changes to an element
@@ -630,9 +614,7 @@ const pending = observer.takeRecords();
 `);
 } else {
   // Browser environment demo (runnable with a real DOM)
-  console.log(
-    "✅ Browser environment detected — running MutationObserver demo"
-  );
+  console.log("✅ Browser environment detected — running MutationObserver demo");
 
   // Create a target element if document exists
   const target = document.createElement("div");
@@ -680,14 +662,10 @@ console.log("- Use MutationObserver for structural/attribute changes");
 console.log("- Avoid polling with setInterval for DOM changes\n");
 
 console.log("📚 Reference Documentation:\n");
-console.log(
-  "- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"
-);
+console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement");
 console.log("- javascript.info: https://javascript.info/modifying-document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
-console.log(
-  "- High Performance Animations: https://web.dev/animations-guide/\n"
-);
+console.log("- High Performance Animations: https://web.dev/animations-guide/\n");
 
 // ============================================
 // Cross-references

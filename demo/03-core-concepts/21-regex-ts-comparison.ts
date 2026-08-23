@@ -30,10 +30,7 @@ type EmailPattern = `${string}@${string}.${string}`;
 type RegexPattern<T extends string> = T;
 
 // Usage with compile-time pattern hints
-function createRegex<T extends string>(
-  pattern: T,
-  flags?: string
-): TypedRegExp<T> {
+function createRegex<T extends string>(pattern: T, flags?: string): TypedRegExp<T> {
   return new TypedRegExp(pattern, flags);
 }
 
@@ -243,10 +240,7 @@ console.log(`Date valid: ${validator.validate("date", "2024-01-15")}`);
 // ============================================================================
 
 // TypeScript: Async pattern matching utility
-async function* matchAllAsync(
-  text: string,
-  pattern: RegExp
-): AsyncGenerator<RegExpExecArray> {
+async function* matchAllAsync(text: string, pattern: RegExp): AsyncGenerator<RegExpExecArray> {
   const regex = new RegExp(
     pattern.source,
     pattern.flags.includes("g") ? pattern.flags : pattern.flags + "g"
@@ -398,6 +392,4 @@ KEY TAKEAWAYS:
 5. Runtime regex behavior follows JavaScript rules
 `);
 
-console.log(
-  "=== TypeScript provides type safety without changing runtime behavior ==="
-);
+console.log("=== TypeScript provides type safety without changing runtime behavior ===");
