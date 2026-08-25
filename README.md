@@ -16,7 +16,13 @@ node demo/06-advanced/39.5-es2025-features.js   # ES2025 features
 node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts
 
 # Type-check all TS files
-npx tsc --noEmit
+npm run typecheck
+
+# Format all demo files with Prettier
+npm run format
+
+# Check if files are properly formatted
+npm run format:check
 ```
 
 ## Requirements
@@ -28,6 +34,17 @@ npx tsc --noEmit
 | ES2027 (Temporal, Explicit Resource Management) | Not yet | Community types needed |
 
 > Temporal API is ES2027 (Stage 4); TypeScript has no built-in types, use `@js-temporal/polyfill`.
+
+## Formatting
+
+This project uses Prettier for consistent code formatting across all demo files and TypeScript comparisons.
+
+- Configuration: `.prettierrc` (100-char width, 2-space indent, double quotes, ES5 trailing commas)
+- Exclusions: `.prettierignore` (docs/, local files, dependencies, git metadata)
+- Apply formatting: `npm run format`
+- Check formatting: `npm run format:check`
+
+> Demo files contain intentional anti-patterns for teaching purposes; ESLint is intentionally omitted to avoid noise.
 
 ## Status
 
