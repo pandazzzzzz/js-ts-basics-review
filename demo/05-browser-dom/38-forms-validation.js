@@ -20,7 +20,8 @@ export {};
 // 3. Constraint Validation API
 // 4. Custom Validation Logic
 // 5. Clipboard and Selection
-// 6. Best Practices & Summary
+// 6. Common Pitfalls
+// 7. Best Practices & Summary
 
 // 1. Form Element Access
 // document.forms → HTMLCollection of forms; form.elements → controls; both support access by name/id
@@ -626,7 +627,37 @@ selection.removeAllRanges();
 `);
 
 // ============================================
-// Best Practices & Summary
+// 6. Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===\n");
+
+console.log("\nPitfall 1: Relying only on client-side validation");
+console.log("  Client validation is UX, not security.");
+console.log("  Fix: Always validate again on the server.");
+
+console.log("\nPitfall 2: Comparing input.value to pattern instead of validity.valid");
+console.log("  checkValidity() handles the spec's rules correctly.");
+console.log("  Fix: Use constraint API (validity.valid, reportValidity()).");
+
+console.log("\nPitfall 3: Missing name attributes on fields");
+console.log("  FormData/form submission ignores fields without name.");
+console.log("  Fix: Add name to every form control you need.");
+
+console.log("\nPitfall 4: Forgetting type=number still allows 'e'");
+console.log("  Browser allows scientific notation like 1e5 in number inputs.");
+console.log("  Fix: Validate range/length explicitly if you need integers.");
+
+console.log("\nPitfall 5: No accessible error messaging");
+console.log("  Screen readers miss errors without aria-describedby/aria-invalid.");
+console.log("  Fix: Wire error text with aria-describedby and set aria-invalid.");
+
+console.log("\nPitfall 6: Not checking form.checkValidity() before submit");
+console.log("  Unhandled invalid forms submit anyway via form.submit().");
+console.log("  Fix: Call checkValidity()/reportValidity() or use requestSubmit().");
+
+// ============================================
+// 7. Best Practices & Summary
 // ============================================
 
 console.log("\n=== Best Practices & Summary ===\n");

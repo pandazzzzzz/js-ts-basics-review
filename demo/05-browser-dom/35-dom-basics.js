@@ -19,7 +19,8 @@ export {};
 // 3. Node Properties and Content
 // 4. Attribute Operations
 // 5. Styles and Classes
-// 6. Best Practices & Summary
+// 6. Common Pitfalls
+// 7. Best Practices & Summary
 
 // ============================================
 
@@ -455,7 +456,38 @@ console.log("│ classList          │ ✅ Yes       │ ✅ Yes    │ Varies 
 console.log("└────────────────────┴──────────────┴──────────┴────────────┘\n");
 
 // ============================================
-// Best Practices & Summary
+// 6. Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===\n");
+
+console.log("\nPitfall 1: Confusing attribute vs property");
+console.log("  element.getAttribute('value') vs element.value");
+console.log("  Attribute is initial HTML, property is current state.");
+console.log("  Fix: Use properties for current values, attributes for HTML state.");
+
+console.log("\nPitfall 2: innerHTML XSS risk");
+console.log("  Inserting user input into innerHTML can execute scripts.");
+console.log("  Fix: Use textContent for text, createElement/textNode for structure.");
+
+console.log("\nPitfall 3: Modifying DOM while iterating a live HTMLCollection");
+console.log("  Mutating the DOM invalidates the collection's indices.");
+console.log("  Fix: Iterate backwards, or convert to a static array first.");
+
+console.log("\nPitfall 4: DOM queries in a loop");
+console.log("  querySelector inside a loop re-scans the document each time.");
+console.log("  Fix: Cache the query result outside the loop.");
+
+console.log("\nPitfall 5: Overusing getComputedStyle");
+console.log("  Forces reflow, hurting performance.");
+console.log("  Fix: Batch style reads, avoid alternating read/write.");
+
+console.log("\nPitfall 6: Assuming NodeList is an Array");
+console.log("  NodeList lacks map/filter without Array.from().");
+console.log("  Fix: Use Array.from(nodeList) or spread [...nodeList].");
+
+// ============================================
+// 7. Best Practices & Summary
 // ============================================
 
 console.log("\n=== Best Practices & Summary ===\n");

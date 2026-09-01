@@ -565,7 +565,7 @@ console.log("Views:", formatStats(1234567, "en-US")); // "1.2M"
 console.log("Likes:", formatStats(9876, "en-US")); // "9.9K"
 
 // ============================================
-// Common Pitfalls
+// Section 9: Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -607,7 +607,7 @@ console.log("  Not available in older browsers");
 console.log("  Fix: Check support before use");
 
 // ============================================
-// Best Practices
+// Section 10: Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -647,7 +647,7 @@ console.log("7. RTL text direction considerations");
 console.log("8. Missing locale fallback handling");
 
 // ============================================
-// Section 9: Intl.DisplayNames (ES2021)
+// Section 11: Intl.DisplayNames (ES2021)
 // ============================================
 
 console.log("\n=== Intl.DisplayNames ===");
@@ -687,7 +687,7 @@ console.log("- Currency selection UIs");
 console.log("- Displaying user-friendly names from codes");
 
 // ============================================
-// Section 10: Intl.Locale (ES2020)
+// Section 12: Intl.Locale (ES2020)
 // ============================================
 
 console.log("\n=== Intl.Locale ===");
@@ -742,7 +742,7 @@ console.log("- Building locale-aware UIs");
 console.log("- Locale normalization");
 
 // ============================================
-// Section 11: Intl.DurationFormat (ES2025)
+// Section 13: Intl.DurationFormat (ES2025)
 // ============================================
 
 /*
@@ -816,7 +816,7 @@ console.log("- Travel time display");
 console.log("- Task duration tracking");
 
 // ============================================
-// Section 12: formatToParts() Method
+// Section 14: formatToParts() Method
 // ============================================
 
 console.log("\n=== formatToParts() Method ===");
@@ -864,7 +864,7 @@ console.log("- Intl.ListFormat.formatToParts()");
 // ══════════════════════════════════════════
 // ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 13: Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
+// Section 15: Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
 // ============================================
 
 /*

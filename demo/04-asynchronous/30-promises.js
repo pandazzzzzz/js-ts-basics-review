@@ -22,6 +22,8 @@ export {};
 // 9. Error Handling Patterns
 // 10. Practical Examples
 // 11. Common Pitfalls & Best Practices
+// 12. Promise Combinators Comparison
+// 13. Promise.try - Wrap Sync Function as Promise (ES2025)
 
 // ============================================
 // 1. PROMISE BASICS
@@ -523,7 +525,7 @@ asyncOperation(30)
   });
 
 // ============================================
-// 9. PRACTICAL EXAMPLES
+// 10. PRACTICAL EXAMPLES
 // ============================================
 
 console.log("\n=== Practical Examples ===\n");
@@ -605,7 +607,7 @@ fetchWithRetry(() => {
   });
 
 // ============================================
-// 10. COMMON PITFALLS & BEST PRACTICES
+// 11. COMMON PITFALLS & BEST PRACTICES
 // ============================================
 
 console.log("\n=== Common Pitfalls ===\n");
@@ -694,7 +696,7 @@ console.log(`
 `);
 
 // ============================================
-// 11. PROMISE COMBINATORS COMPARISON
+// 12. PROMISE COMBINATORS COMPARISON
 // ============================================
 
 /**
@@ -753,7 +755,7 @@ console.log("  → Result: 'fast'");
 console.log("  → Only rejects if ALL reject (AggregateError)\n");
 
 // ============================================
-// 12. PROMISE.TRY - WRAP SYNC FUNCTION AS PROMISE (ES2025)
+// 13. PROMISE.TRY - WRAP SYNC FUNCTION AS PROMISE (ES2025)
 // ============================================
 
 /**

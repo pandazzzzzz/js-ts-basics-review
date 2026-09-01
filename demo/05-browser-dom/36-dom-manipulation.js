@@ -20,7 +20,8 @@ export {};
 // 4. Batch Operations and Performance
 // 5. Special APIs for Tables and Lists
 // 6. MutationObserver
-// 7. Best Practices & Summary
+// 7. Common Pitfalls
+// 8. Best Practices & Summary
 
 // 1. Creating Elements
 // createElement(tag), createTextNode(text) — text nodes auto-escape HTML
@@ -535,31 +536,8 @@ textarea.setSelectionRange(start, end);
 `);
 
 // ============================================
-// Best Practices & Summary
-// ============================================
-
-console.log("\n=== Best Practices & Summary ===\n");
-
-console.log("✅ DO:\n");
-console.log("1. Prefer modern methods (append/prepend/before/after/remove)");
-console.log("2. Use DocumentFragment for bulk operations");
-console.log("3. Detach element before complex operations (if possible)");
-console.log("4. Use cloneNode to duplicate template structures");
-console.log("5. Read/write separation, avoid forced synchronous layout");
-console.log("6. Use CSS class toggles instead of multiple style modifications");
-console.log("7. Use requestAnimationFrame for DOM updates in animations\n");
-
-console.log("❌ DON'T:\n");
-console.log("1. Don't frequently manipulate DOM in loops");
-console.log("2. Don't use innerHTML for complex construction (XSS risk)");
-console.log("3. Don't forget to modify id after cloneNode (duplicate IDs)");
-console.log(
-  "4. innerHTML = '' to empty container: modern engines GC removed children and their listeners (only leaks if you retain JS references to them)"
-);
-console.log("5. Don't mix reads and writes of styles in tight loops");
-console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
-
 // 6. MutationObserver
+// ============================================
 // Watches DOM changes (childList, attributes, characterData, subtree) and delivers batches asynchronously
 // Use cases: auto-save on contenteditable, detecting third-party DOM changes
 // ⚠️ subtree:true is expensive on large DOM; always disconnect() to avoid leaks; callbacks are batched (microtask)
@@ -666,6 +644,61 @@ console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/API/Document/cr
 console.log("- javascript.info: https://javascript.info/modifying-document");
 console.log("- DOM Living Standard: https://dom.spec.whatwg.org/");
 console.log("- High Performance Animations: https://web.dev/animations-guide/\n");
+
+// ============================================
+// 7. Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===\n");
+
+console.log("\nPitfall 1: Frequently manipulating DOM in loops");
+console.log("  Each append/insert triggers layout and repaint.");
+console.log("  Fix: Batch with DocumentFragment or build string then set once.");
+
+console.log("\nPitfall 2: innerHTML for complex construction (XSS risk)");
+console.log("  Untrusted input inside innerHTML can execute scripts.");
+console.log("  Fix: Use createElement/textContent or a safe template.");
+
+console.log("\nPitfall 3: Duplicate IDs after cloneNode");
+console.log("  cloneNode copies id attributes, creating invalid duplicates.");
+console.log("  Fix: Reset the id on the clone before insertion.");
+
+console.log("\nPitfall 4: Mixing style reads and writes in tight loops");
+console.log("  Alternating read/write forces repeated synchronous layout.");
+console.log("  Fix: Separate reads from writes (batch) or use rAF.");
+
+console.log("\nPitfall 5: Anonymous functions for event listeners");
+console.log("  Can't removeEventListener without a reference.");
+console.log("  Fix: Name the handler or store the reference.");
+
+console.log("\nPitfall 6: Not disconnecting MutationObserver");
+console.log("  Left active, it keeps firing and can leak memory.");
+console.log("  Fix: Always observer.disconnect() when done.");
+
+// ============================================
+// 8. Best Practices & Summary
+// ============================================
+
+console.log("\n=== Best Practices & Summary ===\n");
+
+console.log("✅ DO:\n");
+console.log("1. Prefer modern methods (append/prepend/before/after/remove)");
+console.log("2. Use DocumentFragment for bulk operations");
+console.log("3. Detach element before complex operations (if possible)");
+console.log("4. Use cloneNode to duplicate template structures");
+console.log("5. Read/write separation, avoid forced synchronous layout");
+console.log("6. Use CSS class toggles instead of multiple style modifications");
+console.log("7. Use requestAnimationFrame for DOM updates in animations\n");
+
+console.log("❌ DON'T:\n");
+console.log("1. Don't frequently manipulate DOM in loops");
+console.log("2. Don't use innerHTML for complex construction (XSS risk)");
+console.log("3. Don't forget to modify id after cloneNode (duplicate IDs)");
+console.log(
+  "4. Don't use innerHTML = '' naively — it is usually fine for emptying, but retain references to children first"
+);
+console.log("5. Don't mix reads and writes of styles in tight loops");
+console.log("6. Don't use anonymous functions for event listeners (can't remove)\n");
 
 // ============================================
 // Cross-references

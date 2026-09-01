@@ -20,7 +20,8 @@ export {};
 // 4. Browser Default Behavior
 // 5. Common Event Types
 // 6. Custom Events
-// 7. Best Practices & Summary
+// 7. Common Pitfalls
+// 8. Best Practices & Summary
 
 // 1. Event Basics
 // Publish-subscribe model: multiple listeners, rich event object context
@@ -751,7 +752,37 @@ document.addEventListener('cart:updated', (e) => {
 `);
 
 // ============================================
-// Best Practices & Summary
+// 7. Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===\n");
+
+console.log("\nPitfall 1: Forgetting to remove event listeners");
+console.log("  Listeners on removed elements can leak memory.");
+console.log("  Fix: Use AbortController or store handler references to remove.");
+
+console.log("\nPitfall 2: Using onclick instead of addEventListener");
+console.log("  onclick overwrites the previous handler.");
+console.log("  Fix: Always use addEventListener for multiple handlers.");
+
+console.log("\nPitfall 3: Anonymous functions can't be removed");
+console.log("  removeEventListener needs the same function reference.");
+console.log("  Fix: Name the handler or keep a reference.");
+
+console.log("\nPitfall 4: Ignoring event object properties");
+console.log("  e.target vs e.currentTarget differ during bubbling.");
+console.log("  Fix: currentTarget is the listener element, target is the origin.");
+
+console.log("\nPitfall 5: Adding too many listeners on similar elements");
+console.log("  Hundreds of listeners hurt performance and memory.");
+console.log("  Fix: Use event delegation on a common ancestor.");
+
+console.log("\nPitfall 6: Event propagation surprises");
+console.log("  preventDefault() does NOT stop propagation.");
+console.log("  Fix: Use stopPropagation/stopImmediatePropagation explicitly.");
+
+// ============================================
+// 8. Best Practices & Summary
 // ============================================
 
 console.log("\n=== Best Practices & Summary ===\n");

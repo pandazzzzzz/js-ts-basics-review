@@ -4,9 +4,26 @@
 export {};
 
 // ============================================
-// Variables and Data Types — var/let/const, primitive types, type coercion, BigInt, globalThis
-// Sections: 1. HTML 2. Code Structure 3. "use strict" 4. Variables 5. Types 6. Coercion 7. Naming 8. Global 9. Pitfalls 10. Best Practices
+// Learning Goals
 // ============================================
+// Master variables, data types, and type coercion:
+// - Understand var/let/const scoping and hoisting differences
+// - Recognize all 7 primitive types (incl. Symbol and BigInt)
+// - Apply type conversion rules and coercion pitfalls
+// - Use globalThis for cross-environment global access
+
+// ============================================
+// Table of Contents
+// ============================================
+// 1. JavaScript in HTML (JS.info 2.1)
+// 2. Code Structure (JS.info 2.2)
+// 3. "use strict" - Modern Mode (JS.info 2.3)
+// 4. Variable Declarations
+// 5. Primitive Data Types (7 types in ES2020+)
+// 6. globalThis - Cross-Environment Global (ES2020)
+// 7. Type Conversions (JS.info 2.7)
+// 8. Browser Interaction (JS.info 2.6)
+// 9. Common Pitfalls & Best Practices
 
 // ============================================
 // 1. JavaScript in HTML (JS.info 2.1)
@@ -220,7 +237,7 @@ console.log("\nNote: alert/prompt/confirm are browser-only APIs.");
 console.log("In Node.js, use console.log() and process.stdin for I/O.");
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 9. Common Pitfalls & Best Practices
 // ============================================
 
 // Pitfall 1: typeof null returns "object" (historical bug)

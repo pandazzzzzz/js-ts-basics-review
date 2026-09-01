@@ -20,9 +20,10 @@ export {};
 // 5. Code Quality Tools
 // 6. Jest/Vitest Practical Examples
 // 7. Common Pitfalls
+// 8. Best Practices
 
 // ============================================
-// Section 1: Console Methods
+// 1. Console Methods
 // ============================================
 
 console.log("\n=== Console Methods ===");
@@ -88,7 +89,7 @@ console.assert(x > 10, "x should be greater than 10"); // Assertion failed
 console.assert(x > 0, "x should be positive"); // No output (passes)
 
 // ============================================
-// Section 2: Debugging Techniques
+// 2. Debugging Techniques
 // ============================================
 
 console.log("\n=== Debugging Techniques ===");
@@ -135,7 +136,7 @@ console.log("- Use debugger statement strategically");
 console.log("- Check Network panel for API issues");
 
 // ============================================
-// Section 3: Error Tracking and Handling
+// 3. Error Tracking and Handling
 // ============================================
 
 console.log("\n=== Error Tracking ===");
@@ -209,7 +210,7 @@ try {
 console.log("Source maps allow debugging original code in production");
 
 // ============================================
-// Section 4: Testing Basics
+// 4. Testing Basics
 // ============================================
 
 console.log("\n=== Testing Basics ===");
@@ -307,7 +308,7 @@ console.log("- Jasmine: Behavior-driven, no dependencies");
 // expect(fn).toThrow("message")          - Throws with message
 
 // ============================================
-// Section 5: Code Quality Tools
+// 5. Code Quality Tools
 // ============================================
 
 console.log("\n=== Code Quality Tools ===");
@@ -384,7 +385,7 @@ console.log("- Better code understanding");
 console.log("- TypeScript-like type checking (with @ts-check)");
 
 // ============================================
-// Section 6: Jest/Vitest Practical Examples
+// 6. Jest/Vitest Practical Examples
 // ============================================
 
 console.log("\n=== Jest/Vitest Practical Examples ===");
@@ -723,7 +724,7 @@ console.log("\n✅ Jest/Vitest practical examples complete");
 console.log("Run tests: npm test or npm run test:coverage");
 
 // ============================================
-// Common Pitfalls
+// 7. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -769,6 +770,28 @@ console.log("\nPitfall 7: Overusing try/catch for flow control");
 console.log("  try/catch is for exceptional cases, not normal flow.");
 console.log("  Using it for expected conditions hides real errors.");
 console.log("  Fix: Use conditional checks, early returns for normal flows.");
+
+// ============================================
+// 8. Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Use console.table for arrays/objects, console.dir for object trees");
+console.log("2. Use source maps so stack traces point to source, not bundles");
+console.log("3. Write small, isolated unit tests with a single assertion focus");
+console.log("4. Use test runners (Vitest/Jest) with watch mode for fast feedback");
+console.log("5. Structure tests with Arrange-Act-Assert (AAA) clarity");
+console.log("6. Mock network and time-based dependencies for deterministic tests");
+console.log("7. Aim for meaningful coverage of critical paths, not 100% line coverage");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't leave debugger; or console.log noise in production code");
+console.log("2. Don't test implementation details — test observable behavior");
+console.log("3. Don't let tests share mutable state without resetting");
+console.log("4. Don't skip error-path tests — they catch real bugs");
+console.log("5. Don't rely on console output for assertions; use a test runner");
 
 // ============================================
 // Cross-references

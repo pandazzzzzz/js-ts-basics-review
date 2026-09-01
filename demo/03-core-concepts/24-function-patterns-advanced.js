@@ -3,19 +3,27 @@
 export {};
 
 // ============================================
-// Overview
+// Learning Goals
 // ============================================
-// Advanced function patterns in functional JavaScript.
+// Master advanced function patterns in functional JavaScript:
+// - Handle deep recursion safely with trampolines
+// - Apply recursion patterns (linear, tail, tree, reducer)
+// - Compose functions with point-free style
 //
 // In-depth sections live in the split files:
 //   24.1-function-composition.js   → Currying, Compose/Pipe, Partial Application, Factories, Higher-Order
 //   24.2-debounce-throttle.js      → Debounce & Throttle
 //   24.3-memoization-cache.js      → Memoization & caching
-//
-// This file covers the patterns that are NOT detailed elsewhere:
-//   1. Trampolines  — tail-call recursion without stack overflow
-//   2. Recursion Patterns — linear/tail recursion, tree traversal
-//   3. Point-Free Style — composing functions without naming arguments
+
+// ============================================
+// Table of Contents
+// ============================================
+// 1. Trampolines - Tail Recursion Optimization
+// 2. Recursion Patterns
+// 3. Point-Free Style
+// 4. Common Pitfalls
+// 5. Best Practices
+// 6. Cross-references
 
 console.log("=== Function Patterns - Advanced Demo ===\n");
 console.log("📘 For Currying/Compose/Pipe → 24.1-function-composition.js");
@@ -342,3 +350,58 @@ console.log(
  */
 
 console.log("\n=== Function Patterns Advanced Demo Complete ===");
+
+// ============================================
+// 4. Common Pitfalls
+// ============================================
+
+console.log("\n=== Common Pitfalls ===");
+
+console.log("\nPitfall 1: Trampoline adds complexity");
+console.log("  Trampolines are harder to read than plain recursion.");
+console.log("  Fix: Only use when stack depth is a real risk.");
+
+console.log("\nPitfall 2: Recursion without a base case");
+console.log("  Missing or wrong base case causes infinite recursion / stack overflow.");
+console.log("  Fix: Always define and verify the terminating condition.");
+
+console.log("\nPitfall 3: Point-free style hurting readability");
+console.log("  Over-composing hides the data flow and parameter names.");
+console.log("  Fix: Prefer clarity; use point-free only where it improves intent.");
+
+console.log("\nPitfall 4: Deep recursion in non-TCO environments");
+console.log("  Most engines lack TCO, so deep recursion still overflows.");
+console.log("  Fix: Use trampolines or iteration for large depths.");
+
+// ============================================
+// 5. Best Practices
+// ============================================
+
+console.log("\n=== Best Practices ===");
+
+console.log("✅ DO:");
+console.log("1. Use trampolines for deep/mutual recursion");
+console.log("2. Prefer tail recursion when recursion is required");
+console.log("3. Use point-free style for simple, self-evident pipelines");
+console.log("4. Look to 24.1/24.2/24.3 for composition, rate-limiting, and caching");
+
+console.log("\n❌ DON'T:");
+console.log("1. Don't use recursion where iteration is clearer");
+console.log("2. Don't over-abstract with point-free style");
+console.log("3. Don't assume TCO is available — test your target runtime");
+
+// ============================================
+// 6. Cross-references
+// ============================================
+console.log("\n=== Cross-references ===");
+console.log("📘 24.1-function-composition.js - Currying, Compose/Pipe, Factories, HOF");
+console.log("📘 24.2-debounce-throttle.js - Debounce & Throttle");
+console.log("📘 24.3-memoization-cache.js - Memoization & Cache");
+console.log("📘 26-optimization-performance.js - Tail-call optimization, performance");
+
+// ============================================
+// TypeScript Comparison
+// ============================================
+/*
+📘 See TypeScript comparison file: 24-function-patterns-advanced-ts-comparison.ts
+*/

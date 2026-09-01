@@ -4,9 +4,24 @@
 export {};
 
 // ============================================
-// This file covers typed arrays (ES6) for binary data:
-//   1. TypedArray types  2. ArrayBuffer  3. DataView  4. Methods/patterns
+// Learning Goals
 // ============================================
+// Master typed arrays for binary data handling (ES6):
+// - Understand the fixed-type numeric array types
+// - Use ArrayBuffer as raw binary memory
+// - Access arbitrary bytes flexibly with DataView
+// - Apply typed array methods and performance patterns
+
+// ============================================
+// Table of Contents
+// ============================================
+// 1. Typed Arrays Overview
+// 2. Typed Array Types
+// 3. ArrayBuffer - Raw Binary Memory
+// 4. DataView - Flexible Data Access
+// 5. Typed Array Methods and Patterns
+// 6. Common Pitfalls
+// 7. Best Practices
 
 console.log("=== Arrays - Typed Arrays Demo ===\n");
 
