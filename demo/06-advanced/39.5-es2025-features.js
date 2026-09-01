@@ -170,7 +170,7 @@ console.log("\n--- 3. RegExp.escape() ---");
  *   feature: RegExp.escape
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-regex-escaping
  */
 
@@ -207,7 +207,7 @@ console.log("\n--- 4. Promise.try() ---");
  *   feature: Promise.try
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-promise-try
  */
 
@@ -259,7 +259,7 @@ console.log("\n--- 5. Float16Array ---");
  *   feature: Float16Array
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#float16array-for-stage-4
  */
 
@@ -288,7 +288,7 @@ console.log("\n--- 6. JSON Modules ---");
  *   feature: JSON Modules
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2024-10/october-08.md#import-attributes-and-json-modules-for-stage-4
  */
 
@@ -380,7 +380,7 @@ console.log("\n--- 10. Redeclarable Global eval Vars ---");
  *   feature: Redeclarable global eval vars
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#redeclarable-global-eval-vars-for-stage-4
  */
 
@@ -407,7 +407,7 @@ console.log("\n--- 11. Intl.DurationFormat ---");
  *   feature: Intl.DurationFormat
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-intl-duration-format
  */
 
@@ -524,7 +524,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2025-07
 // stage4DateType: milestone
 // source: https://tc39.es/proposal-intl-duration-format
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -532,7 +532,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-04
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-set-methods
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -540,7 +540,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-iterator-helpers
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -548,7 +548,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2025-02
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-regex-escaping
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -556,7 +556,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-promise-try
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -564,7 +564,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2025-02
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-float16array
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -572,7 +572,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-json-modules
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -580,7 +580,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-import-attributes
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -588,7 +588,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-regexp-modifiers
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -596,7 +596,7 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2024-04
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-duplicate-named-capturing-groups
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -604,5 +604,5 @@ console.log("📘 Intl API: 42-intl-api.js");
 // stage4Date: 2025-02
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-redeclarable-global-eval-vars
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

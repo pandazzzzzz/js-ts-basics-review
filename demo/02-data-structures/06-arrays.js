@@ -167,7 +167,7 @@ console.log("Index of first > 3:", foundIndex);
  *   feature: findLast
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const findLastExample = [1, 2, 3, 4, 5, 4, 3].findLast(n => n === 4);
@@ -178,7 +178,7 @@ console.log("Last occurrence of 4:", findLastExample);
  *   feature: findLastIndex
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // findLastIndex - Find index of last match (ES2023)
@@ -227,7 +227,7 @@ console.log("includes(1, 4):", withDuplicates.includes(1, 4)); // false
  *   feature: at
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const atArray = [10, 20, 30, 40, 50];
@@ -422,7 +422,7 @@ console.log("FlatMapped:", flatMapped);
  *   feature: with
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const original = [1, 2, 3, 4, 5];
@@ -439,7 +439,7 @@ console.log("With replaced:", withReplaced);
  *   feature: toReversed
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toReversedExample = [1, 2, 3, 4, 5];
@@ -455,7 +455,7 @@ console.log("Reversed:", toReversedExample.toReversed());
  *   feature: toSorted
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSortedExample = [3, 1, 4, 1, 5];
@@ -474,7 +474,7 @@ console.log(
  *   feature: toSpliced
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSplicedExample = [1, 2, 3, 4, 5];

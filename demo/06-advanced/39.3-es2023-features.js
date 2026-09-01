@@ -102,7 +102,7 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
  *   feature: Array.prototype.findLast / findLastIndex
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/june-13.md#arrayfindlast-and-arrayfindlastindex-for-stage-4
  */
 
@@ -169,7 +169,7 @@ console.log("\n--- 3. Hashbang Grammar ---\n");
  *   feature: Hashbang Syntax
  *   status: ES2023
  *   stage4Date: 2022-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2022-07/july-20.md#hashbang-grammar-for-stage-4
  */
 
@@ -301,7 +301,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2023-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-symbols-as-weakmap-keys
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -309,7 +309,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2023-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -317,7 +317,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2023-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -325,7 +325,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2023-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -333,7 +333,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2023-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -341,7 +341,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2022-06
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-array-find-from-last
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -349,7 +349,7 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2022-06
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-array-find-from-last
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -357,5 +357,5 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 // stage4Date: 2022-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-hashbang
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

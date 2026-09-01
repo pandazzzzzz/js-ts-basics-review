@@ -144,7 +144,7 @@ console.log("After setting length=5:", extendable); // [1, 2, 3, empty × 2]
  *   feature: at
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const atExample = [10, 20, 30, 40, 50];

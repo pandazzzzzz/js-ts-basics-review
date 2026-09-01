@@ -77,7 +77,7 @@ if (typeof Math.sumPrecise === "function") {
  *   feature: Math.sumPrecise
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-math-sum
  */
 
@@ -91,7 +91,7 @@ console.log("\n--- 2. Array.fromAsync() ---\n");
  *   feature: Array.fromAsync
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-array-from-async
  */
 
@@ -179,7 +179,7 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
  *   feature: Uint8Array Base64
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-arraybuffer-base64
  */
 
@@ -230,7 +230,7 @@ console.log("\n--- 5. Map.prototype.upsert() ---\n");
  *   feature: Upsert
  *   status: ES2026
  *   stage4Date: 2026-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-upsert
  */
 
@@ -289,7 +289,7 @@ console.log("\n--- 6. JSON.parse Source Text Access ---\n");
  *   feature: JSON.parse source text access
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-json-parse-source
  */
 
@@ -344,7 +344,7 @@ console.log("\n--- 7. Iterator Sequencing ---\n");
  *   feature: Iterator Sequencing
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-iterator-sequencing
  */
 
@@ -478,7 +478,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-05
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-array-from-async
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -486,7 +486,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-math-sum
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -494,7 +494,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-05
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-error-iserror
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -502,7 +502,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-arraybuffer-base64
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -510,7 +510,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2026-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-upsert
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -518,7 +518,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-11
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-json-parse-source
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -526,5 +526,5 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2025-11
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-iterator-sequencing
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

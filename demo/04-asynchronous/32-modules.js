@@ -259,7 +259,7 @@ console.log("  Use dynamic import() for conditional or runtime-dependent loading
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

@@ -140,7 +140,7 @@ console.log("\n--- 3. .at() Method ---\n");
  *   feature: Array/ String.prototype.at
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-08/august-18.md#at-method-for-builtin-indexables-for-stage-4
  */
 
@@ -242,7 +242,7 @@ console.log("\n--- 5. Error.cause ---\n");
  *   feature: Error.cause
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-10/october-26.md#error-cause-for-stage-4
  */
 
@@ -328,7 +328,7 @@ console.log("\n--- 7. RegExp Match Indices (/d flag) ---\n");
  *   feature: RegExp Match Indices
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2021-05/may-25.md#regexp-match-indices-for-stage-4
  */
 
@@ -462,7 +462,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-08
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-class-static-block
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -470,7 +470,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-08
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-relative-indexing-method
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -478,7 +478,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-08
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-accessible-object-hasownproperty
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -486,7 +486,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-private-fields-in-in
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -494,7 +494,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-10
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-error-cause
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -502,7 +502,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-05
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-top-level-await
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -510,7 +510,7 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-04
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-class-fields
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -518,5 +518,5 @@ console.log("📘 Strings: 04-strings.js");
 // stage4Date: 2021-05
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-regexp-match-indices
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

@@ -1040,7 +1040,7 @@ console.log(mapIter2.next()); // { value: ['x', 1], done: false }
  *   feature: Iterator helpers
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // The generator-based helpers above emulate the API. ES2025 ships the real

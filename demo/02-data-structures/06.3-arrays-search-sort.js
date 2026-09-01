@@ -75,7 +75,7 @@ console.log("Index of > 100 (not found):", notFoundIndex); // -1
  *   feature: findLast
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const findLastExample = [1, 2, 3, 4, 5, 4, 3].findLast(n => n === 4);
@@ -87,7 +87,7 @@ console.log("Last occurrence of 4:", findLastExample); // 4
  *   feature: findLastIndex
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const findLastIndexExample = [1, 2, 3, 4, 5, 4, 3].findLastIndex(n => n === 4);
@@ -285,7 +285,7 @@ console.log("\n=== 3. Immutable Array Methods (ES2023) ===");
  *   feature: toSorted
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSortedExample = [3, 1, 4, 1, 5];
@@ -300,7 +300,7 @@ console.log("Sorted:", sortedCopy); // [1, 1, 3, 4, 5]
  *   feature: toReversed
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toReversedExample = [1, 2, 3, 4, 5];
@@ -315,7 +315,7 @@ console.log("Reversed:", reversedCopy); // [5, 4, 3, 2, 1]
  *   feature: with
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const withOriginal = [1, 2, 3, 4, 5];
@@ -334,7 +334,7 @@ console.log("With at(-1) = 100:", withNegative); // [1, 2, 3, 4, 100]
  *   feature: toSpliced
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSplicedExample = [1, 2, 3, 4, 5];

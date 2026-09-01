@@ -315,7 +315,7 @@ console.log("'a'.localeCompare('a'):", "a".localeCompare("a")); // 0
  *   status: ES2018
  *   stage4Date: 2017-12
  *   stage4DateType: milestone
- *   lastVerified: 2026-08-20
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/ecma402/finished-proposals.md
  */
 
@@ -750,7 +750,7 @@ console.log("- Locale normalization");
  *   feature: Intl.DurationFormat
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/ecma402/finished-proposals.md
  */
 
@@ -871,7 +871,7 @@ console.log("- Intl.ListFormat.formatToParts()");
  * verification:
  *   feature: Intl.MessageFormat
  *   status: Stage 1
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/ecma402/README.md
  */
 console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");
@@ -909,7 +909,7 @@ console.log("📘 50-reserved.js - Temporal API");
 // stage4Date: 2017-12
 // stage4DateType: milestone
 // source: https://github.com/tc39/proposal-intl-plural-rules
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -917,5 +917,5 @@ console.log("📘 50-reserved.js - Temporal API");
 // stage4Date: 2025-07
 // stage4DateType: milestone
 // source: https://tc39.es/proposal-intl-duration-format
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

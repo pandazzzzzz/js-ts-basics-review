@@ -489,7 +489,7 @@ console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
  *   feature: RegExp Match Indices
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp `d` flag - Match Indices (ES2022):");
@@ -841,7 +841,7 @@ console.log("\n=== 11. Newer RegExp Features (ES2024 & ES2025) Demo ===");
  *   feature: RegExp v flag
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp v flag - set operations (ES2024):");
@@ -866,7 +866,7 @@ console.log("'😀' is RGI emoji:", emojiKeycapRe.test("😀")); // true
  *   feature: RegExp.escape
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp.escape (ES2025):");
@@ -894,7 +894,7 @@ if (typeof RegExp.escape === "function") {
  *   feature: Duplicate Named Capture Groups
  *   status: ES2025
  *   stage4Date: 2024-04
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nDuplicate Named Capture Groups (ES2025):");
@@ -923,7 +923,7 @@ try {
  *   feature: RegExp Modifiers
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp Modifiers (ES2025):");

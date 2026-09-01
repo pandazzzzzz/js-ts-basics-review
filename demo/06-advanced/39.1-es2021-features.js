@@ -159,7 +159,7 @@ console.log("\n--- 4. WeakRef (Weak References) ---\n");
  *   feature: WeakRef
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 
@@ -197,7 +197,7 @@ console.log("\n--- 5. FinalizationRegistry ---\n");
  *   feature: FinalizationRegistry
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 
@@ -291,7 +291,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-06
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-string-replaceall
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -299,7 +299,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-logical-assignment
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -307,7 +307,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-numeric-separator
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -315,7 +315,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-weakrefs
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -323,7 +323,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-weakrefs
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -331,7 +331,7 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-promise-any
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==
 
 // == verification block ==
@@ -339,5 +339,5 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 // stage4Date: 2020-07
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-promise-any
-// lastVerified: 2026-08-21
+// lastVerified: 2026-09-01
 // == end verification block ==

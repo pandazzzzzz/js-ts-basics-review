@@ -104,7 +104,7 @@ console.log("4. Can gradually adopt TypeScript");
  * verification:
  *   feature: Decorators
  *   status: Stage 2.7
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 

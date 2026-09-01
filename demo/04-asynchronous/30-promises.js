@@ -364,7 +364,7 @@ console.log("\n=== Promise.any Demo ===\n");
  *   feature: Promise.any
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
@@ -443,7 +443,7 @@ traditionalResolve("hello");
  *   feature: Promise.withResolvers
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nModern way (Promise.withResolvers):");
@@ -783,7 +783,7 @@ console.log("=== Promise.try (ES2025) Demo ===\n");
  *   feature: Promise.try
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

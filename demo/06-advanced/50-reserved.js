@@ -64,7 +64,7 @@ console.log("\n=== Recent Standardized Features ===");
  *   feature: Import Attributes
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
@@ -110,7 +110,7 @@ console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current stan
  *   feature: Records & Tuples
  *   status: Withdrawn
  *   stage: -1
- *   lastVerified: 2026-08-20
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposal-record-tuple
  */
 console.log("// Records & Tuples (Withdrawn) — historical syntax:");
@@ -126,7 +126,7 @@ console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
  * verification:
  *   feature: Composites
  *   status: Stage 1
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Composites (Stage 1) — future syntax, illustrative:");
@@ -142,7 +142,7 @@ console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 });
  * verification:
  *   feature: Decimal
  *   status: Stage 1
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Decimal (Stage 1) — future syntax, illustrative:");
@@ -158,7 +158,7 @@ console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
  * verification:
  *   feature: Do Expressions
  *   status: Stage 1
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Do Expressions (Stage 1) — future syntax, illustrative:");
@@ -171,7 +171,7 @@ console.log("//   }; // evaluates to 'yes' or 'no'");
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 1
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pattern Matching (Stage 1) — future syntax, illustrative:");
@@ -186,7 +186,7 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-08-22
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
@@ -200,7 +200,7 @@ console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(inpu
  * verification:
  *   feature: Partial Application
  *   status: Stage 1
- *   lastVerified: 2026-08-22
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/stage-1-proposals.md
  */
 // `?` placeholder for partial application, deriving new functions from existing ones.
@@ -215,7 +215,7 @@ console.log("//   addFive(3, 2); // 10");
  * verification:
  *   feature: Decorators
  *   status: Stage 2.7
- *   lastVerified: 2026-08-22
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 // Class/method decorators for metadata-style programming, similar to Python/Java
@@ -234,7 +234,7 @@ console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
  * verification:
  *   feature: Module Fragments
  *   status: Stage 2
- *   lastVerified: 2026-08-22
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 // Inline module fragments within a file, for organizing code and tests.

@@ -400,7 +400,7 @@ console.log("\n=== Top-Level Await Demo ===\n");
  *   feature: Top-level await
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 

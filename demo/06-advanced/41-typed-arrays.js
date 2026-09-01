@@ -339,7 +339,7 @@ console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents"
  *   feature: Atomics.waitAsync
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-08-14
+ *   lastVerified: 2026-09-01
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)");
