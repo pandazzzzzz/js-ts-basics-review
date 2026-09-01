@@ -67,6 +67,71 @@ console.log(
 );
 console.log("  Use cases: offline apps, large dataset storage, complex queries");
 console.log("  Comparison: vs localStorage (sync, small) | vs Cookies (sent to server)");
+console.log("  API: indexedDB.open(), object stores, transactions, indexes, cursors");
+console.log("  ⚠️  Event-driven and promise-based (modern) API; non-blocking");
+
+// IndexedDB is a browser-only API. Shown as illustrative (runnable in a browser):
+/*
+// --- Open/create a database ---
+// Returns an IDBOpenDBRequest (event-based)
+const request = indexedDB.open("my-db", 1);
+
+// Runs when the DB is created or upgraded (set up object stores here)
+request.onupgradeneeded = (event) => {
+  const db = event.target.result;
+  // Create an object store "users" with auto-increment keys
+  const store = db.createObjectStore("users", { keyPath: "id" });
+  // Add an index on the "email" field for fast lookups
+  store.createIndex("by_email", "email", { unique: true });
+};
+
+// Runs on success; use the db handle for all subsequent operations
+request.onsuccess = (event) => {
+  const db = event.target.result;
+  // ... do reads/writes with transactions
+};
+
+// --- Write data (in a transaction) ---
+const tx = db.transaction("users", "readwrite");   // readwrite | readonly
+const store = tx.objectStore("users");
+store.add({ id: 1, name: "Alice", email: "a@x.com" });
+store.put({ id: 2, name: "Bob", email: "b@x.com" }); // put = add or update
+tx.oncomplete = () => console.log("Transaction complete");
+
+// --- Read data by key ---
+const getReq = store.get(1);
+getReq.onsuccess = () => console.log("User:", getReq.result);
+
+// --- Query by index ---
+const idxReq = store.index("by_email").get("a@x.com");
+idxReq.onsuccess = () => console.log("By email:", idxReq.result);
+
+// --- Iterate with a cursor ---
+const cursorReq = store.openCursor();
+cursorReq.onsuccess = (event) => {
+  const cursor = event.target.result;
+  if (cursor) {
+    console.log(cursor.key, cursor.value.name);
+    cursor.continue(); // next record
+  }
+};
+
+// --- Delete a record ---
+store.delete(1);
+
+// --- Modern promise wrapper (browser support: Chrome 91+, FF 92+, Safari 15+) ---
+async function idbGet(db, storeName, key) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(storeName, "readonly");
+    const req = tx.objectStore(storeName).get(key);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+// --- Close the DB when done ---
+db.close();
+*/
 
 // ============================================
 // 4. History API

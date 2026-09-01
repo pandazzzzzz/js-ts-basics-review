@@ -15,17 +15,18 @@ export {};
 
 // 1. Arithmetic Operators
 // 2. Comparison Operators
-// 3. Logical Operators
-// 4. Assignment Operators
-// 5. Ternary (Conditional) Operator
-// 6. Bitwise Operators
-// 7. Operator Precedence Examples
-// 8. typeof and instanceof Operators
-// 9. Spread and Rest Operators
-// 10. Property Access Operators
-// 11. this Keyword
-// 12. super Keyword
-// 13. Other Operators
+// 3. Equality and Sameness (Object.is, SameValue, SameValueZero)
+// 4. Logical Operators
+// 5. Assignment Operators
+// 6. Ternary (Conditional) Operator
+// 7. Bitwise Operators
+// 8. Operator Precedence Examples
+// 9. typeof and instanceof Operators
+// 10. Spread and Rest Operators
+// 11. Property Access Operators
+// 12. this Keyword
+// 13. super Keyword
+// 14. Other Operators
 
 // ============================================
 // 1. Arithmetic Operators
@@ -155,7 +156,54 @@ console.log("'apple' < 'banana':", "apple" < "banana"); // true (lexicographic)
 console.log("'10' > '9':", "10" > "9"); // false (string comparison: '1' < '9')
 
 // ============================================
-// 3. Logical Operators
+// 3. Equality and Sameness (Object.is, SameValue, SameValueZero)
+// ============================================
+
+// JavaScript has FOUR different equality/sameness algorithms:
+// 1. == (Loose/abstract equality)  - coerces types (ES1)
+// 2. === (Strict equality)         - no coercion, -0 === +0, NaN !== NaN (ES1)
+// 3. Object.is() (SameValue)       - like === but -0 !== +0, NaN === NaN (ES2015)
+// 4. Map/Set key comparison (SameValueZero) - like Object.is but -0 === +0 (ES2015)
+
+console.log("\n=== Equality & Sameness Deep Dive ===\n");
+
+console.log("\n1. Strict Equality (===):");
+console.log("  NaN === NaN:", NaN === NaN); // false (NaN is not equal to itself)
+console.log("  -0 === +0:", -0 === +0); // true (they are the same value)
+
+console.log("\n2. Object.is() (SameValue) - ES2015:");
+console.log("  Object.is(NaN, NaN):", Object.is(NaN, NaN)); // true (differs from ===)
+console.log("  Object.is(-0, +0):", Object.is(-0, +0)); // false (differs from ===)
+console.log("  Object.is('foo', 'foo'):", Object.is("foo", "foo")); // true
+console.log("  Object.is({}, {}):", Object.is({}, {})); // false (different references)
+
+console.log("\n3. SameValueZero (Map/Set keys):");
+console.log("  Like Object.is() but treats -0 and +0 as equal.");
+console.log("  const m = new Map(); m.set(-0, 'neg'); m.get(+0); // 'neg'");
+
+// SameValueZero comparison helper (illustrative):
+function sameValueZero(x, y) {
+  if (typeof x === "number" && typeof y === "number") {
+    return x === y || (x !== x && y !== y); // handles NaN
+  }
+  return x === y;
+}
+console.log("\n  SameValueZero(-0, +0):", sameValueZero(-0, +0)); // true
+console.log("  SameValueZero(NaN, NaN):", sameValueZero(NaN, NaN)); // true
+
+console.log("\n📊 Algorithm Comparison Table:");
+console.log("  x (compared)      ===     Object.is     SameValueZero");
+console.log("  NaN, NaN           ✗        ✓              ✓");
+console.log("  -0, +0             ✓        ✗              ✓");
+console.log("  'foo', 'foo'       ✓        ✓              ✓");
+console.log("  {}, {}             ✗        ✗              ✗");
+
+console.log("\n✅ Best practice:");
+console.log("  Use === by default. Use Object.is() only when -0/NaN distinction matters.");
+console.log("  For null/undefined checks, x == null is a useful exception (matches both).");
+
+// ============================================
+// 4. Logical Operators
 // ============================================
 
 // Logical AND (&&) - Returns first falsy value or last value (ES1)
@@ -226,7 +274,7 @@ console.log("null ?? (undefined || 'foo'):", null ?? (undefined || "foo")); // "
 console.log("(null && undefined) ?? 'foo':", (null && undefined) ?? "foo"); // "foo"
 
 // ============================================
-// 4. Assignment Operators
+// 5. Assignment Operators
 // ============================================
 
 // Simple Assignment (=) - Assigns value to variable (ES1)
@@ -301,7 +349,7 @@ g ??= 10; // g is not null/undefined, no assignment
 console.log("g ??= 10:", g); // 0
 
 // ============================================
-// 5. Ternary (Conditional) Operator
+// 6. Ternary (Conditional) Operator
 // ============================================
 
 // Ternary Operator (? :) - Inline if-else (ES1)
@@ -326,7 +374,7 @@ console.log("Result:", result); // 0 (postfix returns original value, then decre
 console.log("Count:", count); // -1
 
 // ============================================
-// 6. Bitwise Operators
+// 7. Bitwise Operators
 // ============================================
 
 // Bitwise operators work on 32-bit integers (ES1)
@@ -386,7 +434,7 @@ console.log("-20 >>> 1:", -20 >>> 1); // 2147483638 (treats as unsigned)
 console.log("5 >>> 0:", 5 >>> 0); // 5 (trick to convert to 32-bit unsigned)
 
 // ============================================
-// 7. Operator Precedence Examples
+// 8. Operator Precedence Examples
 // ============================================
 
 // Operator precedence determines evaluation order (ES1)
@@ -403,7 +451,7 @@ console.log("true || false && false:", true || (false && false)); // true (&& be
 console.log("(true || false) && false:", (true || false) && false); // false
 
 // ============================================
-// 8. typeof and instanceof Operators
+// 9. typeof and instanceof Operators
 // ============================================
 
 // typeof - Returns string indicating type (ES1)
@@ -461,7 +509,7 @@ printProperty(car, "make"); // "make: Toyota"
 printProperty(car, "year"); // "year does not exist"
 
 // ============================================
-// 9. Spread and Rest Operators
+// 10. Spread and Rest Operators
 // ============================================
 
 // Spread Operator (...) - Expands iterable into individual elements (ES2015)
@@ -534,7 +582,7 @@ const { x: xVal, y: yVal, ...remaining } = { x: 1, y: 2, z: 3, w: 4 };
 console.log("Object destructuring with rest:", { xVal, yVal, remaining }); // { xVal: 1, yVal: 2, remaining: { z: 3, w: 4 } }
 
 // ============================================
-// 10. Property Access Operators
+// 11. Property Access Operators
 // ============================================
 
 // Optional Chaining (?.) - Safely access nested properties (ES2020)
@@ -579,7 +627,7 @@ console.log("obj3.method?.():", obj3.method?.()); // undefined (method is null)
 // console.log("obj3.method():", obj3.method()); // ❌ Error: obj3.method is not a function
 
 // ============================================
-// 11. this Keyword
+// 12. this Keyword
 // ============================================
 
 // this - References current execution context (ES1)
@@ -616,7 +664,7 @@ const boundGreet = person.greet.bind(person);
 boundGreet(); // "Hello, I'm Bob" (this is bound to person)
 
 // ============================================
-// 12. super Keyword
+// 13. super Keyword
 // ============================================
 
 // super - Calls parent class methods (ES2015)
@@ -654,7 +702,7 @@ console.log("dog.name:", dog.name); // "Rex"
 console.log("dog.breed:", dog.breed); // "Labrador"
 
 // ============================================
-// 13. Other Operators
+// 14. Other Operators
 // ============================================
 
 // Comma Operator (,) - Evaluates each operand, returns last (ES1)

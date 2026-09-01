@@ -640,14 +640,81 @@ console.log(`
 // pointerdown, pointermove, pointerup, pointercancel
 // PointerEvent properties: pointerId, pointerType, pressure
 // Set pointer capture: element.setPointerCapture(e.pointerId);
+
+// Pointer event object properties
+element.addEventListener('pointerdown', (e) => {
+  e.pointerId;     // Unique identifier for this pointer (multi-touch)
+  e.pointerType;   // "mouse" | "touch" | "pen"
+  e.pressure;      // 0 (no pressure) to 1 (max); 0.5 for mouse with button held
+  e.isPrimary;     // true for the first/primary pointer
+  e.width, e.height; // Contact geometry (touch) in CSS pixels
+});
+
+// Pointer capture — keep receiving events even if pointer leaves the element
+element.addEventListener('pointerdown', (e) => {
+  element.setPointerCapture(e.pointerId); // track this pointer
+});
+
+// Coalesced events — combine rapid moves for performance
+element.addEventListener('pointermove', (e) => {
+  const events = e.getCoalescedEvents(); // batched move events
+});
+
+// ⚠️ pointer events vs mouse events:
+//   - Use pointer events for new code (unify mouse/touch/pen)
+//   - Mouse events still fire for compatibility
+//   - Disable touch-action to prevent gestures conflicting with pointer handlers
 `);
 
-console.log("\n📝 Drag and Drop API:\n");
+console.log("\n🖱️ Wheel Events:\n");
+console.log(`
+// wheel — mouse wheel / trackpad (does NOT bubble; fires on the scroll target)
+element.addEventListener('wheel', (e) => {
+  e.deltaY;    // Vertical scroll amount (+ down, - up)
+  e.deltaX;    // Horizontal scroll amount
+  e.deltaMode; // 0 = pixels, 1 = lines, 2 = pages
+  // Note: delta values vary by platform/browser — normalize before using
+});
+
+// ⚠️ wheel is NOT passive by default in most browsers.
+// If you don't preventDefault, mark it passive for performance:
+window.addEventListener('wheel', handler, { passive: true });
+
+// Do NOT use wheel to implement custom scrolling on a scrollable element —
+// it conflicts with native scroll. Use native scroll + scroll events instead.
+`);
+
+console.log("\n🖱️ Drag and Drop API:\n");
 console.log(`
 // Native drag-and-drop. Make element draggable: element.draggable = true
 // Drag source: dragstart, drag, dragend
 // Drop target: dragenter, dragover (must preventDefault), dragleave, drop
 // Use e.dataTransfer.setData/getData for data sharing
+
+// Draggable source
+element.draggable = true;
+element.addEventListener('dragstart', (e) => {
+  e.dataTransfer.setData('text/plain', element.id); // share data
+  e.dataTransfer.effectAllowed = 'move'; // 'copy' | 'move' | 'link'
+});
+
+// Drop target — must preventDefault on dragover to allow drop
+dropZone.addEventListener('dragover', (e) => {
+  e.preventDefault();               // REQUIRED to allow drop
+  e.dataTransfer.dropEffect = 'move';
+});
+
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const id = e.dataTransfer.getData('text/plain');
+  const dragged = document.getElementById(id);
+  dropZone.appendChild(dragged);
+});
+
+// Drag end (on the source)
+element.addEventListener('dragend', (e) => {
+  // e.dataTransfer.dropEffect tells whether drop succeeded
+});
 `);
 
 // 6. Custom Events

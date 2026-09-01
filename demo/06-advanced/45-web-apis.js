@@ -16,20 +16,22 @@ export {};
 // Table of Contents
 // ============================================
 
-// 1. Service Workers and Web Workers
-// 2. Intersection Observer
-// 3. Geolocation API
-// 4. WebSocket API
-// 5. Additional browser APIs
-// 6. Newer Web APIs
-// 7. Canvas API
-// 8. Web Components
-// 9. Additional Web APIs Overview
-// 10. Web Audio API
-// 11. WebRTC
-// 12. Common pitfalls
-// 13. Best practices
-// 14. TypeScript comparison notes
+// 1. Service Workers
+// 2. Web Workers
+// 3. Intersection Observer
+// 4. Geolocation API
+// 5. WebSocket API
+// 6. Additional browser APIs
+// 7. Newer Web APIs
+// 8. Canvas API
+// 9. Animations (CSS + Web Animations API)
+// 10. Web Components
+// 11. Additional Web APIs Overview
+// 12. Web Audio API
+// 13. WebRTC
+// 14. Common Pitfalls
+// 15. Best Practices
+// 16. TypeScript Comparison Notes
 
 // ============================================
 
@@ -449,7 +451,7 @@ createWebSocket();
 // ⚠️ Firewall/proxy issues
 
 // ============================================
-// Section 5: Additional browser APIs
+// Section 6: Additional browser APIs
 // ============================================
 
 console.log("\n=== Additional Web APIs ===");
@@ -534,7 +536,7 @@ if ('getBattery' in navigator) {
 
 // ============================================
 // ============================================
-// Section 6: Newer Web APIs
+// Section 7: Newer Web APIs
 // ============================================
 
 console.log("\n=== New Web APIs (2024-2025) ===\n");
@@ -582,7 +584,7 @@ Note: Check caniuse.com for current browser support
 // ============================================
 `);
 
-// Section 7: Canvas API
+// Section 8: Canvas API
 // ============================================
 /**
  * Canvas API — Programmatic 2D drawing
@@ -676,7 +678,84 @@ console.log("Common use cases: charts, games, image editing, data visualization"
 console.log("For 3D graphics, see WebGL or WebGPU instead");
 
 // ============================================
-// Section 8: Web Components (Custom Elements + Shadow DOM)
+// Section 9: Animations (CSS Transitions + Web Animations API)
+// ============================================
+
+console.log("\n=== Animations ===");
+
+// Three ways to animate in the browser:
+// 1. CSS Transitions — declarative state-to-state animation (transform, opacity)
+// 2. CSS Animations (@keyframes) — multi-step declarative animation
+// 3. Web Animations API (WAAPI) — programmatic, JS-driven animation (.animate())
+
+console.log("\n1. CSS Transitions:");
+console.log("  element.style.transition = 'transform 0.3s ease';");
+console.log("  element.style.transform = 'translateX(100px)'; // triggers transition");
+
+console.log("\n2. CSS Keyframes Animation:");
+console.log(`  // In CSS:
+  // @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+  // .animated { animation: slideIn 0.5s ease-out forwards; }`);
+
+console.log("\n3. Web Animations API (WAAPI) — programmatic:");
+console.log(`
+// Element.animate() — the core of WAAPI
+const box = document.getElementById('box');
+const anim = box.animate(
+  [
+    { transform: 'translateX(0)', opacity: 1 },
+    { transform: 'translateX(200px)', opacity: 0.5 },
+    { transform: 'translateX(0)', opacity: 1 }
+  ],
+  {
+    duration: 1000,          // ms
+    iterations: Infinity,    // or a finite number
+    direction: 'alternate',  // alternate | normal | reverse
+    easing: 'ease-in-out',   // timing function
+    fill: 'forwards'         // fill behavior after animation
+  }
+);
+
+// Control the animation:
+anim.pause();        // pause
+anim.play();         // resume
+anim.reverse();      // play backwards
+anim.cancel();       // stop and clear
+anim.finish();       // jump to end
+anim.updatePlaybackRate(2); // change speed
+
+// Events:
+anim.onfinish = () => console.log('Animation finished');
+anim.oncancel = () => console.log('Animation cancelled');
+
+// Promise-based completion (WAAPI 2.0):
+await anim.finished;   // resolves when animation finishes
+
+// playbackState: 'idle' | 'running' | 'paused' | 'finished'
+console.log('State:', anim.playbackState);
+`);
+
+console.log("\n4. requestAnimationFrame — manual animation loop:");
+console.log(`
+let start = null;
+function step(timestamp) {
+  if (!start) start = timestamp;
+  const progress = Math.min((timestamp - start) / 2000, 1); // 2s animation
+  element.style.transform = \`translateX(\${progress * 200}px)\`;
+  if (progress < 1) requestAnimationFrame(step); // loop until done
+}
+requestAnimationFrame(step);
+`);
+
+console.log("\n📊 Which to use?");
+console.log("- CSS transitions: simple UI state changes (hover, toggle)");
+console.log("- CSS @keyframes: fixed, declarative multi-step animations");
+console.log("- WAAPI: dynamic, JS-driven, controllable, reusable animations");
+console.log("- requestAnimationFrame: custom game loops, physics, frame-accurate control");
+console.log("  ⚠️  rAF runs at display refresh rate (60/120Hz); batch DOM writes in it");
+
+// ============================================
+// Section 10: Web Components (Custom Elements + Shadow DOM)
 // ============================================
 /**
  * Web Components — Reusable, encapsulated custom HTML elements
@@ -790,7 +869,7 @@ console.log("Lifecycle: connectedCallback, disconnectedCallback, attributeChange
 console.log("Key benefit: Framework-agnostic, built-in browser standard");
 
 // ============================================
-// Section 9: Additional Web APIs Overview
+// Section 11: Additional Web APIs Overview
 // ============================================
 /**
  * Other important Web APIs to be aware of:
@@ -833,7 +912,7 @@ console.log("Drag & Drop: Native drag-and-drop with draggable elements");
 console.log("BroadcastChannel: Cross-tab communication without polling");
 
 // ============================================
-// Section 10: Web Audio API
+// Section 12: Web Audio API
 // ============================================
 /**
  * Web Audio API — Audio processing and synthesis
@@ -899,7 +978,7 @@ console.log("Key nodes: Oscillator, Gain, BiquadFilter, Analyser, Panner, Convol
 `);
 
 // ============================================
-// Section 11: WebRTC (Real-Time Communication)
+// Section 13: WebRTC (Real-Time Communication)
 // ============================================
 /**
  * WebRTC — Peer-to-peer real-time communication
@@ -958,7 +1037,7 @@ console.log("WebRTC enables peer-to-peer audio/video/data communication");
 console.log("Key APIs: getUserMedia, RTCPeerConnection, RTCDataChannel");
 console.log("Requires signaling server for connection establishment (not included in API)");
 `);
-// Section 12: Common Pitfalls
+// Section 14: Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -1018,7 +1097,7 @@ console.log(
 );
 
 // ============================================
-// Section 13: Best Practices
+// Section 15: Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -1058,7 +1137,7 @@ console.log(
 );
 
 // ============================================
-// Section 14: TypeScript Comparison Notes
+// Section 16: TypeScript Comparison Notes
 // ============================================
 /*
 🔍 Key Differences in TypeScript:
