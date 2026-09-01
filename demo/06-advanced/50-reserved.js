@@ -8,6 +8,10 @@
 // Standardized features (Section 2) are listed briefly; unfinalized proposals
 // (Section 3+) may change syntax at any time — do not use in production.
 // Stage annotations follow reference/active.json and reference/withdrawn.json.
+//
+// 📌 Reserved slot #28:
+// Lesson number 28 is intentionally reserved (between 27 and 29) for a potential
+// future lesson on async patterns that bridges sync concepts (27) to async (29+).
 export {};
 
 // ============================================
