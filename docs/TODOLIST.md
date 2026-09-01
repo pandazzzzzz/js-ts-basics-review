@@ -200,7 +200,7 @@ TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39.1-es2021-featur
 **44 Design Patterns** — factory, singleton, observer, strategy, decorator
 **45 Web APIs** — Service Workers, Web Workers, Intersection Observer, Geolocation, WebSocket
 **46 Performance Optimization** — Performance API, debounce/throttle, lazy loading, virtual scrolling, code splitting
-**47 TypeScript Advanced** — generic constraints, conditional types, mapped types, template literal types, decorators
+**47 Metaprogramming** — JSDoc type hints, decorators (Stage 2.7), Reflect API, Proxy, Symbol metadata, type coercion/checking. For TypeScript's type system (generics, conditional/mapped/template-literal/utility types), see `47-metaprogramming-ts-comparison.ts`
 **48 Security Best Practices** — XSS protection, CSRF protection, CSP configuration, secure storage, input validation
 **49 Build Tools** — webpack config, vite config, code splitting, production optimization
 **50 Reserved for Future Extensions** — TC39 proposals, Temporal API (ES2027), Decorators (Stage 2.7), runtime evolution, future features
