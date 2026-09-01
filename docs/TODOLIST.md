@@ -183,12 +183,12 @@ TS comparison: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compa
 | 44 | `demo/06-advanced/44-design-patterns.js` | Design Patterns | ✅ |
 | 45 | `demo/06-advanced/45-web-apis.js` | Web APIs | ✅ |
 | 46 | `demo/06-advanced/46-performance.js` | Performance Optimization | ✅ |
-| 47 | `demo/06-advanced/47-typescript-advanced.js` | TypeScript Advanced Features | ✅ |
+| 47 | `demo/06-advanced/47-metaprogramming.js` | Metaprogramming (JSDoc/Reflect/Proxy/Decorators) | ✅ |
 | 48 | `demo/06-advanced/48-security.js` | Security Best Practices | ✅ |
 | 49 | `demo/06-advanced/49-build-tools.js` | Build Tool Integration | ✅ |
 | 50 | `demo/06-advanced/50-reserved.js` | Reserved for Future Extensions | ✅ |
 
-TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39.1-es2021-features-ts-comparison.ts` · `39.2-es2022-features-ts-comparison.ts` · `39.3-es2023-features-ts-comparison.ts` · `39.4-es2024-features-ts-comparison.ts` · `39.5-es2025-features-ts-comparison.ts` · `39.6-es2026-features-ts-comparison.ts` · `39.7-es2027-future-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-typescript-advanced-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
+TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39.1-es2021-features-ts-comparison.ts` · `39.2-es2022-features-ts-comparison.ts` · `39.3-es2023-features-ts-comparison.ts` · `39.4-es2024-features-ts-comparison.ts` · `39.5-es2025-features-ts-comparison.ts` · `39.6-es2026-features-ts-comparison.ts` · `39.7-es2027-future-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-metaprogramming-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
 
 ### Knowledge Points
 

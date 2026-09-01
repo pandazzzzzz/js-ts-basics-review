@@ -235,7 +235,7 @@ function add(a: number, b: number): number {
 **See**: 
 - `demo/01-basics/01-variables-ts-comparison.ts` - Type annotations
 - `demo/02-data-structures/08-objects-ts-comparison.ts` - Interfaces
-- `demo/06-advanced/47-typescript-advanced-ts-comparison.ts` - Advanced types
+- `demo/06-advanced/47-metaprogramming-ts-comparison.ts` - Advanced types
 
 ### 13. TypeScript Utility Types
 
@@ -247,7 +247,7 @@ function add(a: number, b: number): number {
 | `Pick<T, K>` | Select specific properties |
 | `Omit<T, K>` | Remove specific properties |
 
-**See**: `demo/06-advanced/47-typescript-advanced-ts-comparison.ts` for utility types examples
+**See**: `demo/06-advanced/47-metaprogramming-ts-comparison.ts` for utility types examples
 
 ### 14. Common Error Messages & Solutions
 

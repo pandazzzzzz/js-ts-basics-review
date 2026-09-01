@@ -1,10 +1,13 @@
-// TypeScript Advanced Features Demo
-// 📘 For TypeScript comparison, see: 47-typescript-advanced-ts-comparison.ts
+// JavaScript Metaprogramming Demo
+// 📘 For TypeScript comparison, see: 47-metaprogramming-ts-comparison.ts
 // 📘 ECMAScript Decorator Proposal: https://github.com/tc39/proposal-decorators
 // 📘 JSDoc Type Hints: https://www.typescriptlang.org/docs/handbook/jsdoc-reference.html
 // 📘 Reflect API: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
 // 📘 Proxy: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
 // 📌 Covers JavaScript metaprogramming features used by TypeScript
+// 📌 File scope: metaprogramming (JSDoc, Decorators, Reflect, Proxy, Symbol). For TypeScript's
+//    advanced type system (generics, conditional/mapped/template-literal/utility types),
+//    see the TS comparison file: 47-metaprogramming-ts-comparison.ts
 export {};
 
 // ============================================
@@ -441,5 +444,5 @@ console.log("📘 48-security.js - Type-safe security");
 // TypeScript Comparison
 // ============================================
 /*
-📘 See TypeScript comparison file: 47-typescript-advanced-ts-comparison.ts
+📘 See TypeScript comparison file: 47-metaprogramming-ts-comparison.ts
 */

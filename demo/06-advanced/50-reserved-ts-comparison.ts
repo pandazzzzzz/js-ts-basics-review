@@ -410,7 +410,7 @@ console.log("5. Catch errors before runtime");
 
 /*
 📘 See related:
-- 47-typescript-advanced-ts-comparison.ts (Advanced TS features)
+- 47-metaprogramming-ts-comparison.ts (Advanced TS features)
 - 39-es2022-plus-features-ts-comparison.ts (ES2022+ features)
 - 01-variables-ts-comparison.ts (Basic TS types)
 */

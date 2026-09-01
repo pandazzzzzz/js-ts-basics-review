@@ -432,7 +432,7 @@ console.log("\n--- 9. Cross-references ---\n");
 console.log("📘 Date/Time: 12-date-time.js");
 console.log("📘 Classes: 16-classes.js");
 console.log("📘 Iterators/Generators: 22-iterators-generators.js");
-console.log("📦 TypeScript Decorators: 47-typescript-advanced.js");
+console.log("📦 TypeScript Decorators: 47-metaprogramming.js");
 console.log("📘 Atomics: 41-typed-arrays.js");
 console.log("🌐 TC39 Proposals: https://github.com/tc39/proposals");
 

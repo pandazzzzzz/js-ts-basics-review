@@ -82,7 +82,7 @@ console.log("📘 Array methods: 06-arrays.js");
 console.log("📘 Regular Expressions: 21-regex.js");
 console.log("📘 Internationalization: 42-intl-api.js");
 console.log("📘 String methods: 04-strings.js");
-console.log("📘 TypeScript advanced features: 47-typescript-advanced.js");
+console.log("📘 TypeScript advanced features: 47-metaprogramming.js");
 
 // ============================================
 // 5. Verification

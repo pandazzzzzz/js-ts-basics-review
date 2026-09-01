@@ -909,7 +909,7 @@ console.log(`
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 32-modules.js - ES Modules");
-console.log("📘 47-typescript-advanced.js - TypeScript tooling");
+console.log("📘 47-metaprogramming.js - Metaprogramming (JSDoc/Reflect/Proxy/Decorators)");
 
 // ============================================
 // TypeScript Comparison

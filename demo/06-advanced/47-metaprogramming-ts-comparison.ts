@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: TypeScript Advanced Comparison
-// 📘 For JavaScript foundations, see: 47-typescript-advanced.js
-// This file demonstrates TypeScript-specific advanced features
+// 📘 For JavaScript foundations, see: 47-metaprogramming.js
+// This file demonstrates TypeScript-specific advanced features (the type system)
 
 export {}; // Make this file a module to avoid global scope conflicts
 
