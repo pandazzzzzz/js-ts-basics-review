@@ -6,6 +6,7 @@
   "scripts": {
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "demo": "node demo/01-basics/01-variables.js",
+    "verify": "node scripts/verify-consistency.cjs",
     "format": "node node_modules/prettier/bin/prettier.cjs --write \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" tsconfig.json",
     "format:check": "node node_modules/prettier/bin/prettier.cjs --check \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" tsconfig.json"
   },

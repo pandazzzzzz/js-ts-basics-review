@@ -17,3 +17,5 @@
 !.prettierignore
 !.nvmrc
 !CONTRIBUTING.md
+!scripts/
+!scripts/**

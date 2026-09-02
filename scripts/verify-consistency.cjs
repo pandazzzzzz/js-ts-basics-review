@@ -1,0 +1,151 @@
+/**
+ * verify-consistency.js — automated consistency checks for the demo corpus.
+ *
+ * Closes the "verification blind spot" documented in CLAUDE.md: ES version
+ * data used to be reconciled only by hand. This script checks:
+ *
+ *   1. Every demo verification block matches a reference/ entry and its
+ *      status/stage4Date/stage4DateType agree with it
+ *   2. Every reference/ feature is covered by at least one demo block
+ *   3. Every JS demo has a -ts-comparison.ts counterpart (and vice versa)
+ *   4. Filenames referenced across demo/docs/README actually exist
+ *   5. Difficulty tags and `export {}` ESM markers cover every demo file
+ *
+ * Usage: npm run verify   (exits non-zero on any failure)
+ */
+const fs = require("fs");
+const path = require("path");
+
+const root = path.resolve(__dirname, "..");
+const failures = [];
+const fail = (msg) => failures.push(msg);
+
+function walk(dir, out = []) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) walk(p, out);
+    else out.push(p);
+  }
+  return out;
+}
+
+// Reference feature keys are canonical; normalize block names for matching.
+const norm = (s) =>
+  s
+    .toLowerCase()
+    .replace(/^array\/\s*string\.prototype\./, "")
+    .replace(/^array\.prototype\s*\/\s*/, "")
+    .replace(/\s*\/\s*/g, " ")
+    .trim();
+
+// ---------- load reference data ----------
+const reference = {};
+for (const f of ["finished.json", "early.json", "active.json", "withdrawn.json"]) {
+  const j = JSON.parse(fs.readFileSync(path.join(root, "reference", f), "utf8"));
+  for (const [k, v] of Object.entries(j.features || j)) {
+    reference[k] = { ...v, refFile: f };
+  }
+}
+const refByNorm = new Map(Object.keys(reference).map((k) => [norm(k), k]));
+
+// ---------- collect demo files ----------
+const demoDir = path.join(root, "demo");
+const allFiles = walk(demoDir);
+const jsFiles = allFiles.filter((f) => f.endsWith(".js"));
+const tsFiles = allFiles.filter((f) => f.endsWith(".ts"));
+
+// ---------- parse verification blocks (both comment styles) ----------
+const blocks = [];
+for (const f of jsFiles) {
+  const rel = path.relative(root, f);
+  const lines = fs.readFileSync(f, "utf8").split("\n");
+  let cur = null;
+  lines.forEach((line, i) => {
+    if (/verification:/.test(line)) {
+      cur = { file: rel, line: i + 1 };
+      blocks.push(cur);
+      return;
+    }
+    if (!cur) return;
+    if (/\*\/|\=\= end verification block\=\=/i.test(line)) {
+      cur = null;
+      return;
+    }
+    let m;
+    if ((m = line.match(/(?:\*|\/\/)\s*feature:\s*(.+)/))) cur.feature = m[1].trim();
+    else if ((m = line.match(/(?:\*|\/\/)\s*status:\s*(.+)/))) cur.status = m[1].trim();
+    else if ((m = line.match(/(?:\*|\/\/)\s*stage4Date:\s*(\S+)/))) cur.stage4Date = m[1];
+    else if ((m = line.match(/(?:\*|\/\/)\s*stage4DateType:\s*(\S+)/))) cur.stage4DateType = m[1];
+    else if ((m = line.match(/(?:\*|\/\/)\s*lastVerified:\s*(\S+)/))) cur.lastVerified = m[1];
+  });
+}
+
+// ---------- check 1+2: block ↔ reference reconciliation ----------
+const covered = new Set();
+for (const b of blocks) {
+  if (!b.feature) {
+    fail(`${b.file}:${b.line} — verification block has no "feature:" field`);
+    continue;
+  }
+  const key = refByNorm.get(norm(b.feature));
+  if (!key) {
+    fail(`${b.file}:${b.line} — feature "${b.feature}" not found in reference/`);
+    continue;
+  }
+  covered.add(key);
+  const r = reference[key];
+  for (const field of ["status", "stage4Date", "stage4DateType"]) {
+    if (b[field] && r[field] && b[field] !== r[field]) {
+      fail(`${b.file}:${b.line} — "${key}" ${field}: demo says ${b[field]}, reference says ${r[field]}`);
+    }
+  }
+}
+for (const key of Object.keys(reference)) {
+  if (!covered.has(key)) fail(`reference entry "${key}" (${reference[key].refFile}) has no demo verification block`);
+}
+
+// ---------- check 3: JS ↔ TS pairing ----------
+const basenames = new Set(allFiles.map((f) => path.basename(f)));
+for (const f of jsFiles) {
+  const pair = path.basename(f).replace(/\.js$/, "-ts-comparison.ts");
+  if (!basenames.has(pair)) fail(`${path.relative(root, f)} is missing its TypeScript counterpart ${pair}`);
+}
+for (const f of tsFiles) {
+  const pair = path.basename(f).replace(/-ts-comparison\.ts$/, ".js");
+  if (!basenames.has(pair)) fail(`${path.relative(root, f)} is missing its JavaScript counterpart ${pair}`);
+}
+
+// ---------- check 4: referenced demo filenames exist ----------
+const refRe = /\b\d{2}(?:-\d)?-[a-z0-9-]+(?:-ts-comparison)?\.(?:js|ts)\b/g;
+const docFiles = [
+  ...walk(path.join(root, "docs")).filter((f) => f.endsWith(".md")),
+  path.join(root, "README.md"),
+];
+for (const f of [...allFiles, ...docFiles]) {
+  const text = fs.readFileSync(f, "utf8");
+  let m;
+  while ((m = refRe.exec(text)) !== null) {
+    if (!basenames.has(m[0])) {
+      fail(`${path.relative(root, f)} references non-existent demo file "${m[0]}"`);
+    }
+  }
+}
+
+// ---------- check 5: difficulty tags + ESM markers ----------
+for (const f of allFiles) {
+  const rel = path.relative(root, f);
+  const text = fs.readFileSync(f, "utf8");
+  if (!text.includes("🎯 Difficulty:")) fail(`${rel} is missing a 🎯 Difficulty tag`);
+  if (f.endsWith(".js") && !text.includes("export {}")) fail(`${rel} is missing the "export {}" ESM marker`);
+}
+
+// ---------- report ----------
+console.log(`Demo files: ${jsFiles.length} JS + ${tsFiles.length} TS`);
+console.log(`Verification blocks: ${blocks.length} · Reference entries: ${Object.keys(reference).length}`);
+if (failures.length === 0) {
+  console.log("✅ verify-consistency: all checks passed");
+  process.exit(0);
+}
+console.error(`\n❌ ${failures.length} consistency problem(s):`);
+for (const p of failures) console.error("  - " + p);
+process.exit(1);
