@@ -104,7 +104,7 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/june-13.md#arrayfindlast-and-arrayfindlastindex-for-stage-4
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/jun-06.md#findlastfindlastindex-for-stage-4
  */
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -171,7 +171,7 @@ console.log("\n--- 3. Hashbang Grammar ---\n");
  *   status: ES2023
  *   stage4Date: 2022-07
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2022-07/july-20.md#hashbang-grammar-for-stage-4
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2022-07/jul-20.md#shebang-grammar
  */
 
 // Hashbang (shebang) at the start of script files is now standardized

@@ -42,7 +42,7 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-29.md#array-grouping-for-stage-4
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#array-grouping-for-stage-4
  */
 
 const inventory = [
@@ -102,7 +102,7 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-29.md#promise-withresolvers-for-stage-4
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#promise-withresolvers-for-stage-4
  */
 
 // 📘 Official MDN example (Promise.withResolvers):
@@ -302,7 +302,7 @@ console.log("\n--- 5. Atomics.waitAsync() ---\n");
  *   status: ES2024
  *   stage4Date: 2023-05
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-05/may-17.md#atomicswaitasync-for-stage-4
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2023-05/may-15.md#atomicswaitasync-for-stage-4
  */
 
 // Async version of Atomics.wait(), doesn't block the main thread
