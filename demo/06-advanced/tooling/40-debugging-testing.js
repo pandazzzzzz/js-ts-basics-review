@@ -800,7 +800,7 @@ console.log("5. Don't rely on console output for assertions; use a test runner")
 console.log("\n=== Cross-references ===");
 console.log("📘 20-error-handling.js - Error handling");
 console.log("📘 27-memory-management.js - Memory debugging");
-console.log("📘 48-security.js - Security testing");
+console.log("📘 ../architecture/48-security.js - Security testing");
 
 // ============================================
 // TypeScript Comparison

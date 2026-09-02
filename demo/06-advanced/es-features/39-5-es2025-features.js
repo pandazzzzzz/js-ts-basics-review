@@ -509,9 +509,9 @@ console.log("📘 Set/Map: 10-map-set.js");
 console.log("📘 Iterators/Generators: 22-iterators-generators.js");
 console.log("📘 Regular Expressions: 21-regex.js");
 console.log("📘 Promises: 30-promises.js");
-console.log("📘 Typed Arrays: 41-typed-arrays.js");
+console.log("📘 Typed Arrays: ../data-processing/41-typed-arrays.js");
 console.log("📘 Modules: 32-modules.js");
-console.log("📘 Intl API: 42-intl-api.js");
+console.log("📘 Intl API: ../data-processing/42-intl-api.js");
 
 // ============================================
 // TypeScript Comparison

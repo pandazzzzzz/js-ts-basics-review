@@ -909,7 +909,7 @@ console.log("8. Buffer alignment and offsets");
 console.log("\n=== Cross-references ===");
 console.log("📘 06-5-typed-arrays.js - Typed arrays basics");
 console.log("📘 27-memory-management.js - Memory management");
-console.log("📘 43-storage-network.js - Binary data and storage");
+console.log("📘 ../web-platform/43-storage-network.js - Binary data and storage");
 
 // ============================================
 // TypeScript Comparison

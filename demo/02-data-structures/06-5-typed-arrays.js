@@ -418,8 +418,10 @@ console.log("\n=== Cross-references ===");
 console.log(
   "📘 06-1-arrays-basics.js / 06-2-arrays-iteration.js / 06-3-arrays-search-sort.js / 06-4-arrays-manipulation.js - Regular array methods"
 );
-console.log("📘 45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)");
-console.log("📘 43-storage-network.js - Fetch API with ArrayBuffer");
+console.log(
+  "📘 ../06-advanced/web-platform/45-web-apis.js - Web APIs that use TypedArrays (Canvas, Web Audio)"
+);
+console.log("📘 ../06-advanced/web-platform/43-storage-network.js - Fetch API with ArrayBuffer");
 
 // ============================================
 // TypeScript Comparison

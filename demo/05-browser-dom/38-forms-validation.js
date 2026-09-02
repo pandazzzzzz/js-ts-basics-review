@@ -731,8 +731,8 @@ input.setAttribute('autocomplete', 'email'); // Standardized values
 console.log("\n=== Cross-references ===");
 console.log("📘 37-events.js - Event handling");
 console.log("📘 24-2-debounce-throttle.js - Debounce/throttle for real-time validation");
-console.log("📘 43-storage-network.js - Storage and network");
-console.log("📘 48-security.js - Security and input validation");
+console.log("📘 ../06-advanced/web-platform/43-storage-network.js - Storage and network");
+console.log("📘 ../06-advanced/architecture/48-security.js - Security and input validation");
 
 // ============================================
 // TypeScript Comparison

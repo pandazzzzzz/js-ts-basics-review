@@ -47,7 +47,7 @@ Rationale:
   ✅ Consistent structure across all demo files
   ✅ Better maintainability (add new ES versions as they are released)
   ✅ All original content preserved, no features removed
-  ✅ ES2018 features (e.g. Intl.PluralRules) are covered in 42-intl-api.js rather than this 39-x chain
+  ✅ ES2018 features (e.g. Intl.PluralRules) are covered in ../data-processing/42-intl-api.js rather than this 39-x chain
 `);
 
 // ============================================
@@ -81,9 +81,9 @@ console.log("📘 Promise combinators: 30-promises.js");
 console.log("📘 Class features: 16-classes.js");
 console.log("📘 Array methods: 06-arrays.js");
 console.log("📘 Regular Expressions: 21-regex.js");
-console.log("📘 Internationalization: 42-intl-api.js");
+console.log("📘 Internationalization: ../data-processing/42-intl-api.js");
 console.log("📘 String methods: 04-strings.js");
-console.log("📘 TypeScript advanced features: 47-metaprogramming.js");
+console.log("📘 TypeScript advanced features: ../metaprogramming/47-metaprogramming.js");
 
 // ============================================
 // 5. Verification

@@ -168,27 +168,27 @@ TS comparison: `35-dom-basics-ts-comparison.ts` · `36-dom-manipulation-ts-compa
 
 | # | File | Topic | Status |
 |---|------|-------|--------|
-| 39 | `demo/06-advanced/39-es2022-plus-features.js` | ES2022+ Features (Index) | ✅ |
-| | `demo/06-advanced/39-1-es2021-features.js` | ES2021 Features | ✅ |
-| | `demo/06-advanced/39-2-es2022-features.js` | ES2022 Features | ✅ |
-| | `demo/06-advanced/39-3-es2023-features.js` | ES2023 Features | ✅ |
-| | `demo/06-advanced/39-4-es2024-features.js` | ES2024 Features | ✅ |
-| | `demo/06-advanced/39-5-es2025-features.js` | ES2025 Features | ✅ |
-| | `demo/06-advanced/39-6-es2026-features.js` | ES2026 Features | ✅ |
-| | `demo/06-advanced/39-7-es2027-future.js` | ES2027+ & Future Proposals | ✅ |
-| 40 | `demo/06-advanced/40-debugging-testing.js` | Debugging and Testing | ✅ |
-| 41 | `demo/06-advanced/41-typed-arrays.js` | Typed Arrays | ✅ |
-| 42 | `demo/06-advanced/42-intl-api.js` | Internationalization API | ✅ |
-| 43 | `demo/06-advanced/43-storage-network.js` | Storage and Network | ✅ |
-| 44 | `demo/06-advanced/44-design-patterns.js` | Design Patterns | ✅ |
-| 45 | `demo/06-advanced/45-web-apis.js` | Web APIs | ✅ |
-| 46 | `demo/06-advanced/46-performance.js` | Performance Optimization | ✅ |
-| 47 | `demo/06-advanced/47-metaprogramming.js` | Metaprogramming (JSDoc/Reflect/Proxy/Decorators) | ✅ |
-| 48 | `demo/06-advanced/48-security.js` | Security Best Practices | ✅ |
-| 49 | `demo/06-advanced/49-build-tools.js` | Build Tool Integration | ✅ |
-| 50 | `demo/06-advanced/50-reserved.js` | Reserved for Future Extensions | ✅ |
+| 39 | `demo/06-advanced/es-features/39-es2022-plus-features.js` | ES2022+ Features (Index) | ✅ |
+| | `demo/06-advanced/es-features/39-1-es2021-features.js` | ES2021 Features | ✅ |
+| | `demo/06-advanced/es-features/39-2-es2022-features.js` | ES2022 Features | ✅ |
+| | `demo/06-advanced/es-features/39-3-es2023-features.js` | ES2023 Features | ✅ |
+| | `demo/06-advanced/es-features/39-4-es2024-features.js` | ES2024 Features | ✅ |
+| | `demo/06-advanced/es-features/39-5-es2025-features.js` | ES2025 Features | ✅ |
+| | `demo/06-advanced/es-features/39-6-es2026-features.js` | ES2026 Features | ✅ |
+| | `demo/06-advanced/es-features/39-7-es2027-future.js` | ES2027+ & Future Proposals | ✅ |
+| 40 | `demo/06-advanced/tooling/40-debugging-testing.js` | Debugging and Testing | ✅ |
+| 41 | `demo/06-advanced/data-processing/41-typed-arrays.js` | Typed Arrays | ✅ |
+| 42 | `demo/06-advanced/data-processing/42-intl-api.js` | Internationalization API | ✅ |
+| 43 | `demo/06-advanced/web-platform/43-storage-network.js` | Storage and Network | ✅ |
+| 44 | `demo/06-advanced/architecture/44-design-patterns.js` | Design Patterns | ✅ |
+| 45 | `demo/06-advanced/web-platform/45-web-apis.js` | Web APIs | ✅ |
+| 46 | `demo/06-advanced/architecture/46-performance.js` | Performance Optimization | ✅ |
+| 47 | `demo/06-advanced/metaprogramming/47-metaprogramming.js` | Metaprogramming (JSDoc/Reflect/Proxy/Decorators) | ✅ |
+| 48 | `demo/06-advanced/architecture/48-security.js` | Security Best Practices | ✅ |
+| 49 | `demo/06-advanced/tooling/49-build-tools.js` | Build Tool Integration | ✅ |
+| 50 | `demo/06-advanced/metaprogramming/50-reserved.js` | Reserved for Future Extensions | ✅ |
 
-TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39-1-es2021-features-ts-comparison.ts` · `39-2-es2022-features-ts-comparison.ts` · `39-3-es2023-features-ts-comparison.ts` · `39-4-es2024-features-ts-comparison.ts` · `39-5-es2025-features-ts-comparison.ts` · `39-6-es2026-features-ts-comparison.ts` · `39-7-es2027-future-ts-comparison.ts` · `40-debugging-testing-ts-comparison.ts` · `41-typed-arrays-ts-comparison.ts` · `42-intl-api-ts-comparison.ts` · `43-storage-network-ts-comparison.ts` · `44-design-patterns-ts-comparison.ts` · `45-web-apis-ts-comparison.ts` · `46-performance-ts-comparison.ts` · `47-metaprogramming-ts-comparison.ts` · `48-security-ts-comparison.ts` · `49-build-tools-ts-comparison.ts` · `50-reserved-ts-comparison.ts`
+TS comparison: `../demo/06-advanced/es-features/39-es2022-plus-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-1-es2021-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-2-es2022-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-3-es2023-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-4-es2024-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-5-es2025-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-6-es2026-features-ts-comparison.ts` · `../demo/06-advanced/es-features/39-7-es2027-future-ts-comparison.ts` · `../demo/06-advanced/tooling/40-debugging-testing-ts-comparison.ts` · `../demo/06-advanced/data-processing/41-typed-arrays-ts-comparison.ts` · `../demo/06-advanced/data-processing/42-intl-api-ts-comparison.ts` · `../demo/06-advanced/web-platform/43-storage-network-ts-comparison.ts` · `../demo/06-advanced/architecture/44-design-patterns-ts-comparison.ts` · `../demo/06-advanced/web-platform/45-web-apis-ts-comparison.ts` · `../demo/06-advanced/architecture/46-performance-ts-comparison.ts` · `../demo/06-advanced/metaprogramming/47-metaprogramming-ts-comparison.ts` · `../demo/06-advanced/architecture/48-security-ts-comparison.ts` · `../demo/06-advanced/tooling/49-build-tools-ts-comparison.ts` · `../demo/06-advanced/metaprogramming/50-reserved-ts-comparison.ts`
 
 ### Knowledge Points
 
@@ -200,7 +200,7 @@ TS comparison: `39-es2022-plus-features-ts-comparison.ts` · `39-1-es2021-featur
 **44 Design Patterns** — factory, singleton, observer, strategy, decorator
 **45 Web APIs** — Service Workers, Web Workers, Intersection Observer, Geolocation, WebSocket
 **46 Performance Optimization** — Performance API, debounce/throttle, lazy loading, virtual scrolling, code splitting
-**47 Metaprogramming** — JSDoc type hints, decorators (Stage 2.7), Reflect API, Proxy, Symbol metadata, type coercion/checking. For TypeScript's type system (generics, conditional/mapped/template-literal/utility types), see `47-metaprogramming-ts-comparison.ts`
+**47 Metaprogramming** — JSDoc type hints, decorators (Stage 2.7), Reflect API, Proxy, Symbol metadata, type coercion/checking. For TypeScript's type system (generics, conditional/mapped/template-literal/utility types), see `../demo/06-advanced/metaprogramming/47-metaprogramming-ts-comparison.ts`
 **48 Security Best Practices** — XSS protection, CSRF protection, CSP configuration, secure storage, input validation
 **49 Build Tools** — webpack config, vite config, code splitting, production optimization
 **50 Reserved for Future Extensions** — TC39 proposals, Temporal API (ES2027), Decorators (Stage 2.7), runtime evolution, future features

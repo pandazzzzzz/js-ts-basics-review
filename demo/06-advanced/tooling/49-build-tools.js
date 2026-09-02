@@ -901,8 +901,8 @@ console.log(`
 
 📘 See related:
 - 32-modules.js (ES Modules)
-- 46-performance.js (Performance optimization)
-- 39-es2022-plus-features.js (Dynamic imports)
+- ../architecture/46-performance.js (Performance optimization)
+- ../es-features/39-es2022-plus-features.js (Dynamic imports)
 */
 
 // ============================================
@@ -910,7 +910,9 @@ console.log(`
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 32-modules.js - ES Modules");
-console.log("📘 47-metaprogramming.js - Metaprogramming (JSDoc/Reflect/Proxy/Decorators)");
+console.log(
+  "📘 ../metaprogramming/47-metaprogramming.js - Metaprogramming (JSDoc/Reflect/Proxy/Decorators)"
+);
 
 // ============================================
 // TypeScript Comparison

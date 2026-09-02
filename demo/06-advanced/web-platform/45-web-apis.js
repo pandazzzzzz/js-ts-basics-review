@@ -1142,7 +1142,7 @@ console.log(
 console.log("\n=== Cross-references ===");
 console.log("📘 35-dom-basics.js - DOM basics");
 console.log("📘 43-storage-network.js - Storage and network");
-console.log("📘 46-performance.js - Performance optimization");
+console.log("📘 ../architecture/46-performance.js - Performance optimization");
 
 // ============================================
 // TypeScript Comparison Notes

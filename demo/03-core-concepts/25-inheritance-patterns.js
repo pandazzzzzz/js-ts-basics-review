@@ -1389,7 +1389,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 15-prototypes-inheritance.js - Prototypal inheritance");
 console.log("📘 16-classes.js - ES6 class syntax");
 console.log("📘 24-function-patterns-advanced.js - Functional patterns & composition");
-console.log("📘 44-design-patterns.js - More design patterns");
+console.log("📘 ../06-advanced/architecture/44-design-patterns.js - More design patterns");
 
 // ============================================
 // TypeScript Comparison

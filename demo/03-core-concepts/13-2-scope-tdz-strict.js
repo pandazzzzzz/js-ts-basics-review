@@ -431,7 +431,9 @@ console.log("📘 13-1-scope-basics.js - Global, function, block, lexical scope"
 console.log("📘 13-3-closures-basics.js - Closures and data privacy");
 console.log("📘 01-variables.js - Variable declarations and hoisting");
 console.log("📘 07-1-functions-basics.js - Function parameters and scope");
-console.log("📘 48-security.js - Security implications of eval() and code injection");
+console.log(
+  "📘 ../06-advanced/architecture/48-security.js - Security implications of eval() and code injection"
+);
 
 // ============================================
 // TypeScript Comparison

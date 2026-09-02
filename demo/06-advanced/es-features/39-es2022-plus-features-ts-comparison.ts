@@ -47,6 +47,6 @@ console.log("File naming matches the corresponding JS demo files.");
 // - 16-classes-ts-comparison.ts (ES2022 class features)
 // - 06-arrays-ts-comparison.ts (ES2023 array methods)
 // - 21-regex-ts-comparison.ts (RegExp /d, /v flags)
-// - 42-intl-api-ts-comparison.ts (Internationalization)
+// - ../data-processing/42-intl-api-ts-comparison.ts (Internationalization)
 // - 04-strings-ts-comparison.ts (String methods)
-// - 47-metaprogramming-ts-comparison.ts (Decorators, more TS features)
+// - ../metaprogramming/47-metaprogramming-ts-comparison.ts (Decorators, more TS features)

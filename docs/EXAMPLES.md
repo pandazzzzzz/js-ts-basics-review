@@ -10,7 +10,7 @@
 | 遍历/映射/过滤 | `demo/02-data-structures/06-2-arrays-iteration.js` | forEach, map, filter, reduce, flat, flatMap |
 | 查找/排序 | `demo/02-data-structures/06-3-arrays-search-sort.js` | find, findIndex, includes, some, every, sort |
 | 增删改/拷贝 | `demo/02-data-structures/06-4-arrays-manipulation.js` | push, pop, splice, slice, concat, spread |
-| 不可变数组方法 | `demo/06-advanced/39-3-es2023-features.js` | toSorted, toSpliced, toReversed, with |
+| 不可变数组方法 | `demo/06-advanced/es-features/39-3-es2023-features.js` | toSorted, toSpliced, toReversed, with |
 | 类型数组 | `demo/02-data-structures/06-5-typed-arrays.js` | TypedArray, ArrayBuffer, DataView |
 | 深拷贝数组 | `demo/02-data-structures/06-4-arrays-manipulation.js` | 深拷贝 vs 浅拷贝 |
 
@@ -45,7 +45,7 @@
 | Class 语法 | `demo/03-core-concepts/16-classes.js` | class, extends, super, static |
 | this 关键字 | `demo/03-core-concepts/14-this-keyword.js` | this 绑定规则、call/apply/bind |
 | 属性描述符 | `demo/03-core-concepts/17-property-descriptors.js` | defineProperty, getter/setter |
-| 设计模式 | `demo/06-advanced/44-design-patterns.js` | Singleton, Factory, Observer, Strategy |
+| 设计模式 | `demo/06-advanced/architecture/44-design-patterns.js` | Singleton, Factory, Observer, Strategy |
 
 ## 🛡️ 类型与错误
 
@@ -55,7 +55,7 @@
 | 类型判断 | `demo/01-basics/01-variables.js` | typeof, instanceof, 类型转换 |
 | 错误处理 | `demo/03-core-concepts/20-error-handling.js` | try/catch, Error, 自定义错误 |
 | 可选链/空值合并 | `demo/03-core-concepts/18-es6-plus-syntax.js` | ?., ??=, 短路求值 |
-| TypeScript 类型 | `demo/06-advanced/47-metaprogramming-ts-comparison.ts` | 泛型、条件类型、映射类型 |
+| TypeScript 类型 | `demo/06-advanced/metaprogramming/47-metaprogramming-ts-comparison.ts` | 泛型、条件类型、映射类型 |
 
 ## 🖥️ 浏览器 DOM
 
@@ -65,9 +65,9 @@
 | DOM 操作 | `demo/05-browser-dom/36-dom-manipulation.js` | 创建、修改、删除元素 |
 | 事件处理 | `demo/05-browser-dom/37-events.js` | 事件冒泡/捕获、委托、常用事件类型 |
 | 表单验证 | `demo/05-browser-dom/38-forms-validation.js` | 约束验证、自定义验证 |
-| 存储方案 | `demo/06-advanced/43-storage-network.js` | localStorage, IndexedDB, Cookie |
-| Web API | `demo/06-advanced/45-web-apis.js` | Service Worker, WebSocket, 各种 API |
-| 动画 | `demo/06-advanced/45-web-apis.js` | CSS 动画, Web Animations API, rAF |
+| 存储方案 | `demo/06-advanced/web-platform/43-storage-network.js` | localStorage, IndexedDB, Cookie |
+| Web API | `demo/06-advanced/web-platform/45-web-apis.js` | Service Worker, WebSocket, 各种 API |
+| 动画 | `demo/06-advanced/web-platform/45-web-apis.js` | CSS 动画, Web Animations API, rAF |
 
 ## 🔄 迭代器与生成器
 
@@ -75,7 +75,7 @@
 |------|------|------|
 | 迭代器协议 | `demo/03-core-concepts/22-iterators-generators.js` | Iterable, Iterator 接口 |
 | 生成器函数 | `demo/03-core-concepts/22-iterators-generators.js` | function*, yield, yield* |
-| Iterator helpers | `demo/06-advanced/39-5-es2025-features.js` | map, filter, take, drop, toArray |
+| Iterator helpers | `demo/06-advanced/es-features/39-5-es2025-features.js` | map, filter, take, drop, toArray |
 
 ## 🎨 元编程
 
@@ -84,27 +84,27 @@
 | Proxy | `demo/03-core-concepts/23-proxy-reflect.js` | 代理、拦截器、陷阱 |
 | Reflect API | `demo/03-core-concepts/23-proxy-reflect.js` | Reflect 对象方法 |
 | Symbol | `demo/03-core-concepts/19-symbol-deep.js` | 唯一标识符、Well-known Symbols |
-| 装饰器 | `demo/06-advanced/47-metaprogramming.js` | Stage 2.7 装饰器提案 |
-| JSDoc 类型 | `demo/06-advanced/47-metaprogramming.js` | JSDoc 类型注解 |
+| 装饰器 | `demo/06-advanced/metaprogramming/47-metaprogramming.js` | Stage 2.7 装饰器提案 |
+| JSDoc 类型 | `demo/06-advanced/metaprogramming/47-metaprogramming.js` | JSDoc 类型注解 |
 
 ## 🚀 性能优化
 
 | 场景 | 文件 | 说明 |
 |------|------|------|
-| 性能优化技巧 | `demo/06-advanced/46-performance.js` | 重绘重排、防抖节流、懒加载 |
+| 性能优化技巧 | `demo/06-advanced/architecture/46-performance.js` | 重绘重排、防抖节流、懒加载 |
 | 内存管理 | `demo/03-core-concepts/27-memory-management.js` | GC、内存泄漏、WeakRef |
-| 性能测量 | `demo/06-advanced/46-performance.js` | performance API, User Timing |
-| Web Workers | `demo/06-advanced/45-web-apis.js` | 主线程外计算 |
+| 性能测量 | `demo/06-advanced/architecture/46-performance.js` | performance API, User Timing |
+| Web Workers | `demo/06-advanced/web-platform/45-web-apis.js` | 主线程外计算 |
 
 ## 🌐 国际化
 
 | 场景 | 文件 | 说明 |
 |------|------|------|
-| 数字格式化 | `demo/06-advanced/42-intl-api.js` | Intl.NumberFormat |
-| 日期时间格式化 | `demo/06-advanced/42-intl-api.js` | Intl.DateTimeFormat, Temporal |
-| 相对时间 | `demo/06-advanced/42-intl-api.js` | Intl.RelativeTimeFormat |
-| 复数规则 | `demo/06-advanced/42-intl-api.js` | Intl.PluralRules |
-| 列表格式化 | `demo/06-advanced/42-intl-api.js` | Intl.ListFormat |
+| 数字格式化 | `demo/06-advanced/data-processing/42-intl-api.js` | Intl.NumberFormat |
+| 日期时间格式化 | `demo/06-advanced/data-processing/42-intl-api.js` | Intl.DateTimeFormat, Temporal |
+| 相对时间 | `demo/06-advanced/data-processing/42-intl-api.js` | Intl.RelativeTimeFormat |
+| 复数规则 | `demo/06-advanced/data-processing/42-intl-api.js` | Intl.PluralRules |
+| 列表格式化 | `demo/06-advanced/data-processing/42-intl-api.js` | Intl.ListFormat |
 
 ## 📝 正则表达式
 
@@ -112,8 +112,8 @@
 |------|------|------|
 | 基础语法 | `demo/03-core-concepts/21-regex.js` | 元字符、量词、分组 |
 | 常用方法 | `demo/03-core-concepts/21-regex.js` | test, exec, match, replace |
-| ES2024 v flag | `demo/06-advanced/39-4-es2024-features.js` | Unicode 属性类、集合操作 |
-| RegExp.escape | `demo/06-advanced/39-5-es2025-features.js` | 转义用户输入 |
+| ES2024 v flag | `demo/06-advanced/es-features/39-4-es2024-features.js` | Unicode 属性类、集合操作 |
+| RegExp.escape | `demo/06-advanced/es-features/39-5-es2025-features.js` | 转义用户输入 |
 
 ---
 

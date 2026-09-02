@@ -729,7 +729,9 @@ console.log("  1. Store timestamps as UTC (Date.now() / toISOString())");
 console.log("  2. Use Date.parse with ISO 8601 strings for reliable parsing");
 console.log("  3. Avoid Date mutators; create new Date instances instead");
 console.log("  4. Use Intl.DateTimeFormat for locale-aware formatting");
-console.log("  5. Consider Temporal (ES2027) for new projects (see 50-reserved.js)");
+console.log(
+  "  5. Consider Temporal (ES2027) for new projects (see ../06-advanced/metaprogramming/50-reserved.js)"
+);
 console.log("  6. Store dates as strings/numbers in JSON, not raw Date objects");
 
 // ============================================
@@ -767,8 +769,8 @@ console.log("  6. Store dates as strings/numbers in JSON, not raw Date objects")
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 05-numbers-math.js - Numbers and Math");
-console.log("📘 42-intl-api.js - Internationalization API");
-console.log("📘 50-reserved.js - Temporal API (ES2027)");
+console.log("📘 ../06-advanced/data-processing/42-intl-api.js - Internationalization API");
+console.log("📘 ../06-advanced/metaprogramming/50-reserved.js - Temporal API (ES2027)");
 
 // ============================================
 // TypeScript Comparison

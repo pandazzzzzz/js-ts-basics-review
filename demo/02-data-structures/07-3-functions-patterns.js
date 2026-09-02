@@ -572,7 +572,9 @@ console.log("📘 07-1-functions-basics.js - Function basics");
 console.log("📘 07-2-functions-advanced.js - Advanced function concepts");
 console.log("📘 24-function-patterns-advanced.js - Function pattern deep dive");
 console.log("📘 13-scope-closures.js - Closures and scope");
-console.log("📘 44-design-patterns.js - Design patterns using functions");
+console.log(
+  "📘 ../06-advanced/architecture/44-design-patterns.js - Design patterns using functions"
+);
 console.log("📘 26-optimization-performance.js - Performance optimization");
 
 // ============================================

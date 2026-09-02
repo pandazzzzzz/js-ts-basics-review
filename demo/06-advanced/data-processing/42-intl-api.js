@@ -888,7 +888,7 @@ console.log(`// Example template (future syntax):
 // const mf = new Intl.MessageFormat(\`You have {count, plural, =0 {no items} one {one item} other {# items}}.\`, 'en-US');
 // mf.format({ count: 5 });  // "You have 5 items."
 `);
-// 📘 See 50-reserved.js (future extensions topic)
+// 📘 See ../metaprogramming/50-reserved.js (future extensions topic)
 
 // ============================================
 // Cross-references
@@ -896,7 +896,7 @@ console.log(`// Example template (future syntax):
 console.log("\n=== Cross-references ===");
 console.log("📘 12-date-time.js - Date and time formatting");
 console.log("📘 04-strings.js - String comparison");
-console.log("📘 50-reserved.js - Temporal API");
+console.log("📘 ../metaprogramming/50-reserved.js - Temporal API");
 
 // ============================================
 // TypeScript Comparison

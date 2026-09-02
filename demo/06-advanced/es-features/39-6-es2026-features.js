@@ -462,7 +462,7 @@ console.log("📘 Numbers/Math: 05-numbers-math.js");
 console.log("📘 Arrays: 06-arrays.js");
 console.log("📘 Async Iterators: 22-iterators-generators.js");
 console.log("📘 Error Handling: 20-error-handling.js");
-console.log("📘 Typed Arrays: 41-typed-arrays.js");
+console.log("📘 Typed Arrays: ../data-processing/41-typed-arrays.js");
 console.log("📘 Map/Set: 10-map-set.js");
 console.log("📘 JSON: 11-json.js");
 console.log("📘 Iterators: 22-iterators-generators.js");

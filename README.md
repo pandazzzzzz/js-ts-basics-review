@@ -10,7 +10,7 @@ npm install
 
 # Run a JS demo
 node demo/01-basics/01-variables.js
-node demo/06-advanced/39-5-es2025-features.js   # ES2025 features
+node demo/06-advanced/es-features/39-5-es2025-features.js   # ES2025 features
 
 # Run a TS comparison file (after npm install)
 node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts

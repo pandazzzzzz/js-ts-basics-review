@@ -609,7 +609,7 @@ console.log("\n=== Cross-references ===");
 console.log("📘 26-optimization-performance.js - Optimization patterns");
 console.log("📘 27-memory-management.js - Memory management");
 console.log("📘 24-2-debounce-throttle.js - Complete debounce/throttle implementations");
-console.log("📘 45-web-apis.js - Web APIs");
+console.log("📘 ../web-platform/45-web-apis.js - Web APIs");
 
 // ============================================
 // TypeScript Comparison

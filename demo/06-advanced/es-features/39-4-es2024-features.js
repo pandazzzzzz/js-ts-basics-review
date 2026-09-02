@@ -422,8 +422,8 @@ console.log("\n--- 9. Cross-references ---\n");
 
 console.log("📘 Promises: 30-promises.js");
 console.log("📘 Regular Expressions: 21-regex.js");
-console.log("📘 Typed Arrays: 41-typed-arrays.js");
-console.log("📘 Atomics: 41-typed-arrays.js");
+console.log("📘 Typed Arrays: ../data-processing/41-typed-arrays.js");
+console.log("📘 Atomics: ../data-processing/41-typed-arrays.js");
 console.log("� Unicode and Strings: 04-strings.js");
 console.log("📘 Arrays: 06-arrays.js");
 

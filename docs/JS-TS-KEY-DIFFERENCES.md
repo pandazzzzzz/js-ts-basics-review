@@ -145,7 +145,7 @@ config.host ??= "localhost"; // Becomes "localhost" (undefined)
 
 ⚠️ **Critical**: `??=` preserves `0`, `""`, `false` unlike `||=`
 
-**See**: `demo/06-advanced/39-es2022-plus-features.js`
+**See**: `demo/06-advanced/es-features/39-es2022-plus-features.js`
 
 ### 9. Variable Declarations (Same in Both)
 
@@ -235,7 +235,7 @@ function add(a: number, b: number): number {
 **See**: 
 - `demo/01-basics/01-variables-ts-comparison.ts` - Type annotations
 - `demo/02-data-structures/08-objects-ts-comparison.ts` - Interfaces
-- `demo/06-advanced/47-metaprogramming-ts-comparison.ts` - Advanced types
+- `demo/06-advanced/metaprogramming/47-metaprogramming-ts-comparison.ts` - Advanced types
 
 ### 13. TypeScript Utility Types
 
@@ -247,7 +247,7 @@ function add(a: number, b: number): number {
 | `Pick<T, K>` | Select specific properties |
 | `Omit<T, K>` | Remove specific properties |
 
-**See**: `demo/06-advanced/47-metaprogramming-ts-comparison.ts` for utility types examples
+**See**: `demo/06-advanced/metaprogramming/47-metaprogramming-ts-comparison.ts` for utility types examples
 
 ### 14. Common Error Messages & Solutions
 
@@ -295,7 +295,7 @@ await using db = new DatabaseConnection();
 
 Note: `using` reached conditional Stage 4 in May 2025; all conditions were met and it advanced to full Stage 4 in May 2026 (ES2027). TypeScript 5.2+ supports the syntax.
 
-**See**: `demo/06-advanced/39-es2022-plus-features.js`
+**See**: `demo/06-advanced/es-features/39-es2022-plus-features.js`
 
 ---
 

@@ -518,7 +518,7 @@ console.log("📘 13-3-closures-basics.js - Closure basics");
 console.log("📘 13-4-closures-patterns.js - Closure patterns");
 console.log("📘 27-memory-management.js - Memory management and garbage collection");
 console.log("📘 26-optimization-performance.js - Performance optimization");
-console.log("📘 48-security.js - Security best practices");
+console.log("📘 ../06-advanced/architecture/48-security.js - Security best practices");
 
 // ============================================
 // TypeScript Comparison

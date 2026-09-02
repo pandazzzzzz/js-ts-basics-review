@@ -552,7 +552,7 @@ console.log("- CSSOM: https://www.w3.org/TR/cssom-1/\n");
 console.log("\n=== Cross-references ===");
 console.log("📘 36-dom-manipulation.js - DOM manipulation");
 console.log("📘 37-events.js - Event handling");
-console.log("📘 43-storage-network.js - Storage and network");
+console.log("📘 ../06-advanced/web-platform/43-storage-network.js - Storage and network");
 
 // ============================================
 // TypeScript Comparison

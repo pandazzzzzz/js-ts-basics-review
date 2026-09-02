@@ -707,7 +707,7 @@ console.log("6. Don't use anonymous functions for event listeners (can't remove)
 console.log("\n=== Cross-references ===");
 console.log("📘 35-dom-basics.js - DOM basics");
 console.log("📘 37-events.js - Event handling");
-console.log("📘 45-web-apis.js - Advanced Web APIs");
+console.log("📘 ../06-advanced/web-platform/45-web-apis.js - Advanced Web APIs");
 
 // ============================================
 // TypeScript Comparison

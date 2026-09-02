@@ -1327,7 +1327,7 @@ Performance & Optimization:
 console.log("\n=== Cross-references ===");
 console.log("📘 24-2-debounce-throttle.js - Debounce and throttle");
 console.log("📘 27-memory-management.js - Memory management");
-console.log("📘 46-performance.js - Performance optimization");
+console.log("📘 ../06-advanced/architecture/46-performance.js - Performance optimization");
 
 // ============================================
 // TypeScript Comparison

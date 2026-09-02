@@ -57,7 +57,7 @@ console.log("Stage 4: Finished - Approved for ES standard");
 
 console.log("\n=== Recent Standardized Features ===");
 
-// Standardized features (Stage 4); brief list only. See 39-es2022-plus-features.js for full examples.
+// Standardized features (Stage 4); brief list only. See ../es-features/39-es2022-plus-features.js for full examples.
 
 // ES2025
 /*
@@ -246,7 +246,7 @@ console.log("//   module fragment Tests { import { helper } from Utils; /* ... *
 
 // --- Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard) ---
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
-// See tc39/proposal-intl-messageformat (see 42-intl-api.js Section 13 for detail).
+// See tc39/proposal-intl-messageformat (see ../data-processing/42-intl-api.js Section 13 for detail).
 console.log("// Intl.MessageFormat (Stage 1) — future syntax, illustrative:");
 console.log(
   "//   const mf = new Intl.MessageFormat(`You have {count, plural, =0 {no items} one {one item} other {# items}}.`, 'en-US');"
@@ -331,8 +331,8 @@ console.log("- MDN: https://developer.mozilla.org/");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 39-7-es2027-future.js - ES2027 and future proposals");
-console.log("📘 42-intl-api.js - Internationalization API");
+console.log("📘 ../es-features/39-7-es2027-future.js - ES2027 and future proposals");
+console.log("📘 ../data-processing/42-intl-api.js - Internationalization API");
 
 // ============================================
 // TypeScript Comparison

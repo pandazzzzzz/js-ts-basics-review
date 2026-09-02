@@ -289,7 +289,7 @@ Covers:
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 43-storage-network.js - Browser storage API details");
+console.log("📘 ../web-platform/43-storage-network.js - Browser storage API details");
 console.log("📘 33-fetch-api.js - Network request security patterns");
 console.log("📘 38-forms-validation.js - Form input validation techniques");
 console.log("📘 OWASP Top 10 Documentation: https://owasp.org/Top10/");

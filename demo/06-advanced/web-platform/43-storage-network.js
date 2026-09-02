@@ -271,5 +271,5 @@ Covers:
 console.log("\n=== Cross-references ===");
 console.log("📘 33-fetch-api.js / 33-3-fetch-practical-patterns.js - Complete Fetch API patterns");
 console.log("📘 37-events.js - DOM event handling fundamentals");
-console.log("📘 48-security.js - Web security best practices for storage/network");
+console.log("📘 ../architecture/48-security.js - Web security best practices for storage/network");
 console.log("📘 36-dom-manipulation.js - DOM update patterns for dynamic data");

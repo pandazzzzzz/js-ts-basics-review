@@ -518,7 +518,7 @@ console.log("📘 24-2-debounce-throttle.js - Debounce and throttle patterns");
 console.log("📘 24-3-memoization-cache.js - Memoization and caching patterns");
 console.log("📘 07-3-functions-patterns.js - Function pattern basics");
 console.log("📘 13-scope-closures.js - Closures and lexical scope");
-console.log("📘 44-design-patterns.js - Design patterns");
+console.log("📘 ../06-advanced/architecture/44-design-patterns.js - Design patterns");
 
 // ============================================
 // TypeScript Comparison

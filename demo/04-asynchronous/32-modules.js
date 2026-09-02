@@ -300,7 +300,7 @@ console.log("✅ Organize by feature, not by type (features/user/ over models/, 
 console.log("\n=== Cross-references ===");
 console.log("📘 18-es6-plus-syntax.js - ES6+ syntax features");
 console.log("📘 33-3-fetch-practical-patterns.js - Dynamic import patterns");
-console.log("📘 49-build-tools.js - Build tools and bundling");
+console.log("📘 ../06-advanced/tooling/49-build-tools.js - Build tools and bundling");
 
 // ============================================
 // TypeScript Comparison
