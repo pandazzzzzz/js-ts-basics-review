@@ -360,7 +360,8 @@ toolbar.addEventListener('click', (e) => {
 // 4. Browser Default Behavior
 // preventDefault() cancels built-in behavior (link navigation, form submit, context menu)
 // Many events are cancelable; check event.defaultPrevented to detect if a listener already canceled
-// passive: true listeners cannot call preventDefault (throws in strict); good for scroll performance
+// passive: true listeners cannot cancel the event — preventDefault() is ignored
+// (with a console warning), it does not throw; good for scroll performance
 
 console.log("\n=== Section 4: Browser Default Behavior ===\n");
 
@@ -442,7 +443,7 @@ console.log(`
 │ keydown (Tab)        │ Move focus to next element          │
 │ contextmenu          │ Show browser context menu            │
 │ dragstart            │ Start drag and drop operation       │
-│ wheel / scroll       │ Scroll page                          │
+│ wheel / scroll       │ Scroll page (only wheel is cancelable) │
 │ touchmove            │ Pan/scroll on touch devices        │
 │ beforeunload         │ Show "Leave site?" confirmation    │
 └──────────────────────┴─────────────────────────────────┘
@@ -669,7 +670,8 @@ element.addEventListener('pointermove', (e) => {
 
 console.log("\n🖱️ Wheel Events:\n");
 console.log(`
-// wheel — mouse wheel / trackpad (does NOT bubble; fires on the scroll target)
+// wheel — mouse wheel / trackpad (DOES bubble; fires on the element under the
+// pointer, which may differ from the element that actually scrolls)
 element.addEventListener('wheel', (e) => {
   e.deltaY;    // Vertical scroll amount (+ down, - up)
   e.deltaX;    // Horizontal scroll amount
@@ -677,9 +679,10 @@ element.addEventListener('wheel', (e) => {
   // Note: delta values vary by platform/browser — normalize before using
 });
 
-// ⚠️ wheel is NOT passive by default in most browsers.
-// If you don't preventDefault, mark it passive for performance:
-window.addEventListener('wheel', handler, { passive: true });
+// ⚠️ Chrome treats wheel/touchstart/touchmove listeners on window/document/body
+// as passive by default (since Chrome 73/56); most other browsers now do too.
+// If you do need preventDefault on those targets, pass { passive: false } explicitly:
+window.addEventListener('wheel', handler, { passive: false });
 
 // Do NOT use wheel to implement custom scrolling on a scrollable element —
 // it conflicts with native scroll. Use native scroll + scroll events instead.

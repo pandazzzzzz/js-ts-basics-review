@@ -73,8 +73,9 @@ if (typeof document !== "undefined") {
   console.log(`
 ⚠️ cloneNode Notes:
 - Does NOT copy event listeners added with addEventListener
-- DOES copy inline handler attributes / IDL properties (e.g. el.onclick = fn)
-- Does not copy JavaScript properties other than standard attributes
+- Copies HTML attributes, including inline handler markup like onclick="fn()"
+- Does NOT copy JS-assigned handler properties (el.onclick = fn) or other
+  JavaScript properties — only attributes are cloned
 - id attribute is also copied, avoid duplicate IDs!
 `);
 
@@ -96,7 +97,7 @@ if (typeof document !== "undefined") {
 
   // One-time insertion to DOM
   // ul.appendChild(fragment); // Only triggers one reflow!
-  console.log("After append, fragment becomes empty:", fragment.childNodes.length === 0);
+  // (After appending, fragment.childNodes.length === 0 — its children move into ul.)
 } else {
   console.log("\n⚠️ Non-browser environment, creating element examples shown in code form");
 }
@@ -219,8 +220,10 @@ console.log("│ replaceWith()      │ Replace self │ ✅ Yes   │ undefined
 console.log("│ appendChild()      │ End          │ ❌ No    │ Node       │");
 console.log("│ insertBefore()     │ Custom       │ ❌ No    │ Node       │");
 console.log("│ replaceChild()     │ Replace      │ ❌ No    │ Old node   │");
-console.log("│ insertAdjacent*    │ Precise      │ ❌ No    │ undefined  │");
+console.log("│ insertAdjacent*    │ Precise      │ ❌ No    │ Element*   │");
 console.log("└────────────────────┴──────────────┴──────────┴────────────┘\n");
+console.log("* insertAdjacentElement() returns the inserted element (or null);");
+console.log("  insertAdjacentHTML() / insertAdjacentText() return undefined.");
 
 console.log("⚠️ Important: Element Movement Behavior");
 console.log(`

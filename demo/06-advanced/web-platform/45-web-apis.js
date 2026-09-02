@@ -545,7 +545,7 @@ View Transitions API (Chrome 111+, Safari 18+, Firefox 144+):
 - Smooth animated transitions between page states
 - document.startViewTransition(() => updateDOM())
 - SPA (same-document) transitions: Chrome 111+, Safari 18+, Firefox 144+
-- MPA (cross-document) transitions: Only supported in Chrome 126+ and Firefox 127+
+- MPA (cross-document) transitions: Chrome 126+ and Safari 18.2+; not supported in Firefox
 - CSS: ::view-transition pseudo-elements for custom animations
 - Great for single-page app navigation
 - ⚠️ Check support: if ('startViewTransition' in document)
@@ -728,11 +728,11 @@ anim.updatePlaybackRate(2); // change speed
 anim.onfinish = () => console.log('Animation finished');
 anim.oncancel = () => console.log('Animation cancelled');
 
-// Promise-based completion (WAAPI 2.0):
+// Promise-based completion:
 await anim.finished;   // resolves when animation finishes
 
-// playbackState: 'idle' | 'running' | 'paused' | 'finished'
-console.log('State:', anim.playbackState);
+// playState: 'idle' | 'running' | 'paused' | 'finished'
+console.log('State:', anim.playState);
 `);
 
 console.log("\n4. requestAnimationFrame — manual animation loop:");
