@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison index, see: 39-es2022-plus-features-ts-comparison.ts
 // 📘 Detailed version-specific demo files: 39.1 - 39.7
 // This file is the index for the ES2022+ features collection (now split by version)
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================
@@ -18,8 +19,8 @@ export {};
 // 3. Version Timeline
 // 4. Related Files
 // 5. Verification
-// 6. Best Practices
-// 7. Common Pitfalls
+// 6. Common Pitfalls
+// 7. Best Practices
 // 8. Cross-references
 
 // ============================================
@@ -92,16 +93,7 @@ console.log("All ES version annotations are verified against TC39 official docum
 console.log("Last verified: 2026-09-01");
 
 // ============================================
-// 6. Best Practices
-// ============================================
-console.log("\n=== Best Practices ===");
-console.log("1. Open the version-specific file (39.1-39.7) for the feature you need");
-console.log("2. Check browser/runtime support before using newer ES features in production");
-console.log("3. Prefer polyfills or transpilation for targets that lack ES2025+ support");
-console.log("4. Use verification blocks to confirm which features are Stage 4 standard");
-
-// ============================================
-// 7. Common Pitfalls
+// 6. Common Pitfalls
 // ============================================
 console.log("\n=== Common Pitfalls ===");
 console.log(
@@ -114,6 +106,15 @@ console.log("3. Don't skip reading the version-specific file (39.1-39.7) for ful
 console.log(
   "4. Don't rely on verification blocks alone — cross-check reference/ data for stage4Date"
 );
+
+// ============================================
+// 7. Best Practices
+// ============================================
+console.log("\n=== Best Practices ===");
+console.log("1. Open the version-specific file (39.1-39.7) for the feature you need");
+console.log("2. Check browser/runtime support before using newer ES features in production");
+console.log("3. Prefer polyfills or transpilation for targets that lack ES2025+ support");
+console.log("4. Use verification blocks to confirm which features are Stage 4 standard");
 
 // ============================================
 // 8. Cross-references
