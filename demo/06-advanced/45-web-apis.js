@@ -1155,5 +1155,3 @@ Covers:
 - Type-safe Web Animations API
 - Interfaces for Canvas, Web Audio, and WebRTC
 */
-
-
