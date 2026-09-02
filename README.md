@@ -56,6 +56,7 @@ This project uses Prettier for consistent code formatting across all demo files 
 - [TODOLIST.md](docs/TODOLIST.md) — Learning roadmap
 - [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS quick reference
 - [EXAMPLES.md](docs/EXAMPLES.md) — Task-based example index
+- [CONTRIBUTING.md](CONTRIBUTING.md) — Commit conventions and code standards
 
 ## Troubleshooting
 
