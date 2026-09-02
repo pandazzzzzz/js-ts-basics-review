@@ -131,8 +131,9 @@ console.log("satisfies preserves literal types while still type-checking");
 
 console.log("\n=== TypeScript Decorators ===\n");
 
-// Decorators are Stage 3 TC39; TypeScript supports them (legacy via
-// experimentalDecorators, or native Stage 3 in TS 5.0+). They are NOT
+// Decorators are Stage 2.7 TC39 (nearing Stage 3); TypeScript supports them
+// (legacy via experimentalDecorators, or the standard syntax with TS 5.0+).
+// They are NOT
 // transpiled by ts-node ESM, so the `@` applications below are illustrative
 // and commented out — the decorator factories are valid runnable TS.
 
@@ -392,7 +393,7 @@ console.log("- Effect system for tracking side effects");
 console.log("- Better async type inference");
 console.log("- Improved module resolution");
 console.log("- Native decorators when standardized");
-console.log("- Records & Tuples support when ES standardizes");
+console.log("- Composites support when ES standardizes (successor to withdrawn Records & Tuples)");
 console.log("- Pattern matching support when ES standardizes");
 
 // ============================================

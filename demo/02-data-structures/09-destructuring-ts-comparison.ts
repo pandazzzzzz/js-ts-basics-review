@@ -442,7 +442,7 @@ const shallowReadonly: readonly { name: string }[] = [{ name: "Alice" }];
 shallowReadonly[0].name = "Bob"; // ✅ Allowed! Shallow readonly
 console.log("Shallow readonly mutated:", shallowReadonly);
 
-// PITFALL 3: Type narrowing doesn't work with destructured union types
+// PITFALL 3 (updated): destructured discriminant narrowing works since TS 4.6
 type Animal = { kind: "dog"; bark: () => void } | { kind: "cat"; meow: () => void };
 
 function makeSound(animal: Animal): void {
@@ -454,12 +454,14 @@ function makeSound(animal: Animal): void {
   }
 }
 
-// After destructuring, type guards need careful handling
+// Narrowing through the destructured discriminant works directly (TS 4.6+) —
+// no cast needed:
 function makeSoundDestructured(animal: Animal): void {
   const { kind } = animal;
   if (kind === "dog") {
-    // animal is narrowed, but kind alone doesn't narrow
-    (animal as Extract<Animal, { kind: "dog" }>).bark();
+    animal.bark(); // ✅ narrowed via the destructured discriminant
+  } else {
+    animal.meow();
   }
 }
 

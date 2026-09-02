@@ -500,26 +500,29 @@ console.log("Sum:", sumArray(readonlyNumbers));
 
 console.log("\n=== Common Pitfalls ===\n");
 
-// PITFALL 1: Type narrowing doesn't persist across function calls
-function pitfall1(value: string | number) {
-  if (typeof value === "string") {
-    // value is string here
-    console.log("Before function call:", value.toUpperCase());
+// PITFALL 1: Narrowing is invalidated when a mutable variable may be reassigned
+// by a function call. (Parameters and consts that are never reassigned KEEP
+// their narrowing across ordinary calls — it is `let` bindings captured by
+// closures that lose it.)
+let mutableValue: string | number = "hello";
+const reassign = (v: string | number) => {
+  mutableValue = v;
+};
 
-    // After any function call, TypeScript "forgets" the narrowing
-    console.log("Some function call");
+if (typeof mutableValue === "string") {
+  // mutableValue is string here
+  console.log("Before call:", mutableValue.toUpperCase());
 
-    // value is still string | number (narrowing lost)
-    // console.log(value.toUpperCase()); // ❌ Error in strict mode
+  reassign(42); // this call MAY reassign mutableValue...
 
-    // Need to narrow again
-    if (typeof value === "string") {
-      console.log("After re-narrowing:", value.toUpperCase());
-    }
+  // ...so TypeScript resets the narrowing to string | number
+  // console.log(mutableValue.toUpperCase()); // ❌ Error: not assignable to 'string'
+
+  // Need to narrow again
+  if (typeof mutableValue === "string") {
+    console.log("After re-narrowing:", mutableValue.toUpperCase());
   }
 }
-
-pitfall1("hello");
 
 // PITFALL 2: for...in still returns string keys
 const obj = { a: 1, b: 2, c: 3 };

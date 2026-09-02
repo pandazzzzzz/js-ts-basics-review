@@ -7,23 +7,24 @@
 export {};
 
 // ============================================================================
-// 1. JSON.PARSE RETURNS UNKNOWN
+// 1. JSON.PARSE RETURNS any — ANNOTATE unknown FOR SAFETY
 // ============================================================================
 
 // JavaScript: Returns any type, no type information
 // const jsParsed = JSON.parse('{"name": "Alice", "age": 30}');
 // jsParsed.anything; // No error, but might be undefined at runtime
 
-// TypeScript: Returns unknown - forces type handling
+// TypeScript: JSON.parse() is declared to return any (lib.es5.d.ts), so by
+// default it gives NO type safety. Annotate the result as unknown to opt in:
 const jsonString = '{"name": "Alice", "age": 30}';
-const parsed: unknown = JSON.parse(jsonString);
+const parsed: unknown = JSON.parse(jsonString); // explicit unknown annotation
 
-console.log("=== JSON.parse Returns Unknown ===");
+console.log("=== JSON.parse Returns any (annotate as unknown) ===");
 console.log("Parsed value:", parsed);
 
-// ⚠️ PITFALL: Can't use unknown without type assertion or narrowing
+// ⚠️ With the unknown annotation you can't use the value without narrowing:
 // console.log(parsed.name); // ❌ Error: Object is of type 'unknown'
-// parsed.name = "Bob";      // ❌ Error: Object is of type 'unknown'
+// (Without the annotation, parsed would be any and this would silently compile.)
 
 // ✅ SOLUTION: Type assertion (quick but less safe)
 interface Person {
@@ -546,7 +547,7 @@ console.log("Schema validation:", result);
 ❌ DON'T:
 1. Use type assertions without runtime validation
 2. Trust JSON from external sources without validation
-3. Forget that JSON.parse() returns unknown
+3. Forget that JSON.parse() returns any (annotate results as unknown)
 4. Ignore that type assertions don't validate
 5. Try to serialize functions, undefined, or circular references
 6. Assume BigInt will serialize (it won't)
@@ -606,7 +607,7 @@ console.log(`
 │ Feature                    │   JavaScript    │   TypeScript    │
 ├────────────────────────────┼─────────────────┼─────────────────┤
 │ JSON.parse/stringify       │       ✓         │       ✓         │
-│ Returns unknown type       │       ✗         │       ✓         │
+│ Opt-in unknown parsing     │       ✗         │       ✓         │
 │ Type assertions            │       ✗         │       ✓         │
 │ Type guards                │       ✗         │       ✓         │
 │ Interface definitions      │       ✗         │       ✓         │
@@ -619,7 +620,7 @@ console.log(`
 └────────────────────────────┴─────────────────┴─────────────────┘
 
 KEY TAKEAWAYS:
-1. TypeScript treats JSON.parse() as returning unknown
+1. JSON.parse() returns any — annotate results as unknown for safety
 2. Type assertions provide compile-time safety only
 3. Type guards enable runtime validation
 4. Interfaces document expected JSON structures
