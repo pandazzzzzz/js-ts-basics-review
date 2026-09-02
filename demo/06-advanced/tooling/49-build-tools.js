@@ -341,7 +341,7 @@ export default defineConfig({
 `;
 
 console.log("\nVite with Lightning CSS (opt-in transformer):");
-console.log("// Note: Lightning CSS is used by default for CSS minification in production");
+console.log("// Note: esbuild remains the default CSS minifier; Lightning CSS must be opted into");
 console.log(viteLightningConfig);
 
 // Vite with React

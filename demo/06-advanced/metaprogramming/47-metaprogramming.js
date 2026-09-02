@@ -137,9 +137,10 @@ console.log("\n=== Reflect API (ES6) ===\n");
 // for Proxy and decorators.
 
 // Reflect vs Object methods:
-// - Reflect methods always return a value
-// - Reflect methods throw for invalid operations
-// - Reflect is a function, not an object constructor
+// - Reflect methods return a status value (e.g. false) instead of throwing,
+//   where the Object equivalents (defineProperty/setPrototypeOf) throw
+// - Reflect is a plain built-in object (like Math), NOT a constructor — it
+//   is not callable and cannot be invoked with new
 
 const obj = {
   name: "Alice",

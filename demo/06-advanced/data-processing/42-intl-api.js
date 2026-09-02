@@ -571,11 +571,11 @@ console.log("Likes:", formatStats(9876, "en-US")); // "9.9K"
 
 console.log("\n=== Common Pitfalls ===");
 
-// Pitfall 1: Locale string format
-console.log("\nPitfall 1: Locale string format");
-console.log("  'en-US' vs 'en-us' (case sensitivity)");
-console.log("  Some locales are case-sensitive");
-console.log("  Fix: Use standard locale format");
+// Pitfall 1: Malformed locale tags throw (not case sensitivity)
+console.log("\nPitfall 1: Malformed locale tags throw RangeError");
+console.log("  BCP 47 tags are case-insensitive: 'en-us' is canonicalized to 'en-US'");
+console.log("  What throws is a MALFORMED tag, e.g. 'en_US' (underscore)");
+console.log("  Fix: Use well-formed BCP 47 tags ('en-US', 'zh-Hans-CN')");
 
 // Pitfall 2: Time zone handling
 console.log("\nPitfall 2: Time zone handling");
@@ -596,10 +596,10 @@ console.log("  Files sorted: file1, file10, file2");
 console.log("  Fix: Use numeric: true for numbers in strings");
 
 // Pitfall 5: Currency code validity
-console.log("\nPitfall 5: Invalid currency codes");
-console.log("  Invalid codes throw RangeError");
-console.log("  'XYZ' is not valid currency");
-console.log("  Fix: Validate currency codes");
+console.log("\nPitfall 5: Currency code validity");
+console.log("  Only WELL-FORMEDNESS is validated: 3 letters, e.g. 'XYZ' does NOT throw");
+console.log("  Malformed codes ('US1', 'us') throw RangeError; 'XYZ' formats as 'XYZ 1.00'");
+console.log("  Fix: Validate ISO 4217 codes yourself if you need real currencies");
 
 // Pitfall 6: Intl.Segmenter support
 console.log("\nPitfall 6: Intl.Segmenter availability");
