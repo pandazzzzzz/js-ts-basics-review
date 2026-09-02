@@ -13,7 +13,7 @@ export {};
 // This file covers:
 // 1. Browser storage options (localStorage, sessionStorage, Cookies, IndexedDB)
 // 2. History API for SPA routing
-// 3. Advanced Fetch patterns
+// 3. Advanced Fetch patterns (and their legacy predecessor, XMLHttpRequest)
 // 4. Real-time communication (WebSocket, SSE)
 // 5. Cross-tab communication (BroadcastChannel)
 
@@ -24,6 +24,7 @@ export {};
 // 2. Cookies
 // 3. IndexedDB
 // 4. History API
+// 4b. XMLHttpRequest (Legacy)
 // 5. Fetch API Advanced Patterns
 // 6. WebSocket API
 // 7. Server-Sent Events (SSE)
@@ -147,6 +148,34 @@ console.log(
   "  Best practices: always handle direct URL access (server-side fallback), update document.title"
 );
 console.log("  ⚠️  pushState doesn't trigger popstate; handle initial load separately");
+
+// ============================================
+// 4b. XMLHttpRequest (Legacy — the API Fetch replaced)
+// ============================================
+console.log("\n4b. XMLHttpRequest (legacy):");
+console.log(
+  "  XHR is superseded by fetch() for new code, but remains widespread in older codebases"
+);
+console.log("  Core flow: create XHR → open(method, url) → send() → handle onload/onerror");
+console.log(`
+// Classic XHR pattern (browser only):
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/api/users');
+xhr.onload = () => {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    console.log(JSON.parse(xhr.responseText));
+  } else {
+    console.error('HTTP error:', xhr.status); // like fetch, XHR does NOT reject on HTTP errors
+  }
+};
+xhr.onerror = () => console.error('Network error'); // fetch rejects on network errors
+xhr.send();
+
+// readyState values: 0 UNSENT · 1 OPENED · 2 HEADERS_RECEIVED · 3 LOADING · 4 DONE
+// The legacy onreadystatechange + readyState === 4 pattern predates onload/onerror.
+
+// Migrating to fetch: see 33-1-fetch-basics.js and 33-2-fetch-error-handling.js
+`);
 
 // ============================================
 // 5. Fetch API Advanced Patterns

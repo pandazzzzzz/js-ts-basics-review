@@ -36,7 +36,7 @@ TS comparison: `01-variables-ts-comparison.ts` · `02-operators-ts-comparison.ts
 
 | # | File | Topic | Status |
 |---|------|-------|--------|
-| 06 | `demo/02-data-structures/06-arrays.js` | Array Methods (Index) | ✅ |
+| 06 | `demo/02-data-structures/06-arrays.js` | Array Methods (Full) | ✅ |
 | | `demo/02-data-structures/06-1-arrays-basics.js` | Array Basics (Creation, Access, Type, Destructuring) | ✅ |
 | | `demo/02-data-structures/06-2-arrays-iteration.js` | Array Iteration Methods | ✅ |
 | | `demo/02-data-structures/06-3-arrays-search-sort.js` | Array Search & Sort | ✅ |
@@ -86,7 +86,7 @@ TS comparison: `06-arrays-ts-comparison.ts` · `06-1-arrays-basics-ts-comparison
 | 21 | `demo/03-core-concepts/21-regex.js` | Regular Expressions | ✅ |
 | 22 | `demo/03-core-concepts/22-iterators-generators.js` | Iterators and Generators | ✅ |
 | 23 | `demo/03-core-concepts/23-proxy-reflect.js` | Proxy and Reflect | ✅ |
-| 24 | `demo/03-core-concepts/24-function-patterns-advanced.js` | Advanced Function Patterns (Index) | ✅ |
+| 24 | `demo/03-core-concepts/24-function-patterns-advanced.js` | Advanced Function Patterns (Full) | ✅ |
 | | `demo/03-core-concepts/24-1-function-composition.js` | Function Composition | ✅ |
 | | `demo/03-core-concepts/24-2-debounce-throttle.js` | Debounce & Throttle | ✅ |
 | | `demo/03-core-concepts/24-3-memoization-cache.js` | Memoization & Cache | ✅ |
@@ -124,7 +124,7 @@ TS comparison: `13-scope-closures-ts-comparison.ts` · `13-1-scope-basics-ts-com
 | 30 | `demo/04-asynchronous/30-promises.js` | Promises | ✅ |
 | 31 | `demo/04-asynchronous/31-async-await.js` | Async/Await | ✅ |
 | 32 | `demo/04-asynchronous/32-modules.js` | ES Modules | ✅ |
-| 33 | `demo/04-asynchronous/33-fetch-api.js` | Fetch API (Index) | ✅ |
+| 33 | `demo/04-asynchronous/33-fetch-api.js` | Fetch API (All-in-one) | ✅ |
 | | `demo/04-asynchronous/33-1-fetch-basics.js` | Fetch Basics (GET, Response Methods, HTTP Methods, FormData) | ✅ |
 | | `demo/04-asynchronous/33-2-fetch-error-handling.js` | Error Handling & Async/Await (Patterns, Timeout, Sequential/Parallel) | ✅ |
 | | `demo/04-asynchronous/33-3-fetch-practical-patterns.js` | Practical Patterns (API Client, Retry, AbortController, Sequential Calls) | ✅ |

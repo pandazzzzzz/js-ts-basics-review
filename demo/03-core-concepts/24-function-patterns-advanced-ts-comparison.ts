@@ -1,5 +1,9 @@
 // TypeScript vs JavaScript: Advanced Function Patterns Comparison
 // 📘 For JavaScript examples, see: 24-function-patterns-advanced.js
+//
+// 📌 NOTE: This is the consolidated "all-in-one" comparison file. Focused
+// sub-files (24-1 – 24-3) each carry their own -ts-comparison.ts counterpart;
+// the sub-files are the recommended study path.
 // This file demonstrates TypeScript-specific function pattern features
 
 // 🎯 Difficulty: Advanced

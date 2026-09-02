@@ -1,5 +1,15 @@
 // Arrays - Complete Demo
 // 📘 For TypeScript comparison, see: 06-arrays-ts-comparison.ts
+//
+// 📌 NOTE: This file is the consolidated "all-in-one" version of the Arrays topic.
+// It has been split into focused sub-files for easier learning. Either version
+// can be studied independently; the sub-files are the recommended path:
+//   06-1-arrays-basics.js        → Creation, access, type checks, destructuring
+//   06-2-arrays-iteration.js     → forEach/map/filter/reduce/flat/flatMap
+//   06-3-arrays-search-sort.js   → find/findIndex/includes/some/every/sort
+//   06-4-arrays-manipulation.js  → push/pop/splice/slice/concat/spread
+//   06-5-typed-arrays.js         → TypedArray/ArrayBuffer/DataView basics
+// The sub-files have their own -ts-comparison.ts counterparts.
 // 🎯 Difficulty: Beginner
 export {};
 

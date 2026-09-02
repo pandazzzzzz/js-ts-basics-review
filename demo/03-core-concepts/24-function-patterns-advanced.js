@@ -1,5 +1,14 @@
 // Function Patterns - Advanced Demo
 // 📘 For TypeScript comparison, see: 24-function-patterns-advanced-ts-comparison.ts
+//
+// 📌 NOTE: This file is the consolidated "all-in-one" version of Advanced Function
+// Patterns. It has been split into focused sub-files for easier learning. Either
+// version can be studied independently; the sub-files are the recommended path,
+// and some sections here go beyond the sub-files' scope:
+//   24-1-function-composition.js   → Compose/pipe, currying, partial application
+//   24-2-debounce-throttle.js      → Debounce/throttle implementations and variants
+//   24-3-memoization-cache.js      → Memoization, LRU cache, trampolines
+// The sub-files have their own -ts-comparison.ts counterparts.
 // 🎯 Difficulty: Advanced
 export {};
 

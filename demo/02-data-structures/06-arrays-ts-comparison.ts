@@ -1,5 +1,9 @@
 // TypeScript vs JavaScript: Arrays Comparison
 // 📘 For JavaScript examples, see: 06-arrays.js
+//
+// 📌 NOTE: This is the consolidated "all-in-one" comparison file. Focused
+// sub-files (06-1 – 06-5) each carry their own -ts-comparison.ts counterpart;
+// the sub-files are the recommended study path.
 // This file demonstrates key differences, pitfalls, and best practices
 
 // Make this file a module to avoid global scope conflicts
