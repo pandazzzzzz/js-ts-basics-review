@@ -2,7 +2,7 @@
 // TypeScript vs JavaScript: ES2026 Features
 // 📘 For JavaScript version, see: 39-6-es2026-features.js
 // Note: @ts-nocheck because ES2026 APIs (Math.sumPrecise, Uint8Array.toBase64/toHex,
-// Map.upsert, Iterator.concat/toArray) are not yet in TypeScript's type definitions.
+// Map.getOrInsert/getOrInsertComputed, Iterator.concat) are not yet in TypeScript's type definitions.
 
 // 🎯 Difficulty: Advanced
 export {}; // Module
@@ -149,12 +149,12 @@ if (typeof Uint8Array.prototype.toBase64 === "function") {
 
   // Base64 options
   interface Base64Options {
-    urlSafe?: boolean;
+    alphabet?: "base64" | "base64url";
     omitPadding?: boolean;
   }
 
   const urlSafeBase64: string = data.toBase64({
-    urlSafe: true,
+    alphabet: "base64url",
     omitPadding: true,
   });
   console.log("URL-safe base64:", urlSafeBase64); // "SGVsbG8"
@@ -187,41 +187,43 @@ if (typeof Uint8Array.prototype.toBase64 === "function") {
 }
 
 // ============================================
-// 5. Map.prototype.upsert()
+// 5. Map.prototype.getOrInsert() / getOrInsertComputed() (Upsert)
 // ============================================
-console.log("\n--- 5. Map.prototype.upsert() ---\n");
+console.log("\n--- 5. Map.prototype.getOrInsert / getOrInsertComputed ---\n");
 
-// Map.upsert is ES2026 (not in Node 24). Feature-detect before calling.
-if (typeof Map.prototype.upsert === "function") {
-  // Map.upsert preserves type information
+// The upsert proposal ships as getOrInsert/getOrInsertComputed (an earlier draft
+// used a single upsert() method — that API no longer exists). ES2026, not in
+// Node 24 — feature-detect before calling, matching the JS demo's guard.
+if (typeof Map.prototype.getOrInsert === "function") {
+  // getOrInsert preserves type information
   const map: Map<string, number> = new Map([
     ["a", 1],
     ["b", 2],
   ]);
 
-  // Update existing key: update function receives number, returns number
-  const aValue: number = map.upsert("a", 10, (old: number, key: string) => {
-    console.log(`Updating key ${key}: ${old} → ${old * 2}`);
-    return old * 2;
-  });
-  console.log("aValue:", aValue); // 2
+  // Existing key: returns the stored value, default NOT applied
+  const aValue: number = map.getOrInsert("a", 999);
+  console.log("aValue (existing key):", aValue); // 1
 
-  // Insert new key: insert value must match map value type
-  const cValue: number = map.upsert("c", 3, old => old * 2);
-  console.log("cValue:", cValue); // 3
+  // Missing key: inserts and returns the default
+  const cValue: number = map.getOrInsert("c", 3);
+  console.log("cValue (new key):", cValue); // 3
 
-  // Type safety: insert value must match map type
-  // map.upsert("d", "string", old => old); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
+  // Type safety: default value must match the map's value type
+  // map.getOrInsert("d", "string"); // ❌ Error: Argument of type 'string' is not assignable to parameter of type 'number'
 
-  // Update function must return matching type
-  // map.upsert("a", 10, old => old.toString()); // ❌ Error: Type 'string' is not assignable to type 'number'
+  // getOrInsertComputed: lazy default; callback receives the key, runs only when missing
+  const computed: number = map.getOrInsertComputed("e", key => key.length);
+  console.log("computed:", computed); // 1
 
-  // Use case: Typed counters
+  // Use case: Typed counters (pattern from the proposal README)
   type CounterKey = "views" | "clicks" | "conversions";
   const counters = new Map<CounterKey, number>();
 
   function incrementCounter(key: CounterKey): number {
-    return counters.upsert(key, 1, count => count + 1);
+    const next = counters.getOrInsert(key, 0) + 1;
+    counters.set(key, next);
+    return next;
   }
 
   incrementCounter("views");
@@ -229,7 +231,7 @@ if (typeof Map.prototype.upsert === "function") {
   incrementCounter("clicks");
   console.log("Counters:", Object.fromEntries(counters)); // { views: 2, clicks: 1 }
 } else {
-  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
+  console.log("⚠️ Map.prototype.getOrInsert is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -285,11 +287,11 @@ console.log("Timestamp:", financialData.timestamp); // number
 console.log("\n--- 7. Iterator Sequencing ---\n");
 
 // Iterator.concat/toArray are ES2026 (not in Node 24). Feature-detect first.
-if (typeof Iterator.prototype.concat === "function") {
-  // Iterator.concat preserves type information
+if (typeof Iterator.concat === "function") {
+  // Iterator.concat is a STATIC method and preserves type information
   const iter1: Iterator<number> = [1, 2, 3].values();
   const iter2: Iterator<number> = [4, 5, 6].values();
-  const combined: Iterator<number> = iter1.concat(iter2);
+  const combined: Iterator<number> = Iterator.concat(iter1, iter2);
   const combinedArray: number[] = combined.toArray();
   console.log("Combined numbers:", combinedArray); // [1, 2, 3, 4, 5, 6]
 
@@ -299,21 +301,17 @@ if (typeof Iterator.prototype.concat === "function") {
     yield "b";
   }
 
-  const stringIter: Iterator<string> = genStrings();
-  const arrayStrings: string[] = ["c", "d"];
-  const allStrings: Iterator<string> = stringIter.concat(arrayStrings);
+  const allStrings: Iterator<string> = Iterator.concat(genStrings(), ["c", "d"]);
   console.log("Combined strings:", allStrings.toArray()); // ["a", "b", "c", "d"]
 
   // Chaining with helper methods preserves type
-  const result: number[] = [1, 2, 3]
-    .values()
-    .concat([4, 5, 6].values())
+  const result: number[] = Iterator.concat([1, 2, 3], [4, 5, 6])
     .filter(n => n % 2 === 0)
     .map(n => n * 2)
     .toArray();
   console.log("Chained result:", result); // [4, 8, 12]
 } else {
-  console.log("⚠️ Iterator.prototype.concat/toArray is not available in this Node.js version");
+  console.log("⚠️ Iterator.concat/toArray is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
@@ -322,17 +320,19 @@ if (typeof Iterator.prototype.concat === "function") {
 // ============================================
 console.log("\n--- 8. TypeScript-specific Enhancements ---\n");
 
-// 1. Branded types with upsert
+// 1. Branded types with getOrInsertComputed
 type UserId = string & { __brand: "UserId" };
 type UserData = { name: string; email: string };
 
 const userMap = new Map<UserId, UserData>();
 
 function updateUser(id: UserId, data: Partial<UserData>): UserData {
-  return userMap.upsert(id, { name: "New User", email: "new@example.com", ...data }, existing => ({
-    ...existing,
+  const updated: UserData = {
+    ...userMap.getOrInsertComputed(id, () => ({ name: "New User", email: "new@example.com" })),
     ...data,
-  }));
+  };
+  userMap.set(id, updated);
+  return updated;
 }
 
 // 2. Narrowing with Error.isError
@@ -368,7 +368,9 @@ function parseApiResponse(json: string): ApiResponse {
 // ============================================
 console.log("\n--- 9. tsconfig.json Configuration ---\n");
 console.log("To use ES2026 features in TypeScript:");
-console.log('1. Set "target": "ES2026" or higher (TypeScript 5.7+)');
+console.log(
+  '1. ES2026 lib arrives in TypeScript 7.1 (microsoft/TypeScript#63704); until then use "ESNext"'
+);
 console.log('2. Add "ES2026" to "lib" array if target is lower');
 console.log(
   '3. For async iterators: Ensure "downlevelIteration" is enabled if targeting older runtimes'

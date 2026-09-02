@@ -12,7 +12,7 @@ export {};
 // 1. Temporal API (Date/Time overhaul)
 // 2. Explicit Resource Management (using/await using)
 // 3. DisposableStack / AsyncDisposableStack
-// 4. Joint Iteration (Array.fromPairs, Iterator.zip, etc.)
+// 4. Joint Iteration (Iterator.zip / zipKeyed)
 // 5. Atomics.pause()
 // 6. Decorators (Stage 2.7)
 // 7. Other upcoming Stage 2+ proposals
@@ -206,13 +206,14 @@ console.log("\n--- 3. Joint Iteration (ES2027) ---\n");
  *   source: https://github.com/tc39/proposal-joint-iteration
  */
 
-// 3.1 Iterator.zip() - Iterate multiple iterables in parallel
+// Iterator.zip takes ONE iterable of iterables. Mode: "shortest" (default), "longest", "strict".
+// 3.1 Iterator.zip() - Iterate multiple iterables in parallel (shortest wins)
 const numbers = [1, 2, 3];
 const letters = ["a", "b", "c"];
 const booleans = [true, false, true];
 
 /*
-for (const [num, letter, bool] of Iterator.zip(numbers, letters, booleans)) {
+for (const [num, letter, bool] of Iterator.zip([numbers, letters, booleans])) {
   console.log(`num: ${num}, letter: ${letter}, bool: ${bool}`);
 }
 // Output:
@@ -221,12 +222,12 @@ for (const [num, letter, bool] of Iterator.zip(numbers, letters, booleans)) {
 // num: 3, letter: c, bool: true
 */
 
-// 3.2 Iterator.zipLongest() - Continues until longest iterable is exhausted, fills missing with undefined
+// 3.2 Longest mode via options (no separate zipLongest method)
 const longer = [1, 2, 3, 4, 5];
 const shorter = ["a", "b"];
 
 /*
-for (const [num, letter] of Iterator.zipLongest(longer, shorter)) {
+for (const [num, letter] of Iterator.zip([longer, shorter], { mode: "longest" })) {
   console.log(`num: ${num}, letter: ${letter}`);
 }
 // Output:
@@ -235,32 +236,25 @@ for (const [num, letter] of Iterator.zipLongest(longer, shorter)) {
 // num: 3, letter: undefined
 // num: 4, letter: undefined
 // num: 5, letter: undefined
+// Custom fill values: Iterator.zip([longer, shorter], { mode: "longest", padding: [0, "-"] })
 */
 
-// 3.3 Array.fromPairs() - Convert iterable of pairs to object
-const pairs = [
-  ["a", 1],
-  ["b", 2],
-  ["c", 3],
-];
+// 3.3 Iterator.zipKeyed() - zip the values of an object, keyed by property
+const names = ["Alice", "Bob"];
+const scores = [90, 85];
+
 /*
-const obj = Array.fromPairs(pairs);
-console.log("fromPairs:", obj); // { a: 1, b: 2, c: 3 }
+for (const { name, score } of Iterator.zipKeyed({ name: names, score: scores })) {
+  console.log(`${name}: ${score}`);
+}
+// Output:
+// Alice: 90
+// Bob: 85
 */
 
-// Before: Object.fromEntries(pairs) (exists, but Array.fromPairs is more discoverable and works with any iterable)
-
-// 3.4 Iterator.count() - Count elements in iterator
-/*
-const count = [1, 2, 3, 4, 5].values().count();
-console.log("Iterator count:", count); // 5
-*/
-
-// 3.5 Iterator.cycle() - Repeat iterator indefinitely
-/*
-const cycle = [1, 2, 3].values().cycle().take(5);
-console.log("Cycle 5 elements:", [...cycle]); // [1, 2, 3, 1, 2]
-*/
+// Note: Array.fromPairs, Iterator.count, and Iterator.cycle are NOT part of the
+// Joint Iteration proposal — its complete API is Iterator.zip + Iterator.zipKeyed.
+// Use Object.fromEntries(pairs) today; collect iterators with .toArray() / spread.
 
 console.log("Joint iteration features simplify working with multiple iterables in parallel");
 
@@ -402,10 +396,11 @@ console.log("\n--- 7. Common Pitfalls ---\n");
 // } // res disposed here
 // res.doSomething(); // ❌ Error: res is not defined
 
-// Pitfall 3: Iterator.zip stops at the shortest iterable
+// Pitfall 3: Iterator.zip stops at the shortest iterable by default
 // const a = [1, 2, 3];
 // const b = [4, 5];
-// Iterator.zip(a, b) // Gives [1,4], [2,5] only
+// Iterator.zip([a, b]) // Gives [1,4], [2,5] only
+// Iterator.zip([a, b], { mode: "strict" }) // ❌ Throws TypeError when lengths differ
 
 // Pitfall 4: Decorators are still Stage 2.7, not yet standardized
 // Syntax and behavior may change before finalization

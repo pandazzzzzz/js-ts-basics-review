@@ -38,7 +38,7 @@ Reorganized into per-version demo files:
 39-3-es2023-features.js  → ES2023 (immutable array methods, findLast, Hashbang, Symbols as WeakMap keys)
 39-4-es2024-features.js  → ES2024 (groupBy, Promise.withResolvers, RegExp v flag, Resizable ArrayBuffer, etc.)
 39-5-es2025-features.js  → ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, etc.)
-39-6-es2026-features.js  → ES2026 (Math.sumPrecise, Array.fromAsync, Uint8Array Base64, Map.upsert, etc.)
+39-6-es2026-features.js  → ES2026 (Math.sumPrecise, Array.fromAsync, Uint8Array Base64, Map.getOrInsert, etc.)
 39-7-es2027-future.js    → ES2027 & beyond (Temporal API, using/await using, Joint Iteration, Decorators, etc.)
 
 Rationale:

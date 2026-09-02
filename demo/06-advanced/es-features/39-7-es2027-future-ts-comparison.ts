@@ -165,41 +165,38 @@ function createTempFile(): TempFile {
 // ============================================
 console.log("\n--- 3. Joint Iteration ---\n");
 
-// Iterator.zip preserves tuple types
+// Iterator.zip takes ONE iterable of iterables and preserves tuple types
 /*
 const numbers: number[] = [1, 2, 3];
 const letters: string[] = ["a", "b", "c"];
 const booleans: boolean[] = [true, false, true];
 
-for (const [num, letter, bool] of Iterator.zip(numbers, letters, booleans)) {
+for (const [num, letter, bool] of Iterator.zip([numbers, letters, booleans])) {
   // num is number, letter is string, bool is boolean
   console.log(num.toFixed(0), letter.toUpperCase(), bool.valueOf());
 }
 */
 
-// zipLongest with optional types
+// Longest mode via options (no separate zipLongest method); extra slots become undefined
 /*
 const longer: number[] = [1, 2, 3, 4, 5];
 const shorter: string[] = ["a", "b"];
 
-for (const [num, letter] of Iterator.zipLongest(longer, shorter)) {
+for (const [num, letter] of Iterator.zip([longer, shorter], { mode: "longest" })) {
   // num is number, letter is string | undefined
   console.log(num, letter?.toUpperCase());
 }
 */
 
-// Array.fromPairs preserves key/value types
+// Iterator.zipKeyed preserves the value type of each key
 /*
-const pairs: [string, number][] = [["a", 1], ["b", 2], ["c", 3]];
-const obj: Record<string, number> = Array.fromPairs(pairs);
-console.log("Object:", obj); // { a: 1, b: 2, c: 3 }
-// obj.a is number, obj.b is number, etc.
-*/
+const names: string[] = ["Alice", "Bob"];
+const scores: number[] = [90, 85];
 
-// Iterator.count() returns number
-/*
-const count: number = [1, 2, 3, 4, 5].values().count();
-console.log("Count:", count); // 5
+for (const { name, score } of Iterator.zipKeyed({ name: names, score: scores })) {
+  // name is string, score is number
+  console.log(`${name}: ${score}`);
+}
 */
 
 // ============================================
@@ -313,7 +310,7 @@ console.log("5. Enhanced type checking for Web APIs");
 // ============================================
 console.log("\n--- 7. tsconfig.json Configuration ---\n");
 console.log("To use ES2027 features in TypeScript:");
-console.log('1. Set "target": "ES2027" or higher (TypeScript 5.8+)');
+console.log('1. No "ES2027" lib exists yet — use "ESNext" plus polyfill/feature types');
 console.log('2. Add "ES2027" to "lib" array');
 console.log('3. For Explicit Resource Management: Add "ESNext.Disposable" to lib');
 console.log('4. For Decorators: Set "experimentalDecorators": false (use standard decorators)');

@@ -77,7 +77,7 @@
       "stage": 4,
       "stage4Date": "2026-01",
       "stage4DateType": "exact",
-      "note": "Map.prototype.upsert(key, onInsert, onUpdate)",
+      "note": "Map/WeakMap.prototype.getOrInsert(key, defaultValue) and getOrInsertComputed(key, callbackFn); an earlier draft's upsert(key, onInsert, onUpdate) name was dropped before Stage 4",
       "url": "https://github.com/tc39/proposal-upsert"
     },
     "JSON.parse source text access": {

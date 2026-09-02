@@ -13,7 +13,7 @@ export {};
 // 2. Array.fromAsync()
 // 3. Error.isError()
 // 4. Uint8Array Base64 methods (fromBase64, toBase64, fromHex, toHex)
-// 5. Map.prototype.upsert()
+// 5. Map.prototype.getOrInsert / getOrInsertComputed (Upsert)
 // 6. JSON.parse source text access
 // 7. Iterator Sequencing (concat)
 
@@ -24,7 +24,7 @@ export {};
 // 2. Array.fromAsync()
 // 3. Error.isError()
 // 4. Uint8Array Base64/Hex Methods
-// 5. Map.prototype.upsert()
+// 5. Map.prototype.getOrInsert / getOrInsertComputed (Upsert)
 // 6. JSON.parse Source Text Access
 // 7. Iterator Sequencing
 // 8. Common Pitfalls
@@ -197,12 +197,12 @@ if (typeof data.toBase64 === "function") {
   console.log("fromBase64():", decoded); // Uint8Array containing "Hello World"
   console.log("Decoded to string:", new TextDecoder().decode(decoded)); // "Hello World"
 
-  // Base64 URL variant (safe for URLs/filenames, no padding)
-  const base64url = data.toBase64({ urlSafe: true, omitPadding: true });
-  console.log("toBase64 URL-safe:", base64url); // "SGVsbG8gV29ybGQ"
+  // Base64 URL variant (safe for URLs/filenames) via the alphabet option
+  const base64url = data.toBase64({ alphabet: "base64url", omitPadding: true });
+  console.log("toBase64 URL-safe:", base64url); // "SGVsbG8gV29ybGQ" (no '=' padding)
 
-  // Decode URL-safe base64
-  const decodedUrl = Uint8Array.fromBase64(base64url, { urlSafe: true });
+  // Decode URL-safe base64 (decoder must use the same alphabet)
+  const decodedUrl = Uint8Array.fromBase64(base64url, { alphabet: "base64url" });
   console.log("fromBase64 URL-safe:", new TextDecoder().decode(decodedUrl)); // "Hello World"
 } else {
   console.log(
@@ -222,62 +222,72 @@ if (typeof data.toHex === "function") {
 }
 
 // ============================================
-// 5. Map.prototype.upsert()
+// 5. Map.prototype.getOrInsert / getOrInsertComputed (Upsert)
 // ============================================
-console.log("\n--- 5. Map.prototype.upsert() ---\n");
+console.log("\n--- 5. Map.prototype.getOrInsert / getOrInsertComputed ---\n");
 
 /*
  * verification:
  *   feature: Upsert
  *   status: ES2026
  *   stage4Date: 2026-01
- *   lastVerified: 2026-09-01
+ *   lastVerified: 2026-09-03
  *   source: https://github.com/tc39/proposal-upsert
  */
 
-if (typeof new Map().upsert === "function") {
-  // Update or insert a value in a Map atomically
+// The "upsert" proposal ships as getOrInsert/getOrInsertComputed. An earlier draft
+// used a single upsert(key, onInsert, onUpdate) method — that API no longer exists.
+if (typeof new Map().getOrInsert === "function") {
   const map = new Map([
     ["a", 1],
     ["b", 2],
   ]);
   console.log("Original map:", Object.fromEntries(map));
 
-  // If key exists: update with update function, else insert with insert value
-  const aValue = map.upsert("a", 10, oldValue => oldValue * 2);
-  console.log("\nupsert('a') - existing key:");
-  console.log("Return value:", aValue); // 2 (old value 1 * 2)
-  console.log("Map now:", Object.fromEntries(map)); // { a: 2, b: 2 }
+  // getOrInsert(key, defaultValue): returns the existing value, or inserts the default
+  const aValue = map.getOrInsert("a", 999); // key exists → default NOT applied
+  console.log("\ngetOrInsert('a', 999) - existing key:");
+  console.log("Return value:", aValue); // 1 (existing value)
+  console.log("Map now:", Object.fromEntries(map)); // { a: 1, b: 2 }
 
-  // If key doesn't exist: insert value
-  const cValue = map.upsert("c", 3, oldValue => oldValue * 2);
-  console.log("\nupsert('c') - new key:");
-  console.log("Return value:", cValue); // 3 (insert value)
-  console.log("Map now:", Object.fromEntries(map)); // { a: 2, b: 2, c: 3 }
+  const cValue = map.getOrInsert("c", 3); // key missing → inserts the default
+  console.log("\ngetOrInsert('c', 3) - new key:");
+  console.log("Return value:", cValue); // 3 (inserted default)
+  console.log("Map now:", Object.fromEntries(map)); // { a: 1, b: 2, c: 3 }
 
-  // Use case: Counters
+  // getOrInsertComputed(key, callback): lazy variant — the callback receives the key
+  // and runs only when the key is missing (avoids computing unused defaults)
+  const computed = map.getOrInsertComputed("d", key => {
+    console.log(`Computing default for '${key}'...`); // runs only for missing keys
+    return key.toUpperCase();
+  });
+  console.log("\ngetOrInsertComputed('d') - new key:", computed); // "D"
+
+  // Use case: Counters (pattern from the proposal README)
   const counts = new Map();
   const words = ["hello", "world", "hello", "test", "world", "hello"];
-  words.forEach(word => {
-    counts.upsert(word, 1, count => count + 1);
-  });
+  for (const word of words) {
+    counts.set(word, counts.getOrInsert(word, 0) + 1);
+  }
   console.log("\nWord counts:", Object.fromEntries(counts));
   // { hello: 3, world: 2, test: 1 }
+
+  // WeakMap has the same pair of methods (keys must be objects)
+  const meta = new WeakMap();
+  const token = {};
+  console.log("\nWeakMap.getOrInsert:", meta.getOrInsert(token, "default")); // "default"
 } else {
-  console.log("⚠️ Map.prototype.upsert is not available in this Node.js version");
+  console.log("⚠️ Map.prototype.getOrInsert is not available in this Node.js version");
   console.log("It will be added when your runtime supports ES2026+");
 }
 
 // Before ES2026: Had to check existence manually
-function upsertOld(map, key, insert, update) {
+function getOrInsertOld(map, key, defaultValue) {
   if (map.has(key)) {
-    const value = update(map.get(key), key);
-    map.set(key, value);
-    return value;
-  } else {
-    map.set(key, insert);
-    return insert;
+    return map.get(key);
   }
+  map.set(key, defaultValue);
+  return defaultValue;
 }
 
 // ============================================
@@ -349,16 +359,16 @@ console.log("\n--- 7. Iterator Sequencing ---\n");
  *   source: https://github.com/tc39/proposal-iterator-sequencing
  */
 
-if (typeof Iterator.prototype.concat === "function") {
-  // Iterator.prototype.concat() combines multiple iterators
+if (typeof Iterator.concat === "function") {
+  // Iterator.concat() is a STATIC method combining multiple iterators lazily
   const iter1 = [1, 2, 3].values();
   const iter2 = [4, 5, 6].values();
   const iter3 = [7, 8, 9].values();
 
-  const combined = iter1.concat(iter2, iter3);
+  const combined = Iterator.concat(iter1, iter2, iter3);
   console.log("Combined iterator:", [...combined]); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  // Works with any iterable, not just arrays
+  // Accepts any iterables, not just iterators
   function* genA() {
     yield "a";
     yield "b";
@@ -367,19 +377,17 @@ if (typeof Iterator.prototype.concat === "function") {
     yield "c";
     yield "d";
   }
-  const letters = genA().concat(genB(), ["e", "f"]);
+  const letters = Iterator.concat(genA(), genB(), ["e", "f"]);
   console.log("Combined generators and array:", [...letters]); // ["a", "b", "c", "d", "e", "f"]
 
-  // Chaining with other iterator helpers
-  const result = [1, 2, 3]
-    .values()
-    .concat([4, 5, 6].values())
+  // The result supports chaining with other iterator helpers
+  const result = Iterator.concat([1, 2, 3], [4, 5, 6])
     .filter(n => n % 2 === 0)
     .map(n => n * 2)
     .toArray();
   console.log("\nChained concat with helpers:", result); // [4, 8, 12]
 } else {
-  console.log("⚠️ Iterator.prototype.concat is not available in this Node.js version");
+  console.log("⚠️ Iterator.concat is not available in this Node.js version");
 }
 
 // ============================================
@@ -412,17 +420,17 @@ if (typeof Uint8Array.fromBase64 === "function") {
   console.log("Pitfall3: fromBase64 not available in this runtime");
 }
 
-// Pitfall 4: Map.upsert update function is called only if key exists
-if (typeof new Map().upsert === "function") {
+// Pitfall 4: getOrInsertComputed callback runs only when the key is MISSING
+if (typeof new Map().getOrInsert === "function") {
   let called = false;
-  const m = new Map();
-  m.upsert("new-key", 0, () => {
+  const m = new Map([["existing", 1]]);
+  m.getOrInsertComputed("existing", () => {
     called = true;
-    return 1;
+    return 0;
   });
-  console.log("\nPitfall4: upsert for new key - update called:", called); // false (update not called)
+  console.log("\nPitfall4: getOrInsertComputed for existing key - callback called:", called); // false (existing value returned)
 } else {
-  console.log("\nPitfall4: Map.prototype.upsert not available in this runtime");
+  console.log("\nPitfall4: Map.prototype.getOrInsertComputed not available in this runtime");
 }
 
 // Pitfall 5: JSON.parse source text is the exact substring from the JSON input
@@ -443,7 +451,9 @@ console.log(
 console.log("✅ Use Array.fromAsync() to convert async iterables to arrays cleanly");
 console.log("✅ Use Error.isError() for reliable error detection, especially across realms");
 console.log("✅ Use Uint8Array base64/hex methods instead of manual btoa/atob conversions");
-console.log("✅ Use Map.upsert() for atomic update/insert operations (better than has+get+set)");
+console.log(
+  "✅ Use Map.prototype.getOrInsert() for defaulting/counter patterns (better than has+get+set)"
+);
 console.log(
   "✅ Use JSON.parse source access for parsing large numbers/decimals without precision loss"
 );
@@ -511,7 +521,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // stage4Date: 2026-01
 // stage4DateType: exact
 // source: https://github.com/tc39/proposal-upsert
-// lastVerified: 2026-09-01
+// lastVerified: 2026-09-03
 // == end verification block ==
 
 // == verification block ==

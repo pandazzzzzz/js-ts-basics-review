@@ -75,7 +75,7 @@ console.log("- Array.fromAsync (ES2026): const arr = await Array.fromAsync(async
 console.log("- Math.sumPrecise (ES2026): Math.sumPrecise([1e16, 1, 1, 1]) // exact");
 console.log("- Error.isError (ES2026): cross-realm reliable Error check");
 console.log("- Uint8Array Base64 (ES2026): bytes.toBase64() / Uint8Array.fromBase64(s)");
-console.log("- Upsert (ES2026): map.upsert(key, insertFn, updateFn)");
+console.log("- Upsert (ES2026): map.getOrInsert(key, defaultValue) / getOrInsertComputed(key, fn)");
 console.log("- JSON.parse source text access (ES2026): access original JSON string");
 console.log("- Iterator Sequencing (ES2026): Iterator.concat(iter1, iter2) concatenation");
 

@@ -277,15 +277,20 @@ const adminIds = new Set<UserId>([2 as UserId, 3 as UserId, 4 as UserId]);
 const adminUsers = userIds.intersection(adminIds); // Set<UserId>
 console.log("Admin user IDs:", [...adminUsers]); // [2, 3]
 
-// 2. Iterator helpers with async iterators (TypeScript 5.2+)
+// 2. Async iterator helpers — NOT part of ES2025
+// Async variants of iterator helpers (map/filter/take on AsyncIterator) were split
+// out of the iterator-helpers proposal and have never advanced. There is no
+// standard asyncNumbers().map().toArray() — consume async iterables with for-await:
 async function* asyncNumbers(): AsyncGenerator<number> {
   yield 1;
   yield 2;
   yield 3;
 }
 
-// Async iterator helpers are also available
-// const asyncResult = await asyncNumbers().map(n => n * 2).toArray(); // [2, 4, 6]
+for await (const n of asyncNumbers()) {
+  if (n > 3) break;
+  console.log("async iterable value:", n); // 1, 2, 3 (for-await replaces helper chaining)
+}
 
 // 3. RegExp named group type inference (TypeScript 4.9+)
 const regex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
