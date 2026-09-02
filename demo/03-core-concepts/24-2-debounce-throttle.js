@@ -361,7 +361,9 @@ function throttleOptions(fn, limitMs, { leading = true, trailing = true } = {}) 
   let lastThis = null;
 
   const execute = () => {
-    if (lastArgs && lastThis) {
+    // Gate on lastArgs only: in strict mode (ES modules) a plain call has
+    // this === undefined, so checking lastThis truthiness would never execute.
+    if (lastArgs !== null) {
       fn.apply(lastThis, lastArgs);
       lastCall = Date.now();
       lastArgs = null;

@@ -73,10 +73,12 @@ console.log("\n=== Strict Mode Demo ===");
 
 // In strict mode, assigning to an undeclared variable throws a ReferenceError.
 // Run the throwing code via Function so the surrounding file still parses.
+// Note: Function bodies are always sloppy unless they START with "use strict" —
+// strictness does NOT propagate from the surrounding scope into new Function().
 (function strictDemo() {
   "use strict";
   try {
-    new Function("undeclaredVar = 5")();
+    new Function('"use strict"; undeclaredVar = 5')();
   } catch (e) {
     console.log("Strict mode prevents accidental globals:", e.name + ":", e.message);
   }

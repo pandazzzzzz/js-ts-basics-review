@@ -250,8 +250,8 @@ const expensive = memoizeLRU(n => {
 expensive(1);
 expensive(2);
 expensive(1); // Cache hit
-expensive(3); // Evicts 1
-expensive(1); // Recomputes
+expensive(3); // Evicts 2 (key 1 was refreshed to most-recent by the cache hit above)
+expensive(1); // Cache hit
 
 // ============================================
 // 3. Trampolines - Tail Recursion Optimization

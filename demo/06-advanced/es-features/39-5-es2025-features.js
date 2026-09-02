@@ -269,12 +269,12 @@ console.log("\n--- 5. Float16Array ---");
 const float16 = new Float16Array(3);
 float16[0] = 1.5;
 float16[1] = Math.PI;
-float16[2] = 100000; // Will be imprecise (float16 only has ~3.3 decimal digits of precision)
+float16[2] = 100000; // Above float16's max (~65504) → overflows to Infinity
 
 console.log("Float16Array:", float16);
 console.log("float16[0]:", float16[0]); // 1.5
 console.log("float16[1]:", float16[1]); // ~3.140625 (approximate PI)
-console.log("float16[2]:", float16[2]); // 100000 (exact for integers up to 2048, then loses precision)
+console.log("float16[2]:", float16[2]); // Infinity (integers up to 2048 are exact, larger values lose precision, >65504 overflows)
 
 // Use case: Graphics, machine learning, and other applications where memory is constrained
 // and precision can be traded for smaller memory footprint
@@ -381,22 +381,30 @@ console.log("\n--- 10. Redeclarable Global eval Vars ---");
  *   feature: Redeclarable global eval vars
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-09-01
+ *   lastVerified: 2026-09-03
  *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#redeclarable-global-eval-vars-for-stage-4
  */
 
-// var declarations in eval() no longer throw if variable exists in global scope
+// What ES2025 changed: `let`/`const` can now redeclare global vars introduced by
+// sloppy eval (those are configurable, deletable properties). Before ES2025 that
+// redeclaration threw SyntaxError. Plain var-var redeclaration via eval was always
+// legal — the proposal targets the var → let/const case.
+//
+// Direct eval inside this ESM file is strict (its `var` never leaks to global),
+// so vm.runInThisContext is used to reproduce classic-script global semantics:
 var globalVar = 10;
+eval("var globalVar = 20;"); // strict direct eval: stays scoped to the eval code
+console.log("Direct eval in ESM (strict) does not leak:", globalVar); // 10
+
+const vm = await import("node:vm");
+vm.runInThisContext('eval("var fromEval = 42");'); // sloppy eval → configurable global var
+console.log("eval-introduced global:", globalThis.fromEval); // 42
 try {
-  eval("var globalVar = 20;"); // No error in ES2025+
-  console.log("globalVar after eval redeclaration:", globalVar); // 20
+  vm.runInThisContext('let fromEval = 99; console.log("  in a new script, fromEval =", fromEval);');
+  console.log("let redeclaration of eval-introduced var: allowed (ES2025+)");
 } catch (e) {
   console.log("Redeclaration error:", e.message);
 }
-
-// Before ES2025: This threw SyntaxError: Identifier 'globalVar' has already been declared
-
-console.log("var declarations in eval() can now redeclare existing global variables");
 
 // ============================================
 // 11. Intl.DurationFormat

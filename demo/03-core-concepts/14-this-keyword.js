@@ -55,13 +55,16 @@ export {};
 
 console.log("=== 1. this Basic Rules Demo ===");
 
-// 1.1 Global context - this is global object (window/global/globalThis)
-console.log("Global this === globalThis:", this === globalThis);
+// 1.1 Global context — this depends on the module system:
+//   - Classic script (browser <script>, sloppy mode): this === window/globalThis
+//   - ES module (this project, "type": "module"): top-level this === undefined
+console.log("Top-level this (ES module) === undefined:", this === undefined);
 
-// In strict mode, global this is still globalThis
+// In a strict-mode function (plain call), this is undefined — NOT globalThis.
+// Only sloppy-mode plain calls get the global object as this.
 (function () {
   "use strict";
-  console.log("Strict mode global this === globalThis:", this === globalThis);
+  console.log("Strict plain-call this === undefined:", this === undefined);
 })();
 
 // 1.2 Object method - this is the calling object
@@ -106,11 +109,13 @@ obj3.methodShorthand(); // 1
 obj3.functionProperty(); // 1
 
 // 1.5 Standalone function call - default binding
+// Sloppy mode (classic scripts): this is the global object.
+// Strict mode (ES modules, classes): this is undefined. This file is an ESM.
 function standalone() {
-  console.log("Standalone this:", this === globalThis);
+  console.log("Standalone this:", this === undefined);
 }
 
-standalone(); // true (this is globalThis)
+standalone(); // true (this is undefined in strict/ESM; globalThis in sloppy scripts)
 
 // ============================================
 // 2. THIS LOSS PROBLEMS
@@ -169,7 +174,9 @@ let counter = {
 };
 
 console.log("\nsetTimeout with method:");
-setTimeout(counter.increment, 10); // count becomes NaN (this is globalThis)
+// this is lost: in browsers it becomes window/globalThis, in Node.js the Timeout
+// object — either way NOT counter, so this.count is NaN
+setTimeout(counter.increment, 10); // count becomes NaN (this is not counter)
 
 // Solution 1: bind
 setTimeout(counter.increment.bind(counter), 10); // Works! count = 1

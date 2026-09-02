@@ -128,7 +128,7 @@ console.log("  getSeconds():", date.getSeconds()); // 45
 console.log("  getMilliseconds():", date.getMilliseconds()); // 123
 
 // getTime() - Timestamp (milliseconds)
-console.log("  getTime():", date.getTime()); // 1718447445123
+console.log("  getTime():", date.getTime()); // 1718418645123 (UTC+8; ms since epoch)
 
 // Utility function: Format time
 function formatTime(date) {

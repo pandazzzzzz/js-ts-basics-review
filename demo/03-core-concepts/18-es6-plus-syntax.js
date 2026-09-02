@@ -1121,8 +1121,8 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
 
 // 22.6 Top-level await (ES2022)
 // - Allows `await` at the top level of an ES Module
-// - This file is NOT an ESM (it uses CommonJS-style top-level code), so the
-//   syntax below is commented out. It works in .mjs files or with "type":"module".
+// - This file IS an ES module (it has `export {}` and package.json sets
+//   "type": "module"), so top-level await works right here — demonstrated live:
 /*
  * verification:
  *   feature: Top-level await
@@ -1132,9 +1132,12 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
  *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nTop-level await (ES2022):");
-console.log("  // In an ES Module (.mjs or type:module) you can write:");
+// Live demonstration — no async IIFE wrapper needed at module top level:
+const awaitedValue = await Promise.resolve("top-level await works in this ESM file");
+console.log("  awaited value:", awaitedValue);
+
+console.log("  // In any ES Module (.mjs or type:module) you can also write:");
 console.log("  // const data = await fetch('https://api.example.com').then(r => r.json());");
-console.log("  // No async IIFE wrapper needed at module top level");
 
 // 22.7 WeakRef / FinalizationRegistry (ES2021)
 // - WeakRef: hold a weak reference to an object (doesn't prevent GC)

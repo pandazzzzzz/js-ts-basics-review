@@ -193,7 +193,7 @@ console.log("\n=== 2. Array Sorting ===");
 const mixedNumbers = [3, 1, 4, 1, 5, 9, 2, 6, 10, 20];
 console.log("Default sort (string comparison - WRONG for numbers!):");
 console.log("Original:", [...mixedNumbers]);
-console.log("Sorted:", [...mixedNumbers].sort()); // [1, 10, 2, 20, 3, 4, 5, 6, 9]
+console.log("Sorted:", [...mixedNumbers].sort()); // [1, 1, 10, 2, 20, 3, 4, 5, 6, 9]
 console.log("⚠️  Default sort is lexicographic, NOT numeric!");
 
 // 2.2 Numeric sort ascending
