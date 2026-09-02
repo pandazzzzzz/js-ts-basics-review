@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 15-prototypes-inheritance.js
 // This file demonstrates TypeScript-specific typing for prototypes and inheritance
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

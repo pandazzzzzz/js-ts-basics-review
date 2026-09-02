@@ -3,6 +3,7 @@
 // 📘 javascript.info Part 2 > "Forms, controls"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms
 // ⚠️ Browser environment only
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

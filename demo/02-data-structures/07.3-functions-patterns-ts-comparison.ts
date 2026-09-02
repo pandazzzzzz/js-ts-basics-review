@@ -1,6 +1,7 @@
 // Functions - Patterns TypeScript Comparison
 // 📘 Complementary to: 07.3-functions-patterns.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Functions - Patterns TypeScript Comparison ===\n");

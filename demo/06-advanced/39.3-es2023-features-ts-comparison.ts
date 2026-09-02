@@ -2,6 +2,7 @@
 // 📘 For JavaScript version, see: 39.3-es2023-features.js
 /// <reference lib="es2023" />
 
+// 🎯 Difficulty: Intermediate
 export {}; // Module
 
 console.log("\n=== TypeScript ES2023 Features Comparison ===\n");

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 19-symbol-deep.js
 // This file demonstrates TypeScript-specific typing for Symbols
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

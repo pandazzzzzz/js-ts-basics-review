@@ -1,5 +1,6 @@
 // Scope and Closures Demo
 // 📘 For TypeScript comparison, see: 13-scope-closures-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

@@ -1,6 +1,7 @@
 // Scope Basics Demo
 // 📘 For TypeScript comparison, see: 13.1-scope-basics-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

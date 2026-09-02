@@ -4,6 +4,7 @@
 // Note: @ts-nocheck because ES2026 APIs (Math.sumPrecise, Uint8Array.toBase64/toHex,
 // Map.upsert, Iterator.concat/toArray) are not yet in TypeScript's type definitions.
 
+// 🎯 Difficulty: Advanced
 export {}; // Module
 
 console.log("\n=== TypeScript ES2026 Features Comparison ===\n");

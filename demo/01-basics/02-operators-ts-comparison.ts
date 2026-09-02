@@ -3,6 +3,7 @@
 // 📘 For JavaScript runtime behavior, see: 02-operators.js
 
 // Make this file a module to avoid global scope conflicts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

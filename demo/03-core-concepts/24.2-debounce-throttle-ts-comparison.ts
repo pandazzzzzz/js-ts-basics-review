@@ -1,6 +1,7 @@
 // Function Patterns - Debounce & Throttle TypeScript Comparison
 // 📘 Complementary to: 24.2-debounce-throttle.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Function Patterns - Debounce & Throttle TypeScript Comparison ===\n");

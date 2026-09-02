@@ -1,5 +1,6 @@
 // Async/Await Demo
 // 📘 For TypeScript comparison, see: 31-async-await-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

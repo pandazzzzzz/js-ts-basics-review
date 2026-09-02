@@ -1,5 +1,6 @@
 // Async Error Handling Demo
 // 📘 For TypeScript comparison, see: 34-async-error-handling-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

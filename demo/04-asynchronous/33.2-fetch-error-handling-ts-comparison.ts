@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 33.2-fetch-error-handling.js
 // This file demonstrates TypeScript-specific typing for Fetch API error handling
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

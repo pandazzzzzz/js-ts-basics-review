@@ -1,6 +1,7 @@
 // Arrays - Iteration Methods Demo
 // 📘 For TypeScript comparison, see: 06.2-arrays-iteration-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

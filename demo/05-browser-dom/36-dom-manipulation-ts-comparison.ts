@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 36-dom-manipulation.js
 // This file demonstrates TypeScript-specific type features for DOM manipulation
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

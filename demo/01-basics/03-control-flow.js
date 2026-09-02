@@ -1,5 +1,6 @@
 // Control Flow and Control Structures Demo
 // 📘 For TypeScript comparison, see: 03-control-flow-ts-comparison.ts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

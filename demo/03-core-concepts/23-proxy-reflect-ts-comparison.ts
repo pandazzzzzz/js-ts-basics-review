@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 23-proxy-reflect.js
 // This file demonstrates TypeScript-specific typing for Proxy and Reflect
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

@@ -1,6 +1,7 @@
 // Arrays - Basics TypeScript Comparison
 // 📘 Complementary to: 06.1-arrays-basics.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Arrays - Basics TypeScript Comparison ===\n");

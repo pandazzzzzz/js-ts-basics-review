@@ -5,6 +5,7 @@
 // 📌 Covers XSS, CSRF, CSP, secure storage, and input validation
 // ⚠️ Partial browser environment — DOM/Web Crypto sections require a browser or jsdom; Node crypto sections run in Node
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 40-debugging-testing.js
 // This file demonstrates TypeScript-specific debugging and testing features
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

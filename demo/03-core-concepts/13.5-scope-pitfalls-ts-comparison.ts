@@ -1,6 +1,7 @@
 // Scope & Closures Pitfalls TypeScript Comparison
 // 📘 Complementary to: 13.5-scope-pitfalls.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Scope & Closures Pitfalls TypeScript Comparison ===\n");

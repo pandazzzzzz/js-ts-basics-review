@@ -1,6 +1,7 @@
 // Functions - Advanced TypeScript Comparison
 // 📘 Complementary to: 07.2-functions-advanced.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Functions - Advanced TypeScript Comparison ===\n");

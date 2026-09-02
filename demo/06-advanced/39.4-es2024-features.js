@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison, see: 39.4-es2024-features-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
 // 📘 TC39: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

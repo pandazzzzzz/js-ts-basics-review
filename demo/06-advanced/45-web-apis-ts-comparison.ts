@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 45-web-apis.js
 // This file demonstrates TypeScript-specific type features for Web APIs
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module
 
 // ============================================

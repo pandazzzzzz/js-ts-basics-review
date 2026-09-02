@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 33.1-fetch-basics.js
 // This file demonstrates TypeScript-specific typing for Fetch API basics
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================================================

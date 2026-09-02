@@ -1,6 +1,7 @@
 // Function Patterns - Memoization & Cache TypeScript Comparison
 // 📘 Complementary to: 24.3-memoization-cache.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Function Patterns - Memoization & Cache TypeScript Comparison ===\n");

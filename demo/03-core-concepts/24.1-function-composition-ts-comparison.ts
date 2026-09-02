@@ -1,6 +1,7 @@
 // Function Patterns - Composition TypeScript Comparison
 // 📘 Complementary to: 24.1-function-composition.js
 
+// 🎯 Difficulty: Advanced
 export {};
 
 console.log("=== Function Patterns - Composition TypeScript Comparison ===\n");

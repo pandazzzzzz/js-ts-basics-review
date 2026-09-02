@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 20-error-handling.js
 // This file demonstrates TypeScript-specific typing for error handling
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

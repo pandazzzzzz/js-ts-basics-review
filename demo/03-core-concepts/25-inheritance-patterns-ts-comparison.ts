@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 25-inheritance-patterns.js
 // This file demonstrates TypeScript-specific inheritance pattern features
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

@@ -1,6 +1,7 @@
 // Functions - Basics TypeScript Comparison
 // 📘 Complementary to: 07.1-functions-basics.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Functions - Basics TypeScript Comparison ===\n");

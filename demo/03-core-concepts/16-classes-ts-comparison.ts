@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 16-classes.js
 // This file demonstrates TypeScript-specific class features
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

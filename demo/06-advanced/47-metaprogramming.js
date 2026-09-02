@@ -8,6 +8,7 @@
 // 📌 File scope: metaprogramming (JSDoc, Decorators, Reflect, Proxy, Symbol). For TypeScript's
 //    advanced type system (generics, conditional/mapped/template-literal/utility types),
 //    see the TS comparison file: 47-metaprogramming-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

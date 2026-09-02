@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 26-optimization-performance.js
 // This file demonstrates TypeScript-specific optimization features
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

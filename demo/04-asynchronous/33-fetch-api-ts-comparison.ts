@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 33-fetch-api.js
 // This file demonstrates TypeScript-specific typing for Fetch API
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

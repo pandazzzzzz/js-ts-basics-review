@@ -1,6 +1,7 @@
 // Functions - Patterns Demo
 // 📘 For TypeScript comparison, see: 07.3-functions-patterns-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

@@ -5,6 +5,7 @@
 // 📌 Reserved slot #28:
 // Lesson number 28 is intentionally reserved (between 27 and 29) for a potential
 // future lesson on async patterns that bridges sync concepts (27) to async (29+).
+// 🎯 Difficulty: Beginner
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

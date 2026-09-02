@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison, see: 39.6-es2026-features-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sumPrecise
 // 📘 TC39: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

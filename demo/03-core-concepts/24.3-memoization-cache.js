@@ -1,6 +1,7 @@
 // Function Patterns - Memoization & Cache Demo
 // 📘 For TypeScript comparison, see: 24.3-memoization-cache-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

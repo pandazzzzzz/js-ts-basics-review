@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 37-events.js
 // This file demonstrates TypeScript-specific type features for event handling
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

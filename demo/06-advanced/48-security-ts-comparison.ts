@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 48-security.js
 // This file demonstrates TypeScript-specific type features for web security
 
+// 🎯 Difficulty: Advanced
 export {}; // Make this file a module
 
 // ============================================

@@ -1,5 +1,6 @@
 // this Keyword Demo
 // 📘 For TypeScript comparison, see: 14-this-keyword-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

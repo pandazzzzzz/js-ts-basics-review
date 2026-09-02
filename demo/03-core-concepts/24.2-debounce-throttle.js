@@ -1,6 +1,7 @@
 // Function Patterns - Debounce & Throttle Demo
 // 📘 For TypeScript comparison, see: 24.2-debounce-throttle-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

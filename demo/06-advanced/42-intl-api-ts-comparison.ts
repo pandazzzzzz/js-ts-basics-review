@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 42-intl-api.js
 // This file demonstrates TypeScript-specific type features for Intl API
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

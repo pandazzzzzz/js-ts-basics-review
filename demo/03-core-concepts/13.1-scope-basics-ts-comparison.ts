@@ -1,6 +1,7 @@
 // Scope Basics TypeScript Comparison
 // 📘 Complementary to: 13.1-scope-basics.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Scope Basics TypeScript Comparison ===\n");

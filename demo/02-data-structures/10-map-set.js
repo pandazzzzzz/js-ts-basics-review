@@ -4,6 +4,7 @@
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
 // 📌 ES6 (ES2015)
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

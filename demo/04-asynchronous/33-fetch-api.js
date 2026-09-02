@@ -9,6 +9,7 @@
 //   33.3-fetch-practical-patterns.js  → Practical Patterns (API Client, Retry, AbortController)
 //   33.4-fetch-streams-advanced.js    → Streams & Advanced (Stream API, Progress, Cancellation)
 // The sub-files have their own -ts-comparison.ts counterparts.
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

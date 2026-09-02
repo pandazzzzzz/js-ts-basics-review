@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 22-iterators-generators.js
 // This file demonstrates TypeScript-specific typing for iterators and generators
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

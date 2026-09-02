@@ -6,6 +6,7 @@
 /// <reference lib="esnext.disposable" />
 /// <reference lib="esnext.decorators" />
 
+// 🎯 Difficulty: Advanced
 export {}; // Module
 
 console.log("\n=== TypeScript ES2027 & Future Features Comparison ===\n");

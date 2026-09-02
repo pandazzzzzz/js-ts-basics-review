@@ -1,5 +1,6 @@
 // Objects - Complete Demo
 // 📘 For TypeScript comparison, see: 08-objects-ts-comparison.ts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

@@ -1,5 +1,6 @@
 // Error Handling Demo
 // 📘 For TypeScript comparison, see: 20-error-handling-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

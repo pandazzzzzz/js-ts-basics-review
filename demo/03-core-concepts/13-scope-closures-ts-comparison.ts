@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 13-scope-closures.js
 // This file demonstrates TypeScript-specific type features for scope and closures
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

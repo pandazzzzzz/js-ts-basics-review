@@ -1,6 +1,7 @@
 // Arrays - Typed Arrays Demo
 // 📘 For TypeScript comparison, see: 06.5-typed-arrays-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

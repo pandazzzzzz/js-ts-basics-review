@@ -1,6 +1,7 @@
 // Arrays - Manipulation TypeScript Comparison
 // 📘 Complementary to: 06.4-arrays-manipulation.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Arrays - Manipulation TypeScript Comparison ===\n");

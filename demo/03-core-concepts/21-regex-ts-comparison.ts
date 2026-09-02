@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 21-regex.js
 // This file demonstrates TypeScript-specific typing for regular expressions
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

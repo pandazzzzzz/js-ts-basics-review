@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 33.3-fetch-practical-patterns.js
 // This file demonstrates TypeScript-specific typing for Fetch API practical patterns
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

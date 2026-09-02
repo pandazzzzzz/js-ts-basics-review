@@ -1,6 +1,7 @@
 // Functions - Basics Demo
 // 📘 For TypeScript comparison, see: 07.1-functions-basics-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

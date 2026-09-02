@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 17-property-descriptors.js
 // This file demonstrates TypeScript-specific typing for property descriptors
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

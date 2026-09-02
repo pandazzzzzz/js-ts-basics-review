@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 49-build-tools.js
 // This file demonstrates TypeScript-specific type features for build tools
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module
 
 // ============================================

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 33.4-fetch-streams-advanced.js
 // This file demonstrates TypeScript-specific typing for Fetch API streams
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

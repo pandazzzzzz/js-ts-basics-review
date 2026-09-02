@@ -1,6 +1,7 @@
 // Arrays - Search & Sort TypeScript Comparison
 // 📘 Complementary to: 06.3-arrays-search-sort.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Arrays - Search & Sort TypeScript Comparison ===\n");

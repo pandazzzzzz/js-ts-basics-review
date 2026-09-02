@@ -1,6 +1,7 @@
 // Arrays - Basics Demo
 // 📘 For TypeScript comparison, see: 06.1-arrays-basics-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

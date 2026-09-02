@@ -1,6 +1,7 @@
 // Arrays - Manipulation Demo
 // 📘 For TypeScript comparison, see: 06.4-arrays-manipulation-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

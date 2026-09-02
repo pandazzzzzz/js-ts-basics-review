@@ -1,6 +1,7 @@
 // Closure Patterns TypeScript Comparison
 // 📘 Complementary to: 13.4-closures-patterns.js
 
+// 🎯 Difficulty: Advanced
 export {};
 
 console.log("=== Closure Patterns TypeScript Comparison ===\n");

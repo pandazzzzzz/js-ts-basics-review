@@ -1,6 +1,7 @@
 // Function Patterns - Composition Demo
 // 📘 For TypeScript comparison, see: 24.1-function-composition-ts-comparison.ts
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

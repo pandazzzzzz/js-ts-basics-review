@@ -3,6 +3,7 @@
 // 📘 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript (MDN JavaScript Reference)
 // 📘 For TypeScript comparison, see: 18-es6-plus-syntax-ts-comparison.ts
 // 📌 Covers ES6/ES2015 through ES2023+ modern syntax features
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

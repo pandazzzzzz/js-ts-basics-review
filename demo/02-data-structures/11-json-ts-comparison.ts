@@ -3,6 +3,7 @@
 // This file demonstrates key differences, pitfalls, and best practices
 
 // Make this file a module to avoid global scope conflicts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================================================

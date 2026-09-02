@@ -2,6 +2,7 @@
 // 📘 For JavaScript version, see: 39.2-es2022-features.js
 /// <reference lib="es2022" />
 
+// 🎯 Difficulty: Intermediate
 export {}; // Module
 
 console.log("\n=== TypeScript ES2022 Features Comparison ===\n");

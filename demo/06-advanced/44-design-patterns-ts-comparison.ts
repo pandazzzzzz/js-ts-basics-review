@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 44-design-patterns.js
 // This file demonstrates TypeScript-specific type features for design patterns
 
+// 🎯 Difficulty: Advanced
 export {}; // Make this file a module
 
 // ============================================

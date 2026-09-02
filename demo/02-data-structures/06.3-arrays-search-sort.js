@@ -1,6 +1,7 @@
 // Arrays - Search & Sort Demo
 // 📘 For TypeScript comparison, see: 06.3-arrays-search-sort-ts-comparison.ts
 
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 24-function-patterns-advanced.js
 // This file demonstrates TypeScript-specific function pattern features
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

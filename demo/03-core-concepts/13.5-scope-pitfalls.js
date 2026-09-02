@@ -1,6 +1,7 @@
 // Scope & Closures - Pitfalls and Best Practices Demo
 // 📘 For TypeScript comparison, see: 13.5-scope-pitfalls-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

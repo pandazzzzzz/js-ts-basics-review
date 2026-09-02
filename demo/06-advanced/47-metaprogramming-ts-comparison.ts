@@ -2,6 +2,7 @@
 // 📘 For JavaScript foundations, see: 47-metaprogramming.js
 // This file demonstrates TypeScript-specific advanced features (the type system)
 
+// 🎯 Difficulty: Advanced
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

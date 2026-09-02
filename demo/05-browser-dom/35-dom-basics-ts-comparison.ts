@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 35-dom-basics.js
 // This file demonstrates TypeScript-specific type features for DOM manipulation
 
+// 🎯 Difficulty: Beginner
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

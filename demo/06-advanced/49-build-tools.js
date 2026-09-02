@@ -3,6 +3,7 @@
 // 📘 Webpack: https://webpack.js.org/
 // 📘 Vite: https://vitejs.dev/
 // 📌 Covers webpack, vite, code splitting, and production optimization
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

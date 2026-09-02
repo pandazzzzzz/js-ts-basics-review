@@ -3,6 +3,7 @@
 // 📘 Detailed comparison files: 39.1 - 39.7
 // This file is the index for the ES2022+ TypeScript comparisons (now split by version)
 
+// 🎯 Difficulty: Intermediate
 export {}; // Module
 
 // ============================================

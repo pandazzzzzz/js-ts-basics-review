@@ -1,6 +1,7 @@
 // TypeScript String Comparison
 // This file demonstrates TypeScript-specific string features
 // 📘 For JavaScript runtime behavior, see: 04-strings.js
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

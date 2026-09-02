@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 29-event-loop-callbacks.js
 // This file demonstrates TypeScript-specific typing for callbacks and timers
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

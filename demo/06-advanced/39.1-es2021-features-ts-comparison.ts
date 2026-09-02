@@ -2,6 +2,7 @@
 // 📘 For JavaScript version, see: 39.1-es2021-features.js
 /// <reference lib="es2021" />
 
+// 🎯 Difficulty: Intermediate
 export {}; // Module
 
 console.log("\n=== TypeScript ES2021 Features Comparison ===\n");

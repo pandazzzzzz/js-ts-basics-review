@@ -3,6 +3,7 @@
 // 📘 For JavaScript syntax and runtime behavior, see: 03-control-flow.js
 
 // Make this file a module to avoid global scope conflicts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

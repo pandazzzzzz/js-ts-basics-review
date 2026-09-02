@@ -4,6 +4,7 @@
 // Note: @ts-nocheck because ES2025 APIs (RegExp.escape, Intl.DurationFormat,
 // Float16Array, Set methods) are not yet in TypeScript's built-in type definitions.
 
+// 🎯 Difficulty: Advanced
 export {}; // Module
 
 console.log("\n=== TypeScript ES2025 Features Comparison ===\n");

@@ -1,5 +1,6 @@
 // Prototypes and Inheritance Demo
 // 📘 For TypeScript comparison, see: 15-prototypes-inheritance-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

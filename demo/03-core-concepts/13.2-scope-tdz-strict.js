@@ -1,6 +1,7 @@
 // Scope - TDZ and Strict Mode Demo
 // 📘 For TypeScript comparison, see: 13.2-scope-tdz-strict-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

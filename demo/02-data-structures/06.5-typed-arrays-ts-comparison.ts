@@ -1,6 +1,7 @@
 // Arrays - Typed Arrays TypeScript Comparison
 // 📘 Complementary to: 06.5-typed-arrays.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Arrays - Typed Arrays TypeScript Comparison ===\n");

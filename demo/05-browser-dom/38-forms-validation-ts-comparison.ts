@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 38-forms-validation.js
 // This file demonstrates TypeScript-specific type features for forms and validation
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================

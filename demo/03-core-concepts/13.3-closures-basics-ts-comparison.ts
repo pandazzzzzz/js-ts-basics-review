@@ -1,6 +1,7 @@
 // Closures Basics TypeScript Comparison
 // 📘 Complementary to: 13.3-closures-basics.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Closures Basics TypeScript Comparison ===\n");

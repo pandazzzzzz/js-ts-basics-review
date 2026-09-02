@@ -1,5 +1,6 @@
 // Memory Management Demo
 // 📘 For TypeScript comparison, see: 27-memory-management-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

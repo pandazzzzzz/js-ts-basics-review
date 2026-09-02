@@ -14,6 +14,7 @@ declare const process: {
 };
 declare function setImmediate(callback: (value?: unknown) => void): void;
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

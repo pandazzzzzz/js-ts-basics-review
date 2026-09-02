@@ -1,6 +1,7 @@
 // Functions - Advanced Demo
 // 📘 For TypeScript comparison, see: 07.2-functions-advanced-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

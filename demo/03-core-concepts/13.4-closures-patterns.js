@@ -1,6 +1,7 @@
 // Closure Patterns Demo
 // 📘 For TypeScript comparison, see: 13.4-closures-patterns-ts-comparison.ts
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

@@ -3,6 +3,7 @@
 // 📘 For JavaScript runtime behavior, see: 01-variables.js
 
 // Make this file a module to avoid global scope conflicts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

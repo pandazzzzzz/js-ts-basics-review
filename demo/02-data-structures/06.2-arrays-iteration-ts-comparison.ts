@@ -1,6 +1,7 @@
 // Arrays - Iteration TypeScript Comparison
 // 📘 Complementary to: 06.2-arrays-iteration.js
 
+// 🎯 Difficulty: Beginner
 export {};
 
 console.log("=== Arrays - Iteration TypeScript Comparison ===\n");

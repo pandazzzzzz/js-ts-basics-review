@@ -1,6 +1,7 @@
 // Operators and Expressions Demo
 // 📘 For TypeScript comparison, see: 02-operators-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

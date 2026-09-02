@@ -1,5 +1,6 @@
 // Iterators and Generators Demo
 // 📘 For TypeScript comparison, see: 22-iterators-generators-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

@@ -1,6 +1,7 @@
 // Scope - TDZ and Strict Mode TypeScript Comparison
 // 📘 Complementary to: 13.2-scope-tdz-strict.js
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 console.log("=== Scope - TDZ and Strict Mode TypeScript Comparison ===\n");

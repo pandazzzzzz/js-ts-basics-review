@@ -1,5 +1,6 @@
 // Promises Demo
 // 📘 For TypeScript comparison, see: 30-promises-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

@@ -2,6 +2,7 @@
 // 📘 For TypeScript comparison, see: 39.5-es2025-features-ts-comparison.ts
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/intersection
 // 📘 TC39: https://github.com/tc39/proposals/blob/main/finished-proposals.md
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

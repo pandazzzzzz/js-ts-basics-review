@@ -1,5 +1,6 @@
 // Proxy and Reflect Demo
 // 📘 For TypeScript comparison, see: 23-proxy-reflect-ts-comparison.ts
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================

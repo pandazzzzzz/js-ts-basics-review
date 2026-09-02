@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 30-promises.js
 // This file demonstrates TypeScript-specific typing for Promises
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

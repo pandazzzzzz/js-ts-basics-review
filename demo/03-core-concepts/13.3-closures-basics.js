@@ -1,6 +1,7 @@
 // Closures Basics Demo
 // 📘 For TypeScript comparison, see: 13.3-closures-basics-ts-comparison.ts
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

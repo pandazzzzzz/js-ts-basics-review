@@ -1,5 +1,6 @@
 // Regular Expressions Demo
 // 📘 For TypeScript comparison, see: 21-regex-ts-comparison.ts
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================

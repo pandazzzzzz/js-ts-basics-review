@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 14-this-keyword.js
 // This file demonstrates TypeScript-specific this typing features
 
+// 🎯 Difficulty: Intermediate
 export {};
 
 // ============================================================================

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 34-async-error-handling.js
 // This file demonstrates TypeScript-specific async error handling features
 
+// 🎯 Difficulty: Advanced
 export {};
 
 // ============================================================================

@@ -1,5 +1,6 @@
 // Strings and Template Literals Demo
 // 📘 For TypeScript comparison, see: 04-strings-ts-comparison.ts
+// 🎯 Difficulty: Beginner
 export {};
 
 // ============================================

@@ -2,6 +2,7 @@
 // 📘 For JavaScript examples, see: 43-storage-network.js
 // This file demonstrates TypeScript-specific type features for storage and network APIs
 
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================
