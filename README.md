@@ -1,6 +1,6 @@
 # JS/TS Fundamentals Review
 
-JavaScript/TypeScript fundamentals — 76 JS demo files + 76 TypeScript comparison files, covering ES2020–ES2027.
+JavaScript/TypeScript fundamentals — 76 JS demo files + 76 TypeScript comparison files, covering ES2015 (ES6)–ES2027.
 
 ## Quick Start
 
@@ -30,7 +30,7 @@ npm run format:check
 | Feature | Node.js | TypeScript |
 |---------|---------|------------|
 | ES2022+ basics | 18+ | 5+ |
-| ES2025 (Set methods, Iterator helpers, Promise.try) | 22+ | 5.2+ |
+| ES2025 (Set methods, Iterator helpers, Promise.try) | 24+ | 5.2+ |
 | ES2027 (Temporal, Explicit Resource Management) | Not yet | Community types needed |
 
 > Temporal API is ES2027 (Stage 4); TypeScript has no built-in types, use `@js-temporal/polyfill`.
@@ -62,9 +62,10 @@ This project uses Prettier for consistent code formatting across all demo files 
 | Issue | Solution |
 |-------|----------|
 | `ts-node` not found | `npm install` (ts-node is a dev dependency) |
-| ES2022+ syntax error | Ensure Node.js 18+; ES2025 requires 22+ |
-| TypeScript type errors | Run `npx tsc --noEmit`; verify tsconfig.json |
-| TS comparison won't run | Browser-DOM (35–38, 43, 45, 48) and future-ES (39-4/39-6/39-7) demos need a browser or newer runtime; files containing Stage 2.7 decorator snippets (16, 17, 39-7, 50, plus isolated decorator sections in 44 and 46) may require `experimentalDecorators` for those specific sections — the rest of each file runs normally. See each file's header. |
+| ES2022+ syntax error | Ensure Node.js 18+; full ES2025 requires 24+ |
+| TypeScript type errors | Run `npm run typecheck`; verify tsconfig.json |
+| `npx` commands fail | This folder's path contains `&`, which breaks npm's `.bin` shims on Windows — use the `npm run` scripts (they invoke `node` directly) |
+| TS comparison won't run | Browser-DOM (35–38, 43, 45) and future-ES (39-6/39-7) demos need a browser or newer runtime; Stage 2.7 decorator snippets (16, 17, 39-7, 50, plus decorator sections in 44 and 46) run natively on TypeScript 5.2+ without `experimentalDecorators` — see each file's header. |
 
 ## References
 
