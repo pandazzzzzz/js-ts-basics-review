@@ -21,13 +21,5 @@
     }
   },
   "include": ["demo/**/*.ts"],
-  "exclude": [
-    "node_modules",
-    "**/node_modules/**",
-    "js-fundamentals-review",
-    "basics-review",
-    "operators-review",
-    "audit",
-    "array-audit"
-  ]
+  "exclude": ["node_modules", "**/node_modules/**"]
 }
