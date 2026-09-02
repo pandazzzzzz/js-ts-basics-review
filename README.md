@@ -49,12 +49,13 @@ This project uses Prettier for consistent code formatting across all demo files 
 ## Status
 
 ✅ 76/76 JS + 76/76 TS complete · 6 long files split into 27 focused sub-files · All use ESM (`export {}`) strict mode
-📅 Updated 2026-08-21 · 📊 Coverage: Stages 1-6 Complete
+📅 Updated 2026-09-02 · 📊 Coverage: Stages 1-6 Complete
 
 ## Documentation
 
 - [TODOLIST.md](docs/TODOLIST.md) — Learning roadmap
 - [JS-TS-KEY-DIFFERENCES.md](docs/JS-TS-KEY-DIFFERENCES.md) — JS vs TS quick reference
+- [EXAMPLES.md](docs/EXAMPLES.md) — Task-based example index
 
 ## Troubleshooting
 
