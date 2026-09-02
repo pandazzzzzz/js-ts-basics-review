@@ -38,7 +38,7 @@ const API_BASE = "https://jsonplaceholder.typicode.com";
  * Stream API - Read response body incrementally
  *
  * Characteristics:
- * - response.body provides ReadableStream (Streams Standard, ES2017+)
+ * - response.body provides ReadableStream (WHATWG Streams Standard, not ECMAScript)
  * - Read data in chunks instead of all at once (ES2017)
  * - Efficient for large files or data
  * - Low memory usage

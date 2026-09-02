@@ -381,7 +381,7 @@ console.log("\nSpread operator:", spreadMerged);
 const updatedPerson = { ...person, age: 31, country: "USA" };
 console.log("Updated:", updatedPerson);
 
-// Deep copy with structuredClone (ES2022)
+// Deep copy with structuredClone (Web API — not part of any ES edition; Node 17+, Chrome 98+)
 // - True deep copy
 // - Handles nested objects, arrays, dates, etc.
 // - Cannot clone functions, symbols, DOM nodes
@@ -713,7 +713,7 @@ const CONFIG = Object.freeze({
   API_URL: "https://api.example.com",
   TIMEOUT: 5000,
 });
-// CONFIG.API_URL = "other"; // Silently fails
+// CONFIG.API_URL = "other"; // ❌ TypeError in strict mode (ES modules); silent only in sloppy scripts
 
 // Best Practice 5: Use descriptive property names
 // Good: { firstName: "Alice", lastName: "Smith" }

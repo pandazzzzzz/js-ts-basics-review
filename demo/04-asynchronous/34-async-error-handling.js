@@ -739,7 +739,8 @@ async function retryOnlyRetryable(fn, options = {}) {
 // 7. TIMEOUT AND CANCELLATION
 // ============================================
 /**
- * Timeout & Cancellation - Controlling async operation lifetime (ES6+)
+ * Timeout & Cancellation - Controlling async operation lifetime
+ * (Promise.race is ES6; AbortController is a Web API — DOM/HTML Standard)
  *
  * Characteristics:
  * - AbortController for cancellation

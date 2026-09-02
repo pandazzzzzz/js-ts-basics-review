@@ -172,7 +172,7 @@ console.log("Doubled:", doubled);
 
 console.log("\n=== setTimeout and setInterval Demo ===\n");
 
-// setTimeout - single execution (ES1)
+// setTimeout - single execution (Web API: HTML Standard / Node.js global, not ECMAScript)
 console.log("Before setTimeout");
 
 setTimeout(() => {
@@ -998,7 +998,7 @@ setTimeout(() => {
 /**
  * Platform-specific microtask/timer APIs
  *
- * queueMicrotask() (Browser + Node.js, ES2020):
+ * queueMicrotask() (Web API: HTML Standard; Browser + Node.js 11+):
  * - Queues a microtask, executed before next macrotask
  * - Similar to Promise.resolve().then(() => ...) but more explicit
  * - No delay — runs as soon as current task completes and stack is empty
@@ -1018,7 +1018,7 @@ setTimeout(() => {
 console.log("\n=== 12.5 queueMicrotask, setImmediate, process.nextTick ===");
 
 // queueMicrotask — Standard API (Browser + Node.js)
-console.log("\nqueueMicrotask (Standard ES2020):");
+console.log("\nqueueMicrotask (HTML Standard, Browser + Node.js):");
 console.log("  - Adds callback to microtask queue");
 console.log("  - Executes before next macrotask (setTimeout, I/O)");
 console.log("  - But after the current task completes");

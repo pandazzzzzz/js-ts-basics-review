@@ -576,7 +576,7 @@ stateMgr.update({ c: 3 });
 // 6. WEB WORKERS FOR PARALLEL PROCESSING
 // ============================================
 /**
- * Web Workers - Background thread execution (Browser ES6)
+ * Web Workers - Background thread execution (Web API: HTML Standard, not ECMAScript)
  *
  * Characteristics:
  * - True parallel execution
@@ -592,7 +592,7 @@ stateMgr.update({ c: 3 });
  *
  * Common Pitfalls:
  * - Serialization overhead
- * - Can't share memory directly
+ * - No direct shared memory by default (SharedArrayBuffer + Atomics is the opt-in exception)
  * - Worker creation cost
  * - Browser compatibility
  */
