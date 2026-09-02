@@ -1,6 +1,6 @@
 // ES2022+ Features Demo - Index
 // 📘 For TypeScript comparison index, see: 39-es2022-plus-features-ts-comparison.ts
-// 📘 Detailed version-specific demo files: 39.1 - 39.7
+// 📘 Detailed version-specific demo files: 39-1 - 39-7
 // This file is the index for the ES2022+ features collection (now split by version)
 // 🎯 Difficulty: Intermediate
 export {};
@@ -33,13 +33,13 @@ console.log(`
 Original file: 39-es2022-plus-features.js (1749 lines)
 Reorganized into per-version demo files:
 
-39.1-es2021-features.js  → ES2021 (replaceAll, logical assignment, numeric separators, WeakRef, etc.)
-39.2-es2022-features.js  → ES2022 (private fields, .at(), Object.hasOwn, Error.cause, top-level await, etc.)
-39.3-es2023-features.js  → ES2023 (immutable array methods, findLast, Hashbang, Symbols as WeakMap keys)
-39.4-es2024-features.js  → ES2024 (groupBy, Promise.withResolvers, RegExp v flag, Resizable ArrayBuffer, etc.)
-39.5-es2025-features.js  → ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, etc.)
-39.6-es2026-features.js  → ES2026 (Math.sumPrecise, Array.fromAsync, Uint8Array Base64, Map.upsert, etc.)
-39.7-es2027-future.js    → ES2027 & beyond (Temporal API, using/await using, Joint Iteration, Decorators, etc.)
+39-1-es2021-features.js  → ES2021 (replaceAll, logical assignment, numeric separators, WeakRef, etc.)
+39-2-es2022-features.js  → ES2022 (private fields, .at(), Object.hasOwn, Error.cause, top-level await, etc.)
+39-3-es2023-features.js  → ES2023 (immutable array methods, findLast, Hashbang, Symbols as WeakMap keys)
+39-4-es2024-features.js  → ES2024 (groupBy, Promise.withResolvers, RegExp v flag, Resizable ArrayBuffer, etc.)
+39-5-es2025-features.js  → ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, etc.)
+39-6-es2026-features.js  → ES2026 (Math.sumPrecise, Array.fromAsync, Uint8Array Base64, Map.upsert, etc.)
+39-7-es2027-future.js    → ES2027 & beyond (Temporal API, using/await using, Joint Iteration, Decorators, etc.)
 
 Rationale:
   ✅ Clear separation by ES version (chronological order)
@@ -47,7 +47,7 @@ Rationale:
   ✅ Consistent structure across all demo files
   ✅ Better maintainability (add new ES versions as they are released)
   ✅ All original content preserved, no features removed
-  ✅ ES2018 features (e.g. Intl.PluralRules) are covered in 42-intl-api.js rather than this 39.x chain
+  ✅ ES2018 features (e.g. Intl.PluralRules) are covered in 42-intl-api.js rather than this 39-x chain
 `);
 
 // ============================================
@@ -102,7 +102,7 @@ console.log(
 console.log(
   "2. Don't treat Stage 1-3 proposals as standard — they may change syntax before Stage 4"
 );
-console.log("3. Don't skip reading the version-specific file (39.1-39.7) for full examples");
+console.log("3. Don't skip reading the version-specific file (39-1-39-7) for full examples");
 console.log(
   "4. Don't rely on verification blocks alone — cross-check reference/ data for stage4Date"
 );
@@ -111,7 +111,7 @@ console.log(
 // 7. Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
-console.log("1. Open the version-specific file (39.1-39.7) for the feature you need");
+console.log("1. Open the version-specific file (39-1-39-7) for the feature you need");
 console.log("2. Check browser/runtime support before using newer ES features in production");
 console.log("3. Prefer polyfills or transpilation for targets that lack ES2025+ support");
 console.log("4. Use verification blocks to confirm which features are Stage 4 standard");
@@ -120,13 +120,13 @@ console.log("4. Use verification blocks to confirm which features are Stage 4 st
 // 8. Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 39.1-es2021-features.js - ES2021 features");
-console.log("📘 39.2-es2022-features.js - ES2022 features");
-console.log("📘 39.3-es2023-features.js - ES2023 features");
-console.log("📘 39.4-es2024-features.js - ES2024 features");
-console.log("📘 39.5-es2025-features.js - ES2025 features");
-console.log("📘 39.6-es2026-features.js - ES2026 features");
-console.log("📘 39.7-es2027-future.js - ES2027 & future proposals");
+console.log("📘 39-1-es2021-features.js - ES2021 features");
+console.log("📘 39-2-es2022-features.js - ES2022 features");
+console.log("📘 39-3-es2023-features.js - ES2023 features");
+console.log("📘 39-4-es2024-features.js - ES2024 features");
+console.log("📘 39-5-es2025-features.js - ES2025 features");
+console.log("📘 39-6-es2026-features.js - ES2026 features");
+console.log("📘 39-7-es2027-future.js - ES2027 & future proposals");
 
 // ============================================
 // TypeScript Comparison

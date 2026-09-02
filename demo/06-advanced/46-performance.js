@@ -175,13 +175,13 @@ lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
 // ============================================
 // Section 3: Debounce and Throttle (ES5+)
 // - Uses closures (ES3) and arrow functions (ES6); requestAnimationFrame (ES6 Browser)
-// - See 24.2-debounce-throttle.js for complete implementations and variations
+// - See 24-2-debounce-throttle.js for complete implementations and variations
 // ============================================
 
 console.log("\n=== Debounce and Throttle (Performance Optimization) ===");
 
 // Debounce and throttle are rate-limiting patterns that reduce unnecessary work.
-// Full implementations: 24.2-debounce-throttle.js (7+ variations including cancelable,
+// Full implementations: 24-2-debounce-throttle.js (7+ variations including cancelable,
 // leading/trailing, Promise-based, maxWait, etc.)
 
 // Performance Impact:
@@ -608,7 +608,7 @@ console.log(
 console.log("\n=== Cross-references ===");
 console.log("📘 26-optimization-performance.js - Optimization patterns");
 console.log("📘 27-memory-management.js - Memory management");
-console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
+console.log("📘 24-2-debounce-throttle.js - Complete debounce/throttle implementations");
 console.log("📘 45-web-apis.js - Web APIs");
 
 // ============================================

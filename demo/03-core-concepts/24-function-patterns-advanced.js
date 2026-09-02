@@ -12,9 +12,9 @@ export {};
 // - Compose functions with point-free style
 //
 // In-depth sections live in the split files:
-//   24.1-function-composition.js   → Currying, Compose/Pipe, Partial Application, Factories, Higher-Order
-//   24.2-debounce-throttle.js      → Debounce & Throttle
-//   24.3-memoization-cache.js      → Memoization & caching
+//   24-1-function-composition.js   → Currying, Compose/Pipe, Partial Application, Factories, Higher-Order
+//   24-2-debounce-throttle.js      → Debounce & Throttle
+//   24-3-memoization-cache.js      → Memoization & caching
 
 // ============================================
 // Table of Contents
@@ -27,9 +27,9 @@ export {};
 // 6. Cross-references
 
 console.log("=== Function Patterns - Advanced Demo ===\n");
-console.log("📘 For Currying/Compose/Pipe → 24.1-function-composition.js");
-console.log("📘 For Debounce/Throttle   → 24.2-debounce-throttle.js");
-console.log("📘 For Memoization/Cache   → 24.3-memoization-cache.js");
+console.log("📘 For Currying/Compose/Pipe → 24-1-function-composition.js");
+console.log("📘 For Debounce/Throttle   → 24-2-debounce-throttle.js");
+console.log("📘 For Memoization/Cache   → 24-3-memoization-cache.js");
 
 // ============================================
 // 1. TRAMPOLINES - TAIL RECURSION OPTIMIZATION
@@ -219,7 +219,7 @@ console.log("Sum of nested values:", sum); // 10
  * Characteristics:
  * - Also called "tacit programming"
  * - Functions composed without naming arguments
- * - Relies on function composition (see 24.1)
+ * - Relies on function composition (see 24-1)
  * - More declarative, less verbose
  *
  * Use Cases:
@@ -235,7 +235,7 @@ console.log("Sum of nested values:", sum); // 10
 
 console.log("\n=== 3. Point-Free Style Demo ===");
 
-// Pipe helper (full details in 24.1-function-composition.js)
+// Pipe helper (full details in 24-1-function-composition.js)
 function pipe(...fns) {
   return function (x) {
     return fns.reduce((acc, fn) => fn(acc), x);
@@ -304,22 +304,22 @@ console.log(
 
 // Pitfall 2: Memory leak with unclosed functions
 console.log("\nPitfall 2 - Memory leaks:");
-console.log("❌ Bad: Caching without eviction policy (see 24.3-memoization-cache.js for LRU)");
+console.log("❌ Bad: Caching without eviction policy (see 24-3-memoization-cache.js for LRU)");
 console.log(
-  "✅ Good: Use an LRU cache with a size limit — full example in 24.3-memoization-cache.js"
+  "✅ Good: Use an LRU cache with a size limit — full example in 24-3-memoization-cache.js"
 );
 
 // Pitfall 3: Incorrect debounce/throttle timing
 console.log("\nPitfall 3 - Wrong timing values:");
 console.log("❌ Bad: Debounce too short for API calls");
-console.log("✅ Good: Choose delay based on use case — see 24.2-debounce-throttle.js");
+console.log("✅ Good: Choose delay based on use case — see 24-2-debounce-throttle.js");
 console.log("Search: 200-500ms, Resize: 50-150ms, Scroll: 100-300ms");
 
 // Pitfall 4: Over-composing functions
 console.log("\nPitfall 4 - Over-composition:");
 console.log("❌ Bad: Too many composed functions are hard to debug");
 console.log(
-  "✅ Good: Keep composition chains short and readable — see 24.1-function-composition.js"
+  "✅ Good: Keep composition chains short and readable — see 24-1-function-composition.js"
 );
 
 // ============================================
@@ -329,11 +329,11 @@ console.log(
  * Function Patterns Summary
  *
  * Key Concepts:
- * 1. Currying transforms n-ary to unary functions      → 24.1
- * 2. Composition combines functions declaratively     → 24.1
- * 3. Partial application fixes some arguments         → 24.1
- * 4. Debounce/throttle control execution rate         → 24.2
- * 5. Memoization caches repeated computations         → 24.3
+ * 1. Currying transforms n-ary to unary functions      → 24-1
+ * 2. Composition combines functions declaratively     → 24-1
+ * 3. Partial application fixes some arguments         → 24-1
+ * 4. Debounce/throttle control execution rate         → 24-2
+ * 5. Memoization caches repeated computations         → 24-3
  * 6. Trampolines handle deep recursion                → this file
  * 7. Recursion patterns traverse trees/data           → this file
  * 8. Point-free style removes boilerplate             → this file
@@ -384,7 +384,7 @@ console.log("✅ DO:");
 console.log("1. Use trampolines for deep/mutual recursion");
 console.log("2. Prefer tail recursion when recursion is required");
 console.log("3. Use point-free style for simple, self-evident pipelines");
-console.log("4. Look to 24.1/24.2/24.3 for composition, rate-limiting, and caching");
+console.log("4. Look to 24-1/24-2/24-3 for composition, rate-limiting, and caching");
 
 console.log("\n❌ DON'T:");
 console.log("1. Don't use recursion where iteration is clearer");
@@ -395,9 +395,9 @@ console.log("3. Don't assume TCO is available — test your target runtime");
 // 6. Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 24.1-function-composition.js - Currying, Compose/Pipe, Factories, HOF");
-console.log("📘 24.2-debounce-throttle.js - Debounce & Throttle");
-console.log("📘 24.3-memoization-cache.js - Memoization & Cache");
+console.log("📘 24-1-function-composition.js - Currying, Compose/Pipe, Factories, HOF");
+console.log("📘 24-2-debounce-throttle.js - Debounce & Throttle");
+console.log("📘 24-3-memoization-cache.js - Memoization & Cache");
 console.log("📘 26-optimization-performance.js - Tail-call optimization, performance");
 
 // ============================================

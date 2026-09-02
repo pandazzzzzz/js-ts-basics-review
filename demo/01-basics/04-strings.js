@@ -866,7 +866,7 @@ console.log("10. Sanitized:", sanitize`User: ${untrusted}`);
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 01-variables.js - Variables and data types");
-console.log("📘 06.1-arrays-basics.js - Array basics");
+console.log("📘 06-1-arrays-basics.js - Array basics");
 console.log("📘 21-regex.js - Regular expressions");
 
 // ============================================

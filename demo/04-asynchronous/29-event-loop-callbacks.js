@@ -595,7 +595,7 @@ Execution Flow:
 
 console.log("\n=== Practical Examples ===\n");
 
-// Example 1: Debouncing (see 24.2-debounce-throttle.js for full implementation)
+// Example 1: Debouncing (see 24-2-debounce-throttle.js for full implementation)
 // Debounce delays execution until after a pause — uses the event loop's
 // macrotask queue (setTimeout) to coalesce rapid calls into one.
 const debouncedLog = (delay => {
@@ -611,7 +611,7 @@ debouncedLog("Call 1");
 debouncedLog("Call 2");
 debouncedLog("Call 3"); // Only this will execute
 
-// Example 2: Throttling (see 24.2-debounce-throttle.js for full implementation)
+// Example 2: Throttling (see 24-2-debounce-throttle.js for full implementation)
 // Throttle limits execution to once per interval — uses the event loop's
 // timer mechanism to enforce a minimum gap between calls.
 const throttledLog = (limit => {
@@ -1236,8 +1236,8 @@ setTimeout(() => {
 console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promises");
 console.log("📘 31-async-await.js - Async/await");
-console.log("📘 33.1-fetch-basics.js - Fetch API basics");
-console.log("📘 24.2-debounce-throttle.js - Complete debounce/throttle implementations");
+console.log("📘 33-1-fetch-basics.js - Fetch API basics");
+console.log("📘 24-2-debounce-throttle.js - Complete debounce/throttle implementations");
 
 // ============================================
 // TypeScript Comparison

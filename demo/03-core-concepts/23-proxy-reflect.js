@@ -1198,7 +1198,7 @@ Proxy & Reflect:
 console.log("\n=== Cross-references ===");
 console.log("📘 17-property-descriptors.js - Property descriptors");
 console.log("📘 19-symbol-deep.js - Well-known Symbols");
-console.log("📘 24.1-function-composition.js - Function composition and decorators");
+console.log("📘 24-1-function-composition.js - Function composition and decorators");
 
 // ============================================
 // TypeScript Comparison

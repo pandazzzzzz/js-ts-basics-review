@@ -6,23 +6,23 @@
 
 | 场景 | 文件 | 说明 |
 |------|------|------|
-| 数组创建/类型判断 | `demo/02-data-structures/06.1-arrays-basics.js` | Array.of, Array.from, Array.isArray |
-| 遍历/映射/过滤 | `demo/02-data-structures/06.2-arrays-iteration.js` | forEach, map, filter, reduce, flat, flatMap |
-| 查找/排序 | `demo/02-data-structures/06.3-arrays-search-sort.js` | find, findIndex, includes, some, every, sort |
-| 增删改/拷贝 | `demo/02-data-structures/06.4-arrays-manipulation.js` | push, pop, splice, slice, concat, spread |
-| 不可变数组方法 | `demo/06-advanced/39.3-es2023-features.js` | toSorted, toSpliced, toReversed, with |
-| 类型数组 | `demo/02-data-structures/06.5-typed-arrays.js` | TypedArray, ArrayBuffer, DataView |
-| 深拷贝数组 | `demo/02-data-structures/06.4-arrays-manipulation.js` | 深拷贝 vs 浅拷贝 |
+| 数组创建/类型判断 | `demo/02-data-structures/06-1-arrays-basics.js` | Array.of, Array.from, Array.isArray |
+| 遍历/映射/过滤 | `demo/02-data-structures/06-2-arrays-iteration.js` | forEach, map, filter, reduce, flat, flatMap |
+| 查找/排序 | `demo/02-data-structures/06-3-arrays-search-sort.js` | find, findIndex, includes, some, every, sort |
+| 增删改/拷贝 | `demo/02-data-structures/06-4-arrays-manipulation.js` | push, pop, splice, slice, concat, spread |
+| 不可变数组方法 | `demo/06-advanced/39-3-es2023-features.js` | toSorted, toSpliced, toReversed, with |
+| 类型数组 | `demo/02-data-structures/06-5-typed-arrays.js` | TypedArray, ArrayBuffer, DataView |
+| 深拷贝数组 | `demo/02-data-structures/06-4-arrays-manipulation.js` | 深拷贝 vs 浅拷贝 |
 
 ## 🔧 函数式编程
 
 | 场景 | 文件 | 说明 |
 |------|------|------|
-| 函数柯里化 | `demo/03-core-concepts/24.1-function-composition.js` | Currying, Partial Application |
-| 函数组合 | `demo/03-core-concepts/24.1-function-composition.js` | Compose, Pipe |
-| 防抖节流 | `demo/03-core-concepts/24.2-debounce-throttle.js` | Debounce, Throttle 实现 |
-| 记忆化缓存 | `demo/03-core-concepts/24.3-memoization-cache.js` | Memoization, LRU Cache |
-| 高阶函数 | `demo/02-data-structures/07.2-functions-advanced.js` | Higher-Order Functions |
+| 函数柯里化 | `demo/03-core-concepts/24-1-function-composition.js` | Currying, Partial Application |
+| 函数组合 | `demo/03-core-concepts/24-1-function-composition.js` | Compose, Pipe |
+| 防抖节流 | `demo/03-core-concepts/24-2-debounce-throttle.js` | Debounce, Throttle 实现 |
+| 记忆化缓存 | `demo/03-core-concepts/24-3-memoization-cache.js` | Memoization, LRU Cache |
+| 高阶函数 | `demo/02-data-structures/07-2-functions-advanced.js` | Higher-Order Functions |
 
 ## 📅 异步编程
 
@@ -32,9 +32,9 @@
 | Promise 组合 | `demo/04-asynchronous/30-promises.js` | all, race, allSettled, any |
 | async/await | `demo/04-asynchronous/31-async-await.js` | async 函数、await、串行/并行 |
 | 异步错误处理 | `demo/04-asynchronous/34-async-error-handling.js` | 错误模式、unhandledrejection |
-| Fetch 基础 | `demo/04-asynchronous/33.1-fetch-basics.js` | GET/POST, Response, FormData |
-| Fetch 错误处理 | `demo/04-asynchronous/33.2-fetch-error-handling.js` | HTTP 错误、网络错误、超时 |
-| Fetch 高级模式 | `demo/04-asynchronous/33.3-fetch-practical-patterns.js` | API Client, Retry, AbortController |
+| Fetch 基础 | `demo/04-asynchronous/33-1-fetch-basics.js` | GET/POST, Response, FormData |
+| Fetch 错误处理 | `demo/04-asynchronous/33-2-fetch-error-handling.js` | HTTP 错误、网络错误、超时 |
+| Fetch 高级模式 | `demo/04-asynchronous/33-3-fetch-practical-patterns.js` | API Client, Retry, AbortController |
 | 事件循环 | `demo/04-asynchronous/29-event-loop-callbacks.js` | Call Stack, Task Queue, Microtask |
 
 ## 🎭 面向对象
@@ -75,7 +75,7 @@
 |------|------|------|
 | 迭代器协议 | `demo/03-core-concepts/22-iterators-generators.js` | Iterable, Iterator 接口 |
 | 生成器函数 | `demo/03-core-concepts/22-iterators-generators.js` | function*, yield, yield* |
-| Iterator helpers | `demo/06-advanced/39.5-es2025-features.js` | map, filter, take, drop, toArray |
+| Iterator helpers | `demo/06-advanced/39-5-es2025-features.js` | map, filter, take, drop, toArray |
 
 ## 🎨 元编程
 
@@ -112,18 +112,18 @@
 |------|------|------|
 | 基础语法 | `demo/03-core-concepts/21-regex.js` | 元字符、量词、分组 |
 | 常用方法 | `demo/03-core-concepts/21-regex.js` | test, exec, match, replace |
-| ES2024 v flag | `demo/06-advanced/39.4-es2024-features.js` | Unicode 属性类、集合操作 |
-| RegExp.escape | `demo/06-advanced/39.5-es2025-features.js` | 转义用户输入 |
+| ES2024 v flag | `demo/06-advanced/39-4-es2024-features.js` | Unicode 属性类、集合操作 |
+| RegExp.escape | `demo/06-advanced/39-5-es2025-features.js` | 转义用户输入 |
 
 ---
 
 ## 🔍 按难度查找
 
 ### Beginner (入门)
-`01-basics/`, `06.1-arrays-basics`, `07.1-functions-basics`, `08-objects`, `11-json`, `12-date-time`, `35-dom-basics`
+`01-basics/`, `06-1-arrays-basics`, `07-1-functions-basics`, `08-objects`, `11-json`, `12-date-time`, `35-dom-basics`
 
 ### Intermediate (中级)
 `02-data-structures/` 大部分文件, `03-core-concepts/` 基础概念, `04-asynchronous/`, `05-browser-dom/`, `40-debugging-testing`, `42-intl-api`, `43-storage-network`, `45-web-apis`
 
 ### Advanced (高级)
-`15-prototypes-inheritance`, `17-property-descriptors`, `19-symbol-deep`, `22-iterators-generators`, `23-proxy-reflect`, `24-function-patterns`, `25-inheritance-patterns`, `26-optimization-performance`, `27-memory-management`, `34-async-error-handling`, `39.5+`, `41-typed-arrays`, `44-design-patterns`, `46-performance`, `47-metaprogramming`, `48-security`
+`15-prototypes-inheritance`, `17-property-descriptors`, `19-symbol-deep`, `22-iterators-generators`, `23-proxy-reflect`, `24-function-patterns`, `25-inheritance-patterns`, `26-optimization-performance`, `27-memory-management`, `34-async-error-handling`, `39-5+`, `41-typed-arrays`, `44-design-patterns`, `46-performance`, `47-metaprogramming`, `48-security`

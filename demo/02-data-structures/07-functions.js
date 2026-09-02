@@ -1209,10 +1209,10 @@ console.log("6. Name functions descriptively to improve stack traces");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 07.1-functions-basics.js - Function basics");
-console.log("📘 07.2-functions-advanced.js - Advanced functions");
-console.log("📘 07.3-functions-patterns.js - Function patterns");
-console.log("📘 24.1-function-composition.js - Function composition");
+console.log("📘 07-1-functions-basics.js - Function basics");
+console.log("📘 07-2-functions-advanced.js - Advanced functions");
+console.log("📘 07-3-functions-patterns.js - Function patterns");
+console.log("📘 24-1-function-composition.js - Function composition");
 
 // ============================================
 // TypeScript Comparison

@@ -183,7 +183,7 @@ console.timeEnd("fib(35) memoized");
 
 // 2.3 Bounded memoization (LRU) and custom serializers
 // For production, prefer bounded caches to avoid unbounded memory growth.
-// See 24.3-memoization-cache.js for complete implementations:
+// See 24-3-memoization-cache.js for complete implementations:
 //   - memoizeLRU (LRU eviction policy, bounded cache size)
 //   - memoizeWithKey / memoizeWithSerializer (custom key generation)
 //   - memoizeWeak (WeakMap-based, GC-friendly)
@@ -924,7 +924,7 @@ badFilterList(largeList, "123"); // Same filter, runs again
 console.timeEnd("bad-filter-2");
 
 console.log("\n✅ Good: Memoize or cache results for unchanged inputs");
-// Reusing the memoize() defined earlier in §2 (see 24.3-memoization-cache.js
+// Reusing the memoize() defined earlier in §2 (see 24-3-memoization-cache.js
 // for the full set of memoization variants).
 const goodFilterList = memoize((list, filterText) => {
   return list.filter(item => item.includes(filterText));
@@ -1325,7 +1325,7 @@ Performance & Optimization:
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 24.2-debounce-throttle.js - Debounce and throttle");
+console.log("📘 24-2-debounce-throttle.js - Debounce and throttle");
 console.log("📘 27-memory-management.js - Memory management");
 console.log("📘 46-performance.js - Performance optimization");
 

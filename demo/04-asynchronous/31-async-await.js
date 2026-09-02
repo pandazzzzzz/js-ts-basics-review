@@ -926,7 +926,7 @@ console.log(`
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promises");
-console.log("📘 33.2-fetch-error-handling.js - Fetch with async/await");
+console.log("📘 33-2-fetch-error-handling.js - Fetch with async/await");
 console.log("📘 34-async-error-handling.js - Async error handling");
 
 // ============================================

@@ -727,7 +727,7 @@ const CONFIG = Object.freeze({
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 06.1-arrays-basics.js - Array basics");
+console.log("📘 06-1-arrays-basics.js - Array basics");
 console.log("📘 10-map-set.js - Map and Set");
 console.log("📘 15-prototypes-inheritance.js - Prototypes and inheritance");
 

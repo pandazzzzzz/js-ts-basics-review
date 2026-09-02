@@ -434,7 +434,7 @@ try {
 // An inner function retains access to its outer scope's variables.
 // Encapsulates private state; each closure gets its own copy.
 // ⚠️ Pitfall: variables are not garbage-collected while the closure is referenced.
-// 📘 Full detail: 13.3-closures-basics.js
+// 📘 Full detail: 13-3-closures-basics.js
 
 console.log("\n=== Closures - Data Privacy Demo ===");
 
@@ -482,7 +482,7 @@ console.log("Account 2:", account2.getBalance()); // 200
 // ============================================
 // Functions that return customized functions with preset behavior.
 // Each returned function closes over its own captured parameters.
-// 📘 Full detail: 13.4-closures-patterns.js
+// 📘 Full detail: 13-4-closures-patterns.js
 
 console.log("\n=== Function Factories Demo ===");
 
@@ -525,7 +525,7 @@ console.log("isValidAge(25):", isValidAge(25)); // true
 // 10. CLOSURES - PARTIAL APPLICATION
 // ============================================
 // Pre-fill some arguments of a function to create a more specific one.
-// 📘 Full detail: 13.4-closures-patterns.js
+// 📘 Full detail: 13-4-closures-patterns.js
 
 console.log("\n=== Partial Application Demo ===");
 
@@ -561,7 +561,7 @@ infoLog(new Date().toISOString(), "Operation completed");
 // ============================================
 // Cache function results by input; a closure holds the cache.
 // ⚠️ Pitfalls: memory grows with unique inputs; only works for pure functions.
-// 📘 Full detail: 13.4-closures-patterns.js + 24.3-memoization-cache.js
+// 📘 Full detail: 13-4-closures-patterns.js + 24-3-memoization-cache.js
 
 console.log("\n=== Memoization Demo ===");
 
@@ -612,7 +612,7 @@ console.log("factorial(5) again:", factorial(5));
 // ============================================
 // Encapsulate private state + expose a public API via a closure/IIFE.
 // ⚠️ Prefer native ES6 modules (32-modules.js) in modern code.
-// 📘 Full detail: 13.4-closures-patterns.js
+// 📘 Full detail: 13-4-closures-patterns.js
 
 console.log("\n=== Module Pattern Demo ===");
 
@@ -1073,11 +1073,11 @@ Advanced Patterns:
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 13.1-scope-basics.js - Scope basics");
-console.log("📘 13.2-scope-tdz-strict.js - TDZ and strict mode");
-console.log("📘 13.3-closures-basics.js - Closures basics");
-console.log("📘 13.4-closures-patterns.js - Closures patterns");
-console.log("📘 13.5-scope-pitfalls.js - Scope and closure pitfalls");
+console.log("📘 13-1-scope-basics.js - Scope basics");
+console.log("📘 13-2-scope-tdz-strict.js - TDZ and strict mode");
+console.log("📘 13-3-closures-basics.js - Closures basics");
+console.log("📘 13-4-closures-patterns.js - Closures patterns");
+console.log("📘 13-5-scope-pitfalls.js - Scope and closure pitfalls");
 
 // ============================================
 // TypeScript Comparison

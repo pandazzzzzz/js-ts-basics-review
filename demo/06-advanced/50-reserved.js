@@ -331,7 +331,7 @@ console.log("- MDN: https://developer.mozilla.org/");
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 39.7-es2027-future.js - ES2027 and future proposals");
+console.log("📘 39-7-es2027-future.js - ES2027 and future proposals");
 console.log("📘 42-intl-api.js - Internationalization API");
 
 // ============================================

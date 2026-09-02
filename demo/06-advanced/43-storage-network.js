@@ -197,7 +197,7 @@ async function demonstrateFetchTimeout() {
 demonstrateFetchTimeout();
 
 console.log("  Patterns: timeout, request cancellation (AbortController), retries, API wrappers");
-console.log("  📘 See 33.3-fetch-practical-patterns.js for complete implementation examples");
+console.log("  📘 See 33-3-fetch-practical-patterns.js for complete implementation examples");
 
 // ============================================
 // 6. WebSocket API
@@ -269,7 +269,7 @@ Covers:
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 33-fetch-api.js / 33.3-fetch-practical-patterns.js - Complete Fetch API patterns");
+console.log("📘 33-fetch-api.js / 33-3-fetch-practical-patterns.js - Complete Fetch API patterns");
 console.log("📘 37-events.js - DOM event handling fundamentals");
 console.log("📘 48-security.js - Web security best practices for storage/network");
 console.log("📘 36-dom-manipulation.js - DOM update patterns for dynamic data");

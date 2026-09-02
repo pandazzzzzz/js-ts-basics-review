@@ -1039,7 +1039,7 @@ console.log("3. Performance overhead - extra abstraction layers can impact perfo
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 25-inheritance-patterns.js - Inheritance patterns");
-console.log("📘 24.1-function-composition.js - Function composition");
+console.log("📘 24-1-function-composition.js - Function composition");
 console.log("📘 23-proxy-reflect.js - Proxy patterns");
 
 // ============================================

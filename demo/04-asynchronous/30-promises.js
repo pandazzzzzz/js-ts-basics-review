@@ -814,7 +814,7 @@ if (typeof Promise.try === "function") {
 console.log("\n=== Cross-references ===");
 console.log("📘 29-event-loop-callbacks.js - Event loop");
 console.log("📘 31-async-await.js - Async/await");
-console.log("📘 33.2-fetch-error-handling.js - Fetch error handling");
+console.log("📘 33-2-fetch-error-handling.js - Fetch error handling");
 
 // ============================================
 // TypeScript Comparison

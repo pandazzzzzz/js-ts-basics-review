@@ -284,7 +284,7 @@ console.log("value === undefined:", value === undefined); // false
 console.log("\n=== Cross References ===");
 console.log("📘 02-operators.js - Operators and expressions");
 console.log("📘 03-control-flow.js - Control flow and conditionals");
-console.log("📘 13.1-scope-basics.js - Scope fundamentals");
+console.log("📘 13-1-scope-basics.js - Scope fundamentals");
 
 // ============================================
 // TypeScript Comparison

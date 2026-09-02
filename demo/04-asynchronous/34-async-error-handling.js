@@ -1333,8 +1333,8 @@ console.log("\n=== Async Error Handling Advanced Demo Complete ===");
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 30-promises.js - Promise error handling");
-console.log("📘 33.2-fetch-error-handling.js - Fetch error handling");
-console.log("📘 33.3-fetch-practical-patterns.js - Retry patterns");
+console.log("📘 33-2-fetch-error-handling.js - Fetch error handling");
+console.log("📘 33-3-fetch-practical-patterns.js - Retry patterns");
 
 // ============================================
 // TypeScript Comparison

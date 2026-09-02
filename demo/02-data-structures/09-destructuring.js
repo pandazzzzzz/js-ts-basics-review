@@ -327,9 +327,9 @@ initApp({ port: 8080, debug: true });
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
-console.log("📘 06.1-arrays-basics.js - Array basics");
+console.log("📘 06-1-arrays-basics.js - Array basics");
 console.log("📘 08-objects.js - Objects and methods");
-console.log("📘 07.1-functions-basics.js - Function parameters");
+console.log("📘 07-1-functions-basics.js - Function parameters");
 
 // ============================================
 // TypeScript Comparison

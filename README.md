@@ -10,7 +10,7 @@ npm install
 
 # Run a JS demo
 node demo/01-basics/01-variables.js
-node demo/06-advanced/39.5-es2025-features.js   # ES2025 features
+node demo/06-advanced/39-5-es2025-features.js   # ES2025 features
 
 # Run a TS comparison file (after npm install)
 node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts
@@ -63,7 +63,7 @@ This project uses Prettier for consistent code formatting across all demo files 
 | `ts-node` not found | `npm install` (ts-node is a dev dependency) |
 | ES2022+ syntax error | Ensure Node.js 18+; ES2025 requires 22+ |
 | TypeScript type errors | Run `npx tsc --noEmit`; verify tsconfig.json |
-| TS comparison won't run | Browser-DOM (35–38, 43, 45, 48) and future-ES (39.4/39.6/39.7) demos need a browser or newer runtime; files containing Stage 2.7 decorator snippets (16, 17, 39.7, 50, plus isolated decorator sections in 44 and 46) may require `experimentalDecorators` for those specific sections — the rest of each file runs normally. See each file's header. |
+| TS comparison won't run | Browser-DOM (35–38, 43, 45, 48) and future-ES (39-4/39-6/39-7) demos need a browser or newer runtime; files containing Stage 2.7 decorator snippets (16, 17, 39-7, 50, plus isolated decorator sections in 44 and 46) may require `experimentalDecorators` for those specific sections — the rest of each file runs normally. See each file's header. |
 
 ## References
 
