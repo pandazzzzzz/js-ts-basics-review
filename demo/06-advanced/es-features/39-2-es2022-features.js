@@ -138,7 +138,7 @@ console.log("\n--- 3. .at() Method ---\n");
 
 /*
  * verification:
- *   feature: Array/ String.prototype.at
+ *   feature: at
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01

@@ -100,7 +100,16 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
 
 /*
  * verification:
- *   feature: Array.prototype.findLast / findLastIndex
+ *   feature: findLast
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   lastVerified: 2026-09-01
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/jun-06.md#findlastfindlastindex-for-stage-4
+ */
+
+/*
+ * verification:
+ *   feature: findLastIndex
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01

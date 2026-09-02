@@ -38,7 +38,16 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
 
 /*
  * verification:
- *   feature: Object.groupBy / Map.groupBy
+ *   feature: Object.groupBy
+ *   status: ES2024
+ *   stage4Date: 2023-11
+ *   lastVerified: 2026-09-01
+ *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#array-grouping-for-stage-4
+ */
+
+/*
+ * verification:
+ *   feature: Map.groupBy
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
