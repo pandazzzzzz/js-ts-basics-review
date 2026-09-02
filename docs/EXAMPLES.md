@@ -126,4 +126,4 @@
 `02-data-structures/` 大部分文件, `03-core-concepts/` 基础概念, `04-asynchronous/`, `05-browser-dom/`, `40-debugging-testing`, `42-intl-api`, `43-storage-network`, `45-web-apis`
 
 ### Advanced (高级)
-`15-prototypes-inheritance`, `17-property-descriptors`, `19-symbol-deep`, `22-iterators-generators`, `23-proxy-reflect`, `24-function-patterns`, `25-inheritance-patterns`, `26-optimization-performance`, `27-memory-management`, `34-async-error-handling`, `39-5+`, `41-typed-arrays`, `44-design-patterns`, `46-performance`, `47-metaprogramming`, `48-security`
+`15-prototypes-inheritance`, `17-property-descriptors`, `19-symbol-deep`, `22-iterators-generators`, `23-proxy-reflect`, `24-function-patterns-advanced`, `25-inheritance-patterns`, `26-optimization-performance`, `27-memory-management`, `34-async-error-handling`, `39-5 / 39-6 / 39-7`, `41-typed-arrays`, `44-design-patterns`, `46-performance`, `47-metaprogramming`, `48-security`
