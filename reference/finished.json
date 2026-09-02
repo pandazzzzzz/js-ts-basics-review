@@ -178,7 +178,7 @@
       "stage": 4,
       "stage4Date": "2025-02",
       "stage4DateType": "exact",
-      "note": "Allows redeclaration of eval-introduced global variables",
+      "note": "let/const may now redeclare eval-introduced (configurable, deletable) global vars; var-var redeclaration via eval was always legal",
       "url": "https://github.com/tc39/proposal-redeclarable-global-eval-vars"
     },
     "Object.groupBy": {
