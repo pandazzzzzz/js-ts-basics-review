@@ -261,7 +261,7 @@ function add(a: number, b: number): number {
 
 ### 15. Advanced Function Concepts
 
-> **Note**: See `demo/02-data-structures/07-functions.js` for comprehensive examples (16 sections)
+> **Note**: See `demo/02-data-structures/07-1-functions-basics-ts-comparison.ts` / `07-2` / `07-3` for comprehensive TypeScript comparisons (the old 07-functions.js is now an index)
 
 **IIFE** (Immediately Invoked Function Expression): Module pattern for encapsulation
 
@@ -271,7 +271,7 @@ function add(a: number, b: number): number {
 - `compose(f, g)(x)` = f(g(x)) - right-to-left
 - `pipe(f, g)(x)` = g(f(x)) - left-to-right
 
-**See**: `demo/02-data-structures/07-functions.js` sections 13-16
+**See**: `demo/02-data-structures/07-3-functions-patterns.js` (method definitions, binding, IIFE, TCO, pure functions)
 
 ### 16. Modern ES Features (ES2021-ES2027)
 
