@@ -42,7 +42,9 @@ console.log("=== Closures Basics Demo ===\n");
  * Key Characteristics:
  * - Inner function retains access to outer function variables
  * - Even after outer function returns
- * - Each closure has its own copy of outer variables
+ * - Closures share the outer variables BY REFERENCE (each outer-call
+ *   invocation gets a fresh set of bindings, but closures from the same
+ *   invocation mutate the same variables)
  * - Created at function definition time
  *
  * When Closures Are Created:

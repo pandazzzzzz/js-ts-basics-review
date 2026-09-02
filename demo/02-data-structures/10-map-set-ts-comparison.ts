@@ -419,7 +419,7 @@ if (sizeMap.size) {
 4. WeakMap/WeakSet keys must be objects
 5. JSON.stringify on Map/Set produces {}
 6. forEach callback parameter order (value, key, map)
-7. Set maintains insertion order but that's an implementation detail
+7. Set maintains insertion order — guaranteed by the ECMAScript spec, not an implementation detail
 8. Map.size vs Object.keys(obj).length
 9. Weak references don't prevent GC
 10. Type narrowing with Map.has() requires non-null assertion

@@ -252,11 +252,14 @@ function expect(actual) {
       }
     },
     toThrow() {
+      let threw = false;
       try {
         actual();
-        throw new Error("Expected function to throw");
       } catch (error) {
-        // Expected
+        threw = true; // the expected path
+      }
+      if (!threw) {
+        throw new Error("Expected function to throw, but it returned normally");
       }
     },
   };
