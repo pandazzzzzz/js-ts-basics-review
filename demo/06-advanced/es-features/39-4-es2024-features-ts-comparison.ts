@@ -256,6 +256,6 @@ console.log("\n--- 8. tsconfig.json Configuration ---\n");
 console.log("To use ES2024 features in TypeScript:");
 console.log('1. Set "target": "ES2024" or higher');
 console.log('2. Add "ES2024" to "lib" array if target is lower');
-console.log("3. For groupBy types: ensure TypeScript 5.2+");
+console.log("3. For groupBy types: ensure TypeScript 5.7+ (es2024 lib landed in 5.7)");
 
 console.log("\n✅ ES2024 TypeScript comparison completed");

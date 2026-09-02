@@ -62,7 +62,7 @@
       "stage4Date": "2025-05",
       "stage4DateType": "exact",
       "note": "Stage 4 reached May 2025, part of ES2026",
-      "url": "https://github.com/tc39/proposal-error-iserror"
+      "url": "https://github.com/tc39/proposal-is-error"
     },
     "Uint8Array Base64": {
       "status": "ES2026",
@@ -86,7 +86,7 @@
       "stage4Date": "2025-11",
       "stage4DateType": "exact",
       "note": "Access to 'source' property of JSON.parse results",
-      "url": "https://github.com/tc39/proposal-json-parse-source"
+      "url": "https://github.com/tc39/proposal-json-parse-with-source"
     },
     "Iterator Sequencing": {
       "status": "ES2026",

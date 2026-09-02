@@ -30,7 +30,7 @@ npm run format:check
 | Feature | Node.js | TypeScript |
 |---------|---------|------------|
 | ES2022+ basics | 18+ | 5+ |
-| ES2025 (Set methods, Iterator helpers, Promise.try) | 24+ | 5.2+ |
+| ES2025 (Set methods, Iterator helpers, Promise.try) | 24+ | ESNext lib |
 | ES2027 (Temporal, Explicit Resource Management) | Not yet | Community types needed |
 
 > Temporal API is ES2027 (Stage 4); TypeScript has no built-in types, use `@js-temporal/polyfill`.

@@ -42,7 +42,7 @@ const buffer: ArrayBuffer = new ArrayBuffer(16);
 console.log("  buffer byteLength:", buffer.byteLength);
 console.log("  buffer is resizable:", buffer.resizable);
 
-// Resizable ArrayBuffer (ES2023+)
+// Resizable ArrayBuffer (ES2024)
 const resizableBuffer = new ArrayBuffer(32, { maxByteLength: 64 });
 console.log("  resizableBuffer:", resizableBuffer);
 console.log("  resizableBuffer.maxByteLength:", resizableBuffer.maxByteLength);

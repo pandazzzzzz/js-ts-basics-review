@@ -301,7 +301,7 @@ console.log("\n--- 6. JSON.parse Source Text Access ---\n");
  *   status: ES2026
  *   stage4Date: 2025-11
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-json-parse-source
+ *   source: https://github.com/tc39/proposal-json-parse-with-source
  */
 
 // Access the original source text of parsed JSON values
@@ -504,7 +504,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // feature: Error.isError
 // stage4Date: 2025-05
 // stage4DateType: exact
-// source: https://github.com/tc39/proposal-error-iserror
+// source: https://github.com/tc39/proposal-is-error
 // lastVerified: 2026-09-01
 // == end verification block ==
 
@@ -528,7 +528,7 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 // feature: JSON.parse source text access
 // stage4Date: 2025-11
 // stage4DateType: exact
-// source: https://github.com/tc39/proposal-json-parse-source
+// source: https://github.com/tc39/proposal-json-parse-with-source
 // lastVerified: 2026-09-01
 // == end verification block ==
 

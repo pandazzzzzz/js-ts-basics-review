@@ -292,11 +292,11 @@ for await (const n of asyncNumbers()) {
   console.log("async iterable value:", n); // 1, 2, 3 (for-await replaces helper chaining)
 }
 
-// 3. RegExp named group type inference (TypeScript 4.9+)
+// 3. RegExp named groups (es2018 lib — index-signature typing)
 const regex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 const dateMatch = "2024-01-01".match(regex);
 if (dateMatch?.groups) {
-  // groups are typed as { year: string; month: string; day: string }
+  // groups is typed as { [key: string]: string } — keys are NOT individually known
   const year = dateMatch.groups.year; // string
   const month = dateMatch.groups.month; // string
   const day = dateMatch.groups.day; // string
@@ -308,9 +308,8 @@ if (dateMatch?.groups) {
 // ============================================
 console.log("\n--- 10. tsconfig.json Configuration ---\n");
 console.log("To use ES2025 features in TypeScript:");
-console.log('1. Set "target": "ES2025" or higher (TypeScript 5.4+)');
-console.log('2. Add "ES2025" to "lib" array if target is lower');
-console.log("3. For Set methods: Ensure TypeScript 5.4+");
-console.log('4. For iterator helpers: Enable "downlevelIteration" if targeting older runtimes');
+console.log('1. No "ES2025" lib exists yet (as of TypeScript 5.9) — use "ESNext"');
+console.log("2. Set methods, iterator helpers, and Promise.try come from the esnext libs");
+console.log('3. For iterator helpers: Enable "downlevelIteration" if targeting older runtimes');
 
 console.log("\n✅ ES2025 TypeScript comparison completed");
