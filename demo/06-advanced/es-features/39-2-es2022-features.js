@@ -102,7 +102,10 @@ class Config {
   // Static initialization block
   static {
     // Run complex initialization logic
-    const env = process?.env?.NODE_ENV || "development";
+    // ⚠️ Optional chaining does NOT guard an undeclared identifier: in a
+    // browser `process?.env` would still throw ReferenceError. Guard with
+    // typeof (or use a bundler-injected define) for cross-environment code.
+    const env = (typeof process !== "undefined" && process.env?.NODE_ENV) || "development";
     if (env === "production") {
       this.apiUrl = "https://api.prod.com";
     } else {

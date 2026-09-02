@@ -255,10 +255,16 @@ function partialRight(fn, ...fixedArgs) {
 }
 
 const log = (level, message, timestamp) => `[${timestamp}] ${level}: ${message}`;
-const logError = partialRight(log, "ERROR", new Date().toISOString().split("T")[0]);
+// partialRight pins the TRAILING argument(s): here just the timestamp.
+// Pinning "ERROR" and the date together would shift them into message/level —
+// middle positions need placeholders (see 3.3 below).
+const logWithDate = partialRight(log, new Date().toISOString().split("T")[0]);
 
 console.log("\nPartial application from right:");
-console.log("logError('Something went wrong'):", logError("Something went wrong"));
+console.log(
+  "logWithDate('ERROR', 'Something went wrong'):",
+  logWithDate("ERROR", "Something went wrong")
+); // '[2026-09-03] ERROR: Something went wrong'
 
 // 3.3 Partial application with placeholders
 const _ = Symbol("placeholder");

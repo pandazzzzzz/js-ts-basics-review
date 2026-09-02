@@ -422,14 +422,21 @@ console.log("Can be discovered:", symbols);
 console.log("Value accessible:", user[symbols[0]]);
 
 // 4.2 Avoiding naming conflicts
+// Unique Symbols (Symbol()) never collide, even with identical descriptions —
+// contrast Symbol.for("plugin.init"), which SHARES one key across plugins
+// (spreading both objects would silently overwrite plugin1's method).
+const init1 = Symbol("plugin.init");
+const init2 = Symbol("plugin.init");
+console.log("\nUnique symbols are never equal:", init1 === init2); // false
+
 let plugin1 = {
-  [Symbol.for("plugin.init")]() {
+  [init1]() {
     console.log("Plugin 1 initialized");
   },
 };
 
 let plugin2 = {
-  [Symbol.for("plugin.init")]() {
+  [init2]() {
     console.log("Plugin 2 initialized");
   },
 };
@@ -438,9 +445,9 @@ let app = {
   ...plugin1,
   ...plugin2,
   run() {
-    // Each plugin has its own symbol-keyed method
-    plugin1[Symbol.for("plugin.init")]();
-    plugin2[Symbol.for("plugin.init")]();
+    // Each plugin keeps its OWN symbol-keyed method — no conflict, no overwrite
+    plugin1[init1]();
+    plugin2[init2]();
   },
 };
 

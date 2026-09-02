@@ -5,7 +5,7 @@
 // 📌 Reserved slot #28:
 // Lesson number 28 is intentionally reserved (between 27 and 29) for a potential
 // future lesson on async patterns that bridges sync concepts (27) to async (29+).
-// 🎯 Difficulty: Beginner
+// 🎯 Difficulty: Intermediate
 export {}; // Make this file a module to avoid global scope conflicts
 
 // ============================================
@@ -123,7 +123,9 @@ const config = {
 // Attempting extra properties WOULD error (same as ': Config'):
 // const bad = { port: 80, host: "x", extra: true } satisfies Config; // Error!
 
-console.log("satisfies preserves literal types while still type-checking");
+console.log(
+  "satisfies type-checks against Config; it preserves narrower types only where the target does not widen them"
+);
 
 // ============================================
 // Section 2: TypeScript Decorators (Future JS)
