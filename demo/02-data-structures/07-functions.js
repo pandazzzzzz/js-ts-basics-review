@@ -36,7 +36,7 @@ export {};
 // Section 1: Function Declaration (Function Statement)
 // ============================================
 /**
- * Function Declaration - Traditional function definition (ES3)
+ * Function Declaration - Traditional function definition (ES1)
  *
  * Characteristics:
  * - Hoisted to the top of scope (can be called before declaration)
@@ -101,7 +101,7 @@ console.log(person1); // Person { name: 'Alice', age: 30 }
 // Section 2: Function Expression
 // ============================================
 /**
- * Function Expression - Assigning function to a variable (ES3)
+ * Function Expression - Assigning function to a variable (ES1)
  *
  * Characteristics:
  * - Not hoisted, can only be called after definition
@@ -1178,7 +1178,7 @@ console.log(`
 │ Returns Promise     │    ✗     │    ✗     │    ✗     │      ✓     │    ✗     │
 │ Can use 'yield'     │    ✗     │    ✗     │    ✗     │      ✗     │    ✓     │
 │ Can use 'await'     │    ✗     │    ✗     │    ✗     │      ✓     │    ✗     │
-│ ES Version          │   ES3    │   ES3    │   ES6    │    ES8     │   ES6    │
+│ ES Version          │   ES1    │   ES1    │   ES6    │    ES8     │   ES6    │
 └─────────────────────┴──────────┴──────────┴──────────┴─────────────┴──────────┘
 
 BEST PRACTICES:

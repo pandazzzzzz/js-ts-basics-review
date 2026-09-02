@@ -2,7 +2,7 @@
 // 📘 For TypeScript comparison, see: 12-date-time-ts-comparison.ts
 // 📘 javascript.info: "Date and time"
 // 📘 MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
-// 📌 ES1 (Date object), ES5 (Date.now(), Date.parse(), Date.UTC())
+// 📌 ES1 (Date object, Date.parse(), Date.UTC()), ES5 (Date.now())
 // 🎯 Difficulty: Beginner
 export {};
 

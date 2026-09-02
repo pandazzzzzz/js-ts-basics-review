@@ -95,7 +95,7 @@ console.log("ES6 modules and classes are strict by default — no 'use strict' n
 // 4. Variable Declarations
 // ============================================
 
-// var — function- or globally-scoped (ES5)
+// var — function- or globally-scoped (ES1)
 // Hoisted to the top of its scope; can be redeclared; no block scope.
 var oldStyle = "var is function-scoped";
 

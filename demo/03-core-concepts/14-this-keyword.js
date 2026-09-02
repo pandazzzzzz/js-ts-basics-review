@@ -258,7 +258,7 @@ try {
 // 3. EXPLICIT BINDING - call/apply/bind
 // ============================================
 /**
- * Explicit Binding - call, apply, bind methods (ES5)
+ * Explicit Binding - call, apply (ES1); bind (ES5)
  *
  * Function.prototype.call(context, arg1, arg2, ...)
  * - Calls function immediately with given this

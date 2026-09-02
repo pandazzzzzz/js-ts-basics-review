@@ -31,7 +31,7 @@ console.log("=== Functions - Basics Demo ===\n");
 // 1. Function Declaration (Function Statement)
 // ============================================
 /**
- * Function Declaration - Traditional function definition (ES3)
+ * Function Declaration - Traditional function definition (ES1)
  *
  * Characteristics:
  * - Hoisted to the top of scope (can be called before declaration)
@@ -98,7 +98,7 @@ console.log("new Person('Alice', 30):", person1);
 // 2. Function Expression
 // ============================================
 /**
- * Function Expression - Assigning function to a variable (ES3)
+ * Function Expression - Assigning function to a variable (ES1)
  *
  * Characteristics:
  * - Not hoisted, can only be called after definition

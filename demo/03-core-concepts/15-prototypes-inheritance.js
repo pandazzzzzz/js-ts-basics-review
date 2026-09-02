@@ -36,7 +36,7 @@ export {};
 /**
  * Prototype - JavaScript's inheritance mechanism
  *
- * ES Specification: ES3 (1999) - Core concept
+ * ES Specification: ES1 (1997) - Core concept
  *                   ES5 (2009) - Object.create, Object.getPrototypeOf
  *                   ES6 (2015) - Class syntax, Object.setPrototypeOf
  *
@@ -251,7 +251,7 @@ console.log("  After trying to change age:", person.age);
 /**
  * Constructor Functions - Traditional way to create objects
  *
- * ES Specification: ES3 (1999)
+ * ES Specification: ES1 (1997)
  *
  * When using 'new' keyword:
  * 1. Creates new empty object
@@ -612,7 +612,7 @@ console.log(`
 │ Inheritance         │ Manual       │ Manual         │ 'extends'   │
 │ super keyword       │ No           │ No             │ Yes         │
 │ Readability         │ Medium       │ Good           │ Best        │
-│ ES Version          │ ES3          │ ES5            │ ES6         │
+│ ES Version          │ ES1          │ ES5            │ ES6         │
 └─────────────────────┴──────────────┴────────────────┴─────────────┘
 
 * instanceof works if you set up constructor property correctly

@@ -692,7 +692,7 @@ console.log("Counter:", Counter.getCount()); // 2
 // 13. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
 // ============================================
 /**
- * IIFE - Functions that run immediately after definition (ES5)
+ * IIFE - Functions that run immediately after definition (ES1 pattern, ES5-era staple)
  *
  * Characteristics:
  * - Executes immediately upon definition

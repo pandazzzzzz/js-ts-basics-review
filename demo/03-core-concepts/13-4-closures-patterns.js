@@ -422,7 +422,7 @@ console.log("  Timeout:", AppConfig.get("timeout"));
 // ============================================
 // 5. IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSIONS)
 // ============================================
-// IIFE - Functions that run immediately after definition (ES5):
+// IIFE - Functions that run immediately after definition (ES1 pattern, ES5-era staple):
 // Syntax: (function(){...})(); (Classic) / (() => {...})(); (ES6 arrow)
 // Creates isolated scope, prevents global pollution;
 // Modern Alternative: ES6 modules/block scope { let x = ... }
