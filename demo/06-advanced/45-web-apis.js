@@ -31,7 +31,6 @@ export {};
 // 13. WebRTC
 // 14. Common Pitfalls
 // 15. Best Practices
-// 16. TypeScript Comparison Notes
 
 // ============================================
 
@@ -1137,55 +1136,6 @@ console.log(
 );
 
 // ============================================
-// Section 16: TypeScript Comparison Notes
-// ============================================
-/*
-🔍 Key Differences in TypeScript:
-
-1. SERVICE WORKERS
-   TS:  ServiceWorkerRegistration type
-   TS:  ServiceWorkerGlobalScope for worker context
-   TS:  Type-safe message passing with interfaces
-
-2. WEB WORKERS
-   TS:  Worker type with typed message events
-   TS:  interface WorkerMessage { type: string; data: any; }
-   TS:  Type-safe postMessage and onmessage
-
-3. INTERSECTION OBSERVER
-   TS:  IntersectionObserverEntry type
-   TS:  IntersectionObserverInit for options
-   TS:  Type-safe callback with entry types
-
-4. GEOLOCATION
-   TS:  GeolocationPosition and GeolocationCoordinates types
-   TS:  GeolocationPositionError for error handling
-   TS:  Type-safe options with PositionOptions
-
-5. WEBSOCKET
-   TS:  WebSocket type with event types
-   TS:  Type-safe message data with generics
-   TS:  MessageEvent<T> for typed messages
-
-⚠️ BROWSER/RUNTIME SUPPORT:
-- Service Workers: Chrome 40+, Firefox 44+, Safari 11.1+
-- Web Workers: All modern browsers
-- Intersection Observer: Chrome 51+, Firefox 55+, Safari 12.1+
-- Geolocation: All modern browsers (requires HTTPS)
-- WebSocket: All modern browsers
-
-🔧 BEST PRACTICES:
-- Always check for API availability before use
-- Handle errors and edge cases
-- Clean up resources (unobserve, terminate, close)
-- Use HTTPS for security-sensitive APIs
-- Request permissions responsibly
-
-9. NEW WEB APIs (2024-2025)
-
-*/
-
-// ============================================
 // Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
@@ -1194,8 +1144,15 @@ console.log("📘 43-storage-network.js - Storage and network");
 console.log("📘 46-performance.js - Performance optimization");
 
 // ============================================
-// TypeScript Comparison
+// TypeScript Comparison Notes
 // ============================================
 /*
 📘 See TypeScript comparison file: 45-web-apis-ts-comparison.ts
+Covers:
+- Type definitions for Service Workers, Web Workers, Intersection Observer
+- Typed Geolocation and WebSocket APIs
+- Type-safe Web Animations API
+- Interfaces for Canvas, Web Audio, and WebRTC
 */
+
+
