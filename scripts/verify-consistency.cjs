@@ -61,16 +61,20 @@ for (const f of jsFiles) {
   const lines = fs.readFileSync(f, "utf8").split("\n");
   let cur = null;
   lines.forEach((line, i) => {
-    if (/verification:/.test(line)) {
+    // Close-before-open: guards against a same-line-closed opener like
+    // `/* verification: foo */` keeping the block open forever.
+    if (cur && (/\*\//.test(line) || /=\= end verification block ==/i.test(line))) {
+      cur = null;
+    }
+    // Both block styles open with a bare "verification:" line; the trailing
+    // style adds `==` decorations. Require nothing after the colon so a
+    // hypothetical one-line payload is skipped rather than mis-absorbed.
+    if (/verification:\s*$|^\s*\/\/ == verification block ==/.test(line)) {
       cur = { file: rel, line: i + 1 };
       blocks.push(cur);
       return;
     }
     if (!cur) return;
-    if (/\*\/|\=\= end verification block\=\=/i.test(line)) {
-      cur = null;
-      return;
-    }
     let m;
     if ((m = line.match(/(?:\*|\/\/)\s*feature:\s*(.+)/))) cur.feature = m[1].trim();
     else if ((m = line.match(/(?:\*|\/\/)\s*status:\s*(.+)/))) cur.status = m[1].trim();
@@ -82,6 +86,7 @@ for (const f of jsFiles) {
 
 // ---------- check 1+2: block ↔ reference reconciliation ----------
 const covered = new Set();
+const warnings = [];
 for (const b of blocks) {
   if (!b.feature) {
     fail(`${b.file}:${b.line} — verification block has no "feature:" field`);
@@ -97,6 +102,9 @@ for (const b of blocks) {
   for (const field of ["status", "stage4Date", "stage4DateType"]) {
     if (b[field] && r[field] && b[field] !== r[field]) {
       fail(`${b.file}:${b.line} — "${key}" ${field}: demo says ${b[field]}, reference says ${r[field]}`);
+    } else if (r[field] && !b[field]) {
+      // informational: block omits a field the reference could contradict
+      warnings.push(`${b.file}:${b.line} — "${key}" block omits "${field}"`);
     }
   }
 }
@@ -116,11 +124,14 @@ for (const f of tsFiles) {
 }
 
 // ---------- check 4: referenced demo filenames exist ----------
-const refRe = /\b\d{2}(?:-\d)?-[a-z0-9-]+(?:-ts-comparison)?\.(?:js|ts)\b/g;
+// Case-insensitive so a wrong-case reference is matched and then flagged
+// (all actual demo filenames are lowercase).
+const refRe = /\b\d{2}(?:-\d)?-[a-z0-9-]+(?:-ts-comparison)?\.(?:js|ts)\b/gi;
 const docFiles = [
   ...walk(path.join(root, "docs")).filter((f) => f.endsWith(".md")),
   path.join(root, "README.md"),
-];
+  path.join(root, "CONTRIBUTING.md"),
+].filter((f) => fs.existsSync(f));
 for (const f of [...allFiles, ...docFiles]) {
   const text = fs.readFileSync(f, "utf8");
   let m;
@@ -144,6 +155,11 @@ console.log(`Demo files: ${jsFiles.length} JS + ${tsFiles.length} TS`);
 console.log(`Verification blocks: ${blocks.length} · Reference entries: ${Object.keys(reference).length}`);
 if (failures.length === 0) {
   console.log("✅ verify-consistency: all checks passed");
+  if (warnings.length > 0) {
+    console.log(`ℹ️  ${warnings.length} informational note(s) (blocks omitting fields the reference could contradict):`);
+    for (const w of warnings.slice(0, 10)) console.log("  · " + w);
+    if (warnings.length > 10) console.log(`  · … and ${warnings.length - 10} more`);
+  }
   process.exit(0);
 }
 console.error(`\n❌ ${failures.length} consistency problem(s):`);
