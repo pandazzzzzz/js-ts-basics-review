@@ -441,23 +441,23 @@ console.log(`
 │    ✅ Better tooling (tree-shaking, bundling)                    │
 │    ✅ Static analysis                                            │
 │    ✅ Standard across ecosystems                                 │
-│                                                                  │
-│ 2. USE ES2022 # PRIVATE FIELDS WHEN POSSIBLE                     │
+│                                                                  
+│ 2. USE ES2022 # PRIVATE FIELDS WHEN POSSIBLE                     
 │    ✅ Runtime privacy (not just compile-time)                    │
 │    ✅ Cleaner syntax than closures                               │
 │    ✅ Better IDE support                                         │
 │    ✅ Explicit privacy marker                                    │
-│                                                                  │
+│                                                                  
 │ 3. USE BLOCK SCOPE { } INSTEAD OF IIFE                          │
 │    ✅ Simpler syntax                                             │
 │    ✅ Same isolation effect                                      │
 │    ✅ More readable                                              │
-│                                                                  │
-│ 4. USE ARROW FUNCTIONS FOR SIMPLE CLOSURES                       │
+│                                                                  
+│ 4. USE ARROW FUNCTIONS FOR SIMPLE CLOSURES                       
 │    ✅ Concise syntax                                             │
 │    ✅ Lexical this binding                                       │
 │    ✅ No arguments object (less confusion)                       │
-│                                                                  │
+│                                                                  
 └─────────────────────────────────────────────────────────────────┘
 `);
 
