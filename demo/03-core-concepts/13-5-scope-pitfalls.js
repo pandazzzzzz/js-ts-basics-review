@@ -453,7 +453,7 @@ console.log(`
 │    ✅ Same isolation effect                                      │
 │    ✅ More readable                                              │
 │                                                                  │
-│ 4. USE箭头函数 FOR SIMPLE CLOSURES                               │
+│ 4. USE ARROW FUNCTIONS FOR SIMPLE CLOSURES                       │
 │    ✅ Concise syntax                                             │
 │    ✅ Lexical this binding                                       │
 │    ✅ No arguments object (less confusion)                       │

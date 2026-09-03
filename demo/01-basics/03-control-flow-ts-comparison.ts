@@ -516,7 +516,7 @@ if (typeof mutableValue === "string") {
   reassign(42); // this call MAY reassign mutableValue...
 
   // ...so TypeScript resets the narrowing to string | number
-  // console.log(mutableValue.toUpperCase()); // ❌ Error: not assignable to 'string'
+  // console.log(mutableValue.toUpperCase()); // ❌ Error: Property 'toUpperCase' does not exist on type 'string | number'
 
   // Need to narrow again
   if (typeof mutableValue === "string") {

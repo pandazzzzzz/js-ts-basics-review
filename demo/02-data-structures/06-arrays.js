@@ -497,7 +497,7 @@ console.log("Spliced:", toSplicedExample.toSpliced(2, 2, 99, 100));
 // 6. Typed Arrays - Numeric Arrays with Fixed Type
 // ============================================
 
-// Typed Arrays - For high-performance numeric operations (ES6/ES2015)
+// Typed Arrays - For high-performance numeric operations (ES6/ES2015; BigInt64/Uint64 ES2020)
 // - Fixed element type (e.g., Int8, Float64)
 // - Used for WebGL, binary data processing, audio/video
 // - More memory efficient and faster than regular arrays

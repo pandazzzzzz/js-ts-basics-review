@@ -707,7 +707,7 @@ console.log(`
  * |--------------------|---------------------------|---------------------------|---------------------------------|
  * | Promise.all()      | All promises fulfill      | Any promise rejects       | Parallel operations, all needed |
  * | Promise.allSettled()| All promises settle      | Never                     | Batch operations, need all results |
- * | Promise.race()     | Any promise settles       | Any promise rejects       | Timeout patterns, fastest wins  |
+ * | Promise.race()     | First promise fulfills    | First settlement is a rejection | Timeout patterns, fastest wins  |
  * | Promise.any()      | Any promise fulfills      | All promises reject       | First successful response       |
  * | Promise.withResolvers() | External control  | External control          | Event-driven, decoupled resolve |
  */

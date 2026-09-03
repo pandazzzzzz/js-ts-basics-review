@@ -70,7 +70,7 @@ console.log("\nRecommended order: 13-1 → 13-2 → 13-3 → 13-4 → 13-5");
 console.log("Closures (13-3) build directly on scope chain and shadowing (13-1).");
 
 // ============================================
-// Common Pitfalls
+// 4. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -79,7 +79,7 @@ console.log("⚠️  Capturing loop variables with var in callbacks → 13-5");
 console.log("⚠️  Accidental closures over large objects keeping memory alive → 13-5");
 
 // ============================================
-// Best Practices
+// 5. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -87,7 +87,7 @@ console.log("✅ Prefer block-scoped let/const and small function scopes → 13-
 console.log("✅ Use closures intentionally (privacy, factories), not accidentally → 13-3/13-4");
 
 // ============================================
-// Cross-references
+// 6. Cross-references
 // ============================================
 
 console.log("\n=== Cross-references ===");

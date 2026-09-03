@@ -353,8 +353,9 @@ console.log("- Parallel data processing");
 console.log("- Real-time collaborative editing");
 
 console.log("\n⚠️ NOTE:");
-console.log("- Atomics only work on integer TypedArrays (Int32Array, BigInt64Array)");
-console.log("- Not for Float32Array or Float64Array");
+console.log("- Atomics work on all integer TypedArrays (Int8 through BigInt64)");
+console.log("- Atomics.wait/notify/waitAsync are limited to Int32Array and BigInt64Array");
+console.log("- Never for Float32Array or Float64Array");
 console.log("- Always use Atomics with SharedArrayBuffer, not regular ArrayBuffer");
 
 // ============================================

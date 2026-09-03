@@ -310,7 +310,8 @@ console.log('Use: import data from "./data.json" with { type: "json" }');
 console.log("\n--- 7. Import Attributes ---");
 
 // Import attributes allow specifying metadata about imports
-// Supported attributes: type, assert, with
+// The standardized form is the `with` keyword and one attribute key: with { type: "json" }.
+// (`assert` was the earlier keyword — deprecated, then removed; CSS/WASM types are not standardized.)
 
 // JSON modules (as above)
 // import json from "./data.json" with { type: "json" };

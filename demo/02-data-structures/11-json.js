@@ -531,7 +531,7 @@ console.log("    JSON with line/paragraph separators:", jsonWithSeparators);
 const parsedWithSeparators = JSON.parse(jsonWithSeparators);
 console.log("    Parsed successfully:", parsedWithSeparators);
 
-// 3. JSON.stringify() with Symbol keys
+// 3. JSON.stringify() with Symbol keys (behavior since ES2015, not an ES2019 change)
 // - Symbol keys are silently ignored in JSON.stringify
 const objWithSymbols = {
   [Symbol("id")]: 123,
@@ -541,7 +541,7 @@ console.log("\n  Symbol keys in JSON.stringify:");
 console.log("    Object:", objWithSymbols);
 console.log("    JSON:", JSON.stringify(objWithSymbols)); // Symbol keys ignored
 
-// 4. JSON.parse reviver - transforming values during parsing
+// 4. JSON.parse reviver (ES5) - transforming values during parsing
 console.log("\n  JSON.parse reviver - transforming values:");
 function reviverWithSource(key, value) {
   if (key === "created") {

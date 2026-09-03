@@ -1210,7 +1210,7 @@ res("done");
  */
 console.log("\nRegExp v flag (ES2024):");
 try {
-  // ASCII letters excluding decimal numbers (set subtraction)
+  // ASCII letters (intersection of \p{ASCII} and \p{Letter})
   const vRe = /[\p{ASCII}&&\p{Letter}]/v;
   console.log("  /[\p{ASCII}&&\p{Letter}]/v.test('A'):", vRe.test("A")); // true
 } catch (err) {

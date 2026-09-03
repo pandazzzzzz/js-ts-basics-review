@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: Functions - Index
 // 📘 For JavaScript index, see: 07-functions.js
-// 📘 Detailed version-specific comparison files: 07-1 - 07-3 -ts-comparison.ts
+// 📘 Detailed version-specific comparison files: 07-1/07-2/07-3 -ts-comparison.ts
 // This file is the TypeScript index for the Functions collection (now split by topic).
 // 🎯 Difficulty: Beginner
 export {};

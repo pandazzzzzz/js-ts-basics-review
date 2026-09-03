@@ -1,6 +1,6 @@
 // TypeScript vs JavaScript: Scope and Closures - Index
 // 📘 For JavaScript index, see: 13-scope-closures.js
-// 📘 Detailed version-specific comparison files: 13-1 - 13-5 -ts-comparison.ts
+// 📘 Detailed version-specific comparison files: 13-1/13-2/13-3/13-4/13-5 -ts-comparison.ts
 // This file is the TypeScript index for the Scope & Closures collection (now split by topic).
 // 🎯 Difficulty: Intermediate
 export {};

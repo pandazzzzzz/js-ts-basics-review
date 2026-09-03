@@ -363,7 +363,7 @@ console.log("❌ .catch() only catches network errors, NOT HTTP errors");
 console.log("✅ Always check response.ok or response.status");
 
 console.log("\nPitfall 2 - Forgetting try/catch with async/await:");
-console.log("❌ Unhandled promise rejection crashes in Node.js strict mode");
+console.log("❌ Unhandled promise rejection crashes the Node.js process by default (Node 15+)");
 console.log("✅ Wrap await in try/catch blocks");
 
 console.log("\nPitfall 3 - Sequential awaits when parallel is possible:");

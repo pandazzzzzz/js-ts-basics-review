@@ -270,7 +270,7 @@ const newBuffer = buffer.transfer(16); // Creates new buffer of 16 bytes, copies
 console.log("\nAfter transfer(16):");
 console.log("Old buffer detached:", buffer.detached); // true
 console.log("New buffer.byteLength:", newBuffer.byteLength); // 16
-console.log("New buffer.maxByteLength:", newBuffer.maxByteLength); // 16 (resizable by default)
+console.log("New buffer.maxByteLength:", newBuffer.maxByteLength); // 16 (inherited from the resizable source; transferToFixedLength() gives a fixed one)
 
 // Use case: Dynamic binary data processing (e.g., growing buffers for network streams)
 class DynamicBuffer {

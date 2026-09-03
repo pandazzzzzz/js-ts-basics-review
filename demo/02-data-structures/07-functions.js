@@ -30,9 +30,9 @@ console.log("=== Functions - Index ===\n");
 console.log(`
 Original file: 07-functions.js (16 sections)
 Reorganized into topic-focused demo files:
-  07-1-functions-basics.js     (sections 1-5)
-  07-2-functions-advanced.js   (sections 6-9)
-  07-3-functions-patterns.js   (sections 10-16)
+  07-1-functions-basics.js     (5 sections: mechanics)
+  07-2-functions-advanced.js   (5 sections: advanced behavior, incl. currying)
+  07-3-functions-patterns.js   (6 sections: patterns)
 Each sub-file has its own -ts-comparison.ts counterpart.
 `);
 
@@ -48,19 +48,19 @@ console.log("  4. Default Parameters");
 console.log("  5. Rest Parameters");
 
 console.log("\n--- 07-2-functions-advanced.js ---");
-console.log("  6. Higher-Order Functions");
-console.log("  7. Closures");
-console.log("  8. Async Functions");
-console.log("  9. Generator Functions");
+console.log("  1. Higher-Order Functions");
+console.log("  2. Closures");
+console.log("  3. Async Functions");
+console.log("  4. Generator Functions");
+console.log("  5. Currying");
 
 console.log("\n--- 07-3-functions-patterns.js ---");
-console.log("  10. Method Definitions");
-console.log("  11. Function Binding");
-console.log("  12. Currying");
-console.log("  13. Function Properties and Methods");
-console.log("  14. IIFE Patterns and Use Cases");
-console.log("  15. Tail Call Optimization (TCO)");
-console.log("  16. Pure Functions and Functional Programming");
+console.log("  1. Method Definitions");
+console.log("  2. Function Binding");
+console.log("  3. Function Properties and Methods");
+console.log("  4. IIFE Patterns and Use Cases");
+console.log("  5. Tail Call Optimization (TCO)");
+console.log("  6. Pure Functions and Functional Programming");
 
 // ============================================
 // 3. Study Path
@@ -70,7 +70,7 @@ console.log("\nRecommended order: 07-1 (mechanics) → 07-2 (behavior) → 07-3 
 console.log("Beginners should complete 07-1 before moving on; 07-3 assumes closures (07-2).");
 
 // ============================================
-// Common Pitfalls
+// 4. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -83,7 +83,7 @@ console.log(
 );
 
 // ============================================
-// Best Practices
+// 5. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -92,7 +92,7 @@ console.log("✅ Prefer arrow functions for short callbacks and lexical this →
 console.log("✅ Keep functions pure where practical; isolate side effects → 07-3");
 
 // ============================================
-// Cross-references
+// 6. Cross-references
 // ============================================
 
 console.log("\n=== Cross-references ===");

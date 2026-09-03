@@ -30,7 +30,7 @@ console.log("=== Arrays - Typed Arrays Demo ===\n");
 // 1. Typed Arrays Overview
 // ============================================
 /**
- * Typed Arrays - Fixed-type numeric arrays (ES6/ES2015)
+ * Typed Arrays - Fixed-type numeric arrays (ES6/ES2015; BigInt64Array/BigUint64Array ES2020)
  *
  * Key Differences from regular arrays:
  * - Fixed element type (Int8, Uint8, Float64, etc.)
@@ -51,7 +51,7 @@ console.log("=== Arrays - Typed Arrays Demo ===\n");
  * - Int16Array, Uint16Array
  * - Int32Array, Uint32Array
  * - Float32Array, Float64Array
- * - BigInt64Array, BigUint64Array
+ * - BigInt64Array, BigUint64Array (ES2020 — BigInt element types)
  */
 
 console.log("=== 1. Typed Arrays Overview ===");

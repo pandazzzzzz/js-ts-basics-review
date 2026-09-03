@@ -295,6 +295,10 @@ console.log("\n--- 5. Decorators (Stage 2.7) ---\n");
 // Decorators allow adding metadata and modifying classes, methods, properties, and parameters
 // Note: Stage 2.7, expected in ES2028 or later
 // TypeScript has experimental decorator support today
+// ⚠️ The examples below use TypeScript's LEGACY experimental decorator signatures
+// (target, propertyKey, descriptor). The Stage 2.7 standard API differs — decorators
+// receive context objects (e.g. ClassMethodDecoratorContext) and accessor/field
+// decorators replace property descriptors. See 47-metaprogramming.js.
 
 /*
 // Class decorator
