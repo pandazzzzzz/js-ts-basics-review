@@ -224,7 +224,7 @@ console.log("\n--- 6. tsconfig.json Configuration ---\n");
 console.log("To use ES2023 features in TypeScript:");
 console.log('1. Set "target": "ES2023" or higher');
 console.log('2. Add "ES2023" to "lib" array if target is lower');
-console.log("3. For immutable array methods: Ensure TypeScript 5.0+");
-console.log("4. For Symbols in WeakMap: Ensure TypeScript 5.1+");
+console.log("3. For immutable array methods: Ensure TypeScript 5.2+ (typings landed in 5.2)");
+console.log("4. For Symbols in WeakMap: Ensure TypeScript 5.2+ (WeakKey constraint landed in 5.2)");
 
 console.log("\n✅ ES2023 TypeScript comparison completed");

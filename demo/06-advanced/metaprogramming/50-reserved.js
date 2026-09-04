@@ -269,7 +269,7 @@ console.log("- WebAssembly: GC, Components, stack switching, multi-memory");
 
 console.log("\n=== TypeScript Evolution ===");
 console.log(
-  "- TS 5.x: const type params, using, import attributes, satisfies, inferred predicates"
+  "- TS 5.x: const type params, using, import attributes, inferred predicates (satisfies was 4.9)"
 );
 console.log("- TS 6.0: ignoreDeprecations, last JS-based compiler");
 console.log("- TS 7.0: Go-based rewrite (typescript-go), major perf gains");

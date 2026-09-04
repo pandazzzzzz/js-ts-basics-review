@@ -73,7 +73,8 @@ const hex: number = 0xff_ee_dd;
 const binary: number = 0b1010_1010;
 const pi: number = 3.1415_9265;
 
-// Can be used in type-level numeric literals (TypeScript 4.5+)
+// Can be used in type-level numeric literals too (works since TypeScript 2.7,
+// when numeric separators shipped — separators are lexed identically in type positions)
 type StatusCode = 200 | 400 | 404 | 500;
 const ok: StatusCode = 200;
 const notFound: StatusCode = 404;

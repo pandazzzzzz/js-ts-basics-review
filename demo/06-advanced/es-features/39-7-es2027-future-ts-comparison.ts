@@ -311,10 +311,9 @@ console.log("5. Enhanced type checking for Web APIs");
 console.log("\n--- 7. tsconfig.json Configuration ---\n");
 console.log("To use ES2027 features in TypeScript:");
 console.log('1. No "ES2027" lib exists yet — use "ESNext" plus polyfill/feature types');
-console.log('2. Add "ES2027" to "lib" array');
-console.log('3. For Explicit Resource Management: Add "ESNext.Disposable" to lib');
-console.log('4. For Decorators: Set "experimentalDecorators": false (use standard decorators)');
+console.log('2. For Explicit Resource Management: Add "ESNext.Disposable" to lib');
+console.log('3. For Decorators: Set "experimentalDecorators": false (use standard decorators)');
 console.log('   Or "experimentalDecorators": true for legacy TypeScript decorators');
-console.log("5. For Temporal: Install @js-temporal/polyfill and add its types");
+console.log("4. For Temporal: Install @js-temporal/polyfill and add its types");
 
 console.log("\n✅ ES2027 & Future Features TypeScript comparison completed");

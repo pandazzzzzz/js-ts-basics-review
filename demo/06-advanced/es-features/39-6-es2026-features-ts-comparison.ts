@@ -371,9 +371,6 @@ console.log("To use ES2026 features in TypeScript:");
 console.log(
   '1. ES2026 lib arrives in TypeScript 7.1 (microsoft/TypeScript#63704); until then use "ESNext"'
 );
-console.log('2. Add "ES2026" to "lib" array if target is lower');
-console.log(
-  '3. For async iterators: Ensure "downlevelIteration" is enabled if targeting older runtimes'
-);
+console.log('2. For async iterators: Enable "downlevelIteration" if targeting older runtimes');
 
 console.log("\n✅ ES2026 TypeScript comparison completed");

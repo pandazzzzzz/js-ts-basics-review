@@ -353,7 +353,7 @@ function combineSignals(...signals: AbortSignal[]): AbortSignal {
   return controller.signal;
 }
 
-// AbortSignal.timeout() - Modern API (TypeScript 4.7+)
+// AbortSignal.timeout() - Modern API (typing since TypeScript 4.9)
 async function typedSignalTimeout(): Promise<void> {
   if ("timeout" in AbortSignal) {
     console.log("✅ AbortSignal.timeout() available");

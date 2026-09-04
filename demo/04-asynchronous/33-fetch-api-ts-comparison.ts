@@ -991,7 +991,7 @@ async function useTypedSearchController(): Promise<void> {
   }
 }
 
-// AbortSignal.timeout() - Modern API (TypeScript 4.7+)
+// AbortSignal.timeout() - Modern API (typing since TypeScript 4.9)
 async function typedSignalTimeout(): Promise<void> {
   try {
     // Type-safe timeout signal
