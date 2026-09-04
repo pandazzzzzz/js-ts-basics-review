@@ -217,7 +217,7 @@ console.log("Input:", match.input); // "John Doe"
 let matchStr = "The rain in Spain";
 let matchRe = /ain/g;
 console.log("\nmatch() method:");
-console.log("Match all 'ain':", matchStr.match(matchRe)); // ['ain', 'ain', 'ain']
+console.log("Match all 'ain':", matchStr.match(matchRe)); // ['ain', 'ain'] (rain + Spain)
 
 // 3.4 match() without g flag returns groups
 let matchGroupRe = /(\d{4})-(\d{2})-(\d{2})/;

@@ -209,7 +209,10 @@ function thisStrict() {
 }
 
 function thisNonStrict() {
-  console.log("'this' in non-strict function:", this); // [object global] or window
+  // Note: this FILE is an ES module (strict everywhere), so even a plain
+  // function gets undefined. In a classic non-strict script this would be
+  // the global object ([object global] / window).
+  console.log("'this' in non-strict function:", this); // undefined (ESM); global in sloppy scripts
 }
 
 console.log("\n'this' binding:");

@@ -18,7 +18,7 @@ const path = require("path");
 
 const root = path.resolve(__dirname, "..");
 const failures = [];
-const fail = (msg) => failures.push(msg);
+const fail = msg => failures.push(msg);
 
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -30,7 +30,7 @@ function walk(dir, out = []) {
 }
 
 // Reference feature keys are canonical; normalize block names for matching.
-const norm = (s) =>
+const norm = s =>
   s
     .toLowerCase()
     .replace(/^array\/\s*string\.prototype\./, "")
@@ -46,13 +46,13 @@ for (const f of ["finished.json", "early.json", "active.json", "withdrawn.json"]
     reference[k] = { ...v, refFile: f };
   }
 }
-const refByNorm = new Map(Object.keys(reference).map((k) => [norm(k), k]));
+const refByNorm = new Map(Object.keys(reference).map(k => [norm(k), k]));
 
 // ---------- collect demo files ----------
 const demoDir = path.join(root, "demo");
 const allFiles = walk(demoDir);
-const jsFiles = allFiles.filter((f) => f.endsWith(".js"));
-const tsFiles = allFiles.filter((f) => f.endsWith(".ts"));
+const jsFiles = allFiles.filter(f => f.endsWith(".js"));
+const tsFiles = allFiles.filter(f => f.endsWith(".ts"));
 
 // ---------- parse verification blocks (both comment styles) ----------
 const blocks = [];
@@ -101,7 +101,9 @@ for (const b of blocks) {
   const r = reference[key];
   for (const field of ["status", "stage4Date", "stage4DateType"]) {
     if (b[field] && r[field] && b[field] !== r[field]) {
-      fail(`${b.file}:${b.line} — "${key}" ${field}: demo says ${b[field]}, reference says ${r[field]}`);
+      fail(
+        `${b.file}:${b.line} — "${key}" ${field}: demo says ${b[field]}, reference says ${r[field]}`
+      );
     } else if (r[field] && !b[field]) {
       // informational: block omits a field the reference could contradict
       warnings.push(`${b.file}:${b.line} — "${key}" block omits "${field}"`);
@@ -109,18 +111,21 @@ for (const b of blocks) {
   }
 }
 for (const key of Object.keys(reference)) {
-  if (!covered.has(key)) fail(`reference entry "${key}" (${reference[key].refFile}) has no demo verification block`);
+  if (!covered.has(key))
+    fail(`reference entry "${key}" (${reference[key].refFile}) has no demo verification block`);
 }
 
 // ---------- check 3: JS ↔ TS pairing ----------
-const basenames = new Set(allFiles.map((f) => path.basename(f)));
+const basenames = new Set(allFiles.map(f => path.basename(f)));
 for (const f of jsFiles) {
   const pair = path.basename(f).replace(/\.js$/, "-ts-comparison.ts");
-  if (!basenames.has(pair)) fail(`${path.relative(root, f)} is missing its TypeScript counterpart ${pair}`);
+  if (!basenames.has(pair))
+    fail(`${path.relative(root, f)} is missing its TypeScript counterpart ${pair}`);
 }
 for (const f of tsFiles) {
   const pair = path.basename(f).replace(/-ts-comparison\.ts$/, ".js");
-  if (!basenames.has(pair)) fail(`${path.relative(root, f)} is missing its JavaScript counterpart ${pair}`);
+  if (!basenames.has(pair))
+    fail(`${path.relative(root, f)} is missing its JavaScript counterpart ${pair}`);
 }
 
 // ---------- check 4: referenced demo filenames exist ----------
@@ -128,10 +133,10 @@ for (const f of tsFiles) {
 // (all actual demo filenames are lowercase).
 const refRe = /\b\d{2}(?:-\d)?-[a-z0-9-]+(?:-ts-comparison)?\.(?:js|ts)\b/gi;
 const docFiles = [
-  ...walk(path.join(root, "docs")).filter((f) => f.endsWith(".md")),
+  ...walk(path.join(root, "docs")).filter(f => f.endsWith(".md")),
   path.join(root, "README.md"),
   path.join(root, "CONTRIBUTING.md"),
-].filter((f) => fs.existsSync(f));
+].filter(f => fs.existsSync(f));
 for (const f of [...allFiles, ...docFiles]) {
   const text = fs.readFileSync(f, "utf8");
   let m;
@@ -147,16 +152,21 @@ for (const f of allFiles) {
   const rel = path.relative(root, f);
   const text = fs.readFileSync(f, "utf8");
   if (!text.includes("🎯 Difficulty:")) fail(`${rel} is missing a 🎯 Difficulty tag`);
-  if (f.endsWith(".js") && !text.includes("export {}")) fail(`${rel} is missing the "export {}" ESM marker`);
+  if (f.endsWith(".js") && !text.includes("export {}"))
+    fail(`${rel} is missing the "export {}" ESM marker`);
 }
 
 // ---------- report ----------
 console.log(`Demo files: ${jsFiles.length} JS + ${tsFiles.length} TS`);
-console.log(`Verification blocks: ${blocks.length} · Reference entries: ${Object.keys(reference).length}`);
+console.log(
+  `Verification blocks: ${blocks.length} · Reference entries: ${Object.keys(reference).length}`
+);
 if (failures.length === 0) {
   console.log("✅ verify-consistency: all checks passed");
   if (warnings.length > 0) {
-    console.log(`ℹ️  ${warnings.length} informational note(s) (blocks omitting fields the reference could contradict):`);
+    console.log(
+      `ℹ️  ${warnings.length} informational note(s) (blocks omitting fields the reference could contradict):`
+    );
     for (const w of warnings.slice(0, 10)) console.log("  · " + w);
     if (warnings.length > 10) console.log(`  · … and ${warnings.length - 10} more`);
   }

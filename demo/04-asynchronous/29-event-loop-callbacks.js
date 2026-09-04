@@ -721,7 +721,8 @@ const obj = {
   // ❌ Regular function loses 'this'
   regularCallback: function () {
     setTimeout(function () {
-      console.log("Pitfall 1 - Regular function this:", this); // undefined or global
+      // In Node.js the timer invokes this with the Timeout object (browsers: window)
+      console.log("Pitfall 1 - Regular function this:", this); // Timeout object (Node) / window (browser)
     }, 100);
   },
 
