@@ -156,6 +156,65 @@ for (const f of allFiles) {
     fail(`${rel} is missing the "export {}" ESM marker`);
 }
 
+// ---------- check 6: ToC ↔ body section alignment (JS demos) ----------
+// Every Table-of-Contents entry number must exist as a numbered body section,
+// and appear in the same order. Extra numbered lines in the body (e.g. numbered
+// best-practice lists) are tolerated. Requires a space after the leading dot so
+// `N.M` sub-section headers (e.g. "// 12.5 QUEUEMICROTASK") don't match.
+const isFrame = (l) => /^\/\/ ={10,}\s*$/.test((l || "").trim());
+for (const f of jsFiles) {
+  const rel = path.relative(root, f);
+  const lines = fs.readFileSync(f, "utf8").split(/\r?\n/);
+  let t = -1;
+  for (let i = 0; i < lines.length; i++)
+    if (/^\/\/\s*Table of Contents\s*$/.test(lines[i].trim())) { t = i; break; }
+  if (t === -1) { fail(`${rel} has no Table of Contents`); continue; }
+
+  // ToC entries: consecutive entry/blank/frame lines after the header's own frame
+  const tocNums = [];
+  let bodyStart = -1;
+  for (let i = t + 2; i < lines.length; i++) {
+    const line = lines[i];
+    if (isFrame(line) || line.trim() === "") continue;
+    const m = line.match(/^\/\/\s*(\d+[a-z]?)\.\s(\S)/);
+    if (m && !tocNums.includes(m[1])) { tocNums.push(m[1]); continue; }
+    bodyStart = i;
+    break;
+  }
+  if (tocNums.length === 0) { fail(`${rel} has an empty Table of Contents`); continue; }
+  if (bodyStart === -1) { fail(`${rel} ToC region never terminates`); continue; }
+
+  // Body section numbers after the ToC region
+  const bodyNums = [];
+  for (let i = bodyStart; i < lines.length; i++) {
+    let m = lines[i].match(/^\/\/\s*(\d+[a-z]?)\.\s(\S)/);
+    if (!m) m = lines[i].match(/^\/\/\s*Section (\d+):\s(\S)/);
+    if (m) bodyNums.push(m[1]);
+  }
+
+  // (a) every ToC number present in the body
+  const missing = tocNums.filter(n => !bodyNums.includes(n));
+  if (missing.length) fail(`${rel} — ToC section(s) missing from body: ${missing.join(", ")}`);
+  // Numbered list items inside sections (e.g. best-practice lists) also match;
+  // they are informational, not failures — only warn when MANY extras appear.
+  const extraSections = [...new Set(bodyNums.filter(n => !tocNums.includes(n)))];
+  if (extraSections.length > 2)
+    console.log(
+      `ℹ️  ${rel} — ${extraSections.length} numbered body item(s) beyond the ToC (likely list items): ${extraSections.join(", ")}`
+    );
+
+  // (b) ToC numbers appear in body in the same order (subsequence match)
+  let cursor = 0;
+  for (const n of tocNums) {
+    const at = bodyNums.indexOf(n, cursor);
+    if (at === -1) {
+      if (!missing.includes(n)) fail(`${rel} — ToC section ${n} is out of order in the body`);
+      continue;
+    }
+    cursor = at + 1;
+  }
+}
+
 // ---------- report ----------
 console.log(`Demo files: ${jsFiles.length} JS + ${tsFiles.length} TS`);
 console.log(
