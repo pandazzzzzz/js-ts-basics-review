@@ -30,7 +30,7 @@ export {};
 // 8. Best Practices
 
 // ============================================
-// Section 1: JSDoc Type Hints (JavaScript)
+// 1. JSDoc Type Hints (JavaScript)
 // ============================================
 
 console.log("\n=== JSDoc Type Hints in JavaScript ===\n");
@@ -101,7 +101,7 @@ console.log("4. Can gradually adopt TypeScript");
 // ══════════════════════════════════════════
 // ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 2: Decorators (Stage 2.7 proposal - not current standard)
+// 2. Decorators (Stage 2.7 proposal - not current standard)
 // ============================================
 
 /*
@@ -127,7 +127,7 @@ console.log(`// Method decorator example (future syntax):
 // 📘 See 50-reserved.js (future extensions topic)
 
 // ============================================
-// Section 3: Reflect API (ES6)
+// 3. Reflect API (ES6)
 // ============================================
 
 console.log("\n=== Reflect API (ES6) ===\n");
@@ -188,7 +188,7 @@ console.log("- Framework development");
 console.log("- Consistent API for object operations");
 
 // ============================================
-// Section 4: Proxy Object (ES6)
+// 4. Proxy Object (ES6)
 // ============================================
 
 console.log("\n=== Proxy Object (ES6) ===\n");
@@ -250,7 +250,7 @@ console.log("- Data binding and observables");
 // See 23-proxy-reflect.js for more detailed coverage
 
 // ============================================
-// Section 5: Symbol Metadata
+// 5. Symbol Metadata
 // ============================================
 
 console.log("\n=== Symbol Metadata ===\n");
@@ -296,7 +296,7 @@ console.log(
 );
 
 // ============================================
-// Section 6: Type Coercion and Type Checking
+// 6. Type Coercion and Type Checking
 // ============================================
 
 console.log("\n=== Type Coercion and Checking ===\n");
@@ -342,7 +342,7 @@ console.log("Number.isNaN('hello'):", Number.isNaN("hello"));
 console.log("isNaN('hello'):", isNaN("hello"));
 
 // ============================================
-// Section 7: Common Pitfalls
+// 7. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===\n");
@@ -395,7 +395,7 @@ console.log("  TypeScript decorators !== proposal decorators");
 console.log("  Check your transpiler settings");
 
 // ============================================
-// Section 8: Best Practices
+// 8. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===\n");

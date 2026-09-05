@@ -25,9 +25,9 @@ export {};
 // 11. String Interpolation with ${}
 // 12. Tagged Template Literals
 // 13. Common Pitfalls & Best Practices
-
+// 14. Cross-references
 // ============================================
-// String Creation Methods
+// 1. String Creation Methods
 // ============================================
 
 // String Literal - Most common way (ES1)
@@ -67,7 +67,7 @@ console.log(backslash);
 console.log("Unicode:", unicode);
 
 // ============================================
-// String Properties
+// 2. String Properties
 // ============================================
 
 const text = "JavaScript";
@@ -80,7 +80,7 @@ console.log("\n=== String Properties ===");
 console.log("text.length:", text.length); // 10
 
 // ============================================
-// String Methods - Extraction
+// 3. String Methods - Extraction
 // ============================================
 
 const str = "Hello, World!";
@@ -118,7 +118,7 @@ console.log("str.substr(7, 5):", str.substr(7, 5)); // "World"
 console.log("str.substr(-6, 5):", str.substr(-6, 5)); // "World"
 
 // ============================================
-// String Methods - Searching
+// 4. String Methods - Searching
 // ============================================
 
 const searchStr = "The quick brown fox jumps over the lazy dog";
@@ -170,7 +170,7 @@ console.log("endsWith('lazy'):", searchStr.endsWith("lazy")); // false
 console.log("endsWith('lazy', 39):", searchStr.endsWith("lazy", 39)); // true (endPosition is exclusive)
 
 // ============================================
-// String Methods - Modification
+// 5. String Methods - Modification
 // ============================================
 
 const modStr = "  Hello World  ";
@@ -224,7 +224,7 @@ console.log("'Hi'.padEnd(10):", `"${"Hi".padEnd(10)}"`); // "Hi        "
 console.log("'7'.padEnd(4, 'ab'):", "7".padEnd(4, "ab")); // "7aba"
 
 // ============================================
-// String Methods - Splitting and Joining
+// 6. String Methods - Splitting and Joining
 // ============================================
 
 const csvData = "apple,banana,cherry,date";
@@ -242,7 +242,7 @@ console.log("split(' ', 2):", sentence.split(" ", 2)); // ["The", "quick"]
 console.log("split(''):", "Hello".split("")); // ["H", "e", "l", "l", "o"]
 
 // ============================================
-// String Methods - Replacement
+// 7. String Methods - Replacement
 // ============================================
 
 const replaceStr = "The cat sat on the mat. The cat was happy.";
@@ -283,7 +283,7 @@ console.log("Replace with function:", doubled);
 // "I have 10 apples and 6 oranges"
 
 // ============================================
-// String Methods - Case Conversion
+// 8. String Methods - Case Conversion
 // ============================================
 
 const mixedCase = "Hello World";
@@ -313,7 +313,7 @@ console.log("\n=== toLocaleUpperCase() Method ===");
 console.log("toLocaleUpperCase():", mixedCase.toLocaleUpperCase()); // "HELLO WORLD"
 
 // ============================================
-// String Methods - Other Useful Methods
+// 9. String Methods - Other Useful Methods
 // ============================================
 
 // concat() - Concatenate strings (ES3)
@@ -488,7 +488,7 @@ function safeEncode(str) {
 console.log("safeEncode('a\\uD800b'):", safeEncode(loneSurrogateStr)); // "a%EF%BF%BDb" (U+FFFD UTF-8 encoded)
 
 // ============================================
-// Template Literals (ES6/ES2015)
+// 10. Template Literals (ES6/ES2015)
 // ============================================
 
 // Basic template literal
@@ -521,7 +521,7 @@ console.log("\nPoem:");
 console.log(poem);
 
 // ============================================
-// String Interpolation with ${}
+// 11. String Interpolation with ${}
 // ============================================
 
 // Expression interpolation
@@ -560,7 +560,7 @@ ${items.map(item => `  - ${item}`).join("\n")}`;
 console.log(list);
 
 // ============================================
-// Tagged Template Literals
+// 12. Tagged Template Literals
 // ============================================
 
 // Tagged templates - Custom string processing
@@ -688,7 +688,7 @@ console.log("Length regular:", `\n\t`.length); // 2
 console.log("Length raw:", String.raw`\n\t`.length); // 4
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 13. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -802,7 +802,9 @@ console.log("[...emoji].length:", [...emoji].length); // 1 (correct with spread)
 
 console.log("\n=== Best Practices ===");
 
+// ============================================
 // 1. Use template literals for string interpolation
+// ============================================
 const firstName = "John";
 const lastName = "Doe";
 // ❌ Avoid: const fullName = firstName + " " + lastName;
@@ -810,7 +812,9 @@ const lastName = "Doe";
 const fullName = `${firstName} ${lastName}`;
 console.log("1. Template literals:", fullName);
 
+// ============================================
 // 2. Use includes() instead of indexOf() for existence checks
+// ============================================
 const text2 = "Hello World";
 // ❌ Avoid: if (text2.indexOf('World') !== -1)
 // ✅ Prefer:
@@ -818,7 +822,9 @@ if (text2.includes("World")) {
   console.log("2. Use includes() for checks");
 }
 
+// ============================================
 // 3. Use startsWith() and endsWith() for prefix/suffix checks
+// ============================================
 const filename = "document.pdf";
 // ❌ Avoid: if (filename.slice(-4) === '.pdf')
 // ✅ Prefer:
@@ -826,38 +832,52 @@ if (filename.endsWith(".pdf")) {
   console.log("3. Use endsWith() for suffix checks");
 }
 
+// ============================================
 // 4. Use trim() for user input
+// ============================================
 const userInput2 = "  hello@example.com  ";
 const cleaned = userInput2.trim().toLowerCase();
 console.log("4. Cleaned input:", cleaned);
 
+// ============================================
 // 5. Use slice() instead of substring() or substr()
+// ============================================
 // slice() is more consistent and flexible
 const strSlice = "Hello World";
 console.log("5. Use slice():", strSlice.slice(0, 5));
 
+// ============================================
 // 6. Use replaceAll() for replacing all occurrences (ES2021+)
+// ============================================
 const text3 = "foo foo foo";
 // ❌ Avoid: text3.replace(/foo/g, 'bar')
 // ✅ Prefer:
 console.log("6. Use replaceAll():", text3.replaceAll("foo", "bar"));
 
+// ============================================
 // 7. Use padStart()/padEnd() for formatting
+// ============================================
 const id = "42";
 const paddedId = id.padStart(5, "0");
 console.log("7. Padded ID:", paddedId); // "00042"
 
+// ============================================
 // 8. Use split() with limit for performance
+// ============================================
 const longText = "a,b,c,d,e,f,g,h,i,j";
 const firstThree = longText.split(",", 3);
 console.log("8. Split with limit:", firstThree); // ["a", "b", "c"]
 
+// ============================================
 // 9. Use spread operator for Unicode-aware operations
+// ============================================
 const text4 = "Hello 😀 World";
 console.log("9. Unicode-aware length:", [...text4].length); // 13 (correct)
 console.log("   Regular length:", text4.length); // 14 (counts emoji as 2)
 
+// ============================================
 // 10. Use tagged templates for sanitization
+// ============================================
 // Always sanitize user input in templates
 function sanitize(strings, ...values) {
   const escape = str =>
@@ -880,7 +900,7 @@ const untrusted = '<script>alert("xss")</script>';
 console.log("10. Sanitized:", sanitize`User: ${untrusted}`);
 
 // ============================================
-// Cross-references
+// 14. Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 01-variables.js - Variables and data types");

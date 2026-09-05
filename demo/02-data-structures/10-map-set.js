@@ -29,7 +29,7 @@ export {};
 // 11. Best Practices
 
 // ============================================
-// Section 1: Map Basics
+// 1. Map Basics
 // ============================================
 
 // Creating Map (ES6)
@@ -103,7 +103,7 @@ console.log("\nsize Property:");
 console.log("  size:", sizeMap.size); // 3
 
 // ============================================
-// Section 2: Map Iteration
+// 2. Map Iteration
 // ============================================
 
 const iterMap = new Map([
@@ -150,7 +150,7 @@ console.log("  Map -> Object:", mapToObj);
 console.log("  Map -> Array:", mapToArray);
 
 // ============================================
-// Section 3: Objects as Map Keys
+// 3. Objects as Map Keys
 // ============================================
 
 // Object keys (based on reference comparison)
@@ -194,7 +194,7 @@ console.log(
 // elementData.set(document.querySelector('#btn'), { clicked: false });
 
 // ============================================
-// Section 4: Set Basics
+// 4. Set Basics
 // ============================================
 
 // Creating Set (ES6)
@@ -245,7 +245,7 @@ userSet.clear();
 console.log("  size after clear:", userSet.size); // 0
 
 // ============================================
-// Section 5: Set Iteration and Conversion
+// 5. Set Iteration and Conversion
 // ============================================
 
 const iterSet = new Set(["apple", "banana", "cherry"]);
@@ -284,7 +284,7 @@ console.log("\nArray Deduplication Utility:");
 console.log("  unique([1,2,2,3,3,3]):", unique([1, 2, 2, 3, 3, 3])); // [1, 2, 3]
 
 // ============================================
-// Section 6: Map vs Object Comparison
+// 6. Map vs Object Comparison
 // ============================================
 
 console.log("\nMap vs Object Comparison:");
@@ -347,7 +347,7 @@ console.log(`    Object.get: ${objTime.toFixed(2)}ms`);
 // ✓ Configuration/options objects
 
 // ============================================
-// Section 7: Set vs Array Comparison
+// 7. Set vs Array Comparison
 // ============================================
 
 console.log("\nSet vs Array Comparison:");
@@ -386,7 +386,7 @@ console.log(`    Set.has: ${setTime.toFixed(3)}ms (O(1))`);
 // ✓ Need JSON serialization
 
 // ============================================
-// Section 8: WeakMap and WeakSet
+// 8. WeakMap and WeakSet
 // ============================================
 
 console.log("\nWeakMap and WeakSet:");
@@ -449,7 +449,7 @@ console.log(
 console.log("  Weak reference: Map✗ Set✗ WeakMap✓ WeakSet✓");
 
 // ============================================
-// Section 9: Practical Use Cases
+// 9. Practical Use Cases
 // ============================================
 
 console.log("\nPractical Use Cases:");
@@ -641,7 +641,7 @@ try {
 }
 
 // ============================================
-// Section 10: Common Pitfalls
+// 10. Common Pitfalls
 // ============================================
 
 console.log("\nCommon Pitfalls:");
@@ -703,7 +703,7 @@ console.log("      - Object.is(0, -0) → false (Map treats as same!)");
 console.log("      - Map uses SameValueZero = Object.is for NaN, but 0 === -0");
 
 // ============================================
-// Section 11: Best Practices
+// 11. Best Practices
 // ============================================
 
 console.log("\nBest Practices:");

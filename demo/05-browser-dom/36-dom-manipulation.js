@@ -23,8 +23,9 @@ export {};
 // 6. MutationObserver
 // 7. Common Pitfalls
 // 8. Best Practices & Summary
-
+// ============================================
 // 1. Creating Elements
+// ============================================
 // createElement(tag), createTextNode(text) — text nodes auto-escape HTML
 // cloneNode(deep) duplicates elements; ⚠️ does NOT copy event listeners
 // DocumentFragment: lightweight container for batch DOM updates (single reflow)
@@ -104,6 +105,7 @@ if (typeof document !== "undefined") {
 
 // ============================================
 // 2. Inserting Elements
+// ============================================
 // Modern: append/prepend/before/after/replaceWith — accept multiple nodes/strings, return undefined
 // Traditional: appendChild/insertBefore/replaceChild — single node, return the node
 // insertAdjacentHTML/Element/Text: precise position (beforebegin/afterbegin/beforeend/afterend)
@@ -243,6 +245,7 @@ cloned.textContent = 'Modified'; // Modifies the clone, not original
 
 // ============================================
 // 3. Removing Elements
+// ============================================
 // Modern: element.remove() — no parent reference needed
 // Traditional: parent.removeChild(child) — returns the removed node
 // Removed nodes stay in memory if references exist; clean up event listeners to avoid leaks
@@ -305,7 +308,9 @@ console.log(`
    }
 `);
 
+// ============================================
 // 4. Batch Operations and Performance
+// ============================================
 // Minimize reflows: batch DOM writes before reads; use DocumentFragment for bulk insertions
 // requestAnimationFrame for animations; virtual scrolling for very long lists
 // Avoid layout thrashing (alternating read/write causes forced synchronous layouts)
@@ -423,7 +428,9 @@ console.log(
   "  Flow: vNode (JS object) → diff() → patch() applies only the minimal real DOM changes"
 );
 
+// ============================================
 // 5. Special APIs for Tables and Lists
+// ============================================
 // HTMLTableElement: table.rows/caption/tBodies/tHead; insertRow/deleteRow; row.insertCell/deleteCell
 // HTMLSelectElement: select.options/add/remove; option.value/text/selected; selectedIndex/value
 // These specialized APIs provide convenient shortcuts for common table/select operations

@@ -23,8 +23,9 @@ export {};
 // 5. Clipboard and Selection
 // 6. Common Pitfalls
 // 7. Best Practices & Summary
-
+// ============================================
 // 1. Form Element Access
+// ============================================
 // document.forms → HTMLCollection of forms; form.elements → controls; both support access by name/id
 // Access via form.elements.name or form.name; ⚠️ same-name radio buttons return a RadioNodeList collection
 
@@ -151,7 +152,9 @@ console.log('has avatar after delete:', formData.has('avatar')); // false
 // - Works with <form> elements for easy data extraction
 `);
 
+// ============================================
 // 2. Form Events
+// ============================================
 // submit: fires on form submission (button click or Enter); reset: clears form
 // input: real-time on every change; change: fires on blur/confirmation for text, immediately for checkboxes/selects
 // focus/blur don't bubble; focusin/focusout bubble — useful for delegated validation
@@ -226,7 +229,9 @@ if (validateCustom(form)) {
 }
 `);
 
+// ============================================
 // 3. Constraint Validation API
+// ============================================
 // HTML attributes (required, minlength, pattern, type) drive validation; :valid/:invalid CSS pseudo-classes style it
 // API: checkValidity() → boolean; validity object exposes whichRuleFailed (tooShort, patternMismatch, ...)
 // setCustomValidity(msg) sets custom error (empty string clears it); validationMessage returns current message
@@ -356,7 +361,9 @@ input:required {
 }
 `);
 
+// ============================================
 // 4. Custom Validation Logic
+// ============================================
 // For rules HTML5 can't express: cross-field (password match), async (uniqueness), password strength
 // Use setCustomValidity + validationMessage for a unified error UI; debounce real-time checks
 // ⚠️ Always re-validate on the server — client-side checks are bypassable
@@ -509,7 +516,9 @@ class FormValidator {
 new FormValidator(document.getElementById('myForm'));
 `);
 
+// ============================================
 // 5. Clipboard and Selection
+// ============================================
 // Modern: navigator.clipboard.writeText/readText (async, needs user gesture + permission); fallback to execCommand
 // Copy/cut/paste events let you intercept; e.clipboardData holds the payload
 // Selection: window.getSelection() + document.createRange() for programmatic text selection
@@ -692,35 +701,49 @@ console.log("♿ Form Accessibility (ARIA):\n");
 console.log(`
 // Accessible form validation patterns
 
+// ============================================
 // 1. Associate error messages with inputs using aria-describedby
+// ============================================
 input.setAttribute('aria-describedby', 'email-error');
 const errorDiv = document.getElementById('email-error');
 errorDiv.setAttribute('role', 'alert'); // Announced by screen readers
 
+// ============================================
 // 2. Mark invalid fields with aria-invalid
+// ============================================
 input.setAttribute('aria-invalid', 'true'); // or 'false' when valid
 // Screen readers announce: "invalid entry"
 
+// ============================================
 // 3. Required fields with aria-required
+// ============================================
 input.setAttribute('aria-required', 'true');
 // Complements the HTML5 'required' attribute
 
+// ============================================
 // 4. Accessible error summary at form top
+// ============================================
 const errorSummary = document.getElementById('error-summary');
 errorSummary.setAttribute('role', 'alert');
 errorSummary.setAttribute('tabindex', '-1'); // Make focusable
 errorSummary.focus(); // Move focus to errors
 
+// ============================================
 // 5. Live region for dynamic validation feedback
+// ============================================
 const liveRegion = document.createElement('div');
 liveRegion.setAttribute('aria-live', 'polite'); // Announce changes
 liveRegion.setAttribute('aria-atomic', 'true'); // Announce entire content
 
+// ============================================
 // 6. inputmode for mobile keyboard optimization
+// ============================================
 input.setAttribute('inputmode', 'numeric'); // Numeric keyboard on mobile
 // Values: text, numeric, decimal, tel, email, url, search, none
 
+// ============================================
 // 7. Autocomplete attributes for better UX
+// ============================================
 input.setAttribute('autocomplete', 'email'); // Standardized values
 // Common: name, email, tel, address, cc-number, new-password, current-password
 `);

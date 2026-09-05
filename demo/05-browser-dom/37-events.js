@@ -23,8 +23,9 @@ export {};
 // 6. Custom Events
 // 7. Common Pitfalls
 // 8. Best Practices & Summary
-
+// ============================================
 // 1. Event Basics
+// ============================================
 // Publish-subscribe model: multiple listeners, rich event object context
 // Binding: addEventListener(type, handler, {capture, once, passive, signal}) is the modern way
 // element.onclick = fn binds a single handler (later overwrites); inline HTML onclick is not recommended
@@ -162,7 +163,9 @@ element.addEventListener('click', () => console.log('3'));
 element.addEventListener('click', () => console.log('once'), { once: true });
 `);
 
+// ============================================
 // 2. Event Propagation: Capturing → Target → Bubbling
+// ============================================
 // Most events bubble; default listeners run in the bubble phase, capture phase runs top-down first
 // stopPropagation() halts further propagation (⚠️ use sparingly); stopImmediatePropagation() also stops other listeners
 // Delegation relies on bubbling — a single parent listener handles events from many children
@@ -200,7 +203,9 @@ element.addEventListener('click', handler, { capture: true });
 
 console.log("\n🛑 Stop Event Propagation:\n");
 console.log(`
+// ============================================
 // 1. stopPropagation() - Stop continuing propagation
+// ============================================
 //    But doesn't stop other listeners on current element
 element.addEventListener('click', (e) => {
   e.stopPropagation();
@@ -211,7 +216,9 @@ element.addEventListener('click', () => {
   console.log('This also executes (other listener on same element)');
 });
 
+// ============================================
 // 2. stopImmediatePropagation() - Complete stop
+// ============================================
 //    Prevents current element's subsequent listeners from executing
 element.addEventListener('click', (e) => {
   e.stopImmediatePropagation();
@@ -237,7 +244,9 @@ console.log(`
 // - Use mouseover/mouseout instead of mouseenter/mouseleave
 `);
 
+// ============================================
 // 3. Event Delegation
+// ============================================
 // Bind one listener on a parent, use event.target to find the clicked child (reduces listeners, supports dynamic content)
 // Use closest(selector) to filter targets; ⚠️ guard against clicks outside the target area
 
@@ -357,7 +366,9 @@ toolbar.addEventListener('click', (e) => {
 </script>
 `);
 
+// ============================================
 // 4. Browser Default Behavior
+// ============================================
 // preventDefault() cancels built-in behavior (link navigation, form submit, context menu)
 // Many events are cancelable; check event.defaultPrevented to detect if a listener already canceled
 // passive: true listeners cannot cancel the event — preventDefault() is ignored
@@ -449,7 +460,9 @@ console.log(`
 └──────────────────────┴─────────────────────────────────┘
 `);
 
+// ============================================
 // 5. Common Event Types
+// ============================================
 // Mouse: click/dblclick/mouseover (bubbles, includes children) vs mouseenter (no bubble, self only)
 // Keyboard: keydown/keyup (any key, keyCode)/keypress (char only, deprecated); input (any change) vs change (fires on blur for text)
 // Focus: focus/blur (no bubble) vs focusin/focusout (bubble); scroll (no bubble) vs wheel; load/DOMContentLoaded
@@ -721,7 +734,9 @@ element.addEventListener('dragend', (e) => {
 });
 `);
 
+// ============================================
 // 6. Custom Events
+// ============================================
 // new Event(name, {bubbles, cancelable}) or new CustomEvent(name, {detail}) to carry data
 // Dispatch with element.dispatchEvent(event); listen like any native event
 // ⚠️ Set bubbles:true if you need delegation; detail is read-only
@@ -730,13 +745,17 @@ console.log("\n=== Section 6: Custom Events ===\n");
 
 console.log("🎨 Create Custom Events:\n");
 console.log(`
+// ============================================
 // 1. Basic custom event
+// ============================================
 const myEvent = new Event('myevent', {
   bubbles: true,      // Whether to bubble
   cancelable: true    // Whether preventDefault can be called
 });
 
+// ============================================
 // 2. Custom event with data (recommended）
+// ============================================
 const userEvent = new CustomEvent('user:login', {
   bubbles: true,
   cancelable: true,

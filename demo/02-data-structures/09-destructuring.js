@@ -22,7 +22,7 @@ export {};
 // 5. Common Pitfalls & Best Practices
 
 // ============================================
-// Section 1: Array Destructuring
+// 1. Array Destructuring
 // ============================================
 
 // Basic syntax (ES6)
@@ -101,7 +101,7 @@ const [entry1, entry2] = map;
 console.log("  Map entries:", entry1, entry2); // ["a", 1], ["b", 2]
 
 // ============================================
-// Section 2: Object Destructuring
+// 2. Object Destructuring
 // ============================================
 
 // Basic syntax (ES6)
@@ -170,7 +170,7 @@ console.log("\nComputed Property Name Destructuring:");
 console.log("  dynamicValue:", dynamicValue); // "value123"
 
 // ============================================
-// Section 3: Function Parameter Destructuring
+// 3. Function Parameter Destructuring
 // ============================================
 
 // Object parameter destructuring (ES6)
@@ -220,7 +220,7 @@ console.log(
 // { fullName: "John Doe", theme: "dark", notifications: true }
 
 // ============================================
-// Section 4: Advanced Usage
+// 4. Advanced Usage
 // ============================================
 
 // Destructuring to already declared variables (ES6)
@@ -272,7 +272,7 @@ console.log("\nJSON Data Destructuring:");
 console.log(`  User: ${userName2}, First post: ${firstPost}`);
 
 // ============================================
-// Section 5: Common Pitfalls & Best Practices
+// 5. Common Pitfalls & Best Practices
 // ============================================
 
 // Pitfall: Destructuring null/undefined throws error (ES6)

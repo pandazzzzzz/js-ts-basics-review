@@ -31,7 +31,7 @@ export {};
 // 13. Best Practices
 
 // ============================================
-// Section 1: JSON.stringify() Basics
+// 1. JSON.stringify() Basics
 // ============================================
 
 // JSON.stringify() - Convert JavaScript values to JSON strings
@@ -68,7 +68,7 @@ console.log("    Boolean:", JSON.stringify(true)); // true
 console.log("    null:", JSON.stringify(null)); // null
 
 // ============================================
-// Section 2: JSON.parse() Basics
+// 2. JSON.parse() Basics
 // ============================================
 
 // JSON.parse() - Convert JSON strings back to JavaScript objects
@@ -85,7 +85,7 @@ const nestedObj = JSON.parse(nestedJson);
 console.log("\n  Nested JSON:", nestedObj.user.name, nestedObj.user.scores); // Bob, [1,2,3]
 
 // ============================================
-// Section 3: stringify Options - space Parameter
+// 3. stringify Options - space Parameter
 // ============================================
 
 // space parameter - Formatted output (pretty-print JSON)
@@ -109,7 +109,7 @@ function logObject(obj, label = "Object") {
 logObject({ status: "success", data: { id: 1, value: "test" } }, "API Response");
 
 // ============================================
-// Section 4: stringify Options - replacer Function
+// 4. stringify Options - replacer Function
 // ============================================
 
 // replacer parameter - Filter and transform values to serialize
@@ -171,7 +171,7 @@ console.log("\n  Type Conversion:");
 console.log("  " + typed.replace(/\n/g, "\n  "));
 
 // ============================================
-// Section 5: parse reviver Function
+// 5. parse reviver Function
 // ============================================
 
 // reviver function - Transform values during parsing
@@ -267,7 +267,7 @@ console.log("    pattern:", restored.pattern);
 console.log("    tags:", restored.tags);
 
 // ============================================
-// Section 6: Special Value Handling
+// 6. Special Value Handling
 // ============================================
 
 // Values not supported by JSON are omitted or converted
@@ -319,7 +319,7 @@ console.log("\n  Date.toJSON():");
 console.log("  ", JSON.stringify(new Date("2024-06-15T10:00:00Z")));
 
 // ============================================
-// Section 7: Date Serialization Patterns
+// 7. Date Serialization Patterns
 // ============================================
 
 console.log("\nDate Serialization Patterns:");
@@ -356,7 +356,7 @@ const taggedDate = {
 console.log("\n  Type-tagged:", JSON.stringify(taggedDate));
 
 // ============================================
-// Section 8: Practical Use Cases
+// 8. Practical Use Cases
 // ============================================
 
 console.log("\nPractical Use Cases:");
@@ -442,7 +442,7 @@ console.log("    Valid:", isValidJSON('{"a": 1}'));
 console.log("    Invalid:", isValidJSON("{a: 1}")); // JSON requires double quotes
 
 // ============================================
-// Section 9: Error Handling
+// 9. Error Handling
 // ============================================
 
 console.log("\nError Handling:");
@@ -483,7 +483,7 @@ try {
 }
 
 // ============================================
-// Section 10: Performance Considerations
+// 10. Performance Considerations
 // ============================================
 
 console.log("\nPerformance Considerations:");
@@ -508,7 +508,7 @@ console.log(`    parse: ${parseTime.toFixed(2)}ms`);
 console.log(`    JSON size: ${(largeJson.length / 1024).toFixed(2)}KB`);
 
 // ============================================
-// Section 11: ES2019 JSON Improvements
+// 11. ES2019 JSON Improvements
 // ============================================
 
 console.log("\nES2019 JSON Improvements:");
@@ -577,7 +577,7 @@ const parsedDate = JSON.parse(jsonWithDate, reviverWithSource);
 console.log("    Result:", parsedDate.created instanceof Date);
 
 // ============================================
-// Section 12: Common Pitfalls
+// 12. Common Pitfalls
 // ============================================
 
 console.log("\nCommon Pitfalls:");
@@ -657,7 +657,7 @@ console.log("    BigInt stringify:", JSON.stringify(bigNum));
 console.log("    Safe integer:", JSON.stringify({ safe: bigNum.safe }));
 
 // ============================================
-// Section 13: Best Practices
+// 13. Best Practices
 // ============================================
 
 console.log("\nBest Practices:");

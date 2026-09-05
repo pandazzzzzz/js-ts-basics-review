@@ -36,7 +36,7 @@ export {};
 // ============================================
 
 // ============================================
-// Section 1: Service Workers
+// 1. Service Workers
 // ============================================
 
 console.log("\n=== Service Workers ===");
@@ -136,7 +136,7 @@ console.log("5. Stale While Revalidate: Serve cache, update in background");
 // ⚠️ Scope limitations
 
 // ============================================
-// Section 2: Web Workers
+// 2. Web Workers
 // ============================================
 
 console.log("\n=== Web Workers ===");
@@ -218,7 +218,7 @@ console.log("- Communicate via MessagePort");
 // ⚠️ Communication overhead
 
 // ============================================
-// Section 3: Intersection Observer
+// 3. Intersection Observer
 // ============================================
 
 console.log("\n=== Intersection Observer ===");
@@ -293,7 +293,7 @@ console.log("- Unobserve and create new sentinel");
 // ⚠️ Performance with many observers
 
 // ============================================
-// Section 4: Geolocation API
+// 4. Geolocation API
 // ============================================
 
 console.log("\n=== Geolocation API ===");
@@ -372,7 +372,7 @@ console.log(
 // ⚠️ Privacy concerns
 
 // ============================================
-// Section 5: WebSocket API
+// 5. WebSocket API
 // ============================================
 
 console.log("\n=== WebSocket API ===");
@@ -451,7 +451,7 @@ createWebSocket();
 // ⚠️ Firewall/proxy issues
 
 // ============================================
-// Section 6: Additional browser APIs
+// 6. Additional browser APIs
 // ============================================
 
 console.log("\n=== Additional Web APIs ===");
@@ -536,7 +536,7 @@ if ('getBattery' in navigator) {
 
 // ============================================
 // ============================================
-// Section 7: Newer Web APIs
+// 7. Newer Web APIs
 // ============================================
 
 console.log("\n=== New Web APIs (2024-2025) ===\n");
@@ -584,7 +584,7 @@ Note: Check caniuse.com for current browser support
 // ============================================
 `);
 
-// Section 8: Canvas API
+// 8. Canvas API
 // ============================================
 /**
  * Canvas API — Programmatic 2D drawing
@@ -678,7 +678,7 @@ console.log("Common use cases: charts, games, image editing, data visualization"
 console.log("For 3D graphics, see WebGL or WebGPU instead");
 
 // ============================================
-// Section 9: Animations (CSS Transitions + Web Animations API)
+// 9. Animations (CSS Transitions + Web Animations API)
 // ============================================
 
 console.log("\n=== Animations ===");
@@ -755,7 +755,7 @@ console.log("- requestAnimationFrame: custom game loops, physics, frame-accurate
 console.log("  ⚠️  rAF runs at display refresh rate (60/120Hz); batch DOM writes in it");
 
 // ============================================
-// Section 10: Web Components (Custom Elements + Shadow DOM)
+// 10. Web Components (Custom Elements + Shadow DOM)
 // ============================================
 /**
  * Web Components — Reusable, encapsulated custom HTML elements
@@ -869,7 +869,7 @@ console.log("Lifecycle: connectedCallback, disconnectedCallback, attributeChange
 console.log("Key benefit: Framework-agnostic, built-in browser standard");
 
 // ============================================
-// Section 11: Additional Web APIs Overview
+// 11. Additional Web APIs Overview
 // ============================================
 /**
  * Other important Web APIs to be aware of:
@@ -912,7 +912,7 @@ console.log("Drag & Drop: Native drag-and-drop with draggable elements");
 console.log("BroadcastChannel: Cross-tab communication without polling");
 
 // ============================================
-// Section 12: Web Audio API
+// 12. Web Audio API
 // ============================================
 /**
  * Web Audio API — Audio processing and synthesis
@@ -978,7 +978,7 @@ console.log("Key nodes: Oscillator, Gain, BiquadFilter, Analyser, Panner, Convol
 `);
 
 // ============================================
-// Section 13: WebRTC (Real-Time Communication)
+// 13. WebRTC (Real-Time Communication)
 // ============================================
 /**
  * WebRTC — Peer-to-peer real-time communication
@@ -1037,7 +1037,7 @@ console.log("WebRTC enables peer-to-peer audio/video/data communication");
 console.log("Key APIs: getUserMedia, RTCPeerConnection, RTCDataChannel");
 console.log("Requires signaling server for connection establishment (not included in API)");
 `);
-// Section 14: Common Pitfalls
+// 14. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -1097,7 +1097,7 @@ console.log(
 );
 
 // ============================================
-// Section 15: Best Practices
+// 15. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");

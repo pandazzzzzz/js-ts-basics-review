@@ -22,10 +22,9 @@ export {};
 // 5. Styles and Classes
 // 6. Common Pitfalls
 // 7. Best Practices & Summary
-
 // ============================================
-
 // 1. DOM Tree Structure
+// ============================================
 // Nodes form a tree; key node types: ELEMENT_NODE=1, TEXT_NODE=3, COMMENT_NODE=8, DOCUMENT_NODE=9
 // Navigate with: parentNode/childNodes/firstChild/nextSibling (all nodes) or parentElement/children/firstElementChild/nextElementSibling (elements only)
 // Watch out for: whitespace text nodes, live collections auto-updating
@@ -77,7 +76,9 @@ if (typeof document !== "undefined") {
   console.log("Please run these examples in browser console or with jsdom");
 }
 
+// ============================================
 // 2. Searching and Getting Elements
+// ============================================
 // getElementById/querySelector return single element; getElementsBy*/querySelectorAll return collections
 // Live collections (HTMLCollection from getElementsBy*) auto-update — iterate over [...coll] to avoid skipping elements
 // closest(selector) finds nearest ancestor matching selector; matches(selector) tests if element matches
@@ -158,7 +159,9 @@ for (let i = items.length - 1; i >= 0; i--) {
 }
 `);
 
+// ============================================
 // 3. Node Properties and Content
+// ============================================
 // innerHTML: parses HTML, ⚠️ XSS risk with untrusted content; textContent: plain text, safe, fast
 // innerText: CSS-aware, triggers reflow (slow); outerHTML: includes element itself
 // nodeValue/data: for text/comment nodes; hidden: HTML5 boolean (can be overridden by CSS)
@@ -227,7 +230,9 @@ console.log("│ innerText   │ ❌ Escaped│ ✅ Safe   │ Slow(reflow)│ �
 console.log("│ outerHTML   │ ✅ Kept  │ ⚠️ Risk  │ Slow      │ ✅ Inc.  │");
 console.log("└─────────────┴──────────┴──────────┴──────────┴──────────┘\n");
 
+// ============================================
 // 4. Attribute Operations
+// ============================================
 // HTML attribute vs DOM property: attributes are strings in HTML; properties are on the JS object (any type)
 // Standard attributes (id, class) auto-sync; non-standard use getAttribute/setAttribute or dataset for data-*
 // ⚠️ input.value property reflects current typed value; getAttribute('value') returns the initial HTML value
@@ -323,7 +328,9 @@ console.log("│ Cell span      │ colspan/rowspan     │ colSpan/rowSpan     
 console.log("│ Content edit.  │ contenteditable     │ contentEditable     │");
 console.log("└────────────────┴─────────────────────┴─────────────────────┘\n");
 
+// ============================================
 // 5. Styles and Classes
+// ============================================
 // classList: add/remove/toggle/contains/replace — preferred over className string manipulation
 // element.style: inline styles only (camelCase: backgroundColor); cssText for bulk set
 // getComputedStyle(el): read-only computed values (resolved units, includes CSS rules); accepts ::after/::before

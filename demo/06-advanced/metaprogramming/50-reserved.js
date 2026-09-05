@@ -93,7 +93,7 @@ console.log("//   { using f = openFile('d.txt'); f.write('hi'); }     // ES2027,
 console.log("//   for (const [n, a] of Iterator.zip([names, ages])) console.log(n, a); // ES2027");
 
 // ============================================
-// Section 3+: Unfinalized proposals / Withdrawn proposals
+// 3. Unfinalized proposals / Withdrawn proposals
 // ⚠️ Below are not current standards; syntax may change — do not use in production
 // ============================================
 

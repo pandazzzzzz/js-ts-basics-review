@@ -32,7 +32,7 @@ export {};
 // 15. Intl.MessageFormat / MessageFormat 2.0 (proposal)
 
 // ============================================
-// Section 1: Intl.NumberFormat - Number Formatting
+// 1. Intl.NumberFormat - Number Formatting
 // ============================================
 
 console.log("\n=== Intl.NumberFormat ===");
@@ -149,7 +149,7 @@ console.log(
 ); // 1,234.5
 
 // ============================================
-// Section 2: Intl.DateTimeFormat - Date/Time Formatting
+// 2. Intl.DateTimeFormat - Date/Time Formatting
 // ============================================
 
 console.log("\n=== Intl.DateTimeFormat ===");
@@ -267,7 +267,7 @@ console.log(
 ); // March 15 – 20, 2024
 
 // ============================================
-// Section 3: Intl.Collator - String Sorting
+// 3. Intl.Collator - String Sorting
 // ============================================
 
 console.log("\n=== Intl.Collator ===");
@@ -307,7 +307,7 @@ console.log("'b'.localeCompare('a'):", "b".localeCompare("a")); // 1
 console.log("'a'.localeCompare('a'):", "a".localeCompare("a")); // 0
 
 // ============================================
-// Section 4: Intl.PluralRules - Plural Rules
+// 4. Intl.PluralRules - Plural Rules
 // ============================================
 
 /*
@@ -353,7 +353,7 @@ console.log(pluralize(1, "item", "items")); // "1 item"
 console.log(pluralize(5, "item", "items")); // "5 items"
 
 // ============================================
-// Section 5: Intl.RelativeTimeFormat - Relative Time
+// 5. Intl.RelativeTimeFormat - Relative Time
 // ============================================
 
 console.log("\n=== Intl.RelativeTimeFormat ===");
@@ -391,7 +391,7 @@ console.log("Spanish:", new Intl.RelativeTimeFormat("es-ES").format(-1, "day"));
 // "hace 1 día"
 
 // ============================================
-// Section 6: Intl.ListFormat - List Formatting
+// 6. Intl.ListFormat - List Formatting
 // ============================================
 
 console.log("\n=== Intl.ListFormat ===");
@@ -465,7 +465,7 @@ console.log(
 ); // "Apple, Banana y Orange"
 
 // ============================================
-// Section 7: Intl.Segmenter - Text Segmentation (ES2022)
+// 7. Intl.Segmenter - Text Segmentation (ES2022)
 // ============================================
 
 console.log("\n=== Intl.Segmenter (ES2022) ===");
@@ -509,7 +509,7 @@ console.log("- Word counting");
 console.log("- Text truncation");
 
 // ============================================
-// Section 8: Practical Applications
+// 8. Practical Applications
 // ============================================
 
 console.log("\n=== Practical Applications ===");
@@ -566,7 +566,7 @@ console.log("Views:", formatStats(1234567, "en-US")); // "1.2M"
 console.log("Likes:", formatStats(9876, "en-US")); // "9.9K"
 
 // ============================================
-// Section 9: Common Pitfalls
+// 9. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -608,7 +608,7 @@ console.log("  Not available in older browsers");
 console.log("  Fix: Check support before use");
 
 // ============================================
-// Section 10: Best Practices
+// 10. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");
@@ -648,7 +648,7 @@ console.log("7. RTL text direction considerations");
 console.log("8. Missing locale fallback handling");
 
 // ============================================
-// Section 11: Intl.DisplayNames (ES2021)
+// 11. Intl.DisplayNames (ES2021)
 // ============================================
 
 console.log("\n=== Intl.DisplayNames ===");
@@ -688,7 +688,7 @@ console.log("- Currency selection UIs");
 console.log("- Displaying user-friendly names from codes");
 
 // ============================================
-// Section 12: Intl.Locale (ES2020)
+// 12. Intl.Locale (ES2020)
 // ============================================
 
 console.log("\n=== Intl.Locale ===");
@@ -743,7 +743,7 @@ console.log("- Building locale-aware UIs");
 console.log("- Locale normalization");
 
 // ============================================
-// Section 13: Intl.DurationFormat (ES2025)
+// 13. Intl.DurationFormat (ES2025)
 // ============================================
 
 /*
@@ -817,7 +817,7 @@ console.log("- Travel time display");
 console.log("- Task duration tracking");
 
 // ============================================
-// Section 14: formatToParts() Method
+// 14. formatToParts() Method
 // ============================================
 
 console.log("\n=== formatToParts() Method ===");
@@ -865,7 +865,7 @@ console.log("- Intl.ListFormat.formatToParts()");
 // ══════════════════════════════════════════
 // ⚠️ PROPOSAL SECTION — not current standard, syntax may change
 // ══════════════════════════════════════════
-// Section 15: Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
+// 15. Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard)
 // ============================================
 
 /*
