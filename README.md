@@ -18,6 +18,10 @@ node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts
 # Type-check all TS files
 npm run typecheck
 
+# Run the full consistency verification (7 checks: verification-block ↔ reference
+# data reconciliation, JS/TS pairing, cross-references, tags, ToC alignment, EOL)
+npm run verify
+
 # Format all demo files with Prettier
 npm run format
 

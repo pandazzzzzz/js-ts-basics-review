@@ -196,7 +196,7 @@ TS comparison: `es-features/39-es2022-plus-features-ts-comparison.ts` · `es-fea
 **40 Debugging and Testing** — console methods, debugger, breakpoints, unit testing basics
 **41 Typed Arrays** — ArrayBuffer, TypedArray views, DataView, binary data processing
 **42 Internationalization API** — Intl.NumberFormat, DateTimeFormat, Collator, RelativeTimeFormat
-**43 Storage and Network** — localStorage/sessionStorage, IndexedDB, XMLHttpRequest, WebSocket
+**43 Storage and Network** — localStorage/sessionStorage, IndexedDB, XMLHttpRequest, WebSocket, SSE/BroadcastChannel, 跨窗口通信（window.open + postMessage，含 origin 校验）
 **44 Design Patterns** — factory, singleton, observer, strategy, decorator
 **45 Web APIs** — Service Workers, Web Workers, Intersection Observer, Geolocation, WebSocket
 **46 Performance Optimization** — Performance API, debounce/throttle, lazy loading, virtual scrolling, code splitting

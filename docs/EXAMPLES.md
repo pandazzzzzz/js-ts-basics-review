@@ -66,6 +66,7 @@
 | 事件处理 | `demo/05-browser-dom/37-events.js` | 事件冒泡/捕获、委托、常用事件类型 |
 | 表单验证 | `demo/05-browser-dom/38-forms-validation.js` | 约束验证、自定义验证 |
 | 存储方案 | `demo/06-advanced/web-platform/43-storage-network.js` | localStorage, IndexedDB, Cookie |
+| 跨窗口通信 | `demo/06-advanced/web-platform/43-storage-network.js` | window.open + postMessage（origin 校验） |
 | Web API | `demo/06-advanced/web-platform/45-web-apis.js` | Service Worker, WebSocket, 各种 API |
 | 动画 | `demo/06-advanced/web-platform/45-web-apis.js` | CSS 动画, Web Animations API, rAF |
 

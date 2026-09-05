@@ -255,6 +255,7 @@ Decorators 是 Stage 2.7 → 尚不属于任何 ES 版本（active.json）✅
 - [ ] 已更新 README.md 版本要求表（如有版本变化）
 - [ ] demo 文件可正常运行（`node demo/xx/xx-file.js`）
 - [ ] TypeScript 比较文件语法正确（如有）
+- [ ] `npm run verify` 全部通过（verification block/ToC/EOL 等一致性检查）
 - [ ] 提交信息符合规范（见下方）
 
 ### 提交信息规范
