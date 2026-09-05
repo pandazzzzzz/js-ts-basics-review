@@ -274,10 +274,10 @@ const otherWindow = window.open("https://example.com/receiver");
 // ⚠️ Always pass a specific targetOrigin — "*" exposes the message to any origin:
 otherWindow.postMessage({ type: "greeting", payload: "hello" }, "https://example.com");
 
-// Receiver — validate event.origin before trusting event.data:
+// Receiver (inside https://example.com/receiver) — validate event.origin first:
 window.addEventListener("message", (event) => {
   // ❌ NEVER skip this check — any window can send messages to yours:
-  if (event.origin !== "https://trusted.example") return;
+  if (event.origin !== "https://example.com") return;
 
   console.log("Received:", event.data); // { type: "greeting", payload: "hello" }
   // event.source is a reference to the sender window — reply via it:

@@ -471,7 +471,7 @@ console.log(
 );
 // "1 heure, 46 minutes et 40 secondes"
 console.log("MDN en short:", new Intl.DurationFormat("en", { style: "short" }).format(mdnDuration));
-// "1 hr, 46 min and 40 sec"
+// "1 hr, 46 min and 40 sec" (MDN/browser ICU wording; Node 24 prints "1 hr, 46 min, 40 sec")
 console.log(
   "MDN pt narrow:",
   new Intl.DurationFormat("pt", { style: "narrow" }).format(mdnDuration)

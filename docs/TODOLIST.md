@@ -1,8 +1,8 @@
 # Learning Roadmap
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **Updated**: 2026-09-03
-> **ES version verification**: 2026-09-03 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md) · reference/lastVerified
+> **Updated**: 2026-09-05
+> **ES version verification**: 2026-09-05 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md) · reference/lastVerified
 > **Content structure**: All demo files now use a consistent learning-goals intro block and standardized chapter ordering.
 > **Example Index**: See `docs/EXAMPLES.md` for a task-based quick reference to common code examples.
 

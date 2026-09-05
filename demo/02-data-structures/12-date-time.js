@@ -498,7 +498,7 @@ console.log("\n  Pitfall 2 - Timezone:");
 // a local time" (a historical spec error kept for web compatibility).
 const noTimezone = new Date("2024-06-15");
 console.log("    '2024-06-15' parsed as UTC midnight:", noTimezone.toISOString());
-// Displayed as the previous day in timezones behind UTC!
+// Interpreted as UTC midnight — in timezones behind UTC, local display shows the previous day
 
 // Solution: Use ISO format with timezone
 const withTimezone = new Date("2024-06-15T00:00:00+08:00");

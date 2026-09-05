@@ -351,45 +351,45 @@ console.log("\n=== 4. Best Practices ===");
 
 console.log(`
 ┌─────────────────────────────────────────────────────────────────┐
-│                     SCOPE BEST PRACTICES                         │
+│                     SCOPE BEST PRACTICES                        │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│ 1. USE let AND const INSTEAD OF var                              │
+│                                                                 │
+│ 1. USE let AND const INSTEAD OF var                             │
 │    ✅ let and const are block-scoped                             │
 │    ✅ Prevents hoisting confusion                                │
 │    ✅ Prevents accidental globals                                │
 │    ✅ TDZ catches use-before-declaration                         │
-│                                                                  │
-│ 2. MINIMIZE GLOBAL VARIABLES                                     │
+│                                                                 │
+│ 2. MINIMIZE GLOBAL VARIABLES                                    │
 │    ✅ Use modules (ES6) or IIFE                                  │
 │    ✅ Prevents naming conflicts                                  │
 │    ✅ Easier to maintain and test                                │
 │    ✅ Better for tree-shaking in bundlers                        │
-│                                                                  │
-│ 3. USE STRICT MODE                                               │
+│                                                                 │
+│ 3. USE STRICT MODE                                              │
 │    ✅ Prevents accidental globals                                │
 │    ✅ Catches common mistakes early                              │
 │    ✅ Better error messages                                      │
 │    ✅ Enables optimizations                                      │
-│                                                                  │
-│ 4. AVOID DEEP NESTING                                            │
+│                                                                 │
+│ 4. AVOID DEEP NESTING                                           │
 │    ✅ Harder to understand                                       │
 │    ✅ Performance impact (scope chain depth)                     │
 │    ✅ Refactor into smaller functions                            │
 │    ✅ Use early returns                                          │
-│                                                                  │
-│ 5. USE DESCRIPTIVE VARIABLE NAMES                                 │
-│    ✅ Avoid shadowing when possible                               │
+│                                                                 │
+│ 5. USE DESCRIPTIVE VARIABLE NAMES                               │
+│    ✅ Avoid shadowing when possible                              │
 │    ✅ Makes code more readable                                   │
 │    ✅ Easier to debug                                            │
 │    ✅ Reduces accidental shadowing                               │
-│                                                                  │
-│ 6. UNDERSTAND THE SCOPE CHAIN                                    │
+│                                                                 │
+│ 6. UNDERSTAND THE SCOPE CHAIN                                   │
 │    ✅ Know where variables are defined                           │
 │    ✅ Understand variable lookup order                           │
 │    ✅ Avoid unintended shadowing                                 │
 │    ✅ Debug scope issues with browser dev tools                  │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
@@ -433,31 +433,31 @@ console.log(`
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
-│                MODERN PRACTICE ALTERNATIVES                      │
+│                MODERN PRACTICE ALTERNATIVES                     │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│ 1. PREFER ES6 MODULES OVER MODULE PATTERN + IIFE                 │
+│                                                                 │
+│ 1. PREFER ES6 MODULES OVER MODULE PATTERN + IIFE                │
 │    ✅ Native language support                                    │
 │    ✅ Better tooling (tree-shaking, bundling)                    │
 │    ✅ Static analysis                                            │
 │    ✅ Standard across ecosystems                                 │
-│                                                                  
-│ 2. USE ES2022 # PRIVATE FIELDS WHEN POSSIBLE                     
+│                                                                 │
+│ 2. USE ES2022 # PRIVATE FIELDS WHEN POSSIBLE                    │
 │    ✅ Runtime privacy (not just compile-time)                    │
 │    ✅ Cleaner syntax than closures                               │
 │    ✅ Better IDE support                                         │
 │    ✅ Explicit privacy marker                                    │
-│                                                                  
+│                                                                 │
 │ 3. USE BLOCK SCOPE { } INSTEAD OF IIFE                          │
 │    ✅ Simpler syntax                                             │
 │    ✅ Same isolation effect                                      │
 │    ✅ More readable                                              │
-│                                                                  
-│ 4. USE ARROW FUNCTIONS FOR SIMPLE CLOSURES                       
+│                                                                 │
+│ 4. USE ARROW FUNCTIONS FOR SIMPLE CLOSURES                      │
 │    ✅ Concise syntax                                             │
 │    ✅ Lexical this binding                                       │
 │    ✅ No arguments object (less confusion)                       │
-│                                                                  
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 `);
 

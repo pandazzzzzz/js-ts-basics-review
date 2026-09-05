@@ -368,7 +368,7 @@ function processInput(input) {
 // Invalid Unicode can cause issues with string operations
 // 📘 Official MDN examples (String.prototype.toWellFormed):
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toWellFormed
-// (the encodeURIComponent guard below is adapted from MDN)
+// (the encodeURI guard below is adapted from MDN)
 const loneSurrogate = "\uD800";
 console.log("\nLone surrogate length:", loneSurrogate.length); // 1
 console.log("charCodeAt(0):", loneSurrogate.charCodeAt(0).toString(16)); // d800

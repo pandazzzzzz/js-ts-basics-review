@@ -179,6 +179,7 @@ for (const f of jsFiles) {
   // ToC entries: consecutive entry/blank/frame lines after the header's own frame
   const tocNums = [];
   let bodyStart = -1;
+  let carriedNum = null; // body's first header absorbed into the ToC scan (dup number)
   for (let i = t + 2; i < lines.length; i++) {
     const line = lines[i];
     if (isFrame(line) || line.trim() === "") continue;
@@ -187,6 +188,7 @@ for (const f of jsFiles) {
       tocNums.push(m[1]);
       continue;
     }
+    if (m) carriedNum = m[1]; // duplicate number = the body's first section header
     bodyStart = i;
     break;
   }
@@ -201,6 +203,7 @@ for (const f of jsFiles) {
 
   // Body section numbers after the ToC region
   const bodyNums = [];
+  if (carriedNum) bodyNums.push(carriedNum);
   for (let i = bodyStart; i < lines.length; i++) {
     let m = lines[i].match(/^\/\/\s*(\d+[a-z]?)\.\s(\S)/);
     if (!m) m = lines[i].match(/^\/\/\s*Section (\d+):\s(\S)/);

@@ -92,9 +92,9 @@ const registry = new FinalizationRegistry(heldValue => {
 
 // 📘 Official MDN examples (FinalizationRegistry):
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry
-// "Callbacks are never called synchronously" — this MDN example demonstrates it:
-// the cleanup only logs AFTER the recursive allocation loop finishes, proving
-// finalization happens on a later GC pass, not at the moment an object dies.
+// "Callbacks are never called synchronously" — at MDN's original scale (50000/5000)
+// the cleanup logs after the allocation loop finishes; at this scaled-down size V8
+// may not collect during the run at all — the point is: never rely on the timing.
 // (Scaled down 5× from MDN's 50000/5000 so the demo stays fast — same lesson.)
 let mdnCounter = 0;
 const mdnRegistry = new FinalizationRegistry(() => {
