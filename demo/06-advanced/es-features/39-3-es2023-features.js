@@ -86,6 +86,16 @@ console.log("toSpliced(2, 3):", deleted); // [3, 1, 9, 2, 6]
 const inserted = arr.toSpliced(2, 0, "inserted");
 console.log("toSpliced(2, 0, 'inserted'):", inserted); // [3, 1, "inserted", 4, 1, 5, 9, 2, 6]
 
+// 📘 Official MDN examples (Array.prototype.toSpliced):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced
+// MDN's months chain shows insert + delete + replace in one flow:
+const mdnSplicedMonths = ["Jan", "Mar", "Apr", "May"];
+const mdnSpliced2 = mdnSplicedMonths.toSpliced(1, 0, "Feb"); // Insert at index 1
+const mdnSpliced3 = mdnSpliced2.toSpliced(2, 2); // Delete 2 elements from index 2
+const mdnSpliced4 = mdnSpliced3.toSpliced(1, 1, "Feb", "Mar"); // Replace 1 at index 1 with two
+console.log("MDN months chain:", mdnSpliced4); // ["Jan", "Feb", "Mar", "May"]
+console.log("Original months unchanged:", mdnSplicedMonths); // ["Jan", "Mar", "Apr", "May"]
+
 // Comparison with mutable methods
 console.log("\nMutable vs Immutable comparison:");
 const mutable = [...arr];

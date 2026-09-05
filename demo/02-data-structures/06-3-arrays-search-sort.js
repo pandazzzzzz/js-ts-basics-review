@@ -189,12 +189,31 @@ console.log("  Check if ALL match         → every()");
 
 console.log("\n=== 2. Array Sorting ===");
 
+// 📘 Official MDN examples (Array.prototype.sort):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 // 2.1 Default sort (string comparison) - Pitfall!
-const mixedNumbers = [3, 1, 4, 1, 5, 9, 2, 6, 10, 20];
+const stringArray = ["Blue", "Humpback", "Beluga"];
+const numberArray = [40, 1, 5, 200];
+const numericStringArray = ["80", "9", "700"];
+const mixedNumericArray = ["80", "9", "700", 40, 1, 5, 200];
+
+function compareNumbers(a, b) {
+  return a - b;
+}
+
 console.log("Default sort (string comparison - WRONG for numbers!):");
-console.log("Original:", [...mixedNumbers]);
-console.log("Sorted:", [...mixedNumbers].sort()); // [1, 1, 10, 2, 20, 3, 4, 5, 6, 9]
+console.log("  strings sorted:", stringArray.sort()); // ['Beluga', 'Blue', 'Humpback']
+console.log("  numbers default:", numberArray.sort()); // [1, 200, 40, 5] — lexicographic!
+console.log("  numbers compareNumbers:", numberArray.sort(compareNumbers)); // [1, 5, 40, 200]
+console.log("  numeric strings default:", numericStringArray.sort()); // ['700', '80', '9']
+console.log("  numeric strings compareNumbers:", numericStringArray.sort(compareNumbers)); // ['9', '80', '700']
+console.log("  mixed default:", mixedNumericArray.sort()); // [1, 200, 40, 5, '700', '80', '9']
+console.log("  mixed compareNumbers:", mixedNumericArray.sort(compareNumbers)); // [1, 5, '9', 40, '80', 200, '700']
 console.log("⚠️  Default sort is lexicographic, NOT numeric!");
+
+// Extra pitfall: duplicates
+const mixedNumbers = [3, 1, 4, 1, 5, 9, 2, 6, 10, 20];
+console.log("  duplicate-1 array default:", [...mixedNumbers].sort()); // [1, 1, 10, 2, 20, 3, 4, 5, 6, 9]
 
 // 2.2 Numeric sort ascending
 const sortedAsc = [...mixedNumbers].sort((a, b) => a - b);

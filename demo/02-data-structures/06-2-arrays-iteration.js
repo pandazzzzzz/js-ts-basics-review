@@ -241,6 +241,22 @@ const numberMap = numbers.reduce((acc, num) => {
 }, {});
 console.log("Object built from array:", numberMap);
 
+// 📘 Official MDN examples (Array.prototype.reduce):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+// 0 + 1 + 2 + 3 + 4 — the initialValue makes the intent explicit
+const initialValue = 0;
+const sumWithInitial = [1, 2, 3, 4].reduce(
+  (accumulator, currentValue) => accumulator + currentValue,
+  initialValue
+);
+console.log("MDN sum with initialValue:", sumWithInitial); // 10
+
+// Summing a property across objects — you MUST supply an initialValue here,
+// otherwise the first object would be used as the accumulator:
+const objects = [{ x: 1 }, { x: 2 }, { x: 3 }];
+const sumOfX = objects.reduce((accumulator, currentValue) => accumulator + currentValue.x, 0);
+console.log("MDN sum of object property:", sumOfX); // 6
+
 // 4.5 Grouping by property
 const items = [
   { type: "fruit", name: "apple" },

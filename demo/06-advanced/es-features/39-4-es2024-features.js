@@ -54,6 +54,11 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
  *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#array-grouping-for-stage-4
  */
 
+// 📘 Official MDN examples (Object.groupBy / Map.groupBy):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/groupBy
+// (the inventory example below is adapted from MDN)
+
 const inventory = [
   { name: "asparagus", type: "vegetable", quantity: 5 },
   { name: "bananas", type: "fruit", quantity: 10 },
@@ -361,6 +366,9 @@ function processInput(input) {
 }
 
 // Invalid Unicode can cause issues with string operations
+// 📘 Official MDN examples (String.prototype.toWellFormed):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toWellFormed
+// (the encodeURIComponent guard below is adapted from MDN)
 const loneSurrogate = "\uD800";
 console.log("\nLone surrogate length:", loneSurrogate.length); // 1
 console.log("charCodeAt(0):", loneSurrogate.charCodeAt(0).toString(16)); // d800

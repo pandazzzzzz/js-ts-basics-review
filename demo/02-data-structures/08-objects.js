@@ -180,6 +180,28 @@ account.balance = 1500;
 console.log("After set:", account.balance);
 account.balance = -100; // Rejected
 
+// 📘 Official MDN examples (get / set):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
+const objWithLatest = {
+  log: ["example", "test"],
+  get latest() {
+    return this.log.at(-1);
+  },
+};
+console.log("\nMDN getter example — obj.latest:", objWithLatest.latest); // "test"
+
+const language = {
+  set current(name) {
+    this.log.push(name);
+  },
+  log: [],
+};
+language.current = "EN";
+console.log("MDN setter example — language.log:", language.log); // ['EN']
+language.current = "FA";
+console.log("MDN setter example — language.log:", language.log); // ['EN', 'FA']
+
 // ============================================
 // 4. Object Methods - Inspection
 // ============================================

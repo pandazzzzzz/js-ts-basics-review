@@ -258,6 +258,24 @@ for (const { name, score } of Iterator.zipKeyed({ name: names, score: scores }))
 
 console.log("Joint iteration features simplify working with multiple iterables in parallel");
 
+// 📘 Official MDN examples (Iterator.zip):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator/zip
+// Building a Map from parallel lists:
+/*
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const temperatures = [22, 21, 23, 20, 19];
+const dayTemperatureMap = new Map(Iterator.zip([days, temperatures]));
+// Map(5) { 'Mon' => 22, 'Tue' => 21, ... }
+
+// Custom fill values for longest mode:
+const letters2 = ["a", "b", "c"];
+const numbers2 = [1, 2, 3, 4, 5];
+Iterator.zip([letters2, numbers2], {
+  mode: "longest",
+  padding: ["[Letter missing]", "[Number missing]"],
+});
+*/
+
 // ============================================
 // 4. Atomics.pause() (ES2027)
 // ============================================

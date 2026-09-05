@@ -90,6 +90,29 @@ const registry = new FinalizationRegistry(heldValue => {
   obj = null; // Allow GC
 }
 
+// 📘 Official MDN examples (FinalizationRegistry):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry
+// "Callbacks are never called synchronously" — this MDN example demonstrates it:
+// the cleanup only logs AFTER the recursive allocation loop finishes, proving
+// finalization happens on a later GC pass, not at the moment an object dies.
+// (Scaled down 5× from MDN's 50000/5000 so the demo stays fast — same lesson.)
+let mdnCounter = 0;
+const mdnRegistry = new FinalizationRegistry(() => {
+  console.log(`  MDN demo: Array gets garbage collected at ${mdnCounter}`);
+});
+
+mdnRegistry.register(["foo"]);
+
+(function allocateMemory() {
+  // Allocate 10000 functions — a lot of memory!
+  Array.from({ length: 10000 }, () => () => {});
+  if (mdnCounter > 1000) return;
+  mdnCounter++;
+  allocateMemory();
+})();
+
+console.log("  Main job ends (finalization logs above may appear later — or never)");
+
 // 1.3 WeakRef with caching pattern
 class CacheWithWeakRefs {
   constructor() {

@@ -493,9 +493,12 @@ console.log("    new Date(2024, 11, 1):", formatDate(new Date(2024, 11, 1))); //
 
 // Pitfall 2: Timezone issues
 console.log("\n  Pitfall 2 - Timezone:");
+// 📘 Official rule (MDN Date): "When the time zone offset is absent, date-only
+// forms are interpreted as a UTC time and date-time forms are interpreted as
+// a local time" (a historical spec error kept for web compatibility).
 const noTimezone = new Date("2024-06-15");
-console.log("    '2024-06-15' parsed:", formatDate(noTimezone));
-// May be parsed as UTC midnight, displayed as previous day in local timezone
+console.log("    '2024-06-15' parsed as UTC midnight:", noTimezone.toISOString());
+// Displayed as the previous day in timezones behind UTC!
 
 // Solution: Use ISO format with timezone
 const withTimezone = new Date("2024-06-15T00:00:00+08:00");

@@ -46,6 +46,13 @@ console.log("\n=== ES2025 Features ===\n");
 // ============================================
 console.log("\n--- 1. Set Methods ---\n");
 
+// 📘 Official MDN examples (Set.prototype.intersection):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/intersection
+// MDN's canonical opener:
+const odds = new Set([1, 3, 5, 7, 9]);
+const squares = new Set([1, 4, 9]);
+console.log("MDN odds ∩ squares:", [...odds.intersection(squares)]); // Set(2) { 1, 9 }
+
 const setA = new Set([1, 2, 3, 4, 5]);
 const setB = new Set([4, 5, 6, 7, 8]);
 const setC = new Set([1, 2]);
@@ -99,6 +106,16 @@ console.log("\nActive admins not banned:", [...activeAdmins]); // ["alice", "cha
 // ============================================
 console.log("\n--- 2. Iterator Helpers ---");
 
+// 📘 Official MDN examples (Iterator.prototype.take / drop):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator/take
+// The file's own fibonacci() below mirrors MDN's canonical lazy-helpers example.
+// MDN also shows drop() and the error case:
+try {
+  [1, 2, 3].values().take(-1); // ❌ RangeError: -1 must be positive
+} catch (e) {
+  console.log("MDN take(-1) throws:", e.message);
+}
+
 // Iterator helpers work on any iterable (arrays, sets, maps, generators, etc.)
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].values(); // Get iterator
 
@@ -145,6 +162,7 @@ const result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 console.log("\nChained result:", [...result]); // [12, 16]
 
 // Works with generators too
+// (this fibonacci mirrors the canonical MDN Iterator helpers example)
 function* fibonacci() {
   let a = 0,
     b = 1;
@@ -235,6 +253,24 @@ getConfig("")
 getConfig("invalid-path")
   .then(config => console.log("Config:", config))
   .catch(err => console.log("Fetch error caught:", err.message)); // Async error caught
+
+// 📘 Official MDN examples (Promise.try):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/try
+// MDN's doSomething shows all four sync/async × success/error paths:
+function mdnDoSomething(action) {
+  return Promise.try(action)
+    .then(result => console.log("MDN Promise.try result:", result))
+    .catch(error => console.log("MDN Promise.try caught:", error.message))
+    .finally(() => console.log("MDN Promise.try: Done"));
+}
+mdnDoSomething(() => "sync value");
+mdnDoSomething(async () => "async value");
+mdnDoSomething(() => {
+  throw new Error("Sync error");
+});
+mdnDoSomething(async () => {
+  throw new Error("Async error");
+});
 
 // Before ES2025: Had to wrap in new Promise and use try/catch
 function getConfigOld(path) {
@@ -426,6 +462,22 @@ console.log("\n--- 11. Intl.DurationFormat ---");
  */
 
 // Format time durations in a locale-aware way
+// 📘 Official MDN examples (Intl.DurationFormat):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DurationFormat
+const mdnDuration = { hours: 1, minutes: 46, seconds: 40 };
+console.log(
+  "MDN fr-FR long:",
+  new Intl.DurationFormat("fr-FR", { style: "long" }).format(mdnDuration)
+);
+// "1 heure, 46 minutes et 40 secondes"
+console.log("MDN en short:", new Intl.DurationFormat("en", { style: "short" }).format(mdnDuration));
+// "1 hr, 46 min and 40 sec"
+console.log(
+  "MDN pt narrow:",
+  new Intl.DurationFormat("pt", { style: "narrow" }).format(mdnDuration)
+);
+// "1 h 46 min 40 s"
+
 const duration = {
   years: 1,
   months: 2,

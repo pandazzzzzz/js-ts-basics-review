@@ -1021,16 +1021,32 @@ try {
 console.log("\n=== 12. Advanced Patterns Demo ===");
 
 // 12.1 Revocable proxy
-let { proxy: revocableProxy, revoke } = Proxy.revocable({ secret: "data" }, {});
+// 📘 Official MDN examples (Proxy.revocable()):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/revocable
+let { proxy: revocableProxy, revoke } = Proxy.revocable(
+  {},
+  {
+    get(target, name) {
+      return `[[${name}]]`;
+    },
+  }
+);
 
 console.log("Revocable proxy:");
-console.log("Before revoke:", revocableProxy.secret);
+console.log("Before revoke:", revocableProxy.foo); // "[[foo]]"
 revoke();
 try {
-  console.log(revocableProxy.secret); // TypeError
+  console.log(revocableProxy.foo); // TypeError
 } catch (e) {
-  console.log("After revoke:", e.message);
+  console.log("Get after revoke:", e.message);
 }
+try {
+  revocableProxy.foo = 1; // TypeError again
+} catch (e) {
+  console.log("Set after revoke:", e.message);
+}
+// typeof still works after revocation — it triggers no trap:
+console.log("typeof after revoke:", typeof revocableProxy); // "object"
 
 // 12.2 Proxy chain (proxy wrapping proxy)
 let base = { value: 42 };

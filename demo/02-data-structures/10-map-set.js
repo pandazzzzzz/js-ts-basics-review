@@ -167,6 +167,28 @@ console.log("  get(keyObj1):", objKeyMap.get(keyObj1)); // "First object"
 console.log("  get(keyObj2):", objKeyMap.get(keyObj2)); // "Second object"
 console.log("  get({id: 1}):", objKeyMap.get({ id: 1 })); // undefined (new object)
 
+// 📘 Official MDN examples (Map):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+// A Map's keys can be ANY value (functions, objects, primitives); an Object's
+// keys must be Strings or Symbols. Maps also perform better with frequent
+// additions/removals of key-value pairs.
+const myMap = new Map();
+const keyString = "a string";
+const keyFunc = () => {};
+
+myMap.set(keyString, "value associated with 'a string'");
+myMap.set(keyObj1, "value associated with keyObj");
+myMap.set(keyFunc, "value associated with keyFunc");
+
+console.log("  MDN three key types — size:", myMap.size); // 3
+console.log("  get('a string'):", myMap.get("a string")); // by string identity
+console.log("  get({}):", myMap.get({})); // undefined — keyObj1 !== {}
+console.log("  get(keyFunc):", myMap.get(keyFunc)); // by function reference
+console.log(
+  "  get(() => {}):",
+  myMap.get(() => {})
+); // undefined — new function
+
 // Practical example: storing DOM element metadata
 // const elementData = new Map();
 // elementData.set(document.querySelector('#btn'), { clicked: false });

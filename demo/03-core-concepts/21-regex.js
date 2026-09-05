@@ -387,6 +387,16 @@ console.log("Year:", dateMatch2.groups.year); // 2024
 console.log("Month:", dateMatch2.groups.month); // 06
 console.log("Day:", dateMatch2.groups.day); // 15
 
+// 📘 Official MDN examples (Named capturing group):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_capturing_group
+// Destructure straight from exec().groups:
+function parseLog(entry) {
+  const { author, timestamp } = /^(?<timestamp>\d+),(?<author>.+)$/.exec(entry).groups;
+  return `${author} committed on ${new Date(parseInt(timestamp, 10) * 1000).toLocaleString()}`;
+}
+// Output is locale/timezone-dependent:
+console.log("MDN parseLog example:", parseLog("1560979912,Caroline"));
+
 // 5.4 Backreferences
 let backRefRe = /(\w+)\s+\1/;
 console.log("\nBackreferences:");

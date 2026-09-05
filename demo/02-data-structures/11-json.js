@@ -190,6 +190,26 @@ const meetup = JSON.parse(dateJson, function (key, value) {
 console.log("  Restore Date:");
 console.log("    meetup.date:", meetup.date); // Date object
 console.log("    getDate():", meetup.date.getDate()); // 15
+
+// 📘 Official MDN examples (JSON.stringify / JSON.parse):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+// MDN replacer: filtering out ALL string values
+function mdnReplacer(key, value) {
+  if (typeof value === "string") {
+    return undefined;
+  }
+  return value;
+}
+const mdnFoo = { foundation: "Mozilla", model: "box", week: 45, month: 7 };
+console.log("\n  MDN replacer (drop strings):", JSON.stringify(mdnFoo, mdnReplacer));
+// '{"week":45,"month":7}'
+
+// MDN reviver: double every numeric value
+const mdnParsed = JSON.parse('{"p": 5}', (key, value) =>
+  typeof value === "number" ? value * 2 : value
+);
+console.log("  MDN reviver (double numbers):", mdnParsed); // { p: 10 }
 console.log("    instanceof Date:", meetup.date instanceof Date); // true
 
 // Restore nested Dates

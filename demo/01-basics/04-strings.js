@@ -581,6 +581,24 @@ console.log("\n=== Tagged Template Literals ===");
 const result = simple`Hello ${name}, you are ${age} years old`;
 console.log("Result:", result);
 
+// 📘 Official MDN examples (Template literals):
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+// MDN's canonical tag shows direct strings[i] indexing:
+const person = "Mike";
+const ageExp = 28;
+
+function myTag(strings, personExp, ageExp) {
+  const str0 = strings[0]; // "That "
+  const str1 = strings[1]; // " is a "
+  const str2 = strings[2]; // "."
+
+  const ageStr = ageExp < 100 ? "youngster" : "centenarian";
+  return `${str0}${personExp}${str1}${ageStr}${str2}`;
+}
+
+const mdnOutput = myTag`That ${person} is a ${ageExp}.`;
+console.log("MDN tagged template:", mdnOutput); // "That Mike is a youngster."
+
 // HTML escaping tag
 function html(strings, ...values) {
   const escape = str =>

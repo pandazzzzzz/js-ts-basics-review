@@ -65,6 +65,14 @@ async function readStream() {
     const decoder = new TextDecoder();
     let result = "";
 
+    // 📘 Official MDN pattern (ReadableStream.getReader()):
+    // https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/getReader
+    // MDN shows the same loop as recursive promise chaining:
+    //   reader.read().then(function processText({ done, value }) {
+    //     if (done) return;
+    //     return reader.read().then(processText);
+    //   });
+    // The async/await while-loop below is the equivalent modern form.
     while (true) {
       const { done, value } = await reader.read();
 
