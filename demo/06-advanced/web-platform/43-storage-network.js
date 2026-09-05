@@ -16,6 +16,7 @@ export {};
 // 3. Advanced Fetch patterns (and their legacy predecessor, XMLHttpRequest)
 // 4. Real-time communication (WebSocket, SSE)
 // 5. Cross-tab communication (BroadcastChannel)
+// 6. Cross-window communication (window.open, postMessage)
 
 // ============================================
 // Table of Contents
@@ -29,6 +30,7 @@ export {};
 // 6. WebSocket API
 // 7. Server-Sent Events (SSE)
 // 8. BroadcastChannel API
+// 9. Cross-Window Communication (postMessage)
 // ============================================
 
 console.log("=== Storage & Network API Demo ===\n");
@@ -256,6 +258,35 @@ console.log("  Cross-tab/frame communication within the same origin");
 console.log("  Usage: const channel = new BroadcastChannel('channel-name');");
 console.log("  Methods: postMessage(data), close(); Event: 'message'");
 console.log("  Use cases: sync state across tabs, notify other tabs of login/logout");
+
+// ============================================
+// 9. Cross-Window Communication (postMessage)
+// ============================================
+console.log("\n9. Cross-Window Communication (window.open + postMessage):");
+console.log("  Secure message passing between windows/iframes of DIFFERENT origins");
+console.log("  (BroadcastChannel is same-origin only; postMessage works cross-origin)");
+console.log(`
+// 📘 Official MDN examples (Window.postMessage):
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+
+// Sender — open a window and post a message to it:
+const otherWindow = window.open("https://example.com/receiver");
+// ⚠️ Always pass a specific targetOrigin — "*" exposes the message to any origin:
+otherWindow.postMessage({ type: "greeting", payload: "hello" }, "https://example.com");
+
+// Receiver — validate event.origin before trusting event.data:
+window.addEventListener("message", (event) => {
+  // ❌ NEVER skip this check — any window can send messages to yours:
+  if (event.origin !== "https://trusted.example") return;
+
+  console.log("Received:", event.data); // { type: "greeting", payload: "hello" }
+  // event.source is a reference to the sender window — reply via it:
+  event.source.postMessage({ type: "ack" }, event.origin);
+});
+`);
+
+console.log("  Pitfalls: always validate event.origin; '*' as targetOrigin leaks data;");
+console.log("  structured clone applies (functions/DOM nodes cannot be posted)");
 
 // ============================================
 // Common Pitfalls

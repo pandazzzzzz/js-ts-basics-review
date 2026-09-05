@@ -161,14 +161,20 @@ for (const f of allFiles) {
 // and appear in the same order. Extra numbered lines in the body (e.g. numbered
 // best-practice lists) are tolerated. Requires a space after the leading dot so
 // `N.M` sub-section headers (e.g. "// 12.5 QUEUEMICROTASK") don't match.
-const isFrame = (l) => /^\/\/ ={10,}\s*$/.test((l || "").trim());
+const isFrame = l => /^\/\/ ={10,}\s*$/.test((l || "").trim());
 for (const f of jsFiles) {
   const rel = path.relative(root, f);
   const lines = fs.readFileSync(f, "utf8").split(/\r?\n/);
   let t = -1;
   for (let i = 0; i < lines.length; i++)
-    if (/^\/\/\s*Table of Contents\s*$/.test(lines[i].trim())) { t = i; break; }
-  if (t === -1) { fail(`${rel} has no Table of Contents`); continue; }
+    if (/^\/\/\s*Table of Contents\s*$/.test(lines[i].trim())) {
+      t = i;
+      break;
+    }
+  if (t === -1) {
+    fail(`${rel} has no Table of Contents`);
+    continue;
+  }
 
   // ToC entries: consecutive entry/blank/frame lines after the header's own frame
   const tocNums = [];
@@ -177,12 +183,21 @@ for (const f of jsFiles) {
     const line = lines[i];
     if (isFrame(line) || line.trim() === "") continue;
     const m = line.match(/^\/\/\s*(\d+[a-z]?)\.\s(\S)/);
-    if (m && !tocNums.includes(m[1])) { tocNums.push(m[1]); continue; }
+    if (m && !tocNums.includes(m[1])) {
+      tocNums.push(m[1]);
+      continue;
+    }
     bodyStart = i;
     break;
   }
-  if (tocNums.length === 0) { fail(`${rel} has an empty Table of Contents`); continue; }
-  if (bodyStart === -1) { fail(`${rel} ToC region never terminates`); continue; }
+  if (tocNums.length === 0) {
+    fail(`${rel} has an empty Table of Contents`);
+    continue;
+  }
+  if (bodyStart === -1) {
+    fail(`${rel} ToC region never terminates`);
+    continue;
+  }
 
   // Body section numbers after the ToC region
   const bodyNums = [];
