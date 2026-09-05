@@ -233,6 +233,50 @@ for (const f of jsFiles) {
   }
 }
 
+// ---------- check 7: EOL & encoding consistency ----------
+// Adapted from the (unmerged) fix-runtime-errors health-check script. Fails on
+// files with MIXED line endings, a missing final newline, or a UTF-8 BOM —
+// .editorconfig/.gitattributes make CRLF-in-working-tree and LF-in-index both
+// legitimate, so a uniform LF-only file is reported as info, not failure.
+{
+  const eolFiles = [
+    ...new Set([
+      ...allFiles,
+      ...docFiles,
+      path.join(root, "CONTRIBUTING.md"),
+      ...walk(path.join(root, "reference")).filter(f => f.endsWith(".json")),
+    ]),
+  ];
+  let crlfOnly = 0,
+    lfOnly = 0,
+    lfListed = 0;
+  for (const f of eolFiles) {
+    const rel = path.relative(root, f);
+    const content = fs.readFileSync(f, "utf8");
+    const crlfCount = (content.match(/\r\n/g) || []).length;
+    const totalLF = (content.match(/\n/g) || []).length;
+    const bareLF = totalLF - crlfCount;
+    if (crlfCount > 0 && bareLF > 0) {
+      fail(`${rel} has mixed line endings (${crlfCount} CRLF + ${bareLF} bare LF)`);
+    }
+    if (content.startsWith("\uFEFF")) fail(`${rel} starts with a UTF-8 BOM`);
+    if (content.length > 0 && !/\n$/.test(content)) {
+      fail(`${rel} is missing a final newline`);
+    }
+    if (crlfCount > 0) crlfOnly++;
+    else if (totalLF > 0) {
+      lfOnly++;
+      if (lfListed < 5) {
+        console.log(
+          `ℹ️  ${rel} is LF-only (git normalizes on commit — fine, listed for visibility)`
+        );
+      }
+      lfListed++;
+    }
+  }
+  console.log(`EOL scan: ${eolFiles.length} files · CRLF-only: ${crlfOnly} · LF-only: ${lfOnly}`);
+}
+
 // ---------- report ----------
 console.log(`Demo files: ${jsFiles.length} JS + ${tsFiles.length} TS`);
 console.log(
