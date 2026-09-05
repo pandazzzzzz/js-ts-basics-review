@@ -176,10 +176,12 @@ console.log("\n--- 3. RegExp.escape() ---");
  */
 
 // Escapes special regex characters in user input
+// ⚠️ Note: RegExp.escape also hex-escapes whitespace, '-', and a leading word
+// character (per proposal), so the output is NOT just backslash-metacharacters:
 const userInput = "Hello. How are you? [123]";
 const escaped = RegExp.escape(userInput);
 console.log("\nInput:", userInput);
-console.log("Escaped:", escaped); // "Hello\\. How are you\\? \\[123\\]"
+console.log("Escaped:", escaped); // "\\x48ello\\.\\x20How\\x20are\\x20you\\?\\x20\\[123\\]"
 
 // Safe to use in regex
 const regex = new RegExp(escaped);
@@ -189,7 +191,9 @@ console.log("Regex match:", regex.test("Hello. How are you? [123] more text")); 
 function escapeRegExp(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-console.log("\nManual escape same as RegExp.escape:", escapeRegExp(userInput) === escaped); // true
+console.log("\nManual escape equals RegExp.escape:", escapeRegExp(userInput) === escaped); // false!
+console.log("  manual escape:", escapeRegExp(userInput)); // "Hello\\. How are you\\? \\[123\\]"
+// Both regexes match the same text — they just differ in how characters are encoded.
 
 // Use case: Search user input safely
 function search(text, query) {
@@ -439,7 +443,7 @@ console.log("en-US long format:", enUSFormat.format(duration));
 // English (US) short format
 const enUSShort = new Intl.DurationFormat("en-US", { style: "short" });
 console.log("en-US short format:", enUSShort.format(duration));
-// "1 yr, 2 mo, 3 days, 4 hr, 5 min, 6 sec"
+// "1 yr, 2 mths, 3 days, 4 hr, 5 min, 6 sec"
 
 // German
 const deFormat = new Intl.DurationFormat("de-DE", { style: "long" });
@@ -454,7 +458,7 @@ const digitalFormat = new Intl.DurationFormat("en-US", {
   seconds: "2-digit",
 });
 console.log("Digital format:", digitalFormat.format({ hours: 2, minutes: 30, seconds: 15 }));
-// "2:30:15"
+// "02:30:15" (2-digit units are zero-padded)
 
 // ============================================
 // 12. Common Pitfalls

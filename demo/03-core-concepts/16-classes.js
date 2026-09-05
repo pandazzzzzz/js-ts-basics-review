@@ -101,8 +101,10 @@ const Calculator = class MathCalc {
   }
 };
 
-// MathCalc is not accessible outside
-// console.log(typeof MathCalc); // ReferenceError
+// MathCalc is not accessible outside — member access throws, but bare typeof
+// does NOT throw (typeof on an unresolvable identifier returns "undefined"):
+// console.log(typeof MathCalc); // "undefined"
+// console.log(new MathCalc(2)); // ReferenceError: MathCalc is not defined
 
 // 1.4 Constructor rules
 class StrictPerson {

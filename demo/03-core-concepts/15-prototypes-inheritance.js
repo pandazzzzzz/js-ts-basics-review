@@ -266,7 +266,8 @@ console.log("  After trying to change age:", person.age);
  * - Properties on 'this' are instance-specific
  *
  * Common Pitfalls:
- * - Forgetting 'new' keyword (this becomes global)
+ * - Forgetting 'new' keyword ('this' becomes global in sloppy scripts; in
+ *   strict mode/ESM the property assignment throws TypeError instead)
  * - Putting methods on 'this' instead of prototype (memory waste)
  */
 
@@ -700,11 +701,11 @@ console.log("  Reason: Affects all arrays globally, breaks code");
 // Pitfall 2: Forgetting 'new' keyword
 console.log("\nPitfall 2: Forgetting 'new' keyword");
 function BadConstructor(name) {
-  this.name = name; // 'this' is global without 'new'!
+  this.name = name; // 'this' is global without 'new' (sloppy); TypeError in strict/ESM
 }
 
 // ❌ Without 'new'
-// const bad = BadConstructor("Test"); // 'this' is global!
+// const bad = BadConstructor("Test"); // TypeError: Cannot set properties of undefined (strict/ESM)
 
 // ✅ With 'new'
 const good = new BadConstructor("Test");

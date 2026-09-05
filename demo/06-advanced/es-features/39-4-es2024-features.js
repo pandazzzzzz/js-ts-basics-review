@@ -203,9 +203,10 @@ const emojiRegex = /\p{RGI_Emoji}/v;
 const matchEmoji = text.match(emojiRegex);
 console.log("First emoji:", matchEmoji[0]); // "🌍"
 
-// Set operations: intersection (&)
-// Match letters that are both ASCII and uppercase
-const upperAscii = /[[a-z]&[A-Z]]/v; // Empty set
+// Set operations: intersection (&&)
+// Match letters that are both ASCII and uppercase — [a-z] ∩ [A-Z] is empty
+// (a single & in v-mode is a LITERAL ampersand, not intersection!)
+const upperAscii = /[[a-z]&&[A-Z]]/v; // Empty set
 console.log("Upper AND lower ASCII match:", "aA".match(upperAscii)); // null
 
 // Union: Match Greek or Cyrillic letters
@@ -265,7 +266,8 @@ console.log("After resize(16):", buffer.byteLength); // 16
 // buffer.resize(17); // ❌ RangeError: Cannot resize above maxByteLength
 
 // ArrayBuffer.transfer() moves data to a new buffer
-// Note: transfer requires the new size to be >= current byteLength
+// Note: transfer() may SHRINK (extra bytes are dropped); only for a resizable
+// source must newByteLength not exceed the source's maxByteLength
 const newBuffer = buffer.transfer(16); // Creates new buffer of 16 bytes, copies data, old buffer becomes detached
 console.log("\nAfter transfer(16):");
 console.log("Old buffer detached:", buffer.detached); // true
@@ -433,7 +435,7 @@ console.log("📘 Promises: 30-promises.js");
 console.log("📘 Regular Expressions: 21-regex.js");
 console.log("📘 Typed Arrays: ../data-processing/41-typed-arrays.js");
 console.log("📘 Atomics: ../data-processing/41-typed-arrays.js");
-console.log("� Unicode and Strings: 04-strings.js");
+console.log("📘 Unicode and Strings: 04-strings.js");
 console.log("📘 Arrays: 06-arrays.js");
 
 // ============================================

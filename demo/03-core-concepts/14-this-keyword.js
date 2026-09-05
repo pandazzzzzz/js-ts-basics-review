@@ -411,13 +411,15 @@ let objWithArrow = {
     console.log("Regular method this.name:", this.name);
   },
   arrowMethod: () => {
-    console.log("Arrow method this:", this === globalThis); // globalThis!
+    // Arrows have NO own this — they inherit the enclosing scope's this.
+    // At module top level (ESM) that is undefined, not globalThis.
+    console.log("Arrow method this:", this === globalThis); // false (undefined in ESM)
   },
 };
 
 console.log("\nArrow function as object method:");
 objWithArrow.regularMethod(); // "ArrowObj"
-objWithArrow.arrowMethod(); // undefined (this is globalThis, not objWithArrow)
+objWithArrow.arrowMethod(); // false — arrow this is NOT objWithArrow (undefined in ESM / globalThis in a classic script)
 
 // 4.3 Arrow function in callback - preserves this
 let counter2 = {
@@ -451,19 +453,20 @@ arrow.call({ name: "test" }); // Still uses outer this
 arrow.bind({ name: "test" })(); // Still uses outer this
 
 // 4.5 Nested arrow functions
+// Plain call in an ESM (strict) → this is undefined; all nested arrows inherit it.
 function outer() {
-  console.log("outer this:", this === globalThis);
+  console.log("outer this:", this === globalThis); // false (undefined in ESM)
 
   return () => {
-    console.log("inner arrow this:", this === globalThis);
+    console.log("inner arrow this:", this === globalThis); // false — same this
 
     return () => {
-      console.log("nested arrow this:", this === globalThis);
+      console.log("nested arrow this:", this === globalThis); // false — same this
     };
   };
 }
 
-outer()()(); // All true - all inherit same this
+outer()()(); // All false - all inherit the same this (undefined in ESM)
 
 // 4.6 Arrow function in class (good practice)
 class Timer {
@@ -742,7 +745,8 @@ let nestedObj = {
   name: "Outer",
   outer() {
     function inner() {
-      console.log("Inner this:", this === globalThis); // true in non-strict
+      // Plain inner call: strict (ESM) → undefined; sloppy classic script → globalThis
+      console.log("Inner this:", this === globalThis); // false in ESM
     }
     inner();
   },
