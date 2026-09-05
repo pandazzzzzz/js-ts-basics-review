@@ -344,7 +344,7 @@ console.timeEnd("Typed array sum");
 console.log("Typed arrays are typically faster for numeric operations");
 
 // ============================================
-// Common Pitfalls
+// 6. Common Pitfalls
 // ============================================
 console.log("\n=== Common Pitfalls ===");
 
@@ -371,7 +371,7 @@ console.log("❌ No push/pop/splice on TypedArrays");
 console.log("✅ Create new larger TypedArray + set() to simulate growth");
 
 // ============================================
-// Best Practices
+// 7. Best Practices
 // ============================================
 console.log("\n=== Best Practices ===");
 

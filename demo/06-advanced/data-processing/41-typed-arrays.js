@@ -22,6 +22,8 @@ export {};
 // 6. SharedArrayBuffer and Atomics
 // 7. Encoding API (TextEncoder/TextDecoder)
 // 8. Practical Applications
+// 9. Common Pitfalls
+// 10. Best Practices
 
 // ============================================
 // Section 1: ArrayBuffer
@@ -822,7 +824,7 @@ headerView.setUint32(4, Date.now(), false); // timestamp
 console.log("Parsed header:", parseHeader(headerBuffer));
 
 // ============================================
-// Common Pitfalls
+// 9. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -865,7 +867,7 @@ console.log("  Must call URL.revokeObjectURL() to free");
 console.log("  Fix: Revoke after use");
 
 // ============================================
-// Best Practices
+// 10. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");

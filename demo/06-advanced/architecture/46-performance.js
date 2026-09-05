@@ -469,7 +469,7 @@ function processObject(obj) {
 // - Timer cleanup
 
 // ============================================
-// Common Pitfalls
+// 8. Common Pitfalls
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");
@@ -523,7 +523,7 @@ console.log(
 );
 
 // ============================================
-// Core Web Vitals (2025 Update)
+// 9. Core Web Vitals (2025 Update)
 // ============================================
 
 console.log("\n=== Core Web Vitals (2025 Update) ===");
@@ -574,7 +574,7 @@ const inpCodeExample = `
 console.log(inpCodeExample);
 
 // ============================================
-// Best Practices
+// 10. Best Practices
 // ============================================
 
 console.log("\n=== Best Practices ===");

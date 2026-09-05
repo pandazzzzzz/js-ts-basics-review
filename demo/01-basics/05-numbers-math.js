@@ -781,7 +781,7 @@ const timestamp = BigInt(Date.now()) * 1000000n; // Nanosecond precision
 console.log("Nanosecond timestamp:", timestamp);
 
 // ============================================
-// Common Pitfalls & Best Practices
+// 8. Common Pitfalls & Best Practices
 // ============================================
 
 console.log("\n=== Common Pitfalls ===");

@@ -30,7 +30,7 @@ export {};
 // 12. Section 12: Practical Examples
 // 13. Section 13: Performance Considerations
 // 14. Section 14: Modern Alternatives
-// 15. Section 15: Best Practices
+// 15. Best Practices
 
 // ============================================
 
@@ -724,7 +724,7 @@ console.log("      - Moment.js compatible API");
 console.log("      - Plugin architecture");
 
 // ============================================
-// Section 15: Best Practices
+// 15. Best Practices
 // ============================================
 
 console.log("\nBest Practices:");

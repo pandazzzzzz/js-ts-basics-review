@@ -254,7 +254,7 @@ console.log(
 console.log("//   mf.format({ count: 5 });  // 'You have 5 items.'");
 
 // ============================================
-// Following sections: Runtime / Web Platform / TypeScript ecosystem (overview)
+// 4. Runtime / Web Platform / TypeScript ecosystem (overview)
 // ============================================
 
 console.log("\n=== JavaScript Runtime Evolution ===");
@@ -281,7 +281,7 @@ console.log("- Framework: Server Components / Islands / Edge / Hybrid rendering"
 console.log("- Testing: Vitest / Playwright / Bun test");
 
 // ============================================
-// Best Practices for Future-Proofing
+// 5. Best Practices for Future-Proofing
 // ============================================
 
 console.log("\n=== Best Practices for Future-Proofing ===");
@@ -304,6 +304,10 @@ console.log("1. TC39 proposal stage changes (syntax may break before Stage 4)");
 console.log("2. Browser support variations (check caniuse.com)");
 console.log("3. Runtime compatibility differences; deprecated API removal timelines");
 console.log("4. Polyfill quality/maintenance; breaking changes in major versions");
+
+// ============================================
+// 6. Common Pitfalls
+// ============================================
 
 console.log("\n=== Common Pitfalls ===");
 

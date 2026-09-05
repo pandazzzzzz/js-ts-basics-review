@@ -22,6 +22,7 @@ export {};
 // 7. ASYNC ITERATORS
 // 8. COMMON PATTERNS
 // 9. COMMON PITFALLS
+// 9b. ITERATOR HELPERS (ES2025)
 // 10. TYPESCRIPT TYPES
 
 // ============================================

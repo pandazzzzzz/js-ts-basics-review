@@ -271,7 +271,7 @@ console.log("⚠️  Don't rely on GC timing for application logic");
 console.log("✅ Group numeric separators by thousands, bytes, or logical units");
 
 // ============================================
-// Cross-references
+// 8. Cross-references
 // ============================================
 console.log("\n=== Cross-references ===");
 console.log("📘 Promise.any() and AggregateError: 30-promises.js");
