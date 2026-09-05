@@ -12,15 +12,21 @@ npm install
 node demo/01-basics/01-variables.js
 node demo/06-advanced/es-features/39-5-es2025-features.js   # ES2025 features
 
-# Run a TS comparison file (after npm install)
-node --loader ts-node/esm demo/01-basics/01-variables-ts-comparison.ts
+# Run a TS comparison file (Node >= 23.6 runs .ts natively; files using
+# enums/namespaces/parameter-properties need ts-node — `npm run test:ts`
+# picks the right runner automatically)
+node demo/06-advanced/es-features/39-6-es2026-features-ts-comparison.ts
 
 # Type-check all TS files
 npm run typecheck
 
-# Run the full consistency verification (7 checks: verification-block ↔ reference
+# Full consistency verification (7 checks: verification-block ↔ reference
 # data reconciliation, JS/TS pairing, cross-references, tags, ToC alignment, EOL)
 npm run verify
+
+# Run every JS demo / every TS comparison file (one retry on transient errors)
+npm test
+npm run test:ts
 
 # Format all demo files with Prettier
 npm run format

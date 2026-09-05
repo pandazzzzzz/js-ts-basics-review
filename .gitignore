@@ -19,3 +19,5 @@
 !CONTRIBUTING.md
 !scripts/
 !scripts/**
+!.github/
+!.github/**
