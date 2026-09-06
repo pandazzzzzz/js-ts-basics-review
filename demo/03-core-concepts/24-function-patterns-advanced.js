@@ -13,7 +13,7 @@
 export {};
 
 // ============================================
-// Learning Goals
+// Learning goals
 // ============================================
 // Master advanced function patterns in functional JavaScript:
 // - Handle deep recursion safely with trampolines

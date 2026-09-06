@@ -5,7 +5,7 @@
 export {};
 
 // ============================================
-// Learning Goals
+// Learning goals
 // ============================================
 // Master typed arrays for binary data handling (ES6):
 // - Understand the fixed-type numeric array types

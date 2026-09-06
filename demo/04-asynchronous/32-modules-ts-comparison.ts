@@ -3,6 +3,8 @@
 // This file demonstrates TypeScript-specific typing for modules
 // 🎯 Difficulty: Intermediate
 
+export {};
+
 // ============================================================================
 // 1. TYPE-ONLY IMPORTS AND EXPORTS
 // ============================================================================

@@ -5,7 +5,7 @@
 export {};
 
 // ============================================
-// Learning Goals
+// Learning goals
 // ============================================
 // Master variables, data types, and type coercion:
 // - Understand var/let/const scoping and hoisting differences

@@ -58,8 +58,8 @@ This project uses Prettier for consistent code formatting across all demo files 
 
 ## Status
 
-✅ 76/76 JS + 76/76 TS complete · 6 long files split into 27 focused sub-files · All use ESM (`export {}`) strict mode
-📅 Updated 2026-09-05 · 📊 Coverage: Stages 1-6 Complete
+✅ 76/76 JS + 76/76 TS complete · 6 topics split into 27 focused sub-files (17 files still >1000 lines) · All use ESM (`export {}`) strict mode
+📅 Updated 2026-09-06 · 📊 Coverage: Stages 1-6 Complete · Course numbers 01–50, with #28 intentionally reserved for a future async-bridge lesson (see `50-reserved.js`)
 
 ## Documentation
 

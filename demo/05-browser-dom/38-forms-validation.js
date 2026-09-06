@@ -43,7 +43,7 @@ if (typeof document !== "undefined") {
 // </form>
 
 // Access methods:
-document.forms[0];           // First form (index access）
+document.forms[0];           // First form (index access)
 document.forms['login'];     // Access by name attribute
 document.forms.login;        // Short form
 document.getElementById('loginForm'); // Access by ID
@@ -57,10 +57,10 @@ document.getElementById('loginForm'); // Access by ID
 const form = document.forms['login'];
 
 // Access controls:
-form.elements[0];            // First control (index）
+form.elements[0];            // First control (index)
 form.elements['username'];   // Access by name
 form.elements.username;      // Short form
-form.username;               // More simplified form (recommended）
+form.username;               // More simplified form (recommended)
 
 // ⚠️ Trap: If multiple controls have same name, returns RadioNodeList
 // <input type="radio" name="gender" value="male">
@@ -98,7 +98,7 @@ for (let option of select.options) {
 // Checkbox
 const checkbox = form.querySelector('input[type="checkbox"]');
 checkbox.checked;            // true/false
-checkbox.indeterminate = true; // Third state (half-selected）
+checkbox.indeterminate = true; // Third state (half-selected)
 
 // Radio button group
 const radios = form.querySelectorAll('input[name="gender"]');
@@ -173,7 +173,7 @@ input.addEventListener('blur', (e) => {
   validateField(e.target);  // Common: validate on blur
 });
 
-// focusin / focusout - Bubble (can delegate）
+// focusin / focusout - Bubble (can delegate)
 form.addEventListener('focusin', (e) => {
   console.log('Some child element got focus:', e.target.name);
 });
@@ -181,13 +181,13 @@ form.addEventListener('focusin', (e) => {
 
 console.log("\n⌨️ Input Events:\n");
 console.log(`
-// input - Triggers for every value change (real-time）
+// input - Triggers for every value change (real-time)
 searchInput.addEventListener('input', (e) => {
   const query = e.target.value;
   debounce(() => searchSuggestions(query), 300);
 });
 
-// change - Triggers when focus lost and value changed (select/checkbox/radio triggers immediately）
+// change - Triggers when focus lost and value changed (select/checkbox/radio triggers immediately)
 select.addEventListener('change', (e) => {
   console.log('Selected:', e.target.value);
 });
@@ -204,7 +204,7 @@ select.addEventListener('change', (e) => {
 
 console.log("\n📤 Submit Events:\n");
 console.log(`
-// submit - Triggers when form submits (click button or press Enter）
+// submit - Triggers when form submits (click button or press Enter)
 form.addEventListener('submit', (e) => {
   e.preventDefault();  // Stop default submit
 
@@ -220,7 +220,7 @@ form.addEventListener('submit', (e) => {
   });
 });
 
-// Programmatic submit (doesn't trigger submit event）
+// Programmatic submit (doesn't trigger submit event)
 form.submit();  // ❌ Direct submit, bypasses validation and submit event
 
 // Trigger custom validated submit
@@ -254,11 +254,11 @@ console.log(`
 <input minlength="3" maxlength="20">
 <textarea minlength="10"></textarea>
 
-<!-- Value range (number/date/range only）-->
+<!-- Value range (number/date/range only)-->
 <input type="number" min="0" max="100" step="5">
 <input type="date" min="2024-01-01" max="2024-12-31">
 
-<!-- Pattern match (regular expression）-->
+<!-- Pattern match (regular expression)-->
 <input pattern="[A-Za-z]{3}">
 <input pattern="\\d{4}-\\d{2}-\\d{2}">  <!-- Note escaping -->
 
@@ -272,10 +272,10 @@ console.log(`
 const isValid = input.checkValidity();   // Returns boolean, doesn't show prompt
 const isFormValid = form.checkValidity();
 
-// Report validation results (shows browser default prompt）
+// Report validation results (shows browser default prompt)
 input.reportValidity();  // Returns boolean, reports problems to the user if invalid
 
-// Force show validation UI (even if unmodified）
+// Force show validation UI (even if unmodified)
 form.classList.add('was-validated');  // Bootstrap style
 `);
 
@@ -286,7 +286,7 @@ const v = input.validity;
 
 // Boolean properties:
 v.valueMissing      // Required but not filled
-v.typeMismatch      // Format doesn't match type (like email doesn't have @）
+v.typeMismatch      // Format doesn't match type (like email doesn't have @)
 v.patternMismatch   // Doesn't match pattern regex
 v.tooLong           // Exceeds maxlength
 v.tooShort          // Less than minlength
@@ -295,7 +295,7 @@ v.rangeUnderflow    // Below min
 v.stepMismatch      // Doesn't match step
 v.badInput          // Browser can't parse input
 v.customError       // Custom error set by setCustomValidity()
-v.valid             // All above are false (valid）
+v.valid             // All above are false (valid)
 
 // Usage examples:
 if (v.valueMissing) {
@@ -310,7 +310,7 @@ console.log(`
 // Set custom error
 input.setCustomValidity('Username already taken');
 
-// Clear custom error (important!）
+// Clear custom error (important!)
 input.setCustomValidity('');
 
 // Complete example: Dynamic validation
@@ -345,7 +345,7 @@ input:invalid {
   border-color: red;
 }
 
-/* Only show after user interaction (avoid initial red）*/
+/* Only show after user interaction (avoid initial red)*/
 input:not(:placeholder-shown):invalid {
   border-color: red;
 }
@@ -379,7 +379,7 @@ input.addEventListener('input', debounce((e) => {
   validateField(e.target);
 }, 500));
 
-// Strategy 2: Blur validation (recommended）
+// Strategy 2: Blur validation (recommended)
 // ✅ User completes input before validating
 // ❌ Slightly delayed feedback
 input.addEventListener('blur', (e) => {
@@ -396,7 +396,7 @@ form.addEventListener('submit', (e) => {
 });
 
 // Best practice: Mixed strategies
-// - Simple format validation: Real-time (with debounce）
+// - Simple format validation: Real-time (with debounce)
 // - Complex business rules: On blur
 // - Final safety net: On submit
 `);
@@ -407,7 +407,7 @@ console.log(`
 const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
 // More strict RFC 5322 compliant regex is longer, usually use above simplified version
 
-// Phone number validation (China mainland）
+// Phone number validation (China mainland)
 const phoneRegex = /^1[3-9]\\d{9}$/;
 
 // Password strength
@@ -551,9 +551,9 @@ input.addEventListener('paste', (e) => {
 });
 `);
 
-console.log("\n📎 Clipboard API (Modern Async Way）:\n");
+console.log("\n📎 Clipboard API (Modern Async Way):\n");
 console.log(`
-// Write to clipboard (requires secure context HTTPS or localhost）
+// Write to clipboard (requires secure context HTTPS or localhost)
 async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
@@ -565,7 +565,7 @@ async function copyToClipboard(text) {
   }
 }
 
-// Read from clipboard (requires user authorization）
+// Read from clipboard (requires user authorization)
 async function readFromClipboard() {
   try {
     const text = await navigator.clipboard.readText();
@@ -612,7 +612,7 @@ input.focus();
 input.setSelectionRange(0, input.value.length);  // Full select effect
 `);
 
-console.log("\n📖 Selection API (Page Text Selection）:\n");
+console.log("\n📖 Selection API (Page Text Selection):\n");
 console.log(`
 // Get current selection
 const selection = window.getSelection();
@@ -673,7 +673,7 @@ console.log("  Fix: Call checkValidity()/reportValidity() or use requestSubmit()
 console.log("\n=== Best Practices & Summary ===\n");
 
 console.log("✅ DO:\n");
-console.log("1. Always do server-side validation (client-side validation can be bypassed）");
+console.log("1. Always do server-side validation (client-side validation can be bypassed)");
 console.log("2. Use FormData object to collect form data");
 console.log("3. Provide clear error messages and guidance");
 console.log("4. Use debounce for real-time validation");
@@ -682,10 +682,10 @@ console.log("6. Test keyboard navigation and accessibility\n");
 
 console.log("❌ DON'T:\n");
 console.log("1. Don't rely solely on client-side validation");
-console.log("2. Don't show validation errors too early (wait for user to complete input）");
-console.log("3. Don't block UI during validation (async validation）");
+console.log("2. Don't show validation errors too early (wait for user to complete input)");
+console.log("3. Don't block UI during validation (async validation)");
 console.log("4. Don't forget to clear setCustomValidity errors");
-console.log("5. Don't use synchronous clipboard API (deprecated）\n");
+console.log("5. Don't use synchronous clipboard API (deprecated)\n");
 
 console.log("📚 Reference Documentation:\n");
 console.log(

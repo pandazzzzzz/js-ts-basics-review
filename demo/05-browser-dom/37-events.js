@@ -254,7 +254,7 @@ console.log("\n=== Section 3: Event Delegation ===\n");
 
 console.log("💡 Event Delegation Principle:\n");
 console.log(`
-// Traditional approach: Bind event for each button (100 buttons = 100 listeners）
+// Traditional approach: Bind event for each button (100 buttons = 100 listeners)
 document.querySelectorAll('.btn').forEach(btn => {
   btn.addEventListener('click', handleClick);
 });
@@ -278,13 +278,13 @@ console.log(`
 
 <script>
 list.addEventListener('click', (e) => {
-  // event.target: Actually clicked element (could be button or li）
+  // event.target: Actually clicked element (could be button or li)
   console.log(e.target.tagName);      // "BUTTON" or "LI"
 
-  // event.currentTarget: Element with bound listener (list）
+  // event.currentTarget: Element with bound listener (list)
   console.log(e.currentTarget.id);    // "list"
 
-  // Find nearest matching ancestor (search from target upward）
+  // Find nearest matching ancestor (search from target upward)
   const li = e.target.closest('li');  // Find closest <li>
 });
 </script>
@@ -316,7 +316,7 @@ table.addEventListener('click', (e) => {
     }
   }
 
-  // Method 2: Use closest (more robust, handles child element clicks）
+  // Method 2: Use closest (more robust, handles child element clicks)
   const button = e.target.closest('button[data-action]');
   if (button) {
     const action = button.dataset.action;
@@ -425,10 +425,10 @@ console.log(`
 // Problem: Scroll event listener might block main thread
 // Solution: { passive: true }
 
-// ❌ May cause lag (browser waits if you'll call preventDefault）
+// ❌ May cause lag (browser waits if you'll call preventDefault)
 document.addEventListener('scroll', onScroll);
 
-// ✅ Smooth scroll (tell browser you won't prevent default）
+// ✅ Smooth scroll (tell browser you won't prevent default)
 document.addEventListener('scroll', onScroll, { passive: true });
 
 // ⚠️ Passive listeners cannot call preventDefault!
@@ -473,28 +473,28 @@ console.log("\n=== Section 5: Common Event Types ===\n");
 console.log("🖱️ Mouse Events:\n");
 console.log(`
 // Basic click events
-click       - Single click (press and release）
+click       - Single click (press and release)
 dblclick    - Double click
 
-// Press/release (order: mousedown → mouseup → click）
+// Press/release (order: mousedown → mouseup → click)
 mousedown   - Mouse button pressed
 mouseup     - Mouse button released
 
 // Movement related
-mousemove   - Mouse moves (triggers frequently, needs throttling）
-mouseover   - Enter element (bubbles）
-mouseout    - Leave element (bubbles）
-mouseenter  - Enter element (doesn't bubble）⚠️
-mouseleave  - Leave element (doesn't bubble）⚠️
+mousemove   - Mouse moves (triggers frequently, needs throttling)
+mouseover   - Enter element (bubbles)
+mouseout    - Leave element (bubbles)
+mouseenter  - Enter element (doesn't bubble)⚠️
+mouseleave  - Leave element (doesn't bubble)⚠️
 
 // Others
-contextmenu - Right-click menu (can be blocked）
+contextmenu - Right-click menu (can be blocked)
 wheel       - Scroll wheel
 
 // Mouse event object properties
 element.addEventListener('click', (e) => {
   e.clientX, e.clientY;  // Relative to viewport
-  e.pageX, e.pageY;      // Relative to page (including scroll）
+  e.pageX, e.pageY;      // Relative to page (including scroll)
   e.offsetX, e.offsetY;  // Relative to target element
   e.button;              // 0=left, 1=middle, 2=right
   e.buttons;             // Bitmask indicating which buttons pressed
@@ -505,18 +505,18 @@ element.addEventListener('click', (e) => {
 
 console.log("\n⌨️ Keyboard Events:\n");
 console.log(`
-// Event order: keydown → keypress (deprecated）→ keyup
-keydown   - Key pressed (repeats while held）
+// Event order: keydown → keypress (deprecated)→ keyup
+keydown   - Key pressed (repeats while held)
 keyup     - Key released
 
 // ⚠️ keypress is deprecated, don't use!
 
 // Keyboard event object properties
 document.addEventListener('keydown', (e) => {
-  // key: Character value (considers layout）
+  // key: Character value (considers layout)
   e.key;        // "a", "A", "Enter", "ArrowUp", "Escape"
 
-  // code: Physical position (doesn't consider layout）
+  // code: Physical position (doesn't consider layout)
   e.code;       // "KeyA", "Enter", "ArrowUp"
 
   // Modifier keys
@@ -525,7 +525,7 @@ document.addEventListener('keydown', (e) => {
   e.altKey;     // Alt pressed
   e.metaKey;    // Win/Cmd pressed
 
-  // Whether repeated (held down）
+  // Whether repeated (held down)
   e.repeat;     // true/false
 
   // Combination keys example
@@ -535,7 +535,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Input restriction example (numbers only）
+// Input restriction example (numbers only)
 input.addEventListener('keydown', (e) => {
   if (!/[0-9]/.test(e.key) && !['Backspace', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
     e.preventDefault();
@@ -546,17 +546,17 @@ input.addEventListener('keydown', (e) => {
 console.log("\n📝 Form Events:\n");
 console.log(`
 // Focus events
-focus       - Element gets focus (doesn't bubble）
-blur        - Element loses focus (doesn't bubble）
-focusin      - Element gets focus (bubbles）✨
-focusout     - Element loses focus (bubbles）✨
+focus       - Element gets focus (doesn't bubble)
+blur        - Element loses focus (doesn't bubble)
+focusin      - Element gets focus (bubbles)✨
+focusout     - Element loses focus (bubbles)✨
 
 // Input events
-input       - Value changes (real-time, every input triggers）
-change      - Value changes and loses focus (or dropdown selects immediately）
+input       - Value changes (real-time, every input triggers)
+change      - Value changes and loses focus (or dropdown selects immediately)
 
 // Form submit
-submit      - Form submit (click submit button or press Enter）
+submit      - Form submit (click submit button or press Enter)
 reset       - Form reset
 
 // Form event examples
@@ -582,7 +582,7 @@ input.addEventListener('change', (e) => {
 //   change: Triggers when focus lost and value changed
 // <select>
 //   input:  Option changes immediately
-//   change: Option changes immediately (same）
+//   change: Option changes immediately (same)
 `);
 
 console.log("\n📜 Scroll Events:\n");
@@ -613,10 +613,10 @@ document.readyState:
 
 // Key events
 DOMContentLoaded  - DOM parsed, can safely manipulate DOM
-load              - All resources loaded (images, styles, etc.）
-beforeunload      - Page about to unload (can show confirmation dialog）
-unload            - Page is unloading (cleanup work）
-visibilitychange  - Page visibility changes (switching tabs）
+load              - All resources loaded (images, styles, etc.)
+beforeunload      - Page about to unload (can show confirmation dialog)
+unload            - Page is unloading (cleanup work)
+visibilitychange  - Page visibility changes (switching tabs)
 
 // Usage examples
 document.addEventListener('DOMContentLoaded', () => {
@@ -754,7 +754,7 @@ const myEvent = new Event('myevent', {
 });
 
 // ============================================
-// 2. Custom event with data (recommended）
+// 2. Custom event with data (recommended)
 // ============================================
 const userEvent = new CustomEvent('user:login', {
   bubbles: true,
@@ -892,9 +892,9 @@ console.log("1. Don't bind events in loops for each element");
 console.log("2. Don't forget to remove listeners causing memory leaks");
 console.log("3. Don't call preventDefault() in passive listeners");
 console.log("4. Don't overuse stopPropagation");
-console.log("5. Don't use anonymous functions as listeners (can't remove）");
+console.log("5. Don't use anonymous functions as listeners (can't remove)");
 console.log("6. Don't confuse target and currentTarget");
-console.log("7. Don't forget old browser compatibility (if needed）\n");
+console.log("7. Don't forget old browser compatibility (if needed)\n");
 
 console.log("📚 Reference Documentation:\n");
 console.log("- MDN: https://developer.mozilla.org/en-US/docs/Web/Events");
