@@ -148,11 +148,14 @@ for (const f of [...allFiles, ...docFiles]) {
 }
 
 // ---------- check 5: difficulty tags + ESM markers ----------
+// `export {}` is required in BOTH .js and .ts demos: .js files need it to be
+// ESM under "type": "module"; .ts files follow the same marker convention so
+// the corpus stays symmetric (files with real exports still carry the marker).
 for (const f of allFiles) {
   const rel = path.relative(root, f);
   const text = fs.readFileSync(f, "utf8");
   if (!text.includes("🎯 Difficulty:")) fail(`${rel} is missing a 🎯 Difficulty tag`);
-  if (f.endsWith(".js") && !text.includes("export {}"))
+  if ((f.endsWith(".js") || f.endsWith(".ts")) && !text.includes("export {}"))
     fail(`${rel} is missing the "export {}" ESM marker`);
 }
 
@@ -275,6 +278,29 @@ for (const f of jsFiles) {
     }
   }
   console.log(`EOL scan: ${eolFiles.length} files · CRLF-only: ${crlfOnly} · LF-only: ${lfOnly}`);
+}
+
+// ---------- check 8 (informational): reference/meta.json lastVerified staleness ----------
+// CLAUDE.md tracks reference freshness as a manual rule: if the snapshot is
+// older than 90 days, TC39 proposal data may have drifted — re-verify against
+// the official sources and bump the date. Reported as a warning, not a gate.
+{
+  const meta = JSON.parse(fs.readFileSync(path.join(root, "reference", "meta.json"), "utf8"));
+  const last = meta.lastVerified || (meta.meta && meta.meta.lastVerified);
+  if (!last) {
+    fail("reference/meta.json has no lastVerified field");
+  } else {
+    const days = Math.floor((Date.now() - new Date(last).getTime()) / 86400000);
+    if (Number.isNaN(days)) {
+      fail(`reference/meta.json lastVerified "${last}" is not a parseable date`);
+    } else if (days > 90) {
+      console.log(
+        `⚠️  reference/meta.json lastVerified is ${days} days old (${last}) — over the 90-day threshold; re-verify against TC39 sources and update the date`
+      );
+    } else {
+      console.log(`reference/meta.json lastVerified: ${last} (${days} days ago)`);
+    }
+  }
 }
 
 // ---------- report ----------

@@ -1,0 +1,13 @@
+# Dependabot version updates (official config reference:
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
+# Monthly cadence: dev-only deps in a learning repo don't warrant weekly churn.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

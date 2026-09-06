@@ -1,3 +1,7 @@
+# Whitelist-style ignore: everything is ignored (`*`), only explicitly
+# un-ignored (`!`) paths are tracked. TRAP: any NEW root-level or unlisted
+# file (e.g. a new tooling config) is silently untracked — add a `!` rule
+# for it here or `git add -f` deliberately.
 *
 !demo/
 !demo/**

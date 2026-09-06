@@ -11,6 +11,7 @@
 const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const { pathToFileURL } = require("url");
 
 const root = path.resolve(__dirname, "..");
 const files = [];
@@ -61,11 +62,21 @@ for (const f of files) {
     continue;
   }
   const nativeReason = errorHead(firstErr);
-  let tsNodeErr = attempt(["--loader", "ts-node/esm", f]);
+  // ts-node fallback via a module.register() shim (--import scripts/register-ts-node.mjs):
+  //   - `--loader ts-node/esm` is deprecated and emits an ExperimentalWarning per file
+  //   - bare `--import ts-node/esm` registers nothing (ts-node@10 ships loader hooks,
+  //     not a self-registering entry) so files fall through to Node's strip-only mode,
+  //     which rejects enums/namespaces/parameter properties
+  //   - --import resolves its argument as an ESM specifier, so the shim must be a
+  //     file:// URL (a raw Windows absolute path parses "N:" as a URL scheme)
+  // The fs.Stats DeprecationWarning still visible on failure comes from ts-node
+  // internals and goes away when the ts-node dependency is eventually dropped.
+  const tsNodeShim = pathToFileURL(path.join(__dirname, "register-ts-node.mjs")).href;
+  let tsNodeErr = attempt(["--import", tsNodeShim, f]);
   if (tsNodeErr === true) {
     okTsNode.push(rel);
   } else {
-    tsNodeErr = attempt(["--loader", "ts-node/esm", f]);
+    tsNodeErr = attempt(["--import", tsNodeShim, f]);
     if (tsNodeErr === true) {
       okTsNode.push(rel);
       console.log(`retry pass: ${rel} (first ts-node attempt failed)`);

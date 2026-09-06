@@ -2,15 +2,28 @@
   "name": "js-ts-basics-review",
   "version": "1.0.0",
   "description": "JavaScript and TypeScript basics review practice project",
+  "private": true,
+  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandazzzzzz/js-ts-basics-review.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pandazzzzzz/js-ts-basics-review/issues"
+  },
+  "homepage": "https://github.com/pandazzzzzz/js-ts-basics-review#readme",
   "scripts": {
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "demo": "node demo/01-basics/01-variables.js",
     "verify": "node scripts/verify-consistency.cjs",
     "test": "node scripts/run-demos.cjs",
     "test:ts": "node scripts/run-ts.cjs",
-    "format": "node node_modules/prettier/bin/prettier.cjs --write \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" \"scripts/*.cjs\" tsconfig.json",
-    "format:check": "node node_modules/prettier/bin/prettier.cjs --check \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" \"scripts/*.cjs\" tsconfig.json"
+    "format": "node node_modules/prettier/bin/prettier.cjs --write \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" \"scripts/*.cjs\" \"scripts/*.mjs\" tsconfig.json",
+    "format:check": "node node_modules/prettier/bin/prettier.cjs --check \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" \"scripts/*.cjs\" \"scripts/*.mjs\" tsconfig.json"
   },
   "keywords": [
     "javascript",
@@ -20,11 +33,10 @@
     "basics"
   ],
   "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.2.0",
     "prettier": "^3.9.6",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.0"
+    "typescript": "^5.9.0"
   }
 }
