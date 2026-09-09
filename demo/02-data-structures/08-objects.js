@@ -215,6 +215,15 @@ console.log("Keys:", Object.keys(person));
 
 // Object.values() - Get property values (ES2017)
 // - Returns array of own enumerable property values
+/*
+ * verification:
+ *   feature: Object.values / Object.entries
+ *   status: ES2017
+ *   stage4Date: 2016-03
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-object-values-entries
+ */
 const values = Object.values(person);
 console.log("\nObject.values():");
 console.log("Values:", values);
@@ -234,6 +243,15 @@ for (const [key, value] of Object.entries(person)) {
 
 // Object.fromEntries() - Create object from entries (ES2019)
 // - Inverse of Object.entries()
+/*
+ * verification:
+ *   feature: Object.fromEntries
+ *   status: ES2019
+ *   stage4Date: 2019-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-object-from-entries
+ */
 const entriesArray = [
   ["a", 1],
   ["b", 2],
@@ -285,6 +303,7 @@ console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toStrin
 /*
  * verification:
  *   feature: Object.hasOwn
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01
@@ -360,6 +379,15 @@ const descriptor = Object.getOwnPropertyDescriptor(strictObj, "readonly");
 console.log("\nProperty descriptor:", descriptor);
 
 // Object.getOwnPropertyDescriptors() - Get all property descriptors (ES2017)
+/*
+ * verification:
+ *   feature: Object.getOwnPropertyDescriptors
+ *   status: ES2017
+ *   stage4Date: 2016-05
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-object-getownpropertydescriptors
+ */
 const allDescriptors = Object.getOwnPropertyDescriptors(multiProps);
 console.log("\nAll descriptors:", Object.keys(allDescriptors));
 
@@ -612,6 +640,7 @@ thisObj.greet.apply(otherObj); // Same as call
 /*
  * verification:
  *   feature: Object.groupBy
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01

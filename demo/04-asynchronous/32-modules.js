@@ -154,6 +154,15 @@ console.log("  Use case: Barrel files (index.js) simplify imports and hide inter
 // ============================================
 // 7. Dynamic Imports (ES2020)
 // ============================================
+/*
+ * verification:
+ *   feature: import() (dynamic import)
+ *   status: ES2020
+ *   stage4Date: 2019-06
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-dynamic-import
+ */
 console.log("7. Dynamic Imports (ES2020):");
 
 // Dynamic import() returns a promise — can be used conditionally
@@ -205,6 +214,15 @@ console.log(
 console.log("\n  Migration tips:");
 console.log('  1. Add "type": "module" to package.json');
 console.log("  2. Replace require → import, module.exports → export");
+/*
+ * verification:
+ *   feature: import.meta
+ *   status: ES2020
+ *   stage4Date: 2020-03
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2020-03/march-31.md#importmeta-for-stage-4
+ */
 console.log(
   "  3. Replace __dirname: const __dirname = fileURLToPath(new URL('.', import.meta.url));"
 );
@@ -258,6 +276,7 @@ console.log("  Use dynamic import() for conditional or runtime-dependent loading
 /*
  * verification:
  *   feature: Import Attributes
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-09-01

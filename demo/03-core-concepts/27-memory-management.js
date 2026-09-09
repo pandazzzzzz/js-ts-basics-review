@@ -295,6 +295,7 @@ console.log("\nSymbol as WeakMap key (ES2023):");
 /*
  * verification:
  *   feature: Symbols as WeakMap keys
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01

@@ -143,6 +143,7 @@ console.log("After setting length=5:", extendable); // [1, 2, 3, empty × 2]
 /*
  * verification:
  *   feature: at
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01

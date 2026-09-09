@@ -74,6 +74,15 @@ const negativeRemainder = -10 % 3; // -1 (not 2!)
 // - Right-associative: 2 ** 3 ** 2 = 2 ** (3 ** 2) = 512
 // - Replaces Math.pow()
 // - Use case: scientific calculations, compound interest
+/*
+ * verification:
+ *   feature: Exponentiation operator
+ *   status: ES2016
+ *   stage4Date: 2016-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-exponentiation-operator
+ */
 const power = 2 ** 3; // 8
 const squared = 5 ** 2; // 25
 
@@ -246,6 +255,15 @@ console.log("!!'hello':", !!"hello"); // true (converts to boolean)
 // - Only checks for null or undefined (not all falsy values)
 // - Use case: default values when 0 or "" are valid
 // - Difference from ||: 0 ?? 10 returns 0, but 0 || 10 returns 10
+/*
+ * verification:
+ *   feature: Nullish Coalescing
+ *   status: ES2020
+ *   stage4Date: 2019-12
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-nullish-coalescing
+ */
 console.log("\nNullish Coalescing (??):");
 console.log("null ?? 'default':", null ?? "default"); // 'default'
 console.log("undefined ?? 'default':", undefined ?? "default"); // 'default'
@@ -317,6 +335,7 @@ console.log("a **= 3:", a); // 8
 /*
  * verification:
  *   feature: Logical Assignment
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -531,9 +550,19 @@ const copy = [...original];
 console.log("Array copy:", copy); // [1, 2, 3]
 console.log("Are they same?:", original === copy); // false (different references)
 
-// Object spreading
+// Object spreading (ES2018, NOT ES2015 — object rest/spread is a separate proposal
+// from the ES2015 array spread that this section's header labels above)
 const obj1 = { a: 1, b: 2 };
 const obj2 = { c: 3, d: 4 };
+/*
+ * verification:
+ *   feature: Rest/Spread Properties
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-object-rest-spread
+ */
 const mergedObj = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
 console.log("Merged objects:", mergedObj);
 
@@ -591,6 +620,15 @@ console.log("Object destructuring with rest:", { xVal, yVal, remaining }); // { 
 // - Short-circuits: stops evaluation at first null/undefined
 // - Use case: accessing deeply nested properties, optional method calls
 // - Prevents "Cannot read property of undefined" errors
+/*
+ * verification:
+ *   feature: Optional Chaining
+ *   status: ES2020
+ *   stage4Date: 2019-12
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-optional-chaining
+ */
 console.log("\nOptional Chaining (?.):");
 
 const user = {

@@ -312,6 +312,15 @@ console.log("Without m:", /^line2/.test(multiStr)); // false
 console.log("With m:", /^line2/m.test(multiStr)); // true
 
 // 4.4 s flag - dotAll (. matches newline)
+/*
+ * verification:
+ *   feature: RegExp s (dotAll) flag
+ *   status: ES2018
+ *   stage4Date: 2017-11
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-regexp-dotall-flag
+ */
 let newlineStr = "hello\nworld";
 console.log("\nDotAll:");
 console.log("Without s:", /hello.world/.test(newlineStr)); // false
@@ -380,6 +389,15 @@ console.log("Full match:", nameMatch[0]); // "Mr. Smith"
 console.log("Name only:", nameMatch[1]); // "Smith"
 
 // 5.3 Named capturing groups
+/*
+ * verification:
+ *   feature: RegExp named capture groups
+ *   status: ES2018
+ *   stage4Date: 2017-11
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-regexp-named-groups
+ */
 let namedRe = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 let dateMatch2 = "2024-06-15".match(namedRe);
 console.log("\nNamed groups:");
@@ -463,6 +481,15 @@ console.log("'Password1' valid:", passwordRe.test("Password1")); // true
 console.log("'password' valid:", passwordRe.test("password")); // false
 
 // 6.4 Positive lookbehind
+/*
+ * verification:
+ *   feature: RegExp Lookbehind Assertions
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-regexp-lookbehind
+ */
 let posLookbehind = /(?<=\$)\d+/;
 console.log("\nPositive lookbehind:");
 console.log("'$100' matches:", "price: $100".match(posLookbehind)); // ['100']
@@ -498,6 +525,7 @@ console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
 /*
  * verification:
  *   feature: RegExp Match Indices
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
  *   lastVerified: 2026-09-01
@@ -636,6 +664,15 @@ console.log("Fields:", csv.match(csvRe));
  * Requires 'u' flag for Unicode mode
  */
 
+/*
+ * verification:
+ *   feature: RegExp Unicode Property Escapes
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-regexp-unicode-property-escapes
+ */
 console.log("\n=== 7.7 Unicode Property Escapes Demo ===");
 
 // Match any letter (including non-ASCII like 中文, α, ñ)
@@ -850,6 +887,7 @@ console.log("\n=== 11. Newer RegExp Features (ES2024 & ES2025) Demo ===");
 /*
  * verification:
  *   feature: RegExp v flag
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
  *   lastVerified: 2026-09-01
@@ -875,6 +913,7 @@ console.log("'😀' is RGI emoji:", emojiKeycapRe.test("😀")); // true
 /*
  * verification:
  *   feature: RegExp.escape
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2025-02
  *   lastVerified: 2026-09-01
@@ -903,6 +942,7 @@ if (typeof RegExp.escape === "function") {
 /*
  * verification:
  *   feature: Duplicate Named Capture Groups
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-04
  *   lastVerified: 2026-09-01
@@ -932,6 +972,7 @@ try {
 /*
  * verification:
  *   feature: RegExp Modifiers
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-09-01

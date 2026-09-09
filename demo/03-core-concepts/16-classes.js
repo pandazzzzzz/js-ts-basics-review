@@ -391,6 +391,7 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
 /*
  * verification:
  *   feature: Private class fields
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-04
  *   lastVerified: 2026-09-01
@@ -594,6 +595,7 @@ console.log("Value:", legacy.getValue());
 /*
  * verification:
  *   feature: Class Static Block
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01
@@ -649,6 +651,7 @@ console.log("AppConfig.retries:", AppConfig.retries); // 3
 /*
  * verification:
  *   feature: Ergonomic brand checks
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-07
  *   lastVerified: 2026-09-01

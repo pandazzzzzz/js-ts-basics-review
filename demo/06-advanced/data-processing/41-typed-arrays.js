@@ -261,6 +261,15 @@ console.log("Use for: file uploads, downloads, image processing");
 // Section 6: SharedArrayBuffer and Atomics
 // ============================================
 
+/*
+ * verification:
+ *   feature: Shared memory and Atomics
+ *   status: ES2017
+ *   stage4Date: 2017-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-ecmascript-sharedmem
+ */
 console.log("\n=== SharedArrayBuffer and Atomics ===");
 
 // SharedArrayBuffer - ArrayBuffer that can be shared between threads
@@ -340,6 +349,7 @@ console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents"
 /*
  * verification:
  *   feature: Atomics.waitAsync
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
  *   lastVerified: 2026-09-01

@@ -99,6 +99,15 @@ promise.then(result => {
  * - Async method in object/class
  */
 
+/*
+ * verification:
+ *   feature: Async functions
+ *   status: ES2017
+ *   stage4Date: 2016-07
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/ecmascript-asyncawait
+ */
 console.log("\n=== Async Function Syntax Demo ===\n");
 
 // Async function declaration (ES2017)
@@ -399,6 +408,7 @@ console.log("\n=== Top-Level Await Demo ===\n");
 /*
  * verification:
  *   feature: Top-level await
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
  *   lastVerified: 2026-09-01

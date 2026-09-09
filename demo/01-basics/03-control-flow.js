@@ -290,6 +290,15 @@ for (let i = 0, j = 10; i < 5; i++, j--) {
 // - Includes inherited enumerable properties
 // - Common pitfall: iterates over array indices as strings, not values
 // - Use case: object property iteration, debugging
+/*
+ * verification:
+ *   feature: for-in mechanics
+ *   status: ES2020
+ *   stage4Date: 2019-12
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-for-in-order
+ */
 const person = {
   name: "Alice",
   age: 30,
@@ -702,6 +711,15 @@ try {
 // - Syntax: `try { ... } catch { ... }` (no parentheses, no binding)
 // - Use case: when you only care that an error happened, not its details
 // - Note: the binding is still allowed when you need error.message etc.
+/*
+ * verification:
+ *   feature: Optional catch binding
+ *   status: ES2019
+ *   stage4Date: 2019-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-optional-catch-binding
+ */
 console.log("\nOptional Catch Binding (ES2019):");
 
 function parseConfig(raw) {

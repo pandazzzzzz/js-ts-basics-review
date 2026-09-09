@@ -116,16 +116,24 @@ for (const key of Object.keys(reference)) {
 }
 
 // ---------- check 3: JS ↔ TS pairing ----------
+// Pair by RELATIVE PATH (not basename) so two same-named files in different
+// directories each need their own counterpart in the same directory. A basename
+// set would mask a missing counterpart when another dir has a matching filename.
+// `basenames` (basename-only set) is still computed here for check 4's
+// filename-existence lookups, which deliberately match by basename.
 const basenames = new Set(allFiles.map(f => path.basename(f)));
+const relSet = new Set(allFiles.map(f => path.relative(root, f)));
 for (const f of jsFiles) {
-  const pair = path.basename(f).replace(/\.js$/, "-ts-comparison.ts");
-  if (!basenames.has(pair))
-    fail(`${path.relative(root, f)} is missing its TypeScript counterpart ${pair}`);
+  const rel = path.relative(root, f);
+  const pair = rel.replace(/\.js$/, "-ts-comparison.ts");
+  if (!relSet.has(pair))
+    fail(`${rel} is missing its TypeScript counterpart ${path.basename(pair)}`);
 }
 for (const f of tsFiles) {
-  const pair = path.basename(f).replace(/-ts-comparison\.ts$/, ".js");
-  if (!basenames.has(pair))
-    fail(`${path.relative(root, f)} is missing its JavaScript counterpart ${pair}`);
+  const rel = path.relative(root, f);
+  const pair = rel.replace(/-ts-comparison\.ts$/, ".js");
+  if (!relSet.has(pair))
+    fail(`${rel} is missing its JavaScript counterpart ${path.basename(pair)}`);
 }
 
 // ---------- check 4: referenced demo filenames exist ----------

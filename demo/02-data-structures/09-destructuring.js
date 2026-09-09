@@ -130,6 +130,15 @@ console.log("  fullName:", fullName); // "Anonymous"
 
 // Rest properties - Rest pattern (ES2018)
 // - Collect remaining properties into a new object
+/*
+ * verification:
+ *   feature: Rest/Spread Properties
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-object-rest-spread
+ */
 const options = { title: "Menu", height: 200, width: 100 };
 const { title, ...remainingProps } = options;
 console.log("\nRest Properties (ES2018):");

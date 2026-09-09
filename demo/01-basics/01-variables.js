@@ -156,6 +156,15 @@ console.log({ nullType, undefinedType, symbolType, bigIntType });
 // - Before ES2020, code had to feature-detect: window / global / self
 // - Use case: writing portable code that needs the real global object
 // - typeof globalThis is always "object"
+/*
+ * verification:
+ *   feature: globalThis
+ *   status: ES2020
+ *   stage4Date: 2019-10
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-global
+ */
 console.log("\n=== globalThis (ES2020) ===");
 console.log("typeof globalThis:", typeof globalThis); // "object"
 console.log("globalThis === global (Node):", globalThis === global); // true in Node.js

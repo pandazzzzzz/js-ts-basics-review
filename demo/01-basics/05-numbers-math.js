@@ -76,6 +76,7 @@ console.log("1.5e-9:", nano);
 /*
  * verification:
  *   feature: Numeric Separators
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -702,6 +703,15 @@ console.log("Sig digits 0.00123:", sigDigitsFormatter.format(0.00123)); // "0.00
 // - Append 'n' to integer literal
 // - Use BigInt() constructor
 // - Can represent arbitrarily large integers
+/*
+ * verification:
+ *   feature: BigInt
+ *   status: ES2020
+ *   stage4Date: 2019-03
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-bigint
+ */
 console.log("\n=== BigInt Creation ===");
 const bigInt1 = 123n;
 const bigInt2 = BigInt("123");

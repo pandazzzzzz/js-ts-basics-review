@@ -40,6 +40,7 @@ console.log("\n--- 1. Temporal API (ES2027) ---\n");
 /*
  * verification:
  *   feature: Temporal
+ *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-03
  *   lastVerified: 2026-09-01
@@ -104,6 +105,7 @@ console.log("\n--- 2. Explicit Resource Management (ES2027) ---\n");
 /*
  * verification:
  *   feature: using (Explicit Resource Management)
+ *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2025-05
  *   lastVerified: 2026-09-01
@@ -170,6 +172,7 @@ async function processFile() {
 /*
  * verification:
  *   feature: DisposableStack
+ *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2025-05
  *   lastVerified: 2026-09-01
@@ -200,10 +203,11 @@ console.log("\n--- 3. Joint Iteration (ES2027) ---\n");
 /*
  * verification:
  *   feature: Joint Iteration
+ *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-05
  *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-joint-iteration
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4
  */
 
 // Iterator.zip takes ONE iterable of iterables. Mode: "shortest" (default), "longest", "strict".
@@ -284,6 +288,7 @@ console.log("\n--- 4. Atomics.pause() (ES2027) ---\n");
 /*
  * verification:
  *   feature: Atomics.pause
+ *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-05
  *   lastVerified: 2026-09-01
@@ -461,42 +466,52 @@ console.log("🌐 TC39 Proposals: https://github.com/tc39/proposals");
 📘 See TypeScript comparison file: 39-7-es2027-future-ts-comparison.ts
 */
 
-// == verification block ==
-// feature: Temporal
-// stage4Date: 2026-03
-// stage4DateType: exact
-// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Temporal
+ *   status: ES2027
+ *   stage4Date: 2026-03
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Atomics.pause
-// stage4Date: 2026-05
-// stage4DateType: exact
-// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Atomics.pause
+ *   status: ES2027
+ *   stage4Date: 2026-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Joint Iteration
-// stage4Date: 2026-05
-// stage4DateType: exact
-// source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Joint Iteration
+ *   status: ES2027
+ *   stage4Date: 2026-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: using (Explicit Resource Management)
-// stage4Date: 2025-05
-// stage4DateType: exact
-// source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: using (Explicit Resource Management)
+ *   status: ES2027
+ *   stage4Date: 2025-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: DisposableStack
-// stage4Date: 2025-05
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-explicit-resource-management
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: DisposableStack
+ *   status: ES2027
+ *   stage4Date: 2025-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-explicit-resource-management
+ *   lastVerified: 2026-09-01
+ */

@@ -749,6 +749,7 @@ console.log("- Locale normalization");
 /*
  * verification:
  *   feature: Intl.DurationFormat
+ *   stage4DateType: milestone
  *   status: ES2025
  *   stage4Date: 2025-07
  *   lastVerified: 2026-09-01
@@ -896,7 +897,9 @@ console.log(`// Example template (future syntax):
 console.log("\n=== Cross-references ===");
 console.log("📘 12-date-time.js - Date and time formatting");
 console.log("📘 04-strings.js - String comparison");
-console.log("📘 ../metaprogramming/50-reserved.js - Temporal API");
+console.log(
+  "📘 ../metaprogramming/50-reserved.js - Future ES proposals (incl. Intl.MessageFormat)"
+);
 
 // ============================================
 // TypeScript Comparison
@@ -905,18 +908,22 @@ console.log("📘 ../metaprogramming/50-reserved.js - Temporal API");
 📘 See TypeScript comparison file: 42-intl-api-ts-comparison.ts
 */
 
-// == verification block ==
-// feature: Intl.PluralRules
-// stage4Date: 2017-12
-// stage4DateType: milestone
-// source: https://github.com/tc39/proposal-intl-plural-rules
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Intl.PluralRules
+ *   status: ES2018
+ *   stage4Date: 2017-12
+ *   stage4DateType: milestone
+ *   source: https://github.com/tc39/proposal-intl-plural-rules
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Intl.DurationFormat
-// stage4Date: 2025-07
-// stage4DateType: milestone
-// source: https://tc39.es/proposal-intl-duration-format
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Intl.DurationFormat
+ *   status: ES2025
+ *   stage4Date: 2025-07
+ *   stage4DateType: milestone
+ *   source: https://tc39.es/proposal-intl-duration-format
+ *   lastVerified: 2026-09-01
+ */

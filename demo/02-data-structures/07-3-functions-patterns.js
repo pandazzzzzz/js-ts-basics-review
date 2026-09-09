@@ -198,6 +198,16 @@ function exampleFunc(x, y) {
   return x + y;
 }
 
+/*
+ * verification:
+ *   feature: Function.prototype.toString revision
+ *   status: ES2019
+ *   stage4Date: 2018-05
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/Function-prototype-toString-revision
+ */
+
 console.log("\nFunction toString:");
 console.log(exampleFunc.toString());
 

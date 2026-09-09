@@ -158,6 +158,7 @@ console.log("\n--- 4. WeakRef (Weak References) ---\n");
 /*
  * verification:
  *   feature: WeakRef
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -196,6 +197,7 @@ console.log("\n--- 5. FinalizationRegistry ---\n");
 /*
  * verification:
  *   feature: FinalizationRegistry
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -287,58 +289,72 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 📘 See TypeScript comparison file: 39-1-es2021-features-ts-comparison.ts
 */
 
-// == verification block ==
-// feature: replaceAll
-// stage4Date: 2020-06
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-string-replaceall
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: replaceAll
+ *   status: ES2021
+ *   stage4Date: 2020-06
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-string-replaceall
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Logical Assignment
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-logical-assignment
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Logical Assignment
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-logical-assignment
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Numeric Separators
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-numeric-separator
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Numeric Separators
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-numeric-separator
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: WeakRef
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-weakrefs
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: WeakRef
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-weakrefs
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: FinalizationRegistry
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-weakrefs
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: FinalizationRegistry
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-weakrefs
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Promise.any
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-promise-any
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Promise.any
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-promise-any
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: AggregateError
-// stage4Date: 2020-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-promise-any
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: AggregateError
+ *   status: ES2021
+ *   stage4Date: 2020-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-promise-any
+ *   lastVerified: 2026-09-01
+ */

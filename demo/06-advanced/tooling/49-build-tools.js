@@ -840,7 +840,8 @@ console.log(`
 
 // Prettier — Code formatter (complement to ESLint):
 // - Formats code consistently (quotes, semicolons, indentation)
-// - .prettierrc: { "singleQuote": true, "semi": true, "tabWidth": 2 }
+// - .prettierrc: { "singleQuote": false, "semi": true, "tabWidth": 2 }
+//   (this project uses double quotes; singleQuote can be set to true per team taste)
 // - Use eslint-config-prettier to avoid conflicts
 `);
 

@@ -111,6 +111,7 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
 /*
  * verification:
  *   feature: findLast
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01
@@ -120,6 +121,7 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
 /*
  * verification:
  *   feature: findLastIndex
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01
@@ -187,6 +189,7 @@ console.log("\n--- 3. Hashbang Grammar ---\n");
 /*
  * verification:
  *   feature: Hashbang Syntax
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-07
  *   lastVerified: 2026-09-01
@@ -316,66 +319,82 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
 📘 See TypeScript comparison file: 39-3-es2023-features-ts-comparison.ts
 */
 
-// == verification block ==
-// feature: Symbols as WeakMap keys
-// stage4Date: 2023-01
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-symbols-as-weakmap-keys
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Symbols as WeakMap keys
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-symbols-as-weakmap-keys
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: toSorted
-// stage4Date: 2023-01
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: toSorted
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-change-array-by-copy
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: toReversed
-// stage4Date: 2023-01
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: toReversed
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-change-array-by-copy
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: with
-// stage4Date: 2023-01
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: with
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-change-array-by-copy
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: toSpliced
-// stage4Date: 2023-01
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-change-array-by-copy
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: toSpliced
+ *   status: ES2023
+ *   stage4Date: 2023-01
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-change-array-by-copy
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: findLast
-// stage4Date: 2022-06
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-array-find-from-last
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: findLast
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-array-find-from-last
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: findLastIndex
-// stage4Date: 2022-06
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-array-find-from-last
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: findLastIndex
+ *   status: ES2023
+ *   stage4Date: 2022-06
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-array-find-from-last
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Hashbang Syntax
-// stage4Date: 2022-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-hashbang
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Hashbang Syntax
+ *   status: ES2023
+ *   stage4Date: 2022-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-hashbang
+ *   lastVerified: 2026-09-01
+ */

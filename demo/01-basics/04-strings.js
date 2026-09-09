@@ -195,6 +195,15 @@ console.log("After trim:", `"${modStr.trim()}"`); // "Hello World"
 // trimStart() / trimLeft() - Remove whitespace from start (ES2019)
 // - trimLeft() is alias for trimStart()
 // - Only removes from beginning
+/*
+ * verification:
+ *   feature: String.prototype.trimStart / trimEnd
+ *   status: ES2019
+ *   stage4Date: 2019-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-string-left-right-trim
+ */
 console.log("\n=== trimStart() Method ===");
 console.log("trimStart():", `"${modStr.trimStart()}"`); // "Hello World  "
 
@@ -207,6 +216,15 @@ console.log("trimEnd():", `"${modStr.trimEnd()}"`); // "  Hello World"
 // padStart(targetLength, padString) - Pad from start (ES2017)
 // - Pads string to reach target length
 // - padString defaults to space
+/*
+ * verification:
+ *   feature: String padding
+ *   status: ES2017
+ *   stage4Date: 2016-05
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-string-pad-start-end
+ */
 // - Useful for formatting numbers, alignment
 console.log("\n=== padStart() Method ===");
 console.log("'5'.padStart(3, '0'):", "5".padStart(3, "0")); // "005"
@@ -265,6 +283,7 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, "dog"));
 /*
  * verification:
  *   feature: replaceAll
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-06
  *   lastVerified: 2026-09-01
@@ -414,6 +433,15 @@ console.log("NFKD:", accentStr.normalize("NFKD")); // Compatibility decompositio
 // - Returns iterator of all matches
 // - Includes capture groups
 // - Use case: extracting all matches with details
+/*
+ * verification:
+ *   feature: String.prototype.matchAll
+ *   status: ES2020
+ *   stage4Date: 2019-03
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-string-matchall
+ */
 console.log("\n=== matchAll() Method ===");
 const textMatchAll = "test1 test2 test3";
 const regex = /test(\d)/g;
@@ -460,6 +488,7 @@ console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
 /*
  * verification:
  *   feature: Well-Formed Unicode Strings
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
  *   lastVerified: 2026-09-01

@@ -715,6 +715,15 @@ console.log(ids.next().value); // user-3
  * - Error handling is async
  */
 
+/*
+ * verification:
+ *   feature: Asynchronous Iteration
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-async-iteration
+ */
 console.log("\n=== 7. Async Iterators Demo ===");
 
 // 7.1 Async iterator (manual implementation)
@@ -1040,6 +1049,7 @@ console.log(mapIter2.next()); // { value: ['x', 1], done: false }
 /*
  * verification:
  *   feature: Iterator helpers
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-09-01

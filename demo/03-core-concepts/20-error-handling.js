@@ -236,6 +236,7 @@ console.log(
 /*
  * verification:
  *   feature: Error.isError
+ *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-05
  *   lastVerified: 2026-09-01
@@ -1250,6 +1251,7 @@ saferAsyncHandling();
 /*
  * verification:
  *   feature: Error.cause
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
  *   lastVerified: 2026-09-01
@@ -1319,6 +1321,7 @@ try {
 /*
  * verification:
  *   feature: AggregateError
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01

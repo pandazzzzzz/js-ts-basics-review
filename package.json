@@ -18,7 +18,6 @@
   "homepage": "https://github.com/pandazzzzzz/js-ts-basics-review#readme",
   "scripts": {
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
-    "demo": "node demo/01-basics/01-variables.js",
     "verify": "node scripts/verify-consistency.cjs",
     "test": "node scripts/run-demos.cjs",
     "test:ts": "node scripts/run-ts.cjs",

@@ -86,6 +86,15 @@ console.log({ name, age, first, second, rest });
 // - Returns undefined instead of throwing TypeError for null/undefined
 // - Works with properties, methods, and array access
 // - Can be chained deeply with obj?.a?.b?.c
+/*
+ * verification:
+ *   feature: Optional Chaining
+ *   status: ES2020
+ *   stage4Date: 2019-12
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-optional-chaining
+ */
 const user = {
   name: "Alice",
   address: {
@@ -115,6 +124,15 @@ console.log("Without user:", getUserName({})); // "Anonymous"
 // - Only triggers on null or undefined (not falsy values like 0, "", false)
 // - Safer alternative to || operator
 // - Preserves "truthy but falsy" values like 0 and empty strings
+/*
+ * verification:
+ *   feature: Nullish Coalescing
+ *   status: ES2020
+ *   stage4Date: 2019-12
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-nullish-coalescing
+ */
 
 const config = { timeout: 0, debug: "" };
 const defaults = { timeout: 5000, debug: "verbose" };
@@ -1077,6 +1095,7 @@ console.log("  globalThis === globalThis:", globalThis === globalThis); // true
 /*
  * verification:
  *   feature: Error.cause
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
  *   lastVerified: 2026-09-01
@@ -1102,6 +1121,7 @@ try {
 /*
  * verification:
  *   feature: Class Static Block
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01
@@ -1126,6 +1146,7 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
 /*
  * verification:
  *   feature: Top-level await
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
  *   lastVerified: 2026-09-01
@@ -1145,6 +1166,7 @@ console.log("  // const data = await fetch('https://api.example.com').then(r => 
 /*
  * verification:
  *   feature: WeakRef
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -1164,6 +1186,7 @@ weakTarget = null; // strong reference dropped; eligible for GC
 /*
  * verification:
  *   feature: Object.groupBy
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
@@ -1186,6 +1209,7 @@ console.log("  Map.groupBy keys:", [...groupedMap.keys()]); // ['fruit', 'veg']
 /*
  * verification:
  *   feature: Promise.withResolvers
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
@@ -1203,6 +1227,7 @@ res("done");
 /*
  * verification:
  *   feature: RegExp v flag
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
  *   lastVerified: 2026-09-01
@@ -1224,6 +1249,7 @@ try {
 /*
  * verification:
  *   feature: Symbols as WeakMap keys
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01

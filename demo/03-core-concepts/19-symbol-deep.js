@@ -55,6 +55,15 @@ const sym3 = Symbol("description");
 
 console.log("Symbol without description:", sym1);
 console.log("Symbol with description:", sym2);
+/*
+ * verification:
+ *   feature: Symbol.prototype.description
+ *   status: ES2019
+ *   stage4Date: 2018-11
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-Symbol-description
+ */
 console.log("Symbol description property:", sym2.description);
 
 // 1.2 Uniqueness - each Symbol is unique

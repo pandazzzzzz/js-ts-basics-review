@@ -527,6 +527,7 @@ console.log("  Difference A-B:", [...difference]); // [1, 2, 3]
 /*
  * verification:
  *   feature: Set methods
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-04
  *   lastVerified: 2026-09-01
@@ -620,6 +621,7 @@ console.log("  MDN union example:", evens.union(squares)); // Set(6) { 2, 4, 6, 
 /*
  * verification:
  *   feature: Map.groupBy
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01

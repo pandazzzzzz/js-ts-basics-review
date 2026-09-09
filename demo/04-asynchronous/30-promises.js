@@ -134,6 +134,15 @@ rejectedPromise.catch(error => {
 
 console.log("\n=== Then/Catch/Finally Chaining Demo ===\n");
 
+/*
+ * verification:
+ *   feature: Promise.prototype.finally
+ *   status: ES2018
+ *   stage4Date: 2018-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-promise-finally
+ */
 function asyncOperation(value, shouldFail = false) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -304,6 +313,15 @@ withTimeout(delayedPromise("data", 500), 200)
  * - Collecting partial results
  */
 
+/*
+ * verification:
+ *   feature: Promise.allSettled
+ *   status: ES2020
+ *   stage4Date: 2019-07
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-promise-allSettled
+ */
 console.log("\n=== Promise.allSettled Demo ===\n");
 
 const promises = [
@@ -365,6 +383,7 @@ console.log("\n=== Promise.any Demo ===\n");
 /*
  * verification:
  *   feature: Promise.any
+ *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
  *   lastVerified: 2026-09-01
@@ -444,6 +463,7 @@ traditionalResolve("hello");
 /*
  * verification:
  *   feature: Promise.withResolvers
+ *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
  *   lastVerified: 2026-09-01
@@ -784,6 +804,7 @@ console.log("=== Promise.try (ES2025) Demo ===\n");
 /*
  * verification:
  *   feature: Promise.try
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-09-01

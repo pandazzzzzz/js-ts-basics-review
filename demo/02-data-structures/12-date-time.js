@@ -773,7 +773,7 @@ console.log("  6. Store dates as strings/numbers in JSON, not raw Date objects")
 console.log("\n=== Cross-references ===");
 console.log("📘 05-numbers-math.js - Numbers and Math");
 console.log("📘 ../06-advanced/data-processing/42-intl-api.js - Internationalization API");
-console.log("📘 ../06-advanced/metaprogramming/50-reserved.js - Temporal API (ES2027)");
+console.log("📘 ../06-advanced/es-features/39-7-es2027-future.js - Temporal API (ES2027)");
 
 // ============================================
 // TypeScript Comparison

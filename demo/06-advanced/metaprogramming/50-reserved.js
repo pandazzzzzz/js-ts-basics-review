@@ -63,6 +63,7 @@ console.log("\n=== Recent Standardized Features ===");
 /*
  * verification:
  *   feature: Import Attributes
+ *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
  *   lastVerified: 2026-09-01

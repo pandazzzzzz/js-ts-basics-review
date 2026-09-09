@@ -322,6 +322,16 @@ console.log("Average:", average); // 3
  * - flatMap only flattens depth 1
  */
 
+/*
+ * verification:
+ *   feature: Array.prototype.flat / flatMap
+ *   status: ES2019
+ *   stage4Date: 2019-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-flatMap
+ */
+
 console.log("\n=== 5. flat / flatMap Demo ===");
 
 // 5.1 flat - basic flattening

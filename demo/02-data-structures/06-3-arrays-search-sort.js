@@ -74,6 +74,7 @@ console.log("Index of > 100 (not found):", notFoundIndex); // -1
 /*
  * verification:
  *   feature: findLast
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01
@@ -86,6 +87,7 @@ console.log("Last occurrence of 4:", findLastExample); // 4
 /*
  * verification:
  *   feature: findLastIndex
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
  *   lastVerified: 2026-09-01
@@ -120,6 +122,15 @@ console.log("All even:", allEven); // false
 // - Returns boolean
 // - Uses SameValueZero comparison (NaN === NaN)
 // - Can specify start index with fromIndex
+/*
+ * verification:
+ *   feature: Array.prototype.includes
+ *   status: ES2016
+ *   stage4Date: 2015-11
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/Array.prototype.includes
+ */
 const hasThree = numbers.includes(3);
 console.log("\nincludes - Contains:");
 console.log("Has 3:", hasThree); // true
@@ -303,6 +314,7 @@ console.log("\n=== 3. Immutable Array Methods (ES2023) ===");
 /*
  * verification:
  *   feature: toSorted
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01
@@ -318,6 +330,7 @@ console.log("Sorted:", sortedCopy); // [1, 1, 3, 4, 5]
 /*
  * verification:
  *   feature: toReversed
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01
@@ -333,6 +346,7 @@ console.log("Reversed:", reversedCopy); // [5, 4, 3, 2, 1]
 /*
  * verification:
  *   feature: with
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01
@@ -352,6 +366,7 @@ console.log("With at(-1) = 100:", withNegative); // [1, 2, 3, 4, 100]
 /*
  * verification:
  *   feature: toSpliced
+ *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
  *   lastVerified: 2026-09-01

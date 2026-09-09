@@ -316,6 +316,19 @@ processData({
   country: "USA",
 });
 
+// Trailing commas in function parameter lists and calls (ES2017)
+// - A comma after the last parameter/argument is valid and common for
+//   cleaner multi-line diffs (this processData(...) call above uses one)
+/*
+ * verification:
+ *   feature: Trailing commas in function params
+ *   status: ES2017
+ *   stage4Date: 2016-07
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-trailing-function-commas
+ */
+
 // ============================================
 // Common Pitfalls
 // ============================================

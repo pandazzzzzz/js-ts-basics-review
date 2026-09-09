@@ -517,6 +517,15 @@ console.log("\nES2019 JSON Improvements:");
 // - Ensures output is valid UTF-8
 // - Escapes lone surrogates (U+D800 to U+DFFF)
 // - Previously, lone surrogates could break JSON.parse
+/*
+ * verification:
+ *   feature: Well-formed JSON.stringify
+ *   status: ES2019
+ *   stage4Date: 2019-01
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-well-formed-stringify
+ */
 const withLoneSurrogate = {
   loneSurrogate: "\uD800", // Lone high surrogate
 };
@@ -535,6 +544,15 @@ console.log("    Parsed back successfully:", parsedBack);
 // - JavaScript string literals can now contain unescaped U+2028 (LINE SEPARATOR)
 // - JavaScript string literals can now contain unescaped U+2029 (PARAGRAPH SEPARATOR)
 // - These were previously syntax errors in JS but valid in JSON
+/*
+ * verification:
+ *   feature: JSON superset
+ *   status: ES2019
+ *   stage4Date: 2018-05
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-09
+ *   source: https://github.com/tc39/proposal-json-superset
+ */
 console.log("\n  JSON Superset (ES2019):");
 
 // Before ES2019, these characters required escaping in JS

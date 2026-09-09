@@ -428,6 +428,262 @@
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (promise-any-for-stage-4); part of Promise.any proposal",
       "url": "https://github.com/tc39/proposal-promise-any"
+    },
+    "import.meta": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2020-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2020-03 (notes march-31 'importmeta-for-stage-4')",
+      "url": "https://github.com/tc39/notes/blob/HEAD/meetings/2020-03/march-31.md#importmeta-for-stage-4"
+    },
+    "Optional Chaining": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-12",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-12 (notes december-4 'optional-chaining-for-stage-4'); ?. operator",
+      "url": "https://github.com/tc39/proposal-optional-chaining"
+    },
+    "Nullish Coalescing": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-12",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-12 (notes december-4); ?? operator",
+      "url": "https://github.com/tc39/proposal-nullish-coalescing"
+    },
+    "for-in mechanics": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-12",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-12 (notes december-4); specifies for-in enumeration order across engines",
+      "url": "https://github.com/tc39/proposal-for-in-order"
+    },
+    "globalThis": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-10",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-10 (notes october-1 'globalthis-to-stage-4'); cross-realm global object",
+      "url": "https://github.com/tc39/proposal-global"
+    },
+    "Promise.allSettled": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled-for-stage-4')",
+      "url": "https://github.com/tc39/proposal-promise-allSettled"
+    },
+    "import() (dynamic import)": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-06",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-06 (notes june-4 'dynamic-import-for-stage-4'); async module import expression",
+      "url": "https://github.com/tc39/proposal-dynamic-import"
+    },
+    "BigInt": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-03 (notes mar-27 'bigint...for-stage-4'); arbitrary-precision integers",
+      "url": "https://github.com/tc39/proposal-bigint"
+    },
+    "String.prototype.matchAll": {
+      "status": "ES2020",
+      "stage": 4,
+      "stage4Date": "2019-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-03 (notes mar-26); returns iterator of all match objects",
+      "url": "https://github.com/tc39/proposal-string-matchall"
+    },
+    "Array.prototype.flat / flatMap": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2019-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-01 (notes jan-29)",
+      "url": "https://github.com/tc39/proposal-flatMap"
+    },
+    "String.prototype.trimStart / trimEnd": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2019-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-01 (notes jan-29); trimLeft/trimRight are non-standard aliases",
+      "url": "https://github.com/tc39/proposal-string-left-right-trim"
+    },
+    "Object.fromEntries": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2019-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-01 (notes jan-29); inverse of Object.entries",
+      "url": "https://github.com/tc39/proposal-object-from-entries"
+    },
+    "Well-formed JSON.stringify": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2019-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-01 (notes jan-29); prevents JSON.stringify from emitting lone surrogates",
+      "url": "https://github.com/tc39/proposal-well-formed-stringify"
+    },
+    "Optional catch binding": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2019-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2019-01 (notes jan-29 'optional-catch-binding-for-stage-4'); catch {} with no parameter",
+      "url": "https://github.com/tc39/proposal-optional-catch-binding"
+    },
+    "Symbol.prototype.description": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2018-11",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-11 (notes nov-27 'symbol-description-for-stage-4')",
+      "url": "https://github.com/tc39/proposal-Symbol-description"
+    },
+    "JSON superset": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2018-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-05 (notes may-22); ECMAScript becomes a syntactic superset of JSON (U+2028/U+2029 allowed in strings)",
+      "url": "https://github.com/tc39/proposal-json-superset"
+    },
+    "Function.prototype.toString revision": {
+      "status": "ES2019",
+      "stage": 4,
+      "stage4Date": "2018-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-05 (notes may-22); requires toString() to return the original source text when possible",
+      "url": "https://github.com/tc39/Function-prototype-toString-revision"
+    },
+    "Asynchronous Iteration": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2018-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-01 (notes jan-25); for-await-of, async generators, AsyncIterator protocol",
+      "url": "https://github.com/tc39/proposal-async-iteration"
+    },
+    "Promise.prototype.finally": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2018-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-01 (notes jan-24)",
+      "url": "https://github.com/tc39/proposal-promise-finally"
+    },
+    "RegExp Lookbehind Assertions": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2018-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-01 (notes jan-24); (?<=...) positive and (?<!...) negative lookbehind",
+      "url": "https://github.com/tc39/proposal-regexp-lookbehind"
+    },
+    "RegExp Unicode Property Escapes": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2018-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-01 (notes jan-24); \\p{...}/\\P{...} in Unicode-aware regex",
+      "url": "https://github.com/tc39/proposal-regexp-unicode-property-escapes"
+    },
+    "Rest/Spread Properties": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2018-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2018-01 (notes jan-23 'object-rest-spread-properties-for-stage-4'); object spread/rest {...rest}",
+      "url": "https://github.com/tc39/proposal-object-rest-spread"
+    },
+    "RegExp named capture groups": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2017-11",
+      "stage4DateType": "exact",
+      "note": "Conditional Stage 4 at 2017-11 (notes nov-28, pending editor approval); (?<name>...) syntax, accessed via groups",
+      "url": "https://github.com/tc39/proposal-regexp-named-groups"
+    },
+    "RegExp s (dotAll) flag": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2017-11",
+      "stage4DateType": "exact",
+      "note": "Conditional Stage 4 at 2017-11 (notes nov-28, pending editor approval); /s flag makes . match line terminators",
+      "url": "https://github.com/tc39/proposal-regexp-dotall-flag"
+    },
+    "Shared memory and Atomics": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2017-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2017-01 (notes jan-24 'seeking-stage-4-for-sharedarraybuffer'); SharedArrayBuffer + Atomics",
+      "url": "https://github.com/tc39/proposal-ecmascript-sharedmem"
+    },
+    "Async functions": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2016-07",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2016-07 (notes jul-26 'async-functions-for-stage-4'); async/await syntax",
+      "url": "https://github.com/tc39/ecmascript-asyncawait"
+    },
+    "Trailing commas in function params": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2016-07",
+      "stage4DateType": "exact",
+      "note": "Conditional Stage 4 at 2016-07 (notes jul-26, pending Test262 tests; subsequently merged); trailing commas in parameter lists and calls",
+      "url": "https://github.com/tc39/proposal-trailing-function-commas"
+    },
+    "Object.getOwnPropertyDescriptors": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2016-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2016-05 (notes may-25)",
+      "url": "https://github.com/tc39/proposal-object-getownpropertydescriptors"
+    },
+    "String padding": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2016-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2016-05 (notes may-25); String.prototype.padStart / padEnd",
+      "url": "https://github.com/tc39/proposal-string-pad-start-end"
+    },
+    "Object.values / Object.entries": {
+      "status": "ES2017",
+      "stage": 4,
+      "stage4Date": "2016-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2016-03 (notes march-29)",
+      "url": "https://github.com/tc39/proposal-object-values-entries"
+    },
+    "Exponentiation operator": {
+      "status": "ES2016",
+      "stage": 4,
+      "stage4Date": "2016-01",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2016-01 (notes jan-28); ** operator (a ** b) and **= assignment",
+      "url": "https://github.com/tc39/proposal-exponentiation-operator"
+    },
+    "Array.prototype.includes": {
+      "status": "ES2016",
+      "stage": 4,
+      "stage4Date": "2015-11",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2015-11 (notes nov-17); SameValueZero equality check, distinguishes from indexOf's Strict Equality",
+      "url": "https://github.com/tc39/Array.prototype.includes"
     }
   }
 }

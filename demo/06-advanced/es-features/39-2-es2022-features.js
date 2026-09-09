@@ -142,6 +142,7 @@ console.log("\n--- 3. .at() Method ---\n");
 /*
  * verification:
  *   feature: at
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
  *   lastVerified: 2026-09-01
@@ -244,6 +245,7 @@ console.log("\n--- 5. Error.cause ---\n");
 /*
  * verification:
  *   feature: Error.cause
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
  *   lastVerified: 2026-09-01
@@ -330,6 +332,7 @@ console.log("\n--- 7. RegExp Match Indices (/d flag) ---\n");
 /*
  * verification:
  *   feature: RegExp Match Indices
+ *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
  *   lastVerified: 2026-09-01
@@ -461,66 +464,82 @@ console.log("📘 Strings: 04-strings.js");
 📘 See TypeScript comparison file: 39-2-es2022-features-ts-comparison.ts
 */
 
-// == verification block ==
-// feature: Class Static Block
-// stage4Date: 2021-08
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-class-static-block
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Class Static Block
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-class-static-block
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: at
-// stage4Date: 2021-08
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-relative-indexing-method
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: at
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-relative-indexing-method
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Object.hasOwn
-// stage4Date: 2021-08
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-accessible-object-hasownproperty
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Object.hasOwn
+ *   status: ES2022
+ *   stage4Date: 2021-08
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-accessible-object-hasownproperty
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Ergonomic brand checks
-// stage4Date: 2021-07
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-private-fields-in-in
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Ergonomic brand checks
+ *   status: ES2022
+ *   stage4Date: 2021-07
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-private-fields-in-in
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Error.cause
-// stage4Date: 2021-10
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-error-cause
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Error.cause
+ *   status: ES2022
+ *   stage4Date: 2021-10
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-error-cause
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Top-level await
-// stage4Date: 2021-05
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-top-level-await
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Top-level await
+ *   status: ES2022
+ *   stage4Date: 2021-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-top-level-await
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: Private class fields
-// stage4Date: 2021-04
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-class-fields
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: Private class fields
+ *   status: ES2022
+ *   stage4Date: 2021-04
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-class-fields
+ *   lastVerified: 2026-09-01
+ */
 
-// == verification block ==
-// feature: RegExp Match Indices
-// stage4Date: 2021-05
-// stage4DateType: exact
-// source: https://github.com/tc39/proposal-regexp-match-indices
-// lastVerified: 2026-09-01
-// == end verification block ==
+/*
+ * verification:
+ *   feature: RegExp Match Indices
+ *   status: ES2022
+ *   stage4Date: 2021-05
+ *   stage4DateType: exact
+ *   source: https://github.com/tc39/proposal-regexp-match-indices
+ *   lastVerified: 2026-09-01
+ */
