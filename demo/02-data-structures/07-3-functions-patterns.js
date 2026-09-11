@@ -202,9 +202,9 @@ function exampleFunc(x, y) {
  * verification:
  *   feature: Function.prototype.toString revision
  *   status: ES2019
- *   stage4Date: 2018-05
+ *   stage4Date: 2018-11
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
+ *   lastVerified: 2026-09-11
  *   source: https://github.com/tc39/Function-prototype-toString-revision
  */
 

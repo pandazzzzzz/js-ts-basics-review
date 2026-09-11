@@ -715,9 +715,9 @@ try {
  * verification:
  *   feature: Optional catch binding
  *   status: ES2019
- *   stage4Date: 2019-01
+ *   stage4Date: 2018-05
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
+ *   lastVerified: 2026-09-11
  *   source: https://github.com/tc39/proposal-optional-catch-binding
  */
 console.log("\nOptional Catch Binding (ES2019):");

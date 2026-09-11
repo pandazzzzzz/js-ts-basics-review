@@ -488,9 +488,9 @@
     "BigInt": {
       "status": "ES2020",
       "stage": 4,
-      "stage4Date": "2019-03",
+      "stage4Date": "2019-06",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2019-03 (notes mar-27 'bigint...for-stage-4'); arbitrary-precision integers",
+      "note": "Stage 4 at 2019-06 (notes june-4 'bigint-to-stage-4', pending editor signoff); arbitrary-precision integers",
       "url": "https://github.com/tc39/proposal-bigint"
     },
     "String.prototype.matchAll": {
@@ -536,9 +536,9 @@
     "Optional catch binding": {
       "status": "ES2019",
       "stage": 4,
-      "stage4Date": "2019-01",
+      "stage4Date": "2018-05",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2019-01 (notes jan-29 'optional-catch-binding-for-stage-4'); catch {} with no parameter",
+      "note": "Stage 4 at 2018-05 (notes may-22 '11.i.d. optional-catch-binding-for-stage-4'); catch {} with no parameter",
       "url": "https://github.com/tc39/proposal-optional-catch-binding"
     },
     "Symbol.prototype.description": {
@@ -560,9 +560,9 @@
     "Function.prototype.toString revision": {
       "status": "ES2019",
       "stage": 4,
-      "stage4Date": "2018-05",
+      "stage4Date": "2018-11",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2018-05 (notes may-22); requires toString() to return the original source text when possible",
+      "note": "Stage 4 at 2018-11 (notes nov-27 'functionprototypetostring-revision-for-stage-4'); requires toString() to return the original source text when possible",
       "url": "https://github.com/tc39/Function-prototype-toString-revision"
     },
     "Asynchronous Iteration": {
@@ -634,7 +634,7 @@
       "stage": 4,
       "stage4Date": "2016-07",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2016-07 (notes jul-26 'async-functions-for-stage-4'); async/await syntax",
+      "note": "Stage 4 at 2016-07 (notes jul-28 '10.iv-async-functions'); async/await syntax",
       "url": "https://github.com/tc39/ecmascript-asyncawait"
     },
     "Trailing commas in function params": {

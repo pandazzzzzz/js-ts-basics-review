@@ -707,9 +707,9 @@ console.log("Sig digits 0.00123:", sigDigitsFormatter.format(0.00123)); // "0.00
  * verification:
  *   feature: BigInt
  *   status: ES2020
- *   stage4Date: 2019-03
+ *   stage4Date: 2019-06
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
+ *   lastVerified: 2026-09-11
  *   source: https://github.com/tc39/proposal-bigint
  */
 console.log("\n=== BigInt Creation ===");
