@@ -716,6 +716,28 @@ console.log("String.raw:", String.raw`\n\t`); // "\n\t" (4 characters: backslash
 console.log("Length regular:", `\n\t`.length); // 2
 console.log("Length raw:", String.raw`\n\t`.length); // 4
 
+// Lifting template literal restriction (ES2018)
+// - Tagged templates may contain invalid escape sequences (\unicode, \xG, \8, \9)
+// - Untagged templates throw a SyntaxError on these; tagged templates lift the restriction
+// - The tag's cooked string is undefined for such segments; strings.raw keeps the raw text
+/*
+ * verification:
+ *   feature: Lifting template literal restriction
+ *   status: ES2018
+ *   stage4Date: 2017-03
+ *   stage4DateType: exact
+ *   lastVerified: 2026-09-12
+ *   source: https://github.com/tc39/proposal-template-literal-revision
+ */
+function inspectCooked(strings) {
+  return { cooked: strings[0], raw: strings.raw[0] };
+}
+console.log("\nLifting template literal restriction (ES2018):");
+const lifted = inspectCooked`\unicode \xG`;
+console.log("cooked:", lifted.cooked); // undefined (invalid escape)
+console.log("raw:", lifted.raw); // "\unicode \xG" (literal backslashes, no SyntaxError)
+// Before ES2018, the invalid escapes above were a SyntaxError.
+
 // ============================================
 // 13. Common Pitfalls & Best Practices
 // ============================================

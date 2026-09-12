@@ -621,6 +621,14 @@
       "note": "Conditional Stage 4 at 2017-11 (notes nov-28, pending editor approval); /s flag makes . match line terminators",
       "url": "https://github.com/tc39/proposal-regexp-dotall-flag"
     },
+    "Lifting template literal restriction": {
+      "status": "ES2018",
+      "stage": 4,
+      "stage4Date": "2017-03",
+      "stage4DateType": "exact",
+      "note": "Stage 4 at 2017-03 (notes mar-21 '10ia-template-literal-updates'); tagged templates may contain invalid escape sequences (cooked=undefined, raw preserved)",
+      "url": "https://github.com/tc39/proposal-template-literal-revision"
+    },
     "Shared memory and Atomics": {
       "status": "ES2017",
       "stage": 4,
