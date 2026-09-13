@@ -593,16 +593,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
 
 /*
  * verification:
- *   feature: Intl.DurationFormat
- *   status: ES2025
- *   stage4Date: 2025-07
- *   stage4DateType: milestone
- *   source: https://tc39.es/proposal-intl-duration-format
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: Set methods
  *   status: ES2025
  *   stage4Date: 2024-04
@@ -618,46 +608,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   stage4Date: 2024-10
  *   stage4DateType: exact
  *   source: https://github.com/tc39/proposal-iterator-helpers
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: RegExp.escape
- *   status: ES2025
- *   stage4Date: 2025-02
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-regex-escaping
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Promise.try
- *   status: ES2025
- *   stage4Date: 2024-10
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-promise-try
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Float16Array
- *   status: ES2025
- *   stage4Date: 2025-02
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-float16array
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: JSON Modules
- *   status: ES2025
- *   stage4Date: 2024-10
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-json-modules
  *   lastVerified: 2026-09-01
  */
 
@@ -691,12 +641,3 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   lastVerified: 2026-09-01
  */
 
-/*
- * verification:
- *   feature: Redeclarable global eval vars
- *   status: ES2025
- *   stage4Date: 2025-02
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-redeclarable-global-eval-vars
- *   lastVerified: 2026-09-01
- */

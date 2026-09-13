@@ -492,26 +492,6 @@ console.log("📘 Iterators: 22-iterators-generators.js");
 
 /*
  * verification:
- *   feature: Array.fromAsync
- *   status: ES2026
- *   stage4Date: 2025-05
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-array-from-async
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Math.sumPrecise
- *   status: ES2026
- *   stage4Date: 2025-07
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-math-sum
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: Error.isError
  *   status: ES2026
  *   stage4Date: 2025-05
@@ -520,42 +500,3 @@ console.log("📘 Iterators: 22-iterators-generators.js");
  *   lastVerified: 2026-09-01
  */
 
-/*
- * verification:
- *   feature: Uint8Array Base64
- *   status: ES2026
- *   stage4Date: 2025-07
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-arraybuffer-base64
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Upsert
- *   status: ES2026
- *   stage4Date: 2026-01
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-upsert
- *   lastVerified: 2026-09-03
- */
-
-/*
- * verification:
- *   feature: JSON.parse source text access
- *   status: ES2026
- *   stage4Date: 2025-11
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-json-parse-with-source
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Iterator Sequencing
- *   status: ES2026
- *   stage4Date: 2025-11
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-iterator-sequencing
- *   lastVerified: 2026-09-01
- */

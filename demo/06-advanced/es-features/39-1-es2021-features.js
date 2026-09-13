@@ -321,26 +321,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
 
 /*
  * verification:
- *   feature: WeakRef
- *   status: ES2021
- *   stage4Date: 2020-07
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-weakrefs
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: FinalizationRegistry
- *   status: ES2021
- *   stage4Date: 2020-07
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-weakrefs
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: Promise.any
  *   status: ES2021
  *   stage4Date: 2020-07

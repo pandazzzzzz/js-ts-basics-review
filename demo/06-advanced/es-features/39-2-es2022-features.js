@@ -476,16 +476,6 @@ console.log("📘 Strings: 04-strings.js");
 
 /*
  * verification:
- *   feature: at
- *   status: ES2022
- *   stage4Date: 2021-08
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-relative-indexing-method
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: Object.hasOwn
  *   status: ES2022
  *   stage4Date: 2021-08
@@ -506,16 +496,6 @@ console.log("📘 Strings: 04-strings.js");
 
 /*
  * verification:
- *   feature: Error.cause
- *   status: ES2022
- *   stage4Date: 2021-10
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-error-cause
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: Top-level await
  *   status: ES2022
  *   stage4Date: 2021-05
@@ -531,15 +511,5 @@ console.log("📘 Strings: 04-strings.js");
  *   stage4Date: 2021-04
  *   stage4DateType: exact
  *   source: https://github.com/tc39/proposal-class-fields
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: RegExp Match Indices
- *   status: ES2022
- *   stage4Date: 2021-05
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-regexp-match-indices
  *   lastVerified: 2026-09-01
  */

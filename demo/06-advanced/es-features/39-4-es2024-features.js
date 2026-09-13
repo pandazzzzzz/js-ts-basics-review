@@ -461,61 +461,11 @@ console.log("📘 Arrays: 06-arrays.js");
 
 /*
  * verification:
- *   feature: Object.groupBy
- *   status: ES2024
- *   stage4Date: 2023-11
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-array-grouping
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Map.groupBy
- *   status: ES2024
- *   stage4Date: 2023-11
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-array-grouping
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Promise.withResolvers
- *   status: ES2024
- *   stage4Date: 2023-11
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-promise-with-resolvers
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
  *   feature: RegExp v flag
  *   status: ES2024
  *   stage4Date: 2023-05
  *   stage4DateType: exact
  *   source: https://github.com/tc39/proposal-regexp-v-flag
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: ArrayBuffer.transfer
- *   status: ES2024
- *   stage4Date: 2024-02
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-arraybuffer-transfer
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Resizable ArrayBuffer
- *   status: ES2024
- *   stage4Date: 2023-09
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-resizablearraybuffer
  *   lastVerified: 2026-09-01
  */
 
@@ -529,12 +479,3 @@ console.log("📘 Arrays: 06-arrays.js");
  *   lastVerified: 2026-09-01
  */
 
-/*
- * verification:
- *   feature: Atomics.waitAsync
- *   status: ES2024
- *   stage4Date: 2023-05
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-atomics-wait-async
- *   lastVerified: 2026-09-01
- */

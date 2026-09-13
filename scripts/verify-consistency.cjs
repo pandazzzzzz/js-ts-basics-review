@@ -87,6 +87,10 @@ for (const f of jsFiles) {
 // ---------- check 1+2: block ↔ reference reconciliation ----------
 const covered = new Set();
 const warnings = [];
+// Detect a feature's verification block appearing more than once in the SAME file
+// (body + footer duplicate). Cross-file repeats are legitimate (a feature may be
+// taught in several demos); only intra-file duplicates are flagged.
+const fileFeatureSeen = new Map();
 for (const b of blocks) {
   if (!b.feature) {
     fail(`${b.file}:${b.line} — verification block has no "feature:" field`);
@@ -97,6 +101,13 @@ for (const b of blocks) {
     fail(`${b.file}:${b.line} — feature "${b.feature}" not found in reference/`);
     continue;
   }
+  const ffKey = `${b.file}::${key}`;
+  if (fileFeatureSeen.has(ffKey)) {
+    fail(
+      `${b.file}:${b.line} — duplicate verification block for "${key}" (already at line ${fileFeatureSeen.get(ffKey)})`
+    );
+  }
+  fileFeatureSeen.set(ffKey, b.line);
   covered.add(key);
   const r = reference[key];
   for (const field of ["status", "stage4Date", "stage4DateType"]) {

@@ -908,22 +908,3 @@ console.log(
 📘 See TypeScript comparison file: 42-intl-api-ts-comparison.ts
 */
 
-/*
- * verification:
- *   feature: Intl.PluralRules
- *   status: ES2018
- *   stage4Date: 2017-12
- *   stage4DateType: milestone
- *   source: https://github.com/tc39/proposal-intl-plural-rules
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Intl.DurationFormat
- *   status: ES2025
- *   stage4Date: 2025-07
- *   stage4DateType: milestone
- *   source: https://tc39.es/proposal-intl-duration-format
- *   lastVerified: 2026-09-01
- */

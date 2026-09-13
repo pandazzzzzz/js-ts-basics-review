@@ -368,33 +368,3 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   source: https://github.com/tc39/proposal-change-array-by-copy
  *   lastVerified: 2026-09-01
  */
-
-/*
- * verification:
- *   feature: findLast
- *   status: ES2023
- *   stage4Date: 2022-06
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-array-find-from-last
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: findLastIndex
- *   status: ES2023
- *   stage4Date: 2022-06
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-array-find-from-last
- *   lastVerified: 2026-09-01
- */
-
-/*
- * verification:
- *   feature: Hashbang Syntax
- *   status: ES2023
- *   stage4Date: 2022-07
- *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-hashbang
- *   lastVerified: 2026-09-01
- */
