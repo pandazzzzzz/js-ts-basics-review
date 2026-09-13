@@ -474,7 +474,7 @@
       "stage": 4,
       "stage4Date": "2019-07",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled-for-stage-4')",
+      "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled', seeking Stage 4 consensus)",
       "url": "https://github.com/tc39/proposal-promise-allSettled"
     },
     "import() (dynamic import)": {
