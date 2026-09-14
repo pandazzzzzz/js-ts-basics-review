@@ -79,8 +79,6 @@ if (typeof Math.sumPrecise === "function") {
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-math-sum
  */
 
 // ============================================
@@ -94,8 +92,6 @@ console.log("\n--- 2. Array.fromAsync() ---\n");
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-array-from-async
  */
 
 // 📘 Official MDN examples (Array.fromAsync):
@@ -183,8 +179,6 @@ console.log("\n--- 4. Uint8Array Base64/Hex Methods ---\n");
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-arraybuffer-base64
  */
 
 const data = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]); // "Hello World"
@@ -235,8 +229,6 @@ console.log("\n--- 5. Map.prototype.getOrInsert / getOrInsertComputed ---\n");
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2026-01
- *   lastVerified: 2026-09-03
- *   source: https://github.com/tc39/proposal-upsert
  */
 
 // The "upsert" proposal ships as getOrInsert/getOrInsertComputed. An earlier draft
@@ -305,8 +297,6 @@ console.log("\n--- 6. JSON.parse Source Text Access ---\n");
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-json-parse-with-source
  */
 
 // Access the original source text of parsed JSON values
@@ -361,8 +351,6 @@ console.log("\n--- 7. Iterator Sequencing ---\n");
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-iterator-sequencing
  */
 
 if (typeof Iterator.concat === "function") {
@@ -496,7 +484,4 @@ console.log("📘 Iterators: 22-iterators-generators.js");
  *   status: ES2026
  *   stage4Date: 2025-05
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-is-error
- *   lastVerified: 2026-09-01
  */
-

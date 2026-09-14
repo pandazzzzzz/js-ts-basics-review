@@ -162,8 +162,6 @@ console.log({ nullType, undefinedType, symbolType, bigIntType });
  *   status: ES2020
  *   stage4Date: 2019-10
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-global
  */
 console.log("\n=== globalThis (ES2020) ===");
 console.log("typeof globalThis:", typeof globalThis); // "object"

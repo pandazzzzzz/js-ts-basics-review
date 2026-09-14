@@ -204,8 +204,6 @@ function exampleFunc(x, y) {
  *   status: ES2019
  *   stage4Date: 2018-11
  *   stage4DateType: exact
- *   lastVerified: 2026-09-11
- *   source: https://github.com/tc39/Function-prototype-toString-revision
  */
 
 console.log("\nFunction toString:");

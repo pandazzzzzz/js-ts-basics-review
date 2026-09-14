@@ -201,8 +201,6 @@ console.log("After trim:", `"${modStr.trim()}"`); // "Hello World"
  *   status: ES2019
  *   stage4Date: 2019-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-string-left-right-trim
  */
 console.log("\n=== trimStart() Method ===");
 console.log("trimStart():", `"${modStr.trimStart()}"`); // "Hello World  "
@@ -222,8 +220,6 @@ console.log("trimEnd():", `"${modStr.trimEnd()}"`); // "  Hello World"
  *   status: ES2017
  *   stage4Date: 2016-05
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-string-pad-start-end
  */
 // - Useful for formatting numbers, alignment
 console.log("\n=== padStart() Method ===");
@@ -286,8 +282,6 @@ console.log("replace(/cat/g, 'dog'):", replaceStr.replace(/cat/g, "dog"));
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-06
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== replaceAll() Method ===");
 console.log("replaceAll('cat', 'dog'):", replaceStr.replaceAll("cat", "dog"));
@@ -439,8 +433,6 @@ console.log("NFKD:", accentStr.normalize("NFKD")); // Compatibility decompositio
  *   status: ES2020
  *   stage4Date: 2019-03
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-string-matchall
  */
 console.log("\n=== matchAll() Method ===");
 const textMatchAll = "test1 test2 test3";
@@ -491,8 +483,6 @@ console.log("strAt.at(-1):", strAt.at(-1)); // "d" (at() supports negative)
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== isWellFormed() / toWellFormed() Method (ES2024) ===");
 const wellFormedStr = "Hello 😀 World"; // emoji is a valid surrogate pair
@@ -726,8 +716,6 @@ console.log("Length raw:", String.raw`\n\t`.length); // 4
  *   status: ES2018
  *   stage4Date: 2017-03
  *   stage4DateType: exact
- *   lastVerified: 2026-09-12
- *   source: https://github.com/tc39/proposal-template-literal-revision
  */
 function inspectCooked(strings) {
   return { cooked: strings[0], raw: strings.raw[0] };

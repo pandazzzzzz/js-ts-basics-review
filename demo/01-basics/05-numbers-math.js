@@ -79,8 +79,6 @@ console.log("1.5e-9:", nano);
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const largeNumber = 1_000_000; // 1 million
 const billion2 = 1_000_000_000;
@@ -709,8 +707,6 @@ console.log("Sig digits 0.00123:", sigDigitsFormatter.format(0.00123)); // "0.00
  *   status: ES2020
  *   stage4Date: 2019-06
  *   stage4DateType: exact
- *   lastVerified: 2026-09-11
- *   source: https://github.com/tc39/proposal-bigint
  */
 console.log("\n=== BigInt Creation ===");
 const bigInt1 = 123n;

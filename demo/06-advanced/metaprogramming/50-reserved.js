@@ -66,8 +66,6 @@ console.log("\n=== Recent Standardized Features ===");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Import Attributes (ES2025): import config from './c.json' with { type: 'json' };");
 
@@ -112,8 +110,6 @@ console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current stan
  *   feature: Records & Tuples
  *   status: Withdrawn
  *   stage: -1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-record-tuple
  */
 console.log("// Records & Tuples (Withdrawn) — historical syntax:");
 console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
@@ -128,8 +124,6 @@ console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
  * verification:
  *   feature: Composites
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Composites (Stage 1) — future syntax, illustrative:");
 console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
@@ -144,8 +138,6 @@ console.log("//   map.set(Composite { x: 1 }, 'o'); map.get(Composite { x: 1 });
  * verification:
  *   feature: Decimal
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Decimal (Stage 1) — future syntax, illustrative:");
 console.log("//   0.1 + 0.2 === 0.3;       // false today (binary float)");
@@ -160,8 +152,6 @@ console.log("//   price + 0.02m === 0.12m; // true (exact, no rounding)");
  * verification:
  *   feature: Do Expressions
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Do Expressions (Stage 1) — future syntax, illustrative:");
 console.log("//   const label = do {");
@@ -173,8 +163,6 @@ console.log("//   }; // evaluates to 'yes' or 'no'");
  * verification:
  *   feature: Pattern Matching
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pattern Matching (Stage 1) — future syntax, illustrative:");
 console.log("//   const r = match (value) {");
@@ -188,8 +176,6 @@ console.log("//   };");
  * verification:
  *   feature: Pipeline Operator
  *   status: Stage 2
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 console.log("// Pipeline Operator (Stage 2) — future syntax, illustrative:");
 console.log("//   const r = input");
@@ -202,8 +188,6 @@ console.log("//     |> capitalize;  // instead of capitalize(trim(lowercase(inpu
  * verification:
  *   feature: Partial Application
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/stage-1-proposals.md
  */
 // `?` placeholder for partial application, deriving new functions from existing ones.
 // See tc39/proposal-partial-application.
@@ -217,8 +201,6 @@ console.log("//   addFive(3, 2); // 10");
  * verification:
  *   feature: Decorators
  *   status: Stage 2.7
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 // Class/method decorators for metadata-style programming, similar to Python/Java
 // annotations. Nearing Stage 3, not yet finalized.
@@ -236,8 +218,6 @@ console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
  * verification:
  *   feature: Module Fragments
  *   status: Stage 2
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 // Inline module fragments within a file, for organizing code and tests.
 // See tc39/proposal-module-fragments.

@@ -394,8 +394,6 @@ console.log("ClassWithStaticBlock.y:", ClassWithStaticBlock.y); // 20
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-04
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 /**
  * Private and Protected Properties (ES2022)
@@ -598,8 +596,6 @@ console.log("Value:", legacy.getValue());
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // A static block `static { ... }` runs once when the class is evaluated.
 // Unlike static field initializers (each a single expression), a static block
@@ -654,8 +650,6 @@ console.log("AppConfig.retries:", AppConfig.retries); // 3
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // `#field in obj` returns true/false: does `obj` possess the private field
 // declared in THIS class? This is a true brand/membership check, unlike the

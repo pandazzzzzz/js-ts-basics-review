@@ -239,8 +239,6 @@ console.log(
  *   stage4DateType: exact
  *   status: ES2026
  *   stage4Date: 2025-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 // Error.isError() (ES2026) — Reliable cross-realm Error checking
 console.log("\n=== Error.isError() (ES2026) ===");
@@ -1254,8 +1252,6 @@ saferAsyncHandling();
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
 // ============================================
@@ -1324,8 +1320,6 @@ try {
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\n=== 10. AggregateError Demo ===");
 

@@ -92,8 +92,6 @@ console.log({ name, age, first, second, rest });
  *   status: ES2020
  *   stage4Date: 2019-12
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-optional-chaining
  */
 const user = {
   name: "Alice",
@@ -130,8 +128,6 @@ console.log("Without user:", getUserName({})); // "Anonymous"
  *   status: ES2020
  *   stage4Date: 2019-12
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-nullish-coalescing
  */
 
 const config = { timeout: 0, debug: "" };
@@ -1028,8 +1024,6 @@ Key modern features (ES2020-ES2023):
  * verification:
  *   feature: Decorators
  *   status: Stage 2.7
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/README.md
  */
 
 // ══════════════════════════════════════════
@@ -1098,8 +1092,6 @@ console.log("  globalThis === globalThis:", globalThis === globalThis); // true
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nError.cause (ES2022):");
 function loadConfig() {
@@ -1124,8 +1116,6 @@ try {
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nClass static block (ES2022):");
 class ConfigLoader {
@@ -1149,8 +1139,6 @@ console.log("  ConfigLoader.settings:", ConfigLoader.settings);
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nTop-level await (ES2022):");
 // Live demonstration — no async IIFE wrapper needed at module top level:
@@ -1169,8 +1157,6 @@ console.log("  // const data = await fetch('https://api.example.com').then(r => 
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nWeakRef / FinalizationRegistry (ES2021):");
 let weakTarget = { data: "cache-me" };
@@ -1189,8 +1175,6 @@ weakTarget = null; // strong reference dropped; eligible for GC
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nObject.groupBy / Map.groupBy (ES2024):");
 const inventory = [
@@ -1212,8 +1196,6 @@ console.log("  Map.groupBy keys:", [...groupedMap.keys()]); // ['fruit', 'veg']
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nPromise.withResolvers (ES2024):");
 const { promise: p, resolve: res } = Promise.withResolvers();
@@ -1230,8 +1212,6 @@ res("done");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp v flag (ES2024):");
 try {
@@ -1252,8 +1232,6 @@ try {
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nSymbol as WeakMap keys (ES2023):");
 const symWm = new WeakMap();

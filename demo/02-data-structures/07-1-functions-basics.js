@@ -325,8 +325,6 @@ processData({
  *   status: ES2017
  *   stage4Date: 2016-07
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-trailing-function-commas
  */
 
 // ============================================

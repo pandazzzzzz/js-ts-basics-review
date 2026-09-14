@@ -77,8 +77,6 @@ console.log("Index of > 100 (not found):", notFoundIndex); // -1
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const findLastExample = [1, 2, 3, 4, 5, 4, 3].findLast(n => n === 4);
 console.log("\nfindLast - Last match (ES2023):");
@@ -90,8 +88,6 @@ console.log("Last occurrence of 4:", findLastExample); // 4
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const findLastIndexExample = [1, 2, 3, 4, 5, 4, 3].findLastIndex(n => n === 4);
 console.log("findLastIndex - Last index (ES2023):");
@@ -128,8 +124,6 @@ console.log("All even:", allEven); // false
  *   status: ES2016
  *   stage4Date: 2015-11
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/Array.prototype.includes
  */
 const hasThree = numbers.includes(3);
 console.log("\nincludes - Contains:");
@@ -317,8 +311,6 @@ console.log("\n=== 3. Immutable Array Methods (ES2023) ===");
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSortedExample = [3, 1, 4, 1, 5];
 const sortedCopy = toSortedExample.toSorted((a, b) => a - b);
@@ -333,8 +325,6 @@ console.log("Sorted:", sortedCopy); // [1, 1, 3, 4, 5]
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toReversedExample = [1, 2, 3, 4, 5];
 const reversedCopy = toReversedExample.toReversed();
@@ -349,8 +339,6 @@ console.log("Reversed:", reversedCopy); // [5, 4, 3, 2, 1]
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const withOriginal = [1, 2, 3, 4, 5];
 const withReplaced = withOriginal.with(2, 99);
@@ -369,8 +357,6 @@ console.log("With at(-1) = 100:", withNegative); // [1, 2, 3, 4, 100]
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2023-01
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const toSplicedExample = [1, 2, 3, 4, 5];
 const splicedCopy = toSplicedExample.toSpliced(2, 2, 99, 100);

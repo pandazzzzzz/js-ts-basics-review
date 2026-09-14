@@ -146,8 +146,6 @@ console.log("After setting length=5:", extendable); // [1, 2, 3, empty × 2]
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 const atExample = [10, 20, 30, 40, 50];
 console.log("\nat() - Safe indexing:");

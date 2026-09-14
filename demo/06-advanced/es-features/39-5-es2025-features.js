@@ -190,8 +190,6 @@ console.log("\n--- 3. RegExp.escape() ---");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-regex-escaping
  */
 
 // Escapes special regex characters in user input
@@ -232,8 +230,6 @@ console.log("\n--- 4. Promise.try() ---");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-promise-try
  */
 
 // Promise.try catches both synchronous and asynchronous errors
@@ -303,8 +299,6 @@ console.log("\n--- 5. Float16Array ---");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#float16array-for-stage-4
  */
 
 // 16-bit floating point array (half-precision)
@@ -333,8 +327,6 @@ console.log("\n--- 6. JSON Modules ---");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2024-10/october-08.md#import-attributes-and-json-modules-for-stage-4
  */
 
 // Import JSON files directly as modules (with type attribute)
@@ -427,8 +419,6 @@ console.log("\n--- 10. Redeclarable Global eval Vars ---");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-09-03
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-02/february-18.md#redeclarable-global-eval-vars-for-stage-4
  */
 
 // What ES2025 changed: `let`/`const` can now redeclare global vars introduced by
@@ -463,8 +453,6 @@ console.log("\n--- 11. Intl.DurationFormat ---");
  *   stage4DateType: milestone
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposal-intl-duration-format
  */
 
 // Format time durations in a locale-aware way
@@ -597,8 +585,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   status: ES2025
  *   stage4Date: 2024-04
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-set-methods
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -607,8 +593,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   status: ES2025
  *   stage4Date: 2024-10
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-iterator-helpers
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -617,8 +601,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   status: ES2025
  *   stage4Date: 2024-10
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-import-attributes
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -627,8 +609,6 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   status: ES2025
  *   stage4Date: 2024-10
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-regexp-modifiers
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -637,7 +617,4 @@ console.log("📘 Intl API: ../data-processing/42-intl-api.js");
  *   status: ES2025
  *   stage4Date: 2024-04
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-duplicate-named-capturing-groups
- *   lastVerified: 2026-09-01
  */
-

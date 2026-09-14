@@ -221,8 +221,6 @@ console.log("Keys:", Object.keys(person));
  *   status: ES2017
  *   stage4Date: 2016-03
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-object-values-entries
  */
 const values = Object.values(person);
 console.log("\nObject.values():");
@@ -249,8 +247,6 @@ for (const [key, value] of Object.entries(person)) {
  *   status: ES2019
  *   stage4Date: 2019-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-object-from-entries
  */
 const entriesArray = [
   ["a", 1],
@@ -306,8 +302,6 @@ console.log("person.hasOwnProperty('toString'):", person.hasOwnProperty("toStrin
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("Object.hasOwn(person, 'name'):", Object.hasOwn(person, "name"));
 
@@ -385,8 +379,6 @@ console.log("\nProperty descriptor:", descriptor);
  *   status: ES2017
  *   stage4Date: 2016-05
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-object-getownpropertydescriptors
  */
 const allDescriptors = Object.getOwnPropertyDescriptors(multiProps);
 console.log("\nAll descriptors:", Object.keys(allDescriptors));
@@ -643,8 +635,6 @@ thisObj.greet.apply(otherObj); // Same as call
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nObject.groupBy() - Array grouping:");
 

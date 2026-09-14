@@ -316,8 +316,6 @@ console.log("'a'.localeCompare('a'):", "a".localeCompare("a")); // 0
  *   status: ES2018
  *   stage4Date: 2017-12
  *   stage4DateType: milestone
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/ecma402/finished-proposals.md
  */
 
 console.log("\n=== Intl.PluralRules ===");
@@ -752,8 +750,6 @@ console.log("- Locale normalization");
  *   stage4DateType: milestone
  *   status: ES2025
  *   stage4Date: 2025-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/ecma402/finished-proposals.md
  */
 
 console.log("\n=== Intl.DurationFormat ===");
@@ -873,8 +869,6 @@ console.log("- Intl.ListFormat.formatToParts()");
  * verification:
  *   feature: Intl.MessageFormat
  *   status: Stage 1
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/ecma402/README.md
  */
 console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) ===");
 
@@ -907,4 +901,3 @@ console.log(
 /*
 📘 See TypeScript comparison file: 42-intl-api-ts-comparison.ts
 */
-

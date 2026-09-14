@@ -161,8 +161,6 @@ console.log("\n--- 4. WeakRef (Weak References) ---\n");
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 
 // WeakRef creates a weak reference to an object that doesn't prevent GC
@@ -200,8 +198,6 @@ console.log("\n--- 5. FinalizationRegistry ---\n");
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2020-07/july-21.md#weakrefs-for-stage-4
  */
 
 // FinalizationRegistry allows you to register a callback when an object is GC'd
@@ -295,8 +291,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
  *   status: ES2021
  *   stage4Date: 2020-06
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-string-replaceall
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -305,8 +299,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
  *   status: ES2021
  *   stage4Date: 2020-07
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-logical-assignment
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -315,8 +307,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
  *   status: ES2021
  *   stage4Date: 2020-07
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-numeric-separator
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -325,8 +315,6 @@ console.log("📘 Garbage collection: 27-memory-management.js");
  *   status: ES2021
  *   stage4Date: 2020-07
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-promise-any
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -335,6 +323,4 @@ console.log("📘 Garbage collection: 27-memory-management.js");
  *   status: ES2021
  *   stage4Date: 2020-07
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-promise-any
- *   lastVerified: 2026-09-01
  */

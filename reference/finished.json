@@ -2,7 +2,6 @@
   "features": {
     "Temporal": {
       "status": "ES2027",
-      "stage": 4,
       "stage4Date": "2026-03",
       "stage4DateType": "exact",
       "note": "Stage 4 reached Mar 2026 (notes 2026-03/march-11 'temporal-for-stage-4'); delayed publication to ES2027",
@@ -10,7 +9,6 @@
     },
     "Atomics.pause": {
       "status": "ES2027",
-      "stage": 4,
       "stage4Date": "2026-05",
       "stage4DateType": "exact",
       "note": "Stage 4 reached May 2026 (notes 2026-05/may-19 'atomics-pause-for-stage-4'); part of ES2027",
@@ -18,7 +16,6 @@
     },
     "Joint Iteration": {
       "status": "ES2027",
-      "stage": 4,
       "stage4Date": "2026-05",
       "stage4DateType": "exact",
       "note": "Stage 4 reached May 2026 (notes 2026-05/may-19 'joint-iteration-for-stage-4'); part of ES2027. Iterator.zip([iter1, iter2, ...]) produces [[v1, v2], ...]",
@@ -26,7 +23,6 @@
     },
     "using (Explicit Resource Management)": {
       "status": "ES2027",
-      "stage": 4,
       "stage4Date": "2025-05",
       "stage4DateType": "exact",
       "note": "Conditional Stage 4 at 2025-05 (notes may-28 'explicit-resource-management-for-stage-4'); all conditions met and advanced to full Stage 4 at 2026-05 (notes may-19). using/await using, Symbol.dispose/Symbol.asyncDispose, part of ES2027",
@@ -34,7 +30,6 @@
     },
     "DisposableStack": {
       "status": "ES2027",
-      "stage": 4,
       "stage4Date": "2025-05",
       "stage4DateType": "exact",
       "note": "Part of Explicit Resource Management (conditional Stage 4 May 2025; all conditions met May 2026), part of ES2027",
@@ -42,7 +37,6 @@
     },
     "Array.fromAsync": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-05",
       "stage4DateType": "exact",
       "note": "Stage 4 reached May 2025, part of ES2026",
@@ -50,7 +44,6 @@
     },
     "Math.sumPrecise": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-07",
       "stage4DateType": "exact",
       "note": "Stage 4 reached July 2025, part of ES2026",
@@ -58,7 +51,6 @@
     },
     "Error.isError": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-05",
       "stage4DateType": "exact",
       "note": "Stage 4 reached May 2025, part of ES2026",
@@ -66,7 +58,6 @@
     },
     "Uint8Array Base64": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-07",
       "stage4DateType": "exact",
       "note": "Stage 4 reached July 2025, Uint8Array.toBase64/fromBase64, part of ES2026",
@@ -74,7 +65,6 @@
     },
     "Upsert": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2026-01",
       "stage4DateType": "exact",
       "note": "Map/WeakMap.prototype.getOrInsert(key, defaultValue) and getOrInsertComputed(key, callbackFn); an earlier draft's upsert(key, onInsert, onUpdate) name was dropped before Stage 4",
@@ -82,7 +72,6 @@
     },
     "JSON.parse source text access": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-11",
       "stage4DateType": "exact",
       "note": "Access to 'source' property of JSON.parse results",
@@ -90,7 +79,6 @@
     },
     "Iterator Sequencing": {
       "status": "ES2026",
-      "stage": 4,
       "stage4Date": "2025-11",
       "stage4DateType": "exact",
       "note": "Iterator.concat(iter1, iter2, ...) for concatenating iterators",
@@ -98,7 +86,6 @@
     },
     "Intl.DurationFormat": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2025-07",
       "stage4DateType": "milestone",
       "note": "ECMA-402 specification; browser support: Chrome 129+, Firefox 136+, Safari 16.4+, Node.js 23.0.0+",
@@ -106,7 +93,6 @@
     },
     "Set methods": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-04",
       "stage4DateType": "exact",
       "note": "union, intersection, difference, symmetricDifference, isSubsetOf, etc.",
@@ -114,7 +100,6 @@
     },
     "Iterator helpers": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-10",
       "stage4DateType": "exact",
       "note": "map, filter, take, drop, forEach, reduce, toArray, etc.",
@@ -122,21 +107,18 @@
     },
     "RegExp.escape": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2025-02",
       "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-regex-escaping"
     },
     "Promise.try": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-10",
       "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-promise-try"
     },
     "Float16Array": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2025-02",
       "stage4DateType": "exact",
       "note": "Includes Math.f16round()",
@@ -144,7 +126,6 @@
     },
     "JSON Modules": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-10",
       "stage4DateType": "exact",
       "note": "import data from './file.json' with { type: 'json' }",
@@ -152,7 +133,6 @@
     },
     "Import Attributes": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-10",
       "stage4DateType": "exact",
       "note": "Formerly Import Assertions, renamed to Import Attributes",
@@ -160,7 +140,6 @@
     },
     "RegExp Modifiers": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-10",
       "stage4DateType": "exact",
       "note": "Inline flag changes (?i, ?m, ?s)",
@@ -168,14 +147,12 @@
     },
     "Duplicate Named Capture Groups": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2024-04",
       "stage4DateType": "exact",
       "url": "https://github.com/tc39/proposal-duplicate-named-capturing-groups"
     },
     "Redeclarable global eval vars": {
       "status": "ES2025",
-      "stage": 4,
       "stage4Date": "2025-02",
       "stage4DateType": "exact",
       "note": "let/const may now redeclare eval-introduced (configurable, deletable) global vars; var-var redeclaration via eval was always legal",
@@ -183,7 +160,6 @@
     },
     "Object.groupBy": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-11 (array-grouping-for-stage-4)",
@@ -191,7 +167,6 @@
     },
     "Map.groupBy": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-11 (array-grouping-for-stage-4)",
@@ -199,7 +174,6 @@
     },
     "Promise.withResolvers": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-11 (promisewithresolvers-for-stage-4)",
@@ -207,7 +181,6 @@
     },
     "RegExp v flag": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-05 (regexp-v-flag-for-stage-4); Unicode set operations in character classes",
@@ -215,7 +188,6 @@
     },
     "ArrayBuffer.transfer": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2024-02",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2024-02 (arraybuffer-transfer-for-stage-4)",
@@ -223,7 +195,6 @@
     },
     "Resizable ArrayBuffer": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-09",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-09 (resizable-buffers-for-stage-4)",
@@ -231,7 +202,6 @@
     },
     "Well-Formed Unicode Strings": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-05 (well-formed-unicode-strings-for-stage-4); isWellFormed(), toWellFormed()",
@@ -239,7 +209,6 @@
     },
     "Atomics.waitAsync": {
       "status": "ES2024",
-      "stage": 4,
       "stage4Date": "2023-05",
       "stage4DateType": "exact",
       "note": "Non-blocking async version of Atomics.wait()",
@@ -247,7 +216,6 @@
     },
     "Symbols as WeakMap keys": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2023-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-01 (notes jan-30); allow Symbol values as keys in WeakMap, WeakSet, WeakRef, FinalizationRegistry",
@@ -255,7 +223,6 @@
     },
     "toSorted": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2023-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30); immutable array sort",
@@ -263,7 +230,6 @@
     },
     "toReversed": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2023-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30)",
@@ -271,7 +237,6 @@
     },
     "with": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2023-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30); Array.with(index, value) - immutable replacement",
@@ -279,7 +244,6 @@
     },
     "toSpliced": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2023-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2023-01 (Change Array by Copy, notes jan-30)",
@@ -287,7 +251,6 @@
     },
     "findLast": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2022-06",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2022-06 (findlastfindlastindex-for-stage-4)",
@@ -295,7 +258,6 @@
     },
     "findLastIndex": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2022-06",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2022-06 (findlastfindlastindex-for-stage-4)",
@@ -303,7 +265,6 @@
     },
     "Hashbang Syntax": {
       "status": "ES2023",
-      "stage": 4,
       "stage4Date": "2022-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2022-07 (hashbang-grammar-for-stage-4)",
@@ -311,7 +272,6 @@
     },
     "Class Static Block": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-08",
       "stage4DateType": "exact",
       "note": "static { ... } initialization blocks in class definitions",
@@ -319,7 +279,6 @@
     },
     "at": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-08",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-08 (item-method-for-stage-4); Array/string .at() with negative indices",
@@ -327,7 +286,6 @@
     },
     "Object.hasOwn": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-08",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-08 (accessible-object-hasownproperty-for-stage-4)",
@@ -335,7 +293,6 @@
     },
     "Ergonomic brand checks": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-07",
       "stage4DateType": "exact",
       "note": "#field in obj syntax for private field existence checks",
@@ -343,7 +300,6 @@
     },
     "Error.cause": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-10",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-10 (error-cause-for-stage-4)",
@@ -351,7 +307,6 @@
     },
     "Top-level await": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-05 (notes may-25)",
@@ -359,7 +314,6 @@
     },
     "Private class fields": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-04",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-04 (class-fields-...-for-stage-4); #field syntax",
@@ -367,7 +321,6 @@
     },
     "RegExp Match Indices": {
       "status": "ES2022",
-      "stage": 4,
       "stage4Date": "2021-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2021-05 (notes may-25); RegExp /d flag providing start/end indices",
@@ -375,7 +328,6 @@
     },
     "replaceAll": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-06",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-06 (string-prototype-replaceall-for-stage-4)",
@@ -383,7 +335,6 @@
     },
     "Logical Assignment": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (logical-assignment-for-stage-4); ||=, &&=, ??=",
@@ -391,7 +342,6 @@
     },
     "Numeric Separators": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (numeric-separators-for-stage-4)",
@@ -399,7 +349,6 @@
     },
     "WeakRef": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (weakrefs-for-stage-4)",
@@ -407,7 +356,6 @@
     },
     "FinalizationRegistry": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (weakrefs-for-stage-4); part of WeakRefs proposal",
@@ -415,7 +363,6 @@
     },
     "Promise.any": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (promise-any-for-stage-4)",
@@ -423,7 +370,6 @@
     },
     "AggregateError": {
       "status": "ES2021",
-      "stage": 4,
       "stage4Date": "2020-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-07 (promise-any-for-stage-4); part of Promise.any proposal",
@@ -431,7 +377,6 @@
     },
     "import.meta": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2020-03",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2020-03 (notes march-31 'importmeta-for-stage-4')",
@@ -439,7 +384,6 @@
     },
     "Optional Chaining": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-12",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-12 (notes december-4 'optional-chaining-for-stage-4'); ?. operator",
@@ -447,7 +391,6 @@
     },
     "Nullish Coalescing": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-12",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-12 (notes december-4); ?? operator",
@@ -455,7 +398,6 @@
     },
     "for-in mechanics": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-12",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-12 (notes december-4); specifies for-in enumeration order across engines",
@@ -463,7 +405,6 @@
     },
     "globalThis": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-10",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-10 (notes october-1 'globalthis-to-stage-4'); cross-realm global object",
@@ -471,7 +412,6 @@
     },
     "Promise.allSettled": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled', seeking Stage 4 consensus)",
@@ -479,7 +419,6 @@
     },
     "import() (dynamic import)": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-06",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-06 (notes june-4 'dynamic-import-for-stage-4'); async module import expression",
@@ -487,7 +426,6 @@
     },
     "BigInt": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-06",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-06 (notes june-4 'bigint-to-stage-4', pending editor signoff); arbitrary-precision integers",
@@ -495,7 +433,6 @@
     },
     "String.prototype.matchAll": {
       "status": "ES2020",
-      "stage": 4,
       "stage4Date": "2019-03",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-03 (notes mar-26); returns iterator of all match objects",
@@ -503,7 +440,6 @@
     },
     "Array.prototype.flat / flatMap": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2019-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-01 (notes jan-29)",
@@ -511,7 +447,6 @@
     },
     "String.prototype.trimStart / trimEnd": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2019-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-01 (notes jan-29); trimLeft/trimRight are non-standard aliases",
@@ -519,7 +454,6 @@
     },
     "Object.fromEntries": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2019-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-01 (notes jan-29); inverse of Object.entries",
@@ -527,7 +461,6 @@
     },
     "Well-formed JSON.stringify": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2019-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2019-01 (notes jan-29); prevents JSON.stringify from emitting lone surrogates",
@@ -535,7 +468,6 @@
     },
     "Optional catch binding": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2018-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-05 (notes may-22 '11.i.d. optional-catch-binding-for-stage-4'); catch {} with no parameter",
@@ -543,7 +475,6 @@
     },
     "Symbol.prototype.description": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2018-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-11 (notes nov-27 'symbol-description-for-stage-4')",
@@ -551,7 +482,6 @@
     },
     "JSON superset": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2018-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-05 (notes may-22); ECMAScript becomes a syntactic superset of JSON (U+2028/U+2029 allowed in strings)",
@@ -559,7 +489,6 @@
     },
     "Function.prototype.toString revision": {
       "status": "ES2019",
-      "stage": 4,
       "stage4Date": "2018-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-11 (notes nov-27 'functionprototypetostring-revision-for-stage-4'); requires toString() to return the original source text when possible",
@@ -567,7 +496,6 @@
     },
     "Asynchronous Iteration": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2018-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-01 (notes jan-25); for-await-of, async generators, AsyncIterator protocol",
@@ -575,7 +503,6 @@
     },
     "Promise.prototype.finally": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2018-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-01 (notes jan-24)",
@@ -583,7 +510,6 @@
     },
     "RegExp Lookbehind Assertions": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2018-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-01 (notes jan-24); (?<=...) positive and (?<!...) negative lookbehind",
@@ -591,7 +517,6 @@
     },
     "RegExp Unicode Property Escapes": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2018-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-01 (notes jan-24); \\p{...}/\\P{...} in Unicode-aware regex",
@@ -599,7 +524,6 @@
     },
     "Rest/Spread Properties": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2018-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2018-01 (notes jan-23 'object-rest-spread-properties-for-stage-4'); object spread/rest {...rest}",
@@ -607,7 +531,6 @@
     },
     "RegExp named capture groups": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2017-11",
       "stage4DateType": "exact",
       "note": "Conditional Stage 4 at 2017-11 (notes nov-28, pending editor approval); (?<name>...) syntax, accessed via groups",
@@ -615,7 +538,6 @@
     },
     "RegExp s (dotAll) flag": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2017-11",
       "stage4DateType": "exact",
       "note": "Conditional Stage 4 at 2017-11 (notes nov-28, pending editor approval); /s flag makes . match line terminators",
@@ -623,7 +545,6 @@
     },
     "Lifting template literal restriction": {
       "status": "ES2018",
-      "stage": 4,
       "stage4Date": "2017-03",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2017-03 (notes mar-21 '10ia-template-literal-updates'); tagged templates may contain invalid escape sequences (cooked=undefined, raw preserved)",
@@ -631,7 +552,6 @@
     },
     "Shared memory and Atomics": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2017-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2017-01 (notes jan-24 'seeking-stage-4-for-sharedarraybuffer'); SharedArrayBuffer + Atomics",
@@ -639,7 +559,6 @@
     },
     "Async functions": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2016-07",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2016-07 (notes jul-28 '10.iv-async-functions'); async/await syntax",
@@ -647,7 +566,6 @@
     },
     "Trailing commas in function params": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2016-07",
       "stage4DateType": "exact",
       "note": "Conditional Stage 4 at 2016-07 (notes jul-26, pending Test262 tests; subsequently merged); trailing commas in parameter lists and calls",
@@ -655,7 +573,6 @@
     },
     "Object.getOwnPropertyDescriptors": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2016-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2016-05 (notes may-25)",
@@ -663,7 +580,6 @@
     },
     "String padding": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2016-05",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2016-05 (notes may-25); String.prototype.padStart / padEnd",
@@ -671,7 +587,6 @@
     },
     "Object.values / Object.entries": {
       "status": "ES2017",
-      "stage": 4,
       "stage4Date": "2016-03",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2016-03 (notes march-29)",
@@ -679,7 +594,6 @@
     },
     "Exponentiation operator": {
       "status": "ES2016",
-      "stage": 4,
       "stage4Date": "2016-01",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2016-01 (notes jan-28); ** operator (a ** b) and **= assignment",
@@ -687,7 +601,6 @@
     },
     "Array.prototype.includes": {
       "status": "ES2016",
-      "stage": 4,
       "stage4Date": "2015-11",
       "stage4DateType": "exact",
       "note": "Stage 4 at 2015-11 (notes nov-17); SameValueZero equality check, distinguishes from indexOf's Strict Equality",

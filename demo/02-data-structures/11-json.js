@@ -523,8 +523,6 @@ console.log("\nES2019 JSON Improvements:");
  *   status: ES2019
  *   stage4Date: 2019-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-well-formed-stringify
  */
 const withLoneSurrogate = {
   loneSurrogate: "\uD800", // Lone high surrogate
@@ -550,8 +548,6 @@ console.log("    Parsed back successfully:", parsedBack);
  *   status: ES2019
  *   stage4Date: 2018-05
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-json-superset
  */
 console.log("\n  JSON Superset (ES2019):");
 

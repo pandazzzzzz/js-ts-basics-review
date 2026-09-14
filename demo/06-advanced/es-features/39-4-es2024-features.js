@@ -42,8 +42,6 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#array-grouping-for-stage-4
  */
 
 /*
@@ -52,8 +50,6 @@ console.log("\n--- 1. Object.groupBy() and Map.groupBy() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#array-grouping-for-stage-4
  */
 
 // 📘 Official MDN examples (Object.groupBy / Map.groupBy):
@@ -118,8 +114,6 @@ console.log("\n--- 2. Promise.withResolvers() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-11/november-27.md#promise-withresolvers-for-stage-4
  */
 
 // 📘 Official MDN example (Promise.withResolvers):
@@ -244,8 +238,6 @@ console.log("\n--- 4. Resizable ArrayBuffer and ArrayBuffer.transfer() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-09
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2023-09/september-26.md#resizable-buffers-for-stage-4
  */
 
 /*
@@ -254,8 +246,6 @@ console.log("\n--- 4. Resizable ArrayBuffer and ArrayBuffer.transfer() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2024-02
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2024-02/feb-6.md#arraybuffer-transfer-for-stage-4
  */
 
 // Resizable ArrayBuffer allows changing size after creation
@@ -323,8 +313,6 @@ console.log("\n--- 5. Atomics.waitAsync() ---\n");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2023-05/may-15.md#atomicswaitasync-for-stage-4
  */
 
 // Async version of Atomics.wait(), doesn't block the main thread
@@ -465,8 +453,6 @@ console.log("📘 Arrays: 06-arrays.js");
  *   status: ES2024
  *   stage4Date: 2023-05
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-regexp-v-flag
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -475,7 +461,4 @@ console.log("📘 Arrays: 06-arrays.js");
  *   status: ES2024
  *   stage4Date: 2023-05
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-is-usv-string
- *   lastVerified: 2026-09-01
  */
-

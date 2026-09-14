@@ -105,8 +105,6 @@ promise.then(result => {
  *   status: ES2017
  *   stage4Date: 2016-07
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/ecmascript-asyncawait
  */
 console.log("\n=== Async Function Syntax Demo ===\n");
 
@@ -411,8 +409,6 @@ console.log("\n=== Top-Level Await Demo ===\n");
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
 // Simulated top-level await

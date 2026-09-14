@@ -114,8 +114,6 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/jun-06.md#findlastfindlastindex-for-stage-4
  */
 
 /*
@@ -124,8 +122,6 @@ console.log("\n--- 2. findLast() and findLastIndex() ---\n");
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-06
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2022-06/jun-06.md#findlastfindlastindex-for-stage-4
  */
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -192,8 +188,6 @@ console.log("\n--- 3. Hashbang Grammar ---\n");
  *   stage4DateType: exact
  *   status: ES2023
  *   stage4Date: 2022-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2022-07/jul-20.md#shebang-grammar
  */
 
 // Hashbang (shebang) at the start of script files is now standardized
@@ -325,8 +319,6 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   status: ES2023
  *   stage4Date: 2023-01
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-symbols-as-weakmap-keys
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -335,8 +327,6 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   status: ES2023
  *   stage4Date: 2023-01
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-change-array-by-copy
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -345,8 +335,6 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   status: ES2023
  *   stage4Date: 2023-01
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-change-array-by-copy
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -355,8 +343,6 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   status: ES2023
  *   stage4Date: 2023-01
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-change-array-by-copy
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -365,6 +351,4 @@ console.log("📘 Immutability Patterns: 24-function-patterns-advanced.js");
  *   status: ES2023
  *   stage4Date: 2023-01
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-change-array-by-copy
- *   lastVerified: 2026-09-01
  */

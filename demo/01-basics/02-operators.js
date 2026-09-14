@@ -80,8 +80,6 @@ const negativeRemainder = -10 % 3; // -1 (not 2!)
  *   status: ES2016
  *   stage4Date: 2016-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-exponentiation-operator
  */
 const power = 2 ** 3; // 8
 const squared = 5 ** 2; // 25
@@ -261,8 +259,6 @@ console.log("!!'hello':", !!"hello"); // true (converts to boolean)
  *   status: ES2020
  *   stage4Date: 2019-12
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-nullish-coalescing
  */
 console.log("\nNullish Coalescing (??):");
 console.log("null ?? 'default':", null ?? "default"); // 'default'
@@ -338,8 +334,6 @@ console.log("a **= 3:", a); // 8
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 let b = 10;
 b &&= 20; // b = b && 20
@@ -560,8 +554,6 @@ const obj2 = { c: 3, d: 4 };
  *   status: ES2018
  *   stage4Date: 2018-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-object-rest-spread
  */
 const mergedObj = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
 console.log("Merged objects:", mergedObj);
@@ -626,8 +618,6 @@ console.log("Object destructuring with rest:", { xVal, yVal, remaining }); // { 
  *   status: ES2020
  *   stage4Date: 2019-12
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-optional-chaining
  */
 console.log("\nOptional Chaining (?.):");
 

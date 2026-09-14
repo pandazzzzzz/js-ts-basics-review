@@ -43,8 +43,6 @@ console.log("\n--- 1. Temporal API (ES2027) ---\n");
  *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-03
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-03/march-11.md#temporal-for-stage-4
  */
 
 // Modern replacement for the Date object
@@ -108,9 +106,7 @@ console.log("\n--- 2. Explicit Resource Management (ES2027) ---\n");
  *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2025-05
- *   lastVerified: 2026-09-01
  *   note: Conditional Stage 4 at 2025-05; all conditions met and advanced to full Stage 4 at 2026-05
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2025-05/may-28.md#explicit-resource-management-for-stage-4
  */
 
 // using declaration automatically disposes resources when they go out of scope
@@ -175,9 +171,7 @@ async function processFile() {
  *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2025-05
- *   lastVerified: 2026-09-01
  *   note: Part of Explicit Resource Management; conditional Stage 4 at 2025-05, full Stage 4 at 2026-05
- *   source: https://github.com/tc39/proposal-explicit-resource-management
  */
 /*
 function processMultipleResources() {
@@ -206,8 +200,6 @@ console.log("\n--- 3. Joint Iteration (ES2027) ---\n");
  *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#joint-iteration-for-stage-4
  */
 
 // Iterator.zip takes ONE iterable of iterables. Mode: "shortest" (default), "longest", "strict".
@@ -291,8 +283,6 @@ console.log("\n--- 4. Atomics.pause() (ES2027) ---\n");
  *   stage4DateType: exact
  *   status: ES2027
  *   stage4Date: 2026-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/HEAD/meetings/2026-05/may-19.md#atomics-pause-for-stage-4
  */
 
 // Atomics.pause() provides a hint to the CPU that we're in a spin-wait loop
@@ -465,4 +455,3 @@ console.log("🌐 TC39 Proposals: https://github.com/tc39/proposals");
 /*
 📘 See TypeScript comparison file: 39-7-es2027-future-ts-comparison.ts
 */
-

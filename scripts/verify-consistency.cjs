@@ -30,13 +30,7 @@ function walk(dir, out = []) {
 }
 
 // Reference feature keys are canonical; normalize block names for matching.
-const norm = s =>
-  s
-    .toLowerCase()
-    .replace(/^array\/\s*string\.prototype\./, "")
-    .replace(/^array\.prototype\s*\/\s*/, "")
-    .replace(/\s*\/\s*/g, " ")
-    .trim();
+const norm = s => s.toLowerCase().trim();
 
 // ---------- load reference data ----------
 const reference = {};
@@ -63,13 +57,13 @@ for (const f of jsFiles) {
   lines.forEach((line, i) => {
     // Close-before-open: guards against a same-line-closed opener like
     // `/* verification: foo */` keeping the block open forever.
-    if (cur && (/\*\//.test(line) || /=\= end verification block ==/i.test(line))) {
+    if (cur && /\*\//.test(line)) {
       cur = null;
     }
-    // Both block styles open with a bare "verification:" line; the trailing
-    // style adds `==` decorations. Require nothing after the colon so a
-    // hypothetical one-line payload is skipped rather than mis-absorbed.
-    if (/verification:\s*$|^\s*\/\/ == verification block ==/.test(line)) {
+    // A block opens with a bare "verification:" line. Require nothing after
+    // the colon so a hypothetical one-line payload is skipped rather than
+    // mis-absorbed.
+    if (/verification:\s*$/.test(line)) {
       cur = { file: rel, line: i + 1 };
       blocks.push(cur);
       return;
@@ -80,7 +74,6 @@ for (const f of jsFiles) {
     else if ((m = line.match(/(?:\*|\/\/)\s*status:\s*(.+)/))) cur.status = m[1].trim();
     else if ((m = line.match(/(?:\*|\/\/)\s*stage4Date:\s*(\S+)/))) cur.stage4Date = m[1];
     else if ((m = line.match(/(?:\*|\/\/)\s*stage4DateType:\s*(\S+)/))) cur.stage4DateType = m[1];
-    else if ((m = line.match(/(?:\*|\/\/)\s*lastVerified:\s*(\S+)/))) cur.lastVerified = m[1];
   });
 }
 
@@ -265,7 +258,6 @@ for (const f of jsFiles) {
     ...new Set([
       ...allFiles,
       ...docFiles,
-      path.join(root, "CONTRIBUTING.md"),
       ...walk(path.join(root, "reference")).filter(f => f.endsWith(".json")),
     ]),
   ];

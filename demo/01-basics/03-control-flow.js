@@ -296,8 +296,6 @@ for (let i = 0, j = 10; i < 5; i++, j--) {
  *   status: ES2020
  *   stage4Date: 2019-12
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-for-in-order
  */
 const person = {
   name: "Alice",
@@ -717,8 +715,6 @@ try {
  *   status: ES2019
  *   stage4Date: 2018-05
  *   stage4DateType: exact
- *   lastVerified: 2026-09-11
- *   source: https://github.com/tc39/proposal-optional-catch-binding
  */
 console.log("\nOptional Catch Binding (ES2019):");
 

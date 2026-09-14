@@ -318,8 +318,6 @@ console.log("With m:", /^line2/m.test(multiStr)); // true
  *   status: ES2018
  *   stage4Date: 2017-11
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-regexp-dotall-flag
  */
 let newlineStr = "hello\nworld";
 console.log("\nDotAll:");
@@ -395,8 +393,6 @@ console.log("Name only:", nameMatch[1]); // "Smith"
  *   status: ES2018
  *   stage4Date: 2017-11
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-regexp-named-groups
  */
 let namedRe = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 let dateMatch2 = "2024-06-15".match(namedRe);
@@ -487,8 +483,6 @@ console.log("'password' valid:", passwordRe.test("password")); // false
  *   status: ES2018
  *   stage4Date: 2018-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-regexp-lookbehind
  */
 let posLookbehind = /(?<=\$)\d+/;
 console.log("\nPositive lookbehind:");
@@ -528,8 +522,6 @@ console.log("Standard greedy:", "aaab".match(standardRe)); // ["aaab"]
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp `d` flag - Match Indices (ES2022):");
 // The `d` flag adds an `.indices` property to match results,
@@ -670,8 +662,6 @@ console.log("Fields:", csv.match(csvRe));
  *   status: ES2018
  *   stage4Date: 2018-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-regexp-unicode-property-escapes
  */
 console.log("\n=== 7.7 Unicode Property Escapes Demo ===");
 
@@ -890,8 +880,6 @@ console.log("\n=== 11. Newer RegExp Features (ES2024 & ES2025) Demo ===");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp v flag - set operations (ES2024):");
 
@@ -916,8 +904,6 @@ console.log("'😀' is RGI emoji:", emojiKeycapRe.test("😀")); // true
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2025-02
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp.escape (ES2025):");
 
@@ -945,8 +931,6 @@ if (typeof RegExp.escape === "function") {
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-04
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nDuplicate Named Capture Groups (ES2025):");
 
@@ -975,8 +959,6 @@ try {
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nRegExp Modifiers (ES2025):");
 

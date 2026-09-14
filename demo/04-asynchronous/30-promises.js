@@ -140,8 +140,6 @@ console.log("\n=== Then/Catch/Finally Chaining Demo ===\n");
  *   status: ES2018
  *   stage4Date: 2018-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-promise-finally
  */
 function asyncOperation(value, shouldFail = false) {
   return new Promise((resolve, reject) => {
@@ -319,8 +317,6 @@ withTimeout(delayedPromise("data", 500), 200)
  *   status: ES2020
  *   stage4Date: 2019-07
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-promise-allSettled
  */
 console.log("\n=== Promise.allSettled Demo ===\n");
 
@@ -386,8 +382,6 @@ console.log("\n=== Promise.any Demo ===\n");
  *   stage4DateType: exact
  *   status: ES2021
  *   stage4Date: 2020-07
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
 Promise.any([
@@ -466,8 +460,6 @@ traditionalResolve("hello");
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-11
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("\nModern way (Promise.withResolvers):");
 const { promise, resolve, reject } = Promise.withResolvers();
@@ -807,8 +799,6 @@ console.log("=== Promise.try (ES2025) Demo ===\n");
  *   stage4DateType: exact
  *   status: ES2025
  *   stage4Date: 2024-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 
 const jsonStr = '{"name": "Alice"}';

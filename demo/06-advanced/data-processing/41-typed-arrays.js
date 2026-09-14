@@ -267,8 +267,6 @@ console.log("Use for: file uploads, downloads, image processing");
  *   status: ES2017
  *   stage4Date: 2017-01
  *   stage4DateType: exact
- *   lastVerified: 2026-09-09
- *   source: https://github.com/tc39/proposal-ecmascript-sharedmem
  */
 console.log("\n=== SharedArrayBuffer and Atomics ===");
 
@@ -352,8 +350,6 @@ console.log("- Atomics.notify(typedArray, index, count): Wake up waiting agents"
  *   stage4DateType: exact
  *   status: ES2024
  *   stage4Date: 2023-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/proposals/blob/main/finished-proposals.md
  */
 console.log("- Atomics.waitAsync(typedArray, index, expected, timeout): Async wait (ES2024)");
 

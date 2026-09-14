@@ -145,8 +145,6 @@ console.log("\n--- 3. .at() Method ---\n");
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-08
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2021-08/aug-31.md#relative-indexing-at-method-for-stage-4
  */
 
 // .at() allows negative indexing for arrays, strings, and TypedArrays
@@ -248,8 +246,6 @@ console.log("\n--- 5. Error.cause ---\n");
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-10
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2021-10/oct-26.md#error-cause-for-stage-4
  */
 
 // Error.cause allows chaining errors with their original cause
@@ -335,8 +331,6 @@ console.log("\n--- 7. RegExp Match Indices (/d flag) ---\n");
  *   stage4DateType: exact
  *   status: ES2022
  *   stage4Date: 2021-05
- *   lastVerified: 2026-09-01
- *   source: https://github.com/tc39/notes/blob/main/meetings/2021-05/may-25.md#regexp-match-indices-for-stage-4
  */
 
 // The /d flag adds indices array to match results showing start/end positions of each capture group
@@ -470,8 +464,6 @@ console.log("📘 Strings: 04-strings.js");
  *   status: ES2022
  *   stage4Date: 2021-08
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-class-static-block
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -480,8 +472,6 @@ console.log("📘 Strings: 04-strings.js");
  *   status: ES2022
  *   stage4Date: 2021-08
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-accessible-object-hasownproperty
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -490,8 +480,6 @@ console.log("📘 Strings: 04-strings.js");
  *   status: ES2022
  *   stage4Date: 2021-07
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-private-fields-in-in
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -500,8 +488,6 @@ console.log("📘 Strings: 04-strings.js");
  *   status: ES2022
  *   stage4Date: 2021-05
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-top-level-await
- *   lastVerified: 2026-09-01
  */
 
 /*
@@ -510,6 +496,4 @@ console.log("📘 Strings: 04-strings.js");
  *   status: ES2022
  *   stage4Date: 2021-04
  *   stage4DateType: exact
- *   source: https://github.com/tc39/proposal-class-fields
- *   lastVerified: 2026-09-01
  */
