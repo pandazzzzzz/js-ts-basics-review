@@ -747,9 +747,9 @@ console.log("- Locale normalization");
 /*
  * verification:
  *   feature: Intl.DurationFormat
- *   stage4DateType: milestone
+ *   stage4DateType: exact
  *   status: ES2025
- *   stage4Date: 2025-07
+ *   stage4Date: 2024-12
  */
 
 console.log("\n=== Intl.DurationFormat ===");
@@ -874,7 +874,6 @@ console.log("\n=== Intl.MessageFormat (Stage 1 proposal - not current standard) 
 
 // MessageFormat 2.0 is a Stage 1 proposal, not yet part of the ECMAScript standard.
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.
-// No verification block (Stage 1, not finalized).
 // Proposal: https://github.com/tc39/proposal-intl-messageformat
 console.log(
   "- Stage 1 proposal, not yet standardized; use @messageformat/core polyfill for production"

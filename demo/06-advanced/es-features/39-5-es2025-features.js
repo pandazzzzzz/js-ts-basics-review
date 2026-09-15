@@ -450,9 +450,9 @@ console.log("\n--- 11. Intl.DurationFormat ---");
 /*
  * verification:
  *   feature: Intl.DurationFormat
- *   stage4DateType: milestone
+ *   stage4DateType: exact
  *   status: ES2025
- *   stage4Date: 2025-07
+ *   stage4Date: 2024-12
  */
 
 // Format time durations in a locale-aware way

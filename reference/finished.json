@@ -86,9 +86,9 @@
     },
     "Intl.DurationFormat": {
       "status": "ES2025",
-      "stage4Date": "2025-07",
-      "stage4DateType": "milestone",
-      "note": "ECMA-402 specification; browser support: Chrome 129+, Firefox 136+, Safari 16.4+, Node.js 23.0.0+",
+      "stage4Date": "2024-12",
+      "stage4DateType": "exact",
+      "note": "ECMA-402 specification; Stage 4 advanced at 2024-12 TC39 plenary (december-02.md#intldurationformat-for-stage-4); browser support: Chrome 129+, Firefox 136+, Safari 16.4+, Node.js 23.0.0+",
       "url": "https://tc39.es/proposal-intl-duration-format"
     },
     "Set methods": {
