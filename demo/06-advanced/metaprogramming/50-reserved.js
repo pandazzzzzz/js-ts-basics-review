@@ -109,7 +109,6 @@ console.log("\n=== Unfinalized proposals / Withdrawn proposals (not current stan
  * verification:
  *   feature: Records & Tuples
  *   status: Withdrawn
- *   stage: -1
  */
 console.log("// Records & Tuples (Withdrawn) — historical syntax:");
 console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
