@@ -89,7 +89,7 @@ console.log("curriedAdd2(1)(2)(3):", curriedAdd2(1)(2)(3)); // 6
 console.log("curriedAdd2(1, 2)(3):", curriedAdd2(1, 2)(3)); // 6
 
 // 1.3 Practical use case - configurable API
-function calculatePrice(price, tax, discount) {
+function calculatePrice(tax, discount, price) {
   return price * (1 + tax) * (1 - discount);
 }
 
