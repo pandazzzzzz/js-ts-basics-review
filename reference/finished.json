@@ -414,7 +414,7 @@
       "status": "ES2020",
       "stage4Date": "2019-07",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled', seeking Stage 4 consensus)",
+      "note": "Stage 4 at 2019-07 (notes july-24 'promiseallsettled', Stage 4 reached)",
       "url": "https://github.com/tc39/proposal-promise-allSettled"
     },
     "import() (dynamic import)": {
@@ -561,7 +561,7 @@
       "status": "ES2017",
       "stage4Date": "2016-07",
       "stage4DateType": "exact",
-      "note": "Stage 4 at 2016-07 (notes jul-28 '10.iv-async-functions'); async/await syntax",
+      "note": "Stage 4 at 2016-07 (notes jul-28 '10iv-async-functions'); async/await syntax",
       "url": "https://github.com/tc39/ecmascript-asyncawait"
     },
     "Trailing commas in function params": {
