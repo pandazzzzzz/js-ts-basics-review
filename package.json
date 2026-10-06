@@ -33,7 +33,7 @@
   ],
   "author": "",
   "devDependencies": {
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.6.4",
     "prettier": "^3.9.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.0"
