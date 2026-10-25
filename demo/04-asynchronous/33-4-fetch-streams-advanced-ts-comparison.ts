@@ -104,7 +104,8 @@ async function typedDownloadWithProgress(
 }
 
 setTimeout(() => {
-  typedDownloadWithProgress(`${API_BASE}/posts/1`);
+  // Fire-and-forget: typedDownloadWithProgress already logs errors internally
+  typedDownloadWithProgress(`${API_BASE}/posts/1`).catch(() => {});
 }, 2000);
 
 // ============================================================================
@@ -229,32 +230,36 @@ interface Post {
 async function typedCompareReadingMethods(): Promise<void> {
   // Method 1: Read entire response at once
   console.log("  Method 1: Read all at once");
-  const start1 = Date.now();
-  const response1 = await fetch(`${API_BASE}/posts/1`);
-  const data1 = (await response1.json()) as Post;
-  const time1 = Date.now() - start1;
-  console.log(`    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`);
+  try {
+    const start1 = Date.now();
+    const response1 = await fetch(`${API_BASE}/posts/1`);
+    const data1 = (await response1.json()) as Post;
+    const time1 = Date.now() - start1;
+    console.log(`    Time: ${time1}ms, Title: ${data1.title.substring(0, 30)}...`);
 
-  // Method 2: Read as stream
-  console.log("\n  Method 2: Read as stream");
-  const start2 = Date.now();
-  const response2 = await fetch(`${API_BASE}/posts/1`);
-  const reader2 = response2.body!.getReader();
-  let byteCount = 0;
+    // Method 2: Read as stream
+    console.log("\n  Method 2: Read as stream");
+    const start2 = Date.now();
+    const response2 = await fetch(`${API_BASE}/posts/1`);
+    const reader2 = response2.body!.getReader();
+    let byteCount = 0;
 
-  while (true) {
-    const { done, value } = await reader2.read();
-    if (done) break;
-    byteCount += value.length;
+    while (true) {
+      const { done, value } = await reader2.read();
+      if (done) break;
+      byteCount += value.length;
+    }
+
+    const time2 = Date.now() - start2;
+    console.log(`    Time: ${time2}ms, Bytes: ${byteCount}`);
+
+    console.log("\n  Comparison:");
+    console.log(`    Non-stream: ${time1}ms`);
+    console.log(`    Stream: ${time2}ms`);
+    console.log("    Streams are better for large files, real-time processing");
+  } catch (error) {
+    console.error("  Comparison error:", error);
   }
-
-  const time2 = Date.now() - start2;
-  console.log(`    Time: ${time2}ms, Bytes: ${byteCount}`);
-
-  console.log("\n  Comparison:");
-  console.log(`    Non-stream: ${time1}ms`);
-  console.log(`    Stream: ${time2}ms`);
-  console.log("    Streams are better for large files, real-time processing");
 }
 
 setTimeout(() => {
@@ -367,15 +372,19 @@ async function fetchUsers(params: UserQueryParams): Promise<User[]> {
 }
 
 async function useQueryParams(): Promise<void> {
-  const users = await fetchUsers({
-    _page: 1,
-    _limit: 3,
-  });
+  try {
+    const users = await fetchUsers({
+      _page: 1,
+      _limit: 3,
+    });
 
-  console.log(
-    "Fetched users:",
-    users.map(u => u.name)
-  );
+    console.log(
+      "Fetched users:",
+      users.map(u => u.name)
+    );
+  } catch (error) {
+    console.error("Query params error:", error);
+  }
 }
 
 useQueryParams();
@@ -410,9 +419,16 @@ const userTransformer: Transformer<User, string> = (user: User) => {
 };
 
 async function useTransformers(): Promise<void> {
-  const userString = await fetchWithTransform<User, string>(`${API_BASE}/users/1`, userTransformer);
+  try {
+    const userString = await fetchWithTransform<User, string>(
+      `${API_BASE}/users/1`,
+      userTransformer
+    );
 
-  console.log("Transformed user:", userString);
+    console.log("Transformed user:", userString);
+  } catch (error) {
+    console.error("Transformer error:", error);
+  }
 }
 
 useTransformers();

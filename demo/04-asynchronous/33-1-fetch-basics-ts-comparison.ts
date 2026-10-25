@@ -30,7 +30,7 @@ async function basicFetch(): Promise<void> {
   console.log("Headers:", headerCount);
 }
 
-basicFetch();
+basicFetch().catch(error => console.error("   Fetch failed:", error.message));
 
 // ============================================================================
 // 2. REQUESTINIT TYPE
@@ -53,7 +53,7 @@ async function typedRequestInit(): Promise<void> {
   console.log("RequestInit headers:", JSON.stringify(options.headers));
 }
 
-typedRequestInit();
+typedRequestInit().catch(error => console.error("   RequestInit failed:", error.message));
 
 // Custom headers with Record type
 async function customHeaders(): Promise<void> {
@@ -72,7 +72,7 @@ async function customHeaders(): Promise<void> {
   console.log("Response OK:", response.ok);
 }
 
-customHeaders();
+customHeaders().catch(error => console.error("   Custom headers failed:", error.message));
 
 // ============================================================================
 // 3. RESPONSE TYPE
@@ -104,7 +104,7 @@ async function typedResponse(): Promise<void> {
   // formData(): Promise<FormData>
 }
 
-typedResponse();
+typedResponse().catch(error => console.error("   Response methods failed:", error.message));
 
 // ============================================================================
 // 4. GENERIC FETCH WRAPPER
@@ -163,7 +163,7 @@ async function useGenericFetch(): Promise<void> {
   postsResponse.data.forEach(post => console.log("Post:", post.title));
 }
 
-useGenericFetch();
+useGenericFetch().catch(error => console.error("   Generic fetch failed:", error.message));
 
 // ============================================================================
 // 5. RESPONSE METHODS TYPES
@@ -192,7 +192,7 @@ async function responseMethods(): Promise<void> {
   console.log("\n⚠️ Blob and FormData examples skipped (browser-only)");
 }
 
-responseMethods();
+responseMethods().catch(error => console.error("   Response methods failed:", error.message));
 
 // ============================================================================
 // 6. FORMDATA TYPES
@@ -218,7 +218,7 @@ async function typedFormData(): Promise<void> {
   console.log("FormData upload result:", result);
 }
 
-typedFormData();
+typedFormData().catch(error => console.error("   FormData failed:", error.message));
 
 // ============================================================================
 // BEST PRACTICES SUMMARY

@@ -49,6 +49,9 @@ const jsFiles = allFiles.filter(f => f.endsWith(".js"));
 const tsFiles = allFiles.filter(f => f.endsWith(".ts"));
 
 // ---------- parse verification blocks (both comment styles) ----------
+// Only .js files are scanned by design: JS demos are the source of truth for
+// ES version attribution; TS comparison files intentionally carry no
+// verification blocks (see CONTRIBUTING.md / CLAUDE.md).
 const blocks = [];
 for (const f of jsFiles) {
   const rel = path.relative(root, f);

@@ -51,19 +51,21 @@
 ### 版本验证注释块模板
 
 ```javascript
-// 📘 ES Version Verification:
-// - TC39 Finished Proposals: https://github.com/tc39/proposals/blob/main/finished-proposals.md
-// - Last Verified: YYYY-MM-DD
-// - Verification Rule: attribute by Stage 4 date vs edition freeze window; see reference/finished.json (NOT a fixed year N → N+1)
-// - Example: 2024-03 Stage 4 → ES2025 (June 2025 release)
-//
-// ES Version Attribution in this file:
-// - ES2024: Features finalized in 2023 (Object.groupBy, Promise.withResolvers, RegExp /v)
-// - ES2025: Features finalized in 2024 (Set methods, Iterator helpers, Float16Array, Import Attributes)
-// - ES2026: Features finalized in 2025 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64)
-// - ES2027: Features finalized in 2025-2026 (Temporal, Explicit Resource Management, DisposableStack)
-// - Stage 2.7: Active proposals, nearing Stage 3 (Decorators)
+/*
+ * verification:
+ *   feature: featureName
+ *   stage4DateType: exact | milestone
+ *   status: ES20xx
+ *   stage4Date: YYYY-MM
+ */
 ```
+
+规则说明：
+
+- `feature` 必须与 `reference/finished.json`（或 early/active/withdrawn.json）中的条目名完全一致
+- 归属以 Stage 4 日期对照版本冻结窗口判断（而非固定 N → N+1 年）；例：2024-03 达到 Stage 4 → ES2025（2025 年 6 月发布）
+- 每个新 ES 特性必须**同时**添加 reference 条目和 demo verification block；`npm run verify` 会双向对账，缺一即报错
+- verification block 只写在 JS 文件中（TS 对照文件不携带），JS 文件是版本事实源
 
 Markdown 文件使用 HTML 注释：
 ```markdown

@@ -125,7 +125,7 @@ async function useFetchClient(): Promise<void> {
   console.log("Created post:", newPost.id);
 }
 
-useFetchClient();
+useFetchClient().catch(error => console.error("Fetch client failed:", error.message));
 
 // ============================================================================
 // 2. RETRY WITH EXPONENTIAL BACKOFF TYPES
@@ -204,7 +204,7 @@ async function demonstrateRetry(): Promise<void> {
   }
 }
 
-demonstrateRetry();
+demonstrateRetry().catch(error => console.error("Retry demo failed:", error.message));
 
 // ============================================================================
 // 3. ABORTSIGNAL TYPING
@@ -255,7 +255,7 @@ async function useCancellableFetch(): Promise<void> {
   }
 }
 
-useCancellableFetch();
+useCancellableFetch().catch(error => console.error("Cancellable fetch failed:", error.message));
 
 // ============================================================================
 // 4. TYPED SEARCH CONTROLLER
@@ -310,12 +310,17 @@ async function useTypedSearchController(): Promise<void> {
   const searchController = new TypedSearchController<SearchResult>();
 
   // Simulate search-as-you-type (cancels previous)
+  // Fire-and-forget calls get explicit no-op catches; the final search is
+  // awaited so a real failure (e.g. offline) is reported instead of
+  // crashing as an unhandled rejection.
   searchController.search("java", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
   searchController.search("javasc", "https://jsonplaceholder.typicode.com/posts").catch(() => {});
-  const results = await searchController.search(
-    "typescript",
-    "https://jsonplaceholder.typicode.com/posts"
-  );
+  const results = await searchController
+    .search("typescript", "https://jsonplaceholder.typicode.com/posts")
+    .catch(error => {
+      console.error("Search failed:", error.message);
+      return null;
+    });
 
   if (results) {
     console.log("Search completed, results count:", results.length);
@@ -323,7 +328,7 @@ async function useTypedSearchController(): Promise<void> {
   }
 }
 
-useTypedSearchController();
+useTypedSearchController().catch(error => console.error("Search demo failed:", error.message));
 
 // ============================================================================
 // 5. MODERN ABORTSIGNAL APIS
@@ -372,7 +377,7 @@ async function typedSignalTimeout(): Promise<void> {
   }
 }
 
-typedSignalTimeout();
+typedSignalTimeout().catch(error => console.error("Signal timeout failed:", error.message));
 
 // ============================================================================
 // 6. INTERCEPTOR TYPES
@@ -471,7 +476,7 @@ async function useInterceptors(): Promise<void> {
   console.log("User with interceptors:", data.name);
 }
 
-useInterceptors();
+useInterceptors().catch(error => console.error("Interceptors failed:", error.message));
 
 // ============================================================================
 // BEST PRACTICES SUMMARY

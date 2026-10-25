@@ -341,9 +341,15 @@ async function demonstrateSearchAsYouType() {
   const searchController = new SearchController();
 
   // Simulate rapid typing
-  searchController.search("java").catch(() => {});
-  searchController.search("javasc").catch(() => {});
-  const results = await searchController.search("javascript");
+  // Fire-and-forget calls get explicit no-op catches; the final search is
+  // awaited so a real failure (e.g. offline) is reported instead of
+  // crashing as an unhandled rejection.
+  searchController.search("java").catch(() => {}); // cancelled by next search
+  searchController.search("javasc").catch(() => {}); // cancelled by final search
+  const results = await searchController.search("javascript").catch(error => {
+    console.error("   Search failed:", error.message);
+    return null;
+  });
 
   if (results) {
     console.log("   ✓ Search completed for: javascript");

@@ -149,7 +149,8 @@ async function downloadWithProgress(url, onProgress) {
 }
 
 setTimeout(() => {
-  downloadWithProgress(`${API_BASE}/posts/1`);
+  // Fire-and-forget: downloadWithProgress already logs errors internally
+  downloadWithProgress(`${API_BASE}/posts/1`).catch(() => {});
 }, 2000);
 
 // 2.2 Stream transformation
@@ -256,32 +257,36 @@ console.log("\n5. Stream vs non-stream comparison:");
 async function compareReadingMethods() {
   // Method 1: Read entire response at once
   console.log("  Method 1: Read all at once");
-  const start1 = Date.now();
-  const response1 = await fetch(`${API_BASE}/posts/1`);
-  const data1 = await response1.json();
-  const time1 = Date.now() - start1;
-  console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
+  try {
+    const start1 = Date.now();
+    const response1 = await fetch(`${API_BASE}/posts/1`);
+    const data1 = await response1.json();
+    const time1 = Date.now() - start1;
+    console.log(`    Time: ${time1}ms, Size: ~${JSON.stringify(data1).length} bytes`);
 
-  // Method 2: Read as stream
-  console.log("\n  Method 2: Read as stream");
-  const start2 = Date.now();
-  const response2 = await fetch(`${API_BASE}/posts/1`);
-  const reader2 = response2.body.getReader();
-  let byteCount = 0;
+    // Method 2: Read as stream
+    console.log("\n  Method 2: Read as stream");
+    const start2 = Date.now();
+    const response2 = await fetch(`${API_BASE}/posts/1`);
+    const reader2 = response2.body.getReader();
+    let byteCount = 0;
 
-  while (true) {
-    const { done, value } = await reader2.read();
-    if (done) break;
-    byteCount += value.length;
+    while (true) {
+      const { done, value } = await reader2.read();
+      if (done) break;
+      byteCount += value.length;
+    }
+
+    const time2 = Date.now() - start2;
+    console.log(`    Time: ${time2}ms, Size: ${byteCount} bytes`);
+
+    console.log("\n  Comparison:");
+    console.log(`    Non-stream: ${time1}ms`);
+    console.log(`    Stream: ${time2}ms`);
+    console.log("    Streams are better for large files, real-time processing");
+  } catch (error) {
+    console.error("  Comparison error:", error.message);
   }
-
-  const time2 = Date.now() - start2;
-  console.log(`    Time: ${time2}ms, Size: ${byteCount} bytes`);
-
-  console.log("\n  Comparison:");
-  console.log(`    Non-stream: ${time1}ms`);
-  console.log(`    Stream: ${time2}ms`);
-  console.log("    Streams are better for large files, real-time processing");
 }
 
 setTimeout(() => {
@@ -341,13 +346,17 @@ console.log("   - In Node.js, CORS is not an issue");
 async function pitfallCredentials() {
   console.log("\n9. Credentials (cookies) note:");
 
-  const withoutCredentials = await fetch(`${API_BASE}/posts/1`);
-  console.log("   Default credentials ('same-origin'): cookies sent to same origin");
+  try {
+    const withoutCredentials = await fetch(`${API_BASE}/posts/1`);
+    console.log("   Default credentials ('same-origin'): cookies sent to same origin");
 
-  const withCredentials = await fetch(`${API_BASE}/posts/1`, {
-    credentials: "include",
-  });
-  console.log("   With credentials: 'include', cookies ARE sent to any origin");
+    const withCredentials = await fetch(`${API_BASE}/posts/1`, {
+      credentials: "include",
+    });
+    console.log("   With credentials: 'include', cookies ARE sent to any origin");
+  } catch (error) {
+    console.error("   Credentials demo error:", error.message);
+  }
 }
 
 pitfallCredentials();
@@ -361,7 +370,8 @@ fetch(`${API_BASE}/posts`, {
   body: JSON.stringify({ title: "Content-Type Test" }),
 })
   .then(r => r.json())
-  .then(d => console.log("   With Content-Type:", d.id));
+  .then(d => console.log("   With Content-Type:", d.id))
+  .catch(error => console.error("   Content-Type demo error:", error.message));
 
 // Pitfall 5: Not closing response body (memory leak)
 console.log("\n11. Memory leak from unclosed responses:");
@@ -370,13 +380,17 @@ console.log("   - Or explicitly clone and ignore: response.clone()");
 
 async function pitfallMemoryLeak() {
   // GOOD: Body consumed
-  const goodResponse = await fetch(`${API_BASE}/posts/1`);
-  await goodResponse.json(); // Body consumed, connection can be reused
+  try {
+    const goodResponse = await fetch(`${API_BASE}/posts/1`);
+    await goodResponse.json(); // Body consumed, connection can be reused
 
-  // BAD: Body not consumed (in long-running apps)
-  const badResponse = await fetch(`${API_BASE}/posts/1`);
-  // Forgot to consume body - connection stays open
-  console.log("   Always consume response body to avoid memory leaks");
+    // BAD: Body not consumed (in long-running apps)
+    const badResponse = await fetch(`${API_BASE}/posts/1`);
+    // Forgot to consume body - connection stays open
+    console.log("   Always consume response body to avoid memory leaks");
+  } catch (error) {
+    console.error("   Memory leak demo error:", error.message);
+  }
 }
 
 pitfallMemoryLeak();
