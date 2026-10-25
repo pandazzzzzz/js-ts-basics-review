@@ -1,5 +1,26 @@
 {
   "features": {
+    "Iterator Chunking": {
+      "status": "ES2027",
+      "stage4Date": "2026-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 reached May 2026 (notes 2026-05/may-20 'iterator-chunking-for-stage-3' section recording consensus); Iterator.prototype.chunks(size) for non-overlapping and windows(size) for overlapping subsequences",
+      "url": "https://github.com/tc39/proposal-iterator-chunking"
+    },
+    "Iterator Includes": {
+      "status": "ES2027",
+      "stage4Date": "2026-05",
+      "stage4DateType": "exact",
+      "note": "Stage 4 reached May 2026 (notes 2026-05/may-20); Iterator.prototype.includes(value, fromIndex) with SameValueZero, analogue of Array.prototype.includes",
+      "url": "https://github.com/tc39/proposal-iterator-includes"
+    },
+    "Iterator Join": {
+      "status": "ES2027",
+      "stage4Date": "2026-09",
+      "stage4DateType": "milestone",
+      "note": "Listed in finished-proposals with first 2026-09 meeting entry (no notes link published yet; 2026-09 notes directory not uploaded as of 2026-10-25); Iterator.prototype.join(separator) works like Array.prototype.join on an iterator",
+      "url": "https://github.com/tc39/proposal-iterator-join"
+    },
     "Temporal": {
       "status": "ES2027",
       "stage4Date": "2026-03",

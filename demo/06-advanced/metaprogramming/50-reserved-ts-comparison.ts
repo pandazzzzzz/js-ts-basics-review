@@ -395,7 +395,7 @@ console.log("- Effect system for tracking side effects");
 console.log("- Better async type inference");
 console.log("- Improved module resolution");
 console.log("- Native decorators when standardized");
-console.log("- Composites support when ES standardizes (successor to withdrawn Records & Tuples)");
+console.log("- Composites support when ES standardizes (Stage 2, successor to Records & Tuples)");
 console.log("- Pattern matching support when ES standardizes");
 
 // ============================================

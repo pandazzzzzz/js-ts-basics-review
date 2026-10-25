@@ -6,6 +6,12 @@
       "note": "Stage 2.7 — nearing Stage 3. Active TC39 proposal (tc39/proposals README ### Stage 2.7 table).",
       "url": "https://github.com/tc39/proposal-decorators"
     },
+    "Decorator Metadata": {
+      "status": "Stage 2.7",
+      "stage4DateType": null,
+      "note": "Stage 2.7 (tc39/proposals README ### Stage 2.7 table); adds decorator context.metadata support to the Decorators proposal",
+      "url": "https://github.com/tc39/proposal-decorator-metadata"
+    },
     "Pipeline Operator": {
       "status": "Stage 2",
       "stage4DateType": null,
@@ -25,9 +31,9 @@
       "url": "https://github.com/tc39/proposal-decimal"
     },
     "Composites": {
-      "status": "Stage 1",
+      "status": "Stage 2",
       "stage4DateType": null,
-      "note": "Stage 1 as of 2026-07 (composite-keys for-stage-1 at 2025-04 plenary). Successor to Records & Tuples.",
+      "note": "Stage 2 as of 2026-10 (tc39/proposals README Stage 2 table; proposal README 'Stage: 2'; update at 2026-07 plenary). Successor to Records & Tuples.",
       "url": "https://github.com/tc39/proposal-composites"
     },
     "Do Expressions": {
@@ -48,11 +54,11 @@
       "note": "Stage 1 (listed in TC39 stage-1-proposals.md; last Stage 2 attempt 2021-10 oct-25, reverted). ? placeholder for partial function application.",
       "url": "https://github.com/tc39/proposal-partial-application"
     },
-    "Module Fragments": {
+    "Module Declarations": {
       "status": "Stage 2",
       "stage4DateType": null,
-      "note": "Stage 2 as of proposal-module-fragments README (inline module fragments; planned in conjunction with resource bundle loading).",
-      "url": "https://github.com/tc39/proposal-module-fragments"
+      "note": "Stage 2 (tc39/proposals README Stage 2 table). Renamed from 'Module Fragments' — named inline modules for bundling multiple modules into one file; planned in conjunction with resource bundle loading.",
+      "url": "https://github.com/tc39/proposal-module-declarations"
     }
   }
 }

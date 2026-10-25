@@ -19,6 +19,7 @@
   "scripts": {
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "verify": "node scripts/verify-consistency.cjs",
+    "verify:tc39": "node scripts/verify-tc39.cjs",
     "test": "node scripts/run-demos.cjs",
     "test:ts": "node scripts/run-ts.cjs",
     "format": "node node_modules/prettier/bin/prettier.cjs --write \"demo/**/*.js\" \"demo/**/*.ts\" \"reference/*.json\" \"scripts/*.cjs\" \"scripts/*.mjs\" tsconfig.json",

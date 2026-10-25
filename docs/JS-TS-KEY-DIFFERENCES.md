@@ -307,6 +307,6 @@ Note: `using` reached conditional Stage 4 in May 2025; all conditions were met a
 
 ---
 
-**Last Updated**: 2026-09-05
+**Last Updated**: 2026-10-25
 **Based on**: ES2027 and TypeScript 5.x
 **Reviewed**: ✅ Verified against MDN, TypeScript official docs, TC39 proposals

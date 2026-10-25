@@ -1,8 +1,8 @@
 # Learning Roadmap
 
 > **References**: [JavaScript.info](https://javascript.info) · [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) · [roadmap.sh](https://roadmap.sh/javascript)
-> **Updated**: 2026-09-14
-> **ES version verification**: 2026-09-15 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md) · reference/lastVerified
+> **Updated**: 2026-10-25
+> **ES version verification**: 2026-10-25 · See [TC39 Finished Proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md) · reference/lastVerified
 > **Content structure**: All demo files now use a consistent learning-goals intro block and standardized chapter ordering.
 > **Example Index**: See `docs/EXAMPLES.md` for a task-based quick reference to common code examples.
 
@@ -192,7 +192,7 @@ TS comparison: `es-features/39-es2022-plus-features-ts-comparison.ts` · `es-fea
 
 ### Knowledge Points
 
-**39 ES2022+** — 已按ES版本拆分到7个独立文件（39-1-39-7，覆盖 ES2021–ES2027；更早特性委托给对应主题文件：ES2018 Intl.PluralRules → 42，ES2020 特性 → 30/32/18；ES2021 的 Promise.any/AggregateError 教学节委托给 30，39-1 仅保留 verification block）：ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks, RegExp Match Indices) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Map.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Resizable ArrayBuffer, Atomics.waitAsync, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups, Intl.DurationFormat) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert/getOrInsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Atomics.pause) · Stage 2.7 (Decorators)
+**39 ES2022+** — 已按ES版本拆分到7个独立文件（39-1-39-7，覆盖 ES2021–ES2027；更早特性委托给对应主题文件：ES2018 Intl.PluralRules → 42，ES2020 特性 → 30/32/18；ES2021 的 Promise.any/AggregateError 教学节委托给 30，39-1 仅保留 verification block）：ES2021 (replaceAll, ||=, &&=, ??=, numeric separators, WeakRef, FinalizationRegistry, Promise.any, AggregateError) · ES2022 (at(), Object.hasOwn, Error.cause, top-level await, class private fields, Class Static Block, Ergonomic brand checks, RegExp Match Indices) · ES2023 (toSorted, toReversed, with, toSpliced, findLast, findLastIndex, Hashbang, Symbols as WeakMap keys) · ES2024 (Object.groupBy, Map.groupBy, Promise.withResolvers, RegExp /v, ArrayBuffer.transfer, Resizable ArrayBuffer, Atomics.waitAsync, Well-Formed Unicode Strings) · ES2025 (Set methods, Iterator helpers, RegExp.escape, Promise.try, Float16Array, Import Attributes, Redeclarable global eval vars, JSON Modules, RegExp Modifiers, Duplicate Named Capture Groups, Intl.DurationFormat) · ES2026 (Array.fromAsync, Math.sumPrecise, Error.isError, Uint8Array Base64, Upsert/getOrInsert, JSON.parse source text access, Iterator Sequencing) · ES2027 (Temporal API, Explicit Resource Management, DisposableStack, Joint Iteration, Iterator Chunking/Includes/Join, Atomics.pause) · Stage 2.7 (Decorators, Decorator Metadata)
 **40 Debugging and Testing** — console methods, debugger, breakpoints, unit testing basics
 **41 Typed Arrays** — ArrayBuffer, TypedArray views, DataView, binary data processing
 **42 Internationalization API** — Intl.NumberFormat, DateTimeFormat, Collator, RelativeTimeFormat

@@ -24,11 +24,12 @@ export {};
 // 2. Explicit Resource Management (ES2027)
 // 3. Joint Iteration (ES2027)
 // 4. Atomics.pause() (ES2027)
-// 5. Decorators (Stage 2.7)
-// 6. Other Upcoming Proposals
-// 7. Common Pitfalls
-// 8. Best Practices
-// 9. Cross-references
+// 5. Iterator Chunking / Includes / Join (ES2027)
+// 6. Decorators (Stage 2.7)
+// 7. Other Upcoming Proposals
+// 8. Common Pitfalls
+// 9. Best Practices
+// 10. Cross-references
 
 console.log("\n=== ES2027 & Future Features ===\n");
 
@@ -301,9 +302,68 @@ console.log("Atomics.pause() improves performance of spin-wait loops in multi-th
 console.log("Useful in Web Workers and multi-threaded JavaScript applications");
 
 // ============================================
-// 5. Decorators (Stage 2.7)
+// 5. Iterator Chunking / Includes / Join (ES2027)
 // ============================================
-console.log("\n--- 5. Decorators (Stage 2.7) ---\n");
+console.log("\n--- 5. Iterator Chunking / Includes / Join (ES2027) ---\n");
+
+// Three more Iterator.prototype additions finalized alongside ES2027.
+// They extend the ES2025 iterator helpers family (see 39-5).
+
+/*
+ * verification:
+ *   feature: Iterator Chunking
+ *   stage4DateType: exact
+ *   status: ES2027
+ *   stage4Date: 2026-05
+ */
+
+// chunks(size) yields non-overlapping runs; windows(size) yields overlapping
+// sliding windows (each item except the first/last `size - 1` appears in `size` windows)
+/*
+const digits = () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].values();
+
+Array.from(digits().chunks(3));
+// [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [9] ]  ← final partial chunk is kept
+
+Array.from(digits().windows(3));
+// [ [0, 1, 2], [1, 2, 3], ..., [7, 8, 9] ]  ← windows slide by 1
+*/
+
+/*
+ * verification:
+ *   feature: Iterator Includes
+ *   stage4DateType: exact
+ *   status: ES2027
+ *   stage4Date: 2026-05
+ */
+
+// includes(value, fromIndex) — SameValueZero comparison, like Array.prototype.includes
+/*
+[2, 4, 6].values().includes(4); // true
+[2, 4, 6].values().includes(4, 2); // false (search starts at index 2)
+*/
+
+/*
+ * verification:
+ *   feature: Iterator Join
+ *   stage4DateType: milestone
+ *   status: ES2027
+ *   stage4Date: 2026-09
+ */
+
+// join(separator) — exactly like Array.prototype.join, but on any iterator
+// without materializing an Array first
+/*
+["a", "b", "c"].values().join(", "); // 'a, b, c'
+new Set([1, 2, 3]).values().join("-"); // '1-2-3'
+*/
+
+console.log("Iterator chunks/windows/includes/join complete the iterator helper toolkit");
+
+// ============================================
+// 6. Decorators (Stage 2.7)
+// ============================================
+console.log("\n--- 6. Decorators (Stage 2.7) ---\n");
 
 // Decorators allow adding metadata and modifying classes, methods, properties, and parameters
 // Note: Stage 2.7, expected in ES2028 or later
@@ -373,15 +433,26 @@ console.log("Decorators provide a declarative way to add behavior to classes and
 console.log("Common use cases: logging, validation, caching, dependency injection, etc.");
 
 // ============================================
-// 6. Other Upcoming Proposals
+// 7. Other Upcoming Proposals
 // ============================================
-console.log("\n--- 6. Other Upcoming Proposals ---\n");
+console.log("\n--- 7. Other Upcoming Proposals ---\n");
+
+console.log("\n📌 Stage 2.7 Proposals (nearing Stage 3):");
+console.log("1. Decorators - See Section 6 above");
+console.log("2. Decorator Metadata - context.metadata object for decorator authors");
+
+console.log("\n📌 Stage 3 Proposals (candidate features):");
+console.log("1. Error Stack Accessor - error.stack as a getter/setter pair");
+console.log("2. Import Text - import attributes for text modules");
+console.log("3. Await Dictionary - Promise-like fields in object literals");
+console.log("4. RegExp Buffer Boundaries - \\A \\z \\Z anchors (not line-based)");
 
 console.log("\n📌 Stage 2 Proposals (likely future ES versions):");
 console.log("1. Pipeline Operator (|>) - Functional pipelines: 'value |> func1 |> func2'");
-console.log(
-  "2. Module Fragments - Inline module fragments within a file: 'module fragment Utils { }'"
-);
+console.log("2. Module Declarations - Named inline modules: 'module Utils { export ... }'");
+console.log("   (renamed from Module Fragments; pairs with resource bundle loading)");
+console.log("3. Composites - Deeply immutable value types (successor to Records & Tuples)");
+console.log("4. ShadowRealm - Isolated evaluation environments (realms) for plugins/sandboxes");
 
 console.log("\n📌 Stage 1 Proposals (early development):");
 console.log(
@@ -389,18 +460,17 @@ console.log(
 );
 console.log("2. Decimal Type - Exact decimal arithmetic: '0.1m + 0.2m === 0.3m'");
 console.log("3. Do Expressions - 'do { ... }' statement expressions");
-console.log(
-  "4. Composites - Deeply immutable value types (successor to Records & Tuples): '#{ x: 1, y: 2 }'"
-);
-console.log("5. Intl.MessageFormat - Internationalized message formatting");
-console.log("6. Observable - Push-based event streams");
-console.log("7. JSON Modules improvements");
-console.log("8. WebAssembly JS Integration improvements");
+console.log("4. Intl.MessageFormat - Internationalized message formatting");
+console.log("5. Observable - Push-based event streams");
+
+console.log("\n📌 Not TC39 proposals (see 50-reserved.js instead):");
+console.log("JSON Modules - already shipped as part of ES2025 (see 39-5)");
+console.log("WebAssembly integration - a Web Platform topic, not a TC39 proposal");
 
 // ============================================
-// 7. Common Pitfalls
+// 8. Common Pitfalls
 // ============================================
-console.log("\n--- 7. Common Pitfalls ---\n");
+console.log("\n--- 8. Common Pitfalls ---\n");
 
 // Pitfall 1: Temporal objects are immutable, all operations return new objects
 // const date = Temporal.PlainDate.from("2024-01-01");
@@ -423,9 +493,9 @@ console.log("\n--- 7. Common Pitfalls ---\n");
 // Syntax and behavior may change before finalization
 
 // ============================================
-// 8. Best Practices
+// 9. Best Practices
 // ============================================
-console.log("\n--- 8. Best Practices ---\n");
+console.log("\n--- 9. Best Practices ---\n");
 
 console.log("✅ Start using Temporal API for all new date/time code (use polyfill if needed)");
 console.log(
@@ -438,9 +508,9 @@ console.log("⚠️  Check browser/Node.js support before using new features in 
 console.log("📅 Follow TC39 proposals for the latest updates on upcoming features");
 
 // ============================================
-// 9. Cross-references
+// 10. Cross-references
 // ============================================
-console.log("\n--- 9. Cross-references ---\n");
+console.log("\n--- 10. Cross-references ---\n");
 
 console.log("📘 Date/Time: 12-date-time.js");
 console.log("📘 Classes: 16-classes.js");

@@ -24,6 +24,10 @@ npm run typecheck
 # data reconciliation, JS/TS pairing, cross-references, tags, ToC alignment, EOL)
 npm run verify
 
+# Refresh check against the live TC39 proposal lists (network required,
+# manual/monthly cadence — not part of CI)
+npm run verify:tc39
+
 # Run every JS demo / every TS comparison file (one retry on transient errors)
 npm test
 npm run test:ts
@@ -59,7 +63,7 @@ This project uses Prettier for consistent code formatting across all demo files 
 ## Status
 
 ✅ 76/76 JS + 76/76 TS complete · 6 topics split into 27 focused sub-files (17 files still >1000 lines) · All use ESM (`export {}`) strict mode
-📅 Updated 2026-09-06 · 📊 Coverage: Stages 1-6 Complete · Course numbers 01–50, with #28 intentionally reserved for a future async-bridge lesson (see `50-reserved.js`)
+📅 Updated 2026-10-25 · 📊 Coverage: Stages 1-6 Complete · Course numbers 01–50, with #28 intentionally reserved for a future async-bridge lesson (see `50-reserved.js`)
 
 ## Documentation
 

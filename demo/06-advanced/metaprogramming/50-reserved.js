@@ -115,16 +115,16 @@ console.log("//   const r = #{ x: 1, y: 2 };   // record, immutable");
 console.log("//   const t = #[1, 2, 3];        // tuple, immutable");
 console.log("//   #{ x: 1 } === #{ x: 1 };     // true (deep value equality)");
 
-// --- Composites (Stage 1 proposal - not current standard) ---
+// --- Composites (Stage 2 proposal - not current standard) ---
 // Successor to Records & Tuples: deeply immutable composite objects/arrays with
 // value semantics (deep equality, usable as Map keys). Syntax/API still evolving.
 // See tc39/proposal-composites.
 /*
  * verification:
  *   feature: Composites
- *   status: Stage 1
+ *   status: Stage 2
  */
-console.log("// Composites (Stage 1) — future syntax, illustrative:");
+console.log("// Composites (Stage 2) — future syntax, illustrative:");
 console.log("//   const p = Composite { x: 1, y: 2 };   // immutable, value equality");
 console.log("//   const a = Composite { x: 1 } , b = Composite { x: 1 };");
 console.log("//   a === b;            // true (value, not reference)");
@@ -212,17 +212,32 @@ console.log(
 console.log("//   }");
 console.log("//   class Example { @logged greet(n) { return `Hi, ${n}`; } }");
 
-// --- Module Fragments (Stage 2 proposal - not current standard) ---
+// --- Module Declarations (Stage 2 proposal - not current standard) ---
+// Renamed to Module Declarations: named inline modules for bundling multiple
+// modules into a single file, planned alongside resource bundle loading.
 /*
  * verification:
- *   feature: Module Fragments
+ *   feature: Module Declarations
  *   status: Stage 2
  */
-// Inline module fragments within a file, for organizing code and tests.
-// See tc39/proposal-module-fragments.
-console.log("// Module Fragments (Stage 2) — future syntax, illustrative:");
-console.log("//   module fragment Utils { export function helper() { /* ... */ } }");
-console.log("//   module fragment Tests { import { helper } from Utils; /* ... */ }");
+// See tc39/proposal-module-declarations (renamed from proposal-module-fragments).
+console.log("// Module Declarations (Stage 2, renamed from Module Fragments) — illustrative:");
+console.log("//   module Utils { export function helper() { /* ... */ } }");
+console.log("//   module Tests { import { helper } from Utils; /* ... */ }");
+
+// --- Decorator Metadata (Stage 2.7 proposal - not current standard) ---
+// Companion to the Decorators proposal: exposes a context.metadata object so
+// decorators can attach and share metadata without a side-channel WeakMap.
+// See tc39/proposal-decorator-metadata.
+/*
+ * verification:
+ *   feature: Decorator Metadata
+ *   status: Stage 2.7
+ */
+console.log("// Decorator Metadata (Stage 2.7) — future API, illustrative:");
+console.log("//   function tagged(target, context) {");
+console.log("//     context.metadata.role = 'controller';  // shared metadata bag");
+console.log("//   }");
 
 // --- Intl.MessageFormat / MessageFormat 2.0 (Stage 1 proposal - not current standard) ---
 // Unifies plural/select/gender/date/number into a single declarative ICU message syntax.

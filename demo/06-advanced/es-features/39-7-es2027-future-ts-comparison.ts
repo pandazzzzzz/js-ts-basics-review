@@ -215,9 +215,47 @@ function waitForFlag(sab: SharedArrayBuffer, index: number, expected: number): v
 console.log("Atomics.pause() has proper type definitions in TypeScript");
 
 // ============================================
-// 5. Decorators (Stage 2.7)
+// 5. Iterator Chunking / Includes / Join (ES2027)
 // ============================================
-console.log("\n--- 5. Decorators (Stage 2.7) ---\n");
+console.log("\n--- 5. Iterator Chunking / Includes / Join (ES2027) ---\n");
+
+// Three more Iterator.prototype additions finalized for ES2027.
+// TypeScript's DOM/ESNext lib types do not ship declarations yet — type them
+// locally (or use @ts-nocheck like this file) until lib "ES2027" exists.
+
+/*
+interface IteratorChunking<T> {
+  chunks(size: number): IterableIterator<T[]>;
+  windows(size: number): IterableIterator<T[]>;
+  includes(value: T, fromIndex?: number): boolean;
+  join(separator?: string): string;
+}
+
+declare global {
+  interface Iterator<T> extends IteratorChunking<T> {}
+}
+
+// chunks(size): non-overlapping runs (final partial chunk kept)
+const digitChunks: number[][] = Array.from([0, 1, 2, 3, 4].values().chunks(2));
+// [[0, 1], [2, 3], [4]]
+
+// windows(size): overlapping sliding windows
+const digitWindows: number[][] = Array.from([0, 1, 2, 3].values().windows(2));
+// [[0, 1], [1, 2], [2, 3]]
+
+// includes(value, fromIndex?): SameValueZero, like Array.prototype.includes
+const hasFour: boolean = [2, 4, 6].values().includes(4); // true
+
+// join(separator?): like Array.prototype.join, without materializing an Array
+const joined: string = ["a", "b", "c"].values().join(", "); // 'a, b, c'
+*/
+
+console.log("Iterator chunks/windows/includes/join need local typings until lib ES2027");
+
+// ============================================
+// 6. Decorators (Stage 2.7)
+// ============================================
+console.log("\n--- 6. Decorators (Stage 2.7) ---\n");
 
 // TypeScript has supported decorators for a long time (experimental) and now supports standard decorators
 
@@ -294,9 +332,9 @@ user.doHeavyWork();
 // TypeScript can emit type metadata for decorators to use
 
 // ============================================
-// 6. TypeScript-specific Future Features
+// 7. TypeScript-specific Future Features
 // ============================================
-console.log("\n--- 6. TypeScript-specific Future Features ---\n");
+console.log("\n--- 7. TypeScript-specific Future Features ---\n");
 
 console.log("🔮 TypeScript is always evolving alongside JavaScript:");
 console.log("1. Type-Level Programming improvements");
@@ -306,9 +344,9 @@ console.log("4. Better integration with build tools and bundlers");
 console.log("5. Enhanced type checking for Web APIs");
 
 // ============================================
-// 7. Configuration
+// 8. Configuration
 // ============================================
-console.log("\n--- 7. tsconfig.json Configuration ---\n");
+console.log("\n--- 8. tsconfig.json Configuration ---\n");
 console.log("To use ES2027 features in TypeScript:");
 console.log('1. No "ES2027" lib exists yet — use "ESNext" plus polyfill/feature types');
 console.log('2. For Explicit Resource Management: Add "ESNext.Disposable" to lib');
