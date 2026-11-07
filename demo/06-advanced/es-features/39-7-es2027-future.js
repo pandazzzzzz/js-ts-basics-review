@@ -312,9 +312,9 @@ console.log("\n--- 5. Iterator Chunking / Includes / Join (ES2027) ---\n");
 /*
  * verification:
  *   feature: Iterator Chunking
- *   stage4DateType: exact
+ *   stage4DateType: milestone
  *   status: ES2027
- *   stage4Date: 2026-05
+ *   stage4Date: 2026-09
  */
 
 // chunks(size) yields non-overlapping runs; windows(size) yields overlapping
@@ -332,9 +332,9 @@ Array.from(digits().windows(3));
 /*
  * verification:
  *   feature: Iterator Includes
- *   stage4DateType: exact
+ *   stage4DateType: milestone
  *   status: ES2027
- *   stage4Date: 2026-05
+ *   stage4Date: 2026-09
  */
 
 // includes(value, fromIndex) — SameValueZero comparison, like Array.prototype.includes
